@@ -1,0 +1,361 @@
+<HTML>
+<HEAD>
+<TITLE>OLA 0 - Customization of your ranger course account</TITLE>
+<META NAME="author" CONTENT="Xin Yang">
+<META NAME="robots" CONTENT="noindex, nofollow">
+</HEAD>
+
+<BODY BACKGROUND="lab0.gif"
+      BGCOLOR="white" TEXT="black" LINK="blue" VLINK="navy" ALINK="red">
+<CENTER>
+ <TABLE BORDER=8> <TR VALIGN=middle>
+   <TD BGCOLOR="white"><IMG SRC="/~csdept/images/WordmarkTiny.gif"
+       ALT="MTSU" WIDTH="97" HEIGHT="48"></TD>
+   <TD BGCOLOR="white"> <CENTER>
+     <FONT SIZE=5 COLOR="navy"> &nbsp; <B>
+       CSCI 3080 - <EM>Discrete Structures</EM>
+     </B></FONT> &nbsp;
+     <BR><FONT SIZE=4 COLOR="black"><B>
+	   OLA 0 - Customization of your <I>ranger</I> course account
+     </B></FONT>
+   </CENTER> </TD>
+ </TR> </TABLE>
+</CENTER>
+<BR>
+
+<HR SIZE=3>
+
+<center>
+<h2><font color="red">Note: This lab is for Apple Mac Users</font></h2>
+</center>
+<P>
+<BR>
+<B>BACKGROUND:</B>
+The computer system you will use in CSCI 3080 for programming
+is named <B><i>ranger</i></B>.
+(Actually, <i>ranger</i> is an umbrella name for several actual machines,
+such as <i>ranger0</i> or <i>ranger1</i>.  Because it doesn't matter which
+particular ranger machine you are using, we'll just say <i>ranger</i>.)
+&nbsp;
+<I>Ranger</I> runs the UNIX operating system,
+an extremely powerful and popular system.
+There are different "dialects" of UNIX,
+such as <I>Mac OS X</I> or <I>HP-UX</I>.
+The UNIX dialect running on ranger is called <B><I>Linux</I></B>.
+
+<P>
+Unlike a small personal computer that you physically handle to use,
+<I>ranger</I> is a server that we will use via a network connection.
+In CSCI 3080 each user is given an account, uniquely identified by
+a <I>C-number</I>, that will be used when connecting to <I>ranger</I>.
+Your work will be done while logged in to that course account.
+Because your files are stored under your
+course account on <I>ranger</I>, it doesn't matter where you are or
+what computer you're using to connect to <I>ranger</I>, your files
+will always be available to you.
+In this lab,
+you will do a one-time customization of your course computer account
+to get it ready for the rest of the semester.
+
+<P>
+<BR>
+<FONT COLOR="green" SIZE="+1">
+DIRECTIONS:  Follow the instructions and
+perform the actions indicated as they appear in the text.
+</FONT>
+<!--
+(This is <I>different</I> from standard closed labs where you only do
+something when it is inside an exercise.)
+-->
+<BR>
+To do this lab, you will first need to have been given your
+<I>C-number</I> (and corresponding <I>password</I>)
+by your course instructor.
+
+<P>
+<BR>
+<B><h3>Step 1: LOG IN USING <FONT SIZE="+2" COLOR="blue">Terminal</FONT></B></h3>
+<BR>
+To connect to the <I>ranger</I> server from your personal Mac OS X, you will need to <B>open a terminal</B>.
+<ol>
+	<li> Open a terminal. You can do either one of the following: <br>
+		* Click the Launchpad icon <img src="../../images/LaunchPad.jpeg" width="30px" height="30px">  in the Dock, type Terminal in the search field, then click Terminal. <br>
+		or <br>
+		* In the Finder <img src="../../images/Finder.jpeg" width="30px" height="30px">, open the /Applications/Utilities folder, then double-click Terminal.
+		<br>
+		<br>
+		You will then see a terminal window like the following
+(the color scheme may be different--for example, you may have
+a white background, and username should your own name):
+<CENTER>
+<IMG SRC="../../images/macTerminal.png" ALT="terminal icon" WIDTH="50%">
+</CENTER>
+<br>
+		<li> Use your course account to login ranger, please type: <font color="red"><b>ssh c-number@ranger.cs.mtsu.edu</b></font> in the terminal, then press Enter key.</li>
+<b><font color="#0080ff">Note:</font></b>
+	<ul>
+		<li>* Where <font color="#0080ff"><b>c-number</b></font> is your course account, that is the 8-character account you are assigned; for example, c8294600</li>
+		<li>* If you enter a wrong c-number by accident, it will still prompt you for a password. Press Ctrl+C to quit the login attempt.</li>
+	</ul>
+	<br>
+<CENTER>
+<IMG SRC="../../images/macLogin.png" ALT="terminal icon" WIDTH="50%">
+</CENTER>
+<br>
+<li>When prompted for a <FONT SIZE="+1"><tt>Password:</tt></FONT>,
+enter your course account's <I>password</I>; for example 74aB2w45.
+Your password will not be displayed
+so be careful in your typing; 
+hit the enter key when you are done typing the password.</li>
+<FONT COLOR="green">
+NOTE:
+UNIX is <I>case-sensitive</I>,
+that is, it distinguishes between upper and lower case letters.
+It is important to type the information exactly as indicated.
+</FONT>
+<P>
+<I>
+<B>If you entered something wrong,</B> 
+</I>
+<I>
+you will be able to re-enter
+the password information.
+If you are unsuccessful after several attempts,
+check to be sure the <b>Caps Lock</b> key is not locked 
+on the keyboard. If it is, unlock it and try again.
+Otherwise, ask the lab assistant for help.
+</I>
+
+<CENTER>
+<IMG SRC="../../images/macLogWrong.png" ALT="mac prompt" WIDTH="50%">
+</CENTER>
+<P>
+<li>Once you successfully login to the server, you will see something like:</li>
+<CENTER>
+<IMG SRC="../../images/macLogged.png" ALT="PuTTy prompt" WIDTH="50%">
+</CENTER>
+
+
+<P>
+<BR>
+<BR>
+<B><h3>Step 2: CUSTOMIZE YOUR ACCOUNT:</h3></B>
+<BR>
+Much of UNIX is "command&nbsp;driven"; that's a fancy way of saying
+that to get most things done, you type out command instructions 
+inside a <I>Terminal</I> window instead of clicking on icons.
+(Another term for this is that you're using a <B>CLI</B> or
+<B>C</B>ommand <B>L</B>ine <B>I</B>nterface.)
+Recall that UNIX is <I>case-sensitive</I> and thus
+distinguishes between upper and lower case letters.
+It is important to type the commands exactly as indicated.
+Failing to put in a space where required is an error; however
+when a space is required, the amount of space (i.e., the number of blanks)
+is usually not critical.
+
+The Computer Science department has created software that will
+customize your account so that it is suitable to use for this course.
+The following customization should only be done once.
+You will <b>never</b> need to customize this account again.
+
+<P>
+The general form of the customization command is as follows:
+<CENTER>
+<FONT SIZE="+1"><FONT COLOR="red">$</FONT>&nbsp;
+<FONT FACE="Verdana" COLOR=blue>~cs/customize 3080 
+      <SELECT NAME="teachers">
+        <option selected> Select teacher's userid. 
+  <option> sbarbosa
+  <option> rbutler
+  <option> zdong
+  <option> yigu
+  <option> cen
+  <option selected> xyang
+  <option> pettey
+  <option> jphillips
+  <option> msarkar
+  <option> sseo
+  <option> untch
+      </select>
+</FONT>
+</FONT>
+</CENTER>
+<BR>
+With your mouse, 
+click on the arrow next to "Select teacher's userid." and highlight 
+the appropriate userid (your lab instructor will tell you which one).
+The command above should now have your teacher's userid on the end of the line.
+
+<OL>
+<LI>
+In the <I>Terminal</I> window, at the <FONT COLOR="red">$</FONT> prompt,
+enter the customize line exactly as shown above.
+(Do NOT enter the dollar sign as part of your
+command. It is meant to represent the prompt provided by the system.) 
+
+<P>
+As an example, if you have CSCI <FONT COLOR="red">3080</FONT>
+with Dr. <FONT COLOR="blue">Xin Yang</FONT>
+your entry would look like:
+<CENTER>
+<IMG SRC="../images/macCustomize.png" ALT="mac customize" WIDTH="50%">
+<BR>
+</CENTER>
+
+<P>
+<LI>
+   The customization will ask you for your first (personal/nickname)
+   name and last (family) name.  Use mixed-case in entering your names;
+   for example, enter "John" and not "john" or "JOHN". 
+</P>
+
+<CENTER>
+<IMG SRC="../images/macFirstName.png" ALT="mac customize" WIDTH="50%">
+<BR>
+</CENTER>
+<br>
+<CENTER>
+<IMG SRC="../images/macLastName.png" ALT="mac customize" WIDTH="50%">
+<BR>
+</CENTER>
+
+<p>
+   Next you will
+   be asked for your PipelineMT user name.  (You will NOT be asked
+   for your PipelineMT password.)  
+</p> 
+
+<CENTER>
+<IMG SRC="../images/macPipeline.png" ALT="mac customize" WIDTH="60%">
+<BR>
+</CENTER>
+
+<P>Lastly you must enter the 3-digit course section number <b><font color="red">(001)</font></b>. Then press Enter key. 
+Please double check your 3-digit course section number before you enter.</P>
+
+<CENTER>
+<IMG SRC="../images/macSection.png" ALT="mac customize" WIDTH="60%">
+<BR>
+</CENTER>
+
+<P>
+<LI>
+   If there are any errors, please review what you have done and
+   start over at step 1.
+   Otherwise, close the terminal window by typing
+   <FONT COLOR="blue" SIZE="+1"><TT>exit</TT></FONT>.
+
+<CENTER>
+<IMG SRC="../images/mac_exit.png" ALT="mac customize" WIDTH="60%">
+<BR>
+</CENTER>
+<P>
+<LI>
+   Now open up a <I>Terminal</I> window and log in ranger with your C-number and  password again.
+   It should be similar to:
+<CENTER>
+<IMG SRC="../images/mac_success.png" ALT="mac confirmation" WIDTH="60%">
+</CENTER>
+   with CSCI 3080 Notices appearing (highlighted by top red arrow)
+   and a prompt now of the form "ranger$" (Don't worry about which
+   ranger number is being displayed.)
+   If your screen has these items, everything is OK.
+   If not, please check with the instructor as to what might have gone wrong.
+<P>
+<h3> <b>Step 3: Using handin command </b></h3>
+Next enter the following UNIX command:
+<BR>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<FONT COLOR="red">$</FONT> <FONT FACE="Verdana" COLOR=blue><B>handin</B></FONT>
+     <BR>
+
+<CENTER>
+<IMG SRC="../images/mac_handin.png" ALT="handin" WIDTH="70%">
+<BR>
+</CENTER>
+Because this is the first time you are using the
+<FONT FACE="Verdana" COLOR=blue><B>handin</B></FONT>
+command, you will get a message of the form:
+<PRE>
+NOTE: Please enter your course account's password when prompted.
+(Use your instructor-supplied course account password.)
+Authentication realm: &lt;svn://svn.cs.mtsu.edu:3690&gt; 076fc91e-5327-0410-80b2-9ad2079b72ac
+Password for 'c*******':
+</PRE>
+Enter your course account password (the same one you used to log on to ranger)
+as indicated.
+<FONT COLOR="green">
+&nbsp;
+Usually, your password will be obscured by a row of asterisks.
+However on one of the ranger systems,
+don't be alarmed that nothing seems to be being entered;
+your password will <b>not</b> be shown on the screen as you type it,
+not even as a row of asterisks.  It is going in, however!
+</FONT>
+<BR> 
+(You may also be asked if you'd like to
+<CODE>Store&nbsp;password&nbsp;unencrypted&nbsp;(yes/no)?</CODE>;
+&nbsp;
+if asked, answer &nbsp;
+<FONT FACE="Verdana" COLOR=blue>
+<B><CODE>yes</CODE></B></FONT>.)
+<BR> 
+This will be the only time you will need to provide
+this information for <FONT FACE="Verdana" COLOR=blue><B>handin</B></FONT>;
+the information is stored for future uses.
+<BR> 
+If successful, this <FONT FACE="Verdana" COLOR=blue><B>handin</B></FONT>
+command will display a list of current valid assignment identification codes.
+You can safely ignore what this list contains for the time being.
+
+<CENTER>
+<IMG SRC="../../images/mac_handin_done.png" ALT="handin" WIDTH="60%">
+<BR>
+</CENTER>
+
+<P>
+<B><h3>Step 4: LOG OFF</h3></B>
+Once you are done, you will need to log off <I>ranger</I>
+by entering
+<FONT COLOR="blue" SIZE="+1"><TT>exit</TT></FONT>
+at the command-line.
+
+</OL>
+<!-- ================================================================== -->
+
+<HR>
+<HR>
+
+<CENTER>
+<B><FONT size="+1">
+Congratulations!  You have finished OLA 0.
+</FONT></B>
+<!--
+<BR>
+(There is nothing to hand in for Lab 1.)
+</CENTER>
+-->
+
+<P>
+<HR SIZE=3>
+<A HREF="http://www.mtsu.edu/">
+  <IMG SRC="/~csdept/images/MtsuButton.gif"
+  ALT="MTSU" WIDTH="74" HEIGHT="32"></A>
+<IMG SRC="/~csdept/images/Spacer.gif" ALT =" | " WIDTH="11" HEIGHT="32">
+<A HREF="http:/www.mtsu.edu/csc">
+  <IMG SRC="/~csdept/images/CS.gif"
+  ALT="CS" WIDTH="74" HEIGHT="32"></A>
+<HR SIZE=3>
+
+<ADDRESS>
+https://www.cs.mtsu.edu/~xyang/3080/OLA/lab0_mac.html
+&nbsp; (This lab is initially created by &nbsp;<a href="https://www.cs.mtsu.edu/~untch">Dr. Roland Untch</a> 
+, it is revised in Fall 2020 by &nbsp;<A HREF="https://www.cs.mtsu.edu/~xyang">Dr. Xin Yang</A>)
+</ADDRESS>
+
+<br>
+<br>
+<!-- $Header: /nfshome/untch/public_html/manual/labZZ1/RCS/lab1.html,v 1.9 2017/08/31 15:51:03 untch Exp untch $ -->
+</BODY>
+</HTML>
+
