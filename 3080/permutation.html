@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Counting Theory</title>
+  <link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+<div id="main">
+
+
+<h1>Permutations</h1>
+Often it is the case that order of things is important. That is where permutations come in. It enables us to show how many different arrangments can be had of a given set of elements. 
+An ordered arrangement of objects is called a <b><font color="blue">permutation</font></b>.
+
+<h2>Permutation</h2>
+An ordered arrangment of \(r\) elements selected from a set of n elements, 
+\( 0 &le; r &le; n \), where no two elements of the arrangement are the same, is called a permutaion of \(n\) objects taken \(r\) at a time.
+The total number of such permutations is denoted by \(P(n,r).\)
+<Br>
+<h2>Permutation Counting Formula</h2>
+The number of possible permutations of \(r\) elements taken from a set of
+n elements is: <br>
+<br>
+<center>
+	<b>
+	<font color="blue">
+	\(P(n,r) = n.(n-1).(n-2).&hellip;.(n-r+1) = \frac{n!}{(n-r)!}\)
+	</font>
+	</b>
+</center>
+<pre>
+If 0 <= r < n, then we have r positions to fill using n elements:
+
+(a) Position 1 can be filled by any one of n - 0 = n elements
+(b) Position 2 can be filled by any one of n - 1 elements
+(c) &hellip;
+(d) Position r can be filled by any onf of n - (r-1) = n - r + 1 elements  
+</pre>
+
+Hence, by the multiplication rule: <br>
+\(P(n,r) = n.(n-1).(n-2).&hellip;.(n-r+1) = \frac{n!}{(n-r)!} \)
+<br>
+<br>
+For \(r < n\), <br>
+
+\( \frac{n!}{(n-r)!} = \frac{n(n-1)...(n-r+1)(n-r)!}{(n-r)!} = n(n-1)(n-2)...(n-r+1) \)
+<br>
+<br>
+
+<b>Example:</b> <Br>
+\(P(10,4) = 10 \times 9 \times 8 \times 7 = \frac{10 \times 9 \times 8 \times 7 \times 6
+\times 5 \times 4 \times 3 \times 2 \times 1}{6 \times 5 \times 4 \times 3 \times 2 \times 1
+} = \frac{10!}{6!} = \frac{10!}{(10-4)!}\)
+
+<h2>Example</h2>
+
+The number of permutations of 3 objects, say a, b, and c, is given by \(P(3,3) = 3! = 3 \times 2 \times 1 = 6\). The 6 permutations of a, b, and c are: <br>
+<center>
+	abc, acb, bac, bca, cab, cba
+</center>
+
+<h2>Exercises</h2>
+1. A club has eight members eligible to serve as president, vice-president, and treasurer. How many ways are there of choosing these officers?
+<br>
+<br>
+<font color="red"><b>Solution:</b></font> <br>
+<br>
+\( n = 8, r = 3 \)
+<br>
+<br>
+\( P(n,r) = \frac{n!}{(n-r)!} = \frac{8!}{(8-3)!} = \frac{8!}{5!} = 8*7*6\)
+<br>
+<br>
+2. Consider only the digits 1,2,3,4 and 5. <BR>
+<br>
+(a) How many three-digit numbers can be formed if no repetition of digits can occur? <br>
+<br>
+<font color="red"><b>Solution:</b></font>
+<br>
+<br>
+\(n = 5, r = 3\) <br>
+<br>
+\( P(n,r) = \frac{n!}{(n-r)!} = \frac{5!}{(5-3)!} = 5 \times 4 \times 3 = 60\)
+<br>
+<br>
+(b) How many three-digit numbers can be formed if repetition of digits is allowd? <br>
+<br>
+<font color="red"><b>Solution:</b></font>
+<br>
+<br>
+\( 5 \times 5 \times 5 = 125 \)
+<br>
+<br>
+(C) How many three-digit numbers can be formed that <b>begin with 5</b> if repetition of digits is allowd? <br>
+<br>
+<font color="red"><b>Solution:</b></font>
+<br>
+<br>
+\( 1 \times 5 \times 5 = 25 \)
+<br>
+<h2>Reference</h2>
+
+<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+<footer align="center" id="foot01"></footer>
+</div>
+
+</body>
+</html>

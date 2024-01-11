@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Chapter 2: Proofs, Induction</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 2: Proofs, Induction, and Number Theory</h1>
+
+		<center>
+			<h2>Section 2.1 Proof Techniques</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>2.1 Proof Techniques</h1>
+		The formal argument of Chapter 1 have the form \(P &rarr; Q\), where \(P\) and \(Q\) may present compound
+		statements. The point there was to prove that an argument is valid -- true in all interpretations by nature of its
+		internal form or structures, not because of its content or the meaning of its component parts. <Br>
+
+		However, we often want to prove arguments that are not universally true but just true within some context. Meaning
+		becomes important because we are discussing a particular subject -- graph algorithms, or Boolean algebra, or
+		compiler theory, or whatever and we want to prove that if \(P\) is true in this context, then so is \(Q\).
+		<Br>
+		If we can do this, then \(P &rarr; Q\) becomes a <b>theorem</b> about that subject.
+		<br>
+		<br>
+		<b>Proposition</b> is a statement can be either true or false. <br>
+		<b>Theorem</b> is a proposition which has passed the mathematical verification process and it proved to be True.
+		<br>
+
+
+		<h2>To Prove or Disprove</h2>
+		If you are simply presented with a conjecture, it may be difficult to decide which of the two approaches you should
+		try -- to prove the conjecture or to disprove it! A simple counterexample to a conjecture is sufficient to disprove
+		it. Of course, merely hunting for a counterexample and being unsuccessful does not constitute a proof that the
+		conjecture is true.
+		<br>
+
+
+		<h2>Disprove</h2>
+		One <b>
+			<font color="red">counterexample</font>
+		</b> is enough to disprove a conjecture.
+		<br>
+		<br>
+		<b>
+			<font color="blue">Example 1:</font>
+		</b> <br>
+		<hr>
+		<pre>
+For a positive integer n, n factorial is defined as n*(n-1)*(n-2)...1, and is denoted by n!. Prove
+or disprove the conjecture, "For every positive integer n, n! <= n^2"
+
+Let's begin by testing some cases:	     
+</pre>
+		<br>
+		<center>
+			<table style="width:50%">
+				<tr>
+					<th>\(n\)</th>
+					<th>\(n!\)</th>
+					<th>\(n^2\)</th>
+					<th>\(n! <= n^2\)</th>
+				</tr>
+				<tr>
+					<th>1</th>
+					<th>1</th>
+					<th>1</th>
+					<th>yes</th>
+				</tr>
+				<tr>
+					<th>2</th>
+					<th>2</th>
+					<th>4</th>
+					<th>yes</th>
+				</tr>
+				<tr>
+					<th>3</th>
+					<th>6</th>
+					<th>9</th>
+					<th>yes</th>
+				</tr>
+			</table>
+		</center>
+		<br>
+		<pre>
+So far, this conjecture seems to be looking good. But for the next case,
+</pre>
+		<center>
+			<table style="width:50%">
+				<tr>
+					<th>\(n\)</th>
+					<th>\(n!\)</th>
+					<th>\(n^2\)</th>
+					<th>\(n! <= n^2\)</th>
+				</tr>
+				<tr>
+					<th>4</th>
+					<th>24</th>
+					<th>16</th>
+					<th>no</th>
+				</tr>
+			</table>
+		</center>
+		<pre>
+We have found a counterexample. The fact that the conjecture is true for n = 1,2, and 3
+does nothing to prove the conjecture, but the singe case n = 4 is enough to disprove it.
+</pre>
+		If a counterexample is not forthcoming, perhaps the conjecture is true and we should try to
+		prove it. What techniques can we use to try to do this? For the rest of this section, we'll
+		examine various methods of attacking a proof.
+
+		<br>
+		<h2>Exhaustive Proof</h2>
+		While "disproof by counterexample" always works, "proof by example" seldom does. The one exception
+		to this situation occurs when the conjecture is an assertion about a finite collection. In this case,
+		the conjecture can be proved true by showing that it is true for each member of the collection.
+		<b>
+			<font color="red">Proof by exhaustion</font>
+		</b> means that all possible cases have been exhausted, although it often means that the person doing the proof is
+		exhausted as well!
+		<br>
+		<br>
+		<b>
+			<font color="blue">Example 2:</font>
+		</b> <br>
+		<hr>
+		<pre>
+Prove the conjecture, "If an integer between 1 and 20 is divisible by 6, then it is 
+also divisible by 3" ("Divisible by 6" means, "evenly divisible by 6," that is, 
+the number is an integral multiple of 6.)
+
+Becasue there is only a finite number of cases, the conjecture can by proved by 
+simply showing it to be true for all the intgers between 1 and 20. Table 2 is the proof.
+</pre>
+
+		<center>
+			<table style="width:60%">
+				<tr>
+					<th colspan="3">Table 2</th>
+				</tr>
+				<tr>
+					<th>Number</th>
+					<th>Divisible by 6</th>
+					<th>Divisible by 3</th>
+				</tr>
+				<tr>
+					<th>1</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>2</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>3</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>4</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>5</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>6</th>
+					<th>yes: 6 = 1 \(\times\) 6</th>
+					<th>yes: 6 = 2 \(\times\) 3</th>
+				</tr>
+				<tr>
+					<th>7</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>8</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>9</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>10</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>11</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>12</th>
+					<th>yes: 12 = 2 \(\times\) 6</th>
+					<th>yes: 12 = 4 \(\times\) 3</th>
+				</tr>
+				<tr>
+					<th>13</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>14</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>15</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>16</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>17</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>18</th>
+					<th>yes: 18 = 3 \(\times\) 6</th>
+					<th>yes: 18 = 6 \(\times\) 3</th>
+				</tr>
+				<tr>
+					<th>19</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>20</th>
+					<th>no</th>
+					<th></th>
+				</tr>
+			</table>
+		</center>
+		<br>
+		<h2>Direct Proof</h2>
+		In general (where exhaustive proof won't work), how can you prove that \(P &rarr; Q\) is true? The obvious approach
+		is the <b>
+			<font color="red">direct proof</font>
+		</b>--assume the hypothesis \(P\) and deduce the conclusion \(Q\). The following example shows an informal proof
+		that if two numbers are even (that's the hypothesis \(P\)), then their product is even (that's the conclusion
+		\(Q\)). Recall that an <b>even number</b> is a number that is an integral multiple of 2, for example, 18 is even
+		because 18 = 2*9. An <b>odd number</b> is 1 more than an integral multiple of 2, for example, 19 = 2*9 +1.
+		<br>
+		<br>
+		<b>
+			<font color="blue">Example 3:</font>
+		</b> <br>
+		<hr>
+		<pre>
+Consider the conjecture
+   
+     x is an even integer and y is an even integer -> the product x*y is an even integer.
+
+Rewrite as P->Q: Prove that if x and y are even, then x*y is even.
+
+The proof sequence might look like the following:
+
+1. x is even         (hypothesis)
+2. y is even         (hypothesis)
+3. x = 2m            (definition of even)
+4. y = 2n            (definition of even)
+5. x*y = (2m)*(2n)   (substitution)
+6. x*y = 2*(m*2*n)   (algebra)
+7. x*y is even       (definition of even)
+</pre>
+
+		<h2>Proof by Contraposition</h2>
+		If you have tried diligently but failed to produce a direct proof of your conjecture \(P &rarr; Q\), and you still
+		feel that the conjecture is true, you might try some variants on the direct proof technique. If you can prove the
+		theorem \(Q' &rarr; P'\), you can conclude \(P &rarr; Q\) by making use of the tautology \( (Q' &rarr; P') &rarr; (P
+		&rarr; Q) \). \(Q' &rarr; P'\) is the <b>contrapositive</b> of \(P &rarr; Q\), and the technique of proving \(P
+		&rarr; Q\) by doing a direct proof of \(Q' &rarr; P'\) is called <b>
+			<font color="blue">proof by contraposition</font>
+		</b>.
+		<br>
+		<br>
+		<b>
+			<font color="blue">Example 4:</font>
+		</b> <Br>
+		<hr>
+		<pre>
+Prove that if the square of an integer is odd, then the integer must be odd.
+
+Rewrite the conjecture as P->Q:  If n^2 is odd, then n is odd.
+  
+  <table style="width:50%">
+    <tr>
+      <th>P: n^2 is odd </th>
+      <th>Q: n is odd</th>
+    </tr>
+    <tr>
+      <th>P': n^2 is even</th>
+      <th>Q': n is even</th>
+    </tr>
+  </table>
+  
+Write the Contrapositive Q'->P': If an integer is even, then the square of the integer is even.
+
+Rewrite the contrapositive: If x is even, then x^2 is even.
+
+Direct proof of the contrapositive:
+
+1. x is even          (hypothesis)
+2. x = 2*m            (definition of even)
+3. x^2 = 2m*2m        (substitution)
+4. x^2 = 2*(m*2*m)    (algebra)
+5. x^2 is even        (definition of even)
+</pre>
+		<br>
+		<center>
+			<table style="width:60%">
+				<tr>
+					<th colspan="3">More Inference Rules</th>
+				</tr>
+				<tr>
+					<th>From</th>
+					<th>Can Derive</th>
+					<th>Name/Abbreviation for Rule</th>
+				</tr>
+				<tr>
+					<th>P &rarr; Q</th>
+					<th>Q' &rarr; P'</th>
+					<th>Contraposition-cont</th>
+				</tr>
+				<tr>
+					<th>Q' &rarr; P'</th>
+					<th>P &rarr; Q</th>
+					<th>Contraposition-cont</th>
+				</tr>
+			</table>
+		</center>
+
+		<h2>Proof by Contradiction</h2>
+		In addition to direct proof and proof by contraposition, you might use the technique of <b>
+			<font color="blue">proof by contradiction</font>
+		</b>. (Proof by contradiction is sometimes called <b>indirect proof</b>, but this term more properly means any
+		argument that is not a direct proof.) <br>
+		Suppose you are trying to prove \(P &rarr; Q\). By constructing a truth table, we see that <Br>
+		<Br>
+		<center>
+			\((P &and; Q' &rarr; 0) &rarr; (P &rarr; Q)\)
+		</center>
+		is a tautology, so to prove the theorem \(P &rarr; Q\), it is sufficient to prove \(P &and; Q' &rarr; 0\).
+		<Br>
+		<Br>
+		Therefore, in a proof by contradiction you assume that both the hypothesis and the negation of the conclusion are
+		true and then try to deduce some contradiction from these assumptions.
+		<Br>
+		<br>
+		It is hard to prove that something is not true; it's much easier to assume it is true and obtain a contradiction.
+		<br>
+		<br>
+		<b>
+			<font color="blue">Example 5:</font>
+		</b> <Br>
+		<hr>
+		<pre>
+Let's use proof by contradiction on the statement: "If a number added to itself gives itself, 
+then the number is 0." 
+
+    <table style="width:50%">
+    <tr>
+      <th>P: x + x = x </th>
+      <th>Q: x = 0</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>Q': x != 0</th>
+    </tr>
+  </table>
+  
+Let x represent any number.  
+Rewrite the conjecture as P &rarr; Q: If x + x = x, then x = 0.
+
+Indirect proof by contradiction (P &and; Q' &rarr; 0):
+
+1. x + x = x        (hypothesis)
+2. x != 0           (hypothesis)
+3. 2x = x           (algebra, because x != 0, we can divide both sides of the equation by x)
+4. 2 = 1            (contradiction)
+</pre>
+		Hence, \( (x + x = x ) &rarr; (x = 0) \)
+		<br>
+		<br>
+		<b>Reminder: </b>To prove that something is not true, try proof by contradiction.
+		<br>
+		<br>
+		<h2>Proof Techniques Review</h2>
+		Table 2.2 summarizes useful proof techniques we have discussed so far.
+		<br>
+		<center>
+			<table style="width:70%">
+				<tr>
+					<th colspan="3">Table 2.2</th>
+				</tr>
+				<tr>
+					<th>Proof Technique</th>
+					<th>Approach to Prove P &rarr; Q</th>
+					<th>Remarks</th>
+				</tr>
+				<tr>
+					<td>Exhaustive proof</td>
+					<td>Demonstrate P &rarr; Q for all possible cases</td>
+					<td>May be used only to prove a finite number of cases</td>
+				</tr>
+				<tr>
+					<td>Direct proof</td>
+					<td>Assume P, deduce Q</td>
+					<td>The standard approach -- usually the thing to try.</td>
+				</tr>
+				<tr>
+					<td>Proof by contraposition</td>
+					<td>Assume Q', deduce P'</td>
+					<td>Use this if Q' as a hypothesis seems to give more ammunition than P would.</td>
+				</tr>
+				<tr>
+					<td>Proof by contradiction</td>
+					<td>Assume P &and; Q', deduce a contradiction</td>
+					<td>Use this when Q says something is not true.</td>
+				</tr>
+			</table>
+		</center>
+
+		<br>
+		<!--
+		<h2>Serendipity</h2>
+		Serendipity means a fortuitous happening, or good luck. While this isn't really a
+		general proof technique, some of the most interesting proofs come from clever observations that we can admire, even
+		if we would never have thought of them ourselves. We'll look at such proofs, just for fun.
+		<br>
+		<pre>
+<b><font color="blue">Example 6: </font></b>
+<hr>
+A tennis tournament has 342 players. A single match involves 2 players. 
+The winner of a match plays the winner of a match in the next round, 
+while losers are eliminated from the tournament. The 2 players who have 
+won all previous rounds play in the final game, and the winner wins the tournament. 
+Prove that the total number of matches to be played is 341.
+
+The hard way to prove this result is to compute 342/2 = 171 to get the number of 
+matches in the first round, resulting in 171 winners to go on to the second round. 
+For the second round, 171/2=85 plus 1 left over; there are 85 matches and 85 winners, 
+plus the 1 left over, to go on to the third round. The third round had 86/2=43 matches, 
+and so forth. The total number of matches is the sum of 171 + 85 + 43 + ... 
+
+The clever observation is to note that each match results in exactly 1 loser, 
+so there must be the same number of matches as losers in the tournament. 
+Because there is only 1 winner, there are 341 losers and therefore 341 matches.
+</pre>
+-->
+
+		<h1>Practice</h1>
+		1.Provide counterexamples to the following conjectures:
+		<br>
+		<pre>
+			a. All animals living in the ocean are fish.
+			b. Every integer less than 10 is bigger than 5.
+		</pre>
+
+		2. Please give an exhaustive proof of the following conjecture:
+
+		<br>
+		<pre>
+		For any positive integer n less than or equal to 3, n! < 2^n.
+		</pre>
+
+		3.Please give a direct proof of the following conjecture:
+		<br>
+		<pre>
+		The sum of two odd integers is even.
+		</pre>
+
+		4. Please give a contraposition proof of the following conjecture:
+		<br>
+		<pre>
+		If a number x is positvie, so is x + 1.
+			</pre>
+
+		5. Please give a contradiction proof of the following conjecture:
+		<br>
+		<pre>
+		The value A is the average of the n numbers x1, x2, ... , xn. 
+		Prove that at least one of x1, x2, ... , xn is greater than or equal to A.
+		</pre>
+
+		6. Prove that the product xy is odd if and only if both x and y are odd integers.
+		<br>
+		<br>
+		<img src="./images/ifAndOnly.png" width="900px" height="150px">
+		<br>
+		<br>
+		<img src="./images/proofSolution.png" width="1000px" height="600px">
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>
