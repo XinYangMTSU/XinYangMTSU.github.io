@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Hard Problems in Computer Science</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 9: Finite-State Machines, Turing machines</h1>
+
+		<center>
+			<h2>Section 9.4 Turing Machines</h2>
+		</center>
+
+		<br>
+		<br>
+
+		We have spent quite a bit of time discussing what Turing machines can do. By the Church–Turing thesis, they can do a
+		great deal indeed, although not very efficiently. It is even more important, however, to consider what Turing
+		machines <b>cannot</b> do. Because a Turing machine’s abilities to perform tasks exceed those of an actual computer,
+		if we
+		find something no Turing machine can do, then a real computer cannot do it either.
+		In fact, by invoking the Church–Turing thesis, no algorithm exists to do it, and the task is not computable. The
+		type of task we have in mind here is generally that of determining the truth value of each of a number of related
+		statements.
+
+
+
+		<h1>Halting Problem</h1>
+
+		The halting problem asks whether it is possible to write a program that can determine, for any given program and
+		input, whether that program will halt (terminate) or continue running indefinitely. In other words, it is a decision
+		problem that seeks to determine if a program will reach a stopping point or run forever.
+
+		The significance of the halting problem lies in its negative answer. Alan Turing showed that there is no algorithmic
+		solution to the halting problem: it is undecidable. This means that there is no general-purpose algorithm or
+		computer program that can correctly determine whether an arbitrary program will halt or not for all possible inputs.
+
+		This has profound implications for computer science because it shows that there are inherent limits to what can be
+		computed algorithmically. It demonstrates that there are problems that simply cannot be solved by any computer
+		program, regardless of its computational power. The undecidability of the halting problem highlights the existence
+		of fundamental limitations in our ability to reason about program behavior and predict their outcomes.
+
+		The halting problem has also led to further developments in computability theory, such as the notion of Turing
+		completeness and the classification of problems into different complexity classes (like the famous P and NP
+		classes). It serves as a cornerstone for understanding the boundaries of what is computationally possible and has
+		influenced various areas of computer science, including programming languages, compiler design, and formal
+		verification techniques.
+
+		<img src="halt-1.png" width="1200" height="">
+		<br><br>
+		<img src="halt-2.png" width="1200" height="">
+
+		<h1>Computational Complexity</h1>
+		As a model of computation, the Turing machine has provided us with a way to prove the existence of unsolvable
+		(uncomputable) problems. Not only does the Turing machine help us find the limits of computability, but it can also
+		help us classify problems that are computable—that have an algorithm for their solution by the amount of work
+		required to carry out the algorithm.
+
+		<h2>P, NP, NP-Complete and NP-Hard Problems in Computer Science</h2>
+		<!--
+		<center>
+			<img width="900px" height="250px" src="eg47.png">
+		</center>
+
+		<h2>Halting Problem</h2>
+		<center>
+			<img width="900px" height="300px" src="halt.png">
+		</center>
+
+		<h1>Computational Complexity</h1>
+-->
+		In theoretical computer science, the classification and complexity of common problem definitions have two major
+		sets; <b>P</b> which is "Polynomial" time and <b>NP</b> which "Non-deterministic Polynomial" time. There are also
+		<b>NP-Hard</b> and <b>NP-Complete</b> sets, which we use to express more sophisticated problems. In the case of
+		rating from easy to hard, we might label these as "easy", "medium", "hard", and finally "hardest":
+
+		<h2>P</h2>
+		<center>
+			<img width="800px" height="200px" src="p.png">
+		</center>
+		P is a set of problems that can be solved (deterministic) in Polynomial Time.
+		<br>
+
+		<h2>NP</h2>
+
+		<center>
+			<img width="800px" height="200px" src="np.png">
+		</center>
+		NP is a set of problems that can be solved in Non-Polynomial Time. But can be verified in Polynomial Time.
+		<br>
+
+		<center>
+			<img width="900px" height="800px" src="np-hard.png">
+		</center>
+		<br>
+
+		<h2>Big-O Notation</h2>
+
+		<pre>
+		O(1) - constant time
+		O(log_2(n)) - logarithmic time
+		O(n) - linear time
+		O(n^2) - quadratic time
+		O(n^k) - polynomial time
+		O(k^n) - exponential time
+		O(n!) - factorial-time
+		</pre>
+
+		<h3>Polynomial Algorithms</h3>
+		The first set of problems are polynomial algorithms that we can solve in polynomial time, like logarithmic, linear
+		or quadratic time.
+		<br>
+		eg: Linear Search O(n), Bubble Sort (O(n^2)), Merge Sort (O(nlogn)), Djikstra Algorithm, Matrix Multiplication ...
+		<br>
+		<h3>NP Algorithms</h3>
+		The second set of problems cannot be solved in polynomial time. However, they can be verified or certified in
+		polynomial time. We expect these algorithms to have an exponential complexity.
+		<br>
+		eg: Integer Factorization, Graph Isomorphism ...
+		<br>
+		<h3>NP-Complete Algorithms</h3>
+		The next set is very similar to the previous set. Taking a look at the diagram, all of these all belong to NP, but
+		are among the hardest in the set.
+		NP-Complete problems are both in NP and NP-Hard.
+		What makes them different from other NP problems is a useful distinction called
+		completeness. For an NP probme that's complete, there exists a polynomial-time algorithm that can transform the
+		problem into any other NP-complete problem. This transformation requirment is also called reduction. <b>In simpler
+			terms, if we have an efficient algorithm to solve an NP-Complete problem, we can use it to solve any other problem
+			in NP.</b>
+		<br>
+		eg: Traveling Salesman, Knapsack, Graph Coloring ...
+		<br>
+		<br>
+		<b>
+			<font color="blue">NP-Complete is a subset of NP, and it consists of the most difficult problems within NP.</font>
+		</b>
+		<h3>NP-Hard Algorithms</h3>
+		The last set of problems contains the hardest, most complext problems in computer science. They are not only hard to
+		solve but are hard to verify as well. In fact, some of these problems aren't even decidable.
+		<br>
+		eg: K-means Clustering, Traveling Salesman Problem, Graph Coloring
+		<br>
+
+		<h2>Conclusion</h2>
+		<pre>
+P problems are quick to solve.
+NP problems are quick to verify but slow to solve.
+NP-Complete problems are also quick to verify, slow to solve and can be reduced to any other NP-Complete problem.
+NP-Hard problems are slow to verify, slow to solve and can be reduced to any other NP problems.
+		</pre>
+
+		<h2>P =? NP </h2>
+
+		Clearly, P ⊆ NP. P is a subset of NP. Arguably, the biggest open question in theoretical computer science concerns
+		the relationship
+		between those two classes: <br><br>
+		<pre>
+			Is P equal to NP?
+		</pre>
+
+		Since 2002, William Gasarch has conducted three polls of researchers concerning this and related
+		questions.Confidence that P ≠ NP has been increasing – in 2019, 88% believed P ≠ NP, as opposed to 83% in 2012 and
+		61% in 2002. When restricted to experts, the 2019 answers became 99% believed P ≠ NP. These polls do not imply
+		anything about whether P = NP is true, as stated by Gasarch himself: "This does not bring us any closer to solving
+		P=?NP or to knowing when it will be solved, but it attempts to be an objective report on the subjective opinion of
+		this era."
+
+		<h2>Millennium Prize Problems</h2>
+		<a href="https://en.wikipedia.org/wiki/Millennium_Prize_Problems">Millennium Prize Problems</a>
+
+		<h2>Reference</h2>
+		<a href="https://www.baeldung.com/cs/p-np-np-complete-np-hard" target="_blank">Hard Problems in Computer Science</a>
+		<br>
+		<a href="https://en.wikipedia.org/wiki/P_versus_NP_problem" target="_blank">P versus NP problem</a>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

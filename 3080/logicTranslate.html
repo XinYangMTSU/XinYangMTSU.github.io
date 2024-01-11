@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Formal Logic</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 1: Formal Logic</h1>
+
+		<center>
+			<h2>Section 1.1 Statements, Sybmolic Representation and Tautologies</h2>
+		</center>
+
+		<br>
+		<br>
+
+
+
+		<h1>Translating into Propositional Logic</h1>
+
+		<h2>Translating into Propositional Logic</h2>
+		<center>
+			<table style="width:70%">
+				<tr>
+					<th>
+						<font color="blue">English Word</font>
+					</th>
+					<th>
+						<font color="blue">Logical Connective</font>
+					</th>
+					<th>
+						<font color="blue">Logical Expression</font>
+					</th>
+				</tr>
+				<tr>
+					<th>and; but; also; in addition; moreover</th>
+					<th>Conjunction</th>
+					<th>\(A &and; B\)</th>
+				</tr>
+				<tr>
+					<th>or</th>
+					<th>Disjunction</th>
+					<th>\(A &or; B\)</th>
+				</tr>
+				<tr>
+					<th>If A, then B. <br> A implies B. <br>
+						A, therefore B. <br>
+						A only if B. <br>
+						B follows from A. <br>
+						A is a sufficient condition for B. <br>
+						B is a necessary condition for A
+					</th>
+					<th>Implication</th>
+					<th>\(A &rarr; B\)</th>
+				</tr>
+				<tr>
+					<th>A if and only if B. <br> A is nessarray and sufficient for B</th>
+					<th>Equivalence</th>
+					<th>\(A &harr; B\)</th>
+				</tr>
+				<tr>
+					<th>not A. <br> It is false that A ... <br> It is not true that A ...</th>
+					<th>Negation</th>
+					<th>\(A'\)</th>
+				</tr>
+
+			</table>
+		</center>
+
+		<h2>Some Sample Propositions</h2>
+		A: There is a velociraptor outside my apartment. <br>
+		B: Velociraptors can open windows. <br>
+		C: I am in my apartment right now. <br>
+		D: My apartment has windows. <br>
+		E: I am going to be eaten by a velociraptor. <br>
+		<br>
+		Please translating the following english to propositional logic: <br>
+		<br>
+		(1) I won't be eaten by a velociraptor if there isn't a velociratpr outside my apartment.
+		<b>
+			<font color="red">&not;A &rarr; &not;E</font>
+		</b>
+		<br>
+		<br>
+		(2) If there is a velociraptor outside my apartment, but it can't open windows, I am not going
+		to be eaten by a velociraptor. <b>
+			<font color="red">A &and; &not;B &rarr; &not;E</font>
+		</b>
+		<br>
+		<br>
+		(3) I am only in my apartment when there are no velociraptors outside. <b>
+			<font color="red">C &rarr; &not;A</font>
+		</b>
+		<br>
+		<br>
+
+		<h2>Well-formed formula (wff)</h2>
+		An expression that is a legitimate string is called a <font color="blue"><b>well-formed formula</b></font> or <b>
+			<font color="blue">wff</font>
+		</b>.
+		<br>
+		<br>
+		For example: <br>
+		\( (A &rarr; B)&and;(B &rarr; A) \) is legal
+		<br>
+		\( A)) &and;&and; &rarr; B) \) is not legal
+		<br>
+		<br>
+		To reduce the number of parentheses required in a wff, we stipulate an order in which connectivies are applied.
+		<font color="blue"><b>This order of precedence</b></font> is: <br>
+		<br>
+		1. connectives within parentheses, innermost parentheses first <br>
+		2. not: &not; <br>
+		3. and: &and; <br>
+		4. or: &or; <br>
+		5. implies: &rarr; <br>
+		6: equivalence: &harr; <br>
+		<br>
+		This means that the expression \(A &or; B'\) stands for \(A &or; (B')\), not \((A &or; B)'\). Similarly, \(A &or; B
+		&rarr; C\) means \((A &or; B) &rarr; C\), not \(A &or; (B &rarr; C)\). However, we often use parentheses anyway,
+		just to be sure there is no confusion.
+
+		<h2>main connective</h2>
+		In a wff with a number of connectives, the connective to be applied last is the
+		<b>
+			<font color="blue">main connective</font>
+		</b>. In, <br>
+		<br>
+		<center>
+			\(A &and; (B &rarr; C)'\)
+		</center>
+		the main connective is &and;. In <br>
+		<center>
+			\(((A &or; B) &and; C) &rarr; (B &or; C')\)
+		</center>
+		<br>
+		the main connective is &rarr;. Capital letters near the end of the alphabet, such as
+		\(P, Q, R, and S\) are used to represent wffs. Thus \(P\) could represent a single
+		statement letter, which is the simplest kind of wff, or a more complex wff. We might represent <br>
+		<center>
+			\(((A &or; B) &and; C) &rarr; (B &or; C')\)
+		</center>
+		<br>
+		as <br>
+		<center>
+			\(P &rarr; Q\)
+		</center>
+		<br>
+		if we want to hide some of the details for the moment and only concentrate on the main connective.
+
+		<h2>Truth table for any wff</h2>
+
+		Wffs composed of statement letters and connectives have truth values that depend on
+		the truth values assigned to their statement letters. We write the truth table
+		for any wff by building up the component parts, just as we did for \((A &rarr; B) &and; (B &rarr; A)\). The main
+		connective is addressed in the last column of the table.
+		<br>
+		<br>
+		The truth table for the wff \(A &or; B' &rarr; (A &or; B)'\) is given in Table 2. The main connective, acorrding to
+		the rules of precedence, is implication (\(&rarr;\))
+		<br>
+		<center>
+			<table style="width:70%">
+				<tr>
+					<th colspan="7">Table 2</th>
+				</tr>
+				<tr>
+					<th>A</th>
+					<th>B</th>
+					<th>B'</th>
+					<th>A &or; B'</th>
+					<th>A &or; B </th>
+					<th>(A &or; B)'</th>
+					<th>A &or; B' &rarr; (A &or; B)'</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+					<th>T</th>
+					<th>F</th>
+					<th>F</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+					<th>F</th>
+					<th>F</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>F</th>
+					<th>F</th>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>F</th>
+					<th>T</th>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+					<th>T</th>
+				</tr>
+			</table>
+		</center>
+
+		<h2>Practice Examples</h2>
+		Please construct truth tables for the following wffs. <br>
+		<br>
+		(1) (\(A &rarr; B\)) &harr; (B &rarr; A)
+		<br>
+		(2) \( (A &or; A') &rarr; (B &and; B') \)
+		<br>
+		(3) \( [(A &and; B') &rarr; C']' \)
+		<br>
+		(4)\( (A &rarr; B) &harr; (B' &rarr; A') \)
+
+		<br>
+
+		<h2>Application</h2>
+		Here are just a few examples, spanning the entire range of computing applications, from practical commercial
+		software to esoteric theory:
+		<br>
+		<Br>
+		&bull; In software engineering it is good practice to specify what a system should do before starting to code it.
+		Logic is frequently used for software specifications.
+		<Br>
+		<Br>
+		&bull; In information retrieval, including Web search engines, logical propositions are used to specify the
+		properties that should (or should not) be present in a piece of information in order for it to be considered
+		relevant.
+		<br>
+		<Br>
+		&bull; In artificial intelligence, formal logic is sometimes used to simulate intelligent thought processes. People
+		don't do their ordinary reasoning using mathematical logic, but logic is a convenient tool for implementing certain
+		forms of reasoning.
+		<br>
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+		<br>
+		<br>
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>
