@@ -1,0 +1,73 @@
+=============================================================================================
+CSCI-3080 Discrete Structure
+Department of Computer Science (Middle Tennessee State University)
+Instructor: Dr. Xin Yang
+==============================================================================================
+OLA1: Set Operations & Combinatorics in Python
+==============================================================================================
+Grading Rubrics for ola1
+
+Part 1:
+==============================================================================================
+(1) Exercise 1            		         		 (subtotal: 2 points)
+          S = A.intersection(B)
+          print('A Intersection B : ',S)
+          Output: A Intersection B :  {40, 50, 30}
+
+(2) Exercise 2				                         (subtotal: 2 points)
+          S = A.union(B)
+	  print('A Union B : ',S)
+          Output: A Union B :  {70, 40, 10, 50, 20, 60, 30}
+
+(3) Exercise 3   			              		 (subtotal: 2 points)
+          A.difference_update(B)
+	  print('A Difference B : ',A) 
+	  Output: A Difference B :  {10, 20}
+
+(4) Exercise 4
+	  A.difference_update({10,20,30})
+          print('A Difference {10,20,30} : ',A)	             	 (subtotal: 2 points)
+	  Output: A Difference {10,20,30} :  {40, 50}
+
+(5) Exercise 5 				                         (subtotal: 2 points)
+	  if A.isdisjoint(B):
+              print("Two sets have no common items")
+          else:
+              print("Yes. Common items: ")
+              print(A.intersection(B))
+          Output: {40, 50, 30}
+==============================================================================================
+
+Part 2:
+==============================================================================================
+(1) Exercise 1            		         		 (subtotal: 2 points)
+	  nPr(26,3)
+	  Output: 15600
+
+(2) Exercise 2				                         (subtotal: 6 points)
+
+          (a) nPr(6,4)                                           (2 points)
+              Output: 360
+
+          (b) 6*6*6*6                                            (2 points)
+              Output: 1296
+
+          (c) 1*6*6*6                                            (2 points)
+              Output: 216
+
+(3) Exercise 3   			              		 (subtotal: 6 points)
+	  
+          nominator1 = nCr(4,1)*nCr(48,4)                        (2 points)
+          denominator1 = nCr(52,5)                               (2 points)
+          P1 = nominator1/denominator1                           (2 points)
+	  Output: 0.299
+
+(4) Exercise 4                                                   (subtotal: 6 points)
+	  nominator2 = nCr(4,2)*nCr(48,3)                        (2 points)
+          denominator2 = nCr(52,5)                               (2 points)
+          P2 = nominator2/denominator2                           (2 points)
+	  Output: 0.0399
+
+==============================================================================================
+Total:                                                       			   30 points
+==============================================================================================

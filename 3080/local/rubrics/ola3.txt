@@ -1,0 +1,54 @@
+=============================================================================================
+CSCI-3080 Discrete Structure
+Department of Computer Science
+Middle Tennessee State University
+Instructor: Dr. Xin Yang                           Email: Xin.Yang@mtsu.edu
+==============================================================================================
+OLA3: Formal Logic                                 Due date: Sep 17th, 2021 (23:59 PM)
+==============================================================================================
+Grading Rubrics for ola3
+==============================================================================================
+1. Exercise 1            		                  (2 points each. subtotal: 10 points)
+   (1) The processor is slow or the printer is fast.               
+   (2) The processor is slow and the printer is fast.
+   (3) The processor is fast and the printer is fast.
+   (4) The processor is slow or the printer is fast, and the file is not damaged.
+   (5) The printer is slow and the file is not damaged.  
+
+2. Exercise 2				                           (subtotal: 56 points)
+
+   (a) A  B  A->B  A' A'orB (A->B)<->A'orB                (1 point each cell, 24 points)
+       T  T   T    F    T          T
+       T  F   F    F    F          T
+       F  T   T    T    T          T 
+       F  F   T    T    T          T    
+
+   (b) A  B  A^B  (A^B)' A'  B'  A'orB'  (A^B)'<->A'orB'  (1 point each cell, 32 points)
+       T  T   T     F    F   F     F            T
+       T  F   F     T    F   T     T            T
+       F  T   F     T    T   F     T            T
+       F  F   F     T    T   T     T            T
+   
+3. Exercise 3   			            (2 points each step, subtotal: 20 points)
+   Proof:
+   1. A -> B          (hypothesis)
+   2. B -> (C -> D)   (hypothesis)
+   3. A -> (B -> C)   (hypothesis)
+   4. A               (hypothesis)
+   5. B               (1,4 mp)
+   6. C -> D          (2,5 mp)
+   7. B -> C          (3,4 mp)
+   8. C               (5,7 mp)
+   9. D               (6,8 mp)	  
+
+4. Exercise 4                                        (2 points each step, subtotal: 14 points)
+   Proposition Logic: (D'-> J') ^ (D -> T) -> (J -> T)  (4 points)
+   Proof:
+   1. D' -> J'        (hypothesis)
+   2. D -> J          (hypothesis)
+   3. J               (hypothesis)
+   4. D               (1,3 mt)
+   5. T               (2,4 mp)
+==============================================================================================
+Total:                                                       			   100 points
+==============================================================================================
