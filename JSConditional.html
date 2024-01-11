@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>JavaScript Conditional Statements</title>
+	<link href="../CCS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>JavaScript Conditional Statements</h1>
+
+		<ul>
+			<li>&#9733; Conditional statements are used to perform different actions based on different conditions.</li>
+			<li>&#9733; Use <font color="red"><b>if</b></font> to specify a block of code to be executed, if a specified
+				condition is true.</li>
+			<li>&#9733; Use <font color="red"><b>else</b></font> to specify a block of code to be executed, if the same
+				condition is false.</li>
+			<li>&#9733; Use <font color="red"><b>else if</b></font> to specify a new condition to test, if the first condition
+				is false.</li>
+			<li>&#9733; Use <font color="red"><b>switch</b></font> to specify many alternative blocks of code to be executed
+			</li>
+		</ul>
+
+		<h2>if statement</h2>
+
+		Syntax:
+		<pre>
+			if(condition){
+					code to be executed if the condition is true
+			}
+		</pre>
+
+		<h3>Example</h3>
+
+		Note: Some special charaters can not be displayed if those charaters are used directly in your HTML file.
+
+		<pre>
+			& becomes &amp;amp;
+ 			< becomes &amp;lt;
+ 			> becomes &amp;gt;
+ 			" becomes &amp;quot;
+ 			' becomes &amp;#39;
+		</pre>
+
+		<pre>
+			var a = 1;
+			var b = 2;
+			if(a < b){
+					document.getElementById("p1").innerHTML = 'a < b';
+			}
+		</pre>
+
+
+		<h2>else statment</h2>
+		Syntax:
+		<pre>
+			if(condition){
+					code to be executed if the condition is true
+			}
+			else{
+					code to be executed if the condition is false
+			}
+		</pre>
+
+		<h3>Example</h3>
+		<pre>
+			var a = 1;
+			var b = 2;
+			if(a < b){
+						document.getElementById("p1").innerHTML = 'a < b';
+			}
+			else{
+						document.getElementById("p1").innerHTML = 'a >= b';
+			}
+		</pre>
+
+		<h2>else if</h2>
+		Syntax:
+		<pre>
+				if(condition1){
+						code to be executed if the condition 1 is true
+				}
+				else if(condition 2){
+						code to be executed if the condition 2 is true
+				}
+				else{
+						code to be executed if the condition 2 is false
+				}
+		</pre>
+
+		<h3>Example</h3>
+		<pre>
+			var a = 1;
+			var b = 2;
+			if(a < b){
+					document.getElementById("p1").innerHTML = 'a < b';
+			}
+			else if(a > b){
+					document.getElementById("p1").innerHTML = 'a > b';
+			}
+			else{
+					document.getElementById("p1").innerHTML = 'a==b';
+			}
+		</pre>
+
+
+		<h2>Switch statement</h2>
+
+		<ul>
+			<li>&#9733; The <font color="red"><b>switch</b></font> statement is used to perform different actions based on
+				different conditions.</li>
+		</ul>
+
+		<pre>
+			switch(expression){
+			
+			case x:
+					code to be executed if expression == x
+					break;
+			
+			case y:
+					code to be executed if expression == y
+					break;
+	
+			case z:
+					code to be executed if expression == z
+					break;
+			
+			default:
+					code to be executed
+			}
+		</pre>
+
+		<ul>
+			<li>&#9733; The switch expression is evaluated once;</li>
+			<li>&#9733; The value of the expression is compared with the values of each case;</li>
+			<li>&#9733; If there is a match, the associated block of code will be executed.</li>
+			<li>&#9733; If there is no match, the default code block is executed.</li>
+		</ul>
+
+		<pre>
+			&lt;p id="demo"&gt;&lt;/p&gt;
+			&lt;script&gt;
+				var day;
+				switch (new Date().getDay()) {
+					case 0:
+						day = "Sunday";
+						break;
+
+					case 1:
+						day = "Monday";
+						break;
+
+					case 2:
+						day = "Tuesday";
+						break;
+
+					case 3:
+						day = "Wednesday";
+						break;
+
+					case 4:
+						day = "Thursday";
+						break;
+
+					case 5:
+						day = "Friday";
+						break;
+
+					case 6:
+						day = "Saturday";
+						break;
+				}
+				document.getElementById("demo").innerHTML = "Today is " + day;
+			&lt;/script&gt;
+		</pre>
+
+		<ul>
+			<li>&#9733; Example: <a href="https://www.w3schools.com/js/tryit.asp?filename=tryjs_switch"
+					target="_blank">https://www.w3schools.com/js/tryit.asp?filename=tryjs_switch</a></li>
+		</ul>
+		<br>
+	</div>
+
+</body>
+
+</html>

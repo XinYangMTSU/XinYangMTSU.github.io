@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>jQuery Effects - KeyUP/KeyDown & Animation</title>
+	<link href="../CCS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>jQuery Effects - KeyUp & KeyDown</h1>
+
+		<ul>
+			<li>&#9733; The <font color="blue"><b>keyup()</b></font> method triggers the keyup event, or attaches a function
+				to run when a keyup event occurs.</li>
+			<li>&#9733; The <font color="blue"><b>keydown()</b></font> method triggers the keydown event, or attaches a
+				function to run when a keydown event occurs.</li>
+		</ul>
+
+		<pre>
+			In JavaScript:
+			
+			$(document).ready(function(){
+  				$("input").keydown(function(){
+    					$("input").css("background-color", "yellow");
+  				});
+ 					
+				$("input").keyup(function(){
+    					$("input").css("background-color", "pink");
+ 				 });
+			});
+
+			In HTML:
+
+			Enter your name: &lt;input type="text"&gt;
+			&lt;p&gt;Enter your name in the input field above. It will change background color on keydown and keyup.&lt;/p&gt;
+		</pre>
+
+
+		<h1>jQuery Effects - Animation</h1>
+
+		With jQuery, you can create custom animations.
+
+		<h2>The animate() Method</h2>
+		Syntax:
+		<pre>
+			$(selector).animate({params},speed,callback);
+		</pre>
+
+		<ul>
+			<li>&#9733; The required params parameter defines the CSS properties to be animated.</li>
+			<li>&#9733; The optional speed parameter specifies the duration of the effect. It can take the following values:
+				"slow", "fast", or milliseconds.</li>
+			<li>&#9733; The optional callback parameter is a function to be executed after the animation completes.</li>
+			<li>&#9733; The following example demonstrates a simple use of the animate() method; it moves a <div> element to
+					the right, until it has reached a left property of 250px:</li>
+			<pre>
+				In JavaScript:
+				$(document).ready(function(){
+  				$("button").click(function(){
+    				$("div").animate({left: '250px'});
+  				});
+				});
+				In HTML:
+
+				&lt;button&gt;Start Animation&lt;/button&gt;
+
+				&lt;p&gt;By default, all HTML elements have a static position, and cannot be moved. To manipulate the position, remember to first set the CSS position property of the element to relative, fixed, or absolute!<&lt;p&gt;
+
+				&lt;div style="background:#98bf21;height:100px;width:100px;position:absolute;"&gt;&lt;/div&gt;
+				
+			</pre>
+		</ul>
+
+
+		<h2>jQuery animate() - Manipulate Multiple Properties</h2>
+		Notice that multiple properties can be animated at the same time:
+
+		<pre>
+			In JavaScript:
+			$(document).ready(function(){
+  				$("button").click(function(){
+    					$("div").animate({
+      					left: '250px',
+      					opacity: '0.5',
+      					height: '150px',
+      					width: '150px'
+    					});
+  				});
+			});
+
+			In HTML:
+			&lt;button&gt;Start Animation&lt;/button&gt;
+
+			&lt;p&gt;By default, all HTML elements have a static position, and cannot be moved. To manipulate the 				position, remember to first set the CSS position property of the element to relative, fixed, or 				absolute!&lt;/p&gt;
+
+			&lt;div style="background:#98bf21;height:100px;width:100px;position:absolute;"&gt;&lt;/div&gt;
+		</pre>
+
+
+		<h2>jQuery animate() - Using Relative Values</h2>
+		<ul>
+			<li>&#9733; It is also possible to define relative values (the value is then relative to the element's current value). </li>
+			<li>&#9733; This is done by putting += or -= in front of the value:</li>
+			<pre>
+				 In JavaScript:
+				$(document).ready(function(){
+				  $("button").click(function(){
+    					$("div").animate({
+      					 left: '+=50px',
+     					height: '+=150px',
+      					 width: '+=150px'
+    					});
+  				});
+				});
+
+				In HTML:
+				&lt;button&gt;Start Animation&lt;/button&gt;
+
+				&lt;p&gt;By default, all HTML elements have a static position, and cannot be moved. 
+				To manipulate the position, remember to first set the CSS position property of the 
+				element to relative, fixed, or absolute!&lt;/p&gt;
+
+				&lt;div style="background:#98bf21;height:100px;width:100px;position:absolute;"&gt;&lt;/div&gt;
+			</pre>
+		</ul>
+		
+
+		<br>
+	</div>
+
+</body>
+
+</html>

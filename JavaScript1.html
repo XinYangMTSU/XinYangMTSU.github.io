@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Introduction to JavaScript</title>
+	<link href="../CCS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>Introduction to JavaScript</h1>
+		<br>
+
+		<center>
+			<img src="html2.png" width="700px" heigh="600px">
+		</center>
+		<br><br>
+
+		<h2>Why Study JavaScript?</h2>
+
+		JavaScript is the world's most popular programming language.
+		JavaScript is the programming language of the Web.
+		JavaScript is one of the 3 languages all web developers must learn.
+
+		<ul>
+			<li>&#9733; HTML<b>
+					<font color="red"> to define the content of web pages. </font>
+				</b> </li>
+			<li>&#9733; CSS<b>
+					<font color="red"> to specify the layout of web pages.</font>
+				</b>.</li>
+			<li>&#9733; JavaScript<b>
+					<font color="red"> to program the behavior of web pages.</font>
+				</b>.</li>
+		</ul>
+
+		<h2>What can we use JavaScript for?</h2>
+
+		<ul>
+			<li>&#9733; Make websites respond to user interaction. </li>
+			<li>&#9733; Build apps and games.</li>
+			<li>&#9733; Organize and present data.</li>
+		</ul>
+
+
+		<h2>JavaScript Where To?</h2>
+
+		<ul>
+			<li>&#9733; In HTML, JavaScript code must be inserted between
+				&lt;script&gt; and &lt;/script&gt; tags.
+			</li>
+			<li>&#9733; Scripts can be placed in the &lt;body&gt;, or in the &lt;head&gt; section of an HTML page, or in both.
+			</li>
+			<li>&#9733; External scripts are practical when the same code is used in many different web pages.</li>
+			<ul>
+				<li>&clubs; JavaScript files have the file extension .js</li>
+				<li>&clubs; To use an external script, put the name of the script file in the src (source) attribute of a
+					&lt;script&gt; &lt;/script&gt;tag. </li>
+				<li>&clubs; Placing scripts in external files has some advantages:</li>
+				<ul>
+					<li>&star; It separates HTML and code.</li>
+					<li>&star; It makes HTML and JavaScript easier to read and maintain.</li>
+					<li>&star; Cached JavaScript files can speed up page loads.</li>
+				</ul>
+			</ul>
+		</ul>
+
+		<h3>Example</h3>
+
+		In HTML file:
+
+		<pre>
+		&lt;!DOCTYPE html&gt;
+		&lt;html&gt;
+		&lt;head&gt;
+    		&lt;title&gt;JavaScript Demo&lt;/title&gt;
+    		&lt;script type="text/javascript" src="demo.js"&gt;&lt;/script&gt;
+		&lt;/head&gt;
+		&lt;body&gt;
+    			&lt;button onclick="my_function()"&gt;Try it&lt;/button&gt;
+		&lt;/body&gt;
+		&lt;/html&gt;
+		</pre>
+		In JavaScript file:
+		<pre>
+		function my_function() {
+				var name = prompt("what is your name?");
+				confirm("Hello! " + name + " Welcome to CSCI 4410/5410!");
+		}
+		</pre>
+
+		<h2>JavaScript Syntax</h2>
+
+
+		<ul>
+			<li>&#9733; JavaScript is a programming language.</li>
+			<li>&#9733; JavaScript syntax is the set of rules, how JavaScript programs are constructed.</li>
+			<li>&#9733; In a programming language, these program instructions are called statements.</li>
+			<li>&#9733; JavaScript statements are composed of: Variables, Operators, Expressions, Keywords, and Comments.
+			</li>
+		</ul>
+
+
+		<h2>JavaScript Variables</h2>
+
+		<ul>
+			<li>&#9733; JavaScript variables are containers for storing data values.</li>
+			<li>&#9733; We do this by defining a variable with a specific, case-sensitive name.</li>
+			<li>&#9733; Once you create (or declare) a variable as having a particular name, you can then call up that value
+				by typing the variable name.</li>
+		</ul>
+
+		<h2>JavaScript Identifiers</h2>
+
+		<ul>
+			<li>&#9733; All JavaScript variables must be identified with unique names.</li>
+			<li>&#9733; These unique names are called identifiers.</li>
+			<li>&#9733; Identifiers can be short names (like x and y) or more descriptive names (age, sum, totalVolume).</li>
+		</ul>
+
+
+		<h2>The general rules for constructing names for variables (unique identifiers)</h2>
+
+		<ul>
+			<li>&#9733; Names can contain letters, digits, underscores, and dollar signs.</li>
+			<li>&#9733; Names must begin with a letter.</li>
+			<li>&#9733; Names are case sensitive (eg: y and Y are different variables).</li>
+			<li>&#9733; Reserved words (like JavaScript keywords) cannot be used as names.</li>
+		</ul>
+
+
+
+		<h2>Declaring(Creating) JavaScript Variables</h2>
+
+		<ul>
+			<li>&#9733; Creating a variable in JavaScript is called "declaring" a varialbe.</li>
+			<li>&#9733; You declare a JavaScript variable with the <b>
+					<font color="red">var</font>
+				</b> keyword.</li>
+			<li>&#9733; After the declaration, the variable has no value. (Technically it has the value of undefined). To
+				assign a value to the variable, use the equal sign.</li>
+			<li>&#9733; Example:</li>
+			<pre>
+				// syntax
+				var var_name = data;
+				// example
+				var my_name = "Ada";
+				var my_age = 33;
+				var is_male = true;
+			</pre>
+		</ul>
+
+		<h2>JavaScript Arithmetic Operators</h2>
+
+		JavaScript Arithmetic Operators are used to perform arithmetic on numbers:
+		<br><br>
+		<center>
+			<table style="width:30%">
+				<tr>
+					<th>Operator</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>+</td>
+					<td>addition</td>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td>subtraction</td>
+				</tr>
+				<tr>
+					<td>*</td>
+					<td>multiplication</td>
+				</tr>
+				<tr>
+					<td>/</td>
+					<td>division</td>
+				</tr>
+				<tr>
+					<td>**</td>
+					<td>Exponentiation</td>
+				</tr>
+				<tr>
+					<td>%</td>
+					<td>module</td>
+				</tr>
+				<tr>
+					<td>++</td>
+					<td>increment</td>
+				</tr>
+				<tr>
+					<td>--</td>
+					<td>decrement</td>
+				</tr>
+			</table>
+		</center>
+		<br>
+
+		<ul>
+			<li>&#9733; The + operator can also be used to add (concatenate) strings.</li>
+		</ul>
+
+		<pre>
+			let text1 = "John";
+			let text2 = "Doe";
+			let text3 = text1 + " " + text2;
+
+
+			The result of text3 will be: John Doe
+		</pre>
+
+		<br>
+
+		<h2>JavaScript Assignment Operators</h2>
+
+		<center>
+			<table style="width:30%">
+				<tr>
+					<th>Operator</th>
+					<th>Example</th>
+					<th>Same as</th>
+				</tr>
+				<tr>
+					<th>=</th>
+					<th>x = y</th>
+					<th>x=y</th>
+				</tr>
+				<tr>
+					<th>+=</th>
+					<th>x += y</th>
+					<th>x = x + y</th>
+				</tr>
+				<tr>
+					<th>-=</th>
+					<th>x -= y</th>
+					<th>x = x - y</th>
+				</tr>
+				<tr>
+					<th>*=</th>
+					<th>x *= y</th>
+					<th>x = x * y</th>
+				</tr>
+				<tr>
+					<th>/=</th>
+					<th>x /= y</th>
+					<th>x = x / y</th>
+				</tr>
+				<tr>
+					<th>%=</th>
+					<th>x %= y</th>
+					<th>x = x % y</th>
+				</tr>
+			</table>
+		</center>
+
+		<br>
+		<h2>JavaScript Comparison Operators</h2>
+		<br>
+		<center>
+			<table style="width:30%">
+				<tr>
+					<th>Comparison operator</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>==</td>
+					<td>equal to</td>
+				</tr>
+				<tr>
+					<td>===</td>
+					<td>equal value and equal type</td>
+				</tr>
+				<tr>
+					<td>!=</td>
+					<td>not equal</td>
+				</tr>
+				<tr>
+					<td>!==</td>
+					<td>not equal value or not equal type</td>
+				</tr>
+				<tr>
+					<td>></td>
+					<td>greater than</td>
+				</tr>
+				<tr>
+					<td>
+						< </td>
+					<td>less than</td>
+				</tr>
+				<tr>
+					<td>>=</td>
+					<td>greater than or equal to</td>
+				</tr>
+				<tr>
+					<td>
+						<= </td>
+					<td>less than or equal to</td>
+				</tr>
+				<tr>
+					<td>? :</td>
+					<td>ternary operator</td>
+				</tr>
+			</table>
+		</center>
+
+
+		<ul>
+			<li>&#9733; Example: <a href="https://www.w3schools.com/js/js_comparisons.asp" target="_blank">JavaScript
+					Comparisons</a> </li>
+			<li>&#9733; Example: <a href="https://www.w3schools.com/js/tryit.asp?filename=tryjs_comparison"
+					target="_blank">Ternary
+					Operator</a></li>
+			<pre>
+				var voteable = (age < 18) ? "Too young":"Old enough";
+			</pre>
+		</ul>
+
+		<h2>Logical Operators</h2>
+
+		<br>
+		<center>
+			<table style="width:30%">
+				<tr>
+					<th>Logical operator</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>&&</td>
+					<td>logic and</td>
+				</tr>
+				<tr>
+					<td>||</td>
+					<td>logic or</td>
+				</tr>
+				<tr>
+					<td>!</td>
+					<td>logic not</td>
+				</tr>
+			</table>
+		</center>
+
+
+		<h2>JavaScript has 8 Datatypes</h2>
+		<ul>
+			<li>&#9733; 1. <font color="red"><b>String</b></font>: Strings are written with quotes. You can use single or
+				double quotes:
+			</li>
+			<li>&#9733; 2. <font color="red"><b>Number</b></font>
+			</li>
+			<li>&#9733; 3. Bigint: used to store integer values that are too big to be represented by a normal JavaScript
+				Number.</li>
+			<li>&#9733; 4. <font color="red"><b>Boolean</b></font>: can only have two values: true or false.
+			</li>
+			<li>&#9733; 5. Undefined: a variable without a value, has the value undefined</li>
+			<ul>
+				<li>&clubs; An empty value has nothing to do with undefined.</li>
+				<pre>
+			let car;    // Value is undefined, type is undefined
+			let car = "";    // The value is "", the typeof is "string"
+			</pre>
+			</ul>
+			<li>&#9733; 6. Null</li>
+			<li>&#9733; 7. Symbol</li>
+			<li>&#9733; 8. <font color="red"><b>Object</b></font>
+			</li>
+		</ul>
+
+		<ul>
+			<li>You can use the JavaScript <b>
+					<font color="red">typeof</font>
+				</b> operator to find the type of a JavaScript variable.</li>
+			<li>The typeof operator returns the type of a variable or an expression:</li>
+			<pre>
+				typeof "John Doe";     // Returns "string"
+				var x = 5;
+				typeof x;              // Returns "Number"
+			</pre>
+		</ul>
+
+		<h2>JavaScript Functions</h2>
+
+		<ul>
+			<li>&#9733; A JavaScript function is a block of code designed to perform a particular task.</li>
+			<li>&#9733;You can reuse code: Define the code once, and use it many times.</li>
+			<li>&#9733; A JavaScript function is defined with the <font color="red"><b>function</b></font> keyword, followed
+				by a name, followed by
+				parentheses ().</li>
+			<li>&#9733; The parentheses may include parameter names separated by commas: (parameter1, parameter2, ...).</li>
+			<li>&#9733; The code to be executed, by the function, is placed inside curly brackets:</li>
+			<pre>
+				function func_name(parameter1, parameter2,...){
+							//code to be executed
+				}
+			</pre>
+		</ul>
+		<h3>Example</h3>
+		In HTML file:
+		<pre>
+				&lt;button onclick="my_math()"&gt;Calculate it&lt;/button&gt;
+				&lt;p id="demo"&gt;&lt;/p&gt;
+		</pre>
+
+		In JavaScript file:
+		<pre>
+			function my_math() {
+					var x = 5;
+					var y = 6;
+					var z = x + y;
+					document.getElementById("demo").innerHTML = "The value of z is: " + z;
+			}
+		</pre>
+
+		<h2>Global and Local variables</h2>
+		<ul>
+			<li>&#9733; Variables defined outside a function are accessible anywhere once they have been declared.</li>
+			<li>&#9733; They are called global variables and their scope is global.</li>
+			<li>&#9733; Variables defined inside a function are local variables. They cannot be accessed outside of that
+				function.</li>
+		</ul>
+
+		<h2>HTML &lt;button&gt; &lt;/button&gt; tags and onclick Event Attribute</h2>
+		<ul>
+			<li>&#9733; The <font color="red"><b>&lt;button&gt; &lt;/button&gt;</b></font> tag defines a clickable button.
+			</li>
+			<li>&#9733; The <font color="red"><b>onclick</b></font> attribute fires on a mouse click on the element.</li>
+			<li>&#9733; &lt;button onclick = "my_function()"&gt;Click me&lt;/button&gt;
+			</li>
+			<li>&#9733; Other HTML events: <a href="https://www.w3schools.com/tags/ref_eventattributes.asp"
+					target="_blank">Event Attributes</a></li>
+		</ul>
+
+		<h3>JavaScript Events</h3>
+		<ul>
+			<li>&#9733; HTML events are "things" that happen to HTML elements.</li>
+			<li>&#9733; When JavaScript is used in HTML pages, JavaScript can "react" on these events.</li>
+		</ul>
+
+		<h3>The Document Object</h3>
+
+		<ul>
+			<li>&#9733; When an HTML document is loaded into a web browser, it becomes a <font color="red"><b>document
+						object</b></font>.</li>
+			<li>&#9733; The document object is the root node of the HTML document.</li>
+		</ul>
+
+
+		<h3>getElementById() method</h3>
+		<ul>
+			<li>&clubs; The <font color="red"><b>getElementById()</b></font> method returns an element with a specified value.
+			</li>
+			<li>&clubs; The <font color="red"><b>getElementById()</b></font> method returns null if the element does not
+				exist.</li>
+			<li>&clubs; The <font color="red"><b>getElementById()</b></font> method is one of the most common methods in the
+				HTML DOM.</li>
+			<li>&clubs; It is used almost every time you want to read or edit an HTML element.</li>
+			<li>&clubs; The <font color="red"><b>innerHTML</b></font> property sets or returns the HTML content (inner HTML)
+				of an element.</li>
+		</ul>
+
+		<h2>Window prompt() Method</h2>
+		<ul>
+			<li>&#9733; The prompt() method displays a dialog box that prompts the visitor for input.</li>
+			<li>&#9733; A prompt box is often used if you want the user to input a value before entering a page.</li>
+			<li>&#9733; When a prompt box pops up, the user will have to click either "OK" or "Cancel" to proceed after
+				entering an input value.
+			</li>
+			<li>&#9733; The prompt() method returns the input value if the user clicks "OK". If the user clicks "cancel" the
+				method returns null.
+			</li>
+		</ul>
+
+		<h2>Window confirm() Method</h2>
+		<ul>
+			<li>&#9733; The confirm() method displays a dialog box with a specified message, along with an OK and a Cancel
+				button.</li>
+			<li>&#9733; A confirm box is often used if you want the user to verify or accept something.</li>
+			<li>&#9733; The confirm() method returns true if the user clicked "OK", and false otherwise.
+			</li>
+		</ul>
+
+
+		<h2>JavaScript Arrays</h2>
+
+		<ul>
+			<li>&#9733; JavaScript array is a special variable, which can hold more than one value at a time.</li>
+			<li>&#9733; An array can hold many values under a single name, and you can access the values by referring to an
+				index number.</li>
+			<li>&#9733; In JavaScript, arrays always use numbered indexes.</li>
+		</ul>
+
+		<pre>
+			var cars=["BMW", 'Volvo', "Saab"];
+
+			or
+			
+			var cars= new Array("BMW", 'Volvo', "Saab");
+		</pre>
+
+		<ul>
+			<li>&#9733; The two examples above do exactly the same.</li>
+			<li>&#9733; For simplicity, readability and execution speed, use the first one.</li>
+		</ul>
+
+
+		<h3>Access the Elements of an Array</h3>
+
+		<ul>
+			<li>&#9733; You refer to an array element by referring to the index number.</li>
+			<li>&#9733; This statement accesses the value of the first element in cars:</li>
+		</ul>
+
+		<pre>
+				var car_name = cars[0];
+			</pre>
+
+		<h3>Array Properties and Methods</h3>
+
+		<ul>
+			<li>&#9733; The <font color="red"><b>length</b></font> property of an array returns the length of an array (the
+				number of array elements).</li>
+			<li>&#9733; The <font color="red"><b>sort()</b></font> method sorts an array alphabetically.</li>
+		</ul>
+
+		<pre>
+			// the length property returns the number of elements
+			var x = car.length;
+			// the sort() method sorts the array.
+			var y = var.sort();
+		</pre>
+
+		<ul>
+			<li>&#9733; The <font color="red"><b>pop()</b></font> method removes (and returns) the last element from an array:
+			</li>
+			<pre>
+				var cars=["BMW", "Volvo", "Saab"];
+				cars.pop();
+		</pre>
+
+			<li>&#9733; The <font color="red"><b>push()</b></font> method adds a new element to an array (at the end):</li>
+			<pre>
+				var cars=["BMW", "Volvo", "Saab"];
+				cars.push("Honda");
+			</pre>
+		</ul>
+
+
+		<h3>With JavaScript, the full array can be accessed by referring to the array name:</h3>
+		<pre>
+		&lt;p id="demo"&gt;&lt;/p&gt;
+
+		&lt;script&gt;
+			var cars = ["Saab", "Volvo", "BMW"];
+			document.getElementById("demo").innerHTML = cars;
+		&lt;/script&gt;
+		</pre>
+
+		<ul>
+			<li>&#9733; Arrays are a special type of objects. The typeof operator in JavaScript returns "object" for arrays.
+			</li>
+			<li>&#9733; But, JavaScript arrays are best described as arrays.</li>
+			<li>&#9733; <font color="red"><b>Arrays use numbers</b></font> to access its "elements". </li>
+			<li>&#9733; <font color="red"><b>Objects use names</b></font> to access its "members".</li>
+		</ul>
+
+
+		<h3>The best way to loop through an array is using a standard for loop:</h3>
+
+		<pre>
+			&lt;p id="demo"&gt;&lt;/p&gt;
+
+			&lt;script&gt;
+			var fruits = ["Banana", "Orange", "Apple", "Mango"];
+			var fLen = fruits.length;
+
+			var text = "&lt;ul&gt;";
+			for (var i = 0; i < fLen; i++) {
+  				text += "&lt;li>" + fruits[i] + "&lt;/li&gt;";
+			}
+			text += "&lt;/ul&gt;";
+
+			document.getElementById("demo").innerHTML = text;
+			&lt;/script&gt;
+</pre>
+
+
+		<h2>JavaScript Objects</h2>
+
+		<ul>
+			<li>&#9733; Objects are variables too. But objects can contain many values.</li>
+			<li>&#9733; The values are written as <font color="red"><b>name:value</b></font> pairs (name and value separated
+				by a colon).</li>
+			<li>&#9733; JavaScript objects are containers for named values.</li>
+		</ul>
+
+
+		<pre>
+				var car = {type:"Fiat", model:"500", color:"white"};
+		</pre>
+
+		<h3>Using the JavaScript Keyword new</h3>
+		<pre>
+			var car = new Object; // or var car = new Object();
+			car.type = "Fiat";
+			car.model = "500";
+			car.color = "white";
+		</pre>
+
+		<h3>Objects Properties</h3>
+		<ul>
+			<li>&#9733; The name:values pairs (in JavaScript objects) are called properties.</li>
+		</ul>
+		<center>
+			<table style="width:30%">
+				<tr>
+					<th>Property</th>
+					<th>Property Value</th>
+				</tr>
+				<tr>
+					<td>type</td>
+					<td>"Fiat"</td>
+				</tr>
+				<tr>
+					<td>model</td>
+					<td>"500"</td>
+				</tr>
+				<tr>
+					<td>color</td>
+					<td>"white"</td>
+				</tr>
+			</table>
+		</center>
+
+		<h3>Accessing Object Properties</h3>
+		<ul>
+			<li>&#9733; You can access object properties in two ways:</li>
+		</ul>
+		<pre>
+			car.type;
+			
+			or
+
+			car["type"]
+		</pre>
+
+		<h2>Object Methods</h2>
+		<ul>
+			<li>&#9733; Objects can also have <font color="red"><b>methods</b></font>.</li>
+			<li>&#9733; Methods are actions that can be performed on objects.</li>
+			<li>&#9733; Methods are stored in properties as function definitions.</li>
+		</ul>
+		<pre>
+			var car = {
+					type:"Fiat", 
+					model:"500",
+					color:"white",
+				
+					print_car_info: function(){
+						return this.type + " " + this.model;
+					}
+			};
+
+					or 
+
+			var car = new Object; // or var car = new Object();
+			car.type = "Fiat";
+			car.model = "500";
+			car.color = "white";
+					
+			car.print_car_info = function(){
+				return this.type + " " + this.model;
+			};
+		</pre>
+
+		<h3>The keyword "this"</h3>
+
+		<ul>
+			<li>&#9733; In JavaScript, the <font color="red"><b>this</b></font> keyword refers to an object.</li>
+			<li>&#9733; In the example above, <font color="red"><b>this</b></font> refers to the car object.</li>
+			<li>&#9733; The keyword this acts as a placeholder.</li>
+			<li>&#9733; It will refer to whichever object called that method when the method is actually used.</li>
+		</ul>
+
+		<h2>Using an Object Constructor</h2>
+
+		<ul>
+			<li>&#9733; The examples above are limited in many situations. They only create a single object.</li>
+			<li>&#9733; Sometimes we like to have an “object type” that can be used to create many objects of one type.</li>
+			<li>&#9733; The standard way to create an “object type” is to use an object constructor function.</li>
+			<li>&#9733; The following function car is an object constructor, Once you have an object constructor, you can
+				create new objects
+				of the same type.</li>
+		</ul>
+
+
+		<pre>
+		// car constructor
+		function Car(type, model, color){
+				this.type = type;
+				this.model = model;
+				this.color = color;
+		}
+
+		var my_car1 = new Car("Fiat","500","white");
+		var my_car2 = new Car("Honda","Fit","black");
+		</pre>
+
+		<h3>Array of Objects</h3>
+		<pre>
+			// car constructor
+		function Car(type, model, color){
+				this.type = type;
+				this.model = model;
+				this.color = color;
+		}
+
+		var cars = new Array();
+		cars[0] = new Car("Fiat","500","white");
+		cars[1] = new Car("Honda","Fit","black");
+		</pre>
+
+		<ul>
+			<li>&clubs; It is considered good practice to name constructor functions with an upper-case first letter.</li>
+			<li>&clubs; Example: </li>
+			<img src="jsconstructor.png" width="1000px" height="500px">
+		</ul>
+
+		<h2>JavaScript Comments</h2>
+
+		<ul>
+			<li>&#9733; JavaScript comments can be used to explain JavaScript code, and to make it more readable.</li>
+			<li>&#9733; JavaScript comments can also be used to prevent execution, when testing alternative code.</li>
+		</ul>
+
+		<h3>Single Line Comments</h3>
+		<ul>
+			<li>&#9733; Single line comments start with <font color="red"><b>//</b></font>.</li>
+		</ul>
+
+		<h3>Multi-line Comments</h3>
+		<ul>
+			<li>&#9733; Multi-line comments start with <font color="red"><b>/*</b></font> and end with <font color="red">
+					<b>*/</b>
+				</font>.</li>
+		</ul>
+		<br>
+	</div>
+
+</body>
+
+</html>

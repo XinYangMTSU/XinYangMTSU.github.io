@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>HTML Forms</title>
+	<link href="../CCS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>HTML Forms</h1>
+
+
+		<ul>
+			<li>&#9733; An HTML form is used to collect user input. The user input is most often sent to a server for
+				processing.</li>
+			<li>&#9733; The HTML <b>
+					<font color="blue">&lt;form&gt;&lt;/form&gt;</font>
+				</b> element is used to create an HTML form for user input.</li>
+			<li>&#9733; The <b>
+					<font color="blue">&lt;form&gt;&lt;/form&gt;</font>
+				</b> element is a container for different types of input elements, such as: text fields, checkboxes, radio
+				buttons, submit buttons, etc.</li>
+			<li>&#9733; The HTML <b>
+					<font color="blue">&lt;input&gt;</font>
+				</b> element is the most used form element.</li>
+			<li>&#9733; The <b>
+					<font color="blue">&lt;label&gt;</font>
+				</b><b>
+					<font color="blue">&lt;/label&gt;</font>
+				</b> tag defines a label for many form elements.</li>
+			<li>&#9733; The <b>for</b> attribute of the <b>
+					<font color="blue">&lt;label&gt;</font>
+				</b> tag should be equal to the <b>id</b> attribute of the <b>
+					<font color="blue">&lt;input&gt;</font>
+				</b> element to bind them together.</li>
+			<li>&#9733; An <b>
+					<font color="blue">&lt;input&gt;</font>
+				</b> element can be displayed in many ways, depending on the type attribute: </li>
+			<br>
+			<center>
+				<table style="width:70%">
+					<tr>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>&lt;input type="text"&gt;</td>
+						<td>Displays a single-line text input field</td>
+					</tr>
+					<tr>
+						<td>&lt;input type="radio"&gt;</td>
+						<td>Displays a radio button (for selecting one of many choices)</td>
+					</tr>
+					<tr>
+						<td>&lt;input type="checkbox"&gt;</td>
+						<td>Displays a checkbox (for selecting zero or more of many choices)</td>
+					</tr>
+					<tr>
+						<td>&lt;input type="submit"&gt;</td>
+						<td>Displays a submit button (for submitting the form)</td>
+					</tr>
+					<tr>
+						<td>&lt;input type="button"&gt;</td>
+						<td>Displays a clickable button</td>
+					</tr>
+				</table>
+			</center>
+		</ul>
+
+		<h2>Text Fields Example</h2>
+
+		<h3>store the user’s input: .val()</h3>
+		<ul>
+			<li>&#9733; We’ll need to store the user’s input in a variable, which will allow us to append that input to the
+				body of the HTML document later on.</li>
+			<li>&#9733; You can set a variable equal to the contents of the input field using <b>
+					<font color="red">.val()</font>
+				</b></li>
+			<li>&#9733; Get the value from an input: <b>
+					<font color="blue">var first_name = $("input[name=firstname]").val()</font>
+				</b> or <b>
+					<font color="blue">var last_name = $("#lastname").val()</font>
+				</b></li>
+		</ul>
+
+		<pre>
+			In JavaScript:
+
+			$(document).ready(function(){
+  					$("button").click(function(){
+   				  	var first_name = $("input[name=firstname]").val();
+    					var last_name = $("#lname").val();
+    					alert(first_name + " " + last_name);
+  				});
+			});
+
+		  	In HTML:
+
+			&lt;form&gt;
+			&lt;label for="fname">First name:&lt;/label&gt;&lt;br&gt;
+  			&lt;input type="text" id="fname" name="firstname" value="John"&gt;&lt;br&gt;
+  			&lt;label for="lname">Last name:&lt;/label&gt;&lt;br&gt;
+  			&lt;input type="text" id="lname" name="lastname" value="Doe"&gt;
+			&lt;/form&gt;
+
+			&lt;button&gt;Add name&lt;/button&gt;
+		</pre>
+
+		<br>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>jQuery Events</title>
+	<link href="../CCS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>jQuery Add and Remove Elements</h1>
+
+		<ul>
+			<li>&#9733; Dynamically adding elements to our HTML page is a powerful tool.</li>
+			<li>&#9733; It lets us modify not only the formatting, but the actual structure of our websites in response to a
+				user’s actions.</li>
+		</ul>
+
+		<h2>jQuery - Add Elements</h2>
+
+		We will look at four jQuery methods that are used to add new content:
+
+		<ul>
+			<li>&#9733; <b>
+					<font color="red">append()</font>
+				</b> - Inserts content at the end of the selected elements.</li>
+			<li>&#9733; <b>
+					<font color="red">prepend()</font>
+				</b> - Inserts content at the beginning of the selected elements.</li>
+			<li>&#9733; <b>
+					<font color="red">after()</font>
+				</b> - Inserts content after the selected elements.</li>
+			<li>&#9733; <b>
+					<font color="red">before()</font>
+				</b> - Inserts content before the selected elements</li>
+		</ul>
+
+		<h2>jQuery append() and prepend() Method</h2>
+		Syntax:
+		<ul>
+			<li>&#9733; $("p").append("Some appended text.");</li>
+			<li>&#9733; $("p").prepend("Some prepended text.");</li>
+		</ul>
+
+		<pre>
+			In JavaScript:
+
+			$(document).ready(function(){
+  				$("#btn1").click(function(){
+    				$("p").append(" &lt;b&gt;Appended text&lt;/b&gt;.");
+  				});
+
+  				$("#btn2").click(function(){
+    				$("ol").append("&lt;li&gt;Appended item&lt;/li&gt;");
+  				});
+			});
+
+		In HTML:
+
+			&lt;p&gt;This is a paragraph.&lt;/p&gt;
+			&lt;p&gt;This is another paragraph.&lt;/p&gt;
+
+			&lt;ol&gt;
+  				&lt;li&gt;List item 1&lt;/li&gt;
+  				&lt;li&gt;List item 2&lt;/li&gt;
+  				&lt;li&gt;List item 3&lt;/li&gt;
+			&lt;/ol&gt;
+
+			&lt;button id="btn1"&gt;Append text&lt;/button&gt;
+			&lt;button id="btn2"&gt;Append list items&lt;/button&gt;
+		</pre>
+
+		<h2>Add Several New Elements With append() and prepend()</h2>
+		<ul>
+			<li>&#9733; In both examples above, we have only inserted some text/HTML at the beginning/end of the selected HTML
+				elements.</li>
+			<li>&#9733; However, both the append() and prepend() methods can take an infinite number of new elements as
+				parameters. The new elements can be generated with text/HTML (like we have done in the examples above), with
+				jQuery, or with JavaScript code and DOM elements.</li>
+
+			<li>&#9733; In the following example, we create several new elements. The elements are created with text/HTML,
+				jQuery, and JavaScript/DOM. Then we append the new elements to the text with the append() method (this would
+				have worked for prepend() too) :</li>
+		</ul>
+
+		<pre>
+			In JavaScript:
+
+			function appendText() {
+					var txt1 = "&lt;p&gt;Text.&lt;/p&gt;";        // Create text with HTML
+					var txt2 = $("&lt;p&gt;&lt;/p&gt;").text("Text.");  // Create text with jQuery
+					var txt3 = document.createElement("p");
+					txt3.innerHTML = "Text.";         // Create text with DOM
+					$("body").append(txt1, txt2, txt3);   // Append new elements
+			}
+
+			In HTML:
+
+			&lt;p&gt;This is a paragraph.&lt;/p&gt;
+			&lt;button onclick="appendText()"&gt;Append text&lt;/button&gt;
+			
+		</pre>
+		<h2>jQuery after() and before() Methods</h2>
+		Syntax:
+		<ul>
+			<li>&#9733; $("img").after("Some text after");</li>
+			<li>&#9733; $("img").before("Some text before");</li>
+		</ul>
+
+		<pre>
+			In JavaScript:
+
+			$(document).ready(function(){
+  				$("#btn1").click(function(){
+    				$("img").before("&lt;b&gt;Before&lt;/b&gt;");
+  				});
+
+  				$("#btn2").click(function(){
+    				$("img").after("&lt;i&gt;After&lt;/i&gt;");
+  				});
+			});
+
+		In HTML:
+
+			&lt;img src="https://www.w3schools.com/images/w3jquery.gif" alt="jQuery" width="100" height="140"&gt;
+			<br>
+			&lt;button id="btn1"&gt;Insert before&lt;/button&gt;
+			&lt;button id="btn2"&gt;Insert after&lt;/button&gt;
+			
+		</pre>
+
+		<h2>Add Several New Elements With after() and before()</h2>
+		<ul>
+			<li>&#9733; Also, both the after() and before() methods can take an infinite number of new elements as parameters.
+			</li>
+			<li>&#9733; In the following example, we create several new elements. The elements are created with text/HTML,
+				jQuery, and JavaScript/DOM. Then we insert the new elements to the text with the after() method (this would have
+				worked for before() too) :</li>
+		</ul>
+
+		<pre>
+			In JavaScript:
+			
+			function afterText() {
+  				var txt1 = "&lt;b&gt;I &lt;/b&gt;";           // Create element with HTML
+  				var txt2 = $("&lt;i&gt;&lt;/i&gt;").text("love ");  // Create with jQuery
+  				var txt3 = document.createElement("b");   // Create with DOM
+  				txt3.innerHTML = "jQuery!";
+  				$("img").after(txt1, txt2, txt3);    // Insert new elements after img
+			}
+
+			In HTML:
+
+			&lt;img src="https://www.w3schools.com/images/w3jquery.gif" alt="jQuery" width="100" height="140"&gt;
+			<br>
+			&lt;p&gt;Click the button to insert text after the image.&lt;/p&gt;
+			&lt;button onclick="afterText()"&gt;Insert after&lt;/button&gt;
+			
+		</pre>
+
+
+		<h2>jQuery - Remove Elements</h2>
+		With jQuery, it is easy to remove existing HTML elements.
+		To remove elements and content, there are mainly two jQuery methods:
+
+		<ul>
+			<li>&#9733; <b>
+					<font color="red">remove()</font>
+				</b> - Removes the selected element (and its child elements)</li>
+			<li>&#9733; <b>
+					<font color="red">empty()</font>
+				</b> - Removes the child elements from the selected element</li>
+		</ul>
+
+		<h2>jQuery remove() and empty() Method</h2>
+
+		<pre>
+			In JavaScript:
+
+			$(document).ready(function() {
+				$("#btn1").click(function() {
+    	       				$("#div1").empty();
+      	 		});
+
+       				$("#btn2").click(function() {
+        	  			 $("#div2").remove();
+       				});
+			});
+
+			In HTML:
+
+			&lt;div id="div1"&gt;
+			&lt;p&gt;This is a paragraph.&lt;/p&gt;
+			&lt;p&gt;This is another paragraph.&lt;/p&gt;
+			&lt;/div&gt;
+
+			&lt;div id="div2"&gt;
+			&lt;p&gt;This is a paragraph.&lt;/p&gt;
+			&lt;p&gt;This is another paragraph.&lt;/p&gt;
+			&lt;/div&gt;
+
+			&lt;button id="btn1"&gt;empty&lt;/button&gt;
+			&lt;button id="btn2"&gt;remove&lt;/button&gt;
+
+			In CSS:
+
+			#div1{
+					width: 550px;
+					height: 50px;
+					background-color: red;
+			}
+
+			#div2{
+					width: 550px;
+					height: 50px;
+					background-color: green;
+			}
+			
+		</pre>
+
+
+		<h1>jQuery Add and Remove Class</h1>
+
+		jQuery has several methods for CSS manipulation. We will look at the following methods:
+
+		<ul>
+			<li>&#9733; <b>
+					<font color="red">addClass()</font>
+				</b> - Adds one or more classes to the selected elements </li>
+			<li>&#9733; <b>
+					<font color="red">removeClass()</font>
+				</b> - Removes one or more classes from the selected elements</li>
+			<li>&#9733; <b>
+					<font color="red">toggleClass()</font>
+				</b> - Toggles between adding/removing classes from the selected elements</li>
+			<li>&#9733; <b>
+					<font color="red">css()</font>
+				</b> - Sets or returns the style attribute</li>
+		</ul>
+
+		<h3>addClass() method</h3>
+		<pre>
+			In JavaScript:
+			
+			$(document).ready(function(){
+  				$("button").click(function(){
+    					$("h1, h2, p").addClass("blue");
+    					$("div").addClass("important");
+  				});
+			});
+
+			In CSS:
+
+			.important {
+  				font-weight: bold;
+  				font-size: xx-large;
+			}
+
+			.blue {
+  				color: blue;
+			}
+
+			In HTML:
+
+			&lt;h1&gt;Heading 1&lt;/h1&gt;
+			&lt;h2&gt;Heading 2&lt;/h2&gt;
+
+			&lt;p&gt;This is a paragraph.&lt;/p&gt;
+			&lt;p&gt;This is another paragraph.&lt;/p&gt;
+
+			&lt;div&gt;This is some important text!&lt;/div&gt;<br>
+
+			&lt;button&gt;Add classes to elements&lt;/button&gt;
+		</pre>
+
+		&nbsp; &nbsp; &nbsp; &nbsp; You can also specify multiple classes within the addClass() method:
+		<pre>
+
+			$("button").click(function(){
+  				$("#div1").addClass("important blue");
+			});
+			
+		</pre>
+
+		<h3>removeClass() Method</h3>
+
+		<pre>
+			In JavaScript:
+
+			$(document).ready(function(){
+	  			$("button").click(function(){
+    				$("h1, h2, p").removeClass("blue");
+  				});
+			});
+
+			In CSS:
+			.blue {
+  				color: blue;
+			}
+
+			In HTML:
+			
+			&lt;h1 class="blue"&gt;Heading 1&lt;/h1&gt;
+			&lt;h2 class="blue"&gt;Heading 2&lt;/h2&gt;
+
+			&lt;p class="blue"&gt;This is a paragraph.&lt;/p&gt;
+			&lt;p&gt;This is another paragraph.&lt;/p&gt;
+
+			&lt;button>Remove class from elements&lt;/button&gt;
+
+		</pre>
+
+		<h3>toggleClass() Method</h3>
+
+		The following example will show how to use the jQuery toggleClass() method. This method toggles between
+		adding/removing classes from the selected elements:
+
+		<pre>
+			In JavaScript:
+			
+			$(document).ready(function(){
+  				$("button").click(function(){
+    				$("h1, h2, p").toggleClass("blue");
+  				});
+			});
+
+			In CSS:
+
+			.blue {
+  			color: blue;
+			}
+
+			In HTML:
+
+			&lt;h1&gt;Heading 1&lt;/h1&gt;
+			&lt;h2&gt;Heading 2&lt;/h2&gt;
+
+			&lt;p&gt;This is a paragraph.&lt;/p&gt;
+			&lt;p&gt;This is another paragraph.&lt;/p&gt;
+
+			&lt;button&gt;Toggle class&lt;/button&gt;
+		</pre>
+
+		<h3>css() Method</h3>
+
+
+		The css() method sets or returns one or more style properties for the selected elements.
+		<br><br>
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>
+			<font color="red">Return a CSS Property:</font>
+		</b>
+		<ul>
+			<li>&#9733; To return the value of a specified CSS property, use the following syntax:</li>
+			<pre>
+				css("propertyname");
+			</pre>
+			<li>&#9733; The following example will return the background-color value of the FIRST matched element:</li>
+			<pre>
+				In JavaScript:
+
+				$(document).ready(function(){
+  					$("button").click(function(){
+    					alert("Background color = " + $("p").css("background-color"));
+  					});
+				});
+
+				In HTML:
+
+				&lt;p style="background-color:#ff0000"&gt;This is a paragraph.&lt;/p&gt;
+				&lt;p style="background-color:#00ff00"&gt;This is a paragraph.&lt;/p&gt;
+				&lt;p style="background-color:#0000ff"&gt;This is a paragraph.&lt;/p&gt;
+
+				&lt;button&gt;Return background-color of p&lt;/button&gt;
+				
+			</pre>
+		</ul>
+
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>
+			<font color="red">Set a CSS Property:</font>
+		</b>
+
+		<ul>
+			<li>&#9733; To set a specified CSS property, use the following syntax:</li>
+			<pre>
+				css("propertyname","value");
+			</pre>
+			<li>&#9733; The following example will set the background-color value for ALL matched elements:</li>
+			<pre>
+				In JavaScript:
+
+				$(document).ready(function(){
+  					$("button").click(function(){
+    					$("p").css("background-color", "yellow");
+  					});
+				});
+
+				In HTML:
+
+				&lt;p style="background-color:#ff0000"&gt;This is a paragraph.&lt;/p&gt;
+				&lt;p style="background-color:#00ff00"&gt;This is a paragraph.&lt;/p&gt;
+				&lt;p style="background-color:#0000ff"&gt;This is a paragraph.&lt;/p&gt;
+
+				&lt;p&gt;This is a paragraph.&lt;/p&gt;
+
+				&lt;button&gt;Set background-color of p&lt;/button&gt;
+				
+			</pre>
+		</ul>
+
+
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>
+			<font color="red">Set Multiple CSS Properties: </font>
+		</b>
+
+		<ul>
+			<li>&#9733; To set multiple CSS properties, use the following syntax:</li>
+			<pre>
+				css({"propertyname":"value","propertyname":"value",...});
+			</pre>
+			<li>&#9733; The following example will set a background-color and a font-size for ALL matched elements:</li>
+			<pre>
+				$(document).ready(function(){
+  					$("button").click(function(){
+    					$("p").css({"background-color": "yellow", "font-size": "200%"});
+  					});
+				});
+			</pre>
+		</ul>
+
+		<br>
+	</div>
+
+</body>
+
+</html>

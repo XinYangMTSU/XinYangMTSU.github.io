@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>jQuery - Get and Set</title>
+	<link href="../CCS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>jQuery - Get and Set Content and Attributes</h1>
+
+
+		<ul>
+			<li>&#9733; One very important part of jQuery is the possibility to manipulate the DOM.</li>
+			<li>&#9733; jQuery comes with a bunch of DOM related methods that make it easy to access and manipulate elements
+				and attributes.</li>
+			<li>&#9733; DOM = Document Object Model</li>
+			<li>&#9733; The DOM defines a standard for accessing HTML and XML documents.</li>
+		</ul>
+
+		<h2>Get Content - text(), html(), and val()</h2>
+
+		Three simple, but useful, jQuery methods for DOM manipulation are:
+
+		<ul>
+			<li>&#9733; <b>
+					<font color="red">text()</font>
+				</b> - Sets or returns the text content of selected elements.</li>
+			<li>&#9733; <b>
+					<font color="red">html()</font>
+				</b> - Sets or returns the content of selected elements (including HTML markup).</li>
+			<li>&#9733; <b>
+					<font color="red">val()</font>
+				</b> - Sets or returns the value of form fields.</li>
+		</ul>
+
+
+		The following example demonstrates how to get content with the jQuery <b>
+			<font color="blue">text()</font>
+		</b> and <b>
+			<font color="blue">html()</font>
+		</b> methods:
+
+		<pre>
+		In JavaScript:
+
+		$(document).ready(function(){
+  			$("#btn1").click(function(){
+    				alert("Text: " + $("#test").text());
+  			});
+  			$("#btn2").click(function(){
+   				 alert("HTML: " + $("#test").html());
+  			});
+		});
+
+		In HTML:
+
+		&lt;p id="test"&gt;This is some &lt;b&gt;bold&lt;/b&gt; text in a paragraph.&lt;/p&gt;
+
+		&lt;button id="btn1"&gt;Show Text&lt;/button&gt;
+		&lt;button id="btn2"&gt;Show HTML&lt;/button&gt;
+	
+</pre>
+
+
+		The following example demonstrates how to get the value of an input field with the jQuery <b>
+			<font color="blue">val()</font>
+		</b> method:
+
+		<pre>
+
+				In JavaScript:
+				
+				$(document).ready(function(){
+ 					 $("button").click(function(){
+    					alert("Value: " + $("#test").val());
+  				});
+				});
+
+				In HTML:
+				
+				&lt;p&gt;Name: &lt;input type="text" id="test" value="Mickey Mouse"&gt;&lt;/p&gt;
+				&lt;button&gt;Show Value&lt;/button&gt;
+				
+			</pre>
+
+
+		<h2>Get Attributes - attr()</h2>
+		<ul>
+			<li>&#9733; The jQuery attr() method is used to get attribute values.</li>
+			<li>&#9733; The following example demonstrates how to get the value of the href attribute in a link:</li>
+		</ul>
+
+		<pre>
+			In JavaScript:
+
+			$(document).ready(function(){
+  				$("button").click(function(){
+    					alert($("#w3s").attr("href"));
+  				});
+			});
+
+			In HTML:
+
+			&lt;p&gt;&lt;a href="https://www.w3schools.com" id="w3s">W3Schools.com&lt;/a>&lt;/p&gt;
+			&lt;button&gt;Show href Value&lt;/button&gt;
+		</pre>
+
+
+		<h2>Set Content - text(), html(), and val()</h2>
+
+		The following example demonstrates how to set content with the jQuery <b>
+			<font color="blue">text()</font>
+		</b>,<b>
+			<font color="blue">html()</font>
+		</b> and <b>
+			<font color="blue">vall()</font>
+		</b> methods
+
+		<pre>
+				In JavaScript:
+
+				$(document).ready(function(){
+  					$("#btn1").click(function(){
+    					$("#test1").text("Hello world!");
+  					});
+  					$("#btn2").click(function(){
+    					$("#test2").html("&lt;b&gt;Hello world!&lt;/b&gt;");
+  					});
+  					$("#btn3").click(function(){
+    					$("#test3").val("Dolly Duck");
+  					});
+				});
+
+				In HTML:
+
+				&lt;p id="test1"&gt;This is a paragraph.&lt;/p&gt;
+				&lt;p id="test2"&gt;This is another paragraph.&lt;/p&gt;
+
+				&lt;p&gt;Input field: &lt;input type="text" id="test3" value="Mickey Mouse">&lt;/p&gt;
+
+				&lt;button id="btn1"&gt;Set Text&lt;/button&gt;
+				&lt;button id="btn2"&gt;Set HTML&lt;/button&gt;
+				&lt;button id="btn3"&gt;Set Value&lt;/button&gt;
+		</pre>
+
+		<h2>Set Attributes - attr()</h2>
+		<ul>
+			<li>&#9733; The jQuery <b>
+					<font color="blue">attr()</font>
+				</b> method is also used to set/change attribute values.</li>
+			<li>&#9733; The following example demonstrates how to change (set) the value of the href attribute in a link:</li>
+			<pre>
+				In JavaScript:
+				
+				$(document).ready(function(){
+  					$("button").click(function(){
+   						 $("#w3s").attr("href", "https://www.w3schools.com/jquery/");
+    					 	$("a").text("jQuery Tutorial");
+  					});
+				});
+
+				In HTML:
+				
+				&lt;p&gt;&lt;a href="https://www.w3schools.com" id="w3s">W3Schools.com&lt;/a&gt;&lt;/p&gt;
+
+				&lt;button&gt;Change href Value&lt;/button&gt;
+			</pre>
+		</ul>
+
+		<br>
+	</div>
+
+</body>
+
+</html>

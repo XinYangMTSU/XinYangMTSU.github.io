@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>JavaScript Loops</title>
+	<link href="../CCS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>JavaScript Loops</h1>
+		<ul>
+			<li>&#9733; Loops can execute a block of code a number of times.</li>
+			<li>&#9733; Loops are handy, if you want to run the same code over and over again, each time with a different
+				value.</li>
+		</ul>
+
+		<pre>
+			var fruits = ["apple", "banana", "pear", "peach"];
+			var text = "";
+			text += fruits[0] + "&lt;br&gt;";
+			text += fruits[1] + "&lt;br&gt;";
+			text += fruits[2] + "&lt;br&gt;";
+			text += fruits[3] + "&lt;br&gt;";
+		</pre>
+
+		<pre>
+
+			var fruits = ["apple", "banana", "pear", "peach"];
+			var text = "";
+			var i;
+			for(i=0; i < fruites.length; i++){
+					text += fruits[i] + &lt;br&gt;;
+			}
+		</pre>
+
+		<h2>Different Kinds of Loops</h2>
+
+		<ul>
+			<li>&#9733;<b>
+					<font color="red"> for</font>
+				</b> - loops through a block of code a number of times. </li>
+			<li>&#9733;<b>
+					<font color="red">while</font>
+				</b> - loops through a block of code while a specified condition is true.</li>
+			<li>&#9733; <b>
+					<font color="red">do/while</font>
+				</b> - also loops through a block of code while a specified condition is true.</li>
+			<li>&#9733; <b>
+					<font color="red">for/in</font>
+				</b> - loops through the properties of an object.</li>
+			<li>&#9733; <b>
+					<font color="red">for/of</font>
+				</b> - loops through the values of an iterable object.</li>
+		</ul>
+
+		<h2>for loop</h2>
+		Syntax:
+
+		<ul>
+			<li>&#9733; statement 1 is executed before the loop(the code block) starts; </li>
+			<li>&#9733; statement 2 defines the condition for running the loop(the code block);</li>
+			<li>&#9733; statement 3 is executed after the loop(the code block) has been executed.</li>
+		</ul>
+		<pre>
+			for(statement 1; statement 2; statement 3){
+					code block to be executed
+			}
+		</pre>
+
+		<h3>Example</h3>
+		<pre>
+				var fruits = ["apple", "banana", "pear", "peach"];
+				var text = "";
+				var i;
+				for(i=0; i < fruites.length; i++){
+						text += fruits[i] + &lt;br&gt;;
+				}
+			</pre>
+
+		<h2>while loop</h2>
+
+		Sytax:
+
+		<pre>
+				while(condition){
+					code block to be executed
+				}
+		</pre>
+
+		<h3>Example</h3>
+		<pre>
+		var fruits = ["apple", "banana", "pear", "peach"];
+		var text = "";
+		var i = 0;
+		while(i < fruites.length){
+				text += fruits[i] + &lt;br&gt;;
+				i++;
+		}
+		</pre>
+
+
+		<h2>do-while loop</h2>
+
+		<ul>
+			<li>&#9733; the loop will be executed at least once.</li>
+			<li>&#9733; Snytax:</li>
+		</ul>
+
+		<pre>
+			do{
+					code to be executed
+			}
+			while(condition);
+		</pre>
+
+		<h3>Example</h3>
+		<pre>
+			var fruits = ["apple", "banana", "pear", "peach"];
+			var text = "";
+			var i = 0;
+			do{
+					text += fruits[i] + &lt;br&gt;;
+					i++;
+			}
+			while(i < fruites.length);
+			</pre>
+
+		<h2>for/in over objects</h2>
+
+		Syntax:
+
+		<pre>
+			for (key in object) {
+  				// code block to be executed
+			}
+		</pre>
+
+		<pre>
+			const person = {fname:"John", lname:"Doe", age:25};
+
+			let text = "";
+			for (let x in person) {
+  				text += person[x];
+			}
+		</pre>
+
+		Explanation:
+		<ul>
+			<li>&#9733; The for in loop iterates over a person object</li>
+			<li>&#9733; Each iteration returns a key (x) </li>
+			<li>&#9733; The key is used to access the value of the key</li>
+			<li>&#9733; The value of the key is person[x] </li>
+		</ul>
+
+		<h2>for In Over Arrays</h2>
+
+		Syntax:
+		<pre>
+		for (variable in array) {
+ 				code
+		}
+		</pre>
+		<h3>Example</h3>
+		<pre>
+		const numbers = [45, 4, 9, 16, 25];
+
+		let txt = "";
+		for (let x in numbers) {
+					txt += numbers[x];
+		}
+		</pre>
+
+		<h2>for/of</h2>
+
+		<ul>
+			<li>&#9733; variable - For every iteration the value of the next property is assigned to the variable. Variable
+				can be declared with const, let, or var.</li>
+			<li>&#9733; iterable - An object that has iterable properties.</li>
+		</ul>
+
+		<pre>
+					const cars = ["BMW", "Volvo", "Mini"];
+
+					let text = "";
+					for (let x of cars) {
+  						text += x;
+					}
+			
+		</pre>
+
+		<pre>
+
+		let language = "JavaScript";
+
+		let text = "";
+		for (let x of language) {
+					text += x;
+		}
+		</pre>
+
+		<h2>break and continue</h2>
+
+		<ul>
+			<li>&#9733; The break statement "jumps out" of a loop.</li>
+			<li>&#9733; The continue statement "jumps over" one iteration in the loop.</li>
+			<li>&#9733; Example: <a href="https://www.w3schools.com/js/js_break.asp"
+					target="_blank">https://www.w3schools.com/js/js_break.asp</a></li>
+		</ul>
+
+
+		<pre>
+			var i;
+			for (i = 0; i < 10; i++) {
+  				if (i === 3) { break; }
+  					text += "The number is " + i + "&lt;br&gt;";
+			}
+		</pre>
+
+		<pre>
+
+			var i;
+			for (i = 0; i < 10; i++) {
+  				if (i === 3) { continue; }
+  					text += "The number is " + i + "&lt;br&gt;";
+			}
+		</pre>
+
+
+		<br>
+	</div>
+
+</body>
+
+</html>

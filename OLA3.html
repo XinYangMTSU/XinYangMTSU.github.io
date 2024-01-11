@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>OLA 3</title>
+	<link href="../CCS/Site.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>OLA 3: HTML & CSS & JavaScript</h1>
+
+		<center>
+			<b>
+				<font color="red">
+					Due date: 11:59pm Feb/24th/2023 (Friday)
+				</font>
+			</b>
+		</center>
+		<br>
+
+
+		You are working for a large supermarket and the boss need you to create a web cash register system.
+
+		<h2>Step 1: Create your JavaScript file. (70 points)</h2>
+		Please create your JavaScript file, name it as cash.js. Please remember the extension should be .js. And then add
+		the following three parts to your javascript file.
+
+		<h3>1. Create a cashRegister object.</h3>
+
+		<ul>
+			<li>&#9733; Create a new object called <b><font color="blue">cashRegister</font></b> with <b><font color="red">two properties</font></b>, and <b><font color="red">one method</font></b>.</li>
+			<li>&#9733; The first property is <b><font color="blue">total</font></b>, it should be initialized to 0.</li>
+			<li>&#9733; The second property is <b><font color="blue">item</font></b>, it should be initialized to 0.</li>
+			<li>&#9733;The method is called <b><font color="blue">add</font></b> with <b><font color="red">one parameter</font></b> itemCost.</li>
+			<li>&#9733; Inside the add method, add itemCost to this.total by using +=. So that you can add items cost together
+				by
+				calling the method add:</li>
+			<ul>
+				<li>&star; cashRegister.add(0.98)</li>
+				<li>&star; cashRegister.add(1.23)</Li>
+			</ul>
+		</ul>
+
+
+		<h3>2: Create a scan function.</h3>
+
+		<ul>
+			<li>&#9733; Create a function called scan with <b><font color="red">no parameters</font></b>.</li>
+			<li>&#9733; Ask the user to enter the total items number by using <b><font color="blue">prompt</font></b>, and save the entered number to
+				cashRegister.item.</li>
+			<li>&#9733; Then use a for loop to prompt the user to enter the cost for each item.</li>
+			<li>&#9733; You need to add each item cost to the total by calling the method add.</li>
+			<li>&#9733; Note that the variables you receive from prompt is a string, not a number. You can use
+				parseFloat/parseInt to convert the string cost to float/int cost, eg:</li>
+			<ul>
+				<li>&star; cashRegister.add(parseFloat(cost));</li>
+			</ul>
+		</ul>
+
+		<h3>3: Create a print function.</h3>
+
+		<ul>
+			<li>&#9733; Create a function called print with <b><font color="red">no parameters</font></b>.</li>
+			<li>&#9733; Please use if/else statement to print out the results by using <b><font color="blue">confirm</font></b>.</li>
+			<ul>
+				<li>&star; If cashRegister.total equal to 0, then you need to print out "Please enter your items cost first".
+				</li>
+				<li>&star; Else you need to print out the total items cost by using cashRegister.total.</li>
+			</ul>
+		</ul>
+
+		<h2>Step 2: Create your HTML file. (15 points)</h2>
+
+		Please create your HTML file, name it as cash.html. Please remember the extension should be .html. And then add the
+		following parts to your HTML file.
+
+		<h3>1. Create a basic structure HTML</h3>
+		<pre>
+			Declaration line.
+			&lt;html&gt;&lt;/html&gt;
+			&lt;head&gt;&lt;/head&gt;
+			&lt;title&gt;&lt;/title&gt; 
+			&lt;body&gt;&lt;/body&gt;
+		</pre>
+
+		<h3>2. Link JavaScript file to HTML file by using
+			&lt;script&gt; &lt;/script&gt;
+		</h3>
+
+
+		<h3>3. Create a button scan</h3>
+		<ul>
+			<li>&#9733; Please create a button called Scan your item by using &lt;button&gt;&lt;/button&gt; tags.</li>
+			<li>&#9733; When you click this button, the function <b>
+					<font color="red">scan()</font>
+				</b> you create in cash.js file will be called.</li>
+		</ul>
+
+		<h3>4. Create a button print</h3>
+		<ul>
+			<li>&#9733; Please create a button called Total by using &lt;button&gt;&lt;/button&gt; tags.</li>
+			<li>&#9733; When you click this button, the function <b>
+					<font color="red">print()</font>
+				</b> you create in cash.js file will be called.</li>
+		</ul>
+
+		<h3>5. You can add a heading title at the top of your page, eg: "Welcome to use my cash Register!"</h3>
+
+		<h3>6. You can use &lt;div&gt;&lt;/div&gt; block tags to create container for your webpage.
+
+			<h2>Step 3: Create your CSS file. (15 points)</h2>
+			<ul>
+				<li>&#9733; Please create your CSS file, name it as cash.css. Please remember the extension should be .css.</li>
+				<li>&#9733; Design your own CSS style.</li>
+				<li>&#9733; Link your CSS file to HTML file by using &lt;link&gt;&lt;/link&gt;
+			</ul>
+
+			<h2>Step 4: Please submit your OLA3 in replit!</h2>
+
+			<h2>Grading</h2>
+			There are 100 points in total. Here is the grading scale:
+			<br><br>
+			<table style="width:30%">
+				<tr>
+					<th>Part</th>
+					<th>Points</th>
+				</tr>
+				<tr>
+					<th>HTML</th>
+					<th>15 Points</th>
+				</tr>
+				<tr>
+					<th>CSS</th>
+					<th>15 Points</th>
+				</tr>
+				<tr>
+					<th>JavaScript</th>
+					<th>70 Points</th>
+				</tr>
+			</table>
+			<br>
+			If you
+			have any
+			question, email me at Xin.Yang@mtsu.edu or stop by my office at KOM301G.
+
+			<br>
+			<footer align="center" id="foot01"></footer>
+	</div>
+	<br>
+	<br>
+	<script src="../CCS/Script.js"></script>
+
+</body>
+
+</html>

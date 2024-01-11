@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>How does the Internet Work?</title>
+	<link href="../CCS/Site.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>How does the Internet Work?</h1>
+
+		<h2>Internet</h2>
+
+		The <b>Internet</b> is the collection of computers that can communicate with one another using <b>
+			<font color="red">TCP/IP</font>
+		</b> over an open,
+		global
+		communications network. The Internet is the world's largest computer network. Whenever computing devices are
+		connected together in a network, they need protocols to communicate with each other.
+		If the devices want to communicate over the Internet, they must use the Internet networking protocols.
+		<br> <br>
+		<center>
+			<img src="internet.jpeg" width="500px" heigh="600px">
+		</center>
+		<br><br>
+		Millions of computers around the world are connected by cables, fibre, and wireless links. We use the Internet to
+		read blogs, watch videos, send emails, and download pictures and music. But how does the Internet work?
+
+
+		<h2>TCP/IP</h2>
+
+		A computer <b>
+			<font color="blue">communication protocol</font>
+		</b> is a detailed specification of how communication between two computers will be carried out in order to serve
+		some purpose. Communications between computers on a network is done through protocol. <b> <br> <br>
+			<font color="red">TCP/IP</font> (Transmission Control Protocol/Internet Protocol)
+		</b> is the fundamental communication protocol for the Internet. TCP/IP is normally considered to be a 4 layer
+		system. The 4 layers are as follows:
+		<br>
+		<ul>
+			<li>
+				&#9733; Application layer
+			</li>
+			<li>&#9733; Transport layer</li>
+			<li>&#9733; Network layer</li>
+			<li>&#9733; Data link layer</li>
+		</ul>
+
+		<center>
+			<img src="layer.png" width="800px" heigh="1000px">
+		</center>
+
+		<h3>1. Application layer</h3>
+		<hr>
+		Application layer is the topmost layer of TCP/IP protocol suite. The Application layer is responsible for
+		entertaining the requests initiated at the applications level. The application layer uses different protocols to
+		complete the requests for different programs. Some of the protocols used by the application layer include :
+		<ol>
+			<li>HyperText Transfer Protocol (HTTP)</li>
+			<li>File Transfer Protocol (FTP)</li>
+			<li>Simple Mail Transfer Protocol (SMTP)</li>
+		</ol>
+		For example, when we request our browser to access a web server, it calls HTTP protocol to complete the request.
+		Similarly, when we want to upload (or download) a file through a program, the application layer uses the FTP
+		protocol to complete the request.
+		The application layer uses the ports to pass on the data to the transport layer.
+		The ports are logical addresses/interfaces that connect a computer to internal or external devices. The use of the
+		ports makes it easier for the transport layer to understand the type of data. For example, a data sent over port 25
+		means the data is about the email request. A data sent over port 21 and port 22 means it is an FTP data.
+
+		<h3>2. Transport layer</h3>
+		<hr>
+		The application layer sends the data to the lower layer, i.e. the transport layer. The transport layer converts the
+		data into data packets and sends to the destination device. The transport layer uses Transmission Control Protocol
+		(TCP) and the User Datagram Protocol (UDP). TCP is the data transport protocol
+		that's most commonly used on top of IP and it
+		includes strategies for packet ordering, retransmission, and data integrity. UDP is an
+		alternative protocol that solves fewer problems but offers faster data transport.<br><br>
+		When the transport layer receives data from the application layer, it is transformed
+		into the <b>
+			<font color="blue">data packets</font>
+		</b>:
+		Everything transmissed on the Internet involves packets. For example, every Web page that you receive comes as a
+		series
+		of packets, and every e-mail you send leaves as a series of packets. Networks that ship data around in small packets
+		are called <b>
+			<font color="blue">packet switched networks</font>
+		</b>.
+
+		<center>
+			<img src="packetSwitching.png" height="500px" width="800px">
+		</center>
+
+		<br><br>
+
+		The TCP and UDP add a header to the data packets. The TCP header contains different fields
+		like source and destination port information; packets sequence number, acknowledgment information, and checksum
+		values. Each field plays its role when data packets are exchanged. For example, the checksum field is used to check
+		if any packet during the data exchange process has tampered or not. The sequence number tells the TCP at the
+		destination about the order of the packet. The TCP at the receiver end combines the packets in the correct order
+		with the help of the sequence numbers. When a packet is successfully transferred, the devices acknowledge the
+		successful delivery of the packets. If the sender does not receive an acknowledgment by the receiver in a specified
+		period of time or window, it resends the packet. The entire packets at the receiver end are arranged into correct
+		order; the headers are removed from the packets before reassembling them into a complete message.
+		<br><br>
+		<center>
+			<img src="packetFormat.png" height="400px" width="800px">
+			<br>
+			Figure: Packet Format
+		</center>
+
+		<h3>3. Network Layer</h3>
+		<hr>
+		This layer is also known as Internet layer.
+		The data packets from the transport layer travel down to the network layer. Different protocols operate at the
+		network layer including Internet Protocol (IP), Internet Control Message Protocol (ICMP), and Address Resolution
+		Protocol (ARP). At the network layer, a header called IP header is added to the data packet. The IP header contains
+		the source and destination IP address. The packet is sent out to the destination via a router. The router contains a
+		table containing IP addresses of different hosts including the gateway devices (other routers). The router checks if
+		the destination IP address matches with the IP address saved in the table. If the router fails to locate the
+		destination IP address, it sends the data packets to the other router device. The process continues until the packet
+		reaches the destination.
+		<br> <br>
+		The packet will be transferred along with the source and destination IP addresses and some other header information,
+		such as the length of the data. If the destination computer is on the same local network as the source, then the
+		packet will be directly send to the destination via this network. If the destination is on another network, the
+		packet will be send to a gateway, which is a device that is connected to the source computer’s network as well as to
+		at least one other network. The gateway will select a computer on one of the other networks to which it is attached
+		and send the packet on to that computer. This process will continue, with the packet going through perhaps a dozen
+		or more hops, until the packet reaches the destination computer.
+		<br>
+		<br>
+		<center>
+			<img src="NetworkLayer.png" height="400px" width="800px">
+			<br>
+			Figure: IP Layer
+		</center>
+
+		There are actually two versions of the Internet Protocol in use today:
+
+		<ul>
+			<li>&#9733; <b>
+					<font color="blue">IPv4</font> (Internet Protocol version 4)
+				</b>, the first version ever used on the Internet</li>
+			<li>&#9733; <b>
+					<font color="blue">IPv6</font> (Internet Protocol version 6)
+				</b>, a backwards-compatible successor</li>
+		</ul>
+
+		IPv4 addresses are 32-bit numbers that are typically displayed in dotted decimal notation.<br>
+		In the <b>
+			<font color="red">IPv4</font>
+		</b> protocol, IP addresses look like this:
+		<b>
+			<font color="blue">74.125.20.113</font>
+		</b> <br>
+		Each IP address is split into 4 numbers, and each of those numbers can range from 0 to 255:
+		<b>
+			<font color="blue">[0-255].[0-255].[0-255].[0-255]</font>
+		</b><br>
+		We write those numbers in decimal, but the computer stores them in binary, like so:
+		<font color="blue">01010101 01010101 01010101 01010101
+		</font><br>
+		Each number can represent <math>2<sup>8</sup></math> values, Overall, that's 2<sup>32</sup> possible values:
+		4,294,967,296 possible IPv4 addresses.
+		<br>
+		<br>
+		When it became obvious in the 1990s
+		that the IPv4 addresses were running out, the IPv6 protocol was proposed with a much longer addressing scheme.<br>
+		Here's an <b>
+			<font color="red">IPv6</font>
+		</b> address: <font color="blue">2001:0db8:0000:0042:0000:8a2e:0370:7334</font>
+		<br>Notice the letters in those numbers, like d and b? Those are hexadecimal numbers, hexadecimal is a numbering
+		system with base 16 (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F).<br>
+		There are 8 hexadecimal numbers in IPv6 address, and each number is 4 digits long. The highest value for each
+		number is FFFF, since F is the highest
+		digit in hexadecimal. <br>
+		Thus, the highest address would look like:
+		<font color="blue">FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF</font>
+		<br>
+		In total, each IPv6 address is represented by 128 bits, so there are 2<sup>128</sup> possible IPv6 addresses. <br>
+		That's 340340340 undecillion:
+		340,282,366,920,938,000,000,000,000,000,000,000,000
+		<br>
+		<br>
+		<h4>
+			<font color="blue">IPv4 address hierarchy:</font>
+		</h4>
+		Both IPv4 and IPv6 addresses are hierarchical. For simplicity, let's examine the hierarchy of IP v4 addresses. <br>
+		Consider this IP address: 24.147.242.217
+		<br>
+		That IP address could break down into these 222 parts:
+		<br>
+
+		<img src="subnet.png" height="100px" width="400px">
+		<br>
+		The first two octets (16 bits) identifies a network administered by the Comcast (an Internet Service Provider).
+		The last two octets (the final 16 bits) identifies a home computer on that Comcast network.
+		<br>
+		<img src="subnet2.png" height="400px" width="800px">
+		<br>
+		If the last two octets were different, then the IP address would point at a different computer on the Comcast
+		network. If the first two octets were different, then the IP address might belong to a completely different network
+		administrator. The Internet Protocol uses this hierarchical addressing scheme to make it easier to route messages
+		from source to destination. Once a message arrives at the network, a network router can take care of sending it to
+		the individual node.
+		<br>
+		<br>
+		<b>
+			<font color="red">Question:</font>
+		</b>What's your IP address? <br>
+
+		<h3>4. Data Link Layer</h3>
+		<hr>
+		The data link layer is subdivided into three layers:
+		<ol>
+			<li>Logic Link Control (LLC)</li>
+			<li>Media Access Control (MAC) Layer</li>
+			<li>Physical Layer</li>
+		</ol>
+
+		The LLC has the information about the protocol used by the network layer. The
+		LLC, at the receiving end, helps in deciding the delivery of the data packet to the corresponding protocol at the
+		destination network layer. <br>
+		The MAC layer adds the source and destination MAC address to the data frames. <br>
+		The
+		physical layer converts the data frames into a format that can be transmitted over the network. For instance, the
+		physical layer converts the data frames into electrical signals if the path is wired. Similarly, the data frames
+		are
+		converted into electromagnetic waves for wireless communication medium. The aforementioned layers work conversely
+		at
+		the receiving end. The electric signals or electromagnetic waves are converted back into data frames, the headers
+		are removed from the packets; finally, the packets are reassembled into complete data.
+		<br>
+
+		<h4>
+			<font color="blue">Physical network connections:</font>
+		</h4>
+		The Internet is a network of computers connected to each other. But what does each physical connection look like? It
+		depends on the needs of the connection and the size of the network.
+		<ul>
+			<li><b>
+					<font color="red">Copper cables</font>
+				</b></li>
+			If you're in a computer lab or near a modem, you can probably find a cable similar to this one:
+			<br>
+			<img src="cable.jpeg" width="250px" height="150px">
+			<br>
+			This is a type of twisted pair cable, twisted pair cables send data through a network by transmitting pulses of
+			electricity that represent binary data: <br>
+			<img src="twistedCable.png" width="500px" height="150px">
+			<br>
+			To make sure cables are transmitting information in a way that can be understood by the recipient, they follow the
+			Ethernet standards. That's why twisted pair cables are commonly known as <b>Ethernet cables</b>.
+			They are used both in networks as small as a company office (a LAN) or as large as an entire country (a WAN).
+			<br>
+			<br>
+
+			<li><b>
+					<font color="red">Fiber-optic cables</font>
+				</b></li>
+			A fiber-optic cable contains an optical fiber that can carry light (instead of electricity). The fiber is coated
+			with plastic layers and sheathed in a protective tube to protect it from the environment.<br>
+			<img src="fiber.jpeg" width="400px" height="250px">
+			<br><br>
+			Fiber-optic cables communicate by sending pulses of light that represent binary data:<br><br>
+			<img src="fiberPulse.png" width="500px" height="150px">
+			<br>
+			They typically also follow the Ethernet standards to make sure they're sending data in a way that can be commonly
+			understood by any recipient in the network.
+			Fiber-optic cables are capable of transmitting much more data per second than copper cables. They're often used to
+			connect networks across oceans so that data can travel quickly around the world. As fiber-optic cables become less
+			expensive, they're becoming increasingly common in city-wide networks as well.
+			<br>
+			<br>
+			<li><b>
+					<font color="red">Wireless</font>
+				</b></li>
+			Wireless connections don't involve any wiring. A wireless card inside the computer turns binary data into radio
+			waves and transmits them through the air:
+			<br>
+			<img src="wireless.png" width="500px" height="150px">
+			<br>
+			Those radio waves can't travel very far: 75-100 feet in a place like an office building that's filled with all
+			sorts of obstacles, or up to 1000 feet in a wide open field.
+			The waves are hopefully picked up by a wireless access point which converts them from radio waves back into binary
+			data. Wireless access points are connected to the rest of the network using physical wiring, like copper or
+			fiber-optic cables. Wireless connections are limited in how much area they can cover, but they are increasingly
+			commonplace due to the prevalent use of portable computing devices.
+			<br>
+			<br>
+			<br>
+			At any given time, our Internet connection might be using a combination of those technologies. Maybe we're using
+			WiFi to connect to our home router, our home router is using twisted pair copper cables to connect to the
+			metropolitan network, and those cables are hopping over fiber to communicate with overseas data centers. Each
+			technology has both advantages and disadvantages:
+
+			<br>
+			<img src="connection.png" width="800px" height="300px">
+			<br>
+		</ul>
+
+		<h4>
+			<font color="blue">Bit rate:</font>
+		</h4>
+		All of the computing devices on the Internet are communicating in binary. Whether they are connected via wired or
+		wireless, they are sending electromagnetic signals that represent streams of 1s and 0s. Network connections can send
+		bits very fast. We measure that speed using the <b>bit rate</b>, the number of bits of data that are sent each
+		second. <br>
+		The earliest Internet connections were just 75 bps (bits per second). These days, connections are more often
+		measured in Mbps (megabits per second).
+		<br><br>
+
+		<table style="width:50%">
+			<tr>
+				<th>Unit</th>
+				<th>Number of bits</th>
+				<th></th>
+			</tr>
+			<tr>
+				<td>kilobit</td>
+				<td>1000</td>
+				<th>1 thousand</th>
+			</tr>
+			<tr>
+				<td>megabit</td>
+				<td>1000<sup>2</sup></td>
+				<th>1 Million</th>
+			</tr>
+			<tr>
+				<td>gigabit</td>
+				<td>1000<sup>3</sup></td>
+				<th>1 Billion</th>
+			</tr>
+			<tr>
+				<td>terabit</td>
+				<td>1000<sup>4</sup></td>
+				<th>1 Trillion</th>
+			</tr>
+			<tr>
+				<td>petabit</td>
+				<td>1000<sup>5</sup></td>
+				<th>1 Quadrillion</th>
+			</tr>
+		</table>
+
+		<h4>
+			<font color="blue">Bandwidth</font>
+		</h4>
+		We use the term bandwidth to describe the maximum bit rate of a system. If a network connection has a bandwidth of
+		100 Mbps, that means it can't transfer more than 100 megabits per second.
+		Ever heard the term "broadband Internet"? That refers to a connection with a minimum bandwidth of 256 Kbps. That's
+		enough bandwidth for basic Internet use like checking emails and reading websites, but not quite enough for watching
+		online videos.
+		<br>
+
+		<h4>
+			<font color="blue">Latency</font>
+		</h4>
+		Another way to measure the speed of a computer network is <b>latency</b>. latency is the time between the sending of
+		a data message and the receiving of that message, measured in milliseconds:
+		<br>
+		<center>
+			<img src="latency.png" width="600px" height="300px">
+		</center>
+		My computer sends a message to the Google server. 30 milliseconds later, Google receives the message. 40
+		milliseconds later, my computer gets an acknowledgement from Google that it received the message.
+		That's a total round-trip latency of 70 ms. The latency depends on a number of physical factors: the type of
+		connection from my computer to Google, the distance from my computer to the Google servers, and the congestion in
+		the network.
+		<br>
+		<h4>
+			<font color="blue">Internet speed</font>
+		</h4>
+		Speed is a combination of bandwidth and latency. You can measure the current speed of a network using an Internet
+		speed test: a website that downloads and uploads data while tracking how quickly the data is transferred.
+		Here are the results from an Internet speed test from my laptop: <br>
+		<br>
+		<center>
+			<img src="speedTest.png" width="500px" height="350px">
+		</center>
+		<br>
+		The download bit rate is 204.1 Mbps and the upload bit rate is 22.1 Mbps, significantly less. Actually, that's
+		expected. Internet providers often support a much faster download speed than upload speed, because Internet users
+		spend much more time downloading data (reading articles, watching movies) than uploading data (writing blog posts,
+		submitting forms).
+
+		<br>
+		<br>
+
+		<b>
+			<font color="red">Question:</font>
+		</b>What's the speed of your Internet connection? <br>
+
+		<h2>TCP/IP Layers Diagram</h2>
+
+		<br>
+		<center>
+			<img src="tcp-ip.png">
+		</center>
+
+		<h2>Exercise</h2>
+
+		<h3>1.</h3>The following is the binary notation and dotted-decimal notation form of a 32-bit IPv4 address:
+		<br>
+		<center>
+			<img src="exe1_IP.png" height="140px" width="1000px">
+		</center>
+		Please Change the following IPv4 addresses from binary
+		notation to dotted-decimal notation:
+		<ul>
+			<li>a. 10000001 00001011 00001011 11101111</li>
+			<li>b. 11000001 10000011 00011011 11111111</li>
+		</ul>
+		<br>
+		Please Change the following IPv4 addresses from dotted-decimal notation to binary
+		notation:
+		<ul>
+			<li>a. 111.56.45.78</li>
+			<li>b. 221.34.7.82</li>
+		</ul>
+
+		<h3>2.</h3> Please find the error, if any, in the following IPv4 address:
+		<ul>
+			<li>a. 111.56.045.78</li>
+			<li>b. 221.34.7.8.20</li>
+			<li>c. 75.45.301.14</li>
+			<li>d. 11100010.23.14.67</li>
+		</ul>
+
+		<h3>3. </h3>
+		Please identify whether each address below is IPv4, IPv6, or invalid:
+		<ul>
+			<li>a. 119.67.44.86</li>
+			<li>b. 94.49.190.138</li>
+			<li>c. 258.151.50.253</li>
+			<li>d. e0f8:af58:eee6:52b</li>
+			<li>e. d938:2da7:b596:6d34:3970:6789:c941:2340</li>
+			<li>f. d938:2da7:b596:6d3:3970:6789</li>
+			</li>
+		</ul>
+
+		<h3>4. </h3>
+		There is a large difference in IPv6 adoption across the world. These are the IPv6 adoption rates of the top 5 most
+		populated countries, as of October 2018:
+		<br><br>
+		<center>
+			<img src="adoptRate.png" height="200px" width="300px">
+		</center>
+		Why is it important to encourage countries and their Internet Service Providers to upgrade to IPv6?
+		<ul>
+			<li>a. If a country's ISPs don't adopt IPv6, their Internet
+				connections will never be as fast a other countries.</li>
+			<li>b. If a country's ISPs don't adopt IPv6, their Internet
+				connections won't be able to download large files.</li>
+			<li>c. If a country's ISPs don't adopt IPv6, they may
+				run out of addresses when too many devieces want to use
+				the Internet in their country.</li>
+			<li>d. If a country's ISPs don't adopt IPv6, other countries will no
+				longer be able to access the websites hosted on the old IPv4 addresses.</li>
+		</ul>
+
+		<!--
+		<h3>5. </h3>
+		Taylor switched WiFi networks from an AT&T network to a Verizon network. He noticed his IP address changed. What's
+		the best explanation for the change?
+
+		<ul>
+			<li>a. Verizon has a different set of IP addresses to allocate than AT&T, so Verizon had to give Taylor's computer
+				a different IP address than the AT&T address.</li>
+			<li>b. Taylor must have moved to a new location when switching WiFi, as each geographic location maps to a
+				different IP address.</li>
+			<li>c. Verizon thinks that their IP addresses are better, so they always upgrade users who use their WiFi.</li>
+			<li>d. Computers assign themselves new IPs whenever the network changes, based on their internal table of possible
+				IP addresses.</li>
+		</ul>
+		-->
+
+		<h1>Reference</h1>
+		<ul>
+			<li><a href="https://www.thegeekstuff.com/2011/11/tcp-ip-fundamentals/"
+					target="_">https://www.thegeekstuff.com/2011/11/tcp-ip-fundamentals/</a></li>
+			<li><a href="https://www.iplocation.net/tcp-ip" target="_">https://www.iplocation.net/tcp-ip</a></li>
+			<li><a href="https://www.khanacademy.org/computing/computers-and-internet/"
+					target="_">https://www.khanacademy.org/computing/computers-and-internet/</a></li>
+			<li><a href="https://www.ccnablog.com/network-layer/" target="_">https://www.ccnablog.com/network-layer/</a>
+			</li>
+			<li><a href="http://www.tcpipguide.com/free/t_DataLinkLayerLayer2.htm"
+					target="_">http://www.tcpipguide.com/free/t_DataLinkLayerLayer2.htm</a></li>
+		</ul>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+	<br>
+	<br>
+	<script src="../CCS/Script.js"></script>
+
+</body>
+
+</html>
