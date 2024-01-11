@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>OLA 5</title>
+	<link href="../CCS/Site.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>OLA 5: HTML & CSS & JavaScript & PHP </h1>
+
+		<center>
+			<b>
+				<font color="red">
+					Due date: 11:59pm April/4th/2023 (Tuesday)
+				</font>
+			</b>
+		</center>
+		<br>
+
+		You are working for a IT Company and your boss wants you to develop a web-based scientific calculator, where the
+		user can
+		enter a mathematical expression using clickable buttons for the digits 0-9, decimal point, and operators (+, -, *,
+		/). When the user clicks the "=" button, the form will be submitted using the POST method to the php script
+		part, and the result will be displayed. Please add fancy
+		style to the calculator. Please finish all steps by
+		following instructions.
+
+		<h2>Step 1: Create your PHP file.(80 points)</h2>
+
+		Please create your PHP file, name it as <b>
+			<font color="blue">index.php</font>
+		</b>. Please remember the extension should be .php. And then add the
+		following parts to your HTML file.
+
+		<h3>1. Create a basic structure HTML.</h3>
+		<pre>
+		Declaration line.
+		&lt;html&gt;&lt;/html&gt;
+		&lt;head&gt;&lt;/head&gt;
+		&lt;title&gt;&lt;/title&gt;
+		&lt;body&gt;&lt;/body&gt;
+		</pre>
+
+		<h3>2. Create a &lt;div id="calculator"&gt;&lt;/div&gt; section</h3>
+
+		In the &lt;div id="calculator"&gt;&lt;/div&gt; section, there is a input form:
+
+		<ul>
+			<li>&#9733; A &lt;form&gt; to display calculator buttons:</li>
+			<ul>
+				<li>&star; <b>
+						<font color="red">Numbers</font>
+					</b>: 0-9</li>
+				<li>&star; <b>
+						<font color="red">Operators</font>: +,-,*,/,=</li>
+				<li>&star; <b>
+						<font color="red">Clear button</font>
+					</b></li>
+			</ul>
+		</ul>
+
+		<pre>
+		&lt;form method="POST" action="&lt;?php echo htmlspecialchars($_SERVER['PHP_SELF']);?&gt;"&gt;
+		&lt;input type="text" name="display" id="display"&gt;
+		&lt;button type="button" onclick="addToDisplay('7')"&gt;7&lt;/button&gt;
+		&lt;button type="button" onclick="addToDisplay('8')"&gt;8&lt;/button&gt;
+		&lt;button type="button" onclick="addToDisplay('9')"&gt;9&lt;/button&gt;
+		&lt;button type="button" onclick="addToDisplay('+')"&gt;+&lt;/button&gt;
+		//please finish form part here
+		//put your code here
+		&lt;button type="submit" name="submit"&gt;=&lt;/button&gt;
+		&lt;/form&gt;
+		 </pre>
+
+		<h3>2. Create a JavaScript section</h3>
+		<pre>
+	&lt;script&gt;
+		function addToDisplay(value) {
+			document.getElementById("display").value += value;
+		}
+
+		function clearDisplay() {
+				// please finsh clearDisplay function 
+			       // put your code here
+		}
+  	&lt;/script&gt;
+		</pre>
+
+		<h3>3. Create a PHP section</h3>
+		<pre>
+		&lt;?php
+		if($_SERVER["REQUEST_METHOD"] == "POST"){
+			
+			//Please finsh your PHP code here
+			//Put your code here: retrieve mathematical expression using id display and assign it to variable $expression
+			
+			// Remove any unwanted characters
+			$expression = preg_replace('/[^0-9+\-*.\/\^\(\)\s]/', '', $expression);
+			// Evaluate the expression and display the result
+			if (!empty($expression)) {
+				eval("\$result = ($expression);");
+			}
+		}else{
+				$result="";
+		}
+		?&gt;
+		</pre>
+
+		<h3>3: You can add a heading title at the top of your page, eg: "Welcome to my Calculator!"</h3>
+
+		<h3>4: The above sections are required, besides these, you can add additional sections for your webpage based on
+			your design.</h3>
+
+		<h2>Step 2: Create your CSS file. (20 points)</h2>
+
+		<ul>
+			<li>&#9733; Please create your CSS file, name it as cal.css. Please remember the extension should be .css.</li>
+			<li>&#9733; Design your own CSS style.</li>
+			<li>&#9733; Link your CSS file to HTML file by using &lt;link&gt;&lt;/link&gt;
+		</ul>
+		<pre>
+				&lt;link type="text/css" rel="stylesheet" href="cal.css" /&gt;
+			</pre>
+
+		<h2>Step 3: Please submit your OLA5 in replit!</h2>
+
+		<h2>Demo</h2>
+		<img src="hw5_demo.png" width="400px" heigh="500px">
+
+		<h2>Grading</h2>
+		There are 100 points in total. Here is the grading scale:
+		<br><br>
+		<table style="width:30%">
+			<tr>
+				<th>Part</th>
+				<th>Points</th>
+			</tr>
+			<tr>
+				<th>HTML</th>
+				<th>30 Points</th>
+			</tr>
+			<tr>
+				<th>CSS</th>
+				<th>20 Points</th>
+			</tr>
+			<tr>
+				<th>JavaScript</th>
+				<th>10 Points</th>
+			</tr>
+			<tr>
+				<th>PHP</th>
+				<th>40 Points</th>
+			</tr>
+		</table>
+		<br>
+		If you
+		have any
+		question, email me at Xin.Yang@mtsu.edu or stop by my office at KOM301G.
+
+		<br>
+		<footer align="center" id="foot01"></footer>
+	</div>
+	<br>
+	<br>
+	<script src="../CCS/Script.js"></script>
+
+</body>
+
+</html>

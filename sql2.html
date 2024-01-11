@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>MySQL SQL</title>
+	<link href="../CCS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>MySQL SQL</h1>
+		<ul>
+			<li>&#9733; SQL is the standard language for dealing with Relational Databases.
+			</li>
+			<li>&#9733; SQL is used to insert, search, update, and delete database records. </li>
+			<li>&#9733; SQL stands for Structured Query Language</li>
+		</ul>
+
+		<h1>How to Use SQL</h1>
+
+		<h2>Most Important SQL Commands</h2>
+
+		<ul>
+			<li>&#9733; <b>
+					<font color="red">CREATE DATABASE</font>
+				</b> - creates a new database</li>
+			<li>&#9733; <b>
+					<font color="red">DROP DATABASE</font>
+				</b> - deletes a database</li>
+			<br>
+			<li>&#9733; <b>
+					<font color="red">CREATE TABLE</font>
+				</b> - creates a new table</li>
+			<li>&#9733; <b>
+					<font color="red">DROP TABLE</font>
+				</b> - deletes a table</li>
+			<li>&#9733; <b>
+					<font color="red">ALTER TABLE</font>
+				</b> - modifies a table </li>
+			<br>
+			<li>&#9733; <b>
+					<font color="red">INSERT INTO</font>
+				</b> - inserts new data into a database table</li>
+			<li>&#9733; <b>
+					<font color="red">UPDATE</font>
+				</b> - updates data in a database table </li>
+			<li>&#9733; <b>
+					<font color="red">DELETE</font>
+				</b> - deletes data from a database table</li>
+			<li>&#9733; <b>
+					<font color="red">SELECT</font>
+				</b> - extracts data from a database table</li>
+		</ul>
+
+
+		<h2>SQL CREATE DATABASE Statement</h2>
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">CREATE DATABASE</font>
+				</b> statement is used to create a new SQL database.
+			</li>
+			<li>&#9733; Syntax: </li>
+			<pre>
+				CREATE DATABASE databasename;
+			</pre>
+		</ul>
+
+		<h3>CREATE DATABASE Example</h3>
+		<ul>
+			<li>&#9733; The following SQL statement creates a database called "testDB":
+			</li>
+			<pre>
+				CREATE DATABASE testDB;
+			</pre>
+			<li>&#9733; Once a database is created, you can check it in the list of databases with the following SQL command:
+				<b>
+					<font color="blue">SHOW DATABASES;</font>
+				</b>
+			</li>
+		</ul>
+
+		<h2>SQL DROP DATABASE Statement</h2>
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">DROP DATABASE</font>
+				</b> statement is used to drop an existing SQL database.
+			</li>
+			<li>&#9733; Syntax: </li>
+			<pre>
+				DROP DATABASE databasename;
+			</pre>
+		</ul>
+
+		<h3>DROP DATABASE Example</h3>
+		<ul>
+			<li>&#9733; The following SQL statement drops the existing database "testDB":
+			</li>
+			<pre>
+				DROP DATABASE testDB;
+			</pre>
+		</ul>
+
+		<h2>SQL CREATE TABLE Statement</h2>
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">CREATE TABLE</font>
+				</b> statement is used to create a new table in a database.
+			</li>
+			<li>&#9733; Syntax: </li>
+			<pre>
+				CREATE TABLE table_name (
+				    column1 datatype,
+				    column2 datatype,
+				    column3 datatype,
+				   ....
+				);
+			</pre>
+		</ul>
+
+		<h3>CREATE TABLE Example</h3>
+		<ul>
+			<li>&#9733; The following example creates a table called "Persons" that contains five columns: PersonID, LastName,
+				FirstName, Address, and City:
+			</li>
+			<pre>
+				CREATE TABLE Persons (
+				    PersonID int,
+				    LastName varchar(255),
+				    FirstName varchar(255),
+				    Address varchar(255),
+				    City varchar(255)
+				);
+			</pre>
+			<li>&#9733; The PersonID column is of type int and will hold an integer.</li>
+			<li>&#9733; The LastName, FirstName, Address, and City columns are of type varchar and will hold characters, and
+				the maximum length for these fields is 255 characters.</li>
+		</ul>
+
+		<h2>SQL DROP TABLE Statement</h2>
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">DROP TABLE</font>
+				</b> statement is used to drop an existing table in a database.
+			</li>
+			<li>&#9733; Syntax: </li>
+			<pre>
+				DROP TABLE table_name;
+			</pre>
+		</ul>
+
+		<h3>DROP TABLE Example</h3>
+
+		<ul>
+			<li>&#9733; The following SQL statement drops the existing table "Shippers":
+			</li>
+			<pre>
+				DROP TABLE Shippers;
+			</pre>
+		</ul>
+
+
+		<h2>SQL ALTER TABLE Statement</h2>
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">ALTER TABLE</font>
+				</b> statement is used to add, delete, or modify columns in an existing table.
+			</li>
+			<li>&#9733; ALTER TABLE - <b>
+					<font color="blue">ADD Column</font>
+				</b> </li>
+			<pre>
+				ALTER TABLE table_name
+				ADD column_name datatype;
+			</pre>
+			<ul>
+				<li>&star; The following SQL adds an "ZipCode" column to the "Persons" table:</li>
+				<pre>
+        ALTER TABLE Persons
+        ADD ZipCode varchar(255);
+			</pre>
+			</ul>
+			<li>&#9733; ALTER TABLE - <b>
+					<font color="blue">DROP COLUMN</font>
+				</b> </li>
+			<pre>
+				ALTER TABLE table_name
+				DROP COLUMN column_name;
+			</pre>
+			<ul>
+				<li>&star; The following SQL deletes the "ZipCode" column from the "Persons" table:</li>
+				<pre>
+				ALTER TABLE Persons
+				DROP COLUMN ZipCode;
+			</pre>
+			</ul>
+			<li>&#9733; ALTER TABLE - <b>
+					<font color="blue">MODIFY COLUMN</font>
+				</b> </li>
+			<pre>
+				ALTER TABLE table_name
+				MODIFY COLUMN column_name datatype;
+			</pre>
+			<ul>
+				<li>&star; The following SQL statement modify the "PersonID" columns from characters to int type:</li>
+				<pre>
+        ALTER TABLE Persons
+        MODIFY COLUMN PersonID int;
+				</pre>
+			</ul>
+		</ul>
+
+
+		<h2>SQL INSERT INTO Statement</h2>
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">INSERT INTO</font>
+				</b> statement is used to insert new records in a table.
+			</li>
+			<li>&#9733; It is possible to write the INSERT INTO statement in two ways: </li>
+			<ul>
+				<li>&star; 1. Specify both the column names and the values to be inserted:</li>
+				<pre>
+				INSERT INTO table_name (column1, column2, column3, ...)
+				VALUES (value1, value2, value3, ...);
+			</pre>
+				<li>&star; If you are adding values for all the columns of the table, you do not need to specify the column
+					names in the SQL query. However, make sure the order of the values is in the same order as the columns in the
+					table.</li>
+				<pre>
+					INSERT INTO table_name
+					VALUES (value1, value2, value3, ...);					
+				</pre>
+			</ul>
+		</ul>
+
+		<h3>INSERT INTO Example</h3>
+
+		<ul>
+			<li>&#9733; The following SQL statement inserts a new record in the "Persons" table:
+			</li>
+			<pre>
+      INSERT INTO Persons (PersonID, LastName, FirstName, Address, City)
+      VALUES ('1234', 'Lovalace', 'Ada', '1515 Bluebird', 'Murfreesboro');
+			</pre>
+			<li>&#9733; The following SQL statement inserts a new record in the "Persons" table:
+			</li>
+			<pre>
+      INSERT INTO Persons
+      VALUES ('1235', 'Moreno', 'Antonio', '120 Hanover St.', 'Smyrna');
+			</pre>
+		</ul>
+
+		<h2>SQL UPDATE Table</h2>
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">UPDATE</font>
+				</b> statement is used to modify the existing records in a table.
+			</li>
+			<li>&#9733; Syntax: </li>
+			<pre>
+        UPDATE table_name
+        SET column1 = value1, column2 = value2, ...
+        WHERE condition;
+			</pre>
+		</ul>
+
+		<h3>UPDATE Table Example</h3>
+
+		<ul>
+			<li>&#9733; The following SQL statement updates the first person (PersonID = 1234) with a new adress and a new
+				city.
+			</li>
+			<pre>
+	UPDATE Persons
+        SET Address = '835 73rd Ave', City = 'Medina'
+        WHERE PersonID = 1234;
+			</pre>
+		</ul>
+
+
+		<h2>SQL DELETE Statement</h2>
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">DELETE</font>
+				</b> statement is used to delete existing records in a table.
+			</li>
+			<li>&#9733; Syntax: </li>
+			<pre>
+        DELETE FROM table_name WHERE condition;
+			</pre>
+		</ul>
+
+		<h3>DELETE Example</h3>
+
+		<ul>
+			<li>&#9733; The following SQL statement deletes the person Antonio Moreno from the "Persons" table:
+			</li>
+			<pre>
+			DELETE FROM Persons WHERE PersonID='1235';
+			</pre>
+			<li>&#9733; The following SQL statement deletes all rows in the "Persons" table, without deleting the table:
+			</li>
+			<pre>
+				DELETE FROM Persons;
+			</pre>
+		</ul>
+
+
+		<h2>SQL SELECT Statement</h2>
+		<ul>
+			<li>&#9733; The SELECT statement is used to select data from a database.</li>
+			<li>&#9733; Syntax: </li>
+			<pre>
+				SELECT column1, column2, ...
+				FROM table_name;
+			</pre>
+			<li>&#9733; If you want to select all the fields available in the table, use the following syntax:</li>
+			<pre>
+				SELECT * FROM table_name;
+			</pre>
+		</ul>
+
+		<h3>SELECT Columns Example</h3>
+		<ul>
+			<li>&#9733; The following SQL statement selects the "FirstName", "LastName" and "City" columns from the
+				"Persons" table:</li>
+			<pre>
+				SELECT FirstName, LastName, City FROM Persons;
+			</pre>
+			<li>&#9733; The following SQL statement selects all the records in the "Persons" table:
+			</li>
+			<pre>
+				SELECT * FROM Persons;
+			</pre>
+		</ul>
+
+
+		<h2>Reference</h2>
+		<ul>
+			<li><a href="https://www.w3schools.com/MySQL/mysql_sql.asp" target="_blank">W3schools MySQL/</a></li>
+		</ul>
+
+		<br>
+		<br>
+		<br>
+
+		<footer align=" center" id="foot01"></footer>
+	</div>
+	<br>
+	<br>
+	<script src="../CCS/Script.js"></script>
+
+</body>
+
+</html>

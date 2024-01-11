@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Web Servers</title>
+	<link href="../CCS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>Web Servers</h1>
+
+		<h2>Overview</h2>
+
+		<ul>
+			<li>&#9733; Web server is a computer where the web content is stored.</li>
+			<li>&#9733; Basically web server is used to host the web sites but there exists other web servers also such as
+				gaming, storage, FTP, email etc.</li>
+			<li>&#9733; Web site is collection of web pages while web server is a software that respond to the request for web
+				resources.</li>
+		</ul>
+
+
+		<h2>Web Server Working</h2>
+
+
+		<ul>
+			<li>&#9733; Web server respond to the client request in either of the following two ways:</li>
+			<ul>
+				<li>&star; Sending the file to the client associated with the requested URL.</li>
+				<li>&star; Generating response by invoking a script and communicating with database.</li>
+				<img src="server1.jpeg">
+			</ul>
+		</ul>
+
+
+		<h3>Key Points</h3>
+
+		<ul>
+			<li>&#9733; When client sends request for a web page, the web server search for the requested page if requested
+				page is found then it will send it to client with an HTTP response.</li>
+			<li>&#9733; If the requested web page is not found, web server will the send an HTTP response:Error 404 Not found.
+			</li>
+			<li>&#9733; If client has requested for some other resources then the web server will contact to the application
+				server and data store to construct the HTTP response.</li>
+		</ul>
+
+
+		<h2>Architecture</h2>
+		Web Server Architecture follows the following two approaches:
+		<ul>
+			<li>&#9733; Concurrent Approach</li>
+			<li>&#9733; Single-Process-Event-Driven Approach.</li>
+		</ul>
+
+		<h3>Concurrent Approach</h3>
+		Concurrent approach allows the web server to handle multiple client requests at the same time. It can be achieved by
+		following methods:
+		<ul>
+			<li>&#9733; Multi-process</li>
+			<ul>
+				<li>&star; In this a single process (parent process) initiates several single-threaded child processes and
+					distribute incoming requests to these child processes. Each of the child processes are responsible for
+					handling single request.</li>
+				<li>&star; It is the responsibility of parent process to monitor the load and decide if processes should be
+					killed or forked.</li>
+			</ul>
+			<li>&#9733; Multi-threaded</li>
+			<ul>
+				<li>&star; Unlike Multi-process, it creates multiple single-threaded process.</li>
+			</ul>
+			<li>&#9733; Hybrid method</li>
+			<ul>
+				<li>&star; It is combination of above two approaches. In this approach multiple process are created and each
+					process initiates multiple threads. Each of the threads handles one connection. Using multiple threads in
+					single process results in less load on system resources.</li>
+			</ul>
+		</ul>
+
+		Web servers process files written in different programming languages:
+		<ul>
+			<li>&#9733; PHP</li>
+			<li>&#9733; Python</li>
+			<li>&#9733; Java</li>
+			<li>&#9733; and others.</li>
+		</ul>
+
+		<h3>Single Process Event Driven</h3>
+
+		The SPED model uses a single process to perform all client processing and disk activity in an event-driven manner.
+		<br><br>
+
+		<img src="server2.svg" width="1000px" height="500px">
+
+
+		<h2>Examples</h2>
+
+		<table style="width: 70%;">
+			<tr>
+				<th>Server</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<th>Apache HTTP Server</th>
+				<td>This is the most popular web server in the world developed by the Apache Software Foundation. Apache web
+					server is an open source software and can be installed on almost all operating systems including Linux, UNIX,
+					Windows, FreeBSD, Mac OS X and more. About 60% of the web server machines run the Apache Web Server.</td>
+			</tr>
+			<tr>
+				<th>NGINX</th>
+				<td>Nginx was created to solve the so-called c10k problem, meaning that a web server that uses threads to handle
+					user requests is unable to manage more than 10,000 connections at the same time.</td>
+			</tr>
+			<tr>
+				<th>Internet Information Services (IIS)</th>
+				<td>The Internet Information Server (IIS) is a high performance Web Server from Microsoft. This web server runs
+					on Windows NT/2000 and 2003 platforms (and may be on upcoming new Windows version also). IIS comes bundled
+					with Windows NT/2000 and 2003; Because IIS is tightly integrated with the operating system so it is relatively
+					easy to administer it.</td>
+			</tr>
+			<tr>
+				<th>Lighttpd</th>
+				<td>The lighttpd, pronounced lighty is also a free web server that is distributed with the FreeBSD operating
+					system. This open source web server is fast, secure and consumes much less CPU power. Lighttpd can also run on
+					Windows, Mac OS X, Linux and Solaris operating systems.</td>
+			</tr>
+			<tr>
+				<th>Sun Java System Web Server</th>
+				<td>This web server from Sun Microsystems is suited for medium and large web sites. Though the server is free it
+					is not open source. It however, runs on Windows, Linux and UNIX platforms. The Sun Java System web server
+					supports various languages, scripts and technologies required for Web 2.0 such as JSP, Java Servlets, PHP,
+					Perl, Python, and Ruby on Rails, ASP and Coldfusion etc.</td>
+			</tr>
+			<tr>
+				<th>Jigsaw Server</th>
+				<td>Jigsaw (W3C's Server) comes from the World Wide Web Consortium. It is open source and free and can run on
+					various platforms like Linux, UNIX, Windows, and Mac OS X Free BSD etc. Jigsaw has been written in Java and
+					can run CGI scripts and PHP programs.</td>
+			</tr>
+		</table>
+
+
+		<h2>Apache HTTP Server</h2>
+
+		<ul>
+			<li>&#9733; Apache is an open-source and free web server software.</li>
+			<li>&#9733; It powers around 46% of websites around the world.</li>
+			<li>&#9733; It’s maintained and developed by the Apache Software Foundation.</li>
+			<li>&#9733; The first version was released in 1995.</li>
+		</ul>
+
+		<h3>How Does Apache Web Server Work?</h3>
+
+
+		<ul>
+			<li>&#9733; Apache Web Server is not a physical server, but rather a software that runs on a server.</li>
+			<li>&#9733; Its job is to establish a connection between a server and the browsers of website visitors (Firefox,
+				Google Chrome, Safari, etc.) while delivering files back and forth between them (client-server structure).</li>
+			<li>&#9733; Apache is a cross-platform software, therefore it works on both Unix and Windows servers.</li>
+		</ul>
+
+		When a visitor wants to load a page on your website:
+
+		<ul>
+			<li>&#9733; Their browser sends a request to your server.</li>
+			<li>&#9733; Apache returns a response with all the requested files (text, images, etc.).</li>
+			<li>&#9733; The server and the client communicate through the HTTP protocol.</li>
+			<li>&#9733; Apache is responsible for the smooth and secure communication between the two machines.</li>
+		</ul>
+
+		Apache is highly customizable, as it has a module-based structure:
+
+
+		<ul>
+			<li>&#9733; Modules allow server administrators to turn additional functionalities on and off.</li>
+			<li>&#9733; Apache has modules for security, caching, URL rewriting, password authentication, and more.</li>
+			<li>&#9733; You can also set up your own server configurations through a file called .htaccess, which is an Apache
+				configuration file supported with all Hostinger plans.</li>
+		</ul>
+
+
+		<h2>Apache vs NGINX</h2>
+		<ul>
+			<li>&#9733; Since Apache uses the thread-based structure, owners of traffic-heavy websites may encounter
+				performance problems. Nginx is one of the web servers that address the c10k problem and probably the most
+				successful one.</li>
+			<li>&#9733; Nginx has an event-driven architecture that doesn’t create a new process for each request. Instead, it
+				handles every incoming request in a single thread. This master process manages several worker processes that
+				perform the actual processing of requests. The event-based model of Nginx distributes user requests among worker
+				processes in an efficient way, therefore leading to much better scalability.</li>
+			<li>&#9733; If you need to manage a high-traffic website Nginx is an excellent choice, as it can do that by using
+				minimal resources. It cannot be a coincidence that it’s used by many high-visibility websites such as Netflix,
+				Hulu, Pinterest, and Airbnb.</li>
+			<li>&#9733; However, for small and medium players, Apache comes with a handful of advantages over Nginx, such as
+				its easy configuration, lots of modules, and a beginner-friendly environment.</li>
+		</ul>
+
+
+		<h2>Apache Pros and Cons</h2>
+
+		<h3>Pros:</h3>
+		<ul>
+			<li>&#9733; Open-source and free, even for commercial use.</li>
+			<li>&#9733; Reliable, stable software.</li>
+			<li>&#9733; Frequently updated, regular security patches.</li>
+			<li>&#9733; Flexible due to its module-based structure.</li>
+			<li>&#9733; Easy to configure, beginner-friendly.</li>
+			<li>&#9733; Cross-platform (works on both Unix and Windows servers).</li>
+			<li>&#9733; Works out of the box with WordPress sites.</li>
+			<li>&#9733; Huge community and easily available support in case of any problem.</li>
+		</ul>
+
+		<h3>Cons:</h3>
+
+		<ul>
+			<li>&#9733; Performance problems on extremely traffic-heavy websites.</li>
+			<li>&#9733; Too many configuration options can lead to security vulnerabilities.
+			</li>
+		</ul>
+
+
+		<h2>XAMPP</h2>
+
+		<ul>
+			<li>&#9733; <a href="https://www.apachefriends.org/index.html" target="_blank">XAMPP</a> is the most popular PHP
+				development environment.</li>
+			<li>&#9733; <b>
+					<font color="blue">XAMPP = Apache + MariaDB + PHP + Perl</font>
+				</b></li>
+		</ul>
+
+		<h3>MariaDB vs MySQL</h3>
+
+		<ul>
+			<li>&#9733; MariaDB was forked from MySQL source code around version 5.5, circa 2010. Programmers at Monty Program
+				implemented some new features, or integrated features developed by other contributors, or back-ported some
+				features from MySQL 5.6 or 5.7.</li>
+			<li>&#9733; MariaDB is mostly based on the same source code as MySQL.</li>
+			<li>&#9733; MariaDB reads and writes the same database files as MySQL. MariaDB supports the same flavor of SQL
+				query language, with a few enhancements created by MariaDB. They mostly follow the same internal architecture as
+				MySQL, again with some minor improvements developed for MariaDB. In general, you could use MariaDB as a drop-in
+				replacement for MySQL software without changing your queries or your data files.</li>
+			<li>&#9733; However, as time goes on, MySQL develops more extensive features or changes to its internal
+				architecture. They have more developers on staff than MariaDB, so they are making changes at a faster pace.</li>
+			<li>&#9733; Gradually, MySQL and MariaDB will diverge.</li>
+		</ul>
+
+		<h2>XAMPP Installation</h2>
+
+		<h3>Downlaod and installation</h3>
+		<ul>
+			<li>&#9733; <a href="https://www.apachefriends.org/download.html"
+					target="_blank">https://www.apachefriends.org/download.html</a></li>
+		</ul>
+
+		<!--
+		<h3>Start services (Windows)</h3>
+
+		<ul>
+			<li>&#9733; Here is what XAMPP looks like before you start services. </li>
+			<li>&#9733; Click Start to start services of Apache and MySQL. </li>
+			<li>&#9733; Click Explorer, you will find the folder named htdocs where all the html, php and other files are
+				located. </li>
+		</ul>
+		-->
+
+
+		<h3>Start services (MAC OS)</h3>
+
+		<ul>
+			<li>&#9733; Here is what XAMPP looks like before you start services. </li>
+			<br>
+			<img src="xampp_mac0.png" width="500px" height="400px">
+			<br>
+			<li>&#9733; Click <b>
+					<font color="blue">Go to Application</font>
+				</b>, If you see the following webpage, XAMPP is working: </li>
+
+			<img src="server-xamppworks.png" width="800px" height="600px">
+			<br>
+			<li>&#9733; Click <b>
+					<font color="blue">Open Application Folder</font>
+				</b>, you should see the following. All the html, css, javascript, php and other files are located in <b>
+					<font color="blue">htdocs</font>
+				</b> folder. </li>
+
+			<img src="xampp_mac2.png" width="500px" height="800px">
+			<br>
+
+			<li>&#9733; Under the <b>
+					<font color="blue">Manage Servers</font>
+				</b> tab, there are three servers. You can click <b>
+					<font color="blue">Start</font>
+				</b> to start the corresponding server, or click <b>
+					<font color="blue">Start All</font>
+				</b> to start all three servers.
+				<ul>
+					<li>&star; <b>Database Server</b></li>
+					<li>&star; FTP Server</li>
+					<li>&star; <b>Web Server</b></li>
+				</ul>
+			</li>
+			<br>
+			<img src="xampp_mac1.png" width="500px" height="400px">
+			<br>
+		</ul>
+
+
+		<h3>Start services (Windows)</h3>
+
+		<ul>
+			<li>&#9733; Here is what XAMPP looks like before you start services. </li>
+			<br>
+			<img src="xampp0_win.png" width="500px" height="400px">
+			<br>
+			<li>&#9733; Click <b>
+					<font color="blue">Start</font>
+				</b> to start services of Apache and MySQL. </li>
+
+			<li>&#9733; Click <b>
+					<font color="blue">Explorer</font>
+				</b>, you will find the folder named <b>
+					<font color="blue">htdocs</font>
+				</b> where all the html, php and other files are located. </li>
+			<img src="xampp1_win.png" width="800px" height="600px">
+			<br>
+		</ul>
+
+		<h3>Test</h3>
+
+		<ul>
+			<li>&#9733; Open your web browser and type in: <b>
+					<font color="blue">http://localhost</font>
+				</b> or 127.0.0.1, (for mac, if it does not work, try
+				the IP address assigned to the server, which is 192.168.64.2 in this example.)</li>
+			<li>&#9733; If you see the following webpage, XAMPP is working. </li>
+			<br>
+			<img src="server-xamppworks.png" width="800px" height="500px">
+			<li>&#9733; In folder <b>
+					<font color="blue">htdocs</font>
+				</b>, create a file named test.php, type in code:</li>
+			<pre>
+				&lt;!DOCTYPE html&gt;
+				&lt;html&gt;
+				&lt;body&gt;
+
+				&lt;h1&gt;My first PHP page&lt;/h1&gt;
+
+				&lt;?php
+				echo "Hello World!";
+				?&gt;
+
+				&lt;/body&gt;
+				&lt;/html&gt;
+		</pre>
+			<li>&#9733; Save the file and type in <b>
+					<font color="blue">http://localhost/test.php</font>
+				</b> or 192.168.64.2/test.php (for mac), if you see the
+				following webpage, you have finished the installation and test. </li>
+		</ul>
+
+		<br>
+
+
+		<h2>What if you cannot start MySQL server?</h2>
+		<ul>
+			<li>&#9733; XAMPP will use port 3306 for MySQL server. If the default port 3306 has been occupied by another
+				process, then you
+				cannot start the MySQL server.</li>
+			<li>&#9733; You can use the following command to check if port 3306 be occupied:</li>
+			&nbsp; &nbsp; <b>netstat -vanp tcp | grep 3306</b>
+			<li>&#9733; If the port 3306 has been occupied, usually it has been used by another mysql process, you can use the
+				following command to kill it:</li>
+			&nbsp; &nbsp; <b>sudo pkill mysql</b>
+			<li>&#9733; or You can change the port 3306 to another port number such as 3307, 3308 in the file:
+				<ul>
+					<li>&star; "properties.ini" (for Mac Users)</li>
+					<li>&star; "my.ini" (for Windows Users)</li>
+					<li>&star; And add the following line to 'config.inc.php' (replace '3307 with whatever port your MySQL is
+						running
+						on):
+						<pre>
+					$cfg['Servers'][$i]['port'] = '3307';
+						</pre>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<pre>
+
+
+
+		</pre>
+
+		<h1>Reference</h1>
+		<ul>
+			<li>&#9733; <a href="https://www.tutorialspoint.com/internet_technologies/web_servers.htm"
+					target="_blank">www.tutorialspoint.com</a></li>
+			<li>&#9733; <a href="https://www.hostinger.com/tutorials/what-is-apache" target="_blank">www.hostinger.com</a>
+			</li>
+			<li>&#9733; <a href="https://www.quora.com/What-is-the-difference-between-MySQL-and-MariaDB"
+					target="_blank">www.quora.com</a></li>
+		</ul>
+	</div>
+
+</body>
+
+</html>

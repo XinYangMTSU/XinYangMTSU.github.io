@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>MySQL SQL</title>
+	<link href="../CCS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>MySQL SQL</h1>
+
+		<h2>SQL DROP TABLE IF EXISTS</h2>
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">DROP TABLE IF EXISTS</font>
+				</b> statement is used to drop or delete a table from a database, if the table exists. If the table does not
+				exist, then the statement responds with a warning.
+			</li>
+			<li>&#9733; Syntax: </li>
+			<pre>
+				DROP TABLE IF EXISTS table_name;
+				
+				DROP TABLE IF EXISTS database_name.table_name;
+			</pre>
+		</ul>
+
+
+		<h2>SQL SELECT DISTINCT Statement</h2>
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">SELECT DISTINCT</font>
+				</b> statement is used to return only distinct (different) values.
+			</li>
+			<li>&#9733; Syntax: </li>
+			<pre>
+				SELECT DISTINCT column1, column2, ...
+				FROM table_name;
+			</pre>
+		</ul>
+
+		<h3>SELECT DISTINCT Example</h3>
+		<ul>
+			<li>&#9733; The following SQL statement selects only the DISTINCT values from the "Country" column in the
+				"Customers" table:
+			</li>
+			<pre>
+					SELECT DISTINCT Country FROM Customers;
+			</pre>
+			<li>&#9733;The following SQL statement lists the number of different (distinct) customer countries:</li>
+			<pre>
+					SELECT COUNT(DISTINCT Country) FROM Customers;
+			</pre>
+			<li>&#9733; <b>Note</b>: The example above will not work in Firefox!</li>
+		</ul>
+
+
+		<h2>Demo Database</h2>
+
+		<ul>
+			<li>&#9733; Customers: <a href="customers.sql" target="_blank">customers.sql</a></li>
+			<li>&#9733; Products: <a href="products.sql" target="_blank">products.sql</a></li>
+		</ul>
+
+		<h2>SQL WHERE Clause</h2>
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">WHERE</font>
+				</b> clause is used to filter records.
+			</li>
+			<li>&#9733; It is used to extract only those records that fulfill a specified condition.
+			</li>
+			<li>&#9733; The WHERE clause is not only used in SELECT statements, it is also used in UPDATE, DELETE, etc.!</li>
+			<li>&#9733; WHERE Syntax: </li>
+			<pre>
+			SELECT column1, column2, ...
+			FROM table_name
+			WHERE condition;
+			</pre>
+		</ul>
+
+		<h3>WHERE Clause Example</h3>
+
+		<ul>
+			<li>&#9733; The following SQL statement selects all the customers from the country "Mexico", in the "Customers"
+				table:</li>
+			<pre>
+			SELECT * FROM Customers
+			WHERE Country='Mexico';
+			</pre>
+		</ul>
+
+		<h2>Operators in The WHERE Clause</h2>
+
+		<ul>
+			<li>&#9733; The following operators can be used in the WHERE clause:</li>
+			<br>
+			<table>
+				<tr>
+					<th>Operator</th>
+					<th>Description</th>
+					<th>Example</th>
+				</tr>
+				<tr>
+					<td>=</td>
+					<td>Equal</td>
+					<td>SELECT * FROM Products
+						WHERE Price = 18;</td>
+				</tr>
+				<tr>
+					<td>></td>
+					<td>Greater than</td>
+					<td>SELECT * FROM Products
+						WHERE Price > 30;</td>
+				</tr>
+				<tr>
+					<td>
+						< </td>
+					<td>Less than</td>
+					<td>SELECT * FROM Products
+						WHERE Price < 30;</td>
+				</tr>
+				<tr>
+					<td>
+						<= </td>
+					<td>Less than or equal</td>
+					<td>SELECT * FROM Products
+						W HERE Price <= 30;</td>
+				</tr>
+				<tr>
+					<td>
+						<>
+					</td>
+					<td>Not equal. </td>
+					<td>SELECT * FROM Products
+						WHERE Price <> 18;</td>
+				</tr>
+				<tr>
+					<td>BETWEEN</td>
+					<td>Between a certain range</td>
+					<td>SELECT * FROM Products
+						WHERE Price BETWEEN 50 AND 60;</td>
+				</tr>
+				<tr>
+					<td>LIKE</td>
+					<td>Search for a pattern</td>
+					<td>SELECT * FROM Customers
+						WHERE City LIKE 's%';</td>
+				</tr>
+				<tr>
+					<td>IN</td>
+					<td>To specify multiple possible values for a column</td>
+					<td>SELECT * FROM Customers
+						WHERE City IN ('Paris','London');</td>
+				</tr>
+			</table>
+		</ul>
+
+		<h2>SQL AND, OR and NOT Operators</h2>
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">WHERE</font>
+				</b> clause can be combined with AND, OR, and NOT operators.</li>
+			<li>&#9733; The <b>
+					<font color="blue">AND</font>
+				</b> operator displays a record if all the conditions separated by AND are TRUE.</li>
+			<pre>
+        SELECT * FROM Customers
+        WHERE Country='Germany' AND City='Berlin';
+			</pre>
+			<li>&#9733; The <b>
+					<font color="blue">OR</font>
+				</b> operator displays a record if any of the conditions separated by OR is TRUE.</li>
+			<pre>
+       SELECT * FROM Customers
+       WHERE City='Berlin' OR City='München';
+			</pre>
+			<li>&#9733; The <b>
+					<font color="blue">NOT</font>
+				</b> operator displays a record if the condition(s) is NOT TRUE.</li>
+			<pre>
+       SELECT * FROM Customers
+       WHERE Country='Germany' OR Country='Spain';
+			</pre>
+		</ul>
+
+		<h2>SQL ORDER BY Keyword</h2>
+		<ul>
+			<li>&#9733; The ORDER BY keyword is used to sort the result-set in ascending or descending order.</li>
+			<li>&#9733; The ORDER BY keyword sorts the records in ascending order by default. To sort the records in
+				descending order, use the DESC keyword.</li>
+			<li>&#9733; ORDER BY Syntax</li>
+			<pre>
+        SELECT column1, column2, ...
+        FROM table_name
+        ORDER BY column1, column2, ... ASC|DESC;
+			</pre>
+		</ul>
+
+		<h3>ORDER BY Example</h3>
+		<ul>
+			<li>&#9733; The following SQL statement selects all customers from the "Customers" table, sorted by the "Country"
+				column:</li>
+		</ul>
+		<pre>
+      SELECT * FROM Customers
+      ORDER BY Country;
+		</pre>
+
+		<h3>ORDER BY DESC Example</h3>
+		<ul>
+			<li>&#9733; The following SQL statement selects all customers from the "Customers" table, sorted DESCENDING by the
+				"Country" column:</li>
+		</ul>
+		<pre>
+			SELECT * FROM Customers
+			ORDER BY Country DESC;
+		</pre>
+
+		<h3>ORDER BY Several Columns Example 1</h3>
+		<ul>
+			<li>&#9733; The following SQL statement selects all customers from the "Customers" table, sorted by the "Country"
+				and the "CustomerName" column.</li>
+			<li>&#9733; This means that it orders by Country, but if some rows have the same Country, it orders them by
+				CustomerName:</li>
+		</ul>
+		<pre>
+			SELECT * FROM Customers
+			ORDER BY Country, CustomerName;
+		</pre>
+
+		<h3>ORDER BY Several Columns Example 2</h3>
+		<ul>
+			<li>&#9733; The following SQL statement selects all customers from the "Customers" table, sorted ascending by the
+				"Country" and descending by the "CustomerName" column:</li>
+		</ul>
+		<pre>
+			SELECT * FROM Customers
+			ORDER BY Country ASC, CustomerName DESC;
+		</pre>
+
+		<h2>SQL SELECT LIMIT Clause</h2>
+		<ul>
+			<li>&#9733; MySQL supports the <b>
+					<font color="blue">LIMIT</font>
+				</b> clause to select a limited number of records</li>
+			<li>&#9733; LIMIT Syntax:</li>
+			<pre>
+				SELECT column_name(s)
+				FROM table_name
+				WHERE condition
+				LIMIT number;
+			</pre>
+			<li>&#9733; The following SQL statement shows the equivalent example for MySQL:</li>
+			<pre>
+				SELECT * FROM Customers
+				LIMIT 3;
+			</pre>
+		</ul>
+
+		<h2>SQL MIN() and MAX() Functions</h2>
+
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="red">MIN()</font>
+				</b> function returns the smallest value of the selected column.</li>
+			<li>&#9733; The following SQL statement finds the price of the cheapest product:</li>
+			<pre>
+        SELECT MIN(Price) AS SmallestPrice
+        FROM Products;
+			</pre>
+			<li>&#9733; The <b>
+					<font color="red">MAX()</font>
+				</b> function returns the largest value of the selected column.</li>
+			<li>&#9733; The following SQL statement finds the price of the most expensive product:</li>
+			<pre>
+				SELECT MAX(Price) AS LargestPrice
+				FROM Products;
+			</pre>
+		</ul>
+
+		<h2>SQL COUNT(), AVG() and SUM() Functions</h2>
+		<ul>
+			<li>&#9733; The <b>
+					<font color="red">COUNT()</font>
+				</b> function returns the number of rows that matches a specified criterion.</li>
+			<li>&#9733; The following SQL statement finds the number of products: (Note: NULL values are not counted.)</li>
+			<pre>
+				SELECT COUNT(ProductID)
+				FROM Products;
+			</pre>
+			<li>&#9733; The <b>
+					<font color="red">AVG()</font>
+				</b> function returns the average value of a numeric column. </li>
+			<li>&#9733; The following SQL statement finds the average price of all products:(Note: NULL values are ignored.)
+			</li>
+			<pre>
+					SELECT AVG(Price)
+					FROM Products;
+				</pre>
+			<li>&#9733; The <b>
+					<font color="red">SUM()</font>
+				</b> function returns the total sum of a numeric column. </li>
+			<li>&#9733; The following SQL statement finds the sum of the "Price" fields in the "Products" table:</li>
+			<pre>
+        SELECT SUM(Price)
+        FROM Products;
+			</pre>
+		</ul>
+
+
+		<h2>How to Test for NULL Values?</h2>
+
+		<ul>
+			<li>&#9733; We will have to use the IS NULL and IS NOT NULL operators.</li>
+			<li>&#9733; The <b>
+					<font color="red">IS NULL</font>
+				</b> operator is used to test for empty values (NULL values).</li>
+
+			<li>&#9733; The following SQL lists all customers with a NULL value in the "Address" field:
+			</li>
+			<pre>
+        SELECT * FROM Customers
+        WHERE Address IS NULL;
+			</pre>
+			<li>&#9733; The <b>
+					<font color="red">IS NOT NULL</font>
+				</b> operator is used to test for non-empty values (NOT NULL values).</li>
+			<li>&#9733; The following SQL lists all customers with a value in the "Address" field:</li>
+			<pre>
+				SELECT * FROM Customers
+				WHERE Address IS NOT NULL;
+			</pre>
+		</ul>
+
+
+		<h2>Reference</h2>
+		<ul>
+			<li><a href="https://www.w3schools.com/sql/sql_distinct.asp" target="_blank">W3schools MySQL/</a></li>
+		</ul>
+
+		<br>
+		<br>
+		<br>
+
+		<footer align=" center" id="foot01"></footer>
+	</div>
+	<br>
+	<br>
+	<script src="../CCS/Script.js"></script>
+
+</body>
+
+</html>

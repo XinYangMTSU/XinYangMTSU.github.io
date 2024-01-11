@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>PHP</title>
+	<link href="../CCS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>PHP</h1>
+
+		<h2>What is PHP?</h2>
+
+		<ul>
+			<li>&#9733; PHP is an acronym for "PHP: Hypertext Preprocessor".</li>
+			<li>&#9733; PHP is a <b>
+					<font color="blue">server scripting language</font>
+				</b>, and a powerful tool for making dynamic and interactive Web pages.
+			</li>
+			<li>&#9733; PHP is a widely-used, open source scripting language.</li>
+			<li>&#9733; PHP scripts are <b>
+					<font color="blue">executed on the server</font>
+				</b>.</li>
+			<li>&#9733; PHP is free to download and use</li>
+			<li>&#9733; PHP 8 is the latest stable release.</li>
+		</ul>
+
+
+		<h2>What is a PHP File?</h2>
+
+		<ul>
+			<li>&#9733; PHP files can contain text, HTML, CSS, JavaScript, and PHP code</li>
+			<li>&#9733; PHP code is executed on the server, and the result is returned to the browser as plain HTML</li>
+			<li>&#9733; PHP files have extension "<b>
+					<font color="red">.php</font>
+				</b>"</li>
+		</ul>
+
+
+		<h2>What Can PHP Do?</h2>
+
+		<ul>
+			<li>&#9733; PHP can generate dynamic page content.</li>
+			<li>&#9733; PHP can create, open, read, write, delete, and close files on the server.
+			</li>
+			<li>&#9733; PHP can collect form data.</li>
+			<li>&#9733; PHP can send and receive cookies.</li>
+			<li>&#9733; PHP can add, delete, modify data in your database.</li>
+			<li>&#9733; PHP can be used to control user-access.</li>
+			<li>&#9733; PHP can encrypt data.</li>
+		</ul>
+
+
+		<h2>Why PHP?</h2>
+
+		<ul>
+			<li>&#9733; PHP runs on various platforms (Windows, Linux, Unix, Mac OS X, etc.)</li>
+			<li>&#9733; PHP is compatible with almost all servers used today (Apache, IIS, etc.)</li>
+			<li>&#9733; PHP supports a wide range of databases.</li>
+			<li>&#9733; PHP is free. Download it from the official PHP resource: www.php.net</li>
+			<li>&#9733; PHP is easy to learn and runs efficiently on the server side.</li>
+		</ul>
+
+		<h2>Basic PHP Syntax</h2>
+
+		<ul>
+			<li>&#9733; A PHP script is executed on the server, and the plain HTML result is sent back to the browser.
+			</li>
+			<li>&#9733; A PHP script can be placed anywhere in the document.</li>
+			<li>&#9733; A PHP script starts with
+				<b>
+					<font color="red">&lt;?php</font>
+				</b> and ends with <b>
+					<font color="red">?&gt;</font>
+				</b>
+			</li>
+			<li>&#9733; PHP statements end with a semicolon (<b>
+					<font color="red">;</font>
+				</b>)</li>
+			<li></li>
+
+			<li>&#9733; A PHP file normally contains HTML tags, and some PHP scripting code.
+
+			</li>
+
+			<li>&#9733; Below, we have an example of a simple PHP file, with a PHP script that uses a built-in PHP function
+				"echo" to output the text "Hello World!" on a web page:</li>
+
+			<pre>
+			&lt;!DOCTYPE html&gt;
+			&lt;html&gt;
+			&lt;body&gt;
+
+			&lt;h1&gt;My first PHP page&lt;/h1&gt;
+				
+			&lt;?php
+				echo "Hello!";
+			?&gt;
+
+			&lt;/body&gt;
+			&lt;/html&gt;
+			</pre>
+		</ul>
+
+		<h2>PHP Case Sensitivity</h2>
+
+		<ul>
+			<li>&#9733; Keywords (e.g. if, else, while, echo, etc.), classes, functions, and
+				user-defined functions are not case-sensitive.</li>
+			<pre>
+				&lt;!DOCTYPE html&gt;
+				&lt;html&gt;
+				&lt;body&gt;
+
+				&lt;?php
+					ECHO "Hello World!&lt;br&gt;";
+					echo "Hello World!&lt;br&gt;";
+					EcHo "Hello World!&lt;br&gt;";
+				?&gt;
+				&lt;/body&gt;
+				&lt;/html&gt;
+			</pre>
+			<li>&#9733; However, all variable names are case-sensitive!</li>
+			<pre>
+				&lt;!DOCTYPE html&gt;
+				&lt;html&gt;
+				&lt;body&gt;
+
+				&lt;?php
+					$color = "red";
+					echo "My car is " . $color . "&lt;br&gt;";
+					echo "My house is " . $COLOR . "&lt;br&gt;";
+					echo "My boat is " . $coLOR . "&lt;br&gt;";
+				?&gt;
+
+				&lt;/body&gt;
+				&lt;/html&gt;
+			</pre>
+		</ul>
+
+
+		<h2>Comments</h2>
+
+		<ul>
+			<li>&#9733; Single-line comments</li>
+			<pre>
+				&lt;?php
+				// This is a single-line comment
+
+				# This is also a single-line comment
+				?&gt;
+			</pre>
+			<li>&#9733; Multi-line comments</li>
+			<pre>
+				&lt;?php
+					/*
+					This is a multiple-lines comment block
+					that spans over multiple
+					lines
+					*/
+				?&gt;
+			</pre>
+		</ul>
+
+		<h2>PHP Variables</h2>
+
+
+		<h3>Creating (Declaring) PHP Variables</h3>
+		<ul>
+			<li>&#9733; In PHP, a variable starts with the <b>
+					<font color="red">$</font>
+				</b> sign, followed by the name of the variable.</li>
+			<li>&#9733; Note: Unlike other programming languages, PHP has no command for declaring a variable. It is created
+				the moment you first assign a value to it.</li>
+			<pre>
+				&lt;?php
+					$txt = "Hello world!";
+					$x = 5;
+					$y = 10.5;
+					$flag = True;
+				?&gt;
+			</pre>
+		</ul>
+
+
+		<h3>Rules for PHP variables</h3>
+
+		<ul>
+			<li>&#9733; A variable name must start with a letter or the underscore character</li>
+			<li>&#9733; A variable name cannot start with a number</li>
+			<li>&#9733; A variable name can only contain alpha-numeric characters and underscores (A-z, 0-9, and _ )</li>
+			<li>&#9733; Variable names are case-sensitive ($age and $AGE are two different variables)
+			</li>
+
+		</ul>
+
+		<h3>Output Variables</h3>
+
+		<ul>
+			<li>&#9733; The PHP echo statement is often used to output data to the screen.</li>
+			<pre>
+				&lt;?php
+					$txt = "MTSU";
+					echo "I love $txt!";
+				?&gt;
+			</pre>
+			<pre>
+				&lt;?php
+					$txt = "MTSU";
+					echo "I love " . $txt . "!";
+				?&gt;
+			</pre>
+		</ul>
+
+		<h3>PHP Variables Scope</h3>
+
+		PHP has three different variable scopes:
+
+		<ul>
+			<li>&#9733; local</li>
+			<li>&#9733; global</li>
+			<li>&#9733; static</li>
+		</ul>
+
+
+		<h3>local</h3>
+
+		A variable declared <b>
+			<font color="blue">within a function</font>
+		</b> has a LOCAL SCOPE and can only be accessed within that function:
+
+		<pre>
+			&lt;?php
+				function myTest() {
+					$x = 5; // local scope
+					echo "&lt;p&gt;Variable x inside function is: $x&lt;/p&gt;";
+				}
+			
+				myTest();
+				
+				// using x outside the function will generate an error
+				echo "&lt;p&gt;Variable x outside function is: $x&lt;/p&gt;";
+			?&gt;
+		</pre>
+
+
+		<h3>global</h3>
+
+		A variable declared <b>
+			<font color="blue">outside a function</font>
+		</b> has a GLOBAL SCOPE and can only be accessed outside a function:
+
+		<ul>
+			<li>&#9733; using x inside this function will generate an error</li>
+			<pre>
+			&lt;?php
+				$x = 5; // global scope
+				
+				function myTest() {
+					// using x inside this function will generate an error
+					echo "&lt;p&gt;Variable x inside function is: $x&lt;/p&gt;";
+				}
+				
+				myTest();
+				echo "&lt;p&gt;Variable x outside function is: $x&lt;/p&gt;";
+			?&gt;
+		</pre>
+
+
+			<li>&#9733; The <b>
+					<font color="blue">global</font>
+				</b> keyword is used to access a global variable from within a function.</li>
+			<li>&#9733; To do this, use the global keyword before the variables (inside the function):</li>
+
+			<pre>
+			&lt;?php
+				$x = 5;
+				$y = 10;
+				
+				function myTest() {
+						global $x, $y;
+						$y = $x + $y;
+				}
+				
+				myTest();
+				echo $y; // outputs 15
+			?&gt;
+		</pre>
+
+			<li>&#9733; PHP also stores all global variables in an array called <b>
+					<font color="blue">$GLOBALS[index]</font>
+				</b>. The index holds the name of
+				the variable.
+			</li>
+			<pre>
+				&lt;?php
+				$x = 5;
+				$y = 10;
+				
+				function myTest() {
+						$GLOBALS['y'] = $GLOBALS['x'] + $GLOBALS['y'];
+				}
+				
+				myTest();
+				echo $y; // outputs 15
+				?&gt;
+			</pre>
+		</ul>
+
+		<h3>static</h3>
+
+
+		<ul>
+			<li>&#9733; Normally, when a function is completed/executed, all of its variables are deleted.</li>
+			<li>&#9733; sometimes we want a local variable <b>
+					<font color="blue">NOT</font>
+				</b> to be deleted by using the static keyword.</li>
+			<li>&#9733; To do this, use the <b>
+					<font color="blue">static</font>
+				</b> keyword when you first declare the variable.</li>
+			<li>&#9733; Then, each time the function is called, that variable will still have the information it contained
+				from the last time the function was called.</li>
+			<li>&#9733; Note: The variable is still <b>
+					<font color="blue">local</font>
+				</b> to the function.</li>
+			<pre>
+				&lt;?php
+				
+				function myTest() {
+					static $x = 0;
+					echo $x;
+					$x++;
+				}
+				
+				myTest();
+				myTest();
+				myTest();
+				?&gt;
+			</pre>
+		</ul>
+
+		<h2>PHP echo and print Statements</h2>
+
+		<ul>
+			<li>&#9733; With PHP, there are two basic ways to get output: <b>
+					<font color="blue">echo</font>
+				</b> and <b>
+					<font color="blue">print</font>
+				</b>.</li>
+			<li>&#9733; They are both used to output data to the screen.</li>
+			<li>&#9733; echo has no return value.</li>
+			<li>&#9733; print has a return value of 1 </li>
+			<li>&#9733; echo can take multiple parameters (although such usage is rare) while print can take one argument.
+			</li>
+			<li>&#9733; The echo statement can be used with or without parentheses: <b>
+					<font color="blue">echo</font>
+				</b> or <b>
+					<font color="blue">echo()</font>
+				</b>.</li>
+			<li>&#9733; The print statement can be used with or without parentheses: <b>
+					<font color="blue">print</font>
+				</b> or <b>
+					<font color="blue">print()</font>
+				</b>.</li>
+			<li>&#9733; Notice that the text can contain HTML markup</li>
+		</ul>
+
+		<pre>
+			&lt;?php
+				$txt1 = "Learn PHP";
+				$txt2 = "W3Schools.com";
+				$x = 5;
+				$y = 4;
+
+				echo "&lt;h2&gt;" . $txt1 . "&lt;/h2&gt;";
+				echo "Study PHP at " . $txt2 . "&lt;br&gt;";
+				echo $x + $y;
+			  	echo "This ", "string ", "was ", "made ", "with multiple parameters.";
+
+				print "&lt;h2&gt;" . $txt1 . "&lt;/h2&gt;";
+				print "Study PHP at " . $txt2 . "&lt;br&gt;";
+				print $x + $y;
+			?&gt;
+		</pre>
+
+
+		<h2>PHP Data Types</h2>
+
+		PHP supports the following data types:
+
+		<ul>
+			<li>&#9733; <b>
+					<font color="blue">String</font>
+				</b>:</li>
+			<ul>
+				<li>&star; A string is a sequence of characters, like "Hello world!".</li>
+				<li>&star; A string can be any text inside quotes. You can use single or double quotes:</li>
+			</ul>
+			<pre>
+				$x = "Hello world!";
+				$y = 'Hello world!';
+				var_dump($x);
+
+				Note: var_dump() function returns the data type and value;
+			</pre>
+			<li>&#9733; <b>
+					<font color="blue">Integer</font>
+				</b></li>
+			<ul>
+				<li>&star; An integer data type is a non-decimal number between -2,147,483,648 and 2,147,483,647.</li>
+			</ul>
+			<pre>
+				$x = 100;
+				var_dump($x);
+			</pre>
+			<li>&#9733; <b>
+					<font color="blue">Float</font>
+				</b> (floating point numbers - also called double)</li>
+			<ul>
+				<li>&star; A float (floating point number) is a number with a decimal point or a number in exponential form.
+				</li>
+			</ul>
+			<pre>
+				&lt;?php
+					$x = 10.365;
+					var_dump($x);
+				?&gt;
+			</pre>
+			<li>&#9733; <b>
+					<font color="blue">Boolean</font>
+				</b></li>
+			<ul>
+				<li>&star; A Boolean represents two possible states: TRUE or FALSE.
+				</li>
+			</ul>
+			<pre>
+				$x = true;
+				$y = false;
+			</pre>
+			<li>&#9733; <b>
+					<font color="blue">Array</font>
+				</b></li>
+			<ul>
+				<li>&star; An array stores multiple values in one single variable.
+				</li>
+			</ul>
+			<pre>
+				&lt;?php
+					$cars = array("Volvo","BMW","Toyota");
+					var_dump($cars);
+				?&gt;
+			</pre>
+			<li>&#9733; <b>
+					<font color="blue">Object</font>
+				</b></li>
+			<ul>
+				<li>&star; Classes and objects are the two main aspects of object-oriented programming.</li>
+				<li>&star; A class is a template for objects, and an object is an instance of a class.</li>
+				<li>&star; When the individual objects are created, they inherit all the properties and behaviors from the
+					class, but each object will have different values for the properties.</li>
+				<li>&star; An object is a data type which stores data and information on how to process that data.</li>
+				<li>&star; If you create a __construct() function, PHP will automatically call this function when you create an
+					object from a class.
+
+				</li>
+				<li>&star; In PHP, an object must be explicitly declared.</li>
+			</ul>
+			<pre>
+				&lt;?php
+				class Car {
+  				public $color;
+  				public $model;
+  				public function __construct($color, $model) {
+    						$this->color = $color;
+    						$this->model = $model;
+  				}
+  			
+				public function message() {
+    						return "My car is a " . $this->color . " " . $this->model . "!";
+  							}
+				}
+
+				$myCar = new Car("black", "Volvo");
+				echo $myCar -> message();
+				echo "&lt;br&gt;";
+				$myCar = new Car("red", "Toyota");
+				echo $myCar -> message();
+				
+				?&gt;
+			</pre>
+			<li>&#9733; <b>
+					<font color="blue">NULL</font>
+				</b></li>
+			<ul>
+				<li>&star; Null is a special data type which can have only one value: NULL.</li>
+				<li>&star; A variable of data type NULL is a variable that has no value assigned to it</li>
+				<li>&star; If a variable is created without a value, it is automatically assigned a value of NULL.</li>
+				<li>&star; Variables can also be emptied by setting the value to NULL:</li>
+			</ul>
+			<pre>
+				&lt;?php
+				$x = "Hello world!";
+				$x = null;
+				var_dump($x);
+				?&gt;
+			</pre>
+			<li>&#9733; <b>
+					<font color="blue">Resource</font>
+				</b></li>
+			<ul>
+				<li>&star; The special resource type is not an actual data type. It is the storing of a reference to functions
+					and resources external to PHP.</li>
+				<li>&star; A common example of using the resource data type is a database call.</li>
+			</ul>
+		</ul>
+
+		<h2>PHP String Function</h2>
+
+		<ul>
+			<li>&#9733; <b>
+					<font color="blue">strlen()</font>
+				</b>: Return the Length of a String</li>
+			<pre>
+				&lt;?php
+					echo strlen("Hello world!"); // outputs 12
+				?&gt;
+			</pre>
+			<li>&#9733; <b>
+					<font color="blue">str_word_count()</font>
+				</b>: Count the Number of Words in a String</li>
+			<pre>
+				&lt;?php
+				echo str_word_count("Hello world!"); // outputs 2
+				?&gt;
+			</pre>
+			<li>&#9733; <b>
+					<font color="blue">strrev()</font>
+				</b>: Reverse a String</li>
+			<pre>
+				&lt;?php
+					echo strrev("Hello world!"); // outputs !dlrow olleH
+				?&gt;
+			</pre>
+			<li>&#9733; <b>
+					<font color="blue">strpos()</font>
+				</b>: Search For a Text Within a String</li>
+			<ul>
+				<li>&#9733; The PHP strpos() function searches for a specific text within a string.</li>
+				<li>&#9733; If a match is found, the function returns the character position of the first match.</li>
+				<li>&#9733; If no match is found, it will return FALSE.</li>
+				<li>&#9733; The first character position in a string is 0</li>
+			</ul>
+			<pre>
+				&lt;?php
+					echo strpos("Hello world!", "world"); // outputs 6, 6 is the start index of "world", 0 						is the first index in PHP
+				?&gt;
+			</pre>
+			<li>&#9733; <b>
+					<font color="blue">str_replace()</font>
+				</b>: Replace Text Within a String</li>
+			<ul>
+				<li>&star; The PHP str_replace() function replaces some characters with some other characters in a string.</li>
+			</ul>
+			<pre>
+				&lt;?php
+					echo str_replace("world", "Dolly", "Hello world!"); // outputs Hello Dolly!
+					echo str_replace("World", "Dolly", "Hello world!"); // outputs Hello world!
+				?&gt;
+			</pre>
+		</ul>
+
+		<h1>PHP Numbers</h1>
+
+		<h2>PHP Integers</h2>
+
+		PHP has the following functions to check if the type of a variable is integer:
+		<ul>
+			<li>&#9733; is_int()</li>
+			<li>&#9733; is_integer(): alias of is_int()</li>
+			<li>&#9733; is_long(): alias of is_int()</li>
+		</ul>
+		<pre>
+			&lt;?php
+				$x = 5985;
+				var_dump(is_int($x));
+
+				$x = 59.85;
+				var_dump(is_int($x));
+			?&gt;
+		</pre>
+
+		<h2>PHP Floats</h2>
+
+		PHP has the following functions to check if the type of a variable is float:
+		<ul>
+			<li>&#9733; is_float()</li>
+			<li>&#9733; is_double(): alias of is_float()</li>
+		</ul>
+
+		<h2>PHP Infinity</h2>
+
+		A numeric value that is larger than PHP_FLOAT_MAX is considered infinite. <br>
+		PHP has the following functions to check if a numeric value is finite or infinite:
+		<ul>
+			<li>&#9733; is_finite()</li>
+			<li>&#9733; is_infinite()</li>
+		</ul>
+
+		<pre>
+			&lt;?php
+				$x = 1.9e411;
+				var_dump($x);
+				echo "&lt;br&gt;";
+			        var_dump(is_infinite($x));
+			?&gt;
+		</pre>
+
+
+		<h2>PHP NaN</h2>
+		NaN stands for Not a Number. <br>
+		PHP has the following functions to check if a value is not a number:
+
+		<ul>
+			<li>&#9733; is_nan()</li>
+		</ul>
+
+		<pre>
+			&lt;?php
+				$x = acos(8);
+				var_dump(is_nan($x));
+			?&gt;
+		</pre>
+
+		<h2>PHP Numerical Strings</h2>
+
+		<ul>
+			<li>&#9733; The PHP is_numeric() function can be used to find whether a variable is numeric.</li>
+			<li>&#9733; The function returns true if the variable is a number or a numeric string, false otherwise.</li>
+		</ul>
+
+		<pre>
+			&lt;?php
+				$x = 5985;
+				var_dump(is_numeric($x));
+
+				$x = "5985";
+				var_dump(is_numeric($x));
+
+				$x = "59.85" + 100;
+				var_dump(is_numeric($x));
+
+				$x = "Hello";
+				var_dump(is_numeric($x));
+			?&gt;
+		</pre>
+
+
+		<h1>PHP Constants</h1>
+		<ul>
+			<li>&#9733; A constant is an identifier (name) for a simple value. The value cannot be changed during the script.
+			</li>
+			<li>&#9733; A valid constant name starts with a letter or underscore (no $ sign before the constant name).</li>
+			<li>&#9733; Unlike variables, constants are automatically global across the entire script.</li>
+			<li>&#9733; To create a constant, use the <b>
+					<font color="blue">define()</font>
+				</b> function.</li>
+			Syntax: define(name, value, case-insensitive)
+		</ul>
+
+		<pre>
+			&lt;?php
+				define("GREETING", "Welcome to W3Schools.com!"); // case-insensitive is false by 					default(GREETING is case-sensitive by deafault)
+				echo GREETING;
+			?&gt;
+		</pre>
+
+		<pre>
+			&lt;?php
+				define("GREETING", "Welcome to W3Schools.com!", true); // GREETING is not case-sensitive now.
+				echo greeting;
+			?&gt;
+		</pre>
+
+
+		<h2>PHP Constant Arrays</h2>
+
+		<pre>
+			&lt;?php
+				define("cars", [
+   				"Alfa Romeo",
+    				"BMW",
+    				"Toyota"
+				]);
+				echo cars[0];
+			?&gt;
+		</pre>
+
+		<b>
+			<font color="red">Note:</font>
+		</b> Constants are automatically <b>
+			<font color="blue">global</font>
+		</b> and can be used across the entire script.
+
+
+		<h1>PHP Operators</h1>
+
+		PHP divides the operators in the following groups:
+		<br>
+		<ul>
+			<li>&#9733; Arithmetic operators</li>
+			<li>&#9733; Assignment operators</li>
+			<li>&#9733; Comparison operators</li>
+			<li>&#9733; Increment/Decrement operators</li>
+			<li>&#9733; Logical operators</li>
+			<li>&#9733; String operators</li>
+			<li>&#9733; Array operators</li>
+			<li>&#9733; Conditional assignment operators</li>
+		</ul>
+
+		<h2>PHP Arithmetic Operators</h2>
+
+		<table style="width:50%">
+			<tr>
+				<th>Operator</th>
+				<th>Name</th>
+				<th>Example</th>
+			</tr>
+			<tr>
+				<td>+</td>
+				<td>Addition</td>
+				<td>$x + $y</td>
+			</tr>
+			<tr>
+				<td>-</td>
+				<td>Subtraction</td>
+				<td>$x - $y</td>
+			</tr>
+			<tr>
+				<td>*</td>
+				<td>Multiplication</td>
+				<td>$x * $y</td>
+			</tr>
+			<tr>
+				<td>/</td>
+				<td>Division</td>
+				<td>$x / $y</td>
+			</tr>
+			<tr>
+				<td>%</td>
+				<td>Module</td>
+				<td>$x % $y</td>
+			</tr>
+			<tr>
+				<td>**</td>
+				<td>Exponentiation</td>
+				<td>$x ** $y</td>
+			</tr>
+		</table>
+
+		<h2>PHP Assignment Operators</h2>
+
+		<table style="width: 50%">
+			<tr>
+				<th>Assignment</th>
+				<th>same as</th>
+			</tr>
+			<tr>
+				<td>x = y</td>
+				<td>x = y</td>
+			</tr>
+			<tr>
+				<td>x += y</td>
+				<td>x = x+ y</td>
+			</tr>
+			<tr>
+				<td>x -= y</td>
+				<td>x = x - y</td>
+			</tr>
+			<tr>
+				<td>x *= y</td>
+				<td>x = x*y</td>
+			</tr>
+			<tr>
+				<td>x /= y</td>
+				<td>x = x/y</td>
+			</tr>
+			<tr>
+				<td>x %= y</td>
+				<td>x = x%y</td>
+			</tr>
+		</table>
+
+		<h2>PHP Comparison Operators</h2>
+
+		<table style="width: 70%">
+			<tr>
+				<th>Operator</th>
+				<th>Name</th>
+				<th>Example</th>
+				<th>Result</th>
+			</tr>
+			<tr>
+				<td>==</td>
+				<td>Equal</td>
+				<td>$x == $y</td>
+				<td>Returns true if $x is equal to $y</td>
+			</tr>
+			<tr>
+				<td>===</td>
+				<td>Identical</td>
+				<td>$x === $y</td>
+				<td>Returns true if $x is equal to $y, and they are of the same type</td>
+			</tr>
+			<tr>
+				<td>!=</td>
+				<td>Not Equal</td>
+				<td>$x != $y</td>
+				<td>Returns true if $x is not equal to $y</td>
+			</tr>
+			<tr>
+				<td>
+					<>
+				</td>
+				<td>Not equal</td>
+				<td>$x <> $y</td>
+				<td>Returns true if $x is not equal to $y</td>
+			</tr>
+			<tr>
+				<td>!==</td>
+				<td>Not Identical</td>
+				<td>$x !== $y</td>
+				<td>Returns true if $x is not equal to $y, or they are not of the same type</td>
+			</tr>
+			<tr>
+				<td>></td>
+				<td>Greater than</td>
+				<td>$x > $y</td>
+				<td>Returns true if $x is greater than $y</td>
+			</tr>
+			<tr>
+				<td>></td>
+				<td>Less than</td>
+				<td>$x < $y</td>
+				<td>Returns true if $x is less than $y</td>
+			</tr>
+			<tr>
+				<td>>=</td>
+				<td>Greater than or equal to</td>
+				<td>$x >= $y</td>
+				<td>Returns true if $x is greater than or equal to $y</td>
+			</tr>
+			<tr>
+				<td>
+					<= </td>
+				<td>Less than or equal to</td>
+				<td>$x <= $y</td>
+				<td>Returns true if $x is less than or equal to $y</td>
+			</tr>
+			<tr>
+				<td>
+					<=>
+				</td>
+				<td>Spaceship</td>
+				<td>$x <=> $y</td>
+				<td>Returns an integer less than, equal to, or greater than zero, depending on if $x is less than, equal to, or
+					greater than $y. Introduced in PHP 7.</td>
+			</tr>
+		</table>
+
+		<pre>
+			&lt;!DOCTYPE html&gt;
+			&lt;html&gt;
+			&lt;body&gt;
+
+			&lt;?php
+				$x = 5;  
+				$y = 10;
+
+				echo ($x <=> $y); // returns -1 because $x is less than $y
+				echo "&lt;br&gt;";
+
+				$x = 10;  
+				$y = 10;
+
+				echo ($x <=> $y); // returns 0 because values are equal
+				echo "&lt;br&gt;";
+
+				$x = 15;  
+				$y = 10;
+
+				echo ($x <=> $y); // returns +1 because $x is greater than $y
+			?&gt;
+
+			&lt;/body&gt;
+			&lt;/html&gt;
+		</pre>
+
+
+		<h2>PHP Increment / Decrement Operators</h2>
+		<table style="width:50%">
+			<tr>
+				<th>Operator</th>
+				<th>Name</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>++$x</td>
+				<td>Pre-increment</td>
+				<td>Increments $x by one, then returns $x</td>
+			</tr>
+			<tr>
+				<td>$x++</td>
+				<td>Post-increment</td>
+				<td>Returns $x, then increments $x by one</td>
+			</tr>
+			<tr>
+				<td>--$x</td>
+				<td>Pre-decrement</td>
+				<td>Decrements $x by one, then returns $x</td>
+			</tr>
+			<tr>
+				<td>$x--</td>
+				<td>Post-decrement</td>
+				<td>Returns $x, then decrements $x by one</td>
+			</tr>
+		</table>
+
+		<h2>PHP Logical Operators</h2>
+
+		<table style="width:50%">
+			<tr>
+				<th>Operator</th>
+				<th>Name </th>
+				<th>Example</th>
+				<th>Result</th>
+			</tr>
+			<tr>
+				<td>and</td>
+				<td>And</td>
+				<td>$x and $y</td>
+				<td>True if both $x and $y are true</td>
+			</tr>
+			<tr>
+				<td>or</td>
+				<td>Or</td>
+				<td>$x or $y</td>
+				<td>True if either $x or $y is true</td>
+			</tr>
+			<tr>
+				<td>xor</td>
+				<td>Xor</td>
+				<td>$x xor $y</td>
+				<td>True if either $x or $y is true, but not both</td>
+			</tr>
+			<tr>
+				<td>&&</td>
+				<td>And</td>
+				<td>$x && $y</td>
+				<td>True if both $x and $y are true</td>
+			</tr>
+			<tr>
+				<td>||</td>
+				<td>Or</td>
+				<td>$x || $y</td>
+				<td>True if either $x or $y is true</td>
+			</tr>
+			<tr>
+				<td>!</td>
+				<td>Not</td>
+				<td>!$x</td>
+				<td>True if $x is not true</td>
+			</tr>
+		</table>
+
+
+		<h2>PHP String Operators</h2>
+
+		<table style="width:50%">
+			<tr>
+				<th>Operator</th>
+				<th>Name</th>
+				<th>Example</th>
+				<th>Result</th>
+			</tr>
+			<tr>
+				<td>.</td>
+				<td>Concatenation</td>
+				<td>$txt1 . $txt2</td>
+				<td>Concatenation of $txt1 and $txt2</td>
+			</tr>
+			<tr>
+				<td>.=</td>
+				<td>Concatenation assignment</td>
+				<td>$txt1 .= $txt2</td>
+				<td>Appends $txt2 to $txt1</td>
+			</tr>
+		</table>
+
+
+		<h2>PHP Array Operators</h2>
+
+		<table style="width: 50%">
+			<tr>
+				<th>Operator</th>
+				<th>Name</th>
+				<th>Example</th>
+				<th>Result</th>
+			</tr>
+			<tr>
+				<td>+</td>
+				<td>Union</td>
+				<td>$x + $y</td>
+				<td>Union of $x and $y</td>
+			</tr>
+			<tr>
+				<td>==</td>
+				<td>Equality</td>
+				<td>$x == $y</td>
+				<td>Returns true if $x and $y have the same key/value pairs</td>
+			</tr>
+			<tr>
+				<td>===</td>
+				<td>Identity</td>
+				<td>$x === $y</td>
+				<td>Returns true if $x and $y have the same key/value pairs in the same order and of the same types</td>
+			</tr>
+			<tr>
+				<td>!=</td>
+				<td>Inequality</td>
+				<td>$x != $y</td>
+				<td>Returns true if $x is not equal to $y</td>
+			</tr>
+			<tr>
+				<td>
+					<>
+				</td>
+				<td>Inequality</td>
+				<td>$x <> $y</td>
+				<td>Returns true if $x is not equal to $y</td>
+			</tr>
+			<tr>
+				<td>!==</td>
+				<td>Non-identity</td>
+				<td>$x !== $y</td>
+				<td>Returns true if $x is not identical to $y</td>
+			</tr>
+		</table>
+
+		<h1>Reference</h1>
+
+		<a href="https://www.w3schools.com/php/default.asp" target="_blank">www.w3schools.com</a>
+
+
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>OLA 4</title>
+	<link href="../CCS/Site.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>OLA 4: HTML & CSS & jQuery</h1>
+
+		<center>
+			<b>
+				<font color="red">
+					Due date: 11:59pm Mar/20th/2023 (Monday)
+				</font>
+			</b>
+		</center>
+		<br>
+
+
+		You are working for a IT Company and your boss wants you to make a meme generator. Enter an image URL, and captions
+		to go on the top and bottom. Please finish all steps by following instructions.
+
+		<h2>Step 1: Create your HTML file. (15 points)</h2>
+
+		Please create your HTML file, name it as <b>
+			<font color="blue">index.html</font>
+		</b>. Please remember the extension should be .html. And then add the
+		following parts to your HTML file.
+
+		<h3>1. Create a basic structure HTML.</h3>
+		<pre>
+		Declaration line.
+		&lt;html&gt;&lt;/html&gt;
+		&lt;head&gt;&lt;/head&gt;
+		&lt;title&gt;&lt;/title&gt;
+		&lt;body&gt;&lt;/body&gt;
+		</pre>
+
+		<h3>2. Create a &lt;div id="meme1"&gt;&lt;/div&gt; section</h3>
+
+		In the &lt;div id="meme1"&gt;&lt;/div&gt; section, there are two elements:
+
+		<ul>
+			<li>&#9733; A &lt;h1 id="top-caption">&lt;/h1&gt; to display top caption.</li>
+			<li>&#9733; A &lt;h1 id="bottom-caption">&lt;/h1&gt; to display bottom caption.</li>
+		</ul>
+
+		<h3>3: Create a &lt;div id="meme2"&gt;&lt;/div&gt; section</h3>
+
+		In the &lt;div id="meme2"&gt;&lt;/div&gt; section, there are three &lt;input&gt; elements:
+
+		<ul>
+			<li>&#9733; When text is entered into the &lt;input id= "top-text"&gt;. The text of &lt;h1
+				id="top-caption"&gt;&lt;/h1&gt; updates.</li>
+			<li>&#9733; When text is entered into the &lt;input id= "bottom-text"&gt;. The text of &lt;h1 id="bottom-
+				caption"&gt;&lt;/h1&gt; updates.</li>
+			<li>&#9733; When text is entered into the &lt;input id= "image-url"&gt;. The src of &lt;img id="img1"&gt; updates.
+			</li>
+			<li>&#9733; Please add a text label above or in front of each input element to indicate what is it. (top text,
+				bottom text,image URL)</li>
+		</ul>
+
+		<h3>4: Create a &lt;div id="meme3"&gt;&lt;/div&gt; section</h3>
+
+		In the &lt;div id="meme3"&gt;&lt;/div&gt; section, there are one elements:
+
+		<ul>
+			<li>&#9733; A &lt;img id="img1"&gt; element to display the image</li>
+		</ul>
+
+		<pre>
+				&lt;div id="meme3" style="height:100px; width:100px; position:absolute"&gt;
+				   &lt;img id="img1" src="mtsu.jpg" style="height: 100px; width: 100px"&gt;
+				&lt;/div&gt;
+		</pre>
+
+		<h3>5: You can add a heading title at the top of your page, eg: "Welcome to my meme Generator!"</h3>
+
+		<h3>6: The above sections are required, besides these, you can add additional sections for your webpage based on
+			your design.</h3>
+
+		<h2>Step 2: Create your jQuery file. (75 points)</h2>
+
+		Please create your jQuery file, name it as meme.js. Please remember the extension should be .js. And then add the
+		following parts to your jQuery file.
+
+		<h3>1. Create a $(document).ready(function(){})</h3>
+		<pre>
+				$(document).ready(function(){
+				
+				});
+			</pre>
+
+		<h3>2. Create a keyup event handler for #top-text &lt;input&gt; element inside the function of $document.</h3>
+		<ul>
+			<li>&#9733; attach a <b>
+					<font color="red">keyup()</font>
+				</b> event handler to the <b>#top-text</b> input so that it can respond to when a user types a
+				key.</li>
+			<li>&#9733; Inside the keyup event handler, get the text entered into the <b>#top-text</b> input using <b>
+					<font color="red">.val()</font>
+				</b>.</li>
+			<li>&#9733; Then set it as the text of &lt;h1 id="top-caption"&gt;&lt;/h1&gt; using <b>
+					<font color="red">.html()</font>
+				</b>.</li>
+		</ul>
+
+
+		<h3>3. Create a keyup event handler for #bottom-text &lt;input&gt; element inside the function of $document.</h3>
+
+		<ul>
+			<li>&#9733; attach a <b>
+					<font color="red">keyup()</font>
+				</b> event handler to the <b>#bottom-text</b> input so that it can respond to when a user types a
+				key.</li>
+			<li>&#9733; Inside the keyup event handler, get the text entered into the <b>#bottom-text</b> input using <b>
+					<font color="red">.val()</font>
+				</b>.</li>
+			<li>&#9733; Then set it as the text of &lt;h1 id="bottom-caption"&gt;&lt;/h1&gt; using <b>
+					<font color="red">.html()</font>
+				</b>.</li>
+		</ul>
+
+
+		<h3>4. Create a keyup event handler for #image-url &lt;input&gt; element inside the function of $document.</h3>
+		<h3></h3>
+		<ul>
+			<li>&#9733; attach a <b>
+					<font color="red">keyup()</font>
+				</b> event handler to the <b>#image-url</b> input so that it can respond to when a user types a
+				key.</li>
+			<li>&#9733; Inside the keyup event handler, get the text entered into the <b>#image-url</b> input using <b>
+					<font color="red">.val()</font>
+				</b>.
+			</li>
+			<li>&#9733; Then set it as the src attribute of the element &lt;img&gt; using <b>
+					<font color="red">.attr()</font>
+				</b>.</li>
+			<pre>
+		Note that: the incomplete src will yield ERR_FILE_NOT FOUND error, 
+		the image will only be displayed when you input the whole image directory. 
+		If you want to avoid this, you can choose to add one button to get the 
+		text entered into the #image-url input using .val() after the complete src 
+		has been inputed instead of keeping updating the src attribute, if you just 
+		update the src every time you input a character, it is OK.
+			</pre>
+		</ul>
+
+
+		<h3>5. Create a keyup event handler for $document inside the function of $document.</h3>
+
+		You can move your image from left to right, and from up to down.
+
+		<ul>
+			<li>&#9733; attach a keyup() event handler to $document.</li>
+			<li>&#9733; Inside the keyup event handler, check if <b>
+					<font color="blue">event.which==37</font>
+				</b>(<font color="red">left</font> arrow), <b>
+					<font color="blue">event.which==38</font>
+				</b>(<font color="red">up</font>
+				arrow),<b>
+					<font color="blue">event.which==39</font>
+				</b>(<font color="red">right</font> arrow),<b>
+					<font color="blue">event.which==40</font>
+				</b>(<font color="red">down</font> arrow), then move the div/image
+				correspondingly.</li>
+		</ul>
+
+		<pre>
+			$(document).keyup(function(){
+
+				if (event.which==37){
+  					$("div#meme3").animate({
+    					// add code here to move the div/image to the right by 100px (or left by -100px)
+							left: '-=100px',
+  					});
+				}
+			
+		</pre>
+
+
+		<h3>6. Link JavaScript file to HTML file by using &lt;script&gt; &lt;/script&gt;.</h3>
+
+		<pre>
+			&lt;script src="meme.js"&gt;&lt;/script&gt;
+		</pre>
+
+		<h2>Step 3: Create your CSS file. (10 points)</h2>
+
+		<ul>
+			<li>&#9733; Please create your CSS file, name it as meme.css. Please remember the extension should be .css.</li>
+			<li>&#9733; Design your own CSS style.</li>
+			<li>&#9733; Link your CSS file to HTML file by using &lt;link&gt;&lt;/link&gt;
+		</ul>
+		<pre>
+				&lt;link type="text/css" rel="stylesheet" href="meme.css" /&gt;
+			</pre>
+
+		<h2>Step 4: Please submit your OLA4 in replit!</h2>
+
+		<h2>Grading</h2>
+		There are 100 points in total. Here is the grading scale:
+		<br><br>
+		<table style="width:30%">
+			<tr>
+				<th>Part</th>
+				<th>Points</th>
+			</tr>
+			<tr>
+				<th>HTML</th>
+				<th>15 Points</th>
+			</tr>
+			<tr>
+				<th>CSS</th>
+				<th>10 Points</th>
+			</tr>
+			<tr>
+				<th>jQuery</th>
+				<th>75 Points</th>
+			</tr>
+		</table>
+		<br>
+		If you
+		have any
+		question, email me at Xin.Yang@mtsu.edu or stop by my office at KOM301G.
+
+		<br>
+		<footer align="center" id="foot01"></footer>
+	</div>
+	<br>
+	<br>
+	<script src="../CCS/Script.js"></script>
+
+</body>
+
+</html>

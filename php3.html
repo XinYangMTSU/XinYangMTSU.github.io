@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>PHP Functions and Arrays</title>
+	<link href="../CCS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>PHP Functions</h1>
+
+		<h2>PHP Built-in Functions</h2>
+
+
+		<ul>
+			<li>&#9733; PHP has over 1000 built-in functions that can be called directly, from within a script, to perform a
+				specific task.</li>
+			<li>&#9733; Please check out our PHP reference for a complete overview of the <a
+					href="https://www.w3schools.com/php/php_ref_overview.asp" target="_blank">PHP
+					built-in functions</a>.</li>
+		</ul>
+
+
+		<h2>PHP User Defined Functions</h2>
+
+		Besides the built-in PHP functions, it is possible to create your own functions.
+
+		<ul>
+			<li>&#9733; A function is a block of statements that can be used repeatedly in a program. </li>
+			<li>&#9733; A function will not execute automatically when a page loads.
+			</li>
+			<li>&#9733; A function will be executed by a call to the function.</li>
+			<li>&#9733; Syntax: </li>
+			<pre>
+				function functionName() {
+  					code to be executed;
+				}
+			</pre>
+			<li>&#9733; Example: </li>
+			<pre>
+				&lt;?php
+						function writeMsg() {
+ 							 echo "Hello world!";
+						}
+
+						writeMsg(); // call the function
+				?&gt;
+			</pre>
+		</ul>
+
+		<h2>PHP Function Arguments</h2>
+
+		<ul>
+			<li>&#9733;
+				The following example has a function with one argument ($fname). When the familyName() function is called, we
+				also
+				pass along a name (e.g. Jani), and the name is used inside the function:
+			</li>
+
+			<pre>
+			&lt;?php
+				function familyName($fname) {
+  					echo "$fname Refsnes.&lt;br&gt;";
+				}
+
+				familyName("Jani");
+				familyName("Hege");
+				familyName("Stale");
+				familyName("Kai Jim");
+				familyName("Borge");
+			?&gt;
+		</pre>
+
+			<li>&#9733;
+				The following example has a function with two arguments ($fname and $year):
+			</li>
+
+			<pre>
+			&lt;?php
+				function familyName($fname, $year) {
+  					echo "$fname Refsnes. Born in $year &lt;br&gt;";
+				}
+
+				familyName("Hege", "1975");
+				familyName("Stale", "1978");
+				familyName("Kai Jim", "1983");
+			?&gt;
+			</pre>
+		</ul>
+
+
+		<h2>PHP - Loose Type vs Strict Type</h2>
+
+
+		<ul>
+			<li>&#9733; In the example above, notice that we did not have to tell PHP which data type the variable is.
+			</li>
+			<li>&#9733; PHP automatically associates a data type to the variable, depending on its value. Since the data types
+				are not set in a strict sense, you can do things like adding a string to an integer without causing an error.
+			</li>
+
+			<li>&#9733;In PHP 7, type declarations were added. This gives us an option to specify the expected data type when
+				declaring a function, and by adding the strict declaration, it will throw a "Fatal Error" if the data type
+				mismatches. </li>
+			<li>&#9733; In the following example we try to send both a number and a string to the function without using
+				strict:</li>
+			<pre>
+				&lt;?php
+					function addNumbers(int $a, int $b) {
+	 					 return $a + $b;
+					}
+					echo addNumbers(5, "5 days");
+					// since strict is NOT enabled "5 days" is changed to int(5), and it will return 10
+				?&gt;
+			</pre>
+			<li>&#9733; To specify strict we need to set declare(strict_types=1);. This must be on the very first line of the
+				PHP file.</li>
+			<li>&#9733; In the following example we try to send both a number and a string to the function, but here we have
+				added the strict declaration:</li>
+			<pre>
+			&lt;?php declare(strict_types=1); // strict requirement
+
+			function addNumbers(int $a, int $b) {
+  				return $a + $b;
+			}	
+			echo addNumbers(5, "5 days");
+			// since strict is enabled and "5 days" is not an integer, an error will be thrown
+			?&gt;
+			</pre>
+		</ul>
+
+		<h2>PHP Default Argument Value</h2>
+		The following example shows how to use a default parameter. If we call the function setHeight() without arguments it
+		takes the default value as argument:
+
+		<pre>
+			&lt;?php declare(strict_types=1); // strict requirement
+			function setHeight(int $minheight = 50) {
+  				echo "The height is : $minheight &lt;br&gt;";
+			}
+
+			setHeight(350);
+			setHeight(); // will use the default value of 50
+			setHeight(135);
+			setHeight(80);
+			?&gt;
+		</pre>
+
+		<h2>PHP Functions - Returning values</h2>
+
+		To let a function return a value, use the return statement:
+
+		<pre>
+			&lt;?php declare(strict_types=1); // strict requirement
+					function sum(int $x, int $y) {
+  					$z = $x + $y;
+  					return $z;
+					}
+
+					echo "5 + 10 = " . sum(5, 10) . "&lt;br&gt;";
+					echo "7 + 13 = " . sum(7, 13) . "&lt;br&gt;";
+					echo "2 + 4 = " . sum(2, 4);
+			?&gt;
+		</pre>
+
+
+		<h1>PHP Arrays</h1>
+
+		<h2>Create an Array in PHP</h2>
+
+		<ul>
+			<li>&#9733; In PHP, the <b>
+					<font color="blue">array()</font>
+				</b> function is used to create an array:</li>
+
+
+			<pre>
+			&lt;?php
+				$cars = array("Volvo", "BMW", "Toyota");
+				echo "I like " . $cars[0] . ", " . $cars[1] . " and " . $cars[2] . ".";
+			?&gt;
+		</pre>
+
+
+			<li>&#9733;In PHP, there are three types of arrays:</li>
+			<ul>
+				<li>&#9733; <b>
+						<font color="blue">Indexed arrays</font>
+					</b> - Arrays with a numeric index</li>
+				<li>&#9733; <b>
+						<font color="blue">Associative arrays</font>
+					</b> - Arrays with named keys</li>
+				<li>&#9733; Multidimensional arrays - Arrays containing one or more arrays</li>
+			</ul>
+
+		</ul>
+
+
+		<h2>The count() Function</h2>
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">count()</font>
+				</b> function is used to return the length (the number of elements) of an array:</li>
+			<pre>
+			&lt;?php
+				$cars = array("Volvo", "BMW", "Toyota");
+				echo count($cars);
+			?&gt;	
+			</pre>
+		</ul>
+
+		<h2>Loop Through an Indexed Array</h2>
+		<ul>
+			<li>&#9733; To loop through and print all the values of an indexed array, you could use a <b>
+					<font color="blue">for</font>
+				</b> loop, like this:</li>
+			<pre>
+			&lt;?php
+				$cars = array("Volvo", "BMW", "Toyota");
+				$arrlength = count($cars);
+
+				for($x = 0; $x < $arrlength; $x++) {
+ 					   echo $cars[$x];
+					   echo "&lt;br&gt;";
+				}
+			?&gt;
+			</pre>
+		</ul>
+
+		<h2>PHP Associative Arrays</h2>
+
+		<ul>
+			<li>&#9733; Associative arrays are arrays that use named keys that you assign to them.</li>
+			<pre>
+				&lt;?php
+				$age = array("Peter"=>"35", "Ben"=>"37", "Joe"=>"43");
+				echo "Peter is " . $age['Peter'] . " years old.";
+				?&gt;
+			</pre>
+		</ul>
+
+		<h2>Loop Through an Associative Array</h2>
+		<ul>
+			<li>&#9733; To loop through and print all the values of an associative array, you could use a <b>
+					<font color="blue">foreach</font>
+				</b> loop, like this:</li>
+			<pre>
+				&lt;?php
+					$age = array("Peter"=>"35", "Ben"=>"37", "Joe"=>"43");
+
+					foreach($age as $x => $x_value) {
+ 							 echo "Key=" . $x . ", Value=" . $x_value;
+				                        echo "&lt;br&gt;";
+					}
+				?&gt;
+			</pre>
+		</ul>
+
+
+		<h2>PHP - Sort Functions For Arrays</h2>
+
+
+		PHP array sort functions:
+		<ul>
+			<li>&#9733; <b>
+					<font color="blue">sort()</font>
+				</b> - sort arrays in ascending order</li>
+			<li>&#9733; <b>
+					<font color="blue">rsort()</font>
+				</b> - sort arrays in descending order</li>
+			<pre>
+				&lt;?php
+					$cars = array("Volvo", "BMW", "Toyota");
+					sort($cars);
+				       
+
+				        $clength = count($cars);
+					for($x = 0; $x < $clength; $x++) {
+  						echo $cars[$x];
+  						echo "&lt;br&gt;";
+					}
+				?&gt;
+			</pre>
+			<br>
+			<li>&#9733; <b>
+					<font color="blue">asort()</font>
+				</b> - sort associative arrays in ascending order, according to the <b>
+					<font color="blue">value</font>
+				</b></li>
+			<li>&#9733; <b>
+					<font color="blue">arsort()</font>
+				</b> - sort associative arrays in descending order, according to the <b>
+					<font color="blue">value</font>
+				</b></li>
+			<pre>
+				&lt;?php
+					$age = array("Peter"=>"35", "Ben"=>"37", "Joe"=>"43");
+					asort($age);
+
+					foreach($age as $x => $x_value) {
+ 							 echo "Key=" . $x . ", Value=" . $x_value;
+  						         echo "&lt;br&gt;";
+					}
+				?&gt;
+			</pre>
+			<br>
+			<li>&#9733; <b>
+					<font color="blue">ksort()</font>
+				</b> - sort associative arrays in ascending order, according to the <b>
+					<font color="blue">key</font>
+				</b></li>
+			<li>&#9733; <b>
+					<font color="blue">krsort()</font>
+				</b> - sort associative arrays in descending order, according to the <b>
+					<font color="blue">key</font>
+				</b>
+			</li>
+		</ul>
+
+
+
+		<h1>Reference</h1>
+		<ul>
+			<li>&#9733; <a href="https://www.w3schools.com/php/default.asp" target="_blank">www.w3schools.com</a></li>
+		</ul>
+	</div>
+
+</body>
+
+</html>
