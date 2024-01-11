@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>FAQ</title>
+	<link href="./CCS/Site.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<nav id="nav01"></nav>
+
+	<div id="main">
+
+		<h2>D2L Course Administration</h2>
+
+		<a href="https://service.mtsu.edu/sp?id=sc_cat_item&sys_id=592d873d97a7c1d0bfa7724e6253afc5&referrer=popular_items"
+			target="_blank">
+			Add, Remove, or Modify Users in D2L
+		</a>
+
+
+		<h2>Gus Handout</h2>
+		<a href="gus.pdf" target="_blank">Grading Gus Submission Handout</a></h2>
+
+
+		<h2>Using Ranger for a course</h2>
+		<a
+			href="https://www.cs.mtsu.edu/~untch/share/UsingRanger/UsingRanger.html">https://www.cs.mtsu.edu/~untch/share/UsingRanger/UsingRanger.html</a>
+
+		<h2>Printing from the Command Line</h2>
+
+		<a
+			href="https://www.oreilly.com/library/view/running-mac-os/0596009135/ch10s06.html#:~:text=Printing%20from%20the%20Command%20Line.%20Since%20the%20Mac,files%20from%20the%20command%20line%20to%20any%20printer%3A">Printing
+			from the Command Line</a>
+
+		<h2>Set up CS accounts</h2>
+
+		<ol>
+			<li>Log in to PipelineMT, click class Email List</li>
+			<li>Copy the Student Email List</li>
+			<li>Log in to <a href="https://mgt.cs.mtsu.edu/aru/">https://mgt.cs.mtsu.edu/aru</a></li>
+			<li>Paste the Student Email List</li>
+			<li>Assign CS accounts and password to student list</li>
+		</ol>
+
+		<h2>handin Setup</h2>
+
+		<ol>
+			<li>Log in to 00 account: <font color="red">ln -s /nfshome/untch/bin</font>
+			</li>
+			<li>Create a folder named 2170</li>
+			<li>move class roaster 2170.csv to the folder 2170</li>
+			<li>cd to 2170 folder: <font color="red">gusinit 2170</font>
+			</li>
+			<li>cd to xyang/public_html/2170 folder: change the Notes.txt file</li>
+			<li>Method 1 (work for one section):</li>
+			<ul>
+				<li>move HMWK.csv to the folder 2170</li>
+				<li>handin ".HMWK" HMWK.csv</li>
+			</ul>
+			<li>Method 2 (work for several sections):</li>
+			<ul>
+				<li>move H.desc and H.due to the folder 2170</li>
+				<li>gushmwk 2170 001</li>
+				<li>gushmwk 2170 003</li>
+			</ul>
+		</ol>
+
+		<ol>
+			<li>Errors: Directory not that deep (Solution: svn delete)</li>
+		</ol>
+
+		<h2>gushmwk command</h2>
+
+		<ul>
+			<li>gushmwk 2170 003</li>
+			<li>gushmwk 2170 004</li>
+		</ul>
+
+		<h2>mailpass</h2>
+		<ol>
+			<li>copy <b>.muttrc</b> to the home directory of the 00 account</li>
+			<li>copy <b>mailpass</b> and <b>SignedForms.txt</b> to the folder 2170 in 00 account</li>
+			<li>run the command: <b>mailpass all 2170</b></li>
+		</ol>
+
+		<h2>alias c++</h2>
+
+		<h2>AtoL Lab Set up</h2>
+		Upload the class list to the system using: <br>
+		User --> Students and upload list of student's with a correctly formatted file
+
+		<h2>Add GTAs to D2L Request Form</h2>
+		<a href="https://www.mtsu.edu/ait/D2L/Forms/AddRemoveChangeUser.php"
+			target="_blank">https://www.mtsu.edu/ait/D2L/Forms/AddRemoveChangeUser.php</a>
+
+		<h2>
+			print from my local terminal
+		</h2>
+
+		<ul>
+			<li>lpr file</li>
+		</ul>
+
+		<h2>Using Scite on Mac</h2>
+		<ul>
+			<li>
+				Mac user needs to use <font color="red"><b>-Y</b></font> when log in:
+			</li>
+			<font color="red"><b>ssh -Y xyang@ranger.cs.mtsu.edu</b></font>
+		</ul>
+
+		<h2>Solutions for forgetting to exit script mode </h2>
+		<ul>
+			<li>&#9733; delete the file <b>
+					<font color="blue">".cs_inscript"</font>
+				</b> in the home directory</li>
+		</ul>
+
+		<h2>GUS grading</h2>
+
+		<ol>
+			<li>gusget all 2170 cla1</li>
+			<li>copy universal.run to the 2170 folder</li>
+			<li>The rubric is in: /nfshome/xyang/public_html/2170/local/rubrics</li>
+			<li>gusrun all 2170 cla1</li>
+			<li>gus2pdf all 2170 cla1</li>
+			<li>TA grade 2grade folder</li>
+			<li>guscode all 2170 cla1</li>
+			<li>gusput all 2170 cla1</li>
+			<li>ulimit -t 5</li>
+		</ol>
+
+		<h2>MidTerm</h2>
+		New -> Item -> Calculated -> MidTerm -> Select -> Save&Close
+
+		<h2>Digital Measure</h2>
+		<a href="https://www.digitalmeasures.com/login/mtsu/faculty/authentication/showLogin.do?message=login.error.notLoggedIn&shce_test=1562964231507"
+			target="_blank">Digital Measure</a>
+
+		<br>
+		<br>
+		<h2>Others</h2>
+
+		<a href="https://webcaptioner.com/">Web Captioner</a>
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+	<script src="./CCS/Script.js"></script>
+
+</body>
+
+</html>
