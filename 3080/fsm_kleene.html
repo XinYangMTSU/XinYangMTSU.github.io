@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Finite-state machine</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 9: Finite-State Machines, Turing machines</h1>
+
+		<center>
+			<h2>Section 9.3 Finite-State Machines</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>Regular Sets and Kleene's Theorem</h1>
+		We want a compact, symbolic way to describe sets such as those appearing in the answer to Practice 49. We will
+		describe such sets by using <b>
+			<font color="blue">regular expressions</font>
+		</b>; each regular expression describes a particular set.
+		<Br>
+		<Br>
+		<center>
+			<img width="700px" height="150px" src="images/regularSet1.png">
+		</center>
+		<Br>
+		<center>
+			<img width="800px" height="300px" src="images/regularSet2.png">
+		</center>
+		<Br>
+		In formally, an element in AB is an item from A followed by an item from B. An element in \(A &or; B\) is a single
+		item chosen from either A or B. An element in (A)* is zero or more repetitions of elements from A. We note that
+		&lambda;, the empty string, is a member of the set represented by A* for any A because it is the case of zero
+		repetitions of elements from A. In writing regular expressions, we can eliminate parentheses when no ambiguity
+		results. The regular expression 0* &or; 10 therefore consists of \(&lambda;, 0, 00, 000, 0000, ..., 10.\)
+		<Br>
+		<center>
+			<img width="800px" height="400px" src="images/regularSet3.png">
+		</center>
+		<br>
+
+		We have introduced regular sets because, as it turns out, these are exactly the sets finite-state machines are
+		capable of recognizing. This result was first proved by the American mathematician Stephen Kleene in 1956. We state
+		his theorem here without proof.
+		<br>
+		<br>
+		<center>
+			<img width="800px" height="150px" src="images/kleene.png">
+		</center>
+
+
+		<h2>Practice</h2>
+
+		(1) Please write regular expressions for the sets recognized by the finite-state machines of Practice 49: <br>
+		<br>
+		<center>
+			<img width="900px" height="600px" src="images/practice49.png">
+		</center>
+		<br>
+
+
+
+		<br>
+		<h2>Reference</h2>
+
+		<a href="https://en.wikipedia.org/wiki/Finite-state_machine" target="_blank">Wikipedia</a>
+		<br>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Finite-state machine</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 9: Finite-State Machines, Turing machines</h1>
+
+		<center>
+			<h2>Section 9.3 Finite-State Machines</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>Examples of Finite-State Machines</h1>
+
+		<h2>Recognition</h2>
+		A machine can be built to <b>
+			<font color="blue">recognize</font>
+		</b>, say by producing an output of 1, when the input it has received matches a certain description. We will soon
+		discuss more fully the capabilities of finite-state machines as recognizers. Here we will simply construct some
+		examples.
+		<Br>
+		<h2>
+			<font size="5" color="blue">1. FSM for Even/Odd Parity Check:</font> <br>
+		</h2>
+		Parity checker counts the number of 1's in a bit-serial input stream.
+		If the checker asserts its output when the input stream cotains an odd
+		number of 1's, it is called an <b>
+			<font color="blue">odd parity checker</font>
+		</b>.
+		If it asserts its output when it has seen an even number of 1's, it is an
+		<b>
+			<font color="blue">even parity checker</font>
+		</b>.
+		<Br>
+		<Br>
+		<center>
+			<img width="700px" height="150px" src="images/oddParityChecker1.png">
+		</center>
+		<Br>
+		<br>
+		<center>
+			<font size=4 color="blue">State Table</font><br>
+			<table style="width:60%">
+				<tr>
+					<th rowspan="2">Present State</th>
+					<th>Next State</th>
+					<th rowspan="2">Output</th>
+				</tr>
+				<tr>
+					<th>Present Input <br> 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</th>
+				</tr>
+				<tr>
+					<th>\(S_0\) Even</th>
+					<th>\(S_0\) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\(S_1\)</th>
+					<th>0</th>
+				</tr>
+				<tr>
+					<th>\(S_1\) Odd</th>
+					<th>\(S_1\) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\(S_0\)</th>
+					<th>1</th>
+				</tr>
+
+			</table>
+		</center>
+		<br>
+		<font color="blue" size="4">Even(0), Odd(1): </font>
+		<center>
+			<font size=4 color="blue">State Graph</font><br>
+			<img width="200px" height="250px" src="images/oddParityChecker3.png">
+		</center>
+		<br>
+		<br>
+		We see that an input sequence consisting of the characters (0011101) would produce the output of 0:
+		<Br>
+		<br>
+		<center>
+			<table style="width:60%">
+				<tr>
+					<th>Time</th>
+					<th>\(t_0\)</th>
+					<th>\(t_1\)</th>
+					<th>\(t_2\)</th>
+					<th>\(t_3\)</th>
+					<th>\(t_4\)</th>
+					<th>\(t_5\)</th>
+					<th>\(t_6\)</th>
+					<th>\(t_7\)</th>
+				</tr>
+				<tr>
+					<th>Input</th>
+					<th>0</th>
+					<th>0</th>
+					<th>1</th>
+					<th>1</th>
+					<th>1</th>
+					<th>0</th>
+					<th>1</th>
+					<th>-</th>
+				</tr>
+				<tr>
+					<th>State</th>
+					<th>\(S_0\)</th>
+					<th>\(S_0\)</th>
+					<th>\(S_0\)</th>
+					<th>\(S_1\)</th>
+					<th>\(S_0\)</th>
+					<th>\(S_1\)</th>
+					<th>\(S_1\)</th>
+					<th>\(S_0\)</th>
+				</tr>
+				<tr>
+					<th>Output</th>
+					<th>0</th>
+					<th>0</th>
+					<th>0</th>
+					<th>1</th>
+					<th>0</th>
+					<th>1</th>
+					<th>1</th>
+					<th>
+						<font color="red">0</font>
+					</th>
+				</tr>
+			</table>
+		</center>
+		<Br>
+		Assuming an odd parity scheme, if the parity of the received string is not odd, then an error has occurred in
+		transmitting the string, and a request for retransmission can be made. A parity bit therefore serves as a simple <b>
+			<font color="blue">single-error-detection mechanism.</font>
+		</b>
+		<br>
+		<h2>Practice</h2>
+		Redesign the odd parity checker FSM to make it check for even parity
+		(that is, assert the output when the input contains an even number of
+		1's). Show your state table and state graph: <Br>
+		<br>
+		<center>
+			<img width="600px" height="200px" src="images/oddParityChecker5.png">
+		</center>
+		<Br>
+
+		<h2>
+			<font color="blue">2. FSM for String Recognization</font>
+		</h2>
+		<br>
+		<center>
+			<img width="800px" height="250px" src="images/recognizer1.png">
+		</center>
+		<center>
+			<img width="700px" height="500px" src="images/recognizer2.png">
+		</center>
+		<Br>
+
+		<h2>Practice</h2>
+		<center>
+			<img width="700px" height="100px" src="images/practice48.png">
+		</center>
+		<Br>
+		<h2>Formal Definition</h2>
+		Now we want to see exactly what sets finite-state machines can recognize.To avoid writing down outputs, we will
+		designate those states of a finite- state machine with an output of 1 as <b>
+			<font color="blue">final states</font>
+		</b> and denote them in the state graph with a <b>
+			<font color="blue">double circle</font>
+		</b>. Then we can give the following formal definition of recognition, where I* denotes the set of finite-length
+		strings over the input alphabet.
+		<Br>
+		<Br>
+		<img width="700px" height="100px" src="images/def_recognition.png">
+		<br>
+		<center>
+			<img width="700px" height="400px" src="images/practice49.png">
+		</center>
+		<br>
+		<br>
+		<h2>Reference</h2>
+
+		<a href="https://en.wikipedia.org/wiki/Finite-state_machine" target="_blank">Wikipedia</a>
+		<br>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

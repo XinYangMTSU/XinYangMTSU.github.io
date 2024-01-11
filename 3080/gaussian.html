@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Gaussian Elimination</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+
+		<h1>Chapter 5: Matrices</h1>
+
+		<center>
+			<h2>Section 5.7 Matrices</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>Gaussian Elimination</h1>
+
+		<Br>
+		When we encounter the following system of two linear equations in two unknows:
+		<br>
+		<pre>
+                   x + y   = 70
+                 24x + 14y = 1180
+</pre>
+		The general form for a system of \(n\) linear equations in \(n\) unknowns is <br>
+		$$
+		\begin{aligned}
+		a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n & = b_1 \\
+		a_{21}x_1 + a_{22}x_2 + \dots + a_{2n}x_n & = b_2 \\
+		\vdots \\
+		a_{n1}x_1 + a_{n2}x_2 + \dots + a_{nn}x_n & = b_2
+		\end{aligned}
+		$$
+
+
+		with a matrix of coefficients:
+
+		$$
+		\begin{pmatrix}
+		a_{11} & a_{12} & \dots & a_{1n} \\
+		a_{21} & a_{22} & \dots & a_{2n} \\
+		\vdots \\
+		a_{n1} & a_{n2} & \dots & a_{nn} \\
+		\end{pmatrix}
+		$$
+
+		To solve this system of equations, we first form the <b>augmented</b> \( n \times (n+1) \) matrix by adding the
+		column of \(b's\) to the matrix of coefficients:
+
+		$$
+		\begin{pmatrix}
+		a_{11} & a_{12} & \dots & a_{1n} & b_1 \\
+		a_{21} & a_{22} & \dots & a_{2n} & b_2 \\
+		\vdots & \vdots & \vdots & \vdots & \vdots \\
+		a_{n1} & a_{n2} & \dots & a_{nn} & b_n \\
+		\end{pmatrix}
+		$$
+
+		The next step is to "transform" the augmented matrix into one where the matrix-of-coefficients part is an <b>
+			<font color="blue">upper triangle matrix</font>
+		</b>, that is, all values of this \(n \times n\) matrix below the main diagnol are \(0's\). The result will be a
+		matrix of the form:
+
+		$$
+		\begin{pmatrix}
+		c_{11} & c_{12} & \dots & \dots & c_{1n} & d_1 \\
+		0 & c_{22} & \dots & \dots & c_{2n} & d_2 \\
+		\vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+		0 & 0 & \dots & c_{(n-1)(n-1)} & c_{(n-1)n} & d_{n-1} \\
+		0 & 0 & \dots & 0 & c_{nn} & d_n \\
+		\end{pmatrix}
+		$$
+
+		Now we can trun this back into a system of equations of the form:
+
+
+		$$
+		\begin{pmatrix}
+		c_{11}x_1 & c_{12}x_2 & \dots & \dots & c_{1n}x_n & d_1 \\
+		0 & c_{22}x_2 & \dots & \dots & c_{2n}x_n & d_2 \\
+		\vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+		0 & 0 & \dots & c_{(n-1)(n-1)}x_{n-1} & c_{(n-1)n}x_n & d_{n-1} \\
+		0 & 0 & \dots & 0 & c_{nn}x_{n} & d_n \\
+		\end{pmatrix}
+		$$
+		and solve the equations from the bottom up. We solve:
+
+		$$
+		c_{nn}x_n = d_n
+		$$
+		for \(x_n\). Knowing the value of \(x_n\), we can then solve the next-to-last equation:
+
+		$$
+		c_{(n-1)(n-1)}x_{n-1} + c_{(n-1)n}x_n = d_{n-1}
+		$$
+		for \(x_{n-1}\) and so forth, back up to the top row.
+		<Br>
+		<Br>
+		But how do we do the transformation? The allowable operations ot carry out this transformation are called
+		<b>elementary row operations</b>, none of which change the solutoin set of the underlying equations. These
+		operations (performed on the augmented matrix) are:
+		<pre>
+i. Switch any two rows of the matrix.
+ii. Multiply all the elements in any one row of the matrix by a non-zero scalar.
+iii. Add a scalar multiple of any one row to another row.
+</pre>
+		This process is solving systems of linear equations is known as <b>
+			<font color="blue">Gaussian elimination</font>
+		</b>, named for the famous German mathematician Karl Friedrich Gauss.
+
+		<h2>Example 1</h2>
+		Solving the system of equations:
+		<pre>
+                           x + y   = 70
+                         24x + 14y = 1180
+</pre>
+		using Gaussian elimination, we first form the augmented matrix:
+
+		$$
+		\begin{pmatrix}
+		1 & 1 & 70 \\
+		24 & 14 & 1180
+		\end{pmatrix}
+		$$
+
+		We multiply row 1 by the scalar -24 and add the result to row 2 (the third elementary row operation), giving :
+
+		$$
+		\begin{pmatrix}
+		1 & 1 & 70 \\
+		0 & -10 & -500
+		\end{pmatrix}
+		$$
+
+		We divide row 2 by - 10, giving:
+
+		$$
+		\begin{pmatrix}
+		1 & 1 & 70 \\
+		0 & 1 & 50
+		\end{pmatrix}
+		$$
+
+		We multiply row 2 by -1 and add to row 1, giving:
+
+		$$
+		\begin{pmatrix}
+		1 & 0 & 20 \\
+		0 & 1 & 50
+		\end{pmatrix}
+		$$
+
+		The last row represents the equation:
+		$$
+		y = 50
+		$$
+
+		The first row represents the equation:
+		$$
+		x = 20
+		$$
+		The solution is x = 20, y = 50.
+		<br>
+
+		<h2>Example 2</h2>
+		Let's apply Gaussian elimination to the system of 3 equations in 3 unknowns shown here:
+
+		$$
+		\begin{aligned}
+		2x - 3y + z & = -22 \\
+		7x + 9y - 3z & = 14 \\
+		6x + 7y + 2z & = 91
+		\end{aligned}
+		$$
+
+		The augmented matrix is:
+
+		$$
+		\begin{pmatrix}
+		2 & -3 & 1 & -22 \\
+		7 & 9 & -3 & 14 \\
+		6 & 7 & 2 & 91
+		\end{pmatrix}
+		$$
+
+		A series of elementary row operations, as shown here, will convert the \(3 \times 3\) matrix of coefficients to
+		upper triangular form. First, multiply row 1 by \(\frac{1}{2}\)
+		to produce a 1 in the (1,1) position:
+
+
+		$$
+		\frac{1}{2}
+		\begin{pmatrix}
+		2 & -3 & 1 & -22 \\
+		7 & 9 & -3 & 14 \\
+		6 & 7 & 2 & 91
+		\end{pmatrix}
+		$$
+
+		giving:
+
+		$$
+		\begin{pmatrix}
+		1 & -\frac{3}{2} & \frac{1}{2} & -11 \\
+		7 & 9 & -3 & 14 \\
+		6 & 7 & 2 & 91
+		\end{pmatrix}
+		$$
+
+		Then multiply row 1 by -7 and add it to row 2, giving:
+
+		$$
+		\begin{pmatrix}
+		1 & -\frac{3}{2} & \frac{1}{2} & -11 \\
+		0 & \frac{39}{2} & -\frac{13}{2} & 91 \\
+		6 & 7 & 2 & 91
+		\end{pmatrix}
+		$$
+
+		Then multiply row 1 by -6 and add it to row 3, giving:
+
+		$$
+		\begin{pmatrix}
+		1 & -\frac{3}{2} & \frac{1}{2} & -11 \\
+		0 & \frac{39}{2} & -\frac{13}{2} & 91 \\
+		0 & 16 & -1 & 157
+		\end{pmatrix}
+		$$
+
+		Now multiply row 2 by \(\frac{2}{39}\) to produce a 1 in the (2,2) position:
+
+		$$
+		\begin{pmatrix}
+		1 & -\frac{3}{2} & \frac{1}{2} & -11 \\
+		0 & 1 & -\frac{1}{3} & \frac{14}{3} \\
+		0 & 16 & -1 & 157
+		\end{pmatrix}
+		$$
+
+		multiply row 2 by -16 and add it to row 3:
+
+		$$
+		\begin{pmatrix}
+		1 & -\frac{3}{2} & \frac{1}{2} & -11 \\
+		0 & 1 & -\frac{1}{3} & \frac{14}{3} \\
+		0 & 0 & \frac{13}{3} & \frac{247}{3}
+		\end{pmatrix}
+		$$
+
+		divide row 3 by \(\frac{13}{3}\), giving:
+
+		$$
+		\begin{pmatrix}
+		1 & -\frac{3}{2} & \frac{1}{2} & -11 \\
+		0 & 1 & -\frac{1}{3} & \frac{14}{3} \\
+		0 & 0 & 1 & 19
+		\end{pmatrix}
+		$$
+
+		multiply row 3 by \(\frac{1}{3}\), add to row 2, giving:
+
+		$$
+		\begin{pmatrix}
+		1 & -\frac{3}{2} & \frac{1}{2} & -11 \\
+		0 & 1 & 0 & 11 \\
+		0 & 0 & 1 & 19
+		\end{pmatrix}
+		$$
+
+		multiply row 3 by \(-\frac{1}{2}\) and add to row 1,
+		multiply row 2 by \(\frac{3}{2}\) and add to row 1.
+
+		$$
+		\begin{pmatrix}
+		1 & 0 & 0 & -4 \\
+		0 & 1 & 0 & 11 \\
+		0 & 0 & 1 & 19
+		\end{pmatrix}
+		$$
+
+		The bottom row represents the equation:
+		$$
+		z = 19
+		$$
+		The second row represents the equation:
+		$$
+		y = 11
+		$$
+		Finally, from the top row:
+		$$
+		x = -4
+		$$
+		So the solution to this system of equations is \(x = -4, y = 11, z = 19\).
+
+		<h2>Practice</h2>
+		(1) Solve the following system of equations using Gaussian elimination
+		<pre>
+	3x - 5y = 5
+	7x + y = 37
+</pre>
+
+		<h2>Application: Create Matrix Inverse</h2>
+
+		$$
+		A =
+		\begin{pmatrix}
+		1 & 3 \\
+		2 & 2 \\
+		\end{pmatrix}
+		$$
+		Please find the inverse of \(A\) : \(A^{-1}\) <br>
+		<br>
+		Append Identify matrix to original matrix:
+		$$
+		\begin{pmatrix}
+		1 & 3 & 1 & 0 \\
+		2 & 2 & 0 & 1 \\
+		\end{pmatrix}
+		$$
+		multiply row 1 by -2 and add to row 2, giving:
+		$$
+		\begin{pmatrix}
+		1 & 3 & 1 & 0 \\
+		0 & -4 & -2 & 1 \\
+		\end{pmatrix}
+		$$
+
+		divide row 2 by -4, giving:
+		$$
+		\begin{pmatrix}
+		1 & 3 & 1 & 0 \\
+		0 & 1 & \frac{1}{2} & -\frac{1}{4} \\
+		\end{pmatrix}
+		$$
+
+		multiply row 2 by -3 and add to row 1, giving:
+		$$
+		\begin{pmatrix}
+		1 & 0 & -\frac{1}{2} & \frac{3}{4} \\
+		0 & 1 & \frac{1}{2} & -\frac{1}{4} \\
+		\end{pmatrix}
+		$$
+
+		$$
+		A^{-1} =
+		\begin{pmatrix}
+		-\frac{1}{2} & \frac{3}{4} \\
+		\frac{1}{2} & -\frac{1}{4} \\
+		\end{pmatrix}
+		$$
+
+		<h2>Practice</h2>
+		(1) Please find the inverse of matrix A:
+		$$
+		\begin{pmatrix}
+		-1 & 2 & -3 \\
+		2 & 1 & 0 \\
+		4 & -2 & 5
+		\end{pmatrix}
+		$$
+
+
+		<h2>Gaussian Elimination Algorithm</h2>
+		<pre>
+for each row i:
+	divisor = matrix[i][i]
+	for each column j in row i:
+		matrix[i][j] /= divisor
+
+	for each row j not equal to i:
+		multiplier = -matrix[j][i]
+		for each column k in row j:
+			matrix[j][k] = matrix[j][k] + multiplier*matrix[i][k]
+
+</pre>
+
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

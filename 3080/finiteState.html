@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Turing Machines</title>
+  <link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+<div id="main">
+
+
+<h1>Finite-State Machines</h1>
+
+A computer stores information internally in binary form. At any instant, the computer contains certain information, so its internal storage is set in certain patterns of binary digits, which we'll call the state of the computer at that instant. Because a computer contains a finite amount of storage, there is a finite (although large) number of different states that the computer can assume. 
+<br><br>
+An internal clock synchronizes the actions of the computer. On a clock pulse, input can be read, which can change some of the storage locations and thus change the state of the machine to a new state. What the new state is will depend on what the input was, as well as what the previous state was. If these two factors are known, the change is predictable and nonrandom. Because the contents of certain storage cells are available as output, the state of the machine determines its output. In this way, over a succession of clock pulses, the machine produces a sequence of outputs in response to a sequence of inputs.
+<br>
+<h2>Finite-State Machines</h2>
+<b><font color="blue">Finite-State Machines</font></b> 
+<Br>
+<Br>
+The finite-state machine is a model that captures the characteristics of a computer. As you read the definition, look for the following properties in the behavior of our abstract machine:
+<br>
+<ol>
+	<li>Operations of the machine are synchronized by discrete clock pulses.</li>
+	<li>The machine proceeds in a deterministic fashion; that is, its actions in
+	response to a given sequence of inputs are completely predictable.</li>
+	<li>The machine responds to inputs.</li>
+	<li>There is a finite number of states that the machine can attain.At any given
+	moment, the machine is in exactly one of these states. Which state it will be in next is a function of both the present state and the present input. The present state, however, depends on the previous state and input, while the previous state depends on its previous state and input, and so on, going all the way back to the initial configuration. Thus, the state of the machine at any moment serves as a form of memory of past inputs.</li>
+	<li>The machine is capable of output.The nature of the output is a function of the present state of the machine, meaning that it also depends on past inputs.</li>	
+</ol>
+
+<h2>Definition of Finite-State Machines</h2>
+
+<center>
+	<img width="700px" height="400px" src="images/definitionFSM.png">
+</center>
+
+<h2>Examples of Finite-State Machines</h2>
+
+To describe a particular finite-state machine, we have to define the three sets and two functions involved. <br>
+
+<font size="5" color="blue">Example 29:</font> <br>
+<center>
+	<img width="600px" height="400px" src="images/eg29_1.png">
+</center>
+<center>
+	<img width="600px" height="400px" src="images/eg29_2.png">
+</center>
+
+<h2>Reference</h2>
+
+<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+<footer align="center" id="foot01"></footer>
+</div>
+
+</body>
+</html>

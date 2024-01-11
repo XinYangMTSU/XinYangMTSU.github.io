@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Finite-state machine</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 9: Finite-State Machines, Turing machines</h1>
+
+		<center>
+			<h2>Section 9.3 Finite-State Machines</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>Examples of Finite-State Machines</h1>
+		<!--
+<h2>
+<font size="5" color="blue">FSM for Even/Odd Parity Check:</font> <br>
+</h2>
+Parity checker counts the number of 1's in a bit-serial input stream.
+If the checker asserts its output when the input stream cotains an odd
+number of 1's, it is called an <b><font color="blue">odd parity checker</font></b>.
+If it asserts its output when it has seen an even number of 1's, it is an 
+<b><font color="blue">even parity checker</font></b>.
+<Br>
+<center>
+	<img width="600px" height="200px" src="images/oddParityChecker1.png">
+</center>
+<center>
+	<img width="200px" height="250px" src="images/oddParityChecker3.png">
+</center>
+<br>
+<font color="blue" size="4">Even(0), Odd(1): </font>
+<br>
+<center>
+	<img width="200px" height="250px" src="images/oddParityChecker4.png">
+</center>
+<Br>
+<h2>Practice</h2>
+Redesign the odd parity checker FSM to make it check for even parity 
+(that is, assert the output when the input contains an even number of
+1's). Show your state diagram: <Br>
+<br>
+<center>
+	<img width="600px" height="200px" src="images/oddParityChecker5.png">
+</center>
+-->
+
+		<h2>
+			<font size="5" color="blue">Binary Adder:</font> <br>
+		</h2>
+		If finite-state machines model real-world computers, they should be able to do something. Let's try to build a
+		finite-state machine that will add two binary numbers. The input will consist of a sequence of pairs of binary
+		digits, each of the form 00, 01, 10, or 11. Each pair represents one column of digits of the two numbers to be
+		added, least significant digits first (so in this particular case, read the inputs column by column right to left).
+		The basic facts of binary addition: <Br>
+		<center>
+			<img width="600px" height="150px" src="images/binaryAdder_3.png">
+		</center>
+		<center>
+			<img width="600px" height="300px" src="images/binaryAdder_1.png">
+		</center>
+		<center>
+			<img width="600px" height="400px" src="images/binaryAdder_2.png">
+		</center>
+		<center>
+			<img width="600px" height="200px" src="images/binaryAdder_5.png">
+		</center>
+		<center>
+			<img width="600px" height="100px" src="images/binaryAdder_4.png">
+		</center>
+
+
+		<h2>Practice</h2>
+		<center>
+			<img width="900px" height="100px" src="images/practice46.png">
+		</center>
+		<center>
+			<img width="900px" height="70px" src="images/practice47.png">
+		</center>
+
+		<Br>
+		<h2>Reference</h2>
+
+		<a href="https://en.wikipedia.org/wiki/Finite-state_machine" target="_blank">Wikipedia</a>
+		<br>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

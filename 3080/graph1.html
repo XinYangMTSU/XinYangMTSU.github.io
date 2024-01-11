@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Graphs and Trees</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 6: Graphs and Trees</h1>
+
+		<center>
+			<h2>Section 6.1 Graphs and Their Representations</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>Graph and Their Representations</h1>
+		Graphs are formal mathematical representations of networks, collections of objects, events,
+		or set elements that lead naturally from one to another.
+
+		<br>
+		<h2>Graph (Informal Definition)</h2>
+		A <b>
+			<font color="blue">graph</font>
+		</b> is a nonempty set of <b>
+			<font color="blue">nodes(vertices)</font>
+		</b> and a set of <b>
+			<font color="blue">arcs(edges)</font>
+		</b> such that each arc connects two nodes. <br>
+		Our graphs will always have a finite number of nodes and arcs. <br>
+		<br>
+		<b>
+			<font color="blue">Example 1:</font>
+		</b> <br>
+		<br>
+		In the graph below, the <b>
+			<font color="blue">vertices</font>
+		</b> represents the cities, and the <b>
+			<font>edges</font>
+		</b> are the distance between them.<Br>
+		<br>
+		The set of nodes in the airline map of Figure 1 is {Singapore, Tokyo, Hong Kong, Detroit, Austin, Washington,
+		Seattle, San Francisco}. There are 12 arcs; Singapore-Tokyo is an arc (here we are naming an arc by the nodes it
+		connects), Detroit-Austin is an arc, and so on. <br>
+		<center>
+			<img src="images/graph1.png"><br>
+			<caption>Figure 1</caption>
+		</center>
+		<br>
+		The informal definition of a graph works quite well if we have the visual representation of the graph before us to
+		show which arcs connect which nodes. Without the picture, however, we need a concise way to convey this information.
+		Hence our second definition of a graph.
+
+		<h2>Graph (Formal Definition)</h2>
+		A <b>
+			<font color="blue">graph G</font>
+		</b> is an ordered pair G=(V,E) where <br><br>
+		&bull; <b>
+			<font color="red">V</font>
+		</b> is a nonempty set of <b>
+			<font color="blue">nodes(vertices)</font>
+		</b> <br><br>
+		&bull; <b>
+			<font color="red">E</font>
+		</b> is a set of <b>
+			<font color="blue">arcs(edges)</font>
+		</b> <br><br>
+		&bull; Each edge is a pair of vertices.
+		<br>
+		<br>
+		In other words, each element of E is a pair of elements of V.
+		<br>
+		<br>
+		<b>
+			<font color="blue">Example 2:</font>
+		</b> <br><br>
+		In the graph below, the <b>
+			<font color="blue">vertices</font>
+		</b> represents the circles, and the <b>
+			<font>edges</font>
+		</b> are the lines between them.<Br>
+		<br>
+		<center>
+			<img width="400px" height="200px" src="images/graph2.png"><br>
+			<caption>Figure 2</caption>
+		</center>
+		<br>
+		For the graph of Figure 2 represents the following graph: <br>
+		<br>
+		&bull; V = {1,2,3,4,5,6} <br><br>
+		&bull; E = {{1,2}, {1,5}, {2,3}, {2,5} {3,4}, {4,5}, {4,6}} <br><br>
+		&bull; G = (V,E)
+		<!--
+&bull; V = {Singapore, Detroit, Austin, Tokyo, Washington, Seattle, Hong Kong, San Francisco} <br><br>
+&bull; E = {{Singapore, Tokyo}, {Tokyo, Detroit}, {Detroit, Austin}, {Austin, Washinton DC}, 
+{Austin,San Francisco},{Tokyo, Hong Kong},{Tokyo, Washingon DC}, {San Francisco, Seattle},
+{San Francisco, Hong Kong}, {San Francisco, Washington DC}, {Hong Kong, Singapore},{Tokyo, Washington DC}}
+-->
+		<br>
+		<h2>Undirected and Directed</h2>
+		<b>
+			<font color="blue">Undirected graph:</font>
+		</b> The edges of a graph are assumed to be unordered pairs of
+		nodes. Sometimes we say undirected graph to emphasize this point. In an undirected graph, we write edges using
+		curly braces to denote unordered paris. For example, an undirected edge {2,3} from vertex 2 to vertex 3 is the same
+		thing as an undirected edge {3,2} from vertex 3 to vertex 2. <br>
+		<Br>
+		<b>
+			<font color="blue">Direct graph:</font>
+		</b> In a directed graph, the two directions are counted as being
+		distinct direted edges. In an directed graph, we write edges using parentheses to denote ordered pairs.
+		For example, edge (2,3) is directed from 2 to 3, which is different than the directed edge (3,2) from 3 to 2.
+		Directed graphs are drawn with arrowheads on the links, as shown below: <br>
+		<br>
+		<center>
+			<img width="600px" height="300px" src="images/graph3.png"><br>
+			<caption>Figure 3</caption>
+		</center>
+		<br>
+
+		<b>
+			<font color="blue">In this class, the term <font color="red">"graph"</font> will mean an <font color="red">
+					undirected graph</font>. To
+				refer to a <font color="red">directed graph</font>, we
+				will always say <font color="red">"directed graph"</font>.</font>
+		</b>
+		<br>
+		<br>
+
+		<h2>Labeled Graph and Weighted Graph</h2>
+		Besides imposing direction on the arcs of a graph, we may want to modify the basic definiton of a graph in other
+		ways. We often want the nodes of a graph to carry identifying information, like the names of the cities in
+		the map of airline routes. This map would be a <b>
+			<font color="blue">labeled graph</font>
+		</b>. We may want to use a <b>
+			<font color="blue">weighted graph</font>
+		</b>, where each arc has some numerical value, or weight, associated with it. For example, we might want to indicate
+		the price of the various routes in the airline map.
+		<br>
+		<center>
+			<img width="800px" height="400px" src="images/graph4.png"><br>
+			<caption>Figure 4</caption>
+		</center>
+		<br>
+		Figure 4 represents a labeled and weighted graph, where each edge has a numerical value indicating the price. <br>
+
+		<h2>Applications of Graphs</h2>
+		(1) The Internet, for example, is a vast, virtual graph. Every vertex is an individual webpage, and every edge means
+		that there is a hyperlink between two pages.
+		<center>
+			<img width="300px" height="300px" src="images/socialGraph.png">
+		</center>
+
+		(2) Graphs also play an important role in transportation and navigation. All flight, train and subway networks form
+		graphs, which can be used when creating efficient schedules. One of the most recognisable graphs is the London
+		Underground map: <br>
+		<center>
+			<img width="300px" height="300px" src="images/subwayGraph.png">
+		</center>
+
+		(3) The links between atoms in molecules and crystal grids form a graph.
+		<center>
+			<img width="300px" height="300px" src="images/moleculeGraph.png">
+		</center>
+
+		(4) Social Networks
+		<br><br>
+
+		<br>
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

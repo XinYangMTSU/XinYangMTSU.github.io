@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Finite-state machine</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 9: Finite-State Machines, Turing machines</h1>
+
+		<center>
+			<h2>Section 9.3 Finite-State Machines</h2>
+		</center>
+
+		<br>
+		<br>
+		<b>
+			<font color="red">finite-state machine (FSM)</font>
+		</b> or finite-state automaton (FSA, plural: automata), finite automaton, or simply a state machine, is a <b>
+			<font color="blue">mathematical model of computation</font>
+		</b>.A finite state machine is a mathematical abstraction used to design algorithms. It is an abstract machine that
+		can be in exactly one of a finite number of states at any given time. The FSM can change from one state to another
+		in response to some inputs; the change from one state to another is called a <b>
+			<font color="blue">transition</font>
+		</b>. An FSM is defined by a list of its states, its initial state, and the inputs that trigger each transition.
+		<br>
+		<!--
+<br>
+That's it. FSM has a finite number of states, stays in one of them at every moment, and has some rules for the transition from one state to another.
+<br>
+<br>
+There are two types of finite state machines (FSMs): deterministic finite state machines, often called deterministic finite automata, and non-deterministic finite state machines, often called non-deterministic finite automata. There are slight variations in ways that state machines are represented visually, but the ideas behind them stem from the same computational ideas. By definition, deterministic finite automata recognize, or accept, regular languages, and a language is regular if a deterministic finite automaton accepts it.
+
+<br>
+-->
+		<br>
+		Finite state automata generate regular languages. Finite state machines can be used to model problems in many fields
+		including mathematics, artificial intelligence, games, and linguistics. parking meter, pop machine, automated gas
+		pump, and all kinds of other things.
+
+		<h2>Example: coin-operated turnstile</h2>
+
+		<center>
+			<img src="turnstile.png" height="50%" width="50%">
+		</center>
+		<Br>
+		The turnstile state machine can be represented by a state-transition table, showing for each possible state, the
+		transitions between them (based upon the inputs given to the machine) and the outputs resulting from each input:
+		<Br>
+		<Br>
+		<center>
+			<img src="images/turnstileTable.png" height="50%" width="50%">
+		</center>
+		<h2>Formal Definition</h2>
+
+		<!--
+A deterministic finite automation (DFA) is described by a five-element tuple: (Q, \( \Sigma \), \( \delta \), \( q_0 \), F). 
+
+<br>
+<br>
+<b><font color="blue">Q</font></b> = a finite set of states;
+<br>
+<b><font color="blue">\( \Sigma \)</font></b> = a finite, nonempty input alphabet;
+<br>
+<b><font color="blue">\( \delta \)</font></b> = a series of transition functions;
+<br>
+<b><font color="blue">\(q_0\)</font></b> = the starting state;
+<br>
+<b><font color="blue">\(F\)</font></b> = the set of accepting states
+<br>
+<br>
+There must be exactly one transition function for every input symbol in \( \Sigma \) from each state.
+<br>
+<br>
+
+<div class="block1">
+<br>
+DFAs can be represented by diagrams of this form:
+The circles are "<b><font color="blue">states</font></b>" that the machine can be in.
+The arrows are the "<b><font color="blue">transitions</font></b>".
+<center>
+<img src="dfa1.png" width="25%" height="25%">
+</center>
+<br>
+
+Let's write a descripton of the DFA shown above in words:
+<br>
+<br>
+Q = {\( s_1,s_2\)}
+<br>
+\(\Sigma\) = {0,1}
+<br>
+<br>
+The following table describes \(\delta\):
+<br>
+<table style="width:50%">
+	<tr>
+		<td>Current State</td>
+		<td>Input Symbol</td>
+		<td>New State</td>
+	</tr>
+	<tr>
+		<td>\(s_1\)</td>
+		<td>1</td>
+		<td>\(s_1\)</td>
+	</tr>
+	<tr>
+		<td>\(s_1\)</td>
+		<td>0</td>
+		<td>\(s_2\)</td>
+	</tr>
+	<tr>
+		<td>\(s_2\)</td>
+		<td>1</td>
+		<td>\(s_2\)</td>
+	</tr>
+	<tr>
+		<td>\(s_2\)</td>
+		<td>0</td>
+		<td>\(s_1\)</td>
+	</tr>
+</table>
+<br>
+\(q_0\) = \(s_1\)
+<br>
+F = \(s_1\)
+<br>
+<br>
+This DFA recognizes all strings that have an even number of 0's (and any number of 1's). This means that if you run any input string that has an even number of 0's, the string will finish in the accepting state. If you run a string with an odd number of 0's, the string will finish in \(s_2\), which is not an accepting state.
+<br>
+<br>
+</div>
+-->
+
+		<center>
+			<img width="700px" height="400px" src="images/definitionFSM.png">
+		</center>
+		<br>
+		<h2>Examples of Finite-State Machines</h2>
+
+		To describe a particular finite-state machine, we have to define the three sets and two functions involved. <br>
+
+		<font size="5" color="blue">Example 29:</font> <br>
+		<center>
+			<img width="600px" height="400px" src="images/eg29_1.png">
+		</center>
+		<center>
+			<img width="600px" height="400px" src="images/eg29_2.png">
+		</center>
+
+		<h2>FSM Examples in Daily Live</h2>
+
+		<ul>
+			<li>Vending Machines</li>
+			<li>Traffic Lights</li>
+			<li>Elevators</li>
+			<li>Alarm Clock</li>
+			<li>Microwave</li>
+			<li>Cash Registers</li>
+		</ul>
+
+		<h2>Practice</h2>
+		<center>
+			<img width="800px" height="100px" src="images/practice43.png">
+		</center>
+		<Br>
+		<center>
+			<img width="800px" height="300px" src="images/practice44.png">
+		</center>
+		<br>
+		<center>
+			<img width="800px" height="300px" src="images/practice45.png">
+		</center>
+		<h2>Reference</h2>
+
+		<a href="https://en.wikipedia.org/wiki/Finite-state_machine" target="_blank">Wikipedia</a>
+		<br>
+		<a href="https://brilliant.org/wiki/finite-state-machines/" target="_blank">Brilliant</a>
+		<br>
+		<a href="https://people.engr.ncsu.edu/efg/210/s99/Notes/fsm/" target="_blank">FSM Exercise</a>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

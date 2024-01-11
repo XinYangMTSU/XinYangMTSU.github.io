@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Formal Logic</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 1: Formal Logic</h1>
+
+		<center>
+			<h2>Section 1.1 Statements, Sybmolic Representation and Tautologies</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h2> Formal Symbols of Propositional Logic</h2>
+
+		Logic has been studied since the classical Greek period ( 600-300BC). The Greeks,
+		most notably Thales, were the first to formally analyze the reasoning process. Aristotle (384-322BC), the "father of
+		logic", and many other Greeks searched for universal
+		truths that were irrefutable. A second great period for logic came with the use of symbols to simplify complicated
+		logical arguments. Gottfried Leibniz (1646-1716) began
+		this work at age 14, but failed to provide a workable foundation for symbolic logic.
+		George Boole (1815-1864) is considered the "father of symbolic logic". He developed
+		logic as an abstract mathematical system consisting of defined terms (propositions),
+		operations (conjunction, disjunction, and negation), and rules for using the operations. It is this system that we
+		will study in the first section.
+		<br>
+		<br>
+
+		Logic provides a powerful tool for reasoning correctly about mathematics, algorithms and computers. It is used
+		extensively throughout computer science, and you need to understand its basic concepts in order to study many of the
+		more advanced subjects in computing.
+
+		<h2>Proposition</h2>
+		A <b>
+			<font color="blue">proposition</font>
+		</b> is a statement that is, either true or false -- not both.
+
+		<h4>Some Sample Propositions</h4>
+		&bull; MTSU is in Murfreesboro <font color="red"><b>&check;</b></font> <br>
+		&bull; 4 > 9 <font color="red"><b>&check;</b></font><br>
+		&bull; Is this CSCI 3080? <font color="red"><b>No (Question)</b></font><br>
+		&bull; Oatmeal is slimy <font color="red"><b>No (Opinion)</b></font><br>
+		&bull; x > y <font color="red"><b>No (depends on x and y; sometime are true, sometimes are wrong)</b></font><Br>
+
+		<h4>Things that aren't propositions</h4>
+
+		&bull; <b>
+			<font color="blue">Commands</font>
+		</b> cannot be true or false.
+		<br>
+		&bull; <b>
+			<font color="blue">Questions</font>
+		</b> cannot be true or false.
+		<br>
+		&bull; <b>
+			<font color="blue">Jibberish</font>
+		</b> cannot be true or false.
+
+
+		<h2>Propositional Logic</h2>
+		<b>
+			<font color="blue">Propositional logic</font>
+		</b> is a mathematical system for
+		reasoning about propositions and how they relate to
+		one another.
+		<br>
+		<br>
+		&#11088; Propositional logic is a formal mathematical
+		system whose syntax is rigidly specified.
+		<br>
+		&#11088; Every statement in propositional logic consists of
+		<b>
+			<font color="blue">propositional variables</font>
+		</b> combined via <b>
+			<font color="blue">logical
+				connectives</font>
+		</b>.
+
+		<h2>Propositional Variables</h2>
+		&#10058; Each proposition will be represented by a
+		<b>
+			<font color="blue">propositional variable</font>
+		</b>
+		<br>
+		&#10058; Propositional variables are usually
+		represented as <b>
+			<font color="blue">capital-case</font>
+		</b> letters, such
+		as \(A\), \(B\), \(C\), \(D\), etc. If we need more, we can use subscripts: \(A_1\), \(A_2\), etc.
+		<br>
+		&#10058; Each variable can take one one of two
+		values: true or false.
+		<h2>Logical Connectives</h2>
+		&#10058; <b>
+			<font color="blue">Logical NOT: &not;A</font>
+		</b>
+		<ul>
+			<li>&bull; Read "not A"</li>
+			<li>&bull; &not;A is true if and only if A is false</li>
+			<li>&bull; Also called <b>
+					<font color="red">logical negation</font>
+				</b></li>
+		</ul>
+		<center>
+			<table style="width:20%">
+				<tr>
+					<th>\(A\)</th>
+					<th>\(&not;A\)</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+				</tr>
+			</table>
+		</center>
+		<hr>
+		<br>
+		&#10058; <b>
+			<font color="blue">Logical AND: A &and; B</font>
+		</b>
+		<ul>
+			<li>&bull; Read "A and B"</li>
+			<li>&bull; A &and; B is true if both A and B are true</li>
+			<li>&bull; Also called <b>
+					<font color="red">logical conjunction</font>
+				</b></li>
+		</ul>
+		<center>
+			<table style="width:20%">
+				<tr>
+					<th>\(A\)</th>
+					<th>\(B\)</th>
+					<th>\(A &and; B\)</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>F</th>
+					<th>F</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>F</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+					<th>F</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+				</tr>
+			</table>
+		</center>
+		<hr>
+		<br>
+		&#10058; <b>
+			<font color="blue">Logical OR: A &or; B</font>
+		</b>
+		<ul>
+			<li>&bull; Read "A or B"</li>
+			<li>&bull; A &or; B is true if at least one of A or B are true (inclusive OR)</li>
+			<li>&bull; Also called <b>
+					<font color="red">logical disjunction</font>
+				</b></li>
+		</ul>
+		<center>
+			<table style="width:20%">
+				<tr>
+					<th>\(A\)</th>
+					<th>\(B\)</th>
+					<th>\(A &or; B\)</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>F</th>
+					<th>F</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+				</tr>
+			</table>
+		</center>
+		<hr>
+		<br>
+		&#10058; <b>
+			<font color="blue">Implication: A &rarr; B</font>
+		</b>
+		<ul>
+			<li>&bull; Read "A implies B"</li>
+			<li>&bull; A &rarr; B means "if A is true, B is true as well."</li>
+			<li>&bull; A &rarr; B says nothing about what happens if A is false.</li>
+			<li>&bull; A &rarr; B says nothing about causality; it just says that if A
+				is true, B will be true as well.</li>
+		</ul>
+
+
+		<center>
+			<table style="width:20%">
+				<tr>
+					<th>\(A\)</th>
+					<th>\(B\)</th>
+					<th>\(A &rarr; B\)</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+					<th>F</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+				</tr>
+			</table>
+		</center>
+
+		<br>
+		The truth table for implication is less obvious than that for conjunction or disjunction. To understand its
+		definition, let's suppose your friend remarks, "if I pass my economics test, then I'll go to the movie Friday." If
+		your friend passes the test and goes to the movie, the remark was true. If your friend passes the test but doesn't
+		go to the movie, the remark was false. If your friend doesn't pass the test, then-whether he or she goes to the
+		movie or not-- you could not claim that the remark was false. By convention, \(A &rarr; B\) is considered true if A
+		is false, regardless of the truth value of B.
+		<hr>
+		<br>
+		<br>
+		&#10058; <b>
+			<font color="blue">Equivalence (Biconditional): A &harr; B</font>
+		</b>
+		<ul>
+			<li>&bull; A &harr; B means "A if and only if B"</li>
+			<li>&bull; The expression A &harr; B stands for (A &rarr; B) &and; (B &rarr; A).</li>
+			<li>&bull; Intuitively, either both \(A\) and \(B\) are true, or neither of them are.</li>
+		</ul>
+		<center>
+			<table style="width:20%">
+				<tr>
+					<th>\(A\)</th>
+					<th>\(B\)</th>
+					<th>\(A &harr; B\)</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>F</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+					<th>F</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+				</tr>
+			</table>
+		</center>
+		<br>
+		Unlike conjunction, disjunction, and implication, the equivalence connective is not really a fundamental
+		connective but a convenient shortcut. The expression \(A &harr; B\) stands for \((A &rarr; B) &and; (B &rarr; A)\).
+		We can write the truth table for equivalence by constructing, one piece at a time, a truth table for \( (A &rarr; B)
+		&and; (B &rarr; A) \). From the following truth table, \(A &harr; B\) is true exactly when A and B have the same
+		truth value.
+		<br>
+		<br>
+		<center>
+			<table style="width:80%">
+				<tr>
+					<th>\(A\)</th>
+					<th>\(B\)</th>
+					<th>\(A &rarr; B\)</th>
+					<th>\(B &rarr; A\)</th>
+					<th>\((A &rarr; B) &and; (B &rarr; A) \)</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+					<th>F</th>
+					<th>T</th>
+					<th>F</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>T</th>
+					<th>F</th>
+					<th>F</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>F</th>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+				</tr>
+			</table>
+		</center>
+		<br>
+
+		<!--
+    &#10058; The symbol <b>
+      <font color="blue">\(&top;\)</font>
+    </b> is a value that is always true.
+    <br>
+    &#10058; The symbol <b>
+      <font color="blue">\(&perp;\)</font>
+    </b> is a value that is always false.
+    -->
+		<br>
+		<h2>How many rows for truth table?</h2>
+
+		<center>
+			<table style="width:30%">
+				<tr>
+					<th>Number of variables</th>
+					<th>Number of rows</th>
+				</tr>
+				<tr>
+					<th>1</th>
+					<th>2</th>
+				</tr>
+				<tr>
+					<th>2</th>
+					<th>4</th>
+				</tr>
+				<tr>
+					<th>3</th>
+					<th>8</th>
+				</tr>
+				<tr>
+					<th>4</th>
+					<th>16</th>
+				</tr>
+				<tr>
+					<th>...</th>
+					<th>...</th>
+				</tr>
+				<tr>
+					<th>\(n\)</th>
+					<th>\(2^n\)</th>
+				</tr>
+			</table>
+		</center>
+		<br>
+		<br>
+
+		<center>
+			<table style="width:40%">
+				<tr>
+					<th colspan="3">Truth Table Pattern for Three Variables</th>
+				</tr>
+				<tr>
+					<th>A</th>
+					<th>B</th>
+					<th>C</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>T</th>
+					<th>F</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+					<th>F</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>F</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>F</th>
+					<th>F</th>
+				</tr>
+			</table>
+		</center>
+
+		<br>
+
+		<h2>Reference</h2>
+
+		<a href="http://web.stanford.edu/class/archive/cs/cs103/cs103.1132/lectures/09/Small09.pdf"
+			target="_blank">Mathematical Logic</a>
+
+		<br><br>
+		<a href="https://www.math.fsu.edu/~pkirby/mad2104/SlideShow/s2_1.pdf">Logic</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

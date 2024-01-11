@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Decision Trees</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 6: Graphs and Trees</h1>
+
+		<center>
+			<h2>Section 6.4 Huffman Codes</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>Huffman Codes</h1>
+		<br>
+		Character data consist of letters of the alphabet (both uppercase and lowercase), punctuation symbols, and other
+		keyboard symbols such as @ and %. Computers store character data in binary form, as a sequence of 0s and 1s, usually
+		by fixing some length n so that \(2^n\) is at least as large as the number of distinct characters and then encoding
+		each distinct character as a particular sequence of n bits. Each character must be encoded into its fixed binary
+		sequence for electronic storage, and then the binary sequence must be decoded when the character is to be displayed.
+		The most common encoding scheme for many years was ASCII (American Standard Code for Information Interchange), which
+		uses n = 8, so that each character requires 8 bits to store. However, \(2^8 = 256\), so a maximum of 256 characters
+		could be encoded. This was enough for the English alphabet, punctuation, and special characters, but as electronic
+		data storage spread around the world, it was not enough to include characters found in other languages such as
+		Russian, Japanese, Arabic, Greek, and many others. Unicode (in general) uses 16 bits to encode a single character,
+		so that \(2^{16} = 65536\) character encodings are now available. But whatever value is chosen for n, each character
+		requires the same amount of storage space.
+		<br>
+		<br>
+		Suppose a collection of character data to be stored in a file in binary form is large enough that the amount of
+		storage required is a consideration. Suppose also that the file is archival in nature, and its contents will not
+		often be changed. Then it may be worthwhile to invest some extra effort in the encoding process if the amount of
+		storage space required for the file could be reduced.
+		<br>
+		<br>
+
+		Rather than using a fixed number of bits per character, an encoding scheme could use a variable number of bits and
+		store frequently occurring characters as sequences with fewer bits. To store all the distinct characters, some
+		sequences will still have to be long, but if the longer sequences are used for characters that occur less
+		frequently, the overall storage required should be reduced. This approach requires knowledge of the particular file
+		contents, which is why it is best suited for a file whose contents will not be frequently changed. We will study
+		such a <b>
+			<font color="blue">data compression</font>
+		</b> or <b>
+			<font color="blue">data compaction</font>
+		</b> scheme here, because it is best described as a series of actions taken on binary trees. Huffman codes are a
+		basic technique for doing data compression.
+		<br>
+		<br>
+		<center>
+			<img width="70%" src="images/huffman1.png">
+		</center>
+
+		<br>
+
+		In the fixed-length storage scheme with n bits for each character, the long string of bits within the encoded file
+		can be broken up into the code for successive characters by simply looking at n bits at a time. This makes it easy
+		to decode the file. In the variable-length code, there must be a way to tell when the sequence for one character
+		ends and the sequence for another character begins.
+		<br>
+		<br>
+		<center>
+			<img width="80%" src="images/practice28.png">
+		</center>
+		<Br>
+		In Practice 28 the strings can be broken into the representation of characters in only one way. As each new digit is
+		considered, the possibilities are narrowed as to which character is being represented until the character is
+		uniquely identified by the end of that character's representation. There is never any need to guess at what the
+		character might be and then backtrack if our guess proves wrong. This ability to decode uniquely without false
+		starts and backtracking comes about because the code is an example of a <b>
+			<font color="blue">prefix code</font>
+		</b>. In a prefix code, the code for any character is never the prefix of the code for any other character. (A
+		prefix code is therefore an "antiprefix" code!)
+		<br>
+		<br>
+		<center>
+			<img width="70%" src="images/huffman2.png">
+		</center>
+		<br>
+		<h2>Huffman Encoding Algorithm</h2>
+		In our approach to prefix codes, we will build binary trees with the characters as leaves. Once the tree is built, a
+		binary code can be assigned to each character by simply tracing the path from the root to that leaf, using <b>
+			<font color="red">0 for a
+				left branch</font>
+		</b> and <b>
+			<font color="red">1 for a right branch</font>
+		</b>. Because no leaf precedes any other leaf on some path from the root, the code
+		will be a prefix code.
+		<br>
+		<br>
+		<center>
+			<img width="70%" src="images/huffman3.png">
+		</center>
+		<font color="blue">
+			<font size="5">
+				<b>Steps to create the huffman tree:</b>
+			</font>
+			<br>
+			<hr>
+			1. Create tree nodes containing the character and the frequenceis. <br>
+			2. Sort based on frequencey-ascending <br>
+			3. Take first two nodes in the list and create a parent node with the first
+			node as the left child and the second node as the right child.
+			The parent frequency is the sum of the two children frequencies.
+			The children are removed from the list and parent is left in the list.
+			<br>
+			4. repeat steps 2 and 3 until there is only one node in the list.
+			<br>
+		</font>
+
+		<br>
+		<center>
+			<img width="70%" src="images/huffman4.png">
+		</center>
+
+		<br>
+		Once the tree is built, a binary code can be assigned to each character by simply tracing the path from the root to
+		that leaf, using <b>
+			<font color="red">0 for a left branch</font>
+		</b> and <b>
+			<font color="red">1 for a right branch</font>
+		</b>. <br>
+		<br>
+
+		<font color="blue">
+			a: 0 <br>
+			c: 1101 <br>
+			g: 101 <br>
+			k: 1100 <br>
+			p: 111 <br>
+			?: 100 <br>
+		</font>
+		<br>
+		Using the above code, we can decode: <br>
+		110111111001000 <br>
+		would be <br>
+		cpk?a
+		<br>
+		<br>
+		Or encode: <br>
+		cpag? <br>
+		would be <br>
+		11011110101100 <br>
+
+		<h2>Practice</h2>
+		<font size=5>1.</font>
+		<center>
+			<img width="80%" src="images/practice29.png">
+		</center>
+		(1)Please construct the Huffman tree for the above characters and frequencies. <br><br>
+		(2)Please find the Huffman code for each character. <br><br>
+		(3) A file consisting of 10,000 instances of these four characters is stored using the ASCII code encoding
+		scheme. How many bits are required for
+		each character? and what is the toal number of bits needed for this file? <br> <br>
+		(4) Storing the same file using using a fixed-length
+		binary encoding scheme. How many bits are required for each character? and what is the toal
+		number of bits needed for this file?
+		<br>
+		<br>
+		(5) Storing the same file using the Huffman code find in (2), how many bits are needed in total?
+		<br>
+		<br>
+		<br>
+		<br>
+		<font size=5>2.</font> File of 50,000 DNA characters(i.e., each of the characters is one of A, C, T, or G. Assume
+		you have the following
+		percentages of each <br>
+		<pre>
+     letter     A    C    T    G
+  frequency     22   28   22   28
+</pre>
+		Encoding the characters using extended ASCII (8 bits per character) produces:
+		50000*8 = 400,000 bits of data <br>
+		<br>
+		(1) Please encode the DNA characters using huffman code. Please construct a huffman tree.
+		<br>
+		<br>
+		(2) How many bits are needed for storing the file of 50,000 DNA characters using the Huffman code of (1)?
+		<br>
+		<br>
+		(3) Using the huffman code, please decode: 101110110001
+		<br>
+		<br>
+		(4) Using the huffman code, please encode: ATATCG
+		<br><br>
+
+		<h2>Application of Huffman Codes</h2>
+
+		<a href="https://www.print-driver.com/stories/huffman-coding-jpeg" target="_blank">Huffman Coding -- Base of JPEG
+			Image Compression</a>
+
+		<h2>Reference</h2>
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

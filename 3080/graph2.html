@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Graphs and Trees</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 6: Graphs and Trees</h1>
+
+		<center>
+			<h2>Section 6.1 Graphs and Their Representations</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>Graph Terminology</h1>
+		Graphs are formal mathematical representations of networks, collections of objects, events,
+		or set elements that lead naturally from one to another.
+
+		<br>
+		<br>
+
+		Before proceeding, we need some terminology about graphs. Surprisingly, although there is a large body of
+		literature in graph theory, the terminology is not completely standard. Therefore other books may give slightly
+		different variations of some of these terms.
+
+		<h2>Adjacent Vertices</h2>
+		Two vertices are said to be <b>
+			<font color="blue">adjacent</font>
+		</b> if there is an edge(arc) connecting them. <br>
+		<center>
+			<img width="400px" height="200px" src="images/adjacentVertex.png">
+			<br>
+			<caption><a href="https://slideplayer.com/slide/6918692/" target="_blank">source</a></caption>
+		</center>
+
+		<h2>Adjacent Edges</h2>
+		<b>
+			<font color="blue">Adjacent edges</font>
+		</b> are edges that share a common vertex.<br>
+		<center>
+			<img width="400px" height="200px" src="images/adjacentEdge.png">
+			<br>
+			<caption><a href="https://slideplayer.com/slide/6918692/" target="_blank"></a></caption>
+		</center>
+		(1) Edge (A,C) and (A,D) are adjacent edges, they share a common vertex: A. <br>
+		(2) Edge (A,C) and (B,D) are not adjacent edges, they don't have common vertex. <Br>
+
+		<h2>Loop</h2>
+		A <b>
+			<font color="blue">loop</font>
+		</b> is a edge that connects a vertex to itself. A graph
+		with no loops is <b>
+			<font color="blue">loop free</font>
+		</b>. <br>
+		<Br>
+		<center>
+			<img width="300px" height="200px" src="images/loop.png">
+			<br>
+			<caption><a href="https://en.wikipedia.org/wiki/Loop_(graph_theory)" target="_blank">A graph with a loop on vertex
+					1</a></caption>
+		</center>
+
+		<h2>Parallel Arcs</h2>
+		Two arcs with the same endpoints are <b>
+			<font color="blue">parallel arcs</font>
+		</b>. <br>
+		<center>
+			<img width="300px" height="200px" src="images/parallel.jpeg">
+			<br>
+			<caption><a href="" target="_blank"></a></caption>
+		</center>
+		<h2>Simple Graph</h2>
+		A <b>
+			<font color="blue">simple graph</font>
+		</b> is an unweighted, undirected graph that does not have more than one edge between any two vertices and no edge
+		starts and ends at the same vertex. In other words a simple graph is a graph without loops and parallel arcs. <br>
+		<center>
+			<img width="300px" height="200px" src="images/simpleGraph.png">
+		</center>
+
+		<h2>Isolated Node</h2>
+		An <b>
+			<font color="blue">isolated node</font>
+		</b> is adjacent to no other node. <br>
+		<Br>
+		<center>
+			<img width="300px" height="200px" src="images/isolated.png">
+		</center>
+
+		<h2>Degree of a Vertex</h2>
+		The <b>
+			<font color="blue">degree</font>
+		</b> of a vertex is the number of arcs incident with that vertex. <br>
+		<Br>
+		<center>
+			<img width="300px" height="200px" src="images/degree.png">
+		</center>
+
+		<h2>Complete Graph</h2>
+		A <b>
+			<font color="blue">complete graph</font>
+		</b> is a <b>
+			<font color="blue">simple undirected graph</font>
+		</b> in which each pair of distinct vertices is connected by a unique edge.<br>
+		<br>
+		Complete graphs on \(n\) vertices, for \(n\) between 1 and 12, are shown below along with the numbers of edges: <Br>
+		<center>
+			<img width="500px" height="400px" src="images/completeGraph.png">
+			<br>
+			<caption><a href="https://en.wikipedia.org/wiki/Complete_graph" target="_blank">Complete Graphs on \(n\)
+					vertices</a></caption>
+		</center>
+
+		<h2>Path</h2>
+		A <b>
+			<font color="blue">path</font>
+		</b> in a graph represents a way to get from an origin to
+		a destination by traversing edges in the graph. For example, in the undirected graph G = (V,E) drawn below, there
+		are many paths from node 6 to node 1. One such path is highlighted with red: <br>
+
+		<center>
+			<img width="300px" height="200px" src="images/path1.png">
+		</center>
+
+		The red path above is {{6,4}, {4,3}, {3,2}, {2,5}, {5,1}}; it is a path in G from node 6 to node 1. <br><Br>
+
+		<center>
+			<img width="300px" height="200px" src="images/path2.png">
+		</center>
+
+		The blue path above is {{6,4}, {4,5}, {5,1}}; it is also a path in G from node 6 to node 1. <br><Br>
+
+
+		A <b>
+			<font color="blue">path</font>
+		</b> is a sequence of vertices with the property that each vertex in the sequence is adjacent to the vertex next to
+		it. A path that does not repeat vertices is called a <b>
+			<font color="blue">simple path</font>
+		</b>. A <b>
+			<font color="blue">path</font>
+		</b> from node \(n_0\) to node \(n_k\) is a sequence \(n_0, a_0, n_1, a_1, \dots, n_{k-1}, a_{k-1}, n_{k}\) of nodes
+		and arcs where for each \(i\), the endpoints of arc \(a_i\) are \(n_i - n_{i+1}\) <br>
+
+		<h2>Length of a Path</h2>
+		The <b>
+			<font color="blue">length</font>
+		</b> of a path is the number of arcs it contains; if an arc is used more than once, it is counted each time it is
+		used. <br>
+
+		<h2>Connected Graph</h2>
+		A graph is <b>
+			<font color="blue">connected</font>
+		</b> if there is a path from any node to any other node. <Br>
+		<center>
+			<img width="400px" height="300px" src="images/connectedGraph.gif">
+		</center>
+
+		<h2>Cycle</h2>
+		A <b>
+			<font color="blue">cycle</font>
+		</b> in a graph is a path from some node \(n_0\) back to \(n_0\) where no arc appears more than once in the path
+		sequence, \(n_0\) is the only node appearing more than once, and \(n_0\) occurs only at the ends. A graph with no
+		cycles is <b>
+			<font color="blue">acyclic</font>
+		</b>.<br>
+
+		<center>
+			<img width="300px" height="200px" src="images/cycle.png">
+		</center>
+
+		<h2>Bipartite Complete Graph</h2>
+		A graph is a <b>
+			<font color="blue">bipartite complete graph</font>
+		</b> if its nodes can be partitioned into two disjoint nonempty
+		sets \(N_1\) and \(N_2\) such that two nodes \(x\) and \(y\) are adjacent if and only if \(x &isin; N_1\) and \(y
+		&isin; N_2\). If \(|N_1| = m\) and \(|N_2| = n\), such a graph is denoted by \(K_{m,n}\). It is a special kind of
+		bipartite graph where every vertex to the first set is connected to every vertex of the second set. <br>
+
+		<center>
+			<img width="300px" height="200px" src="images/bipartite.png">
+			<br>
+			<caption>An example of bipartite complete graph</caption>
+		</center>
+
+		<h2>Isomorphism Graphs</h2>
+		An <b>
+			<font color="blue">isomorphic graphs</font>
+		</b> G and H is a bijection between the vertex sets of G and H. <br>
+		\(f: V(G) &rarr; V(H) \) <br>
+		such that any two vertices \(u\) and \(v\) of G are adjacent in G if and only if \(f(u)\) and \(f(v)\) are adjacent
+		in H. This kind of bijection is commonly described as "edge-preserving bijection", in accordance with the general
+		notion of isomorphism being a structrue-perserving bijection. <br>
+		<br>
+		<center>
+			<img height="300px" width="500px" src="images/isomorphic.png">
+			<br>
+			<caption><a href="https://en.wikipedia.org/wiki/Graph_isomorphism" target="_blank">Wikipedia</a></caption>
+		</center>
+		<br>
+		<h2>Practice</h2>
+		(1) Sketch a graph having nodes {1,2,3,4,5}, arcs {{1,2}, {1,3}, {3,4}, {3,4}, {4,5}, {5,5}}
+		<br>
+		<br>
+		(2) Refer to the graph created in Practice 1.
+		<pre>
+a. Find two nodes that are not adjacent.
+b. Find a node adjacent to itself.
+c. Find a loop.
+d. Find two parallel arcs.
+e. Find the degree of node 3.
+f. Find a path of length 5.
+g. Find a cycle.
+h. Is this a graph complete?
+i. Is this graph connected?
+</pre>
+
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

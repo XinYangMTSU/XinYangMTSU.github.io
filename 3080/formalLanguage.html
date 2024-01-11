@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Turing Machine</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 9: Finite-State Machines, Turing machines</h1>
+
+		<center>
+			<h2>Section 9.5 Formal Languages</h2>
+		</center>
+
+		<br>
+		<br>
+		Languages derived from grammars such as we have defined are called <font color="blue"><b>formal languages</b></font>
+		. If the grammar is defined
+		first, the language will follow as an outcome of the definition.<br>
+		<br>
+		<center>
+			<img src="chomsky.png" height="" width="800px" />
+		</center>
+		<br>
+		<center>
+			<img src="langType.png" height="" width="800px" />
+		</center>
+		Because of the relationships among the four grammar types, we can classify languages as shown in Figure 9.26. Thus,
+		any regular language is also context-free because any regular grammar is also a context-free grammar, and so on.
+		<br>
+		<br>
+
+		<center>
+			<img src="langHierarchy.png" height="600px" width="800px" />
+		</center>
+
+		<h1>Formal Languages and Computational Devices</h1>
+		The class of sets recognized by a computational device of limited capacity coincides with the most restricted class
+		of languages.
+		The most general computational device is the <font color="blue"><b>Turing machine</b></font> and the most general
+		language is a <font color="red"><b>type 0 language</b></font>. As
+		it happens, the sets recognized by Turing machines correspond to type 0 languages.
+		<br><br>
+		There are computational devices with capabilities midway between those of finite-state machines and those of Turing
+		machines. These devices recognize exactly the context-free languages and the context-sensitive languages,
+		respectively.
+		<br><br>
+
+		The type of device that recognizes the context-free languages is called a <b>
+			<font color="blue">pushdown automaton</font>
+		</b>, or <b>
+			<font color="blue">pda</font>
+		</b>.
+		A pda consists of a finite-state unit that reads input from a tape and controls activity in a stack. Symbols from
+		some alphabet can be pushed onto or popped off of the top of the stack. The finite-state unit in a pda, as a
+		function of the input symbol read, the present state, and the top symbol on the stack, has a finite number of
+		possible next moves. <b>
+			<font color="blue">It can be shown that any set recognized by a pda is a <font color="red">context-free</font>
+				language, and
+				conversely.</font>
+		</b>
+
+		<br><br>
+
+		The type of device that recognizes the context-sensitive languages is called a <b>
+			<font color="blue">lba
+		</b></font>. An lba is a Turing machine whose read-write head is restricted to a portion
+		of
+		the tape that is no
+		longer than a constant multiple of the length of the original input; in addition, at each step it has a choice
+		of
+		possible next moves. An lba recognizes the set of all inputs for which some sequence of moves exists that causes
+		it to halt in a final state. <b>
+			<font color="blue">Any set recognized by an lba can be shown to be a
+				<font color="red">context-sensitive</font> language, and conversely.
+			</font>
+		</b>
+
+		<br>
+		<br>
+		Figure 9.27 shows the relationship between the hierarchy of languages and the hierarchy of computational devices.
+
+		<center>
+			<img src="formal.png" height="600px" width="800px" />
+		</center>
+
+		<br>
+		<h2>Formal Languages</h2>
+
+		<h3>Regular Language:</h3>
+		A regular language is like a simple language that follows a set of easy-to-understand rules. Imagine you have
+		a
+		magic toy that only allows you to press certain buttons in a specific order to make it work. The toy will do
+		different things depending on the buttons you press. A regular language is like a set of rules that tells you
+		which
+		buttons you can press and in what order to make the toy work. It's simple and easy to understand because the
+		rules
+		are straightforward and don't have any complicated conditions.
+
+		<h3>Context-Free Language:</h3>
+		A context-free language is like a language that has a few more rules than a regular language. Imagine you're
+		playing
+		with a set of building blocks, and you have a set of instructions that tell you how to stack the blocks. The
+		instructions might say things like "put a green block on top of a red block" or "put a blue block next to a
+		yellow
+		block." These instructions give you more flexibility in how you can stack the blocks, but they still have some
+		limitations. A context-free language is like a set of rules that tell you how to arrange words or symbols in a
+		sentence. The rules allow you to combine words in different ways, but they still have some restrictions.
+
+		<h3>
+			Context-Sensitive Language:</h3>
+		A context-sensitive language is like a language with even more rules and flexibility. Imagine you have a
+		storytelling game where you can create your own adventure. In this game, you can add characters, locations,
+		and
+		events to the story, and you can even change the rules of the game as you go. A context-sensitive language is
+		like a
+		set of rules that give you a lot of freedom to create your own story. You can add new characters, change the
+		order
+		of events, and modify the rules of the game, as long as everything still makes sense within the context of the
+		story.
+
+		<h3>Type 0 Language:</h3>
+		Type 0 languages are the most powerful and flexible type of language. They can describe any kind of language,
+		no
+		matter how complex. Imagine you have a magic pen that can write any word or sentence you imagine. With this
+		pen, you
+		can write stories, poems, or even create your own language. Type 0 languages allow you to define your own
+		rules and
+		create new words and sentences that have never been seen before.
+		<br><br>
+		To summarize, regular languages have simple and straightforward rules, context-free languages have more
+		flexibility
+		but still have some restrictions, context-sensitive languages give you even more freedom to create your own
+		rules,
+		and type 0 languages allow you to define your own rules and create new words and sentences.
+		<Br>
+		<Br>
+
+		<h2>Reference</h2>
+
+		<a href=" https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a> <br>
+		<a href="https://brilliant.org/wiki/turing-machines/#:~:text=A%20Turing%20machine%20is%20an,that%20we%20simply%20cannot%20solve%3F"
+			target="_blank">Brilliant</a> <br>
+		<a href="https://plato.stanford.edu/entries/computability/#HalPro" target="_blank">Stanford Encyclopedia of
+			Philosophy</a>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>
