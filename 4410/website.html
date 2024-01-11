@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>How does the Website Work?</title>
+	<link href="../CCS/Site.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>How does the Website Work?</h1>
+
+		<h2>The World Wide Web</h2>
+
+		When most of us talk about using the "Internet", we're typically talking about a specific part of the Internet: the
+		<b>
+			<font color="red">World Wide Web</font>
+		</b> (WWW, or simply, the Web). The Web is a massive network of webpages, programs, and files that are accessible
+		via URLs.
+		A <b>URL</b> (Uniform Resource Locator) is a unique identifier used to locate a resource on the Internet. It is also
+		referred to as a web address. URLs consist of multiple parts -- including a protocol and domain name -- that tell a
+		web browser how and where to retrieve a resource.<br><br>
+		We call it a web because of its vast interconnectedness. Starting from one URL, such as http://wikipedia.org, we can
+		follow links to eventually reach millions of webpages from across the globe.
+		<br> <br>
+		<center>
+			<img src="www.png" width="500px" heigh="600px">
+		</center>
+		<br><br>
+
+		A web browser loads a webpage using various protocols:
+
+		<ul>
+			<li>&#9733; It uses the <b>
+					<font color="red">Domain Name System</font>
+				</b> (DNS) protocol to convert a domain name into an IP address.</li>
+			<li>&#9733; It uses the <b>
+					<font color="red">HyperText Transfer Protocol</font>
+				</b> (HTTP) to request the webpage contents from that IP address.</li>
+			<li>&#9733; It may also use the <b>
+					<font color="red">Transport Layer Security</font>
+				</b> (TLS) protocol(Opens in a new window) to serve the website over a secure, encrypted connection.</li>
+		</ul>
+
+		The web browser uses these protocols on top of the Internet protocols, so every HTTP request also uses TCP and IP.
+
+		<h3>
+			Domain Name System (DNS)
+		</h3>
+		<hr>
+		As we just learned, IP addresses are how computers identify other computers on the Internet. IP addresses aren't
+		particularly human-friendly, though. Who wants to memorize an address like 74.125.20.113? Or the even harder IP v6
+		addresses? The <b>domain name system</b> gives us humans an easy way to identify where we want to go on the
+		Internet. We simply type in a domain name like "www.wikipedia.org", and our computer connects us to the computers
+		powering Wikipedia:<br><br>
+		<center>
+			<img src="wikipedia.png" height="140px" width="600px">
+		</center>
+		<br>
+		A domain name is a human-friendly address for a website, something that's easy for us to remember and type in.
+		<br>
+		<h3>
+			Hypertext Transfer Protocol (HTTP)
+		</h3>
+		<hr>
+		Whenever you visit a page on the web, your computer uses the Hypertext Transfer Protocol (HTTP) to download that
+		page from another computer somewhere on the Internet.
+		<br>
+		Let's step through that process. <br>
+
+		<h3>Step 1: Direct browser to URL</h3>
+		The user types a Uniform Resource Locator (URL) in the browser:
+		<br>
+		<center>
+			<img src="wikipedia.png" height="140px" width="600px">
+		</center>
+		<br>
+		<h3>Step 2: Browser looks up IP</h3>
+		We typically type nice human-friendly URLs into browsers, like "khanacademy.org" and "wikipedia.org". Those domain
+		names map to IP addresses, the true location of the domain's computers. That's handled by the Domain Name System.
+		The browser uses a DNS resolver to map the domain to an IP address:
+		<br>
+		<br>
+		<center>
+			<img src="dns1.png" width="700px" heigh="600px">
+		</center>
+		<br>
+		<h3>Step 3: Browser sends HTTP request</h3>
+		Once the browser identifies the IP address of the computer hosting the requested URL, it sends an HTTP request.
+		<br>
+		<br>
+		<center>
+			<img src="http1.png" width="500px" height="200px">
+		</center>
+		<br>
+
+		<h3>Step 4: Host sends back HTTP response</h3>
+		Once the host computer receives the HTTP request, it sends back a response with both the content and metadata about
+		it.
+		<br>
+		<h3>Step 5: The browser renders the response</h3>
+		The browser now has all the information it needs to render the document requested.
+
+		<br>
+		<center>
+			<img src="wikipedia1.png" width="500px" height="400px">
+		</center>
+		<br>
+
+		<h2>Web Client,Server Architecture</h2>
+
+		<br>
+
+		<center>
+			<img src="webserver1.png" width="700px" heigh="600px">
+		</center>
+		<br><br>
+
+
+		<h3>Web Browser</h3>
+		The purpose of a web browser(Chrome, IE, Firefox, Safari) is to requests and interprets web pages encoded with HTML,
+		CSS, JavaScript, etc. The browser does not display the HTML tags, but uses them to determine how to display the
+		document.
+
+		<h3>Web Server</h3>
+		Web server holds web pages and processes browser requests.
+
+		<h3>Web Site</h3>
+		<ul>
+			<li>&#9734; Static Websites</li>
+			The users can read and watch them but cannot interact with the content in any way.
+			<br><br>
+			<li>&#9734; Dynamic Websites</li>
+			These websites keep updatin content based on the user input.
+		</ul>
+
+
+		<h2>Web Pages</h2>
+
+		<center>
+			<img src="html1.png" width="700px" heigh="600px">
+		</center>
+		<br><br>
+
+		<center>
+			<img src="html2.png" width="700px" heigh="600px">
+		</center>
+		<br><br>
+
+		<h3>HTML (HyperText Markup Language)</h3>
+		HTML provides the basic structure of sites, which is enhanced and modified by other technologies like CSS and
+		JavaScript. HTML is at the core of every web page, regardless the complexity of a site or number of technologies
+		involved. It's an essential skill for any web professional. It's the starting point for anyone learning how to
+		create content for the web.
+		<br>
+
+		<h3>CSS (Cascading Style Sheets)</h3>
+		CSS is used to control presentation, formatting, and layout. This programming language dictates how the HTML
+		elements of a website should actually appear on the frontend of the page. HTML provides the raw tools needed to
+		structure content on a website. CSS, on the other hand, helps to style this content so it appears to the user the
+		way it was intended to be seen. These languages are kept separate to ensure websites are built correctly before
+		they're reformatted.
+		<br>
+
+		<h3>JavaScript</h3>
+		JavaScript is used to control the behavior of different elements. JavaScript is a more complicated language than
+		HTML or CSS, and it wasn't released in beta form until 1995. Nowadays, JavaScript is supported by all modern web
+		browsers and is used on almost every site on the web for more powerful and complex functionality. JavaScript is a
+		programming language that lets web developers design interactive sites. Most of the dynamic behavior you'll see on a
+		web page is thanks to JavaScript.
+		<br>
+
+		<h2>Process for developing a website</h2>
+		<ul>
+			<li>&#9734; Plan and design the website</li>
+			<li>&#9734; Create the web pages using an editor</li>
+			<li>&#9734; Test the web pages</li>
+			<li>&#9734; Publish the web pages by uploading the pages to the web server.</li>
+		</ul>
+
+		<h2>Exercise</h2>
+
+		<h3>1.</h3>Ororo types this URL in her browser's address bar:
+		https://www.nssl.noaa.gov/
+		<br>
+		After a few seconds, the browser loads the webpage.
+		Which of these protocols are used by the browser in fetching and loading webpage?
+
+		<ul>
+			<li>a. TCP (Transmission Control Protocol)</li>
+			<li>b. POP (Post Office Protocol)</li>
+			<li>c. FTP (File Transfer Protocol)</li>
+			<li>d. SMTP (Simple Mail Transfer Protocol)</li>
+			<li>e. IP (Internet Protocol)</li>
+			<li>f. HTTP (HyperText Transfer Protocol)</li>
+		</ul>
+		<br>
+		<h3>2.</h3>When we browse websites on the World Wide Web, we're relying on browsers and servers communicating
+		together across wide distances.
+		<br>
+		Which of these best describe the role of the browser and server?
+
+		<ul>
+			<li>a. The browser is responsible for sending HTTP requests to the server that hosts the website. The server is
+				responsible for sending HTTP responses that contain the code of websites.</li>
+			<li>b. The browser is responsible for browsing through its files to find the code for each website. The server is
+				responsible for figuring out the optimal path of routers for a webpage request to reach the server.</li>
+			<li>c. The browser is responsible for finding interesting webpages for the user. The server is responsible for
+				serving users with warnings for visiting insecure websites.</li>
+			<li>d. The server is responsible for sending HTTP requests to the browser that hosts the website. The browser is
+				responsible for sending HTTP responses that contain the code of websites.</li>
+		</ul>
+
+
+
+		<h1>Reference</h1>
+		<ul>
+			<li><a href="https://www.thegeekstuff.com/2011/11/tcp-ip-fundamentals/"
+					target="_">https://www.thegeekstuff.com/2011/11/tcp-ip-fundamentals/</a></li>
+			<li><a href="https://www.iplocation.net/tcp-ip" target="_">https://www.iplocation.net/tcp-ip</a></li>
+			<li><a href="https://www.khanacademy.org/computing/computers-and-internet/"
+					target="_">https://www.khanacademy.org/computing/computers-and-internet/</a></li>
+			<li><a href="https://www.ccnablog.com/network-layer/" target="_">https://www.ccnablog.com/network-layer/</a>
+			</li>
+			<li><a href="http://www.tcpipguide.com/free/t_DataLinkLayerLayer2.htm"
+					target="_">http://www.tcpipguide.com/free/t_DataLinkLayerLayer2.htm</a></li>
+		</ul>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+	<br>
+	<br>
+	<script src="../CCS/Script.js"></script>
+
+</body>
+
+</html>
