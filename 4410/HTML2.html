@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Introduction to CSS</title>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+	<link href="../CCS/Site.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h2>HTML Symbols</h2>
+
+Many mathematical, technical, and currency symbols, are not present on a normal keyboard. To add such symbols to an HTML page, you can use the <b><font color="red">entity name</font></b> or the <b><font color="red">entity number</font></b> (a <b>decimal</b> or a <b>hexadecimal</b> reference) for the symbol.
+
+		<ul>
+			<li>&dollar; <b><font color="blue">Currency Symbols</font></b>: <a href="https://www.w3schools.com/charsets/ref_utf_currency.asp" target="_blank">https://www.w3schools.com/charsets/ref_utf_currency.asp</a></li>
+			<li>&#8750; <b><font color="blue">Mathematical Symbols</font></b>: <a href="https://www.w3schools.com/charsets/ref_utf_math.asp" target="_blank">https://www.w3schools.com/charsets/ref_utf_math.asp</a></li>
+			<li>&Theta; <b><font color="blue">Greek Letters</font></b>: <a href="https://www.w3schools.com/charsets/ref_utf_greek.asp" target="_blank">https://www.w3schools.com/charsets/ref_utf_greek.asp</a></li>
+			<li>&#129409; <b><font color="blue">Emojis</font></b>: <a href="https://www.w3schools.com/charsets/ref_emoji.asp" target="_blank">https://www.w3schools.com/charsets/ref_emoji.asp</a></li>
+			<li>&#x2602; <b><font color="blue">Other Entities</font></b>: <a href="https://www.w3schools.com/charsets/ref_utf_symbols.asp" target="_blank">https://www.w3schools.com/charsets/ref_utf_symbols.asp</a></li>
+		</ul>
+
+		
+		<h3>Example</h3>
+
+Display the euro sign, <b><font color="red">&euro;</font></b>, with an <b><font color="blue">entity name</font></b>, a <b><font color="blue">decimal</font></b>, and a <b><font color="blue">hexadecimal</font></b> value:
+
+<pre>
+&lt;p&gt; I will display &amp;euro; &lt;/p&gt;
+&lt;p&gt; I will display &amp;#8364;&lt;/p&gt;
+&lt;p&gt; I will display &amp;#x20AC;&lt;/p&gt;
+</pre>
+
+Will display as: <br>
+		<p>I will display &euro; <br>I will display &#8364;<br> I will display &#x20AC; <br></p>
+		
+<h2>MATH Formula in HTML</h2>		
+
+		<ul> 
+			<li>&#9733;
+				To display the math formula, we need to include the following JavaScript Library to the head section: <br>
+				&lt;<b><font color="red">script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'&gt;&lt;/script&gt;</font></b>
+			</li>
+			<li>&#9733; MathJax is a JavaScript display engine for mathematics that works in all browsers.</li>
+			<li>&#9733; MathJax Reference: <a href="https://docs.mathjax.org/en/latest/basic/mathematics.html" target="_blank">https://docs.mathjax.org/en/latest/basic/mathematics.html</a></li>
+		</ul>
+
+	Please try to display the following math formula in HTML:
+<br><br>
+
+		<h3> <pre>&bsol;(...&bsol;)</pre> for in-line mathematics: </h3>
+		
+		\( \frac{-b &plusmn; \sqrt{b^2-4bc}}{2a} \)
+		<br>
+		<br>
+		\( \sum\limits_{i=0}^na^i = \frac{a^{n+1}-1}{a-1} (a \neq 1) \)
+	
+		<h3><pre>&dollar;&dollar;...&dollar;&dollar;</pre> for displayed mathematics: </h3>
+		$$ \frac{-b &plusmn; \sqrt{b^2-4bc}}{2a} $$
+
+		$$ \sum\limits_{i=0}^na^i = \frac{a^{n+1}-1}{a-1} (a \neq 1) $$
+
+		
+		<h2>HTML Multimedia</h2>
+
+		<h3>What is Multimedia?</h3>
+		Multimedia comes in many different formats. It can be almost anything you can hear or see, like images, music,
+		sound, videos, records, films, animations, and more.
+
+		Web pages often contain multimedia elements of different types and formats.
+
+		<h3>HTML Video</h3>
+
+		<ul>
+			<li>&#9733; The HTML <b>
+					<font color="red">&lt;video&gt; &lt;/video&gt;</font>
+				</b> element is used to show a video on a web page.</li>
+			<li>&#9733; Only <b>
+					<font color="red">MP4</font>
+				</b>, <b>
+					<font color="red">WebM</font>
+				</b>, and <b>
+					<font color="red">Ogg</font>
+				</b> video are supported by the HTML standard.</li>
+		</ul>
+
+		<pre>
+		&lt;video width="320" height="240" controls&gt;
+  		&lt;source src="movie.mp4" type="video/mp4"&gt;
+  		&lt;source src="movie.ogg" type="video/ogg"&gt;
+		Your browser does not support the video tag.
+		&lt;/video&gt;
+		</pre>
+
+		<video width="320" height="240" controls>
+			<source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+			<source src="https://www.w3schools.com/html/movie.ogg" type="video/ogg">
+			Your browser does not support the video tag.
+		</video>
+
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="red">controls</font>
+				</b> attribute adds video controls, like play, pause, and volume.</li>
+			<li>&#9733; It is a good idea to always include <b>
+					<font color="red">width</font>
+				</b> and <b>
+					<font color="red">height</font>
+				</b> attributes. If height and width are not set, the
+				page might
+				flicker while the video loads.</li>
+			<li>&#9733; The <b>
+					<font color="red">&lt;source&gt;</font>
+				</b> element allows you to specify alternative video files which the browser may choose
+				from. The browser will
+				use the first recognized format.</li>
+			<li>&#9733; The text between the &lt;video&gt; and &lt;/video&gt; tags will only be displayed in browsers that do
+				not
+				support
+				the &lt;video&gt;
+				element.</li>
+		</ul>
+
+		<h3>HTML Audio</h3>
+
+		<ul>
+			<li>&#9733; The HTML <b>
+					<font color="red">&lt;audio&gt; &lt;/audio&gt;</font>
+				</b> element is used to play a audio on a web page. </li>
+			<li>&#9733; Only <b>
+					<font color="red">MP3</font>
+				</b>, <b>
+					<font color="red">WAV</font>
+				</b>, and <b>
+					<font color="red">Ogg</font>
+				</b> audio are supported by the HTML standard.</li>
+		</ul>
+
+		<pre>
+		&lt;audio width="320" height="240" controls&gt;
+  		&lt;source src="horse.ogg" type="audio/mp3"&gt;
+  		&lt;source src="horse.mp3" type="audio/ogg"&gt;
+		Your browser does not support the audio tag.
+		&lt;/audio&gt;
+		</pre>
+
+		<audio controls>
+			<source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg">
+			<source src="https://www.w3schools.com/html/horse.ogg" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+
+
+		<h3>Playing a YouTube Video in HTML</h3>
+
+		The easiest way to play videos in HTML, is to use YouTube.
+
+		<ul>
+			<li>&#9733; Define an <b>
+					<font color="red">&lt;iframe&gt; &lt;/iframe&gt;</font>
+				</b> in your web page. </li>
+			<li>&#9733; Let the <b>
+					<font color="red">src</font>
+				</b> attribute point to the video URL.</li>
+			<li>&#9733; Use the <b>
+					<font color="red">width</font>
+				</b> and <b>
+					<font color="red">height</font>
+				</b> attributes to specify the dimension of the player</li>
+		</ul>
+
+		<pre>
+		&lt;iframe width="420" height="300" 
+			src="https://www.youtube.com/embed/tgbNymZ7vqY"&gt;
+		&lt;/iframe&gt;
+</pre>
+
+		<iframe width="350" height="250" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+		</iframe>
+
+		<h1>Reference</h1>
+		<ul>
+			<li><a href="https://www.w3schools.com/html/html_intro.asp"
+					target="_">https://www.w3schools.com/html/html_intro.asp</a></li>
+
+		</ul>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+	<br>
+	<br>
+	<script src="../CCS/Script.js"></script>
+
+</body>
+
+</html>

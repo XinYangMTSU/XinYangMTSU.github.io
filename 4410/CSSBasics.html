@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Introduction to CSS</title>
+	<link href="../CCS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>Introduction to CSS</h1>
+		<br>
+
+		<center>
+			<img src="html2.png" width="700px" heigh="600px">
+		</center>
+		<br><br>
+
+		<h2>What is CSS?</h2>
+		CSS is the language we use to style an HTML document.
+		CSS describes how HTML elements should be displayed.
+		<ul>
+			<li>&#9733; CSS stands for <b>
+					<font color="red">Cascading Style Sheets. </font>
+				</b> </li>
+			<li>&#9733; CSS defines <b>
+					<font color="red">how HTML elements are to be displayed.</font>
+				</b>.</li>
+			<li>&#9733; CSS saves a lot of work.<b>
+					<font color="red">It can control the layout of multiple web pages all at once</font>
+				</b>.</li>
+			<li>&#9733; CSS contains all styling information: where HTML elements should go, what color they should be, how
+				big they should be, and more.</li>
+
+		</ul>
+
+		<img src="html_css_js.JPG" height="500px" width="400px">
+
+		<h2>CSS Syntax</h2>
+
+		A CSS rule set consists of a <b>selector</b> and a <b>declaration</b> block:
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">selector</font>
+				</b> points to the HTML element you want to style.</li>
+			<li>&#9733; The <b>
+					<font color="blue">declaration</font>
+				</b> block contains one or more declarations <b>
+					<font color="blue">separated by semicolons</font>
+				</b>.</li>
+			<ul>
+				<li>&clubs; The importance of semicolons</li>
+				<ul>
+					<li>&#x2606; As you start adding more and more property-value pairs for each CSS selector, it’s important to
+						remember to put a semicolon (;) at the end of each line.</li>
+					<li>&#x2606; The semicolon tells CSS that one property-value pair is over and it’s time to move on to the next
+						one.</li>
+					<li>&#x2606; Without semicolons, it’ll become confused and your page won’t look right.</li>
+				</ul>
+			</ul>
+			<li>&#9733; Each declaration includes a CSS property <b>
+					<font color="blue">name</font>
+				</b> and a <b>
+					<font color="blue">value</font>
+				</b>, <b>
+					<font color="blue">separated by a colon</font>
+				</b>.</li>
+			<li>&#9733; A CSS declaration always <b>
+					<font color="blue">ends with a semicolon</font>
+				</b>, and declaration blocks are <b>
+					<font color="blue">surrounded by curly braces</font>
+				</b>.</li>
+		</ul>
+
+		<center>
+			<img src="css1.png" width="70%">
+		</center>
+
+		<h3>Example Explained:</h3>
+		<ul>
+			<li>&clubs; <b>
+					<font color="red">h1</font>
+				</b> is a selector in CSS (it points to the HTML element you want to style: &lt;h1&gt;</li>
+			<li>&clubs; <b>
+					<font color="red">color</font>
+				</b> is a property, and <b>
+					<font color="red">blue</font>
+				</b> is the property value</li>
+			<li>&clubs; <b>
+					<font color="red">font-size</font>
+				</b> is a property, and <b>
+					<font color="red">12px</font>
+				</b> is the property value</li>
+		</ul>
+
+
+		<h2>CSS How To ...</h2>
+
+		When a browser reads a style sheet, it will format the HTML document according to the information in the style
+		sheet. There are three ways of inserting a style sheet:
+
+		<ul>
+			<li>&clubs; Inline style.</li>
+			<li>&clubs; Internal style sheet. </li>
+			<li>&clubs; External style sheet. </li>
+
+		</ul>
+
+
+		<h3>Inline style</h3>
+		<hr>
+
+		<ul>
+			<li>&clubs; An inline style may be used to apply a unique style for a single element.</li>
+			<li>&clubs; To use inline styles, add the style attribute to the relevant tag. </li>
+			<li>&clubs; The style attribute can contain any CSS property. </li>
+			<li>&clubs; <b>
+					<font color="red">Note</font>
+				</b>: An inline style loses so many of the advantages of a style sheet(by mixing content with presentation). Use
+				this method sparingly.</li>
+		</ul>
+
+		<pre>
+			&lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;p style="color: #b31fb5;text-align: center; font-size: 40px;"&gt;This is a paragraph with inline style&lt;/p&gt;
+		</pre>
+
+		<p>This is a paragraph.</p>
+		<p style="color: #b31fb5; text-align: center; font-size: 40px;">This is a paragraph with inline style</p>
+
+		<h3>Internal Style Sheet</h3>
+		<hr>
+
+		<ul>
+			<li>&clubs; An internal style sheet may be used if one single page has a unique style.</li>
+			<li>&clubs; Internal styles are defined within the &lt;style&gt; element, <b>
+					<font color="red">inside the head section</font>
+				</b> of an HTML page. </li>
+		</ul>
+
+		<pre>
+	&lt;style&gt;
+    	p{ 
+        color: #b31fb5;
+        text-align: center;
+	font-size: 40px;
+      	}
+    	&lt;/style&gt;
+		</pre>
+
+		<center>
+			<img src="style1.png" width="500px" height="400px">
+		</center>
+		<br>
+
+		<h3>External Style Sheet</h3>
+		<hr>
+
+		<ul>
+			<li>&clubs; With an external style sheet, you can change the look of an entire website by changing just one file!
+			</li>
+			<li>&clubs; Each page must include a reference to the external style sheet file inside the &lt;link&gt; element.
+			</li>
+			<li>&clubs; The &lt;link&gt; element goes inside the &lt;head&gt; section in HTML.</li>
+		</ul>
+
+		<ul>
+			<li>&clubs; In HTML:</li>
+			<center>
+				<img src="link1.png" width="500px" height="100px">
+			</center>
+			<li>&clubs; In Site.css file: </li>
+			<pre>
+    	p{ 
+        color: #b31fb5;
+        text-align: center;
+	font-size: 40px;
+      	}
+			</pre>
+			<li>&clubs; Make sure HTML file can see the external CSS information by putting a &lt;link&gt; tag between the
+				&lt;head&gt;...&lt;/head&gt; tags of the HTML page. Your &lt;link&gt; tag needs three attributes:</li>
+			<ul>
+				<li>&#9733; A <b>
+						<font color="red">type</font>
+					</b> attribute that should be always be equal to "text/css".</li>
+				<li>&#9733; A <b>
+						<font color="red">rel</font>
+					</b> attribute that should be always be equal to "stylesheet". It is used to define the relationship between
+					the linked file and the HTML document.</li>
+				<li>&#9733; A <b>
+						<font color="red">href</font>
+					</b> attribute that should point to the web address of your CSS file.</li>
+			</ul>
+			<li>&clubs; <b>
+					<font color="red">Note that:</font>
+				</b></li>
+			<ul>
+				<li>&#9733; An external style sheet can be written in any text editor.</li>
+				<li>&#9733; The file should not contain any html tags.</li>
+				<li>&#9733; The style sheet file must be saved with a <b>
+						<font color="red">.css</font>
+					</b> extension.</li>
+			</ul>
+		</ul>
+
+		<h2>Cascading Order</h2>
+
+		<ul>
+			<li>&#9733; What style will be used when there is more than one style specified for an HTML element?</li>
+			<li>&#9733; Generally speaking we can say that all the styles will "cascade" into a new "virtual" style sheet by
+				the following rules, where number 1 has the highest priority: </li>
+			<ol>
+				<li>&clubs;1. Inline style (inside an HTML element).</li>
+				<li>&clubs;2. External and internal style sheets (in the head section)</li>
+				<li>&clubs;3. Browser default</li>
+			</ol>
+			<li>&#9733; An inline style (inside a specific HTML element) has the highest priority, which means that it will
+				override a style defined inside the tag, or in an external style sheet, or a browser default value.</li>
+			<li>&#9733; The priority of internal and external style is determined by their order in &lt;head&gt;&lt;/head&gt;
+				tag. <b>
+					<font color="red">The later one will overwrite the earlier one</font>
+				</b>.</li>
+		</ul>
+		</ul>
+
+		<h2>CSS color</h2>
+
+		<ul>
+			<li>&#9733; Colors in CSS are most often specified by:</li>
+			<ul>
+				<li>&clubs; a valid <b>
+						<font color="blue">color name</font>
+					</b> - like red.</li>
+				<li>&clubs; an <b>
+						<font color="blue">RGB</font>
+					</b> value - like rgb(255, 0, 0).</li>
+				<li>&clubs; a <b>
+						<font color="blue">HEX</font>
+					</b> value - like #ff0000.</li>
+			</ul>
+			<li>&#9733; <b>
+					<font color="blue">Color name</font>
+				</b>: HTML/CSS suport 140 standard color names: <a href="https://www.w3schools.com/colors/colors_names.asp"
+					target="_blank">https://www.w3schools.com/colors/colors_names.asp</a>
+			</li>
+			<li>&#9733; <b>
+					<font color="blue">RGB</font>
+				</b>: RGB color values can be specified using this formula: rgb(red, green, blue): <a
+					href="https://www.w3schools.com/colors/colors_rgb.asp"
+					target="_blank">https://www.w3schools.com/colors/colors_rgb.asp</a>
+			</li>
+			<li>&#9733; <b>
+					<font color="blue">Hexadecimal Colors</font>
+				</b>: RGB values can also be specified using hexadecimal color values in the form: #RRGGBB, where RR (red), GG
+				(green) and BB (blue) are hexadecimal values between 00 and FF (same as decimal 0-255): <a
+					href="https://www.w3schools.com/colors/colors_hexadecimal.asp"
+					target="_blank">https://www.w3schools.com/colors/colors_hexadecimal.asp</a></li>
+			<li>&#9733; HTML Color Picker: <a href="https://www.w3schools.com/colors/colors_picker.asp"
+					target="_blank">https://www.w3schools.com/colors/colors_picker.asp</a></li>
+		</ul>
+
+		<h2>Text alignment</h2>
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">text-align</font>
+				</b> property is used to set the horizontal alignment of a text.</li>
+			<li>&#9733; A text can be left or right aligned, centered, or justified.</li>
+			<li>&#9733; The following example shows center aligned, and left and right aligned text:</li>
+		</ul>
+
+		<center>
+			<img src="CSS-textalign.png" width="90%">
+		</center>
+
+		<h2>Font size</h2>
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">font-size</font>
+				</b> property sets the size of the text. </li>
+			<pre>
+	p{
+	 font-size: 40px;
+      	}
+			</pre>
+		</ul>
+
+
+		<h2>Font family</h2>
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">font-family</font>
+				</b> property sets the font family of the text.</li>
+			<li>&#9733; Most computers will understand popular fonts like Verdana, Courier, and Garamond, but each individual
+				computer has different fonts installed on it.</li>
+			<li>&#9733; font-family backup values:</li>
+			<ul>
+				<li>&clubs; You don’t have to jump straight to a default value like cursive or sans-serif: you can tell CSS to
+					try several, going from one to the next if the one you want isn’t available.</li>
+				<li>&clubs; For example, if you write:</li>
+				<pre>
+					p{ font-family: Tahoma, Verdana, sans-serif; }
+				</pre>
+				<li>&clubs; CSS will first try to apply Tahoma to your paragraphs. If the user’s computer doesn’t have that
+					font, it will try Verdana next, and if that doesn’t work, it will show a default sans-serif font. </li>
+			</ul>
+		</ul>
+
+
+		<h2>CSS Background</h2>
+
+		<ul>
+			<li>&#9733; The CSS <b>
+					<font color="blue">background</font>
+				</b> properties are used to define the background effects for elements.</li>
+			<li>&#9733; CSS background properties: </li>
+			<ul>
+				<li>&clubs; <b>
+						<font color="blue">background-color</font>
+					</b></li>
+				<li>&clubs; <b>
+						<font color="blue">background-image</font>
+					</b></li>
+				<li>&clubs; <b>
+						<font color="blue">background-repeat</font>
+					</b></li>
+				<li>&clubs; <b>
+						<font color="blue">background-position</font>
+					</b></li>
+				<li>&clubs; <b>
+						<font color="blue">background-attachment</font>
+					</b></li>
+			</ul>
+		</ul>
+
+		<ul>
+			<li>&#9733; CSS background-color: </li>
+			<ul>
+				<li>&clubs; The background-color property <b>
+						<font color="red">specifies the background color of an element</font>
+					</b>.</li>
+				<pre>
+body{
+    background-color: lightblue;
+}
+h1{
+    background-color: red;
+}
+h2
+{
+    background-color: green;
+}
+h3
+{
+    background-color: blue;
+}
+				</pre>
+			</ul>
+
+			<li>&#9733; CSS background-image: </li>
+			<ul>
+				<li>&clubs; The background-image property <b>
+						<font color="red">specifies an image to use as the background of an element</font>
+					</b>.</li>
+				<li>&clubs; By default, the image is repeated so it covers the entire element.</li>
+				<pre>
+body{
+    background-image: url("mtsu.png");
+}
+				</pre>
+				<li>&clubs; Note that: Do not use a background image that disturbs the text.</li>
+			</ul>
+			<br>
+
+			<li>&#9733; CSS background-repeat: </li>
+			<ul>
+				<li>&clubs; By default, the background-image property repeats an image both horizontally and vertically.</li>
+				<li>&clubs; To repeat an image horizontally, set background-repeat: repeat-x </li>
+				<li>&clubs; To repeat an image vertically, set background-repeat: repeat-y </li>
+				<li>&clubs; No repeat, set background-repeat: no-repeat: </li>
+			</ul>
+			<br>
+			<li>&#9733; CSS background-position: </li>
+			<ul>
+				<li>&clubs; The position of the image is specified by the background-position property.</li>
+				<pre>
+body{
+background-image: url("mtsu.png");
+background-repeat: no-repeat;
+background-position: top right;
+}
+				</pre>
+				<li>&clubs; When you use the bottom position, make sure you have enough elements in the body.</li>
+				<li>&clubs; You can also specify the position by px.</li>
+				<pre>
+body{
+background-image: url("mtsu.png");
+background-repeat: no-repeat;
+background-position: bottom 7px right 5px;
+}
+				</pre>
+			</ul>
+
+			<li>&#9733; CSS background-attachment: </li>
+			<ul>
+				<li>&clubs; To specify that the background image should be fixed (will not scroll with the rest of the page),
+					use background-attachment: fixed.</li>
+				<li>&clubs; To Specify that the background image should scroll with the rest of the page, use
+					background-attachment: scroll. </li>
+			</ul>
+
+		</ul>
+
+
+		<h2>Comment</h2>
+
+		<ul>
+			<li>&#9733; Comments are used to explain the code, and may help when you edit the source code at a later date.
+			</li>
+			<li>&#9733; Comments are ignored by browsers.</li>
+			<li>&#9733; A CSS comment starts with <b>
+					<font color="red">/*</font>
+				</b> and ends with <b>
+					<font color="red">*/</font>
+				</b>. Comments can also span multiple lines.</li>
+		</ul>
+
+
+		<h2>HTML block</h2>
+		<ul>
+			<li>&#9733; A block-level element always starts on a new line and takes up the full width available (stretches out
+				to the left and right as far as it can).
+			</li>
+			<li>&#9733; One of the most versatile structure tags available to you is the <b>
+					<font color="red">&lt;div&gt; &lt;/div&gt;</font>
+				</b> tag. Short
+				for "division".</li>
+			<li>&#9733; &lt;div&gt; allows you to divide your page into containers (that is, different pieces). This will come
+				in handy when you begin learning CSS.</li>
+			<li>&#9733; CSS Division (div) is a container element and it is used to group related items together. Whenever
+				there is a situation that you need to collect various objects into a larger container for scripting or styling
+				purposes, div is the best solution. The use of < div> tag is straightforward.</li>
+		</ul>
+
+		<h3>Examples</h3>
+
+		<pre>
+			&lt;div&gt;
+  			&lt;p&gt;A paragraph inside div&lt;/p&gt;
+			&lt;/div&gt;
+		</pre>
+
+		<pre>
+    &lt;div style="width: 50px; height: 50px; background-color: red"&gt;&lt;/div&gt;
+    &lt;div style="width: 50px; height: 50px; background-color: green"&gt;&lt;/div&gt;
+    &lt;div style="width: 50px; height: 50px; background-color: blue"&gt;&lt;/div&gt;
+    &lt;div style="width: 50px; height: 50px; background-color: yellow"&gt;&lt;/div&gt;
+		</pre>
+		<div style="width: 50px; height: 50px; background-color:red;"></div>
+		<div style="width: 50px; height: 50px; background-color: green"></div>
+		<div style="width: 50px; height: 50px; background-color: blue"></div>
+		<div style="width: 50px; height: 50px; background-color: yellow"></div>
+
+
+		<ul>
+			<li>&#9733; As you can probably guess, the smart use of &lt;div&gt; will eventually allow you to create visual
+				HTML
+				objects like sidebars, menus, and more.</li>
+			<li>&#9733; You can make &lt;div&gt; clickable by wrapping them in <a></a> tags. Do not forget the <b><font color="red">https://</font></b> for the url.</li>
+			<pre>
+				&lt;a href="https://www.google.com" target="_blank"&gt;
+				&lt;div style="width: 100px; height: 50px; background-color: pink"&gt;&lt;/div&gt;
+				&lt;/a&gt;
+			</pre>
+			<a href="https://www.google.com" target="_blank">
+				<div style="width: 100px; height: 50px; background-color: pink"></div>
+			</a>
+		</ul>
+
+
+		<h2>Spantastic</h2>
+
+		<ul>
+			<li>&#9733; While block allows you to divide your webpage up into pieces you can style individually,
+				<b>
+					<font color="blue">&lt;span&gt;&lt;/span&gt;</font>
+				</b>
+				allows
+				you to control styling for smaller parts of your page, such as text.
+			</li>
+			<li>&#9733; For example, if you always want the first word of your paragraphs to be red, you can wrap each first
+				word in &lt;span&gt;&lt;/span&gt; tags and make them red using CSS!</li>
+			<pre>
+			&lt;p&gt;This paragraph is black, except for the word &lt;span style="color:red"&gt;red&lt;/span&gt;!&lt;/p&gt;
+		</pre>
+			<p>This paragraph is black, except for the word <span style="color:red">red</span>!</p>
+			<li>&#9733; Color is just one attribute you can selectively change with tags; you can also change font size, font
+				family, and any other style attribute you can think of!</li>
+		</ul>
+
+
+		<h1>Reference</h1>
+		<ul>
+			<li><a href="https://www.w3schools.com/html/html_intro.asp"
+					target="_">https://www.w3schools.com/html/html_intro.asp</a></li>
+		</ul>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+	<br>
+	<br>
+	<script src="../CCS/Script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>CSS Box Model</title>
+	<link href="../CCS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>CSS Box Model</h1>
+
+		<ul>
+			<li>&#9733; All HTML elements can be considered as <b>
+					<font color="blue">boxes</font>.
+				</b>
+			</li>
+			<li>&#9733; In CSS, the term "<b>
+					<font color="blue">box model</font>
+				</b>" is used when talking about design and layout.</li>
+			<li>&#9733; The CSS box model is essentially a box that wraps around every HTML element.</li>
+			<li>&#9733; It consists of: <b>
+					<font color="blue">margins</font>
+				</b>, <b>
+					<font color="blue">borders</font>
+				</b>, <b>
+					<font color="blue">padding</font>
+				</b>, and the actual <b>
+					<font color="blue">content</font>
+				</b>. The image below illustrates the box model:</li>
+			<center>
+				<img src="box.png" width="700px" height="400px">
+			</center>
+			<ul>
+				<li><b>
+						<font color="red">Content</font>
+					</b> - The content of the box, where text and images appear</li>
+				<li><b>
+						<font color="red">Padding</font>
+					</b> - Clears an area around the content. The padding is transparent</li>
+				<li><b>
+						<font color="red">Border</font>
+					</b> - A border that goes around the padding and content</li>
+				<li><b>
+						<font color="red">Margin</font>
+					</b> - Clears an area outside the border. The margin is transparent</li>
+			</ul>
+		</ul>
+
+		<h3>Example</h3>
+
+		<center>
+			<img src="box2.png" width="1000px" height="400px">
+		</center>
+
+
+		<h2>Width and Height of an Element</h2>
+		In order to set the width and height of an element correctly in all browsers, you need to know how the box model
+		works. The following &lt;div&gt; element will have a total width of 350px:
+
+		<pre>
+div {
+  width: 320px;
+  padding: 10px;
+  border: 5px solid gray;
+  margin: 0;
+}
+		</pre>
+
+		Here is the calculation: <br>
+		<br>
+		<pre>
+			320px (width)
+			+ 20px (left + right padding)
+			+ 10px (left + right border)
+			+ 0px (left + right margin)
+			= 350px
+
+Total element width = width + left padding + right padding + left border + right border + left margin + right margin
+
+Total element height = height + top padding + bottom padding + top border + bottom border + top margin + bottom margin
+		</pre>
+
+		<h3>Example</h3>
+
+		<center>
+			<img src="box3.png" width="800px" height="400px">
+		</center>
+		<br><br>
+
+		<h2>CSS Margins</h2>
+
+
+		<ul>
+			<li>&#9733; The margin is the space around the element. The larger the margin, the more space between our element
+				and the elements around it.</li>
+			<li>&#9733; We can adjust the margin to move our HTML elements closer to or farther from each other.</li>
+			<li>&#9733; If set margin to auto, this tells the document to automatically put equal left and right margins on
+				our element, centering it on the page.</li>
+			<li>&#9733; With CSS, you have full control over the margins. There are properties for setting the margin for each
+				side of an element (top, right, bottom, and left).</li>
+			<li>&#9733; CSS has properties for specifying the margin for each side of an element:</li>
+			<ul>
+				<li>margin-top</li>
+				<li>margin-right</li>
+				<li>margin-bottom</li>
+				<li>margin-left</li>
+			</ul>
+		</ul>
+
+		<h3>Example</h3>
+		<pre>
+		div {
+		        border: 1px solid black;
+  			margin-top: 100px;
+  			margin-bottom: 100px;
+  			margin-right: 150px;
+  			margin-left: 80px;
+		}
+
+		&lt;div&gt;This div element has a top margin of 100px, a right margin of 150px,
+			a bottom margin of 100px, and a left margin of 80px.&lt;/div&gt;
+		</pre>
+
+		<h3>Margin - Shorthand Property</h3>
+		<ul>
+			<li>&#9733; If the margin property has four values:</li>
+			<b>
+				<font color="red">margin: 25px 50px 75px 100px;</font>
+			</b>
+			<ul>
+				<li>top margin is 25px</li>
+				<li>right margin is 50px</li>
+				<li>bottom margin is 75px</li>
+				<li>left margin is 100px</li>
+			</ul>
+		</ul>
+
+		<ul>
+			<li>&#9733; If the margin property has two values:</li>
+			<b>
+				<font color="red">margin: 25px 50px;</font>
+			</b>
+			<ul>
+				<li>top and bottom margins are 25px</li>
+				<li>right and left margins are 50px</li>
+			</ul>
+		</ul>
+
+		<ul>
+			<li>&#9733; If the margin property has one value:</li>
+			<b>
+				<font color="red">margin: 25px;</font>
+			</b>
+			<ul>
+				<li>all four margins are 25px</li>
+			</ul>
+		</ul>
+
+		<ul>
+			<li> &#9733; You can set the margin property to <b>
+					<font color="red">auto</font>
+				</b> to horizontally center the element within its container. </li>
+			<b>
+				<font color="red">margin: auto;</font>
+			</b>
+			<ul>
+				<li>The element will then take up the specified width, and the remaining space will be split equally between the
+					left and right margins.</li>
+			</ul>
+		</ul>
+
+		<h2>CSS Borders</h2>
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">border-style</font>
+				</b> property specifies what kind of border to display. Example: <a
+					href="https://www.w3schools.com/css/css_border.asp"
+					target="_blank">https://www.w3schools.com/css/css_border.asp</a></li>
+			<li>&#9733; The <b>
+					<font color="blue">border-width</font>
+				</b> property specifies the width of the four borders. Example: <a
+					href="https://www.w3schools.com/css/css_border_width.asp"
+					target="_blank">https://www.w3schools.com/css/css_border_width.asp</a></li>
+			<li>&#9733; The <b>
+					<font color="blue">border-color</font>
+				</b> property is used to set the color of the four borders. Example: <a
+					href="https://www.w3schools.com/css/css_border_color.asp"
+					target="_blank">https://www.w3schools.com/css/css_border_color.asp</a></li>
+		</ul>
+
+		<pre>
+			border-width: 2px;
+			border-style: dotted;
+			border-color: red;
+
+			or
+
+			border: 2px dotted red;
+		</pre>
+
+
+		<h2>CSS Padding</h2>
+
+		<ul>
+			<li>&#9733; The padding is the spacing between your innermost layer: the actual content and the border. We can
+				adjust this value with CSS to move the border closer to or farther from the content.</li>
+			<li>&#9733; The CSS <b>
+					<font color="blue">padding properties</font>
+				</b> are used to generate space around an element's content, inside of any defined borders.</li>
+			<li>&#9733; With CSS, you have full control over the padding. There are properties for setting the padding for
+				each side of an element (top, right, bottom, and left).</li>
+			<li>&#9733; CSS has properties for specifying the padding for each side of an element:</li>
+			<ul>
+				<li>padding-top</li>
+				<li>padding-right</li>
+				<li>padding-bottom</li>
+				<li>padding-left</li>
+			</ul>
+		</ul>
+
+		<h3>Example</h3>
+		<pre>
+		div {
+		border: 1px solid black;
+  		background-color: lightblue;
+  		padding-top: 50px;
+  		padding-right: 30px;
+  		padding-bottom: 50px;
+  		padding-left: 80px;
+		}
+
+		&lt;div&gt;This div element has a top padding of 50px, a right padding of 30px, 
+			a bottom padding of 50px, and a left padding of 80px.&lt;/div&gt;
+		</pre>
+
+		<h3>Padding - Shorthand Property</h3>
+		<ul>
+			<li>&#9733; If the padding property has four values:</li>
+			<b>
+				<font color="red">padding: 25px 50px 75px 100px;</font>
+			</b>
+			<ul>
+				<li>top padding is 25px</li>
+				<li>right padding is 50px</li>
+				<li>bottom padding is 75px</li>
+				<li>left padding is 100px</li>
+			</ul>
+		</ul>
+
+		<ul>
+			<li>&#9733; If the padding property has two values:</li>
+			<b>
+				<font color="red">padding: 25px 50px;</font>
+			</b>
+			<ul>
+				<li>top and bottom paddings are 25px</li>
+				<li>right and left paddings are 50px</li>
+			</ul>
+		</ul>
+
+		<ul>
+			<li>&#9733; If the padding property has one value:</li>
+			<b>
+				<font color="red">padding: 25px;</font>
+			</b>
+			<ul>
+				<li>all four paddings are 25px</li>
+			</ul>
+		</ul>
+
+
+		<h2>CSS Layout - The display Property</h2>
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="red">display property</font>
+				</b> is the most important CSS property for controlling layout.</li>
+			<li>&#9733; The display property specifies if/how an element is displayed.</li>
+			<li>&#9733; Every HTML element has a default display value depending on what type of element it is.</li>
+			<li>&#9733; The default display value for most elements is <b>
+					<font color="red">block</font>
+				</b> or <b>
+					<font color="red">inline</font>
+				</b></li>
+		</ul>
+
+		<h3>Block-level Elements</h3>
+		A block-level element always starts on a new line and takes up the full width available (stretches out to the left
+		and right as far as it can).
+		<br>
+		Examples of block-level elements:
+		<pre>
+			&lt;div&gt;
+			&lt;h1&gt; - &lt;h6&gt;
+			&lt;p&gt;
+			&lt;form&gt;
+		</pre>
+
+		<h3>Inline Elements</h3>
+		An inline element does not start on a new line and only takes up as much width as necessary.
+		<br>
+		Examples of inline elements:
+		<pre>
+			&lt;span&gt;
+			&lt;a&gt;
+			&lt;img&gt;
+		</pre>
+
+
+
+		<h3>Override The Default Display Value</h3>
+
+		<ul>
+			<li>&#9733; As mentioned, every element has a default display value. However, you can override this.</li>
+			<li>&#9733; Changing an inline element to a block element, or vice versa, can be useful for making the page look a
+				specific way, and still follow the web standards.</li>
+			<li>&#9733; Four possible values for display property: </li>
+			<ul>
+				<li>&clubs; <b>
+						<font color="blue">block</font>
+					</b>: This makes the element a block box. It won’t let anything sit next to it on the page! It takes up the
+					full width.</li>
+				<li>&clubs; <b>
+						<font color="blue">inline-block</font>
+					</b>: This makes the element a block box, but will allow other elements to sit next to it on the same line.
+				</li>
+				<li>&clubs; <b>
+						<font color="blue">inline</font>
+					</b>: This makes the element sit on the same line as another element, but without formatting it like a block.
+					It only takes up as much width as it needs (not the whole line).</li>
+				<li>&clubs; <b>
+						<font color="blue">none</font>
+					</b>: This makes the element and its content disappear from the page entirely!
+				</li>
+			</ul>
+		</ul>
+
+		<h3>Example:</h3>
+
+		<ul>
+			<li>&#9733; inline exampe:</li>
+
+			<pre>
+			li {
+  			display: inline;
+			}
+
+			
+			&lt;p&gt;Display a list of links as a horizontal menu:&lt;/p&gt;
+
+			&lt;ul&gt;
+  			&lt;li&gt;&lt;a href="/html/default.asp" target="_blank">HTML&lt;/a>&lt;/li&gt;
+  			&lt;li&gt;&lt;a href="/css/default.asp" target="_blank">CSS&lt;/a>&lt;/li&gt;
+  			&lt;li&gt;&lt;a href="/js/default.asp" target="_blank">JavaScript&lt;/a>&lt;/li&gt;
+			&lt;/ul&gt;
+			
+		</pre>
+
+			<li>&#9733; inline block example:</li>
+
+			<pre>
+				div{
+				border: 1px dashed blue;
+				margin: 2px;
+				width: 400px;
+				height: 50px;
+				display: inline-block;
+				}
+
+				#div1{
+					background-color: red;
+				}
+
+				#div2{
+					background-color: green;
+				}
+
+				#div3{
+					background-color: blue;
+				}
+				
+			</pre>
+
+		</ul>
+
+
+
+		<h2>CSS Layout - float and clear</h2>
+
+		<ul>
+			<li>&#9733; The CSS <b>
+					<font color="blue">float property</font>
+				</b> specifies how an element should float.</li>
+			<li>&#9733; The CSS <b>
+					<font color="blue">clear property</font>
+				</b> specifies what elements can float beside the cleared element and on which side.</li>
+		</ul>
+
+		<h3>float</h3>
+
+		<ul>
+			<li>&#9733; The float property is used for positioning and formatting content.</li>
+			<li>&#9733; e.g. let an image float left to the text in a container.</li>
+			<li>&#9733; The float property can have one of the following values:</li>
+			<ul>
+				<li><b>
+						<font color="blue">left</font>
+					</b> - The element floats to the left of its container</li>
+				<li><b>
+						<font color="blue">right</font>
+					</b> - The element floats to the right of its container</li>
+				<li><b>
+						<font color="blue">none</font>
+					</b> - The element does not float (will be displayed just where it occurs in the text). This is default</li>
+				<li><b>
+						<font color="blue">inherit</font>
+					</b> - The element inherits the float value of its parent</li>
+			</ul>
+			<li>&#9733; Example: <a href="https://www.w3schools.com/css/css_float.asp"
+					target="-_blank">https://www.w3schools.com/css/css_float.asp</a></li>
+		</ul>
+
+		<pre>
+			/*In CSS file*/
+			img {
+  			float: right;
+			}
+
+			/*In HTML file */
+			&lt;p&gt;In this example, the image will float to the right in the paragraph, 
+			and the text in the paragraph will wrap around the image.&lt;/p&gt;
+
+			&lt;p&gt;&lt;img src="https://www.w3schools.com/css/pineapple.jpg" 
+			alt="Pineapple" style="width:170px;height:170px;margin-left:15px;"&gt;
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, 
+			nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim 
+			ligula venenatis dolor. Maecenas nisl est, ultrices neccongue eget, auctor 
+			vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, 
+			facilisis sed ornare eu, lobortis in odio. Praesent convallis urna a lacus 
+			interdum ut hendrerit risus congue. Nunc sagittis dictum nisi, sed ullamcorper 
+			ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. 
+			Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non
+			fermentum. Sed dapibus pulvinar nibh tempor porta. Cras ac leo purus. Mauris quis 
+			diam velit.&lt;/p&gt;
+		</pre>
+
+
+
+		<h3>clear</h3>
+
+		When we use the float property, and we want the next element <b>
+			<font color="red">below</font>
+		</b> (not on right or left), we will have to use the
+		clear property.
+
+		<ul>
+			<li>&#9733; The <b>
+					<font color="red">clear property</font>
+				</b> specifies what should happen with the element that is next to a floating element.</li>
+			<li>&#9733; Elements after a floating element will flow around it. To avoid this, use the clear property.
+				.</li>
+			<li>&#9733; The clear property specifies on which sides of an element floating elements are not allowed to float.
+			</li>
+			<li>&#9733; The clear property can have one of the following values:</li>
+			<ul>
+				<li> <b>
+						<font color="blue">none</font>
+					</b> - The element is not pushed below left or right floated elements. This is default</li>
+				<li> <b>
+						<font color="blue">left</font>
+					</b> - The element is pushed below left floated elements</li>
+				<li> <b>
+						<font color="blue">right</font>
+					</b> - The element is pushed below right floated elements</li>
+				<li> <b>
+						<font color="blue">both</font>
+					</b> - The element is pushed below both left and right floated elements</li>
+				<li> <b>
+						<font color="blue">inherit</font>
+					</b> - The element inherits the clear value from its parent</li>
+			</ul>
+			<li>&#9733; When clearing floats, you should match the clear to the float: If an element is floated to the left,
+				then you should clear to the left. Your floated element will continue to float, but the cleared element will
+				appear below it on the web page.</li>
+			<li>&#9733; Example: <a href="https://www.w3schools.com/css/tryit.asp?filename=trycss_layout_clear"
+					target="_blank">https://www.w3schools.com/css/tryit.asp?filename=trycss_layout_clear</a></li>
+			<pre>
+			div1 {
+  				float: left;
+			}
+
+			div2 {
+  				clear: left;	
+			}
+			</pre>
+		</ul>
+
+
+		<h2>CSS Layout - The position Property</h2>
+		<ul>
+			<li>&#9733; The <b>
+					<font color="blue">position property</font>
+				</b> specifies the type of positioning method used for an element.</li>
+			<li>&#9733; There are four different position values:</li>
+			<ul>
+				<li>&clubs; <b>
+						<font color="blue">static</font>
+					</b></li>
+				<ul>
+					<li>&star; HTML elements are positioned static by default.</li>
+					<li>&star; Static positioned elements are not affected by the top, bottom, left, and right properties.</li>
+					<li>&star; An element with position: static; is not positioned in any special way; it is always positioned
+						according to the normal flow of the page.</li>
+				</ul>
+				<li>&clubs; <b>
+						<font color="blue">relative</font>
+					</b></li>
+				<ul>
+					<li>&star; An element with position: relative; is positioned relative to its normal position.</li>
+					<li>&star; Setting the top, right, bottom, and left properties of a relatively-positioned element will cause
+						it to be adjusted away from its normal position.</li>
+				</ul>
+				<pre>
+					.relative {
+  						position: relative;
+  				  		left: 30px;
+  						border: 3px solid #73AD21;
+					}
+				</pre>
+				<li>&clubs; <b>
+						<font color="blue">fixed</font>
+					</b></li>
+				<ul>
+					<li>&star; An element with position: fixed; is positioned relative to the viewport, which means it always
+						stays in the same place even if the page is scrolled.</li>
+					<li>&star; The top, right, bottom, and left properties are used to position the element.</li>
+				</ul>
+				<pre>
+					.fixed {
+  						position: fixed;
+  						bottom: 0;
+  						right: 0;
+  						width: 300px;
+  						border: 3px solid #73AD21;
+					}
+				</pre>
+				<li>&clubs; <b>
+						<font color="blue">absolute</font>
+					</b></li>
+				<ul>
+					<li>&star; An element with position: absolute; is positioned relative to the nearest positioned ancestor.</li>
+					<li>&star; However; if an absolute positioned element has no positioned ancestors, it uses the document body,
+						and moves along with page scrolling.</li>
+					<li>&star; Example: <a href="https://www.w3schools.com/css/tryit.asp?filename=trycss_position_absolute"
+							target="_blank">https://www.w3schools.com/css/tryit.asp?filename=trycss_position_absolute</a></li>
+				</ul>
+			</ul>
+			<li>&#9733; Positioning Text In an Image: <a href="https://www.w3schools.com/css/css_positioning.asp"
+					target="_blank"> https://www.w3schools.com/css/css_positioning.asp</a></li>
+		</ul>
+
+		<h2>CSS Navigation Bar</h2>
+
+		<ul>
+			<li>&#9733; Having easy-to-use navigation is important for any web site.</li>
+			<li>&#9733; With CSS you can transform boring HTML menus into good-looking navigation bars.</li>
+			<li>&#9733; <b>
+					<font color="blue">Navigation Bar = List of Links</font>
+				</b></li>
+			<li>&#9733; A navigation bar is basically a list of links, so using the &lt;ul&gt; and &lt;li&gt; elements makes
+				perfect sense:
+				<pre>
+				&lt;ul&gt;
+  				&lt;li&gt;&lt;a href="https://lecture.yangxinmtsu.repl.co/" target="_blank">Home&lt;/a>&lt;/li&gt;
+  				&lt;li&gt;&lt;a href="https://lecture.yangxinmtsu.repl.co/3080.html" target="_blank">CSCI 3080&lt;/a>&lt;/li&gt;
+  				&lt;li&gt;&lt;a href="https://lecture.yangxinmtsu.repl.co/4410.html" target=""_blank>CSCI 4410&lt;/a&gt;&lt;/li&gt;
+				&lt;/ul&gt;
+				</pre>
+			</li>
+			<li>&#9733; Remove the bullets and the margins and padding from the list</li>
+			<pre>
+				ul {
+  				list-style-type: none;
+  				margin: 0;
+  				padding: 0;
+				}
+			</pre>
+			<li>&#9733; <b>
+					<font color="blue">Vertical Navigation Bar</font>
+				</b>: to build a vertical navigation bar, you can style the &lt;a&gt; elements inside the list: </li>
+			<pre>
+				ul {
+  				list-style-type: none;
+  				margin: 0;
+  				padding: 0;
+  				width: 200px;
+  				background-color: #f1f1f1;
+				}
+
+				li a {
+  				display: block;
+  				color: #000;
+  				padding: 8px 16px;
+  				text-decoration: none;
+				}
+
+			/* Change the link color on hover */
+				li a:hover {
+  				background-color: #555;
+  				color: white;
+				}
+			</pre>
+			<li>&#9733; <b>
+					<font color="blue">Horizontal Navigation Bar</font>
+				</b>: </li>
+			<ul>
+				<li>&clubs; One way to build a horizontal navigation bar is to specify the &lt;li&gt; elements as inline,</li>
+				<pre>
+					ul {
+  					list-style-type: none;
+  					margin: 0;
+  					padding: 0;
+					}
+
+					li {
+  					display: inline;
+					}
+				</pre>
+				<li>&clubs; Another way of creating a horizontal navigation bar is to float the &lt;li&gt; elements, and specify
+					a layout for the navigation links:</li>
+				<pre>
+				ul {
+  						list-style-type: none;
+  						margin: 0;
+  						padding: 0;
+  						overflow: hidden;
+  						background-color: #333;
+					}
+
+				li {
+ 						 float: left;
+					}
+
+				li a {
+ 						 display: block;
+  						color: white;
+  						text-align: center;
+            					padding: 14px 16px;
+            					text-decoration: none;
+         			}
+
+       				li a:hover {
+           					  background-color: #111;
+        			}
+				</pre>
+			</ul>
+		</ul>
+
+		<h1>Reference</h1>
+		<ul>
+			<li><a href="https://www.w3schools.com/html/html_intro.asp"
+					target="_">https://www.w3schools.com/html/html_intro.asp</a></li>
+		</ul>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+	<br>
+	<br>
+	<script src="../CCS/Script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Introduction to HTML</title>
+	<link href="../CCS/Site.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>Introduction to HTML</h1>
+		<br>
+
+		<center>
+			<img src="html2.png" width="700px" heigh="600px">
+		</center>
+		<br><br>
+
+		<h2>What is HTML?</h2>
+		HTML is the standard markup language for creating Web pages. HTML stands for HyperText Markup Language. "Markup
+		language" means that, rather than using a programming language to perform functions, HTML uses tags to identify
+		different types of content and the purposes they each serve to the webpage.
+		<ul>
+			<li>&#9733; HTML stands for <b>
+					<font color="red">Hyper Text Markup Language</font>
+				</b> </li>
+			<li>&#9733; HTML describes <b>
+					<font color="red">structure of a Web page</font>
+				</b>.</li>
+			<li>&#9733; HTML documents are described by <b>
+					<font color="red">HTML tags</font>
+				</b>.</li>
+			<li>&#9733; Each HTML tag describes different element.</li>
+		</ul>
+
+		<h2>HTML versions</h2>
+
+		<table style="width:50%">
+			<tr>
+				<th>Version	</th>
+				<th>Year</th>
+			</tr>
+			<tr>
+				<td>HTML</td>
+				<td>1991</td>
+			</tr>
+			<tr>
+				<td>HTML2.0</td>
+				<td>1995</td>
+			</tr>
+			<tr>
+				<td>HTML3.2</td>
+				<td>1997</td>
+			</tr>
+			<tr>
+				<td>HTML4.01</td>
+				<td>1999</td>
+			</tr>
+			<tr>
+				<td>XHTML</td>
+				<td>2000</td>
+			</tr>
+			<tr>
+				<td>HTML5</td>
+				<td>2014</td>
+			</tr>
+		</table>
+<br>
+		
+		<h2>HTML Page Structure</h2>
+
+		There are always two parts to an HTML file: the head and the body.
+		<ul>
+
+			<li>&#9733; <b>
+					<font color="red">head</font>
+				</b>:
+				The head contains information about your HTML file, like its title. The title is what we see in the browser’s
+				title
+				bar or page tab.</li>
+
+			<li>&#9733; <b>
+					<font color="red">body</font>
+				</b>
+				The body is where you put your content, such as text, images, and links. The content in the body is what will be
+				visible on the actual page.</li>
+		</ul>
+		<pre>
+				&lt;!DOCTYPE html&gt;
+				&lt;html&gt;
+				&lt;head&gt;
+					&lt;title&gt;&lt;/title&gt;
+				&lt;/head&gt;
+				&lt;body&gt;
+
+				&lt;/body&gt;
+				&lt;/html&gt;
+		</pre>
+
+		<ul>
+			<li>&#x2022; The
+				<font color="blue">&lt;!DOCTYPE html&gt;</font> declaration defines that this document is an HTML5 document
+			</li>
+			<li>&#x2022; The <font color="blue">&lt;html&gt; </font> element is the root element of an HTML page</li>
+			<li>&#x2022; The <font color="blue">&lt;head&gt; </font> element contains meta information about the HTML page
+			</li>
+			<li>&#x2022; The <font color="blue">&lt;title&gt; </font> element specifies a title for the HTML page (which is
+				shown in the browser's title
+				bar or in
+				the page's tab)</li>
+			<li>&#x2022; The <font color="blue">&lt;body&gt;</font> element defines the document's body, and is a container
+				for all the visible
+				contents, such as
+				headings,
+				paragraphs, images, hyperlinks, tables, lists, etc.
+			</li>
+		</ul>
+
+		<h3>Pay attention to...</h3>
+
+		<ul>
+			<li>&#x2022;
+				Always put &lt;!DOCTYPE html&gt; on the first line. This tells the browser what language it’s reading (in this
+				case, HTML).</li>
+			<li>&#x2022; Always put &lt;html&gt; on the next line. This starts the HTML document.</li>
+			<li>&#x2022; Always put &lt;/html&gt; on the last line. This ends the HTML document.</li>
+		</ul>
+
+		<h2>HTML Element</h2>
+		An HTML element is defined by a <b>
+			<font color="blue">start tag</font>
+		</b>, some content, and an <b>
+			<font color="blue">end tag</font>
+		</b>:
+
+		<pre>
+			&lt;tagname&gt; Content goes here... &lt;/tagname&gt;
+		</pre>
+
+		<table style="width:50%">
+			<tr>
+				<th>Start tag</th>
+				<th>Element content</th>
+				<th>End tag</th>
+			</tr>
+			<tr>
+				<th>&lt;h1&gt;</th>
+				<th>My First Heading</th>
+				<th>&lt;/h1&gt;</th>
+			</tr>
+			<tr>
+				<th>&lt;p&gt;</th>
+				<th>My first paragraph</th>
+				<th>&lt;/h1&gt;</th>
+			</tr>
+		</table>
+
+		<h2>HTML Headings</h2>
+
+		<ul>
+
+			<li>&#x2022; HTML headings are defined with the <b>
+					<font color="red">&lt;h1&gt; &lt;/h1&gt;</font>
+				</b> to <b>
+					<font color="red">&lt;h6&gt; &lt;/h6&gt;</font>
+				</b> tags.</li>
+
+			<li>&#x2022; &lt;h1&gt; defines the most important heading.</li>
+
+			<li>&#x2022; &lt;h6&gt; defines the least important heading.</li>
+
+		</ul>
+
+		<br>
+		<center>
+			<img src="heading1.png" width="900px" heigh="700px">
+		</center>
+		<br><br>
+
+		<h2>HTML Paragraphs</h2>
+
+		HTML paragraphs are defined with the <b>
+			<font color="red">&lt;p&gt; &lt;/p&gt;</font>
+		</b> tag:
+
+		<pre>
+			&lt;p&gt; This is a paragraph. &lt;/p&gt;
+		</pre>
+
+		<h3>Pay attention to...</h3>
+
+		<ul>
+			<li>&#x2022;
+				Any number of spaces and newlines will be counted as only one space.</li>
+		</ul>
+
+		<br>
+
+		<h2>HTML Comment</h2>
+
+		HTML Comment are defined with the <b>
+			<font color="red">&lt;!--</font>
+		</b> and <b>
+			<font color="red">--&gt;</font>
+		</b>tag:
+
+		<pre>
+			&lt;!-- Comments here. --&gt;
+		</pre>
+
+		<ul>
+
+			<li>&#x2022;Comments are not displayed by the browser, but it will help you remember why you did certain things.
+			</li>
+
+			<li>&#x2022;With comments you can place notifications and reminders in your HTML.</li>
+
+			<li>&#x2022;Comments tag:
+				&lt;!-- Comments Here --&gt; (notce that there are at least two dashes on each side)
+			</li>
+		</ul>
+
+
+		<h2>HTML attributes</h2>
+		<ul>
+			<li>&#x2022; HTML elements can have <b>
+					<font color="red">attributes</font>
+				</b>.</li>
+			<li>&#x2022; Attributes provide <b>additional information</b> about an element.</li>
+			<li>&#x2022; Attributes are always specified in the <b>start tag</b>.</li>
+			<li>&#x2022; Attributes come in name/value pairs like : <b>name = 'value'</b>.</li>
+		</ul>
+
+		<h3>Example</h3>
+
+		1. The <b>title</b> attribute for &lt;p&gt;&lt;/p&gt;:
+		<pre>
+			&lt;p title="our course name"&gt;CSCI 4410 Web Technologies&lt;/p&gt;
+		</pre>
+		move your cursor above this paragraph:
+		<center>
+			<p title="our course name">CSCI 4410 Web Technologies</p>
+		</center>
+
+		2. The <b>href</b> attribute for HTML link tag &lt;a&gt;&lt;/a&gt;:
+
+		<pre>
+		&lt;a href="https://lecture.yangxinmtsu.repl.co/4410.html"&gt;CSCI 4410 Course Link&lt;/a&gt;
+		</pre>
+
+		3. The <b>src</b> attribute for HTML image tag &lt;img&gt;:
+
+		<pre>
+				&lt;img src="image_name.jpg"&gt;
+		</pre>
+
+		<br>
+
+		<h2>HTML Hyperlink</h2>
+
+		<ul>
+
+			<li>&#x2022;HTML link is a hyperlink.
+			</li>
+			<li>&#x2022;Hyperlink is a text or image you can click on, and jump to another document.</li>
+		</ul>
+
+		HTML links are defined with the <b>
+			<font color="red">&lt;a&gt; &lt;/a&gt;</font>
+		</b> tag:
+
+		<pre>
+		&lt;a href="https://lecture.yangxinmtsu.repl.co/4410" target="_blank"&gt;CSCI 4410 Course Link&lt;/a&gt;
+		</pre>
+
+		<ul>
+			<li>&#x2022; In HTML, links are defined with the &lt;a&gt; tag (a stands for anchor).
+			</li>
+			<li>&#x2022; Hyperlink is a text or image you can click on, and jump to another document.</li>
+			<li>&#x2022; The <b>
+					<font color="red">href</font>
+				</b> attribute specifies the destination address. The href attribute can be either absolute URL (a full web
+				address) or local link.</li>
+			<li>&#x2022; The <b>
+					<font color="red">target</font>
+				</b> attribute specifies where to open the linked document.</li>
+			<li>&#x2022; The link text is the visible part.</li>
+
+		</ul>
+
+
+		<h3>target attribute</h3>
+
+		<table style="width:50%">
+			<tr>
+				<th>Value</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>_blank</td>
+				<td>Load in a new window</td>
+			</tr>
+			<tr>
+				<td>_self</td>
+				<td>Load in the same frame as it was clicked</td>
+			</tr>
+			<tr>
+				<td>_parent</td>
+				<td>Load in the parent frameset</td>
+			</tr>
+			<tr>
+				<td>_top</td>
+				<td>Load in the full body of the window</td>
+			</tr>
+		</table>
+
+
+		<h3>Create a bookmark</h3>
+		<hr>
+
+		<ul>
+			<li>&#x2022; HTML bookmarks are used to allow readers to jump to specific parts of a Web page.
+			</li>
+			<li>&#x2022; Bookmarks are practical if your website has long pages.</li>
+			<li>&#x2022; To make a bookmark, you have to first create the bookmark (by the <b>
+					<font color="red">id</font>
+				</b> attribute), then add a link (#
+				and the value of
+				the id attribute) to it.</li>
+			<li>&#x2022; Bookmark is just a link to some tag.</li>
+		</ul>
+
+		<pre>
+	&lt;h1 id="top"&gt;This is the top.&lt;/h1&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+	&lt;p&gt;This is a paragraph.&lt;/p&gt;
+  &lt;a href="#top"&gt;Go to the top.&lt;/a&gt;
+		</pre>
+
+		<br>
+		<h2>HTML Images</h2>
+
+		<ul>
+
+			<li>&#x2022; HTML can display images formats like JPG, PNG, GIF, SVG, ....
+			</li>
+			<li>&#x2022; The &lt;img&gt; tag is empty, it contains attributes only, and does not have a closing tag.</li>
+			<li>&#x2022; HTML images are defined with the<b>
+					<font color="red">&lt;img&gt;</font>
+				</b> tag:</li>
+		</ul>
+
+		<pre>
+		&lt;img src="mtsu.png" alt="MTSU Campus" width="200px" height="400px"&gt;
+		</pre>
+
+		<ul>
+			<li>&#x2022;<b>
+					<font color="red">src</font>
+				</b>: source image file, can be either <b><font color="blue">local</font></b> or <b><font color="blue">online</font></b>.</li>
+			<li>&#x2022;<b>
+					<font color="red">alt</font>
+				</b>: specifies an alternate text for an image, if the image cannot be displayed.</li>
+			<li>&#x2022;<b>
+					<font color="red">width</font>
+				</b>: image width, the values are specified in pixels.</li>
+			<li>&#x2022;<b>
+					<font color="red">height</font>
+				</b>: image height, the values are specified in pixels.</li>
+		</ul>
+
+<h3>more on src attribute</h3>
+		<ul>
+			<li>&#x2022; For an online image, we use its <b>
+					<font color="red">absolute/full url link</font></b>.</li>
+		<pre>
+	&lt;img src="https://www.mtsu.edu/creativesolutions/images/B20110707D011v2.jpg" width="200px" height="200px"&gt;
+		</pre>
+		<center>
+		<img src="absolute.png" width="500px" height="400px">
+		</center>
+		<br>
+			<li>&#x2022; For a local image, you can use its <b>absolute/full path</b> or <b>relative path</b></li>
+			<ul>
+				<li>Q: which one is better for your project?</li>
+			</ul>
+		</ul>
+		
+		<h2>HTML Lists</h2>
+
+		<h3>Unordered lists</h3>
+		<hr>
+		<ul>
+			<li>&#x2022; An unordered list are defined with <b>
+					<font color="red">&lt;ul&gt; &lt;/ul&gt;</font>
+				</b>tag.</li>
+			<li>&#x2022; Each list item starts with the
+				<b>
+					<font color="red">&lt;li&gt;</font>
+				</b> tag.
+			</li>
+
+			<pre>
+		&lt;ul&gt;
+		&lt;li&gt;Coffee&lt;/li&gt;
+		&lt;li&gt;Tea&lt;/li&gt;
+		&lt;li&gt;Milk&lt;/li&gt;
+		&lt;/ul&gt;
+		</pre>
+			<img src="unordered.png" width="200px" heigh="100px">
+			<br>
+
+			<li>&#x2022; A <b>
+					<font color="red">list-style-type</font>
+				</b> attribute can be added to an unordered list, to define the style of the marker</li>
+			<br>
+			<table style="width:50%">
+				<tr>
+					<th>list-style-type</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>disc</td>
+					<td>Sets the list item marker to a bullet (default)</td>
+				</tr>
+				<tr>
+					<td>circle</td>
+					<td>Sets the list item marker to a circle</td>
+				</tr>
+				<tr>
+					<td>square</td>
+					<td>Sets the list item marker to a square</td>
+				</tr>
+				<tr>
+					<td>none</td>
+					<td>The list items will not be marked</td>
+				</tr>
+			</table>
+		</ul>
+
+		<br>
+
+		<img src="unorderBullet.png" width="800px" heigh="500px">
+		<br>
+
+		<h3>Ordered list</h3>
+		<hr>
+		<ul>
+			<li>&#x2022; An Ordered list starts with the <b>
+					<font color="red">&lt;ol&gt; &lt;/ol&gt;</font>
+				</b></li>
+			<li>&#x2022; Each list item starts with the
+				<b>
+					<font color="red">&lt;li&gt;</font>
+				</b> tag.
+			</li>
+
+			<pre>
+		&lt;ol&gt;
+		&lt;li&gt;Coffee&lt;/li&gt;
+		&lt;li&gt;Tea&lt;/li&gt;
+		&lt;li&gt;Milk&lt;/li&gt;
+		&lt;/ol&gt;
+		</pre>
+			<img src="ordered.png" width="250px" heigh="150px">
+			<br>
+
+			<li>&#x2022; A <b>
+					<font color="red">type</font>
+				</b> attribute can be added to an ordered list, to define the style of the marker</li>
+			<br>
+			<table style="width:50%">
+				<tr>
+					<th>type</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>type="1"</td>
+					<td>The list items will be numbered with numbers (default)</td>
+				</tr>
+				<tr>
+					<td>type="A"</td>
+					<td>The list items will be numbered with uppercase letters</td>
+				</tr>
+				<tr>
+					<td>type="a"</td>
+					<td>The list items will be numbered with lowercase letters</td>
+				</tr>
+				<tr>
+					<td>type="I"</td>
+					<td>The list items will be numbered with uppercase roman numbers</td>
+				</tr>
+				<tr>
+					<td>type="i"</td>
+					<td>The list items will be numbered with lowercase roman numbers</td>
+				</tr>
+			</table>
+		</ul>
+
+		<br>
+		<img src="orderedBullet.png" width="1000px" heigh="700px">
+		<br>
+		
+<h3>Nested lists</h3>
+<hr>
+		<pre>
+	&lt;ol type="1"&gt;
+		&lt;li&gt;Coffee&lt;/li&gt;
+			&lt;ul&gt;
+				&lt;li&gt;Espresso&lt;/li&gt;
+				&lt;li&gt;Cappuccino&lt;/li&gt;
+			&lt;/ul&gt;
+		&lt;li&gt;Tea&lt;/li&gt;
+		&lt;li&gt;Milk&lt;/li&gt;
+	&lt;/ol&gt;
+		</pre>
+		
+<br>
+		<img src="nestList.png" width="300px" heigh="150px">
+		<br>
+		
+		<h2>HTML Table</h2>
+
+		<ul>
+			<li>&#x2022; HTML tables allow web developers to arrange data into <b>
+					<font color="red">rows</font>
+				</b> and <b>
+					<font color="red">columns</font>
+				</b>.</li>
+			<li>&#x2022; Tables are defined with the <b>
+					<font color="red">&lt;table&gt; &lt;/table&gt;</font>
+				</b>tag.</li>
+			<li>&#x2022; <b>
+					<font color="red">&lt;th&gt;</font>
+				</b> Defines a header cell in a table</li>
+			<li>&#x2022; Tables are divided into table rows with the <b>
+					<font color="red">&lt;tr&gt;</font>
+				</b> tag.</li>
+			<li>&#x2022; Table rows are divided into table data with the <b>
+					<font color="red">&lt;td&gt;</font>
+				</b> tag.</li>
+			<br>
+			<li>&#x2022; If you do not specify a border for the table, it will be displayed without borders:</li>
+			<pre>
+     &lt;table&gt;
+        &lt;!-- first row: headers --&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Course Title&lt;/th&gt;
+            &lt;th&gt;Course Name&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;!-- second row --&gt;
+        &lt;tr&gt;
+            &lt;td&gt;CSCI 3080&lt;/td&gt;
+            &lt;td&gt;Discrete Structure&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;!-- third row --&gt;
+        &lt;tr&gt;
+            &lt;td&gt;CSCI 4410&lt;/td&gt;
+            &lt;td&gt;Web Technologies&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/table&gt;
+			</pre>
+
+			<center>
+				<img src="table1.png" width="400px" height="150px">
+			</center>
+			<br>
+			<li>&#x2022; A <b>
+					<font color="red">border</font>
+				</b> can be added using the border attribute.</li>
+			<pre>
+     &lt;table border="1px"&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Course Title&lt;/th&gt;
+            &lt;th&gt;Course Name&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;CSCI 3080&lt;/td&gt;
+            &lt;td&gt;Discrete Structure&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;CSCI 4410&lt;/td&gt;
+            &lt;td&gt;Web Technologies&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/table&gt;
+			</pre>
+			<center>
+				<img src="table2.png" width="400px" height="150px">
+			</center>
+			<br>
+			<li>&#x2022; Table Cells can <b>Span Many Columns</b> using the <b>
+					<font color="red">colspan</font>
+				</b> attribute.</li>
+
+			<pre>
+     &lt;table border="1px"&gt;
+        &lt;tr&gt;
+            &lt;th colspan="2"&gt;Course Title and Name&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;CSCI 3080&lt;/td&gt;
+            &lt;td&gt;Discrete Structure&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;CSCI 4410&lt;/td&gt;
+            &lt;td&gt;Web Technologies&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/table&gt;
+			</pre>
+			<center>
+				<img src="table3.png" width="400px" height="150px">
+			</center>
+			<br>
+
+			<li>&#x2022; Table Cells can <b>Span Many Rows</b> using the <b>
+					<font color="red">rowspan</font>
+				</b> attribute.</li>
+
+			<pre>
+     &lt;table border="1px"&gt;
+        &lt;tr&gt;
+           &lt;th&gt;Course Title&lt;/th&gt;
+            &lt;th&gt;Course Name&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td rowspan="2"&gt;CSCI 3080&lt;/td&gt;
+            &lt;td&gt;Discrete Structure&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Web Technologies&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/table&gt;
+			</pre>
+			<center>
+				<img src="table4.png" width="400px" height="150px">
+			</center>
+			<br>
+
+		</ul>
+
+		<h2>HTML Formatting</h2>
+
+		<h3>HTML Bold</h3>
+
+		<ul>
+			<li>&#x2022; The HTML &lt;b&gt; element defines bold text, without any extra importance.</li>
+		</ul>
+
+
+		<h3>HTML Italic</h3>
+
+		<ul>
+			<li>&#x2022; The HTML &lt;i&gt; element defines italic text, without any extra importance.</li>
+		</ul>
+
+		<h3>HTML Marked</h3>
+
+		<ul>
+			<li>&#x2022; The HTML &lt;mark&gt; element defines marked or highlighted text.</li>
+		</ul>
+
+		<pre>
+     &lt;p&gt;This text is normal.&lt;/p&gt;
+     &lt;p&gt;&lt;b&gt;This text is bold.&lt;/b>&lt;/p&gt;
+     &lt;p&gt;&lt;i&gt;This text is italic.&lt;/i&gt;&lt;/p&gt;
+     &lt;p&gt;&lt;mark&gt;This text is marked.&lt;/mark&gt;&lt;/p&gt;
+		</pre>
+
+		This text is normal. <br>
+		<b>This text is bold.</b> <br>
+		<i>This text is italic.</i> <br>
+		<mark>This text is marked.</mark> <br>
+		<br>
+
+		<h2>HTML Editors</h2>
+
+		<ul>
+			<li>&#x2022; Notepad++</li>
+			<li>&#x2022; Atom</li>
+			<li>&#x2022; vi/vim/emac</li>
+			<li>&#x2022; sublime</li>
+			<li>&#x2022; Online Editor: replit</li>
+		</ul>
+
+		<h2>HTML tip: use lowercase tags</h2>
+
+		<ul>
+			<li>&#x2022; HTML tags are not case sensitive, &lt;P&gt; means the same as
+				&lt;p&gt;.
+			</li>
+			<li>&#x2022; If you want to view the HTML source, right-click in the page and select "View Page Source" (in
+				Chrome) or "View Source" (in IE), or similar in another browser. This will open a window containing the HTML
+				code of the page.</li>
+		</ul>
+
+		<h2>Indentation is your friend</h2>
+		Indentation really helps make your code more readable!
+		
+		<h2>Process for developing a website</h2>
+		<ul>
+			<li>&#9734; Plan and design the website</li>
+			<li>&#9734; Create the web pages using an editor</li>
+			<li>&#9734; Test the web pages</li>
+			<li>&#9734; Publish the web pages by uploading the pages to the web server.</li>
+		</ul>
+
+
+		<!--
+		<h2>Exercise</h2>
+
+		<h3>1.</h3>
+
+		<ul>
+			<li>a. </li>
+			<li>b. </li>
+			<li>c. </li>
+			<li>d. </li>
+			<li>e. </li>
+			<li>f. </li>
+		</ul>
+		<br>
+-->
+
+		<h1>Reference</h1>
+		<ul>
+			<li><a href="https://www.w3schools.com/html/html_intro.asp"
+					target="_">https://www.w3schools.com/html/html_intro.asp</a></li>
+			<li><a
+					href="https://blog.hubspot.com/marketing/web-design-html-css-javascript#:~:text=An%20overview%3A,the%20behavior%20of%20different%20elements."
+					target="_">https://blog.hubspot.com/marketing/web-design-html-css-javascript#:~:text=An%20overview%3A,the%20behavior%20of%20different%20elements.</a>
+			</li>
+		</ul>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+	<br>
+	<br>
+	<script src="../CCS/Script.js"></script>
+
+</body>
+
+</html>
