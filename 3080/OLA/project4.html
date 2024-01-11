@@ -1,0 +1,183 @@
+<HTML>
+
+<HEAD>
+	<TITLE>Project 4 - Dijkstra's Algorithm: Explanation and Implementation with C++ program</TITLE>
+	<META NAME="author" CONTENT="Xin Yang">
+	<META NAME="robots" CONTENT="noindex, nofollow">
+</HEAD>
+
+<BODY BACKGROUND="lab0.gif" BGCOLOR="white" TEXT="black" LINK="blue" VLINK="navy" ALINK="red">
+	<CENTER>
+		<TABLE BORDER=8>
+			<TR VALIGN=middle>
+				<TD BGCOLOR="white">
+					<CENTER>
+						<FONT SIZE=5 COLOR="navy"> &nbsp; <B>
+								CSCI 3080 - <EM>Discrete Structures</EM>
+							</B></FONT> &nbsp;
+						<BR>
+						<FONT SIZE=4 COLOR="black"><B>
+								Project 4 - Dijkstra's Algorithm: Implementation with C++ program
+							</B></FONT>
+						<br>
+						<font color="red"><b>Due date: Nov 20th, 2023 (Monday)</b></font>
+					</CENTER>
+				</TD>
+			</TR>
+		</TABLE>
+	</CENTER>
+	<BR>
+
+	<h1>What is Dijkstra’s Algorithm?</h1>
+
+	Dijkstra’s algorithm is also known as the shortest path algorithm. It is an algorithm used to find the shortest path
+	between nodes of the graph. The algorithm creates the tree of the shortest paths from the starting source vertex from
+	all other points in the graph. It differs from the minimum spanning tree as the shortest distance between two vertices
+	may not be included in all the vertices of the graph. The algorithm works by building a set of nodes that have a
+	minimum distance from the source. Here, Dijkstra's algorithm uses a greedy approach to solve the problem and find the
+	best solution.
+
+	<h1>Algorithm for Dijkstra’s in C++</h1>
+
+	To know how Dijkstra's algorithm works behind the scene, look at the below steps to understand it in detail:
+
+	<ol>
+		<li>First of all, we will mark all vertex as unvisited vertex </li>
+		<li>Then, we will mark the source vertex as 0 and all other vertices as infinity</li>
+		<li>Consider source vertex as current vertex</li>
+		<li>Calculate the path length of all the neighboring vertex from the current vertex by adding the weight of the edge
+			in the current vertex</li>
+		<li>Now, if the new path length is smaller than the previous path length then replace it otherwise ignore it</li>
+		<li>Mark the current vertex as visited after visiting the neighbor vertex of the current vertex</li>
+		<li>Select the vertex with the smallest path length as the new current vertex and go back to step 4.</li>
+		<li>Repeat this process until all the vertex are marked as visited.</li>
+	</ol>
+
+	Once we go through the algorithm, we can backtrack the source vertex and find our shortest path.
+
+	<h1>Pseudocode of Dijkstra’s Algorithm in C++</h1>
+
+	<center>
+		<img src="./dijstra.png" width="700px" height="300px">
+	</center>
+	<!-- ================================================================== -->
+
+	<h1>Applications</h1>
+
+	<ol>
+		<li>Dijkstra’s algorithm is used as a routing protocol required by the routers to update their forwarding table.
+		</li>
+		<li>It is used to find the shortest distance between two locations along the path on google maps.</li>
+		<li>It is used in telephone networking to find the shortest path for finding the nearest switching station for
+			transmission.</li>
+		<li>Dijkstra’s algorithm is used to find the shortest path between users measured through handshakes or connections
+			among them.</li>
+		<li>Dijkstra’s algorithm is used to minimize the number of hops in computer networks.</li>
+	</ol>
+
+
+	<h1>1. C++ code for Dijkstra’s Algorithm</h1>
+	Please write a C++ program to implement Dijstra's algorithm. Please use the source code in replit as reference. Please
+	<font color="red"><b>modifiy</b></font> the source code in replit to meet the following requirments:
+
+	<font color="blue">
+		<b>
+			<ol>
+				<li>Please modify the code to <font color="red">read the two-dimenional array from a txt file</font> 
+				</li>
+				Here is the reference for reading data from data file: <a href="https://lecture.yangxinmtsu.repl.co/3080/code/adjmatrix.cpp" target="_blank">read data from a txt file</a>
+				<br>
+				<br>
+				<li>Please modify the DijkstraAlgo function to have <font color="red">three parameters</font>:</li>
+				<ul>
+					<li>(1) Two-dimentional array</li>
+					<li>(2) Starting Node</li>
+					<li>(3) Ending Node</li>
+				</ul>
+				<br>
+				<li>Please <font color="red">prompt the user</font> to enter the Starting Node from the Keyboard.</li>
+				<br>
+				<li>Please <font color="red">prompt the user</font> to enter the Ending Node from the Keyboard. </li>
+				<br>
+				<li>Please print the <font color="red">shortest distance</font> between the Starting Node and the Ending Node.</li>
+				<br>
+				<li>Please print the <font color="red">shortest path</font> bewteen the Starting Node and the Ending Node.</li>
+				<br>
+			</ol>
+		</b>
+	</font>
+
+	&#9733; Please use the following command to <font color="blue"><b>compile</b></font> and <font color="blue">
+			<b>run</b>
+		</font> your code: 
+	<font color="red"><b>
+			<ul>
+				<li>c++ main.cpp</li>
+				<li>./a.out</li>
+			</ul>
+		</b>
+	</font>
+
+	<h1>2. Graph Text File</h1>
+	<a href="https://lecture.yangxinmtsu.repl.co/3080/OLA/graph.txt" target="_blank">graph.txt</a>
+
+	<h1>3. Smaple Output</h1>
+
+	<img src="case2.png" width="500px" height="200px">
+	<br>
+	<br>
+	<img src="case1.png" width="600px" height="200px">
+
+
+	<h1>4. Comments</h1>
+
+	<ul>
+		<li>&#9733; Please add the following comments to the top of your main.cpp:</li>
+		<pre>
+		/*
+		Author: Your name
+		Date: Month/Day/Year
+		Project purpose: Dijkstra's Algorithm: Explanation and Implementation with C++ program
+		*/
+	</pre>
+		<li>&#9733; Please add other nessasary comments to your source code.</li>
+	</ul>
+
+	<hr>
+	<h1>5. Submit</h1>
+	Please submit your Project 4 in replit by clicking submit.
+
+
+
+	<!--
+	<h1>Create your replit Account</h1>
+	<font color="red"><b>Be attention</b></font>, before you start your Project1, please create a replit account with your
+	MT
+	eMail and join the team
+	CSCI-3080-Fall-2022 in replit. Please following the instructions in CLA1:
+	<a href="https://lecture.yangxinmtsu.repl.co/3080/OLA/cla1.html" target="_blank">CLA1</a>
+-->
+
+
+	<h1>Reference</h1>
+	<a
+		href="https://favtutor.com/blogs/dijkstras-algorithm-cpp#:~:text=Algorithm%20for%20Dijkstra's%20in%20C%2B%2B&text=Consider%20source%20vertex%20as%20current,replace%20it%20otherwise%20ignore%20it">reference</a>
+	<HR>
+	<HR>
+	<CENTER>
+		<B>
+			<FONT size="+1">
+				Congratulations! You have finished your project 4!
+			</FONT>
+		</B>
+
+
+		<!--
+<BR>
+(There is nothing to hand in for Lab 1.)
+</CENTER>
+-->
+
+</BODY>
+
+</HTML>

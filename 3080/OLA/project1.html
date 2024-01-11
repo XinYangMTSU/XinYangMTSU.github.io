@@ -1,0 +1,150 @@
+<HTML>
+
+<HEAD>
+	<TITLE>Project 1 - Recursive and Iterative Implementation in C++ </TITLE>
+	<META NAME="author" CONTENT="Xin Yang">
+	<META NAME="robots" CONTENT="noindex, nofollow">
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+</HEAD>
+
+<BODY BACKGROUND="lab0.gif" BGCOLOR="white" TEXT="black" LINK="blue" VLINK="navy" ALINK="red">
+	<CENTER>
+		<TABLE BORDER=8>
+			<TR VALIGN=middle>
+				<TD BGCOLOR="white">
+					<CENTER>
+						<FONT SIZE=5 COLOR="navy"> &nbsp; <B>
+								CSCI 3080 - <EM>Discrete Structures</EM>
+							</B></FONT> &nbsp;
+						<BR>
+						<FONT SIZE=4 COLOR="black"><B>
+								Project 1 - Recursive and Iterative Implementation in C++
+							</B></FONT>
+						<br>
+						<font color="red"><b>Due date: Oct 2nd, 2023 (Monday)</b></font>
+					</CENTER>
+				</TD>
+			</TR>
+		</TABLE>
+	</CENTER>
+	<BR>
+
+	<h1>1. Please write C++ programs to evaluate S(n) for positive integer \( n &gt; 1 \). Please write both <font
+			color="red">recursive</font>
+		algorithm
+		and <font color="red">iterative</font> algorithm.</h1>
+
+	<pre>
+	S(1) = 5
+	S(n) = 2S(n-1) + 5 for n > 1
+	</pre>
+
+	<ul>
+		<li>&#9733; Please create a <font color="red"><b>p1.cpp</b></font> for this question. </li>
+		<li>&#9733; Please create two functions in your p1.cpp:</li>
+		<font color="blue"><b>
+				<ul>
+					<li> int s_rec(int n)</li>
+					<li> int s_ite(int n)</li>
+				</ul>
+			</b></font>
+		<li>&#09733; Please use <font color="red"><b>for loops</b></font> to display the first 10 items for S(n) relation by
+			calling your recursive and iterative functions in <font color="red">
+				<b>main function</b>
+			</font>:</li>
+		<pre>
+			// The first 10 items for the relation S(n) using recursive algorithm: 
+			for(int i = 1; i <= 10; i++)
+					cout << s_rec(i) << endl;
+			
+			// The first 10 items for the relation S(n) using iterative algorithm: 
+			for(int i = 1; i <= 10; i++)
+					cout << s_ite(i) << endl;
+		</pre>
+		<li>&#9733; Please use the following command to <font color="blue"><b>compile</b></font> and <font color="blue">
+				<b>run</b>
+			</font> your code: </li>
+		<font color="red"><b>
+				<ul>
+					<li>c++ p1.cpp</li>
+					<li>./a.out</li>
+				</ul>
+			</b>
+		</font>
+	</ul>
+
+
+	<h1>2. Please write C++ programs to evaluate T(n) for positive integer \( n &gt; 1 \). Please write both <font
+			color="red">recursive</font>
+		algorithm
+		and <font color="red">iterative</font> algorithm.</h1>
+
+	<pre>
+	T(1) = 2
+	T(n) = nT(n−1) + n for n > 1
+	</pre>
+
+	<ul>
+		<li>&#9733; Please create a <font color="red"><b>p2.cpp</b></font> for this question. </li>
+		<li>&#9733; Please create two functions in your p2.cpp:</li>
+		<font color="blue"><b>
+				<ul>
+					<li> int t_rec(int n)</li>
+					<li> int t_ite(int n)</li>
+				</ul>
+			</b></font>
+		<li>&#09733; Please use <font color="red"><b>for loops</b></font> to display the first 10 items for T(n) relation by
+			calling your recursive and iterative functions in <font color="red">
+				<b>main function</b>
+			</font>:</li>
+		<pre>
+			// The first 10 items for the relation T(n) using recursive algorithm: 
+			for(int i = 1; i <= 10; i++)
+					cout << t_rec(i) << endl;
+			
+			// The first 10 items for the relation T(n) using iterative algorithm: 
+			for(int i = 1; i <= 10; i++)
+					cout << t_ite(i) << endl;
+		</pre>
+		<li>&#9733; Please use the following command to <font color="blue"><b>compile</b></font> and <font color="blue">
+				<b>run</b>
+			</font> your code: </li>
+		<font color="red"><b>
+				<ul>
+					<li>c++ p2.cpp</li>
+					<li>./a.out</li>
+				</ul>
+			</b>
+		</font>
+	</ul>
+
+	<h1>3. Comments</h1>
+
+	<ul>
+		<li>&#9733; Please add the following comments to the top of your p1.cpp and p2.cpp:</li>
+		<pre>
+		/*
+		Author: Your name
+		Date: Month/Day/Year
+		Project purpose: recursive and iterative algorithm 
+		*/
+	</pre>
+		<li>&#9733; Please add other nessasary comments to your source code.</li>
+	</ul>
+
+	<h1>4. Submit</h1>
+	Please submit your Project 1 in replit by clicking submit.
+
+	<HR>
+	<CENTER>
+		<B>
+			<FONT size="+1">
+				Congratulations! You have finished your Project 1!
+			</FONT>
+		</B>
+		<br>
+		<br>
+
+</BODY>
+
+</HTML>

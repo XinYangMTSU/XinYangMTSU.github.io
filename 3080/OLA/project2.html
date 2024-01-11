@@ -1,0 +1,129 @@
+<HTML>
+
+<HEAD>
+	<TITLE>Project 2 - Gaussian Elimination Implementation in C++ </TITLE>
+	<META NAME="author" CONTENT="Xin Yang">
+	<META NAME="robots" CONTENT="noindex, nofollow">
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+</HEAD>
+
+<BODY BACKGROUND="lab0.gif" BGCOLOR="white" TEXT="black" LINK="blue" VLINK="navy" ALINK="red">
+	<CENTER>
+		<TABLE BORDER=8>
+			<TR VALIGN=middle>
+				<TD BGCOLOR="white">
+					<CENTER>
+						<FONT SIZE=5 COLOR="navy"> &nbsp; <B>
+								CSCI 3080 - <EM>Discrete Structures</EM>
+							</B></FONT> &nbsp;
+						<BR>
+						<FONT SIZE=4 COLOR="black"><B>
+								Project 2 - Gaussian Elimination Implementation in C++
+							</B></FONT>
+						<br>
+						<font color="red"><b>Due date: Oct 20th, 2023 (Friday)</b></font>
+					</CENTER>
+				</TD>
+			</TR>
+		</TABLE>
+	</CENTER>
+	<BR>
+
+	<h1>1. Please write a C++ program to implement Gaussian Elimination for linear equations systems.</h1>
+
+	Please convert the following Python code to C++ code.
+
+	<pre>
+		n_row,n_col = aug_mat.shape
+		
+ 		for i in range(n_row):
+			divisor = aug_mat[i,i]
+ 				
+			for j in range(n_col):
+ 				aug_mat[i,j] /= divisor
+
+ 			for j in range(n_row):
+ 				if j != i:
+ 					multiplier = -aug_mat[j,i]
+ 					aug_mat[j,:] += multiplier*aug_mat[i,:]
+	</pre>
+
+	<ul>
+		<li>&#9733; Please create a <font color="red"><b>main.cpp</b></font> for this question. </li>
+		<li>&#09733; Please write all code in your <font color="red">
+				<b>main function</b>
+			</font>
+		</li>
+
+		<li>&#9733; Please use the following command to <font color="blue"><b>compile</b></font> and <font color="blue">
+				<b>run</b>
+			</font> your code: </li>
+		<font color="red"><b>
+				<ul>
+					<li>c++ main.cpp</li>
+					<li>./a.out</li>
+				</ul>
+			</b>
+		</font>
+	</ul>
+
+
+
+	<h1>
+		<font color="red">2. Hint:</font>
+	</h1>
+
+	<pre>
+	const int NUM_ROW = 3;
+	const int NUM_COL = 4;
+	double aug_matrix[NUM_ROW][NUM_COL] = {{2,-3,1,-22},
+	                                       {7,9,-3,14},
+	                                       {6,7,2,91}};
+
+
+	//nested for loop to display the augment matrix
+	for(int i = 0; i < NUM_ROW; i++)
+	{
+		for(int j = 0; j < NUM_COL; j++)
+				cout << aug_matrix[i][j] << " ";
+		cout << endl;
+	}					
+	</pre>
+
+	<font color="red"><b>Demo Output:</b></font>
+	<pre>
+		1 0 0 -4 
+		0 1 0 11 
+		0 0 1 19 
+	</pre>
+
+	<h1>3. Comments</h1>
+
+	<ul>
+		<li>&#9733; Please add the following comments to the top of your main.cpp:</li>
+		<pre>
+		/*
+		Author: Your name
+		Date: MM/DD/YY
+		Project purpose: Gaussian Elimination Implementation in C++
+		*/
+	</pre>
+		<li>&#9733; Please add other nessasary comments to your source code.</li>
+	</ul>
+
+	<h1>4. Submit</h1>
+	Please submit your Project 2 in replit by clicking submit.
+
+	<HR>
+	<CENTER>
+		<B>
+			<FONT size="+1">
+				Congratulations! You have finished your Project 2!
+			</FONT>
+		</B>
+		<br>
+		<br>
+
+</BODY>
+
+</HTML>
