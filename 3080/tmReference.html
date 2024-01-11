@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Turing Machine</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 9: Finite-State Machines, Turing machines</h1>
+
+		<center>
+			<h2>Section 9.4 Turing Machines</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h2>Turing Machines Reference</h2>
+
+		ChatGPT:
+
+		Complexity theory is like a way of understanding how hard or easy it is to solve different problems using computers.
+		And Turing Machines are like special machines that help us study and measure the difficulty of these problems.
+
+		Imagine you have a bunch of puzzles, and you want to know how long it will take to solve each puzzle. The Turing
+		Machine is like a magical puzzle-solving machine that can try to solve any puzzle you give it. It follows specific
+		rules and steps to solve the puzzle.
+
+		Now, some puzzles are easy and can be solved quickly by the Turing Machine. These puzzles belong to a group called
+		"P." It's like solving a jigsaw puzzle with a few pieces. The pieces fit together nicely, and you can quickly find
+		the right places for them.
+
+		But then there are puzzles that are much harder to solve. These belong to a group called "NP." It's like solving a
+		huge maze with many different paths. It's challenging to find the right way out, and it may take a long time to
+		solve.
+
+		The interesting thing is that while the Turing Machine can try to solve these harder puzzles, it might take a very
+		long time to find the solution. We don't know if there's a quick and efficient way to solve all puzzles in the NP
+		group, or if it will always take a long time.
+
+		So, Complexity Theory helps us understand and classify problems based on how hard they are to solve. Turing Machines
+		provide the foundation for this theory by being a model that helps us measure the difficulty of problems and
+		determine which problems can be solved quickly and which ones are more challenging.
+
+		By studying Complexity Theory and Turing Machines, we can learn about the limits and possibilities of solving
+		problems using computers, which is important for designing efficient algorithms and understanding what can and
+		cannot be done in computer science.
+
+		<br><br>
+
+		Turing Machines provide a way to measure the difficulty of problems by analyzing the resources required to solve
+		them. These resources include time and space.
+
+		Time Complexity: Turing Machines help us understand how long it takes to solve a problem. We measure this as time
+		complexity. It tells us the number of steps or operations the Turing Machine needs to perform to find the solution.
+		Problems that can be solved quickly by a Turing Machine are said to have a low time complexity, while problems that
+		require a lot of steps have a high time complexity.
+
+		Space Complexity: Turing Machines also help us understand how much memory or space is needed to solve a problem. We
+		measure this as space complexity. It tells us how much memory the Turing Machine needs to store and manipulate data
+		while solving the problem. Problems that can be solved with a small amount of memory have a low space complexity,
+		while problems that require a lot of memory have a high space complexity.
+
+		By studying the behavior of Turing Machines, we can analyze the time and space complexity of different problems.
+		This analysis helps us determine which problems can be solved quickly and which ones are more challenging. We can
+		classify problems into different complexity classes based on their time and space requirements.
+
+		For example:
+
+		Problems in the class P (Polynomial Time) can be solved efficiently by a Turing Machine in a reasonable amount of
+		time. These problems have a low time complexity.
+
+		Problems in the class NP (Nondeterministic Polynomial Time) are more challenging. It means that if we are given a
+		possible solution, we can quickly verify if it is correct. However, finding the solution itself may take a long
+		time. These problems have a high time complexity.
+
+		There are other complexity classes as well, such as NP-complete and NP-hard, which represent some of the most
+		difficult problems to solve efficiently.
+
+		Turing Machines provide a reference model that allows us to study and compare the time and space requirements of
+		different problems. This helps us understand the difficulty of problems and design algorithms that can efficiently
+		solve them. It also helps us identify problems that may be inherently difficult and have no known efficient solutio
+
+		<br><br>
+
+		Implementing Turing Machines to directly measure the time complexity of a problem can be challenging because Turing
+		Machines are an abstract theoretical model rather than a practical programming language. However, we can use the
+		theoretical concepts derived from Turing Machines to estimate or analyze the time complexity of a problem. Here's a
+		high-level approach:
+
+		Define the Problem: Clearly define the problem you want to analyze in terms of inputs, outputs, and the desired
+		solution. Understand the problem's requirements, constraints, and any assumptions.
+
+		Design an Algorithm: Design an algorithm that solves the problem. This algorithm should be based on the rules and
+		behaviors of Turing Machines. Break down the problem into smaller steps and define the operations needed to solve
+		each step.
+
+		Analyze the Algorithm: Analyze the algorithm to estimate its time complexity. This can be done by counting the
+		number of steps or operations required for each step of the algorithm. Identify any loops or repetitive operations
+		that may affect the overall time complexity.
+
+		Express the Time Complexity: Express the time complexity using Big O notation or other relevant complexity
+		notations. This notation describes how the time requirements of the algorithm grow as the input size increases. For
+		example, O(n) represents linear time complexity, O(n^2) represents quadratic time complexity, and so on.
+
+		Validate and Verify: To validate the estimated time complexity, you can run the algorithm on different input sizes
+		and measure the time it takes to solve the problem. Compare the observed running times with the estimated time
+		complexity and check if they align.
+		<br>
+		It's important to note that directly implementing a Turing Machine as a practical program to measure time complexity
+		is not common. Instead, the theoretical concepts derived from Turing Machines, such as the steps outlined above, are
+		used to reason about and estimate the time complexity of algorithms.
+
+		In practice, programming languages and tools provide built-in functions or libraries that offer time complexity
+		analysis. These tools can automatically measure the running time of algorithms on various inputs and provide
+		insights into their time complexity.
+
+		<br><br>
+
+		While Turing Machines may not be directly implementable as practical programs, they serve as a theoretical model
+		that helps us reason about computation. Here's an analogy that might help clarify:
+
+		Think of a map as a model of a city. A map provides a representation of the city's layout, roads, landmarks, and
+		helps us understand and navigate the city. However, the map itself is not the physical city—it's a simplified
+		representation that helps us make sense of the real-world city.
+
+		Similarly, Turing Machines are like a theoretical model or a "map" of computation. They help us understand the
+		fundamental concepts and principles of computation, such as algorithms, decision-making, and problem-solving. While
+		we may not directly implement Turing Machines in practical programming, they provide a simplified representation
+		that helps us reason about computation and analyze the behavior of algorithms.
+
+		By using Turing Machines as a theoretical framework, we can define different complexity classes, such as P, NP, and
+		others, which classify problems based on their computational difficulty. These complexity classes help us understand
+		the limitations and possibilities of solving problems algorithmically.
+
+		So, even though Turing Machines may not have a direct physical implementation, they provide an abstract and powerful
+		tool for studying computation and complexity. They serve as a foundation for understanding what can and cannot be
+		computed, and they allow us to reason about the efficiency and difficulty of solving problems using algorithms.
+
+		<br><br>
+
+		The Halting Problem is like trying to predict whether a machine will ever stop or keep going forever. Imagine you
+		have a special machine that takes in a list of instructions and some input. You want to know if this machine will
+		eventually finish its task or if it will keep going on and on without stopping.
+
+		The problem is that there is no magical rule or trick that can tell you for sure what the machine will do. Even the
+		smartest computer scientists have proven that there is no way to create a program that can predict with certainty
+		whether any machine will stop or not.
+
+		This means that there are some puzzles that are just too tricky to solve using a computer. The Halting Problem shows
+		us that there are limits to what computers can figure out, no matter how clever we are.
+		<br>
+		<br>
+		a Turing Machine cannot solve all problems. While Turing Machines are powerful theoretical models of computation,
+		there are certain problems that are mathematically proven to be unsolvable or undecidable, meaning that no algorithm
+		or Turing Machine can provide a definite answer for all possible inputs.
+
+		The most famous example of an unsolvable problem is the Halting Problem, which asks whether a given Turing Machine
+		will halt or run forever on a specific input. It has been mathematically proven that there is no algorithm or Turing
+		Machine that can solve the Halting Problem for all cases.
+
+		Moreover, there are problems that fall into the category of "computationally infeasible," where solving them using a
+		Turing Machine would require an impractical amount of time or resources. These problems may have solutions, but the
+		time complexity of finding those solutions may be so high that they are not feasible to compute within a reasonable
+		time frame.
+
+		Therefore, while Turing Machines are powerful models of computation, they have limitations. Some problems are
+		unsolvable, some are computationally infeasible, and some problems can be efficiently solved using algorithms
+		running on Turing Machines. The field of computational complexity theory explores the boundaries and classifications
+		of problems based on their solvability and computational difficulty.
+
+		<br><br>
+		Since a Turing Machine can simulate any algorithm executed on a computer, any problem that can be solved by a
+		computer can also be solved by a Turing Machine. If a problem is computable by a common computer, it means that
+		there exists an algorithm that can solve it, and that algorithm can be simulated by a Turing Machine.
+
+		<br><br>
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a><br>
+		<a href="https://brilliant.org/wiki/turing-machines/#:~:text=A%20Turing%20machine%20is%20an,that%20we%20simply%20cannot%20solve%3F"
+			target="_blank">Brilliant</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

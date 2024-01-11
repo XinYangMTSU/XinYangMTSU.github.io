@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Tautology</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 1: Formal Logic</h1>
+
+		<center>
+			<h2>Section 1.1 Statements, Sybmolic Representation and Tautologies</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>Tautology</h1>
+
+		<h2>Tautology</h2>
+		A <b>
+			<font color="blue">tautology</font>
+		</b> is a statement that is always true.
+		Once a tautology has been proven, we can use that tautology anywhere.
+		A tautology is "intrinsically true" by its very structure; it is true no matter what truth values are assigned to
+		its statement letters.
+		<br>
+		<br>
+		A simple example of a tautoloy is <b>
+			<font color="blue">\(A &or; A' \)</font>
+		</b>;
+		consider, for example, the statement: <Br>
+		<b>
+			<font color="blue">"Today the sun will shine or today will not shine."</font>
+		</b>
+		which must always be true because one or the other of these must happen.
+		<br>
+		<br>
+		<center>
+			<table style="width:50%">
+				<tr>
+					<th>A</th>
+					<th>A'</th>
+					<th>A &or; A'</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+					<th>
+						<font color="red">T</font>
+					</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>
+						<font color="red">T</font>
+					</th>
+				</tr>
+			</table>
+		</center>
+
+		<br>
+		Suppose that \(P\) and \(Q\) represent two wffs, and it happends
+		that the wff \(P &harr; Q\) is a tautology. If we did a truth table using the
+		statement letters in \(P\) and \(Q\), then the truth values of the wffs \(
+		P\) and \(Q\) would agree for every row of the truth table. In this case,
+		\(P\) and \(Q\) are said to be <b>
+			<font color="blue">equivalent wffs</font>
+		</b>, denoted by <font color="blue"><b>\(P &hArr; Q \)</b></font>. Thus \(P &hArr; Q\) states a fact, namely, that
+		the particular wff \(P &harr; Q\) is a tautology.
+
+		<br>
+		<h2>Contradiction</h2>
+		A wff whose truth values are always false, is called <font color="blue"><b>contradiction</b></font>. A contradiction
+		is "intrinsically false" by its very structure.
+		<br>
+		A simple example of a contradiction is <font color="blue"><b>\( A &and; A'\)</font></b>; consider <br>
+		<font color="blue"><b>"Today is Tuesday and today is not Tuesday."</b></font> which is false no matter what day of
+		the week it is."
+
+		<br>
+		<br>
+		<center>
+			<table style="width:50%">
+				<tr>
+					<th>A</th>
+					<th>A'</th>
+					<th>A &and; A'</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+					<th>
+						<font color="red">F</font>
+					</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>
+						<font color="red">F</font>
+					</th>
+				</tr>
+			</table>
+		</center>
+
+		<br>
+
+		<h2>Tautological Equivalences</h2>
+		We will list some basic equivalences. We represent any contradiction by 0 and any tautology by 1. <br>
+		<br>
+		<center>
+			<table style="width:80%">
+				<tr>
+					<th colspan="3">Some Tautological Equivalences</th>
+				</tr>
+				<tr>
+					<th>
+						1a. A &or; B &hArr; B &or; A
+					</th>
+					<th>
+						1b. A &and; B &hArr; B &and; A
+					</th>
+					<th>
+						Commutative Properties
+					</th>
+				</tr>
+				<tr>
+					<th>
+						2a. (A &or; B) &or; C &hArr; A &or; (B &or; C)
+					</th>
+					<th>
+						2b. (A &and; B) &and; C &hArr; A &and; (B &and; C)
+					</th>
+					<th>
+						Associative Properties
+					</th>
+				</tr>
+				<tr>
+					<th>
+						3a. A &or; (B &and; C) &hArr; (A &or; B) &and; (A &or; C)
+					</th>
+					<th>
+						3b. A &and; (B &or; C) &hArr; (A &and; B) &or; (A &and; C)
+					</th>
+					<th>
+						Distributive Properties
+					</th>
+				</tr>
+				<tr>
+					<th>
+						4a. A &or; 0 &hArr; A
+					</th>
+					<th>
+						4b. A &and; 1 &hArr; A
+					</th>
+					<th>
+						identity Properties
+					</th>
+				</tr>
+				<tr>
+					<th>
+						5a. A &or; A' &hArr; 1
+					</th>
+					<th>
+						5b. A &and; A' &hArr; 0
+					</th>
+					<th>
+						complement Properties
+					</th>
+				</tr>
+
+			</table>
+		</center>
+		<br>
+		Note that <b>2a</b> allows us to write \(A &or; B &or; C\) with no need for
+		parentheses because the grouping doesn't matter; similarly, <b>2b</b> allows
+		us to write \( A &and; B &and; C\).
+
+		<h2>Example</h2>
+		The turth Table 1 verifies equivalence 1a, the commutative property for
+		disjunction, and that Table 2 verifies 4b, the identity property
+		for conjunction. Note that only two rows are needed for Table 2 because 1 (a
+		tautology) cannot take on false values.
+		<br>
+		<br>
+		<center>
+			<table style="width:60%">
+				<tr>
+					<th colspan="5">Table 1 verifies \(A &or; B &harr; B &or; A\)</th>
+				</tr>
+				<tr>
+					<th>A</th>
+					<th>B</th>
+					<th>A &or; B</th>
+					<th>B &or; A</th>
+					<th>A &or; B &harr; B &or; A</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+					<th>
+						<font color="red">T</font>
+					</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+					<th>T</th>
+					<th>
+						<font color="red">T</font>
+					</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+					<th>
+						<font color="red">T</font>
+					</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>F</th>
+					<th>F</th>
+					<th>F</th>
+					<th>
+						<font color="red">T</font>
+					</th>
+				</tr>
+			</table>
+		</center>
+
+		<br>
+		<br>
+
+		<center>
+			<table style="width:60%">
+				<tr>
+					<th colspan="4">Table 2 verifies \(A &and; 1 &harr; A\)</th>
+				</tr>
+				<tr>
+					<th>A</th>
+					<th>1</th>
+					<th>A &and; 1</th>
+					<th>A &and; 1 &harr; A</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+					<th>
+						<font color="red">T</font>
+					</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>F</th>
+					<th>
+						<font color="red">T</font>
+					</th>
+				</tr>
+			</table>
+		</center>
+
+		<h2>Practice</h2>
+		Please verify equivalence 1b, 2a, 3a.
+		<br>
+		<h2>De Morgan's laws</h2>
+		Two additional equivalences are very useful are <font color="blue"><b>De Morgan's laws</b></font>, named for the
+		nineteenth-century British mathematician Augustus De Morgan, who first stated them. This theorem is easy to prove.
+		<br>
+		<br>
+		<center>
+			\( (A &or; B)' &hArr; A' &and; B'\)
+		</center>
+		<br>
+		and
+		<br>
+		<center>
+			\( (A &and; B)' &hArr; A' &or; B' \)
+		</center>
+		<br>
+		<br>
+		<center>
+			<table style="width: 60%">
+				<tr>
+					<th colspan="8">Verify \( (A &or; B)' &hArr; A' &and; B' \)</th>
+				</tr>
+				<tr>
+					<th>A</th>
+					<th>B</th>
+					<th>A &or; B</th>
+					<th>(A &or; B)'</th>
+					<th>A'</th>
+					<th>B'</th>
+					<th>A' &and; B'</th>
+					<th>(A &or; B)' &harr; A' &and; B'</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+					<th>F</th>
+					<th>F</th>
+					<th>F</th>
+					<th>F</th>
+					<th>
+						<font color="red">T</font>
+					</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+					<th>F</th>
+					<th>F</th>
+					<th>T</th>
+					<th>F</th>
+					<th>
+						<font color="red">T</font>
+					</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+					<th>F</th>
+					<th>F</th>
+					<th>
+						<font color="red">T</font>
+					</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>F</th>
+					<th>F</th>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+					<th>
+						<font color="red">T</font>
+					</th>
+				</tr>
+			</table>
+		</center>
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

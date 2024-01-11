@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Tree and Their Representations</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 6: Graphs and Trees</h1>
+
+		<center>
+			<h2>Section 6.2 Trees and Their Representations</h2>
+		</center>
+
+		<br>
+		<br>
+
+
+		<h1>Tree Terminology</h1>
+		<b>
+			<font color="red">tree</font>
+		</b> data structure is a hierarchical structure that is used to represent and organize data in a way that is easy to
+		navigate and search. It is a collection of nodes that are connected by edges and has a hierarchical relationship
+		between the nodes. <br><br>
+		This data structure is a specialized method to organize and store data in the computer to be used more effectively.
+		We can say that tree data structure has roots, branches, and leaves connected with one another.
+
+		<img src="tree.png" height="150px" width="1000px">
+		<br>
+
+		<h2>Root</h2>
+		A special type of graph called a <b>tree</b> turns out to be a very useful representation of data. A <b>
+			<font color="blue">tree</font>
+		</b> is an acyclic, connected graph with one node designated as the <b>
+			<font color="blue">root</font>
+		</b> of the tree.
+		<br>
+		<center>
+			<img width="400px" height="300px" src="images/tree1.png">
+		</center>
+
+		Figure 6.31 pictures two trees. Perversely, computer scientists like to draw trees with the root at the top. An
+		acyclic connected graph with no designated root node is called a nonrooted tree or a free tree. (Again, terminology
+		is nonstandard. Some books define trees as acyclic, connected graphs and then call them "rooted trees" when there is
+		a designated root node.)
+		<br>
+		<br>
+		<h2>Children and Parent</h2>
+		A tree can also be defined recursively. A single node is a tree (with that node as its root). If \(T_1, T_2, ... ,
+		T_t \) are disjoint trees with roots \(r_1, r_2, ... , r_t\), the graph formed by attaching a new node r by a single
+		arc to each of \(r_1, r_2, ... , r_t\), is a tree with root r. The nodes \(r_1, r_2 ... , r_t\) are <b>
+			<font color="blue">children</font>
+		</b> of r, and r is a <b>
+			<font color="blue">parent</font>
+		</b> of \(r_1, r_2, ... , r_t\). Figure 6.32 shows the final step in the recursive construction of the tree in
+		Figure 6.31b. It is often helpful to process a tree structure by working with it recursively, treating the subtrees
+		as smaller tree objects.
+
+		<br>
+		<center>
+			<img width="400px" height="300px" src="images/tree2.png">
+		</center>
+
+		<br>
+		<h2>Depth of a node</h2>
+		Because a tree is a connected graph, there is a path from the root to any other node in the tree; because the tree
+		is acyclic, that path is unique. The <b>
+			<font color="blue">depth of a node</font>
+		</b> in a tree is the length of the path from the root to the node; the root itself has depth 0.
+		<br>
+
+		<h2>Depth (height) of the tree</h2>
+		The <b>
+			<font color="blue">depth (height) of the tree</font>
+		</b> is the maximum depth of any node in the tree; in other words, it is the length of the longest path from the
+		root to any node.
+		<br>
+
+		<h2>Leaf and internal nodes</h2>
+		A node with no children is called a <b>
+			<font color="blue">leaf</font>
+		</b> of the tree; all non-leaves are <font color="blue"><b>internal nodes</font></b>.
+		<br>
+
+		<h2>Forest</h2>
+		A <b>
+			<font color="blue">forest</font>
+		</b> is an acyclic graph (not necessarily connected); thus a forest is a disjoint collection of trees. Figures 6.31a
+		and 6.31b together form a forest.
+		<Br>
+
+		<h2>Binary trees</h2>
+		<b>
+			<font color="blue">Binary trees</font>
+		</b>, where each node has at most two children, are of particular interest. In a binary tree, each child of a node
+		is designated as either the <b>
+			<font color="blue">left child</font>
+		</b> or the <font color="blue">right child</font></b>.
+		Figure 6.33 shows a binary tree of height 4
+		<br>
+		<center>
+			<img width="300px" height="200px" src="images/b1.png">
+		</center>
+
+		<h2>Full binary tree</h2>
+		A <b>
+			<font color="blue">full binary tree</font>
+		</b> occurs when all internal nodes have two children and all leaves are at the same depth.
+		Figure 6.34 shows a full binary tree of height 3.
+		<br>
+		<center>
+			<img width="300px" height="200px" src="images/b2.png">
+		</center>
+
+		<h2>Complete binary tree</h2>
+		A complete binary tree is a binary tree in which all the levels are completely filled except the lowest level, which
+		is filled from the left. A complete binary tree is an almost full binary tree; the bottom level of the tree is
+		filling from left to right but may not have its full complement of leaves.
+		Figure 6.35 shows a complete binary tree of height 3.
+		<b>(Note that while a tree is a graph, a complete tree is not a complete graph!)</b>
+		<br>
+		<center>
+			<img width="300px" height="200px" src="images/b3.png">
+		</center>
+
+		<h3>Complete binary Tree Example</h3>
+
+		The following is a complete binary tree. Since all the levels except the last level should be completely filled. The
+		nodes are filled from the left.
+		<br>
+		<img width="400px" height="300px" src="images/completeBinaryTree1.png">
+		<br>
+		<br>
+		<br>
+		The following is not a complete binary tree. The nodes need to be filled from the left.
+		<br>
+		<img width="400px" height="300px" src="images/completeBinaryTree2.png">
+
+
+		<h2>Practice</h2>
+		<center>
+			<img width="800px" height="300px" src="images/q1.png">
+		</center>
+
+
+		<h2>Applications of Trees </h2>
+
+		By using trees, a collection of records can be efficiently searched to locate a particular record or to
+		determine that a record is not in the collection. Examples of such a search would be checking for a volume in a
+		library, for a patient’s medical record in a hospital, or for an individual’s credit record at the bank. We will
+		also look at <b>binary tree search</b> in Section 6.3.
+
+		<br><br>
+		<b>
+			<font size="5" color="red">Example 1:</font>
+		</b>
+		<br>
+		The organization chart indicating who reports to whom in a large company or other enterprise is usually a tree.
+		Figure 6.37 is an example of the Univeristy organization:
+		<br>
+
+		<center>
+			<img width="700px" height="500px" src="university.png">
+		</center>
+
+		<br>
+		<b>
+			<font size="5" color="red">Example 2:</font>
+		</b>
+		<br>
+		The file system on a computer: 
+		<br>
+			<center>
+			<img width="500px" height="400px" src="filesystem.png">
+		</center>
+		
+		<br>
+		<b>
+			<font size="5" color="red">Example 3:</font>
+		</b>
+		<br>
+
+		<center>
+			<img width="1000px" height="300px" src="exe23.png">
+		</center>
+
+
+		<br>
+		<b>
+			<font size="5" color="red">Example 4:</font>
+		</b>
+		<br>
+			Data Compression: <a href="https://lecture.yangxinmtsu.repl.co/3080/huffman.html" target="_blank">Huffman coding</a> is a popular technique for data compression that involves constructing a binary tree where the leaves represent characters and their frequency of occurrence. The resulting tree is used to encode the data in a way that minimizes the amount of storage required.
+		
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a><br>
+		
+		<a href="https://www.geeksforgeeks.org/introduction-to-tree-data-structure-and-algorithm-tutorials/" target="_blank">geeksforgeeks</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

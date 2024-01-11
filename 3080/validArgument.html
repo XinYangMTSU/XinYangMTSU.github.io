@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Propositional Logic</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 1: Formal Logic</h1>
+
+		<center>
+			<h2>Section 1.2 Propositional Logic</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>Propositional Logic</h1>
+
+		<h2>Propositional Logic</h2>
+		We used the notation of formal logic to represent statements in symbolic form as wffs;
+		because statements are sometimes called <b>
+			<font color="blue">propositions</font>
+		</b>,
+		these wffs are also called <b>
+			<font color="blue">propositional wffs</font>
+		</b>.
+		<br>
+		<br>
+		Now we want to use tools from formal logic to see how to reach logical conclusion based on
+		given statements. The formal system that uses propositional wffs is called
+		<b>
+			<font color="blue">propositional logic, statement logic</font>
+		</b>.
+
+		<h2>Valid Arguments</h2>
+		An argument can be represented in symbolic form as: <br>
+		<Br>
+		<center>
+			\( P_1 &and; P_2 &and; P_3 &and; ... &and; P_n &rarr; Q \)
+		</center>
+		<br>
+		where \(P_1, P_2, ..., P_n\) are the given statements, called the <b>
+			<font color="blue">hypotheses</font>
+		</b>, of the argument, and \(Q\) is the <b>
+			<font color="blue">conclusion</font>
+		</b>
+		of the argument. As usual, the \(P's\) and the \(Q\) represent wffs, not merely statement letters. When should this
+		be considered a valid argument?
+
+		<h3>Definition:</h3>
+		<b>
+			<font color="blue">
+				The propositional wff: <br>
+				<br>
+				<center>
+					\( P_1 &and; P_2 &and; P_3 &and; ... &and; P_n &rarr; Q \)
+				</center>
+				<br>
+				is a valid argument when it is a tautology.
+			</font>
+		</b>
+
+
+		<h2>Example</h2>
+		<b>
+			<font color="blue">&bull; Example 1:</font>
+		</b> <br>
+		<br>
+		George Washington was the first president of the United States.
+		Thomas Jefferson wrote the Declaration of Independence.
+		Therefore, every day has 24 hours. <br>
+		<br>
+		This argument has two hypotheses: <br>
+		A: George Washington was the first president of the United States. <br>
+		B: Thomas Jefferson wrote the Declaration of Independence. <br>
+		<br>
+		and the conclusion: <br>
+		C: Every day has 24 hours. <br>
+		<br>
+		The argument would be symbolized as: <br>
+		<center>
+			\( A &and; B &rarr; C\)
+		</center>
+		<br>
+		Even though each of the individual hypotheses, as well as the conclusion, is a true statement, we would not consider
+		this argument valid, since it is NOT a tautology.
+		<br>
+		<br>
+		<center>
+			<table style="width:60%">
+				<tr>
+					<th>A</th>
+					<th>B</th>
+					<th>C</th>
+					<th>A &and; B</th>
+					<th>A &and; B &rarr; C</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>F</th>
+					<th>F</th>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>F</th>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>F</th>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+					<th>F</th>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+					<th>F</th>
+				</tr>
+			</table>
+		</center>
+
+
+		<hr>
+
+		<b>
+			<font color="blue">&bull; Example 2:</font>
+		</b>
+		<br>
+		<Br>
+		If George Washington was the first president of the United States,
+		then John Adams was the first vice president. George Washington was
+		the first president of the United States. Therefore John Adams was
+		the first vice president.
+		<Br>
+		<Br>
+		This argument has the two hypotheses: <Br>
+		\(A &rarr; B\): If George Washington was the first president of the United States, then John Adams was the first
+		vice president. <Br>
+		\(A\): George Washington was the first president of the United States.
+		<br>
+		<br>
+		and the conclusion: <br>
+		\(B\): John Adams was the first vice president.
+		<Br>
+		<br>
+		The argument would be symbolized as: <Br>
+		<center>
+			\((A &rarr; B) &and; A &rarr; B\)
+		</center>
+		<Br>
+		The truth table establishes that this argument is a tautology. The argument is valid; its from is such that
+		conculsion follows inevitably from the hypotheses.
+		<Br>
+		<br>
+		<center>
+			<table style="width:80%">
+				<tr>
+					<th>\(A\)</th>
+					<th>\(B\)</th>
+					<th>\(A &rarr; B\)</th>
+					<th>\( (A &rarr; B) &and; A \)</th>
+					<th>\( (A &rarr; B) &and; A &rarr; B \)</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>T</th>
+					<th>F</th>
+					<th>F</th>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>T</th>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+				<tr>
+					<th>F</th>
+					<th>F</th>
+					<th>T</th>
+					<th>F</th>
+					<th>T</th>
+				</tr>
+			</table>
+		</center>
+		<br>
+		To test whether a wff \(P_1 &and; P_2 &and; P_3 &and; ... &and; P_n &rarr; Q\)
+		is a tautology, we could build a truth table or use algorithm TautologTest. Instead, we will trun to formal logic,
+		which uses a system of <b>derivation rules</b> that manuipulate wffs in a truth preserving manner. You begin with
+		the hypotheses \(P_1, ..., P_n\) (assumed true) and attempt to apply the manipulation rules in such a way as to end
+		up with the conclusion \(Q\).
+		<br>
+		<h2>Proof Sequence</h2>
+		<font color="blue">
+			A <b>proof sequence</b> is a sequence of wffs in which each wff is either a hypothesis or the result of applying
+			one of the formal system's derivation rules to earlier wffs in the sequence.
+		</font>
+		<br>
+		<br>
+		Using formal logic to prove that \(Q\) is a valid conclusion from \(P_1, ..., P_n\), we must produce a proof
+		sequence of the form: <br>
+		<br>
+
+		\(P_1\) &nbsp; &nbsp; (hypothesis) <br>
+		\(P_2\) &nbsp; &nbsp; (hypothesis) <br>
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; . <Br>
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; . <br>
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; . <Br>
+		\(P_n\) &nbsp; &nbsp; (hypothesis) <br>
+		\(wff_1\) &nbsp; &nbsp; (obtained by applying a derivation rule to earlier wffs.) <br>
+		\(wff_2\) &nbsp; &nbsp; (obtained by applying a derivation rule to earlier wffs.) <Br>
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; . <Br>
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; . <br>
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; . <Br>
+		\(Q\) &nbsp; &nbsp; (obtained by applying a derivation rule to earlier wffs.) <Br>
+
+		<br>
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

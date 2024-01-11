@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Recursive Relations</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 3: Recursion, Recurrence Relations</h1>
+
+		<center>
+			<h2>Section 3.2 Recurrence Relations</h2>
+		</center>
+
+		<br>
+		<br>
+
+
+		<h1>Recursive Relations</h1>
+		<h2>Recursive Relations</h2>
+		We developed two algorithms, one iterative and one recursive, to compute a value \(S(n)\) for the sequence S of
+		Example 1. However, there is still easier way to compute \(S(n)\). Recall that:
+		<br><br>
+		\( S(1) = 2 \) &nbsp; &nbsp; &nbsp; (1)<br>
+		\( S(n) = 2S(n-1) \) for \(n\) &ge; 2 &nbsp; &nbsp; &nbsp; (2)<br>
+		<br>
+		Because <Br><br>
+		\(S(1) = 2 = 2^1 \) <br>
+		\(S(2) = 4 = 2^2 \) <br>
+		\(S(3) = 8 = 2^3 \) <br>
+		\(S(4) = 16 = 2^4 \) <br>
+		<br>
+		and so on, we can see that <br><br>
+		\(S(n) = 2^n \) &nbsp; &nbsp; &nbsp; (3) <Br>
+		<br>
+		Using Equation (3), we can plug in a value for \(n\) and compute \(S(n)\) without having to compute
+		-- either explicitly, or, through recursion, implicitly -- all the lower values of \(S\) first.
+		An equation such as (3), where we can substitute a value and get the output value back directly, is called a <b>
+			<font color="red">closed-form solution</font>
+		</b> to the recurrence relation (2) subject to the basis step (1). Finding a closed-form solution is called <b>
+			<font color="blue">solving</font>
+		</b> the recurrence relation. Clearly, it is nice to find a closed-form solution to a recurrence relation whenever
+		possible. <br>
+		<br>
+
+		<h2>Linear First-Order Recurrence Relations</h2>
+		<b>
+			<font color="blue">Expand, Guess, and Verify</font>
+		</b> <br><br>
+		One technique for solving recurrence relations is an "expand, guess, and verify" approach that repeatedly uses the
+		recurrence relation to expand the expression for the \(n_{th}\) term until the general pattern can be guessed.
+		Finally the guess is verified by mathematical induction. <Br><Br>
+
+		Example 1: <br><br>
+
+		Consider again the basis step and recurrence relation for the sequence \(S\) of Example 1: <br><br>
+
+		S(1) = 2 &nbsp; &nbsp; &nbsp; (4) <Br>
+		S(n) = 2S(n-1) for n >= 2 &nbsp; &nbsp; &nbsp; (5) <br>
+		<br>
+		Let's pretend we don't already konw the closed-form solution and use the expand, guess, and verify approach to find
+		it. Beginning with \(S(n)\), we expand by using the recurrence relation repeatedly. Keep in mind tha the recurrence
+		relation is a recipe that says S at any value can be replaced by two times S at the previous value. We apply this
+		recipe to S at the values \(n, n-1, n-2\),and so on.
+		<pre>
+S(n) = 2S(n-1)
+     = 2[2S(n-2)] = 2<sup>2</sup>S(n-2)
+     = 2<sup>2</sup>[2S(n-3)] = 2<sup>3</sup>S(n-3)
+</pre>
+		By looking at the developing pattern, we guess that after \(k\) such expansions, the equation has the form <br>
+		<pre>
+     S(n) = 2<sup>k</sup>S(n-k)
+</pre>
+		This expansion of S values in terms of lower S values must stop when \(n-k = 1\), that is, when \(k = n - 1\). At
+		that point, <br>
+		<pre>
+    S(n) = 2<sup>n-1</sup>S[n - (n-1)]
+         = 2<sup>n-1</sup>S(1) = 2<sup>n-1</sup>(2) = 2<sup>n</sup>
+</pre>
+		which expresses the closed-form solution. <Br>
+		<Br>
+		We are not done yet, however, because we guessed at the general pattern. We now confirm our closed-form solution by
+		induction on the value of \(n\). The statement we want to prove is therefore \(S(n) = 2^n\) for \( n &ge; 1 \). <br>
+		<Br>
+		For the basis step, \(S(1) = 2\). This is true by equation (4). We assume that \(S(k) = 2^k \). Then <Br>
+		<pre>
+S(k+1) = 2S(k)       (by equation (5))
+       = 2(2<sup>k</sup>)       (by the inductive hypothesis)
+       = 2<sup>k+1</sup>
+</pre>
+		This proves that our closed-form solution is correct.
+
+		<h2>A Solution Formula</h2>
+		Some types of recurrence relations have known solution formulas. A recurrence relation for a sequence \(S(n)\) is
+		<b>
+			<font color="blue">linear</font>
+		</b> if the ealier values of S appearing in the definition occur only to the first power. The most general linear
+		recurrence relation has the form:<br><br>
+		\( S(n)= f_1(n)S(n-1) + f_2(n)S(n-2) + \dots + f_k(n)S(n-k) + g(n) \)
+		<br><br>
+		, where the \(f_i's\) and \(g\) can be expressions involving \(n\). The recurrence relation has <b>
+			<font color="blue">constatn coefficients</font>
+		</b> is the \(f_i's\) are all constants. It is <b>
+			<font color="blue">first-order</font>
+		</b> if the \(n_{th}\) term depends only on term \(n-1\). <b>
+			<font color="blue">Linear first-order recurrence relations with constant coefficients</font>
+		</b> therefore have the form: <br>
+		<br>
+		<b>
+			<font color="blue">
+				<center>
+					\(S(n) = cS(n-1) + g(n) \) &nbsp; &nbsp; &nbsp;(6) <br>
+				</center>
+			</font>
+		</b>
+		Finally, a recurrence relation is <b>
+			<font color="blue">homogeneous</font>
+		</b>
+		if \(g(n) = 0\) for all \(n\).
+		<br>
+		We will find the solution formula for equation (6), the general linear first-order recurrence relation with constant
+		coefficients, subject to the basis that \( S(1) \) is known. We will use the expand, guess, and verify approach.
+		Repeatedly applying equation (6) and simplifying, we get: <Br>
+		<pre>
+S(n) = cS(n-1) + g(n)
+     = c[cS(n-2) + g(n-1)] + g(n)
+     = c<sup>2</sup>S(n-2) + cg(n-1) + g(n)
+     = c<sup>2</sup>[cS(n-3) + g(n-2)] + cg(n-1) + g(n)
+     = c<sup>3</sup>S(n-3) + c<sup>2</sup>g(n-2) + cg(n-1) + g(n)
+                         &vellip;
+</pre>
+		After \(k\) expansions, the general form appears to be <br><br>
+		\( S(n) = c^kS(n-k) + c^{k-1}g(n-(k-1)) + \dots + cg(n-1) + g(n) \)
+		<Br><br>
+		If the sequence has a base value at 1, then the expansion terminates when
+		n-k=1 or k = n-1, at which point: <br>
+		<pre>
+S(n) = c<sup>n-1</sup>S(1) + c<sup>n-2</sup>g(2) + &hellip; + cg(n-1) + g(n)
+     = c<sup>n-1</sup>S(1) + c<sup>n-2</sup>g(2) + &hellip; + c<sup>1</sup>g(n-1) + c<sup>0</sup>g(n)                (7)
+</pre>
+		We can use <b>summation notation</b> to write part of this expression more compactly. The uppercase Greek letter
+		sigma, &Sigma;, stands for summation. In summation notation, Equation (7) becomes Equation (8):<br><br>
+		<b>
+			<font color="blue">
+				$$ S(n) = c^{n-1}S(1) + \sum_{i=2}^{n}c^{n-i}g(i) \quad (8)$$
+			</font>
+		</b>
+		Therefore, the solution to the recurrence relation (6) is Equation (8)
+		<br><br>
+		<center>
+			<table style="width:60%">
+				<tr>
+					<th>Table 1: Steps of Solution formula</th>
+				</tr>
+				<tr>
+					<th>1. Match your recurrence relation to the form:
+						<br> S(n) = cS(n-1) + g(n) to find c and g(n)
+					</th>
+				</tr>
+				<tr>
+					<th>2. Use c, g(n), and S(1) in the formula
+						<br> $$S(n) = c^{n-1}S(1) + \sum_{i=2}^nc^{n-i}g(i) $$
+					</th>
+				</tr>
+				<tr>
+					<th>3. Evaluate the resulting summation to get the final expression.
+					</th>
+				</tr>
+			</table>
+		</center>
+
+		<hr>
+		<b>
+			<font color="blue">Example 1:</font>
+		</b><br>
+		<pre>
+The sequence S(n) of example 1,
+         S(1) = 2
+         S(n) = 2S(n-1) for n >= 2
+is a linear, first-order, homogeneous recurrence relation with constant coefficients. 
+In other words, it matches equation (6) with c = 2 and g(n) = 0. Because g(n) = 0,
+the g function evaluates to 0 no matter what the argument is. From formula (8),
+the closed-form solution is:
+</pre>
+		$$ S(n) = 2^{n-1}(2) + \sum_{i=2}^{n}0 = 2^n $$
+		<pre>
+which agress with our previous result.
+</pre>
+		<hr>
+		<b>
+			<font color="blue">Example 2:</font>
+		</b><br>
+		<pre>
+Find the closed-form solution to the recurrence relation:
+         T(1) = 1
+         T(n) = T(n-1) + 3 for n >= 2
+This is a linear, first-order recurrence relation with constant coefficients. 
+In other words, it matches equation (6) with c = 1 and g(n) = 3.
+From formula (8), the closed-form solution is:
+</pre>
+		$$ S(n) = 1^{n-1}(1) + \sum_{i=2}^{n}1^{n-i}*3 = 1 + \sum_{i=2}^{n}3 = 1 + 3*(n-1) = 3n -2 $$
+		<br>
+		<hr>
+		<b>
+			<font color="blue">Example 3:</font>
+		</b><br>
+		<pre>
+Find the closed-form solution to the recurrence relation:
+         S(1) = 1
+         S(n) = S(n-1) + n for n >= 2
+This is a linear, first-order recurrence relation with constant coefficients. 
+In other words, it matches equation (6) with c = 1 and g(n) = n.
+From formula (8), the closed-form solution is:
+</pre>
+		$$ S(n) = 1^{n-1}(1) + \sum_{i=2}^{n}1^{n-i}*i = 1 + \sum_{i=2}^{n}i = \sum_{i=1}^{n}i = \frac{n(n+1)}{2} $$
+		<br>
+
+		<h2>What is Linear, First Order, Constant Coefficient</h2>
+		(1) If the S(n-1) term is not to the first power, then it isn't <b>
+			<font color="blue">Linear</font>
+		</b>.<br>
+		For example: S(n) = S(n-1)<sup>2</sup> for n > 1; This one has S(n-1) to the second power, so it isn't Linear.
+		Therefore we cannot use equation (8).
+		<br>
+		<br>
+		(2) If it has more previous terms than just the n-1 term then it isn't <b>
+			<font color="blue">First Order</font>
+		</b>. <br>
+		For example: F(n) = F(n-1) + F(n-2) for n > 2; This one has F(n-1) and F(n-2), so it isn't First Order. Therefore we
+		cannot use equation (8).
+		<br>
+		<br>
+		(3)If the coefficient of the n-1 term has an n in it (for example, n or 2<sup>n</sup>), then it isn't <b>
+			<font color="blue">Constant Coefficient</font>
+		</b>. <br>
+		For example: S(n) = n*S(n-1) for n > 1; This one has n as the coefficient,so it isn't Constant Coefficient.
+		Therefore we cannot use equation (8).
+		<br>
+		<h2>Practice</h2>
+		(1) Find a closed-form solution to the recurrence relation:
+		<pre>
+	S(1) = 4
+	S(n) = 2S(n-1) + 3 for n >= 2
+</pre>
+		Hint: \(1 + 2^1 + 2^2 + \dots + 2^n = 2^{n+1} - 1\)
+		<br>
+		<br>
+		With the general form \( S(n) = cS(n-1) + g(n) \), we see that: \( c= 2, g(n) = 3 \) <br>
+		Substituting into the general solution form:<br><Br>
+		$$ S(n) = c^{n-1}S(1) + \sum_{i=2}^nc^{n-i}g(i) $$ <Br>
+		we get: <Br><Br>
+		$$
+		\begin{aligned}
+		S(n) & = 2^{n-1}(4) + \sum_{i=2}^n2^{n-i}(3) \\
+		& = 2^{n-1}(2^2) + 3\sum_{i=2}^n2^{n-i} \\
+		& = 2^{n+1} + 3[2^{n-2} + 2^{n-3} + \dots + 2^1 + 2^0] \\
+		& = 2^{n+1} + 3[2^{n-1} - 1]
+		\end{aligned}
+		$$
+
+		<br>
+		<br>
+		(2) Find a closed-form solution to the recurrence relation:
+		<pre>
+	T(1) = 2
+	T(n) = T(n-1) + (n+1) for n >= 2
+</pre>
+		Hint: \(1 + 2 + 3 + \dots + n = \frac{n(n+1)}{2}\) <Br>
+
+
+		<br>
+		<br>
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

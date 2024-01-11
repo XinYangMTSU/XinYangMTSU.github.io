@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Lectures</title>
+  <link href="../CCS/3080.css" rel="stylesheet">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+</head>
+
+<body>
+
+<nav id="nav01"></nav>
+
+<div id="main">
+
+<h1>CSCI 3080: Discrete Structures</h1>
+
+<center>
+	<h3><b>Spring 2022--Section 001 (<font color="red">Face to Face</font>)</b></h3>
+</center>
+<img class="displayed" src="../images/UnderConstruction.gif"/>
+<Br>
+<center>
+
+	<table style="width:90%">
+	<tr>
+		<td><b>Section</b></td>
+		<td><b>Lecture <font color="red">(MWFs)</font></b></td>
+		<!-- 
+		<td><b>Seat Chart(KOM 307)</b></td>
+		<td><b>Lab Seat Chart(KOM 360)</b></td>
+		-->
+	</tr>
+	<tr>
+		<th><b><font color="red">Sec 001</font></b></th> 
+		
+		<th><b><font color="#aa00ff">10:20 AM -- 11:15 AM</font> (KOM 452)</b> </th> 
+		
+		<!--
+		<td>
+			<a href="./2170/Tuesday_Sec003_SeatChart.pdf" target="_blank">Tuesday</a>
+			<a href="./2170/Thursday_Sec003_SeatChart.pdf" target="_blank">Thursday</a>
+		</td>
+		<td>
+			<a href="./2170/Tuesday_Sec003_SeatChartLab.pdf" target="_blank">Tuesday</a>
+			<a href="./2170/Thursday_Sec003_SeatChartLab.pdf" target="_blank">Thursday</a>
+		</td>
+		-->
+	</tr>
+	</table>
+	<br>
+	<!--
+	<table style="width:30%">
+	<tr>
+		<td colspan="2"><b>Lab Assistant:</b> <i style="color:#aa00ff"><b>Yuxin Zhang</b></i></td>
+	</tr>
+	<tr>
+		<td><b>Email:</b> <i style="color:#aa00ff"><b>yz3a@mtmail.mtsu.edu</b></i></td>
+	</tr>
+	<tr>
+		<td><a href="https://www.cs.mtsu.edu/~yz3a" target="_blank"><b>https://www.cs.mtsu.edu/~yz3a</b></a></td>
+	</tr>
+	</table>
+	-->
+	<br>
+	<table style="width:60%">
+	<tr>
+		<th>	
+			<a href="https://www.cs.mtsu.edu/~csdept/tutoring.html" target="_blank">Computer Science Tutoring</a>
+		</th>
+		<th>
+			<a href="https://www.cs.mtsu.edu/~xyang/MySchedule.html" target = "_blank">Virtual Zoom Office</a>
+		</th>
+	</tr>
+	</table>
+	<br>
+<!--
+<table style="width:70%">
+	<tr><th>Important Dates</th></tr>
+	<tr><td>Last Day to drop without a grade:  <font color="red"><b>Sep 6th, 2020</b></font> </td></tr>
+	<tr><td>Last Day to drop with grade of W: <font color="red"><b>Sep 10th, 2020</b></font> </td></tr>
+	<tr><td><font color="red"><b>NOTE:</b></font> According to departmental policy, students who fail to attend the first two class meetings will be dropped from the course.</td></tr>
+</table>
+
+</center>
+-->
+<!--
+<h3> <a href="https://www.cs.mtsu.edu/hours.html">KOM CS  Lab Hours</a></h3>
+<font color="red"><b>Web-assisted:</b></font> Face to Face class + Remote Zoom Meeting <br>
+-->
+<font color="red"><b>NOTE:</b></font> According to departmental policy, students who fail to attend the first two class meetings will be dropped from the course
+<br>
+<font color="red"><b>Attendance:</b></font>Class attendance is required. If several class or assignments submission are missing, student attendance will be reported as "no longer attending".
+<br>
+
+<!--
+<font color="red"><b>BONUS:</b></font> You will get <b><font color="red">5 points bonus</font></b> to your final grade if you attend all the classes (<b><font color="red">both Lecture and Lab with Camera On</font></b>).
+-->
+
+<h1>Course Calendar</h1>
+
+
+<center>
+	<h4><b><font color="red">Note: Tentative Class Schedule (subject to change)</font></b></p4>
+	<p>
+	<!--
+	<font color="red">CLA</font> stands for <font color="red"><b>C</b></font>losed <font color="red"><b>L</b></font>ab <font color="red"><b>A</b></font>ssignment (Lab Section)  <a href="../2170/claInfo.html" target="_blank">Closed Lab Information</a>  <br> 
+	-->
+	<font color="red">OLA</font> stands for <font color="red"><b>O</b></font>pen <font color="red"><b>L</b></font>ab <font color="red"><b>A</b></font>ssignment (Homework) <a href="../3080/olaInfo.html" target="_blank">OLA Information</a></p>
+
+</center>
+
+<!--
+<center>
+<div class="block3">
+	<a href="./2170/private/Gaddis9"><h4>Course Slides</a> from Starting Out with C++(9th ed.) by Tony Gaddis</h4>
+</div>
+</center>
+<br>
+<br>
+-->
+
+<button type="button" class="collapsible">Unit 1: Set, Set Operations, and Combinatorics(Chapter 4)</button>
+<div class="content">
+
+<table>
+  <!--
+  <tr>
+	  <th colspan="4">
+		  <table>
+			  <tr><td colspan="3">Chapter Slides (user: mt pass: cs)</td></tr>
+			 <tr>
+				 <td><a href="../2170/private/Gaddis9/SOW_C++_CSO_Chapter_01_9e.pdf" target="_blank">Ch1: Introduction to Computers and Programming</a></td>
+				 <td> 
+			 <a href="../2170/private/Gaddis9/SOW_C++_CSO_Chapter_02_9e.pdf" target="_blank">Ch2: Introduction to C++</a>
+				</td>
+			</tr>
+		       	<tr>	
+				<td>
+			 <a href="../2170/private/Gaddis9/SOW_C++_CSO_Chapter_03_9e.pdf" target="_blank">Ch3: Expressions and Interactivity</a>
+	  			</td>
+				<td>
+			 <a href="../2170/private/Gaddis9/SOW_C++_CSO_Chapter_10_9e.pdf" target="_blank">Ch10: C++ strings</a>
+	  			</td>
+			 </tr>
+	  	  </table>
+	  </th>
+  </tr>
+  <tr id="week">
+	  <td><h4>Week</h4></td>
+	  <td><h4>Monday</h4></td>
+	  <td><h4>Wednesday</h4></td>
+	  <td><h4>Friday</h4></td>
+  </tr>
+  -->
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+<tr>
+	<td id="week"><b><font color="red">Week 1</font></b></td>
+	<th><b><font color="red">Jan 17th, 2022</font></b></th>
+	<th><b><font color="red">Jan 19th, 2022</font></b></th>
+	<th><b><font color="red">Jan 21st, 2022</font></b></th>
+</tr>
+<tr>
+   <th>Lecture</th>
+	 	<th>
+			MLK <br>
+			<font color="red">No Class</font>
+		</th>
+   <td>
+	<table>
+	<tr>
+		<th><a href="Syllabus_CSCI3080.pdf" target="_blank">Syllabus</a></th>
+		<th><a href="../2170/covid19.html" target="_blank">COVID-19</a></th>			
+	</tr>
+	<tr>
+		<th><a href="https://www.youtube.com/watch?v=q4L-wUF3yig" target="_blank">Discrete Mathematics for Computer Science</a></th> 
+		<th><a href="set.html" target="_blank">Introduction to Set Theory</a></th>
+	</tr>
+	<tr>
+		<th colspan="2"><a href="https://mtsu.zoom.us/rec/share/9FcsrJFkwrnqXeCcjhB7CirPkHTxOghnOF3NW0UAZvwKtr3dQGaHQ7ZLJDbkch51.Xv8ofVioFkZVlQUv" target="_blank">Lecture Video</a> Passcode(K$5i0DGd)</th>
+	</tr>
+	</table>
+   </td>
+    <td>
+	<table>
+	<tr>
+		<th><a href="set.html" target="_blank">Introduction to Set Theory</a></th>
+		<th><a href="setOperation.html" target="_blank">Basic Set Operations</a></th>
+	</tr>
+	<tr>
+		<th colspan="2">
+		<a href="https://mtsu.zoom.us/rec/share/UGOfPhwi27j1m14-YZV0SV3CCM9qiNGXntAtvEpY7uSxwof3Vl6L1odsiz3tXA8p.lQ1H6Nz87VhLUiWM" target="_blank">Lecture Video</a> Passcode(ab#Pi$8+)<br>
+		</th>
+	</tr>
+	</table>
+    </td>
+
+    <!--
+    <td>
+	<table>
+		<tr>
+		<th><a href="cartesian.html" target="_blank">Cartesian Products</a></th>
+		</tr>
+	<tr>
+		<th colspan="2">
+		<a href="https://mtsu.zoom.us/rec/share/NbasBWepS6cxB0mZfBIDN-HfWj3XkGFSn9Xk3LhwMvamjrk3tCgaL9Ur76npjGMI.JaWOu1WfhTrdUSTy" target="_blank">Lecture Video</a> Passcode(?5drcuZB)
+		</th>
+	</tr>
+	</table>
+    </td>
+    -->
+</tr>
+<tr>
+	<th>Code</th>
+	<td></td>
+	<td></td>
+	<!--
+	<td>
+		<a href="../codes/roomArea.cpp" target="_blank"></a>
+	</td>
+	-->
+</tr>
+<tr>
+	<th>OLA</th>
+	<th></th>
+	<th>
+		<table>
+		<!--
+		<tr>
+			<td><font color="red">Face2Face</font></td>
+		<td><a href="../2170/public/CLA/lab0.html" target="_blank">CLA 0 - Customization of your ranger course account</a> (KOM 350)</td>
+		</tr>
+		-->
+		<tr>
+			<th colspan="2"><font color="red">Do this at home on your own personal computer:</font></th>
+		</tr>
+		<tr>
+			<td rowspan="2"><font color="red">OLA 0</font></td>
+		<td>
+		<!--
+			Windows: <a href="../2170/MobaXterm.html" target="_blank">Download and Install MobaXterm</a>
+		-->
+		<a href="OLA/lab0_windows.html" target="_blank">Customization of your ranger course account</a> (Windows Users) </td>
+		</tr>
+		<tr>
+		<td><a href="OLA/lab0_mac.html" target="_blank">Customization of your ranger course account</a> (Mac Users)</td>
+		</tr>
+		<!--
+		<table>
+		<tr>
+			<td>Mac: <a href="../2170/XQuartz.html" target="_blank">Download and Install XQuartz</a></td>
+		</tr>
+		</table>
+		-->
+		</table>
+	</th>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 4.1: Sets</font></th></tr> 
+		</table>
+	</td>
+	<!--
+	<td><a href="../3080/OLA/OLA1_3080.pdf" target="_blank"><font color="red">OLA1</font></a> <b><font color="blue">Due date:</font> Sep 3rd, 2021 23:59 PM (Friday)</b> <hr>
+		Jupyter Notebook: <a href="../3080/OLA/OLA1.ipynb">OLA1.ipynb</a>
+	</td>
+	-->
+</tr>
+
+<!--   ================================= -->
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+<tr>
+	<td id="week"><b><font color="red">Week 2</font></b></td>
+	<th><b><font color="red">Jan 24th, 2022</font></b></th>
+	<th><b><font color="red">Jan 26th, 2022</font></b></th>
+	<th><b><font color="red">Jan 28th, 2022</font></b></th>
+</tr>
+<tr>
+	<th>Lecture</th>
+	<td>
+	<table>
+	<tr>
+	<th><a href="setOperation.html" target="_blank">Basic Set Operations</a></th>
+	</tr>
+	<tr>
+	 	<th colspan="2">
+			<a href="https://mtsu.zoom.us/rec/play/hQ_PdsvIIPhw7zROm9CaG_iRQFeRwEASD6FwW-C7vi960yliaiyMMcjMb19a_nnTQfHOA5aR5kuOqmM.9nU0iZD5AGzEDTig?continueMode=true" target="_blank">Lecture Video</a> Passcode(^AJ05Oz7)
+		</th>
+	</tr>
+	</table>
+	</td>
+   <th>
+	<table>
+	<tr>
+		<th><a href="cartesian.html" target="_blank">Cartesian Products</a></th>
+		<th colspan="2"><a href="https://www.khanacademy.org/computing/pixar/crowds/crowds-1/v/intro-crowds" target="_blank">Introduction to Combinatorics</a></th>
+	</tr>
+	<tr>
+	 	<th colspan="2">
+			<a href="https://mtsu.zoom.us/rec/share/2rGt79sg7MfwyfMtGbjCaMyj7_yl9OOeW91Rlqpy9ygzm9NfMpu66O5Wdsfhfusg.1LPDFSZbmZLRF-ep" target="_blank">Lecture Video</a> Passcode(1=9nadG+)
+		</th>
+	</tr>
+	</table>
+   </th>
+	<td>
+	<table>
+	<tr>
+		<th><a href="permutation.html" target="_blank">Permutations</a></th>
+		<th><a href="combination.html" target="_blank">Combinations</a></th>
+	</tr>
+	<tr>
+		<th colspan="2"><a href="https://mtsu.zoom.us/rec/share/TBzrorHOWFdiWzqevYyF5CdOnwJSXZKv0zMX7DP4Imdp8CnC7uAWPhjvKdDKjT8X.agmkBYTtfs2lfAhJ" target="_blank">Lecture Video</a> Passcode (s2K=$kiK)</th>
+	</tr>
+	</table>
+	</td>
+</tr>
+<tr>
+	<th>Code</th>
+	<th>
+		<a href="code/Set_Operation_Demo.pdf" target="_blank">Set_Operations_Demo.pdf</a>
+		<a href="code/Set_Operation_Demo.ipynb" target="_blank">Set_Operations_Demo.ipynb</a>
+	</th>
+	<th>
+	<table>
+	<tr>
+		<th>
+		<a href="code/CartesianProduct_Demo_3080.pdf" target="_blank">
+		CartesianProduct_Demo_3080.pdf</a>
+		<br>
+		<a href="code/CartesianProduct_Demo_3080.ipynb" target="_blank">
+		CartesianProduct_Demo_3080.ipynb</a>
+		<br>
+		<a href="code/lena.jpeg">lena.jpeg</a>
+		<a href="code/lena.png">lena.png</a>
+		</th>
+	</tr>
+	</table>
+	</th>
+	<th>
+	<a href="./code/combinatorics.ipynb" target="_blank">combinatorics.ipynb</a>
+	<Br>
+	<a href="./code/combinatorics.pdf" target="_blank">combinatorics.pdf</a>
+	</th>
+</tr>
+<tr>
+	<th>OLA</th>
+	<td></td>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 4.4: Permutations and Combinations</font></th></tr> 
+		</table>
+	</td>
+	<td><a href="../3080/OLA/OLA1_3080.pdf" target="_blank"><font color="red">OLA1</font></a> <b><font color="blue">Due date:</font> Feb 4th, 2022 23:59 PM (Friday)</b> <hr>
+		Jupyter Notebook: <a href="../3080/OLA/OLA1.ipynb">OLA1.ipynb</a>
+	</td>
+</tr>
+
+
+<!--   ================================= -->
+</table>
+</div>
+
+<br>
+<button type="button" class="collapsible">Unit 2: Mathematical Logic, Induction and Proofs (Chapter 1, 2)</button>
+<div class="content">
+<table>
+
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+<tr>
+	<td id="week"><b><font color="red">Week 3</font></b></td>
+	<th><b><font color="red">Jan 31st, 2022</font></b></th>
+	<th><b><font color="red">Feb 2nd, 2022</font></b></th>
+	<th><b><font color="red">Feb 4th, 2022</font></b></th>
+</tr>
+
+<tr>
+   <td>Lecture</td>
+   <th>
+	<table>
+	<tr>
+	</tr>
+	<tr>
+		<th><a href="permutation.html" target="_blank">Permutations</a></th>
+		<th><a href="combination.html" target="_blank">Combinations</a></th>
+	</tr>
+	<tr>
+		<th><a href="formallogic.html" target="_blank">Formal symbols of Propositional Logic</a></th>
+	 	<th>
+			<a href="https://mtsu.zoom.us/rec/share/-2z62UulZfJxLZOUoU-gHVZnnoaGosZyAY0foE_EXo8NxaSovRZCuj03taDNiznt.5Zo3DGEjlJXKq-AG" target="_blank">Lecture Video (Sec-001)</a> Passcode(^.9&CdRQ)
+		</th>
+	</tr>
+	</table>
+   </th>
+   <td>
+	<table>
+	<tr>
+		<th><a href="formallogic.html" target="_blank">Formal symbols of Propositional Logic</a></th>
+		<th><a href="logicTranslate.html" target="_blank">Translating into Propositional Logic</a></th>
+	</tr>
+		<tr>
+	 	<th colspan="2">
+			<a href="https://mtsu.zoom.us/rec/play/1-auJdk1o8DMrtlIBkPiOIqgUNTCDdK2FrpBEyf7FxwXcEBaLXkWJ6Xt4q9afsLyqSfm8Zec2T3iOQ4.UI7TJIu0D2w8jnwi?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(&0zVatkz)
+		</th>
+		</tr>
+	</table>
+   </td>
+   <td>
+	<table>
+		<tr>
+  	 <th><a href="tautology.html" target="_blank">Tautology</a></th>
+	 <th><a href="validArgument.html" target="_blank">Valid Argument</a></th>
+		</tr>
+		<tr>
+	 	<th colspan="2">
+			<a href="https://mtsu.zoom.us/rec/play/fKOws9qNdLOQxhaDf8-UrbAqgzTbOdkahVTQycrqpGU6BpZ__vEgFHxMXXmKW_X74egJNQXJ7lSRhcvg.d-Gppc6zvrHf809Z?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(*nBw3.Yr)
+		</th>
+		</tr>
+	</table>
+   </td>
+</tr>
+
+<tr>
+	<td>Code</td>
+	<td>
+	<a href="./code/combinatorics.ipynb" target="_blank">combinatorics.ipynb</a>
+	<br>
+	<a href="./code/combinatorics.pdf" target="_blank">combinatorics.pdf</a>
+	</td>
+	<td></td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>OLA</td>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 1.1: Statements, Symbolic Representation, and Tautologies</font></th></tr> 
+		</table>
+	</td>
+	<td>
+	</td>
+	<td>
+	</td>
+</tr>
+
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+<tr>
+	<td id="week"><b><font color="red">Week 4</font></b></td>
+	<th><b><font color="red">Feb 7th, 2022</font></b></th>
+	<th><b><font color="red">Feb 9th, 2022</font></b></th>
+	<th><b><font color="red">Feb 11st, 2022</font></b></th>
+</tr>
+
+<tr>
+   <td>Lecture</td>
+   <td>
+	 <table>
+	<tr>
+		<th>
+			<a href="derivationrules.html" target="_blank">Derivation Rules</a>
+		</th>
+	</tr>
+	 <tr>
+	 	 <th colspan="2">
+			<a href="https://mtsu.zoom.us/rec/play/V1CzHIEW5dm7DIJTLikUHM7g-dMEBCgcfuiNQnsGMfj1g5eqOM0wsBamwQgtr7mlmpt9yqLtvKjHDzVL.xpuoPy7nTISOwMH5?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(1KGbk$i3)
+		</th>
+	 </tr>
+	 </table>
+   </td>
+   <td>
+	 <table>
+	<tr>	
+		<th>
+			<a href="verbalArguments.html" target="_blank">Verbal Arguments</a>
+		</th>
+		 <th>
+			 <a href="Quiz/Quiz1.ipynb" target="_blank">Quiz 1: Sets, Formal Logic (Ch4, Ch1) </a>
+		</th>
+	</tr>
+	<tr>
+		<th colspan="2">
+			<a href="https://mtsu.zoom.us/rec/play/uC3IVroB8Khlci8BSYpBG6WjOsG-hl3GAuMwVQrI0ZkP7iy9Vg6BXmloi3F1K_Q6bnsrzNINpzzbLINq.pPxcCgUbV8NFCIP9?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(Y.X2DAd%)
+	 </th>
+	 </tr>
+	 </table>
+   </td>
+   <td>
+	   <table>
+		   <tr>
+		 <th>
+			 <a href="Quiz/Quiz1.ipynb" target="_blank">Quiz 1: Sets, Formal Logic (Ch4, Ch1) </a>
+		</th>
+		 <th>
+			 <a href="Quiz/Quiz1_Solution.ipynb" target="_blank">Quiz1_Solution.ipynb </a>
+		</th>
+	           </tr>
+	   	<tr>
+		<th>
+			 <a href="Quiz/Quiz1_Solution.pdf" target="_blank">Quiz1_Solution.pdf </a>
+		</th>
+		<th>
+			<a href="https://mtsu.zoom.us/rec/play/1gv-T0G9OomK_opGAsRQ39P_daccemjo1iv4MnA2d-XDbS6BFOmMPAkMFtuQ5jPPIGMUrlsThunb9LKG.yk_TCpswTPf6t2rV?continueMode=true&_x_zm_rtaid=CQfY6wzWQ6aBuBNlg1m0aw.1644635399499.4bb1a2778a7f498e9e732dfb3e723134&_x_zm_rhtaid=693" target="_blank">Lecture Video (Sec-001)</a> Passcode(n6fSmV!E)
+	 </th>
+
+		</tr>
+	   </table>
+   </td>
+</tr>
+
+<tr>
+	<td>Code</td>
+	<td><a href="./codes/"></a></td>
+	<td></td >
+	<td></td >
+</tr>
+
+<tr>
+	<td>OLA</td>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 1.2: Propositional Logic</font></th></tr> 
+		</table>
+	</td>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 2.1: Proof Techniques</font></th></tr> 
+		</table>
+	</td>
+	<th>
+	</th>
+</tr>
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+<tr>
+	<td id="week"><b><font color="red">Week 5</font></b></td>
+	<th><b><font color="red">Feb 14th, 2022</font></b></th>
+	<th><b><font color="red">Feb 16th, 2022</font></b></th>
+	<th><b><font color="red">Feb 18th, 2022</font></b></th>
+</tr>
+
+<tr>
+   <td>Lecture</td>
+   <td>
+   <table>
+   <tr>
+	<th>
+		<a href="proofTechniques.html" target="_blank">Proof Techniques</a>
+	</th>
+	<th>
+		<a href="https://mtsu.zoom.us/rec/play/JJkO6z-1ryWNPJXtRWx_w-2XBNjdWGEvSPlENdERGQVerIr62KX3vDwHmpAhl72nw9cQ33NIAOd3qliF.Rm0EEESAJ4g4a3oZ?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode (q7Q!8ECj)
+	</th>
+   </tr>
+   </table>
+   </td>
+   <td>
+   <table>
+   <tr>
+	 <th><a href="induction.html" target="_blank">Induction</a></th>
+   </tr>
+   <tr>
+	<th colspan="2">
+		<a href="https://mtsu.zoom.us/rec/play/38b0eN1AEMv_GQpuvUoER-3BxXKi0l8twf0277-WCCjk8q5avzpZd4PbpQDZGPyD0TwLQtD5Jb5pUkuh.I2AeqX8MlSu1rtet?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode (st66#2ix)
+	</th>
+   </tr>
+   </table>
+   </td>
+   <td>
+	   <table>
+		<tr>
+	<th>
+		<a href="Quiz/Quiz2.ipynb" target="_blank">Quiz 2: Proofs and Induction</a>
+	</th>
+	<th>
+		<a href="Quiz/Quiz2_Solution.ipynb" target="_blank">Quiz2_Solution.ipynb</a>
+	</th>
+	
+		</tr>
+	<tr>
+	<th>
+		<a href="Quiz/Quiz2_Solution.pdf" target="_blank">Quiz2_Solution.pdf</a>
+	</th>
+	<th>
+		<a href="https://mtsu.zoom.us/rec/play/8cMTYFjcN6paj4_3B7oiojFCuCURw5jMBtUJ5SWC0V-NUOqrIzE-r7UbPbAA1FRHcTzea8hCbkU-h1wq.tXKYFtfp2SgcOacl?continueMode=true&_x_zm_rtaid=wz8o-4SEQRePPoZdu1VRqA.1645215295120.52139389c0501c8983c060a25fd786ea&_x_zm_rhtaid=928" target="_blank">Lecture Video (Sec-001)</a> Passcode (i=$q$@j9)
+	</th>
+		</tr>
+	   </table>
+   
+   </td>
+</tr>
+<tr>
+   <td>Code</td>
+   <td></td>
+   <td></td>
+   <td></td>
+</tr>
+<tr>
+	<td>OLA</td>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 2.2: Induction</font></th></tr> 
+		</table>
+	</td>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 3.1 Recursive Definitions <br> 
+				      Recursively Defined Sequences <Br>
+			              Recursively Defined Algorithms 	      
+					</font></th></tr> 
+		</table>
+	</td>
+	<th>
+		<a href="../3080/OLA/OLA2_3080.pdf" target="_blank"><font color="red">OLA2</font></a>
+		<font color="blue">Due date:</font> Feb 25th, 2022 23:59 PM (Friday)
+		<hr>	Jupyter Notebook: <a href="../3080/OLA/OLA2_3080.ipynb">OLA2.ipynb</a>
+		&nbsp;
+		<a href="../3080/OLA/OLA2_3080_Solution.pdf">OLA2_Solution.pdf</a>
+	</th>
+</tr>
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+</table>
+</div>
+
+<Br>
+
+<button type="button" class="collapsible">Unit 3: Recursion and Recurrence Relations (Chapter 3)</button>
+<div class="content">
+<table>
+
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+<tr>
+	<td id="week"><b><font color="red">Week 6</font></b></td>
+	<th><b><font color="red">Feb 21st, 2022</font></b></th>
+	<th><b><font color="red">Feb 23rd, 2022</font></b></th>
+	<th><b><font color="red">Feb 25th, 2022</font></b></th>
+</tr>
+
+<tr>
+   <td>Lecture</td>
+   <td>
+       	 <table>
+	 <tr>
+	<th>
+		<a href="recursiveDefinition.html" target="_blank">Recursive Definitions</a>
+	</th>
+ 	 <th>
+		<a href="https://mtsu.zoom.us/rec/play/OmVtZgj3HdLpuR7CBWQjlJjcIG4emnH4jlnrnfZ6pLawKWu82TxZVzesH1vN0QJ4X7I-XSHLVj0--7hc.LVPBQc90_O-TVllj?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(.C9uk1$Z)
+	 </th>
+	 </tr>
+	 </table>
+ </td>
+
+   <td>
+		<table>
+		<tr>
+	 <th>
+		 <a href="recurrenceRelations.html" target="_blank">Recurrence Relations</a>
+	 </th>
+	 	<th>
+			<a href="https://mtsu.zoom.us/rec/play/0bDnFmZtdyCdXJLTa3-kwAXRRt24OfTDn3L_NVezMJ4475i09LyAtkBAebPDJOQu02INrEWJJRK2dabm.WY2Ytl6SQlBO91cf?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(?&9#fAM8)
+		</th>
+			
+		</tr>
+		</table>
+  </td>
+
+  <td>
+		<table>
+		<tr>
+	 		<th>
+				<a href="Quiz/Quiz3.ipynb" target="_blank">Quiz 3:Recursion and Recurrence Relations</a>
+			</th>
+	 		<th>
+				<a href="Quiz/Quiz3_Solution.ipynb" target="_blank">Quiz 3 Solution</a>
+			</th>
+		<tr>
+			<th colspan="2">
+				<a href="https://mtsu.zoom.us/rec/play/BuX1W88sFv0E1-E0yFoOdVVSBcZC3iOd6tDkJfUIIPhqwuIRG2bcn3k1P2o2U1Sgvbem2GJEq5Xg1uYg.MeG-Q8qK1UieAn9Z?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(F0!PZBn?)
+			</th>
+		</tr>
+		</table>
+</td>
+</tr>
+
+<tr>
+	<td>Code</td>
+	<td><a href="code/Recursive_Demo.ipynb" target="_blank">RecursiveIterative.ipynb</a></td>
+	<td></td>
+	<td></td>
+</tr>
+
+<tr>
+<td>OLA</td>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 3.2: Recurrence Relations <br>
+				      Linear First-Order Recurrence Relations
+			</font></th></tr> 
+		</table>
+	</td>
+	<td></td>
+	<td>
+		<a href="../3080/OLA/OLA3_3080.pdf" target="_blank"><font color="red">OLA3</font></a>
+		<font color="blue">Due date:</font> Mar 4th, 2022 23:59 PM (Friday)
+		<hr>	Jupyter Notebook: <a href="../3080/OLA/OLA3_3080.ipynb">OLA3.ipynb</a>
+		&nbsp; <a href="../3080/OLA/OLA3_Solution.pdf">OLA3_Solution.pdf</a>
+		<hr>
+		Exercise 6: \( \sum\limits_{i=0}^na^i = \frac{a^{n+1}-1}{a-1} (a !=1) \)
+	</td>
+</tr>
+
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+
+</table>
+</div>
+
+<br>
+
+<button type="button" class="collapsible">Unit 4: Matrices (Chapter 5)</button>
+<div class="content">
+<table>
+
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+<tr>
+	<td id="week"><b><font color="red">Week 7</font></b></td>
+	<th><b><font color="red">Feb 28th, 2022</font></b></th>
+	<th><b><font color="red">Mar 2th, 2022</font></b></th>
+	<th><b><font color="red">Mar 4th, 2022</font></b></th>
+</tr>
+
+<tr>
+   <td>Lecture</td>
+   <td>
+       	 <table>
+	 <tr>
+		 <th><a href="matrices.html" target="_blank">Matrices</a></th>
+ 	 <th>
+		<a href="https://mtsu.zoom.us/rec/play/hGogu3PW1yGPFG2_3-H5EqVUqZVfsJ07tXNKI3b8mcrU8H4-JFsMJ99x4ZgLLxEbrcSoRDXB-x-xx-re.fTTzdyDQANUfj7l1?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(dR9&AV6$)
+	 </th>
+	 </tr>
+	 </table>
+ </td>
+
+   <td>
+		<table>
+		<tr>
+			<th><a href="gaussian.html" target="_blank">Gaussian Elimination</a></th>
+	 	<th>
+			<a href="" target="_blank">Lecture Video (Sec-001)</a> Passcode()
+		</th>
+			
+		</tr>
+		</table>
+  </td>
+
+		<th>
+			<b><font color="red">Test 1</font><Br>10:15 AM -- 11:15 AM (KOM 452)</b>
+		<!--
+		<table>
+		<tr>
+			<th><a href="booleanMatrix.html" target="_blank">Boolean Matrix</a></th>
+			<th><a href="Quiz/Quiz4.ipynb" target="_blank">Quiz 4: Matrices</a></th>
+		</tr>
+		<tr>
+				<th>
+				<a href="https://mtsu.zoom.us/rec/share/O3Zm28bYTcI1W5v1X7tCGvfYFy4W8aUUo1EkLnDJTk-pOukUw1FAqYfF45IEfuWY.D99i9iwVkLIiCuta" target="_blank">Lecture Video (Sec-001)</a> Passcode(Z@fQXhY3)
+				</th>
+		</tr>
+		</table>
+		-->
+		</th>
+</tr>
+
+<tr>
+	<td>Code</td>
+	<td><a href="code/Matrices_Demo.ipynb" target="_blank">Matrices Demo.ipynb</a></td>
+	<td><a href="code/GaussianElimination_Demo.ipynb" target="_blank">GaussianElimination Demo.ipynb</a></td>
+	<td></td>
+</tr>
+
+<tr>
+<td>OLA</td>
+	<td></td>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 5.7: Matrices</font></th></tr> 
+		</table>
+	</td>
+	<td>
+		<a href="../3080/OLA/OLA4_3080.pdf" target="_blank"><font color="red">OLA4</font></a>
+		<font color="blue">Due date:</font> Mar 21st, 2022 23:59 PM (Monday)
+		<hr>	Jupyter Notebook: <a href="../3080/OLA/OLA4_3080.ipynb">OLA4.ipynb</a>
+		<hr>	PDF: <a href="../3080/OLA/OLA4.pdf">OLA4.pdf</a>
+	</td>
+</tr>
+<!-- =============================== -->
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+<tr>
+	<td id="week"><b><font color="red">Week 8</font></b></td>
+	<th><b><font color="red">Mar 7th, 2022</font></b></th>
+	<th><b><font color="red">Mar 9th, 2022</font></b></th>
+	<th><b><font color="red">Mar 11th, 2022</font></b></th>
+</tr>
+
+<tr>
+   <td>Lecture</td>
+   <td><b><font color="red">No Class</font> (Spring Break)</b></td>
+   <td><b><font color="red">No Class</font> (Spring Break)</b></td>
+   <td><b><font color="red">No Class</font> (Spring Break)</b></td>
+</tr>
+<tr>
+	<td>Code</td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+
+<tr>
+<td>OLA</td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+
+
+
+<!--   ================================= -->
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+
+</table>
+</div>
+
+<br>
+<button type="button" class="collapsible">Unit 5: Graphs, Trees and Algorithms (Chapter 6,7)</button>
+<div class="content">
+<table>
+
+<tr>
+	<td id="week"><b><font color="red">Week 9</font></b></td>
+	<th><b><font color="red">Mar 14th, 2022</font></b></th>
+	<th><b><font color="red">Mar 16th, 2022</font></b></th>
+	<th><b><font color="red">Mar 18th, 2022</font></b></th>
+</tr>
+
+<tr>
+   <td>Lecture</td>
+   <td>
+       	 <table>
+	 <tr>
+  	 <th><a href="graph1.html" target="_blank">Graph Basics</a></th>
+  	 <th><a href="graph2.html" target="_blank">Graph Terminology</a></th>
+	 </tr>
+	 <tr>	
+ 	 <th colspan="2">
+		<a href="https://mtsu.zoom.us/rec/play/UL7ot7kTUxKqpBj4eItw2C4UD8E3Y8WdAXFJxtyu3tGt5LH2jqIU7VRQKrwZOAinJkt85PhIod14SmwG.RCUEg6WtlV_-cZ_s?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(3$++G7X0)
+	 </th>
+	 </tr>
+	 </table>
+ </td>
+
+   <td>
+		<table>
+		<tr>
+			<th><a href="adjacencyMatrix.html" target="_blank">Adjacent Matrix</a></th>
+			<th><a href="adjacencyList.html" target="_blank">Adjacent List</a></th>
+		</tr>
+		<tr>
+			<th><a href="arrayPointer.html" target="_blank">Array Pointer</a></th>
+		
+		<th>
+			<a href="https://mtsu.zoom.us/rec/play/pd6oTj0DVDFcbsKr5JNeaFO-MSv4fmj87w0UA_uyTSkD-yufEvJ8H1HFUHwvmXhQlwcxjI7p1SsZPNA.YU26K107wEWJklB_?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(r2EgZ2#E)
+		</th>
+			
+		</tr>
+		</table>
+  </td>
+
+  <th>
+	Test 1 Review
+	<hr>
+	<a href="https://mtsu.zoom.us/rec/play/OLnPAzlps_rrhUJ1l__XQe4Qhd_EliSLmjH3M10Q3UhgxapsoBApBg-ZMXQT7wCHbJaDuXsFETCOetOT.gZSG61k2Qc9li4tl?continueMode=true&_x_zm_rtaid=Uf8_QUXWQ0G21ydOkFArMg.1647630396328.e78553ce73a5295d64c5554961949e73&_x_zm_rhtaid=402" target="_blank">Lecture Video</a> (Passcode: 5%0wKL$c)
+  </th>
+</tr>
+
+<tr>
+	<td>Code</td>
+	<td><a href="./codes/"></a></td>
+	<td></td>
+	<td></td>
+</tr>
+
+<tr>
+<td>OLA</td>
+	<td>
+	</td>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 6.1: Graphs and Representations</font></th></tr> 
+		</table>
+	</td>
+	<td></td>
+</tr>
+
+
+<!--   ================================= -->
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+<tr>
+	<td id="week"><b><font color="red">Week 10</font></b></td>
+	<th><b><font color="red">Mar 21st, 2022</font></b></th>
+	<th><b><font color="red">Mar 23rd, 2022</font></b></th>
+	<th><b><font color="red">Mar 25th, 2022</font></b></th>
+</tr>
+
+<tr>
+   <td>Lecture</td>
+   <td>
+       	 <table>
+	 <tr>	
+			<th><a href="booleanMatrix.html" target="_blank">Boolean Matrix</a></th>
+			<th><a href="Quiz/Quiz4.ipynb" target="_blank">Quiz 4: Matrices</a></th>
+	 </tr>
+	 <tr>
+		 <th><a href="Quiz/Quiz4_Solution.pdf" target="_blank">Quiz4_Solution.pdf</a></th>
+	 	<th><a href="Quiz/Quiz4_Q3_solution.pdf" target="_blank">Quiz4_#3_Solution.pdf</a></th>
+	 </tr>
+	 <tr>
+		 <th>
+			<a href="https://mtsu.zoom.us/rec/play/bRx_bOfeivnKMld974cNHrdCImdgH2aLQgzO7tbQbVsGFkVHmsSIXcMpQoIP-ms6bTkvYdio2qwz_T_2.T8pGiXC70-8rq-U-?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(xZ6JEXN=)
+		 </th>
+	 </tr>
+	 </table>
+ </td>
+
+   <td>
+		<table>
+		<tr>
+			<th><a href="treeTerminology.html" target="_blank">Tree Terminology</a></th>
+	 		<th><a href="treeRepresentation.html" target="_blank">Tree Representation</a></th>
+		</tr>	
+		<tr>	
+			<th colspan="2">
+			<a href="https://mtsu.zoom.us/rec/play/eAAOxwyfU_L97DaR3OdYLaBpNcJp4D-JWDEYYQ5WVyalaATFC6xGDITh0W3v8cFSRaDczoGDuF80H9aa.H4jAv5lEnDqLjQDU?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode( c=b5?#MU)
+			</th>
+		</tr>
+		</table>
+  </td>
+
+  <td>
+		<table>
+		<tr>
+			<th><a href="treeTraverse.html" target="_blank">Tree Traversal Algorithms</a></th>
+			<th><a href="decisionTree.html" target="_blank">Decision Trees: Searching</a></th>
+		</tr>
+		<tr>
+				<th colspan="2">
+				<a href="https://mtsu.zoom.us/rec/play/NA1AG6BXX5CMYpe2Ug0MVIZ3krL2MNe2lhR0T1ItzWrL5fEItYogt2D4L0xC480ajvPi-eyEsEu-kDjN.cVJXuJs8bSTTPldJ?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(Dmr.08rq)
+				</th>
+		</tr>
+		</table>
+</td>
+</tr>
+
+<tr>
+	<td>Code</td>
+	<td><a href="./codes/"></a></td>
+	<td></td>
+	<td></td>
+</tr>
+
+<tr>
+<td>OLA</td>
+	<td>
+	</td>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 6.2: Tree and Representations</font></th></tr> 
+		</table>
+	</td>
+	<td></td>
+</tr>
+
+<!--   ================================= -->
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+<tr>
+	<td id="week"><b><font color="red">Week 11</font></b></td>
+	<th><b><font color="red">Mar 28th, 2022</font></b></th>
+	<th><b><font color="red">Mar 30th, 2022</font></b></th>
+	<th><b><font color="red">April 1st, 2022</font></b></th>
+</tr>
+
+<tr>
+   <td>Lecture</td>
+   <td>
+       	 <table>
+	 <tr>
+			<th><a href="decisionTree.html" target="_blank">Decision Trees: Searching</a></th>
+  	 <th><a href="dtSorting.html" target="_blank">Decision Tree: Sorting</a></th>
+	 </tr>
+	 <tr>	
+ 	  <th colspan="2">
+		<a href="https://mtsu.zoom.us/rec/play/2PKyrhwqGbtjjgKDqNmwHJVNnZxWHDJvgaIcjxBz8VamnTIR9vf_KLKR2F3mMf_PdtCcB76DtbS49S1P.krQ-AIAaKAAe-aiA?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(a=3dM*uM)
+	 </th>
+	 </tr>
+	 </table>
+ </td>
+
+   <td>
+		<table>
+		<tr>
+			<th><a href="huffman.html" target="_blank">Huffman Codes</a></th>
+	 	<th>
+			<a href="https://mtsu.zoom.us/rec/play/KMzNmgaBVM57A5dI1EM4wHYaGz7AaYbfpN0o6DM_Uz-6471ucv4wt7a8gSeOSDUVtHjoLzfZlZnNmmu6.I_00dWN5atbFReVV?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(N6@nP?dQ)
+		</th>
+			
+		</tr>
+		</table>
+  </td>
+
+  <td>
+		<table>
+		<tr>
+	 		<th>
+			<a href="Quiz/Quiz5_Solution.ipynb" target="_blank">Quiz5_Solution.ipybn(Graphs and Trees)</a>
+			<hr>
+			<a href="Quiz/Quiz5_Solution.pdf" target="_blank">Quiz5_Solution.pdf(Graphs and Trees)</a>
+			</th>	
+			<th>
+				<a href="https://mtsu.zoom.us/rec/play/blcTxlML98YyM5hRAqHxXMhD4O9iFvL_Wv54k_OoHEHcg01Awg0mIzkeQN-UrSu5vL1TeqB1OgbuI_ZR.08iyTK0aR--iFRXQ?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(Jy#O=2Y4)
+				</th>
+		</tr>
+		</table>
+</td>
+</tr>
+
+<tr>
+	<td>Code</td>
+	<td><a href="./codes/"></a></td>
+	<td></td>
+	<td></td>
+</tr>
+
+<tr>
+<td>OLA</td>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 6.3: Decision Trees</font></th></tr> 
+		</table>
+	</td>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 6.4: Huffman Codes</font></th></tr> 
+		</table>
+	</td>
+	<td>
+			<a href="../3080/OLA/OLA5_3080.pdf" target="_blank"><font color="red">OLA5</font></a>
+			<font color="blue">Due date:</font> April 11st, 2022 23:59 PM (Monday)
+			<hr>	Jupyter Notebook: <a href="../3080/OLA/OLA5_new.ipynb" target="_blank">OLA5.ipynb</a>
+		       <hr>
+		       PDF : <a href="../3080/OLA/OLA5.pdf" target="_blank">OLA5.pdf</a>
+	</td>
+</tr>
+
+<!--   ================================= -->
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+<tr>
+	<td id="week"><b><font color="red">Week 12</font></b></td>
+	<th><b><font color="red">April 4th, 2022</font></b></th>
+	<th><b><font color="red">April 6th, 2022</font></b></th>
+	<th><b><font color="red">April 8th, 2022</font></b></th>
+</tr>
+
+<tr>
+   <td>Lecture</td>
+   <td>
+		<table>
+		<tr>
+			<th>
+				<a href="binaryRelation.html" target="_blank">Directed Graphs and Binary Relations</a>
+			</th>
+			<th>
+			<a href="https://mtsu.zoom.us/rec/share/E8jQ1dMpZhkNEXfFtIa0rwQEzWtKRTB0F760KRCW-4Uo29YoUByuMD59ysbiViA0.TBXkWolhEhJSHjqm" target="_blank">Lecture Video (Sec-001)</a> Passcode(a9UE^XL%)
+		</th>
+			
+		</tr>
+		</table>
+  </td>
+
+  <td>
+		<table>
+		<tr>
+			<th>
+				<a href="warshall.html" target="_blank">Warshall' Algorithm</a>
+			</th>
+			<th><a href="euler.html" target="_blank">Euler Path and Hamiltonian Circuit</a></th>
+		</tr>
+		<tr>
+				<th>
+				<a href="https://mtsu.zoom.us/rec/play/Pn9s6-Hypp2ucL1xt6y8vJGzuRcRgwDvx9Temt2x6V3P0yVLvKNbKr4VPuBa7cB8X2usM3LwuT-4cRFw.OUg4tM_ltEHTZcEY?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(@Om283+i)
+				</th>
+		</tr>
+		</table>
+</td>
+   <td>
+       	 <table>
+	 <tr>
+			<th><a href="dijkstra.html" target="_blank">Dijkstra's Algorithm</a></th>
+ 	  <th>
+		<a href="https://mtsu.zoom.us/rec/play/p4Vf1-CCRdslNzF_T0RXU5ZCgiLFaPG2QWDm7g7FDqSMgAilNN6946ha7tRjYgnR9lErttV6J6ab0lU5.W9Y4ZRYyKlkSJi3o?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(^Y!K54UB)
+	 </th>
+	 </tr>
+	 </table>
+ </td>
+</tr>
+
+<tr>
+	<td>Code</td>
+	<td><a href="./codes/"></a></td>
+	<td></td>
+	<td></td>
+</tr>
+
+<tr>
+<td>OLA</td>
+<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 7.1: Directed Graphs and Binary Relations, Warshall' Algorithm</font></th></tr> 
+		</table>
+</td>
+<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 7.2: Euler Path and Hamiltonian Circuit</font></th></tr> 
+		</table>
+</td>
+<td></td>
+</tr>
+
+<!--   ================================= -->
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+<tr>
+	<td id="week"><b><font color="red">Week 13</font></b></td>
+	<th><b><font color="red">April 11st, 2022</font></b></th>
+	<th><b><font color="red">April 13rd, 2022</font></b></th>
+	<th><b><font color="red">April 15th, 2022</font></b></th>
+</tr>
+
+<tr>
+   <td>Lecture</td>
+
+   <td>
+		<table>
+		<tr>
+			<th><a href="dijkstra.html" target="_blank">Dijkstra's Algorithm</a></th>
+			<th>
+			<a href="https://mtsu.zoom.us/rec/play/oz3J1l1E633bH0fXZIvMH_MRdevTPx2vuVxuM7WFin0beMIFHM-w9QcDiynJ95WoU0hj5sWqKkOs-3gv.evVWEQ-uO6jEAF6N?continueMode=true&_x_zm_rtaid=SoqKIdY8QV6XVlrpgpeu1g.1650382096128.657316e5de0ba1bec54676048c19f3ef&_x_zm_rhtaid=514" target="_blank">Lecture Video (Sec-001)</a> Passcode(Q1!k%mdw)
+		</th>
+			
+		</tr>
+		</table>
+  </td>
+
+  <td>
+		<table>
+		<tr>
+			<th>
+				<a href="depth-first.html" target="_blank">Depth-First Search</a>
+			</th>
+			<th>
+				<a href="https://www.youtube.com/watch?v=iaBEKo5sM7w" target="_blank">Depth-First Search Video</a>
+			</th>
+		</tr>
+		<tr>
+			<th>
+				<a href="breadth-first.html" target="_blank">Breadth-First Search</a>
+			</th>
+			<th>
+				<a href="https://www.youtube.com/watch?v=QRq6p9s8NVg" target="_blank">Breadth-First Search Video</a>
+			</th>
+		</tr>
+		<tr>
+			<th colspan="2">	
+			<a href="https://mtsu.zoom.us/rec/play/7FeSdqI13BbdH0YjZDliH_xxsck91hqB-oZZ5ER4BtUa1ypvLMMOGh-kPxaOi4g_AwK1EH6aIJ_hHUmq.jzotZKUm7sZuYxF7?continueMode=true&_x_zm_rtaid=SoqKIdY8QV6XVlrpgpeu1g.1650382096128.657316e5de0ba1bec54676048c19f3ef&_x_zm_rhtaid=514" target="_blank">Lecture Video (Sec-001)</a> Passcode(RPP6Hh*w)
+				</th>
+		</tr>
+		</table>
+</td>
+   <td>
+       	 <table>
+	 <tr>
+			<th><a href="Quiz/Quiz6.ipynb" target="_blank">Quiz 6: Graph and Algorithm</a></th>
+			<th><a href="Quiz/Quiz6_Solution.pdf" target="_blank">Quiz 6_Solution.pdf</a></th>
+	 </tr>
+	 <tr>	
+ 	 <th>
+		<a href="https://mtsu.zoom.us/rec/play/lAfrT5IizidcjmSFvlst_ZAuOPZ9B5fm6qhUKzrtp-_CAzGhgzwSMscjOqZVAscIDxkSYxhktJBFedus.pB2j8p6f9Bjgy7jU?continueMode=true&_x_zm_rtaid=SoqKIdY8QV6XVlrpgpeu1g.1650382096128.657316e5de0ba1bec54676048c19f3ef&_x_zm_rhtaid=514" target="_blank">Lecture Video (Sec-001)</a> Passcode(a@H8ZxPC)
+	 </th>
+	 </tr>
+	 </table>
+ </td>
+</tr>
+
+<tr>
+	<td>Code</td>
+	<td><a href="./codes/"></a></td>
+	<td></td>
+	<td></td>
+</tr>
+
+<tr>
+<td>OLA</td>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 7.3: Shortest Path</font></th></tr> 
+		</table>
+	</td>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 7.4: Traversal Algorithms</font></th></tr> 
+		</table>
+	</td>
+	<td>
+		<a href="../3080/OLA/OLA6_3080_new_2.pdf" target="_blank"><font color="red">OLA6</font></a>
+		<font color="blue">Due date:</font> April 21st, 2022 23:59 PM (Thursday)
+		<hr>	Jupyter Notebook: <a href="../3080/OLA/OLA6_new.ipynb" target="_blank">OLA6.ipynb</a>
+		<br>
+		PDF: <a href="../3080/OLA/OLA6_new.pdf" target="_blank">OLA6.pdf</a>
+	</td>
+</tr>
+
+<!--   ================================= -->
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+</table>
+</div>
+
+<br>
+<button type="button" class="collapsible">Unit 6: Finite-State Machines (Chapter 9)</button>
+<div class="content">
+<table>
+
+<tr>
+	<td id="week"><b><font color="red">Week 14</font></b></td>
+	<th><b><font color="red">April 18th, 2022</font></b></th>
+	<th><b><font color="red">April 20th, 2022</font></b></th>
+	<th><b><font color="red">April 22nd, 2022</font></b></th>
+</tr>
+
+<tr>
+   <td>Lecture</td>
+
+   <td>
+		<table>
+		<tr>
+  	 		<th><a href="fsm.html" target="_blank">Finite-State Machine</a></th>
+			<th colspan="2"><a href="fsm_eg.html" target="_blank">Examples of FSM: Binary Adder</a></th>
+		</tr>
+		<tr>
+			<th colspan="2">
+			<a href="https://mtsu.zoom.us/rec/play/NKOrFLYcQFfrSI3UWhomoltqlJLY_Q7XIhN9Sk8RHwkhdCACRGGVo7kWIxsFpWc-lr_y2SUfa346cQiY.6FKy4Jxzx9sj_nA8?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(9z7x4Td$)
+			</th>
+		</tr>
+		</table>
+  </td>
+
+  <td>
+		<table>
+		<tr>
+			<th colspan="2"><a href="fsm_eg.html" target="_blank">Examples of FSM: Binary Adder</a></th>
+			<th><a href="fsm_recognition.html" target="_blank">Examples of FSM: Recognition</a></th>
+	 		<th></th>
+		</tr>
+		<tr>
+				<th>
+				<a href="https://mtsu.zoom.us/rec/share/B1EJg1E4kvL558yKf7jUdrBq7cfsb0kb5zYAUrZgAv1dq2vAFiXzVdwjimFkgvrM.3FJuV_klUoiTvgCW" target="_blank">Lecture Video (Sec-001)</a> Passcode(#=7G0YF6)
+				</th>
+		</tr>
+		</table>
+</td>
+<th>
+
+			<b><font color="red">Test 2</font><Br>10:15 AM -- 11:15 AM (KOM 452)</b>
+</th>
+</tr>
+
+<tr>
+	<td>Code</td>
+	<td><a href="./codes/"></a></td>
+	<td></td>
+	<td></td>
+</tr>
+
+<tr>
+<td>OLA</td>
+	<td></td>
+	<td>
+		<table>
+			<tr><th><font color="red">Reading assignment:</font></th></tr>
+			<tr><th><font>Chapter 9.3: Finite-State Machines</font></th></tr> 
+		</table>
+	</td>
+	<td></td>
+</tr>
+
+<!--   ================================= -->
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+<tr>
+	<td id="week"><b><font color="red">Week 15</font></b></td>
+	<th><b><font color="red">April 25th, 2022</font></b></th>
+	<th><b><font color="red">April 27th, 2022</font></b></th>
+	<th><b><font color="red">April 29th, 2022</font></b></th>
+</tr>
+
+<tr>
+   <td>Lecture</td>
+   <td>
+       	 <table>
+	 <tr>
+			<th><a href="fsm_recognition.html" target="_blank">Examples of FSM: Recognition</a></th>
+	 </tr>
+	 <tr>	
+ 	 <th>
+		<a href="https://mtsu.zoom.us/rec/play/WOuqT1Y4V5cgiX-IZ_EtVSC7EDJm9GQx9j3RfrnhNN3g3QQ6iLcx73qkwsCyMh_eSQpyNFWhlw-fMUfQ.V7ERcKbS8aDkjC3W?continueMode=true" target="_blank">Lecture Video (Sec-001)</a> Passcode(+U#rM7W*)
+	 </th>
+	 </tr>
+	 </table>
+ </td>
+
+   <td>
+		<table>
+		<tr>
+			<th><a href="fsm_kleene.html" target="_blank">Regular Sets and Kleene's Threorem</a></th>
+			<th><a href="turingMachine.html" target="_blank">Turing Machine</a></th>
+		</tr>
+		<tr>	
+			<th colspan="2">
+			<a href="https://mtsu.zoom.us/rec/play/niYdLyONCYr7lkZ5ViG953M3Ll3Nn5X43FWVGgTqOWmxj0JQre79av45Zoj65Q7R_UY2KYLkA8qzEoq7.iE1OIRRLSqY6NGqN?continueMode=true&_x_zm_rtaid=QuQr9zQwStGuuP4L7mDj6Q.1651247912310.d59abedaac3a77e9d734748559e41734&_x_zm_rhtaid=965" target="_blank">Lecture Video (Sec-001)</a> Passcode(N*J6r7jL)
+			</th>
+			
+		</tr>
+		</table>
+  </td>
+
+  <td>
+		<table>
+		<tr>
+			<th>No Class</th>
+			<!--
+			<th><a href="tm2.html" target="_blank">Turing Machine Recognition</a></th>
+	 		<th></th>
+			-->
+		</tr>
+		<tr>
+			<!--
+				<th>
+				<a href="https://mtsu.zoom.us/rec/share/o1PuJr-rTBhDbyJi48Wd4W_GDfTtonguVkMR3Tyqwk57fA-gB8CIo00Jv_ic0E8i._hya-rDzHc4Lgphy" target="_blank">Lecture Video (Sec-001)</a> Passcode($4B#c3.%)
+				</th>
+			-->
+		</tr>
+		</table>
+</td>
+</tr>
+
+<tr>
+	<td>Code</td>
+	<td><a href="./codes/"></a></td>
+	<td></td>
+	<td></td>
+</tr>
+
+<tr>
+<td>OLA</td>
+	<td>
+	</td>
+	<td></td>
+	<td></td>
+</tr>
+
+<!--   ================================= -->
+<!--
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+<tr>
+	<td id="week"><b><font color="red">Week 15</font></b></td>
+	<th><b><font color="red">Nov 29th, 2021</font></b></th>
+	<th><b><font color="red">Dec 1st, 2021</font></b></th>
+	<th><b><font color="red"></font></b></th>
+</tr>
+
+<tr>
+   <td>Lecture</td>
+   <td>
+       	 <table>
+	 <tr>
+  	 <th><a href="final.html" target="_blank">Final Review</a></th>
+	 <th>Course Evaluation</th>
+	 </tr>
+	 <tr>	
+ 	 <th colspan="2">
+		<a href="" target="_blank">Lecture Video (Sec-001)</a> Passcode()
+	 </th>
+	 </tr>
+	 </table>
+ </td>
+
+   <td>
+		<table>
+		<tr>
+			<th>Test 2 Review</th>
+			
+		</tr>
+	 <tr>	
+ 	 <th>
+		<a href="https://mtsu.zoom.us/rec/share/mnEmjNlpbRIHD5BG6XbHh7J9rMH5_EA8YeAAA1shGYnhkihLx4J5hys8yb0yl0o.TT03VcLS4Iryjfet" target="_blank">Lecture Video (Sec-001)</a> Passcode(d&c2j^We)
+	 </th>
+	 </tr>
+		</table>
+  </td>
+
+  <td>
+</td>
+</tr>
+
+<tr>
+	<td>Code</td>
+	<td><a href="./codes/"></a></td>
+	<td></td>
+	<td></td>
+</tr>
+
+<tr>
+<td>OLA</td>
+	<td>
+	</td>
+	<td></td>
+	<td></td>
+</tr>
+-->
+
+<tr>
+	<td colspan="4"><hr color="#aa00ff"></td>
+</tr>
+
+</table>
+</div>
+<br>
+<br>
+
+<table>
+<tr>
+	<th colspan="3"><font color="red">Last Day of Classes:</font> April 27th, 2022 (Wednesday)</th>
+</tr>
+<tr>
+	<th><a href="test1.html" target="_blank">Test 1</a><font color="red">(Sec001)</font></th>
+	<td><b>Date: <font color="#aa00ff">Mar 4th, 2022</font></b> (Friday)</td>
+	<td><b>Time: <font color="#aa00ff">10:15 AM to 11:15 PM</font></b></td>
+</tr>
+<tr>
+	<th><a href="test2.html" target="_blank">Test 2</a><font color="red">(Sec001)</font></th>
+	<td><b>Date: <font color="#aa00ff">April 22nd, 2022</font></b> (Friday)</td>
+	<td><b>Time: <font color="#aa00ff">10:15 AM to 11:15 AM</font></b></td>
+</tr>
+<tr>
+	<th><a href="final.html" target="_blank">Final Exam</a><font color="red">(Sec001)</font></th>
+	<td><b>Date: <font color="#aa00ff">May 2nd, 2022</font></b> (Monday)</td>
+	<td><b>Time: <font color="#aa00ff">09:30 AM to 11:30 AM</font></b></td>
+</tr>
+</table>
+<br>
+
+<footer align="center" id="foot01"></footer>
+</div>
+
+<script src="../CCS/Script.js"></script>
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+		         coll[i].addEventListener("click", function() {
+		           this.classList.toggle("active");
+		           var content = this.nextElementSibling;
+		           if (content.style.maxHeight){
+		             content.style.maxHeight = null;
+		           } else {
+		             content.style.maxHeight = content.scrollHeight + "px";
+		           } 
+		         });
+		       }
+</script>
+
+</body>
+</html>

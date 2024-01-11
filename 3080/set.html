@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sets Theory</title>
+  <link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+<div id="main">
+
+
+<h1>Introduction to Set Theory</h1>
+Every field of study seeks a common terminology and symbology. While it is possible to think about a subject without knowing its particular language, it is not possible to communicate with others about that subject without some common frame of reference. Thus we begin with the basic terms and notations of set theory.
+
+<font color="red"><b>Set theory</b></font> is one of the cornerstones of mathematics. Many concepts in mathematics and computer science can be conveniently expressed in the language of sets. Operations can be performed on sets to generate new sets. Although most sets of interest to computer scientists are finite or countable, there are sets with so many members that they cannot be enumerated.
+
+<h2>Set Notation</h2>
+A set is a collection of objects called <font color="red"><b>elements</b></font>. We use<b> <font color="red">capital letters</font></b> to denote sets and the symbol <b><font color="red">&isin;</font></b> to denote membership in a set. Thus <b><font color="red">a &isin; A</font></b> means that object a is a member, or element, of set <b>A</b>, and <b><font color="red">b &notin; A</font></b> means that object b is not an element of set <b>A</b>. Braces are used to indicate a set. 
+
+<font color="blue">
+<pre>
+Example 1: 
+
+If A = {violet, chartreuse, burnt umber}, then chartreuse &isin; A and magenta &notin; A.
+</pre>
+</font>
+
+<b>Additional Points:</b>
+<br>
+<ul>
+	<li>
+		&bull; Repeated elements are listed once:<br>
+	No ordering is imposed on the elements in a set; therefore {violet, chartreuse, burnt umber} is the same as {chartreuse, burnt umber, violet}. 
+	</li>
+	<li>
+		&bull; There is no order in a set:<br>
+		Each element of a set is listed only once; it is redundant to list it again.
+	</li>
+</ul>
+
+
+<h2>Elements and Cardinality</h2>
+<b><font color="blue">Finite Set</font></b> 
+<Br>
+A set is a finite set if it has a finite number of
+elements. Any set that is not finite is an infinite set.
+<Br>
+<Br>
+<b><font color="blue">Cardinality</font></b> 
+<Br>
+Let <B>A</B> be a finite set. The number of different elements
+in <b>A</b> is called its <b><font color="red">cardinality</font></b>. The cardinality of a finite set <B>A</B> is denoted <b>|A|</b> 
+
+
+<h2>Enumeration</h2>
+
+When the elements of a set are enumerated (or listed) it is traditional to enclose them in braces. For example, the set of binary digits is {0,1} and the set of decimal digits is {0,1,2,3,4,5,6,7,8,9}. The choice of a name for these sets would be arbitrary; but it would be "logical" to call them <b>B</b> and <b>D</b>, respectively. The choice of a set name is much like the choice of an identifier name in programming. Some large sets can be enumerated without actually listing all the elements. For example, the letters of the alphabet and the integers from 1 to 100 could be described as <b>A</b>={a,b,c,...,x,y,z} and <b>G</b>={1,2,...,99,100}. The three consecutive "dots" are called an ellipsis. We use them when it is clear what elements are included but not listed. An ellipsis is used in two other situations. To enumerate the positive integers, we would write {1,2,3,...} indicating that the list goes on infinitely. If we want to list a more general set such as the integers between 1 and n, where n is some undetermined positive integer, we might write {1,...,n}.
+
+<h2>Standard Symbols</h2>
+
+Sets that are frequently encountered are usually given symbols that are reserved for them alone. For example, since we will be referring to the positive integers throughout this course, we will use the symbol \( \mathbb{P} \) instead of writing {1,2,3,...}. It is convenient to name certain standard sets so that we can refer to them easily. A few of the other sets of numbers that we will use frequently are:
+<br>
+<br>
+<font color="blue">
+	\( \mathbb{P} \): set of all positive integers, {1,2,3,4,...} <br>
+	\( \mathbb{N} \): set of all nonnegative integers (natural numbers), {0,1,2,3,4,...} <br>
+	\( \mathbb{Z} \): set of all integers, {...,-3,-2,-1,0,1,2,3,...} <br>
+	\( \mathbb{Q} \): set of all <a href="https://www.mathsisfun.com/rational-numbers.html" target="_blank">rational numbers</a> <br>
+	\( \mathbb{R} \): set of all <a href="https://www.mathsisfun.com/numbers/real-numbers.html" target="_blank">real numbers</a> <br>
+	\( \mathbb{C} \): set of all <a href="https://www.mathsisfun.com/numbers/complex-numbers.html" target="_blank">complex numbers</a> <br>
+</font>
+<br>
+sometimes we will also want to talk about the set with no elements (the <b>empty set</b>, or <b>null set</b>), denoted by <b>\( \emptyset \)</b> or<b>{}</b>. For example, if <font color="red">S = {x|x &isin; \( \mathbb{N} \) and x &lt; 0}</font>, then <font color="red">S = \( \emptyset \)</font>. Note that \( \emptyset \),  the set with no elements, is not the same as {\( \emptyset \)}, which is a set with a single element where the single element is the empty set.
+
+<h2>Set-Builder Notation</h2>
+Another way of describing sets is to use set-builder notation.
+For example, we could define the rational numbers \( \mathbb{Q} \) = {...,\( \frac{1}{1},\frac{1}{2},\frac{1}{3},\frac{2}{3}\),...} as:
+<br>
+<b><font color="blue">\( \mathbb{Q} \) = {a/b|a,b &isin; \( \mathbb{Z} \), b &ne; 0 }</font></b>
+
+<br>
+<br>
+
+Note that in the set-builder description for the rational numbers:
+<br>
+&bull; a/b indicates that a typical element of the set is a "fraciton"
+<br>
+&bull; The vertical line, |, is read "such that" or "where", and is used
+interchangeably with a colon
+<br>
+&bull; a,b &isin; \(\mathbb{Z}\) is an abbreviated way of saying a and b are integers.
+<br>
+&bull; Commas in mathematics are read as "and"
+
+<br>
+<br>
+Example: Please define set-builder notation for Even integers
+\(\mathbb{2Z}\) = {...,-4,-2,0,2,4,...}
+
+<h2>Exercises</h2>
+\(\mathbb{Z^{+}}\) = {1,2,3,...} ;
+\(\mathbb{D}\) = { x &isin; \(\mathbb{Z^{+}}\)|x < 6} 
+<br>
+<br>
+&bull;List the elements of \(\mathbb{D}\).
+<br>
+<br>
+&bull;What is the cardinality of \(\mathbb{D}\)?
+<br>
+<br>
+&bull;What is the cardinality of {\(\emptyset\),{a,b}}?
+
+<h2>Subset</h2>
+<b><font color="blue">Subset</font></b> 
+<Br>
+Let <b>A</b> and <b>B</b> be sets. We say that <b>A</b> is a <b>subset</b> of <b>B</b> if and only if every element of <b>A</b> is an element of <b>B</b>. We write <font color="red"><b>A</b>&sube;<b>B</b></font> to denote the fact that <b>A</b> is a subset of <b>B</b>.
+<Br>
+<Br>
+<b><font color="blue">Set Equality</font></b> 
+<Br>
+Let <b>A</b> and <b>B</b> be sets. We say that <b>A</b> is <b>equal</b> to <b>B</b>(notation <b>A</b> = <b>B</b>) if and only if every element of <b>A</b> is an element of <b>B</b> and conversely every element of <b>B</b> is an element of <b>A</b>; that is, <b>A</b>&sube;<b>B</b> and <b>B</b>&sube;<b>A</b>.
+<br>
+<br>
+<b><font color="blue">Proper Subset</font></b> 
+<br>
+If <b>A</b> is a subset of <b>B</b>, we denote the relationship
+by <b>A &sube;B</b>. If <b>A &sube; B</b> but <b>A &ne; B</b> (there
+is at least one element of <b>B</b> that is not an element of <b>A</b>), then <b>A</b> is a <b>proper subset</b> of B, denoted by <b>A &sub; B</b> 
+
+
+<h2>Reference</h2>
+
+<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+<footer align="center" id="foot01"></footer>
+</div>
+
+</body>
+</html>

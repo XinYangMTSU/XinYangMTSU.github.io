@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Turing Machine</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 9: Finite-State Machines, Turing machines</h1>
+
+		<center>
+			<h2>Section 9.4 Turing Machines</h2>
+		</center>
+
+		<br>
+		<br>
+
+
+		<h1>Turing Machines</h1>
+
+		<br>
+		<center>
+			<img src="./images/KleeneTuring.png" height="200px" width="800px" />
+		</center>
+		We noted that S = {\(0^n\)\(1^n\) | n &ge; 0} is not a regular set, Kleene's theorem tells us that it is not
+		recognizable by any finite-state machine.
+		<Br>
+		<br>
+		To simulate more general computational procedures than the finite-state machine can handle, we use a <b>
+			<font color="blue">Turing machine</font>
+		</b>, proposed by the British mathematician Alan M. Turing in 1936. Turing machine is essentially a finite-state
+		machine with the added ability to reread its input and also to erase and write over its input. It also has unlimited
+		auxiliary memory. Thus, the Turing machine overcomes the deficiencies we noted in finite-state machines. Unlimited
+		auxiliary memory makes the Turing machine a hypothetical "machine" -- a model--not a real device.
+		<br>
+		<br>
+		A <font color="blue"><b>Turing machine</b></font> is an abstract computational model that performs computations by
+		reading and writing to an infinite
+		tape. Turing machines are similar to finite automata/finite state machines but have the advantage of unlimited
+		memory. They are capable of simulating common computers; a problem that a common computer can solve (given enough
+		memory) will also be solvable using a Turing machine, and vice versa. Turing machines were invented by the esteemed
+		computer scientist Alan Turing in 1936. <font color="blue"><b>It is a simple yet powerful abstract machine that
+				serves as a fundamental
+				concept in the field of theoretical computer science.</b></font>
+
+		<h2>Turing Machine</h2>
+		A Turing machine consists of a finite-state machine and an unlimited tape divided into cells, each cell containing
+		at most one symbol from an allowable finite alphabet. At any one instant, only a finite number of cells on the tape
+		are nonblank. We use the special symbol b to denote a blank cell. The finite-state unit, through its read-write
+		head, reads one cell of the tape at any given moment (Figure 9.15).
+		<br>
+		<br>
+		<center>
+			<img width="600px" height="200px" src="images/tm1.png">
+		</center>
+		<br>
+		By the next clock pulse, depending on the present state of the unit and the symbol read, the unit either does
+		nothing (halts) or completes three actions:
+		<br>
+		<br>
+		<font size=4 color="blue">
+			1. Print a symbol from the alphabet on the cell read (it might be the same symbol that's already there). <Br>
+			2. Go to the next state (it might be the same state as before) <Br>
+			3. Move the read -- write head one cell left or right. <Br>
+		</font>
+		<Br>
+		We can describe the actions of any particular Turing machine by a set of quintuples of the form <b>
+			<font color="blue">(s,i,i',s',d)</font>
+		</b>, where s and i indicate the present state and the tape symobl being read, i' denotes the symbol printed, s'
+		denotes the new state, and d denotes the direction in which the read-write head moves (R for ight, L for left).
+		<br>
+		<br>
+		<center>
+			<img width="700px" height="500px" src="images/tm2.png">
+		</center>
+		<br>
+		the configuration illustrated in Figure 9.16b. The symbol 1 being read on the tape has been changed to a 0, the
+		state of the unit has been changed from 2 to 1, and the head has moved one cell to the right.
+		<Br>
+
+		<h2>Definition</h2>
+
+		<center>
+			<img width="700px" height="150px" src="images/tm3.png">
+		</center>
+		<br>
+		The restriction that no two quintuples begin with the same s and i symbols ensures that the action of the Turing
+		machine is deterministic and completely specified by its present state and symbol read. <font color="red"><b>If a
+				Turing machine gets
+				into a configuration for which its present state and symbol read are not the first two symbols of any
+				quintuple,
+				the machine halts.</b></font>
+		<Br>
+		Just as in the case of ordinary finite-state machines, <font color="blue"><b>we specify a fixed starting state,
+				denoted by 0</b></font>, in which
+		the machine begins any computation. We also assume an initial configuration for the read-write
+		head, namely, <font color="blue"><b>a
+				position over the farthest left nonblank symbol on the tape.</b></font> (If the tape is initially all blank, the
+		read-write
+		head can be positioned anywhere to start.)
+		<br>
+		<center>
+			<img width="800px" height="350px" src="images/eg40_1.png">
+		</center>
+		<center>
+			<img width="700px" height="500px" src="images/eg40_2.png">
+		</center>
+		<center>
+			<img width="700px" height="500px" src="images/eg40_3.png">
+		</center>
+		<center>
+			<img width="700px" height="150px" src="images/eg40_4.png">
+		</center>
+		<Br>
+		The tape serves as a memory medium for a Turing machine, and in general, the machine can reread cells of the tape.
+		Since it can also write on the tape, the nonblank portion of the tape can be as long as desired, although there are
+		still only a finite number of nonblank cells at any time. Hence the machine has available an unbounded, though
+		finite, amount of storage. Because Turing machines overcome the limitations of finite-state machines, Turing
+		machines should have considerably higher capabilities. In fact, a finite-state machine is a very special case of a
+		Turing machine, one that always prints the old symbol on the cell read, always moves to the right, and always halts
+		on the symbol b.
+		<br>
+		<Br>
+		<h2>Practice 57</h2>
+
+		<center>
+			<img width="800px" height="650px" src="images/practice57.png">
+		</center>
+
+
+		<br>
+		<h2>Why do we study Turing Machines? </h2>
+		We study Turing Machines because they provide a theoretical framework for understanding the nature of computation
+		and the limits of what can be computed. They were first described by Alan Turing in 1936, and they have become a
+		fundamental concept in the field of theoretical computer science. They are used to model the behavior of algorithms
+		and to analyze the computability of different problems. Additionally, they serve as a foundation for the theory of
+		complexity, which is used to study the efficiency of algorithms and the resources required to solve different
+		problems. Overall, studying Turing Machines helps us understand the capabilities and limitations of computers and
+		computation. <br><br>The power of Turing Machines lies in their ability to simulate any algorithm or computation
+		that can be
+		performed by a computer. They can solve problems that are algorithmically solvable and describe the limits of what
+		can be computed.
+
+		<Br>
+		<Br>
+		Turing's explanation of his machine was primarily intended as a theoretical construct rather than a practical
+		blueprint for physical implementation. When Alan Turing introduced the concept of the Turing Machine in his seminal
+		1936 paper "On Computable Numbers, with an Application to the Entscheidungsproblem," his goal was to define a
+		mathematical model that captured the essence of computation. <br><br>
+		In reality, physical computers and programming languages are built upon various technologies and architectures that
+		differ from the abstract model of a Turing Machine. However, Turing Machines have had a profound impact on the
+		development of computer science and the understanding of computation. They serve as a theoretical foundation for
+		studying the limits of computation, complexity theory, and the theoretical aspects of algorithms. <br><br>
+		It's important to note that although Turing Machines may not be directly implemented in physical form, their
+		concepts and principles
+		have influenced the design and development of real-world computers and programming languages. Turing's work laid the
+		groundwork for the development of modern computing and provided invaluable insights into the theoretical
+		underpinnings of computation.
+
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a> <br>
+		<a href="https://brilliant.org/wiki/turing-machines/#:~:text=A%20Turing%20machine%20is%20an,that%20we%20simply%20cannot%20solve%3F"
+			target="_blank">Brilliant</a> <br>
+		<a href="https://plato.stanford.edu/entries/computability/#HalPro" target="_blank">Stanford Encyclopedia of
+			Philosophy</a>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

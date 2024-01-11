@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Turing Machine</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 9: Finite-State Machines, Turing machines</h1>
+
+		<center>
+			<h2>Section 9.4 Turing Machines</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h2>Turing Machines as Set Recognizers</h2>
+		Although the Turing machine computations we have seen so far are not particularly meaningful, we will use the Turing
+		machine to do two kinds of jobs. First, we'll use it as a recognizer, much as we considered finite-state machines as
+		recognizers in the previous section. We can even give a very similar definition, provided we first define a final
+		state for a Turing machine. A final state in a Turing machine is one that is not the first symbol in any quintuple.
+		Thus, on entering a final state, whatever the symbol read, the Turing machine halts.
+		<Br>
+
+		<h2>Definition</h2>
+		<br>
+		<center>
+			<img width="700px" height="150px" src="images/tmRec1.png">
+		</center>
+		<br>
+		<h2>Turing Machine as Recognizers</h2>
+		We can now build a Turing machine to recognize our old friend \(S =\{0^n1^n | n &ge; 0\} =
+		\{&lambda;,01,0011,000111,00001111,...\}\)The machine is based on our second approach to this recognition problem,
+		sweeping back and forth across the input and crossing out 0-1 pairs.
+
+		<Br>
+
+		<center>
+			<img width="800px" height="650px" src="images/eg41_1.png">
+		</center>
+		<center>
+			<img width="800px" height="650px" src="images/eg41_2.png">
+		</center>
+
+		<h2>Practice</h2>
+		<center>
+			<img width="800px" height="250px" src="images/practice58.png">
+		</center>
+		<br>
+		<center>
+			<img width="800px" height="100px" src="images/practice60.png">
+		</center>
+		<br>
+		<center>
+			<img width="800px" height="100px" src="practice60_solution.png">
+		</center>
+
+
+		<h2>Turing Machine Simulator</h2>
+
+		<a href="https://morphett.info/turing/turing.html" target="_blank">a web-based Turing machine simulator, written in
+			Javascript, with some example Turing
+			machine programs.</a>
+		<br>
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a><br>
+		<a href="https://brilliant.org/wiki/turing-machines/#:~:text=A%20Turing%20machine%20is%20an,that%20we%20simply%20cannot%20solve%3F"
+			target="_blank">Brilliant</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

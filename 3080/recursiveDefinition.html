@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Recursive Definitions</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 3: Recursion, Recurrence Relations</h1>
+
+		<center>
+			<h2>Section 3.1 Recursive Definitions</h2>
+		</center>
+
+		<br>
+		<br>
+
+
+		<h1>Recursive Definitions</h1>
+
+		A definition in which the item being defined appears as part of the definition is called a <b>
+			<font color="blue">recursive definition</font>
+		</b>. At first this seems like nonsense -- how can we define something in terms of itself? This works because there
+		are two parts to a recursive definition: <br>
+		<br>
+		1. A basis, where some simple cases of the item being defined are explicitly given <br>
+		2. An inductive or recursive step, where new cases of the item beding defined are given in terms of previous cases.
+		<br>
+		<br>
+		Part 1 gives us a place to start by providing some simple, concrete cases; part 2 allows us to construct new cases
+		from these simple ones and then to construct still other cases from these new ones, and so forth. <Br>
+		<br>
+		Recursion is an important idea that can be used to define sequences of objects, more general collections of objects,
+		and operations on objects. Even algorithms can be recursive.
+		<br>
+		<br>
+		From a practitioner's perspective, recursive procedures are simple to write, but they are extremely
+		memory-intensive, and it can be difficult to predict how much memory will be required.
+		<br>
+		<h2>Recursively Defined Sequences</h2>
+		A <b>sequence</b> S (an <b>infinite sequence</b>) is a list of objects that are enumerated in some order; there is a
+		first such object, then a second, and so on. S(k) denotes the \(k_{th}\) object in the sequence. The list goes on
+		forever, so a sequence therefore consists of <br>
+		<br>
+		<center>
+			S(1), S(2), ..., S(k), ...
+		</center>
+		<br>
+		Subscript notation is often used to denote the elements in a sequence, as in <br>
+		<center>
+			\( S_1, S_2, ..., S_k, ... \)
+		</center>
+		<br>
+		The letter S is just a "dummy variable", so a sequence could also be denoted by
+		<br>
+		<center>
+			\( a_1, a_2, ..., a_k, ...\) &nbsp; &nbsp; or &nbsp; &nbsp; \(w_1, w_2,...,w_k,...\)
+		</center>
+		and so forth.
+		<br>
+		<h2>Example</h2>
+
+		<pre>
+<b><font color="blue">&bull; Example 1: </font></b>
+
+The sequence S is defined recursively by
+
+     1. S(1) = 2
+     2. S(n) = 2S(n-1)  for n &ge; 2
+</pre>
+		By statement 1, S(1), the first object in S, is 2.<Br>
+		By statement 2, S(2), the second object in S is S(2) = 2S(1) = 2*2 = 4. <br>
+		By statement 2 again, S(3) = 2S(2) = 2*4 = 8. <Br>
+		Continuing in this fashion, we can see that S is the sequence <Br>
+		<center>
+			2, 4, 8, 16, 32, ...
+		</center>
+		<Br>
+		A rule like that of statement 2 in Example 1, which defines a sequence value in terms of one or more earlier values,
+		is called a <b>
+			<font color="blue">recurrence relation.</font>
+		</b>
+		<br>
+		<br>
+		<hr>
+		<Br>
+		Suppose we want to write a computer program to evaluate S(n) for some positive integer n. We
+		can use two approaches: <b>
+			<font color="blue">recursive algorithm</font>
+		</b> or <b>
+			<font color="blue">iterative algorithm</font>
+		</b>.
+		<br>
+		<br>
+		<b>
+			<font color="blue">Recursive Defined Algorithm</font>
+		</b>
+		Following is a version of the recursive algorithm, written as a pseudocode function. <Br>
+
+		<div class="block4">
+			<pre>
+         S(positive integer n)
+	     if n = 1 then
+                return 2
+             else
+                return 2*S(n-1)
+      	     end if
+         end function S
+</pre>
+		</div>
+		<br>
+		<center>
+			<img width="700px" height="400px" src="images/recursiveCall.png">
+			<br>
+			Figure1: Recursive Function Call in Stack
+			<br>
+			<br>
+		</center>
+		<b>
+			<font color="red">Here in recursive algorithm, if \(n\) is 1 trillion there will be 1 trillion functions on the
+				stack -- potential stack overflow. Can we be more efficient? We can use loops. </font>
+		</b>
+		<br>
+		<br>
+		<b>
+			<font color="blue">Iterative Algorithm</font>
+		</b> Following is a version of the iterative algorithm, written as a pseudocode function. <Br>
+
+		<div class="block4">
+			<pre>
+         S(positive integer n)
+		 if n = 1 then
+           	    return 2
+         	 else
+                    i = 2
+                    CurerntValue = 2
+                    while i <= n do
+                        CurrentValue = 2*CurrentValue
+                        i = i + 1
+                    end while
+	            return CurrentValue
+                 end if
+         end function S
+</pre>
+		</div>
+
+		<br>
+
+		<h2>Example</h2>
+		<pre>
+<b><font color="blue">&bull; Example 2: </font></b>
+
+The <b>Fibonacci sequence</b> of numbers, introduced in the thirteenth century by
+an Italian merchant and mathematician, is defiend recursively by:
+
+     1. F(1) = 1
+     2. F(2) = 1
+     3. F(n) = F(n-2) + F(n-1) for n > 2
+</pre>
+		By statement 1, F(1), the first object in F, is 1.<Br>
+		By statement 2, F(2), the second object in F, is 1. <br>
+		By statement 3, F(3) = F(1) + F(2) = 1 + 1 = 2. <Br>
+		By statement 3 again, F(4) = F(2) + F(3) = 1 + 2 = 3. <Br>
+		Continuing in this fashion, we can see that F is the sequence <Br>
+		<center>
+			1, 1, 2, 3, 5, 8, 13, ...
+		</center>
+		<br>
+		<br>
+		<hr>
+		<Br>
+		Suppose we want to write a computer program to evaluate F(n) for some positive integer n. We
+		can use two approaches: <b>
+			<font color="blue">recursive algorithm</font>
+		</b> or <b>
+			<font color="blue">iterative algorithm</font>
+		</b>.
+		<br>
+		<br>
+		<b>
+			<font color="blue">Recursive Defined Algorithm</font>
+		</b>
+		Following is a version of the recursive algorithm, written as a pseudocode function. <Br>
+
+		<div class="block4">
+			<pre>
+         F(positive integer n)
+	     if n = 1 or n = 2 then
+                return 1
+             else
+                return F(n-2) + F(n-1)
+      	     end if
+         end function F
+</pre>
+		</div>
+		Here in recursive algorithm, if \(n\) is 1 trillion there will be 1 trillion functions on the stack -- potential
+		stack overflow. Can we be more dfficient? We can use loops.
+		<br>
+		<br>
+		<b>
+			<font color="blue">Iterative Algorithm</font>
+		</b> Following is a version of the iterative algorithm, written as a pseudocode function. <Br>
+
+		<div class="block4">
+			<pre>
+         F(positive integer n)
+		 if n = 1 or n = 2 then
+           	    return 1
+         	 else
+                    i = 3
+                    F1 = 1
+		    F2 = 1
+                    while i <= n do
+                        Fn = F1 + F2;
+                        F1 = F2;
+                        F2 = Fn;
+                        i = i + 1;
+                    end while
+	            return Fn
+                 end if
+         end function F
+</pre>
+		</div>
+
+		<br>
+		<h2>Practice</h2>
+		(1) Please write a C++ program to evaluate T(n) for some positive integer n.
+		Please write both recursive algorithm and iterative algorithm.
+		<pre>
+T(1) = 1 for n = 1
+T(n) = T(n-1) + 3 for n > 1
+</pre>
+		(2) Please write a C++ program to evaluate S(n) for some positive integer n.
+		Please write both recursive algorithm and iterative algorithm.
+		<pre>
+S(1) = 2 for n = 1
+S(n) = S(n-1)<sup>2</sup> for n > 1
+</pre>
+
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

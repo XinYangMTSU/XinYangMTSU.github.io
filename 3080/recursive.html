@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Recursive Functions in C++</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>Recursive Functions in C++</h1>
+
+		<h2>Recursive Functions</h2>
+
+		<ul>
+			<li>&#9733; A <b>
+					<font color="red">recursive function</font>
+				</b> is a function that calls itself.</li>
+			<li>&#9733; Recursive problem solving </li>
+			<ul>
+				<li>&#9734; Base case</li>
+				<li>&#9734; Divide the rest of problem into subproblem and do recursive call</li>
+			</ul>
+			<li>&#9733; There are many problems that lend themselves to recursive solutions: </li>
+			<ul>
+				<li>&#9734; Mathematic -- factorial, Fibonacci, ......</li>
+				<li>&#9734; Searching and sorting -- binary search, serach trees, ......</li>
+			</ul>
+		</ul>
+
+		<h2>Example -- Factorial</h2>
+
+		<center>
+			<img src="../images/factorial.png" width="30%">
+		</center>
+
+		<ul>
+			<li>
+				<font color="blue">&#9733; Base case:</font>
+			</li>
+			<ul>
+				<li>&#9734; factorial(0) = 1</li>
+			</ul>
+			<li>
+				<font color="blue">&#9733; Recursive case:</font>
+			</li>
+			<ul>
+				<li>&#9734; factorial(n) = n*factorial(n-1)</li>
+			</ul>
+		</ul>
+
+		<div class="block3">
+			<pre>
+#include&ltiostream>
+using namespace std;
+
+//function prototype
+int factorial(int n);
+
+int main()
+{
+      //function activation
+      cout << factorial(8) << endl;
+      return 0;
+}
+
+//function definition
+int factorial(int n)
+{
+     if(n == 0)                //<b><font color="blue">base case</font></b>
+     	return 1;
+      
+     return n*factorial(n-1);   //<b><font color="blue">recursive case</font></b>
+}
+</pre>
+			<a href="../codes/factorial.cpp" target="_blank">factorial.cpp</a>
+		</div>
+
+		<h2>Example - Fibonacci</h2>
+
+		<center>
+			<img src="../images/fibonacci.png" width="40%">
+		</center>
+
+		<ul>
+			<li>
+				<font color="blue">&#9733; Base case:</font>
+			</li>
+			<ul>
+				<li>&#9734; Fib(0) = 0</li>
+				<li>&#9734; Fib(1) = 1</li>
+			</ul>
+			<li>
+				<font color="blue">&#9733; Recursive case:</font>
+			</li>
+			<ul>
+				<li>&#9734; Fib(n) = Fib(n-1) + Fib(n-2)</li>
+			</ul>
+		</ul>
+
+		<div class="block3">
+			<pre>
+#include&ltiostream>
+using namespace std;
+
+//function prototype
+int fibonacci(int n);
+
+int main()
+{
+      //function activation
+      cout << fibonacci(5) << endl;
+      cout << fibonacci(12) << endl;
+      cout << fibonacci(30) << endl;
+
+      return 0;
+}
+
+//function definition
+int fibonacci(int n)
+{
+     if(n <= 1)                //<b><font color="blue">base case</font></b>
+     	return n;
+      
+     return fibonacci(n-1) + fibonacci(n-2);   //<b><font color="blue">recursive case</font></b>
+}
+</pre>
+			<a href="../codes/fibonacci.cpp" target="_blank">fibonacci.cpp</a>
+		</div>
+
+
+		<div class="block3">
+			Important notes:
+			<ul>
+				<li>&#9733; If recursion doesn't eventually stop you will have infinite recursion</li>
+				<li>&#9733; Recursion can be resource intensive</li>
+				<li>&#9733; Remember the base case(s)</li>
+				<ul>
+					<li>&#9734; It terminates the recursion</li>
+				</ul>
+				<li>&#9733; Only use recursive solutions when it makes sense.</li>
+				<li>&#9733; Anything that can be done recursively can be done iteratively.</li>
+			</ul>
+		</div>
+
+		<h2>Recursion vs Iteration</h2>
+		<ul>
+			<li>&#9733; Infinite recursion occurs if the recursion step does not reduce
+				the problem in a manner that converges on some condition (base case) and Infinite
+				recursion can crash the system.</li>
+			<li>&#9733; Recursion is usually slower than iteration due to the overhead of
+				maintaining the stack.</li>
+			<li>&#9733; Recursion uses more memory than iteration.</li>
+			<li>&#9733; Recursion makes the code smaller.</li>
+			<li>&#9733; An iteration does not use the stack so it's faster than recursion.</li>
+			<li>&#9733; Iteration consues less memory.</li>
+			<li>&#9733; Iteration makes the code longer.</li>
+		</ul>
+		<br>
+		<h2>Reference</h2>
+		<a href="https://www.geeksforgeeks.org/difference-between-recursion-and-iteration/" target="_blank">
+			https://www.geeksforgeeks.org/difference-between-recursion-and-iteration/
+		</a>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+	<br>
+	<br>
+</body>
+
+</html>

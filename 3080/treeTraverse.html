@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Tree and Their Representations</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 6: Graphs and Trees</h1>
+
+		<center>
+			<h2>Section 6.2 Trees and Their Representations</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>Tree Traversal Algorithms</h1>
+		If a tree structure is being used to store data, it is often helpful to have a systematic mechanism for writing out
+		the data values stored at all the nodes, which can be accomplished by <b>
+			<font color="red">traversing</font>
+		</b> the tree, that is, visiting each of
+		the nodes in the tree structure, The three common <b>
+			<font color="blue">tree traversal</font>
+		</b> algorithms are <b>
+			<font color="red">preorder</font>
+		</b>, <b>
+			<font color="red">inorder</font>
+		</b>, and <b>
+			<font color="red">postorder</font>
+		</b> traversal. <Br>
+		<br>
+		The terms <b>preorder</b>, <b>inorder</b>, and <b>postorder</b> refer to the order in which the root of a tree is
+		visited compared to the subtree nodes.
+		<br>
+
+		<h2>Preorder Traversal</h2>
+		In <b>
+			<font color="blue">preorder traversal</font>
+		</b>, the root of the tree is visited first and then the subtrees are processed left to right, each subtree is also
+		traversed in preorder.
+		<br>
+		<br>
+		<center>
+			<img width="800px" height="300px" src="images/preorder.png">
+		</center>
+
+
+
+		<br>
+		<h2>Inorder Traversal</h2>
+		In <b>
+			<font color="blue">inorder traversal</font>
+		</b>, the left subtree is processed by an inorder traversal, then the root is visited, and then the remaining
+		subtrees are processed from left to right, each in inorder. If the tree is a binary tree, the result is that the
+		root is visited between processing of the two subtrees. In a nonbinary tree, if there is a single subtree joined to
+		its parent by a vertical arc, that is considered the left subtree and there are no additional subtrees.
+		<br>
+		<br>
+		<center>
+			<img width="800px" height="300px" src="images/inorder.png">
+		</center>
+
+		<h2>Postorder Traversal</h2>
+		In <b>
+			<font color="blue">postorder traversal</font>
+		</b>, the root is visited last, after all subtrees have been processed from left to right in postorder.
+
+		<br>
+		<center>
+			<img width="800px" height="300px" src="images/postorder.png">
+		</center>
+
+		<h2>Reminder</h2>
+		For Binary Tree:
+		<h3> Preorder: <font color="red">root</font>, <font color="red">left</font>, <font color="red">right</font>
+		</h3>
+		<h3> Inorder: <font color="red">left</font>, <font color="red">root</font>, <font color="red">right</font>
+		</h3>
+		<h3> Postorder: <font color="red">left</font>, <font color="red">right</font>, <font color="red">root</font>
+		</h3>
+
+		<br>
+		For Tree with three Children:
+		<h3> Preorder: <font color="red">root</font>, <font color="red">left</font>,<font color="red"> middle</font>, <font
+				color="red">right</font>
+		</h3>
+		<h3> Inorder: <font color="red">left</font>, <font color="red">root</font>, <font color="red">middle</font>, <font
+				color="red">right</font>
+		</h3>
+		<h3> Postorder: <font color="red">left</font>,<font color="red">middle</font>, <font color="red">right</font>, <font
+				color="red">root</font>
+		</h3>
+
+
+		<h2>Example</h2>
+		(1) For the binary tree of Figure 6.45:
+		<center>
+			<img width="300px" height="200px" src="images/traverse.png">
+		</center>
+		<br>
+
+		<b>
+			<font color="blue">Preorder Traverse:</font>
+		</b> <br>
+		<center>
+			<img width="300px" src="images/pre.png">
+		</center>
+		<br>
+		<b>
+			<font color="blue">Inorder Traverse:</font>
+		</b> <br>
+		<center>
+			<img width="300px" src="images/in.png">
+		</center>
+		<br>
+		<b>
+			<font color="blue">Postorder Traverse:</font>
+		</b> <br>
+		<center>
+			<img width="300px" src="images/post.png">
+		</center>
+		<hr>
+		(2) For the tree in Figure 6.46, which is not a binary tree. <br>
+		<center>
+			<img width="300px" height="200px" src="images/traverse2.png">
+		</center>
+		<br>
+
+		<b>
+			<font color="blue">Preorder Traverse:</font>
+		</b> <br>
+		<center>
+			<img width="300px" src="images/pre2.png">
+		</center>
+		<br>
+		<b>
+			<font color="blue">Inorder Traverse:</font>
+		</b> <br>
+		<center>
+			<img width="300px" src="images/in2.png">
+		</center>
+		<br>
+		<b>
+			<font color="blue">Postorder Traverse:</font>
+		</b> <br>
+		<center>
+			<img width="300px" src="images/post2.png">
+		</center>
+
+		<h2>Practice</h2>
+		<center>
+			<img width="800px" height="300px" src="images/q3.png">
+		</center>
+
+		<h2>Algebraic Experssion Tree</h2>
+		<Br>
+		<center>
+			<img width="800px" height="400px" src="images/treeApp.png">
+		</center>
+
+		<h2>Practice</h2>
+		Please draw the algebraic expression tree for the following expression:
+		$$
+		(4x^2-3z)*(5x+7)
+		$$
+		Please traverse the tree using preorder, inorder and postorder algorithms.
+
+		<!--
+		<h2>Postfix Expression Calculator</h2>
+		<font color="blue" size="5">
+			<a href="https://www.cs.mtsu.edu/~xyang/2170/public/CLA/cla18.html" target="_blank">
+				Postfix Expression Calculator
+			</a>
+		</font>
+-->
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sets Theory</title>
+  <link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+<div id="main">
+
+<h1>Basic Set Operations</h1>
+Most of the operations we have seen operate on numbers, but we also operate on sets. Given an arbitrary set <b>S</b>, we can define some binary and unary operations on the set. 
+
+<h2>Union</h2>
+Let <b>A</b> and <b>B</b> be sets. The union of <b>A</b> and <b>B</b>
+(denoted by <b>A \(\mathbb{&cup;}\) B</b>) is the set of all elements that are in <b>A</b>
+or in <b>B</b> or in both <b>A</b> and <b>B</b>. That is:<br>
+<br>
+<font color="blue"><b>
+\(A \mathbb{&cup;} B = \) {x: x &isin; A or x &isin; B }
+</b>
+</font>
+<br>
+<br>
+It is important to note in the set-builder notation for <b>A \(\mathbb{&cup;}\) B</b>, the word "or" is used in the inclusive sense; it includes
+the case where x is in both <b>A</b> and <b>B</b>.
+
+<h2>Intersection</h2>
+Let <b>A</b> and <b>B</b> be sets. The intersection of <b>A</b> and <b>B</b> (denoted <b>A \(\mathbb{&cap;}\) B</b>) is the set of all elements that are in both <b>A</b> and <b>B</b>. That is, <br>
+<br>
+<b><font color="blue">A \(\mathbb{&cap;}\) B = {x: x &isin; A and x &isin; B}</font></b>
+
+<h2>Disjoint Sets</h2>
+Two sets are disjoint if they have no elements in common. That is, A and B are disjoint if <b>A \(\mathbb{&cap;}\) B = \(\emptyset\)</b>
+
+<h2>Venn Diagrams</h2>
+
+When working with sets, as in other branches of mathematics, it is often quite useful to be able to draw a picture or diagram of the situation under consideration. A diagram of a set is called a Venn diagram. The universal set <b>S</b> is represented by the interior of a rectangle and the sets by disks inside the rectangle. Every set <B>A</B> exists within some universe set <b>S</b>.
+
+<center>
+<figure>
+<img src="union.PNG"><br>
+<figcaption>Figure 1: A \(\mathbb{&cup;}\) B</figcaption>
+</figure>
+<br>
+<figure>
+<img src="intersect.PNG">
+<figcaption>Figure 2: A \(\mathbb{&cap;}\) B</figcaption>
+</figure>
+</center>
+
+<h2>Complement of a set</h2>
+If <b>S</b> is the universal set, then <b>S-A</b> is denoted by \(A'\) or (\(A^c, \bar{A}\)) and is called simply the complement of <b>A</b>.
+<br>
+<font color="blue"><b>A' = {x: x &isin; S and x &notin; A}</b></font>
+
+<center>
+<figure>
+<img src="Ac.PNG">
+<figcaption>Figure 3: A'</figcaption>
+</figure>
+</center>
+
+<h2>Set Difference</h2>
+Let A and B be sets. The complement of A relative to B (notation B-A) is the set of elements that are in B and not in A. That is, 
+<br>
+<font color="blue"><b>B-A = {x: x &isin; B and x &notin; A}</b></font>
+<br>
+<br>
+This operation can be rewritten as:
+<br>
+<font color="blue"><b>B-A = {x: x &isin; B and x &isin; A'}</b></font>
+<br>
+<br>
+Finally, it can be rewritten as:
+<br>
+<font color="blue"><b>B-A = B \(\mathbb{&cap;}\) A' </b></font>
+
+<center>
+<figure>
+<img src="B-A.PNG">
+<figcaption>Figure 4: B-A</figcaption>
+</figure>
+</center>
+
+<h2>Important Notes on Set Operations</h2>
+&bull; <b>n(A \(&cup;\) B) = n(A) + n(B) - n(A \(&cap;\) B)</b>
+<br>
+&bull; <b>n(A \(&cap;\) B) = n(A) + n(B) - n(A \(&cup;\) B)</b>
+<br>
+<br>
+Let A and B be any two finite sets.
+<br>
+
+<center>
+<figure>
+<img src="AandB.png">
+<figcaption>Figure 5: A\(&cup;\)B</figcaption>
+</figure>
+</center>
+<pre>
+	n(A &cup; B) = n(A-B) + n(A&cap;B) + n(B-A)
+		 = n(A-B) + n(A&cap;B) + n(B-A) + n(A&cap;B) - n(A&cap;B)
+		 = n(A) + n(B) - n(A&cap;B)
+</pre>
+
+
+<h2>Examples</h2>
+
+<b><font color="blue">Example 1:</font></b> In a school, every student plays either football or soccer. It was found that 200 students played football, 150 students played soccer and 100 students played both. Find how many students were there in the school using the set operation formula.
+<br>
+<br>
+<b><font color="red">Solution:</font></b> <Br>
+Let us represent the number of students who played football as <b>n(F)</b>,
+the number of students who played soccer as <b>n(S)</b> <br>
+We have <b>n(F) = 200, n(S) = 150 and n(F \(&cap;\) S) = 100</b>
+<br>
+We know that: <b>n(F &cup; S) = n(F) + n(S) - n(F &cap; S)</b> <br>
+Therefore, <b>n(F &cup; S) = 200 + 150 - 100</b> <b>
+<br>
+<br>
+<b><font color="blue">Example 2:</font></b> Consider the following subsets of the set of all students: <br>
+<Br>
+A = set of all computer science majors <br>
+B = set of all physics majors <br>
+C = set of all science majors <br>
+D = set of all female students <br>
+<br>
+Using set operations, describe each of the following sets in terms of A, B, C and D: <Br>
+<br>
+(1) set of all students not majoring in science <Br>
+(2) set of all female physics majors <br>
+(3) set of all students majoring in both computer science and physics <br>
+(4) set of all male computer science majors <br>
+<br>
+<b><font color="blue">Example 3:</font> In a survey of 150 high school students it was found that:
+<br>
+<br>
+80 students have laptops
+<br>
+110 students have cell phones
+<br>
+125 students have iPods
+<br>
+62 students have both a laptop and a cell phone
+<br>
+58 students have both a laptop and iPod
+<br>
+98 students have both a cell phone and an iPod
+<br>
+50 students have all three items
+<br>
+<br>
+<img src="images/venn.png" height="250px" width="300px" >
+<br>
+<br>
+a) How many students have just a cell phone?
+<br>
+b) How many students have none of the mentioned items?
+<br>
+c) How many students have an iPod and laptop but not a cellphone?
+<br>
+
+<h2>Reference</h2>
+
+<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+<footer align="center" id="foot01"></footer>
+</div>
+
+</body>
+</html>

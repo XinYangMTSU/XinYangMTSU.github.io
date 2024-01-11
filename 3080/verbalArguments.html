@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Propositional Logic</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 1: Formal Logic</h1>
+
+		<center>
+			<h2>Section 1.2 Propositional Logic</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>Verbal Arguments</h1>
+		An argument in English (an attorney's trial summary, an advertisement, or a political speech) that consists of
+		simple statements can be tested for validity by a two-step process:
+		<br>
+		<br>
+		1. Symbolize the argument using propositional wffs. <Br>
+		2. Prove that the argument is valid by constructing a proof sequence for it using the derivation rules for
+		propositional logic. <Br>
+
+		<h2>The rule of hypothetical syllogism (hs)</h2>
+		From \(P &rarr; Q\) and \(Q &rarr; R\), one can derive \(P &rarr; R\). <Br>
+		<br>
+		This rule is making the claim that: <br>
+		<Br>
+		<center>
+			\( (P &rarr; Q) &and; (Q &rarr; R) &rarr; (P &rarr; R) \)
+		</center>
+		is a valid statement.
+		<br>
+		<h2>Example 1</h2>
+		Consider the argument, "If interest rates drop, the housing market will improve.
+		Either the federal discount rate will drop or the housing market will not improve.
+		Interest rates will drop. Therefore the federal discount rate will drop." Using
+		<Br>
+		<br>
+		I: Interest rates drop. <Br>
+		H: The housing market will improve. <Br>
+		F: The federal discount rate will drop. <Br>
+		<br>
+		the argument is <br>
+		<br>
+		<center>
+			\( (I &rarr; H) &and; (F &or; H') &and; I &rarr; F \)
+		</center>
+		<br>
+		A proof sequence to establish validity:
+		<br>
+		1. \(I &rarr; H\) (hyp) <Br>
+		2. \(F &or; H'\) (hyp) <Br>
+		3. \(I\) (hyp) <br>
+		<br>
+		4. \( H' &or; F \) (2 comm) <br>
+		5. \( H &rarr; F\) (4 imp) <br>
+		6. \( I &rarr; F\) (1,5,hs) <br>
+		7. \( F\) (3,6, mp) <br>
+		<br>
+
+		<h2>Example 2</h2>
+		Use propotitional logic to prove that the following argument is valid. Use statement
+		letters S, R and B. <br>
+		<br>
+		"If security is a problem, then regulation will be increased. If security is not
+		a problem, then business on the Web will grow. Therefore if regulation is not
+		increased, then business on the Web will grow."
+		<br>
+		<br>
+		S: Security is a problem <br>
+		R: Regulation will be increased. <br>
+		B: Business on the Web will grow. <br>
+		<br>
+		the argument is: <br>
+		<center>
+			\( (S &rarr; R) &and; (S' &rarr; B) &rarr; (R' &rarr; B)\)
+		</center>
+		<br>
+		1. \(S &rarr; R\) (hyp) <br>
+		2. \(S' &rarr; B\) (hyp) <br>
+		3. \(R'\) (hyp) <br>
+		<br>
+		4. \( S'\) (1,3 mt) <br>
+		5. \(B\) (2,4 mp) <br>
+		<br>
+		<br>
+
+
+
+		<h2>Practice</h2>
+
+		1. Use propotitional logic to prove that the following argument is valid. Use statement letters E, Q and B.
+		<br>
+		<br>
+		"If the program is efficient, it executes quickly. Either the program is efficient, or it has a bug. However, the
+		program does not execute quickly. Therefore, it has a bug."
+
+		<br><br>
+		2. Use propotitional logic to prove that the following argument is valid. Use statement letters C, W, R, and S.
+		<br>
+		<br>
+		"The crop is good, but there is not enough water. If there is a lot of rain or not a lot of sun, then there is
+		enough water. Therefore, the crop is good and there is a lot of sun."
+
+		<br>
+		<br>
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>
