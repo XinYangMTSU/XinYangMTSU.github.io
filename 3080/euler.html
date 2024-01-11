@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Graph Algorithms</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 7: Graph Algorithms</h1>
+
+		<center>
+			<h2>Section 7.2 Euler Path and Hamiltonian Circuit</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h2>Euler Path</h2>
+		<font color="blue">An <b>Euler path</b> in a graph G is a path that uses each arc of G exactly once.</font>
+		<br>
+		<br>
+		<center>
+			<img width="20%" src="images/eulerPath1.png">
+		</center>
+		<Br>
+
+		<h2>Euler's Theorem</h2>
+
+		<h3>What does Even Node and Odd Node mean?</h3>
+
+		<center>
+			<img width="600px" height="300px" src="images/OddEvenNode.png">
+		</center>
+		<hr>
+		<br>
+		<font color="blue">
+			1. The number of <b>odd nodes</b> in any graph is <b>even</b>.
+			<Br>
+			<br>
+			2. An Euler path exists in a graph if there are zero or two odd nodes. <Br>
+			If there are zero odd node, then the euler path can begin at any node and will end at the same node. <br> If there
+			are two odd nodes, the euler path will begin at one odd node and end at the other odd node.
+			<br>
+			<br>
+			3. If a graph has more than 2 odd nodes, then it has no Euler paths.
+			<br>
+		</font>
+
+		<br>
+
+		<Br>
+		<center>
+			<table style="width:50%">
+				<tr>
+					<th>#Odd Vertices</th>
+					<th>Euler Path?</th>
+				</tr>
+				<tr>
+					<th>0</th>
+					<th>Yes</th>
+				</tr>
+				<tr>
+					<th>2</th>
+					<th>Yes</th>
+				</tr>
+				<tr>
+					<th>4,6,8 ...</th>
+					<th>NO</th>
+				</tr>
+				<tr>
+					<th>1,3,5 ...</th>
+					<th>No Such Graphs Exist!!!</th>
+				</tr>
+			</table>
+		</center>
+
+
+		<h2>Euler Path for Directed Graph</h2>
+		At most one vertex has (outdegree) - (indegree) = 1 and at most one vertex has (indegree) - (outdegree) = 1 and all
+		other vertices have equal in and out degrees.
+		<br>
+		<br>
+		(1) <br>
+		<center>
+			<img width="30%" src="images/eulerDirected1.png">
+		</center>
+		<Br>
+		(2) <br>
+		<center>
+			<img width="80%" src="images/eulerDirected2.png">
+		</center>
+
+		<h2>Example</h2>
+
+		<center>
+			<img width="60%" src="images/eulerPath2.png">
+		</center>
+		<Br>
+		3. There are zero odd nodes. Yes, it has euler path. (eg: 1,2,6,3,1,4,6,5,1)
+		<Br>
+		<br>
+		4. There are zero odd nodes. Yes, it has euler path. (eg: 1,2,4,1,5,4,6,2,3,6,5,3,1)
+		<br>
+		<br>
+
+		<h3>
+			<font color="red">Note:</font>
+		</h3>
+		<ul>
+			<li>&#9733; For an undirected graph, the degree of a vertex is equal to the number of adjacent vertices. A special
+				case is a <b>
+					<font color="blue">loop</font>
+				</b>, which adds two to the degree. </li>
+			<li>&#9733; For a directed graph, a <b>
+					<font color="blue">loop</font>
+				</b> adds one to the in degree and one to the out degree.</li>
+		</ul>
+
+
+		<h2>Hamiltonian Circuit</h2>
+		<font color="blue">A <b>Hamiltonian circuit</b> in a graph is a cycle using every node of the graph.</font> <br>
+		No efficient algorithm has ever been found to determin if a Hamiltonian circuit exists. <br>
+		<br>
+		Hamiltonian circuit problem can be solved for a given graph by trial and error. The algorithm is as follows: Start
+		from one node of the graph and try some path by choosing various arcs. If the path results in a repeated node, it is
+		not a cycle, so throw it away and try a different path. If the path can be completed as a cycle, then see whether it
+		visited every node; if not, throw it away and try a different path. Continue in this fashion until all possible
+		paths have been tried or a Hamiltonian circuit has been found.The trial-and- error approach is theoretically
+		possible,but it is practically impossible! In all but the smallest of graphs, there will simply be too many paths to
+		try.
+
+		<h2>Example</h2>
+
+		<center>
+			<img width="60%" src="images/eulerPath2.png">
+		</center>
+		<Br>
+		3. No, it has no Hamiltonian circuit.
+		<Br>
+		<br>
+		4. Yes, it has Hamiltonian circuit. (eg: 1,4,2,6,3,5,1)
+		<br>
+		<br>
+
+
+		<h2>Practice</h2>
+		1. Do the following graph have Euler path? <br>
+		2. Do the following graph have Hamiltonian circuit? <br>
+		<br>
+		<center>
+			<img width="60%" src="images/eulerPath3.png">
+		</center>
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

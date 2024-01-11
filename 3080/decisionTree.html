@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Decision Trees</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 6: Graphs and Trees</h1>
+
+		<center>
+			<h2>Section 6.3 Decision Trees</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h2>Decision Tree</h2>
+		A <b>
+			<font color="blue">decision tree</font>
+		</b> is a tree in which the internal nodes represent actions, the arcs represent outcomes of an action, and the
+		leaves represent final outcomes.
+		<br>
+		<br>
+		Sometimes useful information can be obtained by using a decision tree to represent the activities of a real
+		algorithm; actions that the algorithm performs take place at internal nodes, the children of an internal node
+		represent the next action taken, based on the outcome of the previous action, and the leaves represent some sort of
+		circumstance that can be inferred upon algorithm termination.
+		<br>
+		<h2>Searching</h2>
+		A search algorithm either finds a target element x within a list of elements or determines that x is not in the
+		list. Such an algorithm generally works by making successive comparisons of x to the list items. We have already
+		seen two such algorithms, <b>
+			<font color="blue">sequential search</font>
+		</b> and <b>
+			<font color="blue">binary search</font>
+		</b>.We can model the activities of these algorithms by using decision trees.The nodes represent the actions of
+		comparing x to the list items, where the comparison of x to the ith element in the list is denoted by x:L[i]. <br>
+		<br>
+		<h3>Sequential Search</h3>
+		<hr>
+		Sequential search only distinguishes between two possible outcomes of a comparison of x to L[i]. If x = L[i], the
+		algorithm terminates because x has been found in the list. If x != L[i], the next comparison performed is x:L[i+1],
+		regardless of whether x was less than or greater than L[i]. The leaves of this decision tree correspond to the final
+		outcomes, where either x is one of the list items or x is not in the list.
+		<br>
+		<br>
+		<center>
+			<img width="600px" height="500px" src="images/decisionTree1.png">
+		</center>
+		<br>
+		From the decision tree for a given search algorithm, we can see that the number of comparisons required to reach any
+		particular outcome (leaf of the tree) is the number of internal nodes from the root to that leaf. This number equals
+		the length of the path from the root to that leaf. The worst case, that is, the maximum number of comparisons, is
+		the maximum length of any such path, which is the depth of the tree. <Br>
+		<Br>
+		Because every decision tree for sequential search looks like Figure 6.52, it is clear that the depth of such a tree,
+		for an n-element list, is n. This agrees with what we already know, namely, that the worst case for sequential
+		search on a list of n elements is n.
+		<Br>
+		<h3>Binary Search</h3>
+		<hr>
+		The decision tree for the binary search algorithm is more interesting. Binary search acts on a <b>
+			<font color="red">sorted list</font>
+		</b> and
+		distinguishes between three possible outcomes of the comparison: <br>
+		<pre>
+x = L[i]: algorithm terminates, x has been found
+x < L[i]: algorithm proceeds to the left half of the list 
+x > L[i]: algorithm proceeds to the right half of the list
+</pre>
+		<br>
+		If x < L[i], the next comparison the algorithm performs is found at the left child of this node; if x> L[i], the
+			algorithm's next comparison is found at the right child. If no child exists, the algorithm terminates because x is
+			not in the list. The tree we've described is a binary tree whose leaves represent all the possible outcomes where
+			x is not in the list. There are many more failure leaves in binary search than in sequential search, because
+			binary search indicates how x fails to be in the list (e.g., x < L[1] or L[1] < x < L[2]). <br>
+				<br>
+				<center>
+					<img width="600px" height="600px" src="images/binaryTree.png">
+				</center>
+
+				<b>
+					<font size="5" color="blue"><a href="https://www.cs.mtsu.edu/~xyang/2170/binarySearch.html"
+							target="_blank">Binary Search Demo</a></font>
+				</b>
+
+				<h2>Practice</h2>
+				<br>
+				<center>
+					<img width="80%" src="images/practice25.png">
+				</center>
+				<br>
+
+				<h2>Lower Bound for Searching</h2>
+				<b>
+					<font color="blue" size="5">Theorem: On the Lower Bound for Searching
+				</b>
+				</font>
+				<br>
+				<font color="blue">
+					Any algorithm that solves the search problem for an n-element list by comparing the target element x to the
+					list items must do at least <b>
+						<font color="red" size="4">&llcorner;\(log_2n\)&lrcorner;+1</font>
+					</b> comparisons in the worst case.
+				</font>
+				<br>
+				<Br>
+				This theorem gives us a lower bound on the number of comparisons required in the worst case for any algorithm
+				that uses comparisons to solve the search problem. Since binary search does no more work than this required
+				minimum amount, binary search is an optimal algorithm in its worst-case behavior.
+				<br>
+				<br>
+				(Lower bound means no algorithm can get faster than this no matter what, so if an algorithm actually does this,
+				then it is optimal for worst case scenario)
+				<br>
+				<b>
+					<font color="red" size="5">Note:</font>
+				</b>
+				<br>
+				(1) <b>
+					<font size="5">&llcorner;&lrcorner;</font>
+				</b> means floor. The floor is the largest integer that is smaller than or equal to the number inside the floor
+				signs.<br>
+				For example: <Br>
+				<b>
+					<font size="4">&llcorner;2.9&lrcorner;=2</font>
+				</b> <Br>
+				<b>
+					<font size="4">&llcorner;2.2&lrcorner;=2</font>
+				</b> <br>
+				<b>
+					<font size="4">&llcorner;2&lrcorner;=2</font>
+				</b> <Br>
+				<br>
+				(2) <b>log</b> is actually base 2 even though they didn't put the base in the statement of the theorem.It is
+				stated elsewhere. <Br>
+				<Br>
+				(3) <b>\(log_2x = y\)</b> means \(2^y=x\) so <b>logn</b> means that we want the exponent we would need to put on
+				2 in order to get n. <Br>
+				<Br>
+				(4) Example 1:<br>
+				Any algorithm that solves the search problem for a 5687-element list by comparing the target
+				element x to the list items must do at least __________ comparisons in the worst case. <br>
+				Solution: <b>
+					<font size="4">&llcorner;\(log_2 5687\) &lrcorner;+1 = &llcorner;12.????&lrcorner; + 1
+						= 12 + 1 = 13</font>
+				</b>
+				<br>
+				<br>
+				How did we get this? The table below has powers of 2 up to \(2^{13}\), and if we want to know the value of x
+				when \(2^x=5687\) (because log 5687 = x means \(2^x=5687\)), then looking in the table (4096 < 5687 < 8192), so
+					x must between 12 and 13. Because of the floor, <b>
+					<font size="4">&llcorner;12.???&lrcorner; = 12</font></b>, we don't have to know the value of the ????.
+					<br>
+					<br>
+					<center>
+						<table style="width:20%">
+							<tr>
+								<th>x</th>
+								<th>\(2^x\)</th>
+							</tr>
+							<tr>
+								<th>1</th>
+								<th>2</th>
+							</tr>
+							<tr>
+								<th>2</th>
+								<th>4</th>
+							</tr>
+							<tr>
+								<th>3</th>
+								<th>8</th>
+							</tr>
+							<tr>
+								<th>4</th>
+								<th>16</th>
+							</tr>
+							<tr>
+								<th>5</th>
+								<th>32</th>
+							</tr>
+							<tr>
+								<th>6</th>
+								<th>64</th>
+							</tr>
+							<tr>
+								<th>7</th>
+								<th>128</th>
+							</tr>
+							<tr>
+								<th>8</th>
+								<th>256</th>
+							</tr>
+							<tr>
+								<th>9</th>
+								<th>512</th>
+							</tr>
+							<tr>
+								<th>10</th>
+								<th>1024</th>
+							</tr>
+							<tr>
+								<th>11</th>
+								<th>2048</th>
+							</tr>
+							<tr>
+								<th>12</th>
+								<th>4096</th>
+							</tr>
+							<tr>
+								<th>13</th>
+								<th>8192</th>
+							</tr>
+						</table>
+					</center>
+					<br>
+					(5) Example 2: <br>
+					Any algorithm that solves the search problem for a 52-element list by comparing the target
+					element x to the list items must do at least __________ comparisons in the worst case. <br>
+					Solution: <b>
+						<font size="4">&llcorner;\(log_2 52\) &lrcorner;+1 = &llcorner;5.????&lrcorner; + 1
+							= 5 + 1 = 6</font>
+					</b>
+					<br>
+					<br>
+					(6) Example 3: <br>
+					Any algorithm that solves the search problem for a 52-element list by comparing the target
+					element x to the list items must do at least __________ comparisons in the worst case. <br>
+					Solution: <b>
+						<font size="4">&llcorner; \(log_2 654\) &lrcorner;+1 = &llcorner;9.????&lrcorner; + 1
+							= 9 + 1 = 10</font>
+					</b>
+					<br>
+
+
+					<h2>Binary Tree Search</h2>
+					The binary search algorithm requires that data already be sorted. Arbitrary data can be organized into a
+					structure called a <b>
+						<font color="blue">binary search tree</font>
+					</b>, which can then be searched using a different algorithm called <b>
+						<font color="blue">binary tree search</font>
+					</b>. To build a binary search tree, the first item of data is made the root of the tree. Successive items are
+					inserted by comparing them to existing nodes, beginning with the root. If the item is less than a node, the
+					next node tested is the left child; otherwise it is the right child. When no child node exists, the new item
+					becomes the child.
+					<br>
+					<br>
+					<center>
+						<img width="50%" src="images/binaryTree2.png">
+					</center>
+					<br>
+					A <b>
+						<font color="blue">binary search tree</font>
+					</b>, by the way it is constructed, has the property that the value at each node is greater than all values in
+					its left subtree (the subtree rooted at its left child) and less than all values in its right subtree.
+					<br> <br>
+					A <b>
+						<font color="blue">binary tree search</font>
+					</b> compares item x with a succession of nodes beginning with the root. If x equals the node item, the
+					algorithm terminates; if x is less than the item, the left child is checked next; if x is greater than the
+					item, the right child is checked next. If no child exists, the algorithm terminates because x is not in the
+					list.
+					<br><br>
+					However, a binary search tree for a given set of data is not unique; the tree (and hence the depth of the
+					tree) depends on the order in which the data items are inserted into the tree.
+					<Br><br>
+					The depth of a binary search tree for a given set of data items can vary. The depth of the tree in Figure 6.54
+					is 4, while that of Figure 6.55 is 2. Thus the worst- case number of comparisons to search for an item can
+					also vary. The tree-building process can be modified to keep the tree more "balanced" that is, short and wide
+					rather than tall and skinny; such a modification reduces the depth of the tree and therefore the search time.
+					Of course, we know from the theorem on the lower bound for searching that a certain minimum amount of work is
+					required no matter how clever we are in building the tree.
+					<br>
+					<br>
+					<center>
+						<img width="50%" src="images/binaryTree3.png">
+					</center>
+					<br>
+					<h2>Practice</h2>
+					<center>
+						<img width="80%" src="images/binaryTree4.png">
+					</center>
+
+
+					<h2>Reference</h2>
+					<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+					<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

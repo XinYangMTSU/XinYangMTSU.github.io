@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Propositional Logic</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 1: Formal Logic</h1>
+
+		<center>
+			<h2>Section 1.2 Propositional Logic</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>Derivation Rules for Propositional Logic</h1>
+
+		<h2>Proof Sequence</h2>
+		<font color="blue">
+			A <b>proof sequence</b> is a sequence of wffs in which each wff is either a hypothesis or the result of applying
+			one of the formal system's derivation rules to earlier wffs in the sequence.
+		</font>
+		<br>
+		<br>
+		Using formal logic to prove that \(Q\) is a valid conclusion from \(P_1, ..., P_n\), we must produce a proof
+		sequence of the form: <br>
+		<br>
+
+		\(P_1\) &nbsp; &nbsp; (hypothesis) <br>
+		\(P_2\) &nbsp; &nbsp; (hypothesis) <br>
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; . <Br>
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; . <br>
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; . <Br>
+		\(P_n\) &nbsp; &nbsp; (hypothesis) <br>
+		\(wff_1\) &nbsp; &nbsp; (obtained by applying a derivation rule to earlier wffs.) <br>
+		\(wff_2\) &nbsp; &nbsp; (obtained by applying a derivation rule to earlier wffs.) <Br>
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; . <Br>
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; . <br>
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; . <Br>
+		\(Q\) &nbsp; &nbsp; (obtained by applying a derivation rule to earlier wffs.) <Br>
+		<br>
+		<h2>Derivation Rules for Propositional Logic</h2>
+		The derivation rules for propositional logic fall into two categories, <font color="blue"><b>equivalence rules</b>
+		</font> and <font color="blue"><b>inference rules</b></font>. Equivalence rules allow individual wffs to be
+		rewritten, while inference rules allow new wffs to be derived from previous wffs in the proof sequence.
+		<br>
+		<br>
+		<b>
+			<font color="blue">&bull; Equivalence Rules: </font>
+		</b>
+		<hr>
+		Equivalence rules state that certain pairs of wffs R and S are equivalent. Remember that \(R &hArr; S\) means that
+		\(R &harr; S\) is a tautoloy and that \(S\) can be substituted for \(R\) in any wff with no change to the truth
+		value of that wff. Equivalence rules are therefore truth-preserving; a true wff remains true if such a substitution
+		is done within it.
+		<br>
+		<br>
+		<center>
+			<table style="width:80%">
+				<tr>
+					<th colspan="3">Table 1: Equivalence Rules</th>
+				</tr>
+				<tr>
+					<th>Expression</th>
+					<th>Equivalent to</th>
+					<th>Name/Abbrevision for Rule</th>
+				</tr>
+				<tr>
+					<th>\(P &or; Q\) <br> \(P &and; Q \)</th>
+					<th>\(Q &or; P\) <br> \(Q &and; P \)</th>
+					<th>Commutative -- comm</th>
+				</tr>
+				<tr>
+					<th>\((P &or; Q) &or; R\) <br> \((P &and; Q) &and; R \)</th>
+					<th>\(P &or; (Q &or; R)\) <br> \(P &and;(Q &and; R) \)</th>
+					<th>Associative -- ass</th>
+				</tr>
+				<tr>
+					<th>\( (P &or; Q)' \) <br> \( (P &and; Q)' \)</th>
+					<th>\( P' &and; Q' \) <br> \( P' &or; Q' \)</th>
+					<th>De Morgan's Laws -- De Morgan</th>
+				</tr>
+				<tr>
+					<th>\( P &rarr; Q\)</th>
+					<th>\( P' &or; Q\)</th>
+					<th>Implication -- imp</th>
+				</tr>
+				<tr>
+					<th>\(P\)</th>
+					<th>\((P')'\)</th>
+					<th>Double negation -- dn</th>
+				</tr>
+				<tr>
+					<th>\(P &harr; Q\)</th>
+					<th>\((P &rarr; Q) &and; (Q &rarr; P)\)</th>
+					<th>Definition of equivalence -- equ</th>
+				</tr>
+			</table>
+		</center>
+		<br>
+		<br>
+		The equivalence rules allow substitution in either direction. For example, we replaced \(A' &or; B'\) with \((A
+		&and; B)'\), but in some other proof sequence, using the same rule, we might replace \((A &and; B)'\) with \(A' &or;
+		B'\).
+		<br>
+		<br>
+		<b>
+			<font color="blue">&bull; Inference Rules: </font>
+		</b>
+		<hr>
+		<br>
+		Inference rules say that if one or more wffs that match the first part of the rule pattern are already part of the
+		proof sequence, we can add to the proof sequence a new wff that matches the last part of the rule pattern. Table 2
+		shows the propositional inference rules we will use, again along with their identifying names.
+		<br>
+		<br>
+		<center>
+			<table style="width:80%">
+				<tr>
+					<th colspan="3">Table 2: Inference Rules</th>
+				</tr>
+				<tr>
+					<th>From</th>
+					<th>Can Derive</th>
+					<th>Name/Abbrevision for Rule</th>
+				</tr>
+				<tr>
+					<th>\(P, P &rarr; Q\)</th>
+					<th>\( Q \)</th>
+					<th>Modus ponens -- mp</th>
+				</tr>
+				<tr>
+					<th>\(P &rarr; Q, Q'\)</th>
+					<th>\( P' \)</th>
+					<th>Modus tollens -- mt</th>
+				</tr>
+				<tr>
+					<th>\(P,Q\)</th>
+					<th>\( P &and; Q \)</th>
+					<th>Conjunction -- con</th>
+				</tr>
+				<tr>
+					<th>\(P &and; Q\)</th>
+					<th>\( P,Q \)</th>
+					<th>Simplification -- sim</th>
+				</tr>
+				<tr>
+					<th>\(P\)</th>
+					<th>\(P &or; Q \)</th>
+					<th>Addition -- add</th>
+				</tr>
+				<tr>
+					<th>\((P &rarr; Q) &and; (Q &rarr; R)\)</th>
+					<th>\(P &rarr; R \)</th>
+					<th>hypothetical syllogism -- hs</th>
+				</tr>
+				<tr>
+					<th>\( P &rarr; Q \)</th>
+					<th>\( Q' &rarr; P' \)</th>
+					<th>Contraposition-- cont</th>
+				</tr>
+				<tr>
+					<th>\( Q' &rarr; P' \)</th>
+					<th>\( P &rarr; Q \)</th>
+					<th>Contraposition-- cont</th>
+				</tr>
+			</table>
+		</center>
+		<br>
+		<br>
+		Unlike equivalence rules, inference rules do not work in both directions. We cannot "reverse" the addition rule in
+		Table 2; from \(P &or; Q\), we cannot infer eithr \(P\) or \(Q\).
+		<br>
+		<br>
+
+		<h2>Example 1</h2>
+		Let's have a complete proof of an argument.Using propositional logic, prove that the argument <br> <Br>
+		<center>
+			\(A &and; (B &rarr; C) &and; [(A &and; B) &rarr; (D &or; C')] &and; B &rarr; D\)
+		</center>
+		<br>
+		is valid.
+		<br>
+		<br>
+		We must produce a proof sequence that begins with the hypotheses and ends with the conclusion. There are four
+		hypotheses, so this gives us lots of "ammunition" to use in the proof. The beginning of the proof is easy enough
+		because it just involves listing the hypotheses:
+		<br>
+		<br>
+		1. \(A\) (hyp) <br>
+		2. \(B &rarr; C\) (hyp) <br>
+		3. \((A &and; B) &rarr; (D &or; C')\) (hyp) <br>
+		4. \(B\) (hyp) <br>
+		<br>
+		Our final goal is to arrive at \(D\), the conclusion. But without even looking ahead, there are a couple of fairly
+		obvious steps we can take that may or may not be helpful:
+		<br>
+		<br>
+		5. \(C\) (2,4,mp) <br>
+		6. \(A &and; B\) (1,4,con) <br>
+		7. \( D &or; C'\) (3,6,mp) <Br>
+		<br>
+		At least at this point we have introduced \(D\), but it's not by itself. Note that from step 5 we have \(C\), which
+		we haven't made use of. If only we had \(C &rarr; D\), we'd be home free. Ah, look at the form of step 7; it's a
+		disjunction, and the implication rule says that we can transform a disjunction of a certain form into am
+		implication. The disjunction must have a negated wff on the left. We can do that: <Br>
+		<br>
+		8. \(C' &or; D\) (7,comm) <br>
+		9. \(C &rarr; D\) (8,imp) <br>
+		<Br>
+		so <br><br>
+		10. \(D\) (5,9, mp)
+		<br>
+		<br>
+		<h2>Example 2</h2>
+		Using propositional logic, prove the validity of the argument. <Br>
+		<br>
+		<center>
+			\( [(A &or; B') &rarr; C] &and; (C &rarr; D) &and; A &rarr; D \)
+		</center>
+		<br>
+		<br>
+		1. \((A &or; B') &rarr; C\) (hyp) <Br>
+		2. \(C &rarr; D\) (hyp) <Br>
+		3. \(A\) (hyp) <br>
+		<br>
+		4. \( A &or; B' \) (3 add) <br>
+		5. \(C\) (1,4 mp) <br>
+		6. \(D\) (2,5,mp) <br>
+		<br>
+
+		<center>
+			<img src="./images/derivationHints.png" width="800px" height="300px">
+		</center>
+
+		<h2>Deduction Method</h2>
+		Suppose the argument we seek to prove has the form: <br> <Br>
+		<center>
+			\( P_1 &and; P_2 &and; P_3 &and; ... &and; P_n &rarr; (R &rarr; S)\)
+		</center>
+		<br>
+		where the conclusion is itself an implication. Instead of using \(P_1,...,P_n\)
+		as the hypotheses and deriving \(R &rarr; S\), the <b>
+			<font color="blue">deduction method</font>
+		</b> lets us add \(R\) as an additional hypothesis and then derive \(S\). In other words, we can instead prove: <br>
+		<br>
+		<center>
+			\(P_1 &and; P_2 &and; P_3 &and; ... &and; P_n &and; R &rarr; S\)
+		</center>
+		<br>
+		<b>
+			<font color="blue">Reminder:</font>
+		</b> Use the deduction method when the conclusion of what you want to prove is an implication.
+
+		<h2>Example 3</h2>
+		Using propositional logic, prove that the following is a valid argument. <Br>
+		<br>
+		<center>
+			\( (A' &or; B) &and; (B &rarr; C) &rarr; (A &rarr; C)\)
+		</center>
+		1. \(A' &or; B\) (hyp) <br>
+		2. \(B &rarr; C\) (hyp) <br>
+		3. \(A\) (hyp) <br>
+		<br>
+		4. \( A &rarr; B\) (1, imp) <br>
+		5. \(B\) (3,4 mp) <br>
+		6. \(C\) (2,5 mp) <br>
+		<br>
+
+		<h2>Practice</h2>
+		1. Use propositional logic to prove <br>
+		<center>
+			\((A &rarr; B) &and; (C' &or; A) &and; C &rarr; B\)
+		</center>
+		<br>
+
+		2. Use propositional logic to prove <br>
+		<center>
+			\((A &rarr; B) &and; (B &rarr; C) &rarr; (A &rarr; C) \)
+		</center>
+		<br>
+
+		3. Use propositional logic to prove <br>
+		<center>
+			\( B &and; [(B &and; C) &rarr; A'] &and; (B &rarr; C) &rarr; A' \)
+		</center>
+		<br>
+
+		4. Use propositional logic to prove <br>
+		<center>
+			\( A &and; (B &rarr; C) &rarr; (B &rarr; ( A &and; C)) \)
+		</center>
+		<br>
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

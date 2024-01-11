@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Counting Theory</title>
+  <link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+<div id="main">
+
+
+<h1>Combinations</h1>
+In many rule-of-products applications, the ordering is important, such as the batting order of a baseball team. In other cases it is not important, as in placing coins in a vending machine or in the listing of the elements of a set. Order is important in permutations. Order is not important in combinations.
+<Br>
+<Br>
+Sometimes we want to select \(r\) objects from a set of \(n\) objects, but we don't care how they are arranged. Then we are counting the number of <b>combinations</b> of \(r\) distinct objects chosen from \(n\) distinct objects, denoted by \(C(n,r)\). 
+
+<h2>Binomial Coefficient</h2>
+Let \(n\) and \(r\) be non-negative integers. The binomial coefficient \(n \choose r\) represents the number of combinations of \(n\) objects taken \(r\) at a time, and is read "n choose r". We would now like to investigate the relationship between permutation and combination problems in order to derive a formula for \(n \choose r\).
+<br>
+<br>
+Let us reconsider the Counting with No Order. The table below lists each subset of \(A\) and all permutations of each subset on the same line:
+<pre>
+subset   permutations
+
+{a,b,c}  abc, acb, bca, bac, cab, cba
+
+{a,b,d}  abd, adb, bda, bad, dab, dba
+
+{a,c,d}  acd, adc, cda, cad, dac, dca
+
+{b,c,d}  bcd, bdc, cdb, cbd, dbc, dcb
+</pre>
+Hence, \(C(4,3)\) = \(4 \choose 3 \) = \(\frac{P(4,3)}{3!} \) = \(\frac{4!}{(4-3)!.3!}\)= 4
+<br>
+<br>
+For each combination, there are \(r!\) ways to permute the \(r\) chosen objects.
+
+<h2>Binomial Coefficient Formula</h2>
+If \(n\) and \(r\) are nonnegative integers with \(0 &le; r &le; n\), then the number \(r\)-element subsets of an element set is equal to:<br>
+<br>
+<center>
+	<b>
+	<font color="blue">
+	\(C(n,r)\) = \( n \choose r\) = \( \frac{n!}{(n-r)!.r!} \)
+	</font>
+	</b>
+</center>
+<br>
+Other notations for \(C(n,r)\) are \(nC_r\), \(C^n_r\), \( n \choose r\)
+<br>
+<b>Example:</b>
+\(C(7,3) = \frac{7!}{3!(7-3)!} = \frac{7!}{3!4!} = \frac{7 \times 6 \times 5 \times 4 \times 3 \times 2 \times 1}{3 \times 2 \times 1 \times 4 \times 3 \times 2 \times 1}  = \frac{7 \times 6 \times 5}{3 \times 2 \times 1} = 7 \times 5 = 35\)
+
+<h2>Exercises</h2>
+1. In a certain state's lottery, \(48\) balls numbered \(1\) through \(48\) are placed in a machine and six of them are drawn at random. If the six numbers drawn match the numbers that a player had chosen, the player wins $1,000,000. In this lottery, the order the numbers are drawn it doesn't matter. Please compute the probability that you win the million-dollar prize if you purchase a single lottery ticket.
+<br>
+<br>
+<b><font color="red">Solution:</font></b> <br>
+<Br>
+\( n = 48, r = 6\) <Br>
+<br>
+\( C(48,6) = \frac{n!}{(n-r)!r!} = \frac{48!}{(48-6)!6!} = 12271512 \) 
+<br>
+<br>
+\( Probability_{firstPrize} = \frac{1}{C(48,6)} = \frac{1}{12271512} = 0.00000008148955075789\)
+<Br>
+<Br>
+2. In the state lottery from the previous example, if five of the six numbers drawn match the numbers that a player has chosen, the player wins a second prize of $1000. Please compute the probability that you win the second prize if you purchase a single lottery ticket.
+<br>
+<br>
+<b><font color="red">Solution:</font></b> <br>
+<Br>
+\( n = 48, r = 6\) <Br>
+<br>
+Total: \( C(48,6) = \frac{n!}{(n-r)!r!} = \frac{48!}{(48-6)!6!} = 12271512 \) 
+<br>
+<br>
+Select 1 ball from wrong balls: \( C(42,1) = \frac{42!}{(42-1)!1!} = 42 \) 
+<br>
+<br>
+Select 5 balls  from correct balls: \( C(6,5) = \frac{6!}{(6-5)!5!} = 6 \) 
+<br>
+<br>
+\( Probability_{SecondPrize} = \frac{C(42,1)C(6,5)}{C(48,6)} = \frac{42*6}{12271512} = 0.00002053536679098713\)
+<Br>
+<Br>
+
+<h2>Reference</h2>
+
+<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+<br>
+<a href="https://courses.lumenlearning.com/finitemath1/" target="_blank">Finite Math</a>
+
+<br>
+<br>
+<br>
+<br>
+
+<footer align="center" id="foot01"></footer>
+</div>
+
+</body>
+</html>

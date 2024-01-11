@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Graph Algorithms</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 7: Graph Algorithms</h1>
+
+		<center>
+			<h2>Section 7.3 Shortest Path</h2>
+		</center>
+
+		<br>
+		<br>
+
+		Assume that we have a simple, weighted, connected graph, where the weights are positive. Then a path exists between
+		any two nodes x and y. Indeed, there may be many such paths. The question is, How do we find a path with minimum
+		weight? Because weight often represents distance, this problem has come to be known as the ''shortest-path''
+		problem. It is an important problem to solve for a computer or communications network, where information at one node
+		must be routed to another node in the most efficient way possible, or for a transportation network, where products
+		in one city must be shipped to another.
+		<br><br>
+		In the shortest-path problem, we put no restrictions (other than minimum weight) on the nature of the path, and
+		because the graph is connected, we know that such a path exists. For this reason we may hope for an efficient
+		algorithm to solve the problem, even though no such algorithm is known for the traveling salesman problem. Indeed
+		such an algorithm does exist; it was published in 1959 by Edsger W. Dijkstra, a prominent computer scientist of the
+		twentieth century.
+		<br><br>
+
+		<h2>Dijkstra's Algorithm</h2>
+		The shortest-path algorithm is known as Dijkstra's algorithm. A pseudocode form of the algorithm is given in the
+		accompanying box. <Br>
+		Here shortest path means minimum-weight path. We actually assume a modified adjacency matrix A, where A[i,j] is the
+		weight of the arc between i and j if one exists and A[i, j] has the value &infin; if no arc exists (here the symbol
+		&infin; denotes a number larger than any weight in the graph).
+		<Br>
+		<Br>
+		<center>
+			<img width="600px" height="700px" src="images/dijkstra.png">
+		</center>
+		<center>
+			<img width="600px" height="200px" src="images/dijkstra2.png">
+		</center>
+		<Br>
+		Dijkstra's algorithm terminates when y is put into IN, even though there may be other nodes in the graph not yet in
+		IN (such as node 2 in the above Example).
+		<br>
+		<h2>Example</h2>
+		<img width="800px" height="500px" src="images/eg8_1.png">
+		<center>
+			<img width="650px" height="400px" src="images/eg8_2.png">
+		</center>
+		<center>
+			<img width="650px" height="400px" src="images/eg8_3.png">
+		</center>
+		<center>
+			<img width="650px" height="400px" src="images/eg8_4.png">
+		</center>
+		<center>
+			<img width="650px" height="400px" src="images/eg8_5.png">
+		</center>
+
+		<Br>
+		<h2>Practice</h2>
+
+		<center>
+			<img width="700px" height="300px" src="images/practice12.png">
+		</center>
+		<br>
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>
