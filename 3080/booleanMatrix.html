@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Boolean Matrices</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 5: Matrices</h1>
+
+		<center>
+			<h2>Section 5.7 Matrices</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>Boolean Matrices</h1>
+		We will be interested in matrics with only 0s and 1s as entries, called <b>
+			<font color="blue">Boolean matrices</font>
+		</b>. We can define an operation of Boolean matrix multiplication \(A \times B\) on Boolean matrices using Boolean
+		multiplication and Boolean addition instead of regular multiplication and addition.
+
+		<h2>Boolean Multiplication</h2>
+		\( x &and; y = \) min\((x,y)\)
+
+		<center>
+			<table style="width:40%">
+				<tr>
+					<th>x</th>
+					<th>y</th>
+					<th>x &and; y</th>
+				</tr>
+				<tr>
+					<th>1</th>
+					<th>1</th>
+					<th>1</th>
+				</tr>
+				<tr>
+					<th>1</th>
+					<th>0</th>
+					<th>0</th>
+				</tr>
+				<tr>
+					<th>0</th>
+					<th>1</th>
+					<th>0</th>
+				</tr>
+				<tr>
+					<th>0</th>
+					<th>0</th>
+					<th>0</th>
+				</tr>
+			</table>
+		</center>
+
+		<h2>Boolean Addition</h2>
+		\( x &or; y = \) max\((x,y)\)
+
+		<center>
+			<table style="width:40%">
+				<tr>
+					<th>x</th>
+					<th>y</th>
+					<th>x &or; y</th>
+				</tr>
+				<tr>
+					<th>1</th>
+					<th>1</th>
+					<th>1</th>
+				</tr>
+				<tr>
+					<th>1</th>
+					<th>0</th>
+					<th>1</th>
+				</tr>
+				<tr>
+					<th>0</th>
+					<th>1</th>
+					<th>1</th>
+				</tr>
+				<tr>
+					<th>0</th>
+					<th>0</th>
+					<th>0</th>
+				</tr>
+			</table>
+		</center>
+
+		<h2>Boolean matrix multiplication</h2>
+		The operation of <b>
+			<font color="blue">Boolean matrix multiplication \(A \times B\)</font>
+		</b> is defined:
+		$$
+		c_{ij} = &or;_{k=1}^{m}(a_{ik} &and; b_{kj})
+		$$
+		<h2>Example 1:</h2>
+		Let A and B be Boolean matrices.
+		$$
+		A =
+		\begin{pmatrix}
+		1 & 1 & 0 \\
+		0 & 1 & 0 \\
+		0 & 0 & 1
+		\end{pmatrix}
+		\quad
+		B =
+		\begin{pmatrix}
+		1 & 0 & 0 \\
+		1 & 1 & 1 \\
+		0 & 0 & 1
+		\end{pmatrix}
+		$$
+		Then:
+		$$
+		A &and; B=
+		\begin{pmatrix}
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		0 & 0 & 1
+		\end{pmatrix}
+		\quad
+		A &or; B =
+		\begin{pmatrix}
+		1 & 1 & 0 \\
+		1 & 1 & 1 \\
+		0 & 0 & 1
+		\end{pmatrix}
+		$$
+		and the Boolean product \(A \times B\) is:
+		$$
+		A \times B =
+		\begin{pmatrix}
+		1 & 1 & 1 \\
+		1 & 1 & 1 \\
+		0 & 0 & 1
+		\end{pmatrix}
+		$$
+
+
+		<h2>Practice</h2>
+
+		1. In the above Example 1, does \(A \times B = A &middot; B\) ?
+		<br>
+		<br>
+		<br>
+		2. In the above Example 1, please compute \(B \times A\).
+		<br>
+		<br>
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

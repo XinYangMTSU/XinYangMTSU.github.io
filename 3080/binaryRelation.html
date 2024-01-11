@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Graph Algorithms</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 7: Graph Algorithms</h1>
+
+		<center>
+			<h2>Section 7.1 Directed Graphs and Binary Relations</h2>
+		</center>
+
+		<br>
+		<br>
+
+		In this section we confine our attention to (unweighted) directed graphs with no parallel arcs. Because there are no
+		parallel arcs in the graph, the adjacency matrix will be a Boolean matrix, that is, a matrix whose only elements are
+		0s and 1s. Conversely, given an \(n \times n\) Boolean matrix, we can reconstruct the directed graph that the matrix
+		represents, and it will have no parallel arcs. Thus there is a one-to-one correspondence, which we can picture as
+
+		<center>
+			<img width="70%" src="images/one-to-one.png">
+		</center>
+
+		<h2>Directed Graphs and Binary Relations</h2>
+		Suppose G is a directed graph with n nodes and no parallel arcs. Let N be the set of nodes. If \( (n_i, n_j) \) is
+		an ordered pair of nodes, then there either is or is not an arc in G from \(n_i\) to \(n_j\). We can use this
+		property to define a binary relation on the set N: <Br>
+		<center>
+			\(n_i\) &#961; \(n_j\) &harr; there is an arc in G from \(n_i\) to \(n_j\)
+		</center>
+		<br>
+		This relation is the <b>adjacency relation</b> of the graph.
+		<br>
+		<br>
+		<center>
+			<img width="70%" src="images/binaryRelation1.png">
+		</center>
+		<br>
+		Conversely, if &#961; is a binary relation on a set N, we can define a directed graph G with N as the set of nodes,
+		and an arc from \(n_i\) to \(n_j\) if and only if \(n_i\) &#961; \(n_j\). G will have no parallel arcs.
+		<br><br>
+		<center>
+			<img width="70%" src="images/binaryRelation2.png">
+		</center>
+		<br>
+		We now have another one-to-one correspondence:
+		<br>
+		<center>
+			<img width="70%" src="images/one-to-one2.png">
+		</center>
+		<br>
+		Thus We have three equivalent sets: <br>
+		<center>
+			<img width="70%" src="images/binaryRelation3.png">
+		</center>
+		<br>
+		An item from any of the three sets has corresponding representations in the other two sets.
+		<Br>
+		<h3>Practice 1</h3>
+		<center>
+			<img width="70%" src="images/binaryRelation_p1.png">
+		</center>
+
+		<Br>
+		<h2>Reachability</h2>
+		<b>
+			<font color="blue">
+				Reachable Node: <br>
+				In a directed graph, node \(n_j\) is <font color="red">reachable</font> from node \(n_i\) if there is a path
+				from \(n_i\) to \(n_j\).
+			</font>
+		</b>
+		<br><br>
+		<center>
+			<img width="90%" src="images/binaryRelation4.png">
+		</center>
+		<br>
+		The adjacency matrix a of a directed graph G with n nodes and no parallel
+		arcs will have a 1 in position i, j if there is an arc from \(n_i\) to \(n_j\). This would be a path of length 1
+		from \(n_i\) to \(n_j\). The adjacency matrix by itself therefore tells us about a limited form of reachability, via
+		length-1 paths. However, let us perform the <b>
+			<font color="blue">Boolean matrix multiplication \(A \times A\)</font>
+		</b>. We'll denote this product by <b>
+			<font color="red">\(A^{(2)}\)</font>
+		</b> to distinguish it from \(A^2\), the result of \(A&middot;A\) using
+		ordinary matrix multiplication.
+
+		A path of length 2 from \(n_i\) to \(n_j\) will exist if and only there is a path of length 2 passing through at
+		least one of the nodes from 1 to n, that is, if and only if \(A^{(2)}[i,j] = 1\). Therefore the entries in
+		\(A^{(2)}\) tell us about reachability via length-2 paths.
+		<br>
+		<h3>Practice 2</h3>
+		<center>
+			<img width="90%" src="images/binaryRelation_p2.png">
+		</center>
+
+		<br>
+		The matrix \(A^{(2)}\) indicates the presence or absence of length-2 paths. We might surmise that this result
+		holds
+		for arbitrary powers and path lengths.
+		<br><br>
+		<center>
+			<img width="90%" src="images/binaryRelation5.png">
+		</center>
+		<br>
+		We can define a <b>
+			<font color="blue">reachability matrix R</font>
+		</b> by:
+		<br>
+		<center>
+			<b>
+				\( R = A &or; A^{(2)} &or; &hellip; &or; A^{(n)} \)
+			</b>
+		</center>
+		<br>
+		Then \(n_j\) is reachable from \(n_i\) is and only if entry \(i,j\) in <b>R</b> is positive. <br>
+		To summarize, corresponding to the three equivalent representations of adjacency relation &#961;, directed graph
+		G,
+		and adjacency matrix A, we have
+		<br>
+		<center>
+			<img width="60%" src="images/binaryRelation6.png">
+		</center>
+		<br>
+		<h2>Example</h2>
+		<center>
+			<img width="60%" src="images/binaryRelation7.png">
+		</center>
+		<center>
+			<img width="60%" src="images/binaryRelation8.png">
+		</center>
+		<center>
+			<img width="60%" src="images/binaryRelation9.png">
+		</center>
+
+		<h2>Practice</h2>
+		Please compute reachability matrix <b>R</b> for the directed graph of Figure 7.2. What information does column 2
+		convey? <br><br>
+		\(R = A &or; A^{(2)} &or; A^{(3)} &or; A^{(4)}\)
+		<br>
+		<center>
+			<img width="60%" src="images/binaryRelation2.png">
+		</center>
+
+		<br>
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Graph and Trees</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 7: Graph Algorithms</h1>
+
+		<center>
+			<h2>Section 7.4 Traversal Algorithms</h2>
+		</center>
+
+		<br>
+		<br>
+
+		In this section we deal with a simpler problem--we only want to write down all the nodes of a simple, connected
+		graph G in some orderly way. This means we must find a path that visits each node at least once, but we can visit it
+		more than once if we don't write it down again. We can also retrace arcs on the graph if necessary, and clearly this
+		would in general be necessary if we were to visit each node in a tree. This process is called <b>
+			<font color="blue">graph traversal</font>
+		</b>. We already have several mechanisms for tree traversal (Section 6.2). The two algorithms in this section
+		generalize traversal to apply to any simple, connected graph.
+
+
+		<h2>Breadth-First Search</h2>
+		In breadth-first search, beginning at an arbitrary node a, we first fan out from node a to visit nodes that are
+		adjacent to a; then we fan out from those nodes, and so on, almost like the concentric circles of ripples in a pond.
+		Figure 7.15 shows the first few nodes visited in the same graph as Figure 7.13, this time using breadth-first
+		search.
+
+		<br><br>
+		<center>
+			<img width="300px" height="400px" src="./images/7.15.png">
+		</center>
+
+		To write the breadth-first search algorithm in an elegant fashion, we will use a <b>
+			<font color="blue">queue</font>
+		</b> structure. A queue is simply a line in which new arrivals are added at the back and departures take place at
+		the front
+
+		<br> <br>
+		<center>
+			<img width="700px" height="400px" src="./images/breadthFirst_1.png">
+		</center>
+
+		<br><br>
+		<center>
+			<img width="800px" height="300px" src="./images/breadthFirst_2.png">
+		</center>
+		<center>
+			<img width="700px" height="600px" src="./images/breadthFirst_3.png">
+		</center>
+		<center>
+			<img width="700px" height="300px" src="./images/breadthFirst_4.png">
+		</center>
+		<center>
+			<img width="700px" height="200px" src="./images/breadthFirst_5.png">
+		</center>
+
+
+		<h2>Practice</h2>
+		Please write the nodes in a breadth-first search of the graph in Figure 7.14.
+		<br>
+		<Br>
+		<center>
+			<img width="700px" height="400px" src="./images/7.14.png">
+		</center>
+
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

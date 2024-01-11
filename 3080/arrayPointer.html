@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Graphs and Trees</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 6: Graphs and Trees</h1>
+
+		<center>
+			<h2>Section 6.1 Graphs and Their Representations</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>Computer Representation of Graphs</h1>
+
+		In a programming language that does not support pointers, we can still achieve the effect of an adjacency list by
+		using a multicolumn array (or an array of records), where one column contains the nodes and another column contains
+		the array index of the next node on the adjacency list—a “pseudopointer.”
+
+		<h2>Array Pointer</h2>
+		<b>
+			<font color="blue">Example 1: </font>
+		</b>
+		<hr>
+		Figure 6.29a shows a weighted directed graph. The adjacency list representation for this graph is shown in Figure
+		6.29b. For each record in the list, the first data item is the node, the second is the weight of the arc to that
+		node, and the third is the pointer. Note that entry 4 in the array of startup pointers is null because there are no
+		arcs that begin at node 4.
+		<br><br>
+		<center>
+			<img width="500px" height="200px" src="images/arrayPointer1.png">
+		</center>
+		<br>
+		In a programming language that does not support pointers, we can still achieve the effect of an adjacency list by
+		using a multicolumn array (or an array of records), where one column contains the nodes and another column contains
+		the array index of the next node on the adjacency list-a "pseudopointer".
+		<br><br>
+		<center>
+			<img width="600px" height="500px" src="images/arrayPointer2.png">
+		</center>
+
+		<b>
+			<font color="blue">Example 2: </font>
+		</b>
+		<hr>
+
+		The following Figure shows a unweighted directed graph.
+		<center>
+			<img width="200px" height="200px" src="./arrayPointer3_1.png">
+		</center>
+
+		The array pointer is:
+
+		<center>
+			<img width="200px" height="500px" src="./arrayPointer3_2.png">
+		</center>
+
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Graphs and Trees</title>
+	<link href="../CCS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Chapter 6: Graphs and Trees</h1>
+
+		<center>
+			<h2>Section 6.1 Graphs and Their Representations</h2>
+		</center>
+
+		<br>
+		<br>
+
+		<h1>Computer Representation of Graphs</h1>
+		We have said that the major advantange of a graph is its visual representation of information. What if we want to
+		store a graph in digital form? Although it is possible to store a digital image of a graph, it takes a lot of sapce.
+		Furthermore, such an image remains but a picture --- the data it represents can't be manipulated in any way. What we
+		need to store are these essential data that are part of the definition of a graph -- what the nodes are and which
+		nodes have connecting arcs. From this information a visual representation could be reconstructed if desired. The
+		usual computer representations of a graph invovle one of two data structures, either an adjacency matrix or an
+		adjacency list.
+
+
+		<h2>Adjacent Matrix</h2>
+		Suppose a graph as \(n\) nodes, numbered \(n_1,n_2,\dots,n_n\). This numbering imposes an arbitrary ordering on the
+		set of nodes. Having ordered the nodes, we can form an \(n \times n\) matrix where entry \((i,j)\) is the number of
+		arcs between nodes \(n_i\) and \(n_j\). This matrix is called the <b>
+			<font color="blue">adjacency matrix A</font>
+		</b> of the graph with respect to this ordering. Thus:
+		$$
+		a_{ij} = p, \text{where there are p arcs between } n_i \text{ and } n_j
+		$$
+
+		<b>
+			<font color="blue">Example 1: </font>
+		</b>
+		<hr>
+		The adjacency matrix for the graph in Figure 1 with respect to the ordering 1,2,3,4,5,6 is a \(6 \times 6\) matrix.
+		Entry (1,1) is a 1 due to the loop at the node. All other elements on the main diagnola are 0. Entry (2,1) (second
+		row, first column) is a 1 because there is one arc between node 2 and node 1, which also means that entry (1,2) is a
+		1.
+		<br>
+		$$
+		\begin{pmatrix}
+		1 & 1 & 0 & 0 & 1 & 0 \\
+		1 & 0 & 1 & 0 & 1 & 0 \\
+		0 & 1 & 0 & 1 & 0 & 0 \\
+		0 & 0 & 1 & 0 & 1 & 1 \\
+		1 & 1 & 0 & 1 & 0 & 0 \\
+		0 & 0 & 0 & 1 & 0 & 0 \\
+		\end{pmatrix}
+		$$
+		<Br>
+		<center>
+			<img width="300px" height="200px" src="images/loop.png">
+			<br>
+			<caption>Figure 1</caption>
+		</center>
+		The adjacency matrix in Figure 1 is symmetric, which will be true for the adjacency matrix of any undirected graph
+		-- if there are p arcs between \(n_i\) and \(n_j\), there are certainly p arcs between \(n_j\) and \(n_i\).They
+		symmetry of the matrix means that only elements on or below the main diagnoal need to be stored. Therefore, all the
+		information contained in the graph in Figure 1 is contained in the "lower triangular" array.
+		<br>
+		<br>
+		<br>
+
+		<b>
+			<font color="blue">Example 2: </font>
+		</b>
+		<hr>
+		An adjacency matrix for a directed graph will not necessarily be symmetric, because an arc from \(n_i\) to \(n_j\)
+		does not imply an arc from \(n_j\) and \(n_i\). See the example in Figure 2:
+
+		<center>
+			<img width="500px" height="300px" src="images/adjDirectedGraph.png">
+			<br>
+			<caption>Figure 2</caption>
+		</center>
+
+		<b>
+			<font color="blue">Example 3: </font>
+		</b>
+		<hr>
+		In a simple weighted graph, the entries in the adjacency matrix can indicate the weight of an arc by the appropriate
+		number rather than just indicating the presence of an arc by the number 1.
+
+		<br>
+		<br>
+
+		<center>
+			<img width="500px" height="300px" src="images/adjMatrixWeightedGraph.jpeg">
+			<br>
+			<caption>Figure 3</caption>
+		</center>
+
+		<h2>Practice</h2>
+		Please find the adjcency matrix:
+		<center>
+			<img width="500px" height="300px" src="images/adjMatrix.png">
+		</center>
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>
