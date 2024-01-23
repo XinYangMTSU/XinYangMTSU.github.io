@@ -103,13 +103,13 @@
 		<br><br>
 
 		The TCP and UDP add a header to the data packets. The TCP header contains different fields
-		like source and destination port information; packets sequence number, acknowledgment information, and checksum
+		like source and destination port information; packet sequence number, acknowledgment information, and checksum
 		values. Each field plays its role when data packets are exchanged. For example, the checksum field is used to check
-		if any packet during the data exchange process has tampered or not. The sequence number tells the TCP at the
+		if any packet during the data exchange process has been tampered or not. The sequence number tells the TCP at the
 		destination about the order of the packet. The TCP at the receiver end combines the packets in the correct order
 		with the help of the sequence numbers. When a packet is successfully transferred, the devices acknowledge the
 		successful delivery of the packets. If the sender does not receive an acknowledgment by the receiver in a specified
-		period of time or window, it resends the packet. The entire packets at the receiver end are arranged into correct
+		period of time or window, it resends the packet. The entire packets at the receiver end are arranged into the correct
 		order; the headers are removed from the packets before reassembling them into a complete message.
 		<br><br>
 		<center>
@@ -120,7 +120,7 @@
 
 		<h3>3. Network Layer</h3>
 		<hr>
-		This layer is also known as Internet layer.
+		This layer is also known as the Internet layer.
 		The data packets from the transport layer travel down to the network layer. Different protocols operate at the
 		network layer including Internet Protocol (IP), Internet Control Message Protocol (ICMP), and Address Resolution
 		Protocol (ARP). At the network layer, a header called IP header is added to the data packet. The IP header contains
@@ -132,10 +132,10 @@
 		<br> <br>
 		The packet will be transferred along with the source and destination IP addresses and some other header information,
 		such as the length of the data. If the destination computer is on the same local network as the source, then the
-		packet will be directly send to the destination via this network. If the destination is on another network, the
-		packet will be send to a gateway, which is a device that is connected to the source computer’s network as well as to
+		packet will be directly sent to the destination via this network. If the destination is on another network, the
+		packet will be sent to a gateway, which is a device that is connected to the source computer’s network as well as to
 		at least one other network. The gateway will select a computer on one of the other networks to which it is attached
-		and send the packet on to that computer. This process will continue, with the packet going through perhaps a dozen
+		and send the packet onto that computer. This process will continue, with the packet going through perhaps a dozen
 		or more hops, until the packet reaches the destination computer.
 		<br>
 		<br>
@@ -198,7 +198,7 @@
 		Both IPv4 and IPv6 addresses are hierarchical. For simplicity, let's examine the hierarchy of IP v4 addresses. <br>
 		Consider this IP address: 24.147.242.217
 		<br>
-		That IP address could break down into these 222 parts:
+		That IP address could be broken down into these 222 parts:
 		<br>
 
 		<img src="subnet.png" height="100px" width="400px">
