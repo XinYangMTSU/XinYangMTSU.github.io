@@ -211,16 +211,16 @@ an Italian merchant and mathematician, is defined recursively by:
 		<div class="block4">
 			<pre>
          F(positive integer n)
-		 if n = 1 or n = 2 then
-           	    return 1
+		 if n <= 1 then
+           	    return m
          	 else
-                    i = 3
-                    F1 = 1
-		    F2 = 1
+                    i = 2
+                    F0 = 0
+		    F1 = 1
                     while i <= n do
-                        Fn = F1 + F2;
-                        F1 = F2;
-                        F2 = Fn;
+                        Fn = F0 + F1;
+                        F0 = F1;
+                        F1 = Fn;
                         i = i + 1;
                     end while
 	            return Fn
