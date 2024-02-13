@@ -453,11 +453,13 @@
 			</pre>
 			<li>&#9733; <b><font color="red">Function Invocation</font>.</b>The code inside the function will execute when "something" <b>invokes</b> (calls) the function:
 			<ul>
-				<li>When an event occurs (when a user clicks a button)</li>
-				<li>When it is invoked (called) from JavaScript code</li>
+				<li>a. When an event occurs (when a user clicks a button)</li>
+				<li>b. When it is invoked (called) from JavaScript code</li>
 			</ul>
 		</ul>
 		<h3>Example</h3>
+
+		<h2>Event Occurs Example</h2>
 		In HTML file:
 		<pre>
 				&lt;button onclick="my_math()"&gt;Calculate it&lt;/button&gt;
@@ -474,6 +476,31 @@
 			}
 		</pre>
 
+		<h2>Invoked (called) from JavaScript code Example</h2>
+		<pre>
+			<!DOCTYPE html>
+			<html>
+			<body>
+
+			<h1>JavaScript Functions</h1>
+
+			<p>Call a function which performs a calculation and returns the result:</p>
+
+			<p id="demo"></p>
+
+			<script>
+				let x = myFunction(4, 3);
+				document.getElementById("demo").innerHTML = x;
+
+				function myFunction(a, b) {
+  					return a * b;
+				}
+			</script>
+
+			</body>
+			</html>
+		</pre>
+		
 		<h2>Global and Local variables</h2>
 		<ul>
 			<li>&#9733; Variables defined outside a function are accessible anywhere once they have been declared. They are called <b><font color="red">global variables</font></b> and their scope is global.</li>
