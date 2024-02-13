@@ -158,19 +158,19 @@ The sequence S is defined recursively by
 <b><font color="blue">&bull; Example 2: </font></b>
 
 The <b>Fibonacci sequence</b> of numbers, introduced in the thirteenth century by
-an Italian merchant and mathematician, is defiend recursively by:
+an Italian merchant and mathematician, is defined recursively by:
 
-     1. F(1) = 1
-     2. F(2) = 1
-     3. F(n) = F(n-2) + F(n-1) for n > 2
+     1. F(0) = 0
+     2. F(1) = 1
+     3. F(n) = F(n-2) + F(n-1) for n > 1
 </pre>
-		By statement 1, F(1), the first object in F, is 1.<Br>
-		By statement 2, F(2), the second object in F, is 1. <br>
-		By statement 3, F(3) = F(1) + F(2) = 1 + 1 = 2. <Br>
-		By statement 3 again, F(4) = F(2) + F(3) = 1 + 2 = 3. <Br>
+		By statement 1, F(0), the first object in F, is 0.<Br>
+		By statement 2, F(1), the second object in F, is 1. <br>
+		By statement 3, F(2) = F(0) + F(1) = 0 + 1 = 1. <Br>
+		By statement 3 again, F(3) = F(1) + F(2) = 1 + 1 = 2. <Br>
 		Continuing in this fashion, we can see that F is the sequence <Br>
 		<center>
-			1, 1, 2, 3, 5, 8, 13, ...
+			0, 1, 1, 2, 3, 5, 8, 13, ...
 		</center>
 		<br>
 		<br>
@@ -192,8 +192,8 @@ an Italian merchant and mathematician, is defiend recursively by:
 		<div class="block4">
 			<pre>
          F(positive integer n)
-	     if n = 1 or n = 2 then
-                return 1
+	     if n <= 1  then
+                return n
              else
                 return F(n-2) + F(n-1)
       	     end if
