@@ -112,8 +112,8 @@
 					function addNumbers(int $a, int $b) {
 	 					 return $a + $b;
 					}
-					echo addNumbers(5, "5 days");
-					// since strict is NOT enabled "5 days" is changed to int(5), and it will return 10
+					echo addNumbers(5, "5");
+					// since strict is NOT enabled "5" is changed to int(5), and it will return 10
 				?&gt;
 			</pre>
 			<li>&#9733; To specify strict we need to set declare(strict_types=1);. This must be on the very first line of the
@@ -126,8 +126,8 @@
 			function addNumbers(int $a, int $b) {
   				return $a + $b;
 			}	
-			echo addNumbers(5, "5 days");
-			// since strict is enabled and "5 days" is not an integer, an error will be thrown
+			echo addNumbers(5, "5");
+			// since strict is enabled and "5" is not an integer, an error will be thrown
 			?&gt;
 			</pre>
 		</ul>
