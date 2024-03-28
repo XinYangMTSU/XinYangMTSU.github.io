@@ -165,6 +165,8 @@
 				if ($conn->connect_error) {
 				    die("Connection failed: " . $conn->connect_error);
 				}
+
+				echo "Connected successfully";
 				
 				// write the SQL query
 				$sql = "SELECT * FROM test1"; //select all the columns from database table test1
