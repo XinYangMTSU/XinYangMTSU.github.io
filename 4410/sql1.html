@@ -158,7 +158,7 @@
 				$servername = "localhost";
 				$username = "root";
 				$password = "";
-				$database = "csci4410"; //you need to create this database in PHPMyAdmin
+				$database = "CSCI4410"; //you need to create this database in PHPMyAdmin
 				// Create connection
 				$conn = new mysqli($servername, $username, $password, $database);
 				// Check connection
@@ -169,13 +169,13 @@
 				echo "Connected successfully";
 				
 				// write the SQL query
-				$sql = "SELECT * FROM test1"; //select all the columns from database table test1
+				$sql = "SELECT * FROM Persons"; //select all the columns from database table Persons
                                 //Perform query on a database
 				$result = mysqli_query($conn, $sql); //fetch the resulting rows as an associated array
 
 				$sql2 = "SELECT COLUMN_NAME
 				FROM INFORMATION_SCHEMA.COLUMNS
-				WHERE TABLE_SCHEMA ='csci4410' AND TABLE_NAME = 'test1'"; // select all column names from table test1
+				WHERE TABLE_SCHEMA ='CSCI4410' AND TABLE_NAME = 'Persons'"; // select all column names from table Persons
 				$columns = mysqli_query($conn,$sql2); 
 				
 				echo "&lt;br&gt;";
@@ -205,6 +205,9 @@
 				$conn->close();
 				?&gt;
 			</pre>
+
+			<a href="https://xinyangmtsu.github.io/4410/persons.sql" target="_blank">persons.sql</a>
+			<br><br>
 
 			<h2>What is a Database Table?</h2>
 			<ul>
