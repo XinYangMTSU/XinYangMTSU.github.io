@@ -151,14 +151,14 @@
 		</ul>
 
 		<ul>
-			<li>&#9733; Usually, we connect to some mysql database:
+			<li>&#9733; Usually, we connect to some MySQL database:
 			</li>
 			<pre>
 				&lt;?php
 				$servername = "localhost";
 				$username = "root";
 				$password = "";
-				$database = "csci4410"; //you need to create this database in phpmyadmin
+				$database = "csci4410"; //you need to create this database in PHPMyAdmin
 				// Create connection
 				$conn = new mysqli($servername, $username, $password, $database);
 				// Check connection
@@ -175,11 +175,11 @@
 
 				$sql2 = "SELECT COLUMN_NAME
 				FROM INFORMATION_SCHEMA.COLUMNS
-				WHERE TABLE_NAME = 'test1'"; // select all column names from table test1
+				WHERE TABLE_SCHEMA ='csci4410' AND TABLE_NAME = 'test1'"; // select all column names from table test1
 				$columns = mysqli_query($conn,$sql2); 
 				
 				echo "&lt;br&gt;";
-				// use table to display the database table
+				//Use table to display the database table
 				echo "&lt;table border='1'&gt;"; // table start
 
 				// table heading
