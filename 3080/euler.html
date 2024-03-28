@@ -122,20 +122,21 @@
 				</b>, which adds two to the degree. </li>
 			<li>&#9733; For a directed graph, a <b>
 					<font color="blue">loop</font>
-				</b> adds one to the in degree and one to the out degree.</li>
+				</b> adds one to the in degree and one to the out-degree.</li>
 		</ul>
 
 
 		<h2>Hamiltonian Circuit</h2>
-		<font color="blue">A <b>Hamiltonian circuit</b> in a graph is a cycle using every node of the graph.</font> <br>
-		No efficient algorithm has ever been found to determin if a Hamiltonian circuit exists. <br>
+		<font color="blue">A <b>Hamiltonian circuit</b> in a graph is a cycle using every node of the graph.
+		A Hamiltonian circuit is a circuit that visits every vertex once with no repeats.</font> <br>
+		No efficient algorithm has ever been found to determine if a Hamiltonian circuit exists. <br>
 		<br>
 		Hamiltonian circuit problem can be solved for a given graph by trial and error. The algorithm is as follows: Start
-		from one node of the graph and try some path by choosing various arcs. If the path results in a repeated node, it is
+		from one node of the graph and try some paths by choosing various arcs. If the path results in a repeated node, it is
 		not a cycle, so throw it away and try a different path. If the path can be completed as a cycle, then see whether it
 		visited every node; if not, throw it away and try a different path. Continue in this fashion until all possible
-		paths have been tried or a Hamiltonian circuit has been found.The trial-and- error approach is theoretically
-		possible,but it is practically impossible! In all but the smallest of graphs, there will simply be too many paths to
+		paths have been tried or a Hamiltonian circuit has been found. The trial-and-error approach is theoretically
+		possible, but it is practically impossible! In all but the smallest of graphs, there will simply be too many paths to
 		try.
 
 		<h2>Example</h2>
