@@ -204,7 +204,15 @@
 			<li>&#9733; Please <b>
 					<font color="red">Insert a new row/tuple</font>
 				</b>, then write a query to check if the insert is successful or not.</li>
-
+				Hint: 
+				<pre>
+				if ($conn->query($sql) === TRUE) {
+                                 	echo "New record inserted successfully";
+				}
+                 		else {
+                                	echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
+				}
+                		</pre>
 			<li>&#9733; Please <b>
 					<font color="red">delete the tuple you just inserted</font>
 				</b>, then write a query to check if the delete is successful or
