@@ -8,7 +8,6 @@ document.getElementById("nav01").innerHTML =
 	"<li><a href='MyResearch.html'>Research</a></li>" +
 	"<li><a href='https://www.mtsu.edu/faculty/xin-yang' target='_blank'>CV</a></li>" +
 	"<li><a href='MyDrawings.html'>Drawings</a></li>" +
-	
 	"<li><a href='StudentsDemo.html' target='_blank'>StudentDemo</a></li>"
 "</ul>";
 
