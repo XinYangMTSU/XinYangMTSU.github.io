@@ -218,7 +218,11 @@
 		This means that the expression \(A &or; B'\) stands for \(A &or; (B')\), not \((A &or; B)'\). Similarly, \(A &or; B
 		&rarr; C\) means \((A &or; B) &rarr; C\), not \(A &or; (B &rarr; C)\). However, we often use parentheses anyway,
 		just to be sure there is no confusion.
-
+		<br>
+		<br>
+		When multiple instances of the same logical connective appear in an expression, the default evaluation order is determined by 
+		the left-associative nature of the connective, meaning the expression is evaluated from <b>left to right</b>. 
+		If a different evaluation order is needed, parentheses can be used to explicitly specify the desired order.
 		<h2>main connective</h2>
 		In a wff with a number of connectives, the connective to be applied last is the
 		<b>
