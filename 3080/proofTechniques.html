@@ -385,6 +385,59 @@ Therefore, <b>if the square of an integer is odd, the integer itself must be odd
 		</center>
 		is a tautology, so to prove the theorem \(P &rarr; Q\), it is sufficient to prove \(P &and; Q' &rarr; 0\).
 		<Br>
+
+	<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th>P</th>
+      <th>Q</th>
+      <th>Q'</th>
+      <th>\( P &and; Q' \)</th>
+      <th>\(P &and; Q' &rarr; 0 \)</th>
+      <th>\(P &rarr; Q \)</th>
+      <th>\( (P &and; Q'  0) &rarr; (P &rarr; Q) \)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+		<br>
 		<Br>
 		Therefore, in a proof by contradiction, you assume that both the hypothesis and the negation of the conclusion are
 		true and then try to deduce some contradiction from these assumptions.
