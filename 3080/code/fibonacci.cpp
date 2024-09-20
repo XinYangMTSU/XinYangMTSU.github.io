@@ -22,18 +22,24 @@ int main()
 
 int fibonacciUsingRecursion(int n)
 {
-	if(n<=1)
-	   return n;
+	if(n == 1)
+		return 0;
+    else if( n == 2)
+        return 1;
+    
 	return  fibonacciUsingRecursion(n-1) + fibonacciUsingRecursion(n-2);
 }
 
 int fibonacciUsingIteration(int n)
 {
 	int a = 0, b = 1, c;
-	if(n==0)
+    
+	if(n == 1)
 		return a;
-
-	for(int i = 2; i <=n; i++)
+    else if( n == 2)
+        return b;
+    
+	for(int i = 3; i <=n; i++)
 	{
 		c = a + b;
 		a = b;
