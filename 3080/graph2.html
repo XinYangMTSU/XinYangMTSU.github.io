@@ -263,6 +263,21 @@
 			<li><b>Preservation of adjacency:</b> If two vertices are connected by an edge in one graph, 
 				their corresponding vertices in the other graph must also be connected.</li>
 		</ul>
+
+		<h3>How can we check if two graphs are isomorphic?</h3>
+		<ul>
+			<li>1. Compare the Number of Vertices and Edges</li>
+			Count the number of vertices and edges in both graphs.<br>
+			If the number of vertices or edges is different, the graphs are <b>not isomorphic</b>.
+			<li>2. Compare the Degree of Each Vertex</li>
+			For each graph, calculate the degree of each vertex.<br>
+			If the degree sequences (the list of vertex degrees) are not the same in both graphs, they are <b>not isomorphic</b>.
+			<li>3. Check Adjacency Matrix</li>
+			Create the <b>adjacency matrix</b> for both graphs. <br>
+			If the two adjacency matrices cannot be made the same by reordering the rows and columns, then the graphs are <b>not isomorphic</b>.
+			<li>4. Use algorithms for larger graphs.</li>
+		</ul>
+		
 		<h3>Graph Isomorphism in Real-World Applications:</h3>
 		<ul>
 			<li><b>Pattern Recognition:</b> Isomorphism is used in computer vision and pattern recognition to determine 
