@@ -21,10 +21,10 @@ int main() {
 
     // Arrays to represent the adjacency list with pseudopointers
     vector<Node> adj = {
-        {2, -1},  // Vertex 1 → Vertex 2 (no further adjacent nodes)
-        {3, -1},  // Vertex 2 → Vertex 3 (no further adjacent nodes)
-        {4, -1},  // Vertex 3 → Vertex 4 (no further adjacent nodes)
-        {1, -1},  // Vertex 4 → Vertex 1 (cycle back to Vertex 1, no further adjacent nodes)
+        {2, -1},  // Vertex 1 -> Vertex 2 (no further adjacent nodes)
+        {3, -1},  // Vertex 2 -> Vertex 3 (no further adjacent nodes)
+        {4, -1},  // Vertex 3 -> Vertex 4 (no further adjacent nodes)
+        {1, -1},  // Vertex 4 -> Vertex 1 (cycle back to Vertex 1, no further adjacent nodes)
         
         // The placeholder nodes are no longer necessary as there is only one adjacent node per vertex
     };
