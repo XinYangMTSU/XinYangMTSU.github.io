@@ -29,12 +29,15 @@ public:
     void addEdge(int src, int dest);
     //This method prints the adjacency list of the graph.
     void printGraph();
+  // Destructor to release allocated memory
+    ~Graph();
 };
 
 // Constructor
 Graph::Graph(int V) {
     numVertices = V;
     adjLists = new list<int>[V];
+    cout << "Constructor has been called." << endl;
 }
 
 // Add edges
@@ -54,11 +57,17 @@ void Graph::printGraph() {
     }
 }
 
+// Destructor
+Graph::~Graph() {
+    delete[] adjLists;  // Release the dynamically allocated memory for adjacency lists
+    cout << "Memory for adjacency list has been released." << endl;
+}
+
 // main function
 int main() {
     
     //This creates a graph with 5 vertices
-    Graph g(5);
+    Graph g = Graph(5);
 
     //Adds an undirected edge between vertex 1 and vertex 2. In the adjacency list, vertex 1 will list vertex 2 as a neighbor, and vice versa.
     g.addEdge(0, 1);
@@ -73,5 +82,4 @@ int main() {
 
     return 0;
 }
-
 
