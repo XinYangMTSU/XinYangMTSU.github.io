@@ -6,7 +6,7 @@ using namespace std;
 // a pointer to right child
 struct Node {
   char data;
-  struct Node *left, *middle, *right;
+  Node *left, *middle, *right;
 };
 
 // function prototype
@@ -14,10 +14,12 @@ struct Node {
 Node *newNode(char data);
 // given a treee, print its nodes in inorder
 void printInorder(Node *node);
+// Delete the tree and free memory
+void deleteTree(Node *node);      
 
 // Driver code
 int main() {
-
+    
   Node *a = newNode('a');
   Node *b = newNode('b');
   Node *c = newNode('c');
@@ -29,8 +31,8 @@ int main() {
   Node *i = newNode('i');
   Node *j = newNode('j');
   Node *k = newNode('k');
-
-  // create root node
+    
+    // create root node
   Node *root = a;
   a->left = b;
   a->right = c;
@@ -55,18 +57,25 @@ int main() {
   cout << "Inorder traversal of your tree is " << endl;
   printInorder(root);
   cout << endl;
+ 
 
-  return 0;
+    // Delete the tree and free memory
+    deleteTree(root);
+    
+    return 0;
 }
 
 // function definition to create a new tree node
 Node *newNode(char data) {
 
+  //Dynamically allocates memory for new nodes.
   Node *temp = new Node;
   temp->data = data;
   temp->left = temp->middle = temp->right = NULL;
+    
   return temp;
 }
+
 
 // Given a tree, print its nodes in inorder
 void printInorder(Node *node) {
@@ -87,4 +96,21 @@ void printInorder(Node *node) {
 
   // Nor recur on right child
   printInorder(node->right);
+}
+
+// Function to delete the entire tree
+void deleteTree(Node *node) {
+    
+    if (node == NULL) {
+        return;
+    }
+
+    // Recursively delete left, middle, and right children
+    deleteTree(node->left);
+    deleteTree(node->middle);
+    deleteTree(node->right);
+
+    // Delete the current node
+    cout << "Deleting node: " << node->data << endl;
+    delete node;
 }
