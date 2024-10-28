@@ -2,7 +2,9 @@
 #include <iostream>
 using namespace std;
 
+//V is the total number of vertices (nodes) in the graph
 const int V = 9;
+
 // Function to print shortest path from source to j
 // using parent array
 void printPath(int parent[], int j) {
