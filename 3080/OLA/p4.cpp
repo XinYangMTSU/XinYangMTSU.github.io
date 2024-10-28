@@ -21,6 +21,10 @@ void printPath(int parent[], int j) {
   cout << str << " ";
 }
 
+/*
+This function finds the unvisited node with the smallest known distance from the source, 
+which is critical for Dijkstra's algorithm as it selects the "next closest" node to explore.
+*/
 int miniDist(int distance[], bool Tset[]) // finding minimum distance
 {
   int minimum = INT_MAX, ind;
