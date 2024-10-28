@@ -71,7 +71,7 @@ void DijkstraAlgo(int graph[V][V], int src) // adjacency matrix
       }
     }
   }
-  cout << "Vertex\t\tDistance from source vertex\t\t Path" << endl;
+  cout << "Vertex\t\tDistance from source vertex\t\t\t\t\t\t Path" << endl;
   for (int k = 0; k < V; k++) {
     char str = 65 + k;
     // cout<<str<<"\t\t\t"<<distance[k]<<endl;
