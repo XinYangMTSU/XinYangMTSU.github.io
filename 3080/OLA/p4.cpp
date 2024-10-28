@@ -8,7 +8,8 @@ const int V = 9;
 // Function to print shortest path from source to j
 // using parent array
 void printPath(int parent[], int j) {
-  char str = 65 + j;
+  char str = 65 + j; // Converts node index to alphabet letter (A, B, C, etc.)
+  
   // Base Case : If j is source
   if (parent[j] == -1) {
     cout << str << " ";
