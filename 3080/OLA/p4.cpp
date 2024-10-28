@@ -43,6 +43,7 @@ int miniDist(int distance[], bool Tset[]) // finding minimum distance
 (2) Starting Node
 (3) Ending Node
 */
+//This function runs Dijkstra's algorithm to calculate the shortest path from a source node to all other nodes.
 void DijkstraAlgo(int graph[V][V], int src) // adjacency matrix
 {
   int distance[V]; // array to calculate the minimum distance for each node
