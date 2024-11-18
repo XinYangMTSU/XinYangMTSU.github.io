@@ -234,19 +234,10 @@
 			incremented as shown in Fig. As only one bit changes at a time, the gray code is called as a unit distance code.
 			The gray code is a <b>
 				<font color="blue">cyclic code</font>
-			</b>. Gray code cannot be used for arithmetic operations.
+			</b>. The term "cyclic" in the context of Gray code means that the Gray code sequence forms a <b><font color="blue">closed loop</font></b>. 
+			The last value in the sequence transitions back to the first value, and this transition involves only a single-bit change, just like any other consecutive values in Gray code. 
+			Gray code cannot be used for arithmetic operations.
 			In this code, two consecutive values are differed by one bit of binary digits.
-			<br>
-			<br>
-			<b><font color="blue">Key Characteristics:</font></b><br><br>
-			<ul>
-				<li>1. <b>Single-Bit Change:</b></li>
-				Successive numbers in Gray code differ by exactly one bit, reducing ambiguity in transitions.
-				<li>2. <b>Cyclic:</b></li>
-				The Gray code sequence wraps around, forming a loop where the last value transitions to the first value with a single-bit change.
-				<li>3. <b>Reflection:</b></li>
-				The Gray code sequence for \(n+1\) bits is derived by reflecting the \(n\)-bit sequence and appending 0 to the original sequence and 1 to the reflected sequence.
-			</ul>
 			
 			<br><br>
 			<font color="red"><b>Binary to Gray conversion : </b></font> <br>
@@ -324,6 +315,18 @@
     </tbody>
 </table>
 			</center>
+
+			<br>
+			<br>
+			<b><font color="blue">Key Characteristics:</font></b>
+			<ul>
+				<li>1. <b>Single-Bit Change:</b></li>
+				Successive numbers in Gray code differ by exactly one bit, reducing ambiguity in transitions.
+				<li>2. <b>Cyclic:</b></li>
+				The Gray code sequence wraps around, forming a loop where the last value transitions to the first value with a single-bit change.
+				<li>3. <b>Reflection:</b></li>
+				The Gray code sequence for \(n+1\) bits is derived by reflecting the \(n\)-bit sequence and appending 0 to the original sequence and 1 to the reflected sequence.
+			</ul>
 
 
 			<h3>Gray code Application</h3>
