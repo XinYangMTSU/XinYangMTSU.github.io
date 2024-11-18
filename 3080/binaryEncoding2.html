@@ -335,6 +335,20 @@
 			by encoding the position values in Gray code, where only one bit changes at a time. This property helps to prevent
 			errors or glitches during the position tracking process.
 
+			<h3>Example: 3-Bit Gray Code Rotary Encoder</h3>
+			Imagine a rotary encoder divided into \(2^3=8\) positions. These positions are encoded using <b>3-bit Gray code</b>:
+			<center>
+				
+			</center>
+			<b>Explanation:</b><br>
+			<ul>
+				<li>1. <b>Gray Code Property:</b></li>
+				From position 0 (000) to position 1 (001): Only the <B>last bit changes</B>. <br>
+				From position 1 (001) to position 2 (011): Only the <b>middle bit changes</b>. <br>
+				This single-bit change minimizes errors during transitions.
+				<li>2. <b>Binary Code Issue:</b></li>
+				In binary code, transitions like 011 to 100 (position 3 to 4) involve multiple bit changes (3 bits flip), increasing the chance of errors.
+			</ul>
 			<br>
 			<br>
 			<h2>Reference</h2>
