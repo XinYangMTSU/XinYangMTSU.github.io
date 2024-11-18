@@ -197,11 +197,27 @@
 </table>
 		</center>
 		<h3>Excess-3 code Application</h3>
-		Error detection: Excess-3 code helps in error detection. In some cases, errors can occur during data transmission or
-		processing and it's important to identify and correct these errors. Excess-3 code has the property that adjacent
-		numbers have a Hamming distance of at least two. This means that if a single-bit error occurs in the code, it will
-		result in an invalid excess-3 code, indicating that an error has occurred. This error detection capability is
-		beneficial in ensuring data integrity.
+		<ul>
+			<li>1. Error Detection Example</li>
+			<b>Scenario: Decimal Value Transmission in a Digital System</b>
+			<br>
+			Suppose we need to send a sequence of decimal number over a network, and we encode them using Excess-3:
+			<br>
+			Decimal 4: Excess-3 code 0111
+			<br>
+			<b>Error Scenario:</b><br>
+			A single-bit error occurs during transmission, and 0111 (for 4) is received as 1111.<br>
+			<B>Error Detection Process:</b><br>
+			<ul>
+				<li>1. <b>Check the received code 1111</b></li><br>
+				Is it a valid Excess-3 code? <b>No</b><br>
+				Valid Excess-3 codes: 0011, 0100, 0101, ..., 1100. <br>
+				<li>2. <b>Action</b>: Since 1111 is invalid, the system flags it as an error.</li>
+			</ul>
+			This simple check prevents corrupted data from being misinterpreted, improving the reliability of communication systems.
+		</ul>
+
+		
 		<br>
 
 		<h3>
