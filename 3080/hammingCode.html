@@ -296,11 +296,70 @@ p3 is selected so as to establish even parity in positions 1,3,5,7.
         </tbody>
     </table>
 		</center>
-
-		Parity bit \(p_3\) (in position 1) is responsible for ensuring even parity for all positions where the Least Significant Bit (LSB) is 1. 
+		<br>
+		Parity bit \(p_3\) (in position 1) is responsible for ensuring even parity for all positions where the <b>Least Significant Bit (LSB)</b> is 1. 
 		From the table above, positions 1,3,5,7 have their LSB set to 1, so \(p_3\) covers those positions.
 
 		<h2>Why does \(p_2\) cover positions 2, 3, 6, 7?</h2>
+
+		<center>
+			<table style="width:60%">
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Binary Representation</th>
+                <th>Second LSB</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>0001</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>0010</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>0011</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>0100</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>0101</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>0110</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>0111</td>
+                <td>1</td>
+            </tr>
+        </tbody>
+    </table>
+		</center>
+		<br>
+		Parity bit \(p_2\) (in position 2) is responsible for ensuring even parity for all positions where the <b>Second Least Significant Bit (second LSB)</b> is 1. 
+		From the table above, positions 2,3,6,7 have their LSB set to 1, so \(p_3\) covers those positions.
+		
+		
+		<h2>Why does \(p_1\) cover positions 4, 5, 6, 7?</h2>
+		
+		<center>
+			
+		</center>
 		
 		<h2>Reference</h2>
 		<a href="https://www.tutorialspoint.com/computer_logical_organization/binary_codes.htm#:~:text=Binary%20Coded%20Decimal%20(BCD)%20code&text=BCD%20is%20a%20way%20to,1111%20are%20invalid%20in%20BCD."
