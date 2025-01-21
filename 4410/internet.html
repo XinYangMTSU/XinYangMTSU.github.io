@@ -84,15 +84,20 @@
 		<hr>
 		The application layer sends the data to the lower layer, i.e. the transport layer. The transport layer converts the
 		data into data packets and sends to the destination device. The transport layer uses the <b><font color="blue">Transmission Control Protocol
-		(TCP)</font></b> and the <b><font color="blue">User Datagram Protocol (UDP)</font></b>. TCP is the data transport protocol
+		(TCP)</font></b> and the <b><font color="blue">User Datagram Protocol (UDP)</font></b>. 
+		<br><br>
+		TCP is the data transport protocol
 		that's most commonly used on top of IP and it
-		includes strategies for packet ordering, retransmission, and data integrity. UDP is an
-		alternative protocol that solves fewer problems but offers faster data transport.
+		includes strategies for packet ordering, retransmission, and data integrity, which ensures reliable, ordered, and error-checked delivery of data.
 		<br>
 		TCP is best used for direct communication in which a reliable connection is needed, 
 		such as web browsing, email, text messaging, and file transfers. 
+		<br><br>
+		
+		UDP is an alternative protocol that solves fewer problems but offers faster data transport, which provides faster, connectionless communication without reliability guarantees.
+		<br>
 		UDP is best used for live and real-time data transmission when speed is more important than 
-		reliability.
+		reliability, such as video streaming and gaming. 
 		<br><br>
 		When the transport layer receives data from the application layer, it is transformed
 		into the <b>
