@@ -138,11 +138,16 @@
 		even across multiple networks. 
 		<br><br>
 		The data packets from the transport layer travel down to the network layer. Different protocols operate at the
-		network layer including Internet Protocol (IP) and Internet Control Message Protocol (ICMP). 
+		network layer including Internet Protocol (IP), Internet Control Message Protocol (ICMP), and Address Resolution Protocol (ARP).
 		<br><br>
 		ICMP (Internet Control Message Protocol) is a network layer protocol used for error reporting and diagnostic functions in an IP network.
 		It helps devices communicate issues such as unreachable destinations, packet loss, and congestion. Unlike TCP or UDP, ICMP is not used for data transmission but for network troubleshooting and control. 
 		It is crucial for network health monitoring and issue resolution. 
+		<br><br>
+		ARP (Address Resolution Protocol) operates at the network layer to map an IP address to a corresponding MAC (Media Access Control) address. 
+		When a device wants to communicate with another device on the same local network, it needs the recipient's MAC address. 
+		ARP helps by sending a broadcast request to all devices, asking "Who has this IP?" The device with the matching IP responds with its MAC address. 
+		This process ensures data is sent to the correct physical hardware address within a local network.
 		<br><br>
 		At the network layer, a header called IP header is added to the data packet. The IP header contains
 		the source and destination IP address. The packet is sent out to the destination via a router. The router contains a
