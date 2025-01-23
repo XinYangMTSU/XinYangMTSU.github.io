@@ -24,17 +24,17 @@
     </center>
     <h1>1. Objective</h1>
     <p>The goal of this lab is to develop a C++ program to simulate a <b><font color="blue">traffic light control system</font></b> using <b><font color="red">propositional logic</font></b>.
+        The system will take input conditions such as the presence of a car, pedestrian crossing, and timer status to determine whether the traffic light should turn green or remain red.  
         Students will learn how to apply logical expressions to solve real-world problems and optimize decision-making.</p>
 
     <h1>2. Problem Statement</h1>
-    <p>The traffic light system should allow cars to pass if a car is detected or the timer condition allows,
-        provided no pedestrians are crossing. The logic is represented by the following Boolean expression:</p>
-    <pre>(C &#8744; T) &#8743; &#172;P</pre>
-    <ul>
-        <li><b>C:</b> Car detected (1 for Yes, 0 for No)</li>
-        <li><b>T:</b> Timer condition allowing (1 for Yes, 0 for No)</li>
-        <li><b>P:</b> Pedestrian crossing (1 for Yes, 0 for No)</li>
-    </ul>
+    
+<p>A traffic light system is required to control the flow of vehicles and pedestrians efficiently. The system should allow vehicles to pass only if it meets specific conditions. The traffic light should turn green if:</p>
+<ul>
+<li>A car is detected (<b>C</b>) OR</li>
+<li>The timer condition allows a green light (<b>T</b>), AND</li>
+<li>No pedestrian is crossing (<b>P</b> is false).</li>
+</ul>
 
 
     <h3>(1) Propositional Variables</h3>
