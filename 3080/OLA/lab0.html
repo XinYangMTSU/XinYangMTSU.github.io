@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lab - Traffic Light Control System Simulation</title>
+    <meta name="author" content="Your Name">
+    <meta name="robots" content="noindex, nofollow">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+</head>
+
+<body background="lab0.gif" bgcolor="white" text="black" link="blue" vlink="navy" alink="red">
+    <center>
+        <table border=8>
+            <tr valign=middle>
+                <td bgcolor="white">
+                    <center>
+                        <font size=5 color="navy">&nbsp;<b>CSCI 3080 - <em>Discrete Structures</em></b></font>&nbsp;
+                        <br>
+                        <font size=4 color="black"><b>Lab - Traffic Light Control System Simulation</b></font>
+                    </center>
+                </td>
+            </tr>
+        </table>
+    </center>
+    <br>
+
+    <h1>1. Objective</h1>
+    <p>The goal of this lab is to develop a C++ program to simulate a traffic light control system using Boolean logic.
+        Students will learn how to apply logical expressions to solve real-world problems and optimize decision-making.</p>
+
+    <h1>2. Problem Statement</h1>
+    <p>The traffic light system should allow cars to pass if a car is detected or the timer condition allows,
+        provided no pedestrians are crossing. The logic is represented by the following Boolean expression:</p>
+    <pre>(C &#8744; T) &#8743; &#172;P</pre>
+    <ul>
+        <li><b>C:</b> Car detected (1 for Yes, 0 for No)</li>
+        <li><b>T:</b> Timer condition allowing (1 for Yes, 0 for No)</li>
+        <li><b>P:</b> Pedestrian crossing (1 for Yes, 0 for No)</li>
+    </ul>
+
+    <h1>3. Requirements</h1>
+    <ul>
+        <li>&#9733; Prompt the user to input values for car detection, timer condition, and pedestrian crossing.</li>
+        <li>&#9733; Evaluate the traffic light condition using the logical expression.</li>
+        <li>&#9733; Display whether the light should be GREEN or RED.</li>
+        <li>&#9733; Allow multiple tests using a loop.</li>
+        <li>&#9733; Handle invalid inputs gracefully.</li>
+    </ul>
+
+    <h1>4. Sample Input/Output</h1>
+    <pre>
+Is a car detected? (1 for Yes, 0 for No): 1
+Is the timer condition allowing? (1 for Yes, 0 for No): 0
+Is a pedestrian crossing? (1 for Yes, 0 for No): 1
+Result: The traffic light is RED (Cars must stop)
+    </pre>
+    <pre>
+Is a car detected? (1 for Yes, 0 for No): 0
+Is the timer condition allowing? (1 for Yes, 0 for No): 1
+Is a pedestrian crossing? (1 for Yes, 0 for No): 0
+Result: The traffic light is GREEN (Cars can go)
+    </pre>
+
+    <h1>5. Submission Instructions</h1>
+    <ul>
+        <li>&#9733; Submit your source code as <b>traffic_light_simulation.cpp</b>.</li>
+        <li>&#9733; Provide screenshots showing your program's output for different test cases.</li>
+        <li>&#9733; Write a short reflection on what you learned from this lab.</li>
+    </ul>
+
+    <h1>6. Grading Criteria</h1>
+    <ul>
+        <li>Correct Implementation: 30 points</li>
+        <li>Input Handling & Validation: 20 points</li>
+        <li>User Interface & Usability: 20 points</li>
+        <li>Code Readability & Comments: 15 points</li>
+        <li>Test Cases & Output Accuracy: 15 points</li>
+    </ul>
+
+    <h1>7. Comments</h1>
+    <ul>
+        <li>&#9733; Please add the following comments to the top of your <b>traffic_light_simulation.cpp</b> file:</li>
+        <pre>
+/*
+    Author: Your Name
+    Date: Month/Day/Year
+    Lab purpose: Traffic Light Control System Simulation
+*/
+        </pre>
+        <li>&#9733; Please add other necessary comments to your source code.</li>
+    </ul>
+
+    <h1>8. Submit</h1>
+    Please submit your Lab source code file: <b>traffic_light_simulation.cpp</b> on D2L!
+
+    <h1>9. Jupyter Hub for Programming</h1>
+    <a href="https://jupyterhub.cs.mtsu.edu/azuread/hub/home" target="_blank">Jupyter Hub for Programming</a>
+    <br>
+    You can create source code and compile and run your code by logging in to Jupyter Hub.
+
+    <h1>10. Traffic Light Control Demos</h1>
+    You can find more information and C++ examples at:
+    <a href="https://xinyangmtsu.github.io/3080/recursiveDefinition.html" target="_blank">Traffic Light Control Demos</a>
+    <br>
+
+    <hr>
+    <center>
+        <b>
+            <font size="+1">
+                Congratulations! You have finished your Lab!
+            </font>
+        </b>
+        <br>
+        <br>
+    </center>
+</body>
+
+</html>
