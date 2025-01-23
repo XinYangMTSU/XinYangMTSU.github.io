@@ -72,29 +72,29 @@
             <p>Within the loop, prompt the user to enter values for <code>carDetected</code>, <code>timerCondition</code>, and <code>pedestrianCrossing</code>. Use integer variables to capture the input and validate that the user enters either 0 or 1. If the input is invalid, display an error message and prompt again.</p>
             <pre><code>        int input;
         // Input for car detection
-        std::cout &lt;&lt; "Is a car detected? (1 for Yes, 0 for No): ";
-        std::cin &gt;&gt; input;
+        cout &lt;&lt; "Is a car detected? (1 for Yes, 0 for No): ";
+        cin &gt;&gt; input;
         while (input != 0 &amp;&amp; input != 1) {
-            std::cout &lt;&lt; "Invalid input. Please enter 1 for Yes or 0 for No: ";
-            std::cin &gt;&gt; input;
+            cout &lt;&lt; "Invalid input. Please enter 1 for Yes or 0 for No: ";
+            cin &gt;&gt; input;
         }
         carDetected = static_cast&lt;bool&gt;(input);
 
         // Input for timer condition
-        std::cout &lt;&lt; "Is the timer condition allowing? (1 for Yes, 0 for No): ";
-        std::cin &gt;&gt; input;
+        cout &lt;&lt; "Is the timer condition allowing? (1 for Yes, 0 for No): ";
+        cin &gt;&gt; input;
         while (input != 0 &amp;&amp; input != 1) {
-            std::cout &lt;&lt; "Invalid input. Please enter 1 for Yes or 0 for No: ";
-            std::cin &gt;&gt; input;
+            cout &lt;&lt; "Invalid input. Please enter 1 for Yes or 0 for No: ";
+            cin &gt;&gt; input;
         }
         timerCondition = static_cast&lt;bool&gt;(input);
 
         // Input for pedestrian crossing
-        std::cout &lt;&lt; "Is a pedestrian crossing? (1 for Yes, 0 for No): ";
-        std::cin &gt;&gt; input;
+        cout &lt;&lt; "Is a pedestrian crossing? (1 for Yes, 0 for No): ";
+        cin &gt;&gt; input;
         while (input != 0 &amp;&amp; input != 1) {
-            std::cout &lt;&lt; "Invalid input. Please enter 1 for Yes or 0 for No: ";
-            std::cin &gt;&gt; input;
+            cout &lt;&lt; "Invalid input. Please enter 1 for Yes or 0 for No: ";
+            cin &gt;&gt; input;
         }
         pedestrianCrossing = static_cast&lt;bool&gt;(input);</code></pre>
         </li>
