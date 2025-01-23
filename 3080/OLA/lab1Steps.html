@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Light Control System Simulation Instructions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow-x: auto;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Traffic Light Control System Simulation Instructions</h1>
+    <ol>
+        <li>
+            <strong>Include Necessary Headers</strong>
+            <p>Begin by including the <code>&lt;iostream&gt;</code> header to facilitate input and output operations.</p>
+            <pre><code>#include &lt;iostream&gt;</code></pre>
+        </li>
+        <li>
+            <strong>Declare the <code>trafficLightControl</code> Function</strong>
+            <p>Define a function named <code>trafficLightControl</code> that takes three boolean parameters: <code>carDetected</code>, <code>timerCondition</code>, and <code>pedestrianCrossing</code>. This function will evaluate the logical expression <code>(C ∨ T) ∧ ¬P</code> and return a boolean indicating whether the traffic light should be green.</p>
+            <pre><code>bool trafficLightControl(bool carDetected, bool timerCondition, bool pedestrianCrossing) {
+    return (carDetected || timerCondition) &amp;&amp; !pedestrianCrossing;
+}</code></pre>
+        </li>
+        <li>
+            <strong>Implement the <code>main</code> Function</strong>
+            <p>Within the <code>main</code> function, declare three boolean variables: <code>carDetected</code>, <code>timerCondition</code>, and <code>pedestrianCrossing</code>. Additionally, declare a character variable <code>choice</code> to control the loop for repeated execution.</p>
+            <pre><code>int main() {
+    bool carDetected, timerCondition, pedestrianCrossing;
+    char choice;</code></pre>
+        </li>
+        <li>
+            <strong>Display Program Header</strong>
+            <p>Output a header to inform the user about the program's purpose.</p>
+            <pre><code>    std::cout &lt;&lt; "Traffic Light Control System Simulation\n";
+    std::cout &lt;&lt; "--------------------------------------\n";</code></pre>
+        </li>
+        <li>
+            <strong>Implement the <code>do-while</code> Loop</strong>
+            <p>Use a <code>do-while</code> loop to repeatedly prompt the user for input, evaluate the traffic light condition, and display the result. The loop will continue until the user decides to exit.</p>
+            <pre><code>    do {
+        // Step 6: Prompt User for Input
+        // Step 7: Evaluate Traffic Light Condition
+        // Step 8: Display the Result
+        // Step 9: Prompt for Continuation
+    } while (choice == 'y' || choice == 'Y');</code></pre>
+        </li>
+        <li>
+            <strong>Prompt User for Input</strong>
+            <p>Within the loop, prompt the user to enter values for <code>carDetected</code>, <code>timerCondition</code>, and <code>pedestrianCrossing</code>. Use integer variables to capture the input and validate that the user enters either 0 or 1. If the input is invalid, display an error message and prompt again.</p>
+            <pre><code>        int input;
+        // Input for car detection
+        std::cout &lt;&lt; "Is a car detected? (1 for Yes, 0 for No): ";
+        std::cin &gt;&gt; input;
+        while (input != 0 &amp;&amp; input != 1) {
+            std::cout &lt;&lt; "Invalid input. Please enter 1 for Yes or 0 for No: ";
+            std::cin &gt;&gt; input;
+        }
+        carDetected = static_cast&lt;bool&gt;(input);
+
+        // Input for timer condition
+        std::cout &lt;&lt; "Is the timer condition allowing? (1 for Yes, 0 for No): ";
+        std::cin &gt;&gt; input;
+        while (input != 0 &amp;&amp; input != 1) {
+            std::cout &lt;&lt; "Invalid input. Please enter 1 for Yes or 0 for No: ";
+            std::cin &gt;&gt; input;
+        }
+        timerCondition = static_cast&lt;bool&gt;(input);
+
+        // Input for pedestrian crossing
+        std::cout &lt;&lt; "Is a pedestrian crossing? (1 for Yes, 0 for No): ";
+        std::cin &gt;&gt; input;
+        while (input != 0 &amp;&amp; input != 1) {
+            std::cout &lt;&lt; "Invalid input. Please enter 1 for Yes or 0 for No: ";
+            std::cin &gt;&gt; input;
+        }
+        pedestrianCrossing = static_cast&lt;bool&gt;(input);</code></pre>
+        </li>
+        <li>
+            <strong>Evaluate Traffic Light Condition</strong>
+            <p>Call the <code>trafficLightControl</code> function with the user's inputs to determine if the traffic light should be green.</p>
+            <pre><code>        bool greenLight = trafficLightControl(carDetected, timerCondition, pedestrianCrossing);</code></pre>
+        </li>
+        <li>
+            <strong>Display the Result</strong>
+            <p>Based on the result from the function, display whether the traffic light is GREEN or RED.</p>
+            <pre><code>        if (greenLight) {
+            std::cout &lt;&lt; "Result: The traffic light is GREEN (Cars can go)\n";
+        } else {
+            std::cout &lt;&lt; "Result: The traffic light is RED (Cars must stop)\n";
+        }</code></pre>
+        </li>
+        <li>
+            <strong>Prompt for Continuation</strong>
+            <p>Ask the user if they want to run the simulation again. Accept 'y' or 'Y' to continue; any other input will end the loop.</p>
+            <pre><code>        std::cout &lt;&lt
+::contentReference[oaicite:0]{index=0}
+ 
