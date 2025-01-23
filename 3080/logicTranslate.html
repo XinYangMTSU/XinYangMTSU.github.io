@@ -221,15 +221,18 @@
 		\( A)) &and;&and; &rarr; B) \) is not legal
 		<br>
 		<br>
-		To reduce the number of parentheses required in a wff, we stipulate an order in which connectivies are applied.
+		When evaluating well-formed formulas in propositional logic, it is important to follow a specific order of precedence to 
+		reduce the need for parentheses and ensure the correct interpretation of expressions.
+		To reduce the number of parentheses required in a well-formed formula, we stipulate an order in which connectivies are applied.
 		<font color="blue"><b>This order of precedence</b></font> is: <br>
 		<br>
 		1. connectives within parentheses, innermost parentheses first <br>
 		2. not: &not; <br>
 		3. and: &and; <br>
 		4. or: &or; <br>
-		5. implies: &rarr; <br>
-		6: equivalence: &harr; <br>
+		5. xor: &#8853; <br>
+		6. implies: &rarr; <br>
+		7: equivalence: &harr; <br>
 		<br>
 		This means that the expression \(A &or; B'\) stands for \(A &or; (B')\), not \((A &or; B)'\). Similarly, \(A &or; B
 		&rarr; C\) means \((A &or; B) &rarr; C\), not \(A &or; (B &rarr; C)\). However, we often use parentheses anyway,
