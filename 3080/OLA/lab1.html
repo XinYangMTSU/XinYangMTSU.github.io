@@ -229,4 +229,19 @@ Result: The traffic light is GREEN (Cars can go)
     </center>
 </body>
 
+    <a href="#" id="goTopBtn" style="position:fixed; bottom:20px; right:20px; font-size:30px; text-decoration:none; color:#007BFF; cursor:pointer;">&#8679;</a>
+
+<script>
+// Get the button
+let goTopBtn = document.getElementById("goTopBtn");
+
+// When the user clicks on the arrow, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
+goTopBtn.onclick = topFunction;
+</script>
+
 </html>
