@@ -36,6 +36,103 @@
         <li><b>P:</b> Pedestrian crossing (1 for Yes, 0 for No)</li>
     </ul>
 
+
+    <h3>(1) Propositional Variables</h3>
+<p>In the traffic light system, the conditions can be represented as propositional variables:</p>
+<ul>
+<li><b>C</b>: Car is detected (True/False)</li>
+<li><b>P</b>: Pedestrian is crossing (True/False)</li>
+<li><b>T</b>: Timer condition allows a green light (True/False)</li>
+</ul>
+
+<h3>(2) Logical Expression for Decision Making</h3>
+<p>A typical propositional logic formula to determine if the traffic light should turn green:</p>
+<pre>(C ∨ T) ∧ ¬P</pre>
+
+<p><b>Explanation of the formula:</b></p>
+<ul>
+<li><b>C ∨ T</b> — The traffic light should turn green if either a car is detected or the timer allows it.</li>
+<li><b>¬P</b> — The light should turn green only if no pedestrian is crossing.</li>
+</ul>
+
+<h3>(3) Truth Table Representation</h3>
+<p>We can represent the decision-making process using a truth table, which is a key characteristic of propositional logic.</p>
+
+<table border="1" style="width:60%; text-align:center">
+<tr>
+<th>C</th>
+<th>T</th>
+<th>P</th>
+<th>C ∨ T</th>
+<th>¬P</th>
+<th>(C ∨ T) ∧ ¬P</th>
+</tr>
+<tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+</tr>
+</table>
+
     <h1>3. Requirements</h1>
     <ul>
         <li>&#9733; Prompt the user to input values for car detection, timer condition, and pedestrian crossing.</li>
