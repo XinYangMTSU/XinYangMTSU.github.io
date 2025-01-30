@@ -232,7 +232,7 @@ h1, h2, p {
 
 		<h3><font color="red">Example:</font></h3>
 
-		&#9989; Works 
+		&#9989; Works (Second Child)
 		<pre>
 		&lt;div&gt;
 			 &lt;p&gt;First paragraph (not red).&lt;/p&gt;
@@ -245,7 +245,7 @@ h1, h2, p {
 		The second &lt;p&gt; is the second child of &lt;div&gt;, so it turns red.
 	
 		<br><br><br>
-		&#10060;Won't Work
+		&#10060;Won't Work (Not Second Child)
 		<pre>
 		&lt;div&gt;
 			 &lt;p&gt;First paragraph (not red).&lt;/p&gt;
@@ -254,7 +254,7 @@ h1, h2, p {
 		&lt;/div&gt;		
 		</pre>
 		<b><font color="blue">Explanation</font></b>: 
-		The &lt;h1&gt; is the second child of &lt;div&gt;, so the first &lt;p&gt; and third &lt;p&gt; will not turn red.
+		The &lt;h1&gt; is the second child of &lt;div&gt;, so the first &lt;p&gt; and third &lt;p&gt; will not be affected by p:nth-child(2).
 		
 		<br><br>
 		
