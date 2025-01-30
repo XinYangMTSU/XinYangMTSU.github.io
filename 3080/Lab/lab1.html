@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 1 - Traffic Light Control System Simulation</title>
+    <meta name="author" content="Your Name">
+    <meta name="robots" content="noindex, nofollow">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default"></script>
+    
+    <!-- ========== STYLE ========== -->
+    <style>
+        /* Dark background and lighter text for comfortable reading */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #2b2b2b; /* Dark gray background */
+            color: #e0e0e0;          /* Light text color */
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Make headings stand out */
+        h1, h2, h3 {
+            color: #ffa500;
+            margin-top: 2rem;
+        }
+
+        /* Center the main heading table with a subtle border */
+        .header-table {
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 2rem auto;
+            background-color: #333333;
+            border: 2px solid #555;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .header-table td {
+            padding: 1rem;
+        }
+
+        /* Main heading text styling */
+        .header-title {
+            font-size: 1.8rem;    /* Increase heading font size */
+            color: #ffa500;
+            font-weight: bold;
+        }
+        .header-subtitle {
+            font-size: 1.3rem;
+            color: #ffffff;
+        }
+
+        /* Paragraph styling */
+        p {
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+        
+        /* Lists spacing */
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Table styling for the truth table and grading table */
+        table {
+            border-collapse: collapse;
+            margin: 1rem auto;
+            width: 80%;
+            max-width: 800px;
+        }
+        th, td {
+            border: 1px solid #555;
+            padding: 0.7rem 1rem;
+            text-align: center;
+        }
+        th {
+            background-color: #444444;
+        }
+        td {
+            background-color: #3a3a3a;
+        }
+        caption {
+            caption-side: top;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #ffa500;
+        }
+
+        /* Emphasize certain colors (traffic light logic) */
+        .blue-text { color: #00adff; }
+        .red-text  { color: #ff4d4d; }
+        .green-text { color: #36c36c; }
+        .navy-text { color: #7eb7ff; }
+
+        /* Links */
+        a {
+            color: #45a1ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* 'Go to Top' Button */
+        #goTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 30px;
+            text-decoration: none;
+            color: #ffa500;
+            cursor: pointer;
+            background-color: rgba(255, 165, 0, 0.1);
+            padding: 5px 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        #goTopBtn:hover {
+            background-color: rgba(255, 165, 0, 0.3);
+        }
+
+        /* Preformatted text look a bit nicer */
+        pre {
+            background-color: #3a3a3a;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        /* Add spacing around sections */
+        hr {
+            margin: 2rem auto;
+            width: 80%;
+            border: 1px solid #555;
+        }
+
+        /* Center the final “Congratulations” section */
+        .centered {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Title / Header Section -->
+    <table class="header-table">
+        <tr>
+            <td>
+                <div class="header-title">CSCI 3080 - <em>Discrete Structures</em></div>
+                <div class="header-subtitle">Lab 1 - Traffic Light Control System Simulation</div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Content -->
+    <h1>1. Objective</h1>
+    <p>
+        The goal of this lab is to develop a C++ program to simulate a
+        <b class="blue-text">traffic light control system</b> using
+        <b class="red-text">propositional logic</b>. 
+        The system will take input conditions such as the presence of a car, pedestrian crossing, 
+        and timer status to determine whether the traffic light should turn green or remain red. 
+        Students will learn how to apply logical expressions to solve real-world problems 
+        and optimize decision-making.
+    </p>
+
+    <h1>2. Problem Statement</h1>
+    <p>
+        A traffic light system is required to control the flow of vehicles and pedestrians efficiently. 
+        The system should allow vehicles to pass only if it meets specific conditions. 
+        The traffic light should turn green if:
+    </p>
+    <ul>
+        <li><span class="blue-text">A car is detected</span> (<b>C</b>) OR</li>
+        <li><span class="blue-text">The timer condition allows a green light</span> (<b>T</b>) AND</li>
+        <li><span class="blue-text">No pedestrian is crossing</span> (<b>P</b> is false).</li>
+    </ul>
+
+    <h3>(1) Propositional Variables</h3>
+    <p>In the traffic light system, the conditions can be represented as <b class="blue-text">propositional variables</b>:</p>
+    <ul>
+        <li><b>C</b>: Car is detected (True/False)</li>
+        <li><b>P</b>: Pedestrian is crossing (True/False)</li>
+        <li><b>T</b>: Timer condition allows a green light (True/False)</li>
+    </ul>
+
+    <h3>(2) Logical Expression for Decision Making</h3>
+    <p>
+        The <b class="blue-text">well-formed formula</b> to determine if the traffic light should turn green: 
+        <b class="red-text">(C &or; T) &and; &not;P</b>
+    </p>
+    <p><b>Explanation of the formula:</b></p>
+    <ul>
+        <li><b>C ∨ T</b> — The traffic light should turn green if either a car is detected or the timer allows it.</li>
+        <li><b>¬P</b> — The light should turn green only if no pedestrian is crossing.</li>
+    </ul>
+
+    <h3>(3) Truth Table Representation</h3>
+    <p>We can represent the decision-making process using a truth table, which is a key characteristic of propositional logic.</p>
+
+    <!-- Truth Table -->
+    <table>
+        <tr>
+            <th>C</th>
+            <th>T</th>
+            <th>P</th>
+            <th>C ∨ T</th>
+            <th>¬P</th>
+            <th>(C ∨ T) ∧ ¬P</th>
+        </tr>
+        <tr>
+            <td>T</td>
+            <td>T</td>
+            <td>T</td>
+            <td>T</td>
+            <td>F</td>
+            <td>F</td>
+        </tr>
+        <tr>
+            <td>T</td>
+            <td>T</td>
+            <td>F</td>
+            <td>T</td>
+            <td>T</td>
+            <th class="green-text">T</th>
+        </tr>
+        <tr>
+            <td>T</td>
+            <td>F</td>
+            <td>T</td>
+            <td>T</td>
+            <td>F</td>
+            <td>F</td>
+        </tr>
+        <tr>
+            <td>T</td>
+            <td>F</td>
+            <td>F</td>
+            <td>T</td>
+            <td>T</td>
+            <th class="green-text">T</th>
+        </tr>
+        <tr>
+            <td>F</td>
+            <td>T</td>
+            <td>T</td>
+            <td>T</td>
+            <td>F</td>
+            <td>F</td>
+        </tr>
+        <tr>
+            <td>F</td>
+            <td>T</td>
+            <td>F</td>
+            <td>T</td>
+            <td>T</td>
+            <th class="green-text">T</th>
+        </tr>
+        <tr>
+            <td>F</td>
+            <td>F</td>
+            <td>T</td>
+            <td>F</td>
+            <td>F</td>
+            <td>F</td>
+        </tr>
+        <tr>
+            <td>F</td>
+            <td>F</td>
+            <td>F</td>
+            <td>F</td>
+            <td>T</td>
+            <td>F</td>
+        </tr>
+    </table>
+
+    <p><b>Key Observations from the Truth Table:</b></p>
+    <p>The traffic light turns green when (Final Column = True):</p>
+    <ul>
+        <li>Row 2: C = True, T = True, P = False → True</li>
+        <li>Row 4: C = True, T = False, P = False → True</li>
+        <li>Row 6: C = False, T = True, P = False → True</li>
+    </ul>
+
+    <h1>3. Requirements</h1>
+    <ul>
+        <li>&#9733; (1) Please <b class="blue-text">prompt the user to input values</b> for <b>car detection</b>, <b>timer condition</b>, and <b>pedestrian crossing</b>.</li>
+        <li>&#9733; (2) Please evaluate the traffic light condition using the <b class="blue-text">well-formed formula</b>: <b class="red-text">(C &or; T) &and; &not;P</b></li>
+        <li>&#9733; (3) Please <b class="blue-text">display</b> whether the light should be <b class="green-text">GREEN</b> or <b class="red-text">RED</b>.</li>
+        <li>&#9733; (4) Please use a <b class="blue-text">do-while loop</b> to run your program repeatedly.</li>
+        <li>&#9733; (5) Please ensure that your program can compile and run <b class="red-text">without</b> crashing, producing errors, or infinite loop errors.</li>
+    </ul>
+
+    <h1>4. Sample Input/Output</h1>
+    <pre>
+Traffic Light Control System Simulation
+-------------------------------------------------------------
+Is a car detected? (1 for Yes, 0 for No): 1
+Is the timer condition allowing? (1 for Yes, 0 for No): 1
+Is a pedestrian crossing? (1 for Yes, 0 for No): 0
+Result: The traffic light is GREEN (Cars can go)
+Do you want to try again? (y/n): y
+
+Is a car detected? (1 for Yes, 0 for No): 1
+Is the timer condition allowing? (1 for Yes, 0 for No): 0
+Is a pedestrian crossing? (1 for Yes, 0 for No): 0
+Result: The traffic light is GREEN (Cars can go)
+Do you want to try again? (y/n): y
+
+Is a car detected? (1 for Yes, 0 for No): 0
+Is the timer condition allowing? (1 for Yes, 0 for No): 1
+Is a pedestrian crossing? (1 for Yes, 0 for No): 0
+Result: The traffic light is GREEN (Cars can go)
+Do you want to try again? (y/n): y
+
+Is a car detected? (1 for Yes, 0 for No): 0
+Is the timer condition allowing? (1 for Yes, 0 for No): 0
+Is a pedestrian crossing? (1 for Yes, 0 for No): 1
+Result: The traffic light is RED (Cars must stop)
+Do you want to try again? (y/n): n
+
+Simulation ended. Thank you!
+-------------------------------------------------------------
+    </pre>
+
+    <h1>5. Grading Criteria</h1>
+    <table>
+        <caption><strong>Grading Criteria</strong> (Total Points: 100)</caption>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Criteria</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="2"><strong>Variable Declarations</strong><br>(10 points)</td>
+                <td>Boolean variables: 
+                    <ul>
+                        <li>carDetected</li>
+                        <li>timerCondition</li>
+                        <li>pedestrianCrossing</li>
+                        <li>greenLight</li>
+                    </ul>
+                </td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>Character variable:
+                    <ul>
+                        <li>choice</li>
+                    </ul>
+                </td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td><strong>User Inputs</strong><br>10 points</td>
+                <td>Reads input from standard input and stores it in the variable correctly.</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td rowspan="3"><strong>trafficLightControl Function Implementation</strong><br>(30 points)</td>
+                <td>Function Prototype: bool trafficLightControl(bool carDetected, bool timerCondition, bool pedestrianCrossing);</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Function Implementation: Accurately implement the logical expression (C ∨ T) ∧ ¬P.</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>Function Activation: The function is called correctly in the main function.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td rowspan="3"><strong>Main Function Implementation</strong><br>(30 points)</td>
+                <td>Prompt the user to enter input in a clear and correct format.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Proper formatting of program output for readability and clarity.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>do-while loop is implemented correctly.</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td rowspan="2"><strong>Code Readability & Comments</strong><br>(10 points)</td>
+                <td>Maintain consistent indentation and spacing throughout the code.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Include comments that explain the purpose of key sections and logic.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td><strong>Test Cases & Output Accuracy</strong><br>(10 points)</td>
+                <td>The output for different test cases is correct and consistent.</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td><strong>Errors</strong><br></td>
+                <td>Your program has syntax errors, compiling errors, running errors, or infinite loops.</td>
+                <td><span class="red-text">-50 points</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h1>6. Comments</h1>
+    <ul>
+        <li>
+            &#9733; Please add the following comments to the top of your <b>lab1.cpp</b> file:
+            <pre>
+/*
+    Author: Your Name
+    Date: Month/Day/Year
+    Lab purpose: Traffic Light Control System Simulation
+*/
+            </pre>
+        </li>
+        <li>&#9733; Please add other necessary comments to your source code.</li>
+    </ul>
+
+    <h1>7. Submit</h1>
+    <p>Please submit your Lab 1 source code file: <b>lab1.cpp</b> in D2L!</p>
+
+    <h1>8. Jupyter Hub for Programming</h1>
+    <a href="https://jupyterhub.cs.mtsu.edu/azuread/hub/home" target="_blank">Jupyter Hub for Programming</a>
+    <br>
+    You can create source code and compile and run your code by logging in to Jupyter Hub.
+
+    <!--
+    <h1>9. Demo Code</h1>
+    You can find relevant C++ demo code here: 
+    <a href="https://xinyangmtsu.github.io/3080/.cpp" target="_blank">Demo Code</a>
+    -->
+
+    <hr>
+
+    <div class="centered">
+        <strong>
+            <font size="+1">
+                Congratulations! You have finished your Lab1!
+            </font>
+        </strong>
+        <br><br>
+    </div>
+
+    <!-- Go to Top Button -->
+    <a href="#" id="goTopBtn">&#8679;</a>
+    
+    <!-- Script to scroll to top -->
+    <script>
+        let goTopBtn = document.getElementById("goTopBtn");
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+        goTopBtn.onclick = topFunction;
+    </script>
+
+</body>
+</html>
