@@ -694,6 +694,19 @@ Total element height = height + top padding + bottom padding + top border + bott
            					  background-color: #111;
         			}
 				</pre>
+			<li>&#9733; Purpose of <b><font color="red">overflow: hidden;</font></b>:
+			
+				When child elements (in this case, &lt;li&gt; elements) are floated, their parent container (&lt;ul&gt;) 
+					may collapse in height because floated elements are removed from the normal document flow. 
+					This can lead to visual issues, such as the parent not enclosing its children properly, 
+					affecting background colors, borders, and overall layout.
+				<br><br>
+
+				By setting overflow: hidden; on the &lt;ul&gt;, you're creating a new block formatting context, 
+					which forces the parent to recognize the height of its floated children and expand accordingly. 
+					This technique ensures that the &lt;ul&gt; encompasses all its &lt;li&gt; elements, maintaining the intended design and layout.
+				<br><br>
+			</li>
 			</ul>
 			<li>&#9733; <a href="https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_vertical_active" target="_blank">Active/Current Navigation Link</a></li>
 			<li>&#9733; <a href="https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_dividers" target="_blank">Border Dividers</a> </li>
