@@ -126,10 +126,23 @@
                     Middle Tennessee State University</strong></p>
     	</footer>
 	    <br><br>
+
+	        <!-- Go to Top Button -->
+    <a href="#" id="goTopBtn">&#8679;</a>
+
     </div>
     <br>
     <br>
     <script src="../CSS/Script.js"></script>
+        <!-- Script to scroll to top -->
+    <script>
+        let goTopBtn = document.getElementById("goTopBtn");
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+        goTopBtn.onclick = topFunction;
+    </script>
 
 </body>
 
