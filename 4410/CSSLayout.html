@@ -96,6 +96,49 @@
 		  }
 		}
 		</pre>
+
+
+		<h2>Unequal Columns</h2>
+		It is common with unequal column widths so that most of the space is reserved for the main content. 
+		The side content (if any) is often used as an alternative navigation or to specify information relevant to the main content. 
+		Change the widths as you like, only remember that it should add up to 100% in total.
+		<br>
+		<h3><font color="red">Example</font>
+		<pre>
+		.column {
+		  float: left;
+		}
+		
+		/* Left and right column */
+		.column.side {
+		  width: 25%;
+		}
+		
+		/* Middle column */
+		.column.middle {
+		  width: 50%;
+		}
+		
+		/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+		@media screen and (max-width: 600px) {
+		  .column.side, .column.middle {
+		    width: 100%;
+		  }
+		}
+		</pre>
+
+		<h2>Footer</h2>
+		The footer is placed at the bottom of your page. 
+		It often contains information like copyright and contact info.
+		<br>
+		<h3><font color="red">Example</font>
+		<pre>
+		.footer {
+		  background-color: #F1F1F1;
+		  text-align: center;
+		  padding: 10px;
+		}
+		</pre>
 		
 		<h1>Reference</h1>
 		<ul>
