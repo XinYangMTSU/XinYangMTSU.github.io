@@ -724,6 +724,78 @@ Total element height = height + top padding + bottom padding + top border + bott
 			<li>&#9733; <a href="https://www.w3schools.com/css/css_navbar.asp" target="_blank">More Examples in W3School</a></li>
 		</ul>
 
+		
+		<h2>CSS Dropdown Navbar</h2>
+		Create a Dropdown Menu inside a Navigation Bar. 
+		<pre>
+		CSS:
+		ul {
+			  list-style-type: none;
+			  margin: 0;
+			  padding: 0;
+			  overflow: hidden;
+			  background-color: #333;
+		}
+
+		li {
+		  float: left;
+		}
+
+		li a, .dropbtn {
+		  display: inline-block;
+		  color: white;
+		  text-align: center;
+		  padding: 14px 16px;
+		  text-decoration: none;
+		}
+
+		li a:hover, .dropdown:hover .dropbtn {
+		  background-color: red;
+		}
+		
+		li.dropdown {
+		  display: inline-block;
+		}
+
+		.dropdown-content {
+		  display: none;
+		  position: absolute;
+		  background-color: #f9f9f9;
+		  min-width: 160px;
+		  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		  z-index: 1;
+		}
+
+		.dropdown-content a {
+		  color: black;
+		  padding: 12px 16px;
+		  text-decoration: none;
+		  display: block;
+		  text-align: left;
+		}
+
+		.dropdown-content a:hover {background-color: #f1f1f1;}
+		
+		.dropdown:hover .dropdown-content {
+		  display: block;
+		}
+
+		HTML:
+		&lt;ul&gt;
+			  &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+			  &lt;li&gt;&lt;a href="#news"&gt;News&lt;/a&gt;&lt;/li&gt;
+			  &lt;li class="dropdown"&gt;
+				    &lt;a href="javascript:void(0)" class="dropbtn"&gt;Dropdown&lt;/a&gt;
+				    &lt;div class="dropdown-content"&gt;
+				      &lt;a href="#"&gt;Link 1&lt;/a&gt;
+				      &lt;a href="#"&gt;Link 2&lt;/a&gt;
+				      &lt;a href="#"&gt;Link 3&lt;/a&gt;
+				    &lt;/div&gt;
+			  &lt;/li&gt;
+		&lt;/ul&gt;
+		</pre>
+		
+		<br>
 		<h1>Reference</h1>
 		<ul>
 			<li><a href="https://www.w3schools.com/html/html_intro.asp"
