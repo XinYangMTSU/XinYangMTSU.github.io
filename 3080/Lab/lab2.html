@@ -8,24 +8,32 @@
     <meta name="robots" content="noindex, nofollow">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default"></script>
     
+      <!-- ========== STYLE ========== -->
     <style>
+        /* Dark background and lighter text for comfortable reading */
         body {
-            background-color: #2b2b2b;
-            color: #e0e0e0;
+            background-color: #2b2b2b; /* Dark gray background */
+            color: #e0e0e0;          /* Light text color */
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         }
+
+        /* Make headings stand out */
         h1, h2, h3 {
             color: #ffa500;
         }
-        #div1 {
+
+        /*project title */
+        #div1{
             border: 10px solid #555;
             border-radius: 10px;
             padding: 20px;
             margin: 20px;
             width: 50%;
         }
+        
+        /* Table styling for the truth table and grading table */
         table {
-            width: 60%;
+            width:60%; 
             border: 1px solid #555;
             margin: 0 auto;
         }
@@ -38,15 +46,43 @@
         td {
             background-color: #3a3a3a;
         }
+    
+        /* Emphasize certain colors (traffic light logic) */
         .blue-text { color: #00adff; }
         .red-text  { color: #ff4d4d; }
         .green-text { color: #36c36c; }
+        .navy-text { color: #7eb7ff; }
+
+        /* Links */
         a {
             color: #45a1ff;
             text-decoration: none;
         }
         a:hover {
             text-decoration: underline;
+        }
+
+        /* 'Go to Top' Button */
+        #goTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 30px;
+            text-decoration: none;
+            color: #ffa500;
+            cursor: pointer;
+            background-color: rgba(255, 165, 0, 0.1);
+            padding: 5px 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        #goTopBtn:hover {
+            background-color: rgba(255, 165, 0, 0.3);
+        }
+
+        /* Center the final “Congratulations” section */
+        .centered {
+            text-align: center;
         }
     </style>
 </head>
