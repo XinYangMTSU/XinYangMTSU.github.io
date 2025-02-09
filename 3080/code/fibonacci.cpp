@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 
+//function prototype
 int fibonacciUsingRecursion(int n);
 int fibonacciUsingIteration(int n);
 
@@ -20,6 +21,7 @@ int main()
 	return 0;
 }
 
+//function definition
 int fibonacciUsingRecursion(int n)
 {
 	if(n == 1)
@@ -30,6 +32,7 @@ int fibonacciUsingRecursion(int n)
 	return  fibonacciUsingRecursion(n-1) + fibonacciUsingRecursion(n-2);
 }
 
+//function definition 
 int fibonacciUsingIteration(int n)
 {
 	int a = 0, b = 1, c;
