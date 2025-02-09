@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 2 - Virus Spread Simulation Using Recursion and Recurrence Relations</title>
+    <meta name="author" content="Your Name">
+    <meta name="robots" content="noindex, nofollow">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default"></script>
+    
+    <style>
+        body {
+            background-color: #2b2b2b;
+            color: #e0e0e0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+        h1, h2, h3 {
+            color: #ffa500;
+        }
+        #div1 {
+            border: 10px solid #555;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            width: 50%;
+        }
+        table {
+            width: 60%;
+            border: 1px solid #555;
+            margin: 0 auto;
+        }
+        th, td {
+            border: 1px solid #555;
+        }
+        th {
+            background-color: #444444;
+        }
+        td {
+            background-color: #3a3a3a;
+        }
+        .blue-text { color: #00adff; }
+        .red-text  { color: #ff4d4d; }
+        .green-text { color: #36c36c; }
+        a {
+            color: #45a1ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div id="div1">
+            <font size=5 color="#ffa500"><b>CSCI 3080 - <em>Discrete Structures</em></b></font>
+            <br><br>
+            <font size=4 color="white"><b>Lab 2 - Virus Spread Simulation Using Recursion and Recurrence Relations</b></font>
+        </div>
+    </center>
+    
+    <h1>1. Objective</h1>
+    <p>
+        The goal of this lab is to develop a C++ program to simulate a
+        <b class="blue-text">virus spread model</b> using
+        <b class="red-text">recursion and recurrence relations</b>. 
+        Students will analyze the growth of an infection and compare recursive and iterative solutions.
+    </p>
+    
+    <h1>2. Problem Statement</h1>
+    <p>A virus spreads in a community based on the following pattern:</p>
+    <ul>
+        <li>On <b>Day 1</b>, there is <b>1 infected person</b>.</li>
+        <li>On <b>Day 2</b>, 2 more people are infected (total: 3).</li>
+        <li>On each day after that, the number of new infections follows the recurrence:</li>
+    </ul>
+    
+    <p><b class="blue-text">Recurrence Relation:</b></p>
+    <p>\( I(n) = I(n-1) + 2I(n-2) \)</p>
+    <p>Base Cases: \( I(1) = 1 \), \( I(2) = 3 \)</p>
+    
+    <h1>3. Requirements</h1>
+    <ul>
+        <li>Implement a <b class="blue-text">recursive function</b> to compute \( I(n) \).</li>
+        <li>Implement an <b class="blue-text">iterative function</b> to compute \( I(n) \).</li>
+        <li>Compare the results of recursion and iteration.</li>
+        <li>Analyze the recurrence relation and solve it using <b class="red-text">mathematical induction</b>.</li>
+    </ul>
+    
+    <h1>4. Sample Input/Output</h1>
+    <pre>
+Enter the number of days (n >= 1): 6
+Recursive Infection Model: I(6) = 63
+Iterative Infection Model: I(6) = 63
+    </pre>
+    
+    <h1>5. Grading Criteria</h1>
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Points</th>
+        </tr>
+        <tr>
+            <td>Recursive Function Implementation</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>Iterative Function Implementation</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>Mathematical Induction Proof</td>
+            <td>20</td>
+        </tr>
+    </table>
+    
+    <h1>6. Submission</h1>
+     <p>Please submit your Lab 2 source code file: <b>lab2.cpp</b> in D2L!</p>
+
+     <hr>
+
+    <div class="centered">
+        <strong>
+            <font size="+1">
+                Congratulations! You have finished your Lab2!
+            </font>
+        </strong>
+        <br><
+
+  <footer style="text-align: center; font-size: 0.9rem; color: #999;">
+        <b>
+         &copy;2025 Dr. Xin Yang. All rights reserved.
+        <br>Department of Computer Science
+        <br>College of Basic and Applied Sciences
+        <br>Middle Tennessee State University
+        </b>
+    </footer>
+    
+    <!-- Go to Top Button -->
+    <a href="#" id="goTopBtn">&#8679;</a>
+    
+    <!-- Script to scroll to top -->
+    <script>
+        let goTopBtn = document.getElementById("goTopBtn");
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+        goTopBtn.onclick = topFunction;
+    </script>
+  
+</body>
+</html>
