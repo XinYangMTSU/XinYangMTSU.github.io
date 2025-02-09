@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 
+//function prototype
 int factorialUsingRecursion(int n);
 int factorialUsingIteration(int n);
 
@@ -20,6 +21,7 @@ int main()
 	return 0;
 }
 
+//function definition
 int factorialUsingRecursion(int n)
 {
 	if(n==0)
@@ -27,6 +29,7 @@ int factorialUsingRecursion(int n)
 	return n*factorialUsingRecursion(n-1);
 }
 
+//function definition
 int factorialUsingIteration(int n)
 {
 	int res = 1;
