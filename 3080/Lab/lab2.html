@@ -64,7 +64,7 @@
     <p>
         The goal of this lab is to develop a C++ program to simulate a
         <b class="blue-text">virus spread model</b> using
-        <b class="red-text">recursion and recurrence relations</b>. 
+        <b class="red-text">recursion and recurrence relations</b>. <br>
         Students will analyze the growth of an infection and compare recursive and iterative solutions.
     </p>
     
@@ -77,8 +77,22 @@
     </ul>
     
     <p><b class="blue-text">Recurrence Relation:</b></p>
-    <p>\( I(n) = I(n-1) + 2I(n-2) \)</p>
-    <p>Base Cases: \( I(1) = 1 \), \( I(2) = 3 \)</p>
+    <pre>
+    I(1) = 1 
+    I(2) = 3
+    I(n) = I(n-1) + 2I(n-2)
+    </pre>
+
+    <p>
+    \[
+    S(n) =
+    \begin{cases} 
+    1, & \text{if } n = 1 \\  
+    2, & \text{if } n = 2 \\  
+    S(n-1) + S(n-2), & \text{if } n \geq 3
+    \end{cases}
+    \]
+    </p>
     
     <h1>3. Requirements</h1>
     <ul>
