@@ -84,7 +84,32 @@
         translates the recurrence relation into a program but may lead to inefficiency due to 
         redundant computations.
     </p>
+    <h3><b class="red-text">Pseudocode Code for newInfectionsRecursive:</b></h3>
+    <pre>
+        // Recursive function to compute new infections on day n
+            Function newInfectionsRecursive(n):
+                If n == 1:
+                    Return 1  // Base case: Day 1 has 1 new infection
+                Else if n == 2:
+                    Return 2  // Base case: Day 2 has 2 new infections
+                Else:
+                    Return newInfectionsRecursive(n - 1) + 2 * newInfectionsRecursive(n - 2)
+                    // Apply recurrence relation for new infections
+    </pre>
 
+    <h3><b class="red-text">Pseudocode Code for totalInfectedRecursive:</b></h3>
+    <pre>
+        // Recursive function to compute total infected individuals up to day n
+            Function totalInfectedRecursive(n):
+                If n == 1:
+                    Return 1  // Base case: Total infected on Day 1 is 1
+                Else if n == 2:
+                    Return 3  // Base case: Total infected on Day 2 is 1 + 2 = 3
+                Else:
+                    Return totalInfectedRecursive(n - 1) + newInfectionsRecursive(n)
+                    // Accumulate total infection using new infections from previous days
+    </pre>
+    
     <h3>(2) Iterative Approach</h3>
    <p>
         Instead of recursion, an <b class="blue-text">iterative</b> approach will 
