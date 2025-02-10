@@ -50,28 +50,31 @@
         <li>On <b>Day 1</b>, there is <b>1 infected person</b>.</li>
         <li>On <b>Day 2</b>, 2 more people are infected (total infected people in Day 2: Day 1 + Day 2 = 3).</li>
         <li>On each day after that, <b class="red-text">the number of new infections</b> follows the recurrence:</li>
+            <p><b class="blue-text">Recurrence Relation for <b class="red-text">new infected individuals</b> on day \(n\):</b></p>
+            <p>
+            \[
+            I(n) =
+            \begin{cases} 
+            1, & \text{if } n = 1 \\  
+            2, & \text{if } n = 2 \\  
+            I(n-1) + 2\times I(n-2), & \text{if } n \geq 3
+            \end{cases}
+            \]
+            </p> 
+        <li></li>
+           <p><b class="blue-text">Recurrence Relation for <b class="red-text">total infected Individuals</b> on day \(n\):</b></p>
+        <p>
+            \[
+            T(n) =
+            \begin{cases} 
+            1, & \text{if } n = 1 \\  
+            3, & \text{if } n = 2 \\  
+            T(n-1) + I(n), & \text{if } n \geq 3
+            \end{cases}
+            \]
+        </p>
     </ul>
     
-    <p><b class="blue-text">Recurrence Relation for new infected individuals on day \(n\):</b></p>
-    <p>
-    \[
-    I(n) =
-    \begin{cases} 
-    1, & \text{if } n = 1 \\  
-    2, & \text{if } n = 2 \\  
-    I(n-1) + 2\times I(n-2), & \text{if } n \geq 3
-    \end{cases}
-    \]
-    </p>
-    <p><b class="blue-text">Recurrence Relation for total infected Individuals on day \(n\):</b></p>
-    \[
-    T(n) =
-    \begin{cases} 
-    1, & \text{if } n = 1 \\  
-    3, & \text{if } n = 2 \\  
-    T(n-1) + I(n), & \text{if } n \geq 3
-    \end{cases}
-    \]
     
     <h3>(1) Recursive Approach</h3>
 
