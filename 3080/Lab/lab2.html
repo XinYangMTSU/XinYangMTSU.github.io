@@ -52,7 +52,7 @@
         <li>On each day after that, <b class="red-text">the number of new infections</b> follows the recurrence:</li>
     </ul>
     
-    <p><b class="blue-text">Recurrence Relation:</b></p>
+    <p><b class="blue-text">Recurrence Relation for new infected individuals on day \(n\):</b></p>
     <p>
     \[
     I(n) =
@@ -63,7 +63,16 @@
     \end{cases}
     \]
     </p>
-
+    <p><b class="blue-text">Recurrence Relation for total infected Individuals on day \(n\):</b></p>
+    \[
+    T(n) =
+    \begin{cases} 
+    1, & \text{if } n = 1 \\  
+    3, & \text{if } n = 2 \\  
+    T(n-1) + I(n), & \text{if } n \geq 3
+    \end{cases}
+    \]
+    
     <h3>(1) Recursive Approach</h3>
 
     <p>
