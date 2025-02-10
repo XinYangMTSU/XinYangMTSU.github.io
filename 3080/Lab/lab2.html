@@ -116,6 +116,30 @@
         reduce memory overhead and improve performance. This method iterates over values 
         from 1 to \( n \), keeping track of previous results to avoid redundant calculations.
     </p>
+    <h3><b class="red-text">Pseudocode Code for totalInfectedIterative:</b></h3>
+    <pre>
+        // Iterative function to compute total infected individuals up to day n
+            Function totalInfectedIterative(n):
+                If n == 1:
+                    Return 1  // Base case: Total infected on Day 1 is 1
+                Else if n == 2:
+                    Return 3  // Base case: Total infected on Day 2 is 1 + 2 = 3
+            
+                // Initialize values for iteration
+                prev1 = 1  // I(1)
+                prev2 = 2  // I(2)
+                total = 3  // T(2) = 3
+                currentNewInfections = 0
+            
+                // Loop to compute total infected individuals up to day n
+                For i from 3 to n:
+                    currentNewInfections = prev2 + 2 * prev1  // Apply recurrence relation for new infections
+                    total = total + currentNewInfections  // Accumulate total infections
+                    prev1 = prev2  // Update previous values
+                    prev2 = currentNewInfections
+            
+                Return total  // Return the total infected individuals up to day n
+    </pre>
     
     <h1>3. Requirements</h1>
     <ul>
