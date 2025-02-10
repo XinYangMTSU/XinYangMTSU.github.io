@@ -647,21 +647,50 @@
 		<h3>addEventListener() vs. Inline onclick in JavaScript</h3>
 		Both addEventListener() and using onclick in HTML can trigger a function when a button is clicked, 
 		but they have key differences in terms of flexibility, maintainability, and best practices.
-		
-		<h3>Pros of Inline onclick:</h3>
-		<ul>
-			<li>Simple and easy for small script</li>
-			<li>Quick to implement</li>
-		</ul>
-		
-		<h3>Cons of Inline onclick:</h3>
-		<ul>
-			<li>Harder to maintain (mixes HTML with JavaScript)</li>
-			<li>Cannot attach multiple event listeners (only one onclick per element)</li>
-			<li>Less flexible for dynamic event handling</li>
-		</ul>
 
+		<table style="width: 80%">
+			<tr>
+			<th><h3>Pros of Inline onclick:</h3></th>
+			<th><h3>Pros of addEventListener():</h3></th>
+			</tr>
+			<tr>
+			<td>
+				<ul>
+					<li>Simple and easy for small script</li>
+					<li>Quick to implement</li>
+				</ul>
+			</td>
+			<td>
+				<ul>
+					<li>Separates JavaScript from HTML (better code structure)</li>
+					<li>Can add multiple event listeners to the same element</li>
+					<li>Can be dynamically removed using removeEventListener()</li>
+				</ul>
+			</td>
+			</tr>
+			<tr>
+				<th><h3>Cons of Inline onclick:</h3></th>
+				<th><h3>Cons of addEventListener():</h3></th>
+			</tr>
+			<tr>
+				<td>
+					<ul>
+						<li>Harder to maintain (mixes HTML with JavaScript)</li>
+						<li>Cannot attach multiple event listeners (only one onclick per element)</li>
+						<li>Less flexible for dynamic event handling</li>
+					</ul>
+				</td>
+				<td>
+					<ul>
+						<li>Slightly more code compared to onclick</li>
+						<li>Requires selecting the element first (document.getElementById())</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
 		
+		
+	
 		
 		<h3>Event Occurs Example</h3>
 		In HTML file:
