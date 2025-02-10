@@ -169,23 +169,96 @@
 
     
     <h1>6. Grading Criteria</h1>
-    <table>
-        <tr>
-            <th>Category</th>
-            <th>Points</th>
-        </tr>
-        <tr>
-            <td>Recursive Function Implementation</td>
-            <td>20</td>
-        </tr>
-        <tr>
-            <td>Iterative Function Implementation</td>
-            <td>10</td>
-        </tr>
-        <tr>
-            <td>Mathematical Induction Proof</td>
-            <td>20</td>
-        </tr>
+
+       <table>
+        <caption><strong>Grading Criteria</strong> (Total Points: 100)</caption>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Criteria</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="3"><strong>Variable Declarations</strong><br>(10 points)</td>
+                <td>Integer variables: 
+                    <ul>
+                        <li>number of days</li>
+                    </ul>
+                </td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>Character variable:
+                    <ul>
+                        <li>choice to simulate again? (y/n)</li>
+                    </ul>
+                </td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>
+                    Function prototypes are correctly declared before the main() function.
+                    <ul>
+                        <li>int newInfectionsRecursive(int n);</li>
+                        <li>int totalInfectedRecursive(int n);</li>
+                        <li>int totalInfectedIterative(int n);</li>
+                    </ul>
+                </td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td><strong>User Inputs</strong><br>10 points</td>
+                <td>Reads input from standard input and stores it in the variable correctly.</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td rowspan="3"><strong>trafficLightControl Function Implementation</strong><br>(30 points)</td>
+                <td>Function Prototype: bool trafficLightControl(bool carDetected, bool timerCondition, bool pedestrianCrossing);</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Function Implementation: Accurately implement the logical expression (C ∨ T) ∧ ¬P.</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>Function Activation: The function is called correctly in the main function.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td rowspan="3"><strong>Main Function Implementation</strong><br>(30 points)</td>
+                <td>Prompt the user to enter input in a clear and correct format.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Proper formatting of program output for readability and clarity.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>do-while loop is implemented correctly.</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td rowspan="2"><strong>Code Readability & Comments</strong><br>(10 points)</td>
+                <td>Maintain consistent indentation and spacing throughout the code.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Include comments that explain the purpose of key sections and logic.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td><strong>Test Cases & Output Accuracy</strong><br>(10 points)</td>
+                <td>The output for different test cases is correct and consistent.</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td><strong>Errors</strong><br></td>
+                <td>Your program has syntax errors, compiling errors, running errors, or infinite loops.</td>
+                <td><span class="red-text">-50 points</span></td>
+            </tr>
+        </tbody>
     </table>
 
 
