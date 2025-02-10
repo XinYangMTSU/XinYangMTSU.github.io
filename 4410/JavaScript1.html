@@ -609,7 +609,16 @@
 			</pre>
 			<li>&#9733; <b><font color="red">Function Invocation</font>.</b>The code inside the function will execute when "something" <b>invokes</b> (calls) the function:
 			<ul>
-				<li>a. When an event occurs (when a user clicks a button)</li>
+				<li>a. When it is invoked (called) from JavaScript code</li>
+				<pre>
+					//Example: Direct Function Call
+					function greet() {
+					    console.log("Hello, welcome to JavaScript!");
+					}
+					// Function is invoked
+					greet();
+				</pre>
+				<li>b. When an event occurs (when a user clicks a button)</li>
 				<pre>
 					//Function Invocation by an Event (e.g., Button Click)
 					JavaScript:
@@ -618,15 +627,6 @@
 				        }
 					HTML:
 					<button onclick="showMessage()">Click Me</button>
-				</pre>
-				<li>b. When it is invoked (called) from JavaScript code</li>
-				<pre>
-					//Example: Direct Function Call
-					function greet() {
-					    console.log("Hello, welcome to JavaScript!");
-					}
-					// Function is invoked
-					greet();
 				</pre>
 				<li>c. Function Invocation with an Event Listener</li>
 				<pre>
