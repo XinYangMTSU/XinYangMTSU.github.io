@@ -759,7 +759,7 @@
 			<li>&#9733; When JavaScript is used in HTML pages, JavaScript can "react" on these events.</li>
 		</ul>
 
-		<h3>The Document Object</h3>
+		<h2>The Document Object</h2>
 
 		<ul>
 			<li>&#9733; When a webpage loads, the browser creates a <font color="red"><b>Document Object Model (DOM)</b></font>.</li>
@@ -801,7 +801,11 @@
 			<li>&#9989; JavaScript can access, modify, and manipulate any of these elements using the DOM!</li>
 		</ul>
 
-		<h3>getElementById() method</h3>
+		<h2>Select and Modify DOM Elements</h2>
+		
+		<h3>Select DOM Elements</h3>
+		
+		<b><font color="blue">getElementById()</font></b> method (Selects One Element by ID)
 		<ul>
 			<li>&clubs; The <font color="red"><b>getElementById()</b></font> method returns an element with a specified value.
 			</li>
@@ -813,7 +817,26 @@
 			<li>&clubs; The <font color="red"><b>innerHTML</b></font> property sets or returns the HTML content (inner HTML)
 				of an element.</li>
 		</ul>
+		<pre>
+			JavaScript:
+			let title = document.getElementById("heading");
+			console.log(title.innerHTML); // Output: Hello, DOM!
+		</pre>
 
+		
+		
+		<h3>Modify DOM Elements</h3>
+	
+		<b><font color="blue">Change Content (innerHTML)</font></b>
+		<pre>
+			document.getElementById("heading").innerHTML = "Hello, JavaScript!";
+		</pre>
+
+		<b><font color="blue">Change Styles (style)</font></b>
+		<pre>
+			document.getElementById("heading").style.color = "blue";
+		</pre>
+		
 		<h2>Window prompt() Method</h2>
 		<ul>
 			<li>&#9733; The prompt() method displays a dialog box that prompts the visitor for input.</li>
