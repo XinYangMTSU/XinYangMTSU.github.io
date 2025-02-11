@@ -3,7 +3,7 @@ let goTopBtn = document.getElementById("goTopBtn");
 
 // 2. Define the function to scroll to the top.
 function topFunction() {
-    document.body.scrollTop = 0;
+    document.body.scrollTop = 0; // older browsers
     document.documentElement.scrollTop = 0;
 }
         
