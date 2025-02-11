@@ -830,6 +830,23 @@
 			<li>&clubs; Works with <font color="blue"><b>tags</b></font>, <font color="blue"><b>classes</b></font>, <font color="blue"><b>IDs</b></font>, 
 			and other <font color="blue"><b>CSS selectors</b></font>.</li>
 		</ul>
+		<pre>
+		JavaScript:
+		function changeText() {
+			let elements = document.querySelectorAll("#title1, #title2, #title3"); // Select multiple IDs
+		
+			elements.forEach(element => {
+			    element.innerHTML = "Updated Heading"; // Change text
+			    element.style.color = "blue"; // Change color
+			});
+		}
+		HTML:
+		&lt;h1 id="title1"&gt;Heading 1&lt;/h1&gt;
+		&lt;h1 id="title2"&gt;Heading 2&lt;/h1&gt;
+		&lt;h1 id="title3"&gt;Heading 3&lt;/h1&gt;
+		
+		&lt;button onclick="changeText()"&gt;Change Headings&lt;/button&gt;
+		</pre>
 		 
 		<h3>Modify DOM Elements</h3>
 	
