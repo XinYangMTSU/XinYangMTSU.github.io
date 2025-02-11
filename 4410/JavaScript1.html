@@ -4,6 +4,10 @@
 <head>
 	<title>Introduction to JavaScript</title>
 	<link href="../CSS/Site.css" type="text/css" rel="stylesheet">
+	<style>
+		.yes { color: green; font-weight: bold; }
+        	.no { color: red; font-weight: bold; }
+	</style>
 </head>
 
 <body>
@@ -186,7 +190,36 @@
 				<li><font color="red">let</font>: The let keyword was added to JavaScript in 2015.</li>
 				<li><font color="red">const</font>: The const keyword was added to JavaScript in 2015.</li>
 			</ul>
-			
+			<table style="width:70%">
+			        <tr>
+			            <th>Keyword</th>
+			            <th>Introduced</th>
+			            <th>Can Be Reassigned?</th>
+			            <th>Can Be Redeclared?</th>
+			            <th>Scope</th>
+			        </tr>
+			        <tr>
+			            <td><code>var</code></td>
+			            <td>Since 1995</td>
+			            <td class="yes">✅ Yes</td>
+			            <td class="yes">✅ Yes (Function Scope)</td>
+			            <td>Function Scope</td>
+			        </tr>
+			        <tr>
+			            <td><code>let</code></td>
+			            <td>ES6 (2015)</td>
+			            <td class="yes">✅ Yes</td>
+			            <td class="no">❌ No (Block Scope)</td>
+			            <td>Block Scope</td>
+			        </tr>
+			        <tr>
+			            <td><code>const</code></td>
+			            <td>ES6 (2015)</td>
+			            <td class="no">❌ No</td>
+			            <td class="no">❌ No (Block Scope)</td>
+			            <td>Block Scope</td>
+			        </tr>
+			    </table>
 			
 			<li>&#9733; After the declaration, the variable has no value. (Technically it has the value of undefined). To
 				assign a value to the variable, and use the equal sign.</li>
