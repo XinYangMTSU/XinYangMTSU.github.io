@@ -485,7 +485,31 @@
 			console.log(people[1].name); // Output: Bob
 			console.log(people[2]["city"]); // Output: Chicago
 		</pre>
-		
+
+		<h3>Looping Through an Array of Objects</h3>
+
+		To access all objects, you can use forEach(), for...of, or a for loop.
+
+		<ul>
+			<li>&#9733; Using forEach() (Recommended)</li>
+			<pre>
+			people.forEach(person => {
+    				console.log(`${person.name} is ${person.age} years old and lives in ${person.city}.`);
+			});
+			</pre>
+			<li>>&#9733; Using for...of Loop</li>
+			<pre>
+				for (let person of people) {
+    					console.log(person.name);
+				}
+			</pre>
+			<li>&#9733; Using for Loop with Index</li>
+			<pre>
+				for (let i = 0; i < people.length; i++) {
+				    console.log(people[i].city);
+				}
+			</pre>
+		</ul>
 		<!--
 		<ul>
 			<li>&clubs; It is considered good practice to name constructor functions with an upper-case first letter.</li>
