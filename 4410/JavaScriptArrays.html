@@ -172,7 +172,40 @@
 			&lt;/script&gt;
 		</pre>
 
-
+		<h3>Accessing Index in forEach()</h3>
+		
+		<ul>
+			<li>&#9733; The forEach() method provides an <font color="blue"><b>optional second parameter</b></font> that 
+		represents the index of the current element in the array.</li>
+			<li>&#9733; Syntax: </li>
+			<pre>
+				array.forEach((element, index) => {
+    					// Code using element and index
+				});
+				//element -> The current value in the array.
+				//index -> The index of the current element (starting from 0).
+			</pre>
+			<li>&#9733; Example 1: Displaying Index and Value</li>
+			<pre>
+				let fruits = ["Apple", "Banana", "Mango"];
+				fruits.forEach((fruit, index) => {
+				    console.log(`Index ${index}: ${fruit}`);
+				});
+			</pre>
+			<li>&#9733; Example 3: Adding Index to an HTML List</li>
+			<pre>
+				let colors = ["Red", "Green", "Blue"];
+				let text = "&lt;ul&gt;";
+				
+				colors.forEach((color, index) => {
+				text += `&lt;li&gt;Color ${index + 1}: ${color}&lt;/li&gt;`;
+				});
+				
+				text += "&lt;/ul&gt;";
+				document.getElementById("demo").innerHTML = text;
+			</pre>
+		</ul>
+					
 		<h2>JavaScript Objects</h2>
 
 		<ul>
