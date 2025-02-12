@@ -550,7 +550,41 @@
 			
 			console.log(cars[0].model); // Output: "Corolla"
 		</pre>
-		
+
+		<h3>Sorting an Array of Objects in JavaScript</h3>
+					
+		The sort() method is used to sort elements in an array. By default, it sorts as strings in ascending order. 
+		To sort numbers, and objects, you need a custom compare function.
+
+		<ul>
+			<li>&#9733; Sorting Numbers (Using a Compare Function)</li>
+			<pre>
+				//Ascending Order (Smallest to Largest)
+				let numbers = [245, 28, 139];
+				numbers.sort((a, b) => a - b);
+				console.log(numbers);
+			</pre>
+			<pre>
+				//Descending Order (Largest to Smallest)
+				let numbers = [245, 28, 139];
+				numbers.sort((a, b) => b - a);
+				console.log(numbers);
+			</pre>
+			<li>&#9733; Sorting an Array of Objects</li>
+			<pre>
+			//Sort by a String Property
+			let people = [
+			    { name: "Charlie", age: 35 },
+			    { name: "Alice", age: 25 },
+			    { name: "Bob", age: 30 }
+			];
+			
+			// Sort by name alphabetically
+			people.sort((a, b) => a.name.localeCompare(b.name));
+			console.log(people);
+			</pre>
+		</ul>
+					
 		<!--
 		<ul>
 			<li>&clubs; It is considered good practice to name constructor functions with an upper-case first letter.</li>
