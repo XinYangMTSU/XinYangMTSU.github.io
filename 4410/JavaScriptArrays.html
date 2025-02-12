@@ -309,28 +309,40 @@
 			<li>&#9733; Methods are actions that can be performed on objects.</li>
 			<li>&#9733; Methods are stored in properties as function definitions.</li>
 		</ul>
-		<pre>
-			var car = {
-					type:"Fiat", 
-					model:"500",
-					color:"white",
+		<ul>
+			<li>&#9733; Example: Basic Object Method</li>
+			<pre>
+				let car = {
+				    brand: "Toyota",
+				    model: "Corolla",
+				    year: 2022,
+				    
+				    // Method inside the object
+				    getCarInfo: function() {
+				        return `Car: ${this.brand} ${this.model}, Year: ${this.year}`;
+				    }
+				};
 				
-					print_car_info: function(){
-						return this.type + " " + this.model;
-					}
-			};
-
-					or 
-
-			var car = new Object; // or var car = new Object();
-			car.type = "Fiat";
-			car.model = "500";
-			car.color = "white";
-					
-			car.print_car_info = function(){
-				return this.type + " " + this.model;
-			};
-		</pre>
+				console.log(car.getCarInfo()); 
+				// Output: Car: Toyota Corolla, Year: 2022
+			</pre>
+			<li>&#9733; Example: Adding a Method to an Existing Object</li>
+			<pre>
+				let person = {
+				    name: "Alice",
+				    age: 25
+				};
+				
+				// Adding a method after object creation
+				person.greet = function() {
+				    return "Hello, my name is " + this.name;
+				};
+				
+				console.log(person.greet()); 
+				// Output: Hello, my name is Alice
+			</pre>
+		</ul>
+		
 
 		<h3>The keyword "this"</h3>
 
