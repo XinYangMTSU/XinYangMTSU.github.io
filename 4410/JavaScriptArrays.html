@@ -616,7 +616,19 @@
 				//Sorts by age, and if two people have the same age, it sorts by name.
 			</pre>
 		</ul>
-					
+
+		<h3>Sorting Without Modifying the Original Array</h3>
+		Since sort() <b><font color="blue">modifies the original array</font></b>, 
+		use slice() or spread (<b><font color="blue">[...]</font></b>) to create a sorted copy.
+
+		<pre>
+			let numbers = [100, 20, 3];
+			let sortedNumbers = [...numbers].sort((a, b) => a - b);
+			
+			console.log(numbers);       // Original: [100, 20, 3]
+			console.log(sortedNumbers); // Sorted Copy: [3, 20, 100]
+		</pre>
+		
 		<!--
 		<ul>
 			<li>&clubs; It is considered good practice to name constructor functions with an upper-case first letter.</li>
