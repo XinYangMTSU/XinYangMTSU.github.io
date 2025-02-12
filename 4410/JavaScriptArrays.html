@@ -362,19 +362,22 @@
 			<li>&#9733; The following function car is an object constructor, Once you have an object constructor, you can
 				create new objects
 				of the same type.</li>
+			<li>&#9733; A <font color="blue"><b>constructor function</b></font> in JavaScript is just a regular function, but by convention, 
+				it starts with a <font color="blue"><b>capital letter</b></font> to distinguish it from normal functions.</li>
 		</ul>
 
-
 		<pre>
-		// car constructor
-		function Car(type, model, color){
-				this.type = type;
-				this.model = model;
-				this.color = color;
+		function Person(name, age) {
+		    this.name = name;
+		    this.age = age;
 		}
-
-		var my_car1 = new Car("Fiat","500","white");
-		var my_car2 = new Car("Honda","Fit","black");
+		
+		// Creating objects using the constructor
+		let person1 = new Person("Alice", 25);
+		let person2 = new Person("Bob", 30);
+		
+		console.log(person1.name); // Output: Alice
+		console.log(person2.age);  // Output: 30
 		</pre>
 
 		<h3>Array of Objects</h3>
