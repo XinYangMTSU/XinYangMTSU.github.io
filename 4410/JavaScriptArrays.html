@@ -529,6 +529,24 @@
 				}
 			</pre>
 		</ul>
+
+		<h3>Creating an Array of Objects Using a Constructor</h3>
+		<pre>
+			function Car(brand, model, year) {
+			    this.brand = brand;
+			    this.model = model;
+			    this.year = year;
+			}
+			
+			let cars = [
+			    new Car("Toyota", "Corolla", 2022),
+			    new Car("Honda", "Fit", "2010"),
+			    new Car("Honda", "Civic", 2023)
+			];
+			
+			console.log(cars[0].model); // Output: "Corolla"
+		</pre>
+		
 		<!--
 		<ul>
 			<li>&clubs; It is considered good practice to name constructor functions with an upper-case first letter.</li>
