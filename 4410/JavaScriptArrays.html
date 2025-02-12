@@ -439,8 +439,7 @@
 					<pre>
 					function Person(name, age) {
 					    this.name = name;
-					    this.age = age;
-					}
+					    this.age = age; }
 					
 					// ✅ `greet()` is stored in the prototype and shared by all instances
 					Person.prototype.greet = function() {
@@ -463,8 +462,7 @@
 					    // ❌ This method is created separately for every object
 					    this.greet = function() {
 					        return `Hello, my name is ${this.name}`;
-					    };
-					}
+					    };}
 					
 					let person1 = new Person("Alice", 25);
 					let person2 = new Person("Bob", 30);
