@@ -654,8 +654,14 @@
 			console.log(sortedNumbers); // Sorted Copy: [3, 20, 100]
 		</pre>
 
-		<h3>Summary of sort() Usage</h3>
+		<h3>Reverse an Sorted Array</h3>
+		<pre>
+			let sortedNumbers = [1, 3, 20, 100];
+			sortedNumbers.reverse();
+			console.log(sortedNumbers);
+		</pre>
 
+<h3>Summary of sort() Usage</h3>
 <table style="width:80%">
     <tr>
         <th>Sorting Type</th>
@@ -706,14 +712,27 @@
         <td><code>array.sort((a, b) => a.age === b.age ? a.name.localeCompare(b.name) : a.age - b.age);</code></td>
     </tr>
 </table>
-
 					
-		<h3>Reverse an Sorted Array</h3>
-		<pre>
-			let sortedNumbers = [1, 3, 20, 100];
-			sortedNumbers.reverse();
-			console.log(sortedNumbers);
-		</pre>
+<h3>Breakdown of Syntax</h3>
+<pre>
+array.sort((a, b) => a - b);
+</pre>
+<ul>
+	<li>&#9733;<b><font color="red">(a, b) => a - b</font></b> is an <b><font color="blue">arrow function</font></b> that 
+		serves as the compare function for sorting.
+	 </li>
+	<ul>
+		<li>&clubs; <b><font color="blue">a</font></b> and <b><font color="blue">b</font></b> -> Represent two elements being compared.</li>
+		<li>&clubs; <b><font color="blue">a - b</font></b> -> Determines the order of sorting:</li>
+		<ol>
+			<li>If a - b is negative (a < b), a comes before b (correct order).</li>
+			<li>If a - b is positive (a > b), b comes before a (swap places).</li>
+			<li>If a - b is 0, they remain in the same order.</li>
+		</ol>
+	</ul>
+</ul>					
+				
+		
 		<!--
 		<ul>
 			<li>&clubs; It is considered good practice to name constructor functions with an upper-case first letter.</li>
