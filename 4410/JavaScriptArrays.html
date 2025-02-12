@@ -576,16 +576,25 @@
 		<ul>
 			<li>&#9733; Sort by a String Property</li>
 			<pre>
+			// Sort by name alphabetically in Ascending Order (A -> Z)
 			let people = [
 			    { name: "Charlie", age: 35 },
 			    { name: "Alice", age: 25 },
 			    { name: "Bob", age: 30 }
 			];
-			
-			// Sort by name alphabetically
 			people.sort((a, b) => a.name.localeCompare(b.name));
 			console.log(people);
+
+			// Sort by name alphabetically in Descending Order (Z -> A)
+			let people = [
+			    { name: "Charlie", age: 35 },
+			    { name: "Alice", age: 25 },
+			    { name: "Bob", age: 30 }
+			];
+			people.sort((a, b) => b.name.localeCompare(a.name));
+			console.log(people);
 			</pre>
+
 			<li>&#9733; Sort by a Numeric Property </li>
 			<pre>
 			// Sort by age (Ascending)
