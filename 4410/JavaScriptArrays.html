@@ -617,6 +617,23 @@
 			</pre>
 		</ul>
 
+		<h3>Sorting Dates</h3>
+		<pre>
+			let events = [
+			    { title: "Event A", date: "2024-06-10" },
+			    { title: "Event B", date: "2023-12-05" },
+			    { title: "Event C", date: "2025-01-15" }
+			];
+			
+			// Sort by date (Oldest to Newest)
+			events.sort((a, b) => new Date(a.date) - new Date(b.date));
+			console.log(events);
+
+			// Sort by date (Newest to Oldest)
+			events.sort((a, b) => new Date(b.date) - new Date(a.date));
+			console.log(events);
+		</pre>
+
 		<h3>Sorting Without Modifying the Original Array</h3>
 		Since sort() <b><font color="blue">modifies the original array</font></b>, 
 		use <b><font color="blue">slice()</font></b> or spread operator(<b><font color="blue">[...]</font></b>) to create a sorted copy.
