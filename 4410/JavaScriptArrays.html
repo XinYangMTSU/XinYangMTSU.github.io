@@ -380,7 +380,25 @@
 		console.log(person2.age);  // Output: 30
 		</pre>
 
-		<h3>Array of Objects</h3>
+		<h3>Adding Methods to a Constructor</h3>
+		To add methods to all objects created with a constructor, define them using the <font color="blue"><b>prototype</b></font>.
+		<pre>
+		function Person(name, age) {
+			this.name = name;
+			this.age = age;
+		}
+		
+		// Adding a method to all Person objects
+		Person.prototype.greet = function() {
+			return "Hello, my name is " + this.name + " and I am " + this.age + " years old.";
+		};
+		
+		let person1 = new Person("Charlie", 28);
+		console.log(person1.greet()); 
+		// Output: Hello, my name is Charlie and I am 28 years old.
+		</pre>
+					
+		<h2>Array of Objects</h2>
 		<pre>
 			// car constructor
 		function Car(type, model, color){
