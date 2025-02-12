@@ -382,25 +382,26 @@
 
 		<h3>Adding Methods to a Constructor</h3>
 		To add methods to all objects created with a constructor, define them using the <font color="blue"><b>prototype</b></font>.
-		<br>
 		In JavaScript, a <font color="blue"><b>prototype</b></font> is a built-in <font color="blue"><b>mechanism for inheritance</b></font>. 
 		It allows objects to <b>inherit properties and methods</b> from other objects, 
 		making JavaScript <font color="blue"><b>prototype-based</b></font> rather than class-based.
 					
 		<pre>
 		function Person(name, age) {
-			this.name = name;
-			this.age = age;
+		    this.name = name;
+		    this.age = age;
 		}
 		
-		// Adding a method to all Person objects
+		// Adding method to the prototype (shared by all instances)
 		Person.prototype.greet = function() {
-			return "Hello, my name is " + this.name + " and I am " + this.age + " years old.";
+		    return `Hello, my name is ${this.name}`;
 		};
 		
-		let person1 = new Person("Charlie", 28);
-		console.log(person1.greet()); 
-		// Output: Hello, my name is Charlie and I am 28 years old.
+		let person1 = new Person("Alice", 25);
+		let person2 = new Person("Bob", 30);
+		
+		console.log(person1.greet()); // Output: Hello, my name is Alice
+		console.log(person2.greet()); // Output: Hello, my name is Bob
 		</pre>
 					
 		<h2>Array of Objects</h2>
