@@ -220,21 +220,29 @@
 			<li>&#9733; Objects are variables too. But objects can contain many values.</li>
 			<li>&#9733; The values are written as <font color="red"><b>name:value</b></font> pairs (name and value separated
 				by a colon).</li>
-			<li>&#9733; JavaScript objects are containers for named values.</li>
 		</ul>
 
-
-		<pre>
-				var car = {type:"Fiat", model:"500", color:"white"};
-		</pre>
-
-		<h3>Using the JavaScript Keyword new</h3>
-		<pre>
-			var car = new Object; // or var car = new Object();
-			car.type = "Fiat";
-			car.model = "500";
-			car.color = "white";
-		</pre>
+		<h3>Creating an Object</h3>
+		There are several ways to create an object in JavaScript.
+		<ul>
+			<li>&#9733; Using Object Literal (Most Common)</li>
+			<pre>
+			let person = {
+			    firstName: "John",
+			    lastName: "Doe",
+			    age: 30,
+			    isStudent: false
+			};
+			console.log(person); 
+			</pre>
+			<li>&#9733; Using new Object() Constructor</li>
+			<pre>
+				let car = new Object();
+				car.brand = "Toyota";
+				car.model = "Corolla";
+				car.year = 2022;
+			</pre>
+		</ul>
 
 		<h3>Objects Properties</h3>
 		<ul>
