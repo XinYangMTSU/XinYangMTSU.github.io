@@ -463,25 +463,37 @@
 		</center>
 					
 		<h2>Array of Objects</h2>
-		<pre>
-			// car constructor
-		function Car(type, model, color){
-				this.type = type;
-				this.model = model;
-				this.color = color;
-		}
+		An Array of Objects is an array where <b><font color="blue">each element</font></b> is an object. 
+		This is useful when you need to store multiple objects with similar properties in a structured format.
 
-		var cars = new Array();
-		cars[0] = new Car("Fiat","500","white");
-		cars[1] = new Car("Honda","Fit","black");
+		<h3>Creating an Array of Objects</h3>
+					
+		<pre>
+		let people = [
+		    { name: "Alice", age: 25, city: "New York" },
+		    { name: "Bob", age: 30, city: "Los Angeles" },
+		    { name: "Charlie", age: 35, city: "Chicago" }
+		];
+		console.log(people);
 		</pre>
 
+		<h3>Accessing Objects in an Array</h3>
+		You can access objects using <b><font color="blue">indexing (array[index])</font></b> 
+		and then access properties with <b><font color="blue">dot notation (.)</font></b> or <b><font color="blue">bracket notation ([])</font></b>.			
+		<pre>
+			console.log(people[0]); // Output: { name: "Alice", age: 25, city: "New York" }
+			console.log(people[1].name); // Output: Bob
+			console.log(people[2]["city"]); // Output: Chicago
+		</pre>
+		
+		<!--
 		<ul>
 			<li>&clubs; It is considered good practice to name constructor functions with an upper-case first letter.</li>
 			<li>&clubs; Example: </li>
 			<img src="jsconstructor.png" width="1000px" height="500px">
 		</ul>
-
+		-->
+					
 		<h2>JavaScript Comments</h2>
 
 		<ul>
