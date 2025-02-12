@@ -113,6 +113,33 @@
 		<pre>
 		console.log(Array.isArray(cars)); // Output: true
 		</pre>
+
+
+		<h3>Looping Through an Array in JavaScript</h3>
+		There are several ways to iterate over an array in JavaScript. 
+		Let’s go over the most commonly used methods.
+
+		<ul>
+			<li>&#9733; Using <font color="blue"><b>forEach()</b></font> (Best for Simple Iteration)</li>
+			<pre>
+				let fruits = ["Apple", "Banana", "Cherry"];
+				fruits.forEach((fruit) => console.log(fruit));
+			</pre>
+			<li>&#9733; Using <font color="blue"><b>for</b></font> Loop (Classic Loop)</li>
+			<pre>
+				let fruits = ["Apple", "Banana", "Cherry"];
+				for (let i = 0; i < fruits.length; i++) {
+    					console.log(fruits[i]);
+				}
+			</pre>
+			<li>&#9733; Using <font color="blue"><b>for...of</b></font> Loop (Best for Simplicity)</li>
+			<pre>
+				let fruits = ["Apple", "Banana", "Cherry"];
+				for (let fruit of fruits) {
+					console.log(fruit);
+				}
+			</pre>
+		</ul>
 		
 		<h3>The best way to loop through an array is using a standard for loop:</h3>
 
