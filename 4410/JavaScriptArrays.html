@@ -654,6 +654,60 @@
 			console.log(sortedNumbers); // Sorted Copy: [3, 20, 100]
 		</pre>
 
+		<h3>Summary of sort() Usage</h3>
+
+<table style="width:80%">
+    <tr>
+        <th>Sorting Type</th>
+        <th>Compare Function</th>
+    </tr>
+    <tr>
+        <td>Alphabetical (Strings - Ascending)</td>
+        <td><code>array.sort((a, b) => a.localeCompare(b));</code></td>
+    </tr>
+    <tr>
+        <td>Alphabetical (Strings - Descending)</td>
+        <td><code>array.sort((a, b) => b.localeCompare(a));</code></td>
+    </tr>
+    <tr>
+        <td>Numbers (Ascending)</td>
+        <td><code>array.sort((a, b) => a - b);</code></td>
+    </tr>
+    <tr>
+        <td>Numbers (Descending)</td>
+        <td><code>array.sort((a, b) => b - a);</code></td>
+    </tr>
+    <tr>
+        <td>Objects (By String Property - Ascending)</td>
+        <td><code>array.sort((a, b) => a.name.localeCompare(b.name));</code></td>
+    </tr>
+    <tr>
+        <td>Objects (By String Property - Descending)</td>
+        <td><code>array.sort((a, b) => b.name.localeCompare(a.name));</code></td>
+    </tr>
+    <tr>
+        <td>Objects (By Numeric Property - Ascending)</td>
+        <td><code>array.sort((a, b) => a.age - b.age);</code></td>
+    </tr>
+    <tr>
+        <td>Objects (By Numeric Property - Descending)</td>
+        <td><code>array.sort((a, b) => b.age - a.age);</code></td>
+    </tr>
+    <tr>
+        <td>Sorting Dates (Oldest to Newest)</td>
+        <td><code>array.sort((a, b) => new Date(a.date) - new Date(b.date));</code></td>
+    </tr>
+    <tr>
+        <td>Sorting Dates (Newest to Oldest)</td>
+        <td><code>array.sort((a, b) => new Date(b.date) - new Date(a.date));</code></td>
+    </tr>
+    <tr>
+        <td>Sorting by Multiple Criteria (Primary: Age, Secondary: Name)</td>
+        <td><code>array.sort((a, b) => a.age === b.age ? a.name.localeCompare(b.name) : a.age - b.age);</code></td>
+    </tr>
+</table>
+
+					
 		<h3>Reverse an Sorted Array</h3>
 		<pre>
 			let sortedNumbers = [1, 3, 20, 100];
