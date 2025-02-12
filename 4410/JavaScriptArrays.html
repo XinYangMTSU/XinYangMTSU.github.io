@@ -394,7 +394,7 @@
 		
 		// Adding method to the prototype (shared by all instances)
 		Person.prototype.greet = function() {
-		    return `Hello, my name is ${this.name}`;
+			return "Hello, my name is " + this.name;
 		};
 		
 		let person1 = new Person("Alice", 25);
@@ -403,6 +403,62 @@
 		console.log(person1.greet()); // Output: Hello, my name is Alice
 		console.log(person2.greet()); // Output: Hello, my name is Bob
 		</pre>
+
+
+		<h3>Prototype Method vs. Instance Method</h3>
+
+		<table>
+			<tr>
+				<th>Prototype Method</th>
+				<ht>Instance Method</ht>
+			</tr>
+			<tr>
+				<td>
+					<pre>
+					function Person(name, age) {
+					    this.name = name;
+					    this.age = age;
+					}
+					
+					// ✅ `greet()` is stored in the prototype and shared by all instances
+					Person.prototype.greet = function() {
+					    return `Hello, my name is ${this.name}`;
+					};
+					
+					let person1 = new Person("Alice", 25);
+					let person2 = new Person("Bob", 30);
+					
+					console.log(person1.greet()); // Output: Hello, my name is Alice
+					console.log(person2.greet()); // Output: Hello, my name is Bob
+					</pre>
+				</td>
+				<td>
+					<pre>
+					function Person(name, age) {
+					    this.name = name;
+					    this.age = age;
+					    
+					    // ❌ This method is created separately for every object
+					    this.greet = function() {
+					        return `Hello, my name is ${this.name}`;
+					    };
+					}
+					
+					let person1 = new Person("Alice", 25);
+					let person2 = new Person("Bob", 30);
+					
+					console.log(person1.greet()); // Output: Hello, my name is Alice
+					console.log(person2.greet()); // Output: Hello, my name is Bob
+					</pre>	
+				</td>
+			</tr>
+			<tr>
+				<td>Now greet() is stored only once in <B><font color="blue">Person.prototype</font></B>, and 
+					all instances of Person share the same method instead of each object having its own copy.</td>
+				<td>Every time new Person(...) is called, <B><font color="blue">a new copy of greet()</font></B> is created, 
+					which wastes memory.</td>
+			</tr>
+		</table>
 					
 		<h2>Array of Objects</h2>
 		<pre>
