@@ -619,11 +619,20 @@
 
 		<h3>Sorting Without Modifying the Original Array</h3>
 		Since sort() <b><font color="blue">modifies the original array</font></b>, 
-		use slice() or spread (<b><font color="blue">[...]</font></b>) to create a sorted copy.
+		use slice() or spread operator(<b><font color="blue">[...]</font></b>) to create a sorted copy.
 
 		<pre>
 			let numbers = [100, 20, 3];
+			// Create a sorted copy using spread operator [...array]
 			let sortedNumbers = [...numbers].sort((a, b) => a - b);
+			
+			console.log(numbers);       // Original: [100, 20, 3]
+			console.log(sortedNumbers); // Sorted Copy: [3, 20, 100]
+		</pre>
+		<pre>
+			let numbers = [100, 20, 3];
+			// Create a sorted copy using slice()
+			let sortedNumbers = numbers.slice().sort((a, b) => a - b);
 			
 			console.log(numbers);       // Original: [100, 20, 3]
 			console.log(sortedNumbers); // Sorted Copy: [3, 20, 100]
