@@ -18,21 +18,19 @@
 		</ul>
 
 		<pre>
-			var fruits = ["apple", "banana", "pear", "peach"];
-			var text = "";
-			text += fruits[0] + "&lt;br&gt;";
-			text += fruits[1] + "&lt;br&gt;";
-			text += fruits[2] + "&lt;br&gt;";
-			text += fruits[3] + "&lt;br&gt;";
+			let fruits = ["apple", "banana", "pear", "peach"];
+		
+			console.log(fruits[0]);
+			console.log(fruits[1]);
+			console.log(fruits[2]);
+			console.log(fruits[3]);
 		</pre>
 
 		<pre>
-
-			var fruits = ["apple", "banana", "pear", "peach"];
-			var text = "";
-			var i;
-			for(i=0; i < fruites.length; i++){
-					text += fruits[i] + &lt;br&gt;;
+			let fruits = ["apple", "banana", "pear", "peach"];
+	
+			for(let i=0; i < fruits.length; i++){
+				console.log(fruits[i]);
 			}
 		</pre>
 
@@ -128,7 +126,7 @@
 			while(i < fruites.length);
 			</pre>
 
-		<h2>for/in over objects</h2>
+		<h2>for in over objects</h2>
 
 		Syntax:
 
@@ -140,10 +138,9 @@
 
 		<pre>
 			const person = {fname:"John", lname:"Doe", age:25};
-
-			let text = "";
-			for (let x in person) {
-  				text += person[x];
+			
+			for (let key in person) {
+  				console.log(key + ":"+ person[key]);
 			}
 		</pre>
 
