@@ -183,6 +183,64 @@
 					target="_blank">https://www.w3schools.com/js/tryit.asp?filename=tryjs_switch</a></li>
 		</ul>
 		<br>
+		<h3>Can case Labels in switch Statements Be Any Data Type?</h3>
+		In JavaScript, the <b><font color="blue">case</font></b> labels in a <b><font color="blue">switch</font></b> statement must be values that can be 
+		strictly compared (===) to the expression inside switch(). <br>
+		<b>Allowed Data Types for case Labels:</b>
+		<ul>
+			<li>1. Using Numbers in case</li>
+			<pre>
+				let num = 2;
+				switch (num) {
+				    case 1:
+				        console.log("One");
+				        break;
+				    case 2:
+				        console.log("Two");
+				        break;
+				    default:
+				        console.log("Unknown number");
+				}
+			</pre>
+			<li>2. Using Strings in case</li>
+			<pre>
+				let fruit = "apple";
+				switch (fruit) {
+				    case "banana":
+				        console.log("It's a banana.");
+				        break;
+				    case "apple":
+				        console.log("It's an apple.");
+				        break;
+				    default:
+				        console.log("Unknown fruit.");
+				}
+			</pre>
+			<li>3. Using Boolean Values in case</li>
+			<pre>
+				let isLoggedIn = true;
+				switch (isLoggedIn) {
+				    case true:
+				        console.log("User is logged in.");
+				        break;
+				    case false:
+				        console.log("User is logged out.");
+				        break;
+				}
+			</pre>
+			<li>4. Using Expressions in case</li>
+			<pre>
+				let x = 10;
+				switch (x % 2 === 0) { // This evaluates to true or false
+				    case true:
+				        console.log("Even number");
+				        break;
+				    case false:
+				        console.log("Odd number");
+				        break;
+				}
+			</pre>
+		</ul>
 	</div>
 
 </body>
