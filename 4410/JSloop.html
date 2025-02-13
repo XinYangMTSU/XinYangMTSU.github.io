@@ -91,12 +91,12 @@
 
 		<h3>Example</h3>
 		<pre>
-		var fruits = ["apple", "banana", "pear", "peach"];
-		var text = "";
-		var i = 0;
-		while(i < fruites.length){
-				text += fruits[i] + &lt;br&gt;;
-				i++;
+		let fruits = ["apple", "banana", "pear", "peach"];
+		
+		let i = 0;
+		while(i < fruits.length){
+			console.log(fruits[i]);
+			i++;
 		}
 		</pre>
 
@@ -117,15 +117,15 @@
 
 		<h3>Example</h3>
 		<pre>
-			var fruits = ["apple", "banana", "pear", "peach"];
-			var text = "";
-			var i = 0;
+			let fruits = ["apple", "banana", "pear", "peach"];
+		
+			let i = 0;
 			do{
-					text += fruits[i] + &lt;br&gt;;
+					console.log(fruits[i]);
 					i++;
 			}
-			while(i < fruites.length);
-			</pre>
+			while(i < fruits.length);
+		</pre>
 
 		<h2>for in over objects</h2>
 
@@ -153,7 +153,7 @@
 			<li>&#9733; The value of the key is person[x] </li>
 		</ul>
 
-		<h2>for In Over Arrays</h2>
+		<h2>for in over arrays</h2>
 
 		Syntax:
 		<pre>
@@ -165,9 +165,8 @@
 		<pre>
 		const numbers = [45, 4, 9, 16, 25];
 
-		let txt = "";
 		for (let x in numbers) {
-					txt += numbers[x];
+			console.log(numbers[x]);
 		}
 		</pre>
 
@@ -182,9 +181,8 @@
 		<pre>
 					const cars = ["BMW", "Volvo", "Mini"];
 
-					let text = "";
-					for (let x of cars) {
-  						text += x;
+					for (let car of cars) {
+  						console.log(car)
 					}
 			
 		</pre>
@@ -192,10 +190,9 @@
 		<pre>
 
 		let language = "JavaScript";
-
-		let text = "";
-		for (let x of language) {
-					text += x;
+			
+		for (let letter of language) {
+			console.log(letter);
 		}
 		</pre>
 
