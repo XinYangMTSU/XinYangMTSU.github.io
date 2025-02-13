@@ -926,6 +926,24 @@
 			HTML:
 			&lt;h1 id="heading"&gt;Hello, DOM!&lt;/h1&gt;
 		</pre>
+		<b><font color="blue">querySelector()</font></b> method (Selects the first matching HTML element)
+		<ul>
+			<li>&clubs; The <b><font color="blue">querySelector()</font></b> method is used to select the <b><font color="blue">first matching</font></b> HTML element based on a CSS selector.</li>
+			<li>&clubs; It returns the first matching element in the document. If no element matches, it returns null.</li>
+		</ul>
+		<pre>
+			// Selecting an Element by ID
+			let title = document.querySelector("#myTitle"); // Selects the first element with ID "myTitle"
+
+			// Selecting an Element by Class
+			let box = document.querySelector(".box"); // Selects the first element with class "box"
+
+			//Selecting an Element by Tag Name
+			let firstParagraph = document.querySelector("p"); // Selects the first &lt;p&gt; tag
+
+			// Selecting an Element by a Nested Selector
+			let firstItem = document.querySelector("ul li"); // Selects the first &lt;li&gt; inside &lt;ul&gt;
+		</pre>
 		<b><font color="blue">querySelectorAll()</font></b> method (Selecting Multiple Elements by IDs)
 		<ul>
 			<li>&clubs; The <font color="blue"><b>document.querySelectorAll()</b></font> method can be used to <b>select multiple elements</b> by multiple IDs using <B>CSS ID selectors</B>.</li>
