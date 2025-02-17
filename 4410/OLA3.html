@@ -54,7 +54,11 @@
 
 	Define a function <b><font color="blue">scan()</font></b> with no parameters.
 	<br>
-	(1) Prompt the user to enter the number of items and store it in <b><font color="blue">cashRegister.itemCount</font></b>. <br>
+	(1) Retrieve the item count from the input field with the ID "itemCount" using <b><font color="blue">document.getElementById</font></b>:
+	    <pre>
+		  let itemCountInput = document.getElementById("itemCount").value;
+		  cashRegister.itemCount = parseInt(itemCountInput);
+	    </pre> 
 	(2) Use a <b><font color="blue">for</font></b> loop to prompt the user to enter the cost of each item. <br>
 	(3) Convert the input to a float using <b><font color="blue">parseFloat()</font></b> and call <b><font color="blue">cashRegister.add()</font></b> to add it to the total. <br>
 	(4) Display the scanned items dynamically in an unordered list. <br>
