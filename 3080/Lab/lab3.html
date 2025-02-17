@@ -45,123 +45,24 @@
 
     <h1>2. Problem Statement</h1>
     <p>
-        A traffic light system is required to control the flow of vehicles and pedestrians efficiently. 
-        The system should allow vehicles to pass only if they meet specific conditions. 
-        The traffic light should turn green if:
+        A system of linear equations consists of multiple equations that need to be solved simultaneously. 
+        One efficient method for solving such systems is Gaussian Elimination, which transforms the system into 
+        an upper triangular form and then applies back-substitution to find the solution. In this lab, you will 
+        implement Gaussian Elimination in C++ by converting a given Python implementation into an equivalent C++ program. 
+        The goal is to apply row operations on an augmented matrix representation of a linear system 
+        to systematically solve for the unknown variables.
     </p>
-    <ul>
-        <li><span class="blue-text">A car is detected</span> (<b>C</b>) OR</li>
-        <li><span class="blue-text">The timer condition allows a green light</span> (<b>T</b>) AND</li>
-        <li><span class="blue-text">No pedestrian is crossing</span> (<b>P</b> is false).</li>
-    </ul>
 
-    <h3>(1) Propositional Variables</h3>
-    <p>In the traffic light system, the conditions can be represented as <b class="blue-text">propositional variables</b>:</p>
-    <ul>
-        <li><b>C</b>: Car is detected (True/False)</li>
-        <li><b>P</b>: Pedestrian is crossing (True/False)</li>
-        <li><b>T</b>: Timer condition allows a green light (True/False)</li>
-    </ul>
-
-    <h3>(2) Logical Expression for Decision Making</h3>
-    <p>
-        The <b class="blue-text">well-formed formula</b> to determine if the traffic light should turn green: 
-        <b class="red-text">(C &or; T) &and; &not;P</b>
-    </p>
-    <p><b>Explanation of the formula:</b></p>
-    <ul>
-        <li><b>C ∨ T</b> — The traffic light should turn green if either a car is detected or the timer allows it.</li>
-        <li><b>¬P</b> — The light should turn green only if no pedestrian is crossing.</li>
-    </ul>
-
-    <h3>(3) Truth Table Representation</h3>
-    <p>We can represent the decision-making process using a truth table, which is a key characteristic of propositional logic.</p>
-
-    <!-- Truth Table -->
-    <center>
-    <table>
-        <tr class="centered">
-            <th>C</th>
-            <th>T</th>
-            <th>P</th>
-            <th>C ∨ T</th>
-            <th>¬P</th>
-            <th>(C ∨ T) ∧ ¬P</th>
-        </tr>
-        <tr class="centered">
-            <td>T</td>
-            <td>T</td>
-            <td>T</td>
-            <td>T</td>
-            <td>F</td>
-            <td>F</td>
-        </tr>
-        <tr class="centered">
-            <td>T</td>
-            <td>T</td>
-            <td>F</td>
-            <td>T</td>
-            <td>T</td>
-            <th class="green-text">T</th>
-        </tr>
-        <tr class="centered">
-            <td>T</td>
-            <td>F</td>
-            <td>T</td>
-            <td>T</td>
-            <td>F</td>
-            <td>F</td>
-        </tr>
-        <tr class="centered">
-            <td>T</td>
-            <td>F</td>
-            <td>F</td>
-            <td>T</td>
-            <td>T</td>
-            <th class="green-text">T</th>
-        </tr>
-        <tr class="centered">
-            <td>F</td>
-            <td>T</td>
-            <td>T</td>
-            <td>T</td>
-            <td>F</td>
-            <td>F</td>
-        </tr>
-        <tr class="centered">
-            <td>F</td>
-            <td>T</td>
-            <td>F</td>
-            <td>T</td>
-            <td>T</td>
-            <th class="green-text">T</th>
-        </tr>
-        <tr class="centered">
-            <td>F</td>
-            <td>F</td>
-            <td>T</td>
-            <td>F</td>
-            <td>F</td>
-            <td>F</td>
-        </tr>
-        <tr class="centered">
-            <td>F</td>
-            <td>F</td>
-            <td>F</td>
-            <td>F</td>
-            <td>T</td>
-            <td>F</td>
-        </tr>
-    </table>
-    </center>
     
-    <p><b>Key Observations from the Truth Table:</b></p>
-    <p>The traffic light turns green when (Final Column = True):</p>
-    <ul>
-        <li>Row 2: C = True, T = True, P = False → True</li>
-        <li>Row 4: C = True, T = False, P = False → True</li>
-        <li>Row 6: C = False, T = True, P = False → True</li>
-    </ul>
+    <h3>(1) Matrix Representation of the System</h3>
+    <p>A system of linear equations can be written in augmented matrix form:</p>
+
+    <p>
+        Here, the left part of the matrix represents the coefficients of the variables, while the rightmost 
+        column represents the constants on the right-hand side of the equations.
+    </p>
+   
+    
 
     <h1>3. Requirements</h1>
     <ul>
@@ -293,38 +194,32 @@ Simulation ended. Thank you!
     <h1>6. Comments</h1>
     <ul>
         <li>
-            &#9733; Please add the following comments to the top of your <b>lab1.cpp</b> file:
+            &#9733; Please add the following comments to the top of your <b>lab3.cpp</b> file:
             <pre>
-/*
-    Author: Your Name
-    Date: Month/Day/Year
-    Lab Purpose: Traffic Light Control System Simulation
-*/
+            /*
+                Author: Your Name
+                Date: Month/Day/Year
+                Lab Purpose: Gaussian Elimination Implementation in C++
+            */
             </pre>
         </li>
         <li>&#9733; Please add other necessary comments to your source code.</li>
     </ul>
 
     <h1>7. Submit</h1>
-    <p>Please submit your Lab 1 source code file: <b>lab1.cpp</b> in D2L!</p>
+    <p>Please submit your Lab 3 source code file: <b>lab3.cpp</b> in D2L!</p>
 
     <h1>8. Jupyter Hub for Programming</h1>
     <a href="https://jupyterhub.cs.mtsu.edu/azuread/hub/home" target="_blank">Jupyter Hub for Programming</a>
     <br>
        By logging in to Jupyter Hub with your <b>MTSU credentials</b>, you can create, compile, and run your source code there.
 
-    <!--
-    <h1>9. Demo Code</h1>
-    You can find relevant C++ demo code here: 
-    <a href="https://xinyangmtsu.github.io/3080/.cpp" target="_blank">Demo Code</a>
-    -->
-
     <hr>
 
     <div class="centered">
         <strong>
             <font size="+1">
-                Congratulations! You have finished your Lab1!
+                Congratulations! You have finished your Lab3!
             </font>
         </strong>
         <br><br>
