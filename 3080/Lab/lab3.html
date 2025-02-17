@@ -57,8 +57,35 @@
         to systematically solve for the unknown variables.
     </p>
 
+    <h3>(1) Reading the Augmented Matrix from a Data File</h3>
+    In this section, you will learn how to read a 3×4 augmented matrix from a data file and store it in a 2D array in C++. 
+    The matrix will represent a system of linear equations, which will later be processed using Gauss-Jordan Elimination.
+    The following C++ function reads the 3×4 matrix from the file and stores it in a 2D array:
+    <pre>
+        const int ROWS = 3;  // Number of equations (rows)
+        const int COLS = 4;  // Number of columns (3 variables + 1 augmented column)
+
+        // Function to read a 3x4 augmented matrix from a file
+        bool readMatrixFromFile(const string &filename, double matrix[ROWS][COLS]) {
+            ifstream file(filename);  // Open the file for reading
+            if (!file) {
+                cerr << "Error: Unable to open file!" << endl;
+                return false;
+            }
+        
+            // Read matrix from file and store it in a 2D array
+            for (int i = 0; i < ROWS; i++) {
+                for (int j = 0; j < COLS; j++) {
+                    file >> matrix[i][j];  // Read each value into the matrix
+                }
+            }
+        
+            file.close(); //Closes the file after reading its contents.
+            return true;
+        }
+    </pre>
     
-    <h3>(1) Matrix Representation of the System</h3>
+    <h3>(2) Matrix Representation of the System</h3>
     <p>A system of linear equations can be written in <b class="red-text">augmented matrix</b> form:</p>
 
         \[
@@ -84,7 +111,7 @@
         \end{bmatrix}
     \]
    
-    <h3>(2) Steps for Gauss-Jordan Elimination </h3>
+    <h3>(3) Steps for Gauss-Jordan Elimination </h3>
     <p>
         <b class="blue-text">Gauss-Jordan Elimination</b> is an extension of Gaussian Elimination that transforms a matrix 
         into the <b class="blue-text">identity matrix</b>, making it easier to extract solutions directly. This method provides a direct solution without requiring back substitution, 
@@ -112,7 +139,7 @@
         </ul>
     </ul>
     
-    <h3>(3) Algorithm Representation in Python</h3>
+    <h3>(4) Algorithm Representation in Python</h3>
 
     <p>The following Python code demonstrates the Gauss-Jordan Elimination process:</p>
     <pre>
@@ -203,7 +230,7 @@ Simulation ended. Thank you!
             </tr>
             <tr>
                 <td rowspan="3"><strong>gaussJordanElimination Function Implementation</strong><br>(30 points)</td>
-                <td>Function Prototype: void gaussJordanElimination(double matrix[SIZE][SIZE + 1]);</td>
+                <td>Function Prototype: void gaussJordanElimination(double matrix[SIZE][COLS]);</td>
                 <td>5</td>
             </tr>
             <tr>
@@ -217,7 +244,7 @@ Simulation ended. Thank you!
 
               <tr>
                 <td rowspan="3"><strong>readMatrixFromFile Functions</strong> (20 points)</td>
-                <td>Function Prototype: bool readMatrixFromFile(string filename, double matrix[SIZE][SIZE + 1]);</td>
+                <td>Function Prototype: bool readMatrixFromFile(const string &filename, double matrix[ROWS][COLS]);</td>
                 <td>5</td>
             </tr>
             <tr>
@@ -231,7 +258,7 @@ Simulation ended. Thank you!
             
              <tr>
                 <td rowspan="3"><strong>Matrix Display Functions</strong> (15 points)</td>
-                <td>Function Prototype: void displaySolution(double matrix[SIZE][SIZE + 1]);</td>
+                <td>Function Prototype: void displaySolution(double matrix[SIZE][COLS]);</td>
                 <td>5</td>
             </tr>
             <tr>
