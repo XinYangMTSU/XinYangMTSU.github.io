@@ -70,8 +70,52 @@
         column represents the constants on the right-hand side of the equations.
     </p>
    
-    
+    <h3>(2) Steps for Gauss-Jordan Elimination </h3>
+    <p>
+        <b class="blue-text">Gauss-Jordan Elimination</b> is an extension of Gaussian Elimination that transforms a matrix 
+        into the <b class="blue-text">identity matrix</b>, making it easier to extract solutions directly. This method provides a direct solution without requiring back substitution, 
+        unlike standard Gaussian Elimination.
+    </p>
 
+    <ul>
+        <li>Step 1: Normalize the Pivot Element</li>
+        <ul>
+            <li>Identify the pivot element at position (i, i).</li>
+            <li>Divide the entire row by this pivot to make the leading coefficient 1.</li>
+        </ul>
+        <li>Step 2: Eliminate Other Entries in the Column</li>
+        <ul>
+            <li>Modify all rows except the pivot row by subtracting a multiple of the pivot 
+                row to make all other values in the column zero.</li>
+        </ul>
+        <li>Step 3: Repeat for Each Column</li>
+        <ul>
+            <li>Loop through each row, repeating Step 1 and Step 2, until the matrix is transformed into an identity matrix.</li>
+        </ul>
+        <li>Final Output:</li>
+        <ul>
+            <li>The left side of the augmented matrix becomes an identity matrix, while the right side contains the solutions to the system.</li>
+        </ul>
+    </ul>
+    
+    <h3>(3) Algorithm Representation in Python</h3>
+
+    <p>The following Python code demonstrates the Gaussian Elimination process:</p>
+    <pre>
+        n_row, n_col = aug_mat.shape
+
+        for i in range(n_row):  
+            divisor = aug_mat[i, i]  
+        
+            for j in range(n_col):  
+                aug_mat[i, j] /= divisor  
+        
+            for j in range(n_row):  
+                if j != i:  
+                    multiplier = -aug_mat[j, i]  
+                    aug_mat[j, :] += multiplier * aug_mat[i, :]
+    </pre>
+    
     <h1>3. Requirements</h1>
     <ul>
         <li>&#9733; (1) Please <b class="blue-text">prompt the user to input values</b> for <b>car detection</b>, <b>timer condition</b>, and <b>pedestrian crossing</b>.</li>
