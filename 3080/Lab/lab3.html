@@ -120,39 +120,29 @@
     <ul>
         <li>&#9733; (1) Please <b class="blue-text">prompt the user to input values</b> for <b>car detection</b>, <b>timer condition</b>, and <b>pedestrian crossing</b>.</li>
         <li>&#9733; (2) Please evaluate the traffic light condition using the <b class="blue-text">well-formed formula</b>: <b class="red-text">(C &or; T) &and; &not;P</b></li>
-        <li>&#9733; (3) Please <b class="blue-text">display</b> whether the light should be <b class="green-text">GREEN</b> or <b class="red-text">RED</b>.</li>
+        <li>&#9733; (3) Please Display the final transformed matrix, showing the computed solutions for the system.</li>
         <li>&#9733; (4) Please use a <b class="blue-text">do-while loop</b> to run your program repeatedly.</li>
         <li>&#9733; (5) Please ensure that your program can compile and run <b class="red-text">without</b> crashing, producing errors, or infinite loop errors.</li>
     </ul>
 
     <h1>4. Sample Input/Output</h1>
     <pre>
-Traffic Light Control System Simulation
+Gauss-Jordan Elimination Solver  
 -------------------------------------------------------------
-Is a car detected? (1 for Yes, 0 for No): 1
-Is the timer condition allowing? (1 for Yes, 0 for No): 1
-Is a pedestrian crossing? (1 for Yes, 0 for No): 0
-Result: The traffic light is GREEN (Cars can go)
-Do you want to try again? (y/n): y
 
-Is a car detected? (1 for Yes, 0 for No): 1
-Is the timer condition allowing? (1 for Yes, 0 for No): 0
-Is a pedestrian crossing? (1 for Yes, 0 for No): 0
-Result: The traffic light is GREEN (Cars can go)
-Do you want to try again? (y/n): y
 
-Is a car detected? (1 for Yes, 0 for No): 0
-Is the timer condition allowing? (1 for Yes, 0 for No): 1
-Is a pedestrian crossing? (1 for Yes, 0 for No): 0
-Result: The traffic light is GREEN (Cars can go)
-Do you want to try again? (y/n): y
+Performing Gauss-Jordan Elimination...  
 
-Is a car detected? (1 for Yes, 0 for No): 0
-Is the timer condition allowing? (1 for Yes, 0 for No): 0
-Is a pedestrian crossing? (1 for Yes, 0 for No): 1
-Result: The traffic light is RED (Cars must stop)
-Do you want to try again? (y/n): n
+Reduced Row Echelon Form (RREF):  
+1   0   0   a  
+0   1   0   b  
+0   0   1   c  
 
+Solution:  
+x = a  
+y = b  
+z = c
+ 
 Simulation ended. Thank you!
 -------------------------------------------------------------
     </pre>
