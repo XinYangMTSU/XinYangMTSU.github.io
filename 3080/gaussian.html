@@ -105,8 +105,12 @@
 		$$
 		for \(x_{n-1}\) and so forth, back up to the top row.
 		<Br>
+		This process is solving systems of linear equations is known as <b>
+			<font color="blue">Gaussian elimination</font>
+		</b>, named for the famous German mathematician Karl Friedrich Gauss.
+		
 		<Br>
-		But how do we do the transformation? The allowable operations ot carry out this transformation are called
+		But how do we do the transformation? The allowable operations to carry out this transformation are called
 		<b>elementary row operations</b>, none of which change the solution set of the underlying equations. These
 		operations (performed on the augmented matrix) are:
 		<b><font color="red">
@@ -116,13 +120,13 @@
 			<li>iii. Add a scalar multiple of any one row to another row.</li>
 		</ul></font>
 		</b>
-		
-		They merely transform the system into an equivalent one that is easier to solve.
-		<br>
-		This process is solving systems of linear equations is known as <b>
-			<font color="blue">Gaussian elimination</font>
-		</b>, named for the famous German mathematician Karl Friedrich Gauss.
+		Gaussian elimination converts a system of equations into an upper triangular form, making it easier to solve using back-substitution. 
+		This method does not alter the fundamental properties of the system but instead simplifies it into an equivalent, more manageable form.
 
+		In this section, we will explore Gauss-Jordan Elimination, an advanced variation of Gaussian elimination. Unlike the traditional method, 
+		Gauss-Jordan elimination transforms the system into a Reduced Row Echelon Form (RREF), enabling a direct solution without requiring back-substitution.
+		<br>
+		
 		<h2>Example 1</h2>
 		Solving the system of equations:
 		<pre>
