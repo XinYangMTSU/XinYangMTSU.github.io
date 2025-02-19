@@ -67,7 +67,8 @@
 
         // Function to read a 3x4 augmented matrix from a file
         bool readMatrixFromFile(const string &filename, double matrix[][COLS]) {
-            ifstream file.open(filename);  // Open the file for reading
+            ifstream file; //create a file object
+            file.open(filename); //open the file
             if (!file) {
                 cerr << "Error: Unable to open file!" << endl;
                 return false;
