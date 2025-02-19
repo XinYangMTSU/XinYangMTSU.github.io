@@ -81,7 +81,7 @@
 		\end{pmatrix}
 		$$
 
-		Now we can trun this back into a system of equations of the form:
+		Now we can turn this back into a system of equations of the form:
 
 
 		$$
@@ -155,6 +155,36 @@
         \end{bmatrix}
     \]
 		So the solution to this system of equations is \(x = -4, y = 11, z = 19\).
+
+
+   <h2>Steps for Gauss-Jordan Elimination </h2>
+    <p>
+        <b><font color="blue">Gauss-Jordan Elimination</font></b> is an extension of Gaussian Elimination that transforms a matrix 
+        into the  <b><font color="blue">identity matrix</font></b>, making it easier to extract solutions directly. This method provides a direct solution without requiring back substitution, 
+        unlike standard Gaussian Elimination.
+    </p>
+
+    <ul>
+        <li>Step 1: Normalize the Pivot Element</li>
+        <ul>
+            <li>Identify the pivot element at position (i, i).</li>
+            <li>Divide the entire row by this pivot to make the leading coefficient 1.</li>
+        </ul>
+        <li>Step 2: Eliminate Other Entries in the Column</li>
+        <ul>
+            <li>Modify all rows except the pivot row by subtracting a multiple of the pivot 
+                row to make all other values in the column zero.</li>
+        </ul>
+        <li>Step 3: Repeat for Each Column</li>
+        <ul>
+            <li>Loop through each column, repeating Step 1 and Step 2, until the matrix is transformed into an identity matrix.</li>
+        </ul>
+        <li>Final Output:</li>
+        <ul>
+            <li>The left side of the augmented matrix becomes an identity matrix, while the right side contains the solutions to the system.</li>
+        </ul>
+    </ul>
+		
 		
 		<h2>Example 1</h2>
 		Solving the system of equations:
