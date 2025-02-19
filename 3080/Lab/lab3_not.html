@@ -141,22 +141,17 @@
         </ul>
     </ul>
     
-    <h3>(4) Gauss-Jordan Elimination Algorithm Representation in Python</h3>
-
-    <p>The following Python code demonstrates the Gauss-Jordan Elimination process:</p>
+    <h3>(4) Gauss-Jordan Elimination Pseudo-code</h3>
     <pre>
-        n_row, n_col = aug_mat.shape
-
-        for i in range(n_row):  
-            divisor = aug_mat[i, i]  
-        
-            for j in range(n_col):  
-                aug_mat[i, j] /= divisor  
-        
-            for j in range(n_row):  
-                if j != i:  
-                    multiplier = -aug_mat[j, i]  
-                    aug_mat[j, :] += multiplier * aug_mat[i, :]
+    for each row i:
+    	    divisor = matrix[i][i]
+    	    for each column j in row i:
+        		    matrix[i][j] /= divisor
+    
+    	    for each row j not equal to i:
+        		    multiplier = -matrix[j][i]
+        		    for each column k in row j:
+            			    matrix[j][k] = matrix[j][k] + multiplier*matrix[i][k]
     </pre>
     
     <h1>3. Requirements</h1>
