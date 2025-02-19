@@ -66,8 +66,8 @@
         const int COLS = 4;  // Number of columns (3 variables + 1 augmented column)
 
         // Function to read a 3x4 augmented matrix from a file
-        bool readMatrixFromFile(const string &filename, double matrix[ROWS][COLS]) {
-            ifstream file(filename);  // Open the file for reading
+        bool readMatrixFromFile(const string &filename, double matrix[][COLS]) {
+            ifstream file.open(filename);  // Open the file for reading
             if (!file) {
                 cerr << "Error: Unable to open file!" << endl;
                 return false;
@@ -244,7 +244,7 @@ Simulation ended. Thank you!
 
               <tr>
                 <td rowspan="3"><strong>readMatrixFromFile Functions</strong> (20 points)</td>
-                <td>Function Prototype: bool readMatrixFromFile(const string &filename, double matrix[ROWS][COLS]);</td>
+                <td>Function Prototype: bool readMatrixFromFile(const string &filename, double matrix[][COLS]);</td>
                 <td>5</td>
             </tr>
             <tr>
@@ -258,7 +258,7 @@ Simulation ended. Thank you!
             
              <tr>
                 <td rowspan="3"><strong>Matrix Display Functions</strong> (15 points)</td>
-                <td>Function Prototype: void displaySolution(double matrix[SIZE][COLS]);</td>
+                <td>Function Prototype: void displaySolution(double matrix[][COLS]);</td>
                 <td>5</td>
             </tr>
             <tr>
