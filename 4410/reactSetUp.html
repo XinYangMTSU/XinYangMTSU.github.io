@@ -133,12 +133,37 @@
 			<li>Assets (images, icons, etc.) → Static resources like images and icons used in the app.</li>
 		</ul>
 		<h3>✅ <span class="folder">App.js</span> → This is the main component of Your React App</h3>
-		This is the primary file where you write your React code. It serves as the main component of your application, and you can:
+		This is the primary file where you write your React code. It serves as the main component of your application, and you can: <br>
 		<u>
 			<li>Create and modify the UI.</li>
 			<li>Import and use other components.</li>
 			<li>Add styles and logic.</li>
 		</u>
+
+<h2>React Image Import Methods</h2>
+		
+    <table style="width:80%">
+        <tr>
+            <th>Method</th>
+            <th>When to Use</th>
+            <th>Example</th>
+        </tr>
+        <tr>
+            <td><strong>Import (<code>import logo from './logo.svg'</code>)</strong></td>
+            <td>When using images inside <code>src/</code></td>
+            <td><code>&lt;img src={logo} /&gt;</code></td>
+        </tr>
+        <tr>
+            <td><strong>Direct Path (<code>src="/logo.svg"</code>)</strong></td>
+            <td>When using images inside <code>public/</code></td>
+            <td><code>&lt;img src="/logo.svg" /&gt;</code></td>
+        </tr>
+        <tr>
+            <td><strong>External URL</strong></td>
+            <td>For online images</td>
+            <td><code>&lt;img src="https://example.com/image.jpg" /&gt;</code></td>
+        </tr>
+    </table>
 		
 	<br>
 	</div>
