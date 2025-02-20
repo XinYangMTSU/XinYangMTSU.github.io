@@ -451,10 +451,13 @@
 		<h2>Gauss-Jordan Elimination Algorithm</h2>
 		<pre>
 for each row i:
-	divisor = matrix[i][i]
-	for each column j in row i:
-		matrix[i][j] /= divisor
+			
+	divisor = matrix[i][i] //matrix[i][i] is the pivot element
+	//This step divides the entire row by the pivot to make the pivot element 1.
+	for each column j in row i:  
+		matrix[i][j] /= divisor  
 
+	//Make all other elements in the column zero using row operations.
 	for each row j not equal to i:
 		multiplier = -matrix[j][i]
 		for each column k in row j:
