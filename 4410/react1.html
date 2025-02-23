@@ -208,23 +208,29 @@
         
     <pre>
         <code class="language-jsx">
-            import React from "react";
-            
-            function App() {
-              const imgUrl = "https://i.imgur.com/NUyttbnb.jpg";
-            
-              return (
-                &lt;div&gt;
-                   &lt;h1&gt;Displaying an Image in JSX&lt;/h1&gt;
-                   &lt;img src={imgUrl} alt="Example Image" width="400" /&gt;
-                 &lt;/div&gt;
-              );
-            }
-            
-            export default App;
+        import React from "react";
+
+        function App() {
+          const imageUrl = "https://i.imgur.com/NUyttbnb.jpg";
+          const inputPlaceholder = "Type here...";
+          const isButtonDisabled = true;
+          const textStyles = { color: "blue", fontSize: "18px" };
+        
+          return (
+            <div>
+              <h1 style={textStyles}>Hello, JSX Attributes!</h1>
+              <img src={imageUrl} alt="Sample" width="300" /> 
+              <br /> {/* a break line*/}
+              <input type="text" placeholder={inputPlaceholder} />
+              {"\u00A0".repeat(5)} {/* repeats the space 5 times */}
+              <button disabled={isButtonDisabled}>Click Me</button>
+            </div>
+          );
+        }
+        
+        export default App;
         </code>
     </pre>
-
 
     <!--
     <h2>2. Components</h2>
