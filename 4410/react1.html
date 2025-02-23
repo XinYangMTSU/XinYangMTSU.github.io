@@ -132,7 +132,24 @@
     elements inside a component. However, there is one case where &lt;&gt;...&lt;/&gt; cannot be used: When You Need to Add a key Prop (e.g., Inside Lists).
     In React, when rendering lists dynamically, each element should have a unique key to help React efficiently 
     update and re-render the UI.
-    
+    <pre>
+        <code class="language-jsx">
+            function App() {
+                  const items = ["Item 1", "Item 2", "Item 3"];
+                
+                  return (
+                    <>
+                      {items.map((item, index) => (
+                        <React.Fragment key={index}>
+                          <h1>{item}</h1>
+                          <p>Description of {item}</p>
+                        </React.Fragment>
+                      ))}
+                    </>
+                  );
+            }    
+        </code>
+    </pre>
         
     <h4>Expressions inside JSX:</h4>
     <pre><code>const name = "Alice";
