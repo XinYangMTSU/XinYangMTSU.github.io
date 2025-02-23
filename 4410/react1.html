@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Prism.js CSS for styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
     <link href="../CSS/Site.css" type="text/css" rel="stylesheet">
     <title>React Syntax Guide</title>
 </head>
@@ -19,6 +21,7 @@
     <pre><code>const element = React.createElement("h1", null, "Hello, React!");</code></pre>
 
     <pre>
+        <code class="language-jsx">
         import React from "react";
 
         function App() {
@@ -29,6 +32,7 @@
         }
 
         export default App;
+        </code>
     </pre>
 
     <p>This is how you would write React elements without JSX.</p>
@@ -76,7 +80,7 @@ export default Greeting;</code></pre>
     <h3>Using the Component</h3>
     <p>In <code>App.js</code>:</p>
     <pre><code>import Greeting from "./Greeting";
-
+        
 function App() {
   return (
     &lt;div&gt;
@@ -197,6 +201,11 @@ function Timer() {
 }</code></pre>
 </div>
 
+    <!-- Prism.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+
+    
 </body>
 </html>
 
