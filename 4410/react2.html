@@ -165,11 +165,11 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
         <code class="language-jsx">
             function UserCard(props) {
               return (
-                <div>
-                  <h2>Name: {props.name}</h2>
-                  <p>Age: {props.age}</p>
-                  <p>Profession: {props.profession}</p>
-                </div>
+                &lt;div&gt;
+                  &lt;h2&gt;Name: {props.name}&lt;/h2&gt;
+                  &lt;p&gt;Age: {props.age}&lt;/p&gt;
+                  &lt;p&gt;Profession: {props.profession}&lt;/p&gt;
+                &lt;/div&gt;
               );
             }
             
@@ -183,11 +183,11 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
         
         function App() {
           return (
-            <div>
-              <UserCard name="Alice" age={25} profession="Developer" />
-              <UserCard name="Bob" age={30} profession="Designer" />
-              <UserCard name="Charlie" age={35} profession="Manager" />
-            </div>
+            &lt;div&gt;
+              &lt;UserCard name="Alice" age={25} profession="Developer" /&gt;
+              &lt;UserCard name="Bob" age={30} profession="Designer" /&gt;
+              &lt;UserCard name="Charlie" age={35} profession="Manager" /&gt;
+            &lt;/div&gt;
           );
         }
         
