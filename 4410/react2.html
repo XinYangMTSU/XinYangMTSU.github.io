@@ -76,18 +76,26 @@
     </pre>
         
     <h3>Using the Component</h3>
-    <p>In <code>App.js</code>:</p>
-    <pre><code>import Greeting from "./Greeting";
+    App.js (Composition: Combines Header, MainContent, and Footer)
         
-function App() {
-  return (
-    &lt;div&gt;
-      &lt;Greeting /&gt;
-    &lt;/div&gt;
-  );
-}
-
-export default App;</code></pre>
+    <p>In <code>App.js</code>:</p>
+    <pre><code>
+        import Header from "./Header";
+        import MainContent from "./MainContent";
+        import Footer from "./Footer";
+        
+        function App() {
+          return (
+            <div>
+              <Header />
+              <MainContent />
+              <Footer />
+            </div>
+          );
+        }
+        
+        export default App;
+    </code></pre>
 
     <h2>2. Rendering a Component</h2>
     <p>React renders components inside <code>index.js</code> using <code>ReactDOM.createRoot()</code>.</p>
