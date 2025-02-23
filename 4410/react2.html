@@ -31,12 +31,50 @@
     </ul>
     
     <h3>Basic Functional Component</h3>
-    <pre><code>function Greeting() {
-  return &lt;h1&gt;Hello, React!&lt;/h1&gt;;
-}
+    Header.js (Encapsulation: Displays the Website Title)
+    <pre><code>
+       function Header() {
+          return (
+            &lt;header style={{ backgroundColor: "#007bff", color: "white", padding: "15px", textAlign: "center" }}&gt;
+              &lt;h1&gt;My React Website&lt;/h1&gt;
+            &lt;/header&gt;
+          );
+        }
+        
+        export default Header;
+    </code></pre>
 
-export default Greeting;</code></pre>
+    MainContent.js (Encapsulation: Handles Main Content)
+    <pre>
+        <code>
+        function MainContent() {
+          return (
+            &lt;main style={{padding: "20px", textAlign: "center", minHeight: "400px"}}&gt;
+              &lt;h2>Welcome to My Website&lt;/h2&gt;
+              &lt;p>This is a simple React app demonstrating component structure.&lt;/p&gt;
+            &lt;/main&gt;
+          );
+        }
+        
+        export default MainContent;
+        </code>
+    </pre>
 
+    Footer.js (Encapsulation: Displays the Footer)
+    <pre>
+        <code>
+        function Footer() {
+          return (
+            &lt;footer style={{ backgroundColor: "#333", color: "white", padding: "10px", textAlign: "center", marginTop: "20px" }}&gt;
+              &lt;p&gt;© 2024 My React Website. All rights reserved.&lt;/p&gt;
+            &lt;/footer&gt;
+          );
+        }
+        
+        export default Footer;
+        </code>
+    </pre>
+        
     <h3>Using the Component</h3>
     <p>In <code>App.js</code>:</p>
     <pre><code>import Greeting from "./Greeting";
