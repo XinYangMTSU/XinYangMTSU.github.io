@@ -142,6 +142,21 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
         export default App;
     </code></pre>
 
+    <h3>Props Are Read-Only</h3>
+    <ul>
+        <li>&diams;  Props are immutable—they cannot be changed inside the component.</li>
+        <li>&diams; If you try to modify them, React will throw an error.</li>
+    </ul>
+    ❌ Incorrect (Trying to Modify Props)
+    <pre>
+        <code class="language-jsx">
+            function Welcome(props) {
+              props.name = "John"; // ❌ This will cause an error
+              return <h1>Hello, {props.name}!</h1>;
+            }
+        </code>
+    </pre>
+
     <h2>4. State (Managing Component Data)</h2>
     <h3>Example using <code>useState</code>:</h3>
     <pre><code>import { useState } from "react";
