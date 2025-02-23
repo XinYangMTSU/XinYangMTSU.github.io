@@ -112,16 +112,35 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(&lt;App /&gt;); // React renders App.js inside index.html
 </code></pre>
         
-    <h2>3. Props (Passing Data to Components)</h2>
-    <p>Props (short for properties) allow data to be passed to components.</p>
+    <h2>3. Understanding Props (Passing Data to Components) in React</h2>
+    <p>Props (short for "properties") are a way to pass data from a parent component to a child component in React. 
+    They allow components to be dynamic and reusable by providing different values when needed.</p>
 
     <h3>Example:</h3>
-    <pre><code>function Welcome(props) {
-  return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;
-}</code></pre>
+    <b>Welcome.js</b>: A component receives props as a function parameter.
+    <pre><code class="language-jsx">
+    function Welcome(props) {
+          return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;
+    }
+    </code></pre>
 
     <h3>Passing Props to a Component:</h3>
-    <pre><code>&lt;Welcome name="Alice" /&gt;</code></pre>
+    <b>App.js</b>: let’s use &lt;Welcome /&gt; inside App.js and pass data.
+    <pre><code class="language-jsx">
+        import Welcome from "./Welcome"; // Import the Welcome component
+
+        function App() {
+          return (
+            &lt;div&gt;
+              &lt;Welcome name="Alice" /&gt;  {/* Passing "Alice" as a prop */}
+              &lt;Welcome name="Bob" /&gt;    {/* Passing "Bob" as a prop */}
+              &lt;Welcome name="Charlie" /&gt; {/* Passing "Charlie" as a prop */}
+            &lt;/div&gt;
+          );
+        }
+        
+        export default App;
+    </code></pre>
 
     <h2>4. State (Managing Component Data)</h2>
     <h3>Example using <code>useState</code>:</h3>
