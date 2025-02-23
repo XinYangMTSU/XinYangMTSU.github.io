@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Syntax Guide</title>
+</head>
+<body>
+    <h1>React Syntax Guide</h1>
+    
+    <h2>1. JSX (JavaScript XML)</h2>
+    <p>JSX allows writing HTML-like syntax inside JavaScript.</p>
+    <pre><code>const element = <h1>Hello, React!</h1>;</code></pre>
+
+    <h2>2. Components</h2>
+    <p>Components are reusable UI elements in React.</p>
+    <pre><code>function Greeting() {
+  return <h1>Hello, React!</h1>;
+}
+export default Greeting;</code></pre>
+
+    <h2>3. Rendering a Component</h2>
+    <pre><code>import Greeting from "./Greeting";
+
+function App() {
+  return (
+    <div>
+      <Greeting />
+    </div>
+  );
+}
+export default App;</code></pre>
+
+    <h2>4. Props (Passing Data to Components)</h2>
+    <pre><code>function Welcome(props) {
+  return <h1>Hello, {props.name}!</h1>;
+}
+<Welcome name="Alice" />;</code></pre>
+
+    <h2>5. State (Managing Component Data)</h2>
+    <pre><code>import { useState } from "react";
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increase</button>
+    </div>
+  );
+}
+export default Counter;</code></pre>
+
+    <h2>6. Handling Events</h2>
+    <pre><code>function ClickHandler() {
+  function handleClick() {
+    alert("Button clicked!");
+  }
+  return <button onClick={handleClick}>Click Me</button>;
+}</code></pre>
+
+    <h2>7. Conditional Rendering</h2>
+    <pre><code>function Message(props) {
+  return props.isLoggedIn ? <h1>Welcome Back!</h1> : <h1>Please Log In</h1>;
+}</code></pre>
+
+    <h2>8. Lists and Keys</h2>
+    <pre><code>const names = ["Alice", "Bob", "Charlie"];
+function NameList() {
+  return (
+    <ul>
+      {names.map((name, index) => (
+        <li key={index}>{name}</li>
+      ))}
+    </ul>
+  );
+}</code></pre>
+
+    <h2>9. Forms and Input Handling</h2>
+    <pre><code>import { useState } from "react";
+function Form() {
+  const [text, setText] = useState("");
+  function handleChange(event) {
+    setText(event.target.value);
+  }
+  return (
+    <div>
+      <input type="text" value={text} onChange={handleChange} />
+      <p>You typed: {text}</p>
+    </div>
+  );
+}</code></pre>
+
+    <h2>10. useEffect (Handling Side Effects)</h2>
+    <pre><code>import { useState, useEffect } from "react";
+function Timer() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    console.log("Component updated! Count:", count);
+  }, [count]);
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increase</button>
+    </div>
+  );
+}</code></pre>
+
+</body>
+</html>
