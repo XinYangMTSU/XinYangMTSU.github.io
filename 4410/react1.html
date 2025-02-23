@@ -111,8 +111,24 @@
          </code>
     </pre>
     &#9989; Fragments are invisible wrappers. Unlike a &lt;div&gt;, they don’t add an extra node to the DOM.
-    
 
+    <h3>Named Fragments (&lt;React.Fragment&gt;...&lt;/React.Fragment&gt;)</h3>
+    You can also use the full syntax instead of &lt;&gt;...&lt;/&gt;:
+    <pre>
+        <code class="language-jsx">
+        function App() {
+          return (
+            &lt;React.Fragment&gt;
+              &lt;h1&gt;Title&lt;/h1&gt;
+              &lt;p&gt;Paragraph&lt;/p&gt;
+            &lt;/React.Fragment&gt;
+          );
+        }
+        
+        export default App;
+        </code>
+    </pre>
+    
     <h4>Expressions inside JSX:</h4>
     <pre><code>const name = "Alice";
 const element = &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;</code></pre>
