@@ -92,8 +92,26 @@
             export default App;
          </code>
     </pre>
-        
-        
+    &#9989; This works because now there is only one root element (&lt;div&gt;).
+
+    <h3>Using React Fragments (&lt;&gt;...&lt;/&gt;)</h3>
+    Instead of using an unnecessary &lt;div&gt;, you can use <b><font color="blue">React Fragments</font></b>:
+    <pre>
+         <code class="language-jsx">
+             function App() {
+              return (
+                <>
+                  <h1>Title</h1>
+                  <p>Paragraph</p>
+                </>
+              );
+            }
+            
+            export default App;
+         </code>
+    </pre>
+    &#9989; Fragments are invisible wrappers. Unlike a &lt;div&gt;, they don’t add an extra node to the DOM.
+    
     <h4>Only one parent element:</h4>
     <pre><code>return (
   &lt;div&gt;
