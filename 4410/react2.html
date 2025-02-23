@@ -157,6 +157,44 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
         </code>
     </pre>
 
+    <h3>Passing Multiple Props</h3>
+    Props aren’t limited to just one value—you can pass multiple properties.
+    <br>
+    <b>UserCard.js:</b>
+    <pre>
+        <code class="language-jsx">
+            function UserCard(props) {
+              return (
+                <div>
+                  <h2>Name: {props.name}</h2>
+                  <p>Age: {props.age}</p>
+                  <p>Profession: {props.profession}</p>
+                </div>
+              );
+            }
+            
+            export default UserCard;
+        </code>
+    </pre>
+    Using UserCard in <b>App.js</b>:
+    <pre>
+        <code class="language-jsx">
+        import UserCard from "./UserCard";
+        
+        function App() {
+          return (
+            <div>
+              <UserCard name="Alice" age={25} profession="Developer" />
+              <UserCard name="Bob" age={30} profession="Designer" />
+              <UserCard name="Charlie" age={35} profession="Manager" />
+            </div>
+          );
+        }
+        
+        export default App;  
+        </code>
+    </pre>
+        
     <h2>2. State (Managing Component Data)</h2>
     <h3>Example using <code>useState</code>:</h3>
     <pre><code>import { useState } from "react";
