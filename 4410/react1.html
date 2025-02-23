@@ -193,10 +193,31 @@
         </code>
     </pre>
     
-
-    <h4>Attributes in JSX:</h4>
-    <pre><code>const imgUrl = "https://example.com/image.jpg";
-const element = &lt;img src={imgUrl} alt="Example Image" /&gt;;</code></pre>
+    <h2>Understanding Attributes in JSX:</h2>
+    In JSX, attributes work similarly to HTML, but some differences exist:
+    <ul>
+        <li>JSX uses curly braces {} to insert JavaScript expressions inside attributes.</li>
+        <li>Some HTML attributes are renamed (e.g., class -> className)</li>
+    </ul>
+        
+    <pre>
+        <code class="language-jsx">
+            import React from "react";
+            
+            function App() {
+              const imgUrl = "https://example.com/image.jpg";
+            
+              return (
+                &lt;div&gt;
+                   &lt;h1&gt;Displaying an Image in JSX&lt;/h1&gt;
+                   &lt;img src={imgUrl} alt="Example Image" width="400" /&gt;
+                 &lt;/div&gt;
+              );
+            }
+            
+            export default App;
+        </code>
+    </pre>
 
     <h2>2. Components</h2>
     <p>React applications are built using components. A component is a function that returns JSX.</p>
