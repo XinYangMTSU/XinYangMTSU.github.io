@@ -129,9 +129,11 @@
         </code>
     </pre>
     Normally, fragments (&lt;&gt;...&lt;/&gt;) are used to avoid unnecessary &lt;div&gt; wrappers when returning multiple 
-    elements inside a component.
+    elements inside a component. However, there is one case where &lt;&gt;...&lt;/&gt; cannot be used: When You Need to Add a key Prop (e.g., Inside Lists).
+    In React, when rendering lists dynamically, each element should have a unique key to help React efficiently 
+    update and re-render the UI.
     
-    
+        
     <h4>Expressions inside JSX:</h4>
     <pre><code>const name = "Alice";
 const element = &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;</code></pre>
