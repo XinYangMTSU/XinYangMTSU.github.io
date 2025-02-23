@@ -209,6 +209,7 @@
     <pre>
         <code class="language-jsx">
         import React from "react";
+        import "./App.css"; // Import the CSS file
 
         function App() {
           const imageUrl = "https://i.imgur.com/NUyttbnb.jpg";
@@ -217,7 +218,7 @@
           const textStyles = { color: "blue", fontSize: "18px", backgroundColor: "lightgray" };
         
           return (
-            &lt;div&gt;
+            &lt;div className="container"&gt;
               &lt;h1 style={textStyles}>Hello, JSX Attributes!&lt;/h1&gt;
               &lt;img src={imageUrl} alt="Sample" width="300" /&gt;
               &lt;br /&gt; {/* a break line*/}
