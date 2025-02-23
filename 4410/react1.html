@@ -177,11 +177,22 @@
         </tr>
     </table>
         
-    <h4>Understanding Expressions Inside JSX:</h4>
+    <h2>Understanding Expressions Inside JSX:</h2>
     JSX allows you to <b><font color="blue">embed JavaScript expressions</font></b> 
     inside curly braces {} within your HTML-like code.
-    <pre><code>const name = "Alice";
-const element = &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;</code></pre>
+    <pre>
+        <code class="language-jsx">
+            import React from "react";
+
+            function App() {
+              const name = "Alice"; 
+              return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;; 
+            }
+            
+            export default App;
+        </code>
+    </pre>
+    
 
     <h4>Attributes in JSX:</h4>
     <pre><code>const imgUrl = "https://example.com/image.jpg";
