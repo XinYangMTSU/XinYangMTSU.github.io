@@ -129,7 +129,7 @@
         </code>
     </pre>
     Normally, fragments (&lt;&gt;...&lt;/&gt;) are used to avoid unnecessary &lt;div&gt; wrappers when returning multiple 
-    elements inside a component. However, there is one case where &lt;&gt;...&lt;/&gt; cannot be used: When You Need to Add a key Prop (e.g., Inside Lists).
+    elements inside a component. However, there is one case where &lt;&gt;...&lt;/&gt; cannot be used: When You Need to Add a key Property (e.g., Inside Lists).
     In React, when rendering lists dynamically, each element should have a unique key to help React efficiently 
     update and re-render the UI.
     <pre>
@@ -152,6 +152,8 @@
     </pre>
     This React function dynamically renders a list of items using JSX and &lt;React.Fragment&gt;.
     
+    <h3>Summary</h3>
+        
     <table style="width: 80%">
         <tr>
             <th>Approach</th>
@@ -170,7 +172,7 @@
         </tr>
         <tr>
             <td>&lt;React.Fragment&gt;...&lt;/React.Fragment&gt;</td>
-            <td><span class="checkmark">✅</span> Supports key prop</td>
+            <td><span class="checkmark">✅</span> Supports key property</td>
             <td><span class="crossmark">❌</span> Slightly longer syntax</td>
         </tr>
     </table>
