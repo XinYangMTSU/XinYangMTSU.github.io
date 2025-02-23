@@ -59,6 +59,24 @@
     In <b><font color="blue">JSX (JavaScript XML)</font></b>, a component must return a <b><font color="blue">single parent element</font></b>. 
     This is because <b><font color="blue">JSX expressions must have one root element</font></b>. If you try to return multiple 
     elements without a parent container, you'll get an error.
+
+    <h3>Incorrect JSX (Will Cause an Error)</h3>
+    The following code <b><font color="blue">won't work</font></b> because it returns two sibling elements without a parent wrapper:
+    <pre>
+         <code class="language-jsx">
+             function App() {
+              return (
+                <h1>Title</h1>
+                <p>Paragraph</p>
+              );
+            }
+            
+            export default App;
+         </code>
+    </pre>
+    &cross; Error: JSX expressions must have one parent element
+
+    <h3></h3>
         
     <h4>Only one parent element:</h4>
     <pre><code>return (
