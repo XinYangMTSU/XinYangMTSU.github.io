@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Prism.js CSS for styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <link href="../CSS/Site.css" type="text/css" rel="stylesheet">
+    <title>React Syntax Guide</title>
+</head>
+<body>
+
+    <div id="main">
+      
+    <h2>1. Components</h2>
+    <p>React applications are built using components. A component is a function that returns JSX.</p>
+
+    <h3>Basic Functional Component</h3>
+    <pre><code>function Greeting() {
+  return &lt;h1&gt;Hello, React!&lt;/h1&gt;;
+}
+
+export default Greeting;</code></pre>
+
+    <h3>Using the Component</h3>
+    <p>In <code>App.js</code>:</p>
+    <pre><code>import Greeting from "./Greeting";
+        
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Greeting /&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code></pre>
+
+    <h2>2. Rendering a Component</h2>
+    <p>React renders components inside <code>index.js</code> using <code>ReactDOM.createRoot()</code>.</p>
+
+    <h3>Example (<code>index.js</code>)</h3>
+    <pre><code>import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(&lt;App /&gt;);</code></pre>
+
+    <h2>3. Props (Passing Data to Components)</h2>
+    <p>Props (short for properties) allow data to be passed to components.</p>
+
+    <h3>Example:</h3>
+    <pre><code>function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;
+}</code></pre>
+
+    <h3>Passing Props to a Component:</h3>
+    <pre><code>&lt;Welcome name="Alice" /&gt;</code></pre>
+
+    <h2>4. State (Managing Component Data)</h2>
+    <h3>Example using <code>useState</code>:</h3>
+    <pre><code>import { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+      &lt;button onClick={() => setCount(count + 1)}&gt;Increase&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Counter;</code></pre>
+
+    <h2>5. Handling Events</h2>
+    <h3>Example:</h3>
+    <pre><code>function ClickHandler() {
+  function handleClick() {
+    alert("Button clicked!");
+  }
+
+  return &lt;button onClick={handleClick}&gt;Click Me&lt;/button&gt;;
+}
+
+export default ClickHandler;</code></pre>
+
+    <h2>6. Conditional Rendering</h2>
+    <h3>Example:</h3>
+    <pre><code>function Message(props) {
+  return props.isLoggedIn ? &lt;h1&gt;Welcome Back!&lt;/h1&gt; : &lt;h1&gt;Please Log In&lt;/h1&gt;;
+}</code></pre>
+
+    <h2>5. Lists and Keys</h2>
+    <h3>Example:</h3>
+    <pre><code>const names = ["Alice", "Bob", "Charlie"];
+
+function NameList() {
+  return (
+    &lt;ul&gt;
+      {names.map((name, index) => (
+        &lt;li key={index}&gt;{name}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+
+    <h2>7. Forms and Input Handling</h2>
+    <h3>Example:</h3>
+    <pre><code>import { useState } from "react";
+
+function Form() {
+  const [text, setText] = useState("");
+
+  function handleChange(event) {
+    setText(event.target.value);
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;input type="text" value={text} onChange={handleChange} /&gt;
+      &lt;p&gt;You typed: {text}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+    <h2>8. useEffect (Handling Side Effects)</h2>
+    <h3>Example:</h3>
+    <pre><code>import { useState, useEffect } from "react";
+
+function Timer() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log("Component updated! Count:", count);
+  }, [count]);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+      &lt;button onClick={() => setCount(count + 1)}&gt;Increase&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+</div>
+
+    <!-- Prism.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+
+    
+</body>
+</html>
