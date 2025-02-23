@@ -76,7 +76,23 @@
     </pre>
     &#10060; Error: JSX expressions must have one parent element
 
-    <h3></h3>
+    <h3>Using a &lt;div&gt; as a Parent Container</h3>
+    A common approach is to wrap everything inside a &lt;div&gt;:
+    <pre>
+         <code class="language-jsx">
+             function App() {
+              return (
+                &lt;div&gt;
+                  &lt;h1&gt;Title&lt;/h1&gt;
+                  &lt;p&gt;Paragraph&lt;/p&gt;
+                &lt;/div&gt;
+              );
+            }
+            
+            export default App;
+         </code>
+    </pre>
+        
         
     <h4>Only one parent element:</h4>
     <pre><code>return (
