@@ -122,6 +122,10 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
     function Welcome(props) {
           return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;
     }
+    // Default value for name if no prop is passed
+    Welcome.defaultProps = {
+      name: "Guest"
+    };
     </code></pre>
 
     <h3>Passing Props to a Component:</h3>
