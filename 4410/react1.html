@@ -150,6 +150,30 @@
             }    
         </code>
     </pre>
+    This React function dynamically renders a list of items using JSX and &lt;React.Fragment&gt;.
+    
+    <table style="width: 80%">
+        <tr>
+            <th>Approach</th>
+            <th>Pros</th>
+            <th>Cons</th>
+        </tr>
+        <tr>
+            <td>&lt;div&gt;...&lt;/div&gt;</td>
+            <td><span class="checkmark">✅</span> Simple & widely used</td>
+            <td><span class="crossmark">❌</span> Adds unnecessary divs to the HTML</td>
+        </tr>
+        <tr>
+            <td>&lt;&gt;...&lt;/&gt; (Fragments)</td>
+            <td><span class="checkmark">✅</span> Prevents extra divs</td>
+            <td><span class="crossmark">❌</span> Cannot use key prop</td>
+        </tr>
+        <tr>
+            <td>&lt;React.Fragment&gt;...&lt;/React.Fragment&gt;</td>
+            <td><span class="checkmark">✅</span> Supports key prop</td>
+            <td><span class="crossmark">❌</span> Slightly longer syntax</td>
+        </tr>
+    </table>
         
     <h4>Expressions inside JSX:</h4>
     <pre><code>const name = "Alice";
