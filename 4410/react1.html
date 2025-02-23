@@ -11,105 +11,179 @@
     <div id="main">
         
     <h1>React Syntax Guide</h1>
-    
+
     <h2>1. JSX (JavaScript XML)</h2>
-    <p>JSX allows writing HTML-like syntax inside JavaScript.</p>
+    <p>JSX allows writing HTML-like syntax inside JavaScript. It makes React code easier to read and write.</p>
+
+    <h3>Example without JSX (Regular JavaScript)</h3>
+    <pre><code>const element = React.createElement("h1", null, "Hello, React!");</code></pre>
+
+    <p>This is how you would write React elements without JSX.</p>
+
+    <h3>Example with JSX</h3>
     <pre><code>const element = &lt;h1&gt;Hello, React!&lt;/h1&gt;;</code></pre>
 
+    <p>This is the same as the previous example but using JSX.</p>
+
+    <h3>Key JSX Rules:</h3>
+    <h4>Only one parent element:</h4>
+    <pre><code>return (
+  &lt;div&gt;
+    &lt;h1&gt;Title&lt;/h1&gt;
+    &lt;p&gt;Paragraph&lt;/p&gt;
+  &lt;/div&gt;
+);</code></pre>
+
+    <h4>Or, use fragments:</h4>
+    <pre><code>return (
+  &lt;&gt;
+    &lt;h1&gt;Title&lt;/h1&gt;
+    &lt;p&gt;Paragraph&lt;/p&gt;
+  &lt;/&gt;
+);</code></pre>
+
+    <h4>Expressions inside JSX:</h4>
+    <pre><code>const name = "Alice";
+const element = &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;</code></pre>
+
+    <h4>Attributes in JSX:</h4>
+    <pre><code>const imgUrl = "https://example.com/image.jpg";
+const element = &lt;img src={imgUrl} alt="Example Image" /&gt;;</code></pre>
+
     <h2>2. Components</h2>
-    <p>Components are reusable UI elements in React.</p>
+    <p>React applications are built using components. A component is a function that returns JSX.</p>
+
+    <h3>Basic Functional Component</h3>
     <pre><code>function Greeting() {
   return &lt;h1&gt;Hello, React!&lt;/h1&gt;;
 }
+
 export default Greeting;</code></pre>
 
-    <h2>3. Rendering a Component</h2
+    <h3>Using the Component</h3>
+    <p>In <code>App.js</code>:</p>
     <pre><code>import Greeting from "./Greeting";
 
 function App() {
   return (
-    <div>
-      <Greeting />
-    </div>
+    &lt;div&gt;
+      &lt;Greeting /&gt;
+    &lt;/div&gt;
   );
 }
+
 export default App;</code></pre>
 
+    <h2>3. Rendering a Component</h2>
+    <p>React renders components inside <code>index.js</code> using <code>ReactDOM.createRoot()</code>.</p>
+
+    <h3>Example (<code>index.js</code>)</h3>
+    <pre><code>import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(&lt;App /&gt;);</code></pre>
+
     <h2>4. Props (Passing Data to Components)</h2>
+    <p>Props (short for properties) allow data to be passed to components.</p>
+
+    <h3>Example:</h3>
     <pre><code>function Welcome(props) {
   return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;
-}
-<Welcome name="Alice" />;</code></pre>
+}</code></pre>
+
+    <h3>Passing Props to a Component:</h3>
+    <pre><code>&lt;Welcome name="Alice" /&gt;</code></pre>
 
     <h2>5. State (Managing Component Data)</h2>
+    <h3>Example using <code>useState</code>:</h3>
     <pre><code>import { useState } from "react";
+
 function Counter() {
   const [count, setCount] = useState(0);
+
   return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increase</button>
-    </div>
+    &lt;div&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+      &lt;button onClick={() => setCount(count + 1)}&gt;Increase&lt;/button&gt;
+    &lt;/div&gt;
   );
 }
+
 export default Counter;</code></pre>
 
     <h2>6. Handling Events</h2>
+    <h3>Example:</h3>
     <pre><code>function ClickHandler() {
   function handleClick() {
     alert("Button clicked!");
   }
-  return <button onClick={handleClick}>Click Me</button>;
-}</code></pre>
+
+  return &lt;button onClick={handleClick}&gt;Click Me&lt;/button&gt;;
+}
+
+export default ClickHandler;</code></pre>
 
     <h2>7. Conditional Rendering</h2>
+    <h3>Example:</h3>
     <pre><code>function Message(props) {
-  return props.isLoggedIn ? <h1>Welcome Back!</h1> : <h1>Please Log In</h1>;
+  return props.isLoggedIn ? &lt;h1&gt;Welcome Back!&lt;/h1&gt; : &lt;h1&gt;Please Log In&lt;/h1&gt;;
 }</code></pre>
 
     <h2>8. Lists and Keys</h2>
+    <h3>Example:</h3>
     <pre><code>const names = ["Alice", "Bob", "Charlie"];
+
 function NameList() {
   return (
-    <ul>
+    &lt;ul&gt;
       {names.map((name, index) => (
-        <li key={index}>{name}</li>
+        &lt;li key={index}&gt;{name}&lt;/li&gt;
       ))}
-    </ul>
+    &lt;/ul&gt;
   );
 }</code></pre>
 
     <h2>9. Forms and Input Handling</h2>
+    <h3>Example:</h3>
     <pre><code>import { useState } from "react";
+
 function Form() {
   const [text, setText] = useState("");
+
   function handleChange(event) {
     setText(event.target.value);
   }
+
   return (
-    <div>
-      <input type="text" value={text} onChange={handleChange} />
-      <p>You typed: {text}</p>
-    </div>
+    &lt;div&gt;
+      &lt;input type="text" value={text} onChange={handleChange} /&gt;
+      &lt;p&gt;You typed: {text}&lt;/p&gt;
+    &lt;/div&gt;
   );
 }</code></pre>
 
     <h2>10. useEffect (Handling Side Effects)</h2>
+    <h3>Example:</h3>
     <pre><code>import { useState, useEffect } from "react";
+
 function Timer() {
   const [count, setCount] = useState(0);
+
   useEffect(() => {
     console.log("Component updated! Count:", count);
   }, [count]);
+
   return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increase</button>
-    </div>
+    &lt;div&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+      &lt;button onClick={() => setCount(count + 1)}&gt;Increase&lt;/button&gt;
+    &lt;/div&gt;
   );
 }</code></pre>
-    
-    </div>
-    
+</div>
+
 </body>
 </html>
+
