@@ -233,6 +233,10 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
         </code>
     </pre>
 
+    ✅: <b><font color="blue">onClick={handleClick}</font></b> passes the function reference, 
+        meaning React <b><font color="blue">calls</font></b> handleClick <b><font color="blue">only when the button is clicked</font></b>.
+    <br>
+        
     <h3>Example 2: Passing Parameters to Event Handlers</h3>
     If you need to pass arguments inside an event handler, use an <b><font color="blue">arrow function</font></b>.
     <pre>
@@ -253,7 +257,12 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
             export default App;
         </code>
     </pre>
-
+    <ul>
+        <li>&diams; () => handleClick("Alice") creates a new function that gets executed only when the button is clicked.</li>
+        <li>&diams; This prevents handleClick("Alice") from running immediately.</li>
+    </ul>
+    
+        
     <h3>Common Event Types in React</h3>
 
     <table style="width:80%">
