@@ -497,7 +497,17 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
 
 
     <h2>5. useEffect (Handling Side Effects)</h2>
+    <h3>What is useEffect?</h3>
+    <b><font color="blue">useEffect</font></b> is a React Hook that runs <b><font color="blue">side effects</font></b> in a component. 
+    A side effect is any operation that affects something outside the component, such as: 
+        <ul>
+            <li>✅ Fetching data from an API</li>
+            <li>✅ Updating the browser title</li>
+            <li>✅ Setting up event listeners</li>
+            <li>✅ Interacting with local storage</li>
+        </ul>
     <h3>Example: Fetching Movies from an API</h3>
+    This example fetches a list of popular movies from the TMDB (The Movie Database) API.
     <pre><code class="language-jsx"> 
         import { useState, useEffect } from "react";
 
