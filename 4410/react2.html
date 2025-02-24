@@ -424,25 +424,6 @@ function NameList() {
   );
 }</code></pre>
 
-    <h2>7. Forms and Input Handling</h2>
-    <h3>Example:</h3>
-    <pre><code>import { useState } from "react";
-
-function Form() {
-  const [text, setText] = useState("");
-
-  function handleChange(event) {
-    setText(event.target.value);
-  }
-
-  return (
-    &lt;div&gt;
-      &lt;input type="text" value={text} onChange={handleChange} /&gt;
-      &lt;p&gt;You typed: {text}&lt;/p&gt;
-    &lt;/div&gt;
-  );
-}</code></pre>
-
     <h2>8. useEffect (Handling Side Effects)</h2>
     <h3>Example:</h3>
     <pre><code>import { useState, useEffect } from "react";
