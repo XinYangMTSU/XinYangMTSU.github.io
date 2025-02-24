@@ -413,9 +413,74 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
 
     <h2>6. Conditional Rendering</h2>
     <h3>Example:</h3>
-    <pre><code>function Message(props) {
-  return props.isLoggedIn ? &lt;h1&gt;Welcome Back!&lt;/h1&gt; : &lt;h1&gt;Please Log In&lt;/h1&gt;;
-}</code></pre>
+    <pre><code>
+    import { useState } from "react";
+
+    function LoginForm() {
+      const [isLoggedIn, setIsLoggedIn] = useState(false); // Controls login state
+      const [username, setUsername] = useState(""); // Stores username input
+      const [email, setEmail] = useState(""); // Stores email input
+      const [error, setError] = useState(""); // Stores validation error message
+    
+      function isValidUsername(username) {
+        return /^[a-zA-Z0-9_]+$/.test(username); // Allows letters, numbers, and underscores only
+      }
+    
+      function handleLogin(event) {
+        event.preventDefault(); // Prevent page reload
+        if (!username || !email) {
+          setError("Both fields are required.");
+          return;
+        }
+    
+        if (!isValidUsername(username)) {
+          setError("Username can only contain letters, numbers, and underscores.");
+          return;
+        }
+    
+        setError(""); // Clear errors if valid
+        setIsLoggedIn(true);
+      }
+    
+      function handleLogout() {
+        setIsLoggedIn(false);
+        setUsername(""); // Clear input fields
+        setEmail("");
+        setError("");
+      }
+    
+      return (
+        &lt;div style={{ textAlign: "center", marginTop: "20px" }}&gt;
+          &lt;h2&gt;{isLoggedIn ? `Welcome, ${username}!` : "Please Log In"}&lt;/h2&gt;
+    
+          {!isLoggedIn ? (
+            &lt;form onSubmit={handleLogin}&gt;
+              &lt;input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter your username"
+                style={{ display: "block", margin: "10px auto", padding: "8px" }}
+              /&gt;
+              &lt;input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                style={{ display: "block", margin: "10px auto", padding: "8px" }}
+              /&gt;
+              &lt;button type="submit"&gt;Log In&lt;/button&gt;
+              {error && &lt;p style={{ color: "red" }}&gt;{error}&lt;/p&gt;}
+            &lt;/form&gt;
+          ) : (
+            &lt;button onClick={handleLogout}&gt;Log Out&lt;/button&gt;
+          )}
+        &lt;/div&gt;
+      );
+    }
+    
+    export default LoginForm;  
+    </code></pre>
 
     <h2>8. useEffect (Handling Side Effects)</h2>
     <h3>Example:</h3>
