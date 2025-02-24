@@ -296,7 +296,32 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
         <li>&diams; <b><font color="blue">() => handleClick("Alice")</font></b> creates a new function that gets executed only when the button is clicked.</li>
         <li>&diams; This prevents handleClick("Alice") from running immediately.</li>
     </ul>
-    
+
+    <h3>Example 3: Handling Input Changes (onChange)</h3>
+    <pre>
+        <code class="language-jsx">  
+            import { useState } from "react";
+
+            function App() {
+            
+              const [text, setText] = useState("");
+            
+              function handleChange(event) {
+                setText(event.target.value);
+              }
+            
+              return (
+                &lt;div&gt;
+                  &lt;h2&gt;Type something:&lt;/h2&gt;
+                  &lt;input type="text" value={text} onChange={handleChange} /&gt;
+                  &lt;p&gt;You typed: {text}&lt;/p&gt;
+                &lt;/div&gt;
+              );
+            }
+            
+            export default App;
+        </code>
+    </pre>
         
     <h3>Common Event Types in React</h3>
 
