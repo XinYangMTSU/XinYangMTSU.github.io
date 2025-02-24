@@ -216,6 +216,7 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
     <pre>
         <code class="language-jsx">    
         function App() {
+            
           function handleClick() {
             alert("You clicked the button!");
           }
@@ -232,6 +233,26 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
         </code>
     </pre>
 
+    <h3>Example 2: Passing Parameters to Event Handlers</h3>
+    If you need to pass arguments inside an event handler, use an <b><font color="blue">arrow function</font></b>.
+    <pre>
+        <code>
+            function App() {
+    
+                   function handleClick(name) {
+                        alert(`Hello, ${name}!`);
+                   }
+                
+                  return (
+                    &lt;button onClick={() => handleClick("Alice")}&gt;
+                      Click Me
+                    &lt;/button&gt;
+                  );
+            }
+                
+            export default App;
+        </code>
+    </pre>
 
     <h3>Common Event Types in React</h3>
 
