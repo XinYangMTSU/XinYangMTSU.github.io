@@ -321,7 +321,14 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
             export default App;
         </code>
     </pre>
-        <b><font color="blue">onChange={handleChange}</font></b> updates state when text is typed.
+        <ul>
+            <li>&diams; <b><font color="blue">onChange={handleChange}</font></b> updates state when text is typed.</li>
+            <li>&diams; <b><font color="blue">event.target</font></b> – Refers to the HTML element that triggered the event (e.g., an &lt;input&gt; field).</li>
+           <li>&diams; <b><font color="blue">event.target.value</font></b> – Captures the current value of the input field</li>
+            <li>&diams; <b><font color="blue">setText(event.target.value);</font></b> – Updates the state (text) with the new input value.</li>
+        </ul>
+        
+        
 
     <h3>Example 4: Preventing Default Behavior (Form Submission)</h3>
         
