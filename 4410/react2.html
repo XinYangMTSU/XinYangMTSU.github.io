@@ -497,23 +497,47 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
 
 
     <h2>5. useEffect (Handling Side Effects)</h2>
-    <h3>Example:</h3>
-    <pre><code>import { useState, useEffect } from "react";
+    <h3>Example: Fetching Movies from an API</h3>
+    <pre><code class="language-jsx"> 
+        import { useState, useEffect } from "react";
 
-function Timer() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    console.log("Component updated! Count:", count);
-  }, [count]);
-
-  return (
-    &lt;div&gt;
-      &lt;p&gt;Count: {count}&lt;/p&gt;
-      &lt;button onClick={() => setCount(count + 1)}&gt;Increase&lt;/button&gt;
-    &lt;/div&gt;
-  );
-}</code></pre>
+        function MovieList() {
+          const [movies, setMovies] = useState([]); // State to store movie data
+          const [loading, setLoading] = useState(true); // State to track loading status
+        
+          useEffect(() => {
+            fetch("https://api.tvmaze.com/shows") // Fetches a list of TV shows
+              .then((response) => response.json()) // Convert response to JSON
+              .then((data) => {
+                setMovies(data.slice(0, 10)); // Store only the first 10 movies
+                setLoading(false); // Stop loading
+              })
+              .catch((error) => console.error("Error fetching movie data:", error));
+          }, []); // Empty dependency array → Runs only once when the component mounts
+        
+          return (
+            &lt;div style={{ textAlign: "center", marginTop: "20px" }}&gt;
+              &lt;h2&gt;Top 10 Movies&lt;/h2&gt;
+              {loading ? (
+                &lt;p&gt;Loading...&lt;/p&gt;
+              ) : (
+                &lt;ul style={{ listStyle: "none", padding: 0 }}&gt;
+                  {movies.map((movie) => (
+                    &lt;li key={movie.id} style={{ marginBottom: "15px", padding: "10px", border: "1px solid #ddd" }}&gt;
+                      &lt;strong&gt;{movie.name}&lt;/strong&gt; &lt;br /&gt;
+                      &lt;img src={movie.image?.medium} alt={movie.name} style={{ borderRadius: "10px", marginTop: "5px" }} /&gt;
+                      &lt;p&gt;&lt;strong&gt;Genre:&lt;/strong&gt; {movie.genres.join(", ")}&lt;/p&gt;
+                      &lt;p&gt;&lt;strong&gt;Premiered:&lt;/strong&gt; {movie.premiered}&lt;/p&gt;
+                    &lt;/li&gt;
+                  ))}
+                &lt;/ul&gt;
+              )}
+            &lt;/div&gt;
+          );
+        }
+        
+        export default MovieList;
+    </code></pre>
 </div>
 
     <!-- Prism.js JavaScript -->
