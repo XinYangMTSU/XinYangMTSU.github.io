@@ -412,8 +412,12 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
 
 
     <h2>6. Conditional Rendering</h2>
-    <h3>Example:</h3>
-    <pre><code>
+
+    <b><font color="blue">Conditional rendering</font></b> in React allows a component to display different content based on a condition 
+    (e.g., user login status, form completion, etc.).    
+    
+    <h3>Example: Log In & Log Out Form with Username Validation</h3>
+    <pre><code class="language-jsx"> 
     import { useState } from "react";
 
     function LoginForm() {
@@ -481,6 +485,16 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
     
     export default LoginForm;  
     </code></pre>
+
+    This Login Form includes:
+        <ul>
+            <li>✅ Conditional rendering (isLoggedIn) controls which UI appears.</li>
+            <li>✅ Username field validation (no spaces or special characters).</li>
+            <li>✅ Two buttons: "Log In" (with validation) & "Log Out".</li>
+            <li>✅ State management: isLoggedIn controls which UI is displayed.</li>
+            <li>✅ Error messages if validation fails.</li>
+        </ul>
+
 
     <h2>8. useEffect (Handling Side Effects)</h2>
     <h3>Example:</h3>
