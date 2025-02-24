@@ -213,17 +213,20 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
         <li>1. <b><font color="blue">Current state value</font></b> (count)</li>
         <li>2. <b><font color="blue">Function to update the state</font></b> (setCount)</li>
     </ul>
+        
     <h3>Example using <code>useState</code>:</h3>
     <pre><code class="language-jsx">
-        import { useState } from "react";
+        import { useState } from "react"; //useState is imported from React because it's a built-in Hook.
 
         function Counter() {
-          const [count, setCount] = useState(0);
+          const [count, setCount] = useState(0); //useState(0) initializes count with 0.
         
           return (
             &lt;div&gt;
-              &lt;p&gt;Count: {count}&lt;/p&gt;
-              &lt;button onClick={() => setCount(count + 1)}&gt;Increase&lt;/button&gt;
+              &lt;p&gt;Count: {count}&lt;/p&gt; {/*{count} dynamically displays the current state in the UI.*/}
+              &lt;button onClick={() => setCount(count + 1)}&gt;Increase&lt;/button&gt; 
+              {/*setCount(newValue) updates count and re-renders the component.*/}
+              {/*When the button is clicked, setCount(count + 1) increments the count by 1.*/}
             &lt;/div&gt;
           );
         }
