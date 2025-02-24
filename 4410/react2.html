@@ -202,8 +202,25 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
         </code>
     </pre>
 
+    <h2>2. State (Managing Component Data)</h2>
+    <h3>Example using <code>useState</code>:</h3>
+    <pre><code>import { useState } from "react";
 
-    <h2>2. Handling Events in React </h2>
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+      &lt;button onClick={() => setCount(count + 1)}&gt;Increase&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Counter;</code></pre>
+
+    
+    <h2>3. Handling Events in React </h2>
     In React, event handling works similarly to JavaScript but with some key differences:
     <ul>
         <li>&diams; Event names use <b><font color="blue">camelCase</font></b> (<b><font color="blue">onClick</font></b> instead of onclick).</li>
@@ -240,7 +257,7 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
     <h3>Example 2: Passing Parameters to Event Handlers</h3>
     If you need to pass arguments inside an event handler, use an <b><font color="blue">arrow function</font></b>.
     <pre>
-        <code>
+       <code class="language-jsx">  
             function App() {
     
                    function handleClick(name) {
@@ -296,34 +313,7 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
       </tbody>
     </table>
         
-    <h2>3. State (Managing Component Data)</h2>
-    <h3>Example using <code>useState</code>:</h3>
-    <pre><code>import { useState } from "react";
 
-function Counter() {
-  const [count, setCount] = useState(0);
-
-  return (
-    &lt;div&gt;
-      &lt;p&gt;Count: {count}&lt;/p&gt;
-      &lt;button onClick={() => setCount(count + 1)}&gt;Increase&lt;/button&gt;
-    &lt;/div&gt;
-  );
-}
-
-export default Counter;</code></pre>
-
-    <h2>5. Handling Events</h2>
-    <h3>Example:</h3>
-    <pre><code>function ClickHandler() {
-  function handleClick() {
-    alert("Button clicked!");
-  }
-
-  return &lt;button onClick={handleClick}&gt;Click Me&lt;/button&gt;;
-}
-
-export default ClickHandler;</code></pre>
 
     <h2>6. Conditional Rendering</h2>
     <h3>Example:</h3>
