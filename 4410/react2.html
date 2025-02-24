@@ -410,20 +410,6 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
   return props.isLoggedIn ? &lt;h1&gt;Welcome Back!&lt;/h1&gt; : &lt;h1&gt;Please Log In&lt;/h1&gt;;
 }</code></pre>
 
-    <h2>5. Lists and Keys</h2>
-    <h3>Example:</h3>
-    <pre><code>const names = ["Alice", "Bob", "Charlie"];
-
-function NameList() {
-  return (
-    &lt;ul&gt;
-      {names.map((name, index) => (
-        &lt;li key={index}&gt;{name}&lt;/li&gt;
-      ))}
-    &lt;/ul&gt;
-  );
-}</code></pre>
-
     <h2>8. useEffect (Handling Side Effects)</h2>
     <h3>Example:</h3>
     <pre><code>import { useState, useEffect } from "react";
