@@ -212,7 +212,25 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
 </li>
     </ul>
     
-
+    <h3>Example 1: Handling Button Clicks</h3>
+    <pre>
+        <code class="language-jsx">    
+        function App() {
+          function handleClick() {
+            alert("You clicked the button!");
+          }
+        
+          return (
+            <div>
+              <h2>Click Event Example</h2>
+              <button onClick={handleClick}>Click Me</button>
+            </div>
+          );
+        }
+        
+        export default App;
+        </code>
+    </pre>
         
     <h2>3. State (Managing Component Data)</h2>
     <h3>Example using <code>useState</code>:</h3>
