@@ -322,6 +322,52 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
         </code>
     </pre>
         <b><font color="blue">onChange={handleChange}</font></b> updates state when text is typed.
+
+    <h3>Example 4: Preventing Default Behavior (Form Submission)</h3>
+        
+    Forms automatically reload the page when submitted. 
+    Prevent this using <b><font color="blue">event.preventDefault()</font></b>.
+    <pre>
+        <code class="language-jsx"> 
+            import { useState } from "react";
+
+            function App() {
+            
+              const [name, setName] = useState(""); // Stores name input
+              const [email, setEmail] = useState(""); // Stores email input
+            
+              function handleSubmit(event) {
+                event.preventDefault(); // Prevents page reload
+                alert(`Name: ${name}\nEmail: ${email}`);
+              }
+            
+              return (
+                &lt;div style={{ textAlign: "center", marginTop: "20px" }}&gt;
+                  &lt;h2&gt;Simple Form&lt;/h2&gt;
+                  &lt;form onSubmit={handleSubmit}&gt;
+                    &lt;input 
+                      type="text" 
+                      value={name} 
+                      onChange={(event) => setName(event.target.value)} 
+                      placeholder="Enter your name"
+                      style={{ display: "block", margin: "10px auto", padding: "8px" }}
+                    /&gt;
+                    &lt;input 
+                      type="email" 
+                      value={email} 
+                      onChange={(event) => setEmail(event.target.value)} 
+                      placeholder="Enter your email"
+                      style={{ display: "block", margin: "10px auto", padding: "8px" }}
+                    /&gt;
+                    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+                  &lt;/form&gt;
+                &lt;/div&gt;
+              );
+            }
+            
+            export default App;
+        </code>
+    </pre>
         
     <h3>Common Event Types in React</h3>
 
