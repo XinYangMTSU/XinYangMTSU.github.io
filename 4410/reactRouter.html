@@ -15,7 +15,46 @@
     <div id="main">
     <h1>Introduction to React Router</h1>
 
-       
+
+    <table style="width:80%">
+  <tr>
+    <th>Feature</th>
+    <th>Traditional Websites (Server-Side Routing)</th>
+    <th>React Router (Client-Side Routing)</th>
+  </tr>
+  <tr>
+    <td>How pages load</td>
+    <td>Each page request loads a new HTML file from the server.</td>
+    <td>Only one HTML file (`index.html`) is loaded initially.</td>
+  </tr>
+  <tr>
+    <td>Navigation</td>
+    <td>Clicking a link sends a request to the server, which responds with a new page.</td>
+    <td>Clicking a link updates the URL and renders a new component without a page reload.</td>
+  </tr>
+  <tr>
+    <td>Performance</td>
+    <td>Slower because each navigation requires a full page reload.</td>
+    <td>Faster because only the necessary parts of the page update.</td>
+  </tr>
+  <tr>
+    <td>Example Behavior</td>
+    <td>
+      <ul>
+        <li>Visiting `/` loads `index.html`.</li>
+        <li>Clicking "About" requests `about.html`.</li>
+        <li>The browser refreshes to load `about.html`.</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>Visiting `/` loads `index.html` once.</li>
+        <li>Clicking "About" does not reload—React dynamically replaces content.</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
   
     </div>
 
