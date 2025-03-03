@@ -310,6 +310,74 @@ Now, modify your App.js file to include the Navbar component:
         export default App;
     </code>
 </pre>
+
+<h2>Organizing Components: Separating Pages in React Router</h2>
+Separating the Home, About, and Contact components into their own files will keep your project organized 
+and maintainable. Here's how you can do it:
+
+<h3>Step 1: Create Separate Component Files</h3>
+
+<ul>
+    <li>(1) Create Home.js</li>
+    <pre>
+    <code class="language-jsx">
+        function Home() {
+          return <h1>Home Page</h1>;
+        }
+        
+        export default Home;
+    </code>
+    </pre>
+    <li>(2) Create About.js</li>
+    <pre>
+        <code class="language-jsx">
+        function About() {
+          return <h1>About Page</h1>;
+        }
+        
+        export default About;
+        </code>
+    </pre>
+    <li>(3) Create Contact.js</li>
+    <pre>
+        <code class="language-jsx">
+            function Contact() {
+              return <h1>Contact Page</h1>;
+            }
+            
+            export default Contact;
+        </code>
+    </pre>
+</ul>
+
+<h3>Step 2: Update App.js</h3>
+Now, modify your App.js file to import and use these separate components:
+<pre>
+    <code class="language-jsx">
+        import { BrowserRouter, Routes, Route } from "react-router-dom";
+        import Navbar from "./Navbar"; // Import the Navbar
+        import Home from "./Home"; // Import Home component
+        import About from "./About"; // Import About component
+        import Contact from "./Contact"; // Import Contact component
+        
+        function App() {
+          return (
+            &lt;BrowserRouter&gt;
+              &lt;Navbar /&gt; {/* Add Navbar at the top */}
+              &lt;Routes&gt;
+                &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+                &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+                &lt;Route path="/contact" element={&lt;Contact /&gt;} /&gt;
+                &lt;Route path="*" element={&lt;h1&gt;404 - Page Not Found&lt;/h1&gt;} /&gt;
+              &lt;/Routes&gt;
+            &lt;/BrowserRouter&gt;
+          );
+        }
+        
+        export default App;
+    </code>
+</pre>
+
         
 <h2>Traditional Websites vs React Router</h2>
         
