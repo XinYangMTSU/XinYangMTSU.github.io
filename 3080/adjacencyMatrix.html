@@ -151,6 +151,61 @@
 			<img width="500px" height="300px" src="images/adjMatrix.png">
 		</center>
 
+		<h2>Real-Life Example: Flight Route System</h2>
+		Imagine we are building a <b><font color="blue">flight booking system</font></b> for an airline.
+		<ul>
+			<li>&clubs; The cities New York (NYC), Los Angeles (LAX), Chicago (ORD), and Dallas (DFW) are represented as nodes.</li>
+			<li>&clubs; A direct flight between two cities is represented as an edge.</li>
+			<li>&clubs; If a flight exists between two cities, we mark it as 1; otherwise, it's 0.</li>
+		</ul>
+		<h3>Step 1: Representing Flight Routes Using an Adjacency Matrix</h3>
+		<ul>
+			<li>&clubs; If there is a flight between city[i] and city[j], then matrix[i][j] = 1, otherwise 0.</li>
+			<li>&clubs; Since flights are bidirectional (undirected graph), the matrix is <b><font color="blue">symmetric</font></b>.</li>
+		</ul>
+
+		<table style="width:50%; margin: auto;">
+		    <tr>
+		        <th>City</th>
+		        <th>NYC</th>
+		        <th>LAX</th>
+		        <th>ORD</th>
+		        <th>DFW</th>
+		    </tr>
+		    <tr>
+		        <th>NYC</th>
+		        <td>0</td>
+		        <td>1</td>
+		        <td>1</td>
+		        <td>0</td>
+		    </tr>
+		    <tr>
+		        <th>LAX</th>
+		        <td>1</td>
+		        <td>0</td>
+		        <td>1</td>
+		        <td>0</td>
+		    </tr>
+		    <tr>
+		        <th>ORD</th>
+		        <td>1</td>
+		        <td>1</td>
+		        <td>0</td>
+		        <td>1</td>
+		    </tr>
+		    <tr>
+		        <th>DFW</th>
+		        <td>0</td>
+		        <td>0</td>
+		        <td>1</td>
+		        <td>0</td>
+		    </tr>
+		</table>
+
+		
+		<h3>Step 2: Implementing the Adjacency Matrix in C++</h3>
+		
+		
 		<h2>Reference</h2>
 
 		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
