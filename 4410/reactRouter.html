@@ -193,6 +193,37 @@ If a user enters an unknown URL, display a 404 error page.
     <li>&clubs; Now, visiting an <b><font color="blue">unknown route</font></b> (e.g., /random) will show <b><font color="blue">"404 - Page Not Found"</font></b>.</li>
 </ul>
 
+<h2>Building a Stylish Navigation Bar with React Router</h2>
+
+<h3>Step 1: Create Navbar.js</h3>
+Inside your src folder, create a new file called Navbar.js:
+<pre>
+    <code class="language-jsx">
+        import { Link } from "react-router-dom";
+        import "./Navbar.css"; // Import CSS for styling
+        
+        function Navbar() {
+          return (
+            &lt;nav className="navbar"&gt;
+              &lt;div className="logo"&gt;MyWebsite&lt;/div&gt;
+              &lt;ul className="nav-links"&gt;
+                &lt;li&gt;
+                  &lt;Link to="/"&gt;Home&lt;/Link&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                  &lt;Link to="/about"&gt;About&lt;/Link&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                  &lt;Link to="/contact"&gt;Contact&lt;/Link&gt;
+                &lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/nav&gt;
+          );
+        }
+        
+        export default Navbar;
+    </code>
+</pre>
 
         
 <h2>Traditional Websites vs React Router</h2>
