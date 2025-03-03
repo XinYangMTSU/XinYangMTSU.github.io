@@ -178,6 +178,18 @@ In the above example, users must type URLs manually. Let's add <b><font color="b
     <li>&clubs; &lt;Link to="/about"&gt;About&lt;/Link&gt; creates a <b><font color="blue">clickable link</font></b> to /about.</li>
     <li>&clubs; Clicking links <b><font color="blue">changes the URL without reloading the page</font></b>.</li>
 </ul>
+
+
+<h2>Handling 404 Pages (Not Found)</h2>
+If a user enters an unknown URL, display a 404 error page.
+<ul>
+    <li>&clubs; <b>Add This Route</b> in App.js</li>
+    <pre>
+        <code>
+            &lt;Route path="*" element={&lt;h1&gt;404 - Page Not Found&lt;/h1&gt;} /&gt;
+        </code>
+    </pre>
+</ul>
         
 <h2>Traditional Websites vs React Router</h2>
         
