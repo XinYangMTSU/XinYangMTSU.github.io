@@ -119,7 +119,29 @@
 
 <h2>Adding Navigation Links</h2>
     
-    
+In the above example, users must type URLs manually. Let's add <b><font color="blue">clickable navigation</font></b>.
+
+<h3>Step 1: Create a Header.js Component</h3>
+<pre>
+    <code>
+        import { Link } from "react-router-dom";
+        
+        function Header() {
+          return (
+            &lt;header&gt;
+              &lt;h1&gt;My Website&lt;/h1&gt;
+              &lt;nav&gt;
+                &lt;Link to="/"&gt;Home&lt;/Link&gt; | 
+                &lt;Link to="/about"&gt;About&lt;/Link&gt;
+              &lt;/nav&gt;
+            &lt;/header&gt;
+          );
+        }
+        
+        export default Header;
+    </code>
+</pre>
+        
 <h2>Traditional Websites vs React Router</h2>
         
 <table style="width:80%; margin:auto;">
