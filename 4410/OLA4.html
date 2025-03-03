@@ -90,10 +90,10 @@
 
 	<br>
 	    
-    	<h2>Step 3: Implementing React Router (20 Points)</h2>
+    	<h2>Step 3: Implementing React Router (18 Points)</h2>
 	This step involves setting up React Router to enable navigation between different pages without reloading the application.
 	<br><br>
-	(1) Set up routes in App.js for different pages
+	(1) Set up routes in App.js for different pages (4 points)
 	<pre>
 		/ --> Home
 		/blog --> Blog page
@@ -101,59 +101,59 @@
 		/blog/:id --> Blog post details
 	</pre>
 
-	(2) &clubs; Use the &lt;Link&gt; component for navigation. <br>
+	(2) &clubs; Use the &lt;Link&gt; component for navigation. (12 points)<br>
 	<pre>
 		a. Use &lt;Link to="/"&gt; instead of &lt;a href="/"&gt; for navigation.
 		b. Ensure the Navbar contains links to all pages.
 	</pre>
 	    
-	(3) &clubs; Handle 404 (Not Found) pages correctly. <br>
+	(3) &clubs; Handle 404 (Not Found) pages correctly. (2 points) <br>
 	    Implement a wildcard route (*) in App.js that displays a "404 - Page Not Found" message for unknown URLs.
 	
 
 	<h2>Step 4: Form Handling & Event Management (20 Points)</h2>
 	This step focuses on implementing the New Post form, handling user input, and updating the blog dynamically.
 	<br><br>
-	(1) Implement a form in NewPost.js to allow users to add blog posts. <br>
+	(1) Implement a form in NewPost.js to allow users to add blog posts. (5 Points)<br>
 	<pre>
 		a. Title (text input)
 		b. Author (text input)
 		c. Content (textarea)
 	</pre>
-	(2) Use controlled components (useState) for form input management. <br>
+	(2) Use controlled components (useState) for form input management. (5 Points) <br>
 	<pre>
 		a. Manage form input values using useState.
 		b. Update state when the user types in the form fields.
 	</pre>
-	(3) Ensure form validation (e.g., title, author, and content fields cannot be empty). <br>
+	(3) Ensure form validation (e.g., title, author, and content fields cannot be empty). (5 Points) <br>
 	<pre>
 		a. Prevent submission if title, author, or content fields are empty.
 		b. Display an error message if validation fails.
 	</pre>
-	(4) After submission, update the blog post list dynamically. <br>
+	(4) After submission, update the blog post list dynamically. (5 Points)<br>
 	<pre>
 		a. When a post is added, it should instantly appear in Blog.js.
 		b. Use state lifting (manage blog posts in App.js and pass as props).
 	</pre>
 
-	<h2>Step 5: Post Viewing & Deletion (20 Points)</h2>
+	<h2>Step 5: Post Viewing & Deletion (18 Points)</h2>
 	This step involves displaying full post details and allowing users to delete posts.
 	    <br><br>
 	    
-	(1) Create PostDetail.js to display full blog post details.<br>
+	(1) Create PostDetail.js to display full blog post details. (4 Points) <br>
 	<pre>
 		a. When clicking a post in Blog.js, users should be navigated to /blog/:id.
 		b. Fetch the correct post based on id using useParams().
 	    </pre>
 	    
-	(2) Implement Delete functionality to remove posts from the list. <br>
+	(2) Implement Delete functionality to remove posts from the list. (10 Points)<br>
 	    <pre>
 		a. Add a "Delete" button in PostDetail.js.
 		b. Clicking it should remove the post from the blog list.
 		c. Use state updates (setPosts()) to ensure the post is deleted.
 	</pre>
 	    
-	(3) Use React state updates to dynamically reflect deletions. <br>
+	(3) Use React state updates to dynamically reflect deletions.(4 Points) <br>
     <pre>
 		a. Ensure the UI updates immediately after a post is deleted.
 		b. Redirect the user back to /blog after deletion using useNavigate().
@@ -161,18 +161,18 @@
 
 	<h2>Step 6: Styling & UI Enhancement (10 Points)</h2>
 
-	(1) Apply CSS to enhance the appearance of the blog. <br>
+	(1) Apply CSS to enhance the appearance of the blog. (4 Points) <br>
 	    <pre>
 	        a. Create a consistent layout for all pages.
 	        b. Use CSS classes for styling form elements, buttons, and text.
 	    </pre>
-	(2) Style navigation links, form inputs, buttons, and blog post lists. <br>
+	(2) Style navigation links, form inputs, buttons, and blog post lists. (3 Points) <br>
 	    <pre>
 		a. Ensure the Navbar is visually distinct.
 		b. Buttons should have hover effects and smooth styling.
 		c. Blog posts should be clearly structured and readable.
 	    </pre>
-	(3) Ensure a responsive layout for better user experience. <br>
+	(3) Ensure a responsive layout for better user experience. (3 Points) <br>
 		<pre>
 		a. The app should work well on both desktop and mobile.
 		b. Use flexbox or grid to manage layout positioning.
@@ -196,11 +196,11 @@
             </tr>
             <tr>
                 <td>Implementing React Router</td>
-                <td>20 Points</td>
+                <td>18 Points</td>
             </tr>
 	    <tr>
                 <td>Form Handling & Event Management</td>
-                <td>18 Points</td>
+                <td>20 Points</td>
             </tr>
 	    <tr>
 		<td>Post Viewing & Deletion</td>
