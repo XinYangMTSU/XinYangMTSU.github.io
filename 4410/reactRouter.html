@@ -225,6 +225,91 @@ Inside your src folder, create a new file called Navbar.js:
     </code>
 </pre>
 
+<h3>Step 2: Create Navbar.css </h3>
+Inside src, create a new file called Navbar.css:
+<pre>
+    <code class="language-jsx">
+        /* Navbar container */
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: #333;
+          padding: 15px 20px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Website logo */
+        .logo {
+          font-size: 24px;
+          font-weight: bold;
+          color: #fff;
+        }
+        
+        /* Navigation links */
+        .nav-links {
+          list-style: none;
+          display: flex;
+          gap: 20px;
+        }
+        
+        .nav-links li {
+          display: inline;
+        }
+        
+        /* Link styles */
+        .nav-links a {
+          text-decoration: none;
+          color: #fff;
+          font-size: 18px;
+          padding: 8px 12px;
+          transition: 0.3s ease-in-out;
+          border-radius: 5px;
+        }
+        
+        .nav-links a:hover {
+          background-color: #ff6b6b;
+          color: #fff;
+        }
+    </code>
+</pre>
+
+<h3>Use Navbar in App.js</h3>
+Now, modify your App.js file to include the Navbar component:
+<pre>
+    <code class="language-jsx">
+        import { BrowserRouter, Routes, Route } from "react-router-dom";
+        import Navbar from "./Navbar"; // Import the Navbar
+        
+        function Home() {
+          return &lt;h1&gt;Home Page&lt;/h1&gt;;
+        }
+        
+        function About() {
+          return &lt;h1&gt;About Page&lt;/h1&gt;;
+        }
+        
+        function Contact() {
+          return &lt;h1&gt;Contact Page&lt;/h1&gt;;
+        }
+        
+        function App() {
+          return (
+            &lt;BrowserRouter&gt;
+              &lt;Navbar /&gt; {/* Add Navbar at the top */}
+              &lt;Routes>
+                &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+                &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+                &lt;Route path="/contact" element={&lt;Contact /&gt;} /&gt;
+                &lt;Route path="*" element={&lt;h1&gt;404 - Page Not Found&lt;/h1&gt;} /&gt;
+              &lt;/Routes&gt;
+            &lt;/BrowserRouter&gt;
+          );
+        }
+        
+        export default App;
+    </code>
+</pre>
         
 <h2>Traditional Websites vs React Router</h2>
         
