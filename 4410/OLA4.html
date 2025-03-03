@@ -112,17 +112,52 @@
 	
 
 	<h2>Step 4: Form Handling & Event Management (20 Points)</h2>
-
+	This step focuses on implementing the New Post form, handling user input, and updating the blog dynamically.
+	<br><br>
 	(1) Implement a form in NewPost.js to allow users to add blog posts. <br>
+	<pre>
+		a. Title (text input)
+		b. Author (text input)
+		c. Content (textarea)
+	</pre>
 	(2) Use controlled components (useState) for form input management. <br>
+	<pre>
+		a. Manage form input values using useState.
+		b. Update state when the user types in the form fields.
+	</pre>
 	(3) Ensure form validation (e.g., title, author, and content fields cannot be empty). <br>
+	<pre>
+		a. Prevent submission if title, author, or content fields are empty.
+		b. Display an error message if validation fails.
+	</pre>
 	(4) After submission, update the blog post list dynamically. <br>
+	<pre>
+		a. When a post is added, it should instantly appear in Blog.js.
+		b. Use state lifting (manage blog posts in App.js and pass as props).
+	</pre>
 
 	<h2>Step 5: Post Viewing & Deletion (20 Points)</h2>
-	
+	This step involves displaying full post details and allowing users to delete posts.
+	    <br><br>
+	    
 	(1) Create PostDetail.js to display full blog post details.<br>
+	<pre>
+		    a. When clicking a post in Blog.js, users should be navigated to /blog/:id.
+		    b. Fetch the correct post based on id using useParams().
+	    </pre>
+	    
 	(2) Implement Delete functionality to remove posts from the list. <br>
+	    <pre>
+		a. Add a "Delete" button in PostDetail.js.
+		b. Clicking it should remove the post from the blog list.
+		c. Use state updates (setPosts()) to ensure the post is deleted.
+	</pre>
+	    
 	(3) Use React state updates to dynamically reflect deletions. <br>
+	    <pre>
+		    a. Ensure the UI updates immediately after a post is deleted.
+		    b. Redirect the user back to /blog after deletion using useNavigate().
+	    </pre>
 
 	<h2>Step 6: Styling & UI Enhancement (10 Points)</h2>
 
