@@ -16,7 +16,7 @@
         
     <h1>Introduction to React Router</h1>
 
-
+        
         <ul>
             <li>&diams; You can use the following command to check whether <b>react-router-dom</b> is installed in your project and show its version:</li>
             <pre>
@@ -28,7 +28,41 @@
              </pre>
         </ul>
        
-       
+    <h2>React Router example</h2>
+    <pre>
+        <code class="language-jsx">
+            // Import necessary components from react-router-dom for routing
+            import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+            // Define the Home component that will be shown when the user visits "/"
+            function Home() {
+              return &lt;h1&gt;Home Page&lt;/h1&gt;; // Displays a heading "Home Page"
+            }
+
+            // Define the About component that will be shown when the user visits "/about"
+            function About() {
+              return &lt;h1&gt;About Page&lt;/h1&gt;; // Displays a heading "About Page"
+            }
+
+            // Define the main App component
+            function App() {
+              return (
+                // BrowserRouter is the parent component that enables React Router
+                &lt;BrowserRouter&gt;
+                  {/* Routes is a wrapper for multiple Route components */}
+                  &lt;Routes&gt;
+                    {/* Route for the Home page: "/" means the root URL (e.g., http://localhost:3000/) */}
+                    &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+                    {/* Route for the About page: "/about" (e.g., http://localhost:3000/about) */}
+                    &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+                  &lt;/Routes&gt;
+                &lt;/BrowserRouter&gt;
+              );
+            }
+            // Export the App component so it can be used in index.js
+            export default App;
+        </code>
+    </pre>
      
 <table style="width:80%; margin:auto;">
   <tr>
