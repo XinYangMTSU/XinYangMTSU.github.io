@@ -123,7 +123,7 @@ In the above example, users must type URLs manually. Let's add <b><font color="b
 
 <h3>Step 1: Create a Header.js Component</h3>
 <pre>
-    <code>
+    <code class="language-jsx">
         import { Link } from "react-router-dom";
         
         function Header() {
@@ -141,6 +141,36 @@ In the above example, users must type URLs manually. Let's add <b><font color="b
         export default Header;
     </code>
 </pre>
+
+<h3>Step 2: Use Header.js in App.js</h3>
+<pre>
+    <code class="language-jsx">
+            import { BrowserRouter, Routes, Route } from "react-router-dom";
+            import Header from "./Header";
+        
+            function Home() {
+              return &lt;h1&gt;Home Page&lt;/h1&gt;; // Displays a heading "Home Page"
+            }
+
+            function About() {
+              return &lt;h1&gt;About Page&lt;/h1&gt;; // Displays a heading "About Page"
+            }
+
+            function App() {
+              return (
+                &lt;Header /&gt;  {/* Display navigation links */}
+                &lt;BrowserRouter&gt;
+                  &lt;Routes&gt;
+                    &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+                    &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+                  &lt;/Routes&gt;
+                &lt;/BrowserRouter&gt;
+              );
+            }
+        
+            export default App;
+        </code>
+    </pre>
         
 <h2>Traditional Websites vs React Router</h2>
         
