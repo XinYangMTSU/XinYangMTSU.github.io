@@ -554,7 +554,7 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
 
     <h3>Structure of useEffect</h3>
     <pre>
-        <code class="language-jsx">
+        <code>
         useEffect(() => {
           // Effect logic (e.g., fetching data)
         }, [dependencies]);
@@ -566,6 +566,11 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
         <li>&clubs; The second argument <b><font color="blue">[dependencies]</font></b> determines when the effect runs.</li>
         <li>&clubs; Empty dependency array <b><font color="blue">[]</font></b>: The effect runs only once, when the component mounts (i.e., on the first render).</li>
     </ul>
+
+    <h3>movies.map((movie) => ())</h3>
+        Loops through movies and returns JSX for each movie.
+    <h3>key={movie.id}</h3>
+        Ensures React efficiently updates the list.
         
 </div>
 
