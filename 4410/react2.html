@@ -562,8 +562,9 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
     </pre>
 
     <ul>
-        <li>The first argument <b><font color="blue">() => {}</font></b> is the effect function.</li>
-        <li>The second argument <b><font color="blue">[dependencies]</font></b> determines when the effect runs.</li>
+        <li>&clubs; The first argument <b><font color="blue">() => {}</font></b> is the effect function.</li>
+        <li>&clubs; The second argument <b><font color="blue">[dependencies]</font></b> determines when the effect runs.</li>
+        <li>&clubs; Empty dependency array <b><font color="blue">[]</font></b>: The effect runs only once, when the component mounts (i.e., on the first render).</li>
     </ul>
         
 </div>
