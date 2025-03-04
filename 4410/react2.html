@@ -571,7 +571,13 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
         Loops through movies and returns JSX for each movie.
     <h3>key={movie.id}</h3>
         Ensures React efficiently updates the list.
-        
+    <h3>movie.image?.medium</h3>
+        <ul>
+            <li>&clubs; movie.image --> The image property inside the movie object.</li>
+            <li>&clubs; movie.image?.medium --> Accesses movie.image.medium, but only if movie.image exists.</li>
+            <li>&clubs; ?. (Optional Chaining) --> Prevents errors if image is null or undefined.</li>
+        </ul>
+
 </div>
 
     <!-- Prism.js JavaScript -->
