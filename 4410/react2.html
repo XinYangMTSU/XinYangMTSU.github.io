@@ -534,9 +534,11 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
               ) : (
                 &lt;ul style={{ listStyle: "none", padding: 0 }}&gt;
                   {movies.map((movie) => (
-                    &lt;li key={movie.id} style={{ marginBottom: "15px", padding: "10px", border: "1px solid #ddd" }}&gt;
+                    &lt;li key={movie.id} style={{ marginBottom: "15px", padding: "10px", 
+                        border: "1px solid #ddd" }}&gt;
                       &lt;strong&gt;{movie.name}&lt;/strong&gt; &lt;br /&gt;
-                      &lt;img src={movie.image?.medium} alt={movie.name} style={{ borderRadius: "10px", marginTop: "5px" }} /&gt;
+                      &lt;img src={movie.image?.medium} alt={movie.name} style={{ borderRadius: "10px", 
+                        marginTop: "5px" }} /&gt;
                       &lt;p&gt;&lt;strong&gt;Genre:&lt;/strong&gt; {movie.genres.join(", ")}&lt;/p&gt;
                       &lt;p&gt;&lt;strong&gt;Premiered:&lt;/strong&gt; {movie.premiered}&lt;/p&gt;
                     &lt;/li&gt;
