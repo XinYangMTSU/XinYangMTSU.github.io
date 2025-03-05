@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Graphs and Trees</title>
+	<link href="../CSS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+	<div id="main">
+
+		<h1>Stack</h1>
+
+		<table style="width:80%; margin: auto;">
+    <thead>
+        <tr>
+            <th>Step</th>
+            <th>i</th>
+            <th>expr[i]</th>
+            <th>Action Taken</th>
+            <th>Values Stack</th>
+            <th>Operators Stack</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1️⃣</td><td>0</td><td>'('</td><td>Push (</td><td>[]</td><td>['(']</td>
+        </tr>
+        <tr>
+            <td>2️⃣</td><td>1</td><td>'2'</td><td>Start extracting 25</td><td>[]</td><td>['(']</td>
+        </tr>
+        <tr>
+            <td>3️⃣</td><td>2</td><td>'5'</td><td>Number becomes 25</td><td>[25]</td><td>['(']</td>
+        </tr>
+        <tr>
+            <td>4️⃣</td><td>3</td><td>'*'</td><td>Push *</td><td>[25]</td><td>['(', '*']</td>
+        </tr>
+        <tr>
+            <td>5️⃣</td><td>4</td><td>'3'</td><td>Extract number 3</td><td>[25, 3]</td><td>['(', '*']</td>
+        </tr>
+        <tr>
+            <td>6️⃣</td><td>5</td><td>')'</td><td>Evaluate (25 * 3), result 75</td><td>[75]</td><td>[]</td>
+        </tr>
+        <tr>
+            <td>7️⃣</td><td>6</td><td>'+'</td><td>Push +</td><td>[75]</td><td>['+']</td>
+        </tr>
+        <tr>
+            <td>8️⃣</td><td>7</td><td>'('</td><td>Push (</td><td>[75]</td><td>['+', '(']</td>
+        </tr>
+        <tr>
+            <td>9️⃣</td><td>8</td><td>'6'</td><td>Extract number 6</td><td>[75, 6]</td><td>['+', '(']</td>
+        </tr>
+        <tr>
+            <td>🔟</td><td>9</td><td>'/'</td><td>Push /</td><td>[75, 6]</td><td>['+', '(', '/']</td>
+        </tr>
+        <tr>
+            <td>1️⃣1️⃣</td><td>10</td><td>'3'</td><td>Extract number 3</td><td>[75, 6, 3]</td><td>['+', '(', '/']</td>
+        </tr>
+        <tr>
+            <td>1️⃣2️⃣</td><td>11</td><td>')'</td><td>Evaluate (6 / 3), result 2</td><td>[75, 2]</td><td>['+']</td>
+        </tr>
+        <tr>
+            <td>1️⃣3️⃣</td><td>12</td><td>End</td><td>Evaluate 75 + 2, result 77</td><td>[77]</td><td>[]</td>
+        </tr>
+    </tbody>
+</table>
+
+
+		<h2>Reference</h2>
+
+		<a href="https://learn.saylor.org/course/view.php?id=67" target="_blank">saylor academy</a>
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+
+</body>
+
+</html>
