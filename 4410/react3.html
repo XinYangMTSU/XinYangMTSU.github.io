@@ -26,13 +26,46 @@
       </ul>
     <pre>
         <code class="language-jsx">
-           
-
-        </code>
-    </pre>
-      
-   <h3>useParams()</h3>
-  
+           import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+    
+            function Home() {
+              const navigate = useNavigate(); // Must be inside a function component
+            
+              return (
+                &lt;div&gt;
+                  &lt;button style={{ margin: "20px" }} onClick={() => navigate("/about")}&gt;Go to About&lt;/button&gt;
+                  &lt;h1&gt;Home Page&lt;/h1&gt;
+                &lt;/div&gt;
+              );
+            }
+            
+            function About() {
+              const navigate = useNavigate(); // Must be inside a function component
+            
+              return (
+                  &lt;div&gt;
+                    &lt;button style={{ margin: "20px" }} onClick={() => navigate("/")}&gt;Go to Home&lt;/button&gt;
+                    &lt;h1&gt;About Page&lt;/h1&gt;
+                  &lt;/div&gt;
+                );
+            }
+            
+            function App() {
+              return (
+                &lt;BrowserRouter&gt; {/* Wrap the entire app inside BrowserRouter */}
+                  &lt;Routes&gt;
+                    &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+                    &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+                  &lt;/Routes&gt;
+                &lt;/BrowserRouter&gt;
+              );
+            }
+            
+            export default App;
+                </code>
+            </pre>
+              
+           <h3>useParams()</h3>
     </div>
 
     <!-- Prism.js JavaScript -->
