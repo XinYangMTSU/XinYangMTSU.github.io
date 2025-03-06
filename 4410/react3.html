@@ -97,43 +97,43 @@
 
             <pre>
                 <code class="language-jsx">
-                    import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
-                    import Navbar from "./Navbar"; // Import the Navbar
-                            
-                      function Home() {
-                          return <h1>Home Page</h1>;
-                      }
-                      
-                      function About() {
-                          return <h1>About Page</h1>;
-                      }
-                      
-                      function Contact() {
-                          return <h1>Contact Page</h1>;
-                      }
+            import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+            import Navbar from "./Navbar"; // Import the Navbar
                     
-                      //UserProfile Component to Show Dynamic Data
-                      function UserProfile() {
-                          const { id } = useParams(); //Extracts "id" from the URL
-                          return <h1>User Profile - ID: {id}</h1>;
-                      }
-                            
-                      function App() {
-                        return (
-                          <BrowserRouter>
-                            <Navbar /> {/* Add Navbar at the top */}
-                            <Routes>
-                              <Route path="/" element={<Home />} />
-                              <Route path="/about" element={<About />} />
-                              <Route path="/contact" element={<Contact />} />
-                              <Route path="/user/:id" element={<UserProfile />} /> {/* Dynamic Route */}
-                              <Route path="*" element={<h1>404 - Page Not Found</h1>} />
-                            </Routes>
-                          </BrowserRouter>
-                        );
-                      }
-                            
-                      export default App;
+              function Home() {
+                  return &lt;h1&gt;Home Page&lt;/h1&gt;
+              }
+              
+              function About() {
+                  return &lt;h1&gtAbout Page&lt;/h1&gt;
+              }
+              
+              function Contact() {
+                  return &lt;h1&gtContact Page&lt;/h1&gt;
+              }
+            
+              //UserProfile Component to Show Dynamic Data
+              function UserProfile() {
+                  const { id } = useParams(); //Extracts "id" from the URL
+                  return &lt;h1&gtUser Profile - ID: {id}&lt;/h1&gt;
+              }
+                    
+              function App() {
+                return (
+                  &lt;BrowserRouter&gt;
+                    &lt;Navbar /&gt; {/* Add Navbar at the top */}
+                    &lt;Routes&gt;
+                      &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+                      &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+                      &lt;Route path="/contact" element={&lt;Contact /&gt;} /&gt;
+                      &lt;Route path="/user/:id" element={&lt;UserProfile /&gt;} /&gt; {/* Dynamic Route */}
+                      &lt;Route path="*" element={&lt;h1>404 - Page Not Found&lt;/h1&gt;} /&gt;
+                    &lt;/Routes&gt;
+                  &lt;/BrowserRouter&gt;
+                );
+              }
+                    
+              export default App;
                 </code>
             </pre>
             Now, try these URLs in your browser:
