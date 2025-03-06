@@ -76,6 +76,15 @@
                 <li>&clubs; Similarly, in the About component, <b><font color="blue">navigate("/")</font></b> takes the user back to the Home page.</li>
                 <li>&clubs; This approach enables <b><font color="blue">client-side navigation</font></b> without a full page reload</li>
             </ul>
+
+            <h3>Navigate Back and Forward</h3>
+            <pre>
+                <code class="language-jsx">
+                        const navigate = useNavigate();
+                        &lt;button onClick={() => navigate(-1)}&gt;Go Back&lt;/button&gt;  // Navigate back
+                        &lt;button onClick={() => navigate(1)}&gt;Go Forward&lt;/button&gt; // Navigate forward
+                </code>
+            </pre>
               
            <h3>useParams()</h3>
     </div>
