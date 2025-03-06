@@ -16,7 +16,8 @@
         
     <h1>React Router Navigation: useNavigate() & useParams()</h1>
 
-    <h3>useNavigate() for Button-Based Navigation</h3>
+    <h2>useNavigate() for Button-Based Navigation</h2>
+        
       The <b><font color="blue">useNavigate()</font></b> hook in React Router allows you to <b><font color="blue">navigate programmatically</font></b> 
       instead of using &lt;Link&gt;. This is useful when:
       <ul>
@@ -24,6 +25,11 @@
         <li>You need <b><font color="blue">conditional navigation</font></b> (e.g., after login, check if user is authenticated).</li>
         <li>You want to <b><font color="blue">go back or forward in history</font></b>.</li>
       </ul>
+
+        <h3>React Router: Navigating Between Pages Using useNavigate</h3>
+        This code demonstrates how to use React Router for client-side navigation between a Home page and an About page using the 
+        useNavigate hook. The App component wraps the application in BrowserRouter, defines routes with Routes and Route, 
+        and allows users to navigate between pages using buttons that trigger navigate() within functional components.
     <pre>
         <code class="language-jsx">
            import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
