@@ -116,6 +116,24 @@
         export default App;
       </code>
     </pre>
+
+        <h3>The .filter() function keeps items that return true in the callback function:</h3>
+        <pre>
+            array.filter((element, index) => condition);
+        </pre>
+    <ul>
+        <li>If condition === true, <b><font color="blue">keep the item</font></b>.</li>
+        <li>If condition === false, <b><font color="blue">remove the item</font></b>.</li>
+    </ul>
+        In our case:
+        <pre>
+            posts.filter((_, index) => index !== indexToDelete);
+        </pre>
+        <ul>
+            <li>If index !== indexToDelete --> <b><font color="blue">Keep the post</font></b>.</li>
+            <li>If index === indexToDelete --> <b><font color="blue">Remove the post</font></b>.</li>
+        </ul>
+        
     </div>
 
     <!-- Prism.js JavaScript -->
