@@ -24,7 +24,7 @@
         import { useState } from "react";
                             
         function Home() {
-            return <h1>Home Page</h1>
+            return &lt;h1&gt;Home Page&lt;/h1&gt;
         }
         
         function Info({ posts, setPosts }) {
@@ -35,24 +35,24 @@
             }
         
             return (
-            <div style={{ textAlign: "center", marginTop: "20px" }}>
-                  <h1>User Information</h1>
+            &lt;div style={{ textAlign: "center", marginTop: "20px" }}&gt;
+                  &lt;h1&gt;User Information&lt;/h1&gt;
         
-                  {posts.length === 0 ? ( <p>No submission yet!</p>) : (
-                    <ul style={{ listStyle: "none"}}>
+                  {posts.length === 0 ? ( &lt;p&gt;No submission yet!&lt;/p&gt;) : (
+                    &lt;ul style={{ listStyle: "none"}}&gt;
                       {posts.map((post, index) => (
-                        <li key={index} style={{ margin: "15px" }}>
-                          <h3>{post.name}</h3>
-                          <p>Email: {post.email}</p>
-                          <p><small>Posted on: {post.time}</small></p>
+                        &lt;li key={index} style={{ margin: "15px" }}&gt;
+                          &lt;h3&gt;{post.name}&lt;/h3&gt;
+                          &lt;p&gt;Email: {post.email}&lt;/p&gt;
+                          &lt;p&gt;&lt;small&gt;Posted on: {post.time}&lt;/small&gt;&lt;/p&gt;
                           {/* Delete Button at Bottom Right */}
-                          <button onClick={() => handleDelete(index)}>
+                          &lt;button onClick={() => handleDelete(index)}&gt;
                             Delete
-                          </button>
-                        </li>)
+                          &lt;/button&gt;
+                        &lt;/li&gt;)
                       )}
-                    </ul> )}
-            </div>);
+                    &lt;/ul&gt; )}
+            &lt;/div&gt;);
         }
         
         function Submit({ setPosts }) {
@@ -72,28 +72,28 @@
             }
         
             return (
-              <div style={{ textAlign: "center", marginTop: "20px" }}>
-                  <h2>Simple Form</h2>
-                  <form onSubmit={handleSubmit}>
-                    <input 
+              &lt;div style={{ textAlign: "center", marginTop: "20px" }}&gt;
+                  &lt;h2&gt;Simple Form&lt;/h2&gt;
+                  &lt;form onSubmit={handleSubmit}&gt;
+                    &lt;input 
                       type="text" 
                       value={name} 
                       onChange={(event) => setName(event.target.value)} 
                       placeholder="Enter your name"
                       style={{ margin: "10px auto", padding: "8px" }}
-                    />
-                      <br />
-                    <input 
+                    /&gt;
+                      &lt;br /&gt;
+                    &lt;input 
                       type="email" 
                       value={email} 
                       onChange={(event) => setEmail(event.target.value)} 
                       placeholder="Enter your email"
                       style={{ margin: "10px auto", padding: "8px" }}
-                    /> 
-                    <br />
-                    <button type="submit">Submit</button>
-                  </form>
-              </div>);
+                    /&gt;
+                    &lt;br /&gt;
+                    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+                  &lt;/form&gt;
+              &lt;/div&gt;);
         }
                    
         function App() {
@@ -101,18 +101,18 @@
           const [posts, setPosts] = useState([]); 
         
           return (
-            <BrowserRouter>
-              <Navbar /> {/* Add Navbar at the top */}
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/info" element={<Info posts={posts} setPosts={setPosts}/>} />
-                <Route path="/submit" element={<Submit setPosts={setPosts}/>} />
-                <Route path="*" element={<h1>404 - Page Not Found</h1>} />
-              </Routes>
-            </BrowserRouter>
+            &lt;BrowserRouter&gt;
+              &lt;Navbar /&gt; {/* Add Navbar at the top */}
+              &lt;Routes&gt;
+                &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+                &lt;Route path="/info" element={&lt;Info posts={posts} setPosts={setPosts}/&gt;} /&gt;
+                &lt;Route path="/submit" element={&lt;Submit setPosts={setPosts}/&gt;} /&gt;
+                &lt;Route path="*" element={&lt;h1&gt;404 - Page Not Found&lt;/h1&gt;} /&gt;
+              &lt;/Routes&gt;
+            &lt;/BrowserRouter&gt;
           );
         }
-                
+            
         export default App;
       </code>
     </pre>
