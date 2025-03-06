@@ -1,0 +1,128 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Prism.js CSS for styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <link href="../CSS/Site.css" type="text/css" rel="stylesheet">
+    <title>User Information System Using React Router</title>
+</head>
+<body>
+
+    <div id="main">
+        
+    <h1>User Information Submission and Deletion System Using React Router</h1>
+
+    <pre>
+      <code class="language-jsx">
+        import { BrowserRouter, Routes, Route} from "react-router-dom";
+        import Navbar from "./Navbar"; // Import the Navbar
+        import { useState } from "react";
+                            
+        function Home() {
+            return <h1>Home Page</h1>
+        }
+        
+        function Info({ posts, setPosts }) {
+        
+            //Remove the selected post
+            function handleDelete(indexToDelete) {
+                setPosts(posts.filter((_, index) => index !== indexToDelete)); 
+            }
+        
+            return (
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
+                  <h1>User Information</h1>
+        
+                  {posts.length === 0 ? ( <p>No submission yet!</p>) : (
+                    <ul style={{ listStyle: "none"}}>
+                      {posts.map((post, index) => (
+                        <li key={index} style={{ margin: "15px" }}>
+                          <h3>{post.name}</h3>
+                          <p>Email: {post.email}</p>
+                          <p><small>Posted on: {post.time}</small></p>
+                          {/* Delete Button at Bottom Right */}
+                          <button onClick={() => handleDelete(index)}>
+                            Delete
+                          </button>
+                        </li>)
+                      )}
+                    </ul> )}
+            </div>);
+        }
+        
+        function Submit({ setPosts }) {
+        
+            const [name, setName] = useState(""); // Stores name input
+            const [email, setEmail] = useState(""); // Stores email input
+            
+            function handleSubmit(event) {
+        
+              event.preventDefault(); // Prevents page reload
+              alert(`Name: ${name}\nEmail: ${email}`);
+              
+              //Creates an object called newPost
+              const newPost = { name, email, time: new Date().toLocaleString() }; 
+              setPosts((prevPosts) => prevPosts.concat(newPost));
+              
+            }
+        
+            return (
+              <div style={{ textAlign: "center", marginTop: "20px" }}>
+                  <h2>Simple Form</h2>
+                  <form onSubmit={handleSubmit}>
+                    <input 
+                      type="text" 
+                      value={name} 
+                      onChange={(event) => setName(event.target.value)} 
+                      placeholder="Enter your name"
+                      style={{ margin: "10px auto", padding: "8px" }}
+                    />
+                      <br />
+                    <input 
+                      type="email" 
+                      value={email} 
+                      onChange={(event) => setEmail(event.target.value)} 
+                      placeholder="Enter your email"
+                      style={{ margin: "10px auto", padding: "8px" }}
+                    /> 
+                    <br />
+                    <button type="submit">Submit</button>
+                  </form>
+              </div>);
+        }
+                   
+        function App() {
+        
+          const [posts, setPosts] = useState([]); 
+        
+          return (
+            <BrowserRouter>
+              <Navbar /> {/* Add Navbar at the top */}
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/info" element={<Info posts={posts} setPosts={setPosts}/>} />
+                <Route path="/submit" element={<Submit setPosts={setPosts}/>} />
+                <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+              </Routes>
+            </BrowserRouter>
+          );
+        }
+                
+        export default App;
+      </code>
+    </pre>
+    </div>
+
+    <!-- Prism.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+
+    
+</body>
+</html>
+
