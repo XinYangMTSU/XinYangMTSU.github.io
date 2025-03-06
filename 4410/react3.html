@@ -94,6 +94,68 @@
                 <li><b><font color="blue">/product/:productId</font></b> --> Show details for a specific product.</li>
                 <Li><b><font color="blue">/post/:slug</font></b> --> Display a blog post dynamically.</Li>
             </ul>
+
+            <pre>
+                <code class="language-jsx">
+                    import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+                    import Navbar from "./Navbar"; // Import the Navbar
+                            
+                      function Home() {
+                          return <h1>Home Page</h1>;
+                      }
+                      
+                      function About() {
+                          return <h1>About Page</h1>;
+                      }
+                      
+                      function Contact() {
+                          return <h1>Contact Page</h1>;
+                      }
+                    
+                      //UserProfile Component to Show Dynamic Data
+                      function UserProfile() {
+                          const { id } = useParams(); //Extracts "id" from the URL
+                          return <h1>User Profile - ID: {id}</h1>;
+                      }
+                            
+                      function App() {
+                        return (
+                          <BrowserRouter>
+                            <Navbar /> {/* Add Navbar at the top */}
+                            <Routes>
+                              <Route path="/" element={<Home />} />
+                              <Route path="/about" element={<About />} />
+                              <Route path="/contact" element={<Contact />} />
+                              <Route path="/user/:id" element={<UserProfile />} /> {/* Dynamic Route */}
+                              <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+                            </Routes>
+                          </BrowserRouter>
+                        );
+                      }
+                            
+                      export default App;
+                </code>
+            </pre>
+            Now, try these URLs in your browser:
+            <table style="width:60%; margin:auto">
+              <tr>
+                <th>URL</th>
+                <th>Displayed Output</th>
+              </tr>
+              <tr>
+                <td>/user/123</td>
+                <td>User Profile - ID: 123</td>
+              </tr>
+              <tr>
+                <td>/user/456</td>
+                <td>User Profile - ID: 456</td>
+              </tr>
+              <tr>
+                <td>/user/abc</td>
+                <td>User Profile - ID: abc</td>
+              </tr>
+            </table>
+
             
     </div>
 
