@@ -95,13 +95,12 @@
 		/ --> Home
 		/blog --> Blog page
 		/new-post --> New post form
-		/blog/:id --> Blog post details
 	</pre>
 
 	(2) &clubs; Use the &lt;Link&gt; component for navigation. (12 points)<br>
 	<pre>
 		a. Use &lt;Link to="/"&gt; instead of &lt;a href="/"&gt; for navigation.
-		b. Ensure the Navbar contains links to all pages.
+		b. Ensure the Navbar.js contains links to all pages.
 	</pre>
 	    
 	(3) &clubs; Handle 404 (Not Found) pages correctly. (2 points) <br>
@@ -129,23 +128,23 @@
 	</pre>
 	(4) After submission, update the blog post list dynamically. (5 Points)<br>
 	<pre>
-		a. When a post is added, it should instantly appear in Blog.js.
-		b. Use state lifting (manage blog posts in App.js and pass as props).
+		a. When a post is added, it should appear in Blog.js.
+		b. Use state (manage blog posts in App.js and pass as props).
 	</pre>
 
 	<h2>Step 5: Post Viewing & Deletion (18 Points)</h2>
 	This step involves displaying full post details and allowing users to delete posts.
 	    <br><br>
 	    
-	(1) Create PostDetail.js to display full blog post details. (4 Points) <br>
+	(1) Create Blog.js to display full blog post details. (4 Points) <br>
 	<pre>
-		a. When clicking a post in Blog.js, users should be navigated to /blog/:id.
-		b. Fetch the correct post based on id using useParams().
+		a. When clicking Blog, users should be navigated to the Blog page.
+		b. The blog page will display all post details: Title, Author, Content, and timestamp.
 	    </pre>
 	    
 	(2) Implement Delete functionality to remove posts from the list. (10 Points)<br>
 	    <pre>
-		a. Add a "Delete" button in PostDetail.js.
+		a. Add a "Delete" button for each post in Blog.js.
 		b. Clicking it should remove the post from the blog list.
 		c. Use state updates (setPosts()) to ensure the post is deleted.
 	</pre>
@@ -153,7 +152,6 @@
 	(3) Use React state updates to dynamically reflect deletions.(4 Points) <br>
     <pre>
 		a. Ensure the UI updates immediately after a post is deleted.
-		b. Redirect the user back to /blog after deletion using useNavigate().
 	    </pre>
 
 	<h2>Step 6: Styling & UI Enhancement (10 Points)</h2>
