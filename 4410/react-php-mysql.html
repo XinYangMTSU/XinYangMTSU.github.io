@@ -1,0 +1,208 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>React</title>
+	<link href="../CSS/Site.css" type="text/css" rel="stylesheet">
+	<style>
+		.folder {
+            font-weight: bold;
+            color: #2b6cb0;
+        }
+	</style>
+</head>
+
+<body>
+
+	<div id="main">
+
+		<h1>What is React?</h1>
+		<ul>
+			<li>&#9733; <b><font color="blue">React</font></b>, sometimes referred to as a frontend JavaScript framework, 
+				is a JavaScript library created by Facebook (Meta).</li>
+			<li>&#9733; React is a JavaScript library for building user interfaces, 
+				widely used in modern web development.</li>
+			<li>&#9733; React is used to build single-page applications.</li>
+			<li>&#9733; React allows us to create reusable UI components.</li>
+			<li>&#9733; React uses Virtual DOM, JSX, and component-based architecture.</li>
+		</ul>
+
+		<h2>Install Node.js </h2>
+
+		To use React in production, you need <b><font color="blue">npm</font></b> which is included with <b><font color="blue">Node.js</font></b>.
+		
+		<h3>What is Node.js? </h3>
+		Node.js is an open-source, cross-platform <b><font color="blue">JavaScript runtime environment</font></b> that allows developers to run JavaScript outside the browser. 
+		It is primarily used for server-side development, making it possible to create fast, scalable, and real-time applications.
+		<br><br>
+		Before Node.js, JavaScript could only run inside a web browser (like Chrome or Firefox). 
+		Node.js changed that by allowing JavaScript to run on a server, enabling backend development with JavaScript.
+		
+		<h3>What is npm (Node Package Manager)?</h3>
+		<b><font color="blue">npm (Node Package Manager)</font></b> is the default package manager for Node.js. 
+		It helps developers install, manage, and share JavaScript libraries and tools easily.
+
+		<br>
+		<h3><font color="red">Steps to Install Node.js:</font> </h3>
+		
+		<ul>
+			<li>1. Visit the Node.js website</li>
+			<ul>
+				<li>&#9733; Go to <a href="https://nodejs.org" target="_blank">https://nodejs.org</a></li>
+				<li>&#9733; You’ll see the LTS (Long-Term Support) version. 
+					LTS is recommended for most users because it’s more stable for development.</li>
+			</ul>
+			<li>2. Download the Installer</li>
+			<ul>
+				<li>&#9733; Click on the LTS version appropriate for your platform (Windows or macOS).</li>
+				<li>&#9733; This will download an <b>.msi</b> (Windows) or <b>.pkg</b> (macOS) installer.</li>
+			</ul>
+			<li>3. Run the Installer</li>
+			<ul>
+				<li>&#9733; <b><font color="blue">Windows:</font></b> Double-click the .msi file, follow the on-screen instructions (accept license, 
+					choose install path, etc.).</li>
+				<li>&#9733; <b><font color="blue">macOS:</font></b> Double-click the .pkg file and follow the installation wizard.</li>
+			</ul>
+			<li>4. Verify Installation</li>
+			<ul>
+				<li>&#9733; Open <b><font color="blue">Command Prompt</font></b> (Windows) or <b><font color="blue">Terminal</font></b> (macOS).</li>
+				<li>&#9733; Run the commands:</li>
+		<pre>
+		node -v
+		npm -v
+		</pre>
+				<li>&#9733; If these commands print version numbers (e.g., v18.16.0 for node, 9.6.4 for npm), 
+					the installation of Node.js succeeded.</li>
+			</ul>
+		</ul>
+	
+
+		<h2>Create a React App</h2>
+
+		<ul>
+			<li>1. Navigate to the folder where you want your project (using  <b><font color="blue">cd</font></b> command).</li>
+			<br>
+			<li>2. Run:</li>
+			<pre>
+			npx create-react-app my-app
+			</pre>
+			This will generate a new folder called  <b><font color="blue">my-app</font></b> with a basic React setup.
+			
+			<table style="width:80%">
+		            <tr>
+		                <th>Command Part</th>
+		                <th>Meaning</th>
+		            </tr>
+		            <tr>
+		                <td><code>npx</code></td>
+		                <td>Runs a package without installing it globally.</td>
+		            </tr>
+		            <tr>
+		                <td><code>create-react-app</code></td>
+		                <td>A tool that sets up a new React project with all necessary files.</td>
+		            </tr>
+		            <tr>
+		                <td><code>my-app</code></td>
+		                <td>The name of your new React project (a folder will be created with this name).</td>
+		            </tr>
+			</table>
+			<br>
+			<li>3. Go into that folder:</li>
+			<pre>
+			cd my-app	
+			</pre>
+			<li>4. Start the development server:</li>
+			<pre>
+			npm start
+			</pre>
+			This launches the app at <a>http://localhost:3000</a> <br>
+			A new browser window will pop up with your newly created React App! <br>
+			You should see a welcome screen with a spinning React logo. <br>
+			<br>
+			<img src="react.png" width="600px" height="400px";/>
+		</ul>
+
+		<h2>React Project Structure</h2>
+		
+		<h3>✅ <span class="folder">src/</span> → This is the Core Folder for Your React Code:</h3>
+		<ul>
+			<li>Components (.js or .jsx files) → Reusable UI building blocks</li>
+			<li>Styles (.css files) → CSS files for styling your components.</li>
+			<li>Logic (.js or .ts files) → JavaScript or TypeScript files for handling data and functionality.</li>
+			<li>Assets (images, icons, etc.) → Static resources like images and icons used in the app.</li>
+		</ul>
+		<h3>✅ <span class="folder">App.js</span> → This is the main component of Your React App</h3>
+		This is the primary file where you write your React code. It serves as the main component of your application, and you can: <br>
+		<u>
+			<li>Create and modify the UI.</li>
+			<li>Import and use other components.</li>
+			<li>Add styles and logic.</li>
+		</u>
+
+<h2>React Image Import Methods</h2>
+		
+    <table style="width:80%">
+        <tr>
+            <th>Method</th>
+            <th>When to Use</th>
+            <th>Example</th>
+        </tr>
+        <tr>
+            <td><strong>Import (<code>import logo from './logo.svg'</code>)</strong></td>
+            <td>When using images inside <code>src/</code></td>
+            <td><code>&lt;img src={logo} /&gt;</code></td>
+        </tr>
+        <tr>
+            <td><strong>Direct Path (<code>src="/logo.svg"</code>)</strong></td>
+            <td>When using images inside <code>public/</code></td>
+            <td><code>&lt;img src="/logo.svg" /&gt;</code></td>
+        </tr>
+        <tr>
+            <td><strong>External URL</strong></td>
+            <td>For online images</td>
+            <td><code>&lt;img src="https://example.com/image.jpg" /&gt;</code></td>
+        </tr>
+    </table>
+
+	<h2>Check React Version Using npm</h2>
+	Execute this command in the terminal within your project directory:
+	<pre>
+	npm list react
+	</pre>
+
+<h2>React Comment Syntax Summary</h2>
+    <table style="width:80%">
+        <tr>
+            <th>Type</th>
+            <th>Syntax</th>
+            <th>Where to Use?</th>
+        </tr>
+        <tr>
+            <td><strong>Single-line JavaScript comment</strong></td>
+            <td><code>// This is a comment</code></td>
+            <td>Outside JSX</td>
+        </tr>
+        <tr>
+            <td><strong>Multi-line JavaScript comment</strong></td>
+            <td><code>/* This is a comment */</code></td>
+            <td>Outside JSX</td>
+        </tr>
+        <tr>
+            <td><strong>JSX Comment</strong></td>
+            <td><code>{/* This is a JSX comment */}</code></td>
+            <td>Inside JSX</td>
+        </tr>
+    </table>
+
+	<h2>What is JSX? (JavaScript XML)</h2>
+	<b><font color="blue">JSX (JavaScript XML)</font></b> is a <b><font color="blue">syntax extension</font></b> for JavaScript that allows you to write HTML-like code inside JavaScript files. 
+	It is used in <b><font color="blue">React</font></b> to describe what the UI should look like.
+	<br>
+	<br>
+	<br>
+		
+	</div>
+
+</body>
