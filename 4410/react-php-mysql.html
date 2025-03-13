@@ -32,8 +32,8 @@
 
 		<h3>Create Database & Users Table</h3>
 		<ul>
-			<li>(1) Open <b><font color="blue">phpMyAdmin</font></b> (http://localhost/phpmyadmin/).</li>
-			<li>(2) Run the following <b><font color="blue">SQL commands</font></b> to create the database and users table: </li>
+			<li>&#9733; (1) Open <b><font color="blue">phpMyAdmin</font></b> (http://localhost/phpmyadmin/).</li>
+			<li>&#9733; (2) Run the following <b><font color="blue">SQL commands</font></b> to create the database and users table: </li>
 			<pre>
 				<code>
 				CREATE DATABASE user_auth;
@@ -52,13 +52,13 @@
 
 		<h3>A. Create Project Folder</h3>	
 		<ul>
-			<li>(1) Inside <b><font color="blue">htdocs</font></b> (XAMPP folder), create a new project:</li>
+			<li>&#9733; (1) Inside <b><font color="blue">htdocs</font></b> (XAMPP folder), create a new project:</li>
 			<pre>
 				cd /Applications/XAMPP/xamppfiles/htdocs
 				mkdir react-php-auth
 				cd react-php-auth
 			</pre>
-			<li>(2) Inside <b><font color="blue">react-php-auth</font></b>, create these PHP files:</li>
+			<li>&#9733; (2) Inside <b><font color="blue">react-php-auth</font></b>, create these PHP files:</li>
 			<pre>
 				db.php
 				register.php
@@ -88,29 +88,19 @@
 
 		<h3>C. Install JWT Library in PHP</h3>
 		<ul>
-			<li>(1) Install Composer (if not installed)</li>
-			<pre>
-				curl -sS https://getcomposer.org/installer | PHP
-				sudo mv composer.phar /usr/local/bin/composer
-			</pre>
-		</ul>
-			
-		<h3>Step 1: Check If PHP Is Installed in XAMPP</h3>
-
-		Run:
+			<li>&#9733; Step 1: Check If PHP Is Installed in XAMPP</li>
+			Run:
 		<pre>
 			/Applications/XAMPP/xamppfiles/bin/php -v
 		</pre>
-
-		If PHP is installed, you should see something like:
+			If PHP is installed, you should see something like:
 		<pre>
 			PHP 8.x.x (cli) (built: ...)
 		</pre>
 
+			<li>&#9733; Step 2: Add XAMPP PHP to Your System PATH</li>
 
-		<h2>Step 2: Add XAMPP PHP to Your System PATH</h2>
-
-		Since you're using XAMPP, the PHP binary is located in:
+			Since you're using XAMPP, the PHP binary is located in:
 		<pre>
 			/Applications/XAMPP/xamppfiles/bin/php
 		</pre>
@@ -131,8 +121,9 @@
 			php -v
 		</pre>
 
-		<h2>Step 3: Install Composer</h2>
-		Once PHP is working, install Composer:
+			<li>&#9733; Step 3: Install Composer</li>
+
+			Once PHP is working, install Composer:
 		<pre>
 			curl -sS https://getcomposer.org/installer | PHP
 			sudo mv composer.phar /usr/local/bin/composer
@@ -142,17 +133,13 @@
 		<pre>
 			composer -v
 		</pre>
-
-		<h2>Step 4: Install JWT Library</h2>
-
-		Navigate to your PHP project folder (react-php-auth) and run:
+			<li>&#9733; Step 4: Install JWT Library</li>
+			Navigate to your PHP project folder (react-php-auth) and run:
 		<pre>
 			cd /Applications/XAMPP/xamppfiles/htdocs/react-php-auth
 			composer require firebase/php-jwt
 		</pre>
-		
-		<ul>
-			<li>&#9733; </li>
+			
 		</ul>
 		
 	<br>
