@@ -26,7 +26,79 @@
 		password hashing for security, and JWT generation for authentication. Users register with a <b><font color="blue">username and password</font></b>, which are securely 
 		stored in a MySQL database. Upon login, a <b><font color="blue">JWT token</font></b> is issued, allowing authenticated users to access protected routes. 
 		The system ensures security with <b><font color="blue">password hashing (bcrypt)</font></b> and JWT-based session management, making it a robust and scalable authentication solution.
-		
+
+
+		<h1>1. Set Up MySQL Database</h1>
+
+		<h2>Create Database & Users Table</h2>
+		<ul>
+			<li>(1) Open <b><font color="blue">phpMyAdmin</font></b> (http://localhost/phpmyadmin/).</li>
+			<li>(2) Run the following <b><font color="blue">SQL commands</font></b> to create the database and users table: </li>
+			<pre>
+				<code>
+				CREATE DATABASE user_auth;
+				USE user_auth;
+				
+				CREATE TABLE users (
+				    id INT AUTO_INCREMENT PRIMARY KEY,
+				    username VARCHAR(100) UNIQUE NOT NULL,
+				    password VARCHAR(255) NOT NULL
+				);
+				</code>
+			</pre>
+		</ul>
+
+		<h1>2. Set Up PHP Backend (XAMPP)</h1>
+
+		<h2>A. Create Project Folder</h2>	
+		<ul>
+			<li>(1) Inside htdocs (XAMPP folder), create a new project:</li>
+			<pre>
+				<code>
+					cd /Applications/XAMPP/xamppfiles/htdocs
+					mkdir react-php-auth
+					cd react-php-auth
+				</code>
+			</pre>
+			<li>(2) Inside react-php-auth, create these PHP files:</li>
+			<pre>
+				db.php
+				register.php
+				login.php
+				jwt_helper.php
+				auth.php
+			</pre>
+		</ul>
+
+		<h2>B. Set Up Database Connection (db.php)</h2>
+
+		Create db.php for MySQL connection:
+		<pre>
+			<code>
+				<?php
+				$host = "localhost";
+				$user = "root"; // Default XAMPP user
+				$password = ""; // Default password is empty
+				$database = "user_auth";
+				
+				$conn = new mysqli($host, $user, $password, $database);
+				
+				if ($conn->connect_error) {
+				    die(json_encode(["error" => "Database connection failed: " . $conn->connect_error]));
+				}
+				?>
+			</code>
+		</pre>
+
+		<h2>C. Install JWT Library in PHP</h2>
+		<ul>
+			<li>(1) Install Composer (if not installed)</li>
+			<pre>
+				curl -sS https://getcomposer.org/installer | PHP
+				sudo mv composer.phar /usr/local/bin/composer
+			</pre>
+		</ul>
+			
 		<h2>Step 1: Check If PHP Is Installed in XAMPP</h2>
 
 		Run:
