@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 4 - </title>
+    <meta name="author" content="Your Name">
+    <meta name="robots" content="noindex, nofollow">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default"></script>
+    <link href="lab.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div>
+    <ul>
+      <li><a href="https://xinyangmtsu.github.io/3080.html" target="_blank"><b>CSCI 3080</b></a></li>
+      <li><a href="https://xinyangmtsu.github.io/3080/Lab/lab3.html"><b>Lab4</b></a></li>
+    </ul>
+</div>
+
+<br>
+<br>
+    
+    <!-- Title / Header Section -->
+    <center>
+            <div id="div1">
+                        <font size=5 color="#ffa500">&nbsp;<b>CSCI 3080 - <em>Discrete Structures</em></b></font>
+                        <br><br>
+                        <font size=4 color="white"><b>Lab 4 - Compressing Text Files with Huffman Coding in C++</b></font>
+            </div>  
+    </center>
+    
+    <!-- Content -->
+    <h1>1. Objective</h1>
+    <p>
+      In this lab, students will implement Huffman coding in C++ to compress and decompress text files. 
+      They will learn how to construct a Huffman tree, generate Huffman codes, encode a text file into a compressed binary format, 
+      and then decode it back to its original form. Additionally, students will analyze the efficiency of Huffman compression 
+      by comparing the file sizes before and after compression. By the end of this lab, students will be able to:
+    </p>
+     <ul>
+       <li>&#9733; Understand the principles of Huffman coding and its application in data compression.</li>
+       <li>&#9733; Implement a priority queue using a min-heap to construct a Huffman tree.</li>
+       <Li>&#9733; Generate Huffman codes for individual characters based on their frequency.</Li>
+       <Li>&#9733; Encode a given text file into a compressed binary format.</Li>
+       <li>&#9733; Decode the compressed file to restore the original text.</li>
+       <li>&#9733; Evaluate the efficiency of the compression by comparing file sizes.</li>
+     </ul>
+
+    <h1>2. Lab Instructions</h1>
+
+    <h2>Step 1: Read the Input File</h2>
+ 
+    <ul>
+      <li>1. Download or create a sample text file named input.txt.</li>
+      <li>2. Write a C++ program to read the contents of input.txt into a string.</li>
+    </ul>
+
+    <h2>Step 2: Compute Character Frequencies</h2>
+
+   <ul>
+     <li>1. Traverse the input string and count the occurrence of each character.</li>
+     <li>2. Store the character-frequency mapping in an unordered_map.</li>
+   </ul>
+
+  <h2>Step 3: Build the Huffman Tree</h2>
+
+  <ul>
+    <Li>1. Use a priority queue (min-heap) to construct the Huffman tree.</Li>
+    <li>2. Merge nodes with the lowest frequencies to build the tree.</li>
+    <li>3. Store the root node of the Huffman tree.</li>
+  </ul>
+  
+  <h2>Step 4: Generate Huffman Codes</h2>
+
+  <ul>
+    <li>1. Traverse the Huffman tree to assign binary codes to each character.</li>
+    <li>2. Store these codes in an unordered_map.</li>
+  </ul>
+
+  <h2>Step 5: Encode the Text File</h2>
+
+  <ul>
+    <li>1. Replace each character in the text file with its Huffman code.</li>
+    <li>2. Write the encoded binary string to a compressed file compressed.bin.</li>
+  </ul>
+
+  <h2>Step 6: Decode the Compressed File</h2>
+
+  <ul>
+    <li>1. Read compressed.bin and reconstruct the original text using the Huffman tree.</li>
+    <li>2. Save the decoded text as decompressed.txt.</li>
+  </ul>
+
+  <h2>Step 7: Analyze Compression Efficiency</h2>
+
+  <ul>
+    <li>1. Compare the size of input.txt, compressed.bin, and decompressed.txt.</li>
+    <li>2. Calculate the compression ratio:</li>
+    (/ 
+    Compression Ratio = \frac{Compressed Size}{Original Size} \times 100%
+    /)
+  </ul>
+  
+    <h1>3. Requirements</h1>
+    
+    <ul>
+        <li>&#9733; (1) Please <b class="blue-text">save the 3×4 augmented matrix to a data file</b> named data.txt</li>
+        <li>&#9733; (2) Please <b class="blue-text">prompt the user to enter the filename</b> containing the augmented matrix.</li>
+        <li>&#9733; (3) Please <b class="blue-text">opens the file</b> and <b class="red-text">reads a 3×4 matrix</b> into a 2D array.</li>
+        <li>&#9733; (4) Please <b class="blue-text">displays the original augmented matrix</b> in a structured format.</li>
+        <li>&#9733; (5) Please <b class="blue-text">applying Gauss-Jordan Elimination</b> to solve the linear equations systems.</li>
+        <li>&#9733; (6) Please <b class="blue-text">display the final transformed matrix RREF Form</b>, and also show the <b class="red-text">computed solutions</b> for the system.</li>
+        <li>&#9733; (7) Please ensure that your program can compile and run <b class="red-text">without</b> crashing, producing errors, or infinite loop errors.</li>
+    </ul>
+
+    <h1>4. Sample Input/Output</h1>
+    <pre>
+
+    </pre>
+
+    <h1>5. Grading Criteria</h1>
+
+    <table>
+        <caption><strong>Grading Criteria</strong> (Total Points: 100)</caption>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Criteria</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="3"><strong>Correctly Declare Required Variables: </strong><br>(10 points)</td>
+                <td>String variable: 
+                    <ul>
+                        <li>fileName</li>
+                    </ul>
+                </td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>Correct declaration of a 2D array of doubles:
+                    <ul>
+                        <li>augMatrix</li>
+                    </ul>
+                </td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>Global Variables
+                    <ul>
+                        <li>ROWS</li>
+                        <li>COLS</li>
+                    </ul>
+                </td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td><strong>User Inputs</strong><br>(2 points)</td>
+                <td>Reads the filename from standard input and correctly passes it to the readMatrixFromFile function.</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td rowspan="3"><strong>gaussJordanElimination Function Implementation</strong><br>(30 points)</td>
+                <td>Function Prototype: void gaussJordanElimination(double matrix[][COLS]);</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Function Implementation: Accurately implement Gauss-Jordan Elimination.</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>Function Activation: The function is called correctly in the main function.</td>
+                <td>5</td>
+            </tr>
+
+              <tr>
+                <td rowspan="3"><strong>readMatrixFromFile Functions</strong> (20 points)</td>
+                <td>Function Prototype: bool readMatrixFromFile(const string &filename, double matrix[][COLS]);</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Function Implementation: Read the augmented matrix from a file and accurately store it in a 2D array.</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                 <td>Function Activation: The function is called correctly in the main function.</td>
+                <td>5</td>
+            </tr>
+            
+             <tr>
+                <td rowspan="3"><strong>displayMatrix Functions</strong> (15 points)</td>
+                <td>Function Prototype: void displayMatrix(double matrix[][COLS]);</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Function Implementation: Display the 2D matrix with proper formatting.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                 <td>Function Activation: The function is called correctly in the main function.</td>
+                <td>5</td>
+            </tr>
+            
+            <tr>
+                <td rowspan="3"><strong>Main Function Implementation</strong><br>(10 points)</td>
+                <td>Prompt the user to enter input in a clear and correct format.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Proper formatting of program output for readability and clarity.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td rowspan="2"><strong>Code Readability & Comments</strong><br>(5 points)</td>
+                <td>Maintain consistent indentation and spacing throughout the code.</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>Include comments that explain the purpose of key sections and logic.</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td><strong>Test Cases & Output Accuracy</strong><br>(5 points)</td>
+                <td>The output for different test cases is correct and consistent.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td><strong>AI disclaimer</strong><br>(3 points)</td>
+                <td>Please put an AI disclaimer at the top of your source code as comments.</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td><strong>Errors</strong><br></td>
+                <td>Your program has syntax errors, compiling errors, running errors, or infinite loops.</td>
+                <td><span class="red-text">-50 points</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <h1>6. Comments</h1>
+    <ul>
+        <li>
+            &#9733; Please add the following comments to the top of your <b>lab4.cpp</b> file:
+            <pre>
+            /*
+                Author: Your Name
+                Date: Month/Day/Year
+                Lab Purpose: 
+                A.I. Disclaimer: please put your A.I. disclaimer here
+            */
+            </pre>
+        </li>
+        <li>&#9733; Please add other necessary comments to your source code.</li>
+    </ul>
+
+    <h1>7. Submit</h1>
+    <p>Please submit your Lab 4 source code file: <b>lab4.cpp</b> in D2L!</p>
+
+    <h1>8. Jupyter Hub for Programming</h1>
+    <a href="https://jupyterhub.cs.mtsu.edu/azuread/hub/home" target="_blank">Jupyter Hub for Programming</a>
+    <br>
+       By logging in to Jupyter Hub with your <b>MTSU credentials</b>, you can create, compile, and run your source code there.
+
+
+    <h1>9. Compile and Run the Source Code</h1>
+    <ul>
+        <li>Compile: <b class="red-text">c++ lab4.cpp</b></li>
+        <li>Run: <b class="red-text">./a.out</b></li>
+    </ul>
+    <hr>
+
+    <div class="centered">
+        <strong>
+            <font size="+1">
+                Congratulations! You have finished your Lab4!
+            </font>
+        </strong>
+        <br><br>
+    </div>
+
+    <footer style="text-align: center; font-size: 0.9rem; color: #999;">
+        <b>
+         &copy;2025 Dr. Xin Yang. All rights reserved.
+        <br>Department of Computer Science
+        <br>College of Basic and Applied Sciences
+        <br>Middle Tennessee State University
+        </b>
+    </footer>
+    
+    <!-- Go to Top Button -->
+    <a href="#" id="goTopBtn">&#8679;</a>
+    
+    <!-- Script to scroll to top -->
+     <script src="lab.js"></script>
+
+</body>
+</html>
