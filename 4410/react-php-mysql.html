@@ -148,6 +148,40 @@
 		</pre>
 			
 		</ul>
+
+		<h3>D. Create JWT Helper</h3>
+		Create jwt_helper.php, this file generates & verifies JWT tokens.
+		
+		<pre>
+			<code class="language-jsx">
+				&lt;?php
+				require __DIR__ . "/vendor/autoload.php";
+				use Firebase\JWT\JWT;
+				use Firebase\JWT\Key;
+				
+				$secret_key = "your_secret_key_here";
+				
+				function createJWT($user_id, $username) {
+				    global $secret_key;
+				    $payload = [
+				        "id" => $user_id,
+				        "username" => $username,
+				        "exp" => time() + (60 * 60) // Token expires in 1 hour
+				    ];
+				    return JWT::encode($payload, $secret_key, "HS256");
+				}
+				
+				function verifyJWT($token) {
+				    global $secret_key;
+				    try {
+				        return JWT::decode($token, new Key($secret_key, "HS256"));
+				    } catch (Exception $e) {
+				        return false;
+				    }
+				}
+				?&gt;
+			</code>
+		</pre>
 		
 	<br>
 	<br>
