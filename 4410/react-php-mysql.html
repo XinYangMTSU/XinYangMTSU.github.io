@@ -184,7 +184,40 @@
 				?&gt;
 			</code>
 		</pre>
-		
+
+		<h3>E. Create User Registration API</h3>
+		<ul>
+			<li>&#9733;  Create <font color="blue"><b>register.php</b></font>, handles user signup and password hashing.</li>
+		</ul>
+
+		<pre>
+			<code class="language-jsx">
+			&lt;?php
+				header("Access-Control-Allow-Origin: *");
+				header("Content-Type: application/json");
+				include "db.php";
+				
+				$data = json_decode(file_get_contents("php://input"));
+				
+				if (!empty($data->username) && !empty($data->password)) {
+				    $username = $data->username;
+				    $password = password_hash($data->password, PASSWORD_DEFAULT); // Hash password
+				
+				    $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+				    $stmt = $conn->prepare($sql);
+				    $stmt->bind_param("ss", $username, $password);
+				
+				    if ($stmt->execute()) {
+				        echo json_encode(["message" => "User registered successfully!"]);
+				    } else {
+				        echo json_encode(["error" => "User registration failed."]);
+				    }
+				} else {
+				    echo json_encode(["error" => "All fields are required."]);
+				}
+			?&gt;	
+			</code>
+		</pre>
 	<br>
 	<br>
 	<br>
