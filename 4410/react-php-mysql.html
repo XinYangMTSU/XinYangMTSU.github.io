@@ -260,6 +260,81 @@
 			?&gt;
 			</code>
 		</pre>
+
+		<h2>3. Set Up React Frontend</h2>
+		<h3>A. Create a React App</h3>
+		<pre>
+			npx create-react-app react-auth
+			cd react-auth
+		</pre>
+		<h3>Install Axios</h3>
+		<pre>
+			npm install axios
+		</pre>
+		<h3>C. Implement Authentication in React</h3>
+		<ul>
+			<li>&#9733; Modify App.js:</li>
+		</ul>
+		<pre>
+			<code class="language-jsx">
+		import React, { useState } from "react";
+		import axios from "axios";
+		
+		function App() {
+		    const [token, setToken] = useState(null);
+		    const [username, setUsername] = useState("");
+		    const [password, setPassword] = useState("");
+		
+		    const handleRegister = async () => {
+			const response = await axios.post("http://localhost/react-php-auth/register.php", 
+			    { username, password },
+			    { headers: { "Content-Type": "application/json" } }
+			);
+			alert(response.data.message || response.data.error);
+		    };
+		
+		    const handleLogin = async () => {
+			const response = await axios.post("http://localhost/react-php-auth/login.php", 
+			    { username, password },
+			    { headers: { "Content-Type": "application/json" } }
+			);
+			if (response.data.token) {
+			    setToken(response.data.token);
+			    localStorage.setItem("token", response.data.token);
+			    alert("Login successful!");
+			} else {
+			    alert(response.data.error);
+			}
+		    };
+		
+		    const handleLogout = () => {
+			setToken(null);
+			localStorage.removeItem("token");
+		    };
+		
+		    return (
+			&lt;div&gt;
+			    &lt;h1&gt;React + PHP + MySQL JWT Auth&lt;/h1&gt;
+			    {token ? (
+				&lt;&gt;
+				    &lt;p&gtLogged in! Token: {token}&lt;/p&gt;
+				    &lt;button onClick={handleLogout}&gtLogout&lt;/button&gt;
+				&lt;/&gt;
+			    ) : (
+				&lt;&gt;
+				    &lt;input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} /&gt;
+				    &lt;input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} /&gt;
+				    &lt;button onClick={handleRegister}&gt;Register&lt;/button&gt;
+				    &lt;button onClick={handleLogin}&gt;Login&lt;/button&gt;
+				&lt;/&gt;
+			    )}
+			&lt;/div&gt;
+		    );
+		}
+		
+		export default App;
+			</code>
+		</pre>
 	<br>
 	<br>
 	<br>
