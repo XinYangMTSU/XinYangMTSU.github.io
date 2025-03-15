@@ -91,7 +91,44 @@
     <li>2. Merge nodes with the lowest frequencies to build the tree.</li>
     <li>3. Store the root node of the Huffman tree.</li>
     <pre>
+        // Build Huffman Tree with vector
+        Node* buildHuffmanTree(unordered_map<char, int>& freqMap) {
+            vector<Node*> nodes;  // Store nodes in a vector
         
+            // Step 1: Convert frequency map into nodes
+            for (auto pair : freqMap) {
+                
+                char character = pair.first;   // Get the character (e.g., 'a')
+                int frequency = pair.second;   // Get the frequency (e.g., 15)
+                
+                //Create the node and add it to the nodes vector
+                nodes.push_back(newNode(character, frequency));
+            }
+        
+            // Step 2: Sort nodes by frequency
+            // This loop continues merging nodes until only one node remains, which becomes the root of the Huffman Tree.
+            while (nodes.size() > 1) {
+                sort(nodes.begin(), nodes.end(), compare);  //sort the nodes in ascending order of frequency 
+        
+                // Take two smallest frequency nodes
+                Node* left = nodes[0];
+                Node* right = nodes[1];
+        
+                // Create a new node combining both
+                // '\0' is the most common placeholder for internal nodes.
+                Node* merged = newNode('\0', left->freq + right->freq);
+                merged->left = left;
+                merged->right = right;
+        
+                // Remove the first two nodes from the list and add the merged node
+                nodes.erase(nodes.begin(), nodes.begin() + 2);
+                nodes.push_back(merged);
+            }
+            
+            // Ensure the vector is not empty before accessing index 0
+            if (nodes.empty()) return nullptr;
+            return nodes[0];  // The last remaining node is the root
+        }
     </pre>
   </ul>
   
