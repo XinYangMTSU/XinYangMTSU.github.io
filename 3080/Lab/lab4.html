@@ -199,10 +199,12 @@
             Node* current = root; //Start at the root of the Huffman tree
             //Loop through each bit in encodedText
             for (char bit : encodedText) {
-                // Move left for '0', right for '1'
-                current = (bit == '0') ? current->left : current->right;
-                // If we reach a leaf node (character node)
-                if (current->left == nullptr && current->right == nullptr) {  
+        
+                // If the bit is '0', move to the left child; if the bit is '1', move to the right child.
+                current = (bit == '0') ? ______________ : ______________; //Hint: Use the left child when the bit is '0' and the right child when the bit is '1'.
+                
+                // Check if we reach a leaf node (character node)
+                if (________________________________________________) {  
                     decodedText += current->ch; // Append the decoded character to the result
                     current = root;  // Reset to the root for the next character
                 }
