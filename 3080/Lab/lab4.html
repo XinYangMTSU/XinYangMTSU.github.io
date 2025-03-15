@@ -238,8 +238,12 @@
     Compression Ratio = \frac{Compressed Size}{Original Size} \times 100\%
     \) </li>
    <pre>
-       cout << "Original size: " << text.size() << " bytes." << endl;
-       cout << "Compressed size: " << encodedText.size() / 8 << " bytes (approx) " << endl;                                                      
+       The original text file size is obtained by counting the number of characters, which gives the total number of bytes, as each character typically occupies one byte.
+       Original text file size: text.size() bytes
+
+       The compressed file size is estimated by taking the total number of bits in the encoded text (since each character in 'encodedText' represents one bit) and dividing by 8,
+       because there are 8 bits in one byte. This calculation is approximate since the total bit count may not be a perfect multiple of 8.
+       Compressed file size: encodedText.size() / 8 bytes (approximately)
    </pre>
   </ul>
   
