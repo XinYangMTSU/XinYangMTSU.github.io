@@ -172,7 +172,20 @@
 
   <ul>
     <li>1. Replace each character in the text file with its Huffman code.</li>
+    <pre>
+        // Encode the text using Huffman Codes
+        string encodeText(string text, unordered_map&lt;char, string&gt;& huffmanCode) {
+            string encodedText;
+            for (char ch : text) {
+                encodedText += huffmanCode[ch];
+            }
+            return encodedText;
+        }
+    </pre>
     <li>2. Write the encoded binary string to a compressed file compressed.bin.</li>
+    <pre>
+        
+    </pre>
   </ul>
 
   <h2>Step 6: Decode the Compressed File</h2>
