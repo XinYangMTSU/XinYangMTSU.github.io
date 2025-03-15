@@ -91,6 +91,11 @@
     <li>2. Merge nodes with the lowest frequencies to build the tree.</li>
     <li>3. Store the root node of the Huffman tree.</li>
     <pre>
+        // Comparison Function to sort nodes based on frequency
+        bool compare(Node* a, Node* b) {
+            return a->freq < b->freq;  // Sort in ascending order of frequency
+        }
+        
         // Build Huffman Tree with vector
         Node* buildHuffmanTree(unordered_map&lt;char, int&gt;& freqMap) {
             vector&lt;Node*&gt; nodes;  // Store nodes in a vector
@@ -114,8 +119,8 @@
                 sort(nodes.begin(), nodes.end(), compare);  //sort the nodes in ascending order of frequency 
         
                 // Take two smallest frequency nodes
-                Node* left = nodes[0];
-                Node* right = nodes[1];
+                Node* left = _________;  //Hint: The node at index 0 has the smallest frequency.
+                Node* right = _________; //Hint: The node at index 1 has the second smallest frequency.
         
                 // Create a new node combining both
                 // '\0' is the most common placeholder for internal nodes.
