@@ -55,6 +55,20 @@
       <li>1. Create a text file named <a href="input.txt" target="_blank">input.txt</a>.</li>
 
       <li>2. Write a C++ program to read the contents of input.txt into a string.</li>
+      <pre>
+        ifstream inputFile("input.txt");
+        if (!inputFile) {
+            cout << "Error: Cannot open input.txt!\n";
+            return 1;
+        }
+        
+        string text;
+        char ch;
+        while (inputFile.get(ch)) {
+            text += ch;  // Append each character to the string
+        }
+        inputFile.close();
+      </pre>
     </ul>
 
     <h2>Step 2: Compute Character Frequencies</h2>
