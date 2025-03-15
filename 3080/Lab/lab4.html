@@ -188,10 +188,28 @@
     </pre>
   </ul>
 
-  <h2>Step 6: Decode the Compressed File</h2>
+  <h2>Step 6: Decode the Huffman encoded text</h2>
 
   <ul>
-    <li>1. Read compressed.bin and reconstruct the original text using the Huffman tree.</li>
+    <li>1. Please reconstruct the original text using the Huffman tree.</li>
+    <pre>
+        // Decode Huffman encoded text
+        string decodeText(string encodedText, Node* root) {
+            string decodedText;
+            Node* current = root; //Start at the root of the Huffman tree
+            //Loop through each bit in encodedText
+            for (char bit : encodedText) {
+                // Move left for '0', right for '1'
+                current = (bit == '0') ? current->left : current->right;
+                // If we reach a leaf node (character node)
+                if (current->left == nullptr && current->right == nullptr) {  
+                    decodedText += current->ch; // Append the decoded character to the result
+                    current = root;  // Reset to the root for the next character
+                }
+            }
+            return decodedText; // Return the fully decoded string
+        }
+    </pre>
     <li>2. Save the decoded text as decompressed.txt.</li>
   </ul>
 
