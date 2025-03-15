@@ -182,9 +182,18 @@
             return encodedText;
         }
     </pre>
-    <li>2. Write the encoded binary string to a compressed file compressed.bin.</li>
+    <li>2. Write the encoded binary string in a compressed file called compressed.bin.</li>
     <pre>
+        ofstream encodedFile;
+        encodedFile.open("compressed.bin");
         
+        if (!encodedFile) {
+            cerr << "Error: Unable to open compressed.txt for writing!" << endl;
+            return 1;
+        }
+        
+        encodedFile << ________________;  // Write encoded text
+        encodedFile.close();
     </pre>
   </ul>
 
