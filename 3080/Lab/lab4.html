@@ -128,9 +128,10 @@
                 merged->left = left;
                 merged->right = right;
         
-                // Remove the first two nodes from the list and add the merged node
+                // Remove the first two nodes from the list
                 nodes.erase(nodes.begin(), nodes.begin() + 2);
-                nodes.push_back(merged);
+                
+                ___________________//Hint: push_back() adds the merged node to the end of the nodes vector.
             }
             
             // Ensure the vector is not empty before accessing index 0
