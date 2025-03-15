@@ -56,9 +56,14 @@
 
       <li>2. Write a C++ program to read the contents of input.txt into a string.</li>
       <pre>
-        ifstream inputFile("input.txt");
+        string filename;
+        cout << "Enter text file name: ";
+        cin >> filename;
+    
+        // Read input file
+        ifstream inputFile(filename);
         if (!inputFile) {
-            cout << "Error: Cannot open input.txt!\n";
+            cout << "Error opening file.\n";
             return 1;
         }
         
