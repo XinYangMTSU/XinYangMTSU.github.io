@@ -96,13 +96,16 @@
             vector&lt;Node*&gt; nodes;  // Store nodes in a vector
         
             // Step 1: Convert frequency map into nodes
-            for (auto pair : freqMap) {
+            for (auto pair: freqMap) {
                 
                 char character = pair.first;   // Get the character (e.g., 'a')
                 int frequency = pair.second;   // Get the frequency (e.g., 15)
                 
-                //Create the node and add it to the nodes vector
-                nodes.push_back(newNode(character, frequency));
+                //Create a node using newNode function with character and its frequency
+                ______________________________________
+        
+                // Use push_back to add the newly created node to the nodes vector.
+                _______________________________________
             }
         
             // Step 2: Sort nodes by frequency
