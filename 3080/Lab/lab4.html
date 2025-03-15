@@ -146,6 +146,23 @@
   <ul>
     <li>1. Traverse the Huffman tree to assign binary codes to each character.</li>
     <li>2. Store these codes in an unordered_map.</li>
+      <pre>
+          void generateHuffmanCodes(Node* root, string code, unordered_map&lt;char, string&gt;& huffmanCode) {
+                if (root == nullptr) return;
+            
+                if (root->left == nullptr && root->right == nullptr) {
+                    huffmanCode[root->ch] = code; // Store Huffman code for this character
+                    return;
+                }
+            
+                generateHuffmanCodes(root->left, code + "0", huffmanCode);
+                generateHuffmanCodes(root->right, code + "1", huffmanCode);
+            }
+            
+            // Generate codes
+            unordered_map&lt;char, string&gt; huffmanCode;
+            generateHuffmanCodes(root, "", huffmanCode);
+      </pre>
   </ul>
 
   <h2>Step 5: Encode the Text File</h2>
