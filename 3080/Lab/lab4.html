@@ -148,15 +148,18 @@
     <li>2. Store these codes in an unordered_map.</li>
       <pre>
           void generateHuffmanCodes(Node* root, string code, unordered_map&lt;char, string&gt;& huffmanCode) {
-                if (root == nullptr) return;
-            
+                if (root == nullptr) return; // Base case: Stop recursion if tree is empty
+
+                //// If the node is a leaf node (contains a character)
                 if (root->left == nullptr && root->right == nullptr) {
                     huffmanCode[root->ch] = code; // Store Huffman code for this character
                     return;
                 }
-            
-                generateHuffmanCodes(root->left, code + "0", huffmanCode);
-                generateHuffmanCodes(root->right, code + "1", huffmanCode);
+
+                //If the node has a left child, assigns 0 for a left branch
+                generateHuffmanCodes(_________, code + "0", huffmanCode);
+                //If the node has a right child, assigns 1 for a right branch
+                generateHuffmanCodes(_________, code + "1", huffmanCode);
             }
             
             // Generate codes
