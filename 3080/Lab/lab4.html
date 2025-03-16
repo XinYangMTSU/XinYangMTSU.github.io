@@ -91,23 +91,25 @@
      </Pre>
    </ul>
 
-  <h2>Step 3: Define the Huffman Tree Node</h2>
- 
- Defines a structure (<b><font color="blue">struct Node</font></b>) to store:  
+  <h2>Step 3: Defining and Creating Huffman Tree Nodes</h2>
+
  <ul>
-     <li>1. A <b><font color="blue">character</font></b> (ch) for leaf nodes.</li>
-     <li>2. An <b><font color="blue">integer</font></b> (freq) representing frequency.</li>
-     <li>3. Two pointers (left and right) for child nodes.</li>
- </ul>
-
-  <h2>Step 4: Define a function to create a new Huffman tree node</h2>
-Defines a function to create a New Node dynamically. Initializes the node with:
-    <ul>
-        <li>1. A character (char ch)</li>
-        <li>2. A frequency (int freq)</li>
-        <li>3. Left and right pointers set to NULL (no children initially)</li>
+     <li> 1. Define a structure (<b class="blue-text">struct Node</b>) to store: </li>
+     <ul>
+     <li>a. A <b class="blue-text">character</b> (ch) for leaf nodes.</li>
+     <li>b. A <b class="blue-text">integer</b> (freq) representing frequency.</li>
+     <li>c. Two <b class="blue-text">pointers</b> (left and right) for child nodes.</li>
+     </ul>
+     <li>2. Define a function to create a New Node dynamically. Initializes the node with:</li>
+     <ul>
+        <li>a. A character (char ch)</li>
+        <li>b. A frequency (int freq)</li>
+        <li>c. Left and right pointers set to NULL (no children initially)</li>
     </ul>
-
+     <li>3. Define a function to delete the entire Huffman tree and free allocated memory</li>
+     
+ </ul>
+    
 Reference for struct Node and function to create a new node dynamically: 
 <a href="https://xinyangmtsu.github.io/3080/code/InOrder.cpp" target="_blank">InOrder.cpp</a>
 
