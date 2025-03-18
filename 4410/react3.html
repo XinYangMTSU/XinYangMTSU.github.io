@@ -160,16 +160,18 @@
         <h3>3. Create your App.js</h3>
         <pre>
             <code class="language-jsx">
-        import { Routes, Route } from 'react-router-dom';
+        import { BrowserRouter, Routes, Route } from 'react-router-dom';
         import LoginForm from './LoginForm';
         import Dashboard from './Dashboard';
         
         function App() {
           return (
+            &lt;BrowserRouter&gt;
             &lt;Routes&gt;
               &lt;Route path="/" element={<LoginForm />} /&gt;
               &lt;Route path="/dashboard" element={<Dashboard />} /&gt;
             &lt;/Routes&gt;
+            &lt;/BrowserRouter&gt;      
           );
         }
         
