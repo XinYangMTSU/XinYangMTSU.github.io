@@ -192,7 +192,7 @@ x > L[i]: algorithm proceeds to the right half of the list
 <h2>Understanding the \(log_2(n)\) Steps in Binary Search</h2>
 In <b><font color="blue">binary search</font></b>, you start with <b><font color="blue">\(n\) elements</font></b>, 
 and in each step, you divide the array into <b><font color="blue">2 halves</font></b>. Each halving step cuts the size by half:
-
+<br><br>
 <table style="width:80%; margin:auto">
   <caption><strong>Binary Search Halving Process</strong></caption>
   <tr>
@@ -224,9 +224,16 @@ and in each step, you divide the array into <b><font color="blue">2 halves</font
     <td>n/(2<sup>k</sup>)</td>
   </tr>
 </table>
+We keep halving until only 1 element is left: \( \frac{n}{2^k} = 1\) <br> <br>
+Solve for k (number of steps): \( \frac{n}{2^k} = 1 \implies n = 2^k \) <br><br>
+Take log base 2 on both sides: \( log_2(n) = k \)  <br><br>
+So: \( k = log_2(n)  \) 
+<ul>
+	<li>&clubs; The number of times you can divide n by 2 before you reach 1 element is \( log_2(n) = k \).</li>
+	<li>&clubs; That’s why binary search takes \( log_2(n) = k \) steps in the worst case.</li>
+</ul>
 
-
-				<h2>Lower Bound for Searching</h2>
+				<h1>Lower Bound for Searching</h1>
 				<b>
 					<font color="blue" size="5">Theorem: On the Lower Bound for Searching</font>
 				</b>				
