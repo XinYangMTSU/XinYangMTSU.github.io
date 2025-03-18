@@ -403,13 +403,26 @@ So: \( k = log_2(n)  \)
 						<li>&clubs; The <b><font color="blue">right child</font></b> has values <b><font color="blue">greater than the node</font></b>.</li>
 					</ul>
 					
-					<br><br>
+					<br>
 					To build a binary search tree, the first item of data is made the root of the tree. Successive items are
 					inserted by comparing them to existing nodes, beginning with the root. If the item is less than a node, the
 					next node tested is the left child; otherwise, it is the right child. When no child node exists, the new item
 					becomes the child.
 					<br>
 					<br>
+
+					Steps to build a BST:
+					<ul>
+						<li>1. Start with the <b><font color="blue">first item</font></b> as the <b><font color="blue">root</font></b>.</li>
+						<li>2. For each <b><font color="blue">next item</font></b>: </li>
+						<ul>
+							<li>Compare it to the <b><font color="blue">current node</font></b> (starting at the root).</li>
+							<li>If the item is <b><font color="blue">less</font></b>, move to the <b><font color="blue">left child</font></b>.</li>
+							<li>If the item is <b><font color="blue">greater</font></b>, move to the <b><font color="blue">right child</font></b>.</li>
+							<li>If there is <b><font color="blue">no left or right child</font></b>, insert the new item there.</li>
+						</ul>
+					</ul>
+					
 					<center>
 						<img width="50%" src="images/binaryTree2.png">
 					</center>
