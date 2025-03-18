@@ -152,7 +152,8 @@ x > L[i]: algorithm proceeds to the right half of the list
     <td>
       O(log n): The worst case happens when:<br>
       - The target is not in the array.<br>
-      - Or is found at the last step after fully narrowing down.
+      - Or the target is located at the final step after repeatedly halving the list. <br>
+       In both cases, the algorithm performs approximately \(log_2(n)\) steps.
     </td>
   </tr>
   <tr>
@@ -162,7 +163,7 @@ x > L[i]: algorithm proceeds to the right half of the list
       but in Big-O we simplify it to O(n).
     </td>
     <td>
-      O(log n): On average, binary search will divide the list about log₂(n) times<br>
+      O(log n): On average, binary search will divide the list about  \(log_2(n)\) times<br>
       to find the target due to halving the list at each step.
     </td>
   </tr>
