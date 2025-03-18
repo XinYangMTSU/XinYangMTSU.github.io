@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Decision Trees</title>
+	<link href="../CSS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+<div id="main">
+
+<h1>Binary Search</h1>
+
+A <b><font color="blue">binary search</font></b> can be used on <b><font color="red">an array that has been sorted into ascending or descending order.</font> 
+
+<h2>Binary Search</h2>
+The algorithm for a binary search is as follows:
+
+<ul>
+	<li>&#9733; Compare the searched for value to the middle array item</li>
+	<ul>
+		<li>&#9734; if <b><font color="blue">value == middle</font></b> then quit. You've found it.</li>
+		<li>&#9734; else if <b><font color="blue">value &lt middle</font></b> then consider the sublist making up the first half of the array (before the middle item)</li>
+		<li>&#9734; else if <b><font color="blue">value &gt middle</font></b> then consider the sublist making up the last half of the array (after the middle item)</li>
+	</ul>
+	<li>&#9733; If you didn't find the value, repeat the search on the sublist. </li>
+	<li>&#9733; You are done as soon as you find the item or whenever the sublist that you are supposed to search is empty.</li>
+</ul>
+<div class="block3">
+<pre>
+<b>	
+int BinarySearch(int a[], int aSize, int toFind)
+{
+    int start = 0;                         //the search starts with index 0
+    int last = aSize -1;                   //last is the last array index
+ 
+    while (start &lt= last)                  //while there is still a place to look.      
+    {
+         int middle = (start + last) / 2;  //Look here first
+         if (toFind == a[middle])          //Found item. Quit. 
+               return middle;
+         if (toFind > a[middle])           //Look in the last half
+               start = middle + 1;
+         else                              //OR look in the first half
+               last =  middle - 1;
+    }
+    //the element wasn't found
+    return -1;
+}
+</b>
+</pre>
+&nbsp &nbsp &nbsp &nbsp <a href="../codes/binarySearch.cpp" target="_blank">binarySearch.cpp</a>
+</div>
+
+<h2>Example</h2>
+
+<pre>
+We have a list of integer values:	
+<b><font color="blue">int list[12] = {-2,1,2,3,5,7,8,10,14,15,38,61};</font></b>
+
+(1) 
+Suppose we wish to search this one-dimensional array for the value <b><font color="blue">10</font></b>:
+<b><font color="blue">int index = BinarySearch(list,12,10);</b></font> 
+
+The figure below, shows how binary search works:.	
+</pre>
+
+<table class="block3">
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th><font color="red">1st</font></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	</tr>
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>&darr;</th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	</tr>
+	<tr>
+		<th><font color="blue">-2</font></th>
+		<th><font color="blue">1</font></th>
+		<th><font color="blue">2</font></th>
+		<th><font color="blue">3</font></th>
+		<th><font color="blue">5</font></th>
+		<th><font color="blue">7</font></th>
+		<th><font color="blue">8</font></th>
+		<th><font color="blue">10</font></th>
+		<th><font color="blue">14</font></th>
+		<th><font color="blue">15</font></th>
+		<th><font color="blue">38</font></th>
+		<th><font color="blue">61</font></th>
+	</tr>
+	<tr>
+	<td>0</td>
+	<td>1</td>
+	<td>2</td>
+	<td>3</td>
+	<td>4</td>
+	<td>5</td>
+	<td>6</td>
+	<td>7</td>
+	<td>8</td>
+	<td>9</td>
+	<td>10</td>
+	<td>11</td>
+	</tr>
+	<tr>
+	<th><font color="blue">start</font></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th><font color="blue">middle</font></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th><font color="blue">last</font></th>
+	</tr>
+</table>
+
+<table class="block3">
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>1st</th>
+	<th></th>
+	<th></th>
+	<th><font color="red">2nd</font></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	</tr>
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>&darr;</th>
+	<th></th>
+	<th></th>
+	<th>&darr;</th>
+	<th></th>
+	<th></th>
+	<th></th>
+	</tr>
+	<tr>
+		<th><font color="blue">-2</font></th>
+		<th><font color="blue">1</font></th>
+		<th><font color="blue">2</font></th>
+		<th><font color="blue">3</font></th>
+		<th><font color="blue">5</font></th>
+		<th><font color="blue">7</font></th>
+		<th><font color="blue">8</font></th>
+		<th><font color="blue">10</font></th>
+		<th><font color="blue">14</font></th>
+		<th><font color="blue">15</font></th>
+		<th><font color="blue">38</font></th>
+		<th><font color="blue">61</font></th>
+	</tr>
+	<tr>
+	<td>0</td>
+	<td>1</td>
+	<td>2</td>
+	<td>3</td>
+	<td>4</td>
+	<td>5</td>
+	<td>6</td>
+	<td>7</td>
+	<td>8</td>
+	<td>9</td>
+	<td>10</td>
+	<td>11</td>
+	</tr>
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th><font color="blue">start</font></th>
+	<th></th>
+	<th><font color="blue">middle</font></th>
+	<th></th>
+	<th></th>
+	<th><font color="blue">last</font></th>
+	</tr>
+</table>
+
+<table class="block3">
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>1st</th>
+	<th><font color="red">3rd</font></th>
+	<th></th>
+	<th>2nd</th>
+	<th></th>
+	<th></th>
+	<th></th>
+	</tr>
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th></th>
+	<th>&darr;</th>
+	<th></th>
+	<th></th>
+	<th></th>
+	</tr>
+	<tr>
+		<th><font color="blue">-2</font></th>
+		<th><font color="blue">1</font></th>
+		<th><font color="blue">2</font></th>
+		<th><font color="blue">3</font></th>
+		<th><font color="blue">5</font></th>
+		<th><font color="blue">7</font></th>
+		<th><font color="blue">8</font></th>
+		<th><font color="blue">10</font></th>
+		<th><font color="blue">14</font></th>
+		<th><font color="blue">15</font></th>
+		<th><font color="blue">38</font></th>
+		<th><font color="blue">61</font></th>
+	</tr>
+	<tr>
+	<td>0</td>
+	<td>1</td>
+	<td>2</td>
+	<td>3</td>
+	<td>4</td>
+	<td>5</td>
+	<td>6</td>
+	<td>7</td>
+	<td>8</td>
+	<td>9</td>
+	<td>10</td>
+	<td>11</td>
+	</tr>
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th><font color="blue">start/middle</font></th>
+	<th><font color="blue">last</font></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	</tr>
+</table>
+
+<table class="block3">
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>1st</th>
+	<th>3rd</th>
+	<th><font color="red">4th</font><br>stop here</th>
+	<th>2nd</th>
+	<th></th>
+	<th></th>
+	<th></th>
+	</tr>
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th></th>
+	<th></th>
+	<th></th>
+	</tr>
+	<tr>
+		<th><font color="blue">-2</font></th>
+		<th><font color="blue">1</font></th>
+		<th><font color="blue">2</font></th>
+		<th><font color="blue">3</font></th>
+		<th><font color="blue">5</font></th>
+		<th><font color="blue">7</font></th>
+		<th><font color="blue">8</font></th>
+		<th><font color="blue">10</font></th>
+		<th><font color="blue">14</font></th>
+		<th><font color="blue">15</font></th>
+		<th><font color="blue">38</font></th>
+		<th><font color="blue">61</font></th>
+	</tr>
+	<tr>
+	<td>0</td>
+	<td>1</td>
+	<td>2</td>
+	<td>3</td>
+	<td>4</td>
+	<td>5</td>
+	<td>6</td>
+	<td><font color="red">7</font></td>
+	<td>8</td>
+	<td>9</td>
+	<td>10</td>
+	<td>11</td>
+	</tr>
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th><font color="blue">start/middle/last</font></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	</tr>
+</table>
+
+<br>
+<br>
+After control returns to the activating function, index will contain <b><font color="red">7</font></b>.
+
+<pre>
+(2)
+Suppose we wish to search this one-dimensional array for the value <b><font color="blue">25</font></b>:
+<b><font color="blue">int index = BinarySearch(list,12,25);</b></font> 
+
+The figure below, shows how binary search works:.	
+</pre>
+
+<table class="block3">
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th><font color="red">1st</font></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	</tr>
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>&darr;</th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	</tr>
+	<tr>
+		<th><font color="blue">-2</font></th>
+		<th><font color="blue">1</font></th>
+		<th><font color="blue">2</font></th>
+		<th><font color="blue">3</font></th>
+		<th><font color="blue">5</font></th>
+		<th><font color="blue">7</font></th>
+		<th><font color="blue">8</font></th>
+		<th><font color="blue">10</font></th>
+		<th><font color="blue">14</font></th>
+		<th><font color="blue">15</font></th>
+		<th><font color="blue">38</font></th>
+		<th><font color="blue">61</font></th>
+	</tr>
+	<tr>
+	<td>0</td>
+	<td>1</td>
+	<td>2</td>
+	<td>3</td>
+	<td>4</td>
+	<td>5</td>
+	<td>6</td>
+	<td>7</td>
+	<td>8</td>
+	<td>9</td>
+	<td>10</td>
+	<td>11</td>
+	</tr>
+	<tr>
+	<th><font color="blue">start</font></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th><font color="blue">middle</font></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th><font color="blue">last</font></th>
+	</tr>
+</table>
+
+<table class="block3">
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>1st</th>
+	<th></th>
+	<th></th>
+	<th><font color="red">2nd</font></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	</tr>
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>&darr;</th>
+	<th></th>
+	<th></th>
+	<th>&darr;</th>
+	<th></th>
+	<th></th>
+	<th></th>
+	</tr>
+	<tr>
+		<th><font color="blue">-2</font></th>
+		<th><font color="blue">1</font></th>
+		<th><font color="blue">2</font></th>
+		<th><font color="blue">3</font></th>
+		<th><font color="blue">5</font></th>
+		<th><font color="blue">7</font></th>
+		<th><font color="blue">8</font></th>
+		<th><font color="blue">10</font></th>
+		<th><font color="blue">14</font></th>
+		<th><font color="blue">15</font></th>
+		<th><font color="blue">38</font></th>
+		<th><font color="blue">61</font></th>
+	</tr>
+	<tr>
+	<td>0</td>
+	<td>1</td>
+	<td>2</td>
+	<td>3</td>
+	<td>4</td>
+	<td>5</td>
+	<td>6</td>
+	<td>7</td>
+	<td>8</td>
+	<td>9</td>
+	<td>10</td>
+	<td>11</td>
+	</tr>
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th><font color="blue">start</font></th>
+	<th></th>
+	<th><font color="blue">middle</font></th>
+	<th></th>
+	<th></th>
+	<th><font color="blue">last</font></th>
+	</tr>
+</table>
+
+<table class="block3">
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>1st</th>
+	<th></th>
+	<th></th>
+	<th>2nd</th>
+	<th></th>
+	<th><font color="red">3rd</font></th>
+	<th></th>
+	</tr>
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>&darr;</th>
+	<th></th>
+	<th></th>
+	<th>&darr;</th>
+	<th></th>
+	<th>&darr;</th>
+	<th></th>
+	</tr>
+	<tr>
+		<th><font color="blue">-2</font></th>
+		<th><font color="blue">1</font></th>
+		<th><font color="blue">2</font></th>
+		<th><font color="blue">3</font></th>
+		<th><font color="blue">5</font></th>
+		<th><font color="blue">7</font></th>
+		<th><font color="blue">8</font></th>
+		<th><font color="blue">10</font></th>
+		<th><font color="blue">14</font></th>
+		<th><font color="blue">15</font></th>
+		<th><font color="blue">38</font></th>
+		<th><font color="blue">61</font></th>
+	</tr>
+	<tr>
+	<td>0</td>
+	<td>1</td>
+	<td>2</td>
+	<td>3</td>
+	<td>4</td>
+	<td>5</td>
+	<td>6</td>
+	<td>7</td>
+	<td>8</td>
+	<td>9</td>
+	<td>10</td>
+	<td>11</td>
+	</tr>
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th><font color="blue">start</font></th>
+	<th><font color="blue">middle</font></th>
+	<th><font color="blue">last</font></th>
+	</tr>
+</table>
+<table class="block3">
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>1st</th>
+	<th></th>
+	<th></th>
+	<th>2nd</th>
+	<th><font color="red">4th</font><br>stop here</th>
+	<th>3rd</th>
+	<th></th>
+	</tr>
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th>&darr;</th>
+	<th></th>
+	<th></th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th></th>
+	</tr>
+	<tr>
+		<th><font color="blue">-2</font></th>
+		<th><font color="blue">1</font></th>
+		<th><font color="blue">2</font></th>
+		<th><font color="blue">3</font></th>
+		<th><font color="blue">5</font></th>
+		<th><font color="blue">7</font></th>
+		<th><font color="blue">8</font></th>
+		<th><font color="blue">10</font></th>
+		<th><font color="blue">14</font></th>
+		<th><font color="blue">15</font></th>
+		<th><font color="blue">38</font></th>
+		<th><font color="blue">61</font></th>
+	</tr>
+	<tr>
+	<td>0</td>
+	<td>1</td>
+	<td>2</td>
+	<td>3</td>
+	<td>4</td>
+	<td>5</td>
+	<td>6</td>
+	<td>7</td>
+	<td>8</td>
+	<td>9</td>
+	<td>10</td>
+	<td>11</td>
+	</tr>
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th><font color="blue">start/middle/last</font></th>
+	<th></th>
+	<th></th>
+</table>
+<br>
+After control returns to the activating function, <b><font color="blue">index will contain -1</font></b> meaning that the function did not find 25 in the array.
+</pre>
+
+<h2>Application Examples</h2>
+<ul>
+	<li>&#9733; IRS database keyed by social security number</li>
+	<li>&#9733; DMV records keyed by driver's license numbers</li>
+</ul>
+
+<h2>Binary or Linear search</h2>
+Why use a binary search when a linear search is easier to code? The answer lies in the efficiency of the search. With a linear search, if you double the size of a list, you could potentially take twice as much time to find an item. With a binary search, doubling the size of the list merely adds one more item to look at. Each time you look with a binary search, you eliminate half of the remaining list items as possible matches.
+
+
+<br>
+
+	<footer align="center" id="foot01"></footer>
+</div>
+
+<br>
+<br>
+</body>
+</html>
