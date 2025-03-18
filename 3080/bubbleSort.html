@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Decision Trees</title>
+	<link href="../CSS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+<div id="main">
+
+<h1>Sorting Algorithms</h1>
+Many programming tasks require the data in an array be sorted in some order. To sort the data in an array, the programmer must use an appropriate sorting algorithm. A<b><font color="blue"> sorting algorithm</font></b> is a technique for stepping through an array and rearranging ints contents in some order. 
+<h1>Bubble Sort</h1>
+The bubble sort is an easy way to arrange data in ascending or descending order. 
+
+<div class="block3">
+<pre>
+<b>	
+void bubbleSort (int array[], int aSize) 
+{ 
+     // Look through all items, starting at the front. 
+     for (int i = 0; i &lt aSize-1; i++)     
+     {
+	for(int j = 0; j < aSize-1-i; j++)
+	    if (array[j] < array[j+1])            
+                swap(array[j], array[j+1]);
+     }
+}
+</b>
+</pre>
+&nbsp &nbsp &nbsp <a href="./code/bubbleSort.cpp" target="_blank">bubbleSort.cpp</a>
+
+</div>
+
+<h2>Example</h2>
+
+<pre>
+We have a list of integer values:	
+<b><font color="blue">int list[5] = {5,1,4,2,8};</font></b>
+
+Suppose we wish to sort this one-dimensional array in ascending order:
+<b><font color="blue">bubbleSort(list,5);</b></font> 
+
+The figure below, shows how bubble sort works:
+<center>	
+<img src="../images/bubbleSort.png" width="80%">
+</center>
+<br>
+
+	<footer align="center" id="foot01"></footer>
+</div>
+
+<br>
+<br>
+</body>
+</html>
