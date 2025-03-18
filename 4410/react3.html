@@ -91,6 +91,71 @@
             </pre>
 
 
+        <h2>Form submission + navigate() example</h2>
+
+        <h3>1. Create the Dashboard.js page</h3>
+        <pre>
+            <code class="language-jsx">
+        function Dashboard() {
+          return (
+            <div style={{ textAlign: 'center', marginTop: '50px' }}>
+              <h1>Welcome to the Dashboard 🎉</h1>
+            </div>
+          );
+        }
+        
+        export default Dashboard;
+            </code>
+        </pre>
+
+
+        <h3>2. Create the LoginForm.js component</h3>
+        <pre>
+            <code class="language-jsx">
+        import { useState } from 'react';
+        import { useNavigate } from 'react-router-dom';
+        
+        function LoginForm() {
+          const [username, setUsername] = useState('');
+          const [password, setPassword] = useState('');
+          const navigate = useNavigate();
+        
+          const handleSubmit = (e) => {
+            e.preventDefault();
+        
+            // Simple login check
+            if (username === 'admin' && password === '1234') {
+              alert('Login Successful!');
+              navigate('/dashboard');
+            } else {
+              alert('Invalid Credentials');
+            }
+          };
+        
+          return (
+            &lt;form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', width: '200px', margin: '50px auto' }}&gt;
+               &lt;input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                style={{ marginBottom: '10px' }}
+              /&gt;
+               &lt;input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                style={{ marginBottom: '10px' }}
+              /&gt;
+               &lt;button type="submit"&gt;Login &lt;/button&gt;
+             &lt;/form&gt;
+          );
+        }
+        
+        export default LoginForm;
+            </code>
+        </pre>
         
         <!--      
            <h2>useParams() for Dynamic Routing in React Router</h2>
