@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Decision Trees</title>
+	<link href="../CSS/3080.css" rel="stylesheet">
+</head>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+
+<body>
+
+<div id="main">
+
+<h1>Linear Search</h1>
+
+With a <b><font color="blue">linear search</font></b> technique, you look at every element in the array, one-at-a-time beginning at the first. When the value is found, quit immediately. If you get through the entire array without quitting, then the search is unsuccessful -- the value is not in the array.
+
+<h2>Linear Search</h2>
+
+<ul>
+	<li>&#9733; The method <b><font color="blue">LinearSearch()</font></b> returns the index of the searched value in the array.</li>
+	<li>&#9733; If the value is not in the array, LinearSearch() returns -1.</li>
+</ul>
+<div class="block3">
+<pre>
+<b>	
+int LinearSearch (int a[], int aSize, int toFind) 
+{ 
+     // Look through all items, starting at the front. 
+     for (int i = 0; i &lt aSize; i++)     
+         if (a[i] == toFind)            
+             return i; 
+  
+     // You've gone through the whole list without success.  
+     return -1; 
+}
+</b>
+</pre>
+&nbsp &nbsp &nbsp <a href="../codes/linearSearch.cpp" target="_blank">linearSearch.cpp</a>
+
+</div>
+
+<h2>Example</h2>
+
+<pre>
+We have a list of integer values:	
+<b><font color="blue">int list[12] = {3,15,2,8,7,1,14,38,10,-2,61,5};</font></b>
+
+(1) 
+Suppose we wish to search this one-dimensional array for the value <b><font color="blue">10</font></b>:
+<b><font color="blue">int index = LinearSearch(list,12,10);</b></font> 
+
+The figure below, shows how linear search works:.	
+</pre>
+
+<table class="block3">
+	<tr>
+		<th><font color="red">start here</font></th>
+	<th>......</th>
+	<th>......</th>
+	<th>...go</th>
+	<th>through</th>
+	<th>these</th>
+	<th>......</th>
+	<th>......</th>
+	<th><font color="red">stop here</font></th>
+	</tr>
+	<tr>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	</tr>
+	<tr>
+		<th><font color="blue">3</font></th>
+		<th><font color="blue">15</font></th>
+		<th><font color="blue">2</font></th>
+		<th><font color="blue">8</font></th>
+		<th><font color="blue">7</font></th>
+		<th><font color="blue">1</font></th>
+		<th><font color="blue">14</font></th>
+		<th><font color="blue">38</font></th>
+		<th><font color="blue">10</font></th>
+		<th><font color="blue">&nbsp -2</font></th>
+		<th><font color="blue">&nbsp 61</font></th>
+		<th><font color="blue">&nbsp 5</font></th>
+	</tr>
+	<tr>
+	<td>0</td>
+	<td>1</td>
+	<td>2</td>
+	<td>3</td>
+	<td>4</td>
+	<td>5</td>
+	<td>6</td>
+	<td>7</td>
+	<td><font color="red">8</font></td>
+	<td>9</td>
+	<td>10</td>
+	<td>11</td>
+	</tr>
+</table>
+<br>
+After control returns to the activating function, index will contain <b><font color="red">8</font></b>.
+
+<pre>
+(2)
+Suppose we wish to search this one-dimensional array for the value <b><font color="blue">25</font></b>:
+<b><font color="blue">int index = LinearSearch(list,12,25);</b></font> 
+
+The figure below, shows how linear search works:.	
+</pre>
+
+<table class="block3">
+	<tr>
+		<th><font color="red">start here</font></th>
+	<th>......</th>
+	<th>......</th>
+	<th>......</th>
+	<th>......</th>
+	<th>...go</th>
+	<th>through</th>
+	<th>these</th>
+	<th>......</th>
+	<th>......</th>
+	<th>......</th>
+	<th>......</th>
+	<th><font color="red">stop here</font></th>
+	</tr>
+	<tr>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	<th>&darr;</th>
+	</tr>
+	<tr>
+		<th><font color="blue">3</font></th>
+		<th><font color="blue">15</font></th>
+		<th><font color="blue">2</font></th>
+		<th><font color="blue">8</font></th>
+		<th><font color="blue">7</font></th>
+		<th><font color="blue">1</font></th>
+		<th><font color="blue">14</font></th>
+		<th><font color="blue">38</font></th>
+		<th><font color="blue">10</font></th>
+		<th><font color="blue">&nbsp -2</font></th>
+		<th><font color="blue">&nbsp 61</font></th>
+		<th><font color="blue">&nbsp 5</font></th>
+	</tr>
+	<tr>
+	<td>0</td>
+	<td>1</td>
+	<td>2</td>
+	<td>3</td>
+	<td>4</td>
+	<td>5</td>
+	<td>6</td>
+	<td>7</td>
+	<td>8</td>
+	<td>9</td>
+	<td>10</td>
+	<td>11</td>
+	</tr>
+</table>
+<br>
+After control returns to the activating function, <b><font color="blue">index will contain -1</font></b> meaning that the function did not find 25 in the array. The search goes all the way to the end of the array, since 25 is not in the list.
+</pre>
+<br>
+<h2>Summary</h2>
+Linear search is useful for when your list is full of random data, when your data cannot be organized in a specific order such as ascending/descending order. It's useful when a list isn't sorted.
+
+<br>
+
+	<footer align="center" id="foot01"></footer>
+</div>
+
+<br>
+<br>
+</body>
+</html>
