@@ -193,6 +193,37 @@ x > L[i]: algorithm proceeds to the right half of the list
 In <b><font color="blue">binary search</font></b>, you start with <b><font color="blue">\(n\) elements</font></b>, 
 and in each step, you divide the array into <b><font color="blue">2 halves</font></b>. Each halving step cuts the size by half:
 
+<table style="width:80%; margin:auto">
+  <caption><strong>Binary Search Halving Process</strong></caption>
+  <tr>
+    <th>Step</th>
+    <th>Remaining Elements</th>
+  </tr>
+  <tr>
+    <td>Start</td>
+    <td>n</td>
+  </tr>
+  <tr>
+    <td>Step 1</td>
+    <td>n/2</td>
+  </tr>
+  <tr>
+    <td>Step 2</td>
+    <td>n/4</td>
+  </tr>
+  <tr>
+    <td>Step 3</td>
+    <td>n/8</td>
+  </tr>
+  <tr>
+    <td>...</td>
+    <td>...</td>
+  </tr>
+  <tr>
+    <td>Step k</td>
+    <td>n/(2<sup>k</sup>)</td>
+  </tr>
+</table>
 
 
 				<h2>Lower Bound for Searching</h2>
