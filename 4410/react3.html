@@ -156,6 +156,27 @@
         export default LoginForm;
             </code>
         </pre>
+
+        <h3>3. Create your App.js</h3>
+        <pre>
+            <code class="language-jsx">
+        import { Routes, Route } from 'react-router-dom';
+        import LoginForm from './LoginForm';
+        import Dashboard from './Dashboard';
+        
+        function App() {
+          return (
+            &lt;Routes&gt;
+              &lt;Route path="/" element={<LoginForm />} /&gt;
+              &lt;Route path="/dashboard" element={<Dashboard />} /&gt;
+            &lt;/Routes&gt;
+          );
+        }
+        
+        export default App;
+            </code>
+        </pre>
+
         
         <!--      
            <h2>useParams() for Dynamic Routing in React Router</h2>
