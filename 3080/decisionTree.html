@@ -387,12 +387,24 @@ So: \( k = log_2(n)  \)
 					
 
 					<h1>Binary Tree Search</h1>
-					The binary search algorithm requires that data already be sorted. Arbitrary data can be organized into a
+					The binary search algorithm requires that data already be sorted. 
+					If the data is <b><font color="red">unsorted</font></b>, you can't apply binary search directly.
+					Arbitrary data can be organized into a
 					a structure called a <b>
-						<font color="blue">binary search tree</font>
+						<font color="blue">binary search tree (BST)</font>
 					</b>, which can then be searched using a different algorithm called <b>
 						<font color="blue">binary tree search</font>
-					</b>. To build a binary search tree, the first item of data is made the root of the tree. Successive items are
+					</b>. 
+
+					<br><br>
+					A binary search tree (BST) is a special kind of binary tree where:
+					<ul>
+						<li>&clubs; The <b><font color="blue">left child</font></b> of a node has values <b><font color="blue">less than the node</font></b>.</li>
+						<li>&clubs; The <b><font color="blue">right child</font></b> has values <b><font color="blue">greater than the node</font></b>.</li>
+					</ul>
+					
+					<br><br>
+					To build a binary search tree, the first item of data is made the root of the tree. Successive items are
 					inserted by comparing them to existing nodes, beginning with the root. If the item is less than a node, the
 					next node tested is the left child; otherwise, it is the right child. When no child node exists, the new item
 					becomes the child.
