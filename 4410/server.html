@@ -410,7 +410,11 @@
 			 
 			<li>&#9733; If the port 3306 has been occupied, usually it has been used by another mysql process, you can use the
 				following command to kill it:</li>
-			&nbsp; &nbsp; <b>sudo pkill mysql</b>
+			<ul>
+				<li>&star; <b>sudo pkill mysql</b> (for Mac Users)</li>
+				<li>&star; <b>taskkill /PID 1234 /F</b> (for Windows Users) (Replace 1234 with the actual PID you found)</li>
+			</ul>
+	
 			<li>&#9733; or You can change the port 3306 to another port number such as 3307, 3308 in the file:
 				<ul>
 					<li>&star; "properties.ini" (for Mac Users)</li>
