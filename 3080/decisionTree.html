@@ -179,8 +179,8 @@ x > L[i]: algorithm proceeds to the right half of the list
   </tr>
   <tr>
     <td>When to use</td>
-    <td>When data is unsorted or list is small</td>
-    <td>When data is sorted and list is large</td>
+    <td>When data is unsorted or the list is small</td>
+    <td>When data is sorted and the list is large</td>
   </tr>
   <tr>
     <td>Requires sorted data?</td>
@@ -189,12 +189,16 @@ x > L[i]: algorithm proceeds to the right half of the list
   </tr>
 </table>
 
+<h2>Understanding the \(log_2(n)\) Steps in Binary Search</h2>
+In <b><font color="blue">binary search</font></b>, you start with <b><font color="blue">\(n\) elements</font></b>, 
+and in each step, you divide the array into <b><font color="blue">2 halves</font></b>. Each halving step cuts the size by half:
+
+
 
 				<h2>Lower Bound for Searching</h2>
 				<b>
-					<font color="blue" size="5">Theorem: On the Lower Bound for Searching
-				</b>
-				</font>
+					<font color="blue" size="5">Theorem: On the Lower Bound for Searching</font>
+				</b>				
 				<br>
 				<font color="blue">
 					Any algorithm that solves the search problem for an n-element list by comparing the target element x to the
