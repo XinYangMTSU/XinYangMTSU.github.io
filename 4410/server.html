@@ -403,7 +403,11 @@
 				process, then you
 				cannot start the MySQL server.</li>
 			<li>&#9733; You can use the following command to check if port 3306 be occupied:</li>
-			&nbsp; &nbsp; <b>netstat -vanp tcp | grep 3306</b>
+			<ul>
+				<li>&star; <b>netstat -vanp tcp | grep 3306</b> (for Mac Users)</li>
+				<li>&star; <b>netstat -ano | findstr :3306</b> (for Windows Users)</li>
+			</ul>
+			 
 			<li>&#9733; If the port 3306 has been occupied, usually it has been used by another mysql process, you can use the
 				following command to kill it:</li>
 			&nbsp; &nbsp; <b>sudo pkill mysql</b>
