@@ -143,13 +143,28 @@ x > L[i]: algorithm proceeds to the right half of the list
   </tr>
   <tr>
     <td>Time Complexity (Worst Case)</td>
-    <td>O(n)</td>
-    <td>O(log n)</td>
+    <td>
+      O(n): The worst case happens when:<br>
+      - The target is at the last position.<br>
+      - Or the target is not in the array at all.<br>
+      In both cases, the algorithm checks all n elements.
+    </td>
+    <td>
+      O(log n): The worst case happens when:<br>
+      - The target is not in the array.<br>
+      - Or is found at the last step after fully narrowing down.
+    </td>
   </tr>
   <tr>
     <td>Time Complexity (Average Case)</td>
-    <td>O(n)</td>
-    <td>O(log n)</td>
+    <td>
+      O(n): On average, linear search will check about half of the elements (n/2),<br>
+      but in Big-O we simplify it to O(n).
+    </td>
+    <td>
+      O(log n): On average, binary search will divide the list about log₂(n) times<br>
+      to find the target due to halving the list at each step.
+    </td>
   </tr>
   <tr>
     <td>Efficiency on large datasets</td>
@@ -163,8 +178,8 @@ x > L[i]: algorithm proceeds to the right half of the list
   </tr>
   <tr>
     <td>When to use</td>
-    <td>When data is unsorted or the list is small</td>
-    <td>When data is sorted and the list is large</td>
+    <td>When data is unsorted or list is small</td>
+    <td>When data is sorted and list is large</td>
   </tr>
   <tr>
     <td>Requires sorted data?</td>
@@ -172,6 +187,7 @@ x > L[i]: algorithm proceeds to the right half of the list
     <td>Yes</td>
   </tr>
 </table>
+
 
 				<h2>Lower Bound for Searching</h2>
 				<b>
