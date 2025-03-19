@@ -103,6 +103,22 @@
 		This property ensures that the resulting bitstream can be <font color="blue"><b>decoded and encoded unambiguously</b></font>.
 		<br>
 		<br>
+		In the context of Huffman coding, encoding and decoding are the two main processes involved in compressing and reconstructing data:
+		<ul>
+			<li>1. <font color="blue"><b>Encoding</b></font> (Compressing the Data)</li>
+			<ul>
+				<li>&clubs; Each symbol/character in the original data is replaced with its binary code from the Huffman tree.</li>
+				<li>&clubs; The original data is transformed into a compressed sequence of binary bits.</li>
+			</ul>
+			
+			<li>2. <font color="blue"><b>Decoding</b></font> (Reconstructing the Original Data)</li>
+			<ul>
+				<li>&clubs; The decoder uses the same Huffman tree to interpret the bitstream.</li>
+				<li>&clubs; The binary sequence is transformed back into the original data.</li>
+			</ul>
+			
+		</ul>
+		<br><br>
 		In our approach to prefix codes, we will build binary trees with the characters as leaves. Once the tree is built, a
 		binary code can be assigned to each character by simply tracing the path from the root to that leaf, using <b>
 			<font color="red">0 for a
