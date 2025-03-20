@@ -1,0 +1,50 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>PHP</title>
+	<link href="../CSS/Site.css" type="text/css" rel="stylesheet">
+	<style>
+		.folder {
+            font-weight: bold;
+            color: #2b6cb0;
+        }
+	</style>
+</head>
+
+<body>
+
+	<div id="main">
+  <h1>Enable Error Reporting in PHP</h1>
+
+  <ul>
+    <li>1. Edit php.ini to display errors:</li>
+    <ul>
+        <li>&clubs; Ensure <b><font color="blue">display_errors</font></b> is set to <b><font color="blue">On</font></b> and 
+    <b><font color="blue">error_reporting</font></b> is set to <b><font color="blue">E_ALL</font></b>.</li>
+       <li>&clubs; Configuration File (<b><font color="blue">php.ini</font></b>) Path: </li>
+       <pre>
+         /Applications/XAMPP/xamppfiles/etc/php.ini
+       </pre>
+    </ul>
+    
+    
+    <li>2. Set error_reporting to show all errors:</li>
+    <ul>
+        <li>&clubs; Place the following code snippet at the very beginning of your PHP code:</li>
+       <pre>
+       ini_set('display_errors', 1);
+       ini_set('display_startup_errors', 1);
+       error_reporting(E_ALL);
+    </pre>
+    </ul>
+    
+  </ul>
+
+    
+    
+	</div>
+
+</body>
