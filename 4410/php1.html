@@ -371,15 +371,15 @@
 			<pre>
 				&lt;?php
 				
-				function myTest() {
-					static $x = 0;
-					echo $x;
-					$x++;
-				}
+				function myCounter() {
+					static $count = 0;
+					$count++;
+					echo $count . "<br>";
+				}		
 				
-				myTest();
-				myTest();
-				myTest();
+				myCounter(); //Outputs 1
+				myCounter(); //Outputs 2
+				myCounter(); //Outputs 3
 				?&gt;
 			</pre>
 		</ul>
