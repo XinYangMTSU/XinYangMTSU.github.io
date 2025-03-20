@@ -288,11 +288,7 @@
 			<font color="blue">outside any function or class</font>
 		</b> has a GLOBAL SCOPE.</li>
 			<li>&clubs; It can be accessed anywhere outside functions or classes, but not directly inside them.</li>
-		</ul>
-		
-
-		<ul>
-			<li>&#9733; using x inside this function will generate an error</li>
+			<li>&clubs; Using the variable x inside this function will cause an error</li>
 			<pre>
 			&lt;?php
 				$x = 5; // global scope
@@ -305,9 +301,11 @@
 				myTest();
 				echo "&lt;p&gt;Variable x outside function is: $x&lt;/p&gt;";
 			?&gt;
-		</pre>
+			</pre>
+		</ul>
+		
 
-
+		<ul>
 			<li>&#9733; The <b>
 					<font color="blue">global</font>
 				</b> keyword is used to access a global variable from within a function.</li>
