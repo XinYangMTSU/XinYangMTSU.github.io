@@ -327,13 +327,14 @@
 			?&gt;
 		</pre>
 
-			<h3>Using $GLOBALS Inside Functions:</h3>
+		<h3>Using $GLOBALS Inside Functions:</h3>
 
 			<li>&#9733; PHP also stores all global variables in an array called <b>
 					<font color="blue">$GLOBALS[index]</font>
 				</b>. The index holds the name of
 				the variable.
 			</li>
+			<li>&#9733; Even if a variable is not declared as global within a function, you can still access it using $GLOBALS.</li>
 			<pre>
 				&lt;?php
 				$x = 5;
