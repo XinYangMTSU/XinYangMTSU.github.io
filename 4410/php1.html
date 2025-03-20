@@ -993,6 +993,27 @@
 			&lt;/html&gt;
 		</pre>
 
+		<h3>Common Use Cases: Sorting</h3>
+
+		<pre>
+			$arr = [3, 1, 4, 2];
+			
+			// Print each item before sorting
+			echo "Before sorting:\n";
+			foreach ($arr as $item) {
+			    echo $item . "\n";
+			}
+			
+			// Sort the array using usort and a lambda function
+			usort($arr, fn($a, $b) => $a <=> $b);
+			
+			// Print each item after sorting
+			echo "After sorting:\n";
+			foreach ($arr as $item) {
+			    echo $item . "\n";
+			}
+		</pre>
+					
 
 		<h2>PHP Increment / Decrement Operators</h2>
 		<table style="width:50%">
