@@ -256,13 +256,17 @@
 		</ul>
 
 
-		<h3>local</h3>
+		<h3>1. Local</h3>
 
-		A variable declared <b>
+		<ul>
+			<li>A variable declared <b>
 			<font color="blue">within a function</font>
-		</b> has a LOCAL SCOPE and can only be accessed within that function:
-
-		<pre>
+		</b> has a LOCAL SCOPE and can only be accessed within that function.</li>
+			<li>It cannot be accessed outside of that function.</li>
+		</ul>
+		
+		<pre>	
+			//Example:
 			&lt;?php
 				function myTest() {
 					$x = 5; // local scope
@@ -271,7 +275,7 @@
 			
 				myTest();
 				
-				// using x outside the function will generate an error
+				//Using x outside the function will cause an error: Undefined variable
 				echo "&lt;p&gt;Variable x outside function is: $x&lt;/p&gt;";
 			?&gt;
 		</pre>
