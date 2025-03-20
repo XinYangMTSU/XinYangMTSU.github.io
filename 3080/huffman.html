@@ -223,6 +223,30 @@
 
 		<h2>Application of Huffman Codes</h2>
 
+		<h3>1. ZIP file format (lossless)</h3>
+		<ul>
+			<li>&clubs; ZIP = LZ77 + Huffman (via DEFLATE)</li>
+			<li>&clubs; Inside ZIP, the DEFLATE algorithm is applied:</li>
+			<ul>
+				<Li>LZ77 first reduces repeated strings/patterns.</Li>
+				<li>Huffman coding compresses the result based on symbol frequency.</li>
+			</ul>
+		</ul>
+
+		<h3>2. JPEG (lossy)</h3>
+		<ul>
+			<li>&clubs; JPEG image compression is mostly lossy, but it does use Huffman coding as a final step.</li>
+			<li>&clubs; JPEG pipeline: </li>
+			<ul>
+				<li>Convert image to YCbCr color space.</li>
+				<li>Apply DCT (Discrete Cosine Transform) to blocks of pixels (lossy step)</li>
+				<li>Quantization (major source of loss).</li>
+				<li>Convert quantized DCT coefficients to a zig-zag order.</li>
+				<li>Run-Length Encoding (RLE) on the zig-zag coefficients.</li>
+				<li>Huffman coding applied to the RLE output for entropy coding.</li>
+			</ul>
+		</ul>
+		
 		<a href="https://www.print-driver.com/stories/huffman-coding-jpeg" target="_blank">Huffman Coding -- Base of JPEG
 			Image Compression</a>
 
