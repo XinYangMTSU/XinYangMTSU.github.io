@@ -632,6 +632,29 @@
 					echo strrev("Hello world!"); // outputs !dlrow olleH
 				?&gt;
 			</pre>
+			Here’s a simple PHP program that uses <font color="blue"><b>strrev()</b></font> to check if a given string is a palindrome 
+			(a word, phrase, or sequence that reads the same backward as forward):
+			<pre>
+				function isPalindrome($string) {
+				    // Remove whitespace and convert the string to lowercase for uniformity
+				    $normalizedString = strtolower(str_replace(' ', '', $string));
+				    
+				    // Reverse the normalized string
+				    $reversedString = strrev($normalizedString);
+				    
+				    // Check if the original normalized string matches the reversed string
+				    return $normalizedString === $reversedString;
+				}
+				
+				// Test the function
+				$inputString = "radar";
+				if (isPalindrome($inputString)) {
+				    echo "$inputString is a palindrome.";
+				} else {
+				    echo "$inputString is not a palindrome.";
+				}
+			</pre>
+			
 			<li>&#9733; <b>
 					<font color="blue">strpos()</font>
 				</b>: Search For a Text Within a String</li>
