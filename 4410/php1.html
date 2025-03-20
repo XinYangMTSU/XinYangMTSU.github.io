@@ -451,6 +451,26 @@
 
 				Note: var_dump() function returns the data type and value;
 			</pre>
+
+			Single and double quotes generally behave the same for simple strings, but <b><font color="blue">double quotes allow variable interpolation and certain escape sequences</font></b>:
+			<ul>
+				<li>1. Variable Interpolation</li>
+				<ul>
+					<li>&clubs; If you place a variable inside a double-quoted string, PHP will automatically replace it with the variable’s value.</li>
+					<li>&clubs; No need to concatenate the variable; it’s interpreted directly within the string.</li>
+					<pre>
+						$name = "Alice";
+						echo "Hello, $name! &lt;br&gt;"; // Outputs: Hello, Alice!
+						echo 'Hello, $name!'; // Outputs: Hello, $name! (literal $name, no interpolation)
+					</pre>
+				</ul>
+				<li>2. Escape Sequences</li>
+				<ul>
+					<li>&clubs; Within double quotes, you can use certain escape sequences to represent special characters.</li>
+					<li>&clubs; </li>
+				</ul>
+			</ul>
+			
 			<li>&#9733; <b>
 					<font color="blue">Integer</font>
 				</b></li>
