@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My First Latin Adventure</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            color: teal;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        input {
+            width: 60%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        #answer-key {
+            display: none;
+            background: #f0f8ff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 15px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: teal;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: darkcyan;
+        }
+    </style>
+</head>
+    
+<body>
+ <h1>💧 AQUA Fun Quiz! 💧</h1>
+    <p><strong>"aqua"</strong> – means <strong>water</strong></p>
+    <p><strong>Word Bank:</strong> aquarium, aquatic, aquifer, aquamarine</p>
+
+    <div class="question">
+        1. Fish live in an __________.<br>
+        <input type="text" placeholder="Your answer">
+    </div>
+    <div class="question">
+        2. Dolphins are __________ animals.<br>
+        <input type="text" placeholder="Your answer">
+    </div>
+    <div class="question">
+        3. The ocean looks __________ in color.<br>
+        <input type="text" placeholder="Your answer">
+    </div>
+    <div class="question">
+        4. We get water from an __________ underground.<br>
+        <input type="text" placeholder="Your answer">
+    </div>
+
+    <button onclick="document.getElementById('answer-key').style.display='block'">Show Answer Key</button>
+
+    <div id="answer-key">
+        <h3>✅ Answer Key:</h3>
+        <ul>
+            <li>1. aquarium</li>
+            <li>2. aquatic</li>
+            <li>3. aquamarine</li>
+            <li>4. aquifer</li>
+        </ul>
+    </div>
+  
+  
+    <hr>
+    <footer style="text-align: center; font-size: 0.9rem; color: #999;">
+        <b>
+        <span style="color: pink;">
+         ❤️ This educational website was created with love 💖 for my daughter, Ada Zhang 👧🌟 ❤️
+        </span>
+        <br>
+        <br>&copy;2025 Dr. Xin Yang. All rights reserved.
+        <br>Department of Computer Science
+        <br>College of Basic and Applied Sciences
+        <br>Middle Tennessee State University
+        
+        </b>
+    </footer>
+    
+    <!-- Go to Top Button -->
+    <a href="#" id="goTopBtn">&#8679;</a>
+    
+    <!-- Script to scroll to top -->
+     <script src="lab.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+
+    <script>
+        let voices = [];
+        window.speechSynthesis.onvoiceschanged = () => {
+            voices = speechSynthesis.getVoices();
+        };
+        
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            const latinLikeVoice = voices.find(voice => voice.lang.includes('it')) || voices[0];
+            utterance.voice = latinLikeVoice;
+            utterance.rate = 0.9;
+            speechSynthesis.speak(utterance);
+        }
+    </script>
+
+</body>
+</html>
