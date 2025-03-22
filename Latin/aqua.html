@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
-  <style>
+   <style>
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
@@ -24,12 +24,20 @@
             padding: 5px;
             margin-top: 5px;
         }
-        #answer-key {
-            display: none;
-            background: #f0f8ff;
-            padding: 10px;
-            border: 1px solid #ccc;
-            margin-top: 15px;
+        .feedback {
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        #score {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
         }
         button {
             padding: 10px 15px;
@@ -38,47 +46,118 @@
             border: none;
             cursor: pointer;
             border-radius: 5px;
+            margin-top: 10px;
+            margin-right: 10px;
         }
         button:hover {
             background-color: darkcyan;
+        }
+        .explanation {
+            background: #f0f8ff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+        .word-image {
+            width: 100px;
+            display: block;
+            margin-top: 5px;
+        }
+        .fun-fact {
+            background: #e6f7ff;
+            padding: 10px;
+            border-left: 5px solid teal;
+            margin-top: 15px;
+            font-style: italic;
+        }
+        .word-breakdown {
+            background: #fffbe6;
+            padding: 10px;
+            border-left: 5px solid orange;
+            margin-top: 15px;
         }
     </style>
 </head>
     
 <body>
- <h1>💧 AQUA Fun Quiz! 💧</h1>
-    <p><strong>"aqua"</strong> – means <strong>water</strong></p>
+
+<h1>💧 AQUA Fun Quiz! 💧</h1>
+
     <p><strong>Word Bank:</strong> aquarium, aquatic, aquifer, aquamarine</p>
 
     <div class="question">
         1. Fish live in an __________.<br>
-        <input type="text" placeholder="Your answer">
+        <input type="text" id="q1" placeholder="Your answer">
+        <div id="f1" class="feedback"></div>
     </div>
     <div class="question">
         2. Dolphins are __________ animals.<br>
-        <input type="text" placeholder="Your answer">
+        <input type="text" id="q2" placeholder="Your answer">
+        <div id="f2" class="feedback"></div>
     </div>
     <div class="question">
         3. The ocean looks __________ in color.<br>
-        <input type="text" placeholder="Your answer">
+        <input type="text" id="q3" placeholder="Your answer">
+        <div id="f3" class="feedback"></div>
     </div>
     <div class="question">
         4. We get water from an __________ underground.<br>
-        <input type="text" placeholder="Your answer">
+        <input type="text" id="q4" placeholder="Your answer">
+        <div id="f4" class="feedback"></div>
     </div>
 
-    <button onclick="document.getElementById('answer-key').style.display='block'">Show Answer Key</button>
+    <button onclick="checkAnswers()">Submit Answers</button>
+    <button onclick="resetQuiz()">Restart Quiz</button>
 
-    <div id="answer-key">
-        <h3>✅ Answer Key:</h3>
+    <div id="score"></div>
+
+    <div class="explanation">
+        <p><strong>"Aqua"</strong> is a Latin root that means <strong>"water"</strong>. Many English words come from this root! For example:</p>
         <ul>
-            <li>1. aquarium</li>
-            <li>2. aquatic</li>
-            <li>3. aquamarine</li>
-            <li>4. aquifer</li>
+            <li><strong>Aquarium</strong> - a place where water animals live.<br><img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Marine_aquarium.jpg" alt="aquarium" class="word-image"></li>
+            <li><strong>Aquatic</strong> - living or growing in water.<br><img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Dolphinsjump.jpg" alt="aquatic" class="word-image"></li>
+            <li><strong>Aquifer</strong> - an underground layer that holds water.<br><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Aquifer_diagram_en.png" alt="aquifer" class="word-image"></li>
+            <li><strong>Aquamarine</strong> - a blue-green color, like the sea.<br><img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Aquamarine_gemstone.jpg" alt="aquamarine" class="word-image"></li>
         </ul>
+        <div class="word-breakdown">
+            🔍 <strong>Word Breakdown:</strong> The word <strong>"Aquarium"</strong> comes from <em>"Aqua"</em> (water) + <em>"-arium"</em> (a place for). So, "Aquarium" means "a place for water." 🐠
+        </div>
+        <div class="fun-fact">
+            💡 Did You Know? The word "aqua" is also where we get the word "aqueduct," an ancient structure used to carry water to cities in ancient Rome!
+        </div>
+        <p>Now you know how "aqua" helps us build new words!</p>
     </div>
-  
+
+    <script>
+        function checkAnswers() {
+            let answers = ["aquarium", "aquatic", "aquamarine", "aquifer"];
+            let score = 0;
+
+            for (let i = 1; i <= 4; i++) {
+                let userAnswer = document.getElementById("q" + i).value.trim().toLowerCase();
+                let feedback = document.getElementById("f" + i);
+                if (userAnswer === answers[i - 1]) {
+                    feedback.innerHTML = "✅ Correct!";
+                    feedback.className = "feedback correct";
+                    score++;
+                } else {
+                    feedback.innerHTML = "❌ Incorrect! Try again.";
+                    feedback.className = "feedback incorrect";
+                }
+            }
+
+            document.getElementById("score").innerHTML = "⭐ Total Score: " + score + " / 4";
+        }
+
+        function resetQuiz() {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById("q" + i).value = "";
+                document.getElementById("f" + i).innerHTML = "";
+                document.getElementById("f" + i).className = "feedback";
+            }
+            document.getElementById("score").innerHTML = "";
+        }
+    </script>  
   
     <hr>
     <footer style="text-align: center; font-size: 0.9rem; color: #999;">
