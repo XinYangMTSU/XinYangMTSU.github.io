@@ -19,7 +19,7 @@
         .audio-listen button { margin-left: 10px; padding: 4px 8px; font-size: 12px; background-color: teal; color: white; border: none; border-radius: 5px; }
         .audio-listen button:hover { background-color: darkcyan; }
         .question { margin-bottom: 15px; }
-        input { width: 60%; padding: 5px; margin-top: 5px; autocomplete: off; }
+        input { width: 60%; padding: 5px; margin-top: 5px;  }
         .feedback { font-weight: bold; margin-top: 5px; }
         .correct { color: green; }
         .incorrect { color: red; }
@@ -43,10 +43,10 @@
     <h1>💧 AQUA Fun Quiz! 💧</h1>
     <p><strong>Word Bank:</strong> aquarium, aquatic, aquifer, aquamarine</p>
 
-    <div class="question">1. Fish live in an __________.<br><input type="text" id="q1" placeholder="Your answer"><div id="f1" class="feedback"></div></div>
-    <div class="question">2. Dolphins are __________ animals.<br><input type="text" id="q2" placeholder="Your answer"><div id="f2" class="feedback"></div></div>
-    <div class="question">3. The ocean looks __________ in color.<br><input type="text" id="q3" placeholder="Your answer"><div id="f3" class="feedback"></div></div>
-    <div class="question">4. We get water from an __________ underground.<br><input type="text" id="q4" placeholder="Your answer"><div id="f4" class="feedback"></div></div>
+    <div class="question">1. Fish live in an __________.<br><input type="text" id="q1" placeholder="Your answer" autocomplete="off"><div id="f1" class="feedback"></div></div>
+    <div class="question">2. Dolphins are __________ animals.<br><input type="text" id="q2" placeholder="Your answer" autocomplete="off"><div id="f2" class="feedback"></div></div>
+    <div class="question">3. The ocean looks __________ in color.<br><input type="text" id="q3" placeholder="Your answer" autocomplete="off"><div id="f3" class="feedback"></div></div>
+    <div class="question">4. We get water from an __________ underground.<br><input type="text" id="q4" placeholder="Your answer" autocomplete="off"><div id="f4" class="feedback"></div></div>
 
     <button onclick="checkAnswers()">Submit Answers</button>
     <button onclick="resetQuiz()">Restart Quiz</button>
