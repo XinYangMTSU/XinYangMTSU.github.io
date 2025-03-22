@@ -5,176 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aqua Fun Quiz!</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            max-width: 600px;
-            margin: auto;
-        }
-        h1 {
-            color: teal;
-        }
-        .diagram {
-            background: #fefae0;
-            padding: 10px;
-            border: 1px dashed #999;
-            margin-top: 20px;
-            text-align: center;
-        }
-        .diagram span {
-            font-weight: bold;
-            display: inline-block;
-            margin: 0 5px;
-            padding: 4px 8px;
-            border-radius: 5px;
-        }
-        .root {
-            background: #b2f7ef;
-        }
-        .suffix {
-            background: #ffd6a5;
-        }
-        .arrow {
-            margin: 0 5px;
-            color: teal;
-            font-size: 20px;
-        }
-        .result {
-            background: #caffbf;
-        }
-        .question {
-            margin-bottom: 15px;
-        }
-        input {
-            width: 60%;
-            padding: 5px;
-            margin-top: 5px;
-        }
-        .feedback {
-            font-weight: bold;
-            margin-top: 5px;
-        }
-        .correct {
-            color: green;
-        }
-        .incorrect {
-            color: red;
-        }
-        #score {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        button {
-            padding: 8px 12px;
-            background-color: teal;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
-            margin-right: 10px;
-        }
-        button:hover {
-            background-color: darkcyan;
-        }
-        .speak-btn {
-            padding: 4px 8px;
-            font-size: 12px;
-            background-color: #444;
-            margin-left: 5px;
-        }
-        .speak-btn:hover {
-            background-color: #222;
-        }
-        .explanation {
-            background: #f0f8ff;
-            padding: 10px;
-            border: 1px solid #ccc;
-            margin-top: 20px;
-        }
-        .word-image {
-            width: 100px;
-            display: block;
-            margin-top: 5px;
-        }
-        .fun-fact {
-            background: #e6f7ff;
-            padding: 10px;
-            border-left: 5px solid teal;
-            margin-top: 15px;
-            font-style: italic;
-        }
-        .word-breakdown {
-            background: #fffbe6;
-            padding: 10px;
-            border-left: 5px solid orange;
-            margin-top: 15px;
-        }
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+        h1 { color: teal; }
+        .diagram { background: #fefae0; padding: 10px; border: 1px dashed #999; margin-top: 20px; text-align: center; }
+        .diagram span { font-weight: bold; display: inline-block; margin: 0 5px; padding: 4px 8px; border-radius: 5px; }
+        .root { background: #b2f7ef; }
+        .suffix { background: #ffd6a5; }
+        .arrow { margin: 0 5px; color: teal; font-size: 20px; }
+        .result { background: #caffbf; }
+        .explanation-list { margin-top: 10px; text-align: left; padding-left: 20px; }
+        .explanation-list li { margin-bottom: 10px; }
+        .audio-listen { display: flex; align-items: center; margin-bottom: 8px; }
+        .audio-listen button { margin-left: 10px; padding: 4px 8px; font-size: 12px; background-color: teal; color: white; border: none; border-radius: 5px; }
+        .audio-listen button:hover { background-color: darkcyan; }
+        .question { margin-bottom: 15px; }
+        input { width: 60%; padding: 5px; margin-top: 5px; }
+        .feedback { font-weight: bold; margin-top: 5px; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+        #score { margin-top: 20px; font-size: 18px; font-weight: bold; }
+        button { padding: 8px 12px; background-color: teal; color: white; border: none; cursor: pointer; border-radius: 5px; margin-top: 10px; margin-right: 10px; }
+        button:hover { background-color: darkcyan; }
+        .speak-btn { padding: 4px 8px; font-size: 12px; background-color: teal; color: white; border: none; border-radius: 5px; margin-left: 5px; }
+        .speak-btn:hover { background-color: darkcyan; }
+        .explanation { background: #f0f8ff; padding: 10px; border: 1px solid #ccc; margin-top: 20px; }
     </style>
 </head>
 <body>
-
     <h1>💧 AQUA Fun Quiz! 💧</h1>
-
     <p><strong>Word Bank:</strong> aquarium, aquatic, aquifer, aquamarine</p>
 
-    <div class="question">
-        1. Fish live in an __________.<br>
-        <input type="text" id="q1" placeholder="Your answer">
-        <div id="f1" class="feedback"></div>
-    </div>
-    <div class="question">
-        2. Dolphins are __________ animals.<br>
-        <input type="text" id="q2" placeholder="Your answer">
-        <div id="f2" class="feedback"></div>
-    </div>
-    <div class="question">
-        3. The ocean looks __________ in color.<br>
-        <input type="text" id="q3" placeholder="Your answer">
-        <div id="f3" class="feedback"></div>
-    </div>
-    <div class="question">
-        4. We get water from an __________ underground.<br>
-        <input type="text" id="q4" placeholder="Your answer">
-        <div id="f4" class="feedback"></div>
-    </div>
+    <div class="question">1. Fish live in an __________.<br><input type="text" id="q1" placeholder="Your answer"><div id="f1" class="feedback"></div></div>
+    <div class="question">2. Dolphins are __________ animals.<br><input type="text" id="q2" placeholder="Your answer"><div id="f2" class="feedback"></div></div>
+    <div class="question">3. The ocean looks __________ in color.<br><input type="text" id="q3" placeholder="Your answer"><div id="f3" class="feedback"></div></div>
+    <div class="question">4. We get water from an __________ underground.<br><input type="text" id="q4" placeholder="Your answer"><div id="f4" class="feedback"></div></div>
 
     <button onclick="checkAnswers()">Submit Answers</button>
     <button onclick="resetQuiz()">Restart Quiz</button>
-
     <div id="score"></div>
 
     <div class="explanation">
-        <p><strong>"Aqua" <button class="speak-btn" onclick="speak('Aqua')">🔊 Listen</button></strong> is a Latin root that means <strong>"water"</strong>. Many English words come from this root! For example:</p>
+        <p><strong>"Aqua"</strong> <button class="speak-btn" onclick="speak('Aqua')">🔊 Listen</button> is a Latin root that means <strong>"water"</strong>. Many English words come from this root! For example:</p>
 
+        <h3>Word Explanations with Audio</h3>
+        <div class="audio-listen"><strong>Aquarium</strong> - a place where water animals live. <button onclick="speak('aquarium')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Aquatic</strong> - living or growing in water. <button onclick="speak('aquatic')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Aquifer</strong> - an underground layer that holds water. <button onclick="speak('aquifer')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Aquamarine</strong> - a blue-green color, like the sea. <button onclick="speak('aquamarine')">🔊 Listen</button></div>
+
+        <h3>Word Building Diagram</h3>
         <div class="diagram">
-            <span class="root">Aqua</span> + <span class="suffix">-arium</span> <span class="arrow">➡</span> <span class="result">Aquarium</span>
-            <br>
-            <span class="root">Aqua</span> + <span class="suffix">-tic</span> <span class="arrow">➡</span> <span class="result">Aquatic</span>
-            <br>
-            <span class="root">Aqua</span> + <span class="suffix">-fer</span> <span class="arrow">➡</span> <span class="result">Aquifer</span>
-            <br>
+            <span class="root">Aqua</span> + <span class="suffix">-arium</span> <span class="arrow">➡</span> <span class="result">Aquarium</span><br>
+            <span class="root">Aqua</span> + <span class="suffix">-tic</span> <span class="arrow">➡</span> <span class="result">Aquatic</span><br>
+            <span class="root">Aqua</span> + <span class="suffix">-fer</span> <span class="arrow">➡</span> <span class="result">Aquifer</span><br>
             <span class="root">Aqua</span> + <span class="suffix">marine</span> <span class="arrow">➡</span> <span class="result">Aquamarine</span>
         </div>
 
-        <ul>
-            <li><strong>Aquarium</strong> - a place where water animals live.
-                <button class="speak-btn" onclick="speak('Aquarium')">🔊 Listen</button><br>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Marine_aquarium.jpg" alt="aquarium" class="word-image">
-            </li>
-            <li><strong>Aquatic</strong> - living or growing in water.
-                <button class="speak-btn" onclick="speak('Aquatic')">🔊 Listen</button><br>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Dolphinsjump.jpg" alt="aquatic" class="word-image">
-            </li>
-            <li><strong>Aquifer</strong> - an underground layer that holds water.
-                <button class="speak-btn" onclick="speak('Aquifer')">🔊 Listen</button><br>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Aquifer_diagram_en.png" alt="aquifer" class="word-image">
-            </li>
-            <li><strong>Aquamarine</strong> - a blue-green color, like the sea.
-                <button class="speak-btn" onclick="speak('Aquamarine')">🔊 Listen</button><br>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Aquamarine_gemstone.jpg" alt="aquamarine" class="word-image">
-            </li>
+        <h3>Breakdown Explanations</h3>
+        <ul class="explanation-list">
+            <li><strong>-arium</strong>: Latin suffix meaning "a place for." (e.g., "Aquarium")</li>
+            <li><strong>-tic</strong>: Latin "-ticus" meaning "relating to." (e.g., "Aquatic")</li>
+            <li><strong>-fer</strong>: From Latin "ferre," meaning "to carry." (e.g., "Aquifer")</li>
+            <li><strong>marine</strong>: From Latin "marinus," meaning "of the sea." (e.g., "Aquamarine")</li>
         </ul>
     </div>
 
@@ -182,7 +74,6 @@
         function checkAnswers() {
             let answers = ["aquarium", "aquatic", "aquamarine", "aquifer"];
             let score = 0;
-
             for (let i = 1; i <= 4; i++) {
                 let userAnswer = document.getElementById("q" + i).value.trim().toLowerCase();
                 let feedback = document.getElementById("f" + i);
@@ -195,10 +86,8 @@
                     feedback.className = "feedback incorrect";
                 }
             }
-
             document.getElementById("score").innerHTML = "⭐ Total Score: " + score + " / 4";
         }
-
         function resetQuiz() {
             for (let i = 1; i <= 4; i++) {
                 document.getElementById("q" + i).value = "";
@@ -207,13 +96,11 @@
             }
             document.getElementById("score").innerHTML = "";
         }
-
         function speak(word) {
             const msg = new SpeechSynthesisUtterance(word);
             msg.lang = 'en-US';
             window.speechSynthesis.speak(msg);
         }
     </script>
-
 </body>
 </html>
