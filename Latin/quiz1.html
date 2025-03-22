@@ -32,7 +32,7 @@
         .quiz button.incorrect {
             background-color: #ffcdd2; /* light red */
         }
-        p,#score {
+        #score {
             font-size: 1.2em;
             margin-bottom: 20px;
             font-weight: bold;
@@ -43,74 +43,10 @@
     
 <body>
 
-   <div class="workbook">
+  <div class="workbook">
         <h2>🎉 Latin Quiz Time! 🎉</h2>
         <div id="score">Score: 0</div>
-
-        <!-- Quiz questions -->
-        <h3>Question 1</h3>
-        <p><i>What does "canis" mean?</i></p>
-        <div class="quiz">
-            <button onclick="checkAnswer(this, true)">🐶 Dog</button>
-            <button onclick="checkAnswer(this, false)">☀️ Sun</button>
-            <button onclick="checkAnswer(this, false)">🌸 Flower</button>
-        </div>
-
-        <h3>Question 2</h3>
-        <p><i>What does "sol" mean?</i></p>
-        <div class="quiz">
-            <button onclick="checkAnswer(this, false)">🐕 Dog</button>
-            <button onclick="checkAnswer(this, true)">☀️ Sun</button>
-            <button onclick="checkAnswer(this, false)">🌸 Flower</button>
-        </div>
-
-        <h3>Question 3</h3>
-        <p><i>What does "flos" mean?</i></p>
-        <div class="quiz">
-            <button onclick="checkAnswer(this, false)">🐕 Dog</button>
-            <button onclick="checkAnswer(this, false)">☀️ Sun</button>
-            <button onclick="checkAnswer(this, true)">🌸 Flower</button>
-        </div>
-
-        <h3>Question 4</h3>
-        <p><i>What does "feles" mean?</i></p>
-        <div class="quiz">
-            <button onclick="checkAnswer(this, true)">🐱 Cat</button>
-            <button onclick="checkAnswer(this, false)">🐴 Horse</button>
-            <button onclick="checkAnswer(this, false)">🐦 Bird</button>
-        </div>
-
-        <h3>Question 5</h3>
-        <p><i>What does "equus" mean?</i></p>
-        <div class="quiz">
-            <button onclick="checkAnswer(this, false)">🐱 Cat</button>
-            <button onclick="checkAnswer(this, true)">🐴 Horse</button>
-            <button onclick="checkAnswer(this, false)">🐦 Bird</button>
-        </div>
-
-        <h3>Question 6</h3>
-        <p><i>What does "avis" mean?</i></p>
-        <div class="quiz">
-            <button onclick="checkAnswer(this, false)">🐱 Cat</button>
-            <button onclick="checkAnswer(this, false)">🐴 Horse</button>
-            <button onclick="checkAnswer(this, true)">🐦 Bird</button>
-        </div>
-
-        <h3>Question 7</h3>
-        <p><i>What does "luna" mean?</i></p>
-        <div class="quiz">
-            <button onclick="checkAnswer(this, false)">☀️ Sun</button>
-            <button onclick="checkAnswer(this, true)">🌙 Moon</button>
-            <button onclick="checkAnswer(this, false)">💧 Water</button>
-        </div>
-
-        <h3>Question 8</h3>
-        <p><i>What does "aqua" mean?</i></p>
-        <div class="quiz">
-            <button onclick="checkAnswer(this, false)">☀️ Sun</button>
-            <button onclick="checkAnswer(this, false)">🌙 Moon</button>
-            <button onclick="checkAnswer(this, true)">💧 Water</button>
-        </div>
+        <div id="quiz-container"></div>
 
         <div id="celebration" style="display:none; text-align:center; margin-top:20px; font-size:1.5em; color:#27ae60;">
             🎉 Congratulations! You finished the quiz! 🎉<br>
@@ -119,18 +55,57 @@
     </div>
 
     <script>
+        const questions = [
+            { word: "canis", correct: "🐶 Dog", options: ["🐶 Dog", "☀️ Sun", "🌸 Flower"] },
+            { word: "sol", correct: "☀️ Sun", options: ["🐕 Dog", "☀️ Sun", "🌸 Flower"] },
+            { word: "flos", correct: "🌸 Flower", options: ["🐕 Dog", "☀️ Sun", "🌸 Flower"] },
+            { word: "feles", correct: "🐱 Cat", options: ["🐱 Cat", "🐴 Horse", "🐦 Bird"] },
+            { word: "equus", correct: "🐴 Horse", options: ["🐱 Cat", "🐴 Horse", "🐦 Bird"] },
+            { word: "avis", correct: "🐦 Bird", options: ["🐱 Cat", "🐴 Horse", "🐦 Bird"] },
+            { word: "luna", correct: "🌙 Moon", options: ["☀️ Sun", "🌙 Moon", "💧 Water"] },
+            { word: "aqua", correct: "💧 Water", options: ["☀️ Sun", "🌙 Moon", "💧 Water"] }
+        ];
+
         let score = 0;
         let questionsAnswered = 0;
-        const totalQuestions = 8;
+        const totalQuestions = questions.length;
         const correctSound = new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg');
         const incorrectSound = new Audio('https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg');
-        const celebrationSound = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_fcc99e94d7.mp3?filename=small-crowd-cheer-6696.mp3');
+        const celebrationSound = new Audio('https://actions.google.com/sounds/v1/cartoon/clown_horn.ogg');
+
+        const quizContainer = document.getElementById('quiz-container');
+
+        shuffleArray(questions);
+        questions.forEach((q, i) => {
+            const qDiv = document.createElement('div');
+            qDiv.innerHTML = `<h3>Question ${i + 1}</h3><p><i>What does "${q.word}" mean?</i></p>`;
+            const btnGroup = document.createElement('div');
+            btnGroup.className = 'quiz';
+            const shuffledOptions = [...q.options]; shuffleArray(shuffledOptions);
+            shuffledOptions.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.textContent = opt;
+                btn.onclick = () => checkAnswer(btn, opt === q.correct);
+                btnGroup.appendChild(btn);
+            });
+            qDiv.appendChild(btnGroup);
+            quizContainer.appendChild(qDiv);
+        });
 
         function checkAnswer(btn, isCorrect) {
             const buttons = btn.parentElement.querySelectorAll('button');
             if (!isCorrect) {
+            const correctAnswer = questions[questionsAnswered].correct;
+            buttons.forEach(b => {
+                if (b.textContent === correctAnswer) {
+                    b.classList.add('correct');
+                    if (!b.textContent.includes('✅')) {
+                        b.textContent += ' ✅';
+                    }
+                }
+            });
                 buttons.forEach(b => {
-                    if (b.getAttribute('onclick').includes('true')) {
+                    if (b.textContent === btn.parentElement.dataset.correct) {
                         b.classList.add('correct');
                         if (!b.textContent.includes('✅')) {
                             b.textContent += ' ✅';
@@ -141,18 +116,21 @@
             if (isCorrect) {
                 btn.classList.add('correct');
                 btn.textContent += ' ✅';
+                correctSound.currentTime = 0;
                 correctSound.play();
                 score++;
                 document.getElementById('score').textContent = `Score: ${score}`;
             } else {
                 btn.classList.add('incorrect');
                 btn.textContent += ' ❌';
+                incorrectSound.currentTime = 0;
                 incorrectSound.play();
             }
             buttons.forEach(button => button.disabled = true);
             questionsAnswered++;
             if (questionsAnswered === totalQuestions) {
                 showConfetti();
+                celebrationSound.currentTime = 0;
                 celebrationSound.play();
                 document.getElementById('celebration').style.display = 'block';
             }
@@ -200,11 +178,17 @@
             setTimeout(() => document.body.removeChild(canvas), 3000);
         }
 
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
         function restartQuiz() {
             location.reload();
         }
     </script>
-  
     <hr>
     <footer style="text-align: center; font-size: 0.9rem; color: #999;">
         <b>
