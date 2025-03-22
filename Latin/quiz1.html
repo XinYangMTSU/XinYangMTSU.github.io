@@ -13,6 +13,7 @@
     <!-- Latin Quiz for Kids -->
 <div class="workbook">
     <h2>🎉 Latin Quiz Time! 🎉</h2>
+    <div id="score">Score: 0</div>
 
     <h3>Question 1</h3>
     <p><i>What does "canis" mean?</i></p>
@@ -77,6 +78,11 @@
         <button onclick="checkAnswer(this, false)">🌙 Moon</button>
         <button onclick="checkAnswer(this, true)">💧 Water</button>
     </div>
+
+    <div id="celebration" style="display:none; text-align:center; margin-top:20px; font-size:1.5em; color:#27ae60;">
+        🎉 Congratulations! You finished the quiz! 🎉<br>
+        <button onclick="restartQuiz()" style="margin-top: 10px; padding: 8px 12px; background: #e67e22; color: #fff; border: none; border-radius: 5px; cursor: pointer;">🔄 Restart Quiz</button>
+    </div>
 </div>
 
 <style>
@@ -105,19 +111,45 @@
 .quiz button.incorrect {
     background-color: #ffcdd2; /* light red */
 }
+#score {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+}
 </style>
 
 <script>
+let score = 0;
+let questionsAnswered = 0;
+const totalQuestions = 8;
+const correctSound = new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg');
+const incorrectSound = new Audio('https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg');
+const celebrationSound = new Audio('https://actions.google.com/sounds/v1/cartoon/slide_whistle_to_drum_hit.ogg');
+
 function checkAnswer(btn, isCorrect) {
     if (isCorrect) {
         btn.classList.add('correct');
         btn.textContent += ' ✅';
+        correctSound.play();
+        score++;
+        document.getElementById('score').textContent = `Score: ${score}`;
     } else {
         btn.classList.add('incorrect');
         btn.textContent += ' ❌';
+        incorrectSound.play();
     }
     const buttons = btn.parentElement.querySelectorAll('button');
     buttons.forEach(button => button.disabled = true);
+    questionsAnswered++;
+    if (questionsAnswered === totalQuestions) {
+        document.getElementById('celebration').style.display = 'block';
+        celebrationSound.play();
+    }
+}
+
+function restartQuiz() {
+    location.reload();
 }
 </script>
   
