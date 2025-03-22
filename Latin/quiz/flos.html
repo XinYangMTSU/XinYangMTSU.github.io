@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flos Fun Quiz!</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 750px; margin: auto; }
+        h1 { color: purple; }
+        .diagram { background: #fefae0; padding: 10px; border: 1px dashed #999; margin-top: 20px; text-align: center; }
+        .diagram span { font-weight: bold; display: inline-block; margin: 0 5px; padding: 4px 8px; border-radius: 5px; }
+        .root { background: #fbc4ab; }
+        .suffix { background: #ffb5e8; }
+        .arrow { margin: 0 5px; color: purple; font-size: 20px; }
+        .result { background: #d0f4de; }
+        .explanation-list { margin-top: 10px; text-align: left; padding-left: 20px; }
+        .explanation-list li { margin-bottom: 15px; }
+        .audio-listen { display: flex; align-items: center; margin-bottom: 8px; }
+        .audio-listen button { margin-left: 10px; padding: 4px 8px; font-size: 12px; background-color: purple; color: white; border: none; border-radius: 5px; }
+        .audio-listen button:hover { background-color: indigo; }
+        .question { margin-bottom: 15px; }
+        input { width: 60%; padding: 5px; margin-top: 5px; }
+        .feedback { font-weight: bold; margin-top: 5px; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+        #score { margin-top: 20px; font-size: 18px; font-weight: bold; }
+        button { padding: 8px 12px; background-color: purple; color: white; border: none; cursor: pointer; border-radius: 5px; margin-top: 10px; margin-right: 10px; }
+        button:hover { background-color: indigo; }
+        .speak-btn { padding: 4px 8px; font-size: 12px; background-color: purple; color: white; border: none; border-radius: 5px; margin-left: 5px; }
+        .speak-btn:hover { background-color: indigo; }
+        .explanation { background: #f0f8ff; padding: 10px; border: 1px solid #ccc; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+     <center>
+        <span style="color: pink;">
+         🌸 This educational website was created with love 💖 for my daughter, Ada Zhang 👧🌟 🌸
+        </span>
+    </center>
+    
+    <h1>🌼 FLOS Fun Quiz! 🌼</h1>
+    <p><strong>Word Bank:</strong> floral, florist, flourish, floriculture</p>
+
+    <div class="question">1. A person who sells flowers is a __________.<br><input type="text" id="q1" placeholder="Your answer"><div id="f1" class="feedback"></div></div>
+    <div class="question">2. She wore a __________ dress with flowers on it.<br><input type="text" id="q2" placeholder="Your answer"><div id="f2" class="feedback"></div></div>
+    <div class="question">3. The business began to __________ after spring.<br><input type="text" id="q3" placeholder="Your answer"><div id="f3" class="feedback"></div></div>
+    <div class="question">4. __________ is the science of growing flowers.<br><input type="text" id="q4" placeholder="Your answer"><div id="f4" class="feedback"></div></div>
+
+    <button onclick="checkAnswers()">Submit Answers</button>
+    <button onclick="resetQuiz()">Restart Quiz</button>
+    <div id="score"></div>
+
+    <div class="explanation">
+         <h3>Word Explanations with Audio</h3>
+        <p><strong>"Flos"</strong> <button class="speak-btn" onclick="speak('Flos')">🔊 Listen</button> is a Latin root that means <strong>"flower"</strong>. Many English words come from this root! For example:</p>
+        <div class="audio-listen"><strong>Floral</strong> - having to do with flowers. <button onclick="speak('floral')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Florist</strong> - a person who sells flowers. <button onclick="speak('florist')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Flourish</strong> - to grow or develop successfully. <button onclick="speak('flourish')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Floriculture</strong> - the science of growing flowers. <button onclick="speak('floriculture')">🔊 Listen</button></div>
+
+        <h3>Word Building Diagram</h3>
+        <div class="diagram">
+            <span class="root">Flos</span> + <span class="suffix">-al</span> <span class="arrow">➡</span> <span class="result">Floral</span><br>
+            <span class="root">Flos</span> + <span class="suffix">-ist</span> <span class="arrow">➡</span> <span class="result">Florist</span><br>
+            <span class="root">Flos</span> + <span class="suffix">-ish</span> <span class="arrow">➡</span> <span class="result">Flourish</span><br>
+            <span class="root">Flos</span> + <span class="suffix">culture</span> <span class="arrow">➡</span> <span class="result">Floriculture</span>
+        </div>
+
+        <h3>Breakdown Explanations</h3>
+        <ul class="explanation-list">
+            <li>🌸 <strong>Flos + -al = Floral:</strong> "Flos" means flower and "-al" means "relating to." Together, "Floral" means "relating to flowers."</li>
+            <li>🌷 <strong>Flos + -ist = Florist:</strong> "Flos" means flower and "-ist" means "a person who does something." A "Florist" is someone who sells flowers.</li>
+            <li>🌻 <strong>Flos + -ish = Flourish:</strong> Originally from "flos," but now means "to grow" or "to thrive" 🌱. Related to the idea of blooming like a flower.</li>
+            <li>🌼 <strong>Flos + culture = Floriculture:</strong> "Flos" + "culture" (growing/cultivation) means "the growing of flowers."</li>
+        </ul>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            let answers = ["florist", "floral", "flourish", "floriculture"];
+            let score = 0;
+            for (let i = 1; i <= 4; i++) {
+                let userAnswer = document.getElementById("q" + i).value.trim().toLowerCase();
+                let feedback = document.getElementById("f" + i);
+                if (userAnswer === answers[i - 1]) {
+                    feedback.innerHTML = "✅ Correct!";
+                    feedback.className = "feedback correct";
+                    score++;
+                } else {
+                    feedback.innerHTML = "❌ Incorrect! Try again.";
+                    feedback.className = "feedback incorrect";
+                }
+            }
+            document.getElementById("score").innerHTML = "🌟 Total Score: " + score + " / 4";
+        }
+        function resetQuiz() {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById("q" + i).value = "";
+                document.getElementById("f" + i).innerHTML = "";
+                document.getElementById("f" + i).className = "feedback";
+            }
+            document.getElementById("score").innerHTML = "";
+        }
+        function speak(word) {
+            const msg = new SpeechSynthesisUtterance(word);
+            msg.lang = 'en-US';
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
