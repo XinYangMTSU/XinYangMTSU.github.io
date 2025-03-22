@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My First Latin Adventure</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+</head>
+    
+<body>
+
+  <!-- Content -->
+    <center>
+        <h2>🏛️ Classical Latin Alphabet</h2>
+    </center>
+
+  <table>
+        <tr>
+            <th>Letter</th>
+            <th>Pronunciation</th>
+            <th>Modern Use</th>
+        </tr>
+        <tr><td>A</td><td>Ah</td><td>🔤 Same as modern "A"</td></tr>
+        <tr><td>B</td><td>Beh</td><td>🅱️ Same as modern "B"</td></tr>
+        <tr><td>C</td><td>K</td><td>🔤 Hard "C" (like "cat")</td></tr>
+        <tr><td>D</td><td>Deh</td><td>🔤 Same as modern "D"</td></tr>
+        <tr><td>E</td><td>Eh</td><td>🔤 Short "E" (like "get")</td></tr>
+        <tr><td>F</td><td>Ef</td><td>🔤 Same as modern "F"</td></tr>
+        <tr><td>G</td><td>Guh</td><td>🔤 Hard "G" (like "go")</td></tr>
+        <tr><td>H</td><td>Ha</td><td>🔤 Light "H" sound</td></tr>
+        <tr><td>I</td><td>Ee</td><td>🔤 "I" or "Y" sound</td></tr>
+        <tr><td>K</td><td>Kah</td><td>🔤 Used rarely</td></tr>
+        <tr><td>L</td><td>El</td><td>🔤 Same as modern "L"</td></tr>
+        <tr><td>M</td><td>Em</td><td>🔤 Same as modern "M"</td></tr>
+        <tr><td>N</td><td>En</td><td>🔤 Same as modern "N"</td></tr>
+        <tr><td>O</td><td>Oh</td><td>🔤 Short "O" (like "hop")</td></tr>
+        <tr><td>P</td><td>Peh</td><td>🔤 Same as modern "P"</td></tr>
+        <tr><td>Q</td><td>Kw</td><td>🔤 Always followed by "U"</td></tr>
+        <tr><td>R</td><td>Er</td><td>🔤 Rolled "R"</td></tr>
+        <tr><td>S</td><td>Es</td><td>🔤 Always like "s" in "sun"</td></tr>
+        <tr><td>T</td><td>Teh</td><td>🔤 Same as modern "T"</td></tr>
+        <tr><td>V</td><td>W</td><td>🔤 Pronounced "W"</td></tr>
+        <tr><td>X</td><td>Ks</td><td>🔤 Same as modern "X"</td></tr>
+        <tr><td>Y</td><td>Upsilon</td><td>🔤 Borrowed from Greek</td></tr>
+        <tr><td>Z</td><td>Dz</td><td>🔤 Borrowed from Greek</td></tr>
+    </table>
+
+    <center>
+        <h3>🕰️ Latin Alphabet Timeline</h3>
+    </center>
+
+    <table>
+        <tr>
+            <th>📅 Time Period</th>
+            <th>📝 Event</th>
+        </tr>
+        <tr>
+            <td>🏺 c. 600 BCE</td>
+            <td>Romans adapt Etruscan alphabet to create early Latin letters.</td>
+        </tr>
+        <tr>
+            <td>🏛️ c. 300 BCE</td>
+            <td>Latin alphabet becomes standard in Roman Republic.</td>
+        </tr>
+        <tr>
+            <td>⚔️ c. 100 BCE - CE</td>
+            <td>Latin alphabet spreads with the Roman Empire.</td>
+        </tr>
+        <tr>
+            <td>📜 Middle Ages</td>
+            <td>Additional letters like "J," "U," and "W" added in medieval Latin.</td>
+        </tr>
+        <tr>
+            <td>🇬🇧 Today</td>
+            <td>Modern English alphabet is based on Latin letters!</td>
+        </tr>
+    </table>
+  
+   <hr>
+    <footer style="text-align: center; font-size: 0.9rem; color: #999;">
+        <b>
+         &copy;2025 Dr. Xin Yang. All rights reserved.
+        <br>Department of Computer Science
+        <br>College of Basic and Applied Sciences
+        <br>Middle Tennessee State University
+        </b>
+    </footer>
+    
+    <!-- Go to Top Button -->
+    <a href="#" id="goTopBtn">&#8679;</a>
+    
+    <!-- Script to scroll to top -->
+     <script src="lab.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+
+    <script>
+        let voices = [];
+        window.speechSynthesis.onvoiceschanged = () => {
+            voices = speechSynthesis.getVoices();
+        };
+        
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            const latinLikeVoice = voices.find(voice => voice.lang.includes('it')) || voices[0];
+            utterance.voice = latinLikeVoice;
+            utterance.rate = 0.9;
+            speechSynthesis.speak(utterance);
+        }
+    </script>
+
+</body>
+</html>
