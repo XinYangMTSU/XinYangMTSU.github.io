@@ -6,154 +6,204 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
+    <style>
+        .workbook {
+            border: 2px dashed #f39c12;
+            padding: 20px;
+            background: #fff8e1;
+            max-width: 500px;
+            margin: auto;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        .workbook h2, .workbook h3 {
+            color: #e67e22;
+        }
+        .quiz button {
+            margin: 5px;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            background: #f0f0f0;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .quiz button.correct {
+            background-color: #c8e6c9; /* light green */
+        }
+        .quiz button.incorrect {
+            background-color: #ffcdd2; /* light red */
+        }
+        p,#score {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
 </head>
     
 <body>
 
-    <!-- Latin Quiz for Kids -->
-<div class="workbook">
-    <h2>🎉 Latin Quiz Time! 🎉</h2>
-    <div id="score">Score: 0</div>
+   <div class="workbook">
+        <h2>🎉 Latin Quiz Time! 🎉</h2>
+        <div id="score">Score: 0</div>
 
-    <h3>Question 1</h3>
-    <p><i>What does "canis" mean?</i></p>
-    <div class="quiz">
-        <button onclick="checkAnswer(this, true)">🐶 Dog</button>
-        <button onclick="checkAnswer(this, false)">☀️ Sun</button>
-        <button onclick="checkAnswer(this, false)">🌸 Flower</button>
+        <!-- Quiz questions -->
+        <h3>Question 1</h3>
+        <p><i>What does "canis" mean?</i></p>
+        <div class="quiz">
+            <button onclick="checkAnswer(this, true)">🐶 Dog</button>
+            <button onclick="checkAnswer(this, false)">☀️ Sun</button>
+            <button onclick="checkAnswer(this, false)">🌸 Flower</button>
+        </div>
+
+        <h3>Question 2</h3>
+        <p><i>What does "sol" mean?</i></p>
+        <div class="quiz">
+            <button onclick="checkAnswer(this, false)">🐕 Dog</button>
+            <button onclick="checkAnswer(this, true)">☀️ Sun</button>
+            <button onclick="checkAnswer(this, false)">🌸 Flower</button>
+        </div>
+
+        <h3>Question 3</h3>
+        <p><i>What does "flos" mean?</i></p>
+        <div class="quiz">
+            <button onclick="checkAnswer(this, false)">🐕 Dog</button>
+            <button onclick="checkAnswer(this, false)">☀️ Sun</button>
+            <button onclick="checkAnswer(this, true)">🌸 Flower</button>
+        </div>
+
+        <h3>Question 4</h3>
+        <p><i>What does "feles" mean?</i></p>
+        <div class="quiz">
+            <button onclick="checkAnswer(this, true)">🐱 Cat</button>
+            <button onclick="checkAnswer(this, false)">🐴 Horse</button>
+            <button onclick="checkAnswer(this, false)">🐦 Bird</button>
+        </div>
+
+        <h3>Question 5</h3>
+        <p><i>What does "equus" mean?</i></p>
+        <div class="quiz">
+            <button onclick="checkAnswer(this, false)">🐱 Cat</button>
+            <button onclick="checkAnswer(this, true)">🐴 Horse</button>
+            <button onclick="checkAnswer(this, false)">🐦 Bird</button>
+        </div>
+
+        <h3>Question 6</h3>
+        <p><i>What does "avis" mean?</i></p>
+        <div class="quiz">
+            <button onclick="checkAnswer(this, false)">🐱 Cat</button>
+            <button onclick="checkAnswer(this, false)">🐴 Horse</button>
+            <button onclick="checkAnswer(this, true)">🐦 Bird</button>
+        </div>
+
+        <h3>Question 7</h3>
+        <p><i>What does "luna" mean?</i></p>
+        <div class="quiz">
+            <button onclick="checkAnswer(this, false)">☀️ Sun</button>
+            <button onclick="checkAnswer(this, true)">🌙 Moon</button>
+            <button onclick="checkAnswer(this, false)">💧 Water</button>
+        </div>
+
+        <h3>Question 8</h3>
+        <p><i>What does "aqua" mean?</i></p>
+        <div class="quiz">
+            <button onclick="checkAnswer(this, false)">☀️ Sun</button>
+            <button onclick="checkAnswer(this, false)">🌙 Moon</button>
+            <button onclick="checkAnswer(this, true)">💧 Water</button>
+        </div>
+
+        <div id="celebration" style="display:none; text-align:center; margin-top:20px; font-size:1.5em; color:#27ae60;">
+            🎉 Congratulations! You finished the quiz! 🎉<br>
+            <button onclick="restartQuiz()" style="margin-top: 10px; padding: 8px 12px; background: #e67e22; color: #fff; border: none; border-radius: 5px; cursor: pointer;">🔄 Restart Quiz</button>
+        </div>
     </div>
 
-    <h3>Question 2</h3>
-    <p><i>What does "sol" mean?</i></p>
-    <div class="quiz">
-        <button onclick="checkAnswer(this, false)">🐕 Dog</button>
-        <button onclick="checkAnswer(this, true)">☀️ Sun</button>
-        <button onclick="checkAnswer(this, false)">🌸 Flower</button>
-    </div>
+    <script>
+        let score = 0;
+        let questionsAnswered = 0;
+        const totalQuestions = 8;
+        const correctSound = new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg');
+        const incorrectSound = new Audio('https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg');
+        const celebrationSound = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_fcc99e94d7.mp3?filename=small-crowd-cheer-6696.mp3');
 
-    <h3>Question 3</h3>
-    <p><i>What does "flos" mean?</i></p>
-    <div class="quiz">
-        <button onclick="checkAnswer(this, false)">🐕 Dog</button>
-        <button onclick="checkAnswer(this, false)">☀️ Sun</button>
-        <button onclick="checkAnswer(this, true)">🌸 Flower</button>
-    </div>
+        function checkAnswer(btn, isCorrect) {
+            const buttons = btn.parentElement.querySelectorAll('button');
+            if (!isCorrect) {
+                buttons.forEach(b => {
+                    if (b.getAttribute('onclick').includes('true')) {
+                        b.classList.add('correct');
+                        if (!b.textContent.includes('✅')) {
+                            b.textContent += ' ✅';
+                        }
+                    }
+                });
+            }
+            if (isCorrect) {
+                btn.classList.add('correct');
+                btn.textContent += ' ✅';
+                correctSound.play();
+                score++;
+                document.getElementById('score').textContent = `Score: ${score}`;
+            } else {
+                btn.classList.add('incorrect');
+                btn.textContent += ' ❌';
+                incorrectSound.play();
+            }
+            buttons.forEach(button => button.disabled = true);
+            questionsAnswered++;
+            if (questionsAnswered === totalQuestions) {
+                showConfetti();
+                celebrationSound.play();
+                document.getElementById('celebration').style.display = 'block';
+            }
+        }
 
-    <h3>Question 4</h3>
-    <p><i>What does "feles" mean?</i></p>
-    <div class="quiz">
-        <button onclick="checkAnswer(this, true)">🐱 Cat</button>
-        <button onclick="checkAnswer(this, false)">🐴 Horse</button>
-        <button onclick="checkAnswer(this, false)">🐦 Bird</button>
-    </div>
+        function showConfetti() {
+            const canvas = document.createElement('canvas');
+            canvas.style.position = 'fixed';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.style.pointerEvents = 'none';
+            canvas.id = 'confettiCanvas';
+            document.body.appendChild(canvas);
 
-    <h3>Question 5</h3>
-    <p><i>What does "equus" mean?</i></p>
-    <div class="quiz">
-        <button onclick="checkAnswer(this, false)">🐱 Cat</button>
-        <button onclick="checkAnswer(this, true)">🐴 Horse</button>
-        <button onclick="checkAnswer(this, false)">🐦 Bird</button>
-    </div>
+            const ctx = canvas.getContext('2d');
+            const pieces = [];
+            const numberOfPieces = 100;
 
-    <h3>Question 6</h3>
-    <p><i>What does "avis" mean?</i></p>
-    <div class="quiz">
-        <button onclick="checkAnswer(this, false)">🐱 Cat</button>
-        <button onclick="checkAnswer(this, false)">🐴 Horse</button>
-        <button onclick="checkAnswer(this, true)">🐦 Bird</button>
-    </div>
+            for (let i = 0; i < numberOfPieces; i++) {
+                pieces.push({
+                    x: Math.random() * window.innerWidth,
+                    y: Math.random() * window.innerHeight - window.innerHeight,
+                    size: Math.random() * 8 + 4,
+                    speed: Math.random() * 3 + 1,
+                    color: `hsl(${Math.random() * 360}, 100%, 50%)`
+                });
+            }
 
-    <h3>Question 7</h3>
-    <p><i>What does "luna" mean?</i></p>
-    <div class="quiz">
-        <button onclick="checkAnswer(this, false)">☀️ Sun</button>
-        <button onclick="checkAnswer(this, true)">🌙 Moon</button>
-        <button onclick="checkAnswer(this, false)">💧 Water</button>
-    </div>
+            function update() {
+                ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                pieces.forEach(p => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, 2 * Math.PI);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                    p.y += p.speed;
+                    if (p.y > window.innerHeight) p.y = -10;
+                });
+                requestAnimationFrame(update);
+            }
 
-    <h3>Question 8</h3>
-    <p><i>What does "aqua" mean?</i></p>
-    <div class="quiz">
-        <button onclick="checkAnswer(this, false)">☀️ Sun</button>
-        <button onclick="checkAnswer(this, false)">🌙 Moon</button>
-        <button onclick="checkAnswer(this, true)">💧 Water</button>
-    </div>
+            update();
+            setTimeout(() => document.body.removeChild(canvas), 3000);
+        }
 
-    <div id="celebration" style="display:none; text-align:center; margin-top:20px; font-size:1.5em; color:#27ae60;">
-        🎉 Congratulations! You finished the quiz! 🎉<br>
-        <button onclick="restartQuiz()" style="margin-top: 10px; padding: 8px 12px; background: #e67e22; color: #fff; border: none; border-radius: 5px; cursor: pointer;">🔄 Restart Quiz</button>
-    </div>
-</div>
-
-<style>
-.workbook {
-    border: 2px dashed #f39c12;
-    padding: 20px;
-    background: #fff8e1;
-    max-width: 500px;
-    margin: auto;
-    font-family: 'Comic Sans MS', cursive;
-}
-.workbook h2, .workbook h3 {
-    color: #e67e22;
-}
-.quiz button {
-    margin: 5px;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    background: #f0f0f0;
-    cursor: pointer;
-    border-radius: 8px;
-}
-.quiz button.correct {
-    background-color: #c8e6c9; /* light green */
-}
-.quiz button.incorrect {
-    background-color: #ffcdd2; /* light red */
-}
-p, #score {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    font-weight: bold;
-    color: #2c3e50;
-}
-</style>
-
-<script>
-let score = 0;
-let questionsAnswered = 0;
-const totalQuestions = 8;
-const correctSound = new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg');
-const incorrectSound = new Audio('https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg');
-//const celebrationSound = new Audio('https://actions.google.com/sounds/v1/cartoon/slide_whistle_to_drum_hit.ogg');
-const celebrationSound = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_387f43659f.mp3?filename=kids-cheering-6813.mp3');
-
-
-function checkAnswer(btn, isCorrect) {
-    if (isCorrect) {
-        btn.classList.add('correct');
-        btn.textContent += ' ✅';
-        correctSound.play();
-        score++;
-        document.getElementById('score').textContent = `Score: ${score}`;
-    } else {
-        btn.classList.add('incorrect');
-        btn.textContent += ' ❌';
-        incorrectSound.play();
-    }
-    const buttons = btn.parentElement.querySelectorAll('button');
-    buttons.forEach(button => button.disabled = true);
-    questionsAnswered++;
-    if (questionsAnswered === totalQuestions) {
-        document.getElementById('celebration').style.display = 'block';
-        celebrationSound.play();
-    }
-}
-
-function restartQuiz() {
-    location.reload();
-}
-</script>
+        function restartQuiz() {
+            location.reload();
+        }
+    </script>
   
     <hr>
     <footer style="text-align: center; font-size: 0.9rem; color: #999;">
