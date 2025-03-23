@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canis Fun Quiz!</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 750px; margin: auto; }
+        h1 { color: darkgreen; }
+        .diagram { background: #fefae0; padding: 10px; border: 1px dashed #999; margin-top: 20px; text-align: center; }
+        .diagram span { font-weight: bold; display: inline-block; margin: 0 5px; padding: 4px 8px; border-radius: 5px; }
+        .root { background: #b7e4c7; }
+        .suffix { background: #ffd6a5; }
+        .arrow { margin: 0 5px; color: darkgreen; font-size: 20px; }
+        .result { background: #caffbf; }
+        .explanation-list { margin-top: 10px; text-align: left; padding-left: 20px; }
+        .explanation-list li { margin-bottom: 15px; }
+        .audio-listen { display: flex; align-items: center; margin-bottom: 8px; }
+        .audio-listen button { margin-left: 10px; padding: 4px 8px; font-size: 12px; background-color: darkgreen; color: white; border: none; border-radius: 5px; }
+        .audio-listen button:hover { background-color: seagreen; }
+        .question { margin-bottom: 15px; }
+        input { width: 60%; padding: 5px; margin-top: 5px; }
+        .feedback { font-weight: bold; margin-top: 5px; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+        #score { margin-top: 20px; font-size: 18px; font-weight: bold; }
+        button { padding: 8px 12px; background-color: darkgreen; color: white; border: none; cursor: pointer; border-radius: 5px; margin-top: 10px; margin-right: 10px; }
+        button:hover { background-color: seagreen; }
+        .speak-btn { padding: 4px 8px; font-size: 12px; background-color: darkgreen; color: white; border: none; border-radius: 5px; margin-left: 5px; }
+        .speak-btn:hover { background-color: seagreen; }
+        .explanation { background: #f0f8ff; padding: 10px; border: 1px solid #ccc; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <center>
+        <span style="color: pink;">
+         ❤️ This educational website was created with love 💖 for my daughter, Ada Zhang 👧🐕 ❤️
+        </span>
+    </center>
+    
+    <h1>🐕 CANIS Fun Quiz! 🐾</h1>
+    <p><strong>Word Bank:</strong> canine, kennel, cynophobia, canid</p>
+
+    <div class="question">1. The word __________ refers to anything related to dogs.<br><input type="text" id="q1" placeholder="Your answer" autocomplete="off"><div id="f1" class="feedback"></div></div>
+    <div class="question">2. A place where dogs are kept is called a __________.<br><input type="text" id="q2" placeholder="Your answer" autocomplete="off"><div id="f2" class="feedback"></div></div>
+    <div class="question">3. The fear of dogs is called __________.<br><input type="text" id="q3" placeholder="Your answer" autocomplete="off"><div id="f3" class="feedback"></div></div>
+    <div class="question">4. Wolves, foxes, and dogs are all part of the __________ family.<br><input type="text" id="q4" placeholder="Your answer" autocomplete="off"><div id="f4" class="feedback"></div></div>
+
+    <button onclick="checkAnswers()">Submit Answers</button>
+    <button onclick="resetQuiz()">Restart Quiz</button>
+    <div id="score"></div>
+
+    <div class="explanation">
+         <h3>Word Explanations with Audio</h3>
+        <p><strong>"Canis"</strong> <button class="speak-btn" onclick="speak('Canis')">🔊 Listen</button> is a Latin root that means <strong>"dog"</strong>. Many English words come from this root! For example:</p>
+        <div class="audio-listen"><strong>Canine</strong> - relating to dogs. <button onclick="speak('canine')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Kennel</strong> - a place where dogs are kept. <button onclick="speak('kennel')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Cynophobia</strong> - fear of dogs. <button onclick="speak('cynophobia')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Canid</strong> - a member of the dog family, like wolves or foxes. <button onclick="speak('canid')">🔊 Listen</button></div>
+
+        <h3>Word Building Diagram</h3>
+        <div class="diagram">
+            <span class="root">Canis</span> + <span class="suffix">-ine</span> <span class="arrow">➡</span> <span class="result">Canine</span><br>
+            <span class="root">Canis</span> ➡ <span class="result">Kennel</span> (via Old French "kenil")<br>
+            <span class="prefix">Cyno-</span> + <span class="suffix">-phobia</span> <span class="arrow">➡</span> <span class="result">Cynophobia</span><br>
+            <span class="root">Canid</span> ➡ <span class="result">Dog Family</span>
+        </div>
+
+        <h3>Breakdown Explanations</h3>
+        <ul class="explanation-list">
+            <li>🐶 <strong>Canis + -ine = Canine:</strong> "Canine" means related to dogs.</li>
+            <li>🏠 <strong>Kennel:</strong> Comes from Old French but still linked to dogs.</li>
+            <li>😨 <strong>Cyno + phobia = Cynophobia:</strong> "Cyno" comes from Greek "kyon" (dog), "phobia" means fear.</li>
+            <li>🦊 <strong>Canid:</strong> Refers to any member of the dog family like wolves, foxes, and domestic dogs.</li>
+        </ul>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            let answers = ["canine", "kennel", "cynophobia", "canid"];
+            let score = 0;
+            for (let i = 1; i <= 4; i++) {
+                let userAnswer = document.getElementById("q" + i).value.trim().toLowerCase();
+                let feedback = document.getElementById("f" + i);
+                if (userAnswer === answers[i - 1]) {
+                    feedback.innerHTML = "✅ Correct!";
+                    feedback.className = "feedback correct";
+                    score++;
+                } else {
+                    feedback.innerHTML = "❌ Incorrect! Try again.";
+                    feedback.className = "feedback incorrect";
+                }
+            }
+            document.getElementById("score").innerHTML = "⭐ Total Score: " + score + " / 4";
+        }
+        function resetQuiz() {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById("q" + i).value = "";
+                document.getElementById("f" + i).innerHTML = "";
+                document.getElementById("f" + i).className = "feedback";
+            }
+            document.getElementById("score").innerHTML = "";
+        }
+        function speak(word) {
+            const msg = new SpeechSynthesisUtterance(word);
+            msg.lang = 'en-US';
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
