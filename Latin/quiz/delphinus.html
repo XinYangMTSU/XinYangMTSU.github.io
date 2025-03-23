@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delphinus Fun Quiz!</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 750px; margin: auto; }
+        h1 { color: deepskyblue; }
+        .diagram { background: #e0f7fa; padding: 10px; border: 1px dashed #999; margin-top: 20px; text-align: center; }
+        .diagram span { font-weight: bold; display: inline-block; margin: 0 5px; padding: 4px 8px; border-radius: 5px; }
+        .root { background: #b3e5fc; }
+        .suffix { background: #4dd0e1; }
+        .arrow { margin: 0 5px; color: deepskyblue; font-size: 20px; }
+        .result { background: #81d4fa; }
+        .explanation-list { margin-top: 10px; text-align: left; padding-left: 20px; }
+        .explanation-list li { margin-bottom: 15px; }
+        .audio-listen { display: flex; align-items: center; margin-bottom: 8px; }
+        .audio-listen button { margin-left: 10px; padding: 4px 8px; font-size: 12px; background-color: deepskyblue; color: white; border: none; border-radius: 5px; }
+        .audio-listen button:hover { background-color: dodgerblue; }
+        .question { margin-bottom: 15px; }
+        input { width: 60%; padding: 5px; margin-top: 5px; }
+        .feedback { font-weight: bold; margin-top: 5px; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+        #score { margin-top: 20px; font-size: 18px; font-weight: bold; }
+        button { padding: 8px 12px; background-color: deepskyblue; color: white; border: none; cursor: pointer; border-radius: 5px; margin-top: 10px; margin-right: 10px; }
+        button:hover { background-color: dodgerblue; }
+        .speak-btn { padding: 4px 8px; font-size: 12px; background-color: deepskyblue; color: white; border: none; border-radius: 5px; margin-left: 5px; }
+        .speak-btn:hover { background-color: dodgerblue; }
+        .explanation { background: #f0fbff; padding: 10px; border: 1px solid #ccc; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <center>
+        <span style="color: deepskyblue;">
+         ❤️ This educational website was created with love 💖 for my daughter, Ada Zhang 👧🐬 ❤️
+        </span>
+    </center>
+    
+    <h1>🐬 DELPHINUS Fun Quiz! 🌊</h1>
+    <p><strong>Word Bank:</strong> delphinus, dolphin, delphinid, Delphinus constellation</p>
+
+    <div class="question">1. The Latin word for "dolphin" is __________.<br><input type="text" id="q1" placeholder="Your answer" autocomplete="off"><div id="f1" class="feedback"></div></div>
+    <div class="question">2. The common English word for "delphinus" is __________.<br><input type="text" id="q2" placeholder="Your answer" autocomplete="off"><div id="f2" class="feedback"></div></div>
+    <div class="question">3. A scientific term for the dolphin family is __________.<br><input type="text" id="q3" placeholder="Your answer" autocomplete="off"><div id="f3" class="feedback"></div></div>
+    <div class="question">4. The constellation shaped like a dolphin is called __________.<br><input type="text" id="q4" placeholder="Your answer" autocomplete="off"><div id="f4" class="feedback"></div></div>
+
+    <button onclick="checkAnswers()">Submit Answers</button>
+    <button onclick="resetQuiz()">Restart Quiz</button>
+    <div id="score"></div>
+
+    <div class="explanation">
+        <h3>Word Explanations with Audio</h3>
+        <p><strong>"Delphinus"</strong> <button class="speak-btn" onclick="speak('Delphinus')">🔊 Listen</button> is Latin for <strong>"dolphin"</strong>. Here are some related words:</p>
+        <div class="audio-listen"><strong>Delphinus</strong> - Latin for dolphin. <button onclick="speak('delphinus')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Dolphin</strong> - the common English word. <button onclick="speak('dolphin')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Delphinid</strong> - scientific term for the dolphin family. <button onclick="speak('delphinid')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Delphinus constellation</strong> - the star pattern shaped like a dolphin. <button onclick="speak('delphinus constellation')">🔊 Listen</button></div>
+
+        <h3>Word Building Diagram</h3>
+        <div class="diagram">
+            <span class="root">Delphinus</span> ➡ <span class="result">Dolphin</span><br>
+            <span class="root">Delphinus</span> + <span class="suffix">-id</span> <span class="arrow">➡</span> <span class="result">Delphinid</span><br>
+            <span class="root">Delphinus</span> ➡ <span class="result">Delphinus constellation</span>
+        </div>
+
+        <h3>Breakdown Explanations</h3>
+        <ul class="explanation-list">
+            <li>🐬 <strong>Delphinus:</strong> The Latin root for "dolphin."</li>
+            <li>🌊 <strong>Dolphin:</strong> Common English word for delphinus.</li>
+            <li>🔬 <strong>Delphinid:</strong> A scientific term for the dolphin family.</li>
+            <li>🌌 <strong>Delphinus constellation:</strong> A star pattern shaped like a dolphin.</li>
+        </ul>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            let answers = ["delphinus", "dolphin", "delphinid", "delphinus constellation"];
+            let score = 0;
+            for (let i = 1; i <= 4; i++) {
+                let userAnswer = document.getElementById("q" + i).value.trim().toLowerCase();
+                let feedback = document.getElementById("f" + i);
+                if (userAnswer === answers[i - 1]) {
+                    feedback.innerHTML = "✅ Correct!";
+                    feedback.className = "feedback correct";
+                    score++;
+                } else {
+                    feedback.innerHTML = "❌ Incorrect! Try again.";
+                    feedback.className = "feedback incorrect";
+                }
+            }
+            document.getElementById("score").innerHTML = "⭐ Total Score: " + score + " / 4";
+        }
+        function resetQuiz() {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById("q" + i).value = "";
+                document.getElementById("f" + i).innerHTML = "";
+                document.getElementById("f" + i).className = "feedback";
+            }
+            document.getElementById("score").innerHTML = "";
+        }
+        function speak(word) {
+            const msg = new SpeechSynthesisUtterance(word);
+            msg.lang = 'en-US';
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
