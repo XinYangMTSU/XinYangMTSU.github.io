@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sol Fun Quiz!</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 750px; margin: auto; }
+        h1 { color: orange; }
+        .diagram { background: #fefae0; padding: 10px; border: 1px dashed #999; margin-top: 20px; text-align: center; }
+        .diagram span { font-weight: bold; display: inline-block; margin: 0 5px; padding: 4px 8px; border-radius: 5px; }
+        .root { background: #ffd6a5; }
+        .suffix { background: #b5ead7; }
+        .arrow { margin: 0 5px; color: orange; font-size: 20px; }
+        .result { background: #caffbf; }
+        .explanation-list { margin-top: 10px; text-align: left; padding-left: 20px; }
+        .explanation-list li { margin-bottom: 15px; }
+        .audio-listen { display: flex; align-items: center; margin-bottom: 8px; }
+        .audio-listen button { margin-left: 10px; padding: 4px 8px; font-size: 12px; background-color: orange; color: white; border: none; border-radius: 5px; }
+        .audio-listen button:hover { background-color: darkorange; }
+        .question { margin-bottom: 15px; }
+        input { width: 60%; padding: 5px; margin-top: 5px; } 
+        .feedback { font-weight: bold; margin-top: 5px; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+        #score { margin-top: 20px; font-size: 18px; font-weight: bold; }
+        button { padding: 8px 12px; background-color: orange; color: white; border: none; cursor: pointer; border-radius: 5px; margin-top: 10px; margin-right: 10px; }
+        button:hover { background-color: darkorange; }
+        .speak-btn { padding: 4px 8px; font-size: 12px; background-color: orange; color: white; border: none; border-radius: 5px; margin-left: 5px; }
+        .speak-btn:hover { background-color: darkorange; }
+        .explanation { background: #f0f8ff; padding: 10px; border: 1px solid #ccc; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <center>
+        <span style="color: pink;">
+         ❤️ This educational website was created with love 💖 for my daughter, Ada Zhang 👧🌞 ❤️
+        </span>
+    </center>
+    
+    <h1>☀️ SOL Fun Quiz! ☀️</h1>
+    <p><strong>Word Bank:</strong> solar, parasol, solstice, solarium</p>
+
+    <div class="question">1. A __________ panel captures energy from the sun.<br><input type="text" id="q1" placeholder="Your answer" autocomplete="off"><div id="f1" class="feedback"></div></div>
+    <div class="question">2. A __________ is a fancy word for a sun umbrella.<br><input type="text" id="q2" placeholder="Your answer" autocomplete="off"><div id="f2" class="feedback"></div></div>
+    <div class="question">3. The summer __________ is the longest day of the year.<br><input type="text" id="q3" placeholder="Your answer" autocomplete="off"><div id="f3" class="feedback"></div></div>
+    <div class="question">4. A __________ is a room with lots of sunlight.<br><input type="text" id="q4" placeholder="Your answer" autocomplete="off"><div id="f4" class="feedback"></div></div>
+
+    <button onclick="checkAnswers()">Submit Answers</button>
+    <button onclick="resetQuiz()">Restart Quiz</button>
+    <div id="score"></div>
+
+    <div class="explanation">
+        <h3>Word Explanations with Audio</h3>
+        <p><strong>"Sol"</strong> <button class="speak-btn" onclick="speak('Sol')">🔊 Listen</button> is a Latin root that means <strong>"sun"</strong>. Many English words come from this root! For example:</p>
+        <div class="audio-listen"><strong>Solar</strong> - related to the sun. <button onclick="speak('solar')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Parasol</strong> - a sun umbrella. <button onclick="speak('parasol')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Solstice</strong> - when the sun is at its highest or lowest point in the sky. <button onclick="speak('solstice')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Solarium</strong> - a room designed to receive sunlight. <button onclick="speak('solarium')">🔊 Listen</button></div>
+
+        <h3>Word Building Diagram</h3>
+        <div class="diagram">
+            <span class="root">Sol</span> + <span class="suffix">-ar</span> <span class="arrow">➡</span> <span class="result">Solar</span><br>
+            <span class="root">Sol</span> + <span class="suffix">-arium</span> <span class="arrow">➡</span> <span class="result">Solarium</span><br>
+            <span class="root">Sol</span> + <span class="suffix">-stice</span> <span class="arrow">➡</span> <span class="result">Solstice</span><br>
+            <span class="suffix">Para-</span> + <span class="root">sol</span> <span class="arrow">➡</span> <span class="result">Parasol</span>
+        </div>
+
+        <h3>Breakdown Explanations</h3>
+        <ul class="explanation-list">
+            <li>☀️ <strong>Sol + -ar = Solar:</strong> "Sol" means sun and "-ar" means "related to." "Solar" means "related to the sun," like "solar energy."</li>
+            <li>🏠 <strong>Sol + -arium = Solarium:</strong> "-arium" means "a place for," so "Solarium" is "a place for the sun" or "a sunroom."</li>
+            <li>🌅 <strong>Sol + -stice = Solstice:</strong> "-stice" comes from Latin "sistere," meaning "to stand still." The "solstice" is when the sun appears to "stand still" at its highest or lowest point.</li>
+            <li>🌂 <strong>Para + sol = Parasol:</strong> "Para-" means "protection from" and "sol" is "sun," so "parasol" is "protection from the sun" (a sun umbrella).</li>
+        </ul>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            let answers = ["solar", "parasol", "solstice", "solarium"];
+            let score = 0;
+            for (let i = 1; i <= 4; i++) {
+                let userAnswer = document.getElementById("q" + i).value.trim().toLowerCase();
+                let feedback = document.getElementById("f" + i);
+                if (userAnswer === answers[i - 1]) {
+                    feedback.innerHTML = "✅ Correct!";
+                    feedback.className = "feedback correct";
+                    score++;
+                } else {
+                    feedback.innerHTML = "❌ Incorrect! Try again.";
+                    feedback.className = "feedback incorrect";
+                }
+            }
+            document.getElementById("score").innerHTML = "⭐ Total Score: " + score + " / 4";
+        }
+        function resetQuiz() {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById("q" + i).value = "";
+                document.getElementById("f" + i).innerHTML = "";
+                document.getElementById("f" + i).className = "feedback";
+            }
+            document.getElementById("score").innerHTML = "";
+        }
+        function speak(word) {
+            const msg = new SpeechSynthesisUtterance(word);
+            msg.lang = 'en-US';
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
