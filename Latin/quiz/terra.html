@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terra Fun Quiz!</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 750px; margin: auto; }
+        h1 { color: green; }
+        .diagram { background: #fefae0; padding: 10px; border: 1px dashed #999; margin-top: 20px; text-align: center; }
+        .diagram span { font-weight: bold; display: inline-block; margin: 0 5px; padding: 4px 8px; border-radius: 5px; }
+        .root { background: #b0f2b6; }
+        .suffix { background: #ffd6a5; }
+        .arrow { margin: 0 5px; color: green; font-size: 20px; }
+        .result { background: #caffbf; }
+        .explanation-list { margin-top: 10px; text-align: left; padding-left: 20px; }
+        .explanation-list li { margin-bottom: 15px; }
+        .audio-listen { display: flex; align-items: center; margin-bottom: 8px; }
+        .audio-listen button { margin-left: 10px; padding: 4px 8px; font-size: 12px; background-color: green; color: white; border: none; border-radius: 5px; }
+        .audio-listen button:hover { background-color: darkgreen; }
+        .question { margin-bottom: 15px; }
+        input { width: 60%; padding: 5px; margin-top: 5px; }
+        .feedback { font-weight: bold; margin-top: 5px; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+        #score { margin-top: 20px; font-size: 18px; font-weight: bold; }
+        button { padding: 8px 12px; background-color: green; color: white; border: none; cursor: pointer; border-radius: 5px; margin-top: 10px; margin-right: 10px; }
+        button:hover { background-color: darkgreen; }
+        .speak-btn { padding: 4px 8px; font-size: 12px; background-color: green; color: white; border: none; border-radius: 5px; margin-left: 5px; }
+        .speak-btn:hover { background-color: darkgreen; }
+        .explanation { background: #f0f8ff; padding: 10px; border: 1px solid #ccc; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+     <center>
+        <span style="color: pink;">
+         ❤️ This educational website was created with love 💖 for my daughter, Ada Zhang 👧🌍 ❤️
+        </span>
+    </center>
+
+    <h1>🌍 TERRA Fun Quiz! 🌍</h1>
+    <p><strong>Word Bank:</strong> terrestrial, territory, subterranean, Mediterranean</p>
+
+    <div class="question">1. A __________ animal lives on land, not in water.<br><input type="text" id="q1" placeholder="Your answer" autocomplete="off"><div id="f1" class="feedback"></div></div>
+    <div class="question">2. A country controls a certain __________ or area.<br><input type="text" id="q2" placeholder="Your answer" autocomplete="off"><div id="f2" class="feedback"></div></div>
+    <div class="question">3. A cave is a __________ space, located below the earth.<br><input type="text" id="q3" placeholder="Your answer" autocomplete="off"><div id="f3" class="feedback"></div></div>
+    <div class="question">4. The __________ Sea is between Europe and Africa.<br><input type="text" id="q4" placeholder="Your answer" autocomplete="off"><div id="f4" class="feedback"></div></div>
+
+    <button onclick="checkAnswers()">Submit Answers</button>
+    <button onclick="resetQuiz()">Restart Quiz</button>
+    <div id="score"></div>
+
+    <div class="explanation">
+         <h3>Word Explanations with Audio</h3>
+        <p><strong>"Terra"</strong> <button class="speak-btn" onclick="speak('Terra')">🔊 Listen</button> is a Latin root that means <strong>"earth"</strong> or <strong>"land"</strong>. Many English words come from this root! For example:</p>
+        <div class="audio-listen"><strong>Terrestrial</strong> - related to the earth or land. <button onclick="speak('terrestrial')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Territory</strong> - an area of land. <button onclick="speak('territory')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Subterranean</strong> - underground, beneath the earth. <button onclick="speak('subterranean')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Mediterranean</strong> - "in the middle of the land" referring to the Mediterranean Sea. <button onclick="speak('Mediterranean')">🔊 Listen</button></div>
+
+        <h3>Word Building Diagram</h3>
+        <div class="diagram">
+            <span class="root">Terra</span> + <span class="suffix">-strial</span> <span class="arrow">➡</span> <span class="result">Terrestrial</span><br>
+            <span class="root">Terra</span> + <span class="suffix">-tory</span> <span class="arrow">➡</span> <span class="result">Territory</span><br>
+            <span class="prefix">Sub-</span> + <span class="root">terra</span> + <span class="suffix">-nean</span> <span class="arrow">➡</span> <span class="result">Subterranean</span><br>
+            <span class="prefix">Medi-</span> + <span class="root">terra</span> + <span class="suffix">-nean</span> <span class="arrow">➡</span> <span class="result">Mediterranean</span>
+        </div>
+
+        <h3>Breakdown Explanations</h3>
+        <ul class="explanation-list">
+            <li>🌳 <strong>Terra + -strial = Terrestrial:</strong> "Terrestrial" means "related to the land."</li>
+            <li>🗺️ <strong>Terra + -tory = Territory:</strong> "Territory" means "a piece of land."</li>
+            <li>⛰️ <strong>Sub + terra + -nean = Subterranean:</strong> "Subterranean" means "under the earth."</li>
+            <li>🌊 <strong>Medi + terra + -nean = Mediterranean:</strong> "Mediterranean" means "in the middle of the land," referring to the sea surrounded by land.</li>
+        </ul>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            let answers = ["terrestrial", "territory", "subterranean", "mediterranean"];
+            let score = 0;
+            for (let i = 1; i <= 4; i++) {
+                let userAnswer = document.getElementById("q" + i).value.trim().toLowerCase();
+                let feedback = document.getElementById("f" + i);
+                if (userAnswer === answers[i - 1]) {
+                    feedback.innerHTML = "✅ Correct!";
+                    feedback.className = "feedback correct";
+                    score++;
+                } else {
+                    feedback.innerHTML = "❌ Incorrect! Try again.";
+                    feedback.className = "feedback incorrect";
+                }
+            }
+            document.getElementById("score").innerHTML = "⭐ Total Score: " + score + " / 4";
+        }
+        function resetQuiz() {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById("q" + i).value = "";
+                document.getElementById("f" + i).innerHTML = "";
+                document.getElementById("f" + i).className = "feedback";
+            }
+            document.getElementById("score").innerHTML = "";
+        }
+        function speak(word) {
+            const msg = new SpeechSynthesisUtterance(word);
+            msg.lang = 'en-US';
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
