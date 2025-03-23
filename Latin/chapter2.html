@@ -95,9 +95,40 @@
         🐺 <strong>Did you know?</strong> Romulus and his brother Remus were raised by a she-wolf in Roman mythology! 🐺
     </div>
 
-<footer>
-    <p>©2025 Dr. Xin Yang | Department of Computer Science | Middle Tennessee State University</p>
-</footer>
+<hr>
+    <footer style="text-align: center; font-size: 0.9rem; color: #999;">
+        <b>
+        <span style="color: pink;">
+         ❤️ This educational website was created with love 💖 for my daughter, Ada Zhang 👧🌟 ❤️
+        </span>
+        <br>
+        <br>&copy;2025 Dr. Xin Yang. All rights reserved.
+        <br>Department of Computer Science
+        <br>College of Basic and Applied Sciences
+        <br>Middle Tennessee State University
+        </b>
+    </footer>
+    
+    <!-- Go to Top Button -->
+    <a href="#" id="goTopBtn">&#8679;</a>
+    
+    <!-- Script to scroll to top -->
+     <script src="lab.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+
+    <script>
+        let voices = [];
+        window.speechSynthesis.onvoiceschanged = () => {
+            voices = speechSynthesis.getVoices();
+        };
+        
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            const latinLikeVoice = voices.find(voice => voice.lang.includes('it')) || voices[0];
+            utterance.voice = latinLikeVoice;
+            utterance.rate = 0.9;
+            speechSynthesis.speak(utterance);
+        }
 
 </body>
 </html>
