@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stell Fun Quiz!</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 750px; margin: auto; }
+        h1 { color: darkblue; }
+        .diagram { background: #fefae0; padding: 10px; border: 1px dashed #999; margin-top: 20px; text-align: center; }
+        .diagram span { font-weight: bold; display: inline-block; margin: 0 5px; padding: 4px 8px; border-radius: 5px; }
+        .root { background: #b5d0ff; }
+        .suffix { background: #ffd6a5; }
+        .arrow { margin: 0 5px; color: darkblue; font-size: 20px; }
+        .result { background: #caffbf; }
+        .explanation-list { margin-top: 10px; text-align: left; padding-left: 20px; }
+        .explanation-list li { margin-bottom: 15px; }
+        .audio-listen { display: flex; align-items: center; margin-bottom: 8px; }
+        .audio-listen button { margin-left: 10px; padding: 4px 8px; font-size: 12px; background-color: darkblue; color: white; border: none; border-radius: 5px; }
+        .audio-listen button:hover { background-color: navy; }
+        .question { margin-bottom: 15px; }
+        input { width: 60%; padding: 5px; margin-top: 5px; }
+        .feedback { font-weight: bold; margin-top: 5px; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+        #score { margin-top: 20px; font-size: 18px; font-weight: bold; }
+        button { padding: 8px 12px; background-color: darkblue; color: white; border: none; cursor: pointer; border-radius: 5px; margin-top: 10px; margin-right: 10px; }
+        button:hover { background-color: navy; }
+        .speak-btn { padding: 4px 8px; font-size: 12px; background-color: darkblue; color: white; border: none; border-radius: 5px; margin-left: 5px; }
+        .speak-btn:hover { background-color: navy; }
+        .explanation { background: #f0f8ff; padding: 10px; border: 1px solid #ccc; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+     <center>
+        <span style="color: pink;">
+         ❤️ This educational website was created with love 💖 for my daughter, Ada Zhang 👧⭐ ❤️
+        </span>
+    </center>
+
+    <h1>⭐ STELL Fun Quiz! ⭐</h1>
+    <p><strong>Word Bank:</strong> stellar, constellation, interstellar, stelliform</p>
+
+    <div class="question">1. A __________ performance means "amazing" or "star-like."<br><input type="text" id="q1" placeholder="Your answer" autocomplete="off"><div id="f1" class="feedback"></div></div>
+    <div class="question">2. A __________ is a group of stars forming a pattern.<br><input type="text" id="q2" placeholder="Your answer" autocomplete="off"><div id="f2" class="feedback"></div></div>
+    <div class="question">3. __________ space means "between the stars."<br><input type="text" id="q3" placeholder="Your answer" autocomplete="off"><div id="f3" class="feedback"></div></div>
+    <div class="question">4. A __________ shape looks like a star.<br><input type="text" id="q4" placeholder="Your answer" autocomplete="off"><div id="f4" class="feedback"></div></div>
+
+    <button onclick="checkAnswers()">Submit Answers</button>
+    <button onclick="resetQuiz()">Restart Quiz</button>
+    <div id="score"></div>
+
+    <div class="explanation">
+         <h3>Word Explanations with Audio</h3>
+        <p><strong>"Stell"</strong> <button class="speak-btn" onclick="speak('Stell')">🔊 Listen</button> is a Latin root that means <strong>"star"</strong>. Many English words come from this root! For example:</p>
+        <div class="audio-listen"><strong>Stellar</strong> - like a star or outstanding. <button onclick="speak('stellar')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Constellation</strong> - a group of stars. <button onclick="speak('constellation')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Interstellar</strong> - between the stars. <button onclick="speak('interstellar')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Stelliform</strong> - star-shaped. <button onclick="speak('stelliform')">🔊 Listen</button></div>
+
+        <h3>Word Building Diagram</h3>
+        <div class="diagram">
+            <span class="root">Stell</span> + <span class="suffix">-ar</span> <span class="arrow">➡</span> <span class="result">Stellar</span><br>
+            <span class="prefix">Con-</span> + <span class="root">stell</span> + <span class="suffix">-ation</span> <span class="arrow">➡</span> <span class="result">Constellation</span><br>
+            <span class="prefix">Inter-</span> + <span class="root">stell</span> + <span class="suffix">-ar</span> <span class="arrow">➡</span> <span class="result">Interstellar</span><br>
+            <span class="root">Stell</span> + <span class="suffix">-iform</span> <span class="arrow">➡</span> <span class="result">Stelliform</span>
+        </div>
+
+        <h3>Breakdown Explanations</h3>
+        <ul class="explanation-list">
+            <li>🌟 <strong>Stell + -ar = Stellar:</strong> "Stellar" means "like a star" or "excellent."</li>
+            <li>✨ <strong>Con + stell + -ation = Constellation:</strong> "Constellation" means "a grouping of stars."</li>
+            <li>🚀 <strong>Inter + stell + -ar = Interstellar:</strong> "Interstellar" means "between the stars."</li>
+            <li>⭐ <strong>Stell + -iform = Stelliform:</strong> "Stelliform" means "star-shaped."</li>
+        </ul>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            let answers = ["stellar", "constellation", "interstellar", "stelliform"];
+            let score = 0;
+            for (let i = 1; i <= 4; i++) {
+                let userAnswer = document.getElementById("q" + i).value.trim().toLowerCase();
+                let feedback = document.getElementById("f" + i);
+                if (userAnswer === answers[i - 1]) {
+                    feedback.innerHTML = "✅ Correct!";
+                    feedback.className = "feedback correct";
+                    score++;
+                } else {
+                    feedback.innerHTML = "❌ Incorrect! Try again.";
+                    feedback.className = "feedback incorrect";
+                }
+            }
+            document.getElementById("score").innerHTML = "⭐ Total Score: " + score + " / 4";
+        }
+        function resetQuiz() {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById("q" + i).value = "";
+                document.getElementById("f" + i).innerHTML = "";
+                document.getElementById("f" + i).className = "feedback";
+            }
+            document.getElementById("score").innerHTML = "";
+        }
+        function speak(word) {
+            const msg = new SpeechSynthesisUtterance(word);
+            msg.lang = 'en-US';
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
