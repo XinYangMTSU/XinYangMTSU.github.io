@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luna Fun Quiz!</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 750px; margin: auto; }
+        h1 { color: purple; }
+        .diagram { background: #fefae0; padding: 10px; border: 1px dashed #999; margin-top: 20px; text-align: center; }
+        .diagram span { font-weight: bold; display: inline-block; margin: 0 5px; padding: 4px 8px; border-radius: 5px; }
+        .root { background: #d0bfff; }
+        .suffix { background: #ffd6a5; }
+        .arrow { margin: 0 5px; color: purple; font-size: 20px; }
+        .result { background: #caffbf; }
+        .explanation-list { margin-top: 10px; text-align: left; padding-left: 20px; }
+        .explanation-list li { margin-bottom: 15px; }
+        .audio-listen { display: flex; align-items: center; margin-bottom: 8px; }
+        .audio-listen button { margin-left: 10px; padding: 4px 8px; font-size: 12px; background-color: purple; color: white; border: none; border-radius: 5px; }
+        .audio-listen button:hover { background-color: indigo; }
+        .question { margin-bottom: 15px; }
+        input { width: 60%; padding: 5px; margin-top: 5px; }
+        .feedback { font-weight: bold; margin-top: 5px; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+        #score { margin-top: 20px; font-size: 18px; font-weight: bold; }
+        button { padding: 8px 12px; background-color: purple; color: white; border: none; cursor: pointer; border-radius: 5px; margin-top: 10px; margin-right: 10px; }
+        button:hover { background-color: indigo; }
+        .speak-btn { padding: 4px 8px; font-size: 12px; background-color: purple; color: white; border: none; border-radius: 5px; margin-left: 5px; }
+        .speak-btn:hover { background-color: indigo; }
+        .explanation { background: #f0f8ff; padding: 10px; border: 1px solid #ccc; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+     <center>
+        <span style="color: pink;">
+         ❤️ This educational website was created with love 💖 for my daughter, Ada Zhang 👧🌙 ❤️
+        </span>
+    </center>
+    
+    <h1>🌙 LUNA Fun Quiz! 🌙</h1>
+    <p><strong>Word Bank:</strong> lunar, lunatic, lunation, interlunar</p>
+
+    <div class="question">1. A __________ eclipse happens when the Earth blocks sunlight from the moon.<br><input type="text" id="q1" placeholder="Your answer" autocomplete="off"><div id="f1" class="feedback"></div></div>
+    <div class="question">2. A person who seems wildly crazy might be called a __________.<br><input type="text" id="q2" placeholder="Your answer" autocomplete="off"><div id="f2" class="feedback"></div></div>
+    <div class="question">3. A __________ is a full cycle of the moon's phases.<br><input type="text" id="q3" placeholder="Your answer" autocomplete="off"><div id="f3" class="feedback"></div></div>
+    <div class="question">4. The time when there is no moon in the sky is called the __________ period.<br><input type="text" id="q4" placeholder="Your answer" autocomplete="off"><div id="f4" class="feedback"></div></div>
+
+    <button onclick="checkAnswers()">Submit Answers</button>
+    <button onclick="resetQuiz()">Restart Quiz</button>
+    <div id="score"></div>
+
+    <div class="explanation">
+         <h3>Word Explanations with Audio</h3>
+        <p><strong>"Luna"</strong> <button class="speak-btn" onclick="speak('Luna')">🔊 Listen</button> is a Latin root that means <strong>"moon"</strong>. Many English words come from this root! For example:</p>
+        <div class="audio-listen"><strong>Lunar</strong> - related to the moon. <button onclick="speak('lunar')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Lunatic</strong> - a person once believed to be "moonstruck" or crazy. <button onclick="speak('lunatic')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Lunation</strong> - a full cycle of the moon (new moon to new moon). <button onclick="speak('lunation')">🔊 Listen</button></div>
+        <div class="audio-listen"><strong>Interlunar</strong> - the time between an old and new moon, when the moon is not visible. <button onclick="speak('interlunar')">🔊 Listen</button></div>
+
+        <h3>Word Building Diagram</h3>
+        <div class="diagram">
+            <span class="root">Luna</span> + <span class="suffix">-ar</span> <span class="arrow">➡</span> <span class="result">Lunar</span><br>
+            <span class="root">Luna</span> + <span class="suffix">-tic</span> <span class="arrow">➡</span> <span class="result">Lunatic</span><br>
+            <span class="root">Luna</span> + <span class="suffix">-tion</span> <span class="arrow">➡</span> <span class="result">Lunation</span><br>
+            <span class="suffix">Inter-</span> + <span class="root">lunar</span> <span class="arrow">➡</span> <span class="result">Interlunar</span>
+        </div>
+
+        <h3>Breakdown Explanations</h3>
+        <ul class="explanation-list">
+            <li>🌕 <strong>Luna + -ar = Lunar:</strong> "Lunar" means "related to the moon."</li>
+            <li>🌙 <strong>Luna + -tic = Lunatic:</strong> In old times, people believed the moon could affect someone's mind, so "lunatic" meant "moonstruck" or "crazy."</li>
+            <li>🌓 <strong>Luna + -tion = Lunation:</strong> A full cycle of the moon's phases from new moon to new moon.</li>
+            <li>🌑 <strong>Inter + lunar = Interlunar:</strong> "Inter-" means "between," so "interlunar" is the period between moon phases when no moon is visible.</li>
+        </ul>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            let answers = ["lunar", "lunatic", "lunation", "interlunar"];
+            let score = 0;
+            for (let i = 1; i <= 4; i++) {
+                let userAnswer = document.getElementById("q" + i).value.trim().toLowerCase();
+                let feedback = document.getElementById("f" + i);
+                if (userAnswer === answers[i - 1]) {
+                    feedback.innerHTML = "✅ Correct!";
+                    feedback.className = "feedback correct";
+                    score++;
+                } else {
+                    feedback.innerHTML = "❌ Incorrect! Try again.";
+                    feedback.className = "feedback incorrect";
+                }
+            }
+            document.getElementById("score").innerHTML = "⭐ Total Score: " + score + " / 4";
+        }
+        function resetQuiz() {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById("q" + i).value = "";
+                document.getElementById("f" + i).innerHTML = "";
+                document.getElementById("f" + i).className = "feedback";
+            }
+            document.getElementById("score").innerHTML = "";
+        }
+        function speak(word) {
+            const msg = new SpeechSynthesisUtterance(word);
+            msg.lang = 'en-US';
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
