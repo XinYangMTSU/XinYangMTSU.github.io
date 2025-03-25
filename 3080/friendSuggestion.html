@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Warshall's Algorithm Classroom Activity</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 2rem auto;
+      line-height: 1.6;
+      padding: 0 1rem;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧠 Classroom Worksheet: Exploring Warshall's Algorithm</h1>
+
+  <h2>📘 Objective:</h2>
+  <p>Understand how Warshall’s Algorithm helps answer the question: <strong>“Can I get from one node to another, even through other nodes?”</strong></p>
+
+  <hr>
+
+  <h2>🔧 Scenario: Social Network Friend Suggestions</h2>
+  <p>You’re building a simplified social network like Facebook.</p>
+
+  <h3>Users:</h3>
+  <ul>
+    <li>Alice</li>
+    <li>Bob</li>
+    <li>Carol</li>
+    <li>Dave</li>
+  </ul>
+
+  <h3>Direct Friendships:</h3>
+  <ul>
+    <li>Alice ➔ Bob</li>
+    <li>Alice ➔ Carol</li>
+    <li>Bob ➔ Alice</li>
+    <li>Bob ➔ Dave</li>
+    <li>Carol ➔ Dave</li>
+    <li>Dave ➔ Bob</li>
+  </ul>
+
+  <blockquote>
+    ❓ Goal: Figure out who each person may indirectly know ("friend-of-a-friend") using <strong>Warshall’s Algorithm</strong>.
+  </blockquote>
+
+  <hr>
+
+  <h2>📂 Step 1: Adjacency Matrix (Direct Connections)</h2>
+  <p>Fill this matrix with <code>1</code> (yes) or <code>0</code> (no):</p>
+
+  <table>
+    <tr><th></th><th>Alice</th><th>Bob</th><th>Carol</th><th>Dave</th></tr>
+    <tr><th>Alice</th><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+    <tr><th>Bob</th><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+    <tr><th>Carol</th><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+    <tr><th>Dave</th><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+  </table>
+
+  <hr>
+
+  <h2>↻ Step 2: Warshall's Algorithm (Transitive Closure)</h2>
+  <p>Apply the formula:</p>
+  <pre>R[i][j] = R[i][j] OR (R[i][k] AND R[k][j])</pre>
+  <p>Do this for <strong>k = 0 to 3</strong> (each user).</p>
+  <p>Use extra sheets or whiteboards to update the matrix each time <code>k</code> changes.</p>
+
+  <hr>
+
+  <h2>✅ Final Reachability Matrix</h2>
+  <p>After applying Warshall’s Algorithm, complete the matrix:</p>
+
+  <table>
+    <tr><th></th><th>Alice</th><th>Bob</th><th>Carol</th><th>Dave</th></tr>
+    <tr><th>Alice</th><td></td><td></td><td></td><td></td></tr>
+    <tr><th>Bob</th><td></td><td></td><td></td><td></td></tr>
+    <tr><th>Carol</th><td></td><td></td><td></td><td></td></tr>
+    <tr><th>Dave</th><td></td><td></td><td></td><td></td></tr>
+  </table>
+
+  <hr>
+
+  <h2>💡 Interpretation</h2>
+  <p>Use the matrix to write friend suggestions:</p>
+  <ul>
+    <li>Alice may know: ____________</li>
+    <li>Bob may know: ____________</li>
+    <li>Carol may know: ____________</li>
+    <li>Dave may know: ____________</li>
+  </ul>
+
+  <hr>
+
+  <h2>🧠 Real-World Examples</h2>
+  <p>Match these examples with what you just did:</p>
+
+  <table>
+    <tr><th>Use Case</th><th>Description</th></tr>
+    <tr><td>Facebook Friend Suggestions</td><td>Find indirect friend connections</td></tr>
+    <tr><td>Amazon Supply Routing</td><td>Find indirect delivery paths between hubs</td></tr>
+    <tr><td>Cloud Access Control</td><td>Track inherited permissions through roles</td></tr>
+    <tr><td>Webpage Navigation</td><td>Check if one page links to another indirectly</td></tr>
+  </table>
+
+  <hr>
+
+  <h2>✏️ Bonus:</h2>
+  <p>Try designing your own graph with 5 users and create a new friend suggestion matrix!</p>
+</body>
+</html>
