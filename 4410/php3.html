@@ -254,7 +254,7 @@
 		<h2>Create an Array in PHP</h2>
 
 		<ul>
-			<li>&#9733; In PHP, the <b>
+			<li>&#9733; In PHP, older syntax <b>
 					<font color="blue">array()</font>
 				</b> function is used to create an array:</li>
 
@@ -264,7 +264,12 @@
 				$cars = array("Volvo", "BMW", "Toyota");
 				echo "I like " . $cars[0] . ", " . $cars[1] . " and " . $cars[2] . ".";
 			?&gt;
+			<li>&#9733; Short array syntax, introduced in PHP 5.4 </li>
+				<pre>
+					$cars = ["Volvo", "BMW", "Toyota"];
+				</pre>
 		</pre>
+			
 
 
 			<li>&#9733;In PHP, there are three types of arrays:</li>
@@ -289,7 +294,7 @@
 				</b> function is used to return the length (the number of elements) of an array:</li>
 			<pre>
 			&lt;?php
-				$cars = array("Volvo", "BMW", "Toyota");
+				$cars = ["Volvo", "BMW", "Toyota"];
 				echo count($cars);
 			?&gt;	
 			</pre>
@@ -302,7 +307,7 @@
 				</b> loop, like this:</li>
 			<pre>
 			&lt;?php
-				$cars = array("Volvo", "BMW", "Toyota");
+				$cars = ["Volvo", "BMW", "Toyota"];
 				$arrlength = count($cars);
 
 				for($x = 0; $x < $arrlength; $x++) {
@@ -356,7 +361,7 @@
 				</b> - sort arrays in descending order</li>
 			<pre>
 				&lt;?php
-					$cars = array("Volvo", "BMW", "Toyota");
+					$cars = ["Volvo", "BMW", "Toyota"];
 					sort($cars);
 				       
 
