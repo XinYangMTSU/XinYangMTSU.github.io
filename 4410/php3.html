@@ -63,7 +63,7 @@
 			<pre>
 			&lt;?php
 				function familyName($fname) {
-  					echo "$fname Refsnes.&lt;br&gt;";
+  					echo "$fname Johnson.&lt;br&gt;";
 				}
 
 				familyName("Jani");
@@ -80,14 +80,26 @@
 
 			<pre>
 			&lt;?php
-				function familyName($fname, $year) {
-  					echo "$fname Refsnes. Born in $year &lt;br&gt;";
+				function fullName($fname, $lname, $year) {
+  					echo "$fname $lname born in $year &lt;br&gt;";
 				}
 
-				familyName("Hege", "1975");
-				familyName("Stale", "1978");
-				familyName("Kai Jim", "1983");
+				fullName("Hege", "Mark", "1975");
+				fullName("Stale", "Love", "1978");
+				fullName("Kai Jim", "Walisa", "1983");
 			?&gt;
+			</pre>
+
+			<li>
+				&#9733; You can also return values from the function instead of echoing:
+			</li>
+
+			<pre>
+				function fullName($fname, $lname, $year) {
+				    return "$fname $lname born in $year";
+				}
+
+				echo fullName("Hege", "Michael", 1975) . "&lt;br&gt;";
 			</pre>
 		</ul>
 
