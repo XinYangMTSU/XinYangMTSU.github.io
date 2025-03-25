@@ -19,7 +19,11 @@
 					Function</a></li>
 		</ul>
 		<pre>
-			&lt;?php
+			&lt;?PHP
+					echo date_default_timezone_get(). "&lt;br&gt;";
+					date_default_timezone_set("America/Chicago");
+					echo "Current date and time: " . date("Y-m-d H:i:s") . "&lt;br&gt;";
+
 					$t = date("H");
 
 					if ($t < "20") {
