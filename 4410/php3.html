@@ -178,6 +178,8 @@
 			}
 			
 			setBoxSize(200);
+			setBoxSize(200,150);
+			setBoxSize(200,150,20);
 		</pre>
 
 		
@@ -198,6 +200,34 @@
 			?&gt;
 		</pre>
 
+		<h2>Quadratic Formula Example:</h2>
+		<pre>
+			function solveQuadratic($a, $b, $c) {
+			    $discriminant = ($b * $b) - (4 * $a * $c);
+			
+			    if ($discriminant < 0) {
+			        return "No real solutions.";
+			    } elseif ($discriminant == 0) {
+			        $x = -$b / (2 * $a);
+			        return "One real solution: x = $x";
+			    } else {
+			        $sqrtDisc = sqrt($discriminant);
+			        $x1 = (-$b + $sqrtDisc) / (2 * $a);
+			        $x2 = (-$b - $sqrtDisc) / (2 * $a);
+			        return "Two real solutions: x₁ = $x1 and x₂ = $x2";
+			    }
+			}
+			
+			// Example usage:
+			echo "Equation: x² + 5x + 6 = 0&lt;br&gt;";
+			echo solveQuadratic(1, 5, 6) . "&lt;br&gt;&lt;br&gt;";
+			
+			echo "Equation: x² + 4x + 4 = 0&lt;br&gt;";
+			echo solveQuadratic(1, 4, 4) . "&lt;br&gt;&lt;br&gt;";
+			
+			echo "Equation: x² + 2x + 5 = 0&lt;br&gt;";
+			echo solveQuadratic(1, 2, 5);
+		</pre>
 
 		<h2>Passing Arguments by Reference</h2>
 
