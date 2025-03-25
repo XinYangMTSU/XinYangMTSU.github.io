@@ -164,6 +164,13 @@
 			?&gt;
 		</pre>
 
+		<h3>With int (typed parameter)</h3>
+		<pre>
+			setHeight(75.5);     // ✅ Becomes 75
+			setHeight("100");    // ✅ Converts to 100
+			setHeight("tall");   // ❌ Error in strict mode
+		</pre>
+		
 		<h2>PHP Functions - Returning values</h2>
 
 		To let a function return a value, use the return statement:
