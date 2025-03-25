@@ -1018,6 +1018,7 @@
 
 		<h3>Common Use Cases: Sorting</h3>
 
+		<h3>Example 1: Sorting an array of numbers using an arrow function</h3>
 		<pre>
 			$arr = [3, 1, 4, 2];
 			
@@ -1036,7 +1037,37 @@
 			    echo $item . "&lt;br&gt;";
 			}
 		</pre>
-					
+
+		<h3>Example 2: Sorting an array of objects using an arrow function</h3>
+		<pre>
+			// Define a simple class
+			class Product {
+			    public $name;
+			    public $price;
+			
+			    public function __construct($name, $price) {
+			        $this->name = $name;
+			        $this->price = $price;
+			    }
+			}
+			
+			// Create an array of Product objects
+			$products = [
+			    new Product("Apple", 2.50),
+			    new Product("Banana", 1.20),
+			    new Product("Cherry", 3.578),
+			    new Product("Date", 2.00)
+			];
+			
+			// Sort by price (ascending) using an arrow function
+			usort($products, fn($a, $b) => $a->price <=> $b->price);
+			
+			// Display sorted products
+			echo "Sorted by price (ascending):&lt;br&gt;";
+			foreach ($products as $product) {
+			    echo $product->name . " - $" . number_format($product->price, 2) . "&lt;br&gt;";
+			}
+		</pre>
 
 		<h2>PHP Increment / Decrement Operators</h2>
 		<table style="width:50%">
