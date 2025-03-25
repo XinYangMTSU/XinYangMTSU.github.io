@@ -1069,6 +1069,19 @@
 			}
 		</pre>
 
+		<h3>To sort by name instead, simply change the comparator:</h3>
+		<pre>
+			usort($products, fn($a, $b) => strcmp($a->name, $b->name));
+		</pre>
+
+		<h3>Sorting by multiple criteria</h3>
+		<pre>
+			// Sort by price, then by name
+			usort($products, fn($a, $b) =>
+			    $a->price <=> $b->price ?: strcmp($a->name, $b->name)
+			);
+		</pre>
+
 		<h2>PHP Increment / Decrement Operators</h2>
 		<table style="width:50%">
 			<tr>
