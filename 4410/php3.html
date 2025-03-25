@@ -170,6 +170,16 @@
 			setHeight("100");    // ✅ Converts to 100
 			setHeight("tall");   // ❌ Error in strict mode
 		</pre>
+
+		<h3>If you want to add more parameters with defaults, just make sure required ones come first:</h3>
+		<pre>
+			function setBoxSize($width, $height = 100, $depth = 50) {
+			    echo "Box: $width x $height x $depth <br>";
+			}
+			
+			setBoxSize(200);
+		</pre>
+
 		
 		<h2>PHP Functions - Returning values</h2>
 
