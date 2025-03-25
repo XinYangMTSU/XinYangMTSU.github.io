@@ -320,11 +320,17 @@
 
 		<h2>PHP Associative Arrays</h2>
 
+		An associative array in PHP lets you use named keys (strings) instead of just numbers to access values.
+		
 		<ul>
 			<li>&#9733; Associative arrays are arrays that use named keys that you assign to them.</li>
 			<pre>
 				&lt;?php
-				$age = array("Peter"=>"35", "Ben"=>"37", "Joe"=>"43");
+				$age = [
+				"Peter"=>"35", 
+				"Ben"=>"37", 
+				"Joe"=>"43"];
+				
 				echo "Peter is " . $age['Peter'] . " years old.";
 				?&gt;
 			</pre>
@@ -337,10 +343,13 @@
 				</b> loop, like this:</li>
 			<pre>
 				&lt;?php
-					$age = array("Peter"=>"35", "Ben"=>"37", "Joe"=>"43");
+					$age = [
+					"Peter"=>"35", 
+					"Ben"=>"37", 
+					"Joe"=>"43"];
 
-					foreach($age as $x => $x_value) {
- 							 echo "Key=" . $x . ", Value=" . $x_value;
+					foreach($age as $key => $value) {
+ 							echo "Key=" . $key . ", Value=" . $value;
 				                        echo "&lt;br&gt;";
 					}
 				?&gt;
