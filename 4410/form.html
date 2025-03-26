@@ -271,8 +271,10 @@
 			
 			&lt;?php
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			  $name = $_POST["name"]; // ❌ Not Safe
-			  echo "Hello " . $name;
+				if (isset($_POST['name'])) {
+				  $name = $_POST["name"]; // ❌ Not Safe
+				  echo "Hello " . $name;
+				}
 			}
 			?&gt;
 		</pre>
