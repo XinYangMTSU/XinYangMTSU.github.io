@@ -194,34 +194,29 @@
 						HTML form with method="get".</li>
 					<li>&#x2022; <font color="blue"><b>Collect form data</b></font> sent using the GET method.</li>
 					<li>&#x2022; Access query string values in the URL.</li>
-					<li>&#x2022; Assume we have an HTML page that contains a hyperlink with parameters:</li>
-	<pre>
-	&lt;html&gt;
-	&lt;body&gt;
-	
-	&lt;a href="test_get.php?subject=PHP&web=W3schools.com"&gt;Test $GET&lt;/a&gt;
-	
-	&lt;/body&gt;
-	&lt;/html&gt;
-		</pre>
-		<li>&#x2022; When a user clicks on the link "Test $GET", the parameters "subject" and "web" are sent to
-			"test_get.php", and you can then access their values in "test_get.php" with $_GET.
-
-			The example below shows the code in "test_get.php":</li>
-		<pre>
-	&lt;html&gt;
-	&lt;body&gt;
-	
-	&lt;?php
-	echo "Study " . $_GET['subject'] . " at " . $_GET['web'];
-	?&gt;
-	
-	&lt;/body&gt;
-	&lt;/html&gt;
+					
+	<pre>	
+&lt;form method="get" action="&lt;?php echo $_SERVER['PHP_SELF'];?&gt;"&gt;
+        Name: &lt;input type="text" name="fname"&gt;
+        &lt;input type="submit"&gt;
+&lt;/form&gt;
+        
+&lt;?php
+       if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            if (isset($_GET['fname'])) {
+                $name = $_GET['fname'];
+                if (empty($name)) {
+                    echo "Name is empty";
+                } else {
+                    echo $name;
+                }
+        }
+}
+?&gt;
 	</pre>
 				</ul>
 			
-			</ul>
+				</ul>
 
 
 	<h2>Secure PHP Form Handling wit htmlspecialchars() </h2>
