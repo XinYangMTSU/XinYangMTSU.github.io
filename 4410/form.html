@@ -265,21 +265,32 @@
 		<li>&star; Why You Need It: <B><font color="blue">Prevent XSS (Cross-Site Scripting)</font></B></li>
 		🚫 Bad example (vulnerable to XSS (Cross-Site Scripting)):
 		<pre>
-			$name = $_GET["name"];
-			echo "Hello " . $name;
+			&lt;form method="post" action="test.php"&gt;
+			  Name: &lt;input type="text" name="name"&gt;
+			  &lt;input type="submit"&gt;
+			&lt;/form&gt;
+			
+			&lt;?php
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			  $name = $_POST["name"]; // ❌ No sanitization
+			  echo "Hello " . $name;
+			}
+			?&gt;
 		</pre>
-		If someone uses this URL:
+		If someone enters this in the input field:
 		<pre>
-			test.php?name=&lt;script&gt;alert('Hacked!')&lt;/script&gt;
+			&lt;script&gt;alert('Hacked!')&lt;/script&gt;
 		</pre>
-		It will execute JavaScript on your page.
+		It will execute JavaScript when the form is submitted.
 		<br><br>
 		✅ Safe example using <B><font color="blue">htmlspecialchars()</font></B>:
 		<pre>
-			$name = htmlspecialchars($_GET["name"]);
-			echo "Hello " . $name;
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			  $name = htmlspecialchars($_POST["name"]); // Safe
+			  echo "Hello " . $name;
+			}
 		</pre>
-		Now, that same script will not run — instead it will be shown as text:
+		Now, even if someone enters &lt;script&gt;alert('Hacked!')&lt;/script&gt;, it won't run, it'll be displayed as text.
 		<pre>
 			Hello &lt;script&gt;alert('Hacked!')&lt;/script&gt;
 		</pre>
