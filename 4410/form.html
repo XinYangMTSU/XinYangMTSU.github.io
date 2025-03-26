@@ -34,19 +34,19 @@
 						the
 						variable.</li>
 					<li>&#x2022; The example below shows how to use the super global variable $GLOBALS:</li>
-		<pre>
-			&lt;?php
-				$x = 75;
-				$y = 25;
+<pre>
+&lt;?php
+	$x = 75;
+	$y = 25;
 
-				function addition() {
-				$GLOBALS['z'] = $GLOBALS['x'] + $GLOBALS['y'];
-				}
+	function addition() {
+	$GLOBALS['z'] = $GLOBALS['x'] + $GLOBALS['y'];
+	}
 
-				addition();
-				echo $z;
-			?&gt;
-		</pre>
+	addition();
+	echo $z;
+?&gt;
+</pre>
 				</ul>
 				<li>&star; <b>
 						<font color="blue">$_SERVER</font>
@@ -55,19 +55,19 @@
 					<li>&#x2022; $_SERVER is a PHP super global variable which holds information about headers, paths, and script
 						locations.</li>
 					<li>&#x2022; The example below shows how to use some of the elements in $_SERVER:</li>
-					<pre>
-					&lt;?php
-							echo $_SERVER['PHP_SELF'];
-							echo "&lt;br&gt;";
-							echo $_SERVER['SERVER_NAME'];
-							echo "&lt;br&gt;";
-							echo $_SERVER['HTTP_HOST'];
-							echo "&lt;br&gt;";
-							echo $_SERVER['HTTP_REFERER'];
-							echo "&lt;br&gt;";
-							echo $_SERVER['SCRIPT_NAME'];
-					?&gt;
-					</pre>
+<pre>
+&lt;?php
+		echo $_SERVER['PHP_SELF'];
+		echo "&lt;br&gt;";
+		echo $_SERVER['SERVER_NAME'];
+		echo "&lt;br&gt;";
+		echo $_SERVER['HTTP_HOST'];
+		echo "&lt;br&gt;";
+		echo $_SERVER['HTTP_REFERER'];
+		echo "&lt;br&gt;";
+		echo $_SERVER['SCRIPT_NAME'];
+?&gt;
+</pre>
 					The following table lists the most important elements that can go inside $_SERVER:
 					<table style="width:80%">
 						<tr>
@@ -107,30 +107,30 @@
 						data by clicking on "Submit", the form data is sent to the file specified in the action attribute of the
 						&lt;form&gt; tag.
 					</li>
-					<pre>
-					&lt;html&gt;
-					&lt;body&gt;
-					
-					&lt;form method="post" action="&lt;?php echo $_SERVER['PHP_SELF'];?&gt;"&gt;
-						Name: &lt;input type="text" name="fname"&gt;
-						&lt;input type="submit"&gt;
-					&lt;/form&gt;
-					
-					&lt;?php
-					if ($_SERVER["REQUEST_METHOD"] == "POST") {
-						// collect value of input field
-						$name = $_REQUEST['fname'];
-						if (empty($name)) {
-							echo "Name is empty";
-						} else {
-							echo $name;
-						}
-					}
-					?>
-					
-					&lt;/body&gt;
-					&lt;/html&gt;
-					</pre>
+	<pre>
+	&lt;html&gt;
+	&lt;body&gt;
+	
+	&lt;form method="post" action="&lt;?php echo $_SERVER['PHP_SELF'];?&gt;"&gt;
+		Name: &lt;input type="text" name="fname"&gt;
+		&lt;input type="submit"&gt;
+	&lt;/form&gt;
+	
+	&lt;?php
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		// collect value of input field
+		$name = $_REQUEST['fname'];
+		if (empty($name)) {
+			echo "Name is empty";
+		} else {
+			echo $name;
+		}
+	}
+	?>
+	
+	&lt;/body&gt;
+	&lt;/html&gt;
+	</pre>
 				</ul>
 				<li>&star; <b>
 						<font color="blue">$_POST</font>
@@ -142,30 +142,30 @@
 						data by clicking on "Submit", the form data is sent to the file specified in the action attribute of the
 						&lt;form&gt; tag.
 					</li>
-					<pre>
-					&lt;html&gt;
-					&lt;body&gt;
-					
-					&lt;form method="post" action="&lt;?php echo $_SERVER['PHP_SELF'];?&gt;"&gt;
-						Name: &lt;input type="text" name="fname"&gt;
-						&lt;input type="submit"&gt;
-					&lt;/form&gt;
-					
-					&lt;?php
-					if ($_SERVER["REQUEST_METHOD"] == "POST") {
-						// collect value of input field
-						$name = $_POST['fname'];
-						if (empty($name)) {
-							echo "Name is empty";
-						} else {
-							echo $name;
-						}
-					}
-					?>
-					
-					&lt;/body&gt;
-					&lt;/html&gt;
-					</pre>
+	<pre>
+	&lt;html&gt;
+	&lt;body&gt;
+	
+	&lt;form method="post" action="&lt;?php echo $_SERVER['PHP_SELF'];?&gt;"&gt;
+		Name: &lt;input type="text" name="fname"&gt;
+		&lt;input type="submit"&gt;
+	&lt;/form&gt;
+	
+	&lt;?php
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		// collect value of input field
+		$name = $_POST['fname'];
+		if (empty($name)) {
+			echo "Name is empty";
+		} else {
+			echo $name;
+		}
+	}
+	?>
+	
+	&lt;/body&gt;
+	&lt;/html&gt;
+	</pre>
 				</ul>
 				<li>&star; <b>
 						<font color="blue">$_GET</font>
@@ -175,30 +175,30 @@
 						HTML form with method="get".</li>
 					<li>&#x2022; $_GET can also collect data sent in the URL.</li>
 					<li>&#x2022; Assume we have an HTML page that contains a hyperlink with parameters:</li>
-					<pre>
-				&lt;html&gt;
-				&lt;body&gt;
-				
-				&lt;a href="test_get.php?subject=PHP&web=W3schools.com"&gt;Test $GET&lt;/a&gt;
-				
-				&lt;/body&gt;
-				&lt;/html&gt;
-					</pre>
-					<li>&#x2022; When a user clicks on the link "Test $GET", the parameters "subject" and "web" are sent to
-						"test_get.php", and you can then access their values in "test_get.php" with $_GET.
+	<pre>
+	&lt;html&gt;
+	&lt;body&gt;
+	
+	&lt;a href="test_get.php?subject=PHP&web=W3schools.com"&gt;Test $GET&lt;/a&gt;
+	
+	&lt;/body&gt;
+	&lt;/html&gt;
+		</pre>
+		<li>&#x2022; When a user clicks on the link "Test $GET", the parameters "subject" and "web" are sent to
+			"test_get.php", and you can then access their values in "test_get.php" with $_GET.
 
-						The example below shows the code in "test_get.php":</li>
-					<pre>
-				&lt;html&gt;
-				&lt;body&gt;
-				
-				&lt;?php
-				echo "Study " . $_GET['subject'] . " at " . $_GET['web'];
-				?&gt;
-				
-				&lt;/body&gt;
-				&lt;/html&gt;
-					</pre>
+			The example below shows the code in "test_get.php":</li>
+		<pre>
+	&lt;html&gt;
+	&lt;body&gt;
+	
+	&lt;?php
+	echo "Study " . $_GET['subject'] . " at " . $_GET['web'];
+	?&gt;
+	
+	&lt;/body&gt;
+	&lt;/html&gt;
+	</pre>
 				</ul>
 				<li>&star; $_FILES</li>
 				<li>&star; $_ENV</li>
@@ -245,65 +245,65 @@
 		</ul>
 
 		<h3>$_POST</h3>
-		<pre>
-			&lt;!-- in test.html --&gt;
-			&lt;!DOCTYPE html&gt;
-			&lt;html&gt;
-			&lt;body&gt;
-			
-			&lt;form action="test.php" method="post"&gt;
-			Name: &lt;input type="text" name="name"&gt;&lt;br&gt;
-			E-mail: &lt;input type="text" name="email"&gt;&lt;br&gt;
-			&lt;input type="submit"&gt;
-			&lt;/form&gt;
-			
-			&lt;/body&gt;
-			&lt;/html&gt;
-		</pre>
+<pre>
+	&lt;!-- in test.html --&gt;
+	&lt;!DOCTYPE html&gt;
+	&lt;html&gt;
+	&lt;body&gt;
+	
+	&lt;form action="test.php" method="post"&gt;
+	Name: &lt;input type="text" name="name"&gt;&lt;br&gt;
+	E-mail: &lt;input type="text" name="email"&gt;&lt;br&gt;
+	&lt;input type="submit"&gt;
+	&lt;/form&gt;
+	
+	&lt;/body&gt;
+	&lt;/html&gt;
+</pre>
 
 		When the user fills out the form above and clicks the submit button, the form data is sent for processing to a PHP
 		file named "test.php". The form data is sent with the HTTP POST method.
 
-		<pre>
-			&lt;!-- in test.php --&gt;
-			&lt;html&gt;
-			&lt;body&gt;
-			
-			Welcome &lt;?php echo $_POST["name"]; ?&gt;&lt;br&gt;
-			Your email address is: &lt;?php echo $_POST["email"]; ?&gt;
-			
-			&lt;/body&gt;
-			&lt;/html&gt;
-		</pre>
+<pre>
+	&lt;!-- in test.php --&gt;
+	&lt;html&gt;
+	&lt;body&gt;
+	
+	Welcome &lt;?php echo $_POST["name"]; ?&gt;&lt;br&gt;
+	Your email address is: &lt;?php echo $_POST["email"]; ?&gt;
+	
+	&lt;/body&gt;
+	&lt;/html&gt;
+</pre>
 
 
 		<h3>$_GET</h3>
-		<pre>
-			&lt;!-- in test.html --&gt;
-			&lt;html&gt;
-			&lt;body&gt;
-			
-			&lt;form action="test.php" method="get"&gt;
-			Name: &lt;input type="text" name="name"&gt;&lt;br&gt;
-			E-mail: &lt;input type="text" name="email"&gt;&lt;br&gt;
-			&lt;input type="submit"&gt;
-			&lt;/form&gt;
-			
-			&lt;/body&gt;
-			&lt;/html&gt;
-		</pre>
+<pre>
+	&lt;!-- in test.html --&gt;
+	&lt;html&gt;
+	&lt;body&gt;
+	
+	&lt;form action="test.php" method="get"&gt;
+	Name: &lt;input type="text" name="name"&gt;&lt;br&gt;
+	E-mail: &lt;input type="text" name="email"&gt;&lt;br&gt;
+	&lt;input type="submit"&gt;
+	&lt;/form&gt;
+	
+	&lt;/body&gt;
+	&lt;/html&gt;
+</pre>
 
-		<pre>
-			&lt;!-- in test.php --&gt;
-			&lt;html&gt;
-			&lt;body&gt;
-			
-			Welcome &lt;?php echo $_GET["name"]; ?&gt;&lt;br&gt;
-			Your email address is: &lt;?php echo $_GET["email"]; ?&gt;
-			
-			&lt;/body&gt;
-			&lt;/html&gt;
-		</pre>
+<pre>
+	&lt;!-- in test.php --&gt;
+	&lt;html&gt;
+	&lt;body&gt;
+	
+	Welcome &lt;?php echo $_GET["name"]; ?&gt;&lt;br&gt;
+	Your email address is: &lt;?php echo $_GET["email"]; ?&gt;
+	
+	&lt;/body&gt;
+	&lt;/html&gt;
+</pre>
 
 		<h2>PHP Form Validation</h2>
 
@@ -312,68 +312,68 @@
 				Proper validation of form data is important to protect your form from hackers and spammers!
 			</li>
 
-			<pre>
-			&lt;!-- test.php --&gt;
-			&lt;!DOCTYPE HTML&gt; 
-			&lt;html&gt;
-			&lt;head&gt;
-			&lt;/head&gt;
-			&lt;body&gt;
+<pre>
+&lt;!-- test.php --&gt;
+&lt;!DOCTYPE HTML&gt; 
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;?php
+		// define variables and set to empty values
+		$name = $email = $gender = $comment = $website = "";
 		
-			&lt;?php
-					// define variables and set to empty values
-					$name = $email = $gender = $comment = $website = "";
-					
-					if ($_SERVER["REQUEST_METHOD"] == "POST") {
-					  $name = test_input($_POST["name"]);
-					  $email = test_input($_POST["email"]);
-					  $website = test_input($_POST["website"]);
-					  $comment = test_input($_POST["comment"]);
-					  $gender = test_input($_POST["gender"]);
-					}
-			
-					function test_input($data) {
-					  $data = trim($data);
-					  $data = stripslashes($data);
-					  $data = htmlspecialchars($data);
-					  return $data;
-					}
-				?>
-			
-				&lt;h2&gt;PHP Form Validation Example&lt;/h2&gt;
-				&lt;form method="post" action="&lt;?php echo htmlspecialchars($_SERVER['PHP_SELF']);?&gt;"&gt;  
-				  Name: &lt;input type="text" name="name"&gt;
-				  &lt;br&gt;&lt;br&gt;
-				  E-mail: &lt;input type="text" name="email"&gt;
-				  &lt;br&gt;&lt;br&gt;
-				  Website: &lt;input type="text" name="website"&gt;
-				  &lt;br&gt;&lt;br&gt;
-				  Comment: &lt;textarea name="comment" rows="5" cols="40"&gt;&lt;/textarea&gt;
-				  &lt;br&gt;&lt;br&gt;
-				  Gender:
-				  &lt;input type="radio" name="gender" value="female"&gt;Female
-				  &lt;input type="radio" name="gender" value="male"&gt;Male
-				  &lt;input type="radio" name="gender" value="other"&gt;Other
-				  &lt;br&gt;&lt;br&gt;
-				  &lt;input type="submit" name="submit" value="Submit"&gt;  
-				&lt;/form&gt;
-			
-				&lt;?php
-				echo "&lt;h2&gt;Your Input:&lt;/h2&gt;";
-				echo $name;
-				echo "&lt;br&gt;";
-				echo $email;
-				echo "&lt;br&gt;";
-				echo $website;
-				echo "&lt;br&gt;";
-				echo $comment;
-				echo "&lt;br&gt;";
-				echo $gender;
-				?&gt;
-			
-				&lt;/body&gt;
-				&lt;/html&gt;
-		</pre>
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		  $name = test_input($_POST["name"]);
+		  $email = test_input($_POST["email"]);
+		  $website = test_input($_POST["website"]);
+		  $comment = test_input($_POST["comment"]);
+		  $gender = test_input($_POST["gender"]);
+		}
+
+		function test_input($data) {
+		  $data = trim($data);
+		  $data = stripslashes($data);
+		  $data = htmlspecialchars($data);
+		  return $data;
+		}
+	?>
+
+	&lt;h2&gt;PHP Form Validation Example&lt;/h2&gt;
+	&lt;form method="post" action="&lt;?php echo htmlspecialchars($_SERVER['PHP_SELF']);?&gt;"&gt;  
+	  Name: &lt;input type="text" name="name"&gt;
+	  &lt;br&gt;&lt;br&gt;
+	  E-mail: &lt;input type="text" name="email"&gt;
+	  &lt;br&gt;&lt;br&gt;
+	  Website: &lt;input type="text" name="website"&gt;
+	  &lt;br&gt;&lt;br&gt;
+	  Comment: &lt;textarea name="comment" rows="5" cols="40"&gt;&lt;/textarea&gt;
+	  &lt;br&gt;&lt;br&gt;
+	  Gender:
+	  &lt;input type="radio" name="gender" value="female"&gt;Female
+	  &lt;input type="radio" name="gender" value="male"&gt;Male
+	  &lt;input type="radio" name="gender" value="other"&gt;Other
+	  &lt;br&gt;&lt;br&gt;
+	  &lt;input type="submit" name="submit" value="Submit"&gt;  
+	&lt;/form&gt;
+
+	&lt;?php
+	echo "&lt;h2&gt;Your Input:&lt;/h2&gt;";
+	echo $name;
+	echo "&lt;br&gt;";
+	echo $email;
+	echo "&lt;br&gt;";
+	echo $website;
+	echo "&lt;br&gt;";
+	echo $comment;
+	echo "&lt;br&gt;";
+	echo $gender;
+	?&gt;
+
+	&lt;/body&gt;
+	&lt;/html&gt;
+</pre>
 		</ul>
 
 		<h3>Text Fields</h3>
@@ -392,12 +392,12 @@
 		<ul>
 			<li>&#9733; The gender fields are radio buttons:</li>
 		</ul>
-		<pre>
-			Gender:
-			&lt;input type="radio" name="gender" value="female"&gt;Female
-			&lt;input type="radio" name="gender" value="male"&gt;Male
-			&lt;input type="radio" name="gender" value="other"&gt;Other
-		</pre>
+	<pre>
+		Gender:
+		&lt;input type="radio" name="gender" value="female"&gt;Female
+		&lt;input type="radio" name="gender" value="male"&gt;Male
+		&lt;input type="radio" name="gender" value="other"&gt;Other
+	</pre>
 
 		<h3>The Form Element</h3>
 
@@ -440,43 +440,43 @@
 				function)</li>
 			<li>&#9733; Remove backslashes (\) from the user input data (with the PHP stripslashes() function)</li>
 
-			<pre>
-				&lt;?php
-				// define variables and set to empty values
-				$name = $email = $gender = $comment = $website = "";
-				
-				if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				  $name = test_input($_POST["name"]);
-				  $email = test_input($_POST["email"]);
-				  $website = test_input($_POST["website"]);
-				  $comment = test_input($_POST["comment"]);
-				  $gender = test_input($_POST["gender"]);
-				}
-				
-				function test_input($data) {
-				  $data = trim($data);
-				  $data = stripslashes($data);
-				  $data = htmlspecialchars($data);
-				  return $data;
-				}
-				?&gt;
-		</pre>
+	<pre>
+		&lt;?php
+		// define variables and set to empty values
+		$name = $email = $gender = $comment = $website = "";
+		
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		  $name = test_input($_POST["name"]);
+		  $email = test_input($_POST["email"]);
+		  $website = test_input($_POST["website"]);
+		  $comment = test_input($_POST["comment"]);
+		  $gender = test_input($_POST["gender"]);
+		}
+		
+		function test_input($data) {
+		  $data = trim($data);
+		  $data = stripslashes($data);
+		  $data = htmlspecialchars($data);
+		  return $data;
+		}
+		?&gt;
+</pre>
 			<li>&#9733; Remove multiple backslashes</li>
 
-			<pre>
-				&lt;?php
-				function removeslashes($string)
-				{
-				    $string=implode("",explode("\\",$string));
-				    return stripslashes(trim($string));
-				}
-				
-				/* Example */
-				
-				$text="My dog don\\\\\\\\\\\\\\\\'t like the postman!";
-				echo removeslashes($text);
-				?&gt;
-			</pre>
+	<pre>
+		&lt;?php
+		function removeslashes($string)
+		{
+		    $string=implode("",explode("\\",$string));
+		    return stripslashes(trim($string));
+		}
+		
+		/* Example */
+		
+		$text="My dog don\\\\\\\\\\\\\\\\'t like the postman!";
+		echo removeslashes($text);
+		?&gt;
+	</pre>
 			<h3>explode</h3>
 			<ul>
 				<li>&#9733; The explode() function breaks a string into an array.</li>
@@ -505,100 +505,100 @@
 			</li>
 		</ul>
 
-		<pre>
-				&lt;!-- test.php --&gt;
-				&lt;!DOCTYPE HTML&gt; 
-				&lt;html&gt;
-				&lt;head&gt;
-				&lt;/head&gt;
-				&lt;body&gt; 
-			
-				&lt;?php
-				// define variables and set to empty values
-				$nameErr = $emailErr = $genderErr = $websiteErr = "";
-				$name = $email = $gender = $comment = $website = "";
-				
-				if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				  if (empty($_POST["name"])) {
-				    $nameErr = "Name is required";
-				  } else {
-				    $name = test_input($_POST["name"]);
-				  }
-				
-				  if (empty($_POST["email"])) {
-				    $emailErr = "Email is required";
-				  } else {
-				    $email = test_input($_POST["email"]);
-				  }
-				
-				  if (empty($_POST["website"])) {
-				    $website = "";
-				  } else {
-				    $website = test_input($_POST["website"]);
-				  }
-				
-				  if (empty($_POST["comment"])) {
-				    $comment = "";
-				  } else {
-				    $comment = test_input($_POST["comment"]);
-				  }
-				
-				  if (empty($_POST["gender"])) {
-				    $genderErr = "Gender is required";
-				  } else {
-				    $gender = test_input($_POST["gender"]);
-				  }
-				}
-				
-				function test_input($data) {
-				  $data = trim($data);
-				  $data = stripslashes($data);
-				  $data = htmlspecialchars($data);
-				  return $data;
-				}
-				?&gt;
-				
-				&lt;h2&gt;PHP Form Validation Example&lt;/h2&gt;
-			        &lt;p&gt;&lt;span class="error"&gt;* required field&lt;/span&gt;&lt;/p&gt;
-				&lt;form method="post" action="&lt;?php echo htmlspecialchars($_SERVER['PHP_SELF']);?&gt;"&gt;  
-				Name: &lt;input type="text" name="name"&gt;
-				&lt;span class="error"&gt;* &lt;?php echo $nameErr;?&gt;&lt;/span&gt;
-				&lt;br&gt;&lt;br&gt;
-				E-mail:
-				&lt;input type="text" name="email"&gt;
-				&lt;span class="error"&gt;* &lt;?php echo $emailErr;?&gt;&lt;/span&gt;
-				&lt;br&gt;&lt;br&gt;
-				Website:
-				&lt;input type="text" name="website"&gt;
-				&lt;span class="error"&gt;&lt;?php echo $websiteErr;?&gt;&lt;/span&gt;
-				&lt;br&gt;&lt;br&gt;
-				Comment: &lt;textarea name="comment" rows="5" cols="40"&gt;&lt;/textarea&gt;
-				&lt;br&gt;&lt;br&gt;
-				Gender:
-				&lt;input type="radio" name="gender" value="female"&gt;Female
-				&lt;input type="radio" name="gender" value="male"&gt;Male
-				&lt;input type="radio" name="gender" value="other"&gt;Other
-				&lt;span class="error"&gt;* &lt;?php echo $genderErr;?&gt;&lt;/span&gt;
-				&lt;br&gt;&lt;br&gt;
-				&lt;input type="submit" name="submit" value="Submit"&gt;
-				&lt;/form&gt;
-				
-				&lt;?php
-				echo "&lt;h2&gt;Your Input:&lt;h2&gt;";
-				echo $name;
-				echo "&lt;br&gt;";
-				echo $email;
-				echo "&lt;br&gt;";
-				echo $website;
-				echo "&lt;br&gt;";
-				echo $comment;
-				echo "&lt;br&gt;";
-				echo $gender;
-				?&gt;
-				
-				&lt;/body&gt;
-				&lt;/html&gt;
-		</pre>
+<pre>
+		&lt;!-- test.php --&gt;
+		&lt;!DOCTYPE HTML&gt; 
+		&lt;html&gt;
+		&lt;head&gt;
+		&lt;/head&gt;
+		&lt;body&gt; 
+	
+		&lt;?php
+		// define variables and set to empty values
+		$nameErr = $emailErr = $genderErr = $websiteErr = "";
+		$name = $email = $gender = $comment = $website = "";
+		
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		  if (empty($_POST["name"])) {
+		    $nameErr = "Name is required";
+		  } else {
+		    $name = test_input($_POST["name"]);
+		  }
+		
+		  if (empty($_POST["email"])) {
+		    $emailErr = "Email is required";
+		  } else {
+		    $email = test_input($_POST["email"]);
+		  }
+		
+		  if (empty($_POST["website"])) {
+		    $website = "";
+		  } else {
+		    $website = test_input($_POST["website"]);
+		  }
+		
+		  if (empty($_POST["comment"])) {
+		    $comment = "";
+		  } else {
+		    $comment = test_input($_POST["comment"]);
+		  }
+		
+		  if (empty($_POST["gender"])) {
+		    $genderErr = "Gender is required";
+		  } else {
+		    $gender = test_input($_POST["gender"]);
+		  }
+		}
+		
+		function test_input($data) {
+		  $data = trim($data);
+		  $data = stripslashes($data);
+		  $data = htmlspecialchars($data);
+		  return $data;
+		}
+		?&gt;
+		
+		&lt;h2&gt;PHP Form Validation Example&lt;/h2&gt;
+		&lt;p&gt;&lt;span class="error"&gt;* required field&lt;/span&gt;&lt;/p&gt;
+		&lt;form method="post" action="&lt;?php echo htmlspecialchars($_SERVER['PHP_SELF']);?&gt;"&gt;  
+		Name: &lt;input type="text" name="name"&gt;
+		&lt;span class="error"&gt;* &lt;?php echo $nameErr;?&gt;&lt;/span&gt;
+		&lt;br&gt;&lt;br&gt;
+		E-mail:
+		&lt;input type="text" name="email"&gt;
+		&lt;span class="error"&gt;* &lt;?php echo $emailErr;?&gt;&lt;/span&gt;
+		&lt;br&gt;&lt;br&gt;
+		Website:
+		&lt;input type="text" name="website"&gt;
+		&lt;span class="error"&gt;&lt;?php echo $websiteErr;?&gt;&lt;/span&gt;
+		&lt;br&gt;&lt;br&gt;
+		Comment: &lt;textarea name="comment" rows="5" cols="40"&gt;&lt;/textarea&gt;
+		&lt;br&gt;&lt;br&gt;
+		Gender:
+		&lt;input type="radio" name="gender" value="female"&gt;Female
+		&lt;input type="radio" name="gender" value="male"&gt;Male
+		&lt;input type="radio" name="gender" value="other"&gt;Other
+		&lt;span class="error"&gt;* &lt;?php echo $genderErr;?&gt;&lt;/span&gt;
+		&lt;br&gt;&lt;br&gt;
+		&lt;input type="submit" name="submit" value="Submit"&gt;
+		&lt;/form&gt;
+		
+		&lt;?php
+		echo "&lt;h2&gt;Your Input:&lt;h2&gt;";
+		echo $name;
+		echo "&lt;br&gt;";
+		echo $email;
+		echo "&lt;br&gt;";
+		echo $website;
+		echo "&lt;br&gt;";
+		echo $comment;
+		echo "&lt;br&gt;";
+		echo $gender;
+		?&gt;
+		
+		&lt;/body&gt;
+		&lt;/html&gt;
+</pre>
 
 
 		<h2>PHP Forms - Validate Name, E-mail and URL</h2>
@@ -611,12 +611,12 @@
 				false otherwise.</li>
 			<li>&#9733; If the value of the name field is not valid, then store an error message:</li>
 		</ul>
-		<pre>
-			$name = test_input($_POST["name"]);
-			if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
-			  $nameErr = "Only letters and white space allowed";
-			}
-		</pre>
+	<pre>
+		$name = test_input($_POST["name"]);
+		if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+		  $nameErr = "Only letters and white space allowed";
+		}
+	</pre>
 
 		<h3>PHP - Validate E-mail</h3>
 		<ul>
@@ -624,12 +624,12 @@
 				filter_var() function.</li>
 			<li>&#9733; In the code below, if the e-mail address is not well-formed, then store an error message:</li>
 		</ul>
-		<pre>
-			$email = test_input($_POST["email"]);
-			if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			  $emailErr = "Invalid email format";
-			}
-		</pre>
+	<pre>
+		$email = test_input($_POST["email"]);
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		  $emailErr = "Invalid email format";
+		}
+	</pre>
 
 		<h3>PHP - Validate URL</h3>
 		<ul>
