@@ -264,7 +264,7 @@
 		<li>&star; Why You Need It: <B><font color="blue">Prevent XSS (Cross-Site Scripting)</font></B></li>
 		🚫 Bad example (vulnerable to XSS (Cross-Site Scripting)):
 		<pre>
-			&lt;form method="post" action="test.php"&gt;
+			&lt;form method="post" action="&lt;?php echo $_SERVER['PHP_SELF'];?&gt;"&gt;
 			  Name: &lt;input type="text" name="name"&gt;
 			  &lt;input type="submit"&gt;
 			&lt;/form&gt;
