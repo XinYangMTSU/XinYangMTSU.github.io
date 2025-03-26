@@ -9,6 +9,8 @@
     <link href="../CSS/Site.css" type="text/css" rel="stylesheet">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
 </script>
+     <!-- Prism.js CSS for styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
 </head>
     
 <body>
@@ -18,6 +20,7 @@
 <h1>Interactive Quadratic Solver Form</h1>
 
 <pre>
+    <code class="language-jsx">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 
@@ -39,9 +42,12 @@
 &lt;h3&gt;Enter values for a, b, and c:&lt;/h3&gt;
 
   &lt;form method="post" action="&lt;?php echo htmlspecialchars($_SERVER[&quot;PHP_SELF&quot;]); ?&gt;"&gt;
-    a: &lt;input type="number" step="any" name="a" required value="&lt;?php if (isset($_POST['a'])) echo htmlspecialchars($_POST['a']); ?&gt;"&gt;&lt;br&gt;&lt;br&gt;
-    b: &lt;input type="number" step="any" name="b" required value="&lt;?php if (isset($_POST['b'])) echo htmlspecialchars($_POST['b']); ?&gt;"&gt;&lt;br&gt;&lt;br&gt;
-    c: &lt;input type="number" step="any" name="c" required value="&lt;?php if (isset($_POST['c'])) echo htmlspecialchars($_POST['c']); ?&gt;"&gt;&lt;br&gt;&lt;br&gt;
+    a: &lt;input type="number" step="any" name="a" required 
+        value="&lt;?php if (isset($_POST['a'])) echo htmlspecialchars($_POST['a']); ?&gt;"&gt;&lt;br&gt;&lt;br&gt;
+    b: &lt;input type="number" step="any" name="b" required 
+        value="&lt;?php if (isset($_POST['b'])) echo htmlspecialchars($_POST['b']); ?&gt;"&gt;&lt;br&gt;&lt;br&gt;
+    c: &lt;input type="number" step="any" name="c" required 
+        value="&lt;?php if (isset($_POST['c'])) echo htmlspecialchars($_POST['c']); ?&gt;"&gt;&lt;br&gt;&lt;br&gt;
     &lt;input type="submit" value="Solve"&gt;
   &lt;/form&gt;
 
@@ -83,11 +89,15 @@
 
 &lt;/body&gt;
 &lt;/html&gt;
+    </code>
 </pre>
 
   
 </div>
 
-  
+    <!-- Prism.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+
 </body>
 </html>
