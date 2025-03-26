@@ -64,10 +64,12 @@
 		echo $_SERVER['HTTP_HOST'];
 		echo "&lt;br&gt;";
 		echo $_SERVER['SCRIPT_NAME'];
+		echo "&lt;br&gt;";
 		if (isset($_SERVER['HTTP_REFERER'])) {
 		    echo $_SERVER['HTTP_REFERER'];
 		} else {
 		    echo "No referrer available.";
+		}
 ?&gt;
 </pre>
 					The following table lists the most important elements that can go inside $_SERVER:
