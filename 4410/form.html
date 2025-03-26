@@ -134,11 +134,13 @@
 	&lt;?php
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		// collect value of input field
-		$name = $_REQUEST['fname'];
-		if (empty($name)) {
-			echo "Name is empty";
-		} else {
-			echo $name;
+		if (isset($_REQUEST['fname'])) {
+		    $name = $_REQUEST['fname'];
+		    if (empty($name)) {
+		        echo "Name is empty";
+		    } else {
+		        echo $name;
+		    }
 		}
 	}
 	?>
