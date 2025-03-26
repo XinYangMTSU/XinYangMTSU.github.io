@@ -227,8 +227,10 @@
 	<h2>Secure PHP Form Handling wit htmlspecialchars() </h2>
 
 	What <B><font color="blue">htmlspecialchars()</font></B> Does? <br><br>
-	It <B><font color="blue">converts special characters into HTML entities</font></B>, like this:
 
+	<ul>
+		<li>&star; It <B><font color="blue">converts special characters into HTML entities</font></B>, like this:</li>
+	
 	<table style="width:80%">
 		 <thead>
 		    <tr>
@@ -259,7 +261,19 @@
 		    </tr>
 		  </tbody>
 	</table>
-		
+
+		<li>&star; Why You Need It: <B><font color="blue">Prevent XSS</font></B></li>
+		🚫 Bad example (vulnerable to XSS):
+		<pre>
+			$name = $_GET["name"];
+			echo "Hello " . $name;
+		</pre>
+		If someone uses this URL:
+		<pre>
+			test.php?name=&lt;script&gt;alert('Hacked!')&lt;/script&gt;
+		</pre>
+		It will execute JavaScript on your page.
+	</ul>
 		
 		<h2>PHP Form Handling</h2>
 
