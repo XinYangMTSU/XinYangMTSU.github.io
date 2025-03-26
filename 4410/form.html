@@ -265,10 +265,8 @@
 			
 			&lt;?php
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				if (isset($_POST['name'])) {
 				  $name = $_POST["name"]; // ❌ Not Safe
 				  echo "Hello " . $name;
-				}
 			}
 			?&gt;
 		</pre>
@@ -281,10 +279,8 @@
 		✅ Safe example using <B><font color="blue">htmlspecialchars()</font></B>:
 		<pre>
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				if (isset($_POST['name'])) {
 				  $name = htmlspecialchars($_POST["name"]); // Safe
 				  echo "Hello " . $name;
-				}
 			}
 		</pre>
 		Now, even if someone enters &lt;script&gt;alert('Hacked!')&lt;/script&gt;, it won't run, it'll be displayed as text.
@@ -335,8 +331,11 @@
 	&lt;body&gt;
 	
 	&lt;form action="test.php" method="post"&gt;
-	Name: &lt;input type="text" name="name"&gt;&lt;br&gt;
-	E-mail: &lt;input type="text" name="email"&gt;&lt;br&gt;
+	Name: &lt;input type="text" name="name" value="&lt;?php if (isset($_POST['name'])) echo $_POST['name']; ?&gt;" &gt; 
+	&lt;br&gt;
+	E-mail: &lt;input type="text" name="email" value="&lt;?php if (isset($_POST['email'])) echo $_POST['email']; ?&gt;"&gt;
+	&lt;br&gt;
+	
 	&lt;input type="submit"&gt;
 	&lt;/form&gt;
 	
