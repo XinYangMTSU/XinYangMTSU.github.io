@@ -203,12 +203,14 @@
         
 &lt;?php
        if ($_SERVER["REQUEST_METHOD"] == "GET") {
-                $name = $_GET['fname'];
-                if (empty($name)) {
-                    echo "Name is empty";
-                } else {
-                    echo $name;
-                }
+		if(isset($_GET['fname'])){
+	                $name = $_GET['fname'];
+	                if (empty($name)) {
+	                    echo "Name is empty";
+	                } else {
+	                    echo $name;
+	                }
+		}
 }
 ?&gt;
 	</pre>
