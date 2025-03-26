@@ -126,7 +126,7 @@
 	&lt;html&gt;
 	&lt;body&gt;
 	
-	&lt;form method="post" action="&lt;?php echo $_SERVER['PHP_SELF'];?&gt;"&gt;
+	&lt;form method="post" action="&lt;?php if (isset($_POST['fname'])) echo $_POST['fname'];?&gt;"&gt;
 	Name: &lt;input type="text" name="fname"&gt;
 	&lt;input type="submit"&gt;
 	&lt;/form&gt;
@@ -134,14 +134,12 @@
 	&lt;?php
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		// collect value of input field
-		if (isset($_REQUEST['fname'])) {
 		    $name = $_REQUEST['fname'];
 		    if (empty($name)) {
 		        echo "Name is empty";
 		    } else {
 		        echo $name;
 		    }
-		}
 	}
 	?>
 	
