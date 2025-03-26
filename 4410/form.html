@@ -64,6 +64,10 @@
 		echo $_SERVER['HTTP_HOST'];
 		echo "&lt;br&gt;";
 		echo $_SERVER['SCRIPT_NAME'];
+		if (isset($_SERVER['HTTP_REFERER'])) {
+		    echo $_SERVER['HTTP_REFERER'];
+		} else {
+		    echo "No referrer available.";
 ?&gt;
 </pre>
 					The following table lists the most important elements that can go inside $_SERVER:
@@ -82,11 +86,15 @@
 						</tr>
 						<tr>
 							<td>$_SERVER['HTTP_HOST']</td>
-							<td>Returns the Host header from the current request</td>
+							<td>The host header sent by the browser (usually same as server name)</td>
 						</tr>
 						<tr>
 							<td>$_SERVER['SCRIPT_NAME']</td>
 							<td>Returns the path of the current script</td>
+						</tr>
+						<tr>
+							<td>$_SERVER['HTTP_REFERER']</td>
+							<td>The URL of the page that referred the user to this page</td>
 						</tr>
 					</table>
 				</ul>
