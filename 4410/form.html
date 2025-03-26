@@ -12,15 +12,41 @@
 
 		<h1>PHP Forms</h1>
 
+		<b><font color="blue">Superglobals</font></b> are <b><font color="blue">built-in predefined variables</font></b> in PHP that:
+		
+		<h2>🌍 What Are Superglobals in PHP?</h2>
+		<ul>
+			<Li>Are always available (you don’t need to global them or pass them around)</Li>
+			<li>Work <b><font color="blue">anywhere</font></b> — inside functions, classes, or outside of them</li>
+			<li>Hold important info about the environment, form data, URLs, sessions, etc.</li>
+		</ul>
+
+		<h2>🧺 List of Common PHP Superglobals</h2>
+
+		<table style="width:80%">
+			<thead>
+			    <tr>
+			      <th>Superglobal</th>
+			      <th>What It Does</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr><td>$_GET</td><td>Data from URL parameters</td></tr>
+			    <tr><td>$_POST</td><td>Data from submitted forms</td></tr>
+			    <tr><td>$_REQUEST</td><td>Combines $_GET, $_POST, and $_COOKIE</td></tr>
+			    <tr><td>$_SERVER</td><td>Info about headers, server, paths, etc.</td></tr>
+			    <tr><td>$_FILES</td><td>Data from uploaded files</td></tr>
+			    <tr><td>$_ENV</td><td>Environment variables</td></tr>
+			    <tr><td>$_COOKIE</td><td>Data stored in cookies</td></tr>
+			    <tr><td>$_SESSION</td><td>Data in user sessions</td></tr>
+			    <tr><td>$GLOBALS</td><td>All global variables in one place</td></tr>
+			  </tbody>
+		</table>
+		
 		<h2>PHP Global Variables - Superglobals</h2>
 
 
 		<ul>
-			<li>&#9733; Superglobals were introduced in PHP 4.1.0, and are built-in variables that are always available in all
-				scopes.</li>
-			<li>&#9733; Some predefined variables in PHP are "superglobals", which means that they are always accessible,
-				regardless of scope - and you can access them from any function, class or file without having to do anything
-				special.</li>
 			<li>&#9733; The PHP superglobal variables are:</li>
 			<ul>
 				<li>&star; <b>
