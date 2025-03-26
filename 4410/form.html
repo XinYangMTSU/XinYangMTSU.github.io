@@ -271,7 +271,7 @@
 			
 			&lt;?php
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			  $name = $_POST["name"]; // ❌ No sanitization
+			  $name = $_POST["name"]; // ❌ Not Safe
 			  echo "Hello " . $name;
 			}
 			?&gt;
