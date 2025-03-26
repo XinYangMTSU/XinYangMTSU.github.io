@@ -287,8 +287,10 @@
 		✅ Safe example using <B><font color="blue">htmlspecialchars()</font></B>:
 		<pre>
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			  $name = htmlspecialchars($_POST["name"]); // Safe
-			  echo "Hello " . $name;
+				if (isset($_POST['name'])) {
+				  $name = htmlspecialchars($_POST["name"]); // Safe
+				  echo "Hello " . $name;
+				}
 			}
 		</pre>
 		Now, even if someone enters &lt;script&gt;alert('Hacked!')&lt;/script&gt;, it won't run, it'll be displayed as text.
