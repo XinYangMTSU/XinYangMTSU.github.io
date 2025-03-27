@@ -1,93 +1,66 @@
+  
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>My First Latin Adventure</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Word Study: Reprimand</title>
+  <link href="style.css" rel="stylesheet">
 </head>
-    
 <body>
 
-    <h2>🔹 reprimand</h2>
-  
-    Part of speech: Noun or verb
-  
-  🔹 As a verb (action):
-  To reprimand someone means to formally scold or criticize them—usually by someone in authority (like a teacher, boss, or parent).
-  Example:
+  <div class="word-box">
+    <h2>
+      🌟 reprimand 
+      <span class="pronunciation">/ˈrɛprəˌmænd/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/r/rep/repri/reprimand__us_1.mp3"></audio>
 
-The teacher reprimanded the student for talking during the test. (= The teacher scolded the student.)
+    <p><strong>Part of speech:</strong> Noun or verb</p>
 
-  🔹 As a noun (a thing):
-  A reprimand is the act of scolding or the official criticism itself.
-  Example:
-The employee received a reprimand from his manager. (= The manager officially told him he did something wrong.)
-  
-🔹 Synonyms (similar words):
+    <h3>📖 As a verb (action):</h3>
+    <p>To reprimand someone means to formally scold or criticize them—usually by someone in authority (like a teacher, boss, or parent).</p>
+    <div class="example">
+      Example: The teacher reprimanded the student for talking during the test. (= The teacher scolded the student.)
+    </div>
 
-  Scold
+    <h3>📖 As a noun (a thing):</h3>
+    <p>A reprimand is the act of scolding or the official criticism itself.</p>
+    <div class="example">
+      Example: The employee received a reprimand from his manager. (= The manager officially told him he did something wrong.)
+    </div>
 
-Tell off
+    <h3>🧩 Synonyms (similar words):</h3>
+    <div class="synonyms">
+      <ul>
+        <li>Scold</li>
+        <li>Tell off</li>
+        <li>Criticize</li>
+        <li>Lecture</li>
+        <li>Rebuke</li>
+        <li>Chastise</li>
+      </ul>
+    </div>
+  </div>
 
-Criticize
+  <div class="etymology">
+    <h3>🔍 Etymology of the word</h3>
+    <p>Let’s look at the origin (etymology) of the word <strong>"reprimand"</strong>.</p>
 
-Lecture
+    <p>It comes from Latin:</p>
+    <ul>
+      <li><strong>re-</strong> = again or back</li>
+      <li><strong>primandare</strong> (related to <em>premere</em>) = to press or command</li>
+    </ul>
 
-Rebuke
+    <p>The full Latin phrase it evolved from was <em>"reprimenda culpa"</em>, which meant "a fault to be checked" or "something that must be restrained or held back."</p>
 
-Chastise
-
-  
-  Let’s look at the origin (etymology) of the word "reprimand."
-  It comes from Latin:
-
-  re- = again or back
-  primandare (related to premere) = to press or command
-
-  The full Latin phrase it evolved from was "reprimenda culpa", which meant "a fault to be checked" or "something that must be restrained or held back."
-
-Then it came into French as réprimander (to scold),
-and then into English in the 1600s, keeping a similar meaning:
-👉 To officially scold or express disapproval.
-  
-    <hr>
-    <footer style="text-align: center; font-size: 0.9rem; color: #999;">
-        <b>
-        <span style="color: hotpink;">
-         ❤️ This educational website was created with love 💖 for my daughter, Ada Zhang 👧🌟 ❤️
-        </span>
-        <br>
-        <br>&copy;2025 Dr. Xin Yang. All rights reserved.
-        <br>Department of Computer Science
-        <br>College of Basic and Applied Sciences
-        <br>Middle Tennessee State University
-        
-        </b>
-    </footer>
-    
-    <!-- Go to Top Button -->
-    <a href="#" id="goTopBtn">&#8679;</a>
-    
-    <!-- Script to scroll to top -->
-     <script src="lab.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
-
-    <script>
-        let voices = [];
-        window.speechSynthesis.onvoiceschanged = () => {
-            voices = speechSynthesis.getVoices();
-        };
-        
-        function speak(text) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            const latinLikeVoice = voices.find(voice => voice.lang.includes('it')) || voices[0];
-            utterance.voice = latinLikeVoice;
-            utterance.rate = 0.9;
-            speechSynthesis.speak(utterance);
-        }
-    </script>
+    <p>Then it came into French as <strong>réprimander</strong> (to scold), and into English in the 1600s:</p>
+    <p>👉 <em>To officially scold or express disapproval.</em></p>
+  </div>
 
 </body>
 </html>
