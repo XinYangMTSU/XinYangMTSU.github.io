@@ -4,6 +4,8 @@
 <head>
 	<title>PHP Functions and Arrays</title>
 	<link href="../CSS/Site.css" type="text/css" rel="stylesheet">
+	<!-- Prism.js CSS for styling -->
+   	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
 </head>
 
 <body>
@@ -358,10 +360,90 @@
 
 		<h3>PHP Contact List Webpage using Associative Arrays</h3>
 
+<pre>
+	<code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Contact List&lt;/title&gt;
+    &lt;style&gt;
+	body {
+	    font-family: Arial, sans-serif;
+	    padding: 20px;
+	    background: #f8f8f8;
+	}
+	h1 {
+	    color: #333;
+	}
+	table {
+	    border-collapse: collapse;
+	    width: 80%;
+	    background-color: #fff;
+	}
+	th, td {
+	    border: 1px solid #ccc;
+	    padding: 10px;
+	    text-align: left;
+	}
+	th {
+	    background-color: #eee;
+	}
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;📇 Contact List&lt;/h1&gt;
+
+&lt;?php
+// Our associative array of contacts
+$contacts = [
+    "alice" =&gt; [
+	"name" =&gt; "Alice Smith",
+	"email" =&gt; "alice@example.com",
+	"city" =&gt; "Nashville"
+    ],
+    "bob" =&gt; [
+	"name" =&gt; "Bob Johnson",
+	"email" =&gt; "bob@example.com",
+	"city" =&gt; "Memphis"
+    ],
+    "carol" =&gt; [
+	"name" =&gt; "Carol White",
+	"email" =&gt; "carol@example.com",
+	"city" =&gt; "Knoxville"
+    ]
+];
+?&gt;
+
+&lt;table&gt;
+    &lt;tr&gt;
+	&lt;th&gt;Name&lt;/th&gt;
+	&lt;th&gt;Email&lt;/th&gt;
+	&lt;th&gt;City&lt;/th&gt;
+    &lt;/tr&gt;
+
+    &lt;?php foreach ($contacts as $id =&gt; $person) { ?&gt;
+	&lt;tr&gt;
+	    &lt;td&gt;&lt;?php echo $person["name"]; ?&gt;&lt;/td&gt;
+	    &lt;td&gt;&lt;?php echo $person["email"]; ?&gt;&lt;/td&gt;
+	    &lt;td&gt;&lt;?php echo $person["city"]; ?&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+    &lt;?php } ?&gt;
+&lt;/table&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+	</code>
+</pre>
+
+
+		
+		<!--
+		
 		<a href="./contact.php" target="_blank">contact.php</a>
 		<br><br>
 		
-		<!--
 
 		<h2>PHP - Sort Functions For Arrays</h2>
 
@@ -434,6 +516,12 @@
 			<li>&#9733; <a href="https://www.w3schools.com/php/default.asp" target="_blank">www.w3schools.com</a></li>
 		</ul>
 	</div>
+
+	    <!-- Prism.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+
+    
 
 </body>
 
