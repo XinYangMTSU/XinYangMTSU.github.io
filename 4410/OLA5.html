@@ -98,73 +98,74 @@
 	<br><br>
 	
 	(1) &clubs; Load the quiz data from <b><font color="blue">php_quiz.json</font></b>. (10 points)
-
-	 <div>
+	<br><br>
+	<div>
 		a. Use <b><font color="blue">json_decode(file_get_contents(...),true)</font></b> to read the questions.  <br>
 		b. Store them in a PHP associate array.  <br>
 	</div>
-	    
+	<br><br> 
 	(2) &clubs; Create a form using <b><font color="blue">PHP</font></b> that loops through the questions and displays them with text input fields. (10 points)
-	
-	<pre> 
-		a. Each question should appear with an input field. 
-		b. Use a loop to generate all form elements. 
-	</pre>
-	    
+	<br><br>
+	<div> 
+		a. Each question should appear with an input field.  <br>
+		b. Use a <b><font color="blue">loop</font></b> to generate all form elements. <br>
+
+	</div>
+	<br><br> 
 	(3) &clubs; Style the form for clarity and readability. (5 points)
-	
-	<pre> 
-		a. Use simple CSS or inline styles. 
-		b. Highlight the Word Bank at the top. 
-	</pre>
+	<br><br>
+	<div> 
+		a. Use CSS styles.  <br>
+		b. Highlight the Word Bank at the top.  <br>
+	</div>
+	<br><br> 
 	    
-	(4) &clubs; Include a visible <b><font color="blue">Word Bank</font></b> that lists all possible answers. (5 points)
+	(4) &clubs; Include a visible <b><font color="blue">Word Bank</font></b> section that lists all possible answers to help users. (5 points)
 		
-	
+	<br>
 	<br>
 	    
-    	<h2>Step 4: PHP Form Handling & Answer Checking (30 Points)</h2>
+    	<h2>Step 4: Process and Grade the Quiz (30 Points)</h2>
 	This step focuses on processing the user's answers and giving instant feedback.
 	
 	<br><br>
 	
 	(1) &clubs; Use <b><font color="blue">$_POST</font></b> to collect submitted answers. (5 points)
-	
-	<pre> 
-		a. Use isset() and loop through each submitted answer. 
-	</pre>
+	<br><br>
+	<div> 
+		a. Use <b><font color="blue">isset()</font></b> and loop through each submitted answer. 
+	</div>
+	<br><br>
+	(2) &clubs; Use <b><font color="blue">string comparison</font></b> and <b><font color="blue">input sanitization</font></b> 
+	    (like <code>htmlspecialchars()</code>) to safely display answers. 
+	<br><br>
 	    
-	(2) &clubs; Check the user's input against the correct answer using string comparison. (10 points)
-	
-	<pre> 
-		a. Use strtolower() and trim() for flexible comparison. 
-		b. Count correct answers for a final score. 
-	</pre>
-	    
-	(3) &clubs; Display the correct answer and the user's answer with color-coded feedback. (10 points)
-	
-	<pre> 
-		a. Show "Correct" or "Incorrect" next to each answer. 
-		b. Use green/red or styled spans to show feedback. 
-	</pre>
-	    
+	(3) &clubs; Display the correct answer and the user's answer with color-coded feedback. (5 points)
+	<br><br>
+	<div> 
+		a. Show "Correct" or "Incorrect" next to each answer <br>
+		b. Use green/red or styled spans to show feedback <br>
+		c. Track the number of correct answers <br>
+	</div>
+	<br><br>  
 	(4) &clubs; Show the final score and a link to retry the quiz. (5 points)
-
-
+	<br><br>
+	<div> 
+		a. Display the final score
+		b. Add a <b><font color="blue">"Restart Quiz"</font></b> button that clears the form
+	</div>
+	    
+	<br><br>
 	<h2>Step 5: Input Validation & Security (10 Points)</h2>
 	Sanitize and secure user input using PHP best practices.
 	
 	<br><br>
-	
 	(1) &clubs; Use <b><font color="blue">htmlspecialchars()</font></b> to prevent code injection. (5 points)
 	
 	(2) &clubs; Ensure input fields are required in the form and display a message if left blank. (5 points)
 
-	<h2>Step 6: Resart Quiz (5 Points)</h2>
 
-	(1) &clubs; Add a <b><font color="blue">"Restart Quiz"</font></b> button that clears the form
-
-        <h2>Step 7: Submission Instructions</h2>
+        <h2>Step 6: Submission Instructions</h2>
         
         Please compress your <b><font color="blue">php-word-bank-quiz</font></b> folder into a single ZIP archive and submit it through D2L.
 
