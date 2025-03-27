@@ -128,14 +128,17 @@
 	<br><br>
 	(1) &clubs; Use <b><font color="blue">$_SERVER["REQUEST_METHOD"]</font></b> to detect form submission. <br><br>
 	    
-	(2) &clubs; Use <b><font color="blue">$_POST</font></b> to collect submitted answers. (5 points)
+	(2) &clubs; Use <b><font color="blue">$_POST</font></b> to collect submitted answers. (10 points)
 	<div> 
 		a. Use <b><font color="blue">isset()</font></b> and loop through each submitted answer. 
 	</div>
 	<br><br>
-	(3) &clubs; Use <b><font color="blue">string comparison</font></b> and <b><font color="blue">input sanitization</font></b> 
-	    (like <code>htmlspecialchars()</code>) to safely display answers. 
-	<br><br>
+	(3) &clubs; Use <b><font color="blue">string comparison</font></b> to check if the user's answer 
+	    matches the correct answer from the JSON file.
+	<div>
+		a. You can use <b><font color="blue">strtolower()</font></b> to convert the submitted answer to lowercase before checking it.
+	</div>
+	    
 	    
 	(4) &clubs; Display the correct answer and the user's answer with color-coded feedback. (5 points)
 	<div> 
