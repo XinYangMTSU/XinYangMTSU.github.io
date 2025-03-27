@@ -57,9 +57,41 @@
 	    
 	In this project, you'll use <b><font color="blue">PHP</font></b> to build a dynamic quiz, 
 	and <b><font color="blue">JSON</font></b> to store quiz data.
+	<ul>
+		<li>&star; <b><font color="blue">index.php</font></b> contains your PHP logic and HTML form.</li>
+		<li>&star; <b><font color="blue">php_quiz.json</font></b> stores the quiz questions and answers.</li>
+	</ul>
 	<br>
 
-	<h2>Step 2: Build the Quiz Form (30 Points)</h2>
+	<h2>Step 2: Create the JSON File (5 Points)</h2>
+	Create a file named <b><font color="blue">php_quiz.json </font></b> and 
+	add PHP-related fill-in-the-blank questions with correct answers.
+	<pre>
+		[
+		  {
+		    "question": "PHP code is executed on the __________.",
+		    "answer": "server"
+		  },
+		  {
+		    "question": "To display text in PHP, we use the __________ statement.",
+		    "answer": "echo"
+		  },
+		  {
+		    "question": "To collect form data sent via POST, we use __________.",
+		    "answer": "$_POST"
+		  },
+		  {
+		    "question": "To check if a variable is set in PHP, we use the __________ function.",
+		    "answer": "isset"
+		  },
+		  {
+		    "question": "In PHP, variables start with the __________ symbol.",
+		    "answer": "$"
+		  }
+		]
+	</pre>
+	    
+	<h2>Step 3: Build the Quiz Form (30 Points)</h2>
 	    
 	In this step, you'll dynamically generate quiz questions based on data from a JSON file and allow users to fill in the blanks.
 	
@@ -91,7 +123,7 @@
 	
 	<br>
 	    
-    	<h2>Step 3: PHP Form Handling & Answer Checking (30 Points)</h2>
+    	<h2>Step 4: PHP Form Handling & Answer Checking (30 Points)</h2>
 	This step focuses on processing the user's answers and giving instant feedback.
 	
 	<br><br>
@@ -119,7 +151,7 @@
 	(4) &clubs; Show the final score and a link to retry the quiz. (5 points)
 
 
-	<h2>Step 4: Input Validation & Security (10 Points)</h2>
+	<h2>Step 5: Input Validation & Security (10 Points)</h2>
 	Sanitize and secure user input using PHP best practices.
 	
 	<br><br>
@@ -128,11 +160,11 @@
 	
 	(2) &clubs; Ensure input fields are required in the form and display a message if left blank. (5 points)
 
-	<h2>Step 5: Resart Quiz (5 Points)</h2>
+	<h2>Step 6: Resart Quiz (5 Points)</h2>
 
 	(1) &clubs; Add a <b><font color="blue">"Restart Quiz"</font></b> button that clears the form
 
-        <h2>Step 6: Submission Instructions</h2>
+        <h2>Step 7: Submission Instructions</h2>
         
         Please compress your <b><font color="blue">php-word-bank-quiz</font></b> folder into a single ZIP archive and submit it through D2L.
 
