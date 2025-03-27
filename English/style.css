@@ -1,126 +1,84 @@
-
- /* Dark background and lighter text for comfortable reading */
 body {
-    /*background-color: #2b2b2b;*/ /* Dark gray background */
-    background-color: #1b1b1b;
-    color: #e0e0e0;          /* Light text color */
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    margin: auto;
-    padding: 15px;
-    max-width: 850px;
-}
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9fbff;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
 
-.fun-fact { background: #ffe0b2; padding: 10px; border-left: 5px solid darkorange; margin: 15px 0; color: black;}
+    .word-box {
+      background-color: #e3f2fd;
+      border-left: 10px solid #42a5f5;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(66, 165, 245, 0.2);
+    }
 
- .new-letter { color: #d2691e; font-weight: bold; }
- .timeline { text-align: center; margin-top: 20px; font-size: 1em; }
+    h2 {
+      font-size: 2.2rem;
+      color: #1565c0;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
 
-.diagram { text-align: center; margin-top: 20px; font-size: 1.2em; }
-.arrow { margin: 0 10px; font-weight: bold; }
+    .pronunciation {
+      font-size: 1.2rem;
+      color: #555;
+      margin-left: 5px;
+    }
 
-/* Make headings stand out */
-h1, h2, h3, h4 {
-    color: #ffa500;
-}
+    .audio-button {
+      background-color: #42a5f5;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
 
-/*project title */
-#div1{
-    border: 10px solid #555;
-    border-radius: 10px;
-    /*
-    padding: 5px;
-    margin: 5px;
-    width: 50%;
-    */
-}
+    .audio-button:hover {
+      background-color: #1e88e5;
+    }
 
-/* Table styling for the truth table and grading table */
-table {
-    width:60%; 
-    border: 1px solid #555;
-    margin: 0 auto;
-}
-th, td {
-    border: 1px solid #555;
-}
-th {
-    background-color: #444444;
-}
-td {
-    background-color: #3a3a3a;
-}
+    h3 {
+      color: #0d47a1;
+      margin-top: 20px;
+    }
 
-/* Emphasize certain colors (traffic light logic) */
-.blue-text { color: #00adff; }
-.red-text  { color: #ff4d4d; }
-.green-text { color: #36c36c; }
-.navy-text { color: #7eb7ff; }
+    .example {
+      background-color: #fff3e0;
+      padding: 10px 15px;
+      border-left: 5px solid #ff9800;
+      margin: 10px 0;
+      border-radius: 5px;
+      font-style: italic;
+    }
 
-/* Links */
-a {
-    color: #45a1ff;
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
-}
+    .synonyms {
+      background-color: #f3e5f5;
+      padding: 10px;
+      border-left: 5px solid #ab47bc;
+      border-radius: 8px;
+    }
 
-/* 'Go to Top' Button */
-#goTopBtn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-size: 30px;
-    text-decoration: none;
-    color: #ffa500;
-    cursor: pointer;
-    background-color: rgba(255, 165, 0, 0.1);
-    padding: 5px 10px;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-}
-#goTopBtn:hover {
-    background-color: #ffa500;
-    color: white;
-}
+    .etymology {
+      background-color: #e8f5e9;
+      padding: 15px;
+      border-left: 8px solid #66bb6a;
+      border-radius: 10px;
+    }
 
-/* Center the final “Congratulations” section */
-.centered {
-    text-align: center;
-}
+    ul {
+      margin-top: 5px;
+      padding-left: 20px;
+    }
 
-
-/* nagivation bar section */
-/*
-div ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background-color: #2b2b2b;
-	border-radius: 10px;
-	border: 1px solid #ffa500;
-	position: fixed;
-	top: 0px;
-	width: 98%;
-}
-
-div li {
-  	 float: left;
-	 border-right: 1px solid #ffa500;
-}
-
-div li a {
-	display: block;
-	color: #ffa500;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-}
-
-div li a:hover {
-	background-color: rgba(120, 120, 119, 0.5);
-	background-color: #ffa500;
-	color: white;
-}
-*/
+    li {
+      margin-bottom: 5px;
+    }
