@@ -154,7 +154,7 @@
         
         function speak(text) {
             const utterance = new SpeechSynthesisUtterance(text);
-            const latinLikeVoice = voices.find(voice => voice.lang.includes('it')) || voices[0];
+            const latinLikeVoice = voices.find(voice => voice.lang.includes('en')) || voices[0];
             utterance.voice = latinLikeVoice;
             utterance.rate = 0.9;
             speechSynthesis.speak(utterance);
