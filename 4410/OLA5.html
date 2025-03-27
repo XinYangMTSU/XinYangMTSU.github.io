@@ -57,123 +57,84 @@
 	    
 	In this project, you'll use <b><font color="blue">PHP</font></b> to build a dynamic quiz, 
 	and <b><font color="blue">JSON</font></b> to store quiz data.
+	<br>
 
-
-	<h2>Step 2: React Component Development (30 Points)</h2>
-	In this step, you will build and structure key React components that form the foundation of your blog application.
+	<h2>Step 2: Build the Quiz Form (30 Points)</h2>
+	    
+	In this step, you'll dynamically generate quiz questions based on data from a JSON file and allow users to fill in the blanks.
+	
 	<br><br>
-	(1) &clubs; Create React components for different pages (Home.js, Blog.js, NewPost.js). (15 points)<br>
-	Implement four main page components:
-	<pre>
-		a. Home.js --> Displays a welcome message.
-		b. Blog.js --> Shows a list of blog posts.
-		c. NewPost.js --> Contains a form for creating new posts.
+	
+	(1) &clubs; Load the quiz data from <b><font color="blue">php_quiz.json</font></b>. (10 points)
+	
+	<pre> 
+		a. Use json_decode(file_get_contents(...)) to read the questions. 
+		b. Store them in a PHP array. 
 	</pre>
-	(2) &clubs; Implement state management (useState) for handling blog posts dynamically. (10 points)<br>
-	<pre>
-		a. Use useState to store and manage blog posts.
-		b. Ensure state updates when new posts are added or deleted.
+	    
+	(2) &clubs; Create a form using <b><font color="blue">PHP</font></b> that loops through the questions and displays them with text input fields. (10 points)
+	
+	<pre> 
+		a. Each question should appear with an input field. 
+		b. Use a loop to generate all form elements. 
 	</pre>
-	(3) &clubs; Ensure each component is well-structured and functional. (5 points)<br>
-	<pre>
-		a. Components should be modular and reusable where applicable.
-		b. Follow React best practices (clean syntax, meaningful function/component names).
-		c. Ensure smooth communication between components through props.
+	    
+	(3) &clubs; Style the form for clarity and readability. (5 points)
+	
+	<pre> 
+		a. Use simple CSS or inline styles. 
+		b. Highlight the Word Bank at the top. 
 	</pre>
-
+	    
+	(4) &clubs; Include a visible <b><font color="blue">Word Bank</font></b> that lists all possible answers. (5 points)
+		
+	
 	<br>
 	    
-    	<h2>Step 3: Implementing React Router (18 Points)</h2>
-	This step involves setting up React Router to enable navigation between different pages without reloading the application.
-	<br><br>
-	(1) &clubs; Set up routes in App.js for different pages (4 points)
-	<pre>
-		/ --> Home
-		/blog --> Blog page
-		/new-post --> New post form
-	</pre>
-
-	(2) &clubs; Use the &lt;Link&gt; component for navigation in Navbar.js. (12 points)<br>
-	<pre>
-		a. Use &lt;Link to="/"&gt; instead of &lt;a href="/"&gt; for navigation.
-		b. Ensure the Navbar.js contains links to all pages.
-	</pre>
-	    
-	(3) &clubs; Handle 404 (Not Found) pages correctly. (2 points) <br>
-	    Implement a wildcard route (*) in App.js that displays a "404 - Page Not Found" message for unknown URLs.
+    	<h2>Step 3: PHP Form Handling & Answer Checking (30 Points)</h2>
+	This step focuses on processing the user's answers and giving instant feedback.
 	
-
-	<h2>Step 4: Form Handling & Event Management (20 Points)</h2>
-	This step focuses on implementing the New Post form, handling user input, and updating the blog dynamically.
 	<br><br>
-	(1) Implement a form in NewPost.js to allow users to add blog posts. (5 Points)<br>
-	<pre>
-		a. Title (text input)
-		b. Author (text input)
-		c. Content (textarea)
-	</pre>
-	(2) Use controlled components (useState) for form input management. (5 Points) <br>
-	<pre>
-		a. Manage form input values using useState.
-		b. Update state when the user types in the form fields.
-	</pre>
-	(3) Ensure form validation (e.g., title, author, and content fields cannot be empty). (5 Points) <br>
-	<pre>
-		a. Prevent submission if title, author, or content fields are empty.
-		b. Display an error message if validation fails.
-	</pre>
-	(4) After submission, update the blog post list dynamically. (5 Points)<br>
-	<pre>
-		a. When a post is added, it should appear in Blog page.
-		b. Use state (manage blog posts in App.js and pass as props).
-	</pre>
-
-	<h2>Step 5: Post Viewing & Deletion (18 Points)</h2>
-	This step involves displaying full post details and allowing users to delete posts.
-	    <br><br>
-	    
-	(1) Create Blog.js to display full blog post details. (4 Points) <br>
-	<pre>
-		a. When clicking Blog, users should be navigated to the Blog page.
-		b. The blog page will display all post details: Title, Author, Content, and timestamp.
-	    </pre>
-	    
-	(2) Implement Delete functionality to remove posts from the list. (10 Points)<br>
-	    <pre>
-		a. Add a "Delete" button for each post in Blog.js.
-		b. Clicking it should remove the post from the blog list.
-		c. Use state updates (setPosts()) to ensure the post is deleted.
+	
+	(1) &clubs; Use <b><font color="blue">$_POST</font></b> to collect submitted answers. (5 points)
+	
+	<pre> 
+		a. Use isset() and loop through each submitted answer. 
 	</pre>
 	    
-	(3) Use React state updates to dynamically reflect deletions.(4 Points) <br>
-    <pre>
-		a. Ensure the UI updates immediately after a post is deleted.
-	    </pre>
+	(2) &clubs; Check the user's input against the correct answer using string comparison. (10 points)
+	
+	<pre> 
+		a. Use strtolower() and trim() for flexible comparison. 
+		b. Count correct answers for a final score. 
+	</pre>
+	    
+	(3) &clubs; Display the correct answer and the user's answer with color-coded feedback. (10 points)
+	
+	<pre> 
+		a. Show "Correct" or "Incorrect" next to each answer. 
+		b. Use green/red or styled spans to show feedback. 
+	</pre>
+	    
+	(4) &clubs; Show the final score and a link to retry the quiz. (5 points)
 
-	<h2>Step 6: Styling & UI Enhancement (10 Points)</h2>
 
-	<b><font color="red">Please create your own unique layout and styling instead of replicating the example we covered in class.</font></b>
+	<h2>Step 4: Input Validation & Security (10 Points)</h2>
+	Sanitize and secure user input using PHP best practices.
+	
 	<br><br>
-	(1) Apply CSS to enhance the appearance of the blog. (4 Points) <br>
-	    <pre>
-	        a. Create a consistent layout for all pages.
-	        b. Use CSS classes for styling form elements, buttons, and text.
-	    </pre>
-	(2) Style navigation links, form inputs, buttons, and blog post lists. (3 Points) <br>
-	    <pre>
-		a. Ensure the Navbar is visually distinct.
-		b. Buttons should have hover effects and smooth styling.
-		c. Blog posts should be clearly structured and readable.
-	    </pre>
-	(3) Ensure a responsive layout for better user experience. (3 Points) <br>
-		<pre>
-		a. The app should work well on both desktop and mobile.
-		</pre>
+	
+	(1) &clubs; Use <b><font color="blue">htmlspecialchars()</font></b> to prevent code injection. (5 points)
+	
+	(2) &clubs; Ensure input fields are required in the form and display a message if left blank. (5 points)
 
-        <h2>Step 7: Submission Instructions</h2>
+	<h2>Step 5: Resart Quiz (5 Points)</h2>
+
+	(1) &clubs; Add a <b><font color="blue">"Restart Quiz"</font></b> button that clears the form
+
+        <h2>Step 6: Submission Instructions</h2>
         
-        Please compress your <b><font color="blue">my-react-blog</font></b> folder into a single ZIP archive and submit it through D2L.
-	Since the entire folder is quite large, you may delete the <b><font color="blue">node_modules</font></b> folder before creating the ZIP archive.
+        Please compress your <b><font color="blue">php-word-bank-quiz</font></b> folder into a single ZIP archive and submit it through D2L.
 
         <h2>Grading:</h2>
         The assignment is worth a total of 100 points, distributed as follows:
