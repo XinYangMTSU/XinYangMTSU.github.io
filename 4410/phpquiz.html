@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadratic Solver</title>
+    <link href="../CSS/Site.css" type="text/css" rel="stylesheet">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
+</script>
+     <!-- Prism.js CSS for styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+</head>
+    
+<body>
+
+<div id="main">
+
+<h1>Interactive PHP Quiz Form</h1>
+
+
+<pre>
+    <code class="language-jsx">
+      &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Simple PHP Quiz&lt;/title&gt;
+    &lt;link href="quiz.css" type="text/css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    
+&lt;h2 style="text-align:center;"&gt;PHP Quiz&lt;/h2&gt;
+
+&lt;?php
+//Reads the contents of a JSON file (questions.json) and converts it into a PHP array 
+$questions = json_decode(file_get_contents("questions.json"), true);
+//The true means: "Make it an associative array" instead of an object.
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $score = 0;
+    $total = count($questions);
+
+    echo '&lt;div class="result"&gt;';
+    echo "&lt;h3&gt;Quiz Results:&lt;/h3&gt;";
+
+    foreach ($questions as $index =&gt; $q) {
+
+        if (isset($_POST["question$index"])) {
+            $userAnswer = $_POST["question$index"];
+        } else {
+            $userAnswer = '';
+        }
+
+        $correctAnswer = $q['answer'];
+        $isCorrect = $userAnswer === $correctAnswer;
+
+        echo "&lt;p&gt;&lt;strong&gt;" . htmlspecialchars($q['question']) . "&lt;/strong&gt;&lt;br&gt;";
+        echo "Your answer: &lt;span class='" . ($isCorrect ? "correct" : "incorrect") . "'&gt;" . htmlspecialchars($userAnswer) . "&lt;/span&gt;&lt;br&gt;";
+        echo "Correct answer: &lt;strong&gt;" . htmlspecialchars($correctAnswer) . "&lt;/strong&gt;&lt;/p&gt;";
+
+        if ($isCorrect) {
+            $score++;
+        }
+    }
+
+    echo "&lt;h3&gt;Your Score: $score / $total&lt;/h3&gt;";
+    if ($score == $total) {
+        echo "&lt;p&gt;🎉 Great job!&lt;/p&gt;";
+    } elseif ($score &gt;= $total / 2) {
+        echo "&lt;p&gt;👍 Not bad, but try again for a perfect score!&lt;/p&gt;";
+    } else {
+        echo "&lt;p&gt;💡 Keep practicing!&lt;/p&gt;";
+    }
+
+    echo '&lt;p&gt;&lt;a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '"&gt;Take the quiz again&lt;/a&gt;&lt;/p&gt;';
+    echo '&lt;/div&gt;';
+
+} else {
+    echo '&lt;form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF']) . '" id="quizForm"&gt;';
+    foreach ($questions as $index =&gt; $q) {
+        echo '&lt;div class="question"&gt;';
+        echo "&lt;p&gt;&lt;strong&gt;" . htmlspecialchars($q["question"]) . "&lt;/strong&gt;&lt;/p&gt;";
+        foreach ($q["choices"] as $choice) {
+            echo '&lt;label&gt;&lt;input type="radio" name="question' . $index . '" value="' . htmlspecialchars($choice) . '" required&gt; ' . htmlspecialchars($choice) . '&lt;/label&gt;';
+        }
+        echo '&lt;/div&gt;';
+    }
+    echo '&lt;input type="submit" value="Submit Quiz"&gt;';
+    echo '&lt;/form&gt;';
+}
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+    </code>
+</pre>
+
+  
+</div>
+
+    <!-- Prism.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+
+</body>
+</html>
