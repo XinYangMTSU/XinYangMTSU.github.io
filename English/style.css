@@ -156,3 +156,38 @@ body {
   background-color: #bbdefb;
 }
 
+
+.fancy-list {
+      list-style: none;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .fancy-list li {
+      width: 100px; /* Fixed width */
+      background: #e3f2fd;
+      border-left: 5px solid #1565c0;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #0d47a1;
+      transition: background 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-sizing: border-box;
+    }
+
+    .fancy-list li:hover {
+      background: #bbdefb;
+    }
+
+    .fancy-list li::before {
+      content: "🎯";
+      color: #1565c0;
+      font-size: 1rem;
+    }
+
