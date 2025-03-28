@@ -83,8 +83,8 @@
     <h3>Latin:
     <em>reprimere</em>
     <span class="pronunciation">/reˈpri.me.re/</span>
-    <button class="audio-button" onclick="document.getElementById('latin-audio').play()">
-      🔊 Play
+    <button class="audio-button2" onclick="speakItalian('reprimere')">
+          🔊 Play
     </button>
     </h3>
     <br>⬇️<br>
@@ -167,6 +167,14 @@
           speechSynthesis.speak(utterance);
         }
 
+       function speakItalian(text) {
+          const voices = speechSynthesis.getVoices();
+          const frenchVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.voice = frenchVoice;
+          utterance.rate = 0.9;
+          speechSynthesis.speak(utterance);
+        }
         
     </script>
   
