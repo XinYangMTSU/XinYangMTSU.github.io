@@ -122,7 +122,7 @@
                 <img src="https://img.icons8.com/office/40/speaker.png" 
                      alt="audio icon" width="20" height="20" 
                      style="cursor: pointer; position: absolute; right: -30px; top: -14px; vertical-align: middle;"
-                     onclick="speak('Iuppiter')">
+                     onclick="speakItalian('Iuppiter')">
                  – King of the gods, ruler of the sky!
             </div>
         
@@ -156,7 +156,7 @@
                     <img src="https://img.icons8.com/office/40/speaker.png" 
                          alt="audio icon" width="20" height="20" 
                          style="cursor: pointer; position: absolute; right: -30px; top: -14px; vertical-align: middle;"
-                         onclick="speak('Neptunus')">
+                         onclick="speakItalian('Neptunus')">
                      – God of the sea!
         </div>
         
@@ -189,7 +189,7 @@
                     <img src="https://img.icons8.com/office/40/speaker.png" 
                          alt="audio icon" width="20" height="20" 
                          style="cursor: pointer; position: absolute; right: -30px; top: -14px; vertical-align: middle;"
-                         onclick="speak('Mars')">
+                         onclick="speakItalian('Mars')">
                      –  God of war and courage!
         </div>
         
@@ -222,7 +222,7 @@
             <img src="https://img.icons8.com/office/40/speaker.png" 
                  alt="audio icon" width="20" height="20" 
                  style="cursor: pointer; position: absolute; right: -30px; top: -14px; vertical-align: middle;"
-                 onclick="speak('Apollo')">
+                 onclick="speakItalian('Apollo')">
              – God of the sun, music, and prophecy!
         </div>
 
@@ -256,7 +256,7 @@
             <img src="https://img.icons8.com/office/40/speaker.png" 
                  alt="audio icon" width="20" height="20" 
                  style="cursor: pointer; position: absolute; right: -30px; top: -14px; vertical-align: middle;"
-                 onclick="speak('Vulcanus')">
+                 onclick="speakItalian('Vulcanus')">
              – God of fire and blacksmiths!
         </div>
 
@@ -289,7 +289,7 @@
             <img src="https://img.icons8.com/office/40/speaker.png" 
                  alt="audio icon" width="20" height="20" 
                  style="cursor: pointer; position: absolute; right: -30px; top: -14px; vertical-align: middle;"
-                 onclick="speak('Mercurius')">
+                 onclick="speakItalian('Mercurius')">
              – God of messages, travel, and trade!
         </div>
 
@@ -329,7 +329,7 @@
                     <img src="https://img.icons8.com/office/40/speaker.png" 
                          alt="audio icon" width="20" height="20" 
                          style="cursor: pointer; position: absolute; right: -30px; top: -14px; vertical-align: middle;"
-                         onclick="speak('Venus')">
+                         onclick="speakItalian('Venus')">
                      –  Goddess of love and beauty!
           </div>
         
@@ -363,7 +363,7 @@
                     <img src="https://img.icons8.com/office/40/speaker.png" 
                          alt="audio icon" width="20" height="20" 
                          style="cursor: pointer; position: absolute; right: -30px; top: -14px; vertical-align: middle;"
-                         onclick="speak('Ceres')">
+                         onclick="speakItalian('Ceres')">
                      –  Goddess of farming and food!
           </div>
         
@@ -399,7 +399,7 @@
               <img src="https://img.icons8.com/office/40/speaker.png" 
                    alt="audio icon" width="20" height="20" 
                    style="cursor: pointer; position: absolute; right: -30px; top: -14px; vertical-align: middle;"
-                   onclick="speak('Juno')">
+                   onclick="speakItalian('Juno')">
                –  Queen of the gods and protector of women!
             </div>
 
@@ -436,7 +436,7 @@
                   <img src="https://img.icons8.com/office/40/speaker.png" 
                        alt="audio icon" width="20" height="20" 
                        style="cursor: pointer; position: absolute; right: -30px; top: -14px; vertical-align: middle;"
-                       onclick="speak('Diana')">
+                       onclick="speakItalian('Diana')">
                    –  Goddess of the moon, wild animals, and the hunt!
             </div>
 
@@ -472,7 +472,7 @@
               <img src="https://img.icons8.com/office/40/speaker.png" 
                    alt="audio icon" width="20" height="20" 
                    style="cursor: pointer; position: absolute; right: -30px; top: -14px; vertical-align: middle;"
-                   onclick="speak('Minerva')">
+                   onclick="speakItalian('Minerva')">
                –  Goddess of wisdom, strategy, and crafts!
             </div>
 
@@ -545,13 +545,22 @@
             voices = speechSynthesis.getVoices();
         };
         
-        function speak(text) {
+        function speakItalian(text) {
             const utterance = new SpeechSynthesisUtterance(text);
             const latinLikeVoice = voices.find(voice => voice.lang.includes('it')) || voices[0];
             utterance.voice = latinLikeVoice;
             utterance.rate = 0.9;
             speechSynthesis.speak(utterance);
         }
+
+        function speakEnglish(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            const latinLikeVoice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+            utterance.voice = latinLikeVoice;
+            utterance.rate = 0.9;
+            speechSynthesis.speak(utterance);
+        }
+        
     </script>
 
 </body>
