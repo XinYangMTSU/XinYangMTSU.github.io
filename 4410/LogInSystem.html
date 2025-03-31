@@ -94,12 +94,6 @@
 		  <ul>
 		    <li>&star; <code>require 'db.php';</code> → Includes the file that connects to the MySQL database.</li>
 		
-		    <li>&star; <code>if ($_SERVER["REQUEST_METHOD"] == "POST")</code> → 
-		      Checks if the form was submitted using the POST method (to handle form data safely).</li>
-		
-		    <li>&star; <code>$username = $_POST["username"];</code> → 
-		      Gets the username entered by the user from the form.</li>
-		
 		    <li>&star; <code>$password = password_hash($_POST["password"], PASSWORD_DEFAULT);</code> → 
 		      Encrypts the password using a secure hashing algorithm so we never store plain text passwords in the database.</li>
 		
