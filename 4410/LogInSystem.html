@@ -92,9 +92,9 @@
 		  <h3>🔍 What’s happening in the registration logic?</h3>
 		  <p>This PHP code runs when a user submits the registration form. Let’s break it down step by step:</p>
 		  <ul>
-		    <li>&star; <code>require 'db.php';</code> → Includes the file that connects to the MySQL database.</li>
+		    <li>&star; <b><font color="blue">require 'db.php';</font></b> → Includes the file that connects to the MySQL database.</li>
 		
-		    <li>&star; <code>$password = password_hash($_POST["password"], PASSWORD_DEFAULT);</code> → 
+		    <li>&star; <b><font color="blue">$password = password_hash($_POST["password"], PASSWORD_DEFAULT);</font></b> → 
 		      Encrypts the password using a secure hashing algorithm so we never store plain text passwords in the database.</li>
 
 			<ul>
@@ -111,18 +111,18 @@
 				
 			</ul>
 		
-		    <li>&star; <code>$stmt = $conn-&gt;prepare("INSERT INTO users (username, password) VALUES (?, ?)");</code> → 
+		    <li>&star; <b><font color="blue">$stmt = $conn-&gt;prepare("INSERT INTO users (username, password) VALUES (?, ?)");</font></b> → 
 		      Prepares an SQL statement with placeholders <code>?</code> for safely inserting user data.</li>
 		
-		    <li>&star; <code>$stmt-&gt;bind_param("ss", $username, $password);</code> →
+		    <li>&star; <b><font color="blue">$stmt-&gt;bind_param("ss", $username, $password);</font></b> →
 		      Binds the actual values to the placeholders. The <code>"ss"</code> means:
 		      <ul>
-		        <li>First <code>s</code> → string for <code>$username</code></li>
-		        <li>Second <code>s</code> → string for <code>$password</code></li>
+		        <li>First <b><font color="blue">s</font></b> → string for <b><font color="blue">$username</font></b></li>
+		        <li>Second <b><font color="blue">s</font></b> → string for <b><font color="blue">$password</font></b></li>
 		      </ul>
 		    </li>
 		
-		    <li>&star; <code>if ($stmt-&gt;execute())</code> →
+		    <li>&star; <b><font color="blue">if ($stmt-&gt;execute())</font></b> →
 		      Tries to run the prepared statement:
 		      <ul>
 		        <li>If successful, the user is registered and sees <strong>"Registered successfully!"</strong></li>
