@@ -43,7 +43,7 @@
 		?&gt;
 		 </code>
 	</pre>
-
+	
 	<h3>register.php</h3>
 	<pre>
 		 <code class="language-jsx">
@@ -165,6 +165,25 @@
 		    padding: 10px;
 		}
 		 </code>
+	</pre>
+
+	<h2></h2>
+	<ul>
+		<li>Put all files into your XAMPP <font color="blue"><b>htdocs/login-system</b></font> folder</li>
+		<li>We need to create a <b><font color="blue">database</font></b> and a <b><font color="blue">table</font></b> in your phpmyadmin in XAMPP</li>
+	</ul>
+	
+	<pre>
+		1. Create a database: login_demo
+		2. Run this SQL:
+		   CREATE TABLE users (
+		       id INT AUTO_INCREMENT PRIMARY KEY,
+		       username VARCHAR(50) NOT NULL UNIQUE,
+		       password VARCHAR(255) NOT NULL
+		   );
+		3. Open register.php to create a user
+		4. Open login.php to log in
+		5. dashboard.php is protected
 	</pre>
   </div>
 
