@@ -71,11 +71,13 @@
 		
 		    $stmt = $conn-&gt;prepare("INSERT INTO users (username, password) VALUES (?, ?)");
 		    $stmt-&gt;bind_param("ss", $username, $password);
-		    if ($stmt-&gt;execute()) {
-		        echo "Registered successfully!";
-		    } else {
-		        echo "Username already taken.";
-		    }
+			 
+		    try{
+	                $stmt->execute();
+	                echo "Registered successfully!";
+	            } catch (mysqli_sql_exception $e) {
+	                echo "Username already taken.";
+	            }
 		}
 		?&gt;
 
