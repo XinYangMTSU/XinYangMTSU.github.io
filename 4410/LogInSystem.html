@@ -59,7 +59,8 @@
 		    }
 		}
 		?&gt;
-		
+
+		&lt;link rel="stylesheet" href="style.css"&gt;
 		&lt;form method="post"&gt;
 		    &lt;h2&gt;Register&lt;/h2&gt;
 		    Username: &lt;input name="username" required&gt;&lt;br&gt;
@@ -95,7 +96,8 @@
 		    echo "Invalid username or password.";
 		}
 		?&gt;
-		
+
+		&lt;link rel="stylesheet" href="style.css"&gt;
 		&lt;form method="post"&gt;
 		    &lt;h2&gt;Login&lt;/h2&gt;
 		    Username: &lt;input name="username" required&gt;&lt;br&gt;
@@ -105,7 +107,9 @@
 	</pre>
 
 	<h3>dashboard.php</h3>
+	
 	<pre>
+		&lt;link rel="stylesheet" href="style.css"&gt;
 		&lt;?php  
 		    session_start();  
 		    if (!isset($_SESSION["user_id"])) {  
