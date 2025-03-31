@@ -276,6 +276,19 @@
 		 </code>
 	</pre>
 
+	<section>
+	  <h3>🔍 What's happening here?</h3>
+	  <p>This PHP script logs the user out by ending the session and redirecting them back to the login page.</p>
+	  <ul>
+	    <li>&star; <b><font color="blue">session_start()</font></b> → Starts or resumes the current session. Required before using or destroying session data.</li>
+	    <li>&star; <b><font color="blue">session_destroy()</font></b> → Destroys all session data, effectively logging the user out.</li>
+	    <li>&star; <b><font color="blue">header("Location: login.php")</font></b> → Redirects the user to the login page after logout.</li>
+	    <li>&star; <b><font color="blue">exit</font></b> → Stops the script to ensure no other code runs after the redirect.</li>
+	  </ul>
+	</section>
+
+	<hr>
+	
 	<h3>style.css</h3>
 	<pre>
 		 <code class="language-jsx">
