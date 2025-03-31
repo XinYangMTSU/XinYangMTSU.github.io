@@ -203,6 +203,8 @@
 	      <ul>
 	        <li>If correct → login success! ✅</li>
 	        <li>We set <b><code>$_SESSION["user_id"]</code></b> and redirect to <b><code>dashboard.php</code></b>.</li>
+		<li>The <b>header</b> redirects the user to the protected page (like their dashboard).</li>
+		<li><b>exit;</b> is important—it <b>stops the script immediately</b> to make sure nothing else runs after the redirect.</li>
 	      </ul>
 	    </li>
 	
