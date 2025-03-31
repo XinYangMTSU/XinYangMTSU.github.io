@@ -175,7 +175,9 @@
 	  <h3>🔍 What’s happening in the login logic?</h3>
 	  <p>This PHP code runs when a user submits the login form. Let’s break it down step by step:</p>
 	  <ul>
-	    <li>&star; <b><font color="blue">session_start();</font></b> → Starts a session so we can store user info after they log in.</li>
+	    <li>&star; <b><font color="blue">session_start();</font></b> → Starts a session so we can store user info after they log in.
+	    To ensure that multiple PHP pages can access the <b><font color="blue">$_SESSION</font></b> variables consistently.
+	    </li>
 
 	    <li>&star; <b><font color="blue">$stmt = $conn-&gt;prepare("SELECT id, password FROM users WHERE username = ?");</font></b> → 
 	      Prepares a safe SQL statement to find the user with the given username. (Prevents SQL injection!)</li>
