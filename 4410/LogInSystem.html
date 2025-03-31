@@ -118,17 +118,17 @@
 		    <li>&star; <b><font color="blue">$stmt-&gt;bind_param("ss", $username, $password);</font></b> →
 		      Binds the actual values to the placeholders. The <code>"ss"</code> means:
 		      <ul>
-		        <li>First <b><font color="blue">s</font></b> → string for <b><font color="blue">$username</font></b></li>
-		        <li>Second <b><font color="blue">s</font></b> → string for <b><font color="blue">$password</font></b></li>
+		        <li>&clubs; First <b><font color="blue">s</font></b> → string for <b><font color="blue">$username</font></b></li>
+		        <li>&clubs; Second <b><font color="blue">s</font></b> → string for <b><font color="blue">$password</font></b></li>
 		      </ul>
 		    </li>
 		
-		    <li>&star; <b><font color="blue">try{ $stmt-&gt;execute(); } catch (mysqli_sql_exception $e) </font></b> →
+		    <li>&star; <b><font color="blue">try{ $stmt-&gt;execute(); } catch (mysqli_sql_exception $e){} </font></b> →
 		      Tries to run the prepared statement:
 		      <ul>
-		        <li>If successful, the user is registered and sees <strong>"Registered successfully!"</strong></li>
-		        <li>If the username already exists (e.g., duplicate entry), it shows <strong>"Username is already taken."</strong></li>
-			<li> <b><font color="blue">try-catch</font></b> is used to catch and handle exceptions. 
+		        <li>&clubs; If successful, the user is registered and sees <strong>"Registered successfully!"</strong></li>
+		        <li>&clubs; If the username already exists (e.g., duplicate entry), it shows <strong>"Username is already taken."</strong></li>
+			<li>&clubs;<b><font color="blue">try-catch</font></b> is used to catch and handle exceptions. 
 				Without the try-catch, a duplicate username would cause a Fatal Error</li>
 		      </ul>
 		    </li>
