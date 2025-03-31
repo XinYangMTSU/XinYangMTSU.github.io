@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 5 - Compressing Text Files using Huffman Coding</title>
+    <meta name="author" content="Your Name">
+    
+    <meta name="robots" content="noindex, nofollow">
+    <link href="lab.css" rel="stylesheet">
+</head>
+    
+<body>
+
+    <div>
+    <ul>
+      <li><a href="https://xinyangmtsu.github.io/3080.html" target="_blank"><b>CSCI 3080</b></a></li>
+      <li><a href="https://xinyangmtsu.github.io/3080/Lab/lab5.html"><b>Lab5</b></a></li>
+    </ul>
+</div>
+
+<br>
+<br>
+    
+    <!-- Title / Header Section -->
+    <center>
+            <div id="div1">
+                        <font size=5 color="#ffa500">&nbsp;<b>CSCI 3080 - <em>Discrete Structures</em></b></font>
+                        <br><br>
+                        <font size=4 color="white"><b>Lab 5 - Compressing Text Files using Huffman Coding</b></font>
+            </div>  
+    </center>
+    
+    <!-- Content -->
+    <h1>1. Objective</h1>
+    <p>
+      In this lab, students will implement Huffman coding in C++ to compress and decompress text files. 
+      They will learn how to construct a Huffman tree, generate Huffman codes, encode a text file into a compressed binary format, 
+      and then decode it back to its original form. Additionally, students will analyze the efficiency of Huffman compression 
+      by comparing the file sizes before and after compression. By the end of this lab, students will be able to:
+    </p>
+     <ul>
+       <li>&#9733; Understand the principles of Huffman coding and its application in data compression.</li>
+       <li>&#9733; Implement a vector to construct a Huffman tree.</li>
+       <Li>&#9733; Generate Huffman codes for individual characters based on their frequency.</Li>
+       <Li>&#9733; Encode a given text file into a compressed binary format.</Li>
+       <li>&#9733; Decode the Huffman codes to restore the original text.</li>
+       <li>&#9733; Evaluate the efficiency of the compression by comparing file sizes.</li>
+     </ul>
+
+    <h1>2. Lab Instructions</h1>
+
+    <h2>Step 1: Read the Input File</h2>
+ 
+    <ul>
+      <li>1. Create a text file named <a href="input.txt" target="_blank">input.txt</a>.</li>
+
+      <li>2. Write a C++ program to read the contents of input.txt into a string.</li>
+      <pre>
+        string filename;
+        cout << "Enter text file name: ";
+        cin >> filename;
+    
+        // Read input file
+        ifstream inputFile(filename);
+        if (!inputFile) {
+            cout << "Error opening file.\n";
+            return 1;
+        }
+        
+        string text;
+        char ch;
+        //read characters from a file one by one until the end of the file is reached
+        while (inputFile.get(ch)) {
+            _____________ // Append each character to the string
+        }
+        inputFile.close();
+      </pre>
+    </ul>
+
+    <h2>Step 2: Compute Character Frequencies</h2>
+
+   <ul>
+     <li>1. Traverse the input string and count the occurrence of each character.</li>
+     <li>2. Store the character-frequency mapping in an unordered_map.</li>
+     <Pre>
+        unordered_map&lt;char, int&gt; freqMap;
+        for (char ch : text) {
+            _______________ // Increment the frequency of each character in freqMap
+        }
+     </Pre>
+   </ul>
+
+    <h1>3. Requirements</h1>
+    
+    <ul>
+        <li>&#9733; (1) Please create a sample text file named <i>input.txt</i> and write a C++ program to <b class="blue-text">read its contents into a string.</b></li>
+        <li>&#9733; (2) Please traverse the input string to <b class="blue-text">count the occurrence of each character</b> and store the character-frequency mapping in an <b class="blue-text">unordered_map.</b></li>
+        <li>&#9733; (3) Please <b class="red-text">use a vector to construct the Huffman tree</b> by merging nodes with the <b class="red-text">lowest frequencies</b> and store the root node of the tree.</li>
+        <li>&#9733; (4) Please <b class="blue-text">traverse the Huffman tree to assign binary codes to each character</b> and store the codes in an <b class="blue-text">unordered_map.</b></li>
+        <li>&#9733; (5) Please <b class="blue-text">replace each character in the text file with its Huffman code</b> and <b class="blue-text">write the encoded binary string to a compressed file</b> named compressed.bin.</li>
+        <li>&#9733; (6) Please <b class="red-text">reconstruct the original text using the Huffman tree</b>, and <b class="red-text">save the decoded text</b> as decompressed.txt.</li>
+        <li>&#9733; (7) Please ensure that your program can compile and run <b class="red-text">without</b> crashing, producing errors, or infinite loop errors.</li>
+    </ul>
+
+    <h1>4. Sample Input/Output</h1>
+    <pre>
+      
+    </pre>
+
+    <h1>5. Grading Criteria</h1>
+
+    <table>
+        <caption><strong>Grading Criteria</strong> (Total Points: 100)</caption>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Criteria</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Huffman Tree Node</strong><br>(5 points)</td>
+                <td>
+                    The Huffman Tree Node is defined correctly.
+                </td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td><strong>New Node Function</strong><br>(5 points)</td>
+                <td>The function to create a new node is defined correctly.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td><strong>Huffman tree</strong><br>(17 points)</td>
+                <td>
+                    The Huffman tree is constructed correctly.
+                </td>
+                <td>17</td>
+            </tr>
+            
+           
+            <tr>
+                <td><strong>Huffman encoding</strong><br>(15 points)</td>
+                <td>Huffman encoding has been successfully implemented</td>
+                <td>15</td>
+            </tr>
+
+              <tr>
+                <td><strong>Huffman decoding</strong><br>(15 points)</td>
+                <td>Huffman decoding has been successfully implemented</td>
+                <td>15</td>
+            </tr>
+
+             <tr>
+                <td><strong>File I/O operations</strong><br>(15 points)</td>
+                <td>File I/O operations work correctly</td>
+                <td>15</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Main Function Implementation</strong><br>(10 points)</td>
+                <td>All functions are correctly invoked in the main function</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td><strong>Analyze compression efficiency</strong><br>(5 points)</td>
+                <td>Accurately compare the sizes of input.txt, compressed.bin, and decompressed.txt</td>
+                <td>5</td>
+            </tr>
+            
+            <tr>
+                <td rowspan="2"><strong>Code Readability & Comments</strong><br>(5 points)</td>
+                <td>Maintain consistent indentation and spacing throughout the code.</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>Include comments that explain the purpose of key sections and logic.</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td><strong>Test Cases & Output Accuracy</strong><br>(5 points)</td>
+                <td>The output for different test cases is correct and consistent.</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td><strong>AI disclaimer</strong><br>(3 points)</td>
+                <td>Please put an AI disclaimer at the top of your source code as comments.</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td><strong>Errors</strong><br></td>
+                <td>Your program has syntax errors, compiling errors, running errors, or infinite loops.</td>
+                <td><span class="red-text">-50 points</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <h1>6. Comments</h1>
+    <ul>
+        <li>
+            &#9733; Please add the following comments to the top of your <b>lab5.cpp</b> file:
+            <pre>
+            /*
+                Author: Your Name
+                Date: Month/Day/Year
+                Lab Purpose: 
+                A.I. Disclaimer: please put your A.I. disclaimer here
+            */
+            </pre>
+        </li>
+        <li>&#9733; Please add other necessary comments to your source code.</li>
+    </ul>
+
+    <h1>7. Submit</h1>
+    <p>Please submit your Lab 5 source code file: <b>lab5.cpp</b> in D2L!</p>
+
+    <h1>8. Jupyter Hub for Programming</h1>
+    <a href="https://jupyterhub.cs.mtsu.edu/azuread/hub/home" target="_blank">Jupyter Hub for Programming</a>
+    <br>
+       By logging in to Jupyter Hub with your <b>MTSU credentials</b>, you can create, compile, and run your source code there.
+
+
+    <h1>9. Compile and Run the Source Code</h1>
+    <ul>
+        <li>Compile: <b class="red-text">c++ lab5.cpp</b></li>
+        <li>Run: <b class="red-text">./a.out</b></li>
+    </ul>
+    <hr>
+
+    <div class="centered">
+        <strong>
+            <font size="+1">
+                Congratulations! You have finished your Lab5!
+            </font>
+        </strong>
+        <br><br>
+    </div>
+
+    <footer style="text-align: center; font-size: 0.9rem; color: #999;">
+        <b>
+         &copy;2025 Dr. Xin Yang. All rights reserved.
+        <br>Department of Computer Science
+        <br>College of Basic and Applied Sciences
+        <br>Middle Tennessee State University
+        </b>
+    </footer>
+    
+    <!-- Go to Top Button -->
+    <a href="#" id="goTopBtn">&#8679;</a>
+    
+    <!-- Script to scroll to top -->
+     <script src="lab.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+
+</body>
+</html>
