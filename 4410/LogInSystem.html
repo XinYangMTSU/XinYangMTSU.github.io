@@ -63,6 +63,45 @@
 		    &lt;button type="submit"&gt;Register&lt;/button&gt;
 		&lt;/form&gt;
 	</pre>
+
+	<h2>login.php</h2>
+	<pre>
+		&lt;?php
+		session_start();
+		require 'db.php';
+		
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		    $username = $_POST["username"];
+		    $password = $_POST["password"];
+		
+		    $stmt = $conn-&gt;prepare("SELECT id, password FROM users WHERE username = ?");
+		    $stmt-&gt;bind_param("s", $username);
+		    $stmt-&gt;execute();
+		    $stmt-&gt;store_result();
+		
+		    if ($stmt-&gt;num_rows === 1) {
+		        $stmt-&gt;bind_result($id, $hashed_password);
+		        $stmt-&gt;fetch();
+		        if (password_verify($password, $hashed_password)) {
+		            $_SESSION["user_id"] = $id;
+		            header("Location: dashboard.php");
+		            exit;
+		        }
+		    }
+		    echo "Invalid username or password.";
+		}
+		?&gt;
+		
+		&lt;form method="post"&gt;
+		    &lt;h2&gt;Login&lt;/h2&gt;
+		    Username: &lt;input name="username" required&gt;&lt;br&gt;
+		    Password: &lt;input type="password" name="password" required&gt;&lt;br&gt;
+		    &lt;button type="submit"&gt;Login&lt;/button&gt;
+		&lt;/form&gt;
+	</pre>
+
+
+	
   </div>
 
 
