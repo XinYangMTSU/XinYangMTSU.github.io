@@ -25,7 +25,44 @@
 		└── README.txt           ← Instructions
 	</pre>
 	
+	<h2>Step-by-Step Files</h2>
 
+	<h3>db.php</h3>
+	<pre>
+		&lt;?php
+			$conn = new mysqli("localhost", "root", "", "login_demo");
+			if ($conn->connect_error) {
+			    die("Connection failed: " . $conn->connect_error);
+			}
+		?&gt;
+	</pre>
+
+	<h3>register.php</h3>
+	<pre>
+		&lt;?php
+		require 'db.php';
+		
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		    $username = $_POST["username"];
+		    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+		
+		    $stmt = $conn-&gt;prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+		    $stmt-&gt;bind_param("ss", $username, $password);
+		    if ($stmt-&gt;execute()) {
+		        echo "Registered successfully!";
+		    } else {
+		        echo "Username already taken.";
+		    }
+		}
+		?&gt;
+		
+		&lt;form method="post"&gt;
+		    &lt;h2&gt;Register&lt;/h2&gt;
+		    Username: &lt;input name="username" required&gt;&lt;br&gt;
+		    Password: &lt;input type="password" name="password" required&gt;&lt;br&gt;
+		    &lt;button type="submit"&gt;Register&lt;/button&gt;
+		&lt;/form&gt;
+	</pre>
   </div>
 
 
