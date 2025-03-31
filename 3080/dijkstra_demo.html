@@ -1,69 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Dijkstra's Algorithm Visualizer</title>
+  <meta charset="UTF-8" />
+  <title>Dijkstra's Algorithm Visualization</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      padding: 20px;
-    }
-    h1 {
-      color: #333;
-    }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin-top: 20px;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: center;
-    }
-    .visited {
-      background-color: #c8e6c9;
-    }
-    .current {
-      background-color: #fff59d;
-    }
-    .inf {
-      color: #999;
-    }
-    .highlight {
-      background-color: #ffccbc;
-    }
-    button {
-      padding: 10px 15px;
-      font-size: 16px;
-      background-color: #4caf50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .explanation {
-      margin-top: 20px;
-      padding: 10px;
-      background-color: #e3f2fd;
-      border-left: 5px solid #2196f3;
-    }
+    body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 20px; }
+    h1 { color: #333; }
+    table { border-collapse: collapse; width: 80%; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f0f0f0; }
+    .highlight { background-color: #ffffaa; }
+    .visited { background-color: #d0ffd0; }
+    .code-box { background: #eee; padding: 10px; border-radius: 5px; white-space: pre; font-family: monospace; margin-top: 30px; }
+    .line-highlight { background-color: #ffebcd; display: block; width: 100%; }
   </style>
 </head>
 <body>
-  <h1>Dijkstra's Algorithm Step-by-Step</h1>
+  <h1>🧠 Dijkstra's Algorithm - Step-by-Step Visualization</h1>
+  <button onclick="nextStep()">▶️ Next Step</button>
 
-  <div class="explanation" id="explanation">
-    Click "Next Step" to begin.
-  </div>
+  <h2>Distance Table</h2>
+  <table id="distanceTable">
+    <thead>
+      <tr><th>Node</th><th>Distance</th><th>Predecessor</th><th>Visited</th></tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
 
-  <table id="table"></table>
-  <br>
-  <button onclick="nextStep()">Next Step</button>
+  <h2>💡 Step Explanation</h2>
+  <p id="explanation">Click "Next Step" to begin.</p>
+
+  <h2>🧾 Code</h2>
+  <div class="code-box" id="codeBox"></div>
 
   <script>
     const INF = Infinity;
+    const nodes = ["1", "2", "3", "4", "5"];
     const A = [
       [INF, 1, 10, INF, 5],
       [1, INF, 8, INF, INF],
@@ -72,57 +44,104 @@
       [5, INF, 6, 1, INF]
     ];
 
-    const nodeName = i => String(i + 1);
-    let n = A.length;
-    let d = new Array(n).fill(INF);
-    let s = new Array(n).fill(-1);
-    let visited = new Array(n).fill(false);
+    let d = Array(nodes.length).fill(INF);
+    let s = Array(nodes.length).fill("-");
+    let visited = Array(nodes.length).fill(false);
     let step = 0;
-    let start = 0;
-    let end = 4;
+    let current = -1;
+    let explanation = document.getElementById("explanation");
+
+    d[0] = 0; // start at node 1
+
+    const codeLines = `void dijkstra(const vector<vector<int>> &A, int start, int end) {
+    int n = A.size();
+    vector<int> d(n, INF);
+    vector<int> s(n, -1);
+    vector<bool> visited(n, false);
 
     d[start] = 0;
 
-    function updateTable(current = -1) {
-      const table = document.getElementById('table');
-      let html = '<tr><th>Node</th>' + d.map((_, i) => `<th>${nodeName(i)}</th>`).join('') + '</tr>';
-      html += '<tr><td>Distance</td>' + d.map((val, i) => {
-        let style = visited[i] ? 'visited' : (i === current ? 'current' : '');
-        return `<td class="${style}">${val === INF ? '<span class="inf">∞</span>' : val}</td>`;
-      }).join('') + '</tr>';
-      html += '<tr><td>Predecessor</td>' + s.map(val => `<td>${val === -1 ? '-' : nodeName(val)}</td>`).join('') + '</tr>';
-      table.innerHTML = html;
+    for (int step = 0; step < n; ++step) {
+        int u = -1;
+        for (int i = 0; i < n; ++i) {
+            if (!visited[i] && (u == -1 || d[i] < d[u])) {
+                u = i;
+            }
+        }
+
+        if (u == -1 || d[u] == INF) break;
+        visited[u] = true;
+
+        for (int v = 0; v < n; ++v) {
+            if (A[u][v] != INF && !visited[v]) {
+                if (d[u] + A[u][v] < d[v]) {
+                    d[v] = d[u] + A[u][v];
+                    s[v] = u;
+                }
+            }
+        }
+    }
+}`.split('\n');
+
+    function highlightCode(lineNumber) {
+      document.getElementById("codeBox").innerHTML = codeLines.map((line, idx) => {
+        return `<span class="${idx === lineNumber ? 'line-highlight' : ''}">${line}</span>`;
+      }).join('\n');
+    }
+
+    function updateTable() {
+      const body = document.getElementById("tableBody");
+      body.innerHTML = "";
+      for (let i = 0; i < nodes.length; i++) {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${nodes[i]}</td>
+          <td>${d[i] === INF ? '∞' : d[i]}</td>
+          <td>${s[i] === "-" || s[i] === -1 ? '-' : nodes[s[i]]}</td>
+          <td class="${visited[i] ? 'visited' : ''}">${visited[i]}</td>
+        `;
+        body.appendChild(row);
+      }
     }
 
     function nextStep() {
-      let u = -1;
-      for (let i = 0; i < n; ++i) {
-        if (!visited[i] && (u === -1 || d[i] < d[u])) {
-          u = i;
+      updateTable();
+      highlightCode(8); // outer loop line
+
+      if (step >= nodes.length) return;
+
+      // Find unvisited node with min distance
+      current = -1;
+      for (let i = 0; i < nodes.length; i++) {
+        if (!visited[i] && (current === -1 || d[i] < d[current])) {
+          current = i;
         }
       }
 
-      if (u === -1 || d[u] === INF) {
-        document.getElementById('explanation').innerText = "All remaining nodes are unreachable.";
+      if (current === -1 || d[current] === INF) {
+        explanation.textContent = "All reachable nodes processed.";
         return;
       }
 
-      visited[u] = true;
-      document.getElementById('explanation').innerText = `Step ${step + 1}: Visit node ${nodeName(u)} with distance ${d[u]}`;
+      visited[current] = true;
+      explanation.textContent = `Visiting node ${nodes[current]} with current shortest distance ${d[current]}`;
+      highlightCode(13);
 
-      for (let v = 0; v < n; ++v) {
-        if (A[u][v] !== INF && !visited[v]) {
-          if (d[u] + A[u][v] < d[v]) {
-            d[v] = d[u] + A[u][v];
-            s[v] = u;
+      for (let v = 0; v < nodes.length; v++) {
+        if (A[current][v] !== INF && !visited[v]) {
+          if (d[current] + A[current][v] < d[v]) {
+            d[v] = d[current] + A[current][v];
+            s[v] = current;
           }
         }
       }
-      updateTable(u);
+
       step++;
+      updateTable();
     }
 
     updateTable();
+    highlightCode(-1);
   </script>
 </body>
 </html>
