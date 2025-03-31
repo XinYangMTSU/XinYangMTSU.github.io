@@ -76,6 +76,44 @@
       <li><code>s[]</code> to store predecessors for path reconstruction</li>
       <li><code>visited[]</code> to keep track of visited nodes</li>
     </ul>
+    Pseudocode for Dijkstra’s Algorithm:
+      <pre>
+          Function Dijkstra(A: 2D matrix of weights, start: int, end: int):
+
+                n ← number of nodes
+                d ← array of size n, filled with INF            // stores shortest distances from start
+                s ← array of size n, filled with -1             // stores predecessor of each node
+                visited ← array of size n, filled with false    // marks visited nodes
+            
+                d[start] ← 0                                     // distance to start is 0
+            
+                Repeat n times:
+                    p ← -1
+                    For i from 0 to n-1:
+                        If node i is unvisited AND (p == -1 OR d[i] < d[p]):
+                            p ← i                                // choose unvisited node with smallest distance
+            
+                    If p == -1 OR d[p] == INF:
+                        Break                                     // all remaining nodes are unreachable
+            
+                    visited[p] ← true                             // mark p as visited
+            
+                    For v from 0 to n-1:
+                        If A[p][v] ≠ INF AND v is not visited:
+                            If d[p] + A[p][v] < d[v]:
+                                d[v] ← d[p] + A[p][v]             // update shorter distance
+                                s[v] ← p                          // update predecessor
+            
+                // Reconstruct and print path
+                path ← empty list
+                v ← end
+                While v ≠ -1:
+                    Insert v at the beginning of path
+                    v ← s[v]
+            
+                Print "Shortest distance from start to end:", d[end]
+                Print "Path:", path
+      </pre>
   </li>
   <li>3. Loop through each node, selecting the unvisited node with the smallest distance and updating neighbors accordingly.</li>
   <li>4. Stop when the destination node is visited or no more reachable nodes exist.</li>
