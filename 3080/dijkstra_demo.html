@@ -2,114 +2,124 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dijkstra Visualization</title>
+  <title>Dijkstra's Algorithm Demo</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #1b1b1b;
-      color: #eee;
-      text-align: center;
+      background-color: #f0f0f0;
       padding: 20px;
     }
     table {
-      margin: auto;
       border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
     }
-    td, th {
+    th, td {
+      border: 1px solid #ccc;
       padding: 10px;
-      border: 1px solid #666;
-      width: 50px;
+      text-align: center;
     }
-    .highlight {
-      background-color: gold;
-      color: black;
+    th {
+      background-color: #eee;
     }
-    .visited {
-      background-color: #36c36c;
-      color: black;
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+    }
+    .explanation {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff8dc;
+      border: 1px solid #e0c97f;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
-  <h2>📍 Dijkstra’s Algorithm Step-by-Step</h2>
-  <p>Click the button to go through each step:</p>
-  <button onclick="nextStep()">▶️ Next Step</button>
 
-  <h3>Distance Array</h3>
-  <div id="distanceDisplay"></div>
+<h2>Dijkstra's Algorithm – Step-by-Step Table</h2>
 
-  <script>
-    const INF = Infinity;
-    const A = [
-      [INF, 1, 10, INF, 5],
-      [1, INF, 8, INF, INF],
-      [10, 8, INF, 1, 6],
-      [INF, INF, 1, INF, 1],
-      [5, INF, 6, 1, INF]
-    ];
-    const n = A.length;
-    const d = new Array(n).fill(INF);
-    const s = new Array(n).fill(-1);
-    const visited = new Array(n).fill(false);
+<table id="stepTable">
+  <thead>
+    <tr>
+      <th>Step</th>
+      <th>Visited</th>
+      <th>Distances</th>
+      <th>Predecessors</th>
+      <th>Explanation</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody">
+  </tbody>
+</table>
 
-    let step = 0;
-    let current = -1;
-    d[0] = 0; // Start at node 0 ("1")
+<button onclick="nextStep()">▶️ Next Step</button>
 
-    function nodeName(i) {
-      return (i + 1).toString();
+<div class="explanation" id="codeExplanation">
+  Click "Next Step" to walk through the algorithm.
+</div>
+
+<script>
+const INF = Infinity;
+const nodes = ['1', '2', '3', '4', '5'];
+const graph = [
+  [INF, 1, 10, INF, 5],
+  [1, INF, 8, INF, INF],
+  [10, 8, INF, 1, 6],
+  [INF, INF, 1, INF, 1],
+  [5, INF, 6, 1, INF]
+];
+
+let dist = Array(nodes.length).fill(INF);
+let prev = Array(nodes.length).fill(null);
+let visited = Array(nodes.length).fill(false);
+let step = 0;
+let start = 0; // from node 1
+
+dist[start] = 0;
+
+function nextStep() {
+  const n = nodes.length;
+  let u = -1;
+
+  for (let i = 0; i < n; i++) {
+    if (!visited[i] && (u === -1 || dist[i] < dist[u])) {
+      u = i;
     }
+  }
 
-    function nextStep() {
-      // Find unvisited node with smallest d value
-      let u = -1;
-      for (let i = 0; i < n; i++) {
-        if (!visited[i] && (u === -1 || d[i] < d[u])) {
-          u = i;
-        }
+  if (u === -1 || dist[u] === INF) return;
+  visited[u] = true;
+
+  for (let v = 0; v < n; v++) {
+    if (graph[u][v] !== INF && !visited[v]) {
+      if (dist[u] + graph[u][v] < dist[v]) {
+        dist[v] = dist[u] + graph[u][v];
+        prev[v] = u;
       }
-
-      if (u === -1 || d[u] === INF) {
-        alert("All reachable nodes have been visited or no path exists.");
-        return;
-      }
-
-      visited[u] = true;
-      current = u;
-
-      // Update neighbors
-      for (let v = 0; v < n; v++) {
-        if (A[u][v] !== INF && !visited[v]) {
-          if (d[u] + A[u][v] < d[v]) {
-            d[v] = d[u] + A[u][v];
-            s[v] = u;
-          }
-        }
-      }
-
-      displayTable();
-      step++;
     }
+  }
 
-    function displayTable() {
-      let html = '<table><tr><th>Node</th>';
-      for (let i = 0; i < n; i++) html += `<th>${nodeName(i)}</th>`;
-      html += '</tr><tr><td>d</td>';
-      for (let i = 0; i < n; i++) {
-        const val = (d[i] === INF ? '∞' : d[i]);
-        let className = visited[i] ? 'visited' : (i === current ? 'highlight' : '');
-        html += `<td class="${className}">${val}</td>`;
-      }
-      html += '</tr><tr><td>s</td>';
-      for (let i = 0; i < n; i++) {
-        html += `<td>${s[i] === -1 ? '-' : nodeName(s[i])}</td>`;
-      }
-      html += '</tr></table>';
+  const row = document.createElement("tr");
 
-      document.getElementById("distanceDisplay").innerHTML = html;
-    }
+  row.innerHTML = `
+    <td>${++step}</td>
+    <td>${visited.map((v, i) => v ? nodes[i] : '-').join(', ')}</td>
+    <td>${dist.map(d => d === INF ? '∞' : d).join(', ')}</td>
+    <td>${prev.map(p => p !== null ? nodes[p] : '-').join(', ')}</td>
+    <td>Node ${nodes[u]} is chosen with smallest tentative distance.<br>
+        Update its neighbors' distances and predecessors if needed.</td>
+  `;
+  document.getElementById("tableBody").appendChild(row);
 
-    displayTable(); // Initial state
-  </script>
+  document.getElementById("codeExplanation").innerHTML = `
+    <strong>Explanation:</strong><br>
+    In this step, we search for the unvisited node with the smallest distance (<code>u</code>).<br>
+    Then, for each neighbor <code>v</code> of <code>u</code>, we check if going through <code>u</code> gives a shorter path.<br>
+    If so, we update the shortest distance and mark <code>u</code> as visited.
+  `;
+}
+</script>
+
 </body>
 </html>
