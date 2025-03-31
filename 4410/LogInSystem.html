@@ -176,12 +176,7 @@
 	  <p>This PHP code runs when a user submits the login form. Let’s break it down step by step:</p>
 	  <ul>
 	    <li>&star; <b><font color="blue">session_start();</font></b> → Starts a session so we can store user info after they log in.</li>
-	
-	    <li>&star; <b><font color="blue">require 'db.php';</font></b> → Includes the file that connects to the MySQL database.</li>
-	
-	    <li>&star; <b><font color="blue">$username = $_POST["username"];</font></b> and <b><font color="blue">$password = $_POST["password"];</font></b> → 
-	      Get the username and password entered by the user in the form.</li>
-	
+
 	    <li>&star; <b><font color="blue">$stmt = $conn-&gt;prepare("SELECT id, password FROM users WHERE username = ?");</font></b> → 
 	      Prepares a safe SQL statement to find the user with the given username. (Prevents SQL injection!)</li>
 	
