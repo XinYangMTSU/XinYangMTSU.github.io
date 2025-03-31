@@ -232,6 +232,38 @@
 		 </code>
 	</pre>
 
+	<section>
+	  <h3>🔍 What’s happening in the dashboard logic?</h3>
+	  <p>This PHP code makes sure only users who are logged in can access the dashboard. Let’s break it down step by step:</p>
+	  <ul>
+	    <li>&star; <b><font color="blue">session_start();</font></b> → This starts or resumes the session so we can access <code>$_SESSION</code> variables.</li>
+	
+	    <li>&star; <b><font color="blue">if (!isset($_SESSION["user_id"]))</font></b> →
+	      Checks if the user is <strong>not logged in</strong>.
+	      <ul>
+	        <li>&clubs; <code>$_SESSION["user_id"]</code> is only set after a successful login.</li>
+	        <li>&clubs; If it’s missing, we redirect the user to the <code>login.php</code> page.</li>
+	      </ul>
+	    </li>
+	
+	    <li>&star; <b><font color="blue">header("Location: login.php");</font></b> →
+	      This safely redirects the user to the login page if they're not authenticated.</li>
+	
+	    <li>&star; <b><font color="blue">exit;</font></b> →
+	      Stops the script immediately after redirection so no protected content is accidentally shown.</li>
+	
+	    <li>&star; <b><font color="blue">echo "Welcome! You are logged in."</font></b> →
+	      This is shown only if the user is authenticated.</li>
+	
+	    <li>&star; <b><font color="blue">echo "&lt;a href='logout.php'&gt;Logout&lt;/a&gt;"</font></b> →
+	      Gives the user a link to log out and destroy the session.</li>
+	  </ul>
+	
+	  <p>✅ This protects your page from being accessed directly by someone who isn’t logged in. Without this check, anyone could visit <code>dashboard.php</code> even without logging in!</p>
+	</section>
+
+	<hr>
+	
 	<h3>logout.php</h3>
 	<pre>
 		 <code class="language-jsx">
