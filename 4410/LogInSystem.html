@@ -4,6 +4,8 @@
 <head>
 	<title>PHP Log In Forms</title>
 	<link href="../CSS/Site.css" type="text/css" rel="stylesheet">
+	 <!-- Prism.js CSS for styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
 </head>
 
 <body>
@@ -33,16 +35,19 @@
 
 	<h3>db.php</h3>
 	<pre>
+		 <code class="language-jsx">
 		&lt;?php
 			$conn = new mysqli("localhost", "root", "", "login_demo");
 			if ($conn->connect_error) {
 			    die("Connection failed: " . $conn->connect_error);
 			}
 		?&gt;
+		 </code>
 	</pre>
 
 	<h3>register.php</h3>
 	<pre>
+		 <code class="language-jsx">
 		&lt;?php
 		require 'db.php';
 		
@@ -67,10 +72,12 @@
 		    Password: &lt;input type="password" name="password" required&gt;&lt;br&gt;
 		    &lt;button type="submit"&gt;Register&lt;/button&gt;
 		&lt;/form&gt;
+		 </code>
 	</pre>
 
 	<h3>login.php</h3>
 	<pre>
+		 <code class="language-jsx">
 		&lt;?php
 		session_start();
 		require 'db.php';
@@ -104,11 +111,13 @@
 		    Password: &lt;input type="password" name="password" required&gt;&lt;br&gt;
 		    &lt;button type="submit"&gt;Login&lt;/button&gt;
 		&lt;/form&gt;
+		 </code>
 	</pre>
 
 	<h3>dashboard.php</h3>
 	
 	<pre>
+		 <code class="language-jsx">
 		&lt;link rel="stylesheet" href="style.css"&gt;
 		&lt;?php  
 		    session_start();  
@@ -119,20 +128,24 @@
 		    echo "&lt;h2&gt;Welcome! You are logged in.&lt;/h2&gt;";  
 		    echo "&lt;a href='logout.php'&gt;Logout&lt;/a&gt;";  
 		?&gt;
+		 </code>
 	</pre>
 
 	<h3>logout.php</h3>
 	<pre>
+		 <code class="language-jsx">
 		&lt;?php
 		session_start();
 		session_destroy();
 		header("Location: login.php");
 		exit;
 		?&gt;
+		 </code>
 	</pre>
 
 	<h3>style.css</h3>
 	<pre>
+		 <code class="language-jsx">
 		body {
 		    font-family: Arial, sans-serif;
 		    background-color: #f7f7f7;
@@ -152,9 +165,13 @@
 		button {
 		    padding: 10px;
 		}
+		 </code>
 	</pre>
   </div>
 
+    <!-- Prism.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
 
   
 </body>
