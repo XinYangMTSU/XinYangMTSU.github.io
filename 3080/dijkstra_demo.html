@@ -2,76 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>🎓 Dijkstra's Algorithm Visual Demo</title>
+  <title>Dijkstra's Algorithm Visualizer</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f8f9fa;
-      color: #333;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
       padding: 20px;
     }
-    h1, h2 {
-      color: #0074D9;
+    h1 {
+      color: #333;
     }
     table {
-      width: 100%;
       border-collapse: collapse;
-      margin-bottom: 20px;
+      width: 100%;
+      margin-top: 20px;
     }
     th, td {
-      padding: 10px;
-      text-align: center;
       border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
     }
-    th {
-      background-color: #0074D9;
-      color: white;
+    .visited {
+      background-color: #c8e6c9;
     }
-    tr.visited {
-      background-color: #d4edda;
+    .current {
+      background-color: #fff59d;
     }
-    tr.current {
-      background-color: #fff3cd;
+    .inf {
+      color: #999;
+    }
+    .highlight {
+      background-color: #ffccbc;
     }
     button {
-      background-color: #28a745;
-      color: white;
       padding: 10px 15px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
-    button:hover {
-      background-color: #218838;
-    }
     .explanation {
-      margin-bottom: 20px;
-      padding: 15px;
-      background: #e9ecef;
-      border-left: 5px solid #0074D9;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #e3f2fd;
+      border-left: 5px solid #2196f3;
     }
   </style>
 </head>
 <body>
-  <h1>🔍 Dijkstra's Algorithm: Step-by-Step Visualization</h1>
-  <p class="explanation" id="explanation">Press "Next Step" to start walking through the algorithm.</p>
-  <table id="table">
-    <thead>
-      <tr>
-        <th>Node</th>
-        <th>Visited</th>
-        <th>Distance from Start</th>
-        <th>Predecessor</th>
-      </tr>
-    </thead>
-    <tbody id="table-body">
-    </tbody>
-  </table>
-  <button onclick="nextStep()">▶️ Next Step</button>
+  <h1>Dijkstra's Algorithm Step-by-Step</h1>
+
+  <div class="explanation" id="explanation">
+    Click "Next Step" to begin.
+  </div>
+
+  <table id="table"></table>
+  <br>
+  <button onclick="nextStep()">Next Step</button>
 
   <script>
     const INF = Infinity;
-    const nodes = ['1', '2', '3', '4', '5'];
     const A = [
       [INF, 1, 10, INF, 5],
       [1, INF, 8, INF, INF],
@@ -80,59 +72,45 @@
       [5, INF, 6, 1, INF]
     ];
 
-    let d = Array(nodes.length).fill(INF);
-    let s = Array(nodes.length).fill('-');
-    let visited = Array(nodes.length).fill(false);
-    let currentStep = 0;
-    let currentNode = -1;
-    let initialized = false;
+    const nodeName = i => String(i + 1);
+    let n = A.length;
+    let d = new Array(n).fill(INF);
+    let s = new Array(n).fill(-1);
+    let visited = new Array(n).fill(false);
+    let step = 0;
+    let start = 0;
+    let end = 4;
 
-    function updateTable() {
-      const tbody = document.getElementById("table-body");
-      tbody.innerHTML = "";
-      for (let i = 0; i < nodes.length; i++) {
-        const row = document.createElement("tr");
-        if (visited[i]) row.classList.add("visited");
-        if (i === currentNode) row.classList.add("current");
+    d[start] = 0;
 
-        row.innerHTML = `
-          <td>${nodes[i]}</td>
-          <td>${visited[i] ? "✅" : "❌"}</td>
-          <td>${d[i] === INF ? "∞" : d[i]}</td>
-          <td>${s[i] === '-' ? '-' : nodes[s[i]]}</td>
-        `;
-        tbody.appendChild(row);
-      }
+    function updateTable(current = -1) {
+      const table = document.getElementById('table');
+      let html = '<tr><th>Node</th>' + d.map((_, i) => `<th>${nodeName(i)}</th>`).join('') + '</tr>';
+      html += '<tr><td>Distance</td>' + d.map((val, i) => {
+        let style = visited[i] ? 'visited' : (i === current ? 'current' : '');
+        return `<td class="${style}">${val === INF ? '<span class="inf">∞</span>' : val}</td>`;
+      }).join('') + '</tr>';
+      html += '<tr><td>Predecessor</td>' + s.map(val => `<td>${val === -1 ? '-' : nodeName(val)}</td>`).join('') + '</tr>';
+      table.innerHTML = html;
     }
 
     function nextStep() {
-      const explainBox = document.getElementById("explanation");
-
-      if (!initialized) {
-        d[0] = 0;
-        initialized = true;
-        explainBox.textContent = `Initialize distances: set d[1] = 0, all others = ∞. Starting from node 1.`;
-        updateTable();
-        return;
-      }
-
       let u = -1;
-      for (let i = 0; i < nodes.length; ++i) {
+      for (let i = 0; i < n; ++i) {
         if (!visited[i] && (u === -1 || d[i] < d[u])) {
           u = i;
         }
       }
 
       if (u === -1 || d[u] === INF) {
-        explainBox.textContent = "No more reachable nodes. Algorithm finished.";
+        document.getElementById('explanation').innerText = "All remaining nodes are unreachable.";
         return;
       }
 
-      currentNode = u;
       visited[u] = true;
-      explainBox.textContent = `Visit node ${nodes[u]} and update its neighbors.`;
+      document.getElementById('explanation').innerText = `Step ${step + 1}: Visit node ${nodeName(u)} with distance ${d[u]}`;
 
-      for (let v = 0; v < nodes.length; ++v) {
+      for (let v = 0; v < n; ++v) {
         if (A[u][v] !== INF && !visited[v]) {
           if (d[u] + A[u][v] < d[v]) {
             d[v] = d[u] + A[u][v];
@@ -140,9 +118,11 @@
           }
         }
       }
-
-      updateTable();
+      updateTable(u);
+      step++;
     }
+
+    updateTable();
   </script>
 </body>
 </html>
