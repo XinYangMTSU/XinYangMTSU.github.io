@@ -100,7 +100,28 @@
 		&lt;/form&gt;
 	</pre>
 
+	<h2>dashboard.php</h2>
+	<pre>
+		&lt;?php  
+		    session_start();  
+		    if (!isset($_SESSION["user_id"])) {  
+		        header("Location: login.php");  
+		        exit;  
+		    }  
+		    echo "&lt;h2&gt;Welcome! You are logged in.&lt;/h2&gt;";  
+		    echo "&lt;a href='logout.php'&gt;Logout&lt;/a&gt;";  
+		?&gt;
+	</pre>
 
+	<h2>logout.php</h2>
+	<pre>
+		&lt;?php
+		session_start();
+		session_destroy();
+		header("Location: login.php");
+		exit;
+		?&gt;
+	</pre>
 	
   </div>
 
