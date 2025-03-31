@@ -123,11 +123,13 @@
 		      </ul>
 		    </li>
 		
-		    <li>&star; <b><font color="blue">if ($stmt-&gt;execute())</font></b> →
+		    <li>&star; <b><font color="blue">try{ $stmt-&gt;execute(); } catch (mysqli_sql_exception $e) </font></b> →
 		      Tries to run the prepared statement:
 		      <ul>
 		        <li>If successful, the user is registered and sees <strong>"Registered successfully!"</strong></li>
-		        <li>If the username already exists (e.g., duplicate entry), it shows <strong>"Username already taken."</strong></li>
+		        <li>If the username already exists (e.g., duplicate entry), it shows <strong>"Username is already taken."</strong></li>
+			<li> <b><font color="blue">try-catch</font></b> is used to catch and handle exceptions. 
+				Without the try-catch, a duplicate username would cause a Fatal Error</li>
 		      </ul>
 		    </li>
 		  </ul>
