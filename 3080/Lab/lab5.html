@@ -50,58 +50,78 @@
 
     <h1>2. Lab Instructions</h1>
 
-    <h2>Step 1: Read the Input File</h2>
- 
+    <h1>2. Lab Instructions</h1>
+
+<h2>Step 1: Read the Adjacency Matrix</h2>
+<ul>
+  <li>1. Create a text file named <code>graph.txt</code> that contains a symmetric adjacency matrix representing distances between 10 Tennessee cities.</li>
+  <li>2. The first line should indicate the number of cities (e.g., <code>10</code>).</li>
+  <li>3. In your C++ program, read this file into a 2D vector (e.g., <code>vector&lt;vector&lt;int&gt;&gt;</code>).</li>
+</ul>
+
+<h2>Step 2: User Input for Starting City and Ending City</h2>
+<ul>
+  <li>1. Create a list of city names corresponding to the rows/columns of the matrix (e.g., Murfreesboro = 0, Nashville = 1, etc.).</li>
+  <li>2. Prompt the user to input the <strong>starting city name</strong> and the <strong>destination city name</strong>.</li>
+  <li>3. Convert the city names to corresponding indices to use in the adjacency matrix.</li>
+  <li>4. Validate that the city names are valid and exist in the city list.</li>
+</ul>
+
+<h2>Step 3: Implement Dijkstra’s Algorithm</h2>
+<ul>
+  <li>1. Implement Dijkstra’s algorithm based on the pseudocode provided.</li>
+  <li>2. Use three arrays:
     <ul>
-      <li>1. Create a text file named <a href="input.txt" target="_blank">input.txt</a>.</li>
-
-      <li>2. Write a C++ program to read the contents of input.txt into a string.</li>
-      <pre>
-        string filename;
-        cout << "Enter text file name: ";
-        cin >> filename;
-    
-        // Read input file
-        ifstream inputFile(filename);
-        if (!inputFile) {
-            cout << "Error opening file.\n";
-            return 1;
-        }
-        
-        string text;
-        char ch;
-        //read characters from a file one by one until the end of the file is reached
-        while (inputFile.get(ch)) {
-            _____________ // Append each character to the string
-        }
-        inputFile.close();
-      </pre>
+      <li><code>d[]</code> to store shortest distances</li>
+      <li><code>s[]</code> to store predecessors for path reconstruction</li>
+      <li><code>visited[]</code> to keep track of visited nodes</li>
     </ul>
+  </li>
+  <li>3. Loop through each node, selecting the unvisited node with the smallest distance and updating neighbors accordingly.</li>
+  <li>4. Stop when the destination node is visited or no more reachable nodes exist.</li>
+</ul>
 
-    <h2>Step 2: Compute Character Frequencies</h2>
+<h2>Step 4: Display Results</h2>
+<ul>
+  <li>1. Display the shortest distance between the selected cities.</li>
+  <li>2. Reconstruct and display the full path from start to destination using city names (e.g., <code>Murfreesboro → Nashville → Memphis</code>).</li>
+  <li>3. Handle cases where no path exists and print a friendly message.</li>
+</ul>
 
-   <ul>
-     <li>1. Traverse the input string and count the occurrence of each character.</li>
-     <li>2. Store the character-frequency mapping in an unordered_map.</li>
-     <Pre>
-        unordered_map&lt;char, int&gt; freqMap;
-        for (char ch : text) {
-            _______________ // Increment the frequency of each character in freqMap
-        }
-     </Pre>
-   </ul>
+<h2>Step 5: Test Your Program</h2>
+<ul>
+  <li>1. Test the program with multiple start and end city combinations.</li>
+  <li>2. Include test cases where:
+    <ul>
+      <li>The path goes through intermediate cities (e.g., A → C → E → F)</li>
+      <li>No path exists between two cities</li>
+    </ul>
+  </li>
+</ul>
+
 
     <h1>3. Requirements</h1>
+
+<ul>
+    <li>&#9733; (1) Please create a sample adjacency matrix file named <i>graph.txt</i> that includes distances between 10 Tennessee cities.</li>
     
-    <ul>
-        <li>&#9733; (1) Please create a sample text file named <i>input.txt</i> and write a C++ program to <b class="blue-text">read its contents into a string.</b></li>
-        <li>&#9733; (2) Please traverse the input string to <b class="blue-text">count the occurrence of each character</b> and store the character-frequency mapping in an <b class="blue-text">unordered_map.</b></li>
-        <li>&#9733; (3) Please <b class="red-text">use a vector to construct the Huffman tree</b> by merging nodes with the <b class="red-text">lowest frequencies</b> and store the root node of the tree.</li>
-        <li>&#9733; (4) Please <b class="blue-text">traverse the Huffman tree to assign binary codes to each character</b> and store the codes in an <b class="blue-text">unordered_map.</b></li>
-        <li>&#9733; (5) Please <b class="blue-text">replace each character in the text file with its Huffman code</b> and <b class="blue-text">write the encoded binary string to a compressed file</b> named compressed.bin.</li>
-        <li>&#9733; (6) Please <b class="red-text">reconstruct the original text using the Huffman tree</b>, and <b class="red-text">save the decoded text</b> as decompressed.txt.</li>
-        <li>&#9733; (7) Please ensure that your program can compile and run <b class="red-text">without</b> crashing, producing errors, or infinite loop errors.</li>
-    </ul>
+    <li>&#9733; (2) Please <b class="blue-text">read the contents of graph.txt</b> into a <b class="blue-text">2D vector</b> in your C++ program, and store the number of cities (nodes).</li>
+
+    <li>&#9733; (3) Please create a <b class="blue-text">vector of city names</b> corresponding to matrix indices, such as Murfreesboro, Nashville, etc.</li>
+
+    <li>&#9733; (4) Please prompt the user to <b class="blue-text">input the starting city and the destination city</b> as strings and convert them to indices.</li>
+
+    <li>&#9733; (5) Please <b class="red-text">implement Dijkstra’s Algorithm</b> to find the shortest path from the start to the destination using the matrix.</li>
+
+    <li>&#9733; (6) Please <b class="blue-text">store the predecessor of each node</b> in a vector for path reconstruction.</li>
+
+    <li>&#9733; (7) After computation, please <b class="red-text">display the shortest path using city names</b> and show the total distance.</li>
+
+    <li>&#9733; (8) Please ensure that your program can handle <b class="red-text">invalid city names</b> and <b class="red-text">unreachable cities</b> gracefully without crashing.</li>
+
+    <li>&#9733; (9) Please test your program with at least <b class="blue-text">3 different start and end combinations</b> that include intermediate cities.</li>
+</ul>
+
 
     <h1>4. Sample Input/Output</h1>
     <pre>
