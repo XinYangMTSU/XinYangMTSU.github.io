@@ -171,6 +171,51 @@
 		 </code>
 	</pre>
 
+	<section>
+	  <h3>🔍 What’s happening in the login logic?</h3>
+	  <p>This PHP code runs when a user submits the login form. Let’s break it down step by step:</p>
+	  <ul>
+	    <li>&star; <b><font color="blue">session_start();</font></b> → Starts a session so we can store user info after they log in.</li>
+	
+	    <li>&star; <b><font color="blue">require 'db.php';</font></b> → Includes the file that connects to the MySQL database.</li>
+	
+	    <li>&star; <b><font color="blue">$username = $_POST["username"];</font></b> and <b><font color="blue">$password = $_POST["password"];</font></b> → 
+	      Get the username and password entered by the user in the form.</li>
+	
+	    <li>&star; <b><font color="blue">$stmt = $conn-&gt;prepare("SELECT id, password FROM users WHERE username = ?");</font></b> → 
+	      Prepares a safe SQL statement to find the user with the given username. (Prevents SQL injection!)</li>
+	
+	    <li>&star; <b><font color="blue">$stmt-&gt;bind_param("s", $username);</font></b> →
+	      Binds the actual username value to the SQL query. The <code>"s"</code> means:
+	      <ul>
+	        <li><b><font color="blue">s</font></b> → a string parameter for <b><font color="blue">$username</font></b></li>
+	      </ul>
+	    </li>
+	
+	    <li>&star; <b><font color="blue">$stmt-&gt;execute();</font></b> and <b><font color="blue">$stmt-&gt;store_result();</font></b> →
+	      Runs the query and stores the result so we can check how many rows it found.</li>
+	
+	    <li>&star; <b><font color="blue">if ($stmt-&gt;num_rows === 1)</font></b> →
+	      Checks if one user was found with that username.
+	      <ul>
+	        <li>&clubs; <b><font color="blue">$stmt-&gt;bind_result($id, $hashed_password);</font></b> → gets the user's ID and stored hashed password from the database.</li>
+	        <li>&clubs; <b><font color="blue">$stmt-&gt;fetch();</font></b> → retrieves the data into those variables.</li>
+	      </ul>
+	    </li>
+	
+	    <li>&star; <b><font color="blue">password_verify($password, $hashed_password);</font></b> →
+	      Compares the typed password to the hashed password stored in the database.
+	      <ul>
+	        <li>If correct → login success! ✅</li>
+	        <li>We set <b><code>$_SESSION["user_id"]</code></b> and redirect to <b><code>dashboard.php</code></b>.</li>
+	      </ul>
+	    </li>
+	
+	    <li>&star; If the username is not found or the password doesn’t match, the user sees: <b>"Invalid username or password."</b></li>
+	  </ul>
+	</section>
+
+	
 	<hr>
 	
 	<h3>dashboard.php</h3>
