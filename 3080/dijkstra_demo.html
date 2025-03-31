@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dijkstra's Algorithm Visualizer</title>
+  <style>
+    body { font-family: Arial; background: #1b1b1b; color: #eee; padding: 20px; }
+    table { border-collapse: collapse; margin-top: 15px; }
+    td, th { border: 1px solid #555; padding: 8px 12px; text-align: center; }
+    .highlight { background-color: #ffa500; color: black; }
+    .step { margin: 10px 0; padding: 10px; background: #333; border-radius: 8px; }
+    .path { color: #00ff99; font-weight: bold; font-size: 1.2em; }
+    .infinity { color: #999; }
+    button { padding: 10px 15px; font-size: 16px; background: #ffa500; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #ffcc00; }
+  </style>
+</head>
+<body>
+  <h1>Dijkstra's Algorithm Visualizer</h1>
+  <p>This simulation is based on your notebook steps. Click the button to proceed through Dijkstra's algorithm step-by-step.</p>
+
+  <div id="steps"></div>
+  <button onclick="nextStep()">Next Step ▶️</button>
+  <div class="step path" id="result"></div>
+
+  <script>
+    const INF = Infinity;
+    const A = [
+      [INF, 1, 10, INF, 5],
+      [1, INF, 8, INF, INF],
+      [10, 8, INF, 1, 6],
+      [INF, INF, 1, INF, 1],
+      [5, INF, 6, 1, INF]
+    ];
+    const n = 5;
+    let d = Array(n).fill(INF);
+    let s = Array(n).fill('-');
+    let visited = Array(n).fill(false);
+    d[0] = 0;
+
+    let step = 0;
+    function nodeName(i) { return (i + 1).toString(); }
+
+    function nextStep() {
+      const stepsDiv = document.getElementById("steps");
+      if (visited.every(v => v)) return;
+
+      let u = -1;
+      for (let i = 0; i < n; i++) {
+        if (!visited[i] && (u === -1 || d[i] < d[u])) u = i;
+      }
+      if (u === -1 || d[u] === INF) return;
+      visited[u] = true;
+
+      let html = `<div class='step'><strong>Step ${step + 1}:</strong> Visit node ${nodeName(u)}<br>`;
+
+      for (let v = 0; v < n; v++) {
+        if (A[u][v] !== INF && !visited[v]) {
+          if (d[u] + A[u][v] < d[v]) {
+            d[v] = d[u] + A[u][v];
+            s[v] = u;
+            html += `Updated d[${nodeName(v)}] = ${d[v]} via ${nodeName(u)}<br>`;
+          }
+        }
+      }
+      html += `<br><table><tr><th>d[]</th>` + d.map(v => `<td>${v === INF ? '<span class='infinity'>∞</span>' : v}</td>`).join('') + `</tr>`;
+      html += `<tr><th>s[]</th>` + s.map(v => `<td>${v === '-' ? '-' : nodeName(v)}</td>`).join('') + `</tr></table></div>`;
+      stepsDiv.innerHTML += html;
+      step++;
+
+      if (visited[2]) showPath();
+    }
+
+    function showPath() {
+      let result = document.getElementById("result");
+      let path = [];
+      for (let v = 2; v !== '-'; v = s[v]) path.unshift(v);
+      path.unshift(0);
+      result.innerHTML = `✅ Shortest path from 1 to 3: ${path.map(i => nodeName(i)).join(' → ')} (length ${d[2]})`;
+    }
+  </script>
+</body>
+</html>
