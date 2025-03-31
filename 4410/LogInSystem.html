@@ -96,6 +96,20 @@
 		
 		    <li>&star; <code>$password = password_hash($_POST["password"], PASSWORD_DEFAULT);</code> → 
 		      Encrypts the password using a secure hashing algorithm so we never store plain text passwords in the database.</li>
+
+			<ul>
+				<li>&clubs; <font color="blue"><b>PASSWORD_DEFAULT</b></font></li> tells PHP to use the <font color="blue"><b>current strongest default algorithm</b></font>.
+				As of PHP 7 and 8, this means <font color="blue"><b>bcrypt</b></font> (very secure).
+				</li>
+				<li>&clubs; Example:</li>
+				<pre>
+					$plaintext = "mypassword";
+					$hashed = password_hash($plaintext, PASSWORD_DEFAULT);
+					
+					echo $hashed;
+				</pre>
+				
+			</ul>
 		
 		    <li>&star; <code>$stmt = $conn-&gt;prepare("INSERT INTO users (username, password) VALUES (?, ?)");</code> → 
 		      Prepares an SQL statement with placeholders <code>?</code> for safely inserting user data.</li>
