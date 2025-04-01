@@ -53,10 +53,17 @@
       border-top: 2px solid #ccc;
       padding-top: 15px;
     }
+    svg {
+      margin-top: 30px;
+    }
+    .edge-label {
+      font-size: 12px;
+      fill: #333;
+    }
   </style>
 </head>
 <body>
-  <h2>🚀 Dijkstra's Algorithm Demo (Adjacency Matrix)</h2>
+  <h2>🚀 Dijkstra's Algorithm Demo (Adjacency Matrix + Weighted Graph)</h2>
   <p>Visualize the shortest path from <b>Node x</b> to <b>Node y</b> step-by-step.</p>
 
   <div class="controls">
@@ -65,6 +72,9 @@
 
   <h3>🔢 Adjacency Matrix (A)</h3>
   <table id="matrix"></table>
+
+  <h3>🔗 Weighted Graph</h3>
+  <svg id="graph" width="500" height="320"></svg>
 
   <div id="steps"></div>
   <div id="result"></div>
@@ -86,6 +96,61 @@
       [INF, 10,  INF, INF, 3,   1,   INF]
     ];
 
+    const positions = [
+      [50, 150],   // x
+      [150, 50],   // 1
+      [250, 50],   // 2
+      [350, 150],  // 3
+      [250, 250],  // 4
+      [150, 250]   // y
+    ];
+
+    function drawGraph() {
+      const svg = document.getElementById("graph");
+      svg.innerHTML = "";
+      for (let i = 1; i <= n; i++) {
+        for (let j = 1; j <= n; j++) {
+          if (A[i][j] !== INF) {
+            const [x1, y1] = positions[i - 1];
+            const [x2, y2] = positions[j - 1];
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", x1);
+            line.setAttribute("y1", y1);
+            line.setAttribute("x2", x2);
+            line.setAttribute("y2", y2);
+            line.setAttribute("stroke", "#888");
+            svg.appendChild(line);
+
+            const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            label.setAttribute("x", (x1 + x2) / 2);
+            label.setAttribute("y", (y1 + y2) / 2 - 5);
+            label.setAttribute("class", "edge-label");
+            label.textContent = A[i][j];
+            svg.appendChild(label);
+          }
+        }
+      }
+
+      for (let i = 0; i < n; i++) {
+        const [x, y] = positions[i];
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", x);
+        circle.setAttribute("cy", y);
+        circle.setAttribute("r", 18);
+        circle.setAttribute("fill", "#3498db");
+        svg.appendChild(circle);
+
+        const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        label.setAttribute("x", x);
+        label.setAttribute("y", y + 5);
+        label.setAttribute("text-anchor", "middle");
+        label.setAttribute("fill", "white");
+        label.setAttribute("font-size", "16");
+        label.textContent = nodeLabels[i];
+        svg.appendChild(label);
+      }
+    }
+
     function createMatrixTable() {
       const table = document.getElementById("matrix");
       table.innerHTML = "";
@@ -106,7 +171,6 @@
 
     function createDistanceTable(d, prev) {
       const table = document.createElement("table");
-
       const header = document.createElement("tr");
       header.innerHTML = "<th></th>" + nodeLabels.map(label => `<th>${label}</th>`).join("");
       table.appendChild(header);
@@ -168,10 +232,10 @@
               d[v] = alt;
               prev[v] = u;
               if (count > 1)
-                stepDiv.innerHTML += `<p>d[${nodeLabels[v - 1]}] = min(${old}, ${d[u]}+${A[u][v] === INF ? '∞' : A[u][v]}) = ${alt} ✅ update</p>`;
+                stepDiv.innerHTML += `<p>d[${nodeLabels[v - 1]}] = min(${old}, ${d[u]}+${A[u][v]}) = ${alt} ✅ update</p>`;
             } else {
               if (count > 1)
-                stepDiv.innerHTML += `<p>d[${nodeLabels[v - 1]}] = min(${old}, ${d[u]}+${A[u][v] === INF ? '∞' : A[u][v]}) = ${actualMin === INF ? '∞' : actualMin} ❌ no update</p>`;
+                stepDiv.innerHTML += `<p>d[${nodeLabels[v - 1]}] = min(${old}, ${d[u]}+${A[u][v]}) = ${actualMin === INF ? "∞" : actualMin} ❌ no update</p>`;
             }
           }
         }
@@ -179,7 +243,7 @@
         stepDiv.appendChild(createDistanceTable(d, prev));
         stepsDiv.appendChild(stepDiv);
 
-        if (visited[end]) break; // Stop if destination node has been visited
+        if (visited[end]) break;
       }
 
       const path = [];
@@ -195,6 +259,7 @@
     }
 
     createMatrixTable();
+    drawGraph();
   </script>
 </body>
 </html>
