@@ -31,7 +31,7 @@
     }
     table {
       border-collapse: collapse;
-      margin: 20px auto;
+      margin: 10px auto;
       background: white;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
@@ -61,39 +61,27 @@
       border-radius: 5px;
       color: #2e7d32;
     }
-    #step-log {
-      text-align: left;
-      width: 60%;
-      margin: 0 auto;
-      background: #fff;
-      border: 1px solid #ccc;
-      padding: 15px;
-      border-radius: 6px;
-      margin-top: 20px;
-      max-height: 250px;
-      overflow-y: auto;
-      font-family: monospace;
+    .step {
+      margin-top: 30px;
+      border-top: 2px solid #ccc;
+      padding-top: 15px;
     }
   </style>
 </head>
 <body>
-  <h2> Dijkstra's Algorithm Demo (Adjacency Matrix)</h2>
+  <h2>🚀 Dijkstra's Algorithm Demo (Adjacency Matrix)</h2>
   <p>Visualize the shortest path from <b>Node 1</b> to <b>Node 3</b> step-by-step.</p>
 
   <div class="controls">
     <button onclick="runDijkstra()">▶️ Run Dijkstra</button>
   </div>
 
-  <h3> Adjacency Matrix (A)</h3>
+  <h3>🔢 Adjacency Matrix (A)</h3>
   <table id="matrix"></table>
 
-  <h3> Distance Table</h3>
-  <table id="distance"></table>
+  <div id="steps"></div>
 
   <div id="result"></div>
-
-  <h3> Step-by-Step Log</h3>
-  <div id="step-log"></div>
 
   <script>
     const INF = Infinity;
@@ -109,9 +97,6 @@
     const n = 5;
     const start = 1;
     const end = 3;
-    let d = Array(n+1).fill(INF);
-    let visited = Array(n+1).fill(false);
-    let prev = Array(n+1).fill(null);
 
     function createMatrixTable() {
       const table = document.getElementById("matrix");
@@ -131,29 +116,29 @@
       }
     }
 
-    function updateDistanceTable(path = []) {
-      const table = document.getElementById("distance");
-      table.innerHTML = "<tr><th>Node</th><th>Distance</th><th>Previous</th></tr>";
+    function createDistanceTable(d, prev) {
+      const table = document.createElement("table");
+      const header = document.createElement("tr");
+      header.innerHTML = "<th>Node</th><th>Distance</th><th>Previous</th>";
+      table.appendChild(header);
+
       for (let i = 1; i <= n; i++) {
         const tr = document.createElement("tr");
         tr.innerHTML = `<td>${i}</td><td>${d[i] === INF ? "∞" : d[i]}</td><td>${prev[i] || "-"}</td>`;
-        if (path.includes(i)) tr.classList.add("path");
         table.appendChild(tr);
       }
-    }
-
-    function logStep(text) {
-      const log = document.getElementById("step-log");
-      log.innerHTML += text + "<br>";
+      return table;
     }
 
     function runDijkstra() {
-      d = Array(n+1).fill(INF);
-      visited = Array(n+1).fill(false);
-      prev = Array(n+1).fill(null);
-      document.getElementById("step-log").innerHTML = "";
+      let d = Array(n+1).fill(INF);
+      let visited = Array(n+1).fill(false);
+      let prev = Array(n+1).fill(null);
 
       d[start] = 0;
+
+      const stepsDiv = document.getElementById("steps");
+      stepsDiv.innerHTML = "";
 
       for (let count = 1; count <= n; count++) {
         let u = -1;
@@ -167,7 +152,12 @@
 
         if (u === -1) break;
         visited[u] = true;
-        logStep(`P = ${u}, In = { ${Array.from({length: n}, (_, i) => i+1).filter(i => visited[i]).join(", ")} }`);
+
+        const stepDiv = document.createElement("div");
+        stepDiv.className = "step";
+        const visitedNodes = Array.from({length: n}, (_, i) => i+1).filter(i => visited[i]);
+        stepDiv.innerHTML += `<h4>Step ${count}: Visiting Node ${u}</h4>`;
+        stepDiv.innerHTML += `<p><b>Visited Set</b>: { ${visitedNodes.join(", ")} }</p>`;
 
         for (let v = 1; v <= n; v++) {
           if (!visited[v] && A[u][v] !== INF) {
@@ -176,13 +166,15 @@
             if (alt < d[v]) {
               d[v] = alt;
               prev[v] = u;
-              logStep(`d[${v}] = min(${old}, d[${u}]+A[${u}][${v}]) = min(${old}, ${d[u]}+${A[u][v]}) = ${alt} ✅ update`);
+              stepDiv.innerHTML += `<p>d[${v}] = min(${old}, ${d[u]}+${A[u][v]}) = ${alt} ✅ update</p>`;
             } else {
-              logStep(`d[${v}] remains ${old} (no update)`);
+              stepDiv.innerHTML += `<p>d[${v}] = min(${old}, ${d[u]}+${A[u][v]}) = ${alt} ❌ no update</p>`;
             }
           }
         }
-        logStep("<hr>");
+
+        stepDiv.appendChild(createDistanceTable(d, prev));
+        stepsDiv.appendChild(stepDiv);
       }
 
       const path = [];
@@ -193,14 +185,11 @@
       }
       path.reverse();
 
-      updateDistanceTable(path);
-
       document.getElementById("result").innerHTML =
-        ` Shortest path from <b>${start}</b> to <b>${end}</b>: <span style='color:#2980b9'>${path.join(" → ")}</span> <br> Path length: <b>${d[end]}</b>`;
+        `📍 Shortest path from <b>${start}</b> to <b>${end}</b>: <span style='color:#2980b9'>${path.join(" → ")}</span> <br>📏 Path length: <b>${d[end]}</b>`;
     }
 
     createMatrixTable();
-    updateDistanceTable();
   </script>
 </body>
 </html>
