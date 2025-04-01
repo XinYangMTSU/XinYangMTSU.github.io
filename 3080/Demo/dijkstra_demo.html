@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>🌐 Dijkstra's Algorithm Visual Demo</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f9ff;
+      text-align: center;
+      padding: 30px;
+      color: #333;
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    .controls {
+      margin-bottom: 25px;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    table {
+      border-collapse: collapse;
+      margin: 20px auto;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      width: 50px;
+      text-align: center;
+    }
+    th {
+      background-color: #ecf0f1;
+    }
+    td.highlight {
+      background-color: #f9f9a4;
+      font-weight: bold;
+    }
+    td.path {
+      background-color: #a5d6ff;
+    }
+    #result {
+      margin-top: 25px;
+      font-size: 18px;
+      background: #eafaf1;
+      padding: 10px 20px;
+      border: 1px solid #2ecc71;
+      display: inline-block;
+      border-radius: 5px;
+      color: #2e7d32;
+    }
+    #step-log {
+      text-align: left;
+      width: 60%;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 20px;
+      max-height: 250px;
+      overflow-y: auto;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <h2> Dijkstra's Algorithm Demo (Adjacency Matrix)</h2>
+  <p>Visualize the shortest path from <b>Node 1</b> to <b>Node 3</b> step-by-step.</p>
+
+  <div class="controls">
+    <button onclick="runDijkstra()">▶️ Run Dijkstra</button>
+  </div>
+
+  <h3> Adjacency Matrix (A)</h3>
+  <table id="matrix"></table>
+
+  <h3> Distance Table</h3>
+  <table id="distance"></table>
+
+  <div id="result"></div>
+
+  <h3> Step-by-Step Log</h3>
+  <div id="step-log"></div>
+
+  <script>
+    const INF = Infinity;
+    const A = [
+      [],
+      [INF,  INF,  1,   10,  INF,  5 ],
+      [INF,   1,  INF,   8,  INF, INF],
+      [INF,  10,   8,  INF,   1,   6 ],
+      [INF, INF, INF,   1,  INF,   1 ],
+      [INF,   5,  INF,   1,   1,  INF]
+    ];
+
+    const n = 5;
+    const start = 1;
+    const end = 3;
+    let d = Array(n+1).fill(INF);
+    let visited = Array(n+1).fill(false);
+    let prev = Array(n+1).fill(null);
+
+    function createMatrixTable() {
+      const table = document.getElementById("matrix");
+      table.innerHTML = "";
+      let header = "<tr><th></th>";
+      for (let i = 1; i <= n; i++) header += `<th>${i}</th>`;
+      header += "</tr>";
+      table.innerHTML += header;
+
+      for (let i = 1; i <= n; i++) {
+        let row = `<tr><th>${i}</th>`;
+        for (let j = 1; j <= n; j++) {
+          row += `<td>${A[i][j] === INF ? "∞" : A[i][j]}</td>`;
+        }
+        row += "</tr>";
+        table.innerHTML += row;
+      }
+    }
+
+    function updateDistanceTable(path = []) {
+      const table = document.getElementById("distance");
+      table.innerHTML = "<tr><th>Node</th><th>Distance</th><th>Previous</th></tr>";
+      for (let i = 1; i <= n; i++) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${i}</td><td>${d[i] === INF ? "∞" : d[i]}</td><td>${prev[i] || "-"}</td>`;
+        if (path.includes(i)) tr.classList.add("path");
+        table.appendChild(tr);
+      }
+    }
+
+    function logStep(text) {
+      const log = document.getElementById("step-log");
+      log.innerHTML += text + "<br>";
+    }
+
+    function runDijkstra() {
+      d = Array(n+1).fill(INF);
+      visited = Array(n+1).fill(false);
+      prev = Array(n+1).fill(null);
+      document.getElementById("step-log").innerHTML = "";
+
+      d[start] = 0;
+
+      for (let count = 1; count <= n; count++) {
+        let u = -1;
+        let minDist = INF;
+        for (let i = 1; i <= n; i++) {
+          if (!visited[i] && d[i] < minDist) {
+            minDist = d[i];
+            u = i;
+          }
+        }
+
+        if (u === -1) break;
+        visited[u] = true;
+        logStep(`P = ${u}, In = { ${Array.from({length: n}, (_, i) => i+1).filter(i => visited[i]).join(", ")} }`);
+
+        for (let v = 1; v <= n; v++) {
+          if (!visited[v] && A[u][v] !== INF) {
+            const old = d[v];
+            const alt = d[u] + A[u][v];
+            if (alt < d[v]) {
+              d[v] = alt;
+              prev[v] = u;
+              logStep(`d[${v}] = min(${old}, d[${u}]+A[${u}][${v}]) = min(${old}, ${d[u]}+${A[u][v]}) = ${alt} ✅ update`);
+            } else {
+              logStep(`d[${v}] remains ${old} (no update)`);
+            }
+          }
+        }
+        logStep("<hr>");
+      }
+
+      const path = [];
+      let node = end;
+      while (node !== null) {
+        path.push(node);
+        node = prev[node];
+      }
+      path.reverse();
+
+      updateDistanceTable(path);
+
+      document.getElementById("result").innerHTML =
+        ` Shortest path from <b>${start}</b> to <b>${end}</b>: <span style='color:#2980b9'>${path.join(" → ")}</span> <br> Path length: <b>${d[end]}</b>`;
+    }
+
+    createMatrixTable();
+    updateDistanceTable();
+  </script>
+</body>
+</html>
