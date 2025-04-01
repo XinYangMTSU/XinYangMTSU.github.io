@@ -135,19 +135,46 @@
 		</table>
 		</center>
 
-			<h2>What is a Database Table?</h2>
-			<ul>
-				<li>&#9733; The data in a MySQL database are stored in tables. A table is a collection of related data, and it
-					consists of columns and rows.</li>
-				<li>&#9733; A column holds specific information about every record in the table.</li>
-				<li>&#9733; A record (or row) is each individual entry that exists in a table.</li>
-			</ul>
-			<br>
-			<br>
-			<center>
-				<img src="mysql1.png" width="400px" height="200px">
-			</center>
-			<br>
+		<h2>What is a Database Table?</h2>
+		<ul>
+			<li>&#9733; The data in a MySQL database are stored in tables. A table is a collection of related data, and it
+				consists of columns and rows.</li>
+			<li>&#9733; A column holds specific information about every record in the table.</li>
+			<li>&#9733; A record (or row) is each individual entry that exists in a table.</li>
+		</ul>
+		<br>
+		<br>
+		<center>
+			<img src="mysql1.png" width="400px" height="200px">
+		</center>
+		<br>
+
+		<h2>Creating a Database and Inserting Student Records in MySQL</h2>
+
+		<b><font color="blue">SQL:</font></b>
+		<pre>
+			-- Create a new database
+			CREATE DATABASE school;
+			
+			-- Switch to the new database
+			USE school;
+			
+			-- Create the students table
+			CREATE TABLE students (
+			  id INT AUTO_INCREMENT PRIMARY KEY,
+			  name VARCHAR(100),
+			  age INT,
+			  email VARCHAR(100)
+			);
+			
+			-- Insert multiple student records
+			INSERT INTO students (name, age, email) VALUES 
+			('Alice', 14, 'alice@school.com'),
+			('Bob', 15, 'bob@school.com'),
+			('Charlie', 13, 'charlie@school.com'),
+			('Diana', 14, 'diana@school.com'),
+			('Ethan', 15, 'ethan@school.com');
+		</pre>
 			<br>
 			<br>
 
