@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>My SQL</title>
+	<link href="../CSS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="main">
+	
+		
+		<h1>MySQL in XAMPP</h1>
+
+		<ul>
+			<li>&#9733; Type localhost in your web browser </li>
+			<li>&#9733; Click phpMyAdmin, you will see a website that can deal with database. </li>
+			<li>&#9733; Here is one <a href="https://blog.templatetoaster.com/xampp-phpmyadmin/" target="_blank">tuotrial</a>
+				to create databases, tables, and reset username and password in XAMPP.</li>
+			<li>&#9733; Here is <a href="https://skillforge.com/how-to-create-a-database-using-phpmyadmin-xampp/"
+					target="_blank">another</a></li>
+		</ul>
+
+		<h2>PHP + MySQL</h2>
+
+		<ul>
+			<li>&#9733; Here is one example to open a MySQL database</li>
+			<li>&#9733; In XAMPP, the servername is <b>
+					<font color="blue">localhost</font>
+				</b>, username is <b>
+					<font color="blue">root</font>
+				</b> and password is empty by default.</li>
+
+			<pre>
+			&lt;!DOCTYPE html&gt;
+			&lt;html&gt;
+			&lt;head&gt;
+				&lt;title&gt;&lt;/title&gt;
+			&lt;/head&gt;
+			&lt;body&gt;
+			&lt;?php
+			$servername = "localhost";
+			$username = "root";
+			$password = "";
+			
+			// Connect to MySQL Database Server Using mysqli
+		        // Object Oriented way
+			$conn = new mysqli($servername, $username, $password);
+			
+			// Check connection
+			if ($conn->connect_error) {
+				       //Print a message and terminate the current script
+					die("Connection failed: " . $conn->connect_error);
+			}
+			echo "Connected successfully";
+			
+			$conn->close(); //disconnect from the MySQL database
+			?>
+			&lt;/body&gt;
+			&lt;/html&gt;
+			</pre>
+		</ul>
+
+
+		<ul>
+			<li>&#9733; Another Example: </li>
+			<pre>
+			&lt;?php
+			$servername = "localhost";
+			$username = "root";
+			$password = "";
+			
+			// Create connection
+			$conn = new mysqli($servername, $username, $password);
+			// Check connection
+			if ($conn->connect_error) {
+			    die("Connection failed: " . $conn->connect_error);
+			}
+
+			echo "Connected successfully";
+				
+			// Create database
+			$sql = "CREATE DATABASE myDB";
+			if ($conn->query($sql) === TRUE) {
+			    echo "Database created successfully";
+			} else {
+			    echo "Error creating database: " . $conn->error;
+			}
+			
+			$conn->close();
+			?&gt;
+			</pre>
+		</ul>
+
+		<ul>
+			<li>&#9733; Create Database in phpmyadmin</li>
+			It is much easier to create databases and tables in phphmyadmin: <a
+				href="https://skillforge.com/how-to-create-a-database-using-phpmyadmin-xampp/" target="_blank">tutorial</a>
+		</ul>
+
+		<ul>
+			<li>&#9733; Usually, we connect to some MySQL database:
+			</li>
+			<pre>
+				&lt;?php
+				$servername = "localhost";
+				$username = "root";
+				$password = "";
+				$database = "CSCI4410"; //you need to create this database in PHPMyAdmin
+				// Create connection
+				$conn = new mysqli($servername, $username, $password, $database);
+				// Check connection
+				if ($conn->connect_error) {
+				    die("Connection failed: " . $conn->connect_error);
+				}
+
+				echo "Connected successfully";
+				
+				// write the SQL query
+				$sql = "SELECT * FROM Persons"; //select all the columns from database table Persons
+                                //Perform query on a database
+				$result = mysqli_query($conn, $sql); //fetch the resulting rows as an associated array
+
+				$sql2 = "SELECT COLUMN_NAME
+				FROM INFORMATION_SCHEMA.COLUMNS
+				WHERE TABLE_SCHEMA ='CSCI4410' AND TABLE_NAME = 'Persons'"; // select all column names from table Persons
+				$columns = mysqli_query($conn,$sql2); 
+				
+				echo "&lt;br&gt;";
+				//Use table to display the database table
+				echo "&lt;table border='1'&gt;"; // table start
+
+				// table heading
+				echo "&lt;tr&gt;";
+				while($row = mysqli_fetch_assoc($columns))
+				{
+				        foreach($row as $value)
+				                echo "&lt;th&gt;" . $value . "&lt;/th&gt;";
+				}
+				echo "&lt;tr&gt;";
+
+				// table rows
+				while ($row = mysqli_fetch_assoc($result)) //Get row from database table
+				{ 
+						echo "&lt;tr&gt;";
+						foreach ($row as $value) { // get the value for each row
+								echo "&lt;td&gt;" . $value . "&lt;/td&gt;"; 
+						}
+						echo "&lt;/tr&gt;";
+				}
+				echo "&lt;/table&gt;"; // table end
+
+				$conn->close();
+				?&gt;
+			</pre>
+
+			<a href="https://xinyangmtsu.github.io/4410/persons.sql" target="_blank">persons.sql</a>
+			<br><br>
+
+
+			<footer align=" center" id="foot01"></footer>
+	</div>
+	<br>
+	<br>
+	<script src="../CCS/Script.js"></script>
+
+</body>
+
+</html>
