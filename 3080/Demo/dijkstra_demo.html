@@ -87,11 +87,11 @@
     const INF = Infinity;
     const A = [
       [],
-      [INF,  INF,  1,   10,  INF,  5 ],
-      [INF,   1,  INF,   8,  INF, INF],
-      [INF,  10,   8,  INF,   1,   6 ],
-      [INF, INF, INF,   1,  INF,   1 ],
-      [INF,   5,  INF,   1,   1,  INF]
+      [INF, INF, 1, 10, INF, 5],
+      [INF, 1, INF, 8, INF, 1],
+      [INF, 10, 8, INF, 1, 6],
+      [INF, INF, INF, 1, INF, 1],
+      [INF, 5, 1, 6, 1, INF]
     ];
 
     const n = 5;
@@ -119,21 +119,25 @@
     function createDistanceTable(d, prev) {
       const table = document.createElement("table");
       const header = document.createElement("tr");
-      header.innerHTML = "<th>Node</th><th>Distance</th><th>Previous</th>";
+      header.innerHTML = "<th></th>" + Array.from({ length: n }, (_, i) => `<th>${i + 1}</th>`).join("");
       table.appendChild(header);
 
-      for (let i = 1; i <= n; i++) {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `<td>${i}</td><td>${d[i] === INF ? "∞" : d[i]}</td><td>${prev[i] || "-"}</td>`;
-        table.appendChild(tr);
-      }
+      const distanceRow = document.createElement("tr");
+      distanceRow.innerHTML = "<th>Distance</th>" + Array.from({ length: n }, (_, i) => `<td>${d[i + 1] === INF ? "∞" : d[i + 1]}</td>`).join("");
+      table.appendChild(distanceRow);
+
+      const prevRow = document.createElement("tr");
+      prevRow.innerHTML = "<th>Previous</th>" + Array.from({ length: n }, (_, i) => `<td>${prev[i + 1] === null ? "-" : prev[i + 1]}</td>`).join("");
+      table.appendChild(prevRow);
+
       return table;
     }
 
     function runDijkstra() {
-      let d = Array(n+1).fill(INF);
-      let visited = Array(n+1).fill(false);
-      let prev = Array(n+1).fill(null);
+      let d = Array(n + 1).fill(INF);
+      let visited = Array(n + 1).fill(false);
+      let prev = Array(n + 1).fill(1);
+      prev[start] = null;
 
       d[start] = 0;
 
@@ -155,20 +159,23 @@
 
         const stepDiv = document.createElement("div");
         stepDiv.className = "step";
-        const visitedNodes = Array.from({length: n}, (_, i) => i+1).filter(i => visited[i]);
+        const visitedNodes = Array.from({ length: n }, (_, i) => i + 1).filter(i => visited[i]);
         stepDiv.innerHTML += `<h4>Step ${count}: Visiting Node ${u}</h4>`;
         stepDiv.innerHTML += `<p><b>Visited Set</b>: { ${visitedNodes.join(", ")} }</p>`;
 
         for (let v = 1; v <= n; v++) {
-          if (!visited[v] && A[u][v] !== INF) {
+          if (!visited[v]) {
             const old = d[v];
-            const alt = d[u] + A[u][v];
+            let alt = INF;
+            if (A[u][v] !== INF) {
+              alt = d[u] + A[u][v];
+            }
             if (alt < d[v]) {
               d[v] = alt;
               prev[v] = u;
-              stepDiv.innerHTML += `<p>d[${v}] = min(${old}, ${d[u]}+${A[u][v]}) = ${alt} ✅ update</p>`;
+              if (count > 1) stepDiv.innerHTML += `<p>d[${v}] = min(${old}, ${d[u]}+${A[u][v]}) = ${alt} ✅ update</p>`;
             } else {
-              stepDiv.innerHTML += `<p>d[${v}] = min(${old}, ${d[u]}+${A[u][v]}) = ${alt} ❌ no update</p>`;
+              if (count > 1) stepDiv.innerHTML += `<p>d[${v}] = min(${old}, ${d[u]}+${A[u][v] === INF ? '∞' : A[u][v]}) = ${alt === INF ? '∞' : alt} ❌ no update</p>`;
             }
           }
         }
