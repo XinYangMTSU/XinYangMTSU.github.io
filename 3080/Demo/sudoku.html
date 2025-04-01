@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>6x6 Sudoku Solver (DFS with Backtracking)</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin: 20px auto;
+    }
+    td {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      font-size: 20px;
+      border: 1px solid #aaa;
+    }
+    td.highlight {
+      background-color: #d0f0d0;
+      transition: background-color 0.3s;
+    }
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center">6x6 Sudoku Solver using DFS + Backtracking</h2>
+  <table id="sudoku"></table>
+  <button onclick="startSolving()">Solve Step-by-Step</button>
+
+<ul> <li>&star; In puzzles like <b><font color="blue">Sudoku</font></b>, we often use a strategy called <b><font color="blue">DFS + Backtracking</font></b>.</li> <li>&star; Here's the typical process: <ul> <li>✅ <b><font color="blue">Make a guess</font></b> — try placing a number in an empty cell.</li> <li>🔍 <b><font color="blue">Go deeper</font></b> — use DFS to continue solving based on that guess.</li> <li>❌ <b><font color="red">If it fails</font></b> — the guess leads to a dead end.</li> <li>↩️ <b><font color="blue">Backtrack</font></b> — undo the guess and try a different value.</li> </ul> </li> <li>&star; This pattern allows the algorithm to explore all possible combinations while efficiently skipping invalid paths.</li> </ul>
+
+  <script>
+    const SIZE = 6;
+    const SUBGRID_ROWS = 2;
+    const SUBGRID_COLS = 3;
+
+    const puzzle = [
+      [0, 0, 0, 0, 6, 0],
+      [0, 6, 0, 1, 0, 4],
+      [0, 1, 0, 0, 2, 0],
+      [0, 0, 4, 0, 0, 0],
+      [5, 0, 0, 0, 0, 2],
+      [0, 0, 6, 0, 0, 0]
+    ];
+
+    let table = document.getElementById("sudoku");
+    for (let i = 0; i < SIZE; i++) {
+      let row = table.insertRow();
+      for (let j = 0; j < SIZE; j++) {
+        let cell = row.insertCell();
+        cell.textContent = puzzle[i][j] !== 0 ? puzzle[i][j] : "";
+      }
+    }
+
+    function isValid(board, row, col, num) {
+      for (let x = 0; x < SIZE; x++) {
+        if (board[row][x] === num || board[x][col] === num) return false;
+      }
+      const startRow = row - row % SUBGRID_ROWS;
+      const startCol = col - col % SUBGRID_COLS;
+      for (let i = 0; i < SUBGRID_ROWS; i++) {
+        for (let j = 0; j < SUBGRID_COLS; j++) {
+          if (board[startRow + i][startCol + j] === num) return false;
+        }
+      }
+      return true;
+    }
+
+    //recursive DFS
+    async function solve(board) {
+      for (let row = 0; row < SIZE; row++) {
+        for (let col = 0; col < SIZE; col++) {
+          if (board[row][col] === 0) {
+            for (let num = 1; num <= SIZE; num++) {
+              if (isValid(board, row, col, num)) {
+                board[row][col] = num;
+                updateCell(row, col, num);
+                await sleep(300); // (Visualization delay)
+                if (await solve(board)) return true;
+                board[row][col] = 0;
+                updateCell(row, col, "", true);
+              }
+            }
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    function updateCell(i, j, value, backtrack = false) {
+      let cell = table.rows[i].cells[j];
+      cell.textContent = value;
+      cell.className = backtrack ? "" : "highlight";
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function startSolving() {
+      solve(puzzle);
+    }
+  </script>
+</body>
+</html>
