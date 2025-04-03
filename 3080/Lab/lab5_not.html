@@ -55,7 +55,7 @@
     <ul>
         <li>Create a 2D <code>vector&lt;vector&lt;int&gt;&gt;</code> adjacency matrix with 10 TN cities and distances.</li>
         <pre>
-                vector<vector<int>> adjMatrix = {
+                vector&lt;vector&lt;int&gt;&gt; adjMatrix = {
                     {  0,    35,  150,  INF,  INF,  40,   INF,   INF,  INF,  80 },
                     { 35,     0,  130,  INF,  210,  20,    50,   INF,  INF,  70 },
                     {150,   130,    0,   80,  310, INF,   INF,   INF,  INF,  90 },
@@ -74,7 +74,7 @@
         </pre>
         <li>Create a <code>vector&lt;string&gt;</code> of city names matching matrix rows/columns.</li>
         <pre>
-                vector<string> cityNames = {
+                vector&lt;string&gt; cityNames = {
                     "Murfreesboro", "Nashville", "Chattanooga", "Knoxville", "Memphis",
                     "Franklin", "Clarksville", "Johnson", "Jackson", "Cookeville"
                 };
@@ -86,7 +86,7 @@
         <li>Use an <code>unordered_map&lt;string, int&gt;</code> to convert city names (case-insensitive) to matrix indices.</li>
     </ul>
     <pre>
-            unordered_map<string, int> cityToIndex;
+            unordered_map&lt;string, int&gt; cityToIndex;
             for (int i = 0; i < cityNames.size(); ++i) {
                 string lowercase = cityNames[i];
                 transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
@@ -122,7 +122,7 @@
         <li>Call the <code>dijkstra()</code> function to compute shortest distances and reconstruct the path.</li>
         <li>Output the route (e.g., <code>Murfreesboro → Franklin → Memphis</code>) and the total distance.</li>
         <li>Print an error message if the city is invalid or the path is unreachable.</li>
-        <li>void dijkstra(const vector<vector<int>> &A, int start, int end, const vector<string>& cityNames) </li>
+        <li>void dijkstra(const vector&lt;vector&lt;int&gt;&gt; &A, int start, int end, const vector&lt;string&gt;& cityNames) </li>
         <li>Pseudocode for Dijkstra’s Algorithm:</li>
         <pre>
             Function Dijkstra(A: 2D matrix of weights, start: int, end: int):
