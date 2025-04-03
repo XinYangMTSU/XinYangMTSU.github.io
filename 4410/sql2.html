@@ -356,6 +356,48 @@
 		</ul>
 
 
+		<h2>DROP vs DELETE</h2>
+
+		<table style="width:80%">
+		  <thead>
+		    <tr>
+		      <th>Concept</th>
+		      <th>DROP</th>
+		      <th>DELETE</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td>What it does</td>
+		      <td>Removes the <strong style="color:blue;">entire table or database</strong></td>
+		      <td>Removes <strong style="color:blue;">data (rows)</strong> from a table</td>
+		    </tr>
+		    <tr>
+		      <td>Structure stays?</td>
+		      <td><strong style="color:blue;">❌ No</strong> — table is <strong style="color:blue;">gone</strong> completely</td>
+		      <td><strong style="color:blue;">✅ Yes</strong> — table structure <strong style="color:blue;">remains</strong></td>
+		    </tr>
+		    <tr>
+		      <td>Used for</td>
+		      <td>Deleting tables, databases</td>
+		      <td>Deleting specific rows or all rows</td>
+		    </tr>
+		    <tr>
+		      <td>Rollback?</td>
+		      <td><strong style="color:blue;">❌ Not recoverable</strong> (in most cases)</td>
+		      <td><strong style="color:blue;">✅ Can be rolled back</strong> (with transactions)</td>
+		    </tr>
+		    <tr>
+		      <td>Example</td>
+		      <td><code>DROP TABLE students;</code></td>
+		      <td><code>DELETE FROM students WHERE id = 1;</code></td>
+		    </tr>
+		  </tbody>
+		</table>
+
+		
+		<br>
+
 		<h2>SQL SELECT Statement</h2>
 		<ul>
 			<li>&#9733; The SELECT statement is used to select data from a database.</li>
