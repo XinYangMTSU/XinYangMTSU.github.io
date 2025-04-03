@@ -236,6 +236,21 @@
 			) AUTO_INCREMENT=1111;
 		</pre>
 		</ul>
+
+
+	<h2>Example: Table with a Composite Primary Key</h2>
+
+		<uL>
+			<li>&#9733; No two rows have the same (student_id, course_id) combination — so it satisfies the rule of a primary key.</li>
+		</uL>
+	<pre>
+		CREATE TABLE enrollments (
+		  student_id INT,
+		  course_id INT,
+		  enrollment_date DATE,
+		  PRIMARY KEY (student_id, course_id)
+		);
+	</pre>
 		
 		<br>
 		<br>
