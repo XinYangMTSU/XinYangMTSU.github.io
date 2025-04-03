@@ -288,6 +288,41 @@
 		</ul>
 
 
+		<h2>ALTER VS UPDATE</h2>
+
+		<table style="width:80%">
+		  <thead>
+		    <tr>
+		      <th>Feature</th>
+		      <th>ALTER</th>
+		      <th>UPDATE</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td>What it does</td>
+		      <td>Changes the <strong style="color:blue;">structure</strong> of a table</td>
+		      <td>Changes the <strong style="color:blue;">data/values</strong> inside the table</td>
+		    </tr>
+		    <tr>
+		      <td>Used for</td>
+		      <td>Adding/removing columns, changing data types</td>
+		      <td>Modifying existing rows (records)</td>
+		    </tr>
+		    <tr>
+		      <td>Affects</td>
+		      <td>The <strong style="color:blue;">table design</strong> (schema)</td>
+		      <td>The <strong style="color:blue;">contents</strong> (data in rows)</td>
+		    </tr>
+		    <tr>
+		      <td>Example</td>
+		      <td><code>ALTER TABLE students ADD gpa DECIMAL(3,2);</code></td>
+		      <td><code>UPDATE students SET gpa = 3.75 WHERE name = 'Alice';</code></td>
+		    </tr>
+		  </tbody>
+		</table>
+
+
 		<h2>SQL DELETE Statement</h2>
 
 		<ul>
