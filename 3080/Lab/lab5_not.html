@@ -120,43 +120,47 @@
         <li>Call the <code>dijkstra()</code> function to compute shortest distances and reconstruct the path.</li>
         <li>Output the route (e.g., <code>Murfreesboro → Franklin → Memphis</code>) and the total distance.</li>
         <li>Print an error message if the city is invalid or the path is unreachable.</li>
-        <li>void dijkstra(const vector&lt;vector&lt;int&gt;&gt; &A, int start, int end, const vector&lt;string&gt;& cityNames) </li>
         <li>Pseudocode for Dijkstra’s Algorithm:</li>
         <pre>
-            Function Dijkstra(A: 2D matrix of weights, start: int, end: int):
-                     n ← number of nodes
-                d ← array of size n, filled with INF            // stores shortest distances from start
-                s ← array of size n, filled with -1             // stores predecessor of each node
-                visited ← array of size n, filled with false    // marks visited nodes
+          void dijkstra(const vector&lt;vector&lt;int&gt;&gt; &A, int start, int end, const vector&lt;string&gt;& cityNames) {
+                int n = A.size();
+                vector&lt;int&gt; d(n, INF);
+                vector&lt;int&gt; s(n, -1);
+                vector&lt;bool&gt; visited(n, false);
+                d[start] = 0;
             
-                d[start] ← 0                                     // distance to start is 0
+                for (int step = 0; step < n; ++step) {
+                    int p = -1;
+                    for (int i = 0; i < n; ++i) {
+                        if (!visited[i] && (p == -1 || d[i] < d[p])) {
+                            p = i;
+                        }
+                    }
+                    if (p == -1 || d[p] == INF) break;
+                    visited[p] = true;
             
-                Repeat n times:
-                    p ← -1
-                    For i from 0 to n-1:
-                        If node i is unvisited AND (p == -1 OR d[i] < d[p]):
-                            p ← i                                // choose unvisited node with smallest distance
+                    for (int v = 0; v < n; ++v) {
+                        if (A[p][v] != INF && !visited[v]) {
+                            if (d[p] + A[p][v] < d[v]) {
+                                d[v] = d[p] + A[p][v];
+                                s[v] = p;
+                            }
+                        }
+                    }
+                }
             
-                    If p == -1 OR d[p] == INF:
-                        Break                                     // all remaining nodes are unreachable
+                vector&lt;int&gt; path;
+                for (int v = end; v != -1; v = s[v]) {
+                    path.insert(path.begin(), v);
+                }
             
-                    visited[p] ← true                             // mark p as visited
-            
-                    For v from 0 to n-1:
-                        If A[p][v] ≠ INF AND v is not visited:
-                            If d[p] + A[p][v] < d[v]:
-                                d[v] ← d[p] + A[p][v]             // update shorter distance
-                                s[v] ← p                          // update predecessor
-            
-                // Reconstruct and print path
-                path ← empty list
-                v ← end
-                While v ≠ -1:
-                    Insert v at the beginning of path
-                    v ← s[v]
-            
-                Print "Shortest distance from start to end:", d[end]
-                Print "Path:", path
+                cout << "\nShortest path: ";
+                for (size_t i = 0; i < path.size(); ++i) {
+                    cout << cityNames[path[i]];
+                    if (i < path.size() - 1) cout << " → ";
+                }
+                cout << "\nTotal distance: " << d[end] << " miles\n";
+            }                
         </pre> 
     </ul>
             
