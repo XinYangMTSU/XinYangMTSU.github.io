@@ -122,38 +122,59 @@
         <li>Print an error message if the city is invalid or the path is unreachable.</li>
         <li>Dijkstra’s Algorithm:</li>
         <pre>
+          // Function to compute the shortest path from a starting city to an ending city
           void dijkstra(const vector&lt;vector&lt;int&gt;&gt; &A, int start, int end, const vector&lt;string&gt;& cityNames) {
-                int n = A.size();
+                int n = A.size(); // Number of cities (nodes)
+            
+                // d[i]: shortest known distance from start to city i (initialized to INF)
+                // s[i]: predecessor of city i in the shortest path
+                // visited[i]: whether city i has been visited
                 vector&lt;int&gt; d(n, INF);
                 vector&lt;int&gt; s(n, -1);
                 vector&lt;bool&gt; visited(n, false);
+
+                // Distance to start city is 0
                 d[start] = 0;
-            
-                for (int step = 0; step < n; ++step) {
-                    int p = -1;
-                    for (int i = 0; i < n; ++i) {
-                        if (!visited[i] && (p == -1 || d[i] < d[p])) {
-                            p = i;
-                        }
-                    }
-                    if (p == -1 || d[p] == INF) break;
-                    visited[p] = true;
-            
-                    for (int v = 0; v < n; ++v) {
-                        if (A[p][v] != INF && !visited[v]) {
-                            if (d[p] + A[p][v] < d[v]) {
-                                d[v] = d[p] + A[p][v];
-                                s[v] = p;
-                            }
-                        }
-                    }
-                }
-            
+
+                // Main loop of the algorithm: repeat up to n times
+
+                // Loop through all nodes (at most n times)
+                // Please convert the following pseudocode into equivalent C++ code:
+                For step from 0 to n - 1:
+                
+                    // Initialize variable p to track the next closest unvisited node
+                    p ← -1
+                
+                    // Find the unvisited node with the smallest tentative distance
+                    For i from 0 to n - 1:
+                        If node i is not visited AND (p is -1 OR d[i] < d[p]):
+                            p ← i  // Select node i as the current closest unvisited node
+                
+                    // If no such node exists or remaining nodes are unreachable, stop the algorithm
+                    If p is -1 OR d[p] is INF:
+                        Break  // No more reachable nodes to process
+                
+                    // Mark the selected node p as visited
+                    Mark p as visited
+                
+                    // Check all neighbors of node p
+                    For v from 0 to n - 1:
+                        // If there's a connection from p to v AND v has not been visited
+                        If there is an edge from p to v AND v is not visited:
+                            // If going through p offers a shorter path to v
+                            If d[p] + A[p][v] < d[v]:
+                                d[v] ← d[p] + A[p][v]  // Update the shortest distance to v
+                                s[v] ← p              // Update the predecessor of v to p
+
+              
+
+                // Reconstruct the shortest path from end to start using predecessors
                 vector&lt;int&gt; path;
                 for (int v = end; v != -1; v = s[v]) {
                     path.insert(path.begin(), v);
                 }
-            
+
+                // Display the shortest path with city names
                 cout << "\nShortest path: ";
                 for (size_t i = 0; i < path.size(); ++i) {
                     cout << cityNames[path[i]];
