@@ -203,6 +203,39 @@
 	</ul>
 
 
+	<h2>How to Start AUTO_INCREMENT from a Custom Number (e.g., 1111)</h2>
+
+	<h3>Option 1: </h3>
+		<ul>
+			<li>&#9733; You cannot directly set the AUTO_INCREMENT to start at 1111 in the CREATE TABLE statement itself, but you can set it immediately after using <b><font color="red">ALTER TABLE</font></b>.</li>
+			<pre>
+				-- Create the table first
+				CREATE TABLE students (
+				  id INT AUTO_INCREMENT PRIMARY KEY,
+				  name VARCHAR(100),
+				  age INT,
+				  email VARCHAR(100)
+				);
+				
+				-- Set the AUTO_INCREMENT starting value to 1111
+				ALTER TABLE students AUTO_INCREMENT = 1111;
+			</pre>
+		</ul>
+
+
+	<h3>Option 2: </h3>
+
+		<ul>
+			<li>&#9733; However, if you're using MySQL 8.0+, there's a little trick: you can include the AUTO_INCREMENT=1111 in the CREATE TABLE statement like this:</li>
+			<pre>
+				CREATE TABLE students (
+				  id INT AUTO_INCREMENT PRIMARY KEY,
+				  name VARCHAR(100),
+				  age INT,
+				  email VARCHAR(100)
+				) AUTO_INCREMENT=1111;
+			</pre>
+		</ul>
 		
 		<br>
 		<br>
