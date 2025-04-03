@@ -51,35 +51,82 @@
 
     <h1>2. Lab Instructions</h1>
 
-<h2>Step 1: Read the Adjacency Matrix</h2>
-<ul>
-  <li>1. Create a text file named <code>graph.txt</code> that contains a symmetric adjacency matrix representing distances between 10 Tennessee cities.</li>
-  <li>2. The first line should indicate the number of cities (e.g., <code>10</code>).</li>
-  <li>3. In your C++ program, read this file into a 2D vector (e.g., <code>vector&lt;vector&lt;int&gt;&gt;</code>).</li>
-</ul>
-
-<h2>Step 2: User Input for Starting City and Ending City</h2>
-<ul>
-  <li>1. Create a list of city names corresponding to the rows/columns of the matrix (e.g., Murfreesboro = 0, Nashville = 1, etc.).</li>
-  <li>2. Prompt the user to input the <strong>starting city name</strong> and the <strong>destination city name</strong>.</li>
-  <li>3. Convert the city names to corresponding indices to use in the adjacency matrix.</li>
-  <li>4. Validate that the city names are valid and exist in the city list.</li>
-</ul>
-
-<h2>Step 3: Implement Dijkstra’s Algorithm</h2>
-<ul>
-  <li>1. Implement Dijkstra’s algorithm based on the pseudocode provided.</li>
-  <li>2. Use three arrays:
+    <h2>Step 1: Initialize Graph and City List</h2>
     <ul>
-      <li><code>d[]</code> to store shortest distances</li>
-      <li><code>s[]</code> to store predecessors for path reconstruction</li>
-      <li><code>visited[]</code> to keep track of visited nodes</li>
+        <li>Create a 2D <code>vector&lt;vector&lt;int&gt;&gt;</code> adjacency matrix with 10 TN cities and distances.</li>
+        <pre>
+                vector<vector<int>> adjMatrix = {
+                    {  0,    35,  150,  INF,  INF,  40,   INF,   INF,  INF,  80 },
+                    { 35,     0,  130,  INF,  210,  20,    50,   INF,  INF,  70 },
+                    {150,   130,    0,   80,  310, INF,   INF,   INF,  INF,  90 },
+                    {INF,   INF,   80,    0,  INF, INF,   INF,    90,  INF,  70 },
+                    {INF,   210,  310,  INF,    0,  190,   230,  INF,   85,  INF },
+                    { 40,    20,  INF,  INF,  190,    0,    60,  INF,  INF,  INF },
+                    {INF,    50,  INF,  INF,  230,   60,     0,  INF,  140,  INF },
+                    {INF,   INF,  INF,   90,  INF, INF,   INF,     0,  INF,  INF },
+                    {INF,   INF,  INF,  INF,   85, INF,    140,  INF,    0,  INF },
+                    { 80,    70,   90,   70,  INF, INF,   INF,   INF,  INF,    0 }
+                };
+        </pre>
+        <li>Use <code>INT_MAX</code> to represent INF (no direct connection).</li>
+        <pre>
+            const int INF = INT_MAX;
+        </pre>
+        <li>Create a <code>vector&lt;string&gt;</code> of city names matching matrix rows/columns.</li>
+        <pre>
+                vector<string> cityNames = {
+                    "Murfreesboro", "Nashville", "Chattanooga", "Knoxville", "Memphis",
+                    "Franklin", "Clarksville", "Johnson", "Jackson", "Cookeville"
+                };
+        </pre>
     </ul>
-    Pseudocode for Dijkstra’s Algorithm:
-      <pre>
-          Function Dijkstra(A: 2D matrix of weights, start: int, end: int):
 
-                n ← number of nodes
+   <h2>Step 2: Map City Names to Indices</h2>
+    <ul>
+        <li>Use an <code>unordered_map&lt;string, int&gt;</code> to convert city names (case-insensitive) to matrix indices.</li>
+    </ul>
+    <pre>
+            unordered_map<string, int> cityToIndex;
+            for (int i = 0; i < cityNames.size(); ++i) {
+                string lowercase = cityNames[i];
+                transform(lowercase.begin(), lowercase.end(), lowercase.begin(), ::tolower);
+                cityToIndex[lowercase] = i;
+            }
+    </pre>
+
+ <h2>Step 3: Build an Interactive Menu</h2>
+    <ul>
+        <li>Create a <code>do...while</code> loop that shows the following menu until the user chooses to exit:</li>
+        <pre>
+    ===== TN Shortest Path Finder =====
+    1. Display Adjacency Matrix
+    2. Find Shortest Path (Dijkstra)
+    3. Exit
+        </pre>
+        <li>Use <code>switch</code> to handle the user’s choice.</li>
+    </ul>
+
+   <h2>Step 4: Implement Option 1 - Display Matrix</h2>
+    <ul>
+        <li>Display a formatted matrix using city names as headers.</li>
+        <li>Please call the displayAdjacencyMatrix function when the user enter option 1.</li>
+        <pre>
+            void displayAdjacencyMatrix(const vector<vector<int>>& A, const vector<string>& cityNames);
+        </pre>
+    </ul>
+
+ <h2>Step 5: Implement Option 2 - Dijkstra's Algorithm</h2>
+    <ul>
+        <li>Prompt the user for starting and ending cities.</li>
+        <li>Convert names to lowercase and validate with your map.</li>
+        <li>Call the <code>dijkstra()</code> function to compute shortest distances and reconstruct the path.</li>
+        <li>Output the route (e.g., <code>Murfreesboro → Franklin → Memphis</code>) and the total distance.</li>
+        <li>Print an error message if the city is invalid or the path is unreachable.</li>
+        <li>void dijkstra(const vector<vector<int>> &A, int start, int end, const vector<string>& cityNames) </li>
+        <li>Pseudocode for Dijkstra’s Algorithm:</li>
+        <pre>
+            Function Dijkstra(A: 2D matrix of weights, start: int, end: int):
+                     n ← number of nodes
                 d ← array of size n, filled with INF            // stores shortest distances from start
                 s ← array of size n, filled with -1             // stores predecessor of each node
                 visited ← array of size n, filled with false    // marks visited nodes
@@ -112,30 +159,14 @@
             
                 Print "Shortest distance from start to end:", d[end]
                 Print "Path:", path
-      </pre>
-  </li>
-  <li>3. Loop through each node, selecting the unvisited node with the smallest distance and updating neighbors accordingly.</li>
-  <li>4. Stop when the destination node is visited or no more reachable nodes exist.</li>
-</ul>
-
-<h2>Step 4: Display Results</h2>
-<ul>
-  <li>1. Display the shortest distance between the selected cities.</li>
-  <li>2. Reconstruct and display the full path from start to destination using city names (e.g., <code>Murfreesboro → Nashville → Memphis</code>).</li>
-  <li>3. Handle cases where no path exists and print a friendly message.</li>
-</ul>
-
-<h2>Step 5: Test Your Program</h2>
-<ul>
-  <li>1. Test the program with multiple start and end city combinations.</li>
-  <li>2. Include test cases where:
-    <ul>
-      <li>The path goes through intermediate cities (e.g., A → C → E → F)</li>
-      <li>No path exists between two cities</li>
+        </pre> 
     </ul>
-  </li>
-</ul>
+            
 
+    <h2>Step 6: Exit Program</h2>
+    <ul>
+        <li>When the user enters 3, exit the program and print a goodbye message.</li>
+    </ul>
 
     <h1>3. Requirements</h1>
 
