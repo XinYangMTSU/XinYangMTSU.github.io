@@ -14,26 +14,41 @@
       flex-direction: column;
     }
 
-    header {
-      background-color: #009688;
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
+ header {
+    background-color: #009688;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
 
-    header h1 {
-      margin: 0;
-      font-size: 34px;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
+  .header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* space between image and text */
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+  }
 
-    header p {
-      margin-top: 10px;
-      font-size: 18px;
-      opacity: 0.9;
-    }
+  .header-content img {
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 34px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  header p {
+    margin: 5px 0;
+    font-size: 18px;
+    opacity: 0.9;
+  }
 
     .piece-list {
       width: 90%;
@@ -99,8 +114,12 @@
 <body>
 
   <header>
-    <h1> <img width="100px" height="100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Joseph_Karl_Stieler%27s_Beethoven_mit_dem_Manuskript_der_Missa_solemnis.jpg/440px-Joseph_Karl_Stieler%27s_Beethoven_mit_dem_Manuskript_der_Missa_solemnis.jpg">
-    Ludwig van Beethoven</h1>
+    <div class="header-content">
+      <h1> 
+      <img width="100px" height="100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Joseph_Karl_Stieler%27s_Beethoven_mit_dem_Manuskript_der_Missa_solemnis.jpg/440px-Joseph_Karl_Stieler%27s_Beethoven_mit_dem_Manuskript_der_Missa_solemnis.jpg">
+      Ludwig van Beethoven
+      </h1>
+    </div>
     <p>🎂 <b>Born:</b> December 16, 1770 – Bonn, Germany 🇩🇪</p>
     <p>🕊️ <b>Died:</b> March 26, 1827 – Vienna, Austria 🇦🇹</p>
   </header>
