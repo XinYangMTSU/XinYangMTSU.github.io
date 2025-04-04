@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎼 Beethoven Study</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #fff0f5, #e0f7fa);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #009688;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .header-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .header-title h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    .pronounce-btn {
+      background-color: #f48fb1;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      font-size: 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background 0.3s ease;
+    }
+
+    .pronounce-btn:hover {
+      background-color: #ec407a;
+    }
+
+    main {
+      flex-grow: 1;
+      width: 90%;
+      max-width: 800px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #e91e63;
+      margin-top: 0;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    p, ul {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    table th, table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #f48fb1;
+      color: white;
+    }
+
+    table tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .movement-description {
+      font-size: 16px;
+      color: #555;
+      margin: 8px 0 16px 0;
+      padding-left: 20px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      border-radius: 15px;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      background: #009688;
+      color: white;
+      font-size: 16px;
+      box-shadow: 0 -4px 8px rgba(0,0,0,0.2);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: #009688;
+      font-weight: bold;
+      font-size: 18px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: #e91e63;
+    }
+
+    .list-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+   .movement-description {
+    font-size: 17px;
+    background: #fff8e1;
+    padding: 15px 20px;
+    border-left: 5px solid #f48fb1;
+    margin: 10px 0 20px 0;
+    border-radius: 10px;
+  }
+
+.creation-background {
+  background: #fff8e1; 
+  padding: 20px 25px;
+  margin: 20px 0;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-size: 18px;
+  line-height: 1.8;
+  color: #444;
+}
+
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-title">
+      <h1>🎼 Ludwig van Beethoven</h1>
+      <button class="pronounce-btn" onclick="speak('Ludwig van Beethoven')">🔊</button>
+    </div>
+  </header>
+
+  <main>
+    <a class="back-link" href="index.html">← Back to Composer List</a>
+
+    <h2>《钢琴奏鸣曲第8号 悲怆》
+      <button class="pronounce-btn" onclick="speak('Piano Sonata Number Eight in C minor, Opus Thirteen, Pathétique')">🔊</button>
+    </h2>
+
+    <p><strong>原文名：</strong> Piano Sonata No. 8 in C minor, Op. 13 "Pathétique"</p>
+    <p><strong>作曲时间：</strong> 1798–1799年</p>
+    <p><strong>出版时间：</strong> 1799年</p>
+    <p><strong>特点：</strong> 这部奏鸣曲以深沉的情感、庄重戏剧性的开场、优雅动人的慢板以及活泼有力的结尾而闻名，展现了贝多芬早期作品中罕见的情感深度与戏剧张力。作为他最著名的作品之一，它不仅体现了技巧与艺术表达的完美结合，也预示了贝多芬后期英雄主义风格的萌芽。</p>
+
+<table>
+      <thead>
+        <tr>
+          <th>英文</th>
+          <th>中文</th>
+          <th>简单解释</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Piano Sonata</td>
+          <td>钢琴奏鸣曲</td>
+          <td>一种经典的钢琴独奏曲形式，通常包括多个乐章。</td>
+        </tr>
+        <tr>
+          <td>No. 8</td>
+          <td>第8号</td>
+          <td>贝多芬创作并正式编号的第8首钢琴奏鸣曲。</td>
+        </tr>
+        <tr>
+          <td>in C minor</td>
+          <td>C小调</td>
+          <td>乐曲的主调为C小调，带有悲伤、沉重的情绪色彩。</td>
+        </tr>
+        <tr>
+          <td>Op. 13</td>
+          <td>作品编号第13号</td>
+          <td>用于整理和分类贝多芬作品的编号系统。</td>
+        </tr>
+        <tr>
+          <td>"Pathétique"</td>
+          <td>《悲怆chuàng》</td>
+          <td>作品的副标题，表达音乐中浓烈的悲伤情感（并非贝多芬自命）。</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2>🎵 乐章结构</h2>
+    <ul>
+      <li class="list-item"> 
+        第一乐章：Grave – Allegro di molto e con brio 
+        <button class="pronounce-btn" onclick="speak('Grave Allegro di molto e con brio')">🔊</button> (Key: C minor)
+      </li>
+      <p class="movement-description">剧情性十足的开场，以悲仇冲击的Grave段落开始，随后转入烈热而充满生命力量的Allegro，完美地表达了贝多芬的激情气质。</p>
+
+      <li class="list-item">
+        第二乐章：Adagio cantabile 
+        <button class="pronounce-btn" onclick="speak('Adagio cantabile')">🔊</button> (A♭ major)
+      </li>
+      <p class="movement-description">一段美丽而精致的慢板，情感真指而深切，音段如同悲伤而温情的歌唱，体现了贝多芬精致的内心世界。</p>
+
+      <li class="list-item">
+        第三乐章：Rondo: Allegro 
+        <button class="pronounce-btn" onclick="speak('Rondo Allegro')">🔊</button> (Key: C minor (ends in C major))
+      </li>
+      <p class="movement-description">活泼而有劲的结尾乐章，以回旋曲形式主题为核心，添加了充满积极劲动的间段，爽快地为全曲停站了应有的尾声。</p>
+    </ul>
+
+ <h2>🎼 《悲怆奏鸣曲》的创作背景</h2>
+
+ <div class="creation-background">
+    <p>1798年到1799年间，贝多芬正在经历人生中一个极为重要的转折时期。</p>
+    <p>虽然他年仅二十七八岁，已经在维也纳赢得了相当的声誉，但与此同时，他也开始察觉到自己听力逐渐恶化的迹象——这一将彻底改变他命运的疾病悄然逼近。</p>
+    <p>在这种矛盾复杂的心境下，贝多芬创作了《C小调第8号钢琴奏鸣曲》（即《悲怆奏鸣曲》）。</p>
+    <p>这部作品充满了深沉、激烈而感伤的情绪，被视为贝多芬早期钢琴奏鸣曲中最具戏剧性的一部。</p>
+    <p>尽管副标题“Pathétique（悲怆）”并不是贝多芬本人亲自命名的，而是出版商加上去的，但它精准地表达了乐曲中那种强烈的悲痛、挣扎与坚韧精神。</p>
+    <p>《悲怆奏鸣曲》的成功不仅巩固了贝多芬在音乐界的地位，也展现出他日后将不断深化的、个人化的音乐表达方式，为他后期的英雄风格埋下了伏笔。</p>
+</div>
+
+    <h2>🎷 推荐联听</h2>
+    <p>以下是第二乐章《Adagio Cantabile》的精选演奏：</p>
+
+    <iframe src="https://www.youtube.com/embed/BuN3yCmHb_U" allowfullscreen></iframe>
+
+  </main>
+
+  <footer>
+    🎶 "Through hardship to the stars" — Let your music tell your story! 🌟
+  </footer>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const latinLikeVoice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+      utterance.voice = latinLikeVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
