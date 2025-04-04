@@ -14,46 +14,95 @@
       flex-direction: column;
     }
 
-   header {
-    background-color: #009688;
-    color: white;
-    padding: 40px 20px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  }
+    header {
+      background-color: #009688;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
 
-  .header-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px; /* space between image and text */
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-  }
+    .header-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
 
-  .header-content img {
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  }
+    .header-content img {
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
 
-  header h1 {
-    margin: 0;
-    font-size: 34px;
-    font-weight: bold;
-    letter-spacing: 1px;
-  }
+    header h1 {
+      margin: 0;
+      font-size: 34px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
 
-  header p {
-    margin: 5px 0;
-    font-size: 18px;
-    opacity: 0.9;
-  }
+    header p {
+      margin: 5px 0;
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .intro-section {
+      width: 90%;
+      max-width: 750px;
+      margin: 40px auto 10px auto;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .intro-section h2, .intro-card h3 {
+      text-align: center;
+      color: #e91e63;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .pronounce-btn {
+      background-color: #f48fb1;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      margin-left: 10px;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background-color 0.3s;
+    }
+
+    .pronounce-btn:hover {
+      background-color: #e91e63;
+    }
+
+    .intro-card {
+      background: #fff8e1;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-left: 5px solid #f48fb1;
+    }
+
+    .intro-card p {
+      margin: 0;
+    }
 
     .piece-list {
       width: 90%;
       max-width: 750px;
-      margin: 40px auto;
+      margin: 20px auto;
       padding: 30px;
       background: rgba(255, 255, 255, 0.7);
       border-radius: 20px;
@@ -86,8 +135,8 @@
 
     .back-link {
       display: block;
-      width: fit-content;
-      margin: 20px auto;
+      margin: 30px 50px 10px 50px;
+      text-align: left;
       text-decoration: none;
       color: #009688;
       font-weight: bold;
@@ -121,57 +170,73 @@
     <p>🎂 <b>Born:</b> December 16, 1770 – Bonn, Germany 🇩🇪</p>
     <p>🕊️ <b>Died:</b> March 26, 1827 – Vienna, Austria 🇦🇹</p>
   </header>
-  
-  <br>
-  
-  <center>
-   <strong><span style="font-size:20px;">Famous Masterpieces to Explore</span></strong>
-  </center>
-  
+
+  <section class="intro-section">
+    <h2>🎹 Introduction: Ludwig van Beethoven
+      <button class="pronounce-btn" onclick="speak('Ludwig van Beethoven')">🔊</button>
+    </h2>
+
+    <div class="intro-card">
+      <h3>🌱 Early Life</h3>
+      <p>Ludwig van Beethoven (1770–1827) was a German composer and pianist, widely regarded as one of the greatest and most influential musicians in the history of Western classical music. Born in Bonn, Germany, Beethoven showed extraordinary musical talent from a young age. He moved to Vienna, where he studied with famous composers like Joseph Haydn and quickly gained a reputation as a brilliant pianist.</p>
+    </div>
+
+    <div class="intro-card">
+      <h3>💪 Overcoming Challenges</h3>
+      <p>Despite starting to lose his hearing in his late twenties — a devastating challenge for any musician — Beethoven continued to compose some of his most powerful works even after becoming almost completely deaf. His music bridged the Classical and Romantic eras, combining the structural elegance of Mozart and Haydn with a new depth of emotion, innovation, and heroism.</p>
+    </div>
+
+    <div class="intro-card">
+      <h3>🌟 Legacy</h3>
+      <p>Beethoven's masterpieces include legendary pieces such as the Fifth Symphony, Ninth Symphony (Ode to Joy), Moonlight Sonata, Pathétique Sonata, and Für Elise. Today, Beethoven is celebrated not only for his incredible music but also for his perseverance, passion, and vision — the timeless language of human struggle and triumph. ✨🎶</p>
+    </div>
+  </section>
+
   <div class="piece-list">
+    <h2 style="text-align:center">🎼 Famous Masterpieces to Explore</h2>
     <div class="piece-item">
       <a href="./Beethoven/SonataNo8.html">🎹 Piano Sonata No. 8 "Pathétique" (1798–1799)</a>
     </div>
-
     <div class="piece-item">
       <a href="#">🎻 Violin Concerto in D Major (1806)</a>
     </div>
-
     <div class="piece-item">
       <a href="#">🎹 Piano Sonata No. 14 "Moonlight" (1801)</a>
     </div>
-
     <div class="piece-item">
       <a href="#">🎼 Symphony No. 5 in C Minor (1804–1808)</a>
     </div>
-
     <div class="piece-item">
       <a href="#">🎹 Piano Concerto No. 5 "Emperor" (1809)</a>
     </div>
-
     <div class="piece-item">
       <a href="#">🎵 Für Elise (1810)</a>
     </div>
-
     <div class="piece-item">
       <a href="#">🎶 Missa Solemnis (1819–1823)</a>
     </div>
-
     <div class="piece-item">
       <a href="#">🎶 Symphony No. 9 "Choral" (1822–1824)</a>
     </div>
-
     <div class="piece-item">
       <a href="#">🎯 Fidelio (Opera) (1805, revised 1814)</a>
     </div>
-
   </div>
 
   <a class="back-link" href="index.html">← Back to Piano Composer List</a>
 
   <footer>
-    🎶 Explore the timeless magic of Beethoven's music! 🌟
+    🎶 Explore the timeless magic of Beethoven's music! ✨
   </footer>
+
+  <script>
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.95;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
 
 </body>
 </html>
