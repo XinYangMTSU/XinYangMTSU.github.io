@@ -1,1 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🏰 Welcome to Prague</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #e0f7fa, #fff0f5);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
+    header {
+      background: linear-gradient(135deg, #4db6ac, #f48fb1);
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .header-content img {
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 38px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin-top: 12px;
+      font-size: 20px;
+      opacity: 0.95;
+    }
+
+    .pronounce-btn {
+      background-color: #ff80ab;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      margin-left: 10px;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: background-color 0.3s;
+    }
+
+    .pronounce-btn:hover {
+      background-color: #f06292;
+    }
+
+    main {
+      flex-grow: 1;
+      width: 90%;
+      max-width: 850px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 25px;
+      padding: 40px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+
+    main h2 {
+      color: #e91e63;
+      font-size: 30px;
+      margin-bottom: 25px;
+    }
+
+    main p {
+      font-size: 19px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    main p b {
+      color: #009688;
+    }
+
+    .famous-list, .famous-people {
+      text-align: left;
+      margin-top: 40px;
+    }
+
+    .famous-list h3, .famous-people h3 {
+      color: #e91e63;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .famous-list-item, .famous-person-item {
+      margin-bottom: 25px;
+    }
+
+    .famous-list-item img, .famous-person-item img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      margin: 10px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #009688;
+      color: white;
+      font-size: 17px;
+      margin-top: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="header-content">
+      <img width="100px" height="100px" src="https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcQ-UhOTZU7lPCdp83Qvuy0BqcHJ4CJR7LjpIyrgLoaPEHvlQZFkC87c_Sv4NHXQTJzyJfUq805lOF7asZzFpbbX-lkiwLmc7R3NuZ4Igw" alt="Prague">
+      
+      <h1>Prague
+        <button class="pronounce-btn" onclick="speak('Prague')">🔊</button>
+      </h1>
+    </div>
+    <p>🏰 The Heart of Europe — Capital of the <b>Czech Republic</b> <button class="pronounce-btn" onclick="speak('Czech Republic')">🔊</button> 🇨🇿</p>
+  </header>
+
+  <main>
+    <h2>✨ Welcome to Magical Prague</h2>
+    <p>
+      <b>Prague</b>, known as <b>"Praha"</b> in Czech, is one of <b>Europe's most beautiful</b> and <b>historic cities</b>.
+      Famous for its <b>stunning medieval architecture</b>, cobblestone streets, the majestic <b>Prague Castle</b>, and the romantic <b>Charles Bridge</b>.
+    </p>
+    <p>
+      Whether you're wandering through the <b>Old Town Square</b>, admiring the astronomical wonders of the <b>Astronomical Clock</b>, or exploring the colorful charm of the <b>Lesser Town</b>,
+      Prague offers a <b>timeless beauty</b> that captures the heart of every visitor. 🌍
+    </p>
+    <p>
+      With its <b>vibrant culture</b>, enchanting <b>classical music</b> traditions, warm cafes, and inspiring river views,
+      Prague is truly a city where <b>history</b> meets <b>magic</b>. ✨🌉
+    </p>
+
+    <div class="famous-list">
+      <h3>🏰 What Prague is Famous For</h3>
+
+      <div class="famous-list-item">
+        <b>Prague Castle</b> — The largest ancient castle complex in the world.
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Pra%C5%BEnsk%C3%BD_hrad_3.jpg" alt="Prague Castle">
+      </div>
+
+      <div class="famous-list-item">
+        <b>Charles Bridge</b> — A stunning historic bridge lined with statues.
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Charles_Bridge_Prague.jpg" alt="Charles Bridge">
+      </div>
+
+      <div class="famous-list-item">
+        <b>Astronomical Clock</b> — The world's oldest working astronomical clock.
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Prague_astronomical_clock_detail.jpg" alt="Astronomical Clock">
+      </div>
+
+      <div class="famous-list-item">
+        <b>St. Vitus Cathedral</b> — A Gothic masterpiece inside the castle.
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Katedr%C3%A1la_sv._V%C3%ADta_%28Prague%29.jpg" alt="St. Vitus Cathedral">
+      </div>
+    </div>
+
+    <div class="famous-people">
+      <h3>🎶 Prague's Music and Culture</h3>
+
+      <div class="famous-person-item">
+        🎻 Enjoy a <b>classical music concert</b> inside historic churches.
+      </div>
+
+      <div class="famous-person-item">
+        🎺 Listen to <b>street musicians</b> performing on the charming <b>Charles Bridge</b>.
+      </div>
+
+      <div class="famous-person-item">
+        🎭 Watch a traditional <b>Czech puppet show</b> — marionette theater is a proud local tradition!
+      </div>
+
+      <div class="famous-person-item">
+        📚 Visit the <b>Franz Kafka Museum</b> dedicated to the famous Prague-born writer.
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    🌟 Explore the timeless magic of Prague! 🌟
+  </footer>
+
+  <script>
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
