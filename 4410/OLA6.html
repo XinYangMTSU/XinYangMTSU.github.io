@@ -100,26 +100,102 @@ In this step, you will <b><font color="blue">write all the SQL code</font></b> n
 <b><font color="red">Important:</font></b> You must complete all database creation, table creation, and data insertion inside your SQL file — not manually through phpMyAdmin.
 
 
+<h2>Step 2: Create Your PHP File and Build the Interactive Page (60 Points)</h2>
 
-    <h2>Step 2: Create Your PHP File (60 Points)</h2>
+In this step, you will create a dynamic PHP web page that connects to your database and allows users to perform specific database operations by clicking different buttons.
 
-    (1) Create a PHP file named <b><font color="blue">index.php</font></b>.<br><br>
-    (2) Connect to the database using object-oriented PHP: <b><font color="blue">new mysqli()</font></b>.<br><br>
-    (3) Perform the following tasks and display results in a nicely formatted HTML table:
-    <div>
-        &clubs; Display all students.<br>
-        &clubs; Display only male students.<br>
-        &clubs; Display only female students.<br>
-        &clubs; Display students older than 21.<br>
-        &clubs; Display the number of distinct majors.<br>
-        &clubs; Display students without phone numbers (Phone IS NULL).<br>
-        &clubs; Insert a new student record and confirm insertion.<br>
-        &clubs; Delete the newly inserted record and confirm deletion.<br>
-        &clubs; Update John Doe’s phone number and confirm update.<br>
-    </div>
-    <br>
-    (4) Close the database connection at the end.<br><br>
+<br><br>
 
+(1) Create a PHP file named <b><font color="blue">index.php</font></b>.
+
+<br><br>
+
+(2) Set up a connection to your database using <b><font color="blue">object-oriented PHP</font></b> with the <b><font color="blue">new mysqli()</font></b> constructor.
+
+<div>
+Example connection code:
+<pre>
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "CSCI4410";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+</pre>
+</div>
+
+<br>
+
+(3) Design a simple HTML form with **separate buttons** for each database task.  
+Each button should trigger one specific query when clicked.
+
+<br><br>
+
+<b>Required Tasks:</b>
+
+<div>
+&clubs; Create a button labeled <b><font color="blue">"Display All Students"</font></b>.<br>
+→ When clicked, select and display all student records from the Students table.<br><br>
+
+&clubs; Create a button labeled <b><font color="blue">"Display Male Students"</font></b>.<br>
+→ When clicked, select and display only the male students.<br><br>
+
+&clubs; Create a button labeled <b><font color="blue">"Display Female Students"</font></b>.<br>
+→ When clicked, select and display only the female students.<br><br>
+
+&clubs; Create a button labeled <b><font color="blue">"Display Students Older Than 21"</font></b>.<br>
+→ When clicked, select and display students whose age is greater than 21.<br><br>
+
+&clubs; Create a button labeled <b><font color="blue">"Count Distinct Majors"</font></b>.<br>
+→ When clicked, display the number of different majors represented among the students.<br><br>
+
+&clubs; Create a button labeled <b><font color="blue">"Display Students Without Phone Numbers"</font></b>.<br>
+→ When clicked, select and display students whose Phone field is <b>NULL</b>.<br><br>
+
+&clubs; Create a button labeled <b><font color="blue">"Insert New Student"</font></b>.<br>
+→ When clicked, insert a new student record into the Students table.  
+After insertion, display a success or error message.<br><br>
+
+&clubs; Create a button labeled <b><font color="blue">"Delete Inserted Student"</font></b>.<br>
+→ When clicked, delete the student you just inserted.  
+After deletion, display a success or error message.<br><br>
+
+&clubs; Create a button labeled <b><font color="blue">"Update John Doe’s Phone Number"</font></b>.<br>
+→ When clicked, update John Doe’s phone number to <b>321-654-0987</b> and confirm the update.<br><br>
+</div>
+
+<br>
+
+<b>Important Requirements:</b>
+
+<div>
+&clubs; Each button should submit the form using the <b>POST</b> method.<br>
+&clubs; Use PHP to detect which button was clicked using <b><font color="blue">isset($_POST['button_name'])</font></b>.<br>
+&clubs; Display all query results in a <b>neatly formatted HTML table</b> with proper borders.<br>
+&clubs; Apply <b>CSS styling</b> from your <b>ola6.css</b> file for clean presentation.<br>
+</div>
+
+<br><br>
+
+(4) After completing all operations, make sure to <b><font color="blue">close the database connection</font></b> properly at the bottom of your PHP file using:
+
+<pre>
+$conn->close();
+</pre>
+
+<br><br>
+
+<b><font color="red">Note:</font></b> Your index.php page should feel like a small interactive control panel where clicking each button performs a live database action and shows immediate results!
+
+
+
+    
     <h2>Step 3: Create Your CSS File (10 Points)</h2>
 
     (1) Create a CSS file named <b><font color="blue">ola6.css</font></b>.<br><br>
