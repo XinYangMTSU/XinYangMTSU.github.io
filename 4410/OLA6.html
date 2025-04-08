@@ -184,7 +184,8 @@ After deletion, display a success or error message.<br><br>
 if (isset($_POST['display_all'])) {
    $sql = "SELECT * FROM Students";
    $result = $conn->query($sql);
-   // code to display table
+   // Call the function to display table
+    displayTable($result);
 }
 </pre>
 
@@ -199,6 +200,18 @@ if (isset($_POST['show_insert_form'])) {
 }
 </pre>
 <br>
+
+<b><font color="red">Hints:</font></b> Create a Reusable "Display Table" Function
+<pre>
+    function displayTable($result) {
+        if ($result->num_rows > 0) {
+            //code to display table 
+        }
+        else {
+            echo "No records found.";
+        }
+    }
+</pre>
 
 <b>Important Requirements:</b>
 
