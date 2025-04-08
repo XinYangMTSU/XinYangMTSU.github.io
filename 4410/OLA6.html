@@ -47,13 +47,59 @@ in a real-world database-driven application.
 such as <b><font color="blue">NULL values</font></b> properly when displaying student information.
 <br><br>
 
-    <h2>Step 1: Create Your Database and Table (30 Points)</h2>
+<h2>Step 1: Create Your Database, Table, and Insert Data (30 Points)</h2>
 
-    (1) Create a database named <b><font color="blue">CSCI4410</font></b> in phpMyAdmin.<br><br>
-    (2) Create a table named <b><font color="blue">Students</font></b> with fields:
-    ID (Auto_Increment Primary Key), Name, BlueCard, Major, ClassLevel, Email, Gender, Age, Phone.<br><br>
-    (3) Insert 10 student records into your Students table (see assignment page for detailed data).<br><br>
-    (4) Save your SQL file as <b><font color="blue">Students.sql</font></b>.<br><br>
+In this step, you will <b><font color="blue">write all the SQL code</font></b> needed to create your database, create your table, and insert student data into a single SQL file.
+
+<br><br>
+
+(1) Open a text editor (such as Notepad) and write your SQL code to complete the following tasks:<br><br>
+
+<div>
+&clubs; Create a database named <b><font color="blue">CSCI4410</font></b>.<br><br>
+
+&clubs; Create a table named <b><font color="blue">Students</font></b> with the following fields:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- ID (INT, Primary Key, Auto_Increment)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- Name (VARCHAR)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- BlueCard (VARCHAR)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- Major (VARCHAR)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- ClassLevel (VARCHAR)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- Email (VARCHAR)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- Gender (VARCHAR)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- Age (INT)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- Phone (VARCHAR)<br><br>
+
+&clubs; Insert the following 10 student records into your <b>Students</b> table:
+</div>
+
+<br>
+
+<pre>
+('John Doe', '01234567', 'Computer Science', 'Freshman', 'DoeJohn@mtsu.edu', 'Male', 19, '123-456-7890'),
+('Jane Doe', '07654321', 'Mathematics', 'Senior', 'DoeJane@mtsu.edu', 'Female', 22, NULL),
+('Mary Mia', '09872345', 'Music', 'Senior', 'MaryMia@mtsu.edu', 'Female', 22, '615-123-3344'),
+('Michael Jame', '07234589', 'Business', 'Junior', 'MichaelJame@mtsu.edu', 'Male', 20, '615-232-1155'),
+('Daniel Jack', '04135892', 'Computer Science', 'Sophomore', 'DanielJack@mtsu.edu', 'Male', 19, '615-333-2266'),
+('Lucy Kate', '72358924', 'Computer Science', 'Freshman', 'LucyKate@mtsu.edu', 'Female', 18, '976-111-4567'),
+('Lauren Spade', '05896294', 'Computer Science', 'Senior', 'LaurenSpade@mtsu.edu', 'Female', 22, '756-222-1478'),
+('Emma Vivian', '67451144', 'Mathematics', 'Sophomore', 'EmmaVivian@mtsu.edu', 'Female', 20, '546-333-7459'),
+('Ada Lane', '66655544', 'Art', 'Junior', 'AdaLane@mtsu.edu', 'Female', 19, '765-777-2255'),
+('Alan Parker', '88833322', 'Business', 'Senior', 'AlanParker@mtsu.edu', 'Male', 24, '999-222-5588')
+</pre>
+
+<br>
+
+(2) Save your complete SQL script as <b><font color="blue">Students.sql</font></b>.
+
+<br><br>
+
+(3) Open <b><font color="blue">phpMyAdmin</font></b> and <b><font color="blue">import your Students.sql file</font></b> to create your database, table, and records automatically.
+
+<br><br>
+
+<b><font color="red">Important:</font></b> You must complete all database creation, table creation, and data insertion inside your SQL file — not manually through phpMyAdmin.
+
+
 
     <h2>Step 2: Create Your PHP File (60 Points)</h2>
 
