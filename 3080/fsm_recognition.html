@@ -221,6 +221,9 @@
 			</li>
 			<li>&star; The examples <b>1101</b> and <b>11101</b> show that at state <font color="red"><b>\(s_1\)</b></font>, if the input is 1, we should stay at \(s_1\).
 			Since we are still seeing a sequence of 1's and have not yet matched the "10" part of the pattern, the machine should remain at \(s_1\) and keep waiting for a 0.</li>
+			<li>&star; The example <b>100101</b> shows that at state \(s_2\), if the input is 0, we should move back to \(s_0\).
+			Since seeing another 0 after 10 means the pattern "101" has been broken, the machine must reset and start looking for a new potential match from the beginning.
+			</li>
 			<li>&star; </li>
 		</ul>
 		
