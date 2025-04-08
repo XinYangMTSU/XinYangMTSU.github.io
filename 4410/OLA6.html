@@ -170,7 +170,7 @@ After deletion, display a success or error message.<br><br>
 → When clicked, update John Doe’s phone number to <b>321-654-0987</b> and confirm the update.<br><br>
 </div>
 
-<b>Hints:</b> HTML Button Example:
+<b><font color="red">Hints:</font></b> HTML Button Example:
 <pre>
 &lt;form method="post"&gt;
   &lt;button name="display_all"&gt;Display All Students&lt;/button&gt;
@@ -178,7 +178,25 @@ After deletion, display a success or error message.<br><br>
   ...
 &lt;/form&gt;
 </pre>
-    
+
+<b><font color="red">Hints:<font color="red"></b> Detect which button is clicked using PHP.
+<pre>
+if (isset($_POST['display_all'])) {
+   $sql = "SELECT * FROM Students";
+   $result = $conn->query($sql);
+   // code to display table
+}
+</pre>
+
+<b><font color="red">Hints:<font color="red"></b> PHP Insert New Student Form Example:
+<pre>
+if (isset($_POST['show_insert_form'])) {
+    echo '&lt;form method="post"&gt;';
+    echo '&lt;input type="text" name="Name" required&gt;';
+    echo '&lt;button type="submit" name="insert_student"&gt;Insert&lt;/button&gt;';
+    echo '&lt;/form&gt;';
+}
+</pre>
 <br>
 
 <b>Important Requirements:</b>
