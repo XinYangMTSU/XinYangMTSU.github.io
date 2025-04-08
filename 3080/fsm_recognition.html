@@ -175,7 +175,7 @@
 		</ul>
 		<h3>Explanation:</h3>
 		<ul>
-			<li>&star; We use the target pattern (<b><font color="blue">101</font></b>) to build the basic states.
+			<li>&star; <font color="red"><b>Step 1:</b></font> We use the target pattern (<b><font color="blue">101</font></b>) to build the basic states.
 			To recognize 101, we need four states:
 			</li>
 			
@@ -211,6 +211,11 @@
 			<li>&star; Only \(s_3 \)is a final (accepting) state.</li>
 			<li>&star; Only when the machine reaches \(s_3 \), it outputs 1 -- meaning it has detected the pattern "101" in the input.</li>
 			<li>&star; Otherwise, when the machine is in states \(s_0, s_1,\) or \(s_2\), the output remains 0. Because the full pattern "101" has not been recognized yet.</li>
+		</ul>
+
+		<ul>
+			<li>&star; <font color="red"><b>Step 2:</b></font> Complete the transitions for every input at every state.</li>
+			For each state \( s_0, s_1, s_2, s_3\), you must decide where the machine should go next when the it reads: 1 or 0 
 		</ul>
 		
 		<Br>
