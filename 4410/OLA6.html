@@ -202,7 +202,9 @@ if (isset($_POST['show_insert_form'])) {
 </pre>
 <br>
 
-<b><font color="red">Hints:</font></b> Create a Reusable "Display Table" Function
+<b><font color="red">Hints:</font></b> Create a Reusable "Display Table" Function <br>
+To make your PHP code cleaner and avoid writing the same table code many times,
+you can define a helper function. 
 <pre>
     function displayTable($result) {
         if ($result->num_rows > 0) {
