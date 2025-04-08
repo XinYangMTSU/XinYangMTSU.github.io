@@ -147,11 +147,13 @@
 				</tr>
 				<tr>
 					<td>LIKE</td>
-					<td>Search for a pattern <br>
-						's%' (Starts with "s") <br>
-						'%s' (Ends with "s") <br>
-						'_s%' (Second letter is "a") <br>
-						'%York%' (Contains "York" anywhere) <br>
+					<td>Search for a pattern: 
+						<ul>
+							<li>&star; 's%' (Starts with "s") </li>
+							<li>&star; '%s' (Ends with "s") </li>
+							<li>&star; '_s%' (Second letter is "a") </li>
+							<li>&star; '%York%' (Contains "York" anywhere) </li>
+						</ul>
 					</td>
 					<td>SELECT * FROM Customers
 						WHERE City LIKE 's%';</td>
