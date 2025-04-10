@@ -69,10 +69,35 @@
 		nor any other computer can solve algorithmically for all possible inputs.
 		<br><br>
 		
-		<h2>Turing Machine</h2>
-		A Turing machine consists of a finite-state machine, a read/write head that moves left or right, and an unlimited tape divided into cells, each cell containing
-		at most one symbol from an allowable finite alphabet. At any one instant, only a finite number of cells on the tape
-		are nonblank. We use the special symbol <b>b</b> to denote a <b>blank cell</b>. The finite-state unit, through its read-write
+		<h2>Structure of a Turing Machine</h2>
+		
+		<h3>A Turing machine consists of:</h3> 
+
+		<ul>
+			<li>&star; A <b>finite-state control unit</b> (like a FSM)</li>
+			<li>&star; An <b>infinite/unlimited tape</b> divided into cells</li>
+			<li>&star; A <b>read/write head</b> that moves left or right.</li>
+		</ul>
+
+		The unlimited tape is divided into cells, each cell containing
+		at most one symbol from an allowable finite alphabet.
+
+		<h3>At any moment:</h3>
+		<ul>
+			<li>&star; Only a finite number of cells on the tape are nonblank.</li>
+			<li>&star; We use the special symbol <b>b</b> to denote a <b>blank cell</b>. </li>
+		</ul>
+
+		<h3>At Each Step, the Machine:</h3>
+		<ul>
+			<li>&star; <b>Reads</b> the symbol on the tape.</li>
+			<li>&star; <b>Writes</b> a symbol (can overwrite the same or different symbol).</li>
+			<li>&star; <b>Changes</b> its internal state.</li>
+			<li>&star; <b>Moves</b> the read/write head <b>left</b> (L) or <b>right</b> (R).</li>
+		</ul>
+
+		
+		The finite-state unit, through its read-write
 		head, reads one cell of the tape at any given moment (Figure 9.15).
 		<br>
 		<br>
