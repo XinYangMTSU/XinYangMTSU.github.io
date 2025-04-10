@@ -37,6 +37,39 @@
 			<img width="700px" height="150px" src="images/tmRec1.png">
 		</center>
 		<br>
+
+		Turing Machine Recognizer is a machine that accepts strings that belong to a set, and halts in a final state.
+		If the input belongs to the set (the language), the machine halts in a final (accepting) state.
+		<br>
+		
+		<table style="width:80%">
+		  <thead>
+		    <tr>
+		      <th>Situation</th>
+		      <th>What Happens</th>
+		      <th>Result</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td>Input belongs to the set</td>
+		      <td>Machine halts in a final (accepting) state</td>
+		      <td>✅ Accept</td>
+		    </tr>
+		    <tr>
+		      <td>Input not in the set, machine halts in a non-final state</td>
+		      <td>Machine halts but in a non-final (non-accepting) state</td>
+		      <td>❌ Reject</td>
+		    </tr>
+		    <tr>
+		      <td>Input not in the set, machine never halts</td>
+		      <td>Machine loops forever without reaching a final state</td>
+		      <td>❌ Reject</td>
+		    </tr>
+		  </tbody>
+		</table>
+
+		
 		<h2>Turing Machine as Recognizers</h2>
 		We can now build a Turing machine to recognize our old friend \(S =\{0^n1^n | n &ge; 0\} =
 		\{&lambda;,01,0011,000111,00001111,...\}\). The goal is to match the same number of 0's followed by the same number of 1's.
