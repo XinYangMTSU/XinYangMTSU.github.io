@@ -121,7 +121,38 @@
 				<li>&clubs; If the machine in State 2 encounters a 1 (2,1,X,3,L), it will cross out that 1 by writing X, move one step to the left, and then transition into State 3.</li>
 				<li>&clubs; Otherwise, if the machine in State 2 reads a 0, an X, or a blank (i.e., (2,0,...), (2,X,...), or (2,b,...)), it will halt and reject the input.</li>
 			</ul>
-				
+			<li>&star; <font color="red"><b>State 3</b></font>: After crossing out a 1 in State 2, the machine needs to move left across the tape to find the next unmarked 0 to process.</li>
+
+			<ul>
+				<li>&clubs; State 3 is the "sweeping left" phase: getting ready to either <font color="blue"><b>start a new 0–1 matching cycle</b></font> or <font color="blue"><b>detect completion</b></font>.</li>
+				<table style="width:80%">
+				  <thead>
+				    <tr>
+				      <th>In State 3, read...</th>
+				      <th>What happens</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <td>1</td>
+				      <td>Keep moving left (stay in State 3)</td>
+				    </tr>
+				    <tr>
+				      <td>0</td>
+				      <td>Switch to State 4 (process the next 0)</td>
+				    </tr>
+				    <tr>
+				      <td>X</td>
+				      <td>Switch to State 5 (check for end/completion)</td>
+				    </tr>
+				    <tr>
+				      <td>b</td>
+				      <td>(Rare, but could indicate error or reject)</td>
+				    </tr>
+				  </tbody>
+				</table>
+
+			</ul>
 			<li>&star; <font color="red"><b>State 6</b></font>: Accept (<font color="blue"><b>Final State</b></font>)</li>
 			
 			
