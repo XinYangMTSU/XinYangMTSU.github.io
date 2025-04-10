@@ -118,6 +118,8 @@
 			<li>&star; <font color="red"><b>State 2</b></font>: After State 1 reaches the blank (b) at the end of input or encounters an X, the machine moves one step left and enters State 2.</li>
 			<ul>
 				<li>&clubs; State 2's job is to find the last unmarked 1 and cross out that 1 by writing X, and then move into the next phase (State 3).</li>
+				<li>&clubs; If the machine in State 2 encounters a 1 (2,1,X,3,L), it will cross out that 1 by writing X, move one step to the left, and then transition into State 3.</li>
+				<li>&clubs; Otherwise, if the machine in State 2 reads a 0, an X, or a blank (i.e., (2,0,...), (2,X,...), or (2,b,...)), it will halt and reject the input.</li>
 			</ul>
 				
 			<li>&star; <font color="red"><b>State 6</b></font>: Accept (<font color="blue"><b>Final State</b></font>)</li>
