@@ -156,7 +156,7 @@
 			<li>&star; <font color="red"><b>State 4</b></font>: If State 3 finds an unmarked 0 while moving left, it switches to State 4 to continue moving 
 				left across the remaining 0’s until it reaches the start of the tape.</li>
 			<ul>
-				<li>&star; After finding an unmarked 0 (in State 3), State 4 keeps moving left across all remaining 0’s until it reaches the first X (the beginning of the tape), 
+				<li>&clubs; After finding an unmarked 0 (in State 3), State 4 keeps moving left across all remaining 0’s until it reaches the first X (the beginning of the tape), 
 					so the machine can reset and start matching the next 0–1 pair.</li>
 				<table style="width:80%">
 				  <thead>
@@ -177,6 +177,29 @@
 				    <tr>
 				      <td>b</td>
 				      <td>(Unexpected — could indicate an error or rejection)</td>
+				    </tr>
+				  </tbody>
+				</table>
+
+			</ul>
+			<li>&star; <font color="red"><b>State 5</b></font>: If State 3 sees an X while moving left, it switches to State 5.</li>
+			<ul>
+				<li>&clubs; After sweeping back to the beginning and finding that there are no more unmarked 0’s left, State 5 checks if the input has been completely processed and decides if the machine should accept.</li>
+				<table style="width:80%">
+				  <thead>
+				    <tr>
+				      <th>In State 5, read...</th>
+				      <th>Action</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <td>X</td>
+				      <td>Move right (stay in State 5)</td>
+				    </tr>
+				    <tr>
+				      <td>b</td>
+				      <td>Switch to State 6 (accept input)</td>
 				    </tr>
 				  </tbody>
 				</table>
