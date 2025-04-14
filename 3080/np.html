@@ -161,6 +161,56 @@
 		</center>
 		<br>
 
+		<h2>Comparison of P, NP, NP-Complete, and NP-Hard</h2>
+		
+		<table style="width:90%">
+			  <thead>
+			    <tr>
+			      <th>Class</th>
+			      <th>Solve Quickly (Polynomial Time)?</th>
+			      <th>Verify Quickly (Polynomial Time)?</th>
+			      <th>Must Be in NP?</th>
+			      <th>Hardness</th>
+			      <th>Examples</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <td><strong>P</strong></td>
+			      <td>✅ Yes</td>
+			      <td>✅ Yes</td>
+			      <td>✅ Yes</td>
+			      <td>Easy</td>
+			      <td>Sorting numbers, Dijkstra’s algorithm</td>
+			    </tr>
+			    <tr>
+			      <td><strong>NP</strong></td>
+			      <td>❓ Maybe hard to solve</td>
+			      <td>✅ Yes</td>
+			      <td>✅ Yes</td>
+			      <td>Harder than P</td>
+			      <td>Sudoku, Hamiltonian Path</td>
+			    </tr>
+			    <tr>
+			      <td><strong>NP-Complete</strong></td>
+			      <td>❌ Hard to solve</td>
+			      <td>✅ Yes</td>
+			      <td>✅ Yes</td>
+			      <td>Hardest in NP</td>
+			      <td>3-SAT, Traveling Salesman (decision version)</td>
+			    </tr>
+			    <tr>
+			      <td><strong>NP-Hard</strong></td>
+			      <td>❌ Hard to solve</td>
+			      <td>❓ Maybe not even verifiable</td>
+			      <td>❌ No</td>
+			      <td>At least as hard as NP problems (or harder)</td>
+			      <td>Halting Problem, TSP (optimization version)</td>
+			    </tr>
+			  </tbody>
+			</table>
+
+
 		<h2>Big-O Notation</h2>
 
 		<b><font color="red">Big-O notation</font></b> is used to analyze the time complexity (how the running time of an algorithm increases with input size) 
