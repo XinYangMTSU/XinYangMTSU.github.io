@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Legible</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 legible
+      <span class="pronunciation">/ˈlɛdʒ.ə.bəl/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/l/leg/legib/legible__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective</p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Legible means clear enough to read. It usually describes handwriting or printed text that can be read without difficulty.</p>
+    <div class="example">
+      <strong>Example:</strong> The doctor’s handwriting was surprisingly legible.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+                 <button class="audio-button2" onclick="speak('Synonyms')">
+                    🔊 Play
+                  </button>
+    </h3>
+
+    <div class="fancy-list">
+      <ul>
+        <li>Readable</li>
+        <li>Clear</li>
+        <li>Understandable</li>
+        <li>Neat</li>
+        <li>Decipherable</li>
+        <li>Intelligible</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+                 <button class="audio-button2" onclick="speak('Etymology')">
+                    🔊 Play
+                  </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> Let’s look at the origin of the word <strong>"legible"</strong>.</p>
+
+    <p><span style="font-size: 2rem;">📝</span> It comes from the Latin verb <strong>legere</strong>, which means "to read."</p>
+
+    <div class="example">
+        <ul>
+          <li><strong>legere</strong> = to read</li>
+        </ul>
+    </div>
+
+    <p><span style="font-size: 2rem;">✍️</span> Over time, it evolved through Late Latin <em>legibilis</em> into French <em>lisible</em> and then into English as <strong>legible</strong>.</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Latin:</strong>
+    <em>legere</em>
+    <span class="pronunciation">/ˈle.ɡe.re/</span>
+    <button class="audio-button2" onclick="speakItalian('legere')">
+          🔊 Play
+    </button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>French:</strong> 
+    <em>lisible</em>
+    <span class="pronunciation">/li.zibl/</span>
+    <button class="audio-button2" onclick="speakFrench('lisible')">
+          🔊 Play
+    </button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>English:</strong> 
+    <em>legible</em>
+    <span class="pronunciation">/ˈlɛdʒ.ə.bəl/</span>
+    <button class="audio-button2" onclick="speak('legible')">
+          🔊 Play
+    </button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Formality Level</th>
+        <th>Example Use</th>
+        <th>Tone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Clear</td>
+        <td>Neutral</td>
+        <td>Her handwriting is clear.</td>
+        <td>Neutral</td>
+      </tr>
+      <tr>
+        <td>Readable</td>
+        <td>Neutral</td>
+        <td>The print is small but readable.</td>
+        <td>Descriptive</td>
+      </tr>
+      <tr>
+        <td><strong>Legible</strong></td>
+        <td><strong>Neutral</strong></td>
+        <td>The essay must be legible for grading.</td>
+        <td>Objective</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Legible"</h3>
+
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/J_2cWZCJnYg?start=0"
+      title="How to Improve Handwriting | Legibility Tips"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+  <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👂</span> Watch to see how “legible” writing makes a difference in daily life.
+    </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Legible in the News</h3>
+  <p>
+    In education and legal documents, “legible” is often used to stress clarity. For example: “Voters must write their names in legible print to be counted.”
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.dictionary.com/e/word-of-the-day/legible-2022-11-12/" target="_blank" class="fancy-link">
+      🌸 Read More on Dictionary.com 🌸
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const latinLikeVoice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+      utterance.voice = latinLikeVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+  }
+
+  function speakFrench(text) {
+    const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = frenchVoice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+
+  function speakItalian(text) {
+    const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = italianVoice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
