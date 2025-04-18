@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Hubris</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 hubris
+      <span class="pronunciation">/ˈhjuː.brɪs/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/h/hub/hubri/hubris__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun</p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Hubris means excessive pride or self-confidence, often leading to a downfall. It’s when someone is so proud or arrogant that they ignore warnings or limits—and suffer consequences.</p>
+    <div class="example">
+      <strong>Example:</strong> The CEO’s hubris led him to ignore expert advice, which eventually caused the company to fail.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">
+        🔊 Play
+      </button>
+    </h3>
+
+    <div class="fancy-list">
+      <ul>
+        <li>Arrogance</li>
+        <li>Pride</li>
+        <li>Conceit</li>
+        <li>Ego</li>
+        <li>Presumption</li>
+        <li>Overconfidence</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">
+        🔊 Play
+      </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> Let’s look at the origin of the word <strong>"hubris"</strong>.</p>
+
+    <p><span style="font-size: 2rem;">📝</span> It comes from Ancient Greek <strong>hybris</strong> (ὕβρις), meaning excessive pride or defiance of the gods.</p>
+
+    <div class="example">
+        <ul>
+          <li><strong>hybris</strong> = extreme pride, arrogance</li>
+        </ul>
+    </div>
+
+    <p><span style="font-size: 2rem;">✍️</span> In Greek tragedies, hubris often leads to the hero’s downfall, making it a key theme in literature and philosophy.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong>
+      <em>ὕβρις (hybris)</em>
+      <span class="pronunciation">/ˈhyuː.brɪs/</span>
+      <button class="audio-button2" onclick="speak('hybris')">
+        🔊 Play
+      </button>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>English:</strong> 
+      <em>hubris</em>
+      <span class="pronunciation">/ˈhjuː.brɪs/</span>
+      <button class="audio-button2" onclick="speak('hubris')">
+        🔊 Play
+      </button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Arrogance</td>
+          <td>Neutral</td>
+          <td>His arrogance made him unpopular with coworkers.</td>
+          <td>Critical</td>
+        </tr>
+        <tr>
+          <td>Pride</td>
+          <td>Neutral</td>
+          <td>She took pride in her work.</td>
+          <td>Positive or negative</td>
+        </tr>
+        <tr>
+          <td><strong>Hubris</strong></td>
+          <td><strong>Formal / Literary</strong></td>
+          <td>His hubris blinded him to the risks.</td>
+          <td>Serious / dramatic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Hubris"</h3>
+    <center>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/d_o_GU28lMg" title="What is Hubris?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> This video explains how hubris plays a role in literature and history.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Hubris in the News</h3>
+    <p>
+      The word “hubris” often appears in political and business news when leaders ignore advice or push boundaries too far. For example: “Analysts blame the tech giant’s collapse on executive hubris and unchecked spending.”
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news/business-66757414" target="_blank" class="fancy-link">
+        🌸 Read More about Hubris on BBC News 🌸
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const voice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
