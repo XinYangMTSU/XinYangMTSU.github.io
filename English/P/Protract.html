@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Protract</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 protract 
+      <span class="pronunciation">/proʊˈtrækt/</span>
+      <button class="audio-button" onclick="speak('Protract')">
+        🔊 Play
+      </button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb</p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To protract something means to make it last longer than necessary; to prolong or extend in time.</p>
+    <div class="example">
+      <strong>Example:</strong> The negotiations were protracted over several months. (= They dragged on longer than expected.)
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧹 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">
+        🔊 Play
+      </button>
+    </h3>
+
+    <div class="fancy-list">
+      <ul>
+        <li>Prolong</li>
+        <li>Extend</li>
+        <li>Delay</li>
+        <li>Drag out</li>
+        <li>Lengthen</li>
+        <li>Stretch</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˈɛtəˌmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">
+        🔊 Play
+      </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> Let's look at the origin of the word <strong>"protract"</strong>.</p>
+
+    <p><span style="font-size: 2rem;">📝</span>It comes from Latin <strong>protrahere</strong> — <em>pro</em> (forward) + <em>trahere</em> (to pull).</p>
+
+    <div class="example">
+      <ul>
+        <li><strong>pro-</strong> = forward</li>
+        <li><strong>trahere</strong> = to pull or drag</li>
+      </ul>
+    </div>
+
+    <p><span style="font-size: 2rem;">✍️</span> So "protract" literally means to pull something forward in time — to delay or prolong.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧱 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong>
+      <em>protrahere</em>
+      <span class="pronunciation">/proʊˈtræ.hɛr.e/</span>
+      <button class="audio-button2" onclick="speak('protrahere')">
+        🔊 Play
+      </button>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>Modern English:</strong>
+      <em>protract</em>
+      <span class="pronunciation">/proʊˈtrækt/</span>
+      <button class="audio-button2" onclick="speak('protract')">
+        🔊 Play
+      </button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Meaning</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Prolong</td>
+          <td>To make something last longer</td>
+          <td>She prolonged the speech with extra stories.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Delay</td>
+          <td>To make something happen later</td>
+          <td>The train was delayed by 2 hours.</td>
+          <td>Often negative</td>
+        </tr>
+        <tr>
+          <td><strong>Protract</strong></td>
+          <td><strong>To extend unnecessarily or for too long</strong></td>
+          <td>They protracted the discussion endlessly.</td>
+          <td>Negative / formal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Protract in the News</h3>
+    <p>
+      In news or formal writing, "protract" is often used to describe lengthy negotiations, conflicts, or legal proceedings. For example: "The trial was protracted over several years due to repeated delays."
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
