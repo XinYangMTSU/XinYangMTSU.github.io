@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Spherical</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌍 spherical
+      <span class="pronunciation">/ˈsfɪrɪkəl/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/sph/spher/spherical__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective</p>
+
+    <h3>📖 Definition:</h3>
+    <p>"Spherical" describes something that is shaped like a sphere or ball — perfectly round in all directions.</p>
+    <div class="example">
+      <strong>Example:</strong> The Earth is not perfectly spherical, but it is close.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+                 <button class="audio-button2" onclick="speak('Synonyms')">
+                    🔊 Play
+                  </button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Round</li>
+        <li>Globular</li>
+        <li>Ball-shaped</li>
+        <li>Orb-like</li>
+        <li>Elliptical (in broader context)</li>
+      </ul>
+    </div>
+  </div>
+  
+  <br>
+  
+  <div class="word-box">
+    <h3>🔍 Etymology of the word
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+                 <button class="audio-button2" onclick="speak('Etymology')">
+                    🔊 Play
+                  </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"spherical"</strong> comes from the Greek word <em>sphaira</em>, meaning "globe" or "ball."</p>
+    <p><span style="font-size: 2rem;">📝</span> It entered English via Latin <em>sphaericus</em> and Middle French <em>spherique</em>.</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Greek:</strong>
+    <em>sphaira</em>
+    <span class="pronunciation">/ˈsfɛə.rə/</span>
+    <button class="audio-button2" onclick="speak('sphaira')">
+          🔊 Play
+    </button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>Latin:</strong> 
+    <em>sphaericus</em>
+    <span class="pronunciation">/sfaiˈri.kus/</span>
+    <button class="audio-button2" onclick="speak('sphaericus')">
+          🔊 Play
+    </button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>English:</strong> 
+    <em>spherical</em>
+    <span class="pronunciation">/ˈsfɪrɪkəl/</span>
+    <button class="audio-button2" onclick="speak('spherical')">
+          🔊 Play
+    </button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Formality Level</th>
+        <th>Example Use</th>
+        <th>Shape Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Round</td>
+        <td>Informal</td>
+        <td>A round table</td>
+        <td>2D or 3D</td>
+      </tr>
+      <tr>
+        <td>Orb</td>
+        <td>Poetic</td>
+        <td>The moon was a glowing orb</td>
+        <td>3D</td>
+      </tr>
+      <tr>
+        <td><strong>Spherical</strong></td>
+        <td><strong>Formal / Scientific</strong></td>
+        <td>A spherical virus cell</td>
+        <td>3D (perfectly ball-shaped)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="word-box">
+  <h3>🛰️ Real-Life Example</h3>
+  <p>The Death Star in Star Wars is famously spherical — a perfect shape for science fiction, but possibly impractical in real engineering terms.</p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+    voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
