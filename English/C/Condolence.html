@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Condolence</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 Condolence
+      <span class="pronunciation">/kənˈdoʊləns/</span>
+      <button class="audio-button" onclick="speak('Condolence')">
+        🔊 Play
+      </button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun</p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A condolence is an expression of sympathy, especially for someone who has experienced the death of a loved one.</p>
+    <div class="example">
+      <strong>Example:</strong> She sent a card of condolence to her friend after the funeral.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">
+        🔊 Play
+      </button>
+    </h3>
+
+    <div class="fancy-list">
+      <ul>
+        <li>Sympathy</li>
+        <li>Compassion</li>
+        <li>Comfort</li>
+        <li>Support</li>
+        <li>Empathy</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">
+        🔊 Play
+      </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"condolence"</strong> comes from the Latin word <em>condolere</em>, which means "to suffer together."</p>
+
+    <p><span style="font-size: 2rem;">📝</span>It is made up of the prefix <strong>con-</strong> meaning "together" and <strong>dolere</strong> meaning "to grieve" or "to feel pain."</p>
+
+    <div class="example">
+      <ul>
+        <li><strong>con-</strong> = together</li>
+        <li><strong>dolere</strong> = to feel pain</li>
+      </ul>
+    </div>
+
+    <p><span style="font-size: 2rem;">💡</span> So, to offer condolences literally means to share in someone's sorrow or grief.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong>
+      <em>condolere</em>
+      <span class="pronunciation">/kon-do-LE-re/</span>
+      <button class="audio-button2" onclick="speak('condolere')">
+        🔊 Play
+      </button>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>French:</strong>
+      <em>condoléance</em>
+      <span class="pronunciation">/kɔ̃.dɔ.lɑ̃s/</span>
+      <button class="audio-button2" onclick="speak('condoléance')">
+        🔊 Play
+      </button>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>English:</strong>
+      <em>condolence</em>
+      <span class="pronunciation">/kənˈdoʊləns/</span>
+      <button class="audio-button2" onclick="speak('condolence')">
+        🔊 Play
+      </button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Meaning</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sympathy</td>
+          <td>General feeling of care for someone’s sadness</td>
+          <td>I expressed my sympathy for her loss.</td>
+          <td>Warm / Caring</td>
+        </tr>
+        <tr>
+          <td>Compassion</td>
+          <td>Deep awareness of others’ suffering</td>
+          <td>He showed compassion to the grieving family.</td>
+          <td>Emotional / Heartfelt</td>
+        </tr>
+        <tr>
+          <td><strong>Condolence</strong></td>
+          <td><strong>Formal expression of sympathy</strong></td>
+          <td>They sent their condolences after the funeral.</td>
+          <td>Respectful / Formal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>📰 Condolence in the News</h3>
+    <p>
+      After the tragic earthquake, world leaders shared their condolences with the affected communities, offering support and solidarity in their time of grief.
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
