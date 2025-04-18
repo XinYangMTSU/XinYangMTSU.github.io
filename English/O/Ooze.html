@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Ooze</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 ooze
+      <span class="pronunciation">/uːz/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/o/ooz/ooze_/ooze__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb or noun</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To ooze means to flow slowly and thickly, like a liquid. It can also mean to clearly show a strong feeling or quality.</p>
+    <div class="example">
+      <strong>Example:</strong> The sauce oozed out of the sandwich. (= The sauce slowly came out.)<br>
+      <strong>Example:</strong> She oozed confidence. (= She clearly showed confidence.)
+    </div>
+
+    <h3>📖 As a noun (a thing):</h3>
+    <p>Ooze refers to any thick, sticky liquid or substance that slowly flows out.</p>
+    <div class="example">
+      <strong>Example:</strong> The swamp was full of dark green ooze.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">
+        🔊 Play
+      </button>
+    </h3>
+
+    <div class="fancy-list">
+      <ul>
+        <li>Seep</li>
+        <li>Drip</li>
+        <li>Leak</li>
+        <li>Exude</li>
+        <li>Flow</li>
+        <li>Trickle</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">
+        🔊 Play
+      </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"ooze"</strong> comes from Old English <strong>wōs</strong> meaning "juice" or "sap".</p>
+
+    <div class="example">
+        <ul>
+          <li><strong>wōs</strong> = juice, sap, or moisture</li>
+        </ul>
+    </div>
+
+    <p><span style="font-size: 2rem;">✍️</span> The word evolved in Middle English as <strong>"wose"</strong> and later became <strong>"ooze"</strong> in Modern English.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong>
+      <em>wōs</em>
+      <span class="pronunciation">/woːs/</span>
+      <button class="audio-button2" onclick="speak('woes')">
+        🔊 Play
+      </button>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>Middle English:</strong> 
+      <em>wose</em>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>Modern English:</strong> 
+      <em>ooze</em>
+      <span class="pronunciation">/uːz/</span>
+      <button class="audio-button2" onclick="speak('ooze')">
+        🔊 Play
+      </button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Meaning</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Seep</td>
+          <td>Flow slowly through something</td>
+          <td>Water seeped through the cracks.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Leak</td>
+          <td>Accidental escape of liquid or gas</td>
+          <td>The pipe leaked water onto the floor.</td>
+          <td>Neutral / Negative</td>
+        </tr>
+        <tr>
+          <td><strong>Ooze</strong></td>
+          <td><strong>Flow slowly, thickly</strong></td>
+          <td>The wound oozed blood.</td>
+          <td>Vivid / descriptive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Ooze"</h3>
+    <center>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/wlnEafqG4EM" title="Nickelodeon Slime - Ooze in Action" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch how ooze is shown visually in slime shows!
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Ooze in the News</h3>
+    <p>
+      In recent science stories, “ooze” is often used when describing strange deep-sea life or underwater discoveries. For example: “Scientists discovered a glowing ooze near the ocean floor that may contain new microbial life.”
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com/2023/06/28/science/deep-sea-ooze.html" target="_blank" class="fancy-link">
+        🌸 Read More about Ooze in Science News 🌸
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const voice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
