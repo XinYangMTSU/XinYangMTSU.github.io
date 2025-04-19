@@ -1,1 +1,178 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Nifty</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 nifty 
+      <span class="pronunciation">/ˈnɪfti/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/n/nif/nifty/nifty__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective</p>
+
+    <h3>📖 Meaning:</h3>
+    <p>“Nifty” means something that is particularly good, clever, or stylish—often small and useful in a smart way.</p>
+    <div class="example">
+      <strong>Example:</strong> She showed me a nifty little app that organizes your tasks with voice commands.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    
+    <div class="fancy-list">
+      <ul>
+        <li>Cool</li>
+        <li>Neat</li>
+        <li>Handy</li>
+        <li>Stylish</li>
+        <li>Smart</li>
+        <li>Ingenious</li>
+      </ul>
+    </div>
+  </div>
+  
+  <br>
+  
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> Let’s look at the origin (etymology) of the word <strong>"nifty"</strong>.</p>
+    
+    <p><span style="font-size: 2rem;">📝</span>The exact origin is uncertain, but "nifty" likely emerged in American English in the 19th century as slang for something attractive or clever.</p>
+
+    <p><span style="font-size: 2rem;">💡</span> Possibly related to "neat" or "thrifty," it was first documented in the 1860s and grew popular in the 20th century in both American and British informal speech.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Unknown origin:</strong> Possibly slang <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>American English (1860s):</strong> 
+      <em>nifty</em>
+      <span class="pronunciation">/ˈnɪfti/</span>
+      <button class="audio-button2" onclick="speak('nifty')">🔊 Play</button>
+    </p>
+  </div>
+  
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cool</td>
+          <td>Informal</td>
+          <td>That’s a cool trick!</td>
+          <td>Trendy / casual</td>
+        </tr>
+        <tr>
+          <td>Smart</td>
+          <td>Neutral</td>
+          <td>A smart solution to a problem</td>
+          <td>Practical / clever</td>
+        </tr>
+        <tr>
+          <td><strong>Nifty</strong></td>
+          <td><strong>Informal</strong></td>
+          <td>A nifty gadget that folds into your wallet</td>
+          <td>Cheerful / clever</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+  
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Nifty"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/C8CkJvdl-K0?start=51"
+      title="Nifty Clip from Back to the Future"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen at <strong>0:51</strong> where the character says <em>"nifty idea!"</em>
+    </div>
+    <span style="font-size: 2rem;">🎬</span> This clip is from the movie <strong>Back to the Future</strong>, where characters often use clever and expressive informal language of the 1980s.
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Nifty in the News</h3>
+    <p>
+      In a recent tech review, the journalist wrote, “Apple’s latest smartwatch has a nifty new feature that detects hand gestures.” Here, “nifty” is used to describe something clever and useful in a compact way.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theverge.com/2024/09/25/apple-watch-gesture-nifty-feature" target="_blank" class="fancy-link">
+        🍏 Read the Full Article on The Verge 🍏
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+    
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voices = speechSynthesis.getVoices();
+      const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = frenchVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+   function speakItalian(text) {
+      const voices = speechSynthesis.getVoices();
+      const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = italianVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
