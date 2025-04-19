@@ -1,1 +1,172 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Rote</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 Rote 
+      <span class="pronunciation">/roʊt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/r/rot/rote_/rote__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun</p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Rote</strong> refers to the process of learning or memorizing something through repetition, often without truly understanding the meaning.</p>
+    <div class="example">
+      <strong>Example:</strong> She learned the multiplication tables by rote, reciting them over and over again.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Memorization</li>
+        <li>Repetition</li>
+        <li>Drill</li>
+        <li>Mechanized learning</li>
+        <li>Parroting</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🖼️ Illustration: Rote Learning</h3>
+    <center>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Kids_reciting_from_books.jpg/640px-Kids_reciting_from_books.jpg" alt="Children learning by rote" style="max-width:90%; border-radius: 10px; box-shadow: 0 0 10px #ccc;">
+      <p style="margin-top: 10px; font-size: 14px; color: #555;">📸 Children reciting lessons from memory — an example of rote learning.</p>
+    </center>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>rote</strong> comes from Middle English and possibly from Old French <em>rote</em> (a type of wheel), implying repetition or turning over.</p>
+    <p><span style="font-size: 2rem;">📝</span> Over time, it came to mean learning something in a repetitive, mechanical way.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old French:</strong> <em>rote</em> (wheel, turn)<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>rote</em> (habitual repetition)<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>rote</em> (repetition-based learning)
+      <span class="pronunciation">/roʊt/</span>
+      <button class="audio-button2" onclick="speak('rote')">🔊 Play</button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Meaning</th>
+          <th>Understanding</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Rote</td>
+          <td>Memorizing through repetition</td>
+          <td>Low</td>
+          <td>Reciting times tables</td>
+        </tr>
+        <tr>
+          <td>Conceptual Learning</td>
+          <td>Understanding underlying ideas</td>
+          <td>High</td>
+          <td>Explaining why 3×4 = 12</td>
+        </tr>
+        <tr>
+          <td>Practice</td>
+          <td>Reinforcement by doing</td>
+          <td>Medium to High</td>
+          <td>Solving math problems repeatedly</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Rote"</h3>
+    <center>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/5u0WzPpP4s8?start=18" title="Rote Learning in Classroom" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> In the video, listen for how students use rote memorization techniques.
+    </div>
+    <span style="font-size: 2rem;">🎓</span> This clip contrasts rote with active learning approaches.
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Rote in the News</h3>
+    <p>
+      Many educators today are moving away from <strong>rote learning</strong> and toward active learning strategies. However, rote methods are still useful for memorizing facts like vocabulary or multiplication tables.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.edutopia.org/article/active-learning-vs-rote-memorization" target="_blank" class="fancy-link">
+        📰 Read More on Edutopia 📰
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = frenchVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = italianVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
