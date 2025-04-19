@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Loopy</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 loopy 
+      <span class="pronunciation">/ˈluːpi/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/l/loo/loopy/loopy__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective</p>
+
+    <h3>📖 Meaning #1: Silly or Slightly Crazy</h3>
+    <p>“Loopy” means acting a little weird, silly, or crazy—often because someone is tired, excited, or confused.</p>
+    <div class="example">
+      <strong>Example:</strong> After studying all night, he was feeling a bit loopy.
+    </div>
+
+    <h3>📖 Meaning #2: Full of Loops</h3>
+    <p>Describes something that has loops, curls, or swirls in shape or design.</p>
+    <div class="example">
+      <strong>Example:</strong> She signed her name in big loopy letters.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    
+    <div class="fancy-list">
+      <ul>
+        <li>Goofy</li>
+        <li>Zany</li>
+        <li>Dizzy</li>
+        <li>Crazy</li>
+        <li>Whimsical</li>
+        <li>Quirky</li>
+      </ul>
+    </div>
+  </div>
+  
+  <br>
+  
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> Let’s explore where <strong>"loopy"</strong> comes from.</p>
+    
+    <p><span style="font-size: 2rem;">📝</span>Derived from the word <strong>“loop”</strong> + suffix <strong>-y</strong>, meaning "having the characteristics of".</p>
+
+    <p><span style="font-size: 2rem;">💡</span> In the 20th century, “loopy” evolved into slang for acting a bit crazy—perhaps like someone going in mental loops.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle English:</strong> <em>loupe</em> (a loop or bend)<br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>loop</em> ➝ <em>loopy</em> (with loops / acting silly)<br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Informal Meaning:</strong> “Loopy” = slightly crazy or silly<br>
+      <span class="pronunciation">/ˈluːpi/</span>
+      <button class="audio-button2" onclick="speak('loopy')">🔊 Play</button>
+    </p>
+  </div>
+  
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Goofy</td>
+          <td>Very informal</td>
+          <td>A goofy smile</td>
+          <td>Funny / silly</td>
+        </tr>
+        <tr>
+          <td>Whimsical</td>
+          <td>Neutral / Literary</td>
+          <td>A whimsical idea</td>
+          <td>Imaginative</td>
+        </tr>
+        <tr>
+          <td><strong>Loopy</strong></td>
+          <td><strong>Informal</strong></td>
+          <td>He acted loopy after three cups of coffee</td>
+          <td>Funny / quirky / strange</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+  
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Loopy"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/FvF_1PJoZ6s?start=22"
+      title="Finding Nemo Loopy Dory Scene"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:22</strong> where Marlin talks about Dory’s “loopy” memory and behavior.
+    </div>
+    <span style="font-size: 2rem;">🎬</span> This clip is from the Pixar film <strong>Finding Nemo</strong>, where Dory’s forgetful and quirky personality fits the word “loopy” perfectly.
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Loopy in the News</h3>
+    <p>
+      In a recent article about AI art generators, the reviewer wrote, “Some of the AI’s interpretations were wildly loopy—one generated a giraffe with sunglasses surfing a pizza.” This highlights the word’s quirky and amusing connotation.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com/2025/02/21/technology/ai-art-generator-loopy-results.html" target="_blank" class="fancy-link">
+        🎨 Read the Full Article on NYT 🎨
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+    
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voices = speechSynthesis.getVoices();
+      const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = frenchVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+   function speakItalian(text) {
+      const voices = speechSynthesis.getVoices();
+      const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = italianVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
