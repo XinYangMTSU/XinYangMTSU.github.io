@@ -1,1 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Frisbee</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
 
+  <div class="word-box">
+    <h2>
+      🌟 Frisbee 
+      <span class="pronunciation">/ˈfrɪz.bi/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/f/fri/frisb/frisbee__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun</p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A <strong>Frisbee</strong> is a flat, round plastic disc used for throwing and catching in outdoor games and sports. It glides through the air when spun and is often played with at parks, beaches, and fields.</p>
+    <div class="example">
+      <strong>Example:</strong> The kids tossed the frisbee back and forth across the sunny park.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Frisbee</li>
+        <li>Flying disc</li>
+        <li>Throwing disc</li>
+        <li>Glider</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🖼️ Image of a Frisbee</h3>
+    <center>
+      <img src="/mnt/data/A_web-based_educational_resource_showcases_the_wor.png" alt="People playing with a frisbee" style="max-width:90%; border-radius: 10px; box-shadow: 0 0 10px #ccc;">
+      <p style="margin-top: 10px; font-size: 14px; color: #555;">📸 A group of people playing with a Frisbee in a field.</p>
+    </center>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The name "Frisbee" originated from the <strong>Frisbie Pie Company</strong> in the U.S., whose pie tins college students used to toss around for fun.</p>
+
+    <p><span style="font-size: 2rem;">📝</span> The plastic disc version was created by Wham-O in the 1950s and marketed as a toy.</p>
+
+    <p><span style="font-size: 2rem;">💡</span> Though "Firsbee" is a common misspelling, it refers to the same flying toy that has become a cultural icon of outdoor play.</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Frisbie Pie Company (USA)</strong><br>
+    <span style="font-size: 2rem;">⬇️</span><br>
+    <strong>College Pie Tin Tossing</strong><br>
+    <span style="font-size: 2rem;">⬇️</span><br>
+    <strong>Wham-O "Frisbee" Toy</strong><br>
+    <span class="pronunciation">/ˈfrɪz.bi/</span>
+    <button class="audio-button2" onclick="speak('Frisbee')">🔊 Play</button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Use</th>
+        <th>Material</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Frisbee</td>
+        <td>Throw and catch</td>
+        <td>Plastic</td>
+        <td>Playing Frisbee at the park</td>
+      </tr>
+      <tr>
+        <td>Ball</td>
+        <td>Kicking, bouncing</td>
+        <td>Rubber or leather</td>
+        <td>Kicking a soccer ball</td>
+      </tr>
+      <tr>
+        <td>Boomerang</td>
+        <td>Returning throw</td>
+        <td>Wood or plastic</td>
+        <td>Throw and catch the boomerang</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+  <h3>🎬 Clip Example – Use of the Word "Frisbee"</h3>
+  <center>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/jhyxi1gPq9Y?start=30" title="Playing Frisbee in the Park" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </center>
+  <br>
+  <div class="word-box">
+    <span style="font-size: 2rem;">👂</span> In the video, people casually say "Frisbee" while enjoying the game — a perfect example of everyday use!
+  </div>
+  <span style="font-size: 2rem;">☀️</span> Frisbee is a favorite outdoor activity in parks, schools, and beaches around the world.
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Frisbee in the News</h3>
+  <p>
+    Frisbee has grown into an internationally recognized sport. <strong>Ultimate Frisbee</strong> and <strong>Disc Golf</strong> are now competitive activities with leagues and tournaments held globally.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.teamusa.org/USA-Ultimate" target="_blank" class="fancy-link">
+      🌍 Visit USA Ultimate for More 🌍
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+    voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+
+  function speakFrench(text) {
+    const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = frenchVoice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+
+  function speakItalian(text) {
+    const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = italianVoice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
