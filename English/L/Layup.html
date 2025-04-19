@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Layup</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 Layup 
+      <span class="pronunciation">/ˈleɪ.ʌp/</span>
+      <button class="audio-button" onclick="speak(layup)">
+        🔊 Play
+      </button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun</p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A <strong>layup</strong> is a type of basketball shot made from close range, usually by gently banking the ball off the backboard into the basket. It is considered one of the easiest and most fundamental shots in the game.</p>
+    <div class="example">
+      <strong>Example:</strong> The player drove past the defender and finished with a smooth layup.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+                 <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Easy shot</li>
+        <li>Bank shot</li>
+        <li>Close-range basket</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+                 <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>layup</strong> comes from the verb phrase "lay up," meaning to place or lift something up gently. In basketball, it refers to softly laying the ball into the hoop.</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>English:</strong> 
+    <em>lay up</em> → to place up gently<br>
+    <span style="font-size: 2rem;">⬇️</span><br>
+    <strong>Modern Basketball:</strong>
+    <em>layup</em> = close, easy shot
+    <span class="pronunciation">/ˈleɪ.ʌp/</span>
+    <button class="audio-button2" onclick="speak('layup')">🔊 Play</button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Shot Type</th>
+        <th>Distance</th>
+        <th>Difficulty</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Layup</td>
+        <td>Very close</td>
+        <td>Easy</td>
+        <td>Drives to the hoop for a layup</td>
+      </tr>
+      <tr>
+        <td>Jump shot</td>
+        <td>Mid-range</td>
+        <td>Moderate</td>
+        <td>Pulls up and shoots a jumper</td>
+      </tr>
+      <tr>
+        <td>Three-pointer</td>
+        <td>Long-range</td>
+        <td>Hard</td>
+        <td>Hits a deep three from the corner</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Layup"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/kLFytH4LhK4?start=15"
+      title="Basketball Layup Tutorial"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+  <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> when the coach says <em>"layup"</em>.
+    </div>
+      <span style="font-size: 2rem;">🏀</span> Layups are essential skills taught early in basketball training.
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Layup in the News</h3>
+  <p>
+    In sports reporting, <strong>"layup"</strong> is often used both literally and metaphorically — describing an easy shot in basketball, or referring to any opportunity that should be simple to take.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.espn.com/nba/story/_/id/36038782/lebron-james-makes-game-winning-layup-ot" target="_blank" class="fancy-link">
+      🏀 Read: LeBron's Game-Winning Layup on ESPN 🏀
+    </a>
+  </p>
+</div>
+
+  <script>
+        let voices = [];
+        window.speechSynthesis.onvoiceschanged = () => {
+            voices = speechSynthesis.getVoices();
+        };
+        
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            const latinLikeVoice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+            utterance.voice = latinLikeVoice;
+            utterance.rate = 0.9;
+            speechSynthesis.speak(utterance);
+        }
+
+        function speakFrench(text) {
+          const voices = speechSynthesis.getVoices();
+          const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.voice = frenchVoice;
+          utterance.rate = 0.9;
+          speechSynthesis.speak(utterance);
+        }
+
+       function speakItalian(text) {
+          const voices = speechSynthesis.getVoices();
+          const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.voice = italianVoice;
+          utterance.rate = 0.9;
+          speechSynthesis.speak(utterance);
+        }
+        
+    </script>
+
+</body>
+</html>
