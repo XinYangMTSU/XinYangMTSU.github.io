@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Nibble</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 nibble 
+      <span class="pronunciation">/ˈnɪb(ə)l/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/n/nib/nibbl/nibble__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb or noun</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To nibble means to take small, gentle bites of something, often in a cautious or playful way.</p>
+    <div class="example">
+      <strong>Example:</strong> She nibbled at a piece of cheese while reading.
+    </div>
+
+    <h3>📖 As a noun (a thing):</h3>
+    <p>A nibble is a small bite or a tiny amount of food, especially as a snack.</p>
+    <div class="example">
+      <strong>Example:</strong> He took a nibble of the cookie and smiled.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    
+    <div class="fancy-list">
+      <ul>
+        <li>Chew (lightly)</li>
+        <li>Bite</li>
+        <li>Sip (for drinks)</li>
+        <li>Munch (softly)</li>
+        <li>Taste</li>
+        <li>Graze</li>
+      </ul>
+    </div>
+  </div>
+  
+  <br>
+  
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> Let’s explore the origin of <strong>"nibble"</strong>.</p>
+    
+    <p><span style="font-size: 2rem;">📝</span>Probably from Low German <strong>nibbeln</strong>, meaning “to gnaw or bite lightly.”</p>
+
+    <p><span style="font-size: 2rem;">💡</span> Related to “nib” (like the nib of a pen), which also refers to a small pointed part—just like a small bite.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Low German:</strong> <em>nibbeln</em><br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>nibble</em><br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>nibble</em>
+      <span class="pronunciation">/ˈnɪb(ə)l/</span>
+      <button class="audio-button2" onclick="speak('nibble')">🔊 Play</button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bite</td>
+          <td>Neutral</td>
+          <td>He took a big bite of his sandwich</td>
+          <td>Direct / physical</td>
+        </tr>
+        <tr>
+          <td>Graze</td>
+          <td>Neutral / Informal</td>
+          <td>She grazed on crackers and fruit</td>
+          <td>Light / continuous</td>
+        </tr>
+        <tr>
+          <td><strong>Nibble</strong></td>
+          <td><strong>Neutral / Playful</strong></td>
+          <td>The baby nibbled on the cookie</td>
+          <td>Soft / gentle</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+  
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Nibble"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/BffA9kYgYWc?start=42"
+      title="Animals nibbling fruit"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch the animal gently nibbling on fruit around <strong>0:42</strong>.
+    </div>
+    <span style="font-size: 2rem;">🦔</span> Nibbling is a soft, cute behavior often seen in small animals or babies, and also used metaphorically to describe light or hesitant actions.
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Nibble in the News</h3>
+    <p>
+      A recent food blog reported: “This year’s hottest food trend isn’t big meals—it’s all about nibbling. Think charcuterie boards, snack platters, and ‘grazing’ culture taking over social media.”
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com/2024/12/15/dining/nibble-trend-charcuterie.html" target="_blank" class="fancy-link">
+        🍇 Read the Full Article on NYTimes 🍇
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+    
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voices = speechSynthesis.getVoices();
+      const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = frenchVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+   function speakItalian(text) {
+      const voices = speechSynthesis.getVoices();
+      const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = italianVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
