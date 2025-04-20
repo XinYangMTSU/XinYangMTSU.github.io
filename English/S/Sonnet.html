@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Sonnet</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 sonnet 
+      <span class="pronunciation">/ˈsɒnɪt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/son/sonne/sonnet__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun</p>
+
+    <h3>📖 Definition:</h3>
+    <p>A <strong>sonnet</strong> is a 14-line poem, typically written in iambic pentameter, that follows a specific rhyme scheme. It often explores themes of love, time, beauty, or nature. Famous sonnet types include the Shakespearean and Petrarchan sonnet.</p>
+
+    <div class="example">
+      <strong>Example:</strong> Shakespeare's Sonnet 18 begins with the famous line: "Shall I compare thee to a summer's day?"
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧰 Synonyms
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Poem</li>
+        <li>Verse</li>
+        <li>Rhyme</li>
+        <li>Ballad</li>
+        <li>Lyric</li>
+        <li>Composition</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"sonnet"</strong> comes from the Italian word <em>sonetto</em>, which means "little song" or "little sound." It is derived from Latin <em>sonus</em> (sound).</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🔭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>sonus</em> (sound)<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Italian:</strong> <em>sonetto</em> (little song)<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>English:</strong> <em>sonnet</em>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Form</th>
+          <th>Structure</th>
+          <th>Rhyme Scheme</th>
+          <th>Theme</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Shakespearean Sonnet</td>
+          <td>3 quatrains + 1 couplet</td>
+          <td>ABAB CDCD EFEF GG</td>
+          <td>Love, Time, Beauty</td>
+        </tr>
+        <tr>
+          <td>Petrarchan Sonnet</td>
+          <td>Octave + Sestet</td>
+          <td>ABBAABBA CDECDE</td>
+          <td>Philosophical Ideas</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎥 Clip Example – Shakespeare Sonnet</h3>
+    <center>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/bP6B9HttRI8" title="Sonnet 18 Read Aloud" frameborder="0" allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">🎧</span> Listen to the famous Shakespearean Sonnet 18 and notice the rhyme and rhythm of the form.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Sonnet in the News</h3>
+    <p>
+      The sonnet remains a popular poetic form in both literature and modern songwriting. An NPR article explored how today's lyricists use sonnet structures to craft poetic lyrics.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.npr.org/poetry-sonnet-modern-lyrics" target="_blank" class="fancy-link">
+        📐 Explore the NPR Feature
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+    
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = frenchVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = italianVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
