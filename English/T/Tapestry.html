@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Tapestry</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 tapestry 
+      <span class="pronunciation">/ˈtæpəstri/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/t/tap/tapes/tapestry__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun</p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A tapestry is a piece of thick fabric with pictures or designs woven into it, often used as a wall hanging. Figuratively, it also refers to something rich, complex, and intricately made—like a story, history, or idea.</p>
+    <div class="example">
+      <strong>Example (literal):</strong> The medieval castle was decorated with colorful tapestries.
+    </div>
+    <div class="example">
+      <strong>Example (figurative):</strong> The novel presents a rich tapestry of life in 19th-century England.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Wall hanging</li>
+        <li>Embroidery</li>
+        <li>Weaving</li>
+        <li>Patchwork (figurative)</li>
+        <li>Collage (figurative)</li>
+        <li>Storyline (figurative)</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>“tapestry”</strong> comes from:</p>
+    <p><span style="font-size: 2rem;">📝</span><strong>Old French:</strong> <em>tapisserie</em> → <strong>Latin:</strong> <em>tapetum</em> (carpet, covering)</p>
+    <p><span style="font-size: 2rem;">💡</span> Originally meant a heavy cloth used for covering or decoration, and later extended figuratively to mean something rich and detailed.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>tapetum</em> 
+      <button class="audio-button2" onclick="speakItalian('tapetum')">🔊 Play</button><br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>French:</strong> <em>tapisserie</em> 
+      <button class="audio-button2" onclick="speakFrench('tapisserie')">🔊 Play</button><br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>English:</strong> <em>tapestry</em>
+      <button class="audio-button2" onclick="speak('tapestry')">🔊 Play</button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Literal Meaning</th>
+          <th>Figurative Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tapestry</td>
+          <td>Woven artwork or fabric</td>
+          <td>Rich, interconnected structure</td>
+          <td>Artistic / poetic</td>
+        </tr>
+        <tr>
+          <td>Patchwork</td>
+          <td>Quilt made of fabric pieces</td>
+          <td>Something made up of diverse elements</td>
+          <td>Mixed / descriptive</td>
+        </tr>
+        <tr>
+          <td>Collage</td>
+          <td>Art from glued materials</td>
+          <td>Combination of ideas or memories</td>
+          <td>Creative / modern</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Tapestry"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/ZBHF7r63TbE?start=10"
+        title="Tapestry Metaphor Scene"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen for the phrase <em>"a tapestry of memories"</em> around <strong>00:20</strong>.
+    </div>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const voice = voices.find(v => v.lang.includes('it')) || voices[0];
+      const utterance = new SpeechSynthesisUtter
