@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Formidable</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="word-box">
+  <h2>
+    🌟 formidable 
+    <span class="pronunciation">/ˈfɔːrmɪdəbl/</span>
+    <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+  </h2>
+  <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/f/for/formi/formidable__us_1.mp3"></audio>
+
+  <p><strong>Part of speech:</strong> Adjective</p>
+
+  <h3>📖 Meaning:</h3>
+  <p><strong>Formidable</strong> describes something or someone that inspires fear or respect because of their size, strength, skill, or difficulty.</p>
+  <div class="example">
+    <strong>Example:</strong> The mountain posed a formidable challenge for even the most experienced climbers.
+  </div>
+</div>
+
+<div class="etymology">
+  <h3>🧩 Synonyms 
+    <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+    <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+  </h3>
+
+  <div class="fancy-list">
+    <ul>
+      <li>Intimidating</li>
+      <li>Powerful</li>
+      <li>Daunting</li>
+      <li>Impressive</li>
+      <li>Dreadful</li>
+      <li>Fearsome</li>
+    </ul>
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>🔍 Etymology of the word 
+    <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+    <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+  </h3>
+
+  <p><span style="font-size: 2rem;">📚</span> The word <strong>"formidable"</strong> comes from the Latin word <em>formidabilis</em>, meaning “causing fear.”</p>
+
+  <div class="example">
+    <ul>
+      <li><strong>formidare</strong> = to fear</li>
+      <li><strong>-abilis</strong> = capable of</li>
+    </ul>
+  </div>
+
+  <p><span style="font-size: 2rem;">💡</span> So “formidable” literally means something “capable of causing fear or respect.”</p>
+</div>
+
+<div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Latin:</strong>
+    <em>formidabilis</em>
+    <span class="pronunciation">/for.miˈda.bi.lis/</span>
+    <button class="audio-button2" onclick="speakItalian('formidabilis')">🔊 Play</button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>French:</strong> 
+    <em>formidable</em>
+    <span class="pronunciation">/fɔʁ.mi.dabl/</span>
+    <button class="audio-button2" onclick="speakFrench('formidable')">🔊 Play</button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>English:</strong> 
+    <em>formidable</em>
+    <span class="pronunciation">/ˈfɔːrmɪdəbl/</span>
+    <button class="audio-button2" onclick="speak('formidable')">🔊 Play</button>
+  </p>
+</div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Formality Level</th>
+        <th>Example Use</th>
+        <th>Tone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Scary</td>
+        <td>Informal</td>
+        <td>The haunted house was scary.</td>
+        <td>Frightening / casual</td>
+      </tr>
+      <tr>
+        <td>Intimidating</td>
+        <td>Neutral</td>
+        <td>She found the interview panel intimidating.</td>
+        <td>Nervous / threatening</td>
+      </tr>
+      <tr>
+        <td><strong>Formidable</strong></td>
+        <td><strong>Formal</strong></td>
+        <td>A formidable opponent in chess</td>
+        <td>Powerful / admirable / slightly scary</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<div class="etymology">
+  <h3>🎬 Clip Example – Use of the Word "Formidable"</h3>
+
+  <center>
+    <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/R54eq1vvgbw?start=40"
+      title="Formidable Explained in Movie Context"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </center>
+
+  <br>
+  <div class="word-box">
+    <span style="font-size: 2rem;">👂</span> Listen for how “formidable” describes a respected and powerful figure.
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Formidable in the News</h3>
+  <p>
+    In a recent article, a young chess player was praised for defeating a “formidable grandmaster” at an international tournament. The journalist highlighted the challenge and respect such a victory implies.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://chessbase.com/news/formidable-rising-champion-defeats-veteran" target="_blank" class="fancy-link">
+      ♟️ Read the Full Article ♟️
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+    voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+
+  function speakFrench(text) {
+    const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+
+  function speakItalian(text) {
+    const voice = voices.find(v => v.lang.includes('it')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
