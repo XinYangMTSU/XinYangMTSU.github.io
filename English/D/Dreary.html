@@ -1,1 +1,179 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Dreary</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 dreary 
+      <span class="pronunciation">/ˈdrɪəri/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/dre/drear/dreary__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective</p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Dreary</strong> describes something that is dull, bleak, depressing, or lifeless, often making you feel sad or bored.</p>
+    <div class="example">
+      <strong>Example:</strong> It was a cold, dreary day with gray skies and steady rain.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🥉 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+                 <button class="audio-button2" onclick="speak('Synonyms')">
+                    🔊 Play
+                  </button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Dull</li>
+        <li>Boring</li>
+        <li>Bleak</li>
+        <li>Gloomy</li>
+        <li>Melancholy</li>
+        <li>Desolate</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+                 <button class="audio-button2" onclick="speak('Etymology')">
+                    🔊 Play
+                  </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> <strong>Dreary</strong> originates from Old English <em>drēorig</em>, which meant sorrowful or bloody. Over time, the word evolved to describe anything that makes you feel down or depressed.</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Old English:</strong>
+    <em>drēorig</em> (sad, grievous)
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+    <strong>Middle English:</strong> <em>dreiry</em>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+    <strong>Modern English:</strong>
+    <em>dreary</em>
+    <span class="pronunciation">/ˈdrɪəri/</span>
+    <button class="audio-button2" onclick="speak('dreary')">
+          🔊 Play
+    </button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Emotion</th>
+        <th>Context</th>
+        <th>Intensity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Boring</td>
+        <td>Neutral / Negative</td>
+        <td>A dull meeting or book</td>
+        <td>Low</td>
+      </tr>
+      <tr>
+        <td><strong>Dreary</strong></td>
+        <td><strong>Negative</strong></td>
+        <td>Weather, routine, life</td>
+        <td><strong>Medium</strong></td>
+      </tr>
+      <tr>
+        <td>Depressing</td>
+        <td>Very Negative</td>
+        <td>News, stories, life events</td>
+        <td>High</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+  <h3>🎥 Clip Example – Use of the Word "Dreary"</h3>
+
+  <center>
+    <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/ZX9HcRt0f5k?start=42"
+    title="Movie scene with 'dreary' used"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+    </iframe>
+  </center>
+<br>
+  <div class="word-box">
+      <span style="font-size: 2rem;">👁️</span> Watch around <strong>0:42</strong> when the character says <em>"This place is so dreary!"</em>
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+
+  <h3>📰 Dreary in the News</h3>
+  <p>
+    A recent weather report described the start of the week as <strong>dreary</strong>, with gray skies, drizzling rain, and little sunlight. Such conditions often lead to low mood and decreased motivation.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.cnn.com/weather" target="_blank" class="fancy-link">
+      ☁️ Check Today's Weather Forecast ☁️
+    </a>
+  </p>
+</div>
+
+<script>
+      let voices = [];
+      window.speechSynthesis.onvoiceschanged = () => {
+          voices = speechSynthesis.getVoices();
+      };
+
+      function speak(text) {
+          const utterance = new SpeechSynthesisUtterance(text);
+          const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+          utterance.voice = voice;
+          utterance.rate = 0.9;
+          speechSynthesis.speak(utterance);
+      }
+
+      function speakFrench(text) {
+        const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = frenchVoice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+      }
+
+      function speakItalian(text) {
+        const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = italianVoice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+      }
+</script>
+
+</body>
+</html>
