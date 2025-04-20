@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Revved-up</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="word-box">
+  <h2>
+    🌟 revved-up 
+    <span class="pronunciation">/rɛvd ʌp/</span>
+    <button class="audio-button" onclick="speak('revved-up')">🔊 Play</button>
+  </h2>
+ 
+
+  <p><strong>Part of speech:</strong> Adjective (informal, idiomatic)</p>
+
+  <h3>📖 Meaning:</h3>
+  <p>“Revved-up” describes something that has been made more intense, energized, exciting, or fast-paced. Originally from car engines, it now often refers to feelings, activities, games, or events that are more thrilling or powerful than usual.</p>
+  <div class="example">
+    <strong>Example:</strong> The teacher turned the old board game into a revved-up classroom competition. (= She made it more exciting and engaging.)
+  </div>
+</div>
+
+<div class="etymology">
+  <h3>🧩 Synonyms 
+    <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+    <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+  </h3>
+  <div class="fancy-list">
+    <ul>
+      <li>Intensified</li>
+      <li>Boosted</li>
+      <li>Hyped-up</li>
+      <li>Supercharged</li>
+      <li>Exhilarated</li>
+      <li>Amped up</li>
+    </ul>
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>🔍 Etymology of the word 
+    <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+    <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+  </h3>
+
+  <p><span style="font-size: 2rem;">📚</span> The term <strong>“revved-up”</strong> comes from the verb <strong>rev</strong>, which is short for <em>revolution</em>, as in engine revolutions per minute (RPM).</p>
+
+  <p><span style="font-size: 2rem;">🛠️</span> To "rev" an engine means to increase its speed without moving the vehicle.</p>
+
+  <p><span style="font-size: 2rem;">💬</span> Over time, this term began to be used metaphorically to describe anything made more energetic, exciting, or powerful—like a <em>revved-up game</em> or a <em>revved-up crowd</em>.</p>
+</div>
+
+<div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Mechanical Origin:</strong><br>
+    <em>Rev</em> (shortened from “revolution”) → <em>to rev up (an engine)</em> → <em>revved-up</em> (energized, intensified)
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+    <strong>Modern Idiomatic Use:</strong><br>
+    A <em>revved-up crowd</em>, <em>revved-up debate</em>, or <em>revved-up version of a game</em>
+  </p>
+</div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Expression</th>
+        <th>Formality Level</th>
+        <th>Example Use</th>
+        <th>Tone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Boosted</td>
+        <td>Neutral</td>
+        <td>A boosted performance</td>
+        <td>Positive / Technical</td>
+      </tr>
+      <tr>
+        <td>Hyped-up</td>
+        <td>Informal</td>
+        <td>A hyped-up music festival</td>
+        <td>Excited / Pop culture</td>
+      </tr>
+      <tr>
+        <td><strong>Revved-up</strong></td>
+        <td><strong>Informal / Figurative</strong></td>
+        <td>A revved-up version of a classic game</td>
+        <td>Energetic / Enhanced</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<div class="etymology">
+  <h3>🎬 Clip Example – Use of "Revved-up"</h3>
+
+  <center>
+    <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/dXgGzNms3jg?start=36"
+      title="Fast and Furious Engine Sound"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </center>
+
+  <br>
+  <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen at <strong>0:36</strong> where you hear the revving engine.  
+      The sound is a literal version of the “revved-up” metaphor!
+  </div>
+  <span style="font-size: 2rem;">🏁</span> The idea of revving conveys excitement, energy, and forward momentum—often used in games, music, or learning environments.
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Revved-up in the News</h3>
+  <p>
+    In a recent tech article, the phrase <strong>"revved-up version of ChatGPT"</strong> was used to describe a new release that is faster, smarter, and more powerful than before.  
+    The term emphasizes how the upgrade enhances both speed and capability.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://techcrunch.com/2024/11/28/openai-launches-revved-up-gpt/" target="_blank" class="fancy-link">
+      🚀 Read the Full Article on TechCrunch 🚀
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
