@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Millennia</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 millennia 
+      <span class="pronunciation">/məˈlɛniə/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/m/mil/mille/millennium__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun (plural form of "millennium")</p>
+
+    <h3>📖 Definition:</h3>
+    <p><strong>Millennia</strong> refers to periods of a thousand years. It is the plural form of the word <em>millennium</em>.</p>
+    <div class="example">
+      <strong>Example:</strong> For millennia, humans have gazed at the stars and wondered about the universe.
+    </div>
+
+    <h3>📖 Broader Meaning:</h3>
+    <p>It can also be used to refer to long spans of time symbolically or poetically.</p>
+    <div class="example">
+      <strong>Example:</strong> These traditions have survived for millennia.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    
+    <div class="fancy-list">
+      <ul>
+        <li>Thousands of years</li>
+        <li>Ages</li>
+        <li>Epochs</li>
+        <li>Generations</li>
+        <li>Centuries (not exact, but similar usage)</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"millennia"</strong> comes from the Latin word <strong>millennium</strong>, which is made up of:</p>
+
+    <div class="example">
+      <ul>
+        <li><strong>mille</strong> = thousand</li>
+        <li><strong>annus</strong> = year</li>
+      </ul>
+    </div>
+
+    <p><span style="font-size: 2rem;">✍️</span> The plural form in Latin is <em>millennia</em>, which was adopted directly into English.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>millennium</em>
+      <span class="pronunciation">/milˈlɛn.ni.um/</span>
+      <button class="audio-button2" onclick="speakItalian('millennium')">🔊 Play</button>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>English:</strong> <em>millennia</em>
+      <span class="pronunciation">/məˈlɛniə/</span>
+      <button class="audio-button2" onclick="speak('millennia')">🔊 Play</button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Century</td>
+          <td>Neutral</td>
+          <td>The building stood for over a century.</td>
+          <td>Common / Historical</td>
+        </tr>
+        <tr>
+          <td>Epoch</td>
+          <td>Formal</td>
+          <td>The Ice Age was a cold epoch in history.</td>
+          <td>Scientific / grand</td>
+        </tr>
+        <tr>
+          <td><strong>Millennia</strong></td>
+          <td><strong>Formal / Poetic</strong></td>
+          <td>Humanity has evolved over millennia.</td>
+          <td>Epic / timeless</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Millennia"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/EZ8PzWP9Cjw?start=38"
+        title="History of Civilization – Millennia of Growth"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen at <strong>0:38</strong> where the narrator says: <em>"over millennia, societies have developed..."</em>
+    </div>
+    <span style="font-size: 2rem;">📽️</span> This video explores the growth of human civilizations over thousands of years.
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Millennia in the News</h3>
+    <p>
+      A recent article discusses how climate patterns recorded in tree rings and glaciers reveal changes that occurred over several millennia.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.scientificamerican.com/article/tree-rings-and-glaciers-reveal-climate-truths/" target="_blank" class="fancy-link">
+        🌍 Read the Full Article on Scientific American 🌍
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+    
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const voice = voices.find(v => v.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
