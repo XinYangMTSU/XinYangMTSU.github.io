@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Foe</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 Foe 
+      <span class="pronunciation">/foʊ/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/f/foe/foe__/foe__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun</p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A <strong>foe</strong> is an enemy or opponent — someone who is against you in a conflict, competition, or struggle.</p>
+    <div class="example">
+      <strong>Example:</strong> The hero defeated his longtime foe in the final battle.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+                 <button class="audio-button2" onclick="speak('Synonyms')">
+                    🔊 Play
+                  </button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Enemy</li>
+        <li>Opponent</li>
+        <li>Rival</li>
+        <li>Adversary</li>
+        <li>Combatant</li>
+        <li>Antagonist</li>
+      </ul>
+    </div>
+  </div>
+  
+  <br>
+  
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+                 <button class="audio-button2" onclick="speak('Etymology')">
+                    🔊 Play
+                  </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>foe</strong> dates back to Old English <em>fāh</em> and <em>gefā</em>, meaning "hostile" or "enemy." It evolved into Middle English <em>fo</em> and then into the modern form <em>foe</em>.</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Old English:</strong> 
+    <em>gefā</em> = enemy<br>
+    <span style="font-size: 2rem;">⬇️</span><br>
+    <strong>Middle English:</strong> 
+    <em>fo</em><br>
+    <span style="font-size: 2rem;">⬇️</span><br>
+    <strong>Modern English:</strong> 
+    <em>foe</em>
+    <span class="pronunciation">/foʊ/</span>
+    <button class="audio-button2" onclick="speak('foe')">
+          🔊 Play
+    </button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Formality Level</th>
+        <th>Example Use</th>
+        <th>Tone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Opponent</td>
+        <td>Neutral</td>
+        <td>A chess opponent</td>
+        <td>Competitive</td>
+      </tr>
+      <tr>
+        <td>Enemy</td>
+        <td>Common</td>
+        <td>Soldiers fighting their enemies</td>
+        <td>Hostile</td>
+      </tr>
+      <tr>
+        <td><strong>Foe</strong></td>
+        <td><strong>Formal / Poetic</strong></td>
+        <td>The knight faced his ancient foe</td>
+        <td>Dramatic / Epic</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+  
+<div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Foe"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/sEuJIDxYB28?start=45"
+      title="Foe in Literature and Film"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+  <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👂</span> Listen to how the narrator says "foe" in reference to the villain.
+    </div>
+      <span style="font-size: 2rem;">⚔️</span> “Foe” is often used in heroic stories or fantasy battles.
+</div>
+
+<br>
+  
+<div class="word-box">
+  <h3>📰 Foe in the News</h3>
+  <p>
+    In journalism, <strong>“foe”</strong> may be used to describe rival countries, competing political groups, or ideological opponents — usually with a dramatic or rhetorical tone.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.politico.com/news/2024/11/03/foe-rivalry-election-00124375" target="_blank" class="fancy-link">
+      📰 Read: Political Foes Clash Ahead of Election – Politico 📰
+    </a>
+  </p>
+</div>
+
+  <script>
+        let voices = [];
+        window.speechSynthesis.onvoiceschanged = () => {
+            voices = speechSynthesis.getVoices();
+        };
+        
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            const latinLikeVoice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+            utterance.voice = latinLikeVoice;
+            utterance.rate = 0.9;
+            speechSynthesis.speak(utterance);
+        }
+
+        function speakFrench(text) {
+          const voices = speechSynthesis.getVoices();
+          const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.voice = frenchVoice;
+          utterance.rate = 0.9;
+          speechSynthesis.speak(utterance);
+        }
+
+       function speakItalian(text) {
+          const voices = speechSynthesis.getVoices();
+          const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.voice = italianVoice;
+          utterance.rate = 0.9;
+          speechSynthesis.speak(utterance);
+        }
+        
+    </script>
+
+</body>
+</html>
