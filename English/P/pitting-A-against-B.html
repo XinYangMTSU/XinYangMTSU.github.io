@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Pitting A against B</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="word-box">
+  <h2>
+    🌟 pitting A against B 
+    <span class="pronunciation">/ˈpɪtɪŋ eɪ əˈɡɛnst biː/</span>
+    <button class="audio-button" onclick="speak('pitting A against B')">🔊 Play</button>
+  </h2>
+  <audio id="audio" src="https://dict.youdao.com/dictvoice?audio=pitting%20against&type=2"></audio>
+
+  <p><strong>Part of speech:</strong> Idiomatic expression (verb phrase)</p>
+
+  <h3>📖 Meaning:</h3>
+  <p>To <strong>pit A against B</strong> means to set two people, ideas, groups, or things in direct opposition, conflict, or competition with each other.</p>
+  <div class="example">
+    <strong>Example:</strong> The debate pitted science against religion. (= The two were positioned as competing or conflicting sides.)
+  </div>
+</div>
+
+<div class="etymology">
+  <h3>🧩 Synonyms 
+    <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+    <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+  </h3>
+
+  <div class="fancy-list">
+    <ul>
+      <li>Oppose</li>
+      <li>Confront</li>
+      <li>Challenge</li>
+      <li>Set against</li>
+      <li>Compete</li>
+      <li>Contrast</li>
+    </ul>
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>🔍 Etymology of the Phrase 
+    <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+    <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+  </h3>
+
+  <p><span style="font-size: 2rem;">📚</span> The verb <strong>pit</strong> comes from the noun <strong>pit</strong> — like a fighting pit — where opponents face each other. To “pit someone against” another comes from the idea of throwing two fighters into a pit to battle.</p>
+  <p><span style="font-size: 2rem;">💡</span> Today, it's used more broadly: debates, ideas, sports teams, even inner emotions can be pitted against one another.</p>
+</div>
+
+<div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Old English:</strong> <em>pytt</em> (a hole or pit)<br>
+    <span style="font-size: 2rem;">⬇️</span><br>
+    <strong>Middle English:</strong> <em>pitten</em> (to throw into a pit)<br>
+    <span style="font-size: 2rem;">⬇️</span><br>
+    <strong>Modern English:</strong> 
+    <em>to pit A against B</em> = to place in conflict or opposition
+  </p>
+</div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Phrase</th>
+        <th>Used With</th>
+        <th>Meaning</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Oppose</td>
+        <td>Ideas, people, actions</td>
+        <td>To resist or go against</td>
+        <td>He opposed the new law.</td>
+      </tr>
+      <tr>
+        <td>Compete</td>
+        <td>People or groups</td>
+        <td>To try to win or do better</td>
+        <td>The teams competed for the trophy.</td>
+      </tr>
+      <tr>
+        <td><strong>Pit A against B</strong></td>
+        <td>Any two forces</td>
+        <td>To set up a rivalry or comparison</td>
+        <td>The book pits logic against emotion.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<div class="etymology">
+  <h3>🎬 Clip Example – Use of the Phrase "Pitting A against B"</h3>
+
+  <center>
+    <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/FpGz3tRJNSY?start=60"
+      title="Debate Clip – Pitting Ideas Against Each Other"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </center>
+
+  <br>
+  <div class="word-box">
+    <span style="font-size: 2rem;">👂</span> At <strong>1:00</strong>, listen for how the speaker pits human instinct against reason.
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 "Pitting A against B" in the News</h3>
+  <p>
+    A recent article on artificial intelligence stated: “The new chatbot pits human conversation against machine logic.” This highlights the growing tension between intuitive language and algorithmic reasoning.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.nytimes.com/2024/10/08/technology/ai-vs-human-judgment.html" target="_blank" class="fancy-link">
+      🤖 Read the Full Article on NYT 🤖
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+    voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
