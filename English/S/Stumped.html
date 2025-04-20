@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Stumped</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 stumped 
+      <span class="pronunciation">/stʌmpt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/stu/stump/stumped__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective (past participle)</p>
+
+    <h3>📖 Definition:</h3>
+    <p>If you are <strong>stumped</strong>, you are confused or unable to figure something out.</p>
+    <div class="example">
+      <strong>Example:</strong> I was completely stumped by the final puzzle. (= I didn’t know how to solve it.)
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Baffled</li>
+        <li>Puzzled</li>
+        <li>Confused</li>
+        <li>Bewildered</li>
+        <li>Perplexed</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> Originally from the noun <strong>stump</strong>, which refers to the base of a tree left after cutting. The verb form came to mean “to challenge” or “to baffle,” possibly from the idea of being stopped in your tracks like hitting a tree stump.</p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Confused</td>
+          <td>Neutral</td>
+          <td>She was confused by the instructions.</td>
+          <td>General</td>
+        </tr>
+        <tr>
+          <td>Perplexed</td>
+          <td>Formal</td>
+          <td>The doctor was perplexed by the symptoms.</td>
+          <td>Intellectual</td>
+        </tr>
+        <tr>
+          <td><strong>Stumped</strong></td>
+          <td><strong>Informal</strong></td>
+          <td>I was stumped by the math question.</td>
+          <td>Casual / informal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Stumped"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ?start=0"
+        title="Video example"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen where the speaker says they are "stumped"—it shows confusion in a humorous or relatable way.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Stumped in the News</h3>
+    <p>
+      In a recent quiz show, the champion was <strong>stumped</strong> by a simple geography question. Even the audience gasped when he admitted, “I just don’t know this one.” The term is often used when someone unexpectedly doesn't know something, even when they’re smart.
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const frenchVoice = voices.find(v => v.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = frenchVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const italianVoice = voices.find(v => v.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = italianVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
