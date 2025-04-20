@@ -124,6 +124,18 @@
     </div>
   </div>
 
+  <div class="word-box">
+    <h3>📰 Tapestry in the News</h3>
+    <p>
+      In a recent article from National Geographic, the author describes the Amazon Rainforest as "a living tapestry of biodiversity." This metaphor helps readers visualize the rich, interconnected life forms in the region—from insects and plants to large mammals and birds. 
+    </p>
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nationalgeographic.com/environment/article/amazon-rainforest" target="_blank" class="fancy-link">
+        🌿 Read the Full Article on National Geographic 🌿
+      </a>
+    </p>
+  </div>
+
   <script>
     let voices = [];
     window.speechSynthesis.onvoiceschanged = () => {
@@ -148,4 +160,12 @@
 
     function speakItalian(text) {
       const voice = voices.find(v => v.lang.includes('it')) || voices[0];
-      const utterance = new SpeechSynthesisUtter
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
