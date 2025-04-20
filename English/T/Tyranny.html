@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Tyranny</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 Tyranny
+      <span class="pronunciation">/\u02c8t\u026ar\u0259ni/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/t/tyr/tyran/tyranny__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun</p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Tyranny</strong> refers to cruel, unreasonable, or arbitrary use of power or control, often by a government or authority figure.</p>
+    <div class="example">
+      <strong>Example:</strong> The people rebelled against the tyranny of the dictator.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧙‍ Synonyms <span class="pronunciation">/\u02c8s\u026an\u0259n\u026amz/</span>
+                 <button class="audio-button2" onclick="speak('Synonyms')">
+                    🔊 Play
+                  </button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Oppression</li>
+        <li>Dictatorship</li>
+        <li>Despotism</li>
+        <li>Autocracy</li>
+        <li>Authoritarianism</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word
+      <span class="pronunciation">/\u02c8\u025bt\u0259\u02ccm\u0251ːl\u0259d\u0292i/</span>
+                 <button class="audio-button2" onclick="speak('Etymology')">
+                    🔊 Play
+                  </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> <strong>Tyranny</strong> comes from the Greek word <em>turannos</em>, meaning "absolute ruler." It passed into Latin as <em>tyrannia</em> and later into Old French before becoming the English word "tyranny."
+    </p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧱 Word Evolution</h3>
+  <p>
+    <strong>Greek:</strong> <em>turannos</em> = absolute ruler<br>
+    <span style="font-size: 2rem;">⬇️</span><br>
+    <strong>Latin:</strong> <em>tyrannia</em><br>
+    <span style="font-size: 2rem;">⬇️</span><br>
+    <strong>French:</strong> <em>tyrannie</em><br>
+    <span style="font-size: 2rem;">⬇️</span><br>
+    <strong>English:</strong> <em>tyranny</em>
+    <span class="pronunciation">/\u02c8t\u026ar\u0259ni/</span>
+    <button class="audio-button2" onclick="speak('tyranny')">🔊 Play</button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Formality Level</th>
+        <th>Example Use</th>
+        <th>Tone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Dictatorship</td>
+        <td>Formal</td>
+        <td>A country under military dictatorship</td>
+        <td>Serious / Political</td>
+      </tr>
+      <tr>
+        <td>Oppression</td>
+        <td>Neutral / Formal</td>
+        <td>Oppression of minorities</td>
+        <td>Negative / Social</td>
+      </tr>
+      <tr>
+        <td><strong>Tyranny</strong></td>
+        <td><strong>Formal / Literary</strong></td>
+        <td>The tyranny of unjust rulers</td>
+        <td>Strong / Dramatic</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+    <h3>🎮 Clip Example – Use of the Word "Tyranny"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/4BTo0ZPbp0g?start=20"
+      title="Tyranny in History - Documentary"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+  <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👁</span> Watch the narrator describe historical tyrannies and how people responded to them.
+    </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Tyranny in the News</h3>
+  <p>
+    The term <strong>"tyranny"</strong> is often used in political commentary to describe excessive or unjust government control. In this editorial, the author compares digital surveillance policies to modern forms of tyranny.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.theguardian.com/commentisfree/2024/feb/15/tyranny-digital-age-privacy-rights" target="_blank" class="fancy-link">
+      📰 Read the Full Article in The Guardian 📰
+    </a>
+  </p>
+</div>
+
+<script>
+      let voices = [];
+      window.speechSynthesis.onvoiceschanged = () => {
+          voices = speechSynthesis.getVoices();
+      };
+
+      function speak(text) {
+          const utterance = new SpeechSynthesisUtterance(text);
+          const latinLikeVoice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+          utterance.voice = latinLikeVoice;
+          utterance.rate = 0.9;
+          speechSynthesis.speak(utterance);
+      }
+
+      function speakFrench(text) {
+        const voices = speechSynthesis.getVoices();
+        const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = frenchVoice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+      }
+
+     function speakItalian(text) {
+        const voices = speechSynthesis.getVoices();
+        const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = italianVoice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+      }
+</script>
+
+</body>
+</html>
