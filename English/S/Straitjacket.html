@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Straitjacket</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 straitjacket 
+      <span class="pronunciation">/ˈstreɪtˌdʒækɪt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/str/strai/straitjacket__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun</p>
+
+    <h3>📖 Definition:</h3>
+    <p>A straitjacket is a strong garment with long sleeves that can be tied together, used to prevent a person from moving their arms—often in the past to restrain people with mental illness. Figuratively, it refers to anything that severely limits freedom of movement, creativity, or action.</p>
+    
+    <div class="example">
+      <strong>Literal Example:</strong> The patient was restrained in a straitjacket.<br>
+      <strong>Figurative Example:</strong> Endless bureaucracy acts as a straitjacket on innovation.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+
+    <div class="fancy-list">
+      <ul>
+        <li>Constraint</li>
+        <li>Limitation</li>
+        <li>Restriction</li>
+        <li>Control</li>
+        <li>Confinement</li>
+        <li>Shackle</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"straitjacket"</strong> comes from the idea of a “strait” (meaning narrow or tight) + “jacket.”</p>
+
+    <p><span style="font-size: 2rem;">📝</span> "Strait" is not the same as "straight" — it means tight or narrow, from Middle English and Old French <em>estreit</em>, from Latin <em>strictus</em>.</p>
+
+    <p><span style="font-size: 2rem;">💡</span> So, a straitjacket is literally a “tight jacket” used to restrain someone. The figurative use came later, describing anything that restricts or limits creativity, freedom, or movement.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>strictus</em> (tight, drawn close)<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>estreit</em> (tight, narrow)<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>strait</em><br>
+      <span style="font-size: 2rem;">➕</span> jacket = <strong>straitjacket</strong>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Literal or Figurative?</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Shackle</td>
+          <td>Literal / Figurative</td>
+          <td>Shackled by tradition</td>
+          <td>Restrictive / Heavy</td>
+        </tr>
+        <tr>
+          <td>Constraint</td>
+          <td>Figurative</td>
+          <td>Time constraints limited our work</td>
+          <td>Neutral / Practical</td>
+        </tr>
+        <tr>
+          <td><strong>Straitjacket</strong></td>
+          <td><strong>Figurative / Literal</strong></td>
+          <td>Rules can be a straitjacket on creativity</td>
+          <td>Metaphorical / Strong</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Straitjacket"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/XRVD32rnzOw?start=55"
+      title="Movie Clip - Straitjacket Metaphor"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">🎞️</span> In the clip above, a character uses the phrase "a straitjacket of expectations" to describe feeling trapped by social pressure.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Straitjacket in the News</h3>
+    <p>
+      In recent commentary on education, one columnist argued that standardized testing acts as a <strong>straitjacket</strong> on teachers, limiting their ability to innovate and personalize learning.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.edweek.org/straitjacket-of-standardized-testing" target="_blank" class="fancy-link">
+        📰 Read the Article on Education Week
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+    
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = frenchVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = italianVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
