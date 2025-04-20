@@ -1,1 +1,170 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Sheepish</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 sheepish 
+      <span class="pronunciation">/ˈʃiːpɪʃ/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/she/sheep/sheepish__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective</p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Sheepish</strong> describes someone who shows or feels embarrassment from shame or a lack of self-confidence.</p>
+    <div class="example">
+      <strong>Example:</strong> He gave a sheepish grin when he realized he had made a mistake in front of the whole class.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+                 <button class="audio-button2" onclick="speak('Synonyms')">
+                    🔊 Play
+                  </button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Shy</li>
+        <li>Embarrassed</li>
+        <li>Self-conscious</li>
+        <li>Timid</li>
+        <li>Bashful</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+                 <button class="audio-button2" onclick="speak('Etymology')">
+                    🔊 Play
+                  </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>sheepish</strong> comes from the behavior of sheep, which are often seen as shy or timid animals. It has been used in English since the 1200s to describe people who act shy, embarrassed, or guilty.</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Old English:</strong> 
+    <em>sceap</em> (sheep) + <em>-ish</em> (suffix meaning "like")<br>
+    <span style="font-size: 2rem;">⬇️</span><br>
+    <strong>Middle English:</strong> 
+    <em>sheepish</em><br>
+    <span style="font-size: 2rem;">⬇️</span><br>
+    <strong>Modern English:</strong> 
+    <em>sheepish</em>
+    <span class="pronunciation">/ˈʃiːpɪʃ/</span>
+    <button class="audio-button2" onclick="speak('sheepish')">🔊 Play</button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Formality Level</th>
+        <th>Example Use</th>
+        <th>Tone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Shy</td>
+        <td>Neutral</td>
+        <td>A shy child hides behind their parent</td>
+        <td>Soft / withdrawn</td>
+      </tr>
+      <tr>
+        <td>Timid</td>
+        <td>Neutral / Formal</td>
+        <td>A timid voice in front of a crowd</td>
+        <td>Nervous / uncertain</td>
+      </tr>
+      <tr>
+        <td><strong>Sheepish</strong></td>
+        <td><strong>Informal / Descriptive</strong></td>
+        <td>A sheepish smile after a mistake</td>
+        <td>Embarrassed / bashful</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Sheepish"</h3>
+    <center>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/O5Ls4PlC5zk?start=95" title="Sheepish Clip" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </center>
+  <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👂</span> Watch at <strong>1:35</strong> where the character gives a sheepish response.
+    </div>
+    <span style="font-size: 2rem;">🎞️</span> The scene shows how someone might act when feeling awkward or embarrassed.
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Sheepish in the News</h3>
+  <p>
+    In a recent article, a politician gave a sheepish apology after being caught in a contradiction. The media described his body language and tone as bashful and awkward.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.npr.org/2023/12/01/sheepish-apology-politics" target="_blank" class="fancy-link">
+      🗞️ Read the Full Article on NPR 🗞️
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+  }
+
+  function speakFrench(text) {
+    const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = frenchVoice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+
+  function speakItalian(text) {
+    const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = italianVoice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
