@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Confine</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 confine 
+      <span class="pronunciation">/kənˈfaɪn/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/con/confine/confine__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To <strong>confine</strong> someone or something means to keep them within limits or to restrict their movement or actions.</p>
+    <div class="example">
+      <strong>Example:</strong> The patient was confined to bed for a week. (= They had to stay in bed and couldn’t move around freely.)
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    
+    <div class="fancy-list">
+      <ul>
+        <li>Restrict</li>
+        <li>Limit</li>
+        <li>Restrain</li>
+        <li>Imprison</li>
+        <li>Trap</li>
+        <li>Keep in</li>
+      </ul>
+    </div>
+  </div>
+  
+  <br>
+  
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"confine"</strong> comes from the Latin word <em>confinare</em>, meaning "to border, to limit."</p>
+
+    <div class="example">
+      <ul>
+        <li><strong>con-</strong> = together</li>
+        <li><strong>finis</strong> = boundary, end</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Restrict</td>
+          <td>Formal</td>
+          <td>Restrict access to data</td>
+          <td>Technical / precise</td>
+        </tr>
+        <tr>
+          <td>Trap</td>
+          <td>Informal</td>
+          <td>Trap a mouse in a box</td>
+          <td>Urgent / physical</td>
+        </tr>
+        <tr>
+          <td><strong>Confine</strong></td>
+          <td><strong>Neutral / Formal</strong></td>
+          <td>Confined to a wheelchair</td>
+          <td>Restrictive / clinical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Confine"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/J5qLhMTYAVk?start=10"
+      title="Confine Example Scene"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:10</strong> where the narrator says <em>"confine"</em> when describing the main character’s situation.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Confine in the News</h3>
+    <p>
+      Health officials warned that residents should confine themselves to their homes during the severe weather emergency to ensure safety.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.cnn.com/2024/12/21/weather-storm-warning-confine-yourself" target="_blank" class="fancy-link">
+        🌀 Read the Full Article on CNN 🌀
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const voice = voices.find(v => v.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
