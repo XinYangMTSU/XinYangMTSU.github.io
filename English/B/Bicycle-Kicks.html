@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Bicycle Kicks</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 bicycle kick 
+      <span class="pronunciation">/ˈbaɪsɪkl kɪk/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/b/bic/bicyc/bicycle__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun (sports term)</p>
+
+    <h3>📖 Definition:</h3>
+    <p>
+      A <strong>bicycle kick</strong> is a spectacular move in soccer where a player jumps into the air, leans backwards,
+      and kicks the ball over their own head while in midair—resembling a pedaling motion.
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The striker scored an incredible goal with a bicycle kick in the final minutes.
+    </div>
+
+    <div class="image-center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Bicycle_kick_-_2013.jpg/640px-Bicycle_kick_-_2013.jpg" 
+           alt="Soccer player performing a bicycle kick" width="70%">
+      <p><em>📸 A soccer player performing a bicycle kick</em></p>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🔍 Etymology and Origin</h3>
+    <p>
+      The term <strong>bicycle kick</strong> comes from the motion of the legs during the move, which resembles the pedaling of a bicycle.
+      In some parts of the world, it’s also known as an <em>overhead kick</em> or <em>scissors kick</em>.
+    </p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Overhead kick</li>
+        <li>Scissors kick</li>
+        <li>Reverse volley</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Sport</th>
+          <th>Movement</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bicycle Kick</td>
+          <td>Soccer</td>
+          <td>Backflip-like aerial kick</td>
+          <td>Spectacular shot or clearance</td>
+        </tr>
+        <tr>
+          <td>Header</td>
+          <td>Soccer</td>
+          <td>Using head to play the ball</td>
+          <td>Passing or scoring</td>
+        </tr>
+        <tr>
+          <td>Volley</td>
+          <td>Soccer</td>
+          <td>Kicking the ball before it touches ground</td>
+          <td>Quick offensive shot</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Famous Bicycle Kick</h3>
+    <center>
+      <iframe width="560" height="315"
+              src="https://www.youtube.com/embed/UJxzWyE5Xc0?start=10"
+              title="Famous Bicycle Kick Goal"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </center>
+    <p>
+      ⚽ This clip features Cristiano Ronaldo’s legendary bicycle kick goal for Real Madrid against Juventus in 2018.
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
