@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Ingenuity</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 ingenuity 
+      <span class="pronunciation">/ˌɪndʒəˈnuːəti/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/i/ing/ingen/ingenuity__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun</p>
+
+    <h3>📖 Definition:</h3>
+    <p>Ingenuity is the quality of being clever, original, and inventive — especially in solving problems or finding new ways to do things.</p>
+    <div class="example">
+      <strong>Example:</strong> With remarkable ingenuity, the engineers designed a machine that could clean the ocean.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Creativity</li>
+        <li>Inventiveness</li>
+        <li>Cleverness</li>
+        <li>Originality</li>
+        <li>Resourcefulness</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>ingenuity</strong> comes from the Latin <em>ingenium</em>, meaning "inborn talent, cleverness."</p>
+    <p><span style="font-size: 2rem;">💡</span> Over time, the word evolved through French as <em>ingéniosité</em> and entered English in the late Middle Ages.</p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Emphasis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Creativity</td>
+          <td>Art / Ideas</td>
+          <td>Writing a novel</td>
+          <td>Imagination</td>
+        </tr>
+        <tr>
+          <td>Ingenuity</td>
+          <td>Problem-solving / Inventions</td>
+          <td>Designing a life-saving device</td>
+          <td>Smart solutions</td>
+        </tr>
+        <tr>
+          <td>Resourcefulness</td>
+          <td>Challenging situations</td>
+          <td>Finding food while stranded</td>
+          <td>Practical cleverness</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Ingenuity"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/qkZ7kpDL1YI?start=20"
+        title="NASA Ingenuity Mars Helicopter"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <p class="word-box">
+      <span style="font-size: 2rem;">🚁</span> This NASA video celebrates the successful flight of the Ingenuity helicopter on Mars —
+      a real-world example of ingenuity in action!
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+    
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
