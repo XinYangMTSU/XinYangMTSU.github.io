@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Hinge</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 hinge 
+      <span class="pronunciation">/hɪndʒ/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/h/hin/hinge/hinge__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun or verb</p>
+
+    <h3>📖 As a noun (a thing):</h3>
+    <p>A <strong>hinge</strong> is a movable joint that connects two solid objects, allowing one of them to swing open or closed, like a door or lid.</p>
+    <div class="example">
+      <strong>Example:</strong> The door creaked on its rusty hinge.
+    </div>
+
+    <h3>📖 As a verb (an action):</h3>
+    <p>To <strong>hinge</strong> on something means to depend entirely on it or be determined by it.</p>
+    <div class="example">
+      <strong>Example:</strong> The outcome of the case hinges on the witness's testimony.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    
+    <div class="fancy-list">
+      <ul>
+        <li>Pivot</li>
+        <li>Depend</li>
+        <li>Turn</li>
+        <li>Swing</li>
+        <li>Axis</li>
+        <li>Joint</li>
+      </ul>
+    </div>
+  </div>
+  
+  <br>
+  
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"hinge"</strong> originated in Middle English and is believed to be related to the Old Norse word <em>hengja</em>, meaning "to hang".</p>
+
+    <div class="example">
+      <ul>
+        <li>Old Norse <strong>hengja</strong> = to hang</li>
+        <li>Related to the function of a hinge hanging or swinging</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old Norse:</strong> <em>hengja</em>
+      <button class="audio-button2" onclick="speak('hengja')">🔊 Play</button>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>hinge</em>
+      <span class="pronunciation">/hɪndʒ/</span>
+      <button class="audio-button2" onclick="speak('hinge')">🔊 Play</button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pivot</td>
+          <td>Neutral</td>
+          <td>The discussion pivoted to a new topic</td>
+          <td>Flexible / shifting</td>
+        </tr>
+        <tr>
+          <td>Depend</td>
+          <td>Neutral</td>
+          <td>The decision depends on funding</td>
+          <td>Relational / conditional</td>
+        </tr>
+        <tr>
+          <td><strong>Hinge</strong></td>
+          <td><strong>Neutral</strong></td>
+          <td>It all hinges on the evidence</td>
+          <td>Central / decisive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Hinge"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/o2kPrkFUtB0?start=40"
+      title="Engineering Explained: Door Hinges"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">🔩</span> In this clip, the host explains how a door hinge supports the movement of the door, just like how ideas hinge on core assumptions.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Hinge in the News</h3>
+    <p>
+      In a recent political analysis, experts said the future of climate legislation may hinge on the outcome of a single Senate vote. This shows how one small piece — like a hinge — can determine the direction of an entire system.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com/climate-legislation-hinge-vote" target="_blank" class="fancy-link">
+        📰 Read the Full Article on NYT 📰
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+        const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+        const voice = voices.find(v => v.lang.includes('it-IT')) || voices[0];
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
