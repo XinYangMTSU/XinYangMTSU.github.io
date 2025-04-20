@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Garden-variety</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 garden-variety
+      <span class="pronunciation">/ˈɡɑːrdn vəˌraɪəti/</span>
+      <button class="audio-button" onclick="speak('garden-variety')">
+        🔊 Play
+      </button>
+    </h2>
+   
+    <p><strong>Part of speech:</strong> Adjective (compound)</p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Garden-variety</strong> means ordinary, not special, or typical. It refers to something very common and lacking any unusual features.</p>
+    <div class="example">
+      <strong>Example:</strong> It's just a garden-variety cold—nothing serious.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+
+    <div class="fancy-list">
+      <ul>
+        <li>Ordinary</li>
+        <li>Commonplace</li>
+        <li>Typical</li>
+        <li>Standard</li>
+        <li>Run-of-the-mill</li>
+        <li>Plain</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The term <strong>garden-variety</strong> originated in the early 1900s in American English.</p>
+
+    <p><span style="font-size: 2rem;">📝</span>It was originally used in horticulture to describe plants that were commonly grown in ordinary gardens (as opposed to rare or exotic species).</p>
+
+    <p><span style="font-size: 2rem;">💡</span> Over time, the phrase became a metaphor for anything that is average, unremarkable, or lacking uniqueness.</p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Typical</td>
+          <td>Neutral</td>
+          <td>A typical Monday morning</td>
+          <td>Descriptive</td>
+        </tr>
+        <tr>
+          <td>Run-of-the-mill</td>
+          <td>Informal</td>
+          <td>A run-of-the-mill action movie</td>
+          <td>Casual / bland</td>
+        </tr>
+        <tr>
+          <td><strong>Garden-variety</strong></td>
+          <td><strong>Neutral / Informal</strong></td>
+          <td>Just a garden-variety headache</td>
+          <td>Unimpressive / normal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Phrase "Garden-variety"</h3>
+    <center>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/GjbcfK0CJU4?start=68" title="Garden-variety Explanation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👂</span> Around <strong>1:08</strong>, listen for the phrase <em>"garden-variety"</em> being used to describe a basic type of thinking.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Garden-variety in the News</h3>
+    <p>
+      In this article, the phrase <strong>“garden-variety”</strong> is used to describe a typical case of fraud, suggesting that there was nothing particularly clever or complicated about it.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.npr.org/2023/07/15/business/garden-variety-fraud-case" target="_blank" class="fancy-link">
+        📰 Read the Full Article on NPR 📰
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
