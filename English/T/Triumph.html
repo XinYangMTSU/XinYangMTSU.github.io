@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Triumph</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 triumph 
+      <span class="pronunciation">/ˈtraɪ.əmf/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/t/tri/trium/triumph__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun or verb</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To triumph means to achieve victory or success, especially after a struggle or challenge.</p>
+    <div class="example">
+      <strong>Example:</strong> The team triumphed over their rivals in the final game.
+    </div>
+
+    <h3>📖 As a noun (a thing):</h3>
+    <p>A triumph is a great victory, achievement, or success.</p>
+    <div class="example">
+      <strong>Example:</strong> Winning the award was a triumph for her hard work and dedication.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧬 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+                 <button class="audio-button2" onclick="speak('Synonyms')">
+                    🔊 Play
+                  </button>
+    </h3>
+    
+    <div class="fancy-list">
+      <ul>
+        <li>Victory</li>
+        <li>Success</li>
+        <li>Win</li>
+        <li>Achievement</li>
+        <li>Glory</li>
+        <li>Conquest</li>
+      </ul>
+    </div>
+  </div>
+  
+  <br>
+  
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+                 <button class="audio-button2" onclick="speak('Etymology')">
+                    🔊 Play
+                  </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"triumph"</strong> comes from the Latin word <em>triumphus</em>, meaning a ceremonial procession celebrating a military victory.</p>
+    <p><span style="font-size: 2rem;">🔹</span> It passed through Old French <em>triumphe</em> into Middle English with its modern meaning of great success or victory.</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🤽 Word Evolution</h3>
+  <p>
+    <strong>Latin:</strong> <em>triumphus</em>
+    <button class="audio-button2" onclick="speakItalian('triumphus')">
+          🔊 Play
+    </button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+    <strong>French:</strong> <em>triumphe</em>
+    <button class="audio-button2" onclick="speakFrench('triumphe')">
+          🔊 Play
+    </button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+    <strong>English:</strong> <em>triumph</em>
+    <button class="audio-button2" onclick="speak('triumph')">
+          🔊 Play
+    </button>
+  </p>
+
+  <!-- Audio elements -->
+  <audio id="latin-audio" src="https://audio.linguanaut.com/latin/triumphus.mp3"></audio>
+  <audio id="french-audio" src="https://freetts.com/storage/temp/430253-audio.mp3"></audio>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Context</th>
+        <th>Example</th>
+        <th>Tone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Victory</td>
+        <td>Sports / War</td>
+        <td>A clear win</td>
+        <td>Strong / bold</td>
+      </tr>
+      <tr>
+        <td>Success</td>
+        <td>General / Academic</td>
+        <td>Achieving a goal</td>
+        <td>Positive / neutral</td>
+      </tr>
+      <tr>
+        <td><strong>Triumph</strong></td>
+        <td><strong>Celebratory / Emotional</strong></td>
+        <td>Winning with great joy</td>
+        <td>Joyous / dramatic</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+    <h3>🎮 Clip Example – Use of the Word "Triumph"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/WkLDfZfWDcs?start=32"
+      title="Speech of Triumph"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+  <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👁</span> Listen around <strong>00:35</strong> where the speaker declares it a "triumph for justice."
+    </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Triumph in the News</h3>
+  <p>
+    In a recent CNN headline, the return of a lost Mars rover signal was described as a "triumph of engineering and perseverance." This usage highlights the emotional and historic weight behind a major success.
+  </p>
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.cnn.com/space/triumph-mars-rover" target="_blank" class="fancy-link">
+      🌌 Read the Full Article on CNN 🌌
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+    voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+
+  function speakFrench(text) {
+    const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+
+  function speakItalian(text) {
+    const voice = voices.find(v => v.lang.includes('it')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
