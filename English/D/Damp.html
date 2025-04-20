@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Damp</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌧️ damp 
+      <span class="pronunciation">/dæmp/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/dam/damp_/damp__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective, noun, or verb</p>
+
+    <h3>📖 As an adjective:</h3>
+    <p>"Damp" describes something that is slightly wet or moist, often in an unpleasant way.</p>
+    <div class="example">
+      <strong>Example:</strong> The clothes were still damp after hanging outside all night.
+    </div>
+
+    <h3>📖 As a noun:</h3>
+    <p>Refers to moisture, often unwanted, especially in walls or air.</p>
+    <div class="example">
+      <strong>Example:</strong> The basement smells of damp.
+    </div>
+
+    <h3>📖 As a verb:</h3>
+    <p>To make something slightly wet or reduce its force or intensity.</p>
+    <div class="example">
+      <strong>Example:</strong> The excitement was damped by the rain.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Moist</li>
+        <li>Wet</li>
+        <li>Humid</li>
+        <li>Clammy</li>
+        <li>Muggy</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"damp"</strong> dates back to the 14th century.</p>
+    <p><span style="font-size: 2rem;">📝</span>Originating from Middle Dutch <strong>"dampe"</strong> meaning "vapor, steam."</p>
+    <p><span style="font-size: 2rem;">💡</span> It evolved to describe something moist or slightly wet in English.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle Dutch:</strong> 
+      <em>dampe</em> (vapor, steam)
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>English:</strong> 
+      <em>damp</em> (moist, slightly wet)
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Moisture Level</th>
+          <th>Use Case</th>
+          <th>Connotation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Moist</td>
+          <td>Medium</td>
+          <td>Moist cake</td>
+          <td>Neutral / Positive</td>
+        </tr>
+        <tr>
+          <td>Damp</td>
+          <td>Light</td>
+          <td>Damp towel, damp clothes</td>
+          <td>Often Negative</td>
+        </tr>
+        <tr>
+          <td>Wet</td>
+          <td>High</td>
+          <td>Wet hair, wet floor</td>
+          <td>Neutral</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Damp"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/WC7Ns2n_1Qs?start=11"
+        title="Use of Damp in Dialogue"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen at <strong>0:11</strong> where the word "damp" is used.
+    </div>
+    <span style="font-size: 2rem;">🍿</span> This scene is from a home renovation show discussing issues with moisture and insulation.
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Damp in the News</h3>
+    <p>
+      In this article, "damp" is used to describe poor housing conditions in older apartment buildings in London. 
+      The word reflects an ongoing concern with indoor moisture and its health impact.
+    </p>
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news/uk-england-london-63876542" target="_blank" class="fancy-link">
+        🏠 Read the Full Article on BBC News 🏠
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const voice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
