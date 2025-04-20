@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Adhere</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 adhere 
+      <span class="pronunciation">/ədˈhɪr/</span>
+      <button class="audio-button" onclick="speak('adhere')">
+        🔊 Play
+      </button>
+    </h2>
+
+
+    <p><strong>Part of speech:</strong> Verb</p>
+
+    <h3>📖 Definition:</h3>
+    <p><strong>Adhere</strong> means to stick firmly to a surface or to follow a set of rules or beliefs.</p>
+    <div class="example">
+      <strong>Example:</strong> Please make sure the label adheres properly to the package.
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> We must adhere to the safety regulations at all times.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    
+    <div class="fancy-list">
+      <ul>
+        <li>Stick</li>
+        <li>Cling</li>
+        <li>Comply</li>
+        <li>Follow</li>
+        <li>Observe</li>
+        <li>Abide by</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> Let’s look at the origin (etymology) of the word <strong>"adhere"</strong>.</p>
+    
+    <p><span style="font-size: 2rem;">📝</span>It comes from Latin <strong>adhaerēre</strong>, meaning "to stick to" — from <strong>ad-</strong> (to) + <strong>haerēre</strong> (to stick).</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>adhaerēre</em>
+      <span class="pronunciation">/ad.haeˈreː.re/</span>
+      <button class="audio-button2" onclick="speakLatin('adhaerēre')">🔊 Play</button>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>English:</strong> <em>adhere</em>
+      <span class="pronunciation">/ədˈhɪr/</span>
+      <button class="audio-button2" onclick="speak('adhere')">🔊 Play</button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Stick</td>
+          <td>Informal</td>
+          <td>The sticker won’t stick to the wall</td>
+          <td>Simple / casual</td>
+        </tr>
+        <tr>
+          <td>Comply</td>
+          <td>Formal</td>
+          <td>Comply with regulations</td>
+          <td>Legal / structured</td>
+        </tr>
+        <tr>
+          <td><strong>Adhere</strong></td>
+          <td><strong>Neutral / Formal</strong></td>
+          <td>Adhere to the policy</td>
+          <td>Firm / respectful</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Adhere"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/urURj9HZSkI?start=20"
+        title="What Does Adhere Mean?"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen at <strong>0:20</strong> where the narrator explains the definition of "adhere."
+    </div>
+    <span style="font-size: 2rem;">🎓</span> This is an educational explainer video on vocabulary words.
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Adhere in the News</h3>
+    <p>
+      Health experts urge citizens to <strong>adhere</strong> to public safety guidelines to prevent the spread of disease.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.cdc.gov/media/releases/2023/p-public-health-guidance.html" target="_blank" class="fancy-link">
+        🧼 Read the CDC Update 🧼
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const voice = voices.find(v => v.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakLatin(text) {
+      const voice = voices.find(v => v.lang.includes('la')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
