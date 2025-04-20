@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Technicality</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 technicality 
+      <span class="pronunciation">/ˌtɛknɪˈkæləti/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/t/tec/techn/technicality__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun</p>
+
+    <h3>📖 Definition:</h3>
+    <p>A technicality is a small detail in a rule, law, or agreement, especially one that is important in affecting how something is done or whether something is legal or valid.</p>
+    <div class="example">
+      <strong>Example:</strong> The case was dismissed on a technicality. (= because of a small legal detail)
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Detail</li>
+        <li>Clause</li>
+        <li>Provision</li>
+        <li>Fine point</li>
+        <li>Loophole</li>
+        <li>Specification</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"technicality"</strong> comes from <em>technical</em> + <em>-ity</em>, which turns an adjective into a noun.</p>
+    <p><span style="font-size: 2rem;">📝</span> It developed in the 19th century to refer to details in specialized fields, particularly law and regulation.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong> <em>tekhnē</em> (meaning art or skill) → 
+      <strong>English:</strong> <em>technical</em> + <em>-ity</em> → 
+      <em>technicality</em>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Detail</td>
+          <td>Neutral</td>
+          <td>A minor detail in the plan</td>
+          <td>Objective</td>
+        </tr>
+        <tr>
+          <td>Loophole</td>
+          <td>Informal</td>
+          <td>A legal loophole in the contract</td>
+          <td>Slightly negative</td>
+        </tr>
+        <tr>
+          <td><strong>Technicality</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>Case dismissed on a technicality</td>
+          <td>Precise / Legalistic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Technicality"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/Wv1Aq-VbRxM?start=60"
+        title="Legal Drama - Technicality Dismissal"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen at <strong>1:00</strong> where the character says <em>"technicality"</em>.
+    </div>
+    <span style="font-size: 2rem;">⚖️</span> A common legal term when small rules have big impact.
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Technicality in the News</h3>
+    <p>
+      In a recent court case, the defendant was released due to a procedural <strong>technicality</strong>. The error was discovered in the filing paperwork, and though the evidence was strong, the case could not proceed.
+    </p>
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://example.com/legal-news-technicality-dismissal" target="_blank" class="fancy-link">
+        ⚖️ Read Full Article on LegalNews.com ⚖️
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const voice = voices.find(v => v.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
