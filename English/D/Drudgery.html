@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Drudgery</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="word-box">
+  <h2>
+    🌟 drudgery 
+    <span class="pronunciation">/ˈdrʌdʒəri/</span>
+    <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+  </h2>
+  <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/dru/drudg/drudgery__us_1.mp3"></audio>
+
+  <p><strong>Part of speech:</strong> Noun</p>
+
+  <h3>📖 Meaning:</h3>
+  <p><strong>Drudgery</strong> means hard, boring, or repetitive work, especially work that feels like a chore and lacks creativity or excitement.</p>
+  <div class="example">
+    <strong>Example:</strong> Copying the same code over and over again felt like pure drudgery.
+  </div>
+</div>
+
+<div class="etymology">
+  <h3>🧩 Synonyms 
+    <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+    <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+  </h3>
+
+  <div class="fancy-list">
+    <ul>
+      <li>Toil</li>
+      <li>Grind</li>
+      <li>Labor</li>
+      <li>Hard work</li>
+      <li>Monotony</li>
+      <li>Routine work</li>
+    </ul>
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>🔍 Etymology of the word 
+    <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+    <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+  </h3>
+
+  <p><span style="font-size: 2rem;">📚</span> The word <strong>"drudgery"</strong> comes from the old English word <strong>drudge</strong>, which referred to someone who does dull, menial work.</p>
+
+  <div class="example">
+    <ul>
+      <li><strong>drudge</strong> = a person who works hard at boring tasks</li>
+      <li><strong>-ery</strong> = a suffix meaning “a kind or class of work”</li>
+    </ul>
+  </div>
+
+  <p><span style="font-size: 2rem;">💡</span> So “drudgery” literally means the kind of work that a drudge would do — repetitive, tedious labor.</p>
+</div>
+
+<div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Middle English:</strong> <em>druggen</em> (to toil)<br>
+    <span style="font-size: 2rem;">⬇️</span><br>
+    <strong>Modern English:</strong> 
+    <em>drudgery</em> = dull and fatiguing work
+  </p>
+</div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Formality Level</th>
+        <th>Example Use</th>
+        <th>Tone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Toil</td>
+        <td>Formal / Poetic</td>
+        <td>He toiled in the fields all day.</td>
+        <td>Heavy / effortful</td>
+      </tr>
+      <tr>
+        <td>Work</td>
+        <td>Neutral</td>
+        <td>I have a lot of work to do.</td>
+        <td>General</td>
+      </tr>
+      <tr>
+        <td><strong>Drudgery</strong></td>
+        <td><strong>Descriptive / Emotional</strong></td>
+        <td>Filing papers is pure drudgery.</td>
+        <td>Negative / dull</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<div class="etymology">
+  <h3>🎬 Clip Example – Use of the Word "Drudgery"</h3>
+
+  <center>
+    <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/BwaI0fYpSOM?start=45"
+      title="What is Drudgery? - English Vocabulary in Context"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </center>
+
+  <br>
+  <div class="word-box">
+    <span style="font-size: 2rem;">👂</span> Listen for how the speaker uses “drudgery” to describe mindless tasks.
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Drudgery in the News</h3>
+  <p>
+    A recent article on automation argued that AI could relieve people of everyday drudgery: tasks like sorting emails, copying data, and managing calendars — freeing them up for more creative work.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.theverge.com/2024/10/02/ai-drudgery-workplace-automation-productivity" target="_blank" class="fancy-link">
+      🤖 Read the Full Article on The Verge 🤖
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+    voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
