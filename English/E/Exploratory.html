@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Exploratory</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 exploratory 
+      <span class="pronunciation">/ɪkˈsplɔːrəˌtɔːri/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/e/exp/explo/exploratory__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective</p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Describing something that is done to discover more about something, to investigate, or to experiment—often without a fixed goal.</p>
+    <div class="example">
+      <strong>Example:</strong> The student conducted an exploratory project on renewable energy. (= A project that explores and investigates, rather than solves a specific problem.)
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+
+    <div class="fancy-list">
+      <ul>
+        <li>Investigative</li>
+        <li>Experimental</li>
+        <li>Inquisitive</li>
+        <li>Probing</li>
+        <li>Curious</li>
+        <li>Preliminary</li>
+      </ul>
+    </div>
+  </div>
+  
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>exploratory</strong> is formed from the verb <strong>explore</strong> and the suffix <strong>-atory</strong>, which means "related to."</p>
+
+    <p><span style="font-size: 2rem;">📝</span> The verb <strong>explore</strong> comes from Latin <em>explorare</em>, meaning “to search out, investigate.”</p>
+
+    <div class="example">
+      <ul>
+        <li><strong>ex-</strong> = out</li>
+        <li><strong>plorare</strong> = to cry out or call out (as in scouting or searching)</li>
+      </ul>
+    </div>
+
+    <p><span style="font-size: 2rem;">💡</span> So “exploratory” describes the nature of seeking, testing, or discovering something new.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong>
+      <em>explorare</em>
+      <span class="pronunciation">/eks.ploˈraː.re/</span>
+      <button class="audio-button2" onclick="speakLatin('explorare')">🔊 Play</button>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>English:</strong> 
+      <em>explore → exploratory</em>
+      <span class="pronunciation">/ɪkˈsplɔːrəˌtɔːri/</span>
+      <button class="audio-button2" onclick="speak('exploratory')">🔊 Play</button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Experimental</td>
+          <td>Formal / Scientific</td>
+          <td>Experimental methods in research</td>
+          <td>Neutral / Scientific</td>
+        </tr>
+        <tr>
+          <td>Inquisitive</td>
+          <td>Neutral</td>
+          <td>A child asking many questions</td>
+          <td>Curious / Positive</td>
+        </tr>
+        <tr>
+          <td><strong>Exploratory</strong></td>
+          <td><strong>Academic / Scientific</strong></td>
+          <td>An exploratory essay or study</td>
+          <td>Open-ended / Curious</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Exploratory"</h3>
+
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/9vJRopau0g0?start=120"
+        title="Exploratory Data Analysis by 3Blue1Brown"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+
+    <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👂</span> Listen around <strong>2:00</strong> when the term <em>"exploratory data analysis"</em> is explained.
+    </div>
+    <span style="font-size: 2rem;">📊</span> In data science, “exploratory” refers to techniques used to uncover patterns and insights before formal modeling.
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Exploratory in the News</h3>
+    <p>
+      A 2024 article in Nature discussed an exploratory study on brain activity during meditation. Unlike conclusive studies, exploratory ones aim to gather insights and guide future research.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nature.com/articles/exploratory-research-meditation" target="_blank" class="fancy-link">
+        🧠 Read the Full Article on Nature 🧠
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const voice = voices.find(v => v.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakLatin(text) {
+      const voice = voices.find(v => v.lang.includes('la')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
