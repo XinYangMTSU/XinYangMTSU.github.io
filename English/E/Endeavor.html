@@ -143,3 +143,43 @@
         🌍 Read More About the NASA Endeavour Mission 🌍
       </a>
     </p>
+
+    </div>
+  
+  <script>
+        let voices = [];
+        window.speechSynthesis.onvoiceschanged = () => {
+            voices = speechSynthesis.getVoices();
+        };
+        
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            const latinLikeVoice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+            utterance.voice = latinLikeVoice;
+            utterance.rate = 0.9;
+            speechSynthesis.speak(utterance);
+        }
+
+        function speakFrench(text) {
+          const voices = speechSynthesis.getVoices();
+          const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.voice = frenchVoice;
+          utterance.rate = 0.9;
+          speechSynthesis.speak(utterance);
+        }
+
+       function speakItalian(text) {
+          const voices = speechSynthesis.getVoices();
+          const frenchVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.voice = frenchVoice;
+          utterance.rate = 0.9;
+          speechSynthesis.speak(utterance);
+        }
+        
+    </script>
+  
+ 
+</body>
+</html>
