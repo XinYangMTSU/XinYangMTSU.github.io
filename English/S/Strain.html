@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Strain</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 strain
+      <span class="pronunciation">/streɪn/</span>
+      <button class="audio-button" onclick="speak('strain')">
+        🔊 Play
+      </button>
+    </h2>
+   
+
+    <p><strong>Part of speech:</strong> Verb / Noun</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To exert force or effort; to stretch something to its limit.</p>
+    <div class="example">
+      <strong>Example:</strong> She strained her eyes reading in the dark.
+    </div>
+
+    <h3>📖 As a noun (a thing):</h3>
+    <p>Physical or mental stress; a force that pulls or stretches something tightly.</p>
+    <div class="example">
+      <strong>Example:</strong> The job put a strain on their relationship.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+
+    <div class="fancy-list">
+      <ul>
+        <li>Stress</li>
+        <li>Tension</li>
+        <li>Effort</li>
+        <li>Pressure</li>
+        <li>Overwork</li>
+        <li>Stretch</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>strain</strong> comes from the Latin word <em>stringere</em>, meaning “to draw tight.”</p>
+    <p><span style="font-size: 2rem;">💡</span> It evolved through Old French <em>estreindre</em> and Middle English <em>streinen</em>.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>stringere</em> (to draw tight)<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>estreindre</em><br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>streinen</em><br>
+      <span style="font-size: 2rem;">➡️</span> <strong>strain</strong>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Literal or Figurative?</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Stress</td>
+          <td>Figurative</td>
+          <td>He experienced a lot of stress at work</td>
+          <td>Negative</td>
+        </tr>
+        <tr>
+          <td>Stretch</td>
+          <td>Literal</td>
+          <td>Stretch the rubber band</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td><strong>Strain</strong></td>
+          <td><strong>Literal / Figurative</strong></td>
+          <td>Strain your muscles / under emotional strain</td>
+          <td>Physical / Emotional</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Strain"</h3>
+    <center>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/1T7S01jUZWY?start=45" title="Movie Clip - Strain" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">🎞️</span> In this clip, the character says, “You’re putting a strain on everyone,” to describe emotional tension in the group.
+    </div>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = frenchVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = italianVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
