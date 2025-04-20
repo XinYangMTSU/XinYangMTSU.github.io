@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Perimeter</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="word-box">
+  <h2>
+    🌟 perimeter 
+    <span class="pronunciation">/pəˈrɪmɪtər/</span>
+    <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+  </h2>
+  <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/per/perim/perimeter__us_1.mp3"></audio>
+
+  <p><strong>Part of speech:</strong> Noun</p>
+
+  <h3>📖 Meaning:</h3>
+  <p>The <strong>perimeter</strong> is the total length around the boundary of a two-dimensional shape. It is the distance one would travel by walking all the way around the shape.</p>
+  <div class="example">
+    <strong>Example:</strong> To find the perimeter of a rectangle, add up the lengths of all four sides.  
+    (= P = 2 × (length + width))
+  </div>
+</div>
+
+<div class="etymology">
+  <h3>🧩 Synonyms 
+    <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+    <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+  </h3>
+
+  <div class="fancy-list">
+    <ul>
+      <li>Edge</li>
+      <li>Boundary</li>
+      <li>Outline</li>
+      <li>Border</li>
+      <li>Circumference (for circles)</li>
+      <li>Fringe</li>
+    </ul>
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>🔍 Etymology of the word 
+    <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+    <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+  </h3>
+
+  <p><span style="font-size: 2rem;">📚</span> The word <strong>perimeter</strong> comes from the Greek word <em>perimetros</em>, meaning "measure around".</p>
+
+  <div class="example">
+    <ul>
+      <li><strong>peri-</strong> = around</li>
+      <li><strong>metron</strong> = measure</li>
+    </ul>
+  </div>
+
+  <p><span style="font-size: 2rem;">💡</span> So, the perimeter literally means “measuring around something.”</p>
+</div>
+
+<div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Greek:</strong>
+    <em>perimetros</em>
+    <span class="pronunciation">/pe.riˈme.tros/</span>
+    <button class="audio-button2" onclick="speak('perimetros')">🔊 Play</button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>Latin:</strong> 
+    <em>perimetros</em> → Late Latin <em>perimetrium</em>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>English:</strong> 
+    <em>perimeter</em>
+    <span class="pronunciation">/pəˈrɪmɪtər/</span>
+    <button class="audio-button2" onclick="speak('perimeter')">🔊 Play</button>
+  </p>
+</div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Term</th>
+        <th>Used With</th>
+        <th>Definition</th>
+        <th>Unit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Perimeter</td>
+        <td>Any polygon (e.g., rectangle, triangle)</td>
+        <td>Total length around a shape</td>
+        <td>Length (e.g., cm, m)</td>
+      </tr>
+      <tr>
+        <td>Area</td>
+        <td>2D shapes</td>
+        <td>Space inside a shape</td>
+        <td>Square units (e.g., cm²)</td>
+      </tr>
+      <tr>
+        <td>Circumference</td>
+        <td>Circle</td>
+        <td>Perimeter of a circle</td>
+        <td>Length (e.g., cm)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<div class="etymology">
+  <h3>🎬 Clip Example – Understanding "Perimeter"</h3>
+
+  <center>
+    <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/s6gD35ZluXY?start=30"
+      title="Perimeter for Kids"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </center>
+
+  <br>
+  <div class="word-box">
+    <span style="font-size: 2rem;">👂</span> Around <strong>0:30</strong>, the video explains how to walk around a shape and count its sides to find the perimeter.
+  </div>
+  <span style="font-size: 2rem;">📏</span> A fun and visual way to reinforce how perimeter works!
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Perimeter in the News</h3>
+  <p>
+    In a news article about school safety, the word <strong>“perimeter”</strong> was used to describe the outer boundary of the campus, where security checks were being reinforced. 
+    It shows how the word can also apply in real-world contexts beyond math.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.nytimes.com/2023/10/14/us/school-security-perimeter.html" target="_blank" class="fancy-link">
+      🛡️ Read the Full Article in The New York Times 🛡️
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+    voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
