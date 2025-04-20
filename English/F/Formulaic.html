@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Formulaic</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 formulaic 
+      <span class="pronunciation">/ˌfɔːrmjəˈleɪɪk/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/f/for/formu/formulaic__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective</p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Something described as <strong>formulaic</strong> follows a fixed or predictable pattern or formula, often lacking originality or creativity.</p>
+    <div class="example">
+      <strong>Example:</strong> The movie received poor reviews for its formulaic plot and shallow characters. (= The plot was too predictable.)
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    
+    <div class="fancy-list">
+      <ul>
+        <li>Predictable</li>
+        <li>Clichéd</li>
+        <li>Routine</li>
+        <li>Unoriginal</li>
+        <li>Standardized</li>
+        <li>Conventional</li>
+      </ul>
+    </div>
+  </div>
+  
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"formulaic"</strong> comes from the root word <strong>"formula"</strong>, which is derived from Latin.</p>
+    
+    <p><span style="font-size: 2rem;">📝</span><strong>Formula</strong> comes from Latin <em>formula</em>, meaning "a small form or rule."</p>
+
+    <div class="example">
+      <ul>
+        <li><strong>forma</strong> = shape, pattern</li>
+        <li><strong>-ula</strong> = a diminutive suffix (small/little)</li>
+      </ul>
+    </div>
+    
+    <p><span style="font-size: 2rem;">💡</span> "Formulaic" was formed by adding the suffix <strong>-ic</strong>, meaning "relating to", so it means "relating to or following a formula."</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong>
+      <em>formula</em>
+      <span class="pronunciation">/ˈfɔr.mu.la/</span>
+      <button class="audio-button2" onclick="speak('formula')">🔊 Play</button>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>English:</strong> 
+      <em>formulaic</em>
+      <span class="pronunciation">/ˌfɔːrmjəˈleɪɪk/</span>
+      <button class="audio-button2" onclick="speak('formulaic')">🔊 Play</button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Predictable</td>
+          <td>Neutral</td>
+          <td>A plot you can easily guess</td>
+          <td>Ordinary / dull</td>
+        </tr>
+        <tr>
+          <td>Clichéd</td>
+          <td>Informal</td>
+          <td>Overused story elements</td>
+          <td>Negative / dismissive</td>
+        </tr>
+        <tr>
+          <td><strong>Formulaic</strong></td>
+          <td><strong>Formal / Academic</strong></td>
+          <td>Describing a creative work lacking originality</td>
+          <td>Critical / structured</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Formulaic"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/AJrEqzSK7P4?start=27"
+        title="Why Formulaic Movies Still Make Money"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👂</span> Listen around <strong>0:27</strong> when the word <em>"formulaic"</em> is mentioned in a discussion about Hollywood blockbusters.
+    </div>
+    <span style="font-size: 2rem;">🍿</span> This YouTube video explores why films that follow a formulaic structure still succeed financially despite being criticized for lack of originality.
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Formulaic in the News</h3>
+    <p>
+      In this article, a critic argues that many recent superhero movies have become too formulaic, relying on the same plot structure and emotional beats. Audiences crave fresh stories, but studios often choose safe, predictable formulas.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theatlantic.com/entertainment/archive/2023/08/marvel-movie-fatigue-formulaic/675102/" target="_blank" class="fancy-link">
+        🎬 Read the Full Article on The Atlantic 🎬
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const voice = voices.find(v => v.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
