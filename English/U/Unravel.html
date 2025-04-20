@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Unravel</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 unravel 
+      <span class="pronunciation">/ʌnˈrævəl/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/u/unr/unrav/unravel__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb</p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To unravel something means to undo twisted, knitted, or woven threads. Figuratively, it can also mean to solve or explain something complex, or to fall apart (like a plan, system, or situation).</p>
+    <div class="example">
+      <strong>Example (literal):</strong> She began to unravel the knitted scarf to reuse the yarn.
+    </div>
+    <div class="example">
+      <strong>Example (figurative):</strong> The mystery slowly unraveled as the detective found new clues.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Untangle</li>
+        <li>Undo</li>
+        <li>Solve</li>
+        <li>Decipher</li>
+        <li>Disentangle</li>
+        <li>Collapse (figurative)</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>“unravel”</strong> is formed from:</p>
+    <ul>
+      <li><strong>un-</strong> = a prefix meaning "reverse or remove"</li>
+      <li><strong>ravel</strong> = an older word meaning to tangle or entangle</li>
+    </ul>
+    <p><span style="font-size: 2rem;">💡</span> Together, <em>unravel</em> means to undo what has been tangled or woven.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle English:</strong> <em>unravelen</em><br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>unravel</em>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Literal Meaning</th>
+          <th>Figurative Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Unravel</td>
+          <td>Untangle threads</td>
+          <td>Clarify or collapse</td>
+          <td>Curious / descriptive</td>
+        </tr>
+        <tr>
+          <td>Untangle</td>
+          <td>Remove knots</td>
+          <td>Clarify confusion</td>
+          <td>Practical / helpful</td>
+        </tr>
+        <tr>
+          <td>Disentangle</td>
+          <td>Free from entanglement</td>
+          <td>Free from complications</td>
+          <td>Precise / academic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Unravel"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/NFZfF1lfbUQ?start=15"
+        title="Detective Scene - Unraveling the Mystery"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>00:20</strong> where the character says <em>"we're starting to unravel the truth."</em>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Unravel in the News</h3>
+    <p>
+      In a recent article from BBC News, a team of archaeologists is working to <strong>unravel</strong> the mystery of an ancient underground city discovered in Turkey. The article uses the word to describe the process of discovering and explaining complex historical information piece by piece.
+    </p>
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news/world-europe-65127856" target="_blank" class="fancy-link">
+        🏛️ Read the Full Article on BBC News 🏛️
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
