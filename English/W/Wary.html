@@ -1,1 +1,176 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Wary</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 Wary 
+      <span class="pronunciation">/ˈwɛəri/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/w/war/wary_/wary__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective</p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Wary</strong> means being cautious or alert to danger or potential problems. A person who is wary is careful because they suspect that something might go wrong.</p>
+    <div class="example">
+      <strong>Example:</strong> He was wary of signing the contract without reading the fine print.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+                 <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Cautious</li>
+        <li>Careful</li>
+        <li>Alert</li>
+        <li>Suspicious</li>
+        <li>Watchful</li>
+        <li>Guarded</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+                 <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>wary</strong> comes from the Old English word <em>wær</em>, meaning "careful" or "aware of danger." It has been used since before the 12th century in English literature to describe people who are alert and cautious.</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Old English:</strong> 
+    <em>wær</em> = careful, cautious<br>
+    <span style="font-size: 2rem;">⬇️</span><br>
+    <strong>Middle English:</strong> 
+    <em>wary</em><br>
+    <span style="font-size: 2rem;">⬇️</span><br>
+    <strong>Modern English:</strong> 
+    <em>wary</em> = cautious or alert
+    <span class="pronunciation">/ˈwɛəri/</span>
+    <button class="audio-button2" onclick="speak('wary')">🔊 Play</button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Intensity</th>
+        <th>Example Use</th>
+        <th>Tone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Careful</td>
+        <td>Mild</td>
+        <td>Be careful crossing the street.</td>
+        <td>Neutral</td>
+      </tr>
+      <tr>
+        <td>Wary</td>
+        <td>Medium</td>
+        <td>She was wary of strangers at night.</td>
+        <td>Cautious</td>
+      </tr>
+      <tr>
+        <td>Suspicious</td>
+        <td>Strong</td>
+        <td>He was suspicious of her motives.</td>
+        <td>Negative / defensive</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Wary"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/Wcq7rz1Gi9g?start=24"
+      title="Use of the word Wary in context"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+  <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👂</span> Listen for the speaker describing why the character is <em>"wary"</em> of entering the dark alley.
+    </div>
+      <span style="font-size: 2rem;">🕵️</span> Wary characters often show hesitation or doubt in suspenseful stories.
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Wary in the News</h3>
+  <p>
+    The word <strong>“wary”</strong> often appears in news about politics, economics, or technology, where leaders or analysts express caution about uncertain or risky developments.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.reuters.com/markets/global-markets-investors-wary-2024-01-10/" target="_blank" class="fancy-link">
+      🌍 Read: Investors Wary Amid Market Uncertainty – Reuters 🌍
+    </a>
+  </p>
+</div>
+
+  <script>
+        let voices = [];
+        window.speechSynthesis.onvoiceschanged = () => {
+            voices = speechSynthesis.getVoices();
+        };
+        
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            const latinLikeVoice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+            utterance.voice = latinLikeVoice;
+            utterance.rate = 0.9;
+            speechSynthesis.speak(utterance);
+        }
+
+        function speakFrench(text) {
+          const voices = speechSynthesis.getVoices();
+          const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.voice = frenchVoice;
+          utterance.rate = 0.9;
+          speechSynthesis.speak(utterance);
+        }
+
+       function speakItalian(text) {
+          const voices = speechSynthesis.getVoices();
+          const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.voice = italianVoice;
+          utterance.rate = 0.9;
+          speechSynthesis.speak(utterance);
+        }
+        
+    </script>
+
+</body>
+</html>
