@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Stroll</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 stroll 
+      <span class="pronunciation">/stroʊl/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/str/strol/stroll__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb or noun</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To stroll means to walk in a slow, relaxed way, usually for enjoyment.</p>
+    <div class="example">
+      <strong>Example:</strong> They strolled along the beach, enjoying the sunset.
+    </div>
+
+    <h3>📖 As a noun (a thing):</h3>
+    <p>A stroll is a slow, relaxed walk, typically taken for pleasure.</p>
+    <div class="example">
+      <strong>Example:</strong> We went for a stroll through the park after dinner.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    
+    <div class="fancy-list">
+      <ul>
+        <li>Walk</li>
+        <li>Amble</li>
+        <li>Saunter</li>
+        <li>Meander</li>
+        <li>Ramble</li>
+        <li>Promenade</li>
+      </ul>
+    </div>
+  </div>
+  
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"stroll"</strong> first appeared in English in the 17th century and may come from a German dialect word <em>strolchen</em>, meaning “to roam” or “to loaf.”</p>
+
+    <p><span style="font-size: 2rem;">📝</span> It was originally associated with vagrants or wandering people, but over time it softened to mean a relaxed, pleasant walk.</p>
+
+    <p><span style="font-size: 2rem;">💡</span> Now it has a peaceful, casual feel—no longer about roaming aimlessly but about walking leisurely for fun.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>German Dialect:</strong>
+      <em>strolchen</em>
+      <span class="pronunciation">/ˈʃtʁɔlçən/</span>
+      <button class="audio-button2" onclick="speak('strolchen')">🔊 Play</button>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>English:</strong> 
+      <em>stroll</em>
+      <span class="pronunciation">/stroʊl/</span>
+      <button class="audio-button2" onclick="speak('stroll')">🔊 Play</button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Walk</td>
+          <td>Neutral</td>
+          <td>Let’s go for a walk</td>
+          <td>General</td>
+        </tr>
+        <tr>
+          <td>Saunter</td>
+          <td>Somewhat formal / literary</td>
+          <td>He sauntered in like he owned the place</td>
+          <td>Confident / relaxed</td>
+        </tr>
+        <tr>
+          <td><strong>Stroll</strong></td>
+          <td><strong>Neutral / Friendly</strong></td>
+          <td>A relaxed walk through the park</td>
+          <td>Peaceful / casual</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Stroll"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/MJp4u5bBrM0?start=52"
+        title="Relaxing Forest Walk – Nature ASMR"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👂</span> Around <strong>0:52</strong>, the video description and title refer to a peaceful <em>stroll</em> through the woods.
+    </div>
+    <span style="font-size: 2rem;">🍃</span> This clip captures the essence of a “stroll” — calm, slow-paced walking through nature.
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Stroll in the News</h3>
+    <p>
+      In this article, a New York Times writer reflects on the joy of taking an afternoon stroll through Central Park as a form of daily mindfulness. The word "stroll" emphasizes the peaceful, unhurried pace that contrasts with the city's usual rush.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com/2023/05/21/travel/central-park-stroll.html" target="_blank" class="fancy-link">
+        🌿 Read the Full Article on The New York Times 🌿
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const voice = voices.find(v => v.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
