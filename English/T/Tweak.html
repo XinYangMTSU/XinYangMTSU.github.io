@@ -1,1 +1,177 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Tweak</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 tweak 
+      <span class="pronunciation">/twiːk/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/t/twe/tweak/tweak__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun or verb</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To <strong>tweak</strong> something means to make a small change or adjustment to improve it or make it work better.</p>
+    <div class="example">
+      <strong>Example:</strong> The engineer tweaked the settings to make the machine run more efficiently.
+    </div>
+
+    <h3>📖 As a noun (a thing):</h3>
+    <p>A <strong>tweak</strong> is a small change or improvement to something.</p>
+    <div class="example">
+      <strong>Example:</strong> The recipe just needs a slight tweak to be perfect.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+                 <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    
+    <div class="fancy-list">
+      <ul>
+        <li>Adjust</li>
+        <li>Modify</li>
+        <li>Refine</li>
+        <li>Improve</li>
+        <li>Change</li>
+        <li>Edit</li>
+      </ul>
+    </div>
+  </div>
+  
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"tweak"</strong> originally meant to pinch or twist sharply and came from Middle English.</p>
+    
+    <p><span style="font-size: 2rem;">📝</span> Over time, it evolved to mean "to make a fine adjustment," especially in mechanical or digital contexts.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle English:</strong> <em>tweeken</em> (to pinch or pluck)<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>tweak</em> — small adjustment or fine-tune<br>
+      <span class="pronunciation">/twiːk/</span>
+      <button class="audio-button2" onclick="speak('tweak')">🔊 Play</button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Edit</td>
+          <td>Neutral</td>
+          <td>Edit an article for clarity</td>
+          <td>Professional / clear</td>
+        </tr>
+        <tr>
+          <td>Adjust</td>
+          <td>Neutral</td>
+          <td>Adjust the brightness</td>
+          <td>Technical / functional</td>
+        </tr>
+        <tr>
+          <td><strong>Tweak</strong></td>
+          <td><strong>Informal</strong></td>
+          <td>Tweak the design layout</td>
+          <td>Creative / hands-on</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Tweak"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/0T8uXxKFvZc?start=38"
+        title="Tweak Example Clip"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:38</strong> where the word <em>"tweak"</em> is used in context.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Tweak in the News</h3>
+    <p>
+      In a recent update, Apple released a new version of iOS that includes a small <strong>tweak</strong> to the control center layout, aiming to improve user accessibility and efficiency.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.macrumors.com/2025/03/15/ios-update-control-center-tweak/" target="_blank" class="fancy-link">
+        🍏 Read the Full Article on MacRumors 🍏
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+    
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+        const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+        const voice = voices.find(v => v.lang.includes('it-IT')) || voices[0];
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
