@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Attest</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 attest 
+      <span class="pronunciation">/əˈtɛst/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/a/att/attes/attest__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To attest means to show, prove, or declare that something is true, often based on personal knowledge or evidence.</p>
+    <div class="example">
+      <strong>Example:</strong> Many documents attest to her long career in the public service. (= They serve as proof.)
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+                 <button class="audio-button2" onclick="speak('Synonyms')">
+                    🔊 Play
+                  </button>
+    </h3>
+    
+    <div class="fancy-list">
+      <ul>
+        <li>Confirm</li>
+        <li>Verify</li>
+        <li>Affirm</li>
+        <li>Prove</li>
+        <li>Substantiate</li>
+        <li>Bear witness</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+                 <button class="audio-button2" onclick="speak('Etymology')">
+                    🔊 Play
+                  </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>attest</strong> comes from the Latin verb <em>attestari</em>, meaning “to bear witness to.”</p>
+
+    <div class="example">
+        <ul>
+          <li><strong>ad-</strong> = to or toward</li>
+          <li><strong>testari</strong> = to testify, give evidence</li>
+        </ul>
+    </div>
+
+    <p><span style="font-size: 2rem;">💡</span> Originally used in legal and religious contexts to refer to giving formal testimony or witnessing truth.</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Latin:</strong>
+    <em>attestari</em>
+    <span class="pronunciation">/at.tesˈtaː.riː/</span>
+    <button class="audio-button2" onclick="speakItalian('attestari')">
+          🔊 Play
+    </button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>French:</strong> 
+    <em>attester</em>
+    <span class="pronunciation">/a.tɛs.te/</span>
+    <button class="audio-button2" onclick="speakFrench('attester')">
+          🔊 Play
+    </button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>English:</strong> 
+    <em>attest</em>
+    <span class="pronunciation">/əˈtɛst/</span>
+    <button class="audio-button2" onclick="speak('attest')">
+          🔊 Play
+    </button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Formality Level</th>
+        <th>Example Use</th>
+        <th>Tone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Say</td>
+        <td>Informal</td>
+        <td>She said it's true.</td>
+        <td>Casual</td>
+      </tr>
+      <tr>
+        <td>Confirm</td>
+        <td>Neutral / Formal</td>
+        <td>They confirmed the findings.</td>
+        <td>Precise</td>
+      </tr>
+      <tr>
+        <td><strong>Attest</strong></td>
+        <td><strong>Formal / Legal</strong></td>
+        <td>He attested under oath in court.</td>
+        <td>Official / Verified</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+  <h3>🎬 Clip Example – Use of the Word "Attest"</h3>
+
+  <center>
+    <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/XqKZL6yYF1Q"
+    title="How to Use 'Attest' in a Sentence"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+    </iframe>
+  </center>
+  <br>
+  <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch how "attest" is used in both formal and casual settings.
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Attest in the News</h3>
+  <p>
+    In a recent investigation, several employees attested to the quality control failures in the production line, providing written statements and data records. The use of the word "attest" here highlights the role of firsthand witness or verification.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.nytimes.com/2023/08/30/business/factory-quality-attest.html" target="_blank" class="fancy-link">
+      🗞️ Read the Full Article on NYTimes 🗞️
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+  }
+
+  function speakFrench(text) {
+    const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+
+  function speakItalian(text) {
+    const voice = voices.find(v => v.lang.includes('it')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
