@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Dis</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 dis
+      <span class="pronunciation">/dɪs/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/dis/dis__/dis__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb or noun (informal / slang)</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To <strong>dis</strong> someone means to disrespect them, especially by insulting or dismissing them in a rude way.</p>
+    <div class="example">
+      <strong>Example:</strong> He felt disrespected when his friend dissed his outfit in front of everyone.
+    </div>
+
+    <h3>📖 As a noun (a thing):</h3>
+    <p>A <strong>dis</strong> is a disrespectful or insulting remark.</p>
+    <div class="example">
+      <strong>Example:</strong> That comment was a major dis to her work.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">
+        🔊 Play
+      </button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Insult</li>
+        <li>Mock</li>
+        <li>Roast</li>
+        <li>Shade</li>
+        <li>Put down</li>
+        <li>Slam</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">
+        🔊 Play
+      </button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> "Dis" originated as an abbreviation of the word <strong>disrespect</strong>, and it became popular in African American Vernacular English (AAVE) and hip-hop culture in the late 20th century.</p>
+
+    <p><span style="font-size: 2rem;">💡</span> It eventually spread into mainstream slang and is now widely understood as an informal way to describe insults.</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>English:</strong>
+    <em>disrespect</em> → <em>dis (slang)</em>
+    <span class="pronunciation">/dɪs/</span>
+    <button class="audio-button2" onclick="speak('dis')">
+          🔊 Play
+    </button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Formality Level</th>
+        <th>Example Use</th>
+        <th>Tone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Insult</td>
+        <td>Neutral</td>
+        <td>He insulted her work in the meeting.</td>
+        <td>Harsh / Serious</td>
+      </tr>
+      <tr>
+        <td>Criticize</td>
+        <td>Formal</td>
+        <td>The editor criticized the article's structure.</td>
+        <td>Analytical</td>
+      </tr>
+      <tr>
+        <td><strong>Dis</strong></td>
+        <td><strong>Informal / Slang</strong></td>
+        <td>She dissed him in her latest rap song.</td>
+        <td>Playful or harsh depending on context</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+  <h3>🎬 Clip Example – Use of the Word "Dis"</h3>
+  <center>
+    <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/jRQOhJZHT2w"
+    title="Epic Rap Battles – Dis Examples"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+    </iframe>
+  </center>
+  <br>
+  <div class="word-box">
+      <span style="font-size: 2rem;">🎤</span> Watch how rappers creatively use “disses” to challenge each other lyrically.
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Dis in the News</h3>
+  <p>
+    In a recent celebrity interview, the singer explained her song was not meant as a dis, despite fans interpreting it as a jab at a former collaborator. The conversation reignited debates around intention and interpretation in pop lyrics.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.rollingstone.com/music/music-news/singer-denies-diss-track-2024-1234567/" target="_blank" class="fancy-link">
+      🎵 Read the Full Article on Rolling Stone 🎵
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
