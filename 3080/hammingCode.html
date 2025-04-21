@@ -379,7 +379,7 @@ p3 is selected so as to establish even parity in positions 1,3,5,7.
             <tr>
                 <th>Position</th>
                 <th>Binary Representation</th>
-                <th>Third LSB</th>
+                <th>MSB(Most Significant Bit)</th>
             </tr>
         </thead>
         <tbody>
@@ -423,8 +423,8 @@ p3 is selected so as to establish even parity in positions 1,3,5,7.
 		</center>
 
 		<br>
-		Parity bit \(p_1\) (in position 4) is responsible for ensuring even parity for all positions where the <b>Third Least Significant Bit (third LSB)</b> is 1. 
-		From the table above, positions 4,5,6,7 have their third LSB set to 1, so \(p_1\) covers those positions.
+		Parity bit \(p_1\) (in position 4) is responsible for ensuring even parity for all positions where the <b>Most Significant Bit (MSB)</b> is 1. 
+		From the table above, positions 4,5,6,7 have their third MSB set to 1, so \(p_1\) covers those positions.
 		If an error occurs in position 4, 5, 6, or 7, the most significant bit of the position number — that is, \(c_1\) — will be 1.
 		If there is no error in any of these positions, the value of \(c_1\) will be 0.
 		
