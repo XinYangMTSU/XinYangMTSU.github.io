@@ -1,1 +1,163 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Cognizant</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 cognizant 
+      <span class="pronunciation">/ˈkɒɡnɪzənt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cog/cogni/cognizant__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective</p>
+
+    <h3>📖 Definition:</h3>
+    <p>If you are <strong>cognizant</strong> of something, you are aware of it or understand it clearly.</p>
+    <div class="example">
+      <strong>Example:</strong> She was fully cognizant of the risks involved in the experiment.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Aware</li>
+        <li>Conscious</li>
+        <li>Mindful</li>
+        <li>Alert</li>
+        <li>Informed</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"cognizant"</strong> comes from Latin roots.</p>
+    <p><span style="font-size: 2rem;">📝</span>It derives from the Latin verb <strong>cognoscere</strong> meaning "to know".</p>
+
+    <div class="example">
+      <ul>
+        <li><strong>co-</strong> = together</li>
+        <li><strong>gnoscere</strong> = to know, recognize</li>
+      </ul>
+    </div>
+
+    <p><span style="font-size: 2rem;">💡</span> It entered English in the 1800s as a formal word meaning "aware" or "having knowledge."</p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Aware</td>
+          <td>Neutral</td>
+          <td>I’m aware of the deadline.</td>
+          <td>Everyday / clear</td>
+        </tr>
+        <tr>
+          <td>Conscious</td>
+          <td>Formal / Neutral</td>
+          <td>He’s conscious of his tone when speaking.</td>
+          <td>Precise / thoughtful</td>
+        </tr>
+        <tr>
+          <td><strong>Cognizant</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>She’s cognizant of the legal issues.</td>
+          <td>Academic / professional</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Cognizant"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/1x8iUw5ZFkc?start=45"
+      title="Use of Cognizant"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> where the narrator uses the word <em>"cognizant."</em>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Cognizant in the News</h3>
+    <p>
+      In a recent article, a climate scientist said: "We must remain <strong>cognizant</strong> of the long-term effects of global warming, even as we focus on short-term solutions."
+    </p>
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com/" target="_blank" class="fancy-link">
+        🌿 Read more on The New York Times 🌿
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+    
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+        const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+        const voice = voices.find(v => v.lang.includes('it-IT')) || voices[0];
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
