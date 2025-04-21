@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Pejorative</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 pejorative
+      <span class="pronunciation">/pəˈdʒɔːrətɪv/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pej/pejor/pejorative__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective or noun</p>
+
+    <h3>📖 As an adjective (describing):</h3>
+    <p>A pejorative word or expression shows disapproval or is intended to belittle someone or something.</p>
+    <div class="example">
+      <strong>Example:</strong> He used a pejorative term to refer to the other team. (= a disrespectful or insulting word)
+    </div>
+
+    <h3>📖 As a noun (a thing):</h3>
+    <p>A pejorative is a word or phrase that expresses criticism or disapproval.</p>
+    <div class="example">
+      <strong>Example:</strong> The word "geek" used to be a pejorative, but now it's often a badge of honor.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">
+        🔊 Play
+      </button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Disparaging</li>
+        <li>Derogatory</li>
+        <li>Insulting</li>
+        <li>Belittling</li>
+        <li>Scornful</li>
+        <li>Contemptuous</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">
+        🔊 Play
+      </button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>pejorative</strong> comes from the Late Latin verb <em>pejorare</em>, which means “to make worse.”</p>
+
+    <div class="example">
+      <ul>
+        <li><strong>pejor-</strong> = worse</li>
+        <li><strong>-ative</strong> = relating to</li>
+      </ul>
+    </div>
+
+    <p><span style="font-size: 2rem;">💡</span> It entered English in the 19th century, used to describe words or expressions that cast something in a negative light.</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Latin:</strong>
+    <em>pejorare</em>
+    <span class="pronunciation">/pe.joˈraː.re/</span>
+    <button class="audio-button2" onclick="speakItalian('pejorare')">
+          🔊 Play
+    </button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>English:</strong>
+    <em>pejorative</em>
+    <span class="pronunciation">/pəˈdʒɔːrətɪv/</span>
+    <button class="audio-button2" onclick="speak('pejorative')">
+          🔊 Play
+    </button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Formality Level</th>
+        <th>Example Use</th>
+        <th>Tone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Insulting</td>
+        <td>Informal</td>
+        <td>That was an insulting comment.</td>
+        <td>Rude / Direct</td>
+      </tr>
+      <tr>
+        <td>Critical</td>
+        <td>Neutral</td>
+        <td>A critical review of the movie.</td>
+        <td>Analytical</td>
+      </tr>
+      <tr>
+        <td><strong>Pejorative</strong></td>
+        <td><strong>Formal / Academic</strong></td>
+        <td>He used a pejorative term for immigrants.</td>
+        <td>Disapproving / Negative</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+  <h3>🎬 Clip Example – Use of the Word "Pejorative"</h3>
+  <center>
+    <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/Sk8HxSW3A84"
+    title="What is a Pejorative?"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+    </iframe>
+  </center>
+  <br>
+  <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch the narrator explain how some words shift from neutral to pejorative over time.
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Pejorative in the News</h3>
+  <p>
+    A recent debate has emerged over the use of historical terms that are now considered pejorative. Language experts caution that once-neutral labels can take on negative meanings over time, especially when used in exclusionary or dismissive ways.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.npr.org/2023/10/15/language-watchdog-pejorative-terms-history" target="_blank" class="fancy-link">
+      📰 Read the Full Article on NPR 📰
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+  }
+
+  function speakFrench(text) {
+    const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+
+  function speakItalian(text) {
+    const voice = voices.find(v => v.lang.includes('it')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
