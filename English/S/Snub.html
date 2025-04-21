@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Snub</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 snub
+      <span class="pronunciation">/snʌb/</span>
+      <button class="audio-button" onclick="speak(snub)">
+        🔊 Play
+      </button>
+    </h2>
+    
+    <p><strong>Part of speech:</strong> Noun or verb</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To snub someone means to deliberately ignore or insult them by not giving them attention or respect.</p>
+    <div class="example">
+      <strong>Example:</strong> She snubbed her old friend at the party by pretending not to see him.
+    </div>
+
+    <h3>📖 As a noun (a thing):</h3>
+    <p>A snub is the act of ignoring or showing disdain for someone, especially in a social setting.</p>
+    <div class="example">
+      <strong>Example:</strong> His absence was seen as a snub to the host.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">
+        🔊 Play
+      </button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Ignore</li>
+        <li>Shun</li>
+        <li>Dismiss</li>
+        <li>Cold-shoulder</li>
+        <li>Insult</li>
+        <li>Brush off</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">
+        🔊 Play
+      </button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>snub</strong> likely comes from an old Norse word <em>snubba</em>, meaning "to scold or rebuke."
+    </p>
+    <p><span style="font-size: 2rem;">💡</span> Over time, the meaning shifted to include social rebuffs, such as ignoring or excluding someone.</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Old Norse:</strong>
+    <em>snubba</em>
+    <span class="pronunciation">/ˈsnʊb.ba/</span>
+    <button class="audio-button2" onclick="speak('snubba')">
+          🔊 Play
+    </button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>English:</strong>
+    <em>snub</em>
+    <span class="pronunciation">/snʌb/</span>
+    <button class="audio-button2" onclick="speak('snub')">
+          🔊 Play
+    </button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Formality Level</th>
+        <th>Example Use</th>
+        <th>Tone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ignore</td>
+        <td>Informal</td>
+        <td>She ignored his message.</td>
+        <td>Neutral / Passive</td>
+      </tr>
+      <tr>
+        <td>Reject</td>
+        <td>Neutral</td>
+        <td>The company rejected the proposal.</td>
+        <td>Formal / Firm</td>
+      </tr>
+      <tr>
+        <td><strong>Snub</strong></td>
+        <td><strong>Deliberate / Slightly Negative</strong></td>
+        <td>He snubbed her at the event.</td>
+        <td>Cold / Personal</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+  <h3>🎬 Clip Example – Use of the Word "Snub"</h3>
+  <center>
+    <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/ALW5v4swZzY"
+    title="Famous Awards Snubs in History"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+    </iframe>
+  </center>
+  <br>
+  <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> The narrator uses "snub" to describe major award show exclusions.
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Snub in the News</h3>
+  <p>
+    In recent news, a high-profile celebrity was noticeably absent from a major fashion event, leading many to speculate it was an intentional snub. Social media discussions exploded with opinions on whether it was a personal slight or a professional statement.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.theguardian.com/fashion/2023/sep/15/celebrity-fashion-week-snub" target="_blank" class="fancy-link">
+      💬 Read More about the Snub on The Guardian 💬
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
