@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Descartes</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 Descartes 
+      <span class="pronunciation">/deɪˈkɑːrt/</span>
+      <button class="audio-button" onclick="speak('Descartes')">
+        🔊 Play
+      </button>
+    </h2>
+  
+    <div style="text-align: center; margin-top: 20px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/440px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg" alt="René Descartes" width="250" style="border-radius: 12px; box-shadow: 2px 2px 10px gray;">
+      <p><em>Portrait of René Descartes by Frans Hals</em></p>
+    </div>
+
+    <p><strong>Part of speech:</strong> Proper noun (a name)</p>
+
+    <h3>👨‍🏫 Who was Descartes?</h3>
+    <p><strong>René Descartes</strong> (1596–1650) was a famous French philosopher, mathematician, and scientist. He is often called the "Father of Modern Philosophy."</p>
+
+    <div class="example">
+      <strong>Famous Quote:</strong> <em>"Cogito, ergo sum."</em> (= "I think, therefore I am.")
+    </div>
+
+    <h3>🔬 Contributions:</h3>
+    <ul>
+      <li>📐 Invented the coordinate system in mathematics (Cartesian coordinates)</li>
+      <li>🧠 Known for developing a method of doubt to reach foundational truths</li>
+      <li>📘 Author of *Discourse on the Method*</li>
+    </ul>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Name Origin (Etymology)</h3>
+    <p><span style="font-size: 2rem;">📚</span> Descartes is a French surname. It is the Latinized form of his original name, "Renatus Cartesius."</p>
+
+    <div class="example">
+        <ul>
+          <li><strong>René</strong> = reborn (from Latin <em>Renatus</em>)</li>
+          <li><strong>Cartesius</strong> = Latinized surname Descartes</li>
+        </ul>
+    </div>
+
+    <p><span style="font-size: 2rem;">💡</span> That’s why we call his graph system "Cartesian coordinates" — it comes from the Latin version of his name!</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Latin:</strong>
+    <em>Cartesius</em>
+    <span class="pronunciation">/karˈteː.si.us/</span>
+    <button class="audio-button2" onclick="speakLatin('Cartesius')">
+          🔊 Play
+    </button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>French:</strong> 
+    <em>Descartes</em>
+    <span class="pronunciation">/dekaʁt/</span>
+    <button class="audio-button2" onclick="speakFrench('Descartes')">
+          🔊 Play
+    </button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>English:</strong> 
+    <em>Descartes</em>
+    <span class="pronunciation">/deɪˈkɑːrt/</span>
+    <button class="audio-button2" onclick="speak('Descartes')">
+          🔊 Play
+    </button>
+  </p>
+</div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison with Other Thinkers</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Philosopher</th>
+        <th>Main Idea</th>
+        <th>Famous Work</th>
+        <th>Known For</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Descartes</strong></td>
+        <td>"I think, therefore I am"</td>
+        <td>Discourse on the Method</td>
+        <td>Cartesian coordinates, Rationalism</td>
+      </tr>
+      <tr>
+        <td>Socrates</td>
+        <td>Know thyself</td>
+        <td>Dialogues (via Plato)</td>
+        <td>Socratic method</td>
+      </tr>
+      <tr>
+        <td>Aristotle</td>
+        <td>Empirical observation</td>
+        <td>Nicomachean Ethics</td>
+        <td>Logic, ethics, natural sciences</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<div class="etymology">
+  <h3>🎬 Clip Example – Who Was Descartes?</h3>
+  <center>
+    <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/Fq2D2PN9zK0?start=0"
+    title="Rene Descartes Biography"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+    </iframe>
+  </center>
+  <br>
+  <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen for how the narrator introduces Descartes and explains his influence on science and philosophy.
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Descartes in the World</h3>
+  <p>
+    Descartes' ideas still shape modern thinking in science, math, and philosophy. From logical reasoning to artificial intelligence, his rationalist approach continues to influence how we understand the world.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://plato.stanford.edu/entries/descartes/" target="_blank" class="fancy-link">
+      🔎 Read More about Descartes on Stanford Encyclopedia of Philosophy
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+  };
+  
+  function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+  }
+
+  function speakFrench(text) {
+    const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+
+  function speakLatin(text) {
+    const voice = voices.find(v => v.lang.includes('it') || v.lang.includes('la')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
