@@ -312,7 +312,8 @@ p3 is selected so as to establish even parity in positions 1,3,5,7.
 		<br>
 		Parity bit \(p_3\) (in position 1) is responsible for ensuring even parity for all positions where the <b>Least Significant Bit (LSB)</b> is 1. 
 		From the table above, positions 1,3,5,7 have their LSB set to 1, so \(p_3\) covers those positions.
-
+		If an error occurs in position 1, 3, 5, or 7, the least significant bit of the position number — that is, \(c_3\( — will be 1.
+		
 		<h2>Why does \(p_2\) cover positions 2, 3, 6, 7?</h2>
 
 		<center>
