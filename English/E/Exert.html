@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Exert</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 exert 
+      <span class="pronunciation">/ɪɡˈzɜːrt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/e/exe/exert/exert__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To <strong>exert</strong> means to apply or use (a force, influence, or quality) deliberately or forcefully.</p>
+    <div class="example">
+      <strong>Example:</strong> She exerted all her strength to lift the heavy box. (= She used all her strength.)
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧹 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')"> 🔊 Play </button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Apply</li>
+        <li>Use</li>
+        <li>Wield</li>
+        <li>Employ</li>
+        <li>Exercise</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')"> 🔊 Play </button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"exert"</strong> comes from Latin roots.</p>
+    <p><span style="font-size: 2rem;">📝</span> It comes from Latin <strong>ex(s)erere</strong> which means "to thrust out" or "put forth".</p>
+
+    <div class="example">
+      <ul>
+        <li><strong>ex-</strong> = out</li>
+        <li><strong>serere</strong> = to join or bind</li>
+      </ul>
+    </div>
+
+    <p><span style="font-size: 2rem;">🖍️</span> Originally, "exert" referred to putting oneself into action. Over time, it came to mean applying force, influence, or effort.</p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Use</td>
+          <td>Informal</td>
+          <td>Use your strength wisely.</td>
+          <td>Simple / Neutral</td>
+        </tr>
+        <tr>
+          <td>Exercise</td>
+          <td>Formal</td>
+          <td>Exercise your right to vote.</td>
+          <td>Professional / Legal</td>
+        </tr>
+        <tr>
+          <td><strong>Exert</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>Exert pressure on the team to perform.</td>
+          <td>Strong / Forceful</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎮 Clip Example – Use of the Word "Exert"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/DWJYfHmtzNc?start=30"
+      title="Use of Exert"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> where the speaker uses the word <em>"exert."</em>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Exert in the News</h3>
+    <p>
+      In a business article, the author states: "The CEO exerted enormous influence over the company’s new direction." This shows how the word "exert" often implies strong, deliberate effort.
+    </p>
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.wsj.com/" target="_blank" class="fancy-link">
+        🌿 Read more on The Wall Street Journal 🌿
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const latinLikeVoice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+        utterance.voice = latinLikeVoice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voices = speechSynthesis.getVoices();
+      const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = frenchVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+   function speakItalian(text) {
+      const voices = speechSynthesis.getVoices();
+      const italianVoice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = italianVoice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
