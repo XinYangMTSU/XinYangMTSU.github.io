@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Brit</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 Brit 
+      <span class="pronunciation">/brɪt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/b/bri/brit_/brit__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun (informal)</p>
+
+    <h3>📖 Definition:</h3>
+    <p><strong>Brit</strong> is an informal word for a person from Britain, especially from England.</p>
+    <div class="example">
+      <strong>Example:</strong> A clever Brit solved Fermat's Last Theorem after centuries of mystery. (= A British person solved it.)
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+                 <button class="audio-button2" onclick="speak('Synonyms')">
+                    🔊 Play
+                  </button>
+    </h3>
+
+    <div class="fancy-list">
+      <ul>
+        <li>British person</li>
+        <li>Briton (more formal)</li>
+        <li>UK citizen</li>
+        <li>Englishman / Englishwoman</li>
+        <li>Londoner (if from London)</li>
+      </ul>
+    </div>
+  </div>
+  
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+                 <button class="audio-button2" onclick="speak('Etymology')">
+                    🔊 Play
+                  </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> <strong>Brit</strong> is a clipped form of <strong>British</strong>, used informally.</p>
+
+    <p><span style="font-size: 2rem;">📝</span> Its usage became more common in the 20th century, especially in journalism and casual speech.</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Usage Evolution</h3>
+  <p>
+    <strong>British (full form):</strong>
+    <em>British</em>
+    <span class="pronunciation">/ˈbrɪtɪʃ/</span>
+    <button class="audio-button2" onclick="speak('British')">
+          🔊 Play
+    </button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>Clipped Informal:</strong> 
+    <em>Brit</em>
+    <span class="pronunciation">/brɪt/</span>
+    <button class="audio-button2" onclick="speak('Brit')">
+          🔊 Play
+    </button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Term</th>
+        <th>Formality</th>
+        <th>Usage Example</th>
+        <th>Context</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>British</td>
+        <td>Formal / Neutral</td>
+        <td>She is a British scientist.</td>
+        <td>Official writing or respectful tone</td>
+      </tr>
+      <tr>
+        <td>Briton</td>
+        <td>Very Formal / Literary</td>
+        <td>The Britons resisted Roman rule.</td>
+        <td>Historical or formal documents</td>
+      </tr>
+      <tr>
+        <td><strong>Brit</strong></td>
+        <td><strong>Informal / Conversational</strong></td>
+        <td>A friendly Brit helped us find the train station.</td>
+        <td>Casual conversation or news headlines</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+  <h3>🎬 Clip Example – Use of the Word "Brit"</h3>
+
+  <center>
+    <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/F_oL0UHsQds?start=20"
+    title="Brit in Pop Culture Clip"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+    </iframe>
+  </center>
+<br>
+  <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> where the host says <em>"this proud Brit"</em>.
+  </div>
+    <span style="font-size: 2rem;">🇬🇧</span> "Brit" is often used affectionately or humorously in media when referring to someone from the UK.
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Brit in the News</h3>
+  <p>
+    In an article about international science awards, a headline read: “Young Brit Wins Global Physics Prize.” Here, “Brit” was used as a short and catchy way to identify a British person in the spotlight.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.bbc.com/news/uk-physics-award-2025" target="_blank" class="fancy-link">
+      🌍 Read the Full Story on BBC News 🌍
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+  };
+  
+  function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+  }
+
+  function speakFrench(text) {
+    const voice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+
+  function speakItalian(text) {
+    const voice = voices.find(voice => voice.lang.includes('it-IT')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
