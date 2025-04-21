@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   Parity Bit
+  </title>
+  <link href="../CSS/3080.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div id="main">
+   <h1>
+    Chapter X: Binary Encoding Scheme
+   </h1>
+   <center>
+    <h2>
+     Section X.3 Error Detecting Codes
+    </h2>
+   </center>
+   <h1>
+    What Is a Parity Bit?
+   </h1>
+   <p>
+    A
+    <b>
+     <font color="blue">
+      parity bit
+     </font>
+    </b>
+    is a simple error-detecting code used in digital communications and memory storage.
+			It is a single bit added to a group of data bits to ensure that the total number of 1's in the group is either even (even parity) or odd (odd parity).
+   </p>
+   <h2>
+    Goal
+   </h2>
+   <ul>
+    <li>
+     To
+     <b>
+      <font color="blue">
+       detect single-bit errors
+      </font>
+     </b>
+     in data transmission or storage.
+    </li>
+    <li>
+     Parity bits
+     <b>
+      <font color="blue">
+       do not correct
+      </font>
+     </b>
+     the error, only
+     <b>
+      <font color="red">
+       detect
+      </font>
+     </b>
+     it.
+    </li>
+   </ul>
+   <h2>
+    Types of Parity
+   </h2>
+   <ul>
+    <li>
+     <b>
+      <font color="green">
+       Even parity:
+      </font>
+     </b>
+     The parity bit is chosen so that the total number of 1's in the group (including the parity bit) is even.
+    </li>
+    <li>
+     <b>
+      <font color="green">
+       Odd parity:
+      </font>
+     </b>
+     The parity bit is chosen so that the total number of 1's in the group (including the parity bit) is odd.
+    </li>
+   </ul>
+   <h2>
+    Example: Even Parity
+   </h2>
+   <p>
+    Suppose we want to transmit the 4-bit data
+    <code>
+     1011
+    </code>
+    .
+			It has three 1's (which is odd), so we need to add a parity bit of
+    <b>
+     1
+    </b>
+    to make the total number of 1's even.
+   </p>
+   <p>
+    <b>
+     Transmitted 5-bit sequence:
+    </b>
+    <code>
+     10111
+    </code>
+   </p>
+   <h2>
+    Example: Odd Parity
+   </h2>
+   <p>
+    Using the same 4-bit data
+    <code>
+     1011
+    </code>
+    , we want the total number of 1's to be odd.
+			Since there are already three 1's, we add a parity bit of
+    <b>
+     0
+    </b>
+    .
+   </p>
+   <p>
+    <b>
+     Transmitted 5-bit sequence:
+    </b>
+    <code>
+     10110
+    </code>
+   </p>
+   <h2>
+    Limitations
+   </h2>
+   <ul>
+    <li>
+     Parity bits can
+     <b>
+      <font color="red">
+       only detect single-bit errors
+      </font>
+     </b>
+     .
+    </li>
+    <li>
+     They
+     <b>
+      cannot detect
+     </b>
+     or
+     <b>
+      correct
+     </b>
+     multiple-bit errors.
+    </li>
+   </ul>
+   <h2>
+    Parity Check Table (Even Parity)
+   </h2>
+   <table border="1" style="width:50%">
+    <thead>
+     <tr>
+      <th>
+       Data
+      </th>
+      <th>
+       Number of 1's
+      </th>
+      <th>
+       Parity Bit
+      </th>
+      <th>
+       Transmitted Data
+      </th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td>
+       0000
+      </td>
+      <td>
+       0
+      </td>
+      <td>
+       0
+      </td>
+      <td>
+       00000
+      </td>
+     </tr>
+     <tr>
+      <td>
+       0001
+      </td>
+      <td>
+       1
+      </td>
+      <td>
+       1
+      </td>
+      <td>
+       00011
+      </td>
+     </tr>
+     <tr>
+      <td>
+       0011
+      </td>
+      <td>
+       2
+      </td>
+      <td>
+       0
+      </td>
+      <td>
+       00110
+      </td>
+     </tr>
+     <tr>
+      <td>
+       0111
+      </td>
+      <td>
+       3
+      </td>
+      <td>
+       1
+      </td>
+      <td>
+       01111
+      </td>
+     </tr>
+     <tr>
+      <td>
+       1111
+      </td>
+      <td>
+       4
+      </td>
+      <td>
+       0
+      </td>
+      <td>
+       11110
+      </td>
+     </tr>
+    </tbody>
+   </table>
+   <h2>
+    More Examples of Parity
+   </h2>
+   <h3>
+    Even vs Odd Parity Examples
+   </h3>
+   <table border="1" style="width:80%">
+    <thead>
+     <tr>
+      <th>
+       Initial Value
+      </th>
+      <th>
+       Total 1's
+      </th>
+      <th>
+       Parity Bit (Even)
+      </th>
+      <th>
+       Transmitted (Even)
+      </th>
+      <th>
+       Parity Bit (Odd)
+      </th>
+      <th>
+       Transmitted (Odd)
+      </th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td>
+       10001000
+      </td>
+      <td>
+       2
+      </td>
+      <td>
+       0
+      </td>
+      <td>
+       100010000
+      </td>
+      <td>
+       1
+      </td>
+      <td>
+       100010001
+      </td>
+     </tr>
+     <tr>
+      <td>
+       10111010
+      </td>
+      <td>
+       5
+      </td>
+      <td>
+       1
+      </td>
+      <td>
+       101110101
+      </td>
+      <td>
+       0
+      </td>
+      <td>
+       101110100
+      </td>
+     </tr>
+     <tr>
+      <td>
+       1000100 (D)
+      </td>
+      <td>
+       2
+      </td>
+      <td>
+       0
+      </td>
+      <td>
+       10001000
+      </td>
+      <td>
+       1
+      </td>
+      <td>
+       10001001
+      </td>
+     </tr>
+     <tr>
+      <td>
+       1001011 (K)
+      </td>
+      <td>
+       4
+      </td>
+      <td>
+       0
+      </td>
+      <td>
+       10010110
+      </td>
+      <td>
+       1
+      </td>
+      <td>
+       10010111
+      </td>
+     </tr>
+    </tbody>
+   </table>
+   <h3>
+    Error Detection
+   </h3>
+   <table border="1" style="width:90%">
+    <thead>
+     <tr>
+      <th>
+       Original Info
+      </th>
+      <th>
+       Transmitted Info
+      </th>
+      <th>
+       Received Info
+      </th>
+      <th>
+       Parity Type
+      </th>
+      <th>
+       Error Detected?
+      </th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td>
+       1001000
+      </td>
+      <td>
+       10010000
+      </td>
+      <td>
+       10010000
+      </td>
+      <td>
+       Even
+      </td>
+      <td>
+       No
+      </td>
+     </tr>
+     <tr>
+      <td>
+       1100101
+      </td>
+      <td>
+       11001011
+      </td>
+      <td>
+       11101011
+      </td>
+      <td>
+       Odd
+      </td>
+      <td>
+       Yes
+      </td>
+     </tr>
+     <tr>
+      <td>
+       1101100
+      </td>
+      <td>
+       11011001
+      </td>
+      <td>
+       11001001
+      </td>
+      <td>
+       Odd
+      </td>
+      <td>
+       Yes
+      </td>
+     </tr>
+     <tr>
+      <td>
+       1110000
+      </td>
+      <td>
+       11100001
+      </td>
+      <td>
+       11100001
+      </td>
+      <td>
+       Even
+      </td>
+      <td>
+       No
+      </td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+ </body>
+</html>
