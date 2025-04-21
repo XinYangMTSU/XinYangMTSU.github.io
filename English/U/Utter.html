@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Utter</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 utter
+      <span class="pronunciation">/ˈʌtər/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/u/utt/utter/utter__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb or adjective</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To <strong>utter</strong> something means to say it or express it in words, especially out loud or formally.</p>
+    <div class="example">
+      <strong>Example:</strong> She didn’t utter a single word during the meeting.
+    </div>
+
+    <h3>📖 As an adjective (describing):</h3>
+    <p>As an adjective, <strong>utter</strong> means complete or absolute, often used for emphasis.</p>
+    <div class="example">
+      <strong>Example:</strong> That’s utter nonsense!
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">
+        🔊 Play
+      </button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Speak</li>
+        <li>Say</li>
+        <li>Express</li>
+        <li>Voice</li>
+        <li>Complete</li>
+        <li>Absolute</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">
+        🔊 Play
+      </button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> The verb <strong>utter</strong> comes from Middle English <em>uteren</em>, from Old English <em>ūter</em>, meaning "outer" or "to put forth."
+    </p>
+    <p><span style="font-size: 2rem;">💡</span> Over time, it evolved to mean “to speak out” or “to say aloud.” As an adjective, it kept the sense of “outermost,” which later became “complete” or “absolute.”</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Old English:</strong>
+    <em>ūter</em> (outer)
+    <span class="pronunciation">/ˈuː.tɛr/</span>
+    <button class="audio-button2" onclick="speak('ūter')">
+          🔊 Play
+    </button>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>Middle English:</strong>
+    <em>uteren</em> (to say or express)
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>Modern English:</strong>
+    <em>utter</em>
+    <span class="pronunciation">/ˈʌtər/</span>
+    <button class="audio-button2" onclick="speak('utter')">
+          🔊 Play
+    </button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Formality Level</th>
+        <th>Example Use</th>
+        <th>Tone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Say</td>
+        <td>Informal</td>
+        <td>He said something funny.</td>
+        <td>Casual</td>
+      </tr>
+      <tr>
+        <td>Express</td>
+        <td>Neutral</td>
+        <td>She expressed her thoughts clearly.</td>
+        <td>Clear / Formal</td>
+      </tr>
+      <tr>
+        <td><strong>Utter</strong></td>
+        <td><strong>Formal / Emphatic</strong></td>
+        <td>He uttered a cry of pain.</td>
+        <td>Dramatic / Serious</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+  <h3>🎬 Clip Example – Use of the Word "Utter"</h3>
+  <center>
+    <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/HYHVzjzBrv8"
+    title="Utter in a Sentence - Video Example"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+    </iframe>
+  </center>
+  <br>
+  <div class="word-box">
+      <span style="font-size: 2rem;">🎥</span> Listen for how the speaker uses "utter" both as a verb and as an adjective.
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Utter in the News</h3>
+  <p>
+    In a recent speech, the mayor uttered strong words of encouragement to the city’s frontline workers. The article described the gesture as a moment of “utter sincerity” that uplifted the audience.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.nytimes.com/2024/11/04/us/politics/mayor-utter-sincerity.html" target="_blank" class="fancy-link">
+      📰 Read the Full Article on NYTimes 📰
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+  }
+
+  function speakFrench(text) {
+    const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+
+  function speakItalian(text) {
+    const voice = voices.find(v => v.lang.includes('it')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
