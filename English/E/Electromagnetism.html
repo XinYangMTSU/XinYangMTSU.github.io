@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Electromagnetism</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 electromagnetism 
+      <span class="pronunciation">/ɪˌlɛktroʊˈmæɡnəˌtɪzəm/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/e/ele/elect/electromagnetism__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun</p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Electromagnetism is the branch of physics involving the study of electric and magnetic fields and how they interact. It explains how charged particles create electric and magnetic forces and how those forces affect the motion of the particles.</p>
+    <div class="example">
+      <strong>Example:</strong> Electromagnetism is the reason why magnets stick to your refrigerator and why electric motors work.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Related Terms <span class="pronunciation">/rɪˈleɪtɪd/</span>
+      <button class="audio-button2" onclick="speak('Related Terms')">
+        🔊 Play
+      </button>
+    </h3>
+    
+    <div class="fancy-list">
+      <ul>
+        <li>Electricity</li>
+        <li>Magnetism</li>
+        <li>Force</li>
+        <li>Field</li>
+        <li>Wave</li>
+        <li>Light</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">
+        🔊 Play
+      </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>electromagnetism</strong> is formed from two parts:</p>
+    <div class="example">
+        <ul>
+          <li><strong>electro-</strong> = related to electricity (from Greek *ēlektron*, meaning amber)</li>
+          <li><strong>magnetism</strong> = the force of magnets (from Greek *magnētis lithos*, meaning “Magnesian stone”)</li>
+        </ul>
+    </div>
+    
+    <p><span style="font-size: 2rem;">💡</span> The term came into use in the early 19th century as scientists began to understand the relationship between electricity and magnetism.</p>
+  </div>
+
+ <div class="etymology">
+  <h3>🧭 Word Evolution</h3>
+  <p>
+    <strong>Greek:</strong>
+    <em>ēlektron</em> + <em>magnētis lithos</em>
+    <span class="pronunciation">/eː.lék.tron/ and /mag.nɛː.tís/</span>
+    <br><span style="font-size: 2rem;">⬇️</span><br>
+
+    <strong>English:</strong> 
+    <em>electromagnetism</em>
+    <span class="pronunciation">/ɪˌlɛktroʊˈmæɡnəˌtɪzəm/</span>
+    <button class="audio-button2" onclick="speak('electromagnetism')">
+          🔊 Play
+    </button>
+  </p>
+ </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Term</th>
+        <th>Related Field</th>
+        <th>Use</th>
+        <th>Discovery</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Electricity</td>
+        <td>Physics</td>
+        <td>Powering devices</td>
+        <td>Ancient Greece (static), 1800s (current)</td>
+      </tr>
+      <tr>
+        <td>Magnetism</td>
+        <td>Physics</td>
+        <td>Compass navigation, motors</td>
+        <td>Ancient China, Greece</td>
+      </tr>
+      <tr>
+        <td><strong>Electromagnetism</strong></td>
+        <td><strong>Unified Physics</strong></td>
+        <td>Motors, generators, light</td>
+        <td><strong>19th century (Maxwell)</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+  <h3>🎬 Clip Example – What is Electromagnetism?</h3>
+  <center>
+    <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/9EFXq9yU5vY"
+    title="Electromagnetism Explained"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+    </iframe>
+  </center>
+  <br>
+  <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch how electric and magnetic fields interact to create waves and power devices.
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Electromagnetism in the News</h3>
+  <p>
+    Recent advances in wireless charging and medical imaging (like MRI) depend heavily on the principles of electromagnetism. Scientists continue to explore how electromagnetic fields influence both technology and human health.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.sciencedaily.com/news/matter_energy/electromagnetism/" target="_blank" class="fancy-link">
+      🌟 Read the Latest on Electromagnetism – Science Daily 🌟
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
