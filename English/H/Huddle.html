@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Huddle</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 huddle
+      <span class="pronunciation">/ˈhʌd.l̩/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/h/hud/huddl/huddle__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun or verb</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To <strong>huddle</strong> means to gather closely together, usually for warmth, safety, or discussion.</p>
+    <div class="example">
+      <strong>Example:</strong> The children huddled together to stay warm in the snow.
+    </div>
+
+    <h3>📖 As a noun (a thing):</h3>
+    <p>A <strong>huddle</strong> is a group of people or things crowded close together. In sports, it refers to a quick gathering to discuss strategy.</p>
+    <div class="example">
+      <strong>Example:</strong> The football players formed a huddle before the next play.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">
+        🔊 Play
+      </button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Crowd</li>
+        <li>Cluster</li>
+        <li>Gather</li>
+        <li>Congregate</li>
+        <li>Group</li>
+        <li>Assemble</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">
+        🔊 Play
+      </button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>huddle</strong> likely comes from Middle English *hoderen*, meaning "to crowd or conceal." It may be related to Old English words meaning "to hide" or "to shelter."</p>
+
+    <p><span style="font-size: 2rem;">💡</span> Its current use in sports (e.g., a football huddle) began in the late 19th century in the United States.</p>
+  </div>
+
+<div class="comparison-table">
+  <h3>📊 Comparison</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Formality Level</th>
+        <th>Example Use</th>
+        <th>Tone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cluster</td>
+        <td>Neutral</td>
+        <td>A cluster of stars</td>
+        <td>Descriptive</td>
+      </tr>
+      <tr>
+        <td>Congregate</td>
+        <td>Formal</td>
+        <td>People congregating at an event</td>
+        <td>Organized / Purposeful</td>
+      </tr>
+      <tr>
+        <td><strong>Huddle</strong></td>
+        <td><strong>Informal / Neutral</strong></td>
+        <td>Kids huddled in a blanket</td>
+        <td>Cozy / Urgent</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="etymology">
+  <h3>🎬 Clip Example – Use of the Word "Huddle"</h3>
+  <center>
+    <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/SxUjHXKdrO8"
+    title="NFL Players Huddle Example"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+    </iframe>
+  </center>
+  <br>
+  <div class="word-box">
+      <span style="font-size: 2rem;">🏈</span> In the clip, players form a <strong>huddle</strong> to quickly communicate their strategy.
+  </div>
+</div>
+
+<br>
+
+<div class="word-box">
+  <h3>📰 Huddle in the News</h3>
+  <p>
+    In a recent article, rescue workers were seen huddling together around a campfire after long hours of searching for survivors in the freezing cold.
+  </p>
+
+  <p style="text-align: center; margin-top: 20px;">
+    <a href="https://www.reuters.com/world/rescue-workers-huddle-for-warmth-2023/" target="_blank" class="fancy-link">
+      🔥 Read the Full Article on Reuters 🔥
+    </a>
+  </p>
+</div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+  }
+
+  function speakFrench(text) {
+    const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+
+  function speakItalian(text) {
+    const voice = voices.find(v => v.lang.includes('it')) || voices[0];
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
