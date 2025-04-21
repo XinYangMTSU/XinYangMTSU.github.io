@@ -368,7 +368,8 @@ p3 is selected so as to establish even parity in positions 1,3,5,7.
 		<br>
 		Parity bit \(p_2\) (in position 2) is responsible for ensuring even parity for all positions where the <b>Second Least Significant Bit (second LSB)</b> is 1. 
 		From the table above, positions 2,3,6,7 have their second LSB set to 1, so \(p_3\) covers those positions.
-		
+		If an error occurs in position 2, 3, 6, or 7, the second significant bit of the position number — that is, \(c_2\) — will be 1.
+		If there is no error in any of these positions, the value of \(c_2\) will be 0.
 		
 		<h2>Why does \(p_1\) cover positions 4, 5, 6, 7?</h2>
 		
@@ -424,7 +425,8 @@ p3 is selected so as to establish even parity in positions 1,3,5,7.
 		<br>
 		Parity bit \(p_1\) (in position 4) is responsible for ensuring even parity for all positions where the <b>Third Least Significant Bit (third LSB)</b> is 1. 
 		From the table above, positions 4,5,6,7 have their third LSB set to 1, so \(p_1\) covers those positions.
-		
+		If an error occurs in position 4, 5, 6, or 7, the most significant bit of the position number — that is, \(c_1\) — will be 1.
+		If there is no error in any of these positions, the value of \(c_1\) will be 0.
 		
 		<h2>Reference</h2>
 		<a href="https://www.tutorialspoint.com/computer_logical_organization/binary_codes.htm#:~:text=Binary%20Coded%20Decimal%20(BCD)%20code&text=BCD%20is%20a%20way%20to,1111%20are%20invalid%20in%20BCD."
