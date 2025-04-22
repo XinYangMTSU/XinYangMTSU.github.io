@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Baffling</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 baffling 
+      <span class="pronunciation">/ˈbæflɪŋ/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/b/baf/baffl/baffling__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective</p>
+
+    <h3>📖 Definition:</h3>
+    <p>If something is <strong>baffling</strong>, it is very confusing, puzzling, or difficult to understand.</p>
+    <div class="example">
+      <strong>Example:</strong> The instructions were so baffling that no one could figure out how to build the toy.
+    </div>
+    <div class="example">
+      <strong>Example:</strong> His behavior was completely baffling to his classmates.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Confusing</li>
+        <li>Puzzling</li>
+        <li>Perplexing</li>
+        <li>Mysterious</li>
+        <li>Incomprehensible</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"baffling"</strong> comes from the verb <em>baffle</em>, which originated in the late 16th century, possibly from French <em>beffler</em>, meaning to trick or deceive.</p>
+
+    <p><span style="font-size: 2rem;">📝</span> Over time, the word evolved to mean "to bewilder" or "to confuse," and "baffling" became the adjective form.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Possibly French:</strong> <em>beffler</em> → to deceive<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>English:</strong> <em>baffle</em> → to confuse<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>baffling</em> → confusing or puzzling
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Baffling</td>
+          <td>Neutral</td>
+          <td>When something is very confusing</td>
+          <td>Puzzled</td>
+        </tr>
+        <tr>
+          <td>Confusing</td>
+          <td>Neutral</td>
+          <td>General confusion</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Perplexing</td>
+          <td>Formal</td>
+          <td>Used in academic or descriptive writing</td>
+          <td>Thoughtful / puzzled</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Baffling"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/gBxeju8dMho?start=10"
+        title="Baffling Riddle Challenge"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">🧠</span> Watch how the riddles confuse the players—baffling but fun!
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Baffling in the News</h3>
+    <p>
+      In a recent article from <em>National Geographic</em>, scientists encountered a baffling set of footprints that did not match any known species. The mystery has sparked debate in the paleontology community.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nationalgeographic.com/science/article/mysterious-footprints-found" target="_blank" class="fancy-link">
+        🦶 Read the Full Article on National Geographic 🦶
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const voice = voices.find(v => v.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
