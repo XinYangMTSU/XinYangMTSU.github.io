@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Bleak</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 bleak
+      <span class="pronunciation">/bliːk/</span>
+      <button class="audio-button" onclick="speak('bleak')">
+        🔊 Play
+      </button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective</p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Bleak</strong> describes something that is cold, empty, or depressing. It can refer to physical places, emotional moods, or situations without hope or comfort.</p>
+    <div class="example">
+      <strong>Example:</strong> The landscape was bleak and barren after the storm. (= It looked empty and lifeless.)
+    </div>
+    <div class="example">
+      <strong>Example:</strong> The future looked bleak for the struggling company. (= Things seemed hopeless.)
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧬 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">
+        🔊 Play
+      </button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Desolate</li>
+        <li>Dreary</li>
+        <li>Gloomy</li>
+        <li>Hopeless</li>
+        <li>Cold</li>
+        <li>Empty</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˈɛtəˌmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">
+        🔊 Play
+      </button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>bleak</strong> comes from Old Norse <em>bleikr</em>, meaning pale or white. It later came to describe places that were cold and exposed, and eventually emotional states that felt depressing or hopeless.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🪠 Word Evolution</h3>
+    <p>
+      <strong>Old Norse:</strong> <em>bleikr</em> (pale, white)<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>bleke</em><br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>bleak</em>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Meaning</th>
+          <th>Context</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bleak</td>
+          <td>Cold, empty, or hopeless</td>
+          <td>Weather, future, feelings</td>
+          <td>Sad / serious</td>
+        </tr>
+        <tr>
+          <td>Gloomy</td>
+          <td>Dark or depressed</td>
+          <td>Weather or mood</td>
+          <td>Melancholy</td>
+        </tr>
+        <tr>
+          <td>Dreary</td>
+          <td>Boring and dull</td>
+          <td>Routine, place</td>
+          <td>Monotonous</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+
+  <div class="etymology">
+    <h3>🎥 Clip Example – Use of the Word "Bleak"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/X8bI3qTtvG0?start=30"
+        title="Bleak Landscape Example"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">🎤</span> Listen for how the narrator describes the scene as bleak and barren.
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Bleak in the News</h3>
+    <p>
+      In an article from <em>The Guardian</em>, the author describes the economic outlook as "bleak" for small businesses in the wake of inflation and rising costs. The term suggests a grim, discouraging situation with little sign of improvement.
+    </p>
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com/business" target="_blank" class="fancy-link">
+        🌟 Read the Full Article on The Guardian 🌟
+      </a>
+    </p>
+  </div>
+
+<script>
+  let voices = [];
+  window.speechSynthesis.onvoiceschanged = () => {
+    voices = speechSynthesis.getVoices();
+  };
+
+  function speak(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const latinLikeVoice = voices.find(voice => voice.lang.includes('en-US')) || voices[0];
+    utterance.voice = latinLikeVoice;
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
