@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Signify</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 signify 
+      <span class="pronunciation">/ˈsɪɡnɪˌfaɪ/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/sig/signi/signify__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb</p>
+
+    <h3>📖 Definition:</h3>
+    <p>To <strong>signify</strong> means to be a sign of something, to indicate or express a meaning, or to show something clearly.</p>
+
+    <div class="example">
+      <strong>Example:</strong> A red flag on the beach signifies danger in the water.
+    </div>
+    <div class="example">
+      <strong>Example:</strong> His silence signified agreement.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Indicate</li>
+        <li>Mean</li>
+        <li>Express</li>
+        <li>Represent</li>
+        <li>Show</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"signify"</strong> comes from the Latin <em>significare</em>, which means “to indicate, to point out, to mean.”</p>
+
+    <p><span style="font-size: 2rem;">✍️</span> It is formed from <strong>signum</strong> meaning “sign” and <strong>facere</strong> meaning “to make.”</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>significare</em> → to indicate, to make a sign<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>signifien</em><br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>signify</em>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Signify</td>
+          <td>Formal</td>
+          <td>To convey a meaning</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Indicate</td>
+          <td>Neutral / Formal</td>
+          <td>To point something out</td>
+          <td>Precise</td>
+        </tr>
+        <tr>
+          <td>Show</td>
+          <td>Informal</td>
+          <td>To make something visible or known</td>
+          <td>Direct</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Signify"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/3OtSZXEMoCk?start=5"
+        title="Sign Language and Symbols"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">🎥</span> In this video, the narrator talks about how hand gestures can signify emotions and meanings.
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Signify in the News</h3>
+    <p>
+      In a recent article on cultural symbols, historians discussed how certain ancient marks and drawings signified social status and beliefs among early civilizations.
+    </p>
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.history.com/topics/prehistoric-art" target="_blank" class="fancy-link">
+        🖼️ Read the Full Article on History.com 🖼️
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const voice = voices.find(v => v.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
