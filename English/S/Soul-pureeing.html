@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Soul-pureeing</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 soul-pureeing
+      <span class="pronunciation">/ˈsoʊl ˌpjʊə.ri.ɪŋ/</span>
+      <button class="audio-button" onclick="speak('soul pureeing')">
+        🔊 Play
+      </button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective (informal, figurative)</p>
+
+    <h3>📖 What does it mean?</h3>
+    <p><strong>"Soul-pureeing"</strong> is a metaphorical expression used to describe an experience so overwhelming or emotionally draining that it feels as if your soul is being blended into a purée. It's used for moments of deep frustration, confusion, or exhaustion—especially in contexts like difficult schoolwork or bureaucratic processes.</p>
+    <div class="example">
+      <strong>Example:</strong> The endless math drills were soul-pureeing. (= They crushed my spirit.)
+    </div>
+
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms
+      <button class="audio-button2" onclick="speak('Synonyms')">
+        🔊 Play
+      </button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Crushing</li>
+        <li>Demoralizing</li>
+        <li>Exhausting</li>
+        <li>Draining</li>
+        <li>Overwhelming</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the phrase</h3>
+    <p><span style="font-size: 2rem;">📚</span> "Soul-pureeing" is a modern creative phrase. It combines the word <strong>soul</strong> (referring to one's emotional or spiritual essence) and <strong>puree</strong> (to blend into a smooth paste), forming a vivid and humorous metaphor.</p>
+    <p><span style="font-size: 2rem;">💡</span> It is not found in traditional dictionaries but has appeared in literature and blogs to describe emotional burnout or absurdly draining experiences.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Formation</h3>
+    <p>
+      <strong>Soul:</strong> one's emotional or spiritual core<br>
+      +
+      <strong>Purée:</strong> to blend food into a smooth paste<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Soul-pureeing:</strong> blending one’s spirit into mush
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Meaning</th>
+          <th>Context</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Exhausting</td>
+          <td>Very tiring</td>
+          <td>Physical/mental effort</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Demoralizing</td>
+          <td>Destroying motivation</td>
+          <td>School/work</td>
+          <td>Negative</td>
+        </tr>
+        <tr>
+          <td><strong>Soul-pureeing</strong></td>
+          <td>Emotionally pulverizing</td>
+          <td>Humorous/exaggerated</td>
+          <td>Dramatic / creative</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Soul-pureeing"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/w8HdOHrc3OQ"
+      title="Soul-Crushing Office Scene"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👂</span> This scene humorously captures the "soul-pureeing" feeling of working in a dreary office.
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Soul-pureeing in the News</h3>
+    <p>
+      An article in <em>The Atlantic</em> humorously described a child's remote math lessons during lockdown as “a soul-pureeing experience for parent and child alike.” It shows how creative language captures shared emotional truths.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theatlantic.com/family/archive/2021/01/pandemic-school-exhaustion-parents/617647/" target="_blank" class="fancy-link">
+        📚 Read the Full Article on The Atlantic
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
