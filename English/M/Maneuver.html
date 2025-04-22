@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Maneuver</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 maneuver 
+      <span class="pronunciation">/məˈnuːvər/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/m/man/maneu/maneuver__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun or verb</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To maneuver means to move skillfully or carefully, especially to avoid obstacles or achieve a goal. It can also mean to plan or manipulate a situation cleverly.</p>
+    <div class="example">
+      <strong>Example:</strong> The pilot maneuvered the plane through the storm. (= Moved it carefully.)
+    </div>
+    <div class="example">
+      <strong>Example:</strong> She maneuvered her way into the leadership role. (= Strategically reached it.)
+    </div>
+
+    <h3>📖 As a noun (a thing):</h3>
+    <p>A maneuver is a movement or series of moves requiring skill and care, often used in driving, military, or strategic planning.</p>
+    <div class="example">
+      <strong>Example:</strong> The tricky parking maneuver took him five minutes to complete.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Move</li>
+        <li>Steer</li>
+        <li>Navigate</li>
+        <li>Strategy</li>
+        <li>Tactic</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"maneuver"</strong> comes from the French word <em>manœuvre</em>, which itself comes from Latin <em>manu operari</em>.</p>
+
+    <div class="example">
+      <ul>
+        <li><strong>manu</strong> = hand</li>
+        <li><strong>operari</strong> = to work</li>
+      </ul>
+    </div>
+    
+    <p><span style="font-size: 2rem;">✍️</span> It originally meant “to work by hand” but evolved to mean a carefully planned movement or action.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>manu operari</em> → to work by hand<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>manœuvre</em><br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>maneuver</em>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Maneuver</td>
+          <td>Neutral</td>
+          <td>Military / driving / strategy</td>
+          <td>Skillful / clever</td>
+        </tr>
+        <tr>
+          <td>Move</td>
+          <td>Neutral</td>
+          <td>General action</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Strategy</td>
+          <td>Formal</td>
+          <td>Long-term planning</td>
+          <td>Deliberate</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Maneuver"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/zvGHyZL98w8?start=10"
+        title="Driving Maneuver Example"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">🚗</span> Watch how the driver performs a perfect parallel parking maneuver.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Maneuver in the News</h3>
+    <p>
+      In a recent article from <em>BBC News</em>, astronauts aboard the International Space Station executed a successful maneuver to avoid space debris. The term "maneuver" was used to describe a carefully planned change in the ISS's orbit to protect the crew and equipment.
+    </p>
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news/science-environment-56722994" target="_blank" class="fancy-link">
+        🌍 Read the Full Article on BBC 🌍
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const voice = voices.find(v => v.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
