@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Wriggle</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 wriggle 
+      <span class="pronunciation">/ˈrɪɡəl/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/w/wri/wrigg/wriggle__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb or noun</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To <strong>wriggle</strong> means to twist and turn your body with small, quick movements, often in a way that shows discomfort or effort to escape.</p>
+    <div class="example">
+      <strong>Example:</strong> The child wriggled in her seat, trying to get comfortable.
+    </div>
+    <div class="example">
+      <strong>Example:</strong> The worm wriggled through the soil.
+    </div>
+
+    <h3>📖 As a noun (a thing):</h3>
+    <p>A <strong>wriggle</strong> is a twisting or turning movement, like the kind a small animal or child might make.</p>
+    <div class="example">
+      <strong>Example:</strong> With a quick wriggle, the fish escaped from his hands.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Squirm</li>
+        <li>Twist</li>
+        <li>Wiggle</li>
+        <li>Fidget</li>
+        <li>Slide</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"wriggle"</strong> likely comes from Middle Low German <em>wricken</em>, meaning “to twist.” It shares roots with words like "wiggle" and "wring."</p>
+    <p><span style="font-size: 2rem;">✍️</span> It has been used in English since the 1500s to describe movements like twisting or sliding through a narrow space.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle Low German:</strong> <em>wricken</em> — to twist<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>wriglen</em> — to move or turn<br>
+      <span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>wriggle</em>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Wriggle</td>
+          <td>Neutral</td>
+          <td>A worm wriggling in dirt</td>
+          <td>Descriptive / active</td>
+        </tr>
+        <tr>
+          <td>Squirm</td>
+          <td>Neutral</td>
+          <td>A child squirming in their seat</td>
+          <td>Restless / uncomfortable</td>
+        </tr>
+        <tr>
+          <td>Wiggle</td>
+          <td>Informal</td>
+          <td>A baby wiggling its toes</td>
+          <td>Playful / light</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Wriggle"</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/Z9MGX7gZbcw?start=27"
+        title="Baby Wriggles Out of Blanket"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">🍼</span> Watch how the baby wriggles around while trying to escape the blanket!
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Wriggle in the News</h3>
+    <p>
+      In a recent science article, researchers described how tiny underwater robots inspired by worms can wriggle through tight spaces in the human body to deliver medicine directly to cells.
+    </p>
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.sciencenews.org/article/tiny-robot-wriggle-body-medicine" target="_blank" class="fancy-link">
+        🤖 Read the Full Article on ScienceNews.org 🤖
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+      const voice = voices.find(v => v.lang.includes('fr')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakItalian(text) {
+      const voice = voices.find(v => v.lang.includes('it-IT')) || voices[0];
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
