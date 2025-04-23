@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Moniker</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🏷️ moniker 
+      <span class="pronunciation">/ˈmɑː.nɪ.kɚ/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/m/mon/monik/moniker__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A <strong>moniker</strong> is a name or nickname that someone or something is known by.<br>
+    <span class="cn">moniker 指的是某人或某物的名字或绰号。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The singer performs under the moniker "Starlight".<br>
+      <span class="cn">例句：这位歌手以“Starlight”的名字演出。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> His real name is Jonathan, but he goes by the moniker "J-Dog".<br>
+      <span class="cn">例句：他本名是乔纳森，但人们叫他“J-Dog”。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Nickname <span class="cn">昵称</span></li>
+        <li>Alias <span class="cn">别名</span></li>
+        <li>Label <span class="cn">标签</span></li>
+        <li>Name <span class="cn">名字</span></li>
+        <li>Tag <span class="cn">称号</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>moniker</strong> is believed to have originated in American slang in the 19th century, possibly from Irish or Scottish roots meaning "name."<br>
+    <span class="cn">moniker 一词可能起源于19世纪的美式俚语，可能与爱尔兰或苏格兰表示“名字”的词有关。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Early usage:</strong> 
+      <em>moniker</em> – informal name or alias<br>
+      <span class="cn">早期用法：moniker 表示非正式的名字或别称</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nickname</td>
+          <td>Informal</td>
+          <td>They gave her the nickname "Speedy".</td>
+          <td>Friendly / casual</td>
+        </tr>
+        <tr>
+          <td>Alias</td>
+          <td>Formal / Legal</td>
+          <td>The criminal used several aliases.</td>
+          <td>Secretive / formal</td>
+        </tr>
+        <tr>
+          <td><strong>Moniker</strong></td>
+          <td><strong>Neutral / Playful</strong></td>
+          <td>He earned the moniker "The Wizard" for his skills.</td>
+          <td>Descriptive / colorful</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Moniker"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/XO9vK3BP1fY?start=15"
+      title="What is a Moniker?"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:15</strong> as the narrator explains the origin of the word "moniker."<br>
+      <span class="cn">听大约 0:15，视频中讲解者讲述了“moniker”一词的起源。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Moniker in the News</h3>
+    <p>
+      In a recent branding article, a tech startup decided to drop its old moniker and adopt a fresher name to appeal to younger audiences.<br>
+      <span class="cn">在最近一篇关于品牌重塑的文章中，一家科技初创公司决定放弃旧称号，采用更有活力的新名字以吸引年轻用户。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news/business" target="_blank" class="fancy-link">
+        📰 Read More – BBC Business
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
