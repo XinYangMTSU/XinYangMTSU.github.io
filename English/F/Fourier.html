@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Fourier</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📊 Fourier 
+      <span class="pronunciation">/ˈfʊrieɪ/ or /ˈfʊrie/</span>
+      <button class="audio-button" onclick="speak('Fourier')">
+        🔊 Play
+      </button>
+    </h2>
+   
+    <p><strong>Part of speech:</strong> Proper noun (name)</p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Fourier</strong> usually refers to <strong>Jean-Baptiste Joseph Fourier</strong>, a French mathematician and physicist known for his work on heat transfer and wave analysis. In mathematics and science, “Fourier” is most commonly seen in the term <strong>Fourier analysis</strong> — a method of breaking down complex waves into simpler sine and cosine components.</p>
+    <div class="example">
+      <strong>Example:</strong> Fourier analysis is used in image processing, audio compression, and signal analysis.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Related Concepts</h3>
+
+    <div class="fancy-list">
+      <ul>
+        <li>Fourier Transform</li>
+        <li>Fourier Series</li>
+        <li>Fast Fourier Transform (FFT)</li>
+        <li>Sine & Cosine Waves</li>
+        <li>Frequency Domain</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Who was Fourier?</h3>
+    <p><span style="font-size: 2rem;">👨‍🔬</span> <strong>Jean-Baptiste Joseph Fourier</strong> (1768–1830) was a French mathematician and physicist. He is best known for initiating the study of <strong>Fourier series</strong> and their applications to problems of heat flow and vibrations.</p>
+    <p>His work laid the foundation for many fields including signal processing, acoustics, quantum physics, and electrical engineering.</p>
+
+    <div class="example">
+      <strong>Fun Fact:</strong> The “Fourier Transform” is used by your phone to turn sound waves into data that can be stored and transmitted!
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>French Name:</strong> 
+      <em>Fourier</em>
+      <span class="pronunciation">/fuʁ.je/ (French)</span>
+      <button class="audio-button2" onclick="speakFrench('Fourier')">🔊 Play</button>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>Modern Usage:</strong> 
+      <em>Fourier series, Fourier analysis, Fourier transform</em>
+      <br>
+      Used globally in mathematics, physics, engineering, and computing.
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison – Fourier Terms</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>What it does</th>
+          <th>Used in</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fourier Series</td>
+          <td>Breaks a periodic function into sine/cosine terms</td>
+          <td>Mathematics, physics</td>
+        </tr>
+        <tr>
+          <td>Fourier Transform</td>
+          <td>Converts a signal from time domain to frequency domain</td>
+          <td>Signal processing</td>
+        </tr>
+        <tr>
+          <td>FFT</td>
+          <td>Computationally fast version of Fourier Transform</td>
+          <td>Engineering, software</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Fourier in Real Life</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/spUNpyF58BY?start=10"
+      title="Fourier Transform Explained Visually"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👂</span> Listen around <strong>0:10</strong> as the speaker introduces Fourier's role in visualizing sound.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Fourier in the News</h3>
+    <p>
+      Fourier methods continue to impact modern life. In a 2024 research breakthrough, scientists used Fourier transforms to analyze faint signals from deep space, helping confirm the detection of gravitational waves.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.scientificamerican.com/article/fourier-transforms-help-detect-space-waves/" target="_blank" class="fancy-link">
+        🌌 Read Full Article – Scientific American
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakFrench(text) {
+        const voices = speechSynthesis.getVoices();
+        const frenchVoice = voices.find(voice => voice.lang.includes('fr')) || voices[0];
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = frenchVoice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
