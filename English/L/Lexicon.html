@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Lexicon</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📘 lexicon 
+      <span class="pronunciation">/ˈlɛksɪˌkɒn/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/l/lex/lexic/lexicon__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun</p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A <strong>lexicon</strong> is the vocabulary of a language, a subject, or a group of people. It can also mean a dictionary, especially for ancient or foreign languages.</p>
+    <div class="example">
+      <strong>Example:</strong> The medical lexicon includes many Latin-based terms unfamiliar to non-specialists.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">
+        🔊 Play
+      </button>
+    </h3>
+
+    <div class="fancy-list">
+      <ul>
+        <li>Vocabulary</li>
+        <li>Word list</li>
+        <li>Terminology</li>
+        <li>Glossary</li>
+        <li>Dictionary</li>
+        <li>Word bank</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">
+        🔊 Play
+      </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> Let’s look at the origin (etymology) of the word <strong>"lexicon"</strong>.</p>
+    <p><span style="font-size: 2rem;">📝</span>It comes from the <strong>Greek word</strong> <em>lexikon</em>, meaning "book of words."</p>
+
+    <div class="example">
+      <ul>
+        <li><strong>lexis</strong> = word or speech (Greek)</li>
+        <li><strong>-ikon</strong> = related to (Greek suffix)</li>
+      </ul>
+    </div>
+
+    <p><span style="font-size: 2rem;">💡</span> Over time, it came to mean "dictionary" or "vocabulary set" in Latin, then into English in the early 1600s.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong>
+      <em>lexikon</em>
+      <span class="pronunciation">/ˈlɛk.si.kon/</span>
+      <button class="audio-button2" onclick="speakGreek('lexikon')">🔊 Play</button>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>Latin:</strong> 
+      <em>lexicon</em> – book of words
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>English:</strong> 
+      <em>lexicon</em>
+      <span class="pronunciation">/ˈlɛksɪˌkɒn/</span>
+      <button class="audio-button2" onclick="speak('lexicon')">🔊 Play</button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Vocabulary</td>
+          <td>Neutral</td>
+          <td>Improve your English vocabulary</td>
+          <td>Everyday / academic</td>
+        </tr>
+        <tr>
+          <td>Glossary</td>
+          <td>Neutral</td>
+          <td>A glossary at the end of the textbook</td>
+          <td>Educational</td>
+        </tr>
+        <tr>
+          <td><strong>Lexicon</strong></td>
+          <td><strong>Formal / Academic</strong></td>
+          <td>The lexicon of legal language</td>
+          <td>Scholarly / technical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Lexicon"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/6nJYY3UeOYg?start=70"
+      title="Lexicon in Real World Usage"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👂</span> Listen around <strong>1:10</strong> where the speaker refers to a “lexicon” of modern slang.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Lexicon in the News</h3>
+    <p>
+      In a recent article on artificial intelligence, the author explored how machine learning models develop their own lexicon—a set of internal symbolic "words" that help them process language in structured ways.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com/2023/07/01/technology/ai-language-lexicon.html" target="_blank" class="fancy-link">
+        🤖 Read Full Article – NYT Tech
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakGreek(text) {
+        const voice = voices.find(v => v.lang.includes('el')) || voices[0];
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
