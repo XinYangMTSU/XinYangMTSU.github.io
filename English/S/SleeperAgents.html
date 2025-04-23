@@ -1,1 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Sleeper Agents</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🕵️ sleeper agents
+      <span class="pronunciation">/ˈsliːpər ˈeɪdʒənts/</span>
+      <button class="audio-button" onclick="speak('Sleeper Agents')">🔊 Play</button>
+    </h2>
+ 
+    <p><strong>Part of speech:</strong> Noun (plural)<br><span class="cn">词性：名词（复数）</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Sleeper agents</strong> are spies or secret operatives who live in a country pretending to be ordinary citizens, waiting to be activated to carry out a mission.<br>
+    <span class="cn">sleeper agents 指的是潜伏特工，他们伪装成普通人，潜伏在目标国家，等待被激活去执行任务。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The novel featured sleeper agents planted decades earlier by a foreign government.<br>
+      <span class="cn">例句：这本小说描写了几十年前由外国政府安插的潜伏特工。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Like sleeper agents, the students automatically recited the formula when prompted.<br>
+      <span class="cn">例句：就像沉睡特工一样，这些学生一被提问就立刻背出公式。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Related Terms
+      <span class="pronunciation">/rɪˈleɪtɪd/</span>
+      <button class="audio-button2" onclick="speak('Related Terms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Spy <span class="cn">间谍</span></li>
+        <li>Operative <span class="cn">特工人员</span></li>
+        <li>Agent <span class="cn">代理人，特工</span></li>
+        <li>Undercover <span class="cn">卧底的</span></li>
+        <li>Espionage <span class="cn">间谍活动</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Origin and Usage
+      <span class="pronunciation">/ˈɔːrɪdʒɪn/</span>
+      <button class="audio-button2" onclick="speak('Origin and Usage')">🔊 Play</button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> The term <strong>sleeper agent</strong> gained popularity during the Cold War, describing spies who would “sleep” undetected in another country until called into action.<br>
+    <span class="cn">sleeper agent 一词在冷战时期流行开来，描述那些潜伏在他国、直到接到指令才开始行动的间谍。</span></p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Type</th>
+          <th>Example Use</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Spy</td>
+          <td>General</td>
+          <td>The spy stole sensitive data.</td>
+          <td>Gather information</td>
+        </tr>
+        <tr>
+          <td>Undercover agent</td>
+          <td>Active</td>
+          <td>The undercover agent infiltrated the gang.</td>
+          <td>Blend in while working</td>
+        </tr>
+        <tr>
+          <td><strong>Sleeper agent</strong></td>
+          <td><strong>Dormant</strong></td>
+          <td>The sleeper agent waited years before receiving orders.</td>
+          <td>Inactive until triggered</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Phrase "Sleeper Agents"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/8c3Vqt0bYew?start=20"
+      title="Sleeper Agents in Pop Culture"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> for a fun discussion of sleeper agents in movies and real history.<br>
+      <span class="cn">听第 0:20 左右，了解影视作品与历史中的沉睡特工。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Sleeper Agents in the News</h3>
+    <p>
+      A recent security briefing warned that modern sleeper agents may use digital identities to remain hidden online for years.<br>
+      <span class="cn">一份最新的安全简报警告称，现代沉睡特工可能利用虚拟身份在网络中潜伏多年。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
 
