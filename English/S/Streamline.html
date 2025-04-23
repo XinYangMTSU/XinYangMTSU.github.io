@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Streamline</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💨 streamline
+      <span class="pronunciation">/ˈstriːmlaɪn/</span>
+      <button class="audio-button" onclick="speak('Streamline')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To <strong>streamline</strong> something means to make it more efficient or simpler by removing unnecessary parts or steps.<br>
+    <span class="cn">streamline 的意思是“简化、精简流程”，通过去除不必要的部分使其更高效。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The company streamlined its operations to reduce costs.<br>
+      <span class="cn">例句：公司简化了运营流程以降低成本。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> We need to streamline the application process to save time.<br>
+      <span class="cn">例句：我们需要简化申请流程以节省时间。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Simplify <span class="cn">简化</span></li>
+        <li>Optimize <span class="cn">优化</span></li>
+        <li>Rationalize <span class="cn">使合理化</span></li>
+        <li>Trim down <span class="cn">精减</span></li>
+        <li>Make more efficient <span class="cn">提高效率</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Streamline" originally referred to the smooth shape of objects designed to reduce air or water resistance. It later came to mean making things more efficient in general.<br>
+    <span class="cn">streamline 最初用于描述减少空气或水阻的光滑外形，后来引申为“使流程更高效”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Early 20th Century:</strong>
+      <em>Streamline</em> – to give a smooth shape for speed and efficiency<br>
+      <span class="cn">20世纪初：streamline 意为为提高速度和效率而设计的流线形</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern Usage:</strong>
+      <em>Streamline</em> – to simplify and make a system more efficient<br>
+      <span class="cn">现代英语：streamline 引申为简化、提高效率</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Simplify</td>
+          <td>Neutral</td>
+          <td>We need to simplify the instructions.</td>
+          <td>Practical</td>
+        </tr>
+        <tr>
+          <td>Optimize</td>
+          <td>Technical</td>
+          <td>They optimized the software for faster performance.</td>
+          <td>Technical / professional</td>
+        </tr>
+        <tr>
+          <td><strong>Streamline</strong></td>
+          <td><strong>Modern / Business</strong></td>
+          <td>We streamlined our logistics to speed up delivery.</td>
+          <td>Efficient / modern</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Streamline"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/vs_ZzqXhB6M?start=20"
+      title="How Companies Streamline Processes"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> to hear how companies use streamlining to improve productivity.<br>
+      <span class="cn">听第 0:20 左右，了解企业如何通过精简流程来提升生产力。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Streamline in the News</h3>
+    <p>
+      A recent tech article discussed how automation tools are helping small businesses streamline daily operations.<br>
+      <span class="cn">一篇最新科技文章讨论了自动化工具如何帮助小企业简化日常运作。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.wsj.com/" target="_blank" class="fancy-link">
+        📰 Read More – The Wall Street Journal
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
