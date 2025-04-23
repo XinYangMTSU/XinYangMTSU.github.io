@@ -1,1 +1,183 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Peculiar</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔮 peculiar 
+      <span class="pronunciation">/pɪˈkjuːliər/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pec/pecul/peculiar__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective</p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Peculiar</strong> means something is strange, unusual, or different from what is normal or expected—often in a way that is interesting or hard to explain.</p>
+    <div class="example">
+      <strong>Example:</strong> There was a peculiar smell in the air—sweet, smoky, and oddly familiar.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">
+        🔊 Play
+      </button>
+    </h3>
+
+    <div class="fancy-list">
+      <ul>
+        <li>Strange</li>
+        <li>Odd</li>
+        <li>Unusual</li>
+        <li>Weird</li>
+        <li>Curious</li>
+        <li>Bizarre</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">
+        🔊 Play
+      </button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> Let’s look at the origin (etymology) of the word <strong>"peculiar"</strong>.</p>
+    <p><span style="font-size: 2rem;">📝</span>It comes from the Latin word <strong>peculium</strong>, which meant "private property or something specially one's own."</p>
+
+    <div class="example">
+      <ul>
+        <li><strong>pecu-</strong> = cattle or wealth (in Latin, cattle was a symbol of property)</li>
+      </ul>
+    </div>
+
+    <p><span style="font-size: 2rem;">💡</span> Over time, “peculiar” came to mean "belonging to one person or group" and then eventually "unusual or unique."</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong>
+      <em>peculium</em>
+      <span class="pronunciation">/peˈku.li.um/</span>
+      <button class="audio-button2" onclick="speakLatin('peculium')">🔊 Play</button>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>Middle English:</strong> 
+      <em>peculier</em> – meaning “particular to someone”
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>Modern English:</strong> 
+      <em>peculiar</em>
+      <span class="pronunciation">/pɪˈkjuːliər/</span>
+      <button class="audio-button2" onclick="speak('peculiar')">🔊 Play</button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Weird</td>
+          <td>Informal</td>
+          <td>That movie was so weird!</td>
+          <td>Strange / silly</td>
+        </tr>
+        <tr>
+          <td>Unusual</td>
+          <td>Neutral</td>
+          <td>This bird has unusual feathers.</td>
+          <td>Neutral / curious</td>
+        </tr>
+        <tr>
+          <td><strong>Peculiar</strong></td>
+          <td><strong>Neutral / Slightly Formal</strong></td>
+          <td>The machine made a peculiar noise.</td>
+          <td>Strange / slightly mysterious</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Peculiar"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/tI8pFidH89U?start=45"
+      title="Peculiar in Movie Dialogue"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> where the speaker describes a “peculiar” situation.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Peculiar in the News</h3>
+    <p>
+      A recent article described a **peculiar** weather phenomenon in which the sky turned green before a thunderstorm. Meteorologists say this happens when light scatters through unusually thick clouds.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.washingtonpost.com/weather/2022/07/06/green-sky-storm/" target="_blank" class="fancy-link">
+        🌪️ Read Full Article – Washington Post
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakLatin(text) {
+        const voice = voices.find(v => v.lang.includes('it') || v.lang.includes('la')) || voices[0];
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
