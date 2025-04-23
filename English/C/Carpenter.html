@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Carpenter</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔨 carpenter
+      <span class="pronunciation">/ˈkɑːrpəntər/</span>
+      <button class="audio-button" onclick="speak('Carpenter')">🔊 Play</button>
+    </h2>
+ 
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A <strong>carpenter</strong> is a person whose job is to make or repair wooden objects and structures.<br>
+    <span class="cn">carpenter 指的是木匠，即以制作或修理木制物品或结构为职业的人。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The carpenter built a custom bookshelf for the library.<br>
+      <span class="cn">例句：木匠为图书馆打造了一个定制的书架。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He works as a carpenter on construction sites.<br>
+      <span class="cn">例句：他在建筑工地做木工。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Woodworker <span class="cn">木工</span></li>
+        <li>Craftsman <span class="cn">工匠</span></li>
+        <li>Joiner <span class="cn">细木工</span></li>
+        <li>Cabinetmaker <span class="cn">橱柜制作师</span></li>
+        <li>Builder <span class="cn">建造者</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Carpenter" comes from the Latin word <em>carpentarius</em>, meaning "wagon maker," derived from <em>carpentum</em>, a type of two-wheeled carriage.<br>
+    <span class="cn">carpenter 一词来自拉丁语 carpentarius，原意为“车匠”，源自 carpentum，一种双轮马车。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>carpentarius</em> – carriage maker<br>
+      <span class="cn">拉丁语 carpentarius：马车制造者</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>carpentier</em><br>
+      <span class="cn">古法语 carpentier</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>carpenter</em> – woodworker<br>
+      <span class="cn">中古英语 carpenter：木工</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Specialty</th>
+          <th>Example Use</th>
+          <th>Formality</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Woodworker</td>
+          <td>General woodworking</td>
+          <td>The woodworker carved a wooden sculpture.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Joiner</td>
+          <td>Fine joints and fittings</td>
+          <td>The joiner made precise wooden doors.</td>
+          <td>Technical</td>
+        </tr>
+        <tr>
+          <td><strong>Carpenter</strong></td>
+          <td><strong>Construction / building</strong></td>
+          <td>The carpenter framed the walls of the house.</td>
+          <td>Common</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Carpenter"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/ZdNCXEX5iUk?start=30"
+      title="A Day in the Life of a Carpenter"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to see how carpenters use their skills in real-life projects.<br>
+      <span class="cn">听第 0:30 左右，了解木匠如何在实际项目中发挥技能。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Carpenter in the News</h3>
+    <p>
+      A recent article highlighted how modern carpenters are combining traditional woodworking techniques with digital tools like laser cutters and 3D modeling software.<br>
+      <span class="cn">一篇最新文章强调了现代木匠如何将传统木工技艺与激光切割和 3D 建模等数字工具结合起来。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.popularwoodworking.com/" target="_blank" class="fancy-link">
+        📰 Read More – Popular Woodworking
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
