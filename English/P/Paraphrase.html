@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Paraphrase</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔁 paraphrase 
+      <span class="pronunciation">/ˈpærəˌfreɪz/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/par/parap/paraphrase__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb or Noun</p>
+
+    <h3>📖 As a verb (action):</h3>
+    <p>To <strong>paraphrase</strong> something means to restate it in your own words—usually to make it simpler or clearer while keeping the original meaning.</p>
+    <div class="example">
+      <strong>Example:</strong> Let me paraphrase what she said: "We need to try harder."
+    </div>
+
+    <h3>📖 As a noun (a thing):</h3>
+    <p>A <strong>paraphrase</strong> is the version you created—your restated sentence or explanation.</p>
+    <div class="example">
+      <strong>Example:</strong> His paraphrase of the poem helped younger students understand its meaning.
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span>
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+
+    <div class="fancy-list">
+      <ul>
+        <li>Restate</li>
+        <li>Reword</li>
+        <li>Summarize</li>
+        <li>Interpret</li>
+        <li>Explain in other words</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span>
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+
+    <p><span style="font-size: 2rem;">📚</span> The word <strong>"paraphrase"</strong> comes from the Latin and Greek word <em>paraphrasis</em>, meaning "a rewording."</p>
+
+    <div class="example">
+      <ul>
+        <li><strong>para-</strong> = beside, alongside</li>
+        <li><strong>phrasis</strong> = speech or expression</li>
+      </ul>
+    </div>
+
+    <p><span style="font-size: 2rem;">💡</span> So to paraphrase literally means to "say something beside"—in other words, to say the same thing in different words.</p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong> 
+      <em>paraphrasis</em> – rewording, explanation
+      <span class="pronunciation">/paˈra.fra.sis/</span>
+      <button class="audio-button2" onclick="speakGreek('paraphrasis')">🔊 Play</button>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>Latin:</strong> 
+      <em>paraphrasis</em> – explanation in other words
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+
+      <strong>English:</strong> 
+      <em>paraphrase</em>
+      <span class="pronunciation">/ˈpærəˌfreɪz/</span>
+      <button class="audio-button2" onclick="speak('paraphrase')">🔊 Play</button>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Summarize</td>
+          <td>Neutral</td>
+          <td>She summarized the article in one paragraph.</td>
+          <td>Brief / academic</td>
+        </tr>
+        <tr>
+          <td>Interpret</td>
+          <td>Formal</td>
+          <td>Can you interpret what he meant?</td>
+          <td>Analytical</td>
+        </tr>
+        <tr>
+          <td><strong>Paraphrase</strong></td>
+          <td><strong>Neutral / Academic</strong></td>
+          <td>He paraphrased the quote in his essay.</td>
+          <td>Clear / instructional</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Paraphrase"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/LErdYo61l9A?start=50"
+      title="Paraphrasing in Academic Writing"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+        <span style="font-size: 2rem;">👂</span> Listen around <strong>0:50</strong> as the speaker shows how to paraphrase clearly and ethically.
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Paraphrase in the News</h3>
+    <p>
+      In a recent education article, teachers emphasized the importance of teaching students to paraphrase instead of copy when researching online — helping students build original thoughts and avoid plagiarism.
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.edweek.org/teaching-learning/how-to-teach-paraphrasing-and-citation/2023/04" target="_blank" class="fancy-link">
+        ✍️ Read Full Article – Education Week
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+
+    function speakGreek(text) {
+        const voice = voices.find(v => v.lang.includes('el')) || voices[0];
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = voice;
+        utterance.rate = 0.9;
+        speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
