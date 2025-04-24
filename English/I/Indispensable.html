@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Indispensable</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 indispensable
+      <span class="pronunciation">/ˌɪndɪˈspɛnsəbəl/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/i/ind/indis/indispensable__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Absolutely necessary; essential.<br>
+    <span class="cn">完全必要的；不可或缺的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Water is indispensable for human survival.<br>
+      <span class="cn">例句：水是人类生存不可或缺的。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Her expertise has made her indispensable to the team.<br>
+      <span class="cn">例句：她的专业知识使她成为团队不可或缺的一员。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Essential <span class="cn">必要的</span></li>
+        <li>Vital <span class="cn">至关重要的</span></li>
+        <li>Crucial <span class="cn">关键的</span></li>
+        <li>Necessary <span class="cn">必需的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Indispensable" comes from Medieval Latin <em>indispensabilis</em>, meaning "that cannot be dispensed with."<br>
+    <span class="cn">indispensable 来自中世纪拉丁语 indispensabilis，意为“不可免除的”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Medieval Latin:</strong> <em>indispensabilis</em> – cannot be dispensed with<br>
+      <span class="cn">中世纪拉丁语 indispensabilis：不可免除的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>French:</strong> <em>indispensable</em> – essential, necessary<br>
+      <span class="cn">法语 indispensable：必要的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>indispensable</em> – absolutely necessary<br>
+      <span class="cn">现代英语 indispensable：完全必要的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Essential</td>
+          <td>Neutral</td>
+          <td>Exercise is essential for good health.</td>
+          <td>General</td>
+        </tr>
+        <tr>
+          <td>Vital</td>
+          <td>Formal</td>
+          <td>Nutrition is vital for children's growth.</td>
+          <td>Serious</td>
+        </tr>
+        <tr>
+          <td><strong>Indispensable</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>Technology has become indispensable in education.</td>
+          <td>Authoritative</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Indispensable"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/XlS-x0vIn9A?start=80"
+      title="Why Good Communication is Indispensable"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:20</strong> to understand why good communication skills are indispensable.<br>
+      <span class="cn">听第 1:20 左右，了解良好的沟通技巧为何不可或缺。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Indispensable in the News</h3>
+    <p>
+      An article highlighted teachers as indispensable during the transition to online learning.<br>
+      <span class="cn">一篇文章强调教师在向在线学习过渡期间不可或缺的作用。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com" target="_blank" class="fancy-link">
+        📰 Read More – The Guardian
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
