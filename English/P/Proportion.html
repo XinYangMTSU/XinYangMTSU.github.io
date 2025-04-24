@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Proportion</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ⚖️ proportion
+      <span class="pronunciation">/prəˈpɔːrʃn/</span>
+      <button class="audio-button" onclick="speak('proportion')">🔊 Play</button>
+    </h2>
+ 
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Proportion</strong> refers to the relationship between two or more amounts, showing how much of one thing there is compared to another.<br>
+    <span class="cn">proportion 指两个或多个数量之间的比例关系，表示一件事物与另一件事物相比有多少。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The proportion of boys to girls in the class is 3 to 2.<br>
+      <span class="cn">例句：班上的男女比例是 3 比 2。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> A small proportion of the students failed the test.<br>
+      <span class="cn">例句：只有少部分学生考试没及格。</span>
+    </div>
+
+    <div style="text-align:center; margin: 20px 0;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Golden_ratio_line.svg" alt="Proportion Example" style="max-width:100%; height:auto; border-radius:12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+      <p style="font-size: 14px; color: #555;">📷 Illustration of a golden ratio — a famous mathematical proportion</p>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Related Words
+      <span class="pronunciation">/rɪˈleɪtɪd/</span>
+      <button class="audio-button2" onclick="speak('Related Words')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Ratio <span class="cn">比率</span></li>
+        <li>Fraction <span class="cn">分数</span></li>
+        <li>Percentage <span class="cn">百分比</span></li>
+        <li>Scale <span class="cn">尺度</span></li>
+        <li>Balance <span class="cn">平衡</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> The word "proportion" comes from Latin <em>proportio</em>, meaning "relation or symmetry," based on <em>pro</em> (for) and <em>portio</em> (a part or share).<br>
+    <span class="cn">proportion 一词来自拉丁语 proportio，意为“关系”或“对称”，由 pro（为了）和 portio（部分）组成。</span></p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Usage</th>
+          <th>Example</th>
+          <th>Register</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ratio</td>
+          <td>Comparison of two numbers</td>
+          <td>The ratio of width to height is 4:3.</td>
+          <td>Technical</td>
+        </tr>
+        <tr>
+          <td>Percentage</td>
+          <td>Part per hundred</td>
+          <td>60% of the team voted yes.</td>
+          <td>Everyday</td>
+        </tr>
+        <tr>
+          <td><strong>Proportion</strong></td>
+          <td><strong>Part in relation to a whole or another part</strong></td>
+          <td>A large proportion of voters supported the policy.</td>
+          <td>General / Mathematical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Proportion"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/IeqE5zYZo9k?start=20"
+      title="Understanding Proportions in Math"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> to hear how proportions help compare values in real-world problems.<br>
+      <span class="cn">听第 0:20 左右，了解比例在实际问题中是如何帮助比较数值的。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Proportion in the News</h3>
+    <p>
+      A recent education report highlights that a significant proportion of students struggle with applying ratios and proportions in problem-solving situations.<br>
+      <span class="cn">最近一份教育报告指出，相当一部分学生在解决实际问题时难以运用比率和比例概念。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.edweek.org/" target="_blank" class="fancy-link">
+        📰 Read More – Education Week
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
