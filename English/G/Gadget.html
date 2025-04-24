@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Gadget</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🛠️ gadget
+      <span class="pronunciation">/ˈɡædʒɪt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/g/gad/gadge/gadget__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A <strong>gadget</strong> is a small device or tool that is clever, often new, and designed to do a specific job.<br>
+    <span class="cn">gadget 指小巧的新奇装置或工具，通常用于执行特定任务。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> He loves collecting kitchen gadgets like avocado slicers and garlic presses.<br>
+      <span class="cn">例句：他喜欢收集厨房小工具，比如鳄梨切片器和蒜泥压榨器。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> This smart gadget can track your daily steps and heart rate.<br>
+      <span class="cn">例句：这个智能小设备可以记录你的每日步数和心率。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Device <span class="cn">设备</span></li>
+        <li>Tool <span class="cn">工具</span></li>
+        <li>Contraption <span class="cn">装置（通常指奇怪或复杂的）</span></li>
+        <li>Appliance <span class="cn">家用电器</span></li>
+        <li>Instrument <span class="cn">器具</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> The word "gadget" likely originated in the 19th century, possibly from naval slang for an unnamed mechanical part or tool. Its exact origin is unclear.<br>
+    <span class="cn">gadget 一词可能起源于19世纪，最初是海军俚语，用来指代不知名的机械零件或工具。确切来源尚不明确。</span></p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Type</th>
+          <th>Example Use</th>
+          <th>Register</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Device</td>
+          <td>General / technical</td>
+          <td>This device can measure air quality.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Contraption</td>
+          <td>Informal / humorous</td>
+          <td>What is that strange contraption on your desk?</td>
+          <td>Casual</td>
+        </tr>
+        <tr>
+          <td><strong>Gadget</strong></td>
+          <td><strong>Small, clever tool</strong></td>
+          <td>She bought a gadget to open jars more easily.</td>
+          <td>Friendly / modern</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Gadget"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/oHgQ2nhk5j4?start=30"
+      title="Cool Kitchen Gadgets That Actually Work"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear examples of useful kitchen gadgets.<br>
+      <span class="cn">听第 0:30 左右，了解一些实用的厨房小工具。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Gadget in the News</h3>
+    <p>
+      A recent tech article reviewed ten of the most innovative gadgets of the year, from smart rings to foldable phones.<br>
+      <span class="cn">一篇最新的科技文章评选出今年最具创新性的十款小工具，从智能戒指到可折叠手机。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.wired.com/" target="_blank" class="fancy-link">
+        📰 Read More – Wired Magazine
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
