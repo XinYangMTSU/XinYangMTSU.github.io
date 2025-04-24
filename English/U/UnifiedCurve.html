@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Unified Curve</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📈 unified curve
+      <span class="pronunciation">/ˈjuːnɪfaɪd kɜːrv/</span>
+      <button class="audio-button" onclick="speak('unified curve')">🔊 Play</button>
+    </h2>
+ 
+    <p><strong>Part of speech:</strong> Noun phrase<br><span class="cn">词性：名词短语</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A <strong>unified curve</strong> refers to a single, smooth line formed by connecting many individual data points. It visually represents a continuous relationship between two variables.<br>
+    <span class="cn">unified curve（统一曲线）是指通过连接多个数据点而形成的一条平滑的曲线，形象地表示两个变量之间的连续关系。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The scattered points from the equation y = x² form a unified curve called a parabola.<br>
+      <span class="cn">例句：来自方程 y = x² 的离散点形成了一条统一的曲线，称为抛物线。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The graph displayed a unified curve that helped students visualize exponential growth.<br>
+      <span class="cn">例句：图表展示了一条统一曲线，帮助学生形象理解指数增长。</span>
+    </div>
+
+    <div style="text-align:center; margin: 20px 0;">
+      <img src="https://media.geeksforgeeks.org/wp-content/uploads/20230608155027/Curve-Sketching-1.png" alt="Unified Curve Example" style="max-width:100%; height:auto; border-radius:12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+      <p style="font-size: 14px; color: #555;">📷 A unified curve formed by smoothly connecting many plotted (x, y) points</p>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Related Words
+      <span class="pronunciation">/rɪˈleɪtɪd/</span>
+      <button class="audio-button2" onclick="speak('Related Words')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Graph <span class="cn">图形</span></li>
+        <li>Plot <span class="cn">绘图</span></li>
+        <li>Continuous function <span class="cn">连续函数</span></li>
+        <li>Curve <span class="cn">曲线</span></li>
+        <li>Trajectory <span class="cn">轨迹</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> The phrase "unified curve" is often used in educational contexts to describe the result of connecting data points into a visually continuous path that conveys a pattern or trend.<br>
+    <span class="cn">短语“unified curve”常用于教育语境中，用于描述将数据点连接成连续路径以展示某种趋势或规律的图像。</span></p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Usage</th>
+          <th>Example</th>
+          <th>Register</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Point</td>
+          <td>Single coordinate (x, y)</td>
+          <td>(2, 4)</td>
+          <td>Mathematical</td>
+        </tr>
+        <tr>
+          <td>Graph</td>
+          <td>Set of plotted points</td>
+          <td>A graph of y = sin(x)</td>
+          <td>Common</td>
+        </tr>
+        <tr>
+          <td><strong>Unified Curve</strong></td>
+          <td><strong>Smoothed path through data</strong></td>
+          <td>Parabola of y = x²</td>
+          <td>Educational / Visual</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Phrase "Unified Curve"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/Nm-6aXkJYdY?start=15"
+      title="Understanding Graphs and Curves"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:15</strong> to hear how a unified curve illustrates a full mathematical relationship.<br>
+      <span class="cn">听第 0:15 左右，了解统一曲线如何体现完整的数学关系。</span>
+    </div>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
