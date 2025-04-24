@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Unto</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📜 unto
+      <span class="pronunciation">/ˈʌn.tuː/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/u/unt/unto_/unto__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Preposition (literary or archaic)<br><span class="cn">词性：介词（文学或古语用法）</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Unto</strong> means “to” or “toward,” and is mostly used in older English texts like the Bible or poetry. It is rarely used in modern everyday speech.<br>
+    <span class="cn">unto 意为“到、向”，多用于圣经或文学作品中，是现代英语中较少使用的古老用法。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Do unto others as you would have them do unto you.<br>
+      <span class="cn">例句：你希望别人怎样对你，你就怎样对待别人。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The king spoke unto his people with great solemnity.<br>
+      <span class="cn">例句：国王庄严地向人民发表讲话。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Related Words
+      <span class="pronunciation">/rɪˈleɪtɪd/</span>
+      <button class="audio-button2" onclick="speak('Related Words')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>To <span class="cn">向、到</span></li>
+        <li>Toward <span class="cn">朝向</span></li>
+        <li>Upon <span class="cn">在...之上</span></li>
+        <li>With <span class="cn">与、和</span></li>
+        <li>Into <span class="cn">进入</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Unto" is a compound of “un-” (a variant of “on”) and “to,” used in Middle English and older forms of English to show direction, relation, or purpose.<br>
+    <span class="cn">unto 是“un-”（“on”的变体）与“to”的组合，用于中世纪英语和更古老的英语中，表示方向、关系或目的。</span></p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Modern Equivalent</th>
+          <th>Example Use</th>
+          <th>Register</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Unto</td>
+          <td>To</td>
+          <td>Render unto Caesar what is Caesar's.</td>
+          <td>Archaic / Literary</td>
+        </tr>
+        <tr>
+          <td>To</td>
+          <td>To</td>
+          <td>He gave the book to her.</td>
+          <td>Modern / Common</td>
+        </tr>
+        <tr>
+          <td>Toward</td>
+          <td>Toward</td>
+          <td>She walked toward the door.</td>
+          <td>Modern / Common</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Unto"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/2vD6oBQxS1Q?start=45"
+      title="Unto in Biblical and Literary English"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> to hear how "unto" is used in biblical language.<br>
+      <span class="cn">听第 0:45 左右，了解“unto”在圣经语言中的使用方式。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Unto in the News (Literary Context)</h3>
+    <p>
+      In a recent literary analysis, scholars discussed the use of archaic prepositions like "unto" to create a solemn or poetic tone in historical novels.<br>
+      <span class="cn">在一篇最新的文学评论中，学者探讨了像“unto”这样的古语介词在历史小说中营造庄重或诗意氛围的用法。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.literaryreview.co.uk/" target="_blank" class="fancy-link">
+        📰 Read More – Literary Review
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
