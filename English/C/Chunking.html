@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Chunking</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧩 chunking
+      <span class="pronunciation">/ˈtʃʌŋkɪŋ/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/chu/chunk/chunking__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Chunking</strong> is a psychological method of organizing information into smaller, manageable units to enhance memory and comprehension.<br>
+    <span class="cn">chunking 是一种心理学方法，通过将信息组织成更小、更易管理的单元，以提高记忆和理解能力。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Chunking can help students memorize complex data more easily.<br>
+      <span class="cn">例句：组块法可以帮助学生更轻松地记忆复杂的数据。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Phone numbers are easier to recall when using chunking.<br>
+      <span class="cn">例句：使用组块法记电话号码更容易。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Grouping <span class="cn">分组</span></li>
+        <li>Segmenting <span class="cn">分段</span></li>
+        <li>Partitioning <span class="cn">划分</span></li>
+        <li>Clustering <span class="cn">聚类</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Chunking" originates from the English word "chunk," meaning a thick piece or lump, indicating breaking information into manageable "chunks."<br>
+    <span class="cn">chunking 来自英文单词 chunk，意为厚块或团块，表示将信息分成易于管理的小块。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>English:</strong> <em>chunk</em> – a thick piece or lump<br>
+      <span class="cn">英文 chunk：厚块或团块</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>English (modern):</strong> <em>chunking</em> – breaking down into smaller parts<br>
+      <span class="cn">现代英语 chunking：将事物分解成更小的部分</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Grouping</td>
+          <td>Neutral</td>
+          <td>Grouping tasks helps improve efficiency.</td>
+          <td>Practical</td>
+        </tr>
+        <tr>
+          <td>Segmenting</td>
+          <td>Academic</td>
+          <td>Segmenting information makes learning easier.</td>
+          <td>Educational</td>
+        </tr>
+        <tr>
+          <td><strong>Chunking</strong></td>
+          <td><strong>Neutral / Academic</strong></td>
+          <td>Chunking data simplifies memorization processes.</td>
+          <td>Analytical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Chunking"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/-iMT7rQbS5E?start=60"
+      title="How Chunking Helps Memory"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:00</strong> to understand the role of chunking in memory improvement.<br>
+      <span class="cn">听第 1:00 左右，了解组块法如何帮助记忆改善。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Chunking in the News</h3>
+    <p>
+      A recent article discussed chunking as an effective strategy for learning complex subjects like mathematics and science.<br>
+      <span class="cn">一篇最新文章讨论了组块法作为学习数学和科学等复杂科目的有效策略。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.sciencedaily.com" target="_blank" class="fancy-link">
+        📰 Read More – Science Daily
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
