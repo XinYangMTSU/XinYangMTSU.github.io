@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Psychological</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧠 psychological
+      <span class="pronunciation">/ˌsaɪkəˈlɑːdʒɪkəl/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/psy/psych/psychological__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Related to the mind, emotions, or mental processes.<br>
+    <span class="cn">与心智、情感或心理过程相关的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Stress can lead to psychological problems.<br>
+      <span class="cn">例句：压力可能导致心理问题。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He studies psychological effects of video games on children.<br>
+      <span class="cn">例句：他研究电子游戏对儿童的心理影响。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Mental <span class="cn">心理的</span></li>
+        <li>Emotional <span class="cn">情感的</span></li>
+        <li>Cognitive <span class="cn">认知的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Psychological" comes from Greek <em>psykhe</em> meaning "mind" or "soul," and <em>logia</em> meaning "study of."<br>
+    <span class="cn">psychological 来源于希腊语 psykhe（意为“心灵”或“灵魂”）和 logia（意为“学科”）。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong> <em>psykhe</em> – mind, soul<br>
+      <span class="cn">希腊语 psykhe：心灵，灵魂</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Greek:</strong> <em>logia</em> – study of<br>
+      <span class="cn">希腊语 logia：研究、学科</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>English:</strong> <em>psychological</em> – related to mind or emotions<br>
+      <span class="cn">英语 psychological：与心智或情感相关的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mental</td>
+          <td>Neutral</td>
+          <td>Mental health is important.</td>
+          <td>General</td>
+        </tr>
+        <tr>
+          <td>Emotional</td>
+          <td>Neutral</td>
+          <td>She is emotional about the results.</td>
+          <td>Expressive</td>
+        </tr>
+        <tr>
+          <td><strong>Psychological</strong></td>
+          <td><strong>Academic / Formal</strong></td>
+          <td>They researched the psychological effects of isolation.</td>
+          <td>Analytical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Psychological"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/O1wClB51ncQ?start=45"
+      title="Understanding Psychological Stress"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> for the discussion on psychological stress and its impact.<br>
+      <span class="cn">听第 0:45 左右，了解关于心理压力及其影响的讨论。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Psychological in the News</h3>
+    <p>
+      Recent studies emphasize the psychological effects of remote work, highlighting both benefits and challenges to mental health.<br>
+      <span class="cn">近期研究强调了远程工作的心理影响，指出了其对心理健康的益处和挑战。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.psychologytoday.com" target="_blank" class="fancy-link">
+        📰 Read More – Psychology Today
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
