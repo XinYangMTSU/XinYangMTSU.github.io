@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Potent</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💪 potent
+      <span class="pronunciation">/ˈpoʊtənt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pot/poten/potent__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Having great power, influence, or effectiveness.<br>
+    <span class="cn">具有强大的力量、影响力或效果。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The medicine is potent enough to relieve pain quickly.<br>
+      <span class="cn">例句：这种药效很强，能迅速止痛。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He delivered a potent speech that moved everyone.<br>
+      <span class="cn">例句：他发表了一场充满影响力的演讲，打动了每个人。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Powerful <span class="cn">强大的</span></li>
+        <li>Strong <span class="cn">有力的</span></li>
+        <li>Effective <span class="cn">有效的</span></li>
+        <li>Influential <span class="cn">有影响力的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Potent" comes from Latin <em>potens</em>, meaning "powerful."<br>
+    <span class="cn">potent 来自拉丁语 potens，意为“强大的”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>potens</em> – powerful<br>
+      <span class="cn">拉丁语 potens：强大的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>potent</em> – influential, powerful<br>
+      <span class="cn">中古英语 potent：有影响力的，强大的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>potent</em> – powerful, effective<br>
+      <span class="cn">现代英语 potent：强大的，有效的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Powerful</td>
+          <td>Neutral</td>
+          <td>The engine is powerful enough to pull heavy loads.</td>
+          <td>General</td>
+        </tr>
+        <tr>
+          <td>Effective</td>
+          <td>Neutral / Formal</td>
+          <td>Exercise is effective for maintaining health.</td>
+          <td>Scientific / Practical</td>
+        </tr>
+        <tr>
+          <td><strong>Potent</strong></td>
+          <td><strong>Neutral / Formal</strong></td>
+          <td>They used potent arguments to convince the jury.</td>
+          <td>Persuasive / authoritative</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Potent"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/fXY0wXU7F0w?start=120"
+      title="Potent Natural Remedies"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>2:00</strong> for a discussion about potent natural remedies.<br>
+      <span class="cn">听第 2:00 左右，了解有关强效天然疗法的讨论。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Potent in the News</h3>
+    <p>
+      A recent study highlighted potent new medications that could revolutionize cancer treatment.<br>
+      <span class="cn">一篇最新研究强调了一些强效的新药可能会彻底改变癌症治疗方式。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.medicalnewstoday.com" target="_blank" class="fancy-link">
+        📰 Read More – Medical News Today
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
