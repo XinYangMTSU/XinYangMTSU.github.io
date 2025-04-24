@@ -1,1 +1,154 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Cleanse</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🚿 cleanse
+      <span class="pronunciation">/klɛnz/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cle/clean/cleanse__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To <strong>cleanse</strong> means to clean or purify thoroughly, often used figuratively or literally.<br>
+    <span class="cn">cleanse 意为彻底清洁或净化，可以是比喻意义或实际意义。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She cleanses her skin carefully every night.<br>
+      <span class="cn">例句：她每晚都仔细清洁她的皮肤。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> People believe certain diets cleanse the body of toxins.<br>
+      <span class="cn">例句：人们相信某些饮食能清除体内的毒素。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Purify <span class="cn">净化</span></li>
+        <li>Clean <span class="cn">清洁</span></li>
+        <li>Wash <span class="cn">洗涤</span></li>
+        <li>Detoxify <span class="cn">排毒</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Cleanse" originates from Old English <em>clænsian</em>, meaning "to purify or make clean."<br>
+    <span class="cn">cleanse 源自古英语 clænsian，意为“净化或使清洁”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>clænsian</em> – to purify, make clean<br>
+      <span class="cn">古英语 clænsian：净化，使清洁</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>clensen</em> – to cleanse<br>
+      <span class="cn">中古英语 clensen：清洁</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>cleanse</em> – to thoroughly clean or purify<br>
+      <span class="cn">现代英语 cleanse：彻底清洁或净化</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Wash</td>
+          <td>Informal</td>
+          <td>I wash my hands regularly.</td>
+          <td>Casual</td>
+        </tr>
+        <tr>
+          <td>Purify</td>
+          <td>Formal / Spiritual</td>
+          <td>The ritual aims to purify the soul.</td>
+          <td>Solemn / spiritual</td>
+        </tr>
+        <tr>
+          <td><strong>Cleanse</strong></td>
+          <td><strong>Neutral / Formal</strong></td>
+          <td>She uses special products to cleanse her face.</td>
+          <td>Neutral / formal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Cleanse"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/HW3Qvl-JnLk?start=50"
+      title="Benefits of a Detox Cleanse"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:50</strong> for insights on cleansing practices for health.<br>
+      <span class="cn">听第 0:50 左右，了解净化对健康的作用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Cleanse in the News</h3>
+    <p>
+      A recent article reviewed popular cleanse diets, highlighting their benefits and potential risks.<br>
+      <span class="cn">一篇最新文章回顾了流行的清洁饮食，指出其益处和潜在风险。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.healthline.com" target="_blank" class="fancy-link">
+        📰 Read More – Healthline
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
