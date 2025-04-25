@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Pay Off</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💸 pay off
+      <span class="pronunciation">/peɪ ɔːf/</span>
+      <button class="audio-button" onclick="speak('pay off')">🔊 Play</button>
+    </h2>
+  
+    <p><strong>Part of speech:</strong> Phrasal Verb<br><span class="cn">词性：动词短语</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Pay off</strong> has two main meanings:
+      <ol>
+        <li>To finish paying a debt or loan.</li>
+        <li>To result in success or reward after effort.</li>
+      </ol>
+      <span class="cn">pay off 有两个主要含义：1. 偿清债务；2. 努力有回报，取得成功。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She finally paid off all her student loans.<br>
+      <span class="cn">例句：她终于还清了所有学生贷款。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> All those hours of practice really paid off when he won the competition.<br>
+      <span class="cn">例句：长时间的练习终于有了回报，他赢得了比赛。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Repay <span class="cn">偿还</span></li>
+        <li>Clear (a debt) <span class="cn">清偿（债务）</span></li>
+        <li>Be worth it <span class="cn">值得</span></li>
+        <li>Reap the rewards <span class="cn">收获回报</span></li>
+        <li>Come to fruition <span class="cn">取得成果</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the phrase <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Pay off" originated from the financial world, where it meant to fully pay a balance or obligation. Over time, it took on a figurative meaning—achieving success or reward.<br>
+    <span class="cn">“Pay off” 最初用于金融领域，表示“偿清欠款”，后来引申为“付出有回报、取得成果”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>pæġan</em> – to pay<br>
+      <span class="cn">古英语 pæġan：支付</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>pay off</em> – to finish paying OR to be successful<br>
+      <span class="cn">现代英语 pay off：偿清或取得成果</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Phrase</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Repay</td>
+          <td>Formal</td>
+          <td>He repaid the loan within five years.</td>
+          <td>Financial</td>
+        </tr>
+        <tr>
+          <td>Be worth it</td>
+          <td>Informal</td>
+          <td>The hard work was totally worth it.</td>
+          <td>Encouraging</td>
+        </tr>
+        <tr>
+          <td><strong>Pay off</strong></td>
+          <td><strong>Neutral</strong></td>
+          <td>All her efforts paid off in the end.</td>
+          <td>Positive / practical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Phrase "Pay Off"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/dkUj6r6MmoU?start=30"
+      title="Does Hard Work Always Pay Off?"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear how "pay off" is used in discussing effort and success.<br>
+      <span class="cn">听第 0:30 左右，看看如何在谈论努力与回报时使用“pay off”。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Pay Off in the News</h3>
+    <p>
+      A recent report shows that investing in education continues to pay off, with higher average earnings for college graduates.<br>
+      <span class="cn">一项最新报告显示，投资教育依然“有回报”，大学毕业生的平均收入更高。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.wsj.com/" target="_blank" class="fancy-link">
+        📰 Read More – Wall Street Journal
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
