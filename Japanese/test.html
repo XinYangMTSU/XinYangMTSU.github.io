@@ -79,10 +79,22 @@
     🌸 Let's enjoy learning Japanese every day! 🌸
   </footer>
 
+  <style>
+  .sakura {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+  }
+</style>
+  
   <!-- Sakura falling effect -->
   <script src="https://cdn.jsdelivr.net/npm/sakura-js@1.0.3/dist/sakura.min.js"></script>
   <script>
-    window.onload = function () {
+
+<script src="https://cdn.jsdelivr.net/npm/sakura-js@1.0.3/dist/sakura.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    try {
       new Sakura('body', {
         colors: [{
           gradientColorStart: "rgba(255, 183, 197, 0.9)",
@@ -94,8 +106,12 @@
         minSize: 9,
         delay: 300
       });
-    };
-  </script>
+      console.log('Sakura initialized successfully');
+    } catch (e) {
+      console.error('Sakura error:', e);
+    }
+  });
+</script>
 
   <script>
     let voices = [];
