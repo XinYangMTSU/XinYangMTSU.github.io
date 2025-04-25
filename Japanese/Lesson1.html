@@ -57,7 +57,7 @@
       width: 90%;
       max-width: 800px;
       margin: 40px auto;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.9);
       border-radius: 20px;
       padding: 30px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.1);
@@ -78,29 +78,17 @@
       line-height: 1.6;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      background: white;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      border-radius: 10px;
-      overflow: hidden;
+    .dialogue-box {
+      background-color: #fff3f8;
+      border-left: 5px solid #f06292;
+      padding: 15px 20px;
+      border-radius: 12px;
+      margin-top: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
-    table th, table td {
-      padding: 12px 15px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-
-    table th {
-      background-color: #f48fb1;
-      color: white;
-    }
-
-    table tr:hover {
-      background-color: #f1f1f1;
+    .dialogue-line {
+      margin: 12px 0;
     }
 
     footer {
@@ -112,7 +100,6 @@
       font-size: 16px;
       box-shadow: 0 -4px 8px rgba(0,0,0,0.2);
     }
-
   </style>
 </head>
 <body>
@@ -148,6 +135,34 @@
     <h2>🎂 How Old Are You?</h2>
     <p>なんさいですか？ (<strong>Nansai desu ka?</strong>) — <em>How old are you?</em>
     <button class="pronounce-btn" onclick="speak('Nansai desu ka?')">🔊</button></p>
+
+    <div class="dialogue-box">
+      <h2>💬 Daily Life Dialogue</h2>
+      <div class="dialogue-line">
+        👧 Ada: こんにちは！<strong> (Konnichiwa!)</strong>
+        <button class="pronounce-btn" onclick="speak('Konnichiwa')">🔊</button>
+      </div>
+      <div class="dialogue-line">
+        👦 Ken: おはよう、エイダ！<strong> (Ohayou, Eida!)</strong>
+        <button class="pronounce-btn" onclick="speak('Ohayou, Eida!')">🔊</button>
+      </div>
+      <div class="dialogue-line">
+        👧 Ada: おなまえは？<strong> (Onamae wa?)</strong>
+        <button class="pronounce-btn" onclick="speak('Onamae wa?')">🔊</button>
+      </div>
+      <div class="dialogue-line">
+        👦 Ken: けんです。<strong> (Ken desu.)</strong>
+        <button class="pronounce-btn" onclick="speak('Ken desu')">🔊</button>
+      </div>
+      <div class="dialogue-line">
+        👧 Ada: なんさいですか？<strong> (Nansai desu ka?)</strong>
+        <button class="pronounce-btn" onclick="speak('Nansai desu ka?')">🔊</button>
+      </div>
+      <div class="dialogue-line">
+        👦 Ken: ろくさいです。<strong> (Rokusai desu.)</strong>
+        <button class="pronounce-btn" onclick="speak('Rokusai desu')">🔊</button>
+      </div>
+    </div>
 
   </main>
 
