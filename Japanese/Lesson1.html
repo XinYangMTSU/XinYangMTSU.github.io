@@ -120,32 +120,32 @@
 
     <h2>👋 Hello!</h2>
     <p>こんにちは (<strong>Konnichiwa</strong>) — <em>Hello!</em>
-    <button class="pronounce-btn" onclick="speak('Konnichiwa')">🔊</button></p>
+    <button class="pronounce-btn" onclick="speak('こんにちは')">🔊</button></p>
 
     <h2>🌅 Good Morning!</h2>
     <p>おはよう (<strong>Ohayou</strong>) — <em>Good Morning!</em>
-    <button class="pronounce-btn" onclick="speak('Ohayou')">🔊</button></p>
+    <button class="pronounce-btn" onclick="speak('おはよう')">🔊</button></p>
 
     <h2>🌙 Good Night!</h2>
     <p>おやすみなさい (<strong>Oyasuminasai</strong>) — <em>Good Night!</em>
-    <button class="pronounce-btn" onclick="speak('Oyasuminasai')">🔊</button></p>
+    <button class="pronounce-btn" onclick="speak('おやすみなさい')">🔊</button></p>
 
     <div class="dialogue-box">
       <h2>💬 Daily Life Dialogue</h2>
       <div class="dialogue-line">
         👧 Ada: こんにちは！<strong> (Konnichiwa!)</strong>
-        <button class="pronounce-btn" onclick="speak('Konnichiwa')">🔊</button>
+        <button class="pronounce-btn" onclick="speak('こんにちは')">🔊</button>
         <div class="translation">Hello!</div>
       </div>
       <div class="dialogue-line">
         👦 Ken: おはよう、エイダ！<strong> (Ohayou, Eida!)</strong>
-        <button class="pronounce-btn" onclick="speak('Ohayou, Eida!')">🔊</button>
+        <button class="pronounce-btn" onclick="speak('おはよう、エイダ!')">🔊</button>
         <div class="translation">Good morning, Ada!</div>
       </div>
 
       <div class="dialogue-line">
         👧 Ada: おやすみなさい！<strong> (Oyasuminasai!)</strong>
-        <button class="pronounce-btn" onclick="speak('Oyasuminasai')">🔊</button>
+        <button class="pronounce-btn" onclick="speak('おやすみなさい')">🔊</button>
         <div class="translation">Good night!</div>
       </div>
       
@@ -158,11 +158,12 @@
   </footer>
 
   <script>
+    /*
     let voices = [];
     window.speechSynthesis.onvoiceschanged = () => {
       voices = speechSynthesis.getVoices();
     };
-
+    
     function speak(text) {
       const utterance = new SpeechSynthesisUtterance(text);
       const voice = voices.find(v => v.lang.includes('ja')) || voices[0];
@@ -170,6 +171,14 @@
       utterance.rate = 0.9;
       speechSynthesis.speak(utterance);
     }
+    */
+  </script>
+
+  <script>
+      function speak(text) {
+        const audio = new Audio(`https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=ja&client=tw-ob`);
+        audio.play();
+      }
   </script>
 
 </body>
