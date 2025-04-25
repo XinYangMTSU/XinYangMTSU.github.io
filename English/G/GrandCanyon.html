@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Grand Canyon</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🏞️ Grand Canyon
+      <span class="pronunciation">/ɡrænd ˈkænjən/</span>
+      <button class="audio-button" onclick="speak('Grand Canyon')">🔊 Play</button>
+    </h2>
+  
+    <p><strong>Part of speech:</strong> Proper Noun<br><span class="cn">词性：专有名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>The <strong>Grand Canyon</strong> is a massive, steep-sided canyon carved by the Colorado River in Arizona, USA. It is known for its immense size and beautiful layered red rock formations.<br>
+    <span class="cn">Grand Canyon（大峡谷）是美国亚利桑那州由科罗拉多河切割而成的巨大峡谷，以其规模宏大和红色岩层的自然美景而著称。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Visiting the Grand Canyon was the highlight of our road trip through the southwest.<br>
+      <span class="cn">例句：参观大峡谷是我们西南自驾游的亮点之一。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The Grand Canyon reveals nearly two billion years of Earth's geological history.<br>
+      <span class="cn">例句：大峡谷展示了地球近二十亿年的地质历史。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Facts & Geography</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>📍 Located in Arizona, USA</li>
+        <li>🌊 Formed by the Colorado River</li>
+        <li>📏 About 277 miles (446 km) long</li>
+        <li>📐 Up to 18 miles (29 km) wide and over a mile (1.6 km) deep</li>
+        <li>🌍 Recognized as a UNESCO World Heritage Site</li>
+      </ul>
+      <ul class="cn">
+        <li>📍 位于美国亚利桑那州</li>
+        <li>🌊 由科罗拉多河冲刷形成</li>
+        <li>📏 长约 446 公里</li>
+        <li>📐 最宽约 29 公里，最深超 1.6 公里</li>
+        <li>🌍 被列为联合国教科文组织世界遗产</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🌄 Etymology of the Name</h3>
+    <p><span style="font-size: 2rem;">📚</span> The name "Grand Canyon" reflects both the **majestic scale** and **geological depth** of the site. "Canyon" comes from Spanish <em>cañón</em>, meaning "tube" or "gorge."<br>
+    <span class="cn">“Grand Canyon”这个名称体现了其宏伟的规模和深远的地质意义。“Canyon”源自西班牙语“cañón”，意思是“管道”或“峡谷”。</span></p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Place</th>
+          <th>Feature</th>
+          <th>Location</th>
+          <th>Known for</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Grand Canyon</td>
+          <td>Vast canyon, red rock layers</td>
+          <td>Arizona, USA</td>
+          <td>Geology, hiking, views</td>
+        </tr>
+        <tr>
+          <td>Niagara Falls</td>
+          <td>Waterfall</td>
+          <td>NY/Canada border</td>
+          <td>Powerful water flow</td>
+        </tr>
+        <tr>
+          <td>Mount Everest</td>
+          <td>Tallest mountain</td>
+          <td>Himalayas</td>
+          <td>Height, climbing</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Grand Canyon in Nature</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/vq6cLAVx4bA?start=20"
+      title="The Grand Canyon: Nature’s Masterpiece"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch around <strong>0:20</strong> to see stunning aerial views and geological explanations of the Grand Canyon.<br>
+      <span class="cn">观看第 0:20 左右，欣赏壮丽的大峡谷风景和地质解说。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Grand Canyon in the News</h3>
+    <p>
+      A recent conservation effort aims to reduce overcrowding and protect endangered species living in the Grand Canyon.<br>
+      <span class="cn">一项最新的保护项目旨在减少游客过多的问题，并保护生活在大峡谷的濒危物种。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nps.gov/grca/index.htm" target="_blank" class="fancy-link">
+        🌐 Visit Official Site – National Park Service
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
