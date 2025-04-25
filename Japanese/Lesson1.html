@@ -23,36 +23,26 @@
 
     <div class="dialogue-box">
       <h2>🌅 Good Morning</h2>
-      <p>
-        <strong>Formal:</strong> おはようございます (<em>Ohayou gozaimasu</em>) — Good morning
-        <button class="pronounce-btn" onclick="speak('おはようございます')">🔊</button>
-      </p>
-      <p>
-        <strong>Informal:</strong> おはよう (<em>Ohayou</em>) — Morning!
-        <button class="pronounce-btn" onclick="speak('おはよう')">🔊</button>
-      </p>
+      <p><strong>Formal:</strong> おはようございます (<em>Ohayou gozaimasu</em>) — Good morning
+      <button class="pronounce-btn" onclick="speak('おはようございます')">🔊</button></p>
+      <p><strong>Informal:</strong> おはよう (<em>Ohayou</em>) — Morning!
+      <button class="pronounce-btn" onclick="speak('おはよう')">🔊</button></p>
     </div>
 
     <div class="dialogue-box">
       <h2>🌆 Good Evening</h2>
-      <p>
-        <strong>Formal:</strong> こんばんは (<em>Konbanwa</em>) — Good evening
-        <button class="pronounce-btn" onclick="speak('こんばんは')">🔊</button>
-      </p>
+      <p><strong>Formal:</strong> こんばんは (<em>Konbanwa</em>) — Good evening
+      <button class="pronounce-btn" onclick="speak('こんばんは')">🔊</button></p>
     </div>
 
-   <div class="dialogue-box">
-    <h2>🌙 Good Night!</h2>
-    <p>
-      <strong>Formal:</strong> おやすみなさい (<em>Oyasuminasai</em>) — Good night
-      <button class="pronounce-btn" onclick="speak('おやすみなさい')">🔊</button>
-    </p>
-    <p>
-      <strong>Informal:</strong> おやすみ (<em>Oyasumi</em>) — Night!
-      <button class="pronounce-btn" onclick="speak('おやすみ')">🔊</button>
-    </p>
-  </div>
-      
+    <div class="dialogue-box">
+      <h2>🌙 Good Night!</h2>
+      <p><strong>Formal:</strong> おやすみなさい (<em>Oyasuminasai</em>) — Good night
+      <button class="pronounce-btn" onclick="speak('おやすみなさい')">🔊</button></p>
+      <p><strong>Informal:</strong> おやすみ (<em>Oyasumi</em>) — Night!
+      <button class="pronounce-btn" onclick="speak('おやすみ')">🔊</button></p>
+    </div>
+
     <div class="dialogue-box">
       <h2>💬 Daily Life Dialogue</h2>
       <div class="dialogue-line">
@@ -62,10 +52,9 @@
       </div>
       <div class="dialogue-line">
         👦 Ken: おはよう、エイダ！<strong> (Ohayou, Eida!)</strong>
-        <button class="pronounce-btn" onclick="speak('おはよう、エイダ!')">🔊</button>
+        <button class="pronounce-btn" onclick="speak('おはよう、エイダ！')">🔊</button>
         <div class="translation">Good morning, Ada!</div>
       </div>
-
       <div class="dialogue-line">
         👧 Ada: おやすみなさい！<strong> (Oyasuminasai!)</strong>
         <button class="pronounce-btn" onclick="speak('おやすみなさい')">🔊</button>
@@ -73,20 +62,17 @@
       </div>
     </div>
 
+    <section style="margin-top: 50px; background: #fff3f8; border-radius: 20px; padding: 20px; box-shadow: 0 6px 12px rgba(0,0,0,0.1);">
+      <h2 style="text-align: center; color: #e91e63; font-size: 28px;">🎥 Learn Japanese Greetings with Bocchi & Pocchi</h2>
+      <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+        <iframe src="https://www.youtube.com/embed/BGxLlGub0D4" 
+                style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:15px;" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+        </iframe>
+      </div>
+    </section>
 
-  <section style="margin-top: 50px; background: #fff3f8; border-radius: 20px; padding: 20px; box-shadow: 0 6px 12px rgba(0,0,0,0.1);">
-  <h2 style="text-align: center; color: #e91e63; font-size: 28px;">🎥 Learn Japanese Greetings with Bocchi & Pocchi</h2>
-  <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-    <iframe src="https://www.youtube.com/embed/BGxLlGub0D4" 
-            style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:15px;" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-    </iframe>
-  </div>
-</section>
-
-
-    
   </main>
 
   <footer>
@@ -94,23 +80,24 @@
   </footer>
 
   <script>
-    
     let voices = [];
-    window.speechSynthesis.onvoiceschanged = () => {
+
+    function loadVoices() {
       voices = speechSynthesis.getVoices();
-    };
-    
+    }
+
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+
     function speak(text) {
       const utterance = new SpeechSynthesisUtterance(text);
       const voice = voices.find(v => v.lang.includes('ja')) || voices[0];
-      utterance.voice = voice;
+      if (voice) {
+        utterance.voice = voice;
+      }
       utterance.rate = 0.9;
       speechSynthesis.speak(utterance);
     }
-    
   </script>
-
-
 
 </body>
 </html>
