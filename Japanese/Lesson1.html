@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎌 Japanese Lesson 1: Greetings!</title>
+  <link href="../style.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ffe4e1, #e0f7fa);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #ff69b4;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .header-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .header-title h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    .pronounce-btn {
+      background-color: #f48fb1;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      font-size: 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background 0.3s ease;
+    }
+
+    .pronounce-btn:hover {
+      background-color: #ec407a;
+    }
+
+    main {
+      flex-grow: 1;
+      width: 90%;
+      max-width: 800px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #e91e63;
+      margin-top: 0;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    p, ul {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    table th, table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #f48fb1;
+      color: white;
+    }
+
+    table tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      background: #ff69b4;
+      color: white;
+      font-size: 16px;
+      box-shadow: 0 -4px 8px rgba(0,0,0,0.2);
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-title">
+      <h1>🎌 Japanese Lesson 1: Greetings!</h1>
+    </div>
+  </header>
+
+  <main>
+
+    <h2>👋 Hello!</h2>
+    <p>こんにちは (<strong>Konnichiwa</strong>) — <em>Hello!</em>
+    <button class="pronounce-btn" onclick="speak('Konnichiwa')">🔊</button></p>
+
+    <h2>🌅 Good Morning!</h2>
+    <p>おはよう (<strong>Ohayou</strong>) — <em>Good Morning!</em>
+    <button class="pronounce-btn" onclick="speak('Ohayou')">🔊</button></p>
+
+    <h2>🌆 Good Evening!</h2>
+    <p>こんばんは (<strong>Konbanwa</strong>) — <em>Good Evening!</em>
+    <button class="pronounce-btn" onclick="speak('Konbanwa')">🔊</button></p>
+
+    <h2>❓ What’s Your Name?</h2>
+    <p>おなまえは？ (<strong>Onamae wa?</strong>) — <em>What's your name?</em>
+    <button class="pronounce-btn" onclick="speak('Onamae wa?')">🔊</button></p>
+
+    <h2>👧 I am Ada.</h2>
+    <p>わたしはエイダです。(<strong>Watashi wa Ada desu.</strong>) — <em>I am Ada.</em>
+    <button class="pronounce-btn" onclick="speak('Watashi wa Ada desu')">🔊</button></p>
+
+    <h2>🎂 How Old Are You?</h2>
+    <p>なんさいですか？ (<strong>Nansai desu ka?</strong>) — <em>How old are you?</em>
+    <button class="pronounce-btn" onclick="speak('Nansai desu ka?')">🔊</button></p>
+
+  </main>
+
+  <footer>
+    🌸 Let's enjoy learning Japanese every day! 🌸
+  </footer>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('ja')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
