@@ -1,0 +1,249 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎌 Japanese Lesson 1: Greetings!</title>
+  <link href="./style.css" rel="stylesheet">
+  <style>
+  body {
+    margin: 0;
+    font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffe4e1 0%, #e0f7fa 100%);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    animation: backgroundShift 20s ease infinite alternate;
+  }
+
+  @keyframes backgroundShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+
+  header {
+    background: linear-gradient(to right, #ff69b4, #f48fb1);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+
+  .header-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-title h1 {
+    margin: 0;
+    font-size: 36px;
+    text-shadow: 2px 2px #ffb6c1;
+  }
+
+  .pronounce-btn {
+    background-color: #ff90b3;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    font-size: 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+  }
+
+  .pronounce-btn:hover {
+    background-color: #ff5c8d;
+    transform: scale(1.1);
+  }
+
+  main {
+    flex-grow: 1;
+    width: 92%;
+    max-width: 900px;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  }
+
+  h2 {
+    color: #e91e63;
+    margin-top: 0;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  p, ul {
+    font-size: 20px;
+    line-height: 1.8;
+  }
+
+  .dialogue-box {
+    background: linear-gradient(145deg, #ffe4f0, #e0f7ff);
+    border-left: 6px dotted #ff69b4;
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 30px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  }
+
+  .dialogue-line {
+    margin: 15px 0;
+    font-size: 19px;
+  }
+
+  .translation {
+    font-style: italic;
+    color: #777;
+    padding-left: 30px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    background: linear-gradient(to right, #f48fb1, #81d4fa);
+    color: white;
+    font-size: 18px;
+    box-shadow: 0 -6px 10px rgba(0,0,0,0.2);
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+  }
+
+  section {
+    margin-top: 50px;
+    background: #ffe8f0;
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  }
+
+  section h2 {
+    text-align: center;
+    color: #d81b60;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="header-title">
+      <h1>🎌 Japanese Lesson 1: Greetings!</h1>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="dialogue-box">
+      <h2>👋 Hello!</h2>
+      <p>こんにちは (<strong>Konnichiwa</strong>) — <em>Hello!</em>
+      <button class="pronounce-btn" onclick="speak('こんにちは')">🔊</button></p>
+    </div>
+
+    <div class="dialogue-box">
+      <h2>🌅 Good Morning</h2>
+      <p>
+        <strong>Formal:</strong> おはようございます (<em>Ohayou gozaimasu</em>) — Good morning
+        <button class="pronounce-btn" onclick="speak('おはようございます')">🔊</button>
+      </p>
+      <p>
+        <strong>Informal:</strong> おはよう (<em>Ohayou</em>) — Morning!
+        <button class="pronounce-btn" onclick="speak('おはよう')">🔊</button>
+      </p>
+    </div>
+
+    <div class="dialogue-box">
+      <h2>🌆 Good Evening</h2>
+      <p>
+        <strong>Formal:</strong> こんばんは (<em>Konbanwa</em>) — Good evening
+        <button class="pronounce-btn" onclick="speak('こんばんは')">🔊</button>
+      </p>
+    </div>
+
+   <div class="dialogue-box">
+    <h2>🌙 Good Night!</h2>
+    <p>
+      <strong>Formal:</strong> おやすみなさい (<em>Oyasuminasai</em>) — Good night
+      <button class="pronounce-btn" onclick="speak('おやすみなさい')">🔊</button>
+    </p>
+    <p>
+      <strong>Informal:</strong> おやすみ (<em>Oyasumi</em>) — Night!
+      <button class="pronounce-btn" onclick="speak('おやすみ')">🔊</button>
+    </p>
+  </div>
+      
+    <div class="dialogue-box">
+      <h2>💬 Daily Life Dialogue</h2>
+      <div class="dialogue-line">
+        👧 Ada: こんにちは！<strong> (Konnichiwa!)</strong>
+        <button class="pronounce-btn" onclick="speak('こんにちは')">🔊</button>
+        <div class="translation">Hello!</div>
+      </div>
+      <div class="dialogue-line">
+        👦 Ken: おはよう、エイダ！<strong> (Ohayou, Eida!)</strong>
+        <button class="pronounce-btn" onclick="speak('おはよう、エイダ!')">🔊</button>
+        <div class="translation">Good morning, Ada!</div>
+      </div>
+
+      <div class="dialogue-line">
+        👧 Ada: おやすみなさい！<strong> (Oyasuminasai!)</strong>
+        <button class="pronounce-btn" onclick="speak('おやすみなさい')">🔊</button>
+        <div class="translation">Good night!</div>
+      </div>
+    </div>
+
+
+  <section style="margin-top: 50px; background: #fff3f8; border-radius: 20px; padding: 20px; box-shadow: 0 6px 12px rgba(0,0,0,0.1);">
+  <h2 style="text-align: center; color: #e91e63; font-size: 28px;">🎥 Learn Japanese Greetings with Bocchi & Pocchi</h2>
+  <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+    <iframe src="https://www.youtube.com/embed/BGxLlGub0D4" 
+            style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:15px;" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+    </iframe>
+  </div>
+</section>
+
+
+    
+  </main>
+
+  <footer>
+    🌸 Let's enjoy learning Japanese every day! 🌸
+  </footer>
+
+  <script>
+    
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+    
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('ja')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+    
+  </script>
+
+
+
+</body>
+</html>
+
