@@ -1,1 +1,176 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎌 Japanese Lesson 2: About You</title>
+  <link href="../style.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #e0f7fa, #fff3f8);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #81d4fa;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .header-title h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    .pronounce-btn {
+      background-color: #4fc3f7;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      font-size: 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background 0.3s ease;
+    }
+
+    .pronounce-btn:hover {
+      background-color: #039be5;
+    }
+
+    main {
+      flex-grow: 1;
+      width: 90%;
+      max-width: 800px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #0288d1;
+      margin-top: 0;
+      font-size: 26px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    p, ul {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .dialogue-box {
+      background-color: #e3f2fd;
+      border-left: 5px solid #4fc3f7;
+      padding: 15px 20px;
+      border-radius: 12px;
+      margin-top: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .dialogue-line {
+      margin: 12px 0;
+    }
+
+    .translation {
+      font-style: italic;
+      color: #555;
+      padding-left: 25px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      background: #4fc3f7;
+      color: white;
+      font-size: 16px;
+      box-shadow: 0 -4px 8px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-title">
+      <h1>🎌 Japanese Lesson 2: About You</h1>
+    </div>
+  </header>
+
+  <main>
+
+    <h2>❓ What’s Your Name?</h2>
+    <p>おなまえは？ (<strong>Onamae wa?</strong>) — <em>What's your name?</em>
+    <button class="pronounce-btn" onclick="speak('Onamae wa?')">🔊</button></p>
+
+    <h2>👧 I am Ada.</h2>
+    <p>わたしはエイダです。(<strong>Watashi wa Ada desu.</strong>) — <em>I am Ada.</em>
+    <button class="pronounce-btn" onclick="speak('Watashi wa Ada desu')">🔊</button></p>
+
+    <h2>🎂 How Old Are You?</h2>
+    <p>なんさいですか？ (<strong>Nansai desu ka?</strong>) — <em>How old are you?</em>
+    <button class="pronounce-btn" onclick="speak('Nansai desu ka?')">🔊</button></p>
+
+    <h2>6 Years Old</h2>
+    <p>ろくさいです。(<strong>Rokusai desu.</strong>) — <em>I’m six years old.</em>
+    <button class="pronounce-btn" onclick="speak('Rokusai desu')">🔊</button></p>
+
+    <div class="dialogue-box">
+      <h2>💬 Daily Life Dialogue</h2>
+      <div class="dialogue-line">
+        👧 Ada: おなまえは？<strong> (Onamae wa?)</strong>
+        <button class="pronounce-btn" onclick="speak('Onamae wa?')">🔊</button>
+        <div class="translation">What’s your name?</div>
+      </div>
+      <div class="dialogue-line">
+        👦 Ken: けんです。<strong> (Ken desu.)</strong>
+        <button class="pronounce-btn" onclick="speak('Ken desu')">🔊</button>
+        <div class="translation">I’m Ken.</div>
+      </div>
+      <div class="dialogue-line">
+        👧 Ada: なんさいですか？<strong> (Nansai desu ka?)</strong>
+        <button class="pronounce-btn" onclick="speak('Nansai desu ka?')">🔊</button>
+        <div class="translation">How old are you?</div>
+      </div>
+      <div class="dialogue-line">
+        👦 Ken: ろくさいです。<strong> (Rokusai desu.)</strong>
+        <button class="pronounce-btn" onclick="speak('Rokusai desu')">🔊</button>
+        <div class="translation">I’m six years old.</div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    🌟 You’re doing great! Keep learning Japanese step by step! 🌟
+  </footer>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('ja')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
