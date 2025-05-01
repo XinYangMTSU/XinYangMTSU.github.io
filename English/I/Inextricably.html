@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Inextricably</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔗 inextricably
+      <span class="pronunciation">/ˌɪnɪkˈstrɪkəbli/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/i/ine/inext/inextricably__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adverb<br><span class="cn">词性：副词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Inextricably</strong> means in a way that is so closely linked or involved that it is impossible to separate.<br>
+      <span class="cn">“inextricably” 意为紧密相连到无法分开的程度。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The history of the two countries is inextricably linked.<br>
+      <span class="cn">例句：这两个国家的历史密不可分。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Science and mathematics are inextricably connected in many fields.<br>
+      <span class="cn">例句：科学与数学在许多领域中紧密相连，无法分割。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> 
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Closely <span class="cn">紧密地</span></li>
+        <li>Indivisibly <span class="cn">不可分割地</span></li>
+        <li>Firmly <span class="cn">牢固地</span></li>
+        <li>Tightly <span class="cn">紧紧地</span></li>
+        <li>Unbreakably <span class="cn">无法分开的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> 
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Inextricably” comes from the Latin word <em>inextricabilis</em>, meaning “that cannot be untangled.” It is formed by the prefix <em>in-</em> (not) + <em>extricabilis</em> (able to untangle).<br>
+      <span class="cn">“inextricably” 来自拉丁语 inextricabilis，意为“无法解开的”。由 in-（否定）+ extricabilis（可解开的）构成。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Strength</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Closely</td>
+          <td>With little distance</td>
+          <td>The two teams worked closely together.</td>
+          <td>Moderate</td>
+        </tr>
+        <tr>
+          <td>Firmly</td>
+          <td>In a strong and secure way</td>
+          <td>She held the rope firmly.</td>
+          <td>Moderate</td>
+        </tr>
+        <tr>
+          <td><strong>Inextricably</strong></td>
+          <td><strong>So linked that separation is impossible</strong></td>
+          <td>The two ideas are inextricably intertwined.</td>
+          <td>Very strong</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Inextricably"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/LINK_TO_VIDEO"
+      title="Inextricably in Context"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen for how “inextricably” is used to describe connections that can't be broken.<br>
+      <span class="cn">听听“inextricably”是如何用来描述无法分割的联系的。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Inextricably in the News</h3>
+    <p>
+      Climate change and economic stability are now inextricably linked in policy discussions.<br>
+      <span class="cn">气候变化与经济稳定如今在政策讨论中已密不可分。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
