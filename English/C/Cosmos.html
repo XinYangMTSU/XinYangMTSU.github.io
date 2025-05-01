@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Cosmos</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌌 cosmos
+      <span class="pronunciation">/ˈkɑːzməs/ or /ˈkɒzmɒs/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cos/cosmo/cosmos__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Cosmos</strong> refers to the universe as an ordered and harmonious system. It suggests not just outer space, but the idea that everything in existence follows an underlying structure or order.<br>
+      <span class="cn">“cosmos” 指宇宙，强调它是一个有秩序、和谐的整体，而不仅仅是星空或太空。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> Ancient philosophers believed the cosmos was governed by divine order.<br>
+      <span class="cn">例句：古代哲学家认为宇宙受神圣秩序支配。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The documentary explores the wonders of the cosmos.<br>
+      <span class="cn">例句：那部纪录片探索了宇宙的奇迹。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> 
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Universe <span class="cn">宇宙</span></li>
+        <li>Galaxy <span class="cn">星系</span></li>
+        <li>Heavens <span class="cn">苍穹；天空</span></li>
+        <li>Macrocosm <span class="cn">大宇宙</span></li>
+        <li>Outer space <span class="cn">外太空</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> 
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Cosmos” comes from the Greek word <em>kosmos</em>, meaning “order” or “world.” The term was later adopted in Latin and modern English to describe the universe as an ordered whole.<br>
+      <span class="cn">“cosmos” 源自希腊语 “kosmos”，意为“秩序”或“世界”，后来在拉丁语和现代英语中用于描述有序的宇宙整体。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Focus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Universe</td>
+          <td>All space, time, and matter</td>
+          <td>The universe is constantly expanding.</td>
+          <td>Scientific scope</td>
+        </tr>
+        <tr>
+          <td>Galaxy</td>
+          <td>A system of stars</td>
+          <td>We live in the Milky Way galaxy.</td>
+          <td>Astronomical unit</td>
+        </tr>
+        <tr>
+          <td><strong>Cosmos</strong></td>
+          <td><strong>The universe seen as orderly and harmonious</strong></td>
+          <td>The cosmos is full of hidden beauty.</td>
+          <td>Philosophical / poetic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Cosmos"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/wupToqz1e2g"
+      title="Carl Sagan - The Cosmos"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen to how Carl Sagan uses “cosmos” to inspire a sense of wonder and unity.<br>
+      <span class="cn">听卡尔·萨根如何用“cosmos”激发人们对宇宙的敬畏与联结感。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Cosmos in the News</h3>
+    <p>
+      NASA’s new telescope promises to reveal hidden structures of the cosmos.<br>
+      <span class="cn">美国国家航空航天局的新望远镜有望揭示宇宙中隐藏的结构。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nasa.gov" target="_blank" class="fancy-link">
+        🌠 Explore More – NASA
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
