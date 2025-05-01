@@ -1,1 +1,153 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Subservient</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧎 subservient
+      <span class="pronunciation">/səbˈsɜːrviənt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/sub/subse/subservient__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Subservient</strong> describes someone or something that is excessively willing to follow orders or serve a more powerful authority; or something that plays a supporting, less important role.<br>
+      <span class="cn">“subservient” 指的是过于顺从、服从他人，或处于从属地位的人或事物。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> He expected his assistants to be completely subservient to his decisions.<br>
+      <span class="cn">例句：他希望自己的助理对他的决定完全服从。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> In the story, mathematics is portrayed as subservient to science.<br>
+      <span class="cn">例句：在这个故事中，数学被描绘成科学的附属工具。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> 
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Obedient <span class="cn">顺从的</span></li>
+        <li>Submissive <span class="cn">服从的</span></li>
+        <li>Servile <span class="cn">卑躬屈膝的</span></li>
+        <li>Inferior <span class="cn">下级的</span></li>
+        <li>Secondary <span class="cn">次要的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> 
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Subservient” comes from Latin <em>subserviens</em>, the present participle of <em>subservire</em>, meaning “to serve under.”  
+      It is formed from <em>sub-</em> (under) + <em>servire</em> (to serve).<br>
+      <span class="cn">“subservient” 来自拉丁语 subserviens，是 subservire 的现在分词，意为“在下服务”或“作为附属”；由 sub-（在下）和 servire（服务）构成。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Obedient</td>
+          <td>Willing to follow rules or authority</td>
+          <td>The dog was obedient to its owner.</td>
+          <td>Neutral / Positive</td>
+        </tr>
+        <tr>
+          <td>Submissive</td>
+          <td>Too willing to give in or yield</td>
+          <td>She was quiet and submissive around her boss.</td>
+          <td>Negative</td>
+        </tr>
+        <tr>
+          <td><strong>Subservient</strong></td>
+          <td><strong>Acting in a way that shows lower rank or purpose</strong></td>
+          <td>He viewed the assistant as subservient to his authority.</td>
+          <td>Usually negative or critical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Subservient"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/LINK_TO_VIDEO"
+      title="Subservient in Context"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen to how “subservient” is used to describe roles of power and dependence.<br>
+      <span class="cn">听听“subservient”如何用来形容权力与从属之间的关系。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Subservient in the News</h3>
+    <p>
+      Critics argue that the department has become subservient to political interests.<br>
+      <span class="cn">批评者认为，该部门已沦为政治利益的附属品。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
