@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Thin Out</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌱 thin out
+      <span class="pronunciation">/θɪn aʊt/</span>
+      <button class="audio-button" onclick="speak('Thin Out')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Phrasal Verb<br><span class="cn">词性：短语动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Thin out</strong> means to become or make something less dense, crowded, or thick—either physically or metaphorically.<br>
+      <span class="cn">“thin out” 的意思是变得稀疏或让某物变得不那么密集，可以是实际的（如植物、人群）或比喻的（如头发、感情）。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> As the children grew older, their baby fat thinned out.<br>
+      <span class="cn">例句：随着孩子们长大，他们的婴儿肥慢慢变得稀薄了。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The crowd began to thin out after the concert ended.<br>
+      <span class="cn">例句：音乐会结束后，人群开始散去。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> 
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Shrink <span class="cn">缩小</span></li>
+        <li>Reduce <span class="cn">减少</span></li>
+        <li>Disperse <span class="cn">分散</span></li>
+        <li>Fade <span class="cn">逐渐减弱</span></li>
+        <li>Lighten <span class="cn">变稀薄</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the phrase 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> 
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Thin out” comes from the adjective “thin” (not thick or dense) combined with the particle “out,” implying reduction or spreading away from a center.<br>
+      <span class="cn">“thin out” 来自形容词 thin（稀薄的）加上副词 out，表示“向外扩散”或“减少密度”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Phrases</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Phrasal Verb</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Thin out</td>
+          <td>Become less dense or crowded</td>
+          <td>The forest was thinned out by the fire.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Break up</td>
+          <td>Disperse or separate</td>
+          <td>The police broke up the protest.</td>
+          <td>Forceful</td>
+        </tr>
+        <tr>
+          <td>Fade away</td>
+          <td>Disappear slowly</td>
+          <td>His voice faded away into the distance.</td>
+          <td>Soft / gradual</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Phrase "Thin Out"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/LINK_TO_VIDEO"
+      title="Using 'Thin Out' in Conversation"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen for how “thin out” is used when describing a fading crowd or a maturing process.<br>
+      <span class="cn">听听“thin out”是如何在描述人群散去或成长过程时使用的。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Thin Out in the News</h3>
+    <p>
+      City officials announced plans to thin out trees in the overcrowded park for safety reasons.<br>
+      <span class="cn">出于安全考虑，市政府宣布将减少公园中过于密集的树木。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
