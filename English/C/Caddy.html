@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Caddy</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🏌️ caddy
+      <span class="pronunciation">/ˈkædi/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cad/caddy/caddy__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      A <strong>caddy</strong> is a person who carries a golfer’s clubs and gives advice and assistance during a game.<br>
+      <span class="cn">caddy（球童）指的是在高尔夫比赛中，负责为球手背球杆并提供建议和协助的人。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The caddy handed the golfer the right club for the shot.<br>
+      <span class="cn">例句：球童为球手递上了合适的球杆来击球。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He worked as a golf caddy during summer break.<br>
+      <span class="cn">例句：他在暑假期间做过高尔夫球童的工作。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> 
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Assistant <span class="cn">助手</span></li>
+        <li>Helper <span class="cn">帮手</span></li>
+        <li>Attendant <span class="cn">服务员</span></li>
+        <li>Supporter <span class="cn">支持者</span></li>
+        <li>Guide <span class="cn">引导者</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> 
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Caddy” comes from the Scottish word <em>caddie</em>, meaning “helper or errand boy,” originally derived from the French word <em>cadet</em>, meaning “younger son” or “junior.”<br>
+      <span class="cn">“caddy” 来自苏格兰语 caddie，意为“帮手”或“跑腿”，源自法语 cadet，意为“年幼的儿子”或“小辈”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Formality</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Assistant</td>
+          <td>Someone who helps another person</td>
+          <td>She hired an assistant to help with scheduling.</td>
+          <td>Formal</td>
+        </tr>
+        <tr>
+          <td>Attendant</td>
+          <td>Someone who provides service</td>
+          <td>The flight attendant brought drinks.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td><strong>Caddy</strong></td>
+          <td><strong>A golf helper who carries clubs and gives advice</strong></td>
+          <td>The caddy advised the golfer to use a 9-iron.</td>
+          <td>Sport-specific</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Caddy"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/LINK_TO_VIDEO"
+      title="Caddy in Action"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen to how “caddy” is used when someone describes a golfer's support team.<br>
+      <span class="cn">听听在描述高尔夫球手的支持团队时，“caddy”是如何被使用的。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Caddy in the News</h3>
+    <p>
+      The champion golfer credited his long-time caddy for helping him stay focused under pressure.<br>
+      <span class="cn">那位冠军高尔夫选手表示，多亏了他长期搭档的球童，才让他在压力下保持专注。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.pgatour.com/news" target="_blank" class="fancy-link">
+        🏌️ Read More – PGA Tour News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
