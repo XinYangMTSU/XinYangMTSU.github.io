@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Quest</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🛡️ quest
+      <span class="pronunciation">/kwest/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/q/que/quest/quest__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun / Verb<br><span class="cn">词性：名词 / 动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Quest</strong> means:
+      <ol>
+        <li>(n.) A long or difficult search for something important.</li>
+        <li>(v.) To go on a journey in search of something.</li>
+      </ol>
+      <span class="cn">
+        quest 有两个常见含义：<br>
+        1.（名词）对某种重要事物的长期或艰难追寻；<br>
+        2.（动词）寻找，探求。
+      </span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The knight set off on a quest to find the lost sword.<br>
+      <span class="cn">例句：骑士踏上寻找失落之剑的征途。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Scientists are on a quest to cure rare diseases.<br>
+      <span class="cn">例句：科学家们正致力于攻克罕见疾病。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> 
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Search <span class="cn">寻找</span></li>
+        <li>Pursuit <span class="cn">追求</span></li>
+        <li>Journey <span class="cn">旅程</span></li>
+        <li>Expedition <span class="cn">探险</span></li>
+        <li>Mission <span class="cn">任务</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> 
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      "Quest" comes from Latin <em>quaerere</em>, meaning “to seek” or “to ask.” It entered English through Old French <em>queste</em> meaning “search or inquiry.”<br>
+      <span class="cn">“quest” 源自拉丁语 quaerere，意为“寻找、询问”，通过古法语 queste 演变而来，意思是“寻找”或“探究”。</span>
+    </p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>quaerere</em> – to seek<br>
+      <span class="cn">拉丁语 quaerere：寻找</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>queste</em> – a search or inquiry<br>
+      <span class="cn">古法语 queste：探求</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>English:</strong> <em>quest</em> – a journey or search for something valuable<br>
+      <span class="cn">现代英语 quest：对某个重要事物的寻找</span>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Search</td>
+          <td>Trying to find something</td>
+          <td>They searched the forest for clues.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Expedition</td>
+          <td>A planned journey for exploration</td>
+          <td>The team went on an expedition to the Arctic.</td>
+          <td>Formal / adventurous</td>
+        </tr>
+        <tr>
+          <td><strong>Quest</strong></td>
+          <td><strong>A noble or difficult journey to seek something valuable</strong></td>
+          <td>The hero began his quest for truth.</td>
+          <td>Elevated / epic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Quest"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/FhKpQMQx3K4"
+      title="Quest in Context"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch how “quest” is used to describe meaningful journeys in stories and documentaries.<br>
+      <span class="cn">观看视频，了解“quest”如何用于描述具有意义的旅程。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Quest in the News</h3>
+    <p>
+      Scientists continue their quest to develop clean energy sources that can replace fossil fuels.<br>
+      <span class="cn">科学家们持续努力，寻求开发可替代化石燃料的清洁能源。</span>
+    </p>
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nationalgeographic.com/" target="_blank" class="fancy-link">
+        📰 Read More – National Geographic
+      </a>
+    </p>
+  </div>
+
+</body>
+</html>
