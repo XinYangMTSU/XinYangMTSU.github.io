@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Muse</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🎨 muse
+      <span class="pronunciation">/mjuːz/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/m/mus/muse_/muse__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun / Verb<br><span class="cn">词性：名词 / 动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      As a <strong>noun</strong>, <strong>muse</strong> refers to a person or thing that inspires creativity, especially in art, music, or writing.<br>
+      As a <strong>verb</strong>, it means to think deeply or reflect silently.<br>
+      <span class="cn">“muse” 作为名词，表示激发艺术创作灵感的人或事物；作为动词，表示沉思、冥想。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example (noun):</strong> The mountains served as her muse for many poems.<br>
+      <span class="cn">例句（名词）：群山是她许多诗歌的灵感来源。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example (verb):</strong> He mused about the meaning of life while staring at the stars.<br>
+      <span class="cn">例句（动词）：他凝视星空，沉思人生的意义。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Inspiration <span class="cn">灵感</span></li>
+        <li>Contemplation <span class="cn">沉思</span></li>
+        <li>Reflection <span class="cn">反思</span></li>
+        <li>Think deeply <span class="cn">深入思考</span></li>
+        <li>Creative influence <span class="cn">创作影响力</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Muse” comes from Greek <em>Mousa</em>, referring to any of the nine goddesses who inspired literature, science, and the arts.  
+      In modern use, it refers to anyone or anything that sparks creative thought.<br>
+      <span class="cn">“muse” 源自希腊语 Mousa，原指九位激发文学、科学和艺术灵感的缪斯女神。如今泛指激发创意的人或事物。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Inspiration</td>
+          <td>Something that sparks ideas or action</td>
+          <td>Her speech was a true inspiration to us all.</td>
+          <td>General creativity or motivation</td>
+        </tr>
+        <tr>
+          <td>Reflection</td>
+          <td>Serious thought or consideration</td>
+          <td>He paused for reflection before answering.</td>
+          <td>Internal contemplation</td>
+        </tr>
+        <tr>
+          <td><strong>Muse</strong></td>
+          <td><strong>A source of artistic inspiration or deep thought</strong></td>
+          <td>The ocean was the painter's muse.</td>
+          <td>Art, literature, philosophy</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Muse"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/DsnZQru1de4"
+      title="Muse in Art and Literature"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch how the idea of a “muse” is used in different artistic traditions.<br>
+      <span class="cn">观看视频，了解“muse”在不同艺术传统中的使用方式。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Muse in the News</h3>
+    <p>
+      The fashion designer cited vintage film stars as her muse for the latest collection.<br>
+      <span class="cn">这位时装设计师称老电影明星为她最新系列的灵感来源。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.vogue.com/" target="_blank" class="fancy-link">
+        📰 Read More – Vogue Magazine
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
