@@ -30,8 +30,11 @@
 
     .char-box {
       text-align: center;
-      font-size: 5rem;
+      font-size: 6rem;
       margin: 1rem 0;
+      color: black;
+      font-weight: bold;
+      transform: rotate(-2deg);
     }
 
     .pronounce-button {
@@ -61,41 +64,15 @@
       color: #ffb6c1;
     }
 
-    .origin {
-      margin-top: 2rem;
-      padding: 1rem;
-      background-color: #fff8dc;
-      border-radius: 10px;
-    }
-
-    .origin img {
-      max-width: 100%;
-      margin-top: 0.5rem;
-    }
-
-    .structure {
-      margin-top: 2rem;
-      padding: 1rem;
-      background-color: #e0f7fa;
-      border-radius: 10px;
-    }
-
-    .radical {
-      margin-top: 2rem;
-      padding: 1rem;
-      background-color: #e8f5e9;
-      border-radius: 10px;
-    }
-
     audio {
       display: none;
     }
   </style>
 </head>
 <body>
-  <div class="container" style="background-color: #444;">
-    <h1><span style="font-size: 2rem;">📖</span> 学汉字：<span style="color: #ffb6c1; font-size: 4rem; font-weight: bold; text-shadow: 2px 2px #ffd700;">这</span></h1>
-    <div class="char-box" style="color: black; font-size: 6rem; font-weight: bold; transform: rotate(-2deg);">这</div>
+  <div class="container">
+    <h1><span style="font-size: 2rem;">📖</span> 学汉字：<span style="color: #ffb6c1; font-size: 4rem; font-weight: bold;">这</span></h1>
+    <div class="char-box">这</div>
     <p style="text-align:center; font-size: 1.2rem;">拼音：<strong>zhè</strong></p>
     <div style="text-align: center; margin: 1rem 0;">
       <button class="pronounce-button" onclick="speak('这')">🔊 听发音</button>
@@ -104,77 +81,63 @@
     <div class="examples">
       <h3>📜 汉字演变：</h3>
       <div class="example">
-      <h3>📜 汉字演变：</h3>
-      <p>
-        <strong>“这”</strong>是一个形声字，原义为“往”，后借指“这个”，用于指示近处的人或事物。
-        指示代词。
-      </p>
-      <p>下面是“这”字的演变过程（繁体字为：<strong>這</strong>）：</p>
-      <ul>
-        <li>甲骨文：暂无记录（该字在甲骨文中未见）</li>
-        <li>“這”字作为“这”的繁体形式，最早可追溯至东汉《说文解字》，说明其在汉代已正式使用。</li>
-        <li>补充说明：“这”字是一个较晚出现的汉字，因此在甲骨文和金文中较少或未见，属于后起字。</li>
-        <li>金文：尚不常见，但相关的“辶”部首已有出现</li>
-        <li>隶书：逐渐接近现代形体<br><img src="https://ishufa.net/i/shufa%2Fl%2F98139.gif" alt="隶书这"></li>
-        <li>楷书：就是我们今天写的“这”字<br>
-          <img src="https://img.tiptop.cn/ShuFaYanZi/zitie/S4/b32ab38d9b61a6d39a65151b6c91573d/slices/8/76e4ba63b5b1be7665f5d24b24bda88d.png" alt="楷书这">
-          <img src="https://ishufa.net/i/shufa%2Fk%2F125287.gif" alt="楷书这">
-        </li>
-         
-        <li>演变说明：
-          简化字“这”是在 1956 年新中国文字简化改革中由“這”字简化而来，用于日常书写。
-          
-          “这”字是一个形声字，从“辶”（表示走路），“文”作声符，最早见于小篆。
-          小篆形体较为整齐，进入隶书后逐渐变平直，结构简化，最后形成现代楷书。
-        </li>
-      </ul>
+        <p><strong>“这”</strong>是一个形声字，原义为“往”，后借指“这个”，用于指示近处的人或事物（指示代词）。</p>
+        <p>下面是“这”字的演变过程（繁体字为：<strong>這</strong>）：</p>
+        <ul>
+          <li>甲骨文：暂无记录（该字在甲骨文中未见）。</li>
+          <li>“這”字作为“这”的繁体形式，最早可追溯至东汉《说文解字》，说明其在汉代已正式使用。</li>
+          <li>金文：尚不常见，但“辶”部首已有出现。</li>
+          <li>隶书：逐渐接近现代形体。<br><img src="https://ishufa.net/i/shufa%2Fl%2F98139.gif" alt="隶书这"></li>
+          <li>楷书：为今日常用写法。<br>
+            <img src="https://img.tiptop.cn/ShuFaYanZi/zitie/S4/b32ab38d9b61a6d39a65151b6c91573d/slices/8/76e4ba63b5b1be7665f5d24b24bda88d.png" alt="楷书这">
+            <img src="https://ishufa.net/i/shufa%2Fk%2F125287.gif" alt="楷书这">
+          </li>
+          <li>演变说明：简化字“这”是在 1956 年新中国文字简化改革中由“這”字简化而来，用于日常书写。
+            “这”字从“辶”（表示走路），“文”作声符，最早见于小篆，小篆结构整齐，隶书趋于平直，楷书定型。</li>
+        </ul>
       </div>
     </div>
-  </div>
 
     <div class="examples">
       <h3>✍️ 字形结构与笔顺：</h3>
       <div class="example">
-      <h3>✍️ 字形结构与笔顺：</h3>
-      <p><strong>结构：</strong>半包围结构（辶为部首）</p>
-      <p><strong>总笔画数：</strong>7 画</p>
-      <p><strong>笔顺：</strong>点、横、撇、点、点、横折折撇、捺</p>
-      <p><strong>笔顺动画演示：</strong></p>
-      <img src="https://bishun.ivtool.com//hz/gifs/16860.gif" alt="这字笔顺动画">
-
-      <table>
-        <tr>
-          <td> <img src="https://bishun.ivtool.com//hz/bishun_pos/16860/0.png"> </td>
-          <td> <img src="https://bishun.ivtool.com//hz/bishun_pos/16860/1.png"> </td>
-          <td> <img src="https://bishun.ivtool.com//hz/bishun_pos/16860/2.png"> </td>
-        </tr>
-        <tr>
-          <td> <img src="https://bishun.ivtool.com//hz/bishun_pos/16860/3.png"> </td>
-          <td> <img src="https://bishun.ivtool.com//hz/bishun_pos/16860/4.png"> </td>
-          <td> <img src="https://bishun.ivtool.com//hz/bishun_pos/16860/5.png"> </td>
-        </tr>
-        <tr>
-          <td> <img src="https://bishun.ivtool.com//hz/bishun_pos/16860/6.png"> </td>
-        </tr>
-      </table>
+        <p><strong>结构：</strong>半包围结构（辶为部首）</p>
+        <p><strong>总笔画数：</strong>7 画</p>
+        <p><strong>笔顺：</strong>点、横、撇、点、点、横折折撇、捺</p>
+        <p><strong>笔顺动画演示：</strong></p>
+        <img src="https://bishun.ivtool.com//hz/gifs/16860.gif" alt="这字笔顺动画">
+        <table>
+          <tr>
+            <td><img src="https://bishun.ivtool.com//hz/bishun_pos/16860/0.png"></td>
+            <td><img src="https://bishun.ivtool.com//hz/bishun_pos/16860/1.png"></td>
+            <td><img src="https://bishun.ivtool.com//hz/bishun_pos/16860/2.png"></td>
+          </tr>
+          <tr>
+            <td><img src="https://bishun.ivtool.com//hz/bishun_pos/16860/3.png"></td>
+            <td><img src="https://bishun.ivtool.com//hz/bishun_pos/16860/4.png"></td>
+            <td><img src="https://bishun.ivtool.com//hz/bishun_pos/16860/5.png"></td>
+          </tr>
+          <tr>
+            <td><img src="https://bishun.ivtool.com//hz/bishun_pos/16860/6.png"></td>
+          </tr>
+        </table>
       </div>
     </div>
 
     <div class="examples">
       <h3>📘 部首讲解：辶（chuò）</h3>
       <div class="example">
-      <h3>📘 部首讲解：辶（chuò）</h3>
-      <p>“这”字的部首是 <strong>辶</strong>，读作 <strong>chuò</strong>，是一个常见的表示“走路、行动、移动”意义的部首。</p>
-      <p>这个部首像是一个小人在路上走，所以很多带“辶”的字都与“移动”有关。</p>
-      <p>它也被称为<strong>走之底</strong>，因为它经常出现在汉字的底部，看起来像一个人在走路的轨迹。</p>
-      <p>常见带有“辶”的字有：</p>
-      <ul>
-        <li>过（guò）、还（hái）、进（jìn）、远（yuǎn）</li>
-      </ul>
+        <p>“这”字的部首是 <strong>辶</strong>，读作 <strong>chuò</strong>，是一个常见的表示“走路、行动、移动”意义的部首。</p>
+        <p>这个部首像是一个小人在路上走，所以很多带“辶”的字都与“移动”有关。</p>
+        <p>它也被称为<strong>走之底</strong>，因为它经常出现在汉字的底部，看起来像一个人在走路的轨迹。</p>
+        <p>常见带有“辶”的字有：</p>
+        <ul>
+          <li>过（guò）、还（hái）、进（jìn）、远（yuǎn）</li>
+        </ul>
+      </div>
     </div>
-  </div>
 
-      <div class="examples">
+    <div class="examples">
       <h3>🧠 例句：</h3>
       <div class="example">
         这是我的书。<br>
@@ -192,7 +155,14 @@
         <em>（This apple is very sweet.）</em>
       </div>
     </div>
-  
+
+    <div class="examples">
+      <h3>🎬 视频学习：</h3>
+      <div class="example" style="text-align: center;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/I6b4zZtXzCA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+
   <script>
     let voices;
     window.speechSynthesis.onvoiceschanged = () => {
