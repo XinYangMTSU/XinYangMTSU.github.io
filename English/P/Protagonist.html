@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Protagonist</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🎭 protagonist
+      <span class="pronunciation">/prəˈtæɡənɪst/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pro/prota/protagonist__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      A <strong>protagonist</strong> is the **main character** in a story, play, or movie—the person the story is centered around.<br>
+      It can also refer to a **leading figure** in a real situation or movement.<br>
+      <span class="cn">“protagonist” 指的是小说、戏剧或电影中的主角，也可以指现实中的领导者或积极参与者。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> Harry Potter is the protagonist of the famous book series.<br>
+      <span class="cn">例句：哈利·波特是这套著名小说的主角。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She was a key protagonist in the campaign for education reform.<br>
+      <span class="cn">例句：她是教育改革运动中的主要推动者之一。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> 
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Hero <span class="cn">英雄 / 主角</span></li>
+        <li>Main character <span class="cn">主要角色</span></li>
+        <li>Leading figure <span class="cn">领导人物</span></li>
+        <li>Central character <span class="cn">核心角色</span></li>
+        <li>Champion <span class="cn">拥护者 / 倡导者</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> 
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Protagonist” comes from Greek <em>protagonistes</em>, where <em>proto-</em> means “first” and <em>agonistes</em> means “actor in a struggle.”<br>
+      <span class="cn">“protagonist” 来自希腊语 protagonistēs：其中 proto- 表示“第一”，agonistes 表示“参赛者、演员”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Use Case</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hero</td>
+          <td>A brave or admired main character</td>
+          <td>The hero rescued the village.</td>
+          <td>Fiction, mythology, real life</td>
+        </tr>
+        <tr>
+          <td>Main character</td>
+          <td>The person the story revolves around</td>
+          <td>The main character faces many challenges.</td>
+          <td>General storytelling</td>
+        </tr>
+        <tr>
+          <td><strong>Protagonist</strong></td>
+          <td><strong>The main figure in a narrative or cause</strong></td>
+          <td>The protagonist struggled with inner conflict.</td>
+          <td>Literature, politics, activism</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Protagonist"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/9FPOxsmAG_Y"
+      title="Protagonist in Movies"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch how “protagonist” is used in popular films and storytelling.
+      <br>
+      <span class="cn">观看视频，了解“protagonist”在电影和叙事中的真实用法。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Protagonist in the News</h3>
+    <p>
+      In the recent climate summit, Greta Thunberg emerged as a global protagonist for environmental activism.<br>
+      <span class="cn">在最近的气候峰会上，格蕾塔·通贝里成为全球环保行动的重要推动者。</span>
+    </p>
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com/environment" target="_blank" class="fancy-link">
+        📰 Read More – The Guardian
+      </a>
+    </p>
+  </div>
+
+</body>
+</html>
