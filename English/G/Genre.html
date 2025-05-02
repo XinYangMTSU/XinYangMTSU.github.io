@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Genre</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🎞️ genre
+      <span class="pronunciation">/ˈʒɑːnrə/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/g/gen/genre/genre__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      A <strong>genre</strong> is a category or type of art, music, literature, or film that has a particular style, form, or content.<br>
+      <span class="cn">“genre” 指的是具有特定风格、形式或内容的艺术、音乐、文学或电影的类别。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> My favorite movie genre is science fiction.<br>
+      <span class="cn">例句：我最喜欢的电影类型是科幻片。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She reads books from every genre, from romance to mystery.<br>
+      <span class="cn">例句：她各类书都读，从爱情小说到悬疑小说。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> 
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Category <span class="cn">类别</span></li>
+        <li>Type <span class="cn">类型</span></li>
+        <li>Style <span class="cn">风格</span></li>
+        <li>Form <span class="cn">形式</span></li>
+        <li>Classification <span class="cn">分类</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> 
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Genre” comes from the French word <em>genre</em>, meaning “kind” or “type,” which in turn comes from Latin <em>genus</em> (meaning “birth, race, kind”).<br>
+      <span class="cn">“genre” 来自法语，意为“种类”，源于拉丁语 genus，表示“出生、种族、类别”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Style</td>
+          <td>Distinctive way of expression</td>
+          <td>The artist has a unique painting style.</td>
+          <td>Visual arts, music</td>
+        </tr>
+        <tr>
+          <td>Form</td>
+          <td>Structure or arrangement</td>
+          <td>Haiku is a form of Japanese poetry.</td>
+          <td>Literature, music</td>
+        </tr>
+        <tr>
+          <td><strong>Genre</strong></td>
+          <td><strong>Category based on content and style</strong></td>
+          <td>Fantasy is a popular literary genre.</td>
+          <td>Books, film, music</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Genre"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/DxAk3oNrbwI"
+      title="What is Genre?"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch this clip to understand how different genres are categorized in storytelling.<br>
+      <span class="cn">观看视频，了解“genre”如何用于描述不同的叙事类型。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Genre in the News</h3>
+    <p>
+      Streaming platforms are expanding into new genres to attract diverse global audiences.<br>
+      <span class="cn">流媒体平台正在拓展新类型内容，以吸引多样化的全球观众。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.variety.com/" target="_blank" class="fancy-link">
+        📰 Read More – Variety News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
