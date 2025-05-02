@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Cumulus</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ☁️ cumulus
+      <span class="pronunciation">/ˈkjuːmjələs/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cum/cumul/cumulus__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      A <strong>cumulus</strong> cloud is a large, white, fluffy cloud with a flat base, often seen on sunny days.<br>
+      <span class="cn">“cumulus” 指的是一种大而白、形状蓬松、底部平坦的云，常见于晴天。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> Cumulus clouds floated across the blue summer sky.<br>
+      <span class="cn">例句：积云在夏日的蓝天中飘荡。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The painting showed a mountain range beneath cumulus clouds.<br>
+      <span class="cn">例句：画中展现了群山之上漂浮着的积云。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Cloud <span class="cn">云</span></li>
+        <li>Fluffy cloud <span class="cn">蓬松的云</span></li>
+        <li>Fair-weather cloud <span class="cn">晴天云</span></li>
+        <li>White puff <span class="cn">白色团团的云</span></li>
+        <li>Billow <span class="cn">翻滚的云团</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Cumulus” comes from Latin <em>cumulus</em>, meaning “heap” or “pile.”  
+      The word reflects the cloud’s shape, as it looks like a **pile of cotton or whipped cream**.<br>
+      <span class="cn">“cumulus” 来自拉丁语 cumulus，意为“堆、团”，形容这种云就像一团堆积的棉花或奶油。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Other Cloud Types</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Cloud Type</th>
+          <th>Appearance</th>
+          <th>Weather</th>
+          <th>Altitude</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cumulus</td>
+          <td>Fluffy and white with a flat base</td>
+          <td>Fair weather</td>
+          <td>Low</td>
+        </tr>
+        <tr>
+          <td>Stratus</td>
+          <td>Gray and flat, covering sky like a blanket</td>
+          <td>Drizzle or overcast</td>
+          <td>Low</td>
+        </tr>
+        <tr>
+          <td>Cirrus</td>
+          <td>Thin and wispy</td>
+          <td>Fair but can signal change</td>
+          <td>High</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Cumulus Clouds in Nature</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/1IR3uF0a7pg"
+      title="What Are Cumulus Clouds?"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch this video to see real-life footage and explanations of cumulus clouds.<br>
+      <span class="cn">观看此视频，了解积云的真实影像与解释。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Cumulus in the News</h3>
+    <p>
+      Meteorologists noted the formation of cumulus clouds as a sign of stable weather patterns in the region.<br>
+      <span class="cn">气象学家指出，积云的形成是该地区天气稳定的标志。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.noaa.gov/" target="_blank" class="fancy-link">
+        📰 Read More – NOAA Weather News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
