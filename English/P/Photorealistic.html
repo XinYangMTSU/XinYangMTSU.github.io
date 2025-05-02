@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Photorealistic</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🖼️ photorealistic
+      <span class="pronunciation">/ˌfəʊtəʊˌriːəˈlɪstɪk/</span>
+      <button class="audio-button" onclick="speak('Photorealistic')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Photorealistic</strong> describes artwork, images, or graphics that are extremely detailed and realistic, almost indistinguishable from a real photograph.<br>
+      <span class="cn">“photorealistic” 形容的是极其逼真、细节丰富、几乎与真实照片难以区分的图像或艺术作品。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The artist created a photorealistic portrait using only colored pencils.<br>
+      <span class="cn">例句：这位艺术家仅用彩铅创作了一幅逼真的人物肖像。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Modern video games often feature photorealistic graphics.<br>
+      <span class="cn">例句：现代电子游戏通常具有逼真的图像效果。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Hyperrealistic <span class="cn">超写实的</span></li>
+        <li>Detailed <span class="cn">细节丰富的</span></li>
+        <li>Lifelike <span class="cn">栩栩如生的</span></li>
+        <li>True-to-life <span class="cn">逼真的</span></li>
+        <li>Naturalistic <span class="cn">自然主义风格的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Photorealistic” combines the words <em>photo</em> (from Greek “phōs,” meaning “light”) and <em>realistic</em> (from Latin “res,” meaning “thing” or “reality”).  
+      It literally means “realistic as a photograph.”<br>
+      <span class="cn">“photorealistic” 是由 “photo”（光）与 “realistic”（现实的）组成，意为“如照片般真实”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Realistic</td>
+          <td>Looks close to reality</td>
+          <td>The movie used realistic props.</td>
+          <td>General art and film</td>
+        </tr>
+        <tr>
+          <td>Hyperrealistic</td>
+          <td>More intense than real</td>
+          <td>The sculpture had hyperrealistic skin textures.</td>
+          <td>Fine art, painting</td>
+        </tr>
+        <tr>
+          <td><strong>Photorealistic</strong></td>
+          <td><strong>As detailed and accurate as a photograph</strong></td>
+          <td>The 3D model was photorealistic.</td>
+          <td>Graphics, painting, animation</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Photorealistic"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/9zvC3tJoMK0"
+      title="Photorealistic Drawing Time-lapse"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch how artists use pencil and shading to achieve photorealistic results.<br>
+      <span class="cn">观看此视频，了解艺术家如何通过铅笔和明暗表现绘制逼真图像。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Photorealistic in the News</h3>
+    <p>
+      A recent AI model stunned critics by generating photorealistic portraits of imaginary people.<br>
+      <span class="cn">最近一款人工智能模型通过生成逼真的虚拟人物肖像震惊了评论界。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.wired.com/" target="_blank" class="fancy-link">
+        📰 Read More – Wired News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
