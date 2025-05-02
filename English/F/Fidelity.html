@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Fidelity</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🎧 fidelity
+      <span class="pronunciation">/fɪˈdɛlɪti/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/f/fid/fidel/fidelity__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Fidelity</strong> has two main meanings:
+      <ol>
+        <li>Loyalty and faithfulness to a person, cause, or belief.</li>
+        <li>Accuracy in reproduction—how closely something matches the original (such as sound, image, or translation).</li>
+      </ol>
+      <span class="cn">“fidelity” 有两个主要含义：<br>
+      1. 对某人、事业或信仰的忠诚；<br>
+      2. 再现的准确性，如音质、图像或翻译的逼真度。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She was admired for her fidelity to her values.<br>
+      <span class="cn">例句：她因忠于自己的价值观而受到尊敬。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> This speaker system offers high fidelity audio reproduction.<br>
+      <span class="cn">例句：这款音响系统提供高保真的音频还原。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Loyalty <span class="cn">忠诚</span></li>
+        <li>Faithfulness <span class="cn">忠实</span></li>
+        <li>Accuracy <span class="cn">准确性</span></li>
+        <li>Exactness <span class="cn">精确性</span></li>
+        <li>Authenticity <span class="cn">真实性</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Fidelity” comes from Latin <em>fidelitas</em>, from <em>fidelis</em> meaning “faithful,” which in turn comes from <em>fides</em> meaning “faith.”  
+      It originally referred to loyalty and trustworthiness.<br>
+      <span class="cn">“fidelity” 来自拉丁语 fidelitas，源自 fidelis（忠诚的），再追溯至 fides（信任、信仰）。最初用于表示忠诚与可信赖。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Loyalty</td>
+          <td>Steadfast allegiance to a person or cause</td>
+          <td>Her loyalty to her team never wavered.</td>
+          <td>Relationships, teams, politics</td>
+        </tr>
+        <tr>
+          <td>Accuracy</td>
+          <td>Closeness to the true or original version</td>
+          <td>The map's accuracy was impressive.</td>
+          <td>Data, technology, translation</td>
+        </tr>
+        <tr>
+          <td><strong>Fidelity</strong></td>
+          <td><strong>Loyalty or faithful reproduction</strong></td>
+          <td>High fidelity sound is prized by audiophiles.</td>
+          <td>Relationships, media, devices</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Fidelity"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/MF73JK3VIXQ"
+      title="What Is Fidelity in Audio?"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch how “fidelity” is used to describe high-quality sound reproduction.<br>
+      <span class="cn">观看视频，了解“fidelity”如何用于描述高质量音频还原。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Fidelity in the News</h3>
+    <p>
+      New wireless headphones are being praised for their fidelity and long battery life.<br>
+      <span class="cn">新款无线耳机因其高保真音质和持久续航受到好评。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.cnet.com/topics/headphones/" target="_blank" class="fancy-link">
+        📰 Read More – CNET Audio Tech
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
