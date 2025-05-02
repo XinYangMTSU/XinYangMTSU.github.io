@@ -1,1 +1,152 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Auteur</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🎬 auteur
+      <span class="pronunciation">/oʊˈtɜːr/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/a/aut/auteu/auteur__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      An <strong>auteur</strong> is a filmmaker, usually a director, who has a distinct personal style and complete control over all aspects of a film's production.<br>
+      <span class="cn">“auteur” 指的是一位具有鲜明个人风格，并对电影制作拥有全面掌控的导演或电影创作者。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> Stanley Kubrick is widely considered an auteur because of his unique vision and control over his films.<br>
+      <span class="cn">例句：斯坦利·库布里克被广泛认为是电影作者，因为他对作品具有独特视角和全面控制。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The film was praised for its auteur-driven direction and artistic choices.<br>
+      <span class="cn">例句：这部电影因其“作者式”导演风格和艺术选择而受到好评。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms 
+      <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> 
+      <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button>
+    </h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Visionary <span class="cn">有远见的人</span></li>
+        <li>Director <span class="cn">导演</span></li>
+        <li>Creator <span class="cn">创作者</span></li>
+        <li>Filmmaker <span class="cn">电影制作者</span></li>
+        <li>Artist <span class="cn">艺术家</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word 
+      <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> 
+      <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button>
+    </h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Auteur” comes directly from the French word for “author.” It was adopted in English especially in the context of film criticism to describe directors who leave a strong personal stamp on their work.<br>
+      <span class="cn">“auteur” 源自法语，意为“作者”。该词被引入英语用于电影评论，特指那些在电影中展现强烈个人风格的导演。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Director</td>
+          <td>Person in charge of film production</td>
+          <td>The director instructed the actors on set.</td>
+          <td>General film production</td>
+        </tr>
+        <tr>
+          <td>Filmmaker</td>
+          <td>Someone who makes films</td>
+          <td>The filmmaker completed her first short film.</td>
+          <td>Broad and inclusive term</td>
+        </tr>
+        <tr>
+          <td><strong>Auteur</strong></td>
+          <td><strong>A filmmaker with strong personal style</strong></td>
+          <td>The film bears the signature of its auteur.</td>
+          <td>Artistic/critical cinema</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Auteur"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/MZ7xV3GTi3I"
+      title="Auteur Theory Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch this video to understand how the word “auteur” is used in film studies.<br>
+      <span class="cn">观看此视频，了解“auteur”一词在电影理论中的使用方式。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Auteur in the News</h3>
+    <p>
+      The Cannes Film Festival featured several auteur directors known for their unconventional storytelling.<br>
+      <span class="cn">戛纳电影节展映了几位以非传统叙事手法闻名的“作者导演”的作品。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.hollywoodreporter.com/" target="_blank" class="fancy-link">
+        📰 Read More – Hollywood Reporter
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
