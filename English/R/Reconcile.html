@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Reconcile</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🤝 reconcile
+      <span class="pronunciation">/ˈrek.ən.saɪl/</span>
+      <button class="audio-button" onclick="speak('Reconcile')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Reconcile</strong> means to restore friendly relations between people, or to make two ideas, situations, or facts compatible or consistent with each other.<br>
+      <span class="cn">“reconcile” 的意思是恢复友好关系，或使两个想法、情况或事实一致或兼容。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> After years of conflict, the two sides finally reconciled.<br>
+      <span class="cn">例句：经过多年的冲突，双方终于和解了。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> It's hard to reconcile his words with his actions.<br>
+      <span class="cn">例句：很难将他的话与他的行为协调起来。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Settle <span class="cn">解决</span></li>
+        <li>Resolve <span class="cn">化解</span></li>
+        <li>Harmonize <span class="cn">使协调</span></li>
+        <li>Appease <span class="cn">安抚</span></li>
+        <li>Mend <span class="cn">修补（关系）</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Reconcile” comes from Latin *reconciliare*, meaning “to bring together again,” from *re-* (again) + *conciliare* (to make friendly).<br>
+      <span class="cn">“reconcile” 源自拉丁语 *reconciliare*，意思是“再次和好”，由 *re-*（再次）和 *conciliare*（使友好）组成。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Reconcile</td>
+          <td>To restore harmony or make consistent</td>
+          <td>They reconciled after years of disagreement.</td>
+          <td>Relationships, logic</td>
+        </tr>
+        <tr>
+          <td>Resolve</td>
+          <td>To settle a dispute or problem</td>
+          <td>The issue was resolved peacefully.</td>
+          <td>Conflicts, decisions</td>
+        </tr>
+        <tr>
+          <td>Forgive</td>
+          <td>To stop feeling resentment</td>
+          <td>She forgave him for the mistake.</td>
+          <td>Emotional, personal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Reconcile"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/0zE3KcNu0ro"
+      title="How to Reconcile Conflicting Ideas"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch this clip to see how people reconcile differences in opinions and beliefs.<br>
+      <span class="cn">观看这个视频，了解人们如何调和不同的意见和信仰。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Reconcile in the News</h3>
+    <p>
+      The government is working to reconcile economic growth with environmental sustainability.<br>
+      <span class="cn">政府正在努力协调经济增长与环境可持续性之间的关系。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com/" target="_blank" class="fancy-link">
+        📰 Read More – The Guardian
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
