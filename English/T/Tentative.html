@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Tentative</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🕊️ tentative
+      <span class="pronunciation">/ˈten.tə.tɪv/</span>
+      <button class="audio-button" onclick="speak('Tentative')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Tentative</strong> means not certain or fixed; done without confidence or as a trial or experiment.<br>
+      <span class="cn">“tentative” 意为不确定的，暂定的；或表示缺乏信心、试探性的行为。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> We made a tentative plan to meet next week.<br>
+      <span class="cn">例句：我们暂定下周见面。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She took a tentative step onto the ice.<br>
+      <span class="cn">例句：她小心翼翼地踏上冰面。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Uncertain <span class="cn">不确定的</span></li>
+        <li>Hesitant <span class="cn">犹豫的</span></li>
+        <li>Provisional <span class="cn">临时的</span></li>
+        <li>Experimental <span class="cn">实验性的</span></li>
+        <li>Cautious <span class="cn">谨慎的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span>
+      "Tentative" comes from Latin <em>tentativus</em> (trying, testing), from <em>tentare</em> meaning "to try, test, or attempt."<br>
+      <span class="cn">“tentative” 源自拉丁语 <em>tentativus</em>（尝试性的），来自 <em>tentare</em>，意为“尝试、试探”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tentative</td>
+          <td>Not definite; done with uncertainty</td>
+          <td>His tone was tentative and unsure.</td>
+          <td>Plans, decisions, actions</td>
+        </tr>
+        <tr>
+          <td>Provisional</td>
+          <td>Temporary or conditional</td>
+          <td>A provisional agreement was signed.</td>
+          <td>Legal, contractual</td>
+        </tr>
+        <tr>
+          <td>Hesitant</td>
+          <td>Lacking certainty or willingness</td>
+          <td>He gave a hesitant answer.</td>
+          <td>Speech, response</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Tentative"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/HMo2f1yR_3U"
+      title="Tentative Behavior in Communication"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> This video explores how people express uncertainty and tentative language.<br>
+      <span class="cn">该视频探讨了人们如何表达不确定性和试探性的语言。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Tentative in the News</h3>
+    <p>
+      Negotiators reached a tentative agreement late Friday night, pending approval from both parties.<br>
+      <span class="cn">谈判代表于周五晚达成了一项暂定协议，仍需双方批准。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com/" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
