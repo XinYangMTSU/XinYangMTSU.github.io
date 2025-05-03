@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Nourish</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌱 nourish
+      <span class="pronunciation">/ˈnɜː.rɪʃ/</span>
+      <button class="audio-button" onclick="speak('Nourish')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Nourish</strong> means to provide food or other substances necessary for growth, health, and good condition; it can also mean to support or strengthen a feeling, idea, or belief.<br>
+      <span class="cn">“nourish” 指的是提供食物或其他有助于成长、健康和良好状态的物质；也可指滋养、支持某种情感、思想或信念。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> This soup will nourish your body during recovery.<br>
+      <span class="cn">例句：这碗汤会在你康复期间滋养你的身体。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She nourished hopes of becoming a great writer.<br>
+      <span class="cn">例句：她怀有成为一名伟大作家的希望。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Feed <span class="cn">喂养</span></li>
+        <li>Sustain <span class="cn">维持</span></li>
+        <li>Support <span class="cn">支持</span></li>
+        <li>Encourage <span class="cn">鼓励</span></li>
+        <li>Cultivate <span class="cn">培养</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span>
+      "Nourish" comes from Old French <em>nouriss-</em>, from Latin <em>nutrire</em>, meaning "to feed, foster, or support".<br>
+      <span class="cn">“nourish” 源自古法语 <em>nouriss-</em>，其根源是拉丁语 <em>nutrire</em>，意为“喂养、养育、支持”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nourish</td>
+          <td>Provide sustenance or support</td>
+          <td>The program nourished students’ creativity.</td>
+          <td>Health, emotion, development</td>
+        </tr>
+        <tr>
+          <td>Feed</td>
+          <td>Give food to someone or something</td>
+          <td>She fed the baby every four hours.</td>
+          <td>Physical sustenance</td>
+        </tr>
+        <tr>
+          <td>Cultivate</td>
+          <td>Foster or grow over time</td>
+          <td>He cultivated an interest in poetry.</td>
+          <td>Education, values</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Nourish"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/Ck3UOqTbkO8"
+      title="Nourishing Your Body and Mind"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> This video explains how we can nourish both our physical and mental well-being.<br>
+      <span class="cn">该视频讲解如何同时滋养我们的身体和心理健康。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Nourish in the News</h3>
+    <p>
+      New research suggests that community support can nourish resilience in times of crisis.<br>
+      <span class="cn">新研究表明，社区支持可以在危机时刻滋养人们的韧性。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.psychologytoday.com/" target="_blank" class="fancy-link">
+        📰 Read More – Psychology Today
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
