@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Irredeemable</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ❌ irredeemable
+      <span class="pronunciation">/ˌɪr.ɪˈdiː.mə.bəl/</span>
+      <button class="audio-button" onclick="speak('Irredeemable')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Irredeemable</strong> describes something that cannot be saved, corrected, or improved; it is hopeless or beyond repair.<br>
+      <span class="cn">“irredeemable” 意为无法挽回的、无法补救的、不可救药的。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The plan was considered an irredeemable failure.<br>
+      <span class="cn">例句：这个计划被认为是彻底失败，无法挽回。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Some believed he was an irredeemable villain.<br>
+      <span class="cn">例句：有人认为他是个无可救药的恶棍。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Hopeless <span class="cn">无望的</span></li>
+        <li>Unrecoverable <span class="cn">不可恢复的</span></li>
+        <li>Incurable <span class="cn">无法治愈的</span></li>
+        <li>Unfixable <span class="cn">无法修复的</span></li>
+        <li>Beyond repair <span class="cn">无法修补的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span>
+      "Irredeemable" comes from the Latin prefix <em>ir-</em> (not) and <em>redimere</em> (to buy back or redeem). It literally means “not able to be redeemed.”<br>
+      <span class="cn">“irredeemable” 源自拉丁语前缀 <em>ir-</em>（不）和动词 <em>redimere</em>（赎回），意为“无法赎回或挽救”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Irredeemable</td>
+          <td>Cannot be saved or fixed</td>
+          <td>Her mistakes made the situation irredeemable.</td>
+          <td>Serious failure</td>
+        </tr>
+        <tr>
+          <td>Hopeless</td>
+          <td>Without hope or chance of success</td>
+          <td>He felt hopeless after the loss.</td>
+          <td>Emotional, situational</td>
+        </tr>
+        <tr>
+          <td>Incurable</td>
+          <td>Not able to be cured or corrected</td>
+          <td>The disease was incurable.</td>
+          <td>Medical, behavioral</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Irredeemable"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/fhOV5xmyztE"
+      title="What Makes a Character Irredeemable?"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch how storytelling explores the line between flawed and irredeemable characters.<br>
+      <span class="cn">观看故事如何探讨角色从有缺陷到不可救药的转变。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Irredeemable in the News</h3>
+    <p>
+      The journalist argued that no culture is irredeemable, no matter how broken it seems.<br>
+      <span class="cn">这位记者认为，无论看起来多么破碎，没有哪个文化是不可挽救的。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theatlantic.com/" target="_blank" class="fancy-link">
+        📰 Read More – The Atlantic
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
