@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Blunt</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔪 blunt
+      <span class="pronunciation">/blʌnt/</span>
+      <button class="audio-button" onclick="speak('Blunt')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective / Verb<br><span class="cn">词性：形容词 / 动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      As an <strong>adjective</strong>, <strong>blunt</strong> means not sharp or pointed, or speaking in a direct, sometimes harsh way.<br>
+      As a <strong>verb</strong>, it means to make something less sharp or to reduce the intensity or force of something.<br>
+      <span class="cn">作为形容词，“blunt” 意为不锋利的，或说话直率而可能显得生硬的；作为动词，意为使变钝，或减弱某事的强度。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example (adj):</strong> The knife was too blunt to cut the bread.<br>
+      <span class="cn">例句（形容词）：这把刀太钝了，切不了面包。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example (adj):</strong> She gave a blunt reply: “No.”<br>
+      <span class="cn">例句（形容词）：她直截了当地回答：“不。”</span>
+    </div>
+
+    <div class="example">
+      <strong>Example (verb):</strong> The edge of the blade was blunted by repeated use.<br>
+      <span class="cn">例句（动词）：刀刃因反复使用而变钝。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example (verb):</strong> His shock was blunted by years of experience.<br>
+      <span class="cn">例句（动词）：多年的经验让他的震惊感减弱了。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Dull <span class="cn">钝的</span></li>
+        <li>Direct <span class="cn">直率的</span></li>
+        <li>Frank <span class="cn">坦率的</span></li>
+        <li>Soften <span class="cn">减弱</span></li>
+        <li>Deaden <span class="cn">使迟钝</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span>
+      "Blunt" comes from Middle English <em>blont</em> meaning “dull,” possibly of Scandinavian origin.<br>
+      <span class="cn">“blunt” 源自中古英语 <em>blont</em>，意为“迟钝的”，可能源自斯堪的纳维亚语系。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Blunt</td>
+          <td>Not sharp or very direct in manner</td>
+          <td>He was blunt about the risks.</td>
+          <td>Objects, speech</td>
+        </tr>
+        <tr>
+          <td>Sharp</td>
+          <td>Having an edge or clear expression</td>
+          <td>The scissors are very sharp.</td>
+          <td>Cutting tools, clarity</td>
+        </tr>
+        <tr>
+          <td>Frank</td>
+          <td>Open and honest in expression</td>
+          <td>She was frank about her opinion.</td>
+          <td>Speech, emotion</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Blunt"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/MCVt3C8D9x8"
+      title="Blunt Communication Explained"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> This video explains how blunt language can help or hurt in communication.<br>
+      <span class="cn">本视频解释了直率的语言在交流中可能产生的帮助或伤害。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Blunt in the News</h3>
+    <p>
+      The CEO gave a blunt response to questions about the company's layoffs.<br>
+      <span class="cn">首席执行官对有关公司裁员的问题做出了直截了当的回应。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
