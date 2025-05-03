@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Inquiry</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ❓ inquiry
+      <span class="pronunciation">/ˈɪn.kwə.ri/</span>
+      <button class="audio-button" onclick="speak('Inquiry')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Inquiry</strong> is the act of asking questions or seeking information, often in a formal or systematic way.<br>
+      <span class="cn">“inquiry” 指的是提问或系统性地寻求信息的行为，通常用于正式场合。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The school launched an inquiry into the incident.<br>
+      <span class="cn">例句：学校对这一事件展开了调查。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She made an inquiry about the course schedule.<br>
+      <span class="cn">例句：她询问了课程安排。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Investigation <span class="cn">调查</span></li>
+        <li>Examination <span class="cn">审查</span></li>
+        <li>Questioning <span class="cn">质询</span></li>
+        <li>Query <span class="cn">询问</span></li>
+        <li>Probe <span class="cn">探查</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Inquiry” comes from the Latin *inquirere*, meaning “to seek” or “to ask,” formed from *in-* (into) + *quaerere* (to ask, seek).<br>
+      <span class="cn">“inquiry” 来自拉丁语 *inquirere*，意思是“寻求”或“询问”，由 *in-*（向内）和 *quaerere*（询问）组成。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Inquiry</td>
+          <td>Act of seeking information or investigation</td>
+          <td>The company opened an internal inquiry.</td>
+          <td>Academic, legal, business</td>
+        </tr>
+        <tr>
+          <td>Question</td>
+          <td>A sentence to ask for information</td>
+          <td>He asked a question about the policy.</td>
+          <td>Everyday conversation</td>
+        </tr>
+        <tr>
+          <td>Research</td>
+          <td>Systematic study or investigation</td>
+          <td>Her research focused on climate change.</td>
+          <td>Academic, scientific</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Inquiry"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/I_3Zu5bGqoM"
+      title="What is Inquiry-Based Learning?"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch this video to learn how “inquiry” is used in education and scientific investigation.<br>
+      <span class="cn">观看此视频，了解“inquiry”如何用于教育和科学研究中。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Inquiry in the News</h3>
+    <p>
+      A government inquiry was launched to examine the recent data breach affecting millions of users.<br>
+      <span class="cn">政府已启动调查，以审查最近影响数百万用户的数据泄露事件。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
