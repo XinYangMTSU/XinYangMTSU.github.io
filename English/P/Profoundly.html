@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Profoundly</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌌 profoundly
+      <span class="pronunciation">/prəˈfaʊnd.li/</span>
+      <button class="audio-button" onclick="speak('Profoundly')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adverb<br><span class="cn">词性：副词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Profoundly</strong> means to a very great or intense degree; deeply and meaningfully.<br>
+      <span class="cn">“profoundly” 意为“极大程度地；深刻地；意义重大地”。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The discovery profoundly changed our understanding of the universe.<br>
+      <span class="cn">例句：这一发现极大地改变了我们对宇宙的认识。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She was profoundly moved by the speech.<br>
+      <span class="cn">例句：她被这场演讲深深打动。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Deeply <span class="cn">深深地</span></li>
+        <li>Greatly <span class="cn">极大地</span></li>
+        <li>Seriously <span class="cn">严重地；严肃地</span></li>
+        <li>Meaningfully <span class="cn">有意义地</span></li>
+        <li>Extremely <span class="cn">非常</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      "Profoundly" comes from the adjective "profound," which is derived from Latin <em>profundus</em>, meaning “deep.”<br>
+      <span class="cn">“profoundly” 源自动词“profound”（深刻的），其词根是拉丁语 <em>profundus</em>，意思是“深的”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Profoundly</td>
+          <td>To a deep or intense degree</td>
+          <td>The news profoundly affected her.</td>
+          <td>Emotional, intellectual</td>
+        </tr>
+        <tr>
+          <td>Deeply</td>
+          <td>Far below the surface; strongly felt</td>
+          <td>He was deeply grateful.</td>
+          <td>Emotional expression</td>
+        </tr>
+        <tr>
+          <td>Extremely</td>
+          <td>To a very high degree</td>
+          <td>She was extremely tired.</td>
+          <td>General emphasis</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Profoundly"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/2NNTs-vgFWw"
+      title="Profound Ideas That Changed the World"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Discover how profound ideas and discoveries have reshaped human history.<br>
+      <span class="cn">了解那些深刻的思想和发现如何重塑人类历史。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Profoundly in the News</h3>
+    <p>
+      The technology is profoundly changing how we interact with information.<br>
+      <span class="cn">这项技术正在深刻地改变我们与信息的互动方式。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com/" target="_blank" class="fancy-link">
+        📰 Read More – The Guardian
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
