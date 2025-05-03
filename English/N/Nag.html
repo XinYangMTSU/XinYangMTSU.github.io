@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Nag</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🗯️ nag
+      <span class="pronunciation">/næɡ/</span>
+      <button class="audio-button" onclick="speak('Nag')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb / Noun<br><span class="cn">词性：动词 / 名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Nag</strong> means to repeatedly complain to or criticize someone in an annoying way. As a noun, it can also refer to a person who does this frequently.<br>
+      <span class="cn">“nag” 指的是反复地抱怨或批评某人，让人感到烦恼；也可以作为名词，指经常唠叨的人。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> Stop nagging me—I’ll do it later!<br>
+      <span class="cn">例句：别再唠叨我了——我等会儿会做的！</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He’s such a nag about cleaning the kitchen.<br>
+      <span class="cn">例句：他总是唠叨厨房要打扫干净。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Pester <span class="cn">纠缠</span></li>
+        <li>Bother <span class="cn">烦扰</span></li>
+        <li>Badger <span class="cn">不断纠缠</span></li>
+        <li>Harass <span class="cn">骚扰</span></li>
+        <li>Complain <span class="cn">抱怨</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span>
+      "Nag" likely comes from a Scandinavian source such as Old Norse <em>nagga</em>, meaning "to gnaw" or "to nibble," which figuratively became "to nag."<br>
+      <span class="cn">“nag” 很可能来自斯堪的纳维亚语系，如古挪威语 <em>nagga</em>，意为“啃咬”，后来引申为“唠叨”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nag</td>
+          <td>Repeatedly urge or criticize in an annoying way</td>
+          <td>She kept nagging him to clean his room.</td>
+          <td>Informal, interpersonal</td>
+        </tr>
+        <tr>
+          <td>Pester</td>
+          <td>Annoy someone persistently</td>
+          <td>Kids pestered their parents for candy.</td>
+          <td>General annoyance</td>
+        </tr>
+        <tr>
+          <td>Badger</td>
+          <td>Repeatedly ask or pressure someone</td>
+          <td>He was badgered by reporters for a comment.</td>
+          <td>Media, pressure</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Nag"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/95v1r1r7IxE"
+      title="Why Do People Nag?"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> This video explores why people nag and how to respond constructively.<br>
+      <span class="cn">本视频探讨人们为何唠叨以及如何积极应对。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Nag in the News</h3>
+    <p>
+      A study found that constant nagging can strain relationships and reduce motivation.<br>
+      <span class="cn">一项研究发现，持续的唠叨会影响人际关系并降低积极性。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.psychologytoday.com/" target="_blank" class="fancy-link">
+        📰 Read More – Psychology Today
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
