@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Wacko</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🤪 wacko
+      <span class="pronunciation">/ˈwæk.oʊ/</span>
+      <button class="audio-button" onclick="speak('Wacko')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun / Adjective (Informal)<br><span class="cn">词性：名词 / 形容词（非正式）</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Wacko</strong> is an informal term used to describe someone who is considered crazy, eccentric, or behaving in a very unusual way. As an adjective, it describes bizarre or irrational things.<br>
+      <span class="cn">“wacko” 是一个非正式词汇，用来形容行为古怪、疯狂或非常不同寻常的人或事物。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> Some people dismissed the idea as a wacko theory.<br>
+      <span class="cn">例句：一些人把这个观点斥为异想天开的理论。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He acted like a total wacko at the meeting.<br>
+      <span class="cn">例句：他在会议上的表现完全像个疯子。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Crazy person <span class="cn">疯子</span></li>
+        <li>Lunatic <span class="cn">疯人</span></li>
+        <li>Oddball <span class="cn">怪人</span></li>
+        <li>Weirdo <span class="cn">怪胎</span></li>
+        <li>Nuts <span class="cn">疯的；怪的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span>
+      "Wacko" is derived from the word "wacky," which came into use in the 1930s from the Scots word <em>whack</em> meaning a blow or strike—eventually extending to mean mentally unbalanced.<br>
+      <span class="cn">“wacko” 源自动词“wacky”，而“wacky”起源于 20 世纪 30 年代的苏格兰语 <em>whack</em>（击打），后引申为“精神不稳定”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Wacko</td>
+          <td>A person behaving bizarrely or irrationally</td>
+          <td>He’s not a bad guy, just a bit of a wacko.</td>
+          <td>Informal speech</td>
+        </tr>
+        <tr>
+          <td>Wacky</td>
+          <td>Funny or silly in a strange way</td>
+          <td>She has a wacky sense of humor.</td>
+          <td>Humorous tone</td>
+        </tr>
+        <tr>
+          <td>Crazy</td>
+          <td>Mentally unstable or acting wild</td>
+          <td>That plan is totally crazy.</td>
+          <td>Everyday informal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Wacko"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/1xkKJVcT3Y8"
+      title="Top 10 Wackiest Moments in History"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Explore some of the most wacko historical events ever recorded.<br>
+      <span class="cn">了解历史上最奇怪的一些事件。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Wacko in the News</h3>
+    <p>
+      A politician’s wacko outburst during a debate went viral on social media.<br>
+      <span class="cn">一位政客在辩论中的疯狂举动在社交媒体上疯传。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nbcnews.com/" target="_blank" class="fancy-link">
+        📰 Read More – NBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
