@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Unperturb</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧘 unperturb
+      <span class="pronunciation">/ˌʌn.pəˈtɜːbd/</span>
+      <button class="audio-button" onclick="speak('Unperturb')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective (used as past participle)<br><span class="cn">词性：形容词（过去分词形式）</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Unperturbed</strong> means not worried, upset, or disturbed by something that might normally cause concern or agitation.<br>
+      <span class="cn">“unperturbed” 意为不受干扰、不烦恼、不担忧，面对可能引起焦虑的事物保持镇定。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She remained unperturbed by the criticism.<br>
+      <span class="cn">例句：她对批评毫不在意，保持冷静。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Despite the chaos, he sat unperturbed in his chair.<br>
+      <span class="cn">例句：尽管现场一片混乱，他仍安坐如常。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Calm <span class="cn">冷静的</span></li>
+        <li>Composed <span class="cn">沉着的</span></li>
+        <li>Untroubled <span class="cn">不受困扰的</span></li>
+        <li>Serene <span class="cn">安详的</span></li>
+        <li>Undisturbed <span class="cn">未被打扰的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      "Unperturbed" is formed from the prefix <em>un-</em> (meaning "not") and <em>perturbed</em>, which comes from Latin <em>perturbare</em>, meaning "to confuse or agitate."<br>
+      <span class="cn">“unperturbed” 由前缀 <em>un-</em>（不）与“perturbed”（烦扰的）组成，后者源自拉丁语 <em>perturbare</em>，意为“使混乱、使烦扰”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Unperturbed</td>
+          <td>Not bothered or affected</td>
+          <td>He stayed unperturbed amid the noise.</td>
+          <td>Emotional control</td>
+        </tr>
+        <tr>
+          <td>Calm</td>
+          <td>Free from agitation or excitement</td>
+          <td>The teacher remained calm during the drill.</td>
+          <td>General behavior</td>
+        </tr>
+        <tr>
+          <td>Composed</td>
+          <td>Having self-control and being unshaken</td>
+          <td>She delivered the speech in a composed tone.</td>
+          <td>Formal, poised situations</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Unperturbed"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YZCr9qVU3KQ"
+      title="Staying Calm in Chaos"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch how staying unperturbed can improve decision-making in stressful situations.<br>
+      <span class="cn">观看在压力下保持镇定如何帮助做出更好的决策。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Unperturbed in the News</h3>
+    <p>
+      Despite mounting political pressure, the leader appeared unperturbed and focused on policy goals.<br>
+      <span class="cn">尽管政治压力不断加大，那位领导人依旧冷静专注于政策目标。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.reuters.com/" target="_blank" class="fancy-link">
+        📰 Read More – Reuters
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
