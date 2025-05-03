@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Curvature</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📐 curvature
+      <span class="pronunciation">/ˈkɜː.və.tʃər/</span>
+      <button class="audio-button" onclick="speak('Curvature')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Curvature</strong> refers to the amount or degree to which something is curved or bent, especially in geometry or space.<br>
+      <span class="cn">“curvature” 指的是某物弯曲或曲率的程度，常用于几何或空间中。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The curvature of the Earth becomes visible at high altitudes.<br>
+      <span class="cn">例句：在高空中可以看到地球的弯曲程度。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Einstein’s theory describes how mass causes curvature in space-time.<br>
+      <span class="cn">例句：爱因斯坦的理论描述了质量如何引起时空的弯曲。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Bend <span class="cn">弯曲</span></li>
+        <li>Arc <span class="cn">弧形</span></li>
+        <li>Curve <span class="cn">曲线</span></li>
+        <li>Bow <span class="cn">弓形</span></li>
+        <li>Flexure <span class="cn">屈曲</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span>
+      "Curvature" comes from the Latin root <em>curvatura</em>, meaning "a bending," from <em>curvus</em> (curved).<br>
+      <span class="cn">“curvature” 源自拉丁语 <em>curvatura</em>，意为“弯曲”，词根是 <em>curvus</em>，意思是“弯的”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Curvature</td>
+          <td>The amount of bending in a shape or surface</td>
+          <td>The curvature of space can be measured by gravitational effects.</td>
+          <td>Physics, geometry</td>
+        </tr>
+        <tr>
+          <td>Curve</td>
+          <td>A continuous and smooth flowing line</td>
+          <td>The road has a sharp curve ahead.</td>
+          <td>Everyday objects, shapes</td>
+        </tr>
+        <tr>
+          <td>Arc</td>
+          <td>A portion of a curved line</td>
+          <td>The rainbow formed a perfect arc in the sky.</td>
+          <td>Geometry, visuals</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Curvature"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/5rUmjD6owN8"
+      title="Curvature of Space-Time Explained"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> This video explains how curvature in space-time results from gravity and mass.<br>
+      <span class="cn">本视频讲解了质量如何导致时空的弯曲现象。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Curvature in the News</h3>
+    <p>
+      Scientists have detected curvature in the cosmic microwave background, offering clues about the universe’s shape.<br>
+      <span class="cn">科学家在宇宙微波背景辐射中发现了曲率的迹象，这为宇宙的形状提供了线索。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nature.com/" target="_blank" class="fancy-link">
+        📰 Read More – Nature
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
