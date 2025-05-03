@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Dainty</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧁 dainty
+      <span class="pronunciation">/ˈdeɪn.ti/</span>
+      <button class="audio-button" onclick="speak('Dainty')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective & Noun<br><span class="cn">词性：形容词 & 名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      As an <strong>adjective</strong>, <strong>dainty</strong> means delicately small and pretty, or refined in taste or manners.<br>
+      As a <strong>noun</strong>, it refers to something that is delicious or a small treat.<br>
+      <span class="cn">作为形容词，“dainty” 意指娇小精致的，或品味高雅的；作为名词，指的是美味的小点心或精致的东西。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example (adj):</strong> She wore a dainty silver necklace.<br>
+      <span class="cn">例句（形容词）：她戴着一条精致的银项链。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example (noun):</strong> The bakery offered a variety of dainties.<br>
+      <span class="cn">例句（名词）：那家面包店提供各种精致美味的点心。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Delicate <span class="cn">精致的</span></li>
+        <li>Elegant <span class="cn">优雅的</span></li>
+        <li>Petite <span class="cn">娇小的</span></li>
+        <li>Refined <span class="cn">文雅的</span></li>
+        <li>Treat <span class="cn">美味</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span>
+      "Dainty" comes from Middle English <em>deinte</em>, from Old French <em>deintie</em>, meaning "delightful thing," from Latin <em>dignitas</em> meaning "worthiness, excellence."<br>
+      <span class="cn">“dainty” 源自中古英语 <em>deinte</em>，来自古法语 <em>deintie</em>，意为“令人愉快的事物”，其根源是拉丁语 <em>dignitas</em>，意为“值得、优秀”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Dainty</td>
+          <td>Small, delicate, or delicious</td>
+          <td>She picked up the dainty porcelain cup.</td>
+          <td>Appearance, food</td>
+        </tr>
+        <tr>
+          <td>Delicate</td>
+          <td>Fragile or fine in texture</td>
+          <td>The lace was very delicate.</td>
+          <td>Fabric, emotion</td>
+        </tr>
+        <tr>
+          <td>Elegant</td>
+          <td>Stylish in appearance or manner</td>
+          <td>She gave an elegant speech at the gala.</td>
+          <td>Style, manners</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Dainty"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/FPdY7X6tiq8"
+      title="What Makes Something Dainty?"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> See how people describe dainty fashion and design in this short documentary.<br>
+      <span class="cn">在这段短片中，人们如何描述精致的时尚和设计。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Dainty in the News</h3>
+    <p>
+      A new tea set collection is gaining popularity for its dainty craftsmanship and pastel tones.<br>
+      <span class="cn">一款新的茶具系列因其精致的工艺和柔和的色调而广受欢迎。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.housebeautiful.com/" target="_blank" class="fancy-link">
+        📰 Read More – House Beautiful
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
