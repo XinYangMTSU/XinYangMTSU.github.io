@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Devilish</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      😈 devilish
+      <span class="pronunciation">/ˈdev.əl.ɪʃ/</span>
+      <button class="audio-button" onclick="speak('Devilish')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Devilish</strong> means wicked, mischievous, or extremely difficult in a playful or clever way.<br>
+      <span class="cn">“devilish” 意指顽皮的、邪恶的，或形容某事非常棘手但有趣。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She flashed a devilish grin before revealing the surprise.<br>
+      <span class="cn">例句：她露出一个狡黠的笑容，然后揭示了惊喜。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The professor gave us a devilish math problem to solve.<br>
+      <span class="cn">例句：教授给我们出了一道极其棘手的数学题。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Mischievous <span class="cn">调皮的</span></li>
+        <li>Wicked <span class="cn">邪恶的</span></li>
+        <li>Tricky <span class="cn">棘手的</span></li>
+        <li>Cunning <span class="cn">狡猾的</span></li>
+        <li>Playful <span class="cn">爱玩的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Devilish” comes from “devil” + “-ish,” forming an adjective that originally meant “of or like a devil,” and later came to describe mischievous or tricky behavior.<br>
+      <span class="cn">“devilish” 由 “devil”（魔鬼）加上形容词后缀 “-ish” 构成，原意为“像魔鬼一样”，后来引申为“调皮或棘手的行为”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Devilish</td>
+          <td>Mischievously clever or wicked</td>
+          <td>The puzzle had a devilish twist.</td>
+          <td>Playful, tricky</td>
+        </tr>
+        <tr>
+          <td>Mischievous</td>
+          <td>Causing trouble in a playful way</td>
+          <td>The child was mischievous in class.</td>
+          <td>Children, humor</td>
+        </tr>
+        <tr>
+          <td>Wicked</td>
+          <td>Morally bad or evil</td>
+          <td>The villain had a wicked plan.</td>
+          <td>Serious, evil</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Devilish"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/ZcdTS5dP8o0"
+      title="Devilish Puzzles Explained"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> See how a “devilish” puzzle can challenge and delight at the same time.<br>
+      <span class="cn">看看“棘手的”谜题如何既让人挑战也带来乐趣。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Devilish in the News</h3>
+    <p>
+      Critics praised the author for crafting a devilish mystery full of twists and red herrings.<br>
+      <span class="cn">评论家称赞这位作者编织了一场充满曲折和误导的“狡猾”悬疑故事。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com/" target="_blank" class="fancy-link">
+        📰 Read More – The New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
