@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Paradox</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔄 paradox
+      <span class="pronunciation">/ˈpærəˌdɒks/</span>
+      <button class="audio-button" onclick="speak('Paradox')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      A <strong>paradox</strong> is a statement or situation that seems contradictory or impossible but may actually be true or reveal a deeper truth.<br>
+      <span class="cn">“paradox” 是指看似矛盾或不合逻辑，但可能却是真实或揭示深层道理的陈述或情形。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> It’s a paradox that standing is more tiring than walking.<br>
+      <span class="cn">例句：站着比走路更累，这听起来是个悖论。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The paradox of tolerance is that unlimited tolerance may lead to the disappearance of tolerance.<br>
+      <span class="cn">例句：宽容的悖论在于，无限的宽容可能导致宽容本身的消失。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Contradiction <span class="cn">矛盾</span></li>
+        <li>Irony <span class="cn">反讽</span></li>
+        <li>Dilemma <span class="cn">困境</span></li>
+        <li>Anomaly <span class="cn">异常</span></li>
+        <li>Enigma <span class="cn">谜团</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Paradox” comes from the Greek word <em>paradoxon</em>, meaning “contrary to expectation.” It is formed from <em>para</em> (beyond, against) + <em>doxa</em> (opinion, belief).<br>
+      <span class="cn">“paradox” 源自希腊语 “paradoxon”，意思是“出乎意料的”，由 “para”（超出、反对）和 “doxa”（观点、信仰）组成。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Contradiction</td>
+          <td>Two things that cannot both be true</td>
+          <td>Her actions were in contradiction to her words.</td>
+          <td>Logic, argument</td>
+        </tr>
+        <tr>
+          <td>Irony</td>
+          <td>Opposite of what’s expected, often humorous</td>
+          <td>It’s ironic that the fire station burned down.</td>
+          <td>Literature, speech</td>
+        </tr>
+        <tr>
+          <td><strong>Paradox</strong></td>
+          <td><strong>Seems contradictory but might be true</strong></td>
+          <td>The paradox of choice can cause anxiety.</td>
+          <td>Philosophy, everyday life</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Paradox"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/0v5UYNzHNUU"
+      title="What is a Paradox?"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch this explanation of famous paradoxes in science and logic.<br>
+      <span class="cn">观看这个视频，了解科学与逻辑中著名的悖论。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Paradox in the News</h3>
+    <p>
+      A recent article discusses the paradox of technology: it connects us but can also make us feel more alone.<br>
+      <span class="cn">一篇最近的文章探讨了技术的悖论：它让我们相连，却也可能让我们更加孤独。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theatlantic.com/" target="_blank" class="fancy-link">
+        📰 Read More – The Atlantic
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
