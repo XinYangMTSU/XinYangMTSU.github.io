@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Symbiotic</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔄 symbiotic
+      <span class="pronunciation">/ˌsɪm.baɪˈɒ.tɪk/</span>
+      <button class="audio-button" onclick="speak('Symbiotic')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Symbiotic</strong> describes a relationship between two different organisms or entities where both benefit or depend on each other.<br>
+      <span class="cn">“symbiotic” 意指两种不同生物或实体之间的共生关系，通常彼此互利或相互依赖。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The clownfish and the sea anemone have a symbiotic relationship.<br>
+      <span class="cn">例句：小丑鱼和海葵之间有共生关系。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Their collaboration was symbiotic—each gained from the other’s strengths.<br>
+      <span class="cn">例句：他们的合作是共生的——彼此从对方的优势中受益。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Mutually beneficial <span class="cn">互利的</span></li>
+        <li>Cooperative <span class="cn">合作的</span></li>
+        <li>Interdependent <span class="cn">相互依赖的</span></li>
+        <li>Reciprocal <span class="cn">互惠的</span></li>
+        <li>Complementary <span class="cn">互补的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span>
+      "Symbiotic" comes from Greek <em>symbiōsis</em>, meaning “living together,” from <em>sym-</em> (together) and <em>bios</em> (life).<br>
+      <span class="cn">“symbiotic” 源自希腊语 <em>symbiōsis</em>，意为“共同生活”，由 <em>sym-</em>（一起）与 <em>bios</em>（生命）组成。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Symbiotic</td>
+          <td>Living or working together for mutual benefit</td>
+          <td>The symbiotic partnership boosted both startups.</td>
+          <td>Biology, collaboration</td>
+        </tr>
+        <tr>
+          <td>Mutual</td>
+          <td>Shared by two or more parties</td>
+          <td>They had mutual respect for each other.</td>
+          <td>Personal, professional</td>
+        </tr>
+        <tr>
+          <td>Interdependent</td>
+          <td>Relying on each other</td>
+          <td>The two systems are interdependent.</td>
+          <td>Science, ecosystems</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Symbiotic"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/j-L2qB7StmU"
+      title="Understanding Symbiosis in Nature"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> This video shows real examples of symbiotic relationships in nature.<br>
+      <span class="cn">本视频展示了自然界中真实的共生关系案例。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Symbiotic in the News</h3>
+    <p>
+      A recent article highlights the symbiotic connection between urban trees and city wildlife.<br>
+      <span class="cn">最近一篇文章强调了城市树木与城市野生动物之间的共生关系。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nationalgeographic.com/" target="_blank" class="fancy-link">
+        📰 Read More – National Geographic
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
