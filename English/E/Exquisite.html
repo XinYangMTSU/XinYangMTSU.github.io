@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Exquisite</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💎 exquisite
+      <span class="pronunciation">/ˈɛks.kwɪ.zɪt/</span>
+      <button class="audio-button" onclick="speak('Exquisite')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Exquisite</strong> means extremely beautiful and delicate, or exceptionally fine and pleasing in detail or quality.<br>
+      <span class="cn">“exquisite” 意为极其精美、精致或出类拔萃，常用于形容艺术品、感受或品质。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The artist's work is known for its exquisite detail.<br>
+      <span class="cn">例句：这位艺术家的作品以其精致的细节而闻名。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She wore an exquisite silk dress to the gala.<br>
+      <span class="cn">例句：她穿着一件精美的丝绸礼服参加晚会。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Elegant <span class="cn">优雅的</span></li>
+        <li>Delicate <span class="cn">精致的</span></li>
+        <li>Refined <span class="cn">精炼的</span></li>
+        <li>Beautiful <span class="cn">美丽的</span></li>
+        <li>Superb <span class="cn">极佳的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      "Exquisite" comes from Latin *exquisitus*, meaning "carefully sought out," from *exquirere* (to search out), combining *ex-* (out) and *quaerere* (to seek).<br>
+      <span class="cn">“exquisite” 源自拉丁语 *exquisitus*，意为“精心挑选的”，由 *ex-*（出）和 *quaerere*（寻找）组成。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Exquisite</td>
+          <td>Extremely beautiful or finely detailed</td>
+          <td>She admired the exquisite embroidery.</td>
+          <td>Art, design, emotion</td>
+        </tr>
+        <tr>
+          <td>Delicate</td>
+          <td>Light, fragile, or finely made</td>
+          <td>The flower had delicate petals.</td>
+          <td>Nature, physical traits</td>
+        </tr>
+        <tr>
+          <td>Elegant</td>
+          <td>Graceful and stylish</td>
+          <td>The room was decorated in an elegant style.</td>
+          <td>Fashion, interior design</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Exquisite"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/jYcRJE_1Z6M"
+      title="Exquisite Craftsmanship Examples"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> This video explores the exquisite detail in traditional handmade objects.<br>
+      <span class="cn">这个视频介绍了传统手工艺品中的精美细节。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Exquisite in the News</h3>
+    <p>
+      The museum's newest exhibit features exquisite artifacts from ancient Persia.<br>
+      <span class="cn">博物馆最新展览展示了来自古波斯的精美文物。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nationalgeographic.com/" target="_blank" class="fancy-link">
+        📰 Read More – National Geographic
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
