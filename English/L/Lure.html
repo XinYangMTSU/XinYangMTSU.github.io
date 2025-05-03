@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Lure</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🎣 lure
+      <span class="pronunciation">/lʊr/</span>
+      <button class="audio-button" onclick="speak('Lure')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb / Noun<br><span class="cn">词性：动词 / 名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      As a verb, <strong>lure</strong> means to tempt or attract someone, often by offering something appealing. As a noun, it refers to the thing used to tempt someone or something.<br>
+      <span class="cn">“lure” 作为动词时，意思是引诱或吸引某人，常通过提供诱人的东西；作为名词时，指用来引诱的东西。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> Advertisements are designed to lure customers into buying more.<br>
+      <span class="cn">例句：广告的目的是引诱顾客购买更多商品。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The fish took the lure and got caught.<br>
+      <span class="cn">例句：那条鱼咬了诱饵，结果被钓上来了。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Tempt <span class="cn">诱惑</span></li>
+        <li>Entice <span class="cn">引诱</span></li>
+        <li>Attract <span class="cn">吸引</span></li>
+        <li>Seduce <span class="cn">勾引</span></li>
+        <li>Bait <span class="cn">诱饵</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Lure” comes from Old French *lurer*, meaning “to attract birds with a decoy,” originally from a Germanic root related to calling or whistling.<br>
+      <span class="cn">“lure” 源自古法语 *lurer*，原指用诱饵吸引鸟类，词根与“呼唤”或“吹口哨”相关，源自日耳曼语。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lure</td>
+          <td>To attract or tempt</td>
+          <td>She tried to lure him with promises of success.</td>
+          <td>Advertising, hunting, manipulation</td>
+        </tr>
+        <tr>
+          <td>Tempt</td>
+          <td>To try to convince someone to do something, especially wrong</td>
+          <td>He was tempted to cheat on the exam.</td>
+          <td>Moral, emotional</td>
+        </tr>
+        <tr>
+          <td>Attract</td>
+          <td>To draw attention or interest</td>
+          <td>The bright lights attract tourists.</td>
+          <td>General use</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Lure"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YD3rYfJv7G8"
+      title="How Ads Lure You In"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> This video explains how marketing uses psychology to lure consumers.<br>
+      <span class="cn">此视频解释了市场营销如何利用心理学来引诱消费者。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Lure in the News</h3>
+    <p>
+      Cybercriminals often lure users into clicking malicious links by disguising them as trusted sources.<br>
+      <span class="cn">网络犯罪分子常通过伪装成可信来源，引诱用户点击恶意链接。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.cnn.com/" target="_blank" class="fancy-link">
+        📰 Read More – CNN Tech
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
