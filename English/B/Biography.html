@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Biography</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📖 biography
+      <span class="pronunciation">/baɪˈɒɡ.rə.fi/</span>
+      <button class="audio-button" onclick="speak('Biography')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      A <strong>biography</strong> is a written account of someone’s life, usually including detailed facts, events, and achievements.<br>
+      <span class="cn">“biography” 是对某人一生的书面记述，通常包括详细的事实、事件和成就。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She wrote a bestselling biography of Marie Curie.<br>
+      <span class="cn">例句：她写了一本关于居里夫人的畅销传记。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The biography covers his childhood, career, and legacy.<br>
+      <span class="cn">例句：这本传记涵盖了他的童年、生涯与遗产。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Life story <span class="cn">人生故事</span></li>
+        <li>Memoir <span class="cn">回忆录</span></li>
+        <li>Profile <span class="cn">人物简介</span></li>
+        <li>Chronicle <span class="cn">编年史</span></li>
+        <li>Autobiography <span class="cn">自传</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span>
+      "Biography" comes from the Greek roots <em>bios</em> (life) and <em>graphia</em> (writing), meaning “life writing.”<br>
+      <span class="cn">“biography” 源自希腊语词根 <em>bios</em>（生命）和 <em>graphia</em>（书写），意为“记录生命”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Biography</td>
+          <td>A written account of someone’s life</td>
+          <td>The biography highlights her scientific contributions.</td>
+          <td>Books, academic writing</td>
+        </tr>
+        <tr>
+          <td>Memoir</td>
+          <td>Personal recollections</td>
+          <td>His memoir focuses on his childhood during wartime.</td>
+          <td>Autobiographical works</td>
+        </tr>
+        <tr>
+          <td>Autobiography</td>
+          <td>A biography written by the subject themselves</td>
+          <td>She published her autobiography after retiring.</td>
+          <td>Self-reflection</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Biography"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/bR5I6zWsh4g"
+      title="What is a Biography?"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Learn how biographies help us understand historical figures and their impact.<br>
+      <span class="cn">了解传记如何帮助我们了解历史人物及其影响。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Biography in the News</h3>
+    <p>
+      A newly released biography of Nelson Mandela offers rare insights into his early activism.<br>
+      <span class="cn">新出版的纳尔逊·曼德拉传记提供了他早期活动的珍贵见解。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com/" target="_blank" class="fancy-link">
+        📰 Read More – The New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
