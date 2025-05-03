@@ -1,1 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Deliberately</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧠 deliberately
+      <span class="pronunciation">/dɪˈlɪb.ər.ət.li/</span>
+      <button class="audio-button" onclick="speak('Deliberately')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adverb<br><span class="cn">词性：副词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Deliberately</strong> means doing something consciously and intentionally, rather than by accident.<br>
+      <span class="cn">“deliberately” 意为有意识地、故意地去做某事，而不是偶然或无意中发生的。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She deliberately avoided eye contact.<br>
+      <span class="cn">例句：她故意避开了眼神接触。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The door was left open deliberately to let the cat in.<br>
+      <span class="cn">例句：门是故意开着的，好让猫进来。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Intentionally <span class="cn">有意地</span></li>
+        <li>On purpose <span class="cn">故意地</span></li>
+        <li>Knowingly <span class="cn">明知地</span></li>
+        <li>Willfully <span class="cn">任意地</span></li>
+        <li>Calculatedly <span class="cn">蓄意地</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      "Deliberately" comes from the Latin word <em>deliberare</em>, meaning "to consider carefully," which passed into Old French and then English.<br>
+      <span class="cn">“deliberately” 源自拉丁语 <em>deliberare</em>（慎重考虑），通过古法语传入英语。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Deliberately</td>
+          <td>Consciously and intentionally</td>
+          <td>He deliberately chose not to answer.</td>
+          <td>Planned behavior</td>
+        </tr>
+        <tr>
+          <td>Accidentally</td>
+          <td>Without intending to</td>
+          <td>She accidentally spilled the water.</td>
+          <td>Unplanned events</td>
+        </tr>
+        <tr>
+          <td>Purposely</td>
+          <td>With a specific aim</td>
+          <td>He purposely left early to avoid traffic.</td>
+          <td>Goal-driven actions</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Deliberately"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/LBsp0RM6wQU"
+      title="The Power of Deliberate Choices"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Learn how making choices deliberately can shape your habits and mindset.<br>
+      <span class="cn">了解如何通过有意识地做选择来塑造习惯和思维方式。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Deliberately in the News</h3>
+    <p>
+      Officials stated that the leak was caused deliberately and an investigation is underway.<br>
+      <span class="cn">官员表示泄漏是蓄意造成的，目前正在调查中。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
 
