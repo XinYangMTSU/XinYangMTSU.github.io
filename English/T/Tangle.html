@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Tangle</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧵 tangle
+      <span class="pronunciation">/ˈtæŋ.ɡəl/</span>
+      <button class="audio-button" onclick="speak('Tangle')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun / Verb<br><span class="cn">词性：名词 / 动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      As a noun, <strong>tangle</strong> refers to a twisted mass of threads, hair, or other similar things. As a verb, it means to become or cause to become twisted together in a messy way.<br>
+      <span class="cn">“tangle” 作为名词指纠缠在一起的东西（如线、头发）；作为动词则表示使缠结或变得杂乱无章。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> Her hair was in a tangle after the windy day.<br>
+      <span class="cn">例句：风大的一天过后，她的头发全打结了。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Don’t tangle the cords or they’ll be hard to separate later.<br>
+      <span class="cn">例句：别把电线缠在一起，不然之后很难分开。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Snarl <span class="cn">缠结</span></li>
+        <li>Entangle <span class="cn">使纠缠</span></li>
+        <li>Twist <span class="cn">扭曲</span></li>
+        <li>Knot <span class="cn">打结</span></li>
+        <li>Mess <span class="cn">混乱</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Tangle” dates back to Middle English and is likely related to Old Norse *tangla*, meaning "to entangle."<br>
+      <span class="cn">“tangle” 这个词起源于中古英语，可能与古诺斯语 *tangla*（缠绕）有关。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tangle</td>
+          <td>A twisted, knotted mess</td>
+          <td>The ropes were in a tangle on the deck.</td>
+          <td>Everyday, physical objects</td>
+        </tr>
+        <tr>
+          <td>Snarl</td>
+          <td>A confused or tangled condition</td>
+          <td>The traffic snarl delayed everyone.</td>
+          <td>Traffic, cables, bureaucracy</td>
+        </tr>
+        <tr>
+          <td>Entangle</td>
+          <td>To involve in difficulties or confusion</td>
+          <td>She got entangled in legal issues.</td>
+          <td>Abstract, emotional, legal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Tangle"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/XRUzDZk3NBM"
+      title="Dealing with Tangled Cables"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch how to prevent and solve tangles in your cords and wires.<br>
+      <span class="cn">观看如何防止和解开电线或耳机的缠结。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Tangle in the News</h3>
+    <p>
+      Scientists study how DNA avoids getting into a hopeless tangle inside microscopic cells.<br>
+      <span class="cn">科学家研究DNA如何在微观细胞中避免陷入无望的缠结。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nature.com/" target="_blank" class="fancy-link">
+        📰 Read More – Nature
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
