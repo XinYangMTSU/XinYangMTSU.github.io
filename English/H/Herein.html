@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Herein</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📍 herein
+      <span class="pronunciation">/ˌhɪərˈɪn/</span>
+      <button class="audio-button" onclick="speak('Herein')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adverb<br><span class="cn">词性：副词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Herein</strong> means “in this document, statement, or situation.” It’s often used in formal or legal writing.<br>
+      <span class="cn">“herein” 的意思是“在此（文件、陈述或情境中）”，常用于正式或法律文体中。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The terms outlined herein are binding upon all parties.<br>
+      <span class="cn">例句：此处列明的条款对所有当事方具有约束力。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Herein lies the problem with their argument.<br>
+      <span class="cn">例句：问题就在于他们的论点中。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>In this <span class="cn">在此</span></li>
+        <li>Within <span class="cn">之内</span></li>
+        <li>Inside <span class="cn">内部</span></li>
+        <li>Contained <span class="cn">所包含的</span></li>
+        <li>Included <span class="cn">包括在内的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Herein” is formed from “here” + “in,” and dates back to Middle English, used especially in formal, legal, or academic contexts.<br>
+      <span class="cn">“herein” 源自 “here” 与 “in” 的组合，最早见于中古英语，常用于正式、法律或学术语境中。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Herein</td>
+          <td>In this document or situation</td>
+          <td>The information herein is confidential.</td>
+          <td>Legal, formal writing</td>
+        </tr>
+        <tr>
+          <td>Hereby</td>
+          <td>By means of this</td>
+          <td>I hereby declare...</td>
+          <td>Legal, declarations</td>
+        </tr>
+        <tr>
+          <td>Therein</td>
+          <td>In that place or thing</td>
+          <td>The clause is contained therein.</td>
+          <td>Legal, contracts</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Herein"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/26U_seo0a1g"
+      title="Legal Terms Explained: Herein"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen to how legal professionals use the term “herein” in contracts and agreements.<br>
+      <span class="cn">了解法律专业人士如何在合同和协议中使用“herein”。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Herein in the News</h3>
+    <p>
+      A tech company stated in its official filing: “The terms herein shall govern all product use.”<br>
+      <span class="cn">一家科技公司在其官方文件中声明：“此处条款适用于所有产品使用。”</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.reuters.com/" target="_blank" class="fancy-link">
+        📰 Read More – Reuters Legal
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
