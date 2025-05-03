@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Tome</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📚 tome
+      <span class="pronunciation">/toʊm/</span>
+      <button class="audio-button" onclick="speak('Tome')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      A <strong>tome</strong> is a large, heavy, and often scholarly book, especially one that is part of a larger work or deals with a serious subject.<br>
+      <span class="cn">“tome” 指的是一本厚重的书，通常是学术性的，可能是系列著作的一部分。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> He spent years writing a tome on ancient Greek philosophy.<br>
+      <span class="cn">例句：他花了数年写了一本关于古希腊哲学的巨著。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The textbook was a dense tome filled with mathematical proofs.<br>
+      <span class="cn">例句：那本教材是一部充满数学证明的厚书。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Volume <span class="cn">卷册</span></li>
+        <li>Opus <span class="cn">大作</span></li>
+        <li>Work <span class="cn">著作</span></li>
+        <li>Publication <span class="cn">出版物</span></li>
+        <li>Textbook <span class="cn">教科书</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span>
+      "Tome" comes from the Greek word <em>tomos</em>, meaning “a section” or “a volume,” which was used to refer to a single part of a larger written work.<br>
+      <span class="cn">“tome” 源自希腊语 <em>tomos</em>，意为“一部分”或“一卷”，原指大型著作中的某一册。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tome</td>
+          <td>A large or scholarly book</td>
+          <td>She placed the ancient tome on the shelf.</td>
+          <td>Academic, literary</td>
+        </tr>
+        <tr>
+          <td>Book</td>
+          <td>A set of written or printed pages bound together</td>
+          <td>I’m reading a mystery book.</td>
+          <td>General use</td>
+        </tr>
+        <tr>
+          <td>Volume</td>
+          <td>A single book in a multi-book series</td>
+          <td>This is Volume II of the encyclopedia.</td>
+          <td>Series or collections</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Tome"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/hY7m5jjJ9mM"
+      title="How Big Books Change the World"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch how massive tomes have shaped history and knowledge.<br>
+      <span class="cn">观看这些巨著如何影响历史与知识传播。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Tome in the News</h3>
+    <p>
+      A newly discovered 15th-century tome offers insight into early scientific thought.<br>
+      <span class="cn">一部新发现的15世纪巨著揭示了早期科学思想的线索。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.smithsonianmag.com/" target="_blank" class="fancy-link">
+        📰 Read More – Smithsonian Magazine
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
