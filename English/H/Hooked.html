@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Hooked</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🪝 hooked
+      <span class="pronunciation">/hʊkt/</span>
+      <button class="audio-button" onclick="speak('Hooked')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective (informal)<br><span class="cn">词性：形容词（非正式）</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Hooked</strong> means being strongly attracted to or obsessed with something, or unable to stop doing it. It originally comes from the idea of being caught by a hook.<br>
+      <span class="cn">“hooked” 意为对某事物非常着迷或上瘾，无法停止做某事。这个词源自被鱼钩钩住的意象。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She got hooked on the detective series and watched the whole season in two days.<br>
+      <span class="cn">例句：她迷上了那部侦探剧，两天内就看完了一整季。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> I'm totally hooked on this new video game.<br>
+      <span class="cn">例句：我完全沉迷于这款新电子游戏。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Obsessed <span class="cn">痴迷的</span></li>
+        <li>Addicted <span class="cn">上瘾的</span></li>
+        <li>Captivated <span class="cn">被吸引的</span></li>
+        <li>Engrossed <span class="cn">全神贯注的</span></li>
+        <li>Infatuated <span class="cn">迷恋的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Hooked” comes from the literal image of something caught on a hook—like a fish. Over time, it came to describe people metaphorically “caught” or fixated on something.<br>
+      <span class="cn">“hooked” 一词最初源自鱼钩钩住东西的字面意思，后来逐渐演变为形容人被某事“钩住”或沉迷其中的隐喻用法。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hooked</td>
+          <td>Strongly addicted or attracted to something</td>
+          <td>He’s hooked on puzzle games.</td>
+          <td>Informal, emotional</td>
+        </tr>
+        <tr>
+          <td>Addicted</td>
+          <td>Physically or mentally dependent</td>
+          <td>She’s addicted to caffeine.</td>
+          <td>Medical, behavioral</td>
+        </tr>
+        <tr>
+          <td>Obsessed</td>
+          <td>Thinking constantly about something</td>
+          <td>He’s obsessed with perfection.</td>
+          <td>Psychological, casual</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Hooked"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/GPhqU__hd4g"
+      title="How Games Get You Hooked"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> This video explores how design tricks in apps and games get users hooked.<br>
+      <span class="cn">此视频探讨了应用程序和游戏如何通过设计技巧让用户上瘾。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Hooked in the News</h3>
+    <p>
+      Experts warn that teens are getting hooked on social media algorithms that feed them endless content.<br>
+      <span class="cn">专家警告称，青少年正被社交媒体的算法“钩住”，不断沉迷于海量内容中。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com/" target="_blank" class="fancy-link">
+        📰 Read More – The New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
