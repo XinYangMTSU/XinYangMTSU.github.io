@@ -1,1 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Ether</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌌 ether
+      <span class="pronunciation">/ˈiː.θər/</span>
+      <button class="audio-button" onclick="speak('Ether')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Ether</strong> historically refers to a substance once believed to fill all space and carry light waves; in modern chemistry, it also refers to a type of organic compound.<br>
+      <span class="cn">“ether” 在历史上指一种被认为充满宇宙、能够传递光波的物质；在现代化学中也指一种有机化合物（醚）。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> In the 19th century, scientists believed that light traveled through ether.<br>
+      <span class="cn">例句：在19世纪，科学家认为光是通过以太传播的。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Ether is also used as a solvent in chemistry labs.<br>
+      <span class="cn">例句：醚也常作为溶剂用于化学实验室中。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Upper air <span class="cn">高空</span></li>
+        <li>Heavens <span class="cn">天空（古义）</span></li>
+        <li>Invisible medium <span class="cn">无形介质</span></li>
+        <li>Aether (archaic spelling) <span class="cn">以太（旧拼写）</span></li>
+        <li>Solvent (modern use) <span class="cn">溶剂（现代用法）</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Ether” comes from the Greek word *aithēr*, meaning “upper air” or “pure, bright air.” It was thought to be the fifth element beyond earth, water, air, and fire.<br>
+      <span class="cn">“ether” 来自希腊语 *aithēr*，意为“高空”或“纯净明亮的空气”，被认为是继土、水、气、火之后的“第五元素”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ether</td>
+          <td>Invisible substance once thought to fill space</td>
+          <td>Light was believed to travel through ether.</td>
+          <td>Physics, chemistry</td>
+        </tr>
+        <tr>
+          <td>Air</td>
+          <td>Mixture of gases we breathe</td>
+          <td>Air surrounds the Earth.</td>
+          <td>Everyday, science</td>
+        </tr>
+        <tr>
+          <td>Vacuum</td>
+          <td>Empty space without matter</td>
+          <td>Light travels in a vacuum.</td>
+          <td>Physics, astronomy</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Ether"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/FCEKpXbdz8I"
+      title="History of the Aether Theory"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch this video about how the concept of ether influenced physics before Einstein’s theory of relativity.<br>
+      <span class="cn">观看视频了解“以太”概念如何在爱因斯坦提出相对论前影响了物理学。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Ether in the News</h3>
+    <p>
+      Scientists once believed the cosmos was filled with ether—now we know it's mostly vacuum and dark matter.<br>
+      <span class="cn">科学家曾认为宇宙充满了以太——现在我们知道大多数是真空和暗物质。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nature.com/" target="_blank" class="fancy-link">
+        📰 Read More – Nature News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
 
