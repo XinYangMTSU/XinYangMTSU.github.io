@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Dreamy</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌙 dreamy
+      <span class="pronunciation">/ˈdriːmi/</span>
+      <button class="audio-button" onclick="speak('Dreamy')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Dreamy</strong> describes something that is magical, gentle, peaceful, or has a romantic or unreal quality, like in a dream.<br>
+      <span class="cn">“dreamy” 描述的是梦幻般的、温柔的、宁静的，或带有浪漫、不真实的特质。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The music had a soft, dreamy quality that made everyone relax.<br>
+      <span class="cn">例句：这段音乐带有柔和梦幻的特质，让人放松下来。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She stared out the window with a dreamy expression on her face.<br>
+      <span class="cn">例句：她面带梦幻的表情望向窗外。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Whimsical <span class="cn">异想天开的</span></li>
+        <li>Romantic <span class="cn">浪漫的</span></li>
+        <li>Airy <span class="cn">轻盈的</span></li>
+        <li>Fantasy-like <span class="cn">幻想般的</span></li>
+        <li>Peaceful <span class="cn">宁静的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Dreamy” comes from the word “dream,” which originates from Old English *drēam* meaning “joy” or “music,” later evolving to refer to imagined visions during sleep. “Dreamy” has come to mean “like a dream.”<br>
+      <span class="cn">“dreamy” 源自 “dream”，其古英语 *drēam* 原意为“欢乐”或“音乐”，后来演变为“梦境”。“dreamy” 则指“像梦一样的”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Romantic</td>
+          <td>Full of love or idealized feelings</td>
+          <td>The painting had a romantic atmosphere.</td>
+          <td>Art, literature</td>
+        </tr>
+        <tr>
+          <td>Whimsical</td>
+          <td>Playfully unusual or imaginative</td>
+          <td>The garden had a whimsical design.</td>
+          <td>Decor, storytelling</td>
+        </tr>
+        <tr>
+          <td><strong>Dreamy</strong></td>
+          <td><strong>Like a dream; soft, peaceful, or unreal</strong></td>
+          <td>The landscape looked dreamy in the moonlight.</td>
+          <td>Music, mood, visual arts</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Dreamy"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/B2GUEZBGaYQ"
+      title="Dreamy Music – Relaxing Ambience"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen to this dreamy ambient music perfect for relaxing or studying.<br>
+      <span class="cn">聆听这段梦幻氛围音乐，非常适合放松或学习。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Dreamy in the News</h3>
+    <p>
+      A popular fashion magazine described the designer’s latest collection as “dreamy and delicate, like something out of a fairytale.”<br>
+      <span class="cn">一家知名时尚杂志形容这位设计师的新系列为“梦幻而精致，如同童话世界中的作品”。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.vogue.com/" target="_blank" class="fancy-link">
+        📰 Read More – Vogue
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
