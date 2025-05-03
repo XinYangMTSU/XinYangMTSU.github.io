@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Continuum</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔁 continuum
+      <span class="pronunciation">/kənˈtɪn.ju.əm/</span>
+      <button class="audio-button" onclick="speak('Continuum')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      A <strong>continuum</strong> is something that changes gradually or exists as a whole, without clear or abrupt breaks between parts. It’s often used to describe a range or progression.<br>
+      <span class="cn">“continuum” 指的是一个连续体，表示变化是逐渐的，没有明确的分界，常用于描述一个范围或演变过程。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> Intelligence exists on a continuum and cannot be reduced to simple categories.<br>
+      <span class="cn">例句：智力是一个连续体，不能简单地归类。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The spectrum of political beliefs forms a continuum rather than separate camps.<br>
+      <span class="cn">例句：政治观点的范围构成了一个连续体，而非截然不同的阵营。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Range <span class="cn">范围</span></li>
+        <li>Spectrum <span class="cn">光谱；连续体</span></li>
+        <li>Progression <span class="cn">进程；连续性</span></li>
+        <li>Sequence <span class="cn">序列</span></li>
+        <li>Flow <span class="cn">流动</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span>
+      "Continuum" comes from Latin <em>continuum</em>, meaning “a continuous thing,” from <em>continere</em>, meaning “to hold together.”<br>
+      <span class="cn">“continuum” 源自拉丁语 <em>continuum</em>（连续体），来自 <em>continere</em>，意为“保持在一起”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Continuum</td>
+          <td>A continuous sequence or whole without clear divisions</td>
+          <td>Human emotions exist on a continuum.</td>
+          <td>Science, psychology, philosophy</td>
+        </tr>
+        <tr>
+          <td>Spectrum</td>
+          <td>A broad range of related qualities or ideas</td>
+          <td>The autism spectrum includes many traits.</td>
+          <td>Science, mental health</td>
+        </tr>
+        <tr>
+          <td>Range</td>
+          <td>The extent between two points or limits</td>
+          <td>The price range is $10 to $100.</td>
+          <td>Mathematics, commerce</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Continuum"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/SWGRLM8jHRA"
+      title="Space-Time Continuum Explained"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> This video explains what a space-time continuum is in simple terms.<br>
+      <span class="cn">本视频以通俗方式解释了什么是时空连续体。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Continuum in the News</h3>
+    <p>
+      Scientists describe climate change as a continuum of shifting weather patterns, not isolated events.<br>
+      <span class="cn">科学家将气候变化描述为气候模式的连续变化，而非孤立事件。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nature.com/" target="_blank" class="fancy-link">
+        📰 Read More – Nature Magazine
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
