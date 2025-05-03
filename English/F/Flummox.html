@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Flummox</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      😕 flummox
+      <span class="pronunciation">/ˈflʌm.əks/</span>
+      <button class="audio-button" onclick="speak('Flummox')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Flummox</strong> means to confuse or bewilder someone completely.<br>
+      <span class="cn">“flummox” 的意思是让某人彻底困惑或不知所措。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The complex instructions flummoxed the new employee.<br>
+      <span class="cn">例句：复杂的操作说明让新员工彻底懵了。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> I was flummoxed by the unexpected question.<br>
+      <span class="cn">例句：我被那个意外的问题搞得不知所措。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Confuse <span class="cn">使困惑</span></li>
+        <li>Bewilder <span class="cn">使迷惑</span></li>
+        <li>Baffle <span class="cn">使困惑</span></li>
+        <li>Perplex <span class="cn">使费解</span></li>
+        <li>Stump <span class="cn">难倒</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      "Flummox" likely originated in British dialect in the 19th century, possibly imitative or expressive in nature, used to convey confusion.<br>
+      <span class="cn">“flummox” 很可能起源于19世纪英国方言，是一个拟声或感情色彩很强的词，表示困惑。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Flummox</td>
+          <td>To confuse or bewilder</td>
+          <td>The strange results flummoxed the scientist.</td>
+          <td>Unexpected confusion</td>
+        </tr>
+        <tr>
+          <td>Baffle</td>
+          <td>To frustrate or puzzle</td>
+          <td>The clues baffled the detective.</td>
+          <td>Mental challenge</td>
+        </tr>
+        <tr>
+          <td>Perplex</td>
+          <td>To make someone uncertain</td>
+          <td>The math problem perplexed the students.</td>
+          <td>Complexity or uncertainty</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Flummox"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/f9DqT1m7FMY"
+      title="What Does 'Flummox' Mean?"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch this short explainer on how the word "flummox" is used in daily speech.<br>
+      <span class="cn">观看这个短片，了解“flummox”在日常对话中的用法。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Flummox in the News</h3>
+    <p>
+      Economists were flummoxed by the sudden shift in market trends.<br>
+      <span class="cn">经济学家对市场趋势的突然变化感到困惑。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.economist.com/" target="_blank" class="fancy-link">
+        📰 Read More – The Economist
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
