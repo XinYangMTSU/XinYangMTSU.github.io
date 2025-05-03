@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Poet, Poetic, and Poetry</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ===== POET ===== -->
+  <div class="word-box">
+    <h2>
+      🧑‍🎨 poet
+      <span class="pronunciation">/ˈpəʊɪt/</span>
+      <button class="audio-button" onclick="speak('Poet')">🔊 Play</button>
+    </h2>
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Poet</strong> is a person who writes poems or creates poetry.<br>
+      <span class="cn">“poet” 是指写诗或创作诗歌的人。</span>
+    </p>
+
+    <div class="example"><strong>Example:</strong> Maya Angelou was a famous American poet.<br><span class="cn">例句：玛雅·安杰卢是一位著名的美国诗人。</span></div>
+  </div>
+
+  <!-- ===== POETIC ===== -->
+  <div class="word-box">
+    <h2>
+      ✨ poetic
+      <span class="pronunciation">/pəʊˈɛtɪk/</span>
+      <button class="audio-button" onclick="speak('Poetic')">🔊 Play</button>
+    </h2>
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Poetic</strong> describes something that is beautiful, expressive, or characteristic of poetry.<br>
+      <span class="cn">“poetic” 描述某物美丽、有表现力，或具有诗意特征。</span>
+    </p>
+
+    <div class="example"><strong>Example:</strong> Her speech was so poetic that it moved the entire audience.<br><span class="cn">例句：她的演讲充满诗意，感动了在场的每一个人。</span></div>
+  </div>
+
+  <!-- ===== POETRY ===== -->
+  <div class="word-box">
+    <h2>
+      📝 poetry
+      <span class="pronunciation">/ˈpəʊətri/</span>
+      <button class="audio-button" onclick="speak('Poetry')">🔊 Play</button>
+    </h2>
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Poetry</strong> is a form of literary expression that uses rhythm, imagery, and metaphor to evoke emotions and ideas.<br>
+      <span class="cn">“poetry” 是一种使用节奏、意象和比喻来表达情感和思想的文学形式。</span>
+    </p>
+
+    <div class="example"><strong>Example:</strong> He enjoys reading poetry before bed.<br><span class="cn">例句：他喜欢在睡前读诗。</span></div>
+  </div>
+
+  <!-- ===== ETYMOLOGY ===== -->
+  <div class="word-box">
+    <h3>🔍 Etymology</h3>
+    <p><span style="font-size: 2rem;">📚</span> All three words originate from the Greek word <em>poiein</em>, meaning “to make.”<br>
+      <span class="cn">这三个词都源自希腊语 <em>poiein</em>，意为“创造”或“做”。</span>
+    </p>
+  </div>
+
+  <!-- ===== COMPARISON TABLE ===== -->
+  <div class="comparison-table">
+    <h3>📊 Comparison Table</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Poet</td>
+          <td>One who writes poems</td>
+          <td>The poet read aloud her latest piece.</td>
+          <td>People, roles</td>
+        </tr>
+        <tr>
+          <td>Poetic</td>
+          <td>Having qualities of poetry</td>
+          <td>His writing style is very poetic.</td>
+          <td>Descriptions, style</td>
+        </tr>
+        <tr>
+          <td>Poetry</td>
+          <td>The art or composition of poems</td>
+          <td>She studies 19th-century poetry.</td>
+          <td>Genre, literature</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== VIDEO ===== -->
+  <div class="word-box">
+    <h3>🎬 Video Example</h3>
+    <center>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/A3mfS_k-mzk"
+        title="Why Poetry Matters"
+        frameborder="0"
+        allowfullscreen></iframe>
+    </center>
+    <br>
+    <p><span class="cn">观看此视频，了解诗歌为何在今天仍然重要。</span></p>
+  </div>
+
+  <!-- ===== NEWS EXAMPLE ===== -->
+  <div class="word-box">
+    <h3>📰 In the News</h3>
+    <p>
+      A young poet's work was featured in a national poetry magazine for its poetic imagery and emotional depth.<br>
+      <span class="cn">一位年轻诗人的作品因其诗意的意象和情感深度而登上国家诗歌杂志。</span>
+    </p>
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://poets.org/" target="_blank" class="fancy-link">
+        📰 Read More – poets.org
+      </a>
+    </p>
+  </div>
+
+  <!-- ===== SCRIPT ===== -->
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
