@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Resemblance</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧬 resemblance
+      <span class="pronunciation">/rɪˈzem.bləns/</span>
+      <button class="audio-button" onclick="speak('Resemblance')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      <strong>Resemblance</strong> means the state of being similar to something or someone, especially in appearance or characteristics.<br>
+      <span class="cn">“resemblance” 意为与某物或某人相似的状态，特别是外貌或特征上的相似。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> There is a strong resemblance between the twins.<br>
+      <span class="cn">例句：这对双胞胎非常相像。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> His painting bears a close resemblance to Van Gogh’s style.<br>
+      <span class="cn">例句：他的画作与梵高的风格极为相似。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Similarity <span class="cn">相似性</span></li>
+        <li>Likeness <span class="cn">相像</span></li>
+        <li>Affinity <span class="cn">相似性；亲和力</span></li>
+        <li>Parallel <span class="cn">相似之处</span></li>
+        <li>Correspondence <span class="cn">相符；相似</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Resemblance” comes from the Old French *resembler*, meaning “to seem alike,” which is based on Latin *similis*, meaning “similar.”<br>
+      <span class="cn">“resemblance” 源自古法语 *resembler*，意为“看起来相像”，其根源是拉丁语 *similis*，意思是“相似的”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Resemblance</td>
+          <td>A state of being similar in appearance or nature</td>
+          <td>The resemblance between the siblings was striking.</td>
+          <td>Appearance, comparison</td>
+        </tr>
+        <tr>
+          <td>Similarity</td>
+          <td>General likeness in character or quality</td>
+          <td>The two cultures share many similarities.</td>
+          <td>Abstract qualities</td>
+        </tr>
+        <tr>
+          <td>Likeness</td>
+          <td>Close visual similarity</td>
+          <td>The sculpture bore a perfect likeness to the king.</td>
+          <td>Visual, artistic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Resemblance"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/s8a4B7vVhwo"
+      title="Family Resemblance in Genetics"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> This video explains how resemblance in physical traits is passed down genetically.<br>
+      <span class="cn">这个视频解释了身体特征的相似是如何通过基因遗传的。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Resemblance in the News</h3>
+    <p>
+      Researchers found a striking resemblance between two ancient texts from different civilizations.<br>
+      <span class="cn">研究人员发现两个来自不同文明的古代文本之间存在惊人的相似之处。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.scientificamerican.com/" target="_blank" class="fancy-link">
+        📰 Read More – Scientific American
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
