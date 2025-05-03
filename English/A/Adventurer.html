@@ -1,1 +1,138 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Adventurer</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧭 adventurer
+      <span class="pronunciation">/ədˈven.tʃər.ər/</span>
+      <button class="audio-button" onclick="speak('Adventurer')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      An <strong>adventurer</strong> is a person who seeks out exciting, risky, or unusual experiences—often involving travel, exploration, or bold action.<br>
+      <span class="cn">“adventurer” 指的是一个追求刺激、冒险或非凡经历的人，通常与旅行、探索或大胆行为有关。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The adventurer set off to explore the Amazon rainforest.<br>
+      <span class="cn">例句：那位冒险者踏上了探索亚马逊雨林的旅程。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She lived like a true adventurer, always chasing the unknown.<br>
+      <span class="cn">例句：她活得像个真正的冒险家，总是追逐未知。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Explorer <span class="cn">探险者</span></li>
+        <li>Risk-taker <span class="cn">冒险者</span></li>
+        <li>Voyager <span class="cn">航行者</span></li>
+        <li>Daredevil <span class="cn">胆大妄为的人</span></li>
+        <li>Wanderer <span class="cn">流浪者</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span>
+      "Adventurer" comes from the Old French <em>aventureor</em>, which traces back to Latin <em>adventura</em>, meaning "what is about to happen"—from <em>advenire</em>, "to arrive".<br>
+      <span class="cn">“adventurer” 源自古法语 <em>aventureor</em>，追溯至拉丁语 <em>adventura</em>，意为“即将发生的事”，来自 <em>advenire</em>，意为“到来”。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Adventurer</td>
+          <td>One who seeks adventure or risk</td>
+          <td>The adventurer climbed Mount Everest alone.</td>
+          <td>Travel, exploration</td>
+        </tr>
+        <tr>
+          <td>Explorer</td>
+          <td>Someone who investigates unknown regions</td>
+          <td>Early explorers mapped the oceans.</td>
+          <td>Geography, discovery</td>
+        </tr>
+        <tr>
+          <td>Wanderer</td>
+          <td>Someone who travels without a fixed purpose</td>
+          <td>The wanderer roamed from town to town.</td>
+          <td>Poetic, philosophical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Adventurer"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/0rB7GxR7d5k"
+      title="The Life of an Adventurer"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch how modern adventurers prepare for extreme conditions.<br>
+      <span class="cn">观看现代冒险家如何为极端环境做准备。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Adventurer in the News</h3>
+    <p>
+      A young adventurer made headlines after cycling solo across the Sahara Desert.<br>
+      <span class="cn">一位年轻的冒险家因独自骑行穿越撒哈拉沙漠而登上新闻头条。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nationalgeographic.com/" target="_blank" class="fancy-link">
+        📰 Read More – National Geographic
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
