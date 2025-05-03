@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Taunt</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🗯️ taunt
+      <span class="pronunciation">/tɔːnt/</span>
+      <button class="audio-button" onclick="speak('Taunt')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb / Noun<br><span class="cn">词性：动词 / 名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      As a verb, <strong>taunt</strong> means to insult or provoke someone by mocking or teasing. As a noun, it refers to a comment made to anger or upset someone.<br>
+      <span class="cn">“taunt” 作为动词时指讽刺、挑衅或嘲笑某人；作为名词时指具有挑衅性的言语。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The fans taunted the opposing team with chants and jeers.<br>
+      <span class="cn">例句：球迷们用呼喊和嘲讽来挑衅对方球队。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> His cruel taunt left her speechless.<br>
+      <span class="cn">例句：他残酷的嘲讽让她无言以对。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Mock <span class="cn">嘲笑</span></li>
+        <li>Ridicule <span class="cn">讥笑</span></li>
+        <li>Jeer <span class="cn">嘲弄</span></li>
+        <li>Tease <span class="cn">戏弄</span></li>
+        <li>Provoke <span class="cn">激怒</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word</h3>
+    <p><span style="font-size: 2rem;">📚</span> 
+      “Taunt” comes from Middle French *tanter*, meaning “to tempt or provoke,” and is related to Latin *tentare*, meaning “to test or try.”<br>
+      <span class="cn">“taunt” 源自中古法语 *tanter*，意为“挑衅或引诱”，与拉丁语 *tentare*（试探、测试）相关。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Related Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Definition</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Taunt</td>
+          <td>To insult or provoke with mockery</td>
+          <td>The bully taunted the younger kid.</td>
+          <td>Conflict, teasing</td>
+        </tr>
+        <tr>
+          <td>Tease</td>
+          <td>To make fun of in a playful way</td>
+          <td>She teased him about his haircut.</td>
+          <td>Friendly or rude, depending on tone</td>
+        </tr>
+        <tr>
+          <td>Jeer</td>
+          <td>To shout mocking or insulting things</td>
+          <td>The crowd jeered at the referee.</td>
+          <td>Public, aggressive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Taunt"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/DvIImHeWg-M"
+      title="Examples of Verbal Taunts in Sports"
+      frameborder="0"
+      allowfullscreen></iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> This video shows examples of how taunts are used in competitive sports and their effects.<br>
+      <span class="cn">该视频展示了体育比赛中挑衅言语的例子及其影响。</span>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>📰 Taunt in the News</h3>
+    <p>
+      The politician’s speech included subtle taunts aimed at his opponent’s record.<br>
+      <span class="cn">那位政治家的演讲中暗含对其对手政绩的嘲讽。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com/" target="_blank" class="fancy-link">
+        📰 Read More – The Guardian
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
