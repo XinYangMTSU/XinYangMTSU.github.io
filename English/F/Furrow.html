@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Furrow</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌾 furrow
+      <span class="pronunciation">/ˈfɜːroʊ/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/f/fur/furro/furrow__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun / Verb<br><span class="cn">词性：名词 / 动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A long narrow trench in the ground or a deep wrinkle, especially on the forehead.<br>
+    <span class="cn">地面上的长沟槽，或（尤指额头上的）深皱纹。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The farmer plowed deep furrows into the soil.<br>
+      <span class="cn">例句：农民在土壤中犁出了深深的沟槽。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He furrowed his brow in confusion.<br>
+      <span class="cn">例句：他疑惑地皱起了眉头。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Trench <span class="cn">沟槽</span></li>
+        <li>Wrinkle <span class="cn">皱纹</span></li>
+        <li>Crease <span class="cn">褶皱</span></li>
+        <li>Groove <span class="cn">凹槽</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Furrow" comes from Old English <em>furh</em>, meaning “trench” or “track,” originally associated with farming.<br>
+    <span class="cn">furrow 来自古英语 furh，意为“沟槽”或“痕迹”，最初与耕作有关。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>furh</em> – trench, furrow<br>
+      <span class="cn">古英语 furh：沟槽，犁沟</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>furrow</em> – a groove in soil or a wrinkle in skin<br>
+      <span class="cn">现代英语 furrow：土壤中的沟槽或皮肤上的皱纹</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Wrinkle</td>
+          <td>Neutral</td>
+          <td>She had wrinkles around her eyes.</td>
+          <td>Descriptive / Aging</td>
+        </tr>
+        <tr>
+          <td>Groove</td>
+          <td>Neutral / Technical</td>
+          <td>The record has tiny grooves that hold the sound.</td>
+          <td>Mechanical</td>
+        </tr>
+        <tr>
+          <td><strong>Furrow</strong></td>
+          <td><strong>Neutral / Literary</strong></td>
+          <td>He furrowed his brow during the difficult question.</td>
+          <td>Descriptive / Visual</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Furrow"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/f0kQIrHxywQ?start=45"
+      title="Furrow Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> to hear how "furrow" is used in both agriculture and expressions.<br>
+      <span class="cn">听第 0:45 左右，了解 “furrow” 在农业和面部表情中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Furrow in the News</h3>
+    <p>
+      Prolonged droughts left deep furrows in the farmland, signaling a tough harvest season.<br>
+      <span class="cn">长期干旱在农田中留下了深深的沟壑，预示着艰难的收成季节。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nationalgeographic.com" target="_blank" class="fancy-link">
+        📰 Read More – National Geographic
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
