@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Clench</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ✊ clench
+      <span class="pronunciation">/klɛntʃ/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cle/clenc/clench__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To close your hands, teeth, or body tightly, especially because of anger or pain.<br>
+    <span class="cn">（尤指因愤怒或疼痛而）紧握、咬紧、绷紧。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> He clenched his fists in frustration.<br>
+      <span class="cn">例句：他懊恼地握紧了拳头。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She clenched her jaw to keep from crying.<br>
+      <span class="cn">例句：她咬紧牙关以控制住哭泣。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Grasp <span class="cn">抓紧</span></li>
+        <li>Squeeze <span class="cn">紧握</span></li>
+        <li>Tighten <span class="cn">收紧</span></li>
+        <li>Clutch <span class="cn">抓住</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Clench" likely comes from Middle English <em>clenchen</em>, related to Old English <em>clencan</em>, meaning “to hold fast or make tight.”<br>
+    <span class="cn">clench 可能源自中古英语 clenchen，与古英语 clencan 有关，意为“紧紧抓住”或“使变紧”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>clencan</em> – to hold tight<br>
+      <span class="cn">古英语 clencan：紧抓</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>clenchen</em> – to fasten tightly<br>
+      <span class="cn">中古英语 clenchen：紧系、紧握</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>clench</em> – to tighten or close firmly<br>
+      <span class="cn">现代英语 clench：紧闭、紧握</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Grasp</td>
+          <td>Neutral</td>
+          <td>She grasped the rope firmly.</td>
+          <td>Firm / Focused</td>
+        </tr>
+        <tr>
+          <td>Clutch</td>
+          <td>Neutral / Emotional</td>
+          <td>The child clutched his mother tightly.</td>
+          <td>Protective / Anxious</td>
+        </tr>
+        <tr>
+          <td><strong>Clench</strong></td>
+          <td><strong>Neutral / Descriptive</strong></td>
+          <td>He clenched his fists in anger.</td>
+          <td>Tense / Intense</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Clench"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/jfZo59tbMRA?start=80"
+      title="Body Language: Clenching Fists"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:20</strong> for discussion of clenching as a body language cue.<br>
+      <span class="cn">听第 1:20 左右，了解“clench”在身体语言中的含义。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Clench in the News</h3>
+    <p>
+      Athletes often clench their jaws during intense moments of focus or pain.<br>
+      <span class="cn">运动员在专注或疼痛的关键时刻常常会咬紧牙关。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
