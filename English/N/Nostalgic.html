@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Nostalgic</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🕰️ nostalgic
+      <span class="pronunciation">/nəˈstældʒɪk/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/n/nos/nosta/nostalgic__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Feeling happy and slightly sad when thinking about the past, especially about a time or place that was happy.<br>
+    <span class="cn">当回忆过去（尤指愉快的时光）时感到快乐又有些忧伤。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Seeing my old school made me feel nostalgic.<br>
+      <span class="cn">例句：看到我以前的学校让我感到怀旧。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He grew nostalgic for his childhood summers by the sea.<br>
+      <span class="cn">例句：他对童年在海边度过的夏天充满怀旧之情。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Sentimental <span class="cn">多愁善感的</span></li>
+        <li>Wistful <span class="cn">惆怅的</span></li>
+        <li>Melancholy <span class="cn">忧郁的</span></li>
+        <li>Yearning <span class="cn">渴望的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Nostalgic" comes from "nostalgia," which was formed from Greek <em>nostos</em> (return home) + <em>algos</em> (pain).<br>
+    <span class="cn">nostalgic 来自单词 nostalgia，该词源自希腊语 nostos（回家）+ algos（痛苦）。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong> <em>nostos + algos</em> – homecoming + pain<br>
+      <span class="cn">希腊语 nostos + algos：回家 + 痛苦</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>nostalgic</em> – longing for the past<br>
+      <span class="cn">现代英语 nostalgic：对过去的怀念或向往</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sentimental</td>
+          <td>Neutral</td>
+          <td>She keeps old letters for sentimental reasons.</td>
+          <td>Emotional</td>
+        </tr>
+        <tr>
+          <td>Wistful</td>
+          <td>Literary</td>
+          <td>He had a wistful smile remembering the past.</td>
+          <td>Longing / Gentle</td>
+        </tr>
+        <tr>
+          <td><strong>Nostalgic</strong></td>
+          <td><strong>Neutral / Literary</strong></td>
+          <td>The smell of cookies made her feel nostalgic.</td>
+          <td>Bittersweet / Reflective</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Nostalgic"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/B8dgcY_1WWg?start=90"
+      title="Exploring Nostalgia in Film"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:30</strong> for a discussion on nostalgic themes in film.<br>
+      <span class="cn">听第 1:30 左右，了解电影中怀旧主题的讨论。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Nostalgic in the News</h3>
+    <p>
+      The new TV series evokes a nostalgic sense of the 1990s, complete with old-school music and fashion.<br>
+      <span class="cn">这部新电视剧唤起了人们对 1990 年代的怀旧感，充满复古音乐和时尚。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com" target="_blank" class="fancy-link">
+        📰 Read More – The Guardian
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
