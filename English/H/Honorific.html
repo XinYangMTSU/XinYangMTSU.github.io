@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Honorific</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🎓 honorific
+      <span class="pronunciation">/ˌɑːnəˈrɪfɪk/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/h/hon/honor/honorific__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun / Adjective<br><span class="cn">词性：名词 / 形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A title or word showing respect, often used when addressing or referring to someone formally.<br>
+    <span class="cn">表示尊敬的称谓或用词，通常用于正式称呼他人。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> “Sir” and “Madam” are common honorifics in English.<br>
+      <span class="cn">例句：“Sir”和“Madam”是英语中常见的尊称。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> In Japanese, honorifics like "-san" are added to names to show respect.<br>
+      <span class="cn">例句：在日语中，像“–san”这样的尊称加在名字后面以示尊敬。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Title <span class="cn">称号</span></li>
+        <li>Salutation <span class="cn">称呼语</span></li>
+        <li>Appellation <span class="cn">称谓</span></li>
+        <li>Courtesy title <span class="cn">礼貌称呼</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Honorific" comes from Latin <em>honorificus</em>, meaning “conveying honor or respect.”<br>
+    <span class="cn">honorific 来自拉丁语 honorificus，意为“表达尊敬的”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>honorificus</em> – respectful, honoring<br>
+      <span class="cn">拉丁语 honorificus：表示尊敬的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>honorific</em> – showing or expressing respect<br>
+      <span class="cn">现代英语 honorific：表示尊重的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Title</td>
+          <td>Neutral</td>
+          <td>Her title is "Dr."</td>
+          <td>Official</td>
+        </tr>
+        <tr>
+          <td>Salutation</td>
+          <td>Formal</td>
+          <td>The letter began with the salutation “Dear Sir.”</td>
+          <td>Polite</td>
+        </tr>
+        <tr>
+          <td><strong>Honorific</strong></td>
+          <td><strong>Formal / Cultural</strong></td>
+          <td>In Korea, honorifics reflect age and social rank.</td>
+          <td>Respectful / Cultural</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Honorific"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/C9LzGmyX3e8?start=30"
+      title="Japanese Honorifics Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to learn about how honorifics work in Japanese culture.<br>
+      <span class="cn">听第 0:30 左右，了解 honorifics 在日本文化中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Honorific in the News</h3>
+    <p>
+      Linguists study how different cultures use honorifics to show social hierarchy and respect.<br>
+      <span class="cn">语言学家研究不同文化如何使用尊称来表达社会等级与尊重。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/culture/article/20201001-why-some-languages-need-honorifics" target="_blank" class="fancy-link">
+        📰 Read More – BBC Culture
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
