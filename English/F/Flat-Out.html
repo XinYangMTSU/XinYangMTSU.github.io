@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Flat-out</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🛑 flat-out
+      <span class="pronunciation">/ˌflæt ˈaʊt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/f/fla/flat_/flat__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adverb / Adjective<br><span class="cn">词性：副词 / 形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Completely or absolutely; in a direct or blunt way; also used to mean doing something at full speed or maximum effort.<br>
+      <span class="cn">完全地；直率地；也指全力以赴地做某事。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She flat-out denied all the accusations.<br>
+      <span class="cn">例句：她完全否认了所有指控。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He was working flat-out to meet the deadline.<br>
+      <span class="cn">例句：他在拼尽全力赶在截止日期前完成工作。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Absolutely <span class="cn">绝对地</span></li>
+        <li>Completely <span class="cn">完全地</span></li>
+        <li>Totally <span class="cn">彻底地</span></li>
+        <li>All-out <span class="cn">全力以赴地</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the phrase <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Flat-out" originated in American English in the early 20th century, originally used to describe cars or people moving at full speed.<br>
+    <span class="cn">flat-out 起源于 20 世纪初的美式英语，最初用来形容车辆或人以最快速度移动。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Phrase Evolution</h3>
+    <p>
+      <strong>Early use:</strong> Full speed or effort<br>
+      <span class="cn">早期用法：全速或全力</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern use:</strong> Completely, bluntly, or intensely<br>
+      <span class="cn">现代用法：彻底地、直率地或极度地</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Phrase</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Absolutely</td>
+          <td>Neutral / Formal</td>
+          <td>She is absolutely certain about her choice.</td>
+          <td>Confident</td>
+        </tr>
+        <tr>
+          <td>All-out</td>
+          <td>Neutral / Informal</td>
+          <td>The team made an all-out effort to win.</td>
+          <td>Energetic</td>
+        </tr>
+        <tr>
+          <td><strong>Flat-out</strong></td>
+          <td><strong>Informal</strong></td>
+          <td>That was a flat-out lie.</td>
+          <td>Direct / emphatic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Phrase "Flat-out"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/RZ5w4rPBTm8?start=40"
+      title="Flat-out Example in Context"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> for an example of someone using "flat-out" in conversation.<br>
+      <span class="cn">听第 0:40 左右，听到 flat-out 在对话中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Flat-out in the News</h3>
+    <p>
+      The company flat-out denied any wrongdoing in its official statement.<br>
+      <span class="cn">该公司在官方声明中坚决否认有任何不当行为。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – The New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
