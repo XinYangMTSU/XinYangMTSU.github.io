@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Revise</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ✏️ revise
+      <span class="pronunciation">/rɪˈvaɪz/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/r/rev/revis/revise__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      To change something in order to improve it, especially a piece of writing, a plan, or knowledge before an exam.<br>
+      <span class="cn">为了改进而修改某物，尤其是文章、计划，或考前复习知识。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She revised her essay after receiving feedback from the teacher.<br>
+      <span class="cn">例句：她在收到老师的反馈后修改了文章。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> You should revise the key concepts before the exam.<br>
+      <span class="cn">例句：你应该在考试前复习一下关键概念。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Edit <span class="cn">编辑</span></li>
+        <li>Amend <span class="cn">修正</span></li>
+        <li>Update <span class="cn">更新</span></li>
+        <li>Review <span class="cn">复习</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Revise" comes from Latin <em>revidēre</em>, meaning “to look at again.”<br>
+    <span class="cn">revise 源自拉丁语 revidēre，意为“再次查看”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>revidēre</em> – to look again<br>
+      <span class="cn">拉丁语 revidēre：再次查看</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>reviser</em> – to look at again<br>
+      <span class="cn">古法语 reviser：再次查看</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>revise</em> – to edit or review<br>
+      <span class="cn">现代英语 revise：修改或复习</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Edit</td>
+          <td>Neutral</td>
+          <td>I edited the report for clarity.</td>
+          <td>Technical / instructional</td>
+        </tr>
+        <tr>
+          <td>Review</td>
+          <td>Neutral</td>
+          <td>I reviewed the notes before the test.</td>
+          <td>Academic</td>
+        </tr>
+        <tr>
+          <td><strong>Revise</strong></td>
+          <td><strong>Neutral / Formal</strong></td>
+          <td>She revised her proposal after the critique.</td>
+          <td>Academic / precise</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Revise"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/0yK6ZClg_Ow?start=45"
+      title="Revise Example"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> to hear the word “revise” used in context.<br>
+      <span class="cn">听第 0:45 左右，了解 revise 在语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Revise in the News</h3>
+    <p>
+      The government decided to revise its economic forecast due to unexpected inflation.<br>
+      <span class="cn">由于意外的通货膨胀，政府决定修订其经济预测。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
