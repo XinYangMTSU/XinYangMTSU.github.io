@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Parkour</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🤸 parkour
+      <span class="pronunciation">/pɑːrˈkʊr/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/par/park_/park__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      A sport or physical discipline in which people move through urban environments by running, jumping, and climbing over obstacles in the most efficient way possible.<br>
+      <span class="cn">一种运动形式，通过奔跑、跳跃和攀爬，尽可能高效地穿越城市障碍。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> He practices parkour by jumping between rooftops and climbing walls.<br>
+      <span class="cn">例句：他通过在屋顶间跳跃和攀爬墙壁练习跑酷。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Parkour athletes train to move with agility, speed, and control.<br>
+      <span class="cn">例句：跑酷运动员训练自己具备灵活性、速度和控制力。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Freerunning <span class="cn">自由奔跑</span></li>
+        <li>Urban acrobatics <span class="cn">城市杂技</span></li>
+        <li>Obstacle running <span class="cn">障碍跑</span></li>
+        <li>Movement training <span class="cn">动作训练</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Parkour" comes from the French word <em>parcours</em>, meaning "course" or "route", and was popularized by David Belle in the late 20th century.<br>
+    <span class="cn">parkour 源自法语 parcours，意为“路线”或“路径”，由大卫·贝尔于 20 世纪末推广。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>French:</strong> <em>parcours</em> – route, journey<br>
+      <span class="cn">法语 parcours：路线，旅程</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern Use:</strong> <em>parkour</em> – efficient movement over obstacles<br>
+      <span class="cn">现代用法 parkour：高效越过障碍的运动形式</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Freerunning</td>
+          <td>Informal</td>
+          <td>He performs flips and tricks while freerunning.</td>
+          <td>Stylized</td>
+        </tr>
+        <tr>
+          <td>Obstacle course</td>
+          <td>Neutral</td>
+          <td>They trained on a military-style obstacle course.</td>
+          <td>Technical</td>
+        </tr>
+        <tr>
+          <td><strong>Parkour</strong></td>
+          <td><strong>Neutral</strong></td>
+          <td>She teaches parkour to beginners at the gym.</td>
+          <td>Modern / action-oriented</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Parkour"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/gy5g33S0Gzo"
+      title="Parkour Compilation"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch the video to see real examples of parkour in action.<br>
+      <span class="cn">观看视频，看看真实的跑酷表演。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Parkour in the News</h3>
+    <p>
+      A new urban park was designed specifically for parkour athletes and enthusiasts.<br>
+      <span class="cn">一个新的城市公园专为跑酷运动员和爱好者设计。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com" target="_blank" class="fancy-link">
+        📰 Read More – The Guardian
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
