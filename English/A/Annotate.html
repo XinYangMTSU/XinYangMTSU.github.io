@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Annotate</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🖊️ annotate
+      <span class="pronunciation">/ˈænəˌteɪt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/a/ann/annot/annotate__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      To add notes to a text, diagram, or piece of information to explain or comment on it.<br>
+      <span class="cn">为文本、图表或信息添加注释或解释。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The students were asked to annotate the poem with their own interpretations.<br>
+      <span class="cn">例句：学生们被要求为这首诗写上自己的理解注释。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Scientists annotated the genetic sequence to identify specific functions.<br>
+      <span class="cn">例句：科学家为基因序列添加注释，以识别特定功能。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Comment <span class="cn">评论</span></li>
+        <li>Explain <span class="cn">解释</span></li>
+        <li>Note <span class="cn">注释</span></li>
+        <li>Highlight <span class="cn">标注</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Annotate" comes from Latin <em>annotatus</em>, past participle of <em>annotare</em>, meaning “to note down.”<br>
+    <span class="cn">annotate 源自拉丁语 annotatus，是 annotare（记下、做笔记）的过去分词。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>annotare</em> – to note, mark<br>
+      <span class="cn">拉丁语 annotare：记下，做标记</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>annotate</em> – to add notes of explanation or comment<br>
+      <span class="cn">现代英语 annotate：添加解释性注释或评论</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Comment</td>
+          <td>Neutral</td>
+          <td>She commented on each paragraph in the margin.</td>
+          <td>General</td>
+        </tr>
+        <tr>
+          <td>Highlight</td>
+          <td>Neutral / Informal</td>
+          <td>I highlighted the important definitions.</td>
+          <td>Visual / supportive</td>
+        </tr>
+        <tr>
+          <td><strong>Annotate</strong></td>
+          <td><strong>Neutral / Formal</strong></td>
+          <td>Please annotate the article for class discussion.</td>
+          <td>Academic / explanatory</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Annotate"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/SZwHjbz8sqs?start=60"
+      title="How to Annotate Text"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:00</strong> to learn how "annotate" is used in academic settings.<br>
+      <span class="cn">听第 1:00 左右，了解 annotate 在学术场景中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Annotate in the News</h3>
+    <p>
+      New AI tools can automatically annotate images and videos to improve search accuracy.<br>
+      <span class="cn">新的人工智能工具可以自动为图像和视频添加注释，以提高搜索准确性。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nature.com" target="_blank" class="fancy-link">
+        📰 Read More – Nature
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
