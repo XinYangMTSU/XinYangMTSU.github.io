@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Supremely</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      👑 supremely
+      <span class="pronunciation">/suːˈpriːmli/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/sup/supre/supremely__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adverb<br><span class="cn">词性：副词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To the highest degree; extremely or exceptionally.<br>
+    <span class="cn">极其，非常；最高程度地。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She was supremely confident in her decision.<br>
+      <span class="cn">例句：她对自己的决定极其自信。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The plan was supremely successful.<br>
+      <span class="cn">例句：这个计划非常成功。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Extremely <span class="cn">极其</span></li>
+        <li>Exceptionally <span class="cn">异常地</span></li>
+        <li>Highly <span class="cn">非常</span></li>
+        <li>Overwhelmingly <span class="cn">压倒性地</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Supremely" comes from the adjective "supreme," which originates from Latin <em>supremus</em>, meaning "highest, most elevated."<br>
+    <span class="cn">supremely 来自形容词 supreme，源自拉丁语 supremus，意为“最高的”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>supremus</em> – highest<br>
+      <span class="cn">拉丁语 supremus：最高的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>sovereyn</em> – superior<br>
+      <span class="cn">中古英语 sovereyn：优越的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>supreme</em> → <em>supremely</em> – to the highest degree<br>
+      <span class="cn">现代英语 supreme → supremely：最高程度地</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Extremely</td>
+          <td>Neutral</td>
+          <td>He was extremely tired after the trip.</td>
+          <td>General</td>
+        </tr>
+        <tr>
+          <td>Exceptionally</td>
+          <td>Formal</td>
+          <td>She performed exceptionally well on the exam.</td>
+          <td>Academic / Professional</td>
+        </tr>
+        <tr>
+          <td><strong>Supremely</strong></td>
+          <td><strong>Formal / Emphatic</strong></td>
+          <td>He was supremely confident in his answer.</td>
+          <td>Elevated / Emphatic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Supremely"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/BMGhts_HKxQ?start=85"
+      title="Supremely Talented Pianist Performance"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:25</strong> for the speaker describing the pianist as "supremely talented."<br>
+      <span class="cn">听 1:25 左右，听到主持人形容钢琴家“才华横溢”。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Supremely in the News</h3>
+    <p>
+      The athlete was described as supremely focused during the championship match.<br>
+      <span class="cn">这位运动员在冠军赛中被形容为专注至极。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com" target="_blank" class="fancy-link">
+        📰 Read More – The Guardian
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
