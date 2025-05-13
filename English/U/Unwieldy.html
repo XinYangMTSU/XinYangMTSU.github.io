@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Unwieldy</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🪜 unwieldy
+      <span class="pronunciation">/ʌnˈwiːldi/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/u/unw/unwie/unwieldy__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Too large, heavy, or complicated to handle easily.<br>
+    <span class="cn">笨重的；难以控制的；难以使用或处理的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The box was so unwieldy that it took two people to move it.<br>
+      <span class="cn">例句：这个箱子太笨重了，需要两个人才能搬动。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The new regulations created an unwieldy legal system.<br>
+      <span class="cn">例句：新规造成了一个难以操作的法律体系。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Bulky <span class="cn">笨重的</span></li>
+        <li>Cumbersome <span class="cn">难处理的</span></li>
+        <li>Awkward <span class="cn">不方便的</span></li>
+        <li>Heavy <span class="cn">沉重的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Unwieldy" comes from the prefix <em>un-</em> (not) and the Old English <em>wieldan</em>, meaning “to handle or control.”<br>
+    <span class="cn">unwieldy 源自前缀 un-（不）和古英语 wieldan，意为“掌控、操作”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>wieldan</em> – to handle, control<br>
+      <span class="cn">古英语 wieldan：掌控、操作</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>unweldy</em> – unmanageable<br>
+      <span class="cn">中古英语 unweldy：难以处理的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>unwieldy</em> – awkward or hard to manage<br>
+      <span class="cn">现代英语 unwieldy：笨重的、难控制的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Unwieldy</td>
+          <td>Neutral</td>
+          <td>The unwieldy machine blocked the hallway.</td>
+          <td>Descriptive / Practical</td>
+        </tr>
+        <tr>
+          <td>Cumbersome</td>
+          <td>Formal</td>
+          <td>The form was too cumbersome to complete quickly.</td>
+          <td>Technical / Bureaucratic</td>
+        </tr>
+        <tr>
+          <td>Awkward</td>
+          <td>Neutral / Informal</td>
+          <td>The tool’s shape made it awkward to use.</td>
+          <td>Everyday / Casual</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Unwieldy"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/g7BDyWfnOCc?start=30"
+      title="Unwieldy Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> for how "unwieldy" is used to describe complicated systems.<br>
+      <span class="cn">听 0:30 左右，了解“unwieldy”如何用于描述复杂系统。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Unwieldy in the News</h3>
+    <p>
+      Experts warn that the current healthcare policy is becoming too unwieldy to administer effectively.<br>
+      <span class="cn">专家警告说，当前的医疗政策正变得过于笨重，难以高效管理。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com/section/health" target="_blank" class="fancy-link">
+        📰 Read More – The New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
