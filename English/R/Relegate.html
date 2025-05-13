@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Relegate</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📉 relegate
+      <span class="pronunciation">/ˈrelɪɡeɪt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/r/rel/releg/relegate__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To assign to a lower position, rank, or less important role.<br>
+    <span class="cn">贬低；降级；把……降到较低地位。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She was relegated to a desk job after the reorganization.<br>
+      <span class="cn">例句：重组后，她被调到文职岗位。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The team was relegated to a lower division after losing the season.<br>
+      <span class="cn">例句：球队赛季失利后降级到了较低级别的联赛。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Demote <span class="cn">降职</span></li>
+        <li>Downgrade <span class="cn">降级</span></li>
+        <li>Assign <span class="cn">指派</span></li>
+        <li>Dismiss <span class="cn">贬退</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Relegate" comes from Latin <em>relegare</em>, meaning “to send away, remove, or banish.”<br>
+    <span class="cn">relegate 源自拉丁语 relegare，意为“送走、移开、放逐”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>relegare</em> – to send away<br>
+      <span class="cn">拉丁语 relegare：送走</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Late Middle English:</strong> <em>relegaten</em> – banish or assign to a lower place<br>
+      <span class="cn">中古英语 relegaten：放逐、降级</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>relegate</em> – to assign a lower status<br>
+      <span class="cn">现代英语 relegate：降级、贬职</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Connotation</th>
+          <th>Example Use</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Relegate</td>
+          <td>Neutral / Negative</td>
+          <td>The player was relegated to the bench.</td>
+          <td>Work / Sports</td>
+        </tr>
+        <tr>
+          <td>Demote</td>
+          <td>Negative</td>
+          <td>He was demoted due to poor performance.</td>
+          <td>Workplace</td>
+        </tr>
+        <tr>
+          <td>Assign</td>
+          <td>Neutral</td>
+          <td>She was assigned a new task.</td>
+          <td>General</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Relegate"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/t2GlP56f3BY?start=40"
+      title="Relegation in Football Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> for how "relegate" is used in a football context.<br>
+      <span class="cn">听第 0:40 左右，了解 "relegate" 在足球中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Relegate in the News</h3>
+    <p>
+      The article criticized the policy that relegates arts education to the background in schools.<br>
+      <span class="cn">这篇文章批评了将艺术教育边缘化的政策。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – The New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
