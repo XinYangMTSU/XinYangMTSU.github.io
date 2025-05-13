@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Sprinting</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🏃‍♂️ sprinting
+      <span class="pronunciation">/ˈsprɪntɪŋ/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/spr/sprin/sprinting__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb (present participle)<br><span class="cn">词性：动词（现在分词）</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Running at full speed over a short distance.<br>
+    <span class="cn">以全速短距离奔跑。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> He was sprinting to catch the bus.<br>
+      <span class="cn">例句：他在全速奔跑赶公交车。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She kept sprinting until she crossed the finish line.<br>
+      <span class="cn">例句：她一直冲刺到冲过终点线。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Dash <span class="cn">冲刺</span></li>
+        <li>Race <span class="cn">赛跑</span></li>
+        <li>Charge <span class="cn">猛冲</span></li>
+        <li>Run fast <span class="cn">快速奔跑</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Sprint" likely comes from the Old Norse word <em>spretta</em>, meaning “to jump up, burst forth.”<br>
+    <span class="cn">sprint 可能源自古诺斯语 spretta，意为“跳起、突然冲出”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old Norse:</strong> <em>spretta</em> – to jump, burst forth<br>
+      <span class="cn">古诺斯语 spretta：跳跃，冲出</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>sprinten</em> – to run fast<br>
+      <span class="cn">中古英语 sprinten：快速跑</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>sprint</em> – to run at top speed<br>
+      <span class="cn">现代英语 sprint：冲刺、极速奔跑</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Speed</th>
+          <th>Example Use</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sprint</td>
+          <td>Very Fast</td>
+          <td>He sprinted the last 100 meters.</td>
+          <td>Short distance / sports</td>
+        </tr>
+        <tr>
+          <td>Run</td>
+          <td>Varies</td>
+          <td>She runs every morning.</td>
+          <td>General activity</td>
+        </tr>
+        <tr>
+          <td>Jog</td>
+          <td>Moderate</td>
+          <td>He jogged around the park.</td>
+          <td>Exercise / casual</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Sprinting"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/nfWlot6h_JM?start=45"
+      title="Olympic Sprinter Highlight"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> for a description of sprinting technique.<br>
+      <span class="cn">听 0:45 左右，了解冲刺技巧的解说。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Sprinting in the News</h3>
+    <p>
+      The athlete broke the national record by sprinting the 100 meters in just 9.8 seconds.<br>
+      <span class="cn">这名运动员以 9.8 秒的成绩冲刺 100 米，打破了全国纪录。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.espn.com" target="_blank" class="fancy-link">
+        📰 Read More – ESPN
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
