@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Jagged</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🪨 jagged
+      <span class="pronunciation">/ˈdʒæɡɪd/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/j/jag/jagge/jagged__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Having rough, sharp points protruding; uneven and irregular in shape or outline.<br>
+    <span class="cn">有锯齿状边缘的；参差不齐的；不规则的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The climbers carefully moved across the jagged rocks.<br>
+      <span class="cn">例句：攀岩者小心翼翼地越过锯齿状的岩石。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He drew a jagged line through the paper.<br>
+      <span class="cn">例句：他在纸上画了一条锯齿状的线。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Ragged <span class="cn">参差的</span></li>
+        <li>Serrated <span class="cn">锯齿状的</span></li>
+        <li>Uneven <span class="cn">不平整的</span></li>
+        <li>Rough <span class="cn">粗糙的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Jagged" comes from the word "jag," meaning a sharp projection or point, which likely originates from Middle English.<br>
+    <span class="cn">jagged 源自“jag”一词，意为尖锐的突出物或尖端，可能起源于中古英语。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle English:</strong> <em>jag</em> – a notch, sharp point<br>
+      <span class="cn">中古英语 jag：缺口，尖点</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>jagged</em> – having sharp, uneven edges<br>
+      <span class="cn">现代英语 jagged：边缘参差不齐、锋利</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Surface Texture</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Jagged</td>
+          <td>Sharp and irregular</td>
+          <td>He cut his hand on the jagged metal.</td>
+          <td>Descriptive / Cautionary</td>
+        </tr>
+        <tr>
+          <td>Rough</td>
+          <td>Uneven</td>
+          <td>The road was rough and full of stones.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Serrated</td>
+          <td>Tooth-like edges</td>
+          <td>The knife had a serrated blade.</td>
+          <td>Technical / Precise</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Jagged"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/0sQf0Pfhz_s?start=30"
+      title="Jagged Mountains and Rocks"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear how "jagged" is used in a nature description.<br>
+      <span class="cn">听第 0:30 左右，了解 “jagged” 在自然描述中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Jagged in the News</h3>
+    <p>
+      The hikers were warned about the jagged cliffs along the trail.<br>
+      <span class="cn">登山者被提醒注意沿途锯齿状的悬崖。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nationalgeographic.com" target="_blank" class="fancy-link">
+        📰 Read More – National Geographic
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
