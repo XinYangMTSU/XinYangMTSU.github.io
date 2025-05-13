@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Obsolete</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🕰️ obsolete
+      <span class="pronunciation">/ˌɑːbsəˈliːt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/o/obs/obsol/obsolete__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>No longer used or no longer useful; out of date.<br>
+    <span class="cn">不再使用的；过时的；淘汰的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> VHS tapes have become obsolete in the age of digital streaming.<br>
+      <span class="cn">例句：在数字流媒体时代，VHS录像带已经变得过时。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Some traditional farming techniques are now considered obsolete.<br>
+      <span class="cn">例句：一些传统农业技术现在被认为已经落伍。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Outdated <span class="cn">过时的</span></li>
+        <li>Extinct <span class="cn">灭绝的；不再使用的</span></li>
+        <li>Old-fashioned <span class="cn">老式的</span></li>
+        <li>Antiquated <span class="cn">陈旧的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Obsolete" comes from Latin <em>obsoletus</em>, meaning "worn out" or "no longer used."<br>
+    <span class="cn">obsolete 来自拉丁语 obsoletus，意为“废弃的、过时的”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>obsoletus</em> – worn out, outdated<br>
+      <span class="cn">拉丁语 obsoletus：破旧的，过时的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>obsolet</em> – fallen into disuse<br>
+      <span class="cn">中古英语 obsolet：不再使用的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>obsolete</em> – no longer in use<br>
+      <span class="cn">现代英语 obsolete：不再使用的；过时的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Degree of Use</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Obsolete</td>
+          <td>Completely out of use</td>
+          <td>The device became obsolete within a few years.</td>
+          <td>Neutral / Technical</td>
+        </tr>
+        <tr>
+          <td>Outdated</td>
+          <td>Still exists but not preferred</td>
+          <td>The data in the report is outdated.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Old-fashioned</td>
+          <td>Still in use but seen as old</td>
+          <td>His views are considered old-fashioned.</td>
+          <td>Casual / Slightly negative</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Obsolete"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/d0lNkRkVY_U?start=70"
+      title="Obsolete Technology Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:10</strong> to hear how "obsolete" is used in context.<br>
+      <span class="cn">听 1:10 左右，了解“obsolete”在语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Obsolete in the News</h3>
+    <p>
+      Some experts warn that certain jobs may become obsolete due to automation.<br>
+      <span class="cn">一些专家警告说，某些工作可能因为自动化而变得过时。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news/technology" target="_blank" class="fancy-link">
+        📰 Read More – BBC Technology News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
