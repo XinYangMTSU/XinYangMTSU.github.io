@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Botany</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌿 botany
+      <span class="pronunciation">/ˈbɑːtəni/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/b/bot/botan/botany__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>The scientific study of plants, including their structure, properties, and biochemical processes.<br>
+    <span class="cn">植物学；对植物的结构、性质和生物化学过程的科学研究。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She studied botany in college and now works in environmental research.<br>
+      <span class="cn">例句：她在大学学习植物学，现在从事环境研究工作。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Botany helps us understand how plants grow and interact with their environment.<br>
+      <span class="cn">例句：植物学帮助我们了解植物如何生长及其与环境的相互作用。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Plant science <span class="cn">植物科学</span></li>
+        <li>Flora study <span class="cn">植物研究</span></li>
+        <li>Vegetation biology <span class="cn">植被生物学</span></li>
+        <li>Phytology <span class="cn">植物学（专业术语）</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Botany" comes from the Greek word <em>botanē</em>, meaning "plant" or "herb."<br>
+    <span class="cn">botany 源自希腊语 botanē，意为“植物”或“草本植物”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong> <em>botanē</em> – plant, herb<br>
+      <span class="cn">希腊语 botanē：植物，草本植物</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Late Latin:</strong> <em>botanicus</em> – of plants<br>
+      <span class="cn">晚期拉丁语 botanicus：植物的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>botany</em> – study of plants<br>
+      <span class="cn">现代英语 botany：植物学</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Focus Area</th>
+          <th>Example Use</th>
+          <th>Discipline</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Botany</td>
+          <td>Scientific study of plants</td>
+          <td>He majored in botany at the university.</td>
+          <td>Biology</td>
+        </tr>
+        <tr>
+          <td>Horticulture</td>
+          <td>Cultivation of plants</td>
+          <td>She works in horticulture designing gardens.</td>
+          <td>Agriculture</td>
+        </tr>
+        <tr>
+          <td>Ecology</td>
+          <td>Interaction between organisms and environments</td>
+          <td>The ecology of the rainforest is complex.</td>
+          <td>Environmental Science</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Botany"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/7zj4YfK23vE?start=60"
+      title="Introduction to Botany"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:00</strong> for the introduction to what botany covers.<br>
+      <span class="cn">听第 1:00 左右，了解植物学涵盖的内容。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Botany in the News</h3>
+    <p>
+      A new study in botany reveals how desert plants adapt to extreme heat.<br>
+      <span class="cn">一项新的植物学研究揭示了沙漠植物如何适应极端高温。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nature.com" target="_blank" class="fancy-link">
+        📰 Read More – Nature Journal
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
