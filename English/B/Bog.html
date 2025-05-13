@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Bog</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🪵 bog
+      <span class="pronunciation">/bɑːɡ/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/b/bog/bog__/bog__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun / Verb<br><span class="cn">词性：名词 / 动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>As a noun:</strong> A wet, spongy area of land, often like a swamp or marsh.<br>
+    <span class="cn">（名词）沼泽地；湿软泥泞的地区。</span></p>
+    <p><strong>As a verb (usually passive, “bogged down”):</strong> To be stuck or slowed down, especially in work or difficulty.<br>
+    <span class="cn">（动词，常用于“bogged down”）陷入困境；被拖慢。</span></p>
+
+    <div class="example">
+      <strong>Example (noun):</strong> The hikers got lost in the bog.<br>
+      <span class="cn">例句（名词）：徒步者在沼泽中迷路了。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example (verb):</strong> We got bogged down in paperwork.<br>
+      <span class="cn">例句（动词）：我们被一堆文书工作拖住了。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Swamp <span class="cn">沼泽</span></li>
+        <li>Marsh <span class="cn">湿地</span></li>
+        <li>Mire <span class="cn">泥潭；困境</span></li>
+        <li>Quagmire <span class="cn">泥泞地；困境</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Bog" likely comes from the Irish or Scottish Gaelic word <em>bogach</em>, meaning "soft" or "boggy ground."<br>
+    <span class="cn">bog 可能源自爱尔兰语或苏格兰盖尔语 bogach，意为“湿软的地面”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Gaelic:</strong> <em>bogach</em> – soft, marshy ground<br>
+      <span class="cn">盖尔语 bogach：松软的泥地</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>bog</em> – wetland or figurative trouble<br>
+      <span class="cn">现代英语 bog：沼泽地或比喻上的困境</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Type</th>
+          <th>Example Use</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bog</td>
+          <td>Noun / Verb</td>
+          <td>The car got stuck in the bog.</td>
+          <td>Nature / Workload</td>
+        </tr>
+        <tr>
+          <td>Swamp</td>
+          <td>Noun</td>
+          <td>The area was surrounded by swamp.</td>
+          <td>Nature</td>
+        </tr>
+        <tr>
+          <td>Quagmire</td>
+          <td>Noun</td>
+          <td>They were in a political quagmire.</td>
+          <td>Figurative / Formal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Bog"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YhWIo-DmTTg?start=40"
+      title="What is a Bog?"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> to hear a natural explanation of what a bog is.<br>
+      <span class="cn">听 0:40 左右，了解“bog”在自然环境中的定义。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Bog in the News</h3>
+    <p>
+      Climate scientists are studying peat bogs as a major source of carbon storage.<br>
+      <span class="cn">气候科学家正在研究泥炭沼泽作为碳储存的重要来源。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nationalgeographic.com/environment" target="_blank" class="fancy-link">
+        📰 Read More – National Geographic
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
