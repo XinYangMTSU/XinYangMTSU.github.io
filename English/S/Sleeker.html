@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Sleeker</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ✨ sleeker
+      <span class="pronunciation">/ˈsliːkər/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/sle/sleek/sleek__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective (comparative form of "sleek")<br><span class="cn">词性：形容词（sleek 的比较级）</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>More smooth, shiny, stylish, or elegant in appearance or design.<br>
+    <span class="cn">更加光滑的，更加时尚的，更加优雅的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The new phone design is sleeker and more compact.<br>
+      <span class="cn">例句：新款手机的设计更加流畅紧凑。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Her hairstyle looked sleeker after using the conditioner.<br>
+      <span class="cn">例句：用了护发素后，她的发型看起来更顺滑了。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Glossier <span class="cn">更有光泽的</span></li>
+        <li>Smoother <span class="cn">更光滑的</span></li>
+        <li>More stylish <span class="cn">更时尚的</span></li>
+        <li>More elegant <span class="cn">更优雅的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Sleeker" is the comparative form of "sleek," which likely comes from Middle English <em>sliken</em>, meaning “to make smooth or glossy.”<br>
+    <span class="cn">sleeker 是 sleek 的比较级，sleek 源自中古英语 sliken，意为“使光滑、有光泽”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle English:</strong> <em>sliken</em> – to make smooth<br>
+      <span class="cn">中古英语 sliken：使光滑</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>sleek</em> – smooth and elegant<br>
+      <span class="cn">现代英语 sleek：光滑而优雅</span><br>
+      <strong>sleeker</strong> – more smooth, stylish, or modern<br>
+      <span class="cn">sleeker：更加光滑、时尚或现代</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Comparative</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sleek</td>
+          <td>Sleeker</td>
+          <td>This car is sleek and efficient.</td>
+          <td>Modern / Polished</td>
+        </tr>
+        <tr>
+          <td>Glossy</td>
+          <td>Glossier</td>
+          <td>The magazine has a glossy cover.</td>
+          <td>Visual / Shiny</td>
+        </tr>
+        <tr>
+          <td>Stylish</td>
+          <td>More stylish</td>
+          <td>That outfit is more stylish than mine.</td>
+          <td>Fashion / Aesthetic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Sleeker"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/Z1BCujX3pw8?start=95"
+      title="Sleeker Car Designs Review"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:35</strong> for a description of a "sleeker" model.<br>
+      <span class="cn">听 1:35 左右，了解 “sleeker” 车型的描述。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Sleeker in the News</h3>
+    <p>
+      Tech companies are racing to develop sleeker, more efficient devices for modern users.<br>
+      <span class="cn">科技公司正在竞相开发更时尚、更高效的设备，以满足现代用户的需求。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theverge.com" target="_blank" class="fancy-link">
+        📰 Read More – The Verge
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
