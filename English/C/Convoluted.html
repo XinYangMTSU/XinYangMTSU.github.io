@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Convoluted</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌀 convoluted
+      <span class="pronunciation">/ˈkɑːnvəˌluːtɪd/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/con/convo/convoluted__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Extremely complex and difficult to follow; twisted or tangled in structure or reasoning.<br>
+    <span class="cn">复杂的，费解的；（结构或逻辑）盘绕的、错综复杂的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The explanation was so convoluted that no one understood it.<br>
+      <span class="cn">例句：解释过于复杂，以至于没人能听懂。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The movie has a convoluted plot full of twists and surprises.<br>
+      <span class="cn">例句：这部电影的情节错综复杂，充满了转折和惊喜。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Complicated <span class="cn">复杂的</span></li>
+        <li>Twisted <span class="cn">扭曲的</span></li>
+        <li>Intricate <span class="cn">错综的</span></li>
+        <li>Confusing <span class="cn">令人困惑的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Convoluted" comes from Latin <em>convolutus</em>, the past participle of <em>convolvere</em>, meaning “to roll together.”<br>
+    <span class="cn">convoluted 源自拉丁语 convolutus，是 convolvere（卷在一起）的过去分词，意指“盘绕在一起”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>convolutus</em> – rolled together<br>
+      <span class="cn">拉丁语 convolutus：缠绕在一起</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>English:</strong> <em>convoluted</em> – twisted; complex or difficult<br>
+      <span class="cn">英语 convoluted：盘绕的；难理解的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Complicated</td>
+          <td>Neutral</td>
+          <td>The instructions were too complicated.</td>
+          <td>Everyday / Clear</td>
+        </tr>
+        <tr>
+          <td>Intricate</td>
+          <td>Formal</td>
+          <td>The design features intricate patterns.</td>
+          <td>Detailed / Elegant</td>
+        </tr>
+        <tr>
+          <td><strong>Convoluted</strong></td>
+          <td><strong>Neutral / Negative</strong></td>
+          <td>His reasoning was so convoluted it lost clarity.</td>
+          <td>Critical / Descriptive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Convoluted"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/U3pZGJfrr-U?start=45"
+      title="Explaining Convoluted Plots"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> for how "convoluted" is used to describe overly complex storytelling.<br>
+      <span class="cn">听第 0:45 左右，了解“convoluted”如何用于描述过于复杂的故事结构。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Convoluted in the News</h3>
+    <p>
+      Critics argue that the new policy is based on a convoluted set of rules that confuse rather than clarify.<br>
+      <span class="cn">批评者认为，这项新政策基于一套令人困惑而非清晰的复杂规则。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com" target="_blank" class="fancy-link">
+        📰 Read More – The Guardian
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
