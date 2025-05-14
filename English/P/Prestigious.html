@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Prestigious</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🎓 prestigious
+      <span class="pronunciation">/preˈstɪdʒəs/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pre/prest/prestigious__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Respected and admired because of high status, quality, or achievement.<br>
+    <span class="cn">因地位高、质量好或成就卓越而受人尊敬和仰慕的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She graduated from a prestigious university.<br>
+      <span class="cn">例句：她毕业于一所享有盛誉的大学。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> It’s one of the most prestigious awards in the scientific community.<br>
+      <span class="cn">例句：这是科学界最有声望的奖项之一。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Renowned <span class="cn">著名的</span></li>
+        <li>Distinguished <span class="cn">卓越的</span></li>
+        <li>Esteemed <span class="cn">受尊敬的</span></li>
+        <li>Celebrated <span class="cn">知名的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Prestigious" comes from Latin <em>praestigiae</em> meaning “illusion” or “deception”; over time, its meaning shifted to refer to impressive or respected status.<br>
+    <span class="cn">prestigious 来自拉丁语 praestigiae，原意为“幻术”或“欺骗”，后来演变为“令人印象深刻的”或“受尊敬的”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>praestigiae</em> – illusion, trick<br>
+      <span class="cn">拉丁语 praestigiae：幻术、把戏</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>French:</strong> <em>prestigieux</em> – dazzling, impressive<br>
+      <span class="cn">法语 prestigieux：令人印象深刻的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>prestigious</em> – honored, respected<br>
+      <span class="cn">现代英语 prestigious：受尊敬、有声望的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Renowned</td>
+          <td>Formal</td>
+          <td>A renowned scientist gave the lecture.</td>
+          <td>Respectful</td>
+        </tr>
+        <tr>
+          <td>Distinguished</td>
+          <td>Formal</td>
+          <td>He had a long and distinguished career.</td>
+          <td>Honoring / Professional</td>
+        </tr>
+        <tr>
+          <td><strong>Prestigious</strong></td>
+          <td><strong>Formal / Admiring</strong></td>
+          <td>They were nominated for a prestigious prize.</td>
+          <td>Elite / Admiring</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Prestigious"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/0LgMPtqvDjA?start=45"
+      title="Prestigious Institutions Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> for how people describe prestigious universities.<br>
+      <span class="cn">听第 0:45 左右，了解人们如何形容“prestigious”大学。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Prestigious in the News</h3>
+    <p>
+      A prestigious fellowship was awarded to the young researcher for her groundbreaking work in renewable energy.<br>
+      <span class="cn">这位年轻研究者因其在可再生能源方面的突破性工作获得了一项极具声望的奖学金。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nature.com" target="_blank" class="fancy-link">
+        📰 Read More – Nature Journal
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
