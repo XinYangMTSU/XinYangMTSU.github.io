@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Restraint</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ✋ restraint
+      <span class="pronunciation">/rɪˈstreɪnt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/r/res/restraint/restraint__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>The act of controlling your emotions or actions; a limitation or condition that keeps someone or something under control.<br>
+    <span class="cn">克制；限制；控制情绪或行为的行为或条件。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> He showed admirable restraint by not responding to the insults.<br>
+      <span class="cn">例句：他面对侮辱仍能保持克制，令人敬佩。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The government imposed restraints on public gatherings.<br>
+      <span class="cn">例句：政府对公众集会实施了限制。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Control <span class="cn">控制</span></li>
+        <li>Self-discipline <span class="cn">自律</span></li>
+        <li>Limitation <span class="cn">限制</span></li>
+        <li>Suppression <span class="cn">压抑</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Restraint" comes from Old French <em>restreinte</em>, from Latin <em>restringere</em>, meaning "to bind fast or hold back".<br>
+    <span class="cn">“restraint” 来自古法语 restreinte，源于拉丁语 restringere，意为“紧束，抑制”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>restringere</em> – to bind or limit<br>
+      <span class="cn">拉丁语 restringere：捆绑或限制</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>restreinte</em> – limitation<br>
+      <span class="cn">古法语 restreinte：限制</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>restraint</em> – act of holding back<br>
+      <span class="cn">现代英语 restraint：克制、限制</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Usage</th>
+          <th>Example Use</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Restraint</td>
+          <td>Formal / Emotional</td>
+          <td>She spoke with restraint about the tragedy.</td>
+          <td>Behavior / Law</td>
+        </tr>
+        <tr>
+          <td>Control</td>
+          <td>General</td>
+          <td>He has good control over his temper.</td>
+          <td>Personal / Situational</td>
+        </tr>
+        <tr>
+          <td>Suppression</td>
+          <td>Strong / Negative</td>
+          <td>The suppression of protests drew criticism.</td>
+          <td>Political / Psychological</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Restraint"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/xK9Yc6mTNzQ?start=50"
+      title="Moments of Restraint in Leadership"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch around <strong>0:50</strong> to hear how restraint is discussed in leadership.<br>
+      <span class="cn">观看第 0:50 左右，了解“restraint”在领导行为中的应用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Restraint in the News</h3>
+    <p>
+      Experts urge restraint in the use of military force in the region.<br>
+      <span class="cn">专家呼吁在该地区使用军事力量时应保持克制。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.reuters.com" target="_blank" class="fancy-link">
+        📰 Read More – Reuters
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
