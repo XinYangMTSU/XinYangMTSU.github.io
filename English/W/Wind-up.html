@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Wind Up</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔄 wind up
+      <span class="pronunciation">/waɪnd ʌp/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/w/win/wind_/wind_up__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Phrasal Verb<br><span class="cn">词性：动词短语</span></p>
+
+    <h3>📖 Meanings:</h3>
+    <p><strong>1. To end up in a situation, often unexpectedly</strong><br>
+    <span class="cn">最终处于（常出人意料的）某种状态或境地</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> He wound up in New York without a job or a place to stay.<br>
+      <span class="cn">例句：他最后流落到纽约，没有工作也没有住处。</span>
+    </div>
+
+    <p><strong>2. To finish something</strong><br>
+    <span class="cn">结束某事</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Let’s wind up the meeting and go to lunch.<br>
+      <span class="cn">例句：我们把会议结束，然后去吃午饭吧。</span>
+    </div>
+
+    <p><strong>3. (Informal) To annoy or tease someone (British English)</strong><br>
+    <span class="cn">（英式英语，非正式）戏弄或惹恼某人</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Are you trying to wind me up?<br>
+      <span class="cn">例句：你是想气我吗？</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Related Expressions</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>End up <span class="cn">最终成为</span></li>
+        <li>Finish off <span class="cn">完成，结束</span></li>
+        <li>Mess with (for teasing) <span class="cn">戏弄，耍人</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="word-box">
+    <h3>🔍 Etymology</h3>
+    <p><span style="font-size: 2rem;">📚</span> Originally referred to turning a key to tighten a spring (like winding up a clock or toy). Over time, it gained metaphorical meanings related to **concluding** or **leading to an outcome**.<br>
+    <span class="cn">最初指的是用钥匙拧紧发条（比如钟表或玩具），后来引申为“结束”或“导致某种结果”。</span></p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison with Similar Phrases</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Phrase</th>
+          <th>Meaning</th>
+          <th>Example</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Wind up</td>
+          <td>End up / finish / tease</td>
+          <td>We wound up getting lost.</td>
+          <td>Versatile</td>
+        </tr>
+        <tr>
+          <td>End up</td>
+          <td>Eventually be in a situation</td>
+          <td>She ended up staying late.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Wrap up</td>
+          <td>Conclude (something)</td>
+          <td>Let’s wrap up the discussion.</td>
+          <td>Professional / Formal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – "Wind Up" in Use</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/rYPv6ZzHldk?start=45"
+      title="Wind Up Phrase in Conversation"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch around <strong>0:45</strong> to hear “wind up” used in a real conversation.<br>
+      <span class="cn">观看第 0:45 秒，了解 “wind up” 在实际对话中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Wind Up in the News</h3>
+    <p>
+      Many small businesses wound up operations during the pandemic due to financial strain.<br>
+      <span class="cn">许多小企业因财务困难在疫情期间关闭运营。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
