@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Thump</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      👊 thump
+      <span class="pronunciation">/θʌmp/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/t/thu/thump/thump__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun / Verb<br><span class="cn">词性：名词 / 动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>As a verb:</strong> To hit something with a heavy dull sound.<br>
+    <span class="cn">动词：用沉闷的声音重击某物。</span></p>
+    <p><strong>As a noun:</strong> A heavy dull sound made by or as if by a blow.<br>
+    <span class="cn">名词：由重击发出的沉闷声。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> He thumped the table with his fist.<br>
+      <span class="cn">例句：他用拳头猛击桌子。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> I heard a loud thump from upstairs.<br>
+      <span class="cn">例句：我听到楼上传来一声巨响。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Pound <span class="cn">猛击</span></li>
+        <li>Bang <span class="cn">砰的一声</span></li>
+        <li>Hit <span class="cn">打</span></li>
+        <li>Knock <span class="cn">敲击</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Thump" is of imitative origin, echoing the sound of a dull blow or heavy fall.<br>
+    <span class="cn">thump 是拟声词，模仿沉重打击或坠落的声音。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Origin:</strong> Imitative of a heavy, dull sound<br>
+      <span class="cn">词源：模仿沉重、闷响的声音</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> – <em>thumpen</em> (likely influenced by sound)<br>
+      <span class="cn">中古英语：可能由声音影响而形成</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>thump</em> – a dull heavy hit or noise<br>
+      <span class="cn">现代英语 thump：沉重的打击或声音</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pound</td>
+          <td>Neutral</td>
+          <td>He pounded on the door with both fists.</td>
+          <td>Forceful</td>
+        </tr>
+        <tr>
+          <td>Bang</td>
+          <td>Casual</td>
+          <td>She banged the cupboard shut.</td>
+          <td>Loud / Sudden</td>
+        </tr>
+        <tr>
+          <td><strong>Thump</strong></td>
+          <td><strong>Neutral</strong></td>
+          <td>The book fell to the floor with a thump.</td>
+          <td>Heavy / Impactful</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Thump"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/Lg1G3A-VdiY?start=35"
+      title="Funny Thump Sound Effects Compilation"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:35</strong> for different comedic uses of “thump.”<br>
+      <span class="cn">听第 0:35 左右，欣赏“thump”在喜剧中的多种使用方式。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Thump in the News</h3>
+    <p>
+      The basketball hit the court with a loud thump as the buzzer sounded.<br>
+      <span class="cn">随着哨声响起，篮球砰地一声落在地板上。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.espn.com" target="_blank" class="fancy-link">
+        📰 Read More – ESPN
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
