@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Fleen</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      👾 fleen
+      <span class="pronunciation">/fliːn/</span>
+      <button class="audio-button" onclick="speak('fleen')">🔊 Play</button>
+    </h2>
+   
+    <p><strong>Part of speech:</strong> Noun (fictional)<br><span class="cn">词性：名词（虚构）</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>“Fleen” is a fictional or imaginative term that may refer to a creature, alien species, or whimsical concept often used in cartoons, fantasy worlds, or science fiction.<br>
+    <span class="cn">“Fleen” 是一个虚构的词，可能指代一种生物、外星种族，或幻想/幽默世界中的概念。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The fleens invaded from the marshy moons of Glorkon 7.<br>
+      <span class="cn">例句：Fleen 们从 Glorkon 7 的沼泽月球入侵了。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Each fleen can shape-shift depending on the color of its environment.<br>
+      <span class="cn">例句：每只 Fleen 都能根据环境颜色改变形态。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧪 Origin & Use</h3>
+    <p><span style="font-size: 2rem;">🧬</span> The word “fleen” does not originate from traditional English. It is often used in playful or creative settings—such as children's media, sci-fi stories, or internet memes—to refer to bizarre or otherworldly beings.<br>
+    <span class="cn">“Fleen” 不是标准英语词汇，通常出现在儿童媒体、科幻故事或网络幽默中，用于描述怪异或异世界的存在。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Creative Usage</h3>
+    <p>
+      “Fleen” is sometimes found in parody or whimsical contexts, representing nonsense or fun alien terms. It may evoke similar invented terms like "blorb," "zorp," or "glork." <br>
+      <span class="cn">“Fleen” 有时用于滑稽或奇幻想象中，与 “blorb”、“zorp” 或 “glork” 等虚构词相似，用于娱乐和创意表达。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison – Other Nonsense/Fictional Words</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Type</th>
+          <th>Common Use</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fleen</td>
+          <td>Fictional Noun</td>
+          <td>Alien/Creature</td>
+          <td>The fleen snuck into the cargo bay.</td>
+        </tr>
+        <tr>
+          <td>Zorp</td>
+          <td>Made-up Verb</td>
+          <td>Alien action</td>
+          <td>They zorpped the spaceship into warp.</td>
+        </tr>
+        <tr>
+          <td>Glork</td>
+          <td>Noun/Verb</td>
+          <td>Comedic sci-fi</td>
+          <td>He glorked a bowl of space noodles.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Fleen in Media</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Fleen Encounter – Animated Short"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch the animated example above to see how a fleen might be portrayed.<br>
+      <span class="cn">观看上方动画片段，了解 fleen 的想象形象。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Fleen in Pop Culture</h3>
+    <p>
+      Though not officially defined, “fleen” has appeared in indie games and internet fiction as a placeholder for unknown alien life or silly monsters.<br>
+      <span class="cn">虽然没有官方定义，但 “fleen” 常在独立游戏或网络小说中出现，作为未知外星生物或搞怪怪兽的代表。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://en.wikipedia.org/wiki/Fictional_creatures" target="_blank" class="fancy-link">
+        🧠 Explore More – Fictional Creature List
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
