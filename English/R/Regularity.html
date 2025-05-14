@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Regularity</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📏 regularity
+      <span class="pronunciation">/ˌreɡjəˈlærəti/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/r/reg/regul/regularity__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>The quality or state of being consistent or occurring at fixed intervals; orderliness or uniformity.<br>
+    <span class="cn">规律性；规则性；有规律的状态。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She exercises with great regularity every morning.<br>
+      <span class="cn">例句：她每天早晨都非常规律地锻炼。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The pattern shows a clear regularity in spacing.<br>
+      <span class="cn">例句：这个图案在间距上显示出明显的规律性。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Consistency <span class="cn">一致性</span></li>
+        <li>Routine <span class="cn">常规</span></li>
+        <li>Orderliness <span class="cn">有序</span></li>
+        <li>Uniformity <span class="cn">统一性</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Regularity" comes from the Latin root <em>regula</em>, meaning "rule" or "straight stick", which also gives us the word “regulate.”<br>
+    <span class="cn">regularity 源自拉丁语 regula，意为“规则”或“直尺”，与 regulate（调节）同源。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>regula</em> – rule<br>
+      <span class="cn">拉丁语 regula：规则</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>regularité</em> – conformity to rule<br>
+      <span class="cn">古法语 regularité：遵守规则</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>regularity</em> – consistency, order<br>
+      <span class="cn">现代英语 regularity：规律性、一致性</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Connotation</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Regularity</td>
+          <td>Positive / Neutral</td>
+          <td>There is regularity in the sun’s rising and setting.</td>
+          <td>Scientific / Observational</td>
+        </tr>
+        <tr>
+          <td>Consistency</td>
+          <td>Positive</td>
+          <td>Consistency in training leads to improvement.</td>
+          <td>Motivational</td>
+        </tr>
+        <tr>
+          <td>Routine</td>
+          <td>Neutral / Slightly Negative</td>
+          <td>He followed a boring daily routine.</td>
+          <td>Descriptive / Informal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Regularity"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/3uBcq1x7P34?start=45"
+      title="Regularity in Nature – Patterns and Predictability"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> for a discussion of regularity in patterns and nature.<br>
+      <span class="cn">听第 0:45 左右，了解“regularity”在自然模式中的应用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Regularity in the News</h3>
+    <p>
+      Scientists emphasize the importance of sleep regularity in maintaining long-term health.<br>
+      <span class="cn">科学家强调睡眠规律性对长期健康的重要性。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.scientificamerican.com" target="_blank" class="fancy-link">
+        📰 Read More – Scientific American
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
