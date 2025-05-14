@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Whim</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🎈 whim
+      <span class="pronunciation">/wɪm/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/w/whi/whim_/whim__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A sudden and impulsive idea, desire, or change of mind, often without serious thought.<br>
+    <span class="cn">突发奇想；一时的念头；心血来潮。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> He quit his job on a whim and moved to the countryside.<br>
+      <span class="cn">例句：他一时兴起辞了工作，搬到了乡下。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She bought the expensive necklace on a whim, even though she didn’t need it.<br>
+      <span class="cn">例句：她一时冲动买下了那条昂贵的项链，尽管并不需要它。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Impulse <span class="cn">冲动</span></li>
+        <li>Fancy <span class="cn">幻想</span></li>
+        <li>Caprice <span class="cn">反复无常</span></li>
+        <li>Notion <span class="cn">念头</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> The word “whim” is likely a shortened form of “whim-wham,” an old term for a fanciful or odd idea. It has been used since the 17th century to describe sudden, whimsical notions.<br>
+    <span class="cn">“whim” 可能来自旧词 “whim-wham”，意指奇思妙想或古怪的想法。自17世纪起就被用来指代突如其来的念头。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Early English:</strong> <em>whim-wham</em> – odd fancy<br>
+      <span class="cn">早期英语 whim-wham：奇怪的想法</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>whim</em> – sudden, whimsical desire<br>
+      <span class="cn">现代英语 whim：一时的冲动或奇想</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Impulse</td>
+          <td>Neutral</td>
+          <td>She acted on impulse and booked the trip.</td>
+          <td>Quick / Unplanned</td>
+        </tr>
+        <tr>
+          <td>Caprice</td>
+          <td>Formal</td>
+          <td>His actions were governed by caprice, not logic.</td>
+          <td>Unpredictable / Emotional</td>
+        </tr>
+        <tr>
+          <td><strong>Whim</strong></td>
+          <td><strong>Neutral / Playful</strong></td>
+          <td>They took a road trip on a whim.</td>
+          <td>Light / Spontaneous</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Whim"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/vMzOeMdlj38?start=60"
+      title="Understanding Impulse & Whim in Decision-Making"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:00</strong> to hear how "whim" is used to describe spontaneous choices.<br>
+      <span class="cn">听第 1:00 左右，了解 “whim” 如何用于描述即兴的决定。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Whim in the News</h3>
+    <p>
+      The CEO emphasized that major decisions can’t be made on a whim—they must be data-driven and strategic.<br>
+      <span class="cn">CEO 强调重大决策不能凭一时冲动，而应基于数据并具备战略性。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.forbes.com" target="_blank" class="fancy-link">
+        📰 Read More – Forbes
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
