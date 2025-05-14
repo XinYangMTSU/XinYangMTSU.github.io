@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Brittle</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧊 brittle
+      <span class="pronunciation">/ˈbrɪtl/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/b/bri/britt/brittle__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Hard but easily broken or cracked; not flexible or durable.<br>
+    <span class="cn">坚硬但容易碎裂的；不灵活或不耐用的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The cookies were too brittle and crumbled in my hands.<br>
+      <span class="cn">例句：这些饼干太脆了，在我手里就碎了。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Her voice sounded brittle with tension.<br>
+      <span class="cn">例句：她的声音因紧张而显得脆弱。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Fragile <span class="cn">易碎的</span></li>
+        <li>Breakable <span class="cn">易破的</span></li>
+        <li>Delicate <span class="cn">脆弱的</span></li>
+        <li>Crisp <span class="cn">脆的（用于食物）</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Brittle" comes from Old English <em>brytel</em>, meaning “easily broken,” related to the word “break.”<br>
+    <span class="cn">brittle 源自古英语 brytel，意为“易碎的”，与 break（打碎）有关。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>brytel</em> – easily broken<br>
+      <span class="cn">古英语 brytel：容易碎裂的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>brittel</em> – fragile<br>
+      <span class="cn">中古英语 brittel：易碎的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>brittle</em> – hard but easily broken<br>
+      <span class="cn">现代英语 brittle：坚硬但容易碎裂</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fragile</td>
+          <td>Neutral / Formal</td>
+          <td>This glass is fragile—handle it with care.</td>
+          <td>Warning / Sensitive</td>
+        </tr>
+        <tr>
+          <td>Delicate</td>
+          <td>Neutral</td>
+          <td>Her skin is very delicate.</td>
+          <td>Gentle / Cautious</td>
+        </tr>
+        <tr>
+          <td><strong>Brittle</strong></td>
+          <td><strong>Neutral</strong></td>
+          <td>The brittle plastic cracked under pressure.</td>
+          <td>Technical / Descriptive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Brittle"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/eqZam9hFcyE?start=40"
+      title="Why Glass is Brittle"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> to hear how “brittle” is used to describe glass properties.<br>
+      <span class="cn">听第 0:40 左右，了解“brittle”如何用于描述玻璃的特性。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Brittle in the News</h3>
+    <p>
+      Scientists are developing new materials that are both strong and less brittle than traditional glass.<br>
+      <span class="cn">科学家正在研发比传统玻璃更坚固且不易碎的新材料。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.scientificamerican.com" target="_blank" class="fancy-link">
+        📰 Read More – Scientific American
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
