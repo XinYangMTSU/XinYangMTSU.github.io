@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Fraggle</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🎭 Fraggle
+      <span class="pronunciation">/ˈfræɡəl/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.myexampleaudio.com/audio/fraggle.mp3"></audio> <!-- Replace with actual source if needed -->
+
+    <p><strong>Part of speech:</strong> Proper Noun<br><span class="cn">词性：专有名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A <strong>Fraggle</strong> is one of the main characters in the children’s television series <em>Fraggle Rock</em>, created by Jim Henson. Fraggles are colorful, curious creatures who live in a magical underground world and explore themes of friendship, cooperation, and diversity.<br>
+    <span class="cn">Fraggle 是由吉姆·汉森创作的儿童电视剧《Fraggle Rock》中的主角之一。这些色彩鲜艳、好奇的生物生活在一个神奇的地下世界，探讨友情、合作和多样性等主题。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Gobo is one of the most adventurous Fraggles in Fraggle Rock.<br>
+      <span class="cn">例句：Gobo 是《Fraggle Rock》中最具冒险精神的 Fraggle 之一。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The Fraggles sang songs to express their emotions and resolve conflicts.<br>
+      <span class="cn">例句：Fraggles 用歌声表达情感并解决冲突。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Series Background</h3>
+    <p><span style="font-size: 2rem;">📺</span> <strong>Fraggle Rock</strong> premiered in 1983 as a puppet-based TV show that aimed to entertain and teach important social lessons through musical storytelling and imaginative world-building.<br>
+    <span class="cn">《Fraggle Rock》首播于1983年，是一部以木偶表演为特色的电视剧，通过音乐和奇幻的世界观传达重要的社会教育理念。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Cultural Impact</h3>
+    <p>
+      Fraggles became symbols of joy, community, and curiosity. The show emphasized harmony between different communities like the Fraggles, Doozers, and Gorgs.<br>
+      <span class="cn">Fraggle 成为了快乐、社群和好奇心的象征。该剧强调 Fraggles、Doozers 和 Gorgs 等不同群体之间的和谐共处。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison – Puppet-Based Characters</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Character</th>
+          <th>Show</th>
+          <th>Key Theme</th>
+          <th>Audience</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fraggle</td>
+          <td>Fraggle Rock</td>
+          <td>Harmony & Exploration</td>
+          <td>Children</td>
+        </tr>
+        <tr>
+          <td>Kermit the Frog</td>
+          <td>The Muppet Show</td>
+          <td>Humor & Entertainment</td>
+          <td>Family</td>
+        </tr>
+        <tr>
+          <td>Big Bird</td>
+          <td>Sesame Street</td>
+          <td>Learning & Friendship</td>
+          <td>Preschool</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Meet the Fraggles</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/ldP6eHkD4fU?start=15"
+      title="Fraggle Rock Theme Song"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">🎵</span> Watch around <strong>0:15</strong> for the iconic introduction to the Fraggle world.<br>
+      <span class="cn">观看第 0:15 秒，感受 Fraggle 世界的经典开场。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Fraggle in the News</h3>
+    <p>
+      “Fraggle Rock: Back to the Rock,” a reboot of the original show, premiered on Apple TV+ in 2022, bringing Fraggles to a new generation.<br>
+      <span class="cn">《Fraggle Rock：回归岩石》，作为原剧的重启版，于2022年在 Apple TV+ 首播，把 Fraggles 带给新一代观众。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.appletv.com/show/fraggle-rock" target="_blank" class="fancy-link">
+        🎬 Watch Now – Fraggle Rock on Apple TV+
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
