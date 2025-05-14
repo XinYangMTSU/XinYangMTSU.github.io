@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Accolade</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🏅 accolade
+      <span class="pronunciation">/ˈækəleɪd/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/a/acc/accol/accolade__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>An award or expression of praise or approval.<br>
+    <span class="cn">奖赏；赞扬；荣誉。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She received the highest accolade for her contribution to science.<br>
+      <span class="cn">例句：她因对科学的贡献而获得最高荣誉。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The novel won critical accolades across the globe.<br>
+      <span class="cn">例句：这部小说在全球范围内赢得了评论界的高度评价。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Award <span class="cn">奖项</span></li>
+        <li>Honor <span class="cn">荣誉</span></li>
+        <li>Praise <span class="cn">称赞</span></li>
+        <li>Tribute <span class="cn">致敬</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Accolade" comes from the Latin word <em>collum</em> meaning "neck", referring to the ceremonial act of touching a knight’s shoulder with a sword during knighting.<br>
+    <span class="cn">accolade 源自拉丁语 collum（脖子），指的是封爵仪式中用剑轻触肩膀的动作，象征表彰。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>collum</em> – neck<br>
+      <span class="cn">拉丁语 collum：脖子</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>accoler</em> – to embrace<br>
+      <span class="cn">古法语 accoler：拥抱</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>accolade</em> – honor, award<br>
+      <span class="cn">现代英语 accolade：赞誉、荣誉</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Honor</td>
+          <td>Neutral / Formal</td>
+          <td>She was honored with a lifetime achievement award.</td>
+          <td>Respectful / Celebratory</td>
+        </tr>
+        <tr>
+          <td>Praise</td>
+          <td>Neutral</td>
+          <td>He received praise for his work ethic.</td>
+          <td>Positive / Encouraging</td>
+        </tr>
+        <tr>
+          <td><strong>Accolade</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>The film received the highest accolade at the festival.</td>
+          <td>Prestigious / Ceremonial</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Accolade"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/dKkNSEZt9gk?start=75"
+      title="Accolades in Award Ceremonies"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:15</strong> to hear how “accolade” is used in award ceremonies.<br>
+      <span class="cn">听第 1:15 左右，了解“accolade”在颁奖典礼中的使用方式。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Accolade in the News</h3>
+    <p>
+      The young researcher earned international accolades for her groundbreaking discovery in genetics.<br>
+      <span class="cn">这位年轻研究人员因其在遗传学方面的突破性发现而获得国际赞誉。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nature.com" target="_blank" class="fancy-link">
+        📰 Read More – Nature Journal
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
