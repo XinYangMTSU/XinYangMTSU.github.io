@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Shore</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌊 shore
+      <span class="pronunciation">/ʃɔːr/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/sho/shore/shore__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>The land along the edge of a sea, lake, or other large body of water.<br>
+    <span class="cn">海、湖或其他大型水体边缘的陆地；岸边。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> We walked along the shore, collecting seashells.<br>
+      <span class="cn">例句：我们沿着海岸散步，捡贝壳。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The boat finally reached the shore after hours at sea.<br>
+      <span class="cn">例句：小船在海上航行数小时后终于靠岸。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Coast <span class="cn">海岸</span></li>
+        <li>Beach <span class="cn">沙滩</span></li>
+        <li>Seaside <span class="cn">海边</span></li>
+        <li>Bank <span class="cn">河岸</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Shore" comes from Middle English <em>shore</em>, from Old English <em>scora</em>, meaning "coast" or "slope".<br>
+    <span class="cn">shore 来自中古英语 shore，源自古英语 scora，意为“海岸”或“斜坡”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>scora</em> – coast, slope<br>
+      <span class="cn">古英语 scora：海岸、斜坡</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>shore</em> – coast or edge of land<br>
+      <span class="cn">中古英语 shore：海岸或陆地边缘</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>shore</em> – land beside a body of water<br>
+      <span class="cn">现代英语 shore：水体边的陆地</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Coast</td>
+          <td>Neutral</td>
+          <td>They drove along the California coast.</td>
+          <td>Geographic / Scenic</td>
+        </tr>
+        <tr>
+          <td>Beach</td>
+          <td>Casual</td>
+          <td>We spent the day relaxing on the beach.</td>
+          <td>Recreational</td>
+        </tr>
+        <tr>
+          <td><strong>Shore</strong></td>
+          <td><strong>Neutral</strong></td>
+          <td>The waves crashed onto the shore.</td>
+          <td>Descriptive / Natural</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Shore"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/FTe1yhFZ-bA?start=40"
+      title="Shoreline Erosion Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> for a discussion of how waves shape the shore.<br>
+      <span class="cn">听第 0:40 左右，了解海浪如何塑造海岸。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Shore in the News</h3>
+    <p>
+      Rising sea levels are threatening communities living along the shore.<br>
+      <span class="cn">海平面上升正在威胁沿海社区的生存。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com/section/climate" target="_blank" class="fancy-link">
+        📰 Read More – New York Times Climate Section
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
