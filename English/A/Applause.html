@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Applause</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      👏 applause
+      <span class="pronunciation">/əˈplɔːz/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/a/app/appla/applause__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Clapping of hands by an audience to show approval, enjoyment, or praise.<br>
+    <span class="cn">观众鼓掌以表示赞许、欣赏或称赞。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The speaker received loud applause at the end of the lecture.<br>
+      <span class="cn">例句：演讲结束时，讲者赢得了热烈的掌声。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Her performance was met with thunderous applause.<br>
+      <span class="cn">例句：她的表演赢得了雷鸣般的掌声。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Clapping <span class="cn">鼓掌</span></li>
+        <li>Cheering <span class="cn">欢呼</span></li>
+        <li>Ovation <span class="cn">喝彩；欢迎</span></li>
+        <li>Acclaim <span class="cn">喝彩；称赞</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> From Latin <em>applaudere</em>, meaning “to clap hands,” from <em>ad-</em> (to) + <em>plaudere</em> (to clap).<br>
+    <span class="cn">来自拉丁语 applaudere，意为“鼓掌”，由 ad-（向）和 plaudere（拍手）组成。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>applaudere</em> – to clap<br>
+      <span class="cn">拉丁语 applaudere：鼓掌</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>applaus</em><br>
+      <span class="cn">古法语 applaus：掌声</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>applause</em> – approval shown by clapping<br>
+      <span class="cn">现代英语 applause：以鼓掌表示的认可</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Form</th>
+          <th>Example Use</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Applause</td>
+          <td>Noun</td>
+          <td>The crowd gave a round of applause.</td>
+          <td>Public Events / Performances</td>
+        </tr>
+        <tr>
+          <td>Ovation</td>
+          <td>Noun</td>
+          <td>She received a standing ovation.</td>
+          <td>Formal / Honoring</td>
+        </tr>
+        <tr>
+          <td>Cheers</td>
+          <td>Noun (plural)</td>
+          <td>The team heard cheers from the crowd.</td>
+          <td>Sporting / Festive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Applause"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/cO5N9sHb0ns?start=25"
+      title="Speech Ending with Applause"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:25</strong> to hear the audience break into applause.<br>
+      <span class="cn">听第 0:25 秒左右，观众开始鼓掌。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Applause in the News</h3>
+    <p>
+      The humanitarian received long and heartfelt applause after her acceptance speech at the ceremony.<br>
+      <span class="cn">那位人道主义者在典礼上致辞后，收获了长时间而真挚的掌声。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com" target="_blank" class="fancy-link">
+        📰 Read More – The Guardian
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
