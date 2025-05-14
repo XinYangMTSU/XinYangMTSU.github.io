@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Pan Out</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🎥 pan out
+      <span class="pronunciation">/pæn aʊt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pan/pan__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Phrasal Verb<br><span class="cn">词性：动词短语</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To turn out or result in a particular way, especially a successful one.<br>
+    <span class="cn">结果是……（尤指成功）；（事情）发展得……</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> We’ll see how things pan out after the interview.<br>
+      <span class="cn">例句：面试之后我们看看事情会如何发展。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> His business idea didn’t pan out as he had hoped.<br>
+      <span class="cn">例句：他的商业想法并未如他所希望的那样成功。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Work out <span class="cn">顺利进行</span></li>
+        <li>Turn out <span class="cn">结果是</span></li>
+        <li>Play out <span class="cn">发展</span></li>
+        <li>Succeed (context-dependent) <span class="cn">成功（视上下文而定）</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the phrase <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Pan out" originally comes from gold panning — if gold appeared in the pan, the effort "panned out." Over time, it came to mean "turn out successfully."<br>
+    <span class="cn">“Pan out” 源自淘金术语 —— 如果淘到金子，就表示“成功”。后来引申为“有结果，成功”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Phrase Evolution</h3>
+    <p>
+      <strong>Gold Rush Era:</strong> pan out – to find gold in a pan<br>
+      <span class="cn">淘金时期：pan out 表示在淘盘中发现金子</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> pan out – to result or develop successfully<br>
+      <span class="cn">现代英语：表示事情成功或有结果</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Phrase</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Work out</td>
+          <td>Informal / Neutral</td>
+          <td>Everything worked out in the end.</td>
+          <td>Hopeful</td>
+        </tr>
+        <tr>
+          <td>Turn out</td>
+          <td>Neutral</td>
+          <td>It turned out better than expected.</td>
+          <td>Descriptive</td>
+        </tr>
+        <tr>
+          <td><strong>Pan out</strong></td>
+          <td><strong>Informal / Idiomatic</strong></td>
+          <td>Let’s see how this pans out.</td>
+          <td>Colloquial / Curious</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Phrase "Pan Out"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/zEdwNG4wU4Q?start=65"
+      title="What Does It Mean When Things 'Pan Out'?"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:05</strong> to hear how “pan out” is used in everyday speech.<br>
+      <span class="cn">听第 1:05 左右，了解“pan out”如何用于日常口语。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Pan Out in the News</h3>
+    <p>
+      Economists are waiting to see how recent policy changes will pan out in the long term.<br>
+      <span class="cn">经济学家正等待观察近期政策变化在长期会如何发展。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.wsj.com" target="_blank" class="fancy-link">
+        📰 Read More – Wall Street Journal
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
