@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Nitty-gritty</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ⚙️ nitty-gritty
+      <span class="pronunciation">/ˌnɪtiˈɡrɪti/</span>
+      <button class="audio-button" onclick="speak('Nitty-gritty')">🔊 Play</button>
+    </h2>
+    
+    <p><strong>Part of speech:</strong> Noun (informal)<br><span class="cn">词性：名词（非正式）</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>The most essential and basic aspects of something; the core details that really matter.<br>
+    <span class="cn">基本要点；关键内容；事情的核心。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Let’s skip the small talk and get down to the nitty-gritty.<br>
+      <span class="cn">例句：我们别闲聊了，直接进入正题吧。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The article explains the nitty-gritty of how the system works.<br>
+      <span class="cn">例句：这篇文章解释了该系统的运作核心。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Essence <span class="cn">本质</span></li>
+        <li>Core <span class="cn">核心</span></li>
+        <li>Basics <span class="cn">基础</span></li>
+        <li>Crux <span class="cn">关键</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> The exact origin of "nitty-gritty" is unclear. It became popular in American English in the 1940s and is used to refer to the most important or practical aspects of a situation.<br>
+    <span class="cn">“nitty-gritty” 的确切起源不详，20世纪40年代开始在美式英语中流行，用来表示事情最重要或最实用的部分。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Usage Evolution</h3>
+    <p>
+      <strong>1940s American English:</strong> Emerged in spoken language to mean practical essentials<br>
+      <span class="cn">20世纪40年代的美式英语：开始用于口语中，表示实质性要点</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> Used commonly in business, journalism, and everyday speech<br>
+      <span class="cn">现代英语：常见于商业、新闻和日常对话中</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nitty-gritty</td>
+          <td>Informal</td>
+          <td>Let’s focus on the nitty-gritty of the project.</td>
+          <td>Casual / Direct</td>
+        </tr>
+        <tr>
+          <td>Essence</td>
+          <td>Formal</td>
+          <td>The essence of the issue is fairness.</td>
+          <td>Academic / Philosophical</td>
+        </tr>
+        <tr>
+          <td>Crux</td>
+          <td>Neutral</td>
+          <td>The crux of the matter is timing.</td>
+          <td>Analytical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Nitty-gritty"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/8ThAfsHD0v4?start=40"
+      title="Breaking Down the Nitty-Gritty"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> to hear how "nitty-gritty" is used in a practical breakdown.<br>
+      <span class="cn">听第 0:40 左右，了解“nitty-gritty”如何用于具体问题的分析中。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Nitty-gritty in the News</h3>
+    <p>
+      The article avoids vague generalities and dives right into the nitty-gritty of climate data.<br>
+      <span class="cn">这篇文章没有空谈，而是直接深入气候数据的核心内容。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com/section/climate" target="_blank" class="fancy-link">
+        📰 Read More – The New York Times Climate Section
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
