@@ -1,1 +1,154 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Youngster</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧒 youngster
+      <span class="pronunciation">/ˈjʌŋstər/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/y/you/young/youngster__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A child or young person, especially someone who is not yet an adult.<br>
+    <span class="cn">儿童或年轻人，尤指尚未成年的青少年。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The camp is designed for youngsters aged 8 to 12.<br>
+      <span class="cn">例句：这个营地是为8到12岁的青少年设计的。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> As a youngster, she loved reading adventure books.<br>
+      <span class="cn">例句：小时候她喜欢读冒险小说。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Child <span class="cn">孩子</span></li>
+        <li>Youth <span class="cn">青少年</span></li>
+        <li>Kid <span class="cn">小孩</span></li>
+        <li>Teen <span class="cn">青少年</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Youngster" is a compound of "young" + the suffix "-ster", which denotes a person associated with a particular quality or activity.<br>
+    <span class="cn">youngster 是“young”（年轻的）与后缀 “-ster”（表示与某种特性或活动有关的人）组合而成。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>geong</em> – young<br>
+      <span class="cn">古英语 geong：年轻的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>yong</em> + <em>-ster</em> – one who is young<br>
+      <span class="cn">中古英语 yong + -ster：年轻的人</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>youngster</em> – child or young person<br>
+      <span class="cn">现代英语 youngster：儿童或青少年</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Child</td>
+          <td>Neutral</td>
+          <td>The child is playing in the yard.</td>
+          <td>Standard</td>
+        </tr>
+        <tr>
+          <td>Kid</td>
+          <td>Informal</td>
+          <td>The kid was full of energy.</td>
+          <td>Casual</td>
+        </tr>
+        <tr>
+          <td><strong>Youngster</strong></td>
+          <td><strong>Neutral</strong></td>
+          <td>Programs are available for youngsters of all ages.</td>
+          <td>Friendly / Descriptive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Youngster"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/O5Izzh2Jcpg?start=30"
+      title="Programs for Youngsters"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> for how the word “youngster” is used in community programs.<br>
+      <span class="cn">听第 0:30 左右，了解“youngster”在社区项目中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Youngster in the News</h3>
+    <p>
+      The talented youngster amazed audiences with her piano performance at just 8 years old.<br>
+      <span class="cn">这位有才华的小朋友在仅仅8岁时就以钢琴表演惊艳了观众。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news/education" target="_blank" class="fancy-link">
+        📰 Read More – BBC Education News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
