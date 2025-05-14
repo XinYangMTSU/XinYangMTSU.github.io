@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Sweeping</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧹 sweeping
+      <span class="pronunciation">/ˈswiːpɪŋ/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/swe/sweep/sweeping__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Having a wide range or effect; very extensive or far-reaching in influence, scope, or impact.<br>
+    <span class="cn">影响广泛的；范围巨大的；全面的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The president announced sweeping changes to the tax system.<br>
+      <span class="cn">例句：总统宣布了税收制度的全面改革。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The movie features sweeping landscapes and emotional storytelling.<br>
+      <span class="cn">例句：这部电影展现了广阔的自然景观和感人的故事。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Extensive <span class="cn">广泛的</span></li>
+        <li>Comprehensive <span class="cn">全面的</span></li>
+        <li>Broad <span class="cn">宽广的</span></li>
+        <li>Far-reaching <span class="cn">深远的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Sweeping" comes from the verb "sweep," which originally means “to clean or brush away.” Over time, it came to refer metaphorically to things that move across a broad area or have wide effect.<br>
+    <span class="cn">sweeping 源自动词 sweep（扫、清除），后来引申为“广泛影响”或“全面变化”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>swāpan</em> – to sweep<br>
+      <span class="cn">古英语 swāpan：扫</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>swepen</em> – to brush or move over<br>
+      <span class="cn">中古英语 swepen：刷过，横扫</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>sweeping</em> – broad in scope or impact<br>
+      <span class="cn">现代英语 sweeping：范围广泛或影响深远的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Extensive</td>
+          <td>Neutral / Formal</td>
+          <td>The report provides extensive data.</td>
+          <td>Technical / Informative</td>
+        </tr>
+        <tr>
+          <td>Comprehensive</td>
+          <td>Formal</td>
+          <td>They proposed a comprehensive solution.</td>
+          <td>Analytical / Strategic</td>
+        </tr>
+        <tr>
+          <td><strong>Sweeping</strong></td>
+          <td><strong>Neutral / Emphatic</strong></td>
+          <td>The reforms led to sweeping changes.</td>
+          <td>Dramatic / Broad</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Sweeping"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/5WgXwz2N1S4?start=40"
+      title="Sweeping Historical Changes"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> for how “sweeping” is used to describe major historical shifts.<br>
+      <span class="cn">听第 0:40 左右，了解“sweeping”一词如何用于描述重大历史变革。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Sweeping in the News</h3>
+    <p>
+      The government introduced sweeping legislation aimed at addressing climate change.<br>
+      <span class="cn">政府推出了旨在应对气候变化的全面立法。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com" target="_blank" class="fancy-link">
+        📰 Read More – The Guardian
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
