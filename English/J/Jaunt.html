@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Jaunt</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧳 jaunt
+      <span class="pronunciation">/dʒɔːnt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/j/jau/jaunt/jaunt__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A short trip or journey taken for pleasure.<br>
+    <span class="cn">短途旅行；愉快的短程出游。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> We took a weekend jaunt to the mountains.<br>
+      <span class="cn">例句：我们进行了一个周末的山中短途旅行。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Their jaunt to the coast was spontaneous and fun.<br>
+      <span class="cn">例句：他们临时起意的海边之旅充满乐趣。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Excursion <span class="cn">远足，短途旅行</span></li>
+        <li>Outing <span class="cn">出游</span></li>
+        <li>Trip <span class="cn">旅行</span></li>
+        <li>Getaway <span class="cn">小型度假</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Jaunt" likely comes from 17th-century English, possibly a variant of “jaunce,” meaning to prance or make a tiring journey on horseback.<br>
+    <span class="cn">jaunt 可能源于17世纪的英语词“jaunce”，意思是骑马跋涉，后来演变为轻松愉快的短途旅行。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Early English:</strong> <em>jaunce</em> – to prance or move up and down<br>
+      <span class="cn">早期英语 jaunce：跳跃前进或劳累地骑行</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>jaunt</em> – a fun short trip<br>
+      <span class="cn">现代英语 jaunt：愉快的短途旅行</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Jaunt</td>
+          <td>Informal / Cheerful</td>
+          <td>They went on a little jaunt to the lake.</td>
+          <td>Playful / Light</td>
+        </tr>
+        <tr>
+          <td>Excursion</td>
+          <td>Formal</td>
+          <td>The school organized an excursion to the museum.</td>
+          <td>Educational</td>
+        </tr>
+        <tr>
+          <td>Getaway</td>
+          <td>Informal</td>
+          <td>We booked a weekend getaway in the countryside.</td>
+          <td>Relaxed / Leisure</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Jaunt"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/NvR60Wg9R7Q?start=40"
+      title="Travel Vlog Jaunt"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> to hear how "jaunt" is used in a real travel vlog.<br>
+      <span class="cn">听第 0:40 左右，了解“jaunt”在旅游日志中的使用方式。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Jaunt in the News</h3>
+    <p>
+      A brief jaunt to Paris inspired the artist's latest collection of paintings.<br>
+      <span class="cn">一次短暂的巴黎之行激发了这位艺术家的最新画作灵感。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nationalgeographic.com/travel" target="_blank" class="fancy-link">
+        📰 Read More – National Geographic Travel
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
