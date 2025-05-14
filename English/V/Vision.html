@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Vision</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      👁️ vision
+      <span class="pronunciation">/ˈvɪʒən/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/v/vis/visio/vision__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>1. The ability to see.  
+    2. The ability to imagine a future goal or idea with wisdom and creativity.<br>
+    <span class="cn">1. 视力；视觉。<br>2. 对未来的构想；远见卓识。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She has perfect vision in both eyes.<br>
+      <span class="cn">例句：她双眼视力完好。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The company’s success is driven by the CEO’s vision for the future.<br>
+      <span class="cn">例句：这家公司的成功来自于CEO对未来的远见。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Sight <span class="cn">视力</span></li>
+        <li>Foresight <span class="cn">远见</span></li>
+        <li>Insight <span class="cn">洞察力</span></li>
+        <li>Dream <span class="cn">梦想</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Vision" comes from Latin <em>visio</em>, meaning “the act of seeing.”<br>
+    <span class="cn">vision 来自拉丁语 visio，意为“看见的动作”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>videre</em> – to see → <em>visio</em> – sight<br>
+      <span class="cn">拉丁语 videre：看 → visio：视觉</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>visioun</em> – supernatural sight or dream<br>
+      <span class="cn">中古英语 visioun：神视或异象</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>vision</em> – sight or forward-thinking idea<br>
+      <span class="cn">现代英语 vision：视觉或前瞻性构想</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sight</td>
+          <td>Neutral</td>
+          <td>He lost sight in one eye.</td>
+          <td>Physical / Neutral</td>
+        </tr>
+        <tr>
+          <td>Insight</td>
+          <td>Formal</td>
+          <td>Her insight helped solve the issue.</td>
+          <td>Intellectual / Respectful</td>
+        </tr>
+        <tr>
+          <td><strong>Vision</strong></td>
+          <td><strong>Neutral / Inspirational</strong></td>
+          <td>The founder had a clear vision for change.</td>
+          <td>Positive / Ambitious</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Vision"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/VZ4X3nOozz8?start=60"
+      title="Leadership and Vision"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:00</strong> for how “vision” is used to describe forward-thinking leadership.<br>
+      <span class="cn">听第 1:00 左右，了解“vision”如何用于描述具有远见的领导力。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Vision in the News</h3>
+    <p>
+      The startup’s bold vision to revolutionize clean energy has drawn global attention.<br>
+      <span class="cn">这家初创公司在清洁能源领域的大胆愿景吸引了全球关注。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.reuters.com" target="_blank" class="fancy-link">
+        📰 Read More – Reuters
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
