@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Sentiment</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💬 sentiment
+      <span class="pronunciation">/ˈsɛntɪmənt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/sen/senti/sentiment__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A view, opinion, or feeling about something; an emotion or attitude toward a situation or topic.<br>
+    <span class="cn">观点，情绪，感情；对某事的态度或看法。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Public sentiment is shifting in favor of environmental reform.<br>
+      <span class="cn">例句：公众情绪正转向支持环境改革。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> His speech was filled with patriotic sentiment.<br>
+      <span class="cn">例句：他的演讲充满了爱国情怀。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Emotion <span class="cn">情感</span></li>
+        <li>Feeling <span class="cn">感觉</span></li>
+        <li>Opinion <span class="cn">看法</span></li>
+        <li>Viewpoint <span class="cn">观点</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Sentiment" comes from Latin <em>sentire</em>, meaning "to feel." It entered English via Old French as <em>sentiment</em>, meaning "feeling or opinion."<br>
+    <span class="cn">sentiment 源自拉丁语 sentire（感觉），通过古法语 sentiment（感情、意见）进入英语。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>sentire</em> – to feel<br>
+      <span class="cn">拉丁语 sentire：感受</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>sentiment</em> – feeling, opinion<br>
+      <span class="cn">古法语 sentiment：感情，观点</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>sentiment</em> – feeling or emotional view<br>
+      <span class="cn">现代英语 sentiment：感情或情绪化的看法</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Emotion</td>
+          <td>Neutral</td>
+          <td>She was overwhelmed by emotion.</td>
+          <td>Personal / Intense</td>
+        </tr>
+        <tr>
+          <td>Opinion</td>
+          <td>Neutral</td>
+          <td>His opinion differs from mine.</td>
+          <td>Objective / General</td>
+        </tr>
+        <tr>
+          <td><strong>Sentiment</strong></td>
+          <td><strong>Neutral / Poetic</strong></td>
+          <td>Public sentiment is against the war.</td>
+          <td>Reflective / Emotional</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Sentiment"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/4Z9WVZddH9w?start=80"
+      title="Understanding Public Sentiment in Economics"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:20</strong> to hear how "sentiment" is used in economic and social analysis.<br>
+      <span class="cn">听第 1:20 左右，了解“sentiment”在经济和社会分析中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Sentiment in the News</h3>
+    <p>
+      Investor sentiment weakened after the latest inflation report showed rising prices.<br>
+      <span class="cn">在最新通胀报告显示价格上涨后，投资者情绪减弱。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bloomberg.com" target="_blank" class="fancy-link">
+        📰 Read More – Bloomberg
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
