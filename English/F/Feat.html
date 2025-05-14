@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Feat</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🏆 feat
+      <span class="pronunciation">/fiːt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/f/fea/feat_/feat__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A remarkable achievement that requires great skill, courage, or strength.<br>
+    <span class="cn">需要极大技巧、勇气或力量的非凡成就。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Climbing Mount Everest was a remarkable feat of endurance.<br>
+      <span class="cn">例句：登上珠穆朗玛峰是一项非凡的耐力壮举。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The magician’s final trick was an incredible feat of illusion.<br>
+      <span class="cn">例句：魔术师最后的把戏是一项令人难以置信的幻术壮举。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Achievement <span class="cn">成就</span></li>
+        <li>Accomplishment <span class="cn">完成</span></li>
+        <li>Exploit <span class="cn">英勇行为</span></li>
+        <li>Triumph <span class="cn">胜利</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Feat" comes from Old French <em>fait</em>, meaning "deed" or "action", from Latin <em>factum</em>.<br>
+    <span class="cn">feat 来自古法语 fait，意为“行为”或“行动”，源自拉丁语 factum。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>factum</em> – deed<br>
+      <span class="cn">拉丁语 factum：行为</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>fait</em> – action, feat<br>
+      <span class="cn">古法语 fait：行动，壮举</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>feat</em> – deed, act of skill<br>
+      <span class="cn">中古英语 feat：行为，技艺表现</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Achievement</td>
+          <td>Neutral / Formal</td>
+          <td>Graduating with honors is a major achievement.</td>
+          <td>Respectful</td>
+        </tr>
+        <tr>
+          <td>Exploit</td>
+          <td>Neutral / Literary</td>
+          <td>He told tales of his wartime exploits.</td>
+          <td>Heroic / adventurous</td>
+        </tr>
+        <tr>
+          <td><strong>Feat</strong></td>
+          <td><strong>Neutral</strong></td>
+          <td>The rescue operation was a feat of teamwork and bravery.</td>
+          <td>Impressive / skillful</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Feat"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/N8OU_fBhW8E?start=45"
+      title="Incredible Human Feats"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> for a discussion about a legendary athletic feat.<br>
+      <span class="cn">听第 0:45 左右，了解一个传奇运动壮举的讲解。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Feat in the News</h3>
+    <p>
+      The astronaut’s return from the moon was hailed as a historic feat of science and engineering.<br>
+      <span class="cn">宇航员从月球返回被誉为科学与工程的历史性壮举。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nasa.gov" target="_blank" class="fancy-link">
+        📰 Read More – NASA
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
