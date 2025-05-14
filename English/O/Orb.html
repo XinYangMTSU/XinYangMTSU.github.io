@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Orb</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔵 orb
+      <span class="pronunciation">/ɔːrb/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/o/orb/orb__/orb__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A spherical object or shape, often used to describe the sun, moon, or a glowing ball; also a symbol of power in royal regalia.<br>
+    <span class="cn">球体；常用于描述太阳、月亮或发光球体；也是皇家权力的象征物之一。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> A golden orb sat atop the royal scepter.<br>
+      <span class="cn">例句：一颗金色圆球装饰在皇家权杖顶端。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The full moon appeared as a bright orb in the night sky.<br>
+      <span class="cn">例句：满月在夜空中如一个明亮的圆球。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Sphere <span class="cn">球体</span></li>
+        <li>Globe <span class="cn">球形物</span></li>
+        <li>Ball <span class="cn">球</span></li>
+        <li>Circle <span class="cn">圆圈（比喻用法）</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Orb" comes from Latin <em>orbis</em>, meaning “circle” or “disk.”<br>
+    <span class="cn">orb 来自拉丁语 orbis，意为“圆圈”或“圆盘”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>orbis</em> – circle, ring<br>
+      <span class="cn">拉丁语 orbis：圆圈、环形</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>orbe</em> – sphere<br>
+      <span class="cn">古法语 orbe：球体</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>orb</em> – round object or symbol of power<br>
+      <span class="cn">现代英语 orb：球体、权力的象征</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sphere</td>
+          <td>Neutral / Scientific</td>
+          <td>The earth is an oblate sphere.</td>
+          <td>Mathematical / Scientific</td>
+        </tr>
+        <tr>
+          <td>Globe</td>
+          <td>Neutral</td>
+          <td>A glass globe lit the hallway.</td>
+          <td>Descriptive / Practical</td>
+        </tr>
+        <tr>
+          <td><strong>Orb</strong></td>
+          <td><strong>Literary / Formal</strong></td>
+          <td>The sun rose as a glowing orb.</td>
+          <td>Poetic / Symbolic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Orb"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/CeF2qDMMt7U?start=15"
+      title="Mysterious Light Orbs Caught on Camera"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:15</strong> for how “orb” is used to describe glowing spheres in the sky.<br>
+      <span class="cn">听第 0:15 左右，了解“orb”如何用来描述空中的发光球体。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Orb in the News</h3>
+    <p>
+      A strange glowing orb was spotted over the ocean, sparking curiosity among scientists and locals alike.<br>
+      <span class="cn">一个奇异的发光球体在海面上空被发现，引起了科学家和当地居民的兴趣。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.space.com" target="_blank" class="fancy-link">
+        📰 Read More – Space.com
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
