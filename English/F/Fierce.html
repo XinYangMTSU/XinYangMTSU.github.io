@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Fierce</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🐅 fierce
+      <span class="pronunciation">/fɪrs/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/f/fie/fierc/fierce__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Very strong, intense, or aggressive in force or feeling.<br>
+    <span class="cn">非常强烈、激烈或具有攻击性的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The fierce storm damaged several homes along the coast.<br>
+      <span class="cn">例句：猛烈的风暴摧毁了沿海的几所房屋。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She is a fierce competitor who never gives up.<br>
+      <span class="cn">例句：她是一位永不言败的强劲对手。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Intense <span class="cn">强烈的</span></li>
+        <li>Ferocious <span class="cn">凶猛的</span></li>
+        <li>Violent <span class="cn">猛烈的</span></li>
+        <li>Powerful <span class="cn">强大的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Fierce" comes from Old French <em>fier</em>, meaning "proud" or "brave", which derives from Latin <em>ferus</em>, meaning "wild" or "untamed".<br>
+    <span class="cn">fierce 来自古法语 fier，意为“骄傲”或“勇敢”，源自拉丁语 ferus，意为“野性的”或“未驯服的”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>ferus</em> – wild, untamed<br>
+      <span class="cn">拉丁语 ferus：野的，未驯的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>fier</em> – brave, fierce<br>
+      <span class="cn">古法语 fier：勇敢的，猛烈的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>fierce</em> – intense, aggressive<br>
+      <span class="cn">现代英语 fierce：强烈的，激烈的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ferocious</td>
+          <td>Formal / Descriptive</td>
+          <td>The lion gave a ferocious roar.</td>
+          <td>Wild / Animalistic</td>
+        </tr>
+        <tr>
+          <td>Violent</td>
+          <td>Neutral / Negative</td>
+          <td>There was a violent clash during the protest.</td>
+          <td>Dangerous / Harsh</td>
+        </tr>
+        <tr>
+          <td><strong>Fierce</strong></td>
+          <td><strong>Neutral</strong></td>
+          <td>They faced fierce opposition to the new policy.</td>
+          <td>Intense / Emotional</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Fierce"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/4lUUDw0mNq0?start=60"
+      title="Fierce Debate Highlights"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:00</strong> for how speakers engage in a fierce debate.<br>
+      <span class="cn">听第 1:00 左右，了解激烈辩论中“fierce”的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Fierce in the News</h3>
+    <p>
+      The fierce competition among tech companies is driving rapid innovation.<br>
+      <span class="cn">科技公司之间的激烈竞争正在推动快速创新。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.forbes.com" target="_blank" class="fancy-link">
+        📰 Read More – Forbes Tech
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
