@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Crave</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🍫 crave
+      <span class="pronunciation">/kreɪv/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cra/crave/crave__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To have a strong desire for something, especially something you cannot easily have.<br>
+    <span class="cn">强烈渴望某物，尤其是难以得到的东西。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She craved attention from her parents.<br>
+      <span class="cn">例句：她渴望得到父母的关注。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> After a long day, I was craving chocolate.<br>
+      <span class="cn">例句：一天忙下来，我特别想吃巧克力。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Desire <span class="cn">渴望</span></li>
+        <li>Long for <span class="cn">渴求</span></li>
+        <li>Yearn <span class="cn">向往</span></li>
+        <li>Hunger for <span class="cn">渴望，极想</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Crave" comes from Old English <em>crafian</em>, meaning “to ask for” or “demand.”<br>
+    <span class="cn">crave 源自古英语 crafian，意为“请求”或“要求”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>crafian</em> – to demand, ask for<br>
+      <span class="cn">古英语 crafian：要求，请求</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>craven</em> – to long for<br>
+      <span class="cn">中古英语 craven：渴望</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>crave</em> – to strongly desire<br>
+      <span class="cn">现代英语 crave：强烈渴望</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Desire</td>
+          <td>Neutral</td>
+          <td>He desired peace and quiet.</td>
+          <td>Emotional / Thoughtful</td>
+        </tr>
+        <tr>
+          <td>Yearn</td>
+          <td>Formal / Poetic</td>
+          <td>They yearned for their homeland.</td>
+          <td>Romantic / Melancholic</td>
+        </tr>
+        <tr>
+          <td><strong>Crave</strong></td>
+          <td><strong>Neutral</strong></td>
+          <td>She craved recognition from her peers.</td>
+          <td>Urgent / Emotional</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Crave"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/RZsMpz3oF0I?start=45"
+      title="Why We Crave Certain Foods"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> to learn why we crave sweet or salty foods.<br>
+      <span class="cn">听第 0:45 左右，了解我们为什么会渴望甜食或咸食。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Crave in the News</h3>
+    <p>
+      In a fast-paced digital world, people increasingly crave deeper, more meaningful connections.<br>
+      <span class="cn">在这个快节奏的数字时代，人们越来越渴望更深层次、更有意义的联系。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.psychologytoday.com" target="_blank" class="fancy-link">
+        📰 Read More – Psychology Today
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
