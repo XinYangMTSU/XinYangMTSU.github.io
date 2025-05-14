@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Consolidate</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧱 consolidate
+      <span class="pronunciation">/kənˈsɑː.lə.deɪt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/con/conso/consolidate__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To make something stronger or more solid; to combine things into a more effective or coherent whole.<br>
+    <span class="cn">使加强、巩固；把多项合并成一项更有效或更有条理的整体。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The company plans to consolidate its operations in one location.<br>
+      <span class="cn">例句：公司计划将其业务整合到一个地点。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She consolidated her power after winning the election.<br>
+      <span class="cn">例句：她在赢得选举后巩固了自己的权力。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Strengthen <span class="cn">加强</span></li>
+        <li>Unify <span class="cn">统一</span></li>
+        <li>Combine <span class="cn">合并</span></li>
+        <li>Secure <span class="cn">稳固</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Consolidate" comes from Latin <em>consolidare</em>, meaning "to make firm or solid."<br>
+    <span class="cn">consolidate 来自拉丁语 consolidare，意为“使坚固”或“加固”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>consolidare</em> – to make firm<br>
+      <span class="cn">拉丁语 consolidare：使坚固</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle French:</strong> <em>consolider</em> – to strengthen<br>
+      <span class="cn">中古法语 consolider：加强</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>consolidate</em> – to strengthen or combine<br>
+      <span class="cn">现代英语 consolidate：加强或合并</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Strengthen</td>
+          <td>Neutral</td>
+          <td>Regular exercise strengthens your muscles.</td>
+          <td>Practical</td>
+        </tr>
+        <tr>
+          <td>Unify</td>
+          <td>Formal / Political</td>
+          <td>The leader worked to unify the divided nation.</td>
+          <td>Inspirational</td>
+        </tr>
+        <tr>
+          <td><strong>Consolidate</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>The company consolidated its assets to increase efficiency.</td>
+          <td>Strategic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Consolidate"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/lS7R4W2rsFg?start=60"
+      title="Business Consolidation Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:00</strong> for an explanation of how companies consolidate.<br>
+      <span class="cn">听第 1:00 左右，了解公司如何进行整合。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Consolidate in the News</h3>
+    <p>
+      The tech giant aims to consolidate its market position through strategic acquisitions.<br>
+      <span class="cn">这家科技巨头通过战略性收购来巩固其市场地位。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.forbes.com" target="_blank" class="fancy-link">
+        📰 Read More – Forbes
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
