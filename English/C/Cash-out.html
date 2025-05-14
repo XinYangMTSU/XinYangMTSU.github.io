@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Cash Out</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💵 cash out
+      <span class="pronunciation">/kæʃ aʊt/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cas/casho/cash_out__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Phrasal verb<br><span class="cn">词性：动词短语</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To sell an investment or convert an asset into cash, often by withdrawing from a business or account.<br>
+    <span class="cn">将投资变现或把资产转换成现金，通常指退出某个业务或账户。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She decided to cash out her shares and retire early.<br>
+      <span class="cn">例句：她决定套现股票，提前退休。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He cashed out of the startup after it was acquired.<br>
+      <span class="cn">例句：公司被收购后，他把股份套现退出了创业项目。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Liquidate <span class="cn">变现</span></li>
+        <li>Withdraw <span class="cn">提款</span></li>
+        <li>Sell off <span class="cn">出售</span></li>
+        <li>Exit <span class="cn">退出</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the phrase <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Cash out" comes from the literal act of exchanging chips or assets for cash, especially in gambling or banking contexts.<br>
+    <span class="cn">cash out 来自字面意思，最初指在赌博或银行中将筹码或资产兑换成现金。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Phrase Evolution</h3>
+    <p>
+      <strong>Origin:</strong> Casino and finance usage – to exchange value for cash<br>
+      <span class="cn">词源：最初用于赌场和金融领域——将价值兑换成现金</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern Usage:</strong> Common in startups, retirement, and investing<br>
+      <span class="cn">现代用法：常用于创业、退休和投资场景</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Phrase</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Liquidate</td>
+          <td>Formal</td>
+          <td>The company liquidated its assets to pay debts.</td>
+          <td>Financial / Legal</td>
+        </tr>
+        <tr>
+          <td>Withdraw</td>
+          <td>Neutral</td>
+          <td>I withdrew $500 from my account.</td>
+          <td>Everyday / Banking</td>
+        </tr>
+        <tr>
+          <td><strong>Cash out</strong></td>
+          <td><strong>Informal / Business</strong></td>
+          <td>He cashed out after the stock price doubled.</td>
+          <td>Casual / Financial</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Phrase "Cash Out"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/rsA4cJd8A8Y?start=90"
+      title="How to Cash Out Investments"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:30</strong> for a financial planner discussing when to “cash out.”<br>
+      <span class="cn">听第 1:30 左右，理财顾问讨论何时该“套现”。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Cash Out in the News</h3>
+    <p>
+      Investors rushed to cash out after the sudden market crash last week.<br>
+      <span class="cn">上周市场突然崩盘后，投资者纷纷套现。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.wsj.com" target="_blank" class="fancy-link">
+        📰 Read More – Wall Street Journal
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
