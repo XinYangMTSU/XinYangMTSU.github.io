@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Distill</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧪 distill
+      <span class="pronunciation">/dɪˈstɪl/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/dis/disti/distill__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To purify a liquid by heating and cooling; to extract the essential meaning or most important aspects of something.<br>
+    <span class="cn">通过加热和冷却来净化液体；提炼出某事物的本质或最重要方面。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The scientist distilled the liquid to remove impurities.<br>
+      <span class="cn">例句：科学家通过蒸馏去除液体中的杂质。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She distilled the main points from the lengthy report.<br>
+      <span class="cn">例句：她从冗长的报告中提炼出要点。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Purify <span class="cn">净化</span></li>
+        <li>Extract <span class="cn">提取</span></li>
+        <li>Refine <span class="cn">提炼</span></li>
+        <li>Condense <span class="cn">浓缩</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Distill" comes from Latin <em>destillare</em>, meaning "to trickle down" or "drop by drop."<br>
+    <span class="cn">distill 来自拉丁语 destillare，意为“滴下”或“逐滴流下”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>destillare</em> – to drip or trickle<br>
+      <span class="cn">拉丁语 destillare：滴下</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>distillen</em> – to refine through vapor<br>
+      <span class="cn">中古英语 distillen：通过蒸汽精炼</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>distill</em> – to purify or extract essence<br>
+      <span class="cn">现代英语 distill：净化或提炼精华</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Purify</td>
+          <td>Neutral</td>
+          <td>The water is purified before use.</td>
+          <td>Scientific</td>
+        </tr>
+        <tr>
+          <td>Extract</td>
+          <td>Neutral</td>
+          <td>They extracted key insights from the data.</td>
+          <td>Analytical</td>
+        </tr>
+        <tr>
+          <td><strong>Distill</strong></td>
+          <td><strong>Neutral / Formal</strong></td>
+          <td>The book distills complex theories into simple concepts.</td>
+          <td>Concise / Refined</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Distill"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/6t1vaF50Ks0?start=75"
+      title="Distillation Process Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:15</strong> for a step-by-step explanation of how liquids are distilled.<br>
+      <span class="cn">听第 1:15 左右，了解液体是如何蒸馏的。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Distill in the News</h3>
+    <p>
+      Scientists are working to distill vast amounts of climate data into actionable insights.<br>
+      <span class="cn">科学家正努力将海量气候数据提炼为可操作的见解。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.scientificamerican.com" target="_blank" class="fancy-link">
+        📰 Read More – Scientific American
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
