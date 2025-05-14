@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Zoombini</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧠 Zoombini
+      <span class="pronunciation">/zuːmˈbiːni/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.learningcompany.com/audio/zoombini_pron.mp3"></audio> <!-- Example placeholder -->
+
+    <p><strong>Part of speech:</strong> Proper Noun<br><span class="cn">词性：专有名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Zoombini</strong> refers to a character from the educational puzzle game <em>The Logical Journey of the Zoombinis</em>, designed to teach logical thinking, pattern recognition, and problem-solving through fun and interactive challenges.<br>
+    <span class="cn">Zoombini 是一款教育益智游戏《Zoombinis 的逻辑之旅》中的角色，旨在通过有趣的互动挑战培养逻辑思维、模式识别和问题解决能力。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Each Zoombini has a unique combination of traits like hair, eyes, and transportation.<br>
+      <span class="cn">例句：每个 Zoombini 都有独特的特征组合，比如发型、眼睛和交通工具。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Playing Zoombinis helps children learn how to make decisions based on patterns.<br>
+      <span class="cn">例句：玩 Zoombinis 有助于孩子们学习如何根据模式做决策。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🎮 Game Background</h3>
+    <p><span style="font-size: 2rem;">🕹️</span> <strong>Zoombinis</strong> was first released in 1996 by The Learning Company. The game features adorable blue creatures on a journey to find a new home, facing logic puzzles along the way.<br>
+    <span class="cn">Zoombinis 游戏最初由 The Learning Company 于 1996 年发布，主角是一些可爱的蓝色小生物，在寻找新家的旅程中不断挑战逻辑难题。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Educational Value</h3>
+    <p>
+      The game teaches skills like data sorting, deductive reasoning, and systems thinking, and is widely praised by educators.<br>
+      <span class="cn">该游戏教授诸如数据分类、演绎推理和系统思维等技能，受到教育者的广泛好评。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison – Educational Game Characters</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Character</th>
+          <th>Game</th>
+          <th>Main Skill Taught</th>
+          <th>Audience</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Zoombini</td>
+          <td>The Logical Journey of the Zoombinis</td>
+          <td>Logic & Problem Solving</td>
+          <td>Kids (8+)</td>
+        </tr>
+        <tr>
+          <td>Carmen Sandiego</td>
+          <td>Where in the World is Carmen Sandiego?</td>
+          <td>Geography & Deduction</td>
+          <td>Kids / Teens</td>
+        </tr>
+        <tr>
+          <td>Reader Rabbit</td>
+          <td>Reader Rabbit Series</td>
+          <td>Reading & Math</td>
+          <td>Young Learners</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Zoombinis Gameplay</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/NrxUlqzO7DU?start=30"
+      title="Zoombinis Logic Journey Gameplay"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch around <strong>0:30</strong> to see how Zoombinis puzzles encourage logical reasoning.<br>
+      <span class="cn">观看第 0:30 左右，了解 Zoombinis 如何鼓励逻辑思维训练。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Zoombinis in the News</h3>
+    <p>
+      The classic 90s game Zoombinis made a comeback in 2015 with updated graphics and compatibility for modern devices.<br>
+      <span class="cn">这款 90 年代的经典游戏 Zoombinis 于 2015 年重新发行，配有更新的图形并兼容现代设备。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.zoombinis.com" target="_blank" class="fancy-link">
+        🧩 Learn More – Official Zoombinis Website
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
