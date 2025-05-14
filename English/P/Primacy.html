@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Primacy</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🥇 primacy
+      <span class="pronunciation">/ˈpraɪməsi/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pri/primacy/primacy__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>The state of being the most important or having the highest position or power.<br>
+    <span class="cn">首要地位；至高无上的地位。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The primacy of education in national development is widely acknowledged.<br>
+      <span class="cn">例句：教育在国家发展中的首要地位被广泛认可。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The Constitution establishes the primacy of federal law over state law.<br>
+      <span class="cn">例句：宪法确立了联邦法律优于州法律的首要地位。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Supremacy <span class="cn">至高无上</span></li>
+        <li>Dominance <span class="cn">支配地位</span></li>
+        <li>Leadership <span class="cn">领导地位</span></li>
+        <li>Preeminence <span class="cn">卓越；优越</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Primacy" comes from Latin <em>prīmus</em>, meaning “first.” It entered English via Late Latin <em>primatia</em> (“first place”).<br>
+    <span class="cn">primacy 来自拉丁语 prīmus，意为“第一”，通过晚期拉丁语 primatia 演变为“首位”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>prīmus</em> – first<br>
+      <span class="cn">拉丁语 prīmus：第一</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Late Latin:</strong> <em>primatia</em> – first rank<br>
+      <span class="cn">晚期拉丁语 primatia：首要地位</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>primacy</em> – highest importance or authority<br>
+      <span class="cn">现代英语 primacy：至高地位或最重要性</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Supremacy</td>
+          <td>Formal</td>
+          <td>The empire fought to maintain its military supremacy.</td>
+          <td>Powerful / Strategic</td>
+        </tr>
+        <tr>
+          <td>Leadership</td>
+          <td>Neutral</td>
+          <td>The country took leadership in global climate talks.</td>
+          <td>Positive / Practical</td>
+        </tr>
+        <tr>
+          <td><strong>Primacy</strong></td>
+          <td><strong>Formal / Academic</strong></td>
+          <td>The court affirmed the primacy of constitutional law.</td>
+          <td>Authoritative / Legal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Primacy"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/3AIlP6ZXHBk?start=60"
+      title="Primacy in International Politics"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:00</strong> for how “primacy” is used in discussions of power and influence.<br>
+      <span class="cn">听第 1:00 左右，了解“primacy”如何用于权力和影响的讨论中。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Primacy in the News</h3>
+    <p>
+      Analysts debate whether the U.S. can maintain its primacy in global technology leadership.<br>
+      <span class="cn">分析人士正在讨论美国是否能够保持其在全球科技领域的主导地位。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.foreignaffairs.com" target="_blank" class="fancy-link">
+        📰 Read More – Foreign Affairs
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
