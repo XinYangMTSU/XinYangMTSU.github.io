@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Whack</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🪓 whack
+      <span class="pronunciation">/wæk/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/w/wha/whack/whack__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb / Noun (informal)<br><span class="cn">词性：动词 / 名词（非正式）</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>As a verb:</strong> To hit someone or something with a sharp blow.<br>
+    <span class="cn">动词：猛击，重打。</span></p>
+    
+    <p><strong>As a noun:</strong> A sharp or resounding blow.<br>
+    <span class="cn">名词：重击，猛打。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> He whacked the ball over the fence.<br>
+      <span class="cn">例句：他猛地把球击出围栏。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She gave the bug a whack with her book.<br>
+      <span class="cn">例句：她用书猛打那只虫子。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Smack <span class="cn">拍击</span></li>
+        <li>Strike <span class="cn">击打</span></li>
+        <li>Hit <span class="cn">打</span></li>
+        <li>Thump <span class="cn">重击</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Whack" is of imitative origin, meaning it likely comes from the sound of a heavy blow. It has been used since the 18th century in informal English.<br>
+    <span class="cn">“whack” 是拟声词，模仿重击时发出的声音，18世纪以来在非正式英语中使用。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Origin:</strong> Imitative of a sharp hitting sound<br>
+      <span class="cn">词源：模仿重击时的声音</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>18th Century:</strong> Used to describe blows or strikes<br>
+      <span class="cn">18世纪：用于描述猛击或重打</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> Also used in slang (e.g., "out of whack")<br>
+      <span class="cn">现代英语：也用于俚语中（如 “out of whack” 表示出故障、不正常）</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Intensity</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Whack</td>
+          <td>Strong / Informal</td>
+          <td>He whacked the nail with a hammer.</td>
+          <td>Casual / Physical</td>
+        </tr>
+        <tr>
+          <td>Smack</td>
+          <td>Medium</td>
+          <td>She smacked him on the arm playfully.</td>
+          <td>Light / Playful</td>
+        </tr>
+        <tr>
+          <td>Strike</td>
+          <td>Neutral / Formal</td>
+          <td>The worker struck the metal with precision.</td>
+          <td>Serious / Technical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Whack"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/0E2PpYqZ6k4?start=75"
+      title="Whack-a-Mole Game Clip"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:15</strong> to hear how “whack” is used in a fun, action-based context.<br>
+      <span class="cn">听第 1:15 左右，了解“whack”在游戏或动作场景中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Whack in the News</h3>
+    <p>
+      A protester tried to whack the bell with a stick before being stopped by security.<br>
+      <span class="cn">一名抗议者试图用棍子猛敲钟，但被安保人员制止了。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.reuters.com" target="_blank" class="fancy-link">
+        📰 Read More – Reuters
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
