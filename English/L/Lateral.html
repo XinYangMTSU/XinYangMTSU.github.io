@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Lateral</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ↔️ lateral
+      <span class="pronunciation">/ˈlætərəl/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/l/lat/later/lateral__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Relating to or situated at the side; moving or directed sideways rather than up or down.<br>
+    <span class="cn">侧面的；横向的；向旁边的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The lateral movement of the car made it hard to park.<br>
+      <span class="cn">例句：汽车的横向移动让停车变得困难。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Promotions in the company are not always upward — sometimes there are lateral moves to different departments.<br>
+      <span class="cn">例句：公司中的晋升并不总是向上，有时是横向调动到其他部门。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Sideways <span class="cn">向侧面地</span></li>
+        <li>Horizontal <span class="cn">水平的</span></li>
+        <li>Peripheral <span class="cn">外围的</span></li>
+        <li>Oblique <span class="cn">斜向的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Lateral" comes from Latin <em>lateralis</em>, derived from <em>latus</em>, meaning “side.”<br>
+    <span class="cn">lateral 源自拉丁语 lateralis，来自 latus，意为“侧面”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>latus</em> – side<br>
+      <span class="cn">拉丁语 latus：侧面</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Late Latin:</strong> <em>lateralis</em> – relating to the side<br>
+      <span class="cn">晚期拉丁语 lateralis：与侧面相关</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>lateral</em> – side or sideways<br>
+      <span class="cn">现代英语 lateral：横向的，侧面的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Horizontal</td>
+          <td>Neutral</td>
+          <td>He drew a horizontal line across the page.</td>
+          <td>Technical / Spatial</td>
+        </tr>
+        <tr>
+          <td>Sideways</td>
+          <td>Informal</td>
+          <td>She glanced sideways at him.</td>
+          <td>Descriptive / Casual</td>
+        </tr>
+        <tr>
+          <td><strong>Lateral</strong></td>
+          <td><strong>Neutral / Formal</strong></td>
+          <td>He was offered a lateral position in another department.</td>
+          <td>Professional / Structural</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Lateral"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/JMuzC-oxfuw?start=30"
+      title="Lateral Thinking Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> for how "lateral" is used in creative problem solving.<br>
+      <span class="cn">听第 0:30 左右，了解“lateral”如何用于描述创造性思维。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Lateral in the News</h3>
+    <p>
+      Tech companies are embracing lateral career moves to retain talent and promote internal growth.<br>
+      <span class="cn">科技公司正在采用横向调动来留住人才并促进内部发展。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.wsj.com" target="_blank" class="fancy-link">
+        📰 Read More – The Wall Street Journal
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
