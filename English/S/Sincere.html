@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Sincere</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ❤️ sincere
+      <span class="pronunciation">/sɪnˈsɪr/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/sin/since/sincere__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Genuine; expressing true feelings, thoughts, or intentions without pretending.<br>
+    <span class="cn">真诚的；表达真实感情、想法或意图的；不虚伪的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She gave me a sincere apology for what happened.<br>
+      <span class="cn">例句：她为发生的事情向我真诚地道歉。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> I want to express my sincere thanks for your help.<br>
+      <span class="cn">例句：我想表达我对你帮助的真挚感谢。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Genuine <span class="cn">真诚的</span></li>
+        <li>Honest <span class="cn">诚实的</span></li>
+        <li>Truthful <span class="cn">真实的</span></li>
+        <li>Heartfelt <span class="cn">发自内心的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Sincere" comes from Latin <em>sincerus</em>, meaning “clean, pure, sound,” referring to truthfulness or being free from deceit.<br>
+    <span class="cn">sincere 来自拉丁语 sincerus，意为“纯净的、真实的”，引申为不欺骗的真诚之意。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>sincerus</em> – clean, pure, truthful<br>
+      <span class="cn">拉丁语 sincerus：纯净、真实</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle French:</strong> <em>sincere</em> – genuine<br>
+      <span class="cn">中古法语 sincere：真诚的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>sincere</em> – honest and heartfelt<br>
+      <span class="cn">现代英语 sincere：诚实且发自内心的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Honest</td>
+          <td>Neutral</td>
+          <td>He gave an honest answer to the question.</td>
+          <td>Respectful / Trustworthy</td>
+        </tr>
+        <tr>
+          <td>Genuine</td>
+          <td>Neutral / Positive</td>
+          <td>Her smile was completely genuine.</td>
+          <td>Warm / Natural</td>
+        </tr>
+        <tr>
+          <td><strong>Sincere</strong></td>
+          <td><strong>Neutral / Formal</strong></td>
+          <td>Please accept my sincere condolences.</td>
+          <td>Respectful / Deep</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Sincere"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/q5L5n1_KqOU?start=80"
+      title="How to Give a Sincere Apology"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:20</strong> for how “sincere” is used in personal communication.<br>
+      <span class="cn">听第 1:20 左右，了解 sincere 一词如何用于表达真挚的交流。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Sincere in the News</h3>
+    <p>
+      The athlete offered a sincere statement after the controversy, earning public support.<br>
+      <span class="cn">这位运动员在争议之后发表了真诚的声明，赢得了公众的支持。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
