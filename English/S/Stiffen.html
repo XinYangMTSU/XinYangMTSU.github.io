@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Stiffen</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧊 stiffen
+      <span class="pronunciation">/ˈstɪfən/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/sti/stiff/stiffen__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To become, or make something become, more rigid or firm.<br>
+    <span class="cn">变得（或使变得）僵硬或坚硬。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> His body stiffened when he heard the strange noise.<br>
+      <span class="cn">例句：他听到奇怪的声音时全身僵硬了。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Add starch to stiffen the fabric.<br>
+      <span class="cn">例句：加上淀粉可以使布料变得更硬挺。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Harden <span class="cn">使变硬</span></li>
+        <li>Freeze <span class="cn">冻僵</span></li>
+        <li>Tense <span class="cn">紧绷</span></li>
+        <li>Solidify <span class="cn">凝固</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Stiffen" comes from Middle English <em>stiffen</em>, related to the word "stiff" meaning rigid or firm.<br>
+    <span class="cn">stiffen 源自中古英语 stiffen，与表示“坚硬”的 stiff 一词相关。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>stif</em> – rigid, inflexible<br>
+      <span class="cn">古英语 stif：僵硬的，不灵活的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>stiffen</em> – become rigid<br>
+      <span class="cn">中古英语 stiffen：变得僵硬</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>stiffen</em> – to make or become stiff<br>
+      <span class="cn">现代英语 stiffen：使变得僵硬</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Intensity</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Stiffen</td>
+          <td>Moderate</td>
+          <td>She stiffened at the sound of his voice.</td>
+          <td>Physical / Emotional</td>
+        </tr>
+        <tr>
+          <td>Freeze</td>
+          <td>Strong</td>
+          <td>He froze in terror as the bear approached.</td>
+          <td>Intense / Fearful</td>
+        </tr>
+        <tr>
+          <td>Harden</td>
+          <td>General</td>
+          <td>The clay hardened overnight.</td>
+          <td>Neutral / Physical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Stiffen"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/ibnz3-xeqH4?start=40"
+      title="How Fear Affects the Body"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Around <strong>0:40</strong>, listen for how the body may stiffen during fear.<br>
+      <span class="cn">听第 0:40 处，了解人在害怕时身体可能变得僵硬。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Stiffen in the News</h3>
+    <p>
+      As tensions stiffen between rival factions, diplomats call for calm and resolution.<br>
+      <span class="cn">随着对立派系之间的紧张局势加剧，外交官呼吁冷静与解决。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
