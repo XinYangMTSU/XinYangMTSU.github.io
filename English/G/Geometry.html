@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Geometry</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📐 geometry
+      <span class="pronunciation">/dʒiˈɑːmətri/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/g/geo/geom_/geometry__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>The branch of mathematics that deals with the properties, measurement, and relationships of points, lines, angles, surfaces, and solids.<br>
+    <span class="cn">数学的一个分支，研究点、线、角、面和立体的性质、测量和关系。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She has always enjoyed studying geometry and solving shape-related problems.<br>
+      <span class="cn">例句：她一直喜欢学习几何并解决与形状相关的问题。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Geometry helps architects design buildings with precision.<br>
+      <span class="cn">例句：几何学帮助建筑师精确设计建筑物。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Shape study <span class="cn">形状研究</span></li>
+        <li>Spatial reasoning <span class="cn">空间推理</span></li>
+        <li>Mathematical measurement <span class="cn">数学测量</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Geometry" comes from Greek <em>geo</em> meaning "earth" and <em>metron</em> meaning "measure."<br>
+    <span class="cn">geometry 来自希腊语 geo（地球）和 metron（测量）。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong> <em>geometria</em> – earth measurement<br>
+      <span class="cn">希腊语 geometria：测量土地</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Latin:</strong> <em>geometria</em><br>
+      <span class="cn">拉丁语 geometria</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>geometry</em><br>
+      <span class="cn">中古英语 geometry</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Field</th>
+          <th>Example Use</th>
+          <th>Focus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Geometry</td>
+          <td>Mathematics</td>
+          <td>Geometry is essential for understanding spatial relationships.</td>
+          <td>Shapes and space</td>
+        </tr>
+        <tr>
+          <td>Trigonometry</td>
+          <td>Mathematics</td>
+          <td>Trigonometry focuses on the properties of triangles.</td>
+          <td>Angles and lengths</td>
+        </tr>
+        <tr>
+          <td>Algebra</td>
+          <td>Mathematics</td>
+          <td>Algebra is used to solve equations involving unknowns.</td>
+          <td>Symbols and equations</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Geometry"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/3s7h2MHQtxc"
+      title="What is Geometry? - Math Video"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch the first 30 seconds for a basic definition of geometry.<br>
+      <span class="cn">观看前 30 秒了解几何的基本定义。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Geometry in the News</h3>
+    <p>
+      Researchers are using advanced geometry to model the shape of protein molecules.<br>
+      <span class="cn">研究人员正在使用高级几何来建模蛋白质分子的形状。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.sciencenews.org" target="_blank" class="fancy-link">
+        📰 Read More – Science News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
