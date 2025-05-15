@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Vietnam 🇻🇳</title>
+  <title>Vietnam 🇻🇳 越南</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -97,19 +97,31 @@
       border-radius: 10px;
       font-style: italic;
     }
+
+    .big-flag {
+  font-size: 7rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+    
   </style>
+  
 </head>
 <body>
 
   <header>
-    <h1>🇻🇳 Vietnam</h1>
+    <h1>🇻🇳 Vietnam 越南</h1>
     <p>Discover the beauty and culture of Vietnam!</p>
   </header>
 
   <div class="container">
     <div class="card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Vietnam_%28orthographic_projection%29.svg/640px-Vietnam_%28orthographic_projection%29.svg.png" alt="Map of Vietnam" class="photo">
+      <div class="big-flag">🇻🇳</div>
       <div class="info-list">
+        Vietnam  <button class="audio-button2" onclick="speak('Vietnam')">🔊</button>
+        越南 <button class="audio-button2" onclick="speakCh('越南')">🔊</button>
+        <br>
         <p><strong>Capital:</strong> Hanoi <button class="audio-button2" onclick="speak('Capital: Hanoi')">🔊</button></p>
         <p><strong>Language:</strong> Vietnamese <button class="audio-button2" onclick="speak('Language: Vietnamese')">🔊</button></p>
         <p><strong>Currency:</strong> Vietnamese đồng <button class="audio-button2" onclick="speak('Currency: Vietnamese dong')">🔊</button></p>
@@ -159,6 +171,15 @@
       utterance.rate = 0.9;
       speechSynthesis.speak(utterance);
     }
+
+     function speakCh(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('zh')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+    
   </script>
 
 </body>
