@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Crouch Down & Ruffled</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(to right, #fce4ec, #e0f7fa);
+      padding: 30px;
+      color: #333;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #00796b;
+    }
+    .vocab-box {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin: 30px auto;
+      max-width: 800px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      background-color: #fff;
+    }
+    th {
+      background-color: #b2dfdb;
+      color: #004d40;
+    }
+    .example {
+      background: #f8bbd0;
+      padding: 15px;
+      margin-top: 20px;
+      border-left: 6px solid #ad1457;
+    }
+    .audio-button {
+      background-color: #ff80ab;
+      color: white;
+      border: none;
+      padding: 5px 15px;
+      margin-left: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .audio-button:hover {
+      background-color: #f06292;
+    }
+    .speak-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎓 Word Study: <em>Crouch Down</em> & <em>Ruffled</em></h1>
+
+
+  <div class="vocab-box">
+    <h2>🧍‍♂️ "Crouch Down" <button class="audio-button" onclick="speak('Crouch down')">🔈</button> 的表达</h2>
+    <table>
+      <tr>
+        <th>English</th>
+        <th>Meaning</th>
+        <th>Example</th>
+        <th>中文翻译</th>
+      </tr>
+      <tr>
+        <td>🧎 Kneel down <button class="audio-button" onclick="speak('Kneel down')">🎧</button></td>
+        <td>Go on knees</td>
+        <td>She kneeled to tie her shoes.</td>
+        <td>跪下来</td>
+      </tr>
+      <tr>
+        <td>🧍‍♀️ Squat down <button class="audio-button" onclick="speak('Squat down')">🎧</button></td>
+        <td>Lower body with bent knees</td>
+        <td>He squatted to pick up the toy.</td>
+        <td>蹲下</td>
+      </tr>
+      <tr>
+        <td>🙇 Bend down <button class="audio-button" onclick="speak('Bend down')">🎧</button></td>
+        <td>Lean forward</td>
+        <td>She bent down to look.</td>
+        <td>弯下身</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="vocab-box">
+    <h2>🐱 "Ruffled"  <button class="audio-button" onclick="speak('Ruffled')">🔈</button> 的表达</h2>
+    <table>
+      <tr>
+        <th>English</th>
+        <th>Meaning</th>
+        <th>Example</th>
+        <th>中文翻译</th>
+      </tr>
+      <tr>
+        <td>Stroked <button class="audio-button" onclick="speak('Stroked')">🎧</button></td>
+        <td>Gently moved hand</td>
+        <td>I stroked the cat’s back.</td>
+        <td>抚摸</td>
+      </tr>
+      <tr>
+        <td>Petted <button class="audio-button" onclick="speak('Petted')">🎧</button></td>
+        <td>Touched with affection</td>
+        <td>She petted the puppy.</td>
+        <td>爱抚</td>
+      </tr>
+      <tr>
+        <td>Tousled <button class="audio-button" onclick="speak('Tousled')">🎧</button></td>
+        <td>Made messy softly</td>
+        <td>He tousled his son's hair.</td>
+        <td>轻轻揉乱</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="vocab-box example">
+    <h2>✏️ Sentence Comparison</h2>
+    <p><strong>Original:</strong> "What is it, Sassafras?" I <em>crouched down</em> and <em>ruffled</em> my cat’s fluffy fur.</p>
+    <p><strong>Rewrite 1:</strong> I <b>bent down</b> and <b>stroked</b> my cat’s soft coat.</p>
+    <p><strong>Rewrite 2:</strong> I <b>squatted</b> beside her and <b>ran my fingers through</b> her fur.</p>
+    <p><strong>Rewrite 3:</strong> I <b>knelt</b> and gently <b>tousled</b> her fluffy hair.</p>
+  </div>
+
+  <script>
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "en-US";
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
