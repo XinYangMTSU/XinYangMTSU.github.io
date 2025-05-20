@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Precedence</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🥇 precedence
+      <span class="pronunciation">/ˈpresɪdəns/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pre/prece/precedence__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>The condition of being considered more important than something else; the right to go before others in importance, order, or rank.<br>
+    <span class="cn">优先；优先权；重要性较高。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Safety must take precedence over speed.<br>
+      <span class="cn">例句：安全必须优先于速度。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> In official ceremonies, precedence is given to senior officials.<br>
+      <span class="cn">例句：在正式仪式中，优先权给予高级官员。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Priority <span class="cn">优先</span></li>
+        <li>Primacy <span class="cn">首要</span></li>
+        <li>Preeminence <span class="cn">卓越；领先地位</span></li>
+        <li>Superiority <span class="cn">优越性</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Precedence" comes from the Latin word <em>praecedere</em>, meaning “to go before.” It entered English via Old French as <em>precedence</em>, referring to priority or the act of going ahead.<br>
+    <span class="cn">precedence 来自拉丁语 praecedere，意思是“走在前面”。通过古法语进入英语，表示优先或领先的行为。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>praecedere</em> – to go before<br>
+      <span class="cn">拉丁语 praecedere：走在前面</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>precedence</em> – priority, rank<br>
+      <span class="cn">古法语 precedence：优先，等级</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>precedence</em> – priority, importance<br>
+      <span class="cn">现代英语 precedence：优先权，重要性</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Priority</td>
+          <td>Neutral</td>
+          <td>Our top priority is customer safety.</td>
+          <td>Practical</td>
+        </tr>
+        <tr>
+          <td>Primacy</td>
+          <td>Formal</td>
+          <td>The primacy of science in modern thought is clear.</td>
+          <td>Philosophical</td>
+        </tr>
+        <tr>
+          <td><strong>Precedence</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>Her health takes precedence over her job.</td>
+          <td>Serious / Hierarchical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Precedence"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/QSC6e5JqLEw?start=80"
+      title="Protocol and Precedence Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:20</strong> for how “precedence” is explained in terms of official ranking and protocol.<br>
+      <span class="cn">听第 1:20 左右，了解“precedence”在官职等级和礼仪中的解释。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Precedence in the News</h3>
+    <p>
+      Climate change now takes precedence in the global political agenda.<br>
+      <span class="cn">气候变化现在在全球政治议程中占据优先地位。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
