@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Legitimate</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ✅ legitimate
+      <span class="pronunciation">/ləˈdʒɪtɪmət/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/l/leg/legit/legitimate__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Allowed by law or rules; reasonable and acceptable; genuine or real.<br>
+    <span class="cn">合法的；正当的；合理的；真实的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> He has a legitimate claim to the property.<br>
+      <span class="cn">例句：他对这块财产有合法的权利。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> That's a legitimate concern — we need to consider it carefully.<br>
+      <span class="cn">例句：那是个合理的担忧——我们需要认真考虑。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Lawful <span class="cn">合法的</span></li>
+        <li>Valid <span class="cn">有效的；有根据的</span></li>
+        <li>Genuine <span class="cn">真实的</span></li>
+        <li>Justified <span class="cn">有正当理由的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Legitimate" comes from Latin <em>legitimus</em>, meaning “lawful,” which in turn derives from <em>lex</em>, meaning “law.”<br>
+    <span class="cn">legitimate 来自拉丁语 legitimus，意思是“合法的”，源自 lex，意思是“法律”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>lex</em> – law<br>
+      <span class="cn">拉丁语 lex：法律</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Latin:</strong> <em>legitimus</em> – lawful, proper<br>
+      <span class="cn">拉丁语 legitimus：合法的，正当的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>legitimate</em> – lawful, valid, reasonable<br>
+      <span class="cn">现代英语 legitimate：合法的，正当的，合理的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lawful</td>
+          <td>Formal</td>
+          <td>They followed the lawful procedure.</td>
+          <td>Legal</td>
+        </tr>
+        <tr>
+          <td>Valid</td>
+          <td>Neutral</td>
+          <td>The ticket is valid for 30 days.</td>
+          <td>Technical</td>
+        </tr>
+        <tr>
+          <td><strong>Legitimate</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>He made a legitimate request for more time.</td>
+          <td>Respectful / Legal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Legitimate"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/Tld5JtHHHBo?start=50"
+      title="Explaining Legitimate Rights"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:50</strong> for how the speaker uses the word “legitimate” in a legal and ethical context.<br>
+      <span class="cn">听第 0:50 左右，了解讲者如何在法律和道德背景下使用“legitimate”一词。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Legitimate in the News</h3>
+    <p>
+      The protesters demanded legitimate reforms to the electoral process.<br>
+      <span class="cn">抗议者要求对选举制度进行合法的改革。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com" target="_blank" class="fancy-link">
+        📰 Read More – The Guardian
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
