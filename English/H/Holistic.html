@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Holistic</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌐 holistic
+      <span class="pronunciation">/hoʊˈlɪstɪk/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/h/hol/holis/holistic__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Considering something as a whole, rather than just a collection of parts; focusing on the complete system or person, especially in health, education, or analysis.<br>
+    <span class="cn">整体的；全面的；强调整体而非部分的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> A holistic approach to education considers emotional, social, and academic development.<br>
+      <span class="cn">例句：教育的整体方法会考虑情感、社交和学术的发展。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Holistic medicine treats the body, mind, and spirit together.<br>
+      <span class="cn">例句：整体医学将身体、心理和精神作为一个整体来治疗。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Comprehensive <span class="cn">全面的</span></li>
+        <li>Integrated <span class="cn">整合的</span></li>
+        <li>Whole-person <span class="cn">以人为整体的</span></li>
+        <li>All-encompassing <span class="cn">包罗万象的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Holistic" comes from the Greek word <em>holos</em>, meaning “whole.” It was first used in the early 20th century in English, especially in philosophical and medical contexts.<br>
+    <span class="cn">“Holistic” 源自希腊语 holos，意为“整体”。20 世纪初首次进入英语，常用于哲学和医学领域。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong> <em>holos</em> – whole, entire<br>
+      <span class="cn">希腊语 holos：整体，全部</span><br><br>
+      <strong>Modern English:</strong> <em>holistic</em> – relating to the whole rather than parts<br>
+      <span class="cn">现代英语 holistic：着眼于整体的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Comprehensive</td>
+          <td>Formal</td>
+          <td>We conducted a comprehensive review of the data.</td>
+          <td>Analytical</td>
+        </tr>
+        <tr>
+          <td>Integrated</td>
+          <td>Neutral</td>
+          <td>The project uses an integrated learning system.</td>
+          <td>Technical</td>
+        </tr>
+        <tr>
+          <td><strong>Holistic</strong></td>
+          <td><strong>Formal / Philosophical</strong></td>
+          <td>A holistic view of the patient was necessary.</td>
+          <td>Humanistic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Holistic"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/tHkfFmZ5pxY?start=30"
+      title="What is Holistic Thinking?"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear how “holistic” is used in health and education contexts.<br>
+      <span class="cn">听第 0:30 左右，了解“holistic”在健康和教育领域的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Holistic in the News</h3>
+    <p>
+      Schools are adopting holistic approaches to student well-being, incorporating mindfulness, nutrition, and emotional learning.<br>
+      <span class="cn">学校正在采用整体方法关注学生福祉，包括正念训练、营养健康和情绪学习。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
