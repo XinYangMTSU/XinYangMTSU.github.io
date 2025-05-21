@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Bureaucracy</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🏛️ bureaucracy
+      <span class="pronunciation">/bjʊˈrɑːkrəsi/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/b/bur/burea/bureaucracy__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A system of government or business that is run by many departments and officials following fixed rules; often used to describe overly complex administrative procedures.<br>
+    <span class="cn">官僚制度；官僚作风；繁琐的行政程序。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The reforms are intended to reduce unnecessary bureaucracy in education.<br>
+      <span class="cn">例句：这些改革旨在减少教育系统中不必要的官僚作风。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Applying for a visa can involve a lot of bureaucracy.<br>
+      <span class="cn">例句：申请签证可能涉及大量的繁文缛节。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Red tape <span class="cn">繁琐手续</span></li>
+        <li>Administration <span class="cn">行政管理</span></li>
+        <li>Government agency <span class="cn">政府机构</span></li>
+        <li>Officialdom <span class="cn">官僚机构</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Bureaucracy" comes from the French word <em>bureaucratie</em>, which combines <em>bureau</em> ("desk" or "office") and the Greek suffix <em>-kratia</em> ("power" or "rule"). It originally referred to government by office desks, i.e., administration by officials.<br>
+    <span class="cn">bureaucracy 来自法语 bureaucratie，词根为 bureau（办公桌、办公室）与希腊语后缀 -kratia（统治）。最初指“由办公室管理的政府”，即“官僚制度”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>French:</strong> <em>bureaucratie</em> – rule by offices<br>
+      <span class="cn">法语 bureaucratie：由办公室管理</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>bureaucracy</em> – rule by officials, often rigid<br>
+      <span class="cn">现代英语 bureaucracy：官僚统治，制度僵化</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Red tape</td>
+          <td>Informal</td>
+          <td>They’re cutting red tape to help small businesses.</td>
+          <td>Critical</td>
+        </tr>
+        <tr>
+          <td>Administration</td>
+          <td>Neutral</td>
+          <td>She works in university administration.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td><strong>Bureaucracy</strong></td>
+          <td><strong>Formal / Critical</strong></td>
+          <td>Bureaucracy can slow down important decisions.</td>
+          <td>Serious / Negative</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Bureaucracy"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/Ex3A7vArI6k?start=60"
+      title="What Is Bureaucracy – Crash Course Government"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:00</strong> to hear “bureaucracy” used in the context of government systems.<br>
+      <span class="cn">听第 1:00 左右，了解“bureaucracy”在政府系统中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Bureaucracy in the News</h3>
+    <p>
+      Tech companies are calling for less bureaucracy in the patent approval process.<br>
+      <span class="cn">科技公司呼吁在专利审批流程中减少官僚作风。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
