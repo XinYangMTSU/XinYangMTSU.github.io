@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Companion</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      👫 companion
+      <span class="pronunciation">/kəmˈpænjən/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/com/compa/companion__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A person or animal that spends time with someone or goes somewhere with them. A companion can also refer to a close friend or someone who provides company.<br>
+    <span class="cn">陪伴者；同伴；朋友；伴侣。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The dog has been his faithful companion for ten years.<br>
+      <span class="cn">例句：这只狗是他十年来忠实的伙伴。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She traveled the world with her lifelong companion.<br>
+      <span class="cn">例句：她和终生伴侣一起周游世界。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Friend <span class="cn">朋友</span></li>
+        <li>Partner <span class="cn">伙伴</span></li>
+        <li>Mate <span class="cn">伴侣</span></li>
+        <li>Associate <span class="cn">同伴；同事</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Companion" comes from the Latin <em>com-</em> (together) + <em>panis</em> (bread), originally meaning “someone you share bread with.” It entered English in the 14th century to mean a person who accompanies another.<br>
+    <span class="cn">“Companion” 源自拉丁语 com-（一起）和 panis（面包），原意为“一起吃面包的人”。14 世纪进入英语，指陪伴者或同伴。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>com-</em> (together) + <em>panis</em> (bread)<br>
+      <span class="cn">拉丁语 com-（共同）+ panis（面包）</span><br><br>
+      <strong>Old French:</strong> <em>compaignon</em> – someone who shares<br>
+      <span class="cn">古法语 compaignon：共享的人</span><br><br>
+      <strong>Modern English:</strong> <em>companion</em> – a friend, partner, or someone who provides company<br>
+      <span class="cn">现代英语 companion：朋友、伴侣或陪伴者</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Friend</td>
+          <td>Neutral</td>
+          <td>He’s my best friend from college.</td>
+          <td>Personal</td>
+        </tr>
+        <tr>
+          <td>Partner</td>
+          <td>Neutral</td>
+          <td>We’re business partners and companions in life.</td>
+          <td>Practical / Intimate</td>
+        </tr>
+        <tr>
+          <td><strong>Companion</strong></td>
+          <td><strong>Neutral / Warm</strong></td>
+          <td>The traveler found a loyal companion on his journey.</td>
+          <td>Friendly / Loyal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Companion"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/ev2zkRSnLss?start=30"
+      title="The Power of Companionship"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear how “companion” is used to describe supportive relationships.<br>
+      <span class="cn">听第 0:30 左右，了解“companion”如何用于描述有支持性的关系。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Companion in the News</h3>
+    <p>
+      Many seniors find comfort in having a companion animal for emotional support.<br>
+      <span class="cn">许多老年人通过宠物伴侣获得情感上的安慰。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
