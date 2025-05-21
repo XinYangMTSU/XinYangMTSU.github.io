@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Rigid</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧱 rigid
+      <span class="pronunciation">/ˈrɪdʒɪd/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/r/rig/rigid/rigid__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Not flexible; unable to bend or be changed easily. Can describe physical stiffness or inflexible attitudes or rules.<br>
+    <span class="cn">僵硬的；死板的；不灵活的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The metal frame is rigid and won't bend under pressure.<br>
+      <span class="cn">例句：金属框架很坚硬，不会在压力下弯曲。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He has a rigid attitude toward discipline.<br>
+      <span class="cn">例句：他对纪律持有非常严格的态度。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Stiff <span class="cn">僵硬的</span></li>
+        <li>Inflexible <span class="cn">不灵活的</span></li>
+        <li>Strict <span class="cn">严格的</span></li>
+        <li>Unbending <span class="cn">不屈的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Rigid" comes from Latin <em>rigidus</em>, meaning “stiff” or “hard,” derived from <em>rigēre</em> — “to be stiff.” It entered English in the late Middle Ages.<br>
+    <span class="cn">rigid 源自拉丁语 rigidus，意为“僵硬的”，来自 rigēre（变硬）。在中世纪晚期进入英语。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>rigēre</em> – to be stiff<br>
+      <span class="cn">拉丁语 rigēre：变硬</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Latin:</strong> <em>rigidus</em> – stiff, hard<br>
+      <span class="cn">拉丁语 rigidus：坚硬的，僵化的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>rigid</em> – not flexible or adaptable<br>
+      <span class="cn">现代英语 rigid：僵硬的，不灵活的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Stiff</td>
+          <td>Neutral</td>
+          <td>My back is stiff after sitting all day.</td>
+          <td>Descriptive</td>
+        </tr>
+        <tr>
+          <td>Inflexible</td>
+          <td>Formal</td>
+          <td>The rules are inflexible and outdated.</td>
+          <td>Critical</td>
+        </tr>
+        <tr>
+          <td><strong>Rigid</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>The structure must be rigid to support weight.</td>
+          <td>Technical / Critical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Rigid"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/Ikwa9UnF_3Q?start=55"
+      title="Rigid vs Flexible Design – Engineering Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:55</strong> to hear “rigid” used to describe engineering structures.<br>
+      <span class="cn">听第 0:55 左右，了解“rigid”在工程结构语境中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Rigid in the News</h3>
+    <p>
+      Critics say the rigid school curriculum leaves little room for creativity.<br>
+      <span class="cn">批评者表示，僵化的学校课程体系几乎没有给创造力留空间。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
