@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Embark</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🚢 embark
+      <span class="pronunciation">/ɪmˈbɑːrk/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/e/emb/embar/embark__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To begin a journey, project, or course of action, especially one that is new or challenging.<br>
+    <span class="cn">开始（新的或有挑战性的事情）；启程；着手。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> They embarked on a new adventure through the Amazon rainforest.<br>
+      <span class="cn">例句：他们踏上了穿越亚马逊雨林的新冒险。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She decided to embark on a career in medicine.<br>
+      <span class="cn">例句：她决定从事医学职业。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Begin <span class="cn">开始</span></li>
+        <li>Commence <span class="cn">着手</span></li>
+        <li>Start off <span class="cn">出发</span></li>
+        <li>Launch <span class="cn">发起</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Embark" comes from the Old French word <em>embarquer</em>, meaning “to go on board a ship,” which is derived from <em>em-</em> (in) + <em>barque</em> (small ship).<br>
+    <span class="cn">embark 来自古法语 embarquer，意思是“登船”，由 em-（进入）+ barque（小船）构成。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old French:</strong> <em>embarquer</em> – to go on board<br>
+      <span class="cn">古法语 embarquer：登船</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>embark</em> – to begin or set out<br>
+      <span class="cn">现代英语 embark：开始，启程</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Begin</td>
+          <td>Neutral</td>
+          <td>Let’s begin the project next week.</td>
+          <td>Simple</td>
+        </tr>
+        <tr>
+          <td>Commence</td>
+          <td>Formal</td>
+          <td>The trial will commence at 10 a.m.</td>
+          <td>Official</td>
+        </tr>
+        <tr>
+          <td><strong>Embark</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>He embarked on a journey to self-discovery.</td>
+          <td>Adventurous / Ambitious</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Embark"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/xHH0lbJ8U64?start=90"
+      title="Embark on a Journey – National Geographic"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:30</strong> for how “embark” is used to describe setting off on expeditions.<br>
+      <span class="cn">听第 1:30 左右，了解“embark”如何用来描述探险出发。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Embark in the News</h3>
+    <p>
+      Scientists are set to embark on a groundbreaking mission to study deep-sea ecosystems.<br>
+      <span class="cn">科学家将启程进行一项开创性的深海生态系统研究任务。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
