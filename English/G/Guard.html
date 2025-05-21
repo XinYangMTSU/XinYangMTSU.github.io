@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Guard</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🛡️ guard
+      <span class="pronunciation">/ɡɑːrd/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/g/gua/guard/guard__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun / Verb<br><span class="cn">词性：名词 / 动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Noun:</strong> A person or device that protects or watches over something.<br>
+    <span class="cn">名词：守卫，警卫，保护装置。</span></p>
+    <p><strong>Verb:</strong> To protect or watch over someone or something.<br>
+    <span class="cn">动词：守卫，保卫。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> A security guard checked everyone entering the building.<br>
+      <span class="cn">例句：保安检查了所有进入大楼的人。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Soldiers were guarding the entrance to the camp.<br>
+      <span class="cn">例句：士兵们正在守卫营地入口。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Protect <span class="cn">保护</span></li>
+        <li>Defend <span class="cn">防卫</span></li>
+        <li>Watch <span class="cn">看守</span></li>
+        <li>Sentry <span class="cn">哨兵</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Guard" comes from Old French <em>garder</em>, meaning "to protect or watch", which has Germanic roots. It entered English in the Middle Ages.<br>
+    <span class="cn">guard 来自古法语 garder，意为“保护”或“看守”，源自日耳曼语词根，在中世纪进入英语。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old French:</strong> <em>garder</em> – to guard, protect<br>
+      <span class="cn">古法语 garder：守卫，保护</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Middle English:</strong> <em>garde</em> – protection<br>
+      <span class="cn">中古英语 garde：保护</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>guard</em> – to protect or person who protects<br>
+      <span class="cn">现代英语 guard：保护或守卫者</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Protect</td>
+          <td>Neutral</td>
+          <td>The sunscreen protects your skin from UV rays.</td>
+          <td>General</td>
+        </tr>
+        <tr>
+          <td>Defend</td>
+          <td>Formal</td>
+          <td>They defended their country bravely.</td>
+          <td>Military / Serious</td>
+        </tr>
+        <tr>
+          <td><strong>Guard</strong></td>
+          <td><strong>Neutral</strong></td>
+          <td>He guards the museum at night.</td>
+          <td>Protective / Practical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Guard"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/BGzDn9V8hV8?start=60"
+      title="Guard Duty in Action"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:00</strong> to hear how “guard” is used in a military or security context.<br>
+      <span class="cn">听第 1:00 左右，了解“guard”在军事或安保语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Guard in the News</h3>
+    <p>
+      The guard acted quickly to stop the intruder from entering the building.<br>
+      <span class="cn">警卫迅速采取行动，阻止了闯入者进入大楼。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
