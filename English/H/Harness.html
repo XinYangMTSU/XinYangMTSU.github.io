@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Harness</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🐴 harness
+      <span class="pronunciation">/ˈhɑːrnəs/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/h/har/harne/harness__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb / Noun<br><span class="cn">词性：动词 / 名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Verb:</strong> To control and make use of a natural resource or power.<br>
+    <span class="cn">动词：控制并利用（自然资源或能量）。</span></p>
+    <p><strong>Noun:</strong> A set of straps used to attach or control an animal or secure a person.<br>
+    <span class="cn">名词：用于控制动物或固定人的一组带子；安全带。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Engineers are working to harness solar energy more efficiently.<br>
+      <span class="cn">例句：工程师正在努力更高效地利用太阳能。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The climber adjusted his harness before starting the ascent.<br>
+      <span class="cn">例句：登山者在开始攀登前调整了他的安全带。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Utilize <span class="cn">利用</span></li>
+        <li>Control <span class="cn">控制</span></li>
+        <li>Exploit <span class="cn">开发；利用</span></li>
+        <li>Apply <span class="cn">应用</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Harness" comes from Old French <em>harneis</em>, meaning “equipment or gear,” especially for a horse, and is of Germanic origin.<br>
+    <span class="cn">harness 来自古法语 harneis，意为“装备”或“马具”，源自日耳曼语。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old French:</strong> <em>harneis</em> – equipment, armor<br>
+      <span class="cn">古法语 harneis：装备，盔甲</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>harness</em> – strap device or to utilize<br>
+      <span class="cn">现代英语 harness：安全带装置；利用资源</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Utilize</td>
+          <td>Formal</td>
+          <td>We must utilize available data for better insights.</td>
+          <td>Technical</td>
+        </tr>
+        <tr>
+          <td>Exploit</td>
+          <td>Neutral / Negative</td>
+          <td>The company exploits renewable energy sources.</td>
+          <td>Neutral / Critical</td>
+        </tr>
+        <tr>
+          <td><strong>Harness</strong></td>
+          <td><strong>Neutral</strong></td>
+          <td>We need to harness wind power for sustainability.</td>
+          <td>Scientific / Practical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Harness"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/CXdtTAkZjoE?start=50"
+      title="Harnessing the Power of Nature"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:50</strong> for how “harness” is used when discussing sustainable energy.<br>
+      <span class="cn">听第 0:50 左右，了解“harness”在可持续能源中的使用方式。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Harness in the News</h3>
+    <p>
+      Countries around the world are investing heavily to harness wind and solar power.<br>
+      <span class="cn">世界各国正在大量投资，以利用风能和太阳能。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
