@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Shutter</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📸 shutter
+      <span class="pronunciation">/ˈʃʌtər/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/shu/shutt/shutter__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun / Verb<br><span class="cn">词性：名词 / 动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Noun:</strong> A device that opens and closes to let light into a camera; a cover for a window that blocks light or protects it.<br>
+    <span class="cn">名词：相机的快门；窗户的百叶窗或遮板。</span></p>
+    <p><strong>Verb:</strong> To close something such as a window or business.<br>
+    <span class="cn">动词：关闭（窗户、商店等）。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The camera shutter clicked as the photo was taken.<br>
+      <span class="cn">例句：拍照时相机的快门咔嗒一声响。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Many shops were shuttered during the storm.<br>
+      <span class="cn">例句：许多商店在暴风雨中关闭了。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Cover <span class="cn">遮盖物</span></li>
+        <li>Window blind <span class="cn">窗帘</span></li>
+        <li>Lens gate <span class="cn">镜头挡板</span></li>
+        <li>Close down (verb) <span class="cn">关闭（动词）</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Shutter" comes from the verb "shut," meaning "to close," with the suffix "-er" indicating an object that performs an action. First used in the late 17th century for window coverings, later for cameras.<br>
+    <span class="cn">shutter 来自动词 shut（关闭）和后缀 -er（表示执行动作的物品），最早用于指窗户遮板，后来用于指相机快门。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>scyttan</em> – to shut<br>
+      <span class="cn">古英语 scyttan：关闭</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>shutter</em> – window or camera cover<br>
+      <span class="cn">现代英语 shutter：窗户或相机快门</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cover</td>
+          <td>Neutral</td>
+          <td>Put a cover over the camera lens.</td>
+          <td>Practical</td>
+        </tr>
+        <tr>
+          <td>Window blind</td>
+          <td>Neutral</td>
+          <td>She pulled down the window blind.</td>
+          <td>Descriptive</td>
+        </tr>
+        <tr>
+          <td><strong>Shutter</strong></td>
+          <td><strong>Neutral</strong></td>
+          <td>The shutter closed with a soft click.</td>
+          <td>Visual / Technical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Shutter"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/zA4uXAfO1m4?start=40"
+      title="How Camera Shutters Work – Science Channel"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> to hear how “shutter” is explained in photography.<br>
+      <span class="cn">听第 0:40 左右，了解“shutter”在摄影中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Shutter in the News</h3>
+    <p>
+      Several businesses were forced to shutter during the pandemic lockdowns.<br>
+      <span class="cn">在疫情封锁期间，许多企业被迫关闭。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
