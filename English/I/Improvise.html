@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Improvise</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🎭 improvise
+      <span class="pronunciation">/ˈɪmprəvaɪz/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/i/imp/impro/improvise__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To create or perform something spontaneously or without preparation, often using what is available at the moment.<br>
+    <span class="cn">即兴创作；临时做；临时应变。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> We didn’t have a ladder, so we improvised by stacking boxes.<br>
+      <span class="cn">例句：我们没有梯子，只好临时用箱子叠起来凑合。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The actor forgot his line but managed to improvise brilliantly.<br>
+      <span class="cn">例句：演员忘词了，但他即兴发挥得非常精彩。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Invent <span class="cn">发明</span></li>
+        <li>Adapt <span class="cn">适应</span></li>
+        <li>Wing it <span class="cn">即兴应对（口语）</span></li>
+        <li>Make do <span class="cn">将就；凑合</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Improvise" comes from the Latin <em>improvisus</em>, meaning “unforeseen,” from <em>in-</em> (not) + <em>providere</em> (to foresee). It entered English in the 18th century through French and Italian.<br>
+    <span class="cn">“Improvise” 源自拉丁语 improvisus，意为“未预见的”，由 in-（不）和 providere（预见）构成。18 世纪通过法语和意大利语进入英语。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>improvisus</em> – unforeseen<br>
+      <span class="cn">拉丁语 improvisus：未预见的</span><br><br>
+      <strong>Italian:</strong> <em>improvvisare</em> – to compose or do without preparation<br>
+      <span class="cn">意大利语 improvvisare：即兴创作</span><br><br>
+      <strong>Modern English:</strong> <em>improvise</em> – to do something without planning<br>
+      <span class="cn">现代英语 improvise：即兴创作；临时应变</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Wing it</td>
+          <td>Informal</td>
+          <td>I didn’t prepare, so I just winged it during the meeting.</td>
+          <td>Casual</td>
+        </tr>
+        <tr>
+          <td>Adapt</td>
+          <td>Neutral</td>
+          <td>He quickly adapted to the new situation.</td>
+          <td>Practical</td>
+        </tr>
+        <tr>
+          <td><strong>Improvise</strong></td>
+          <td><strong>Neutral / Formal</strong></td>
+          <td>She had to improvise a speech when the host was late.</td>
+          <td>Flexible / Creative</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Improvise"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/zUkImN8YzJ4?start=30"
+      title="Actors Who Had to Improvise Their Lines"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear how actors use improvisation in film scenes.<br>
+      <span class="cn">听第 0:30 左右，了解演员在电影场景中如何即兴发挥。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Improvise in the News</h3>
+    <p>
+      During the power outage, residents had to improvise ways to cook meals and stay warm.<br>
+      <span class="cn">停电期间，居民们不得不临时想办法做饭和取暖。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
