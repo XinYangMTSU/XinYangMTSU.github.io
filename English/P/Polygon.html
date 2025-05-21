@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Polygon</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔷 polygon
+      <span class="pronunciation">/ˈpɑːlɪɡɑːn/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pol/polyg/polygon__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A flat shape with three or more straight sides and angles, typically having five or more sides.<br>
+    <span class="cn">多边形；一种具有三条或更多直边和角的平面图形，通常指五边形以上。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> A triangle is the simplest kind of polygon.<br>
+      <span class="cn">例句：三角形是最简单的一种多边形。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Architects often use polygons in modern building designs.<br>
+      <span class="cn">例句：建筑师经常在现代建筑设计中使用多边形。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Geometric figure <span class="cn">几何图形</span></li>
+        <li>Shape <span class="cn">形状</span></li>
+        <li>Plane figure <span class="cn">平面图形</span></li>
+        <li>Closed figure <span class="cn">封闭图形</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Polygon" comes from the Greek words <em>poly-</em> meaning “many” and <em>gōnia</em> meaning “angle.” It literally means “many angles.”<br>
+    <span class="cn">polygon 来自希腊语 poly-（多）和 gōnia（角），字面意思是“多角形”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong> <em>polygonos</em> – many-angled<br>
+      <span class="cn">希腊语 polygonos：多角的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Latin:</strong> <em>polygonum</em> – polygon<br>
+      <span class="cn">拉丁语 polygonum：多边形</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>polygon</em> – shape with many sides<br>
+      <span class="cn">现代英语 polygon：多边形</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Shape</td>
+          <td>Informal</td>
+          <td>What shape is that sign?</td>
+          <td>Simple</td>
+        </tr>
+        <tr>
+          <td>Geometric figure</td>
+          <td>Technical</td>
+          <td>This geometric figure has five sides.</td>
+          <td>Academic</td>
+        </tr>
+        <tr>
+          <td><strong>Polygon</strong></td>
+          <td><strong>Neutral</strong></td>
+          <td>The stop sign is a regular polygon with eight sides.</td>
+          <td>Descriptive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Polygon"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/qhbnzjQo3zo?start=60"
+      title="Polygons Explained – Math Antics"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:00</strong> to hear how “polygon” is used in basic geometry lessons.<br>
+      <span class="cn">听第 1:00 左右，了解“polygon”在基础几何课程中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Polygon in the News</h3>
+    <p>
+      A new educational game teaches kids how to identify different polygons and their properties.<br>
+      <span class="cn">一款新的教育游戏正在教孩子们识别各种多边形及其特征。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
