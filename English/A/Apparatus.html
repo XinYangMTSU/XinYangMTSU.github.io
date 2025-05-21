@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Apparatus</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧪 apparatus
+      <span class="pronunciation">/ˌæpəˈrætəs/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/a/app/appar/apparatus__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>1. A set of tools, machines, or equipment used for a specific purpose.</strong><br>
+    <span class="cn">一套设备、装置或仪器，用于特定目的。</span></p>
+
+    <p><strong>2. The structure or organization of a system, especially in politics or the body.</strong><br>
+    <span class="cn">系统的结构或机制，尤其指政治或生理系统。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The laboratory is equipped with modern scientific apparatus.<br>
+      <span class="cn">例句：这个实验室配备了现代科学仪器。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The government apparatus failed to respond quickly to the crisis.<br>
+      <span class="cn">例句：政府体系未能对这场危机迅速作出反应。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Equipment <span class="cn">设备</span></li>
+        <li>Device <span class="cn">装置</span></li>
+        <li>System <span class="cn">系统</span></li>
+        <li>Mechanism <span class="cn">机制</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Apparatus" comes from Latin <em>apparatus</em>, meaning “preparation” or “equipment,” from the verb <em>apparare</em> ("to prepare"). It entered English in the 17th century.<br>
+    <span class="cn">“Apparatus” 源自拉丁语 apparatus，意为“准备”或“设备”，来自动词 apparare（准备）。17 世纪进入英语。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>apparare</em> – to prepare<br>
+      <span class="cn">拉丁语 apparare：准备</span><br><br>
+      <strong>Latin noun:</strong> <em>apparatus</em> – equipment, tools<br>
+      <span class="cn">拉丁名词 apparatus：设备，工具</span><br><br>
+      <strong>Modern English:</strong> <em>apparatus</em> – equipment or system structure<br>
+      <span class="cn">现代英语 apparatus：仪器，组织机构</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Use</th>
+          <th>Formality</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Device</td>
+          <td>Tool or machine</td>
+          <td>Neutral</td>
+          <td>This device helps monitor heart rate.</td>
+        </tr>
+        <tr>
+          <td>System</td>
+          <td>Organized structure</td>
+          <td>Neutral</td>
+          <td>The education system needs reform.</td>
+        </tr>
+        <tr>
+          <td><strong>Apparatus</strong></td>
+          <td><strong>Tool set or structure</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>The rescue apparatus was deployed quickly.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Apparatus"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/yCzPRmck0Hk?start=60"
+      title="How Lab Apparatus Works"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:00</strong> to hear “apparatus” used in a science context.<br>
+      <span class="cn">听第 1:00 左右，了解“apparatus”在科学实验中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Apparatus in the News</h3>
+    <p>
+      The emergency apparatus was overwhelmed during the natural disaster.<br>
+      <span class="cn">这次自然灾害中，紧急救援系统应接不暇。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
