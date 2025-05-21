@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Stubby</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ✂️ stubby
+      <span class="pronunciation">/ˈstʌbi/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/s/stu/stubb/stubby__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Short and thick in a way that is often considered awkward or cute.<br>
+    <span class="cn">又短又粗的（常给人笨拙或可爱的感觉）。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> He had short, stubby fingers.<br>
+      <span class="cn">例句：他有一双又短又粗的手指。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The puppy’s stubby tail wagged excitedly.<br>
+      <span class="cn">例句：小狗那短短的尾巴兴奋地摇摆着。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Short <span class="cn">短的</span></li>
+        <li>Chunky <span class="cn">矮胖的</span></li>
+        <li>Stumpy <span class="cn">粗短的</span></li>
+        <li>Blunt <span class="cn">钝的；粗的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Stubby" is formed from the noun “stub,” meaning a short, thick part remaining after something is cut or broken, plus the adjective-forming suffix “-y.” It has been used in English since the 19th century.<br>
+    <span class="cn">“Stubby” 源自动词 stub（残段、短粗部分），加上形容词后缀 -y，意思是“又短又粗的”，自 19 世纪起开始在英语中使用。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>stybb</em> – stump<br>
+      <span class="cn">古英语 stybb：树桩，残根</span><br><br>
+      <strong>Modern English:</strong> <em>stubby</em> – short and thick<br>
+      <span class="cn">现代英语 stubby：又短又粗的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Stumpy</td>
+          <td>Neutral</td>
+          <td>The tree was cut down, leaving a stumpy base.</td>
+          <td>Descriptive</td>
+        </tr>
+        <tr>
+          <td>Chunky</td>
+          <td>Informal</td>
+          <td>He wore a chunky sweater on the cold day.</td>
+          <td>Cozy / Playful</td>
+        </tr>
+        <tr>
+          <td><strong>Stubby</strong></td>
+          <td><strong>Neutral / Playful</strong></td>
+          <td>The robot had stubby little legs.</td>
+          <td>Cute / Visual</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Stubby"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/2lR2ZVaS1Lg?start=40"
+      title="Describing Body Shapes with Adjectives"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> to hear “stubby” used in describing a character’s limbs.<br>
+      <span class="cn">听第 0:40 左右，了解“stubby”在形容身体部位时的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Stubby in the News</h3>
+    <p>
+      The puppy’s stubby legs made it even more adorable to shelter visitors.<br>
+      <span class="cn">小狗那又短又粗的腿让收容所的访客觉得它更加可爱。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
