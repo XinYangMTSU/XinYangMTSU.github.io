@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Encompass</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌀 encompass
+      <span class="pronunciation">/ɪnˈkʌmpəs/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/e/enc/encom/encompass__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To include a wide range of ideas, subjects, or things; to surround or cover completely.<br>
+    <span class="cn">包括，涵盖（广泛的内容）；包围；围绕。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The course will encompass a broad range of topics from history to science.<br>
+      <span class="cn">例句：这门课程将涵盖从历史到科学的广泛主题。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The valley is encompassed by towering mountains.<br>
+      <span class="cn">例句：这个山谷被高耸的山脉所环绕。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Include <span class="cn">包括</span></li>
+        <li>Surround <span class="cn">包围</span></li>
+        <li>Embrace <span class="cn">涵盖；拥抱</span></li>
+        <li>Cover <span class="cn">覆盖</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Encompass" comes from the prefix <em>en-</em> meaning "in" and the Middle English word <em>compas</em> meaning "circle" or "boundary". It originally meant to go around or encircle.<br>
+    <span class="cn">encompass 来自前缀 en-（表示“进入”）和中世纪英语 compas（圆圈，范围），原意为“环绕，包围”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle English:</strong> <em>encompassen</em> – to encircle<br>
+      <span class="cn">中世纪英语 encompassen：环绕，包围</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>encompass</em> – to include or surround<br>
+      <span class="cn">现代英语 encompass：包括，围绕</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Include</td>
+          <td>Neutral</td>
+          <td>This book includes several case studies.</td>
+          <td>Informative</td>
+        </tr>
+        <tr>
+          <td>Embrace</td>
+          <td>Literary</td>
+          <td>The idea embraces both tradition and innovation.</td>
+          <td>Positive / Creative</td>
+        </tr>
+        <tr>
+          <td><strong>Encompass</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>The law must encompass all citizens equally.</td>
+          <td>Comprehensive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Encompass"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/yK5tYvLzp7I?start=90"
+      title="How Ecosystems Encompass Interconnected Life"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:30</strong> for how “encompass” is used to describe ecosystems.<br>
+      <span class="cn">听第 1:30 左右，了解“encompass”如何用于描述生态系统的全面性。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Encompass in the News</h3>
+    <p>
+      The reforms encompass health care, education, and climate change policies.<br>
+      <span class="cn">这些改革涵盖了医疗、教育和气候变化政策。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
