@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Realm</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      👑 realm
+      <span class="pronunciation">/relm/</span>
+      <button class="audio-button" onclick="speak('Realm')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>1. A kingdom or territory ruled by a monarch.<br>
+    2. A field or domain of activity, interest, or knowledge.<br>
+    <span class="cn">1. 王国，领域（指由君主统治的领土）；<br>2. 领域，范围（指活动、兴趣或知识的范围）。</span></p>
+
+    <div class="example">
+      <strong>Example 1:</strong> The king ruled over a vast realm with fairness and wisdom.<br>
+      <span class="cn">例句 1：国王英明地统治着辽阔的王国。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example 2:</strong> She works in the realm of artificial intelligence research.<br>
+      <span class="cn">例句 2：她从事人工智能研究领域的工作。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Kingdom <span class="cn">王国</span></li>
+        <li>Domain <span class="cn">领域</span></li>
+        <li>Territory <span class="cn">领土</span></li>
+        <li>Sphere <span class="cn">范围</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Realm" comes from Old French <em>reaume</em>, derived from Latin <em>regimen</em> (rule or government), and ultimately from <em>regere</em> (to rule). It originally referred to a kingdom, then broadened to include conceptual fields.<br>
+    <span class="cn">“Realm” 来自古法语 reaume，源自拉丁语 regimen（统治、管理），其词根 regere 意为“统治”。最初指“王国”，后来引申为抽象领域。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>regere</em> – to rule<br>
+      <span class="cn">拉丁语 regere：统治</span><br><br>
+      <strong>Old French:</strong> <em>reaume</em> – kingdom<br>
+      <span class="cn">古法语 reaume：王国</span><br><br>
+      <strong>Modern English:</strong> <em>realm</em> – kingdom or area of interest<br>
+      <span class="cn">现代英语 realm：王国；领域</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Primary Use</th>
+          <th>Formality</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Kingdom</td>
+          <td>Political / Historical</td>
+          <td>Formal</td>
+          <td>The kingdom prospered under wise leadership.</td>
+        </tr>
+        <tr>
+          <td><strong>Realm</strong></td>
+          <td><strong>Political or Abstract</strong></td>
+          <td><strong>Formal</strong></td>
+          <td><strong>In the realm of science, progress is rapid.</strong></td>
+        </tr>
+        <tr>
+          <td>Field</td>
+          <td>Academic / Practical</td>
+          <td>Neutral</td>
+          <td>She specializes in the field of linguistics.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Realm"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/sLm7bwCzRxM?start=20"
+      title="Fantasy Realms in Film and Literature"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> to hear “realm” used to describe magical or fictional kingdoms.<br>
+      <span class="cn">听第 0:20 左右，了解“realm”如何用于描述幻想中的王国。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Realm in the News</h3>
+    <p>
+      Researchers are pushing the boundaries of what's possible in the realm of quantum computing.<br>
+      <span class="cn">研究人员正在量子计算领域不断突破可能性的边界。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.scientificamerican.com" target="_blank" class="fancy-link">
+        📰 Read More – Scientific American
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
