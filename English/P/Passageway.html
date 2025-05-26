@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Passageway</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🚪 passageway
+      <span class="pronunciation">/ˈpæsɪdʒˌweɪ/</span>
+      <button class="audio-button" onclick="speak('Passageway')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A narrow path or corridor that allows people to pass from one place to another, especially between rooms, buildings, or through enclosed areas.<br>
+    <span class="cn">通道；过道；尤指连接房间、建筑物或穿越封闭空间的狭长通路。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The secret passageway led to a hidden chamber beneath the castle.<br>
+      <span class="cn">例句：这条秘密通道通往城堡下方的隐秘房间。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Please keep the passageway clear of luggage at all times.<br>
+      <span class="cn">例句：请随时保持通道畅通，不要堆放行李。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Corridor <span class="cn">走廊</span></li>
+        <li>Hallway <span class="cn">过道</span></li>
+        <li>Tunnel <span class="cn">隧道</span></li>
+        <li>Pathway <span class="cn">小路；路径</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Passageway" is formed from "passage" (from Latin <em>passus</em> meaning "step") + "way", meaning a route or path for movement.<br>
+    <span class="cn">“Passageway” 由 “passage”（通过，来自拉丁语 passus，意为“步”）和 “way”（道路）组成，表示供人通行的路径。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>passus</em> – step, stride<br>
+      <span class="cn">拉丁语 passus：步伐</span><br><br>
+      <strong>Old French:</strong> <em>passage</em> – act of passing<br>
+      <span class="cn">古法语 passage：通行，经过</span><br><br>
+      <strong>Modern English:</strong> <em>passageway</em> – a narrow route for movement<br>
+      <span class="cn">现代英语 passageway：供通行的狭长路径</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Type</th>
+          <th>Typical Location</th>
+          <th>Example Use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Corridor</td>
+          <td>Indoor</td>
+          <td>Inside buildings</td>
+          <td>We met in the school corridor.</td>
+        </tr>
+        <tr>
+          <td><strong>Passageway</strong></td>
+          <td><strong>Indoor/Underground</strong></td>
+          <td><strong>Rooms, caves, hidden places</strong></td>
+          <td>A passageway led to a hidden tomb.</td>
+        </tr>
+        <tr>
+          <td>Tunnel</td>
+          <td>Underground</td>
+          <td>Mountains, subways</td>
+          <td>The train entered the tunnel.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Passageway"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YhHG8E7Imi4?start=15"
+      title="Underground Passageways and Hidden Tunnels"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:15</strong> to hear how “passageway” is used in the context of underground architecture.<br>
+      <span class="cn">听第 0:15 左右，了解“passageway”在地下建筑中的使用方式。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Passageway in the News</h3>
+    <p>
+      Archaeologists discovered an ancient passageway beneath the pyramid that may have led to a royal tomb.<br>
+      <span class="cn">考古学家在金字塔下发现了一条古老的通道，可能通往一座王室墓穴。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nationalgeographic.com" target="_blank" class="fancy-link">
+        📰 Read More – National Geographic
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
