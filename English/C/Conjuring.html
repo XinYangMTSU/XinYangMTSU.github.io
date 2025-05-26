@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Conjuring</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ✨ conjuring
+      <span class="pronunciation">/ˈkʌndʒərɪŋ/</span>
+      <button class="audio-button" onclick="speak('Conjuring')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>The act of performing magic tricks or calling upon supernatural forces; the process of bringing something to mind vividly, as if by magic.<br>
+    <span class="cn">变魔术；施展魔法；像变魔术般地唤起或使人想起某事。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The magician’s conjuring left the audience amazed.<br>
+      <span class="cn">例句：魔术师的变魔术表演令观众惊叹不已。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The film is a masterful conjuring of childhood memories.<br>
+      <span class="cn">例句：这部电影巧妙地唤起了童年的回忆。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Magic <span class="cn">魔法</span></li>
+        <li>Summoning <span class="cn">召唤</span></li>
+        <li>Evocation <span class="cn">唤起</span></li>
+        <li>Illusion <span class="cn">幻象</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Conjuring" comes from the verb "conjure," from Latin <em>conjurare</em> meaning “to swear together, to invoke,” from <em>com-</em> (together) + <em>jurare</em> (to swear).<br>
+    <span class="cn">“Conjuring” 源自动词 conjure，来自拉丁语 conjurare，意为“共同宣誓”或“召唤”，由 com-（一起）和 jurare（宣誓）组成。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>conjurare</em> – to swear together, to invoke<br>
+      <span class="cn">拉丁语 conjurare：联合发誓，召唤</span><br><br>
+      <strong>Old French:</strong> <em>conjurer</em> – to plot, invoke, charm<br>
+      <span class="cn">古法语 conjurer：阴谋、施法、召唤</span><br><br>
+      <strong>Modern English:</strong> <em>conjuring</em> – performing magic or summoning memories<br>
+      <span class="cn">现代英语 conjuring：施展魔法或唤起回忆</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Magic</td>
+          <td>Neutral</td>
+          <td>The book was full of magical adventures.</td>
+          <td>Fantasy</td>
+        </tr>
+        <tr>
+          <td>Evocation</td>
+          <td>Formal</td>
+          <td>The poem is a beautiful evocation of nature.</td>
+          <td>Artistic</td>
+        </tr>
+        <tr>
+          <td><strong>Conjuring</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>The conjuring of spirits was central to the ritual.</td>
+          <td>Mystical / Dramatic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Conjuring"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/uW4nJtf2BO4?start=40"
+      title="Conjuring Tricks and Illusions in History"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> to hear how “conjuring” is used in a historical context of magic and illusion.<br>
+      <span class="cn">听第 0:40 左右，了解“conjuring”在历史魔术和幻术中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Conjuring in the News</h3>
+    <p>
+      The director's conjuring of a haunting atmosphere left a lasting impression on audiences.<br>
+      <span class="cn">导演对恐怖氛围的营造让观众印象深刻，仿佛施了魔法。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com" target="_blank" class="fancy-link">
+        📰 Read More – The Guardian
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
