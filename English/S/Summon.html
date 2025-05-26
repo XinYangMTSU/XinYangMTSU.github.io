@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Summon</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧙 summon
+      <span class="pronunciation">/ˈsʌmən/</span>
+      <button class="audio-button" onclick="speak('Summon')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To call upon someone or something to come, especially with authority or urgency; to gather strength or courage; to bring forth something from within oneself.<br>
+    <span class="cn">召唤；召集；鼓起（勇气、力量等）。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The king summoned his advisors for an emergency meeting.<br>
+      <span class="cn">例句：国王召集了顾问召开紧急会议。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She summoned all her strength to lift the heavy box.<br>
+      <span class="cn">例句：她鼓起全身力气抬起那个沉重的箱子。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Call <span class="cn">召唤</span></li>
+        <li>Command <span class="cn">命令</span></li>
+        <li>Convene <span class="cn">召集（会议）</span></li>
+        <li>Rally <span class="cn">集合；鼓起（精神、力量）</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Summon" comes from Latin <em>summonere</em>, from <em>sub-</em> (secretly, up from below) + <em>monere</em> (to warn or advise), meaning “to call forth.”<br>
+    <span class="cn">“Summon” 源自拉丁语 summonere，由 sub-（从下、私下）和 monere（警告、提醒）组成，意为“召唤、叫来”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>summonere</em> – to secretly call or warn<br>
+      <span class="cn">拉丁语 summonere：秘密地召唤或警告</span><br><br>
+      <strong>Old French:</strong> <em>somoner</em> – to call<br>
+      <span class="cn">古法语 somoner：召唤</span><br><br>
+      <strong>Modern English:</strong> <em>summon</em> – to officially or urgently call<br>
+      <span class="cn">现代英语 summon：正式或紧急地召唤</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Call</td>
+          <td>Neutral</td>
+          <td>He called his team for help.</td>
+          <td>Casual</td>
+        </tr>
+        <tr>
+          <td>Convene</td>
+          <td>Formal</td>
+          <td>The president convened a meeting of the council.</td>
+          <td>Official</td>
+        </tr>
+        <tr>
+          <td><strong>Summon</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>The wizard summoned a storm with his staff.</td>
+          <td>Dramatic / Commanding</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Summon"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/tH9Igo_3x40?start=30"
+      title="Fantasy Scenes Using Summoning Spells"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear how “summon” is used in a fantasy context.<br>
+      <span class="cn">听第 0:30 左右，了解“summon”在奇幻语境中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Summon in the News</h3>
+    <p>
+      The government summoned the ambassador for urgent talks.<br>
+      <span class="cn">政府召见大使进行紧急会谈。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
