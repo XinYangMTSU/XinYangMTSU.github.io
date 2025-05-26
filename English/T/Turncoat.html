@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Turncoat</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧥 turncoat
+      <span class="pronunciation">/ˈtɜːn.kəʊt/</span>
+      <button class="audio-button" onclick="speak('Turncoat')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A person who switches allegiance from one side, party, or cause to an opposing one; a traitor.<br>
+    <span class="cn">变节者；叛徒；背叛原来立场或阵营的人。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> He was branded a turncoat after joining the rival political party.<br>
+      <span class="cn">例句：他加入了对立党派，被指为叛徒。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The general was once a hero, but history remembers him as a turncoat.<br>
+      <span class="cn">例句：那位将军曾是英雄，但历史记住他是一个叛徒。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Traitor <span class="cn">叛徒</span></li>
+        <li>Defector <span class="cn">变节者</span></li>
+        <li>Betrayer <span class="cn">背叛者</span></li>
+        <li>Renegade <span class="cn">叛教者；背叛者</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Turncoat" originated in the 16th century, from the literal idea of turning one’s coat inside out to show loyalty to a new side—especially in times of political change.<br>
+    <span class="cn">“Turncoat” 起源于 16 世纪，最初是字面意思：把外套翻过来穿，以显示对新阵营的忠诚，常用于政治变革时期。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>16th century:</strong> <em>turn + coat</em> – one who literally or figuratively switches sides<br>
+      <span class="cn">16 世纪：turn + coat，即“换阵营”或“翻脸”的人</span><br><br>
+      <strong>Modern English:</strong> <em>turncoat</em> – traitor or defector<br>
+      <span class="cn">现代英语 turncoat：叛徒；变节者</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality</th>
+          <th>Negative Connotation</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Traitor</td>
+          <td>High</td>
+          <td>Very strong</td>
+          <td>He was convicted as a traitor to his country.</td>
+        </tr>
+        <tr>
+          <td><strong>Turncoat</strong></td>
+          <td><strong>Moderate</strong></td>
+          <td><strong>Strong</strong></td>
+          <td><strong>He was seen as a turncoat by former allies.</strong></td>
+        </tr>
+        <tr>
+          <td>Defector</td>
+          <td>Formal / political</td>
+          <td>Moderate</td>
+          <td>The defector fled to another nation.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Turncoat"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/KtRkx3sfvlk?start=15"
+      title="Famous Historical Turncoats – Documentary Snippet"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:15</strong> to hear the narrator use “turncoat” in describing a historical figure who betrayed his side.<br>
+      <span class="cn">听第 0:15 左右，了解“turncoat”在描述历史叛徒时的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Turncoat in the News</h3>
+    <p>
+      The politician was labeled a turncoat after abruptly switching parties ahead of the election.<br>
+      <span class="cn">那位政客在选举前突然换党，被贴上了“变节者”的标签。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.politico.com" target="_blank" class="fancy-link">
+        📰 Read More – Politico
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
