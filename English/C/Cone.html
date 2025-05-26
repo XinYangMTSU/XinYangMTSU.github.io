@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Cone</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🍦 cone
+      <span class="pronunciation">/koʊn/</span>
+      <button class="audio-button" onclick="speak('Cone')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A three-dimensional geometric shape with a circular base that tapers smoothly to a single point called the apex or vertex.<br>
+    <span class="cn">圆锥体；一种有圆形底面，并逐渐收拢到顶点的三维几何形状。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> An ice cream cone is shaped like a geometric cone.<br>
+      <span class="cn">例句：冰淇淋筒的形状像一个几何圆锥。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Traffic cones are used to direct vehicles away from hazards.<br>
+      <span class="cn">例句：路锥被用来引导车辆避开危险区域。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Cone shape <span class="cn">圆锥形</span></li>
+        <li>Geometric cone <span class="cn">几何圆锥</span></li>
+        <li>Tapered solid <span class="cn">锥形体</span></li>
+        <li>Vertexed shape <span class="cn">有顶点的图形</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Cone" comes from the Latin <em>conus</em> and Greek <em>kōnos</em>, both meaning "pinecone" or "conical shape".<br>
+    <span class="cn">“Cone” 源自拉丁语 conus 和希腊语 kōnos，意思是“松果”或“锥形”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong> <em>kōnos</em> – cone, pinecone<br>
+      <span class="cn">希腊语 kōnos：圆锥，松果</span><br><br>
+      <strong>Latin:</strong> <em>conus</em> – cone<br>
+      <span class="cn">拉丁语 conus：圆锥</span><br><br>
+      <strong>Modern English:</strong> <em>cone</em> – a shape with a circular base and a pointed top<br>
+      <span class="cn">现代英语 cone：底部圆形、顶部尖的形状</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Shape</th>
+          <th>Base</th>
+          <th>Top</th>
+          <th>Example Use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cylinder</td>
+          <td>Circle</td>
+          <td>Flat circle</td>
+          <td>Soda can</td>
+        </tr>
+        <tr>
+          <td><strong>Cone</strong></td>
+          <td><strong>Circle</strong></td>
+          <td><strong>Pointed tip</strong></td>
+          <td>Ice cream cone</td>
+        </tr>
+        <tr>
+          <td>Sphere</td>
+          <td>None</td>
+          <td>None</td>
+          <td>Basketball</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Cone"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/L2k93akvTZs?start=15"
+      title="What Is a Cone? Geometry for Kids"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:15</strong> to hear how “cone” is introduced in basic geometry.<br>
+      <span class="cn">听第 0:15 左右，了解“cone”在几何学中的基本定义。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Cone in the News</h3>
+    <p>
+      Scientists studied how volcanic cones are formed through lava eruptions.<br>
+      <span class="cn">科学家研究了火山锥是如何通过熔岩喷发形成的。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nationalgeographic.com" target="_blank" class="fancy-link">
+        📰 Read More – National Geographic
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
