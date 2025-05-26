@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Gaze</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      👀 gaze
+      <span class="pronunciation">/ɡeɪz/</span>
+      <button class="audio-button" onclick="speak('Gaze')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb / Noun<br><span class="cn">词性：动词 / 名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>As a verb:</strong> To look steadily and intently, often with admiration, wonder, or deep thought.<br>
+    <span class="cn">动词：凝视；目不转睛地看，通常带有敬意、惊叹或沉思。</span></p>
+
+    <p><strong>As a noun:</strong> A steady, fixed look; an intent stare.<br>
+    <span class="cn">名词：凝视；专注的目光。</span></p>
+
+    <div class="example">
+      <strong>Example (verb):</strong> She gazed at the stars, lost in thought.<br>
+      <span class="cn">例句（动词）：她凝望着星空，陷入沉思。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example (noun):</strong> His gaze was fixed on the painting for several minutes.<br>
+      <span class="cn">例句（名词）：他的目光在那幅画上停留了好几分钟。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Stare <span class="cn">凝视</span></li>
+        <li>Look <span class="cn">看</span></li>
+        <li>Watch <span class="cn">注视</span></li>
+        <li>Observe <span class="cn">观察</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Gaze" likely comes from the Middle English <em>gasen</em>, meaning “to stare” or “to look with intent,” of Scandinavian origin.<br>
+    <span class="cn">“Gaze” 很可能源自中古英语 gasen，意为“凝视”或“专注地看”，起源于斯堪的纳维亚语言。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old Norse:</strong> <em>gāsa</em> – to gape, stare<br>
+      <span class="cn">古诺斯语 gāsa：张口凝视</span><br><br>
+      <strong>Middle English:</strong> <em>gasen</em> – to look with attention<br>
+      <span class="cn">中古英语 gasen：注视</span><br><br>
+      <strong>Modern English:</strong> <em>gaze</em> – fixed, steady look<br>
+      <span class="cn">现代英语 gaze：凝视，目不转睛地看</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Part of Speech</th>
+          <th>Intensity</th>
+          <th>Emotion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Stare</td>
+          <td>Verb / Noun</td>
+          <td>Strong</td>
+          <td>Surprise, shock, or rudeness</td>
+        </tr>
+        <tr>
+          <td><strong>Gaze</strong></td>
+          <td><strong>Verb / Noun</strong></td>
+          <td><strong>Soft to Intense</strong></td>
+          <td><strong>Wonder, admiration, love</strong></td>
+        </tr>
+        <tr>
+          <td>Look</td>
+          <td>Verb / Noun</td>
+          <td>Neutral</td>
+          <td>General or brief attention</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Gaze"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/AjEQVYs0cZA?start=20"
+      title="Poetic Moments of Gaze in Film"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> to hear “gaze” used in cinematic narration.<br>
+      <span class="cn">听第 0:20 左右，了解“gaze”在电影叙述中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Gaze in the News</h3>
+    <p>
+      The astronaut’s gaze lingered on Earth as the spacecraft drifted farther into orbit.<br>
+      <span class="cn">随着飞船进一步进入轨道，宇航员久久凝视着地球。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nationalgeographic.com" target="_blank" class="fancy-link">
+        📰 Read More – National Geographic
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
