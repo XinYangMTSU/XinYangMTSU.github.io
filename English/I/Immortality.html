@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Immortality</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🕊️ immortality
+      <span class="pronunciation">/ˌɪmɔːrˈtæləti/</span>
+      <button class="audio-button" onclick="speak('Immortality')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>The state of living forever or never dying; the ability to exist beyond death, often associated with myths, religion, or fame.<br>
+    <span class="cn">永生；不朽；指永远活着或不会死亡，常与神话、宗教或名声相关。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Many ancient cultures believed in the soul’s immortality.<br>
+      <span class="cn">例句：许多古代文化相信灵魂可以永生。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The artist achieved immortality through her timeless works.<br>
+      <span class="cn">例句：这位艺术家通过她永恒的作品获得了不朽。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Eternal life <span class="cn">永恒的生命</span></li>
+        <li>Perpetuity <span class="cn">永久</span></li>
+        <li>Undying fame <span class="cn">不朽的名声</span></li>
+        <li>Everlasting existence <span class="cn">永恒存在</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Immortality" comes from Latin <em>immortalitas</em>, from <em>in-</em> (not) + <em>mortalitas</em> (mortality), meaning “not subject to death.”<br>
+    <span class="cn">“Immortality” 来自拉丁语 immortalitas，由 in-（不）+ mortalitas（死亡、必死性）组成，意为“不会死的状态”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>immortalitas</em> – undying<br>
+      <span class="cn">拉丁语 immortalitas：不死</span><br><br>
+      <strong>Middle English:</strong> <em>immortalite</em> – eternal life<br>
+      <span class="cn">中古英语 immortalite：永生</span><br><br>
+      <strong>Modern English:</strong> <em>immortality</em> – the state of living forever<br>
+      <span class="cn">现代英语 immortality：不朽，永生</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Type</th>
+          <th>Meaning</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mortality</td>
+          <td>Noun</td>
+          <td>The state of being subject to death</td>
+          <td>He was reminded of his own mortality after the accident.</td>
+        </tr>
+        <tr>
+          <td><strong>Immortality</strong></td>
+          <td><strong>Noun</strong></td>
+          <td><strong>Living forever</strong></td>
+          <td>Legends of immortality are found in many cultures.</td>
+        </tr>
+        <tr>
+          <td>Eternity</td>
+          <td>Noun</td>
+          <td>Infinite or unending time</td>
+          <td>The stars have burned for what feels like an eternity.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Immortality"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/MHky-xP6Hmc?start=20"
+      title="The Search for Immortality in Ancient Civilizations"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> to hear how “immortality” is discussed in the context of mythology.<br>
+      <span class="cn">听第 0:20 左右，了解“immortality”在神话背景中的讨论。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Immortality in the News</h3>
+    <p>
+      Advances in biotechnology have sparked debate over the possibility of human immortality.<br>
+      <span class="cn">生物技术的进步引发了关于人类是否可能永生的讨论。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.scientificamerican.com" target="_blank" class="fancy-link">
+        📰 Read More – Scientific American
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
