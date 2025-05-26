@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Resilience</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💪 resilience
+      <span class="pronunciation">/rɪˈzɪl.jəns/</span>
+      <button class="audio-button" onclick="speak('Resilience')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>The capacity to recover quickly from difficulties or adapt well to adversity; the ability of a material or system to return to its original shape after being bent or stretched.<br>
+    <span class="cn">韧性；适应力；快速从困难中恢复的能力；物体受压后恢复原状的能力。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Her resilience after the accident inspired everyone around her.<br>
+      <span class="cn">例句：她在事故后的坚韧精神激励了周围的每一个人。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The foam mattress is known for its resilience and comfort.<br>
+      <span class="cn">例句：这种泡沫床垫以其弹性和舒适性而著称。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Strength <span class="cn">坚强</span></li>
+        <li>Adaptability <span class="cn">适应力</span></li>
+        <li>Endurance <span class="cn">耐力</span></li>
+        <li>Toughness <span class="cn">坚韧</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Resilience" comes from Latin <em>resilire</em>, meaning “to spring back” or “rebound.” It is formed from <em>re-</em> (back) + <em>salire</em> (to jump).<br>
+    <span class="cn">“Resilience” 来自拉丁语 resilire，意为“反弹、弹回”，由前缀 re-（向后）和 salire（跳跃）组成。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>resilire</em> – to rebound<br>
+      <span class="cn">拉丁语 resilire：弹回</span><br><br>
+      <strong>17th century:</strong> <em>resilientia</em> – elasticity in materials<br>
+      <span class="cn">17世纪：resilientia 用于描述材料的弹性</span><br><br>
+      <strong>Modern English:</strong> <em>resilience</em> – ability to recover from adversity<br>
+      <span class="cn">现代英语 resilience：从困难中恢复的能力</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Type</th>
+          <th>Meaning</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Strength</td>
+          <td>Noun</td>
+          <td>Power or physical force</td>
+          <td>She showed incredible strength during recovery.</td>
+        </tr>
+        <tr>
+          <td><strong>Resilience</strong></td>
+          <td><strong>Noun</strong></td>
+          <td><strong>Ability to bounce back from hardship</strong></td>
+          <td>Resilience is key to long-term success.</td>
+        </tr>
+        <tr>
+          <td>Endurance</td>
+          <td>Noun</td>
+          <td>Ability to last through stress</td>
+          <td>The athlete's endurance was tested during the marathon.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Resilience"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/NWH8N-BvhAw?start=30"
+      title="What Is Resilience? Psychology & Success"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear “resilience” used to describe mental and emotional strength.<br>
+      <span class="cn">听第 0:30 左右，了解“resilience”在心理与情感韧性方面的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Resilience in the News</h3>
+    <p>
+      Communities affected by natural disasters have shown remarkable resilience in rebuilding their lives.<br>
+      <span class="cn">受自然灾害影响的社区展现出非凡的重建韧性。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
