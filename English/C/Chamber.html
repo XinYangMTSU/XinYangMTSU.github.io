@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Chamber</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🏛️ chamber
+      <span class="pronunciation">/ˈtʃeɪmbər/</span>
+      <button class="audio-button" onclick="speak('Chamber')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A large room, especially used for a formal or specific purpose; an enclosed space or compartment inside a structure or organism.<br>
+    <span class="cn">房间；（尤指）大房间、议事厅；密室；体内的腔室。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The king met with his advisors in the royal chamber.<br>
+      <span class="cn">例句：国王在王室大厅中会见顾问。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The heart has four chambers that pump blood through the body.<br>
+      <span class="cn">例句：心脏有四个腔室，用于向全身输送血液。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Hall <span class="cn">大厅</span></li>
+        <li>Room <span class="cn">房间</span></li>
+        <li>Vault <span class="cn">拱顶室；密室</span></li>
+        <li>Compartment <span class="cn">隔间；舱室</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Chamber" comes from Old French <em>chambre</em>, from Latin <em>camera</em> meaning “vaulted room.” Originally referred to any private or enclosed space.<br>
+    <span class="cn">“Chamber” 源自古法语 chambre，来自拉丁语 camera，意思是“拱形屋顶的房间”，最初指任何私密或封闭的空间。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>camera</em> – vaulted room<br>
+      <span class="cn">拉丁语 camera：拱形房间</span><br><br>
+      <strong>Old French:</strong> <em>chambre</em> – room<br>
+      <span class="cn">古法语 chambre：房间</span><br><br>
+      <strong>Modern English:</strong> <em>chamber</em> – a formal room or enclosed space<br>
+      <span class="cn">现代英语 chamber：正式场所或封闭空间</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Meaning</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Room</td>
+          <td>Any enclosed space in a building</td>
+          <td>The room was decorated with paintings.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td><strong>Chamber</strong></td>
+          <td><strong>A formal or enclosed space</strong></td>
+          <td>The judge entered the court chamber.</td>
+          <td>Formal / Historical</td>
+        </tr>
+        <tr>
+          <td>Vault</td>
+          <td>Arched room, often for storage or burial</td>
+          <td>The crown was kept in the royal vault.</td>
+          <td>Mysterious / Secure</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Chamber"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/QCkYZKke3Co?start=25"
+      title="What Is a Chamber? Architecture and Biology"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:25</strong> to hear how “chamber” is used in architectural and anatomical contexts.<br>
+      <span class="cn">听第 0:25 左右，了解“chamber”在建筑与解剖学中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Chamber in the News</h3>
+    <p>
+      Scientists used high-pressure chambers to simulate conditions deep inside planets.<br>
+      <span class="cn">科学家使用高压密室模拟行星深处的环境。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nature.com" target="_blank" class="fancy-link">
+        📰 Read More – Nature News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
