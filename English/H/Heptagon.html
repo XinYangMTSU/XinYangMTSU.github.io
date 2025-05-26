@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Heptagon</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🟦 heptagon
+      <span class="pronunciation">/ˈhɛptəˌɡɒn/</span>
+      <button class="audio-button" onclick="speak('Heptagon')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A flat, two-dimensional shape with seven straight sides and seven angles.<br>
+    <span class="cn">七边形；一个有七条边和七个角的平面图形。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> A regular heptagon has seven equal sides and seven equal angles.<br>
+      <span class="cn">例句：正七边形的七条边和七个角都相等。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> It's rare to find heptagons used in everyday architecture.<br>
+      <span class="cn">例句：在日常建筑中很少使用七边形。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Seven-sided shape <span class="cn">七边形</span></li>
+        <li>Polygon <span class="cn">多边形</span></li>
+        <li>Heptagonal figure <span class="cn">七边图形</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Heptagon" comes from Greek <em>hepta</em> meaning "seven" and <em>-gon</em> meaning "angle" or "corner".<br>
+    <span class="cn">“Heptagon” 来自希腊语：hepta 表示“七”，-gon 表示“角”或“边”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong> <em>heptagōnos</em> – seven-angled<br>
+      <span class="cn">希腊语 heptagōnos：七个角的</span><br><br>
+      <strong>Late Latin:</strong> <em>heptagonum</em> – seven-sided figure<br>
+      <span class="cn">晚期拉丁语 heptagonum：七边形</span><br><br>
+      <strong>Modern English:</strong> <em>heptagon</em> – a polygon with seven sides<br>
+      <span class="cn">现代英语 heptagon：七边形</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Shape</th>
+          <th>Number of Sides</th>
+          <th>Type</th>
+          <th>Example Use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hexagon</td>
+          <td>6</td>
+          <td>Polygon</td>
+          <td>Beehives are often made of hexagons.</td>
+        </tr>
+        <tr>
+          <td><strong>Heptagon</strong></td>
+          <td><strong>7</strong></td>
+          <td><strong>Polygon</strong></td>
+          <td>A heptagon has seven sides and is less common in geometry.</td>
+        </tr>
+        <tr>
+          <td>Octagon</td>
+          <td>8</td>
+          <td>Polygon</td>
+          <td>A stop sign is shaped like an octagon.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Heptagon"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/lUPWzGqY-rM?start=10"
+      title="Geometry Shapes: What Is a Heptagon?"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:10</strong> to hear how “heptagon” is defined in geometry.<br>
+      <span class="cn">听第 0:10 左右，了解“heptagon”在几何学中的定义。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Heptagon in the News</h3>
+    <p>
+      The artist used a large heptagon as the central shape in the sculpture.<br>
+      <span class="cn">这位艺术家将一个巨大的七边形作为雕塑的中心形状。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.artnews.com" target="_blank" class="fancy-link">
+        📰 Read More – Art News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
