@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Aspiring</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 aspiring
+      <span class="pronunciation">/əˈspaɪərɪŋ/</span>
+      <button class="audio-button" onclick="speak('Aspiring')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Having a strong desire to achieve something, typically a particular career, goal, or status.<br>
+    <span class="cn">有志向的；有抱负的；渴望成功（尤指在事业上）的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She’s an aspiring writer working on her first novel.<br>
+      <span class="cn">例句：她是一位有志成为作家的新人，正在写她的第一本小说。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The workshop was designed for aspiring musicians and performers.<br>
+      <span class="cn">例句：这个工作坊是为有志成为音乐家和表演者的人开设的。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Ambitious <span class="cn">有雄心的</span></li>
+        <li>Hopeful <span class="cn">抱有希望的</span></li>
+        <li>Motivated <span class="cn">积极进取的</span></li>
+        <li>Driven <span class="cn">有动力的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Aspiring" comes from the Latin <em>aspirare</em>, meaning “to breathe toward” or “to seek to reach,” combining <em>ad-</em> (toward) + <em>spirare</em> (to breathe).<br>
+    <span class="cn">“Aspiring” 来自拉丁语 aspirare，意思是“朝……呼吸”或“渴望达到”，由前缀 ad-（朝向）和动词 spirare（呼吸）组成。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>aspirare</em> – to breathe toward, strive<br>
+      <span class="cn">拉丁语 aspirare：朝向呼吸，努力追求</span><br><br>
+      <strong>Middle English:</strong> <em>aspire</em> – to strive to attain<br>
+      <span class="cn">中古英语 aspire：渴望获得</span><br><br>
+      <strong>Modern English:</strong> <em>aspiring</em> – having ambition to succeed<br>
+      <span class="cn">现代英语 aspiring：有志向的，有抱负的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Tone</th>
+          <th>Meaning</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ambitious</td>
+          <td>Neutral / Positive</td>
+          <td>Having strong determination to succeed</td>
+          <td>He is very ambitious in his career goals.</td>
+        </tr>
+        <tr>
+          <td><strong>Aspiring</strong></td>
+          <td><strong>Positive</strong></td>
+          <td><strong>Having the desire to achieve something</strong></td>
+          <td>She's an aspiring film director.</td>
+        </tr>
+        <tr>
+          <td>Dreaming</td>
+          <td>Gentle / Idealistic</td>
+          <td>Having hopes and imagination about success</td>
+          <td>He’s dreaming of becoming a pilot.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Aspiring"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/fm0T7_SGee4?start=60"
+      title="Advice for Aspiring Artists"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:00</strong> to hear how “aspiring” is used when encouraging creative careers.<br>
+      <span class="cn">听第 1:00 左右，了解“aspiring”在鼓励创意职业时的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Aspiring in the News</h3>
+    <p>
+      The program offers scholarships and mentorship to aspiring engineers from underrepresented communities.<br>
+      <span class="cn">该项目为来自弱势群体的有志工程师提供奖学金和指导。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.npr.org" target="_blank" class="fancy-link">
+        📰 Read More – NPR News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
