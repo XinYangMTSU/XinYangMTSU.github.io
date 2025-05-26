@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Squander</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💸 squander
+      <span class="pronunciation">/ˈskwɒn.dər/</span>
+      <button class="audio-button" onclick="speak('Squander')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To waste something (especially money, time, or resources) in a foolish or careless way.<br>
+    <span class="cn">浪费；挥霍（尤指金钱、时间或资源），通常指不明智或草率地使用。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> He squandered his inheritance on luxury cars and parties.<br>
+      <span class="cn">例句：他把继承的钱挥霍在豪车和派对上。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Don't squander this opportunity to improve your skills.<br>
+      <span class="cn">例句：不要浪费这次提升技能的机会。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Waste <span class="cn">浪费</span></li>
+        <li>Blow (informal) <span class="cn">乱花（非正式）</span></li>
+        <li>Dissipate <span class="cn">挥霍；消散</span></li>
+        <li>Fritter away <span class="cn">一点一点浪费掉</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Squander" is of uncertain origin, but it may come from an obsolete word meaning "to scatter" or "to disperse," reflecting the idea of throwing resources away carelessly.<br>
+    <span class="cn">“Squander”的词源不确定，可能来自一个已废弃的词，意为“分散”或“抛洒”，体现了随意浪费资源的意思。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Obsolete English:</strong> <em>squand</em> – to scatter<br>
+      <span class="cn">古英语 squand：散开、挥洒</span><br><br>
+      <strong>Modern English:</strong> <em>squander</em> – to waste foolishly<br>
+      <span class="cn">现代英语 squander：愚蠢地浪费</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality</th>
+          <th>Intensity</th>
+          <th>Example Use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Waste</td>
+          <td>Neutral</td>
+          <td>Medium</td>
+          <td>He wastes time on social media.</td>
+        </tr>
+        <tr>
+          <td><strong>Squander</strong></td>
+          <td><strong>Formal</strong></td>
+          <td><strong>Strong</strong></td>
+          <td><strong>She squandered all her savings in a year.</strong></td>
+        </tr>
+        <tr>
+          <td>Fritter away</td>
+          <td>Informal</td>
+          <td>Mild</td>
+          <td>They frittered away the afternoon chatting.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Squander"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/3xFHzfLN5dM?start=25"
+      title="How People Squander Their Potential – Motivational Clip"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:25</strong> to hear “squander” used in the context of life choices and missed opportunities.<br>
+      <span class="cn">听第 0:25 左右，了解“squander”在描述人生选择和错失机会时的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Squander in the News</h3>
+    <p>
+      Economists warned that the country might squander its budget surplus on short-term political gains.<br>
+      <span class="cn">经济学家警告，该国可能会为短期政治利益而挥霍预算盈余。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.economist.com" target="_blank" class="fancy-link">
+        📰 Read More – The Economist
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
