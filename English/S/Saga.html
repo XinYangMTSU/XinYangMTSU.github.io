@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Saga</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📖 saga
+      <span class="pronunciation">/ˈsɑːɡə/</span>
+      <button class="audio-button" onclick="speak('Saga')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      A long and involved story, especially one featuring heroic deeds, legendary adventures, or complex family history. Originally, “saga” referred to medieval Icelandic or Norse prose narratives.<br>
+      <span class="cn">长篇故事；史诗；尤指包含英雄事迹、家族传奇或复杂经历的叙事。最初指中世纪冰岛或北欧的散文传说。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The movie follows a thrilling space saga across multiple generations.<br>
+      <span class="cn">例句：这部电影讲述了一段跨越多代的太空传奇。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Her memoir reads like a saga of survival and triumph.<br>
+      <span class="cn">例句：她的回忆录如同一部关于生存与胜利的传奇。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Epic <span class="cn">史诗</span></li>
+        <li>Tale <span class="cn">故事</span></li>
+        <li>Legend <span class="cn">传说</span></li>
+        <li>Chronicle <span class="cn">编年史</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Saga" comes from Old Norse <em>saga</em>, meaning "a narrative" or "what is said." It originally referred to traditional Icelandic stories about heroic figures and events.<br>
+    <span class="cn">“Saga” 源自古诺斯语 saga，意为“叙述”或“传说”，最初指冰岛传统的英雄事迹故事。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old Norse:</strong> <em>saga</em> – story, history<br>
+      <span class="cn">古诺斯语 saga：故事，历史</span><br><br>
+      <strong>Modern English:</strong> <em>saga</em> – long narrative or dramatic story<br>
+      <span class="cn">现代英语 saga：长篇叙事或戏剧性故事</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Type</th>
+          <th>Length</th>
+          <th>Typical Subject</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Epic</td>
+          <td>Noun / Adjective</td>
+          <td>Very long</td>
+          <td>Heroic deeds, often poetic</td>
+        </tr>
+        <tr>
+          <td><strong>Saga</strong></td>
+          <td><strong>Noun</strong></td>
+          <td><strong>Long</strong></td>
+          <td><strong>Heroic, historical, or family-based</strong></td>
+        </tr>
+        <tr>
+          <td>Tale</td>
+          <td>Noun</td>
+          <td>Short to medium</td>
+          <td>Fictional or moral-based</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Saga"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/sO2DQhx3fjI?start=15"
+      title="The Norse Sagas – History and Mythology"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:15</strong> to hear “saga” in the context of ancient Viking stories.<br>
+      <span class="cn">听第 0:15 左右，了解“saga”在描述古代维京传奇中的使用方式。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Saga in the News</h3>
+    <p>
+      The political scandal turned into a months-long saga filled with twists and investigations.<br>
+      <span class="cn">这场政治丑闻变成了一场长达数月、充满转折和调查的传奇事件。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
