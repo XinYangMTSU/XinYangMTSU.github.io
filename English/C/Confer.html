@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Confer</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🎓 confer
+      <span class="pronunciation">/kənˈfɜːr/</span>
+      <button class="audio-button" onclick="speak('Confer')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To grant or bestow something (such as a right, degree, honor, or benefit); to discuss something with others to make a decision.<br>
+    <span class="cn">授予；给予（如权利、学位、荣誉等）；商议；协商。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The university will confer degrees at the commencement ceremony.<br>
+      <span class="cn">例句：大学将在毕业典礼上授予学位。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She conferred with her advisor before making the decision.<br>
+      <span class="cn">例句：她在做出决定前与导师商议过。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Grant <span class="cn">授予</span></li>
+        <li>Bestow <span class="cn">给予</span></li>
+        <li>Award <span class="cn">颁发</span></li>
+        <li>Consult <span class="cn">商议</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Confer" comes from Latin <em>conferre</em>, meaning "to bring together" or "to consult," from <em>com-</em> (together) + <em>ferre</em> (to carry).<br>
+    <span class="cn">“Confer” 来自拉丁语 conferre，意为“带到一起”或“商议”；由 com-（一起）和 ferre（携带）组成。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>conferre</em> – to bring together<br>
+      <span class="cn">拉丁语 conferre：共同带来，商议</span><br><br>
+      <strong>Middle English:</strong> <em>conferen</em> – to compare or consult<br>
+      <span class="cn">中古英语 conferen：比较，协商</span><br><br>
+      <strong>Modern English:</strong> <em>confer</em> – to grant or consult<br>
+      <span class="cn">现代英语 confer：授予，商议</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Grant</td>
+          <td>Neutral</td>
+          <td>The city granted him permission to build.</td>
+          <td>Official</td>
+        </tr>
+        <tr>
+          <td>Bestow</td>
+          <td>Formal</td>
+          <td>They bestowed honors upon the soldiers.</td>
+          <td>Respectful</td>
+        </tr>
+        <tr>
+          <td><strong>Confer</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>The board conferred the title of Professor Emeritus.</td>
+          <td>Academic / Diplomatic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Confer"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/oMRdWkAv9Mk?start=45"
+      title="Academic Honors and What Universities Confer"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> to hear how “confer” is used in academic settings.<br>
+      <span class="cn">听第 0:45 左右，了解“confer”在学术语境中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Confer in the News</h3>
+    <p>
+      The committee conferred several honors on the scientist for her groundbreaking research.<br>
+      <span class="cn">委员会因其开创性的研究向这位科学家授予了多个荣誉。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nature.com" target="_blank" class="fancy-link">
+        📰 Read More – Nature News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
