@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Resistance</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🛡️ resistance
+      <span class="pronunciation">/rɪˈzɪs.təns/</span>
+      <button class="audio-button" onclick="speak('Resistance')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>1. The act or power of opposing or withstanding something (such as force, pressure, or change).<br>
+    2. In physics, the opposition to the flow of electric current in a circuit.<br>
+    <span class="cn">1. 抵抗；反抗；抗力。<br>2. （物理）电阻，对电流的阻碍。</span></p>
+
+    <div class="example">
+      <strong>Example 1:</strong> The wall provides strong resistance to wind and water.<br>
+      <span class="cn">例句 1：这面墙对风和水具有很强的抗力。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example 2:</strong> Copper has low electrical resistance.<br>
+      <span class="cn">例句 2：铜的电阻很低。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Opposition <span class="cn">反对</span></li>
+        <li>Defiance <span class="cn">反抗</span></li>
+        <li>Barrier <span class="cn">障碍</span></li>
+        <li>Drag (physics) <span class="cn">阻力（物理）</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Resistance" comes from the Latin word <em>resistentia</em>, from <em>resistere</em>, meaning "to withstand" or "stand back." It entered English via Old French in the 14th century.<br>
+    <span class="cn">“Resistance” 来自拉丁语 resistentia，源自 resistere，意为“抵抗、抵御”，于14世纪通过古法语进入英语。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>resistere</em> – to resist, stand against<br>
+      <span class="cn">拉丁语 resistere：抵抗，顶住</span><br><br>
+      <strong>Old French:</strong> <em>resistance</em> – opposition<br>
+      <span class="cn">古法语 resistance：反抗</span><br><br>
+      <strong>Modern English:</strong> <em>resistance</em> – opposition, defense, or electrical opposition<br>
+      <span class="cn">现代英语 resistance：抵抗、对抗、电阻</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Meaning</th>
+          <th>Field</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Opposition</td>
+          <td>Act of resisting or fighting back</td>
+          <td>Politics / Debate</td>
+          <td>The proposal met strong opposition.</td>
+        </tr>
+        <tr>
+          <td><strong>Resistance</strong></td>
+          <td><strong>Force that opposes motion or change</strong></td>
+          <td><strong>Physics / Social</strong></td>
+          <td><strong>He built up resistance to the disease.</strong></td>
+        </tr>
+        <tr>
+          <td>Drag</td>
+          <td>Resistance due to air or fluid</td>
+          <td>Physics</td>
+          <td>Airplanes experience drag during flight.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Resistance"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/nqZojR3lg3E?start=30"
+      title="Physics: What is Resistance? – Educational Clip"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear “resistance” used in a physics explanation.<br>
+      <span class="cn">听第 0:30 左右，了解“resistance”在物理教学中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Resistance in the News</h3>
+    <p>
+      Scientists are concerned about the growing resistance of bacteria to antibiotics.<br>
+      <span class="cn">科学家担心细菌对抗生素的抗药性日益增强。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nature.com" target="_blank" class="fancy-link">
+        📰 Read More – Nature Journal
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
