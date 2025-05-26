@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Affirm</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ✅ affirm
+      <span class="pronunciation">/əˈfɜːm/</span>
+      <button class="audio-button" onclick="speak('Affirm')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To state something as true or confirm it with confidence; to express agreement or support, often publicly or formally.<br>
+    <span class="cn">断言；确认；公开或正式地表示支持或同意。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She affirmed her commitment to equal rights during the interview.<br>
+      <span class="cn">例句：她在采访中确认了自己对平等权利的承诺。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The judge affirmed the lower court’s decision.<br>
+      <span class="cn">例句：法官确认了下级法院的裁决。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Confirm <span class="cn">确认</span></li>
+        <li>Declare <span class="cn">宣称</span></li>
+        <li>Assert <span class="cn">断言</span></li>
+        <li>Support <span class="cn">支持</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Affirm" comes from Latin <em>affirmare</em>, meaning “to make steady or strengthen,” from <em>ad</em> (to) + <em>firmare</em> (to make firm).<br>
+    <span class="cn">“Affirm” 源自拉丁语 affirmare，意为“坚定地说”或“加强”，由 ad（向）+ firmare（使坚固）组成。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>affirmare</em> – to assert, to make firm<br>
+      <span class="cn">拉丁语 affirmare：断言，使坚定</span><br><br>
+      <strong>Old French:</strong> <em>affermer</em> – to confirm<br>
+      <span class="cn">古法语 affermer：确认</span><br><br>
+      <strong>Modern English:</strong> <em>affirm</em> – to state or confirm as true<br>
+      <span class="cn">现代英语 affirm：确认；断言</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality</th>
+          <th>Strength</th>
+          <th>Example Use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Assert</td>
+          <td>Neutral</td>
+          <td>Strong</td>
+          <td>He asserted his innocence.</td>
+        </tr>
+        <tr>
+          <td><strong>Affirm</strong></td>
+          <td><strong>Formal</strong></td>
+          <td><strong>Strong</strong></td>
+          <td><strong>The leader affirmed her support for the policy.</strong></td>
+        </tr>
+        <tr>
+          <td>Confirm</td>
+          <td>Neutral</td>
+          <td>Medium</td>
+          <td>The test confirmed their theory.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Affirm"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/Wl9BgJK_d0k?start=20"
+      title="Leaders Affirming Their Principles – Documentary Segment"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> to hear “affirm” used in the context of public leadership and conviction.<br>
+      <span class="cn">听第 0:20 左右，了解“affirm”在领导发言中的正式使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Affirm in the News</h3>
+    <p>
+      The company’s CEO affirmed their commitment to sustainability during the press conference.<br>
+      <span class="cn">公司首席执行官在新闻发布会上确认了他们对可持续发展的承诺。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
