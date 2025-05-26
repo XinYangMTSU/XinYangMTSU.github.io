@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Frustum</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧊 frustum
+      <span class="pronunciation">/ˈfrʌstəm/</span>
+      <button class="audio-button" onclick="speak('Frustum')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A solid figure formed by cutting the top off a cone or pyramid with a plane parallel to the base. It has two parallel faces—one larger, one smaller—and trapezoidal sides.<br>
+    <span class="cn">截头体；通过与底面平行的平面切去圆锥或金字塔顶端而形成的立体图形，具有上下两个平行面（一个大一个小）和梯形侧面。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The lampshade was shaped like a frustum of a cone.<br>
+      <span class="cn">例句：这个灯罩的形状像一个圆锥的截头体。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Engineers calculated the volume of the frustum using geometry formulas.<br>
+      <span class="cn">例句：工程师使用几何公式计算了截头体的体积。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Truncated cone <span class="cn">截头圆锥</span></li>
+        <li>Truncated pyramid <span class="cn">截头金字塔</span></li>
+        <li>Geometric solid <span class="cn">几何立体</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Frustum" comes from Latin <em>frustum</em>, meaning "a piece broken off" or "a fragment". It refers to a portion of a solid that has been sliced off.<br>
+    <span class="cn">“Frustum” 来自拉丁语 frustum，意为“断裂的一块”或“碎片”，用于描述被切去顶端后的立体图形。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>frustum</em> – a piece, fragment<br>
+      <span class="cn">拉丁语 frustum：一块，碎片</span><br><br>
+      <strong>Modern English:</strong> <em>frustum</em> – a geometric solid formed by slicing off the top of a cone or pyramid<br>
+      <span class="cn">现代英语 frustum：几何中的截头体</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Shape</th>
+          <th>Top</th>
+          <th>Bottom</th>
+          <th>Example Use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cone</td>
+          <td>Pointed tip</td>
+          <td>Circular base</td>
+          <td>Ice cream cone</td>
+        </tr>
+        <tr>
+          <td>Pyramid</td>
+          <td>Pointed tip</td>
+          <td>Polygonal base</td>
+          <td>Egyptian pyramid</td>
+        </tr>
+        <tr>
+          <td><strong>Frustum</strong></td>
+          <td><strong>Flat (cut-off)</strong></td>
+          <td><strong>Flat base</strong></td>
+          <td>Truncated lamp shade or water tank</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Frustum"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/HxplxgYjKHw?start=25"
+      title="What Is a Frustum? Geometry Basics"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:25</strong> to hear how “frustum” is used when describing 3D solids.<br>
+      <span class="cn">听第 0:25 左右，了解“frustum”在几何立体中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Frustum in the News</h3>
+    <p>
+      NASA engineers used a frustum-shaped module for aerodynamic stability during re-entry.<br>
+      <span class="cn">NASA 工程师使用了截头体形状的舱体，以提高重返大气层时的空气动力稳定性。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nasa.gov" target="_blank" class="fancy-link">
+        📰 Read More – NASA News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
