@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Sliver</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🪵 sliver
+      <span class="pronunciation">/ˈslɪvər/</span>
+      <button class="audio-button" onclick="speak('Sliver')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A small, thin, narrow piece of something that has been cut or broken off, especially from wood, glass, metal, or food.<br>
+    <span class="cn">碎片；裂片；指从木头、玻璃、金属或食物中切下或断裂出的小而薄的一块。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She picked up a sliver of glass from the floor.<br>
+      <span class="cn">例句：她从地板上捡起了一块玻璃碎片。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> I only want a sliver of cake, not a full slice.<br>
+      <span class="cn">例句：我只要一小块蛋糕，不要整片。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Shard <span class="cn">碎片</span></li>
+        <li>Splinter <span class="cn">尖片；刺</span></li>
+        <li>Chip <span class="cn">碎屑</span></li>
+        <li>Slice <span class="cn">薄片；一片</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Sliver" comes from the Middle English verb <em>sliven</em> meaning “to split” or “to cleave,” and is related to the word <em>slice</em>.<br>
+    <span class="cn">“Sliver” 源自中古英语 sliven，意为“劈开”或“分裂”，与“slice（切片）”一词相关。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle English:</strong> <em>sliven</em> – to split<br>
+      <span class="cn">中古英语 sliven：劈开</span><br><br>
+      <strong>Modern English:</strong> <em>sliver</em> – a thin, narrow piece<br>
+      <span class="cn">现代英语 sliver：薄而窄的一片</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Meaning</th>
+          <th>Material</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Splinter</td>
+          <td>Small sharp piece</td>
+          <td>Wood, glass</td>
+          <td>I got a splinter in my finger.</td>
+        </tr>
+        <tr>
+          <td><strong>Sliver</strong></td>
+          <td><strong>Thin, narrow piece</strong></td>
+          <td><strong>Wood, food, glass</strong></td>
+          <td>A sliver of cheese was left on the plate.</td>
+        </tr>
+        <tr>
+          <td>Slice</td>
+          <td>Flat cut portion</td>
+          <td>Food, paper</td>
+          <td>He served a slice of pie.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Sliver"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/nYbg6q86zZ8?start=30"
+      title="How to Remove a Sliver (Splinter) Safely"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear how “sliver” is used when talking about splinters or small fragments.<br>
+      <span class="cn">听第 0:30 左右，了解“sliver”在谈论刺或碎片时的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Sliver in the News</h3>
+    <p>
+      A sliver of moonlight lit up the ancient temple ruins.<br>
+      <span class="cn">一缕月光照亮了古庙的废墟。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
