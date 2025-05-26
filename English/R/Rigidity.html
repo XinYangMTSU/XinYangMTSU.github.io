@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Rigidity</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧱 rigidity
+      <span class="pronunciation">/rɪˈdʒɪdəti/</span>
+      <button class="audio-button" onclick="speak('Rigidity')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>The quality or state of being stiff and not easily bent or changed; structural firmness or resistance to deformation.<br>
+    <span class="cn">刚性；坚硬性；不易弯曲或改变的特性。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The triangle is known for its structural rigidity in architecture.<br>
+      <span class="cn">例句：三角形因其结构上的刚性而被广泛应用于建筑设计中。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Rigidity in thinking can prevent people from accepting new ideas.<br>
+      <span class="cn">例句：思维的僵化可能阻碍人们接受新观点。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Stiffness <span class="cn">僵硬</span></li>
+        <li>Inflexibility <span class="cn">不灵活</span></li>
+        <li>Firmness <span class="cn">坚固</span></li>
+        <li>Resistance <span class="cn">抵抗力</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Rigidity" comes from Latin <em>rigiditas</em>, from <em>rigidus</em> meaning "stiff or unyielding". The suffix <em>-ity</em> forms nouns that express a state or condition.<br>
+    <span class="cn">“Rigidity” 源自拉丁语 rigiditas，rigidus 意为“坚硬的，不屈的”。后缀 -ity 表示某种状态或性质。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>rigidus</em> – stiff, unyielding<br>
+      <span class="cn">拉丁语 rigidus：坚硬的，不能弯曲的</span><br><br>
+      <strong>Middle English:</strong> <em>rigide</em> – rigid or strict<br>
+      <span class="cn">中古英语 rigide：僵硬的，严格的</span><br><br>
+      <strong>Modern English:</strong> <em>rigidity</em> – the quality of being stiff or firm<br>
+      <span class="cn">现代英语 rigidity：刚性，僵化</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Stiffness</td>
+          <td>Neutral</td>
+          <td>The material’s stiffness made it ideal for the bridge.</td>
+          <td>Technical</td>
+        </tr>
+        <tr>
+          <td>Inflexibility</td>
+          <td>Semi-formal</td>
+          <td>His inflexibility in negotiations frustrated the team.</td>
+          <td>Critical</td>
+        </tr>
+        <tr>
+          <td><strong>Rigidity</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>The design relies on the rigidity of the triangular frame.</td>
+          <td>Objective / Structural</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Rigidity"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/9d0g-3CmJjA?start=35"
+      title="Engineering with Triangles – Rigidity in Design"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:35</strong> to hear how “rigidity” is used in structural engineering contexts.<br>
+      <span class="cn">听第 0:35 左右，了解“rigidity”在结构工程中的应用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Rigidity in the News</h3>
+    <p>
+      Engineers praised the rigidity of the framework, which prevented any collapse during the quake.<br>
+      <span class="cn">工程师称赞该框架的刚性，在地震中起到了防止坍塌的作用。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.sciencenews.org" target="_blank" class="fancy-link">
+        📰 Read More – Science News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
