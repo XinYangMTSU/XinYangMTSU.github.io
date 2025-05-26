@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Pentagon</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ⬟ pentagon
+      <span class="pronunciation">/ˈpɛntəˌɡɒn/</span>
+      <button class="audio-button" onclick="speak('Pentagon')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A flat, two-dimensional shape with five straight sides and five angles; also used to refer to the U.S. Department of Defense building in Washington, D.C.<br>
+    <span class="cn">五边形；也指美国国防部的五边形办公大楼。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> A regular pentagon has five equal sides and five equal angles.<br>
+      <span class="cn">例句：一个正五边形有五条相等的边和五个相等的角。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The Pentagon announced a new defense strategy today.<br>
+      <span class="cn">例句：五角大楼今天宣布了一项新的国防战略。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Five-sided shape <span class="cn">五边形</span></li>
+        <li>Five-angle polygon <span class="cn">五角形多边形</span></li>
+        <li>(U.S.) Department of Defense <span class="cn">（美国）国防部</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Pentagon" comes from Greek <em>penta-</em> meaning "five" and <em>-gon</em> meaning "angle" or "corner".<br>
+    <span class="cn">“Pentagon” 来自希腊语：前缀 penta- 表示“五”，后缀 -gon 表示“角”或“边”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong> <em>pentagōnos</em> – five-angled<br>
+      <span class="cn">希腊语 pentagōnos：五个角的</span><br><br>
+      <strong>Late Latin:</strong> <em>pentagonum</em> – five-sided figure<br>
+      <span class="cn">晚期拉丁语 pentagonum：五边形</span><br><br>
+      <strong>Modern English:</strong> <em>pentagon</em> – a 2D shape with five sides or the name of the U.S. military headquarters<br>
+      <span class="cn">现代英语 pentagon：五边形；美国国防部</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Shape</th>
+          <th>Number of Sides</th>
+          <th>Type</th>
+          <th>Example Use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Triangle</td>
+          <td>3</td>
+          <td>Polygon</td>
+          <td>The triangle is the simplest polygon.</td>
+        </tr>
+        <tr>
+          <td>Square</td>
+          <td>4</td>
+          <td>Polygon</td>
+          <td>A square has four equal sides and angles.</td>
+        </tr>
+        <tr>
+          <td><strong>Pentagon</strong></td>
+          <td><strong>5</strong></td>
+          <td><strong>Polygon</strong></td>
+          <td>A pentagon has five sides and five angles.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Pentagon"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/zORUUqJd81M?start=20"
+      title="What Is a Pentagon? Geometry for Kids"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> to hear how “pentagon” is defined in basic geometry.<br>
+      <span class="cn">听第 0:20 左右，了解“pentagon”在几何学中的定义。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Pentagon in the News</h3>
+    <p>
+      The Pentagon released a statement regarding new military operations.<br>
+      <span class="cn">五角大楼就新的军事行动发表声明。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.defense.gov" target="_blank" class="fancy-link">
+        📰 Read More – U.S. Department of Defense
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
