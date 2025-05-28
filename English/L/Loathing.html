@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Loathing</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      😖 loathing
+      <span class="pronunciation">/ˈloʊðɪŋ/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">
+        🔊 Play
+      </button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/l/loa/loath/loathing__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>Loathing</strong> means a strong feeling of hatred or disgust for someone or something.<br>
+    <span class="cn">loathing 的意思是对某人或某事强烈的厌恶或憎恨。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She felt nothing but loathing for the corrupt politician.<br>
+      <span class="cn">例句：她对那个腐败的政客只有厌恶。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> His loathing of violence was evident in his writing.<br>
+      <span class="cn">例句：他对暴力的憎恨在他的作品中显而易见。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms</h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Hatred <span class="cn">仇恨</span></li>
+        <li>Disgust <span class="cn">厌恶</span></li>
+        <li>Aversion <span class="cn">反感</span></li>
+        <li>Detestation <span class="cn">憎恶</span></li>
+        <li>Repulsion <span class="cn">厌恶感</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
