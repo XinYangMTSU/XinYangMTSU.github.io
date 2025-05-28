@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Exotic</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🐦 exotic
+      <span class="pronunciation">/ɪɡˈzɑːtɪk/</span>
+      <button class="audio-button" onclick="speak('Exotic')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Strikingly unusual or different; from a foreign country and often seen as exciting or unusual.<br>
+    <span class="cn">异国风情的；奇异的；与众不同的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The garden was filled with exotic plants from South America.<br>
+      <span class="cn">例句：花园里种满了来自南美洲的奇异植物。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She wore an exotic outfit made of silk and feathers.<br>
+      <span class="cn">例句：她穿着一件由丝绸和羽毛制成的异国服装。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Unusual <span class="cn">不寻常的</span></li>
+        <li>Foreign <span class="cn">外国的</span></li>
+        <li>Strange <span class="cn">奇怪的</span></li>
+        <li>Alluring <span class="cn">迷人的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Exotic" comes from the Greek word <em>exōtikos</em>, meaning “from the outside.” It entered English via Latin and French, originally referring to anything foreign or strange.<br>
+    <span class="cn">“Exotic” 源自希腊语 exōtikos，意为“外来的”，通过拉丁语和法语传入英语，最初指的是异国或陌生的事物。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong> <em>exōtikos</em> – from outside<br>
+      <span class="cn">希腊语 exōtikos：来自外部的</span><br><br>
+      <strong>Latin:</strong> <em>exoticus</em> – foreign<br>
+      <span class="cn">拉丁语 exoticus：外国的</span><br><br>
+      <strong>Modern English:</strong> <em>exotic</em> – strikingly unusual or foreign<br>
+      <span class="cn">现代英语 exotic：异国的，奇异的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Foreign</td>
+          <td>Neutral</td>
+          <td>He traveled to a foreign country.</td>
+          <td>Objective</td>
+        </tr>
+        <tr>
+          <td>Strange</td>
+          <td>Informal</td>
+          <td>The food tasted strange to me.</td>
+          <td>Unfamiliar</td>
+        </tr>
+        <tr>
+          <td><strong>Exotic</strong></td>
+          <td><strong>Descriptive</strong></td>
+          <td>She collects exotic spices from around the world.</td>
+          <td>Colorful / Admiring</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Exotic"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/tWrhZpz0xp0?start=25"
+      title="Exotic Animals Around the World"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:25</strong> to hear how “exotic” is used to describe unusual animals.<br>
+      <span class="cn">听第 0:25 左右，了解“exotic”用于描述稀有动物的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Exotic in the News</h3>
+    <p>
+      The chef's new menu features exotic ingredients from Southeast Asia.<br>
+      <span class="cn">这位厨师的新菜单采用了来自东南亚的异国食材。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
