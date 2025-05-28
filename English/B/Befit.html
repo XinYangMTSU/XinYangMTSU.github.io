@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Befit</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧵 befit
+      <span class="pronunciation">/bɪˈfɪt/</span>
+      <button class="audio-button" onclick="speak('Befit')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To be appropriate or suitable for someone or something; to be fitting or proper in a certain situation.<br>
+    <span class="cn">适合；与…相称；与身份、场合等相配。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> He wore a suit that befit the seriousness of the occasion.<br>
+      <span class="cn">例句：他穿了一套与场合的庄重氛围相称的西装。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Her humble attitude befits someone of true greatness.<br>
+      <span class="cn">例句：她谦逊的态度正与真正伟大之人相称。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Suit <span class="cn">适合</span></li>
+        <li>Match <span class="cn">与…相配</span></li>
+        <li>Accord with <span class="cn">与…一致</span></li>
+        <li>Be appropriate for <span class="cn">适用于</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Befit" comes from the Middle English word <em>befitten</em>, combining the prefix “be-” (intensifier) with “fit” (suitable). It literally means “to make fit” or “to be fitting for.”<br>
+    <span class="cn">“Befit” 来自中古英语 befiten，由前缀 be-（表示加强）和 fit（适合）组成，字面意思是“使合适”或“适合于”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle English:</strong> <em>befitten</em> – to make suitable<br>
+      <span class="cn">中古英语 befiten：使适合</span><br><br>
+      <strong>Modern English:</strong> <em>befit</em> – to be proper for<br>
+      <span class="cn">现代英语 befit：适合；相配</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Suit</td>
+          <td>Neutral</td>
+          <td>The outfit suits her well.</td>
+          <td>Practical / Visual</td>
+        </tr>
+        <tr>
+          <td>Accord with</td>
+          <td>Formal</td>
+          <td>His actions accord with his values.</td>
+          <td>Logical / Ethical</td>
+        </tr>
+        <tr>
+          <td><strong>Befit</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>That humility befits a wise leader.</td>
+          <td>Respectful / Elevated</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Befit"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/AaCqjzW1Y3M?start=30"
+      title="Befitting Behavior in Historical Drama"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear how “befit” is used in a formal or noble context.<br>
+      <span class="cn">听第 0:30 左右，了解“befit”在正式或尊贵语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Befit in the News</h3>
+    <p>
+      The president’s address struck a tone that befit the gravity of the situation.<br>
+      <span class="cn">总统的演讲语气与局势的严重性相称。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
