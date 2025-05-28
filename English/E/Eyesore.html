@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Eyesore</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      👁️‍🗨️ eyesore
+      <span class="pronunciation">/ˈaɪ.sɔːr/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/e/eye/eyeso/eyesore__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Something that is very ugly, especially a building or place that spoils the appearance of a scene.<br>
+    <span class="cn">非常难看的东西，尤指破坏景观的建筑或地方；眼中钉。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> That abandoned factory is a real eyesore in the neighborhood.<br>
+      <span class="cn">例句：那个废弃的工厂真是这个社区的眼中钉。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The giant billboard was considered an eyesore by many residents.<br>
+      <span class="cn">例句：许多居民认为那个巨大的广告牌非常碍眼。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Blight <span class="cn">破坏景观的事物</span></li>
+        <li>Disfigurement <span class="cn">毁容；损坏</span></li>
+        <li>Ugly spot <span class="cn">丑陋之处</span></li>
+        <li>Nuisance <span class="cn">讨厌的东西</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Eyesore" is a compound of “eye” and “sore,” suggesting something painful or offensive to look at. The term has been used since the 1500s to describe visual ugliness.<br>
+    <span class="cn">“Eyesore” 是由 “eye”（眼睛）和 “sore”（痛处）组成的复合词，表示“令人不适的视觉”。早在16世纪就用来描述视觉上的丑陋。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle English:</strong> <em>eyesore</em> – something that hurts to look at<br>
+      <span class="cn">中古英语 eyesore：看着令人不舒服的东西</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>eyesore</em> – ugly or unpleasant to see<br>
+      <span class="cn">现代英语 eyesore：难看或破坏美感的事物</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Blight</td>
+          <td>Formal</td>
+          <td>The factory was a blight on the landscape.</td>
+          <td>Critical</td>
+        </tr>
+        <tr>
+          <td>Nuisance</td>
+          <td>Neutral</td>
+          <td>The noise from construction is a nuisance.</td>
+          <td>Annoyed</td>
+        </tr>
+        <tr>
+          <td><strong>Eyesore</strong></td>
+          <td><strong>Visual / Informal</strong></td>
+          <td>That rusty sign is a real eyesore.</td>
+          <td>Disapproving</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Eyesore"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/n5C1xLozXoY?start=15"
+      title="Eyesore Usage in Real Life"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:15</strong> to hear “eyesore” used in context.<br>
+      <span class="cn">听第 0:15 左右，了解“eyesore”在实际语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Eyesore in the News</h3>
+    <p>
+      Local officials plan to remove the abandoned lot, calling it a public eyesore.<br>
+      <span class="cn">当地官员计划清除那块废弃地，称它为公众眼中钉。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com" target="_blank" class="fancy-link">
+        📰 Read More – The Guardian
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
