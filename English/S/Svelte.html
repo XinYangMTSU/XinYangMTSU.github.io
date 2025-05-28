@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Svelte</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💃 svelte
+      <span class="pronunciation">/svɛlt/</span>
+      <button class="audio-button" onclick="speak('Svelte')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Gracefully slender and elegant in appearance or manner.<br>
+    <span class="cn">苗条而优雅的；体态轻盈的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The actress looked svelte in her designer gown on the red carpet.<br>
+      <span class="cn">例句：那位女演员穿着设计师礼服在红毯上显得苗条优雅。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> His svelte figure was the result of years of yoga and mindful eating.<br>
+      <span class="cn">例句：他苗条的身材是多年练瑜伽和注意饮食的结果。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Slender <span class="cn">苗条的</span></li>
+        <li>Graceful <span class="cn">优雅的</span></li>
+        <li>Lean <span class="cn">精瘦的</span></li>
+        <li>Trim <span class="cn">整洁苗条的</span></li>
+        <li>Willowy <span class="cn">苗条柔美的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Svelte" comes from Italian <em>svelto</em>, meaning “slender, stretched,” the past participle of <em>svellere</em>, meaning “to stretch or pluck out.”<br>
+    <span class="cn">“Svelte” 源自意大利语 svelto，意为“苗条的，拉伸的”，是动词 svellere（拉伸，拔出）的过去分词形式。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Italian:</strong> <em>svelto</em> – slender, sleek<br>
+      <span class="cn">意大利语 svelto：苗条、灵巧</span><br><br>
+      <strong>French (influence):</strong> <em>svelte</em> – slender<br>
+      <span class="cn">法语 svelte：纤细的</span><br><br>
+      <strong>Modern English:</strong> <em>svelte</em> – gracefully slim<br>
+      <span class="cn">现代英语 svelte：苗条优雅的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Slender</td>
+          <td>Neutral</td>
+          <td>She has a slender waist.</td>
+          <td>Descriptive</td>
+        </tr>
+        <tr>
+          <td>Lean</td>
+          <td>Neutral / Fitness</td>
+          <td>He keeps a lean physique.</td>
+          <td>Sporty</td>
+        </tr>
+        <tr>
+          <td><strong>Svelte</strong></td>
+          <td><strong>Elegant / Formal</strong></td>
+          <td>The dancer moved with svelte grace.</td>
+          <td>Refined</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Svelte"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/QJXXYoAbZnA?start=15"
+      title="Svelte Explained in Fashion Context"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:15</strong> to hear how “svelte” is used in a style and fashion context.<br>
+      <span class="cn">听第 0:15 左右，了解“svelte”在时尚语境中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Svelte in the News</h3>
+    <p>
+      The magazine praised the model’s svelte appearance as an ideal of modern elegance.<br>
+      <span class="cn">该杂志称赞这位模特苗条的外表是现代优雅的典范。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.vogue.com/" target="_blank" class="fancy-link">
+        📰 Read More – Vogue
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
