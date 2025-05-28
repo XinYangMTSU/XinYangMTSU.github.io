@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Equilateral</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔺 equilateral
+      <span class="pronunciation">/ˌiːkwɪˈlætərəl/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/e/equ/equil/equilateral__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Having all sides of equal length.<br>
+    <span class="cn">等边的；所有边长相等的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> An equilateral triangle has three equal sides and angles.<br>
+      <span class="cn">例句：等边三角形有三条相等的边和角。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The design was based on equilateral shapes for balance and symmetry.<br>
+      <span class="cn">例句：该设计基于等边图形，以获得平衡与对称。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Regular <span class="cn">规则的（几何）</span></li>
+        <li>Symmetrical <span class="cn">对称的</span></li>
+        <li>Even-sided <span class="cn">边长均等的</span></li>
+        <li>Uniform <span class="cn">统一的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Equilateral" comes from the Latin roots <em>aequus</em> (equal) and <em>lateralis</em> (side). It literally means “equal-sided.”<br>
+    <span class="cn">equilateral 来自拉丁语 aequus（相等）和 lateralis（边），意为“边长相等的”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>aequilateralis</em> – equal-sided<br>
+      <span class="cn">拉丁语 aequilateralis：边长相等的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Old French:</strong> <em>equilateral</em> – equal-sided<br>
+      <span class="cn">古法语 equilateral：等边的</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>equilateral</em> – all sides equal<br>
+      <span class="cn">现代英语 equilateral：所有边相等</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Regular</td>
+          <td>Technical</td>
+          <td>A regular polygon has all sides and angles equal.</td>
+          <td>Mathematical</td>
+        </tr>
+        <tr>
+          <td>Symmetrical</td>
+          <td>Neutral</td>
+          <td>The painting’s symmetrical design draws attention.</td>
+          <td>Balanced</td>
+        </tr>
+        <tr>
+          <td><strong>Equilateral</strong></td>
+          <td><strong>Technical</strong></td>
+          <td>An equilateral triangle appears in geometry lessons.</td>
+          <td>Precise</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Equilateral"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/8nboMGGqgd0?start=35"
+      title="What is an Equilateral Triangle?"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:35</strong> to hear “equilateral” used in context.<br>
+      <span class="cn">听第 0:35 左右，了解“equilateral”在实际语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Equilateral in the News</h3>
+    <p>
+      Mathematicians analyzed the symmetry of equilateral triangles in architectural designs.<br>
+      <span class="cn">数学家分析了等边三角形在建筑设计中的对称性。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.scientificamerican.com" target="_blank" class="fancy-link">
+        📰 Read More – Scientific American
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
