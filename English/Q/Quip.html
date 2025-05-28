@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Quip</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💬 quip
+      <span class="pronunciation">/kwɪp/</span>
+      <button class="audio-button" onclick="speak('Quip')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun / Verb<br><span class="cn">词性：名词 / 动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A short, clever, and often witty remark; to make a quick, humorous comment.<br>
+    <span class="cn">妙语；俏皮话；风趣的评论。动词形式表示说妙语或俏皮话。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> She ended her speech with a quick quip that made the audience laugh.<br>
+      <span class="cn">例句：她用一句俏皮话结束了演讲，逗得观众哈哈大笑。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> "At least I didn't trip this time," he quipped after his speech.<br>
+      <span class="cn">例句：“至少这次我没摔倒。”他开完演讲后幽默地说道。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Witticism <span class="cn">俏皮话</span></li>
+        <li>Joke <span class="cn">笑话</span></li>
+        <li>One-liner <span class="cn">一语中的的妙语</span></li>
+        <li>Retort <span class="cn">反驳妙语</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Quip" originated in the 16th century, from Latin <em>quippe</em>, meaning "indeed" or "to be sure"—often used sarcastically. Over time, it evolved into a term for sharp or clever remarks.<br>
+    <span class="cn">“Quip” 起源于16世纪，来自拉丁语 quippe，意为“确实、的确”，常带有讽刺意味，后逐渐演变为指风趣、机智的评论。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>quippe</em> – indeed, for sure (often sarcastic)<br>
+      <span class="cn">拉丁语 quippe：确实、的确（常含讽刺）</span><br><br>
+      <strong>English (16th century):</strong> <em>quip</em> – sharp or clever saying<br>
+      <span class="cn">16世纪英语 quip：机智、风趣的说法</span><br><br>
+      <strong>Modern:</strong> Quip – humorous or witty remark<br>
+      <span class="cn">现代英语 quip：幽默机智的评论</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Joke</td>
+          <td>Neutral</td>
+          <td>He told a funny joke at dinner.</td>
+          <td>Amusing</td>
+        </tr>
+        <tr>
+          <td>Retort</td>
+          <td>Formal</td>
+          <td>She responded with a quick retort.</td>
+          <td>Sharp</td>
+        </tr>
+        <tr>
+          <td><strong>Quip</strong></td>
+          <td><strong>Witty</strong></td>
+          <td>He ended the meeting with a clever quip.</td>
+          <td>Light / Clever</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Quip"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/0la5DBtOVNI?start=40"
+      title="Quippy Movie Characters"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> to hear how “quip” is used by a witty character.<br>
+      <span class="cn">听第 0:40 左右，了解“quip”如何被风趣角色使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Quip in the News</h3>
+    <p>
+      The politician’s quip about the economy drew both laughter and criticism.<br>
+      <span class="cn">那位政治家对经济的妙语引发了笑声和争议。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
