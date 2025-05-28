@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Dismay</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      😟 dismay
+      <span class="pronunciation">/dɪsˈmeɪ/</span>
+      <button class="audio-button" onclick="speak('Dismay')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun / Verb<br><span class="cn">词性：名词 / 动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A feeling of shock, sadness, or disappointment; to cause someone to feel shocked or discouraged.<br>
+    <span class="cn">惊愕；沮丧；失望。动词形式表示使某人感到惊愕或沮丧。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> To her dismay, the concert was canceled at the last minute.<br>
+      <span class="cn">例句：令她沮丧的是，音乐会在最后一刻被取消了。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He was dismayed by the lack of progress.<br>
+      <span class="cn">例句：他对缺乏进展感到失望。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Disappointment <span class="cn">失望</span></li>
+        <li>Discouragement <span class="cn">沮丧</span></li>
+        <li>Shock <span class="cn">震惊</span></li>
+        <li>Displeasure <span class="cn">不满</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Dismay" comes from Old French <em>esmaier</em>, meaning “to frighten,” and from the Latin root <em>ex-</em> (out of) + <em>magare</em> (to trouble). Over time, it came to mean emotional distress or sadness.<br>
+    <span class="cn">“Dismay” 源自古法语 esmaier，意为“使害怕”，其词根包括拉丁语的 ex-（向外）和 magare（使不安），后来演变为表示情感上的沮丧或不安。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old French:</strong> <em>esmaier</em> – to frighten<br>
+      <span class="cn">古法语 esmaier：使害怕</span><br><br>
+      <strong>Middle English:</strong> <em>dismaien</em> – to alarm or sadden<br>
+      <span class="cn">中古英语 dismaien：使惊愕或沮丧</span><br><br>
+      <strong>Modern English:</strong> <em>dismay</em> – sadness, fear, or disappointment<br>
+      <span class="cn">现代英语 dismay：悲伤、惊讶或失望</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Disappointment</td>
+          <td>Neutral</td>
+          <td>She felt disappointment when the plan failed.</td>
+          <td>Sad</td>
+        </tr>
+        <tr>
+          <td>Shock</td>
+          <td>Neutral</td>
+          <td>He was in shock after hearing the news.</td>
+          <td>Sudden / Intense</td>
+        </tr>
+        <tr>
+          <td><strong>Dismay</strong></td>
+          <td><strong>Moderately Formal</strong></td>
+          <td>To his dismay, his team lost the game.</td>
+          <td>Sad + Surprised</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Dismay"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/dcR-RE0z_lA?start=45"
+      title="Dismay in Reaction Scenes"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> to hear how “dismay” is used in an emotional context.<br>
+      <span class="cn">听第 0:45 左右，了解“dismay”在情绪表达中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Dismay in the News</h3>
+    <p>
+      There was public dismay after the historic building was demolished.<br>
+      <span class="cn">这座历史建筑被拆除后引发了公众的强烈失望。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
