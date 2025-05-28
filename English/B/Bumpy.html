@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Bumpy</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🪨 bumpy
+      <span class="pronunciation">/ˈbʌmpi/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/b/bum/bumpy/bumpy__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Having a surface that is not smooth; full of jolts or uneven areas.<br>
+    <span class="cn">崎岖不平的；颠簸的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> We drove along a bumpy road through the forest.<br>
+      <span class="cn">例句：我们沿着一条颠簸的森林小路行驶。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> It was a bumpy flight because of the turbulence.<br>
+      <span class="cn">例句：由于气流颠簸，这趟航班一路不平稳。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Uneven <span class="cn">不平坦的</span></li>
+        <li>Rough <span class="cn">粗糙的</span></li>
+        <li>Jolty <span class="cn">颠簸的</span></li>
+        <li>Rugged <span class="cn">崎岖的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Bumpy" is derived from the word "bump," which has been used since the 16th century, possibly of Scandinavian origin, meaning a light blow or a raised area. The suffix "-y" turns it into an adjective.<br>
+    <span class="cn">“Bumpy” 源于单词 “bump”（隆起、撞击），该词自16世纪以来就已使用，可能源自斯堪的纳维亚语，加上形容词后缀“-y”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle English:</strong> <em>bump</em> – a light knock or swelling<br>
+      <span class="cn">中古英语 bump：轻轻的撞击或隆起</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>bumpy</em> – having many bumps or jolts<br>
+      <span class="cn">现代英语 bumpy：颠簸的，有许多隆起或震动的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Uneven</td>
+          <td>Neutral</td>
+          <td>The path was uneven and rocky.</td>
+          <td>Descriptive</td>
+        </tr>
+        <tr>
+          <td>Rough</td>
+          <td>Neutral</td>
+          <td>His hands felt rough from hard work.</td>
+          <td>Plain</td>
+        </tr>
+        <tr>
+          <td><strong>Bumpy</strong></td>
+          <td><strong>Informal</strong></td>
+          <td>The ride was bumpy but fun.</td>
+          <td>Casual</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Bumpy"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/7f4VJ9i0D8Y?start=42"
+      title="Bumpy Ride Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:42</strong> to hear “bumpy” used in real-world context.<br>
+      <span class="cn">听第 0:42 左右，了解“bumpy”在实际场景中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Bumpy in the News</h3>
+    <p>
+      The plane experienced a bumpy landing due to strong crosswinds.<br>
+      <span class="cn">由于强侧风，这架飞机着陆时很颠簸。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
