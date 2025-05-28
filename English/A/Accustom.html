@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Accustom</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🛠️ accustom
+      <span class="pronunciation">/əˈkʌstəm/</span>
+      <button class="audio-button" onclick="speak('Accustom')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To make someone or yourself familiar with something, or used to a situation or condition.<br>
+    <span class="cn">使习惯于；使适应。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> It took a while for him to accustom himself to the cold weather.<br>
+      <span class="cn">例句：他花了一段时间才适应寒冷的天气。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> You’ll soon accustom yourself to the new schedule.<br>
+      <span class="cn">例句：你很快就会习惯新的时间安排。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Adapt <span class="cn">适应</span></li>
+        <li>Acclimate <span class="cn">使适应（新环境）</span></li>
+        <li>Familiarize <span class="cn">使熟悉</span></li>
+        <li>Adjust <span class="cn">调整，适应</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Accustom" comes from Old French <em>acostumer</em>, based on Latin <em>consuetudo</em> meaning “custom” or “habit.”<br>
+    <span class="cn">“Accustom” 源自古法语 acostumer，源于拉丁语 consuetudo，意为“习惯，习俗”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>consuetudo</em> – habit, custom<br>
+      <span class="cn">拉丁语 consuetudo：习惯，风俗</span><br><br>
+      <strong>Old French:</strong> <em>acostumer</em> – to make familiar<br>
+      <span class="cn">古法语 acostumer：使熟悉</span><br><br>
+      <strong>Modern English:</strong> <em>accustom</em> – to make used to<br>
+      <span class="cn">现代英语 accustom：使习惯</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Adapt</td>
+          <td>Neutral</td>
+          <td>They had to adapt quickly to the new rules.</td>
+          <td>Practical</td>
+        </tr>
+        <tr>
+          <td>Acclimate</td>
+          <td>Formal / Technical</td>
+          <td>She needed time to acclimate to the altitude.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td><strong>Accustom</strong></td>
+          <td><strong>Formal / Literary</strong></td>
+          <td>He accustomed himself to the silence.</td>
+          <td>Reflective</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Accustom"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/HT0RydtL2qI?start=40"
+      title="Learning to Accustom Yourself"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> to hear how “accustom” is used in self-discipline context.<br>
+      <span class="cn">听第 0:40 左右，了解“accustom”在自律语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Accustom in the News</h3>
+    <p>
+      Health experts advise travelers to accustom themselves to local time zones to avoid jet lag.<br>
+      <span class="cn">健康专家建议旅行者适应当地时区，以避免时差反应。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.cnn.com/travel" target="_blank" class="fancy-link">
+        📰 Read More – CNN Travel
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
