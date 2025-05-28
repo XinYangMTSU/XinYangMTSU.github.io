@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Minimalism</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ⚪ minimalism
+      <span class="pronunciation">/ˈmɪnɪməlɪzəm/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/m/min/minim/minimalism__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A style or approach that uses the fewest and simplest elements possible; focusing on clarity, simplicity, and functionality.<br>
+    <span class="cn">极简主义；以最少、最简单的元素表达美感，注重清晰、简洁与功能性。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Her home is decorated in a clean, minimalist style.<br>
+      <span class="cn">例句：她的家以简洁的极简风格装饰。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Minimalism in art emphasizes empty space and subtle detail.<br>
+      <span class="cn">例句：极简艺术强调留白与细微之美。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Simplicity <span class="cn">简洁</span></li>
+        <li>Reduction <span class="cn">简化</span></li>
+        <li>Elegance <span class="cn">优雅（极简风）</span></li>
+        <li>Essentialism <span class="cn">本质主义</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Minimalism" comes from the word "minimal," meaning “the least amount,” and the suffix “-ism,” indicating a philosophy or movement. It became widely known in the 20th century through art and design.<br>
+    <span class="cn">“Minimalism” 源自 “minimal”（最少的）加上后缀 “-ism”（表示主义、风格）。20世纪通过艺术与设计广泛传播。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin root:</strong> <em>minimus</em> – smallest<br>
+      <span class="cn">拉丁语词根 minimus：最小</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Modern English:</strong> <em>minimalism</em> – a design and lifestyle philosophy focusing on simplicity<br>
+      <span class="cn">现代英语 minimalism：强调简洁的设计与生活理念</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Simplicity</td>
+          <td>Neutral</td>
+          <td>The simplicity of the design makes it elegant.</td>
+          <td>Clean</td>
+        </tr>
+        <tr>
+          <td>Essentialism</td>
+          <td>Philosophical</td>
+          <td>Essentialism is about keeping only what matters.</td>
+          <td>Intentional</td>
+        </tr>
+        <tr>
+          <td><strong>Minimalism</strong></td>
+          <td><strong>Modern / Artistic</strong></td>
+          <td>Minimalism values clarity over clutter.</td>
+          <td>Stylish / Efficient</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Minimalism"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/GgBpyNsS-jU?start=12"
+      title="What is Minimalism?"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:12</strong> to hear “minimalism” used in real-world context.<br>
+      <span class="cn">听第 0:12 左右，了解“minimalism”在实际语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Minimalism in the News</h3>
+    <p>
+      More young people are embracing minimalism, choosing quality over quantity in homes, fashion, and workspaces.<br>
+      <span class="cn">越来越多年轻人拥抱极简主义，在居住、穿着与办公空间中追求品质而非数量。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.theguardian.com/lifeandstyle/series/minimalism" target="_blank" class="fancy-link">
+        📰 Read More – The Guardian
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
