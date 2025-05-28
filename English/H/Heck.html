@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Heck</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      😠 heck
+      <span class="pronunciation">/hɛk/</span>
+      <button class="audio-button" onclick="document.getElementById('audio').play()">🔊 Play</button>
+    </h2>
+    <audio id="audio" src="https://www.oxfordlearnersdictionaries.com/media/english/us_pron/h/hec/heck_/heck__us_1.mp3"></audio>
+
+    <p><strong>Part of speech:</strong> Interjection / Noun<br><span class="cn">词性：感叹词 / 名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A mild expression of surprise, anger, frustration, or emphasis; used instead of "hell" to avoid strong language.<br>
+    <span class="cn">表示惊讶、愤怒、沮丧或强调的轻微用语；用来替代“hell”以避免粗俗语言。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> What the heck is going on here?<br>
+      <span class="cn">例句：这是怎么回事啊？</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Heck, I didn’t expect to win!<br>
+      <span class="cn">例句：哎呀，我真没想到我会赢！</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Gosh <span class="cn">天哪（轻微感叹）</span></li>
+        <li>Darn <span class="cn">该死（较轻）</span></li>
+        <li>Jeez <span class="cn">哎呀</span></li>
+        <li>What on earth <span class="cn">到底怎么回事</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Heck" is a euphemism for "hell," used to soften the expression and avoid profanity. It originated in the early 19th century as a more polite alternative in casual conversation.<br>
+    <span class="cn">“Heck” 是 “hell” 的委婉语，用来缓和语气、避免粗俗用词。起源于19世纪早期，作为日常对话中更礼貌的替代词。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Original:</strong> <em>hell</em> – place of punishment<br>
+      <span class="cn">原词 hell：地狱，表示诅咒或愤怒</span>
+      <br><span style="font-size: 2rem;">⬇️</span><br>
+      <strong>Euphemism:</strong> <em>heck</em> – softened version<br>
+      <span class="cn">委婉语 heck：更轻的表达形式</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hell</td>
+          <td>Informal / Strong</td>
+          <td>What the hell is this?</td>
+          <td>Angry, intense</td>
+        </tr>
+        <tr>
+          <td>Gosh</td>
+          <td>Polite / Mild</td>
+          <td>Gosh, I didn’t see that coming.</td>
+          <td>Surprised, gentle</td>
+        </tr>
+        <tr>
+          <td><strong>Heck</strong></td>
+          <td><strong>Casual / Mild</strong></td>
+          <td>Heck, that was a close call.</td>
+          <td>Emphatic, friendly</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Heck"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/2LQpxgUScE4?start=10"
+      title="Heck in Conversation"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:10</strong> to hear “heck” used in a real-life sentence.<br>
+      <span class="cn">听第 0:10 左右，了解“heck”在实际语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Heck in the News</h3>
+    <p>
+      Some politicians avoid strong language and say “what the heck” in public speeches.<br>
+      <span class="cn">一些政治人物在公开演讲中避免使用粗话，而说“what the heck”。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.npr.org" target="_blank" class="fancy-link">
+        📰 Read More – NPR
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
