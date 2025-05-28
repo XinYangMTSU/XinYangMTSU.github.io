@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Befuddlement</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      😵‍💫 befuddlement
+      <span class="pronunciation">/bɪˈfʌdəlmənt/</span>
+      <button class="audio-button" onclick="speak('Befuddlement')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A state of being confused or perplexed; mental muddle or bewilderment.<br>
+    <span class="cn">迷惑状态；困惑；混乱。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> His explanation only added to my befuddlement.<br>
+      <span class="cn">例句：他的解释只让我更加困惑。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She stared in befuddlement at the strange machine.<br>
+      <span class="cn">例句：她迷惑地盯着那台奇怪的机器看。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Confusion <span class="cn">困惑</span></li>
+        <li>Bewilderment <span class="cn">迷惑</span></li>
+        <li>Perplexity <span class="cn">茫然</span></li>
+        <li>Daze <span class="cn">晕眩；迷茫</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Befuddlement" comes from the verb "befuddle", meaning to confuse or stupefy. It likely derives from “fuddle” (to confuse with drink), plus the prefix “be-”.<br>
+    <span class="cn">“Befuddlement” 源自动词 befuddle，意为使困惑或迷糊，可能来源于“fuddle”（因饮酒而迷糊），加前缀 be-。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>English:</strong> <em>fuddle</em> – to confuse with drink<br>
+      <span class="cn">英语 fuddle：因饮酒而迷糊</span><br><br>
+      <strong>English:</strong> <em>befuddle</em> – to confuse or perplex<br>
+      <span class="cn">英语 befuddle：使迷惑或困惑</span><br><br>
+      <strong>Modern:</strong> <em>befuddlement</em> – state of confusion<br>
+      <span class="cn">现代英语 befuddlement：迷惑状态</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Confusion</td>
+          <td>Neutral</td>
+          <td>There was a lot of confusion after the announcement.</td>
+          <td>General</td>
+        </tr>
+        <tr>
+          <td>Bewilderment</td>
+          <td>Formal</td>
+          <td>He shook his head in bewilderment.</td>
+          <td>Emotional</td>
+        </tr>
+        <tr>
+          <td><strong>Befuddlement</strong></td>
+          <td><strong>Moderately Formal</strong></td>
+          <td>Her eyes widened in befuddlement.</td>
+          <td>Vivid / Descriptive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Befuddlement"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/V9yU2N0vcYk?start=45"
+      title="Funny Scenes of Confusion"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> to hear how “befuddlement” fits into a humorous scene.<br>
+      <span class="cn">听第 0:45 左右，了解“befuddlement”在幽默场景中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Befuddlement in the News</h3>
+    <p>
+      The sudden reversal of the policy left many citizens in a state of befuddlement.<br>
+      <span class="cn">政策的突然逆转让许多市民陷入了困惑。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
