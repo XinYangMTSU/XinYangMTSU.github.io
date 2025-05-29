@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Decisive</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ⚔️ decisive
+      <span class="pronunciation">/dɪˈsaɪsɪv/</span>
+      <button class="audio-button" onclick="speak('Decisive')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Having the power or quality of deciding; showing determination or producing a definite result.<br>
+      <span class="cn">果断的；决定性的；明确的。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The general gave a decisive order that changed the course of the battle.<br>
+      <span class="cn">例句：将军下达了一道果断的命令，改变了战局。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Her decisive manner inspired confidence in the team.<br>
+      <span class="cn">例句：她果断的态度让团队充满信心。</span>
+    </div>
+
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Determined <span class="cn">坚定的</span></li>
+        <li>Resolute <span class="cn">坚决的</span></li>
+        <li>Critical <span class="cn">关键的</span></li>
+        <li>Final <span class="cn">最终的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Decisive" comes from the Latin word <em>decidere</em>, meaning "to cut off" or "to decide." It entered English via French as a term describing firmness and finality.<br>
+    <span class="cn">“Decisive” 源自拉丁语 decidere，意为“切断”或“决定”，通过法语进入英语，用于描述果断和决定性。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>decidere</em> – to cut off, to decide<br>
+      <span class="cn">拉丁语 decidere：切断，决定</span><br><br>
+      <strong>French:</strong> <em>décisif</em> – decisive<br>
+      <span class="cn">法语 décisif：果断的，决定性的</span><br><br>
+      <strong>Modern English:</strong> <em>decisive</em> – firm, conclusive<br>
+      <span class="cn">现代英语 decisive：果断的，明确的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Determined</td>
+          <td>Neutral</td>
+          <td>She was determined to succeed.</td>
+          <td>Persistent</td>
+        </tr>
+        <tr>
+          <td>Critical</td>
+          <td>Formal</td>
+          <td>It was a critical moment in the match.</td>
+          <td>Urgent / Key</td>
+        </tr>
+        <tr>
+          <td><strong>Decisive</strong></td>
+          <td><strong>Standard</strong></td>
+          <td>His decisive action ended the argument.</td>
+          <td>Commanding / Strong</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Decisive"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Leadership Moments: Being Decisive"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen to how “decisive” is used to describe strong leadership.<br>
+      <span class="cn">听听视频中如何用“decisive”来描述果断的领导力。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Decisive in the News</h3>
+    <p>
+      The prime minister’s decisive stance helped calm the markets.<br>
+      <span class="cn">首相果断的立场帮助稳定了市场。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
