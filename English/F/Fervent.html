@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Fervent</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔥 fervent
+      <span class="pronunciation">/ˈfɜːrvənt/</span>
+      <button class="audio-button" onclick="speak('Fervent')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Displaying passionate intensity or enthusiasm; having or showing great warmth of spirit or strong belief.<br>
+      <span class="cn">热情的；充满激情的；强烈的信仰或情感。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She is a fervent supporter of climate action.<br>
+      <span class="cn">例句：她是气候行动的热情支持者。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He made a fervent plea for peace.<br>
+      <span class="cn">例句：他热情地呼吁和平。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Passionate <span class="cn">热情的</span></li>
+        <li>Zealous <span class="cn">狂热的</span></li>
+        <li>Ardent <span class="cn">炽热的；热心的</span></li>
+        <li>Fiery <span class="cn">炽热的；激烈的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Fervent" comes from Latin <em>fervere</em>, meaning "to boil" or "to glow." It originally described physical heat and came to refer to emotional or spiritual intensity.<br>
+    <span class="cn">“Fervent” 源自拉丁语 <em>fervere</em>，意为“沸腾”或“发热”，最初指物理上的热度，后来引申为情感或精神的炽热。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>fervere</em> – to boil or glow<br>
+      <span class="cn">拉丁语 fervere：沸腾、发热</span><br><br>
+      <strong>Old French:</strong> <em>fervent</em> – passionate<br>
+      <span class="cn">古法语 fervent：热情的</span><br><br>
+      <strong>Modern English:</strong> <em>fervent</em> – emotionally intense<br>
+      <span class="cn">现代英语 fervent：情感炽热的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Passionate</td>
+          <td>Neutral</td>
+          <td>She is passionate about education.</td>
+          <td>Positive</td>
+        </tr>
+        <tr>
+          <td>Ardent</td>
+          <td>Formal / Literary</td>
+          <td>An ardent admirer of classical music.</td>
+          <td>Warm / Romantic</td>
+        </tr>
+        <tr>
+          <td><strong>Fervent</strong></td>
+          <td><strong>Emphatic / Formal</strong></td>
+          <td>His fervent hope was for peace.</td>
+          <td>Serious / Deeply committed</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Fervent"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Example Use of Fervent in Speech"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen to a speaker making a fervent appeal or declaration.<br>
+      <span class="cn">听一位演讲者充满激情地呼吁或宣言。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Fervent in the News</h3>
+    <p>
+      The activist gave a fervent speech urging reforms.<br>
+      <span class="cn">这位活动人士发表了激情洋溢的演讲，呼吁改革。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.npr.org" target="_blank" class="fancy-link">
+        📰 Read More – NPR News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
