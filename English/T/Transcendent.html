@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Transcendent</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌌 transcendent
+      <span class="pronunciation">/trænˈsɛndənt/</span>
+      <button class="audio-button" onclick="speak('Transcendent')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Surpassing ordinary limits; going beyond what is normal, physical, or human; extraordinary or spiritual in nature.<br>
+      <span class="cn">超越的；卓越的；超凡的；超自然的。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> Her performance was transcendent, lifting the audience to tears.<br>
+      <span class="cn">例句：她的表演超凡脱俗，感动得观众潸然泪下。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Philosophers debate the nature of transcendent reality beyond physical existence.<br>
+      <span class="cn">例句：哲学家争论超越物质存在的超验现实的本质。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Otherworldly <span class="cn">非凡的；超俗的</span></li>
+        <li>Supernatural <span class="cn">超自然的</span></li>
+        <li>Extraordinary <span class="cn">非同寻常的</span></li>
+        <li>Divine <span class="cn">神圣的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Transcendent" comes from the Latin word <em>transcendere</em>, meaning “to climb over” or “go beyond,” from <em>trans-</em> (across, beyond) and <em>scandere</em> (to climb).<br>
+    <span class="cn">“Transcendent” 源自拉丁语 transcendere，意思是“跨越”或“超越”，由 trans-（穿越、超越）和 scandere（攀登）组成。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>transcendere</em> – to climb over, go beyond<br>
+      <span class="cn">拉丁语 transcendere：超越，攀升</span><br><br>
+      <strong>Middle English:</strong> <em>transcendent</em> – surpassing ordinary limits<br>
+      <span class="cn">中古英语 transcendent：超出寻常</span><br><br>
+      <strong>Modern English:</strong> <em>transcendent</em> – beyond physical or material reality<br>
+      <span class="cn">现代英语 transcendent：超越物质现实</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Extraordinary</td>
+          <td>Neutral</td>
+          <td>She gave an extraordinary speech.</td>
+          <td>Impressive</td>
+        </tr>
+        <tr>
+          <td>Supernatural</td>
+          <td>Neutral / Fantasy</td>
+          <td>They believed in supernatural beings.</td>
+          <td>Mystical</td>
+        </tr>
+        <tr>
+          <td><strong>Transcendent</strong></td>
+          <td><strong>Formal / Philosophical</strong></td>
+          <td>The experience was transcendent.</td>
+          <td>Spiritual / Profound</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Transcendent"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YfDf6tjJHlM?start=60"
+      title="Transcendent Moments in Art and Music"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>1:00</strong> to hear how “transcendent” is used to describe emotional and artistic moments.<br>
+      <span class="cn">听第 1:00 左右，了解“transcendent”用于描述情感和艺术的超越时刻。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Transcendent in the News</h3>
+    <p>
+      The writer’s final novel is considered a transcendent meditation on life and death.<br>
+      <span class="cn">这位作家的最后一部小说被认为是对生死的超凡沉思。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
