@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Vague</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌫️ vague
+      <span class="pronunciation">/veɪɡ/</span>
+      <button class="audio-button" onclick="speak('Vague')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Not clearly expressed, defined, or understood; lacking detail or certainty.<br>
+      <span class="cn">含糊的；模糊不清的；不明确的；不清晰的。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> He gave only a vague answer when asked about the plan.<br>
+      <span class="cn">例句：当被问到这个计划时，他只给出了一个模糊的回答。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> I have a vague memory of visiting this place as a child.<br>
+      <span class="cn">例句：我依稀记得小时候来过这个地方。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Unclear <span class="cn">不清楚的</span></li>
+        <li>Ambiguous <span class="cn">模棱两可的</span></li>
+        <li>Hazy <span class="cn">朦胧的；模糊的</span></li>
+        <li>Indefinite <span class="cn">不明确的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Vague" comes from Latin <em>vagus</em>, meaning “wandering” or “uncertain.” It entered English through French.<br>
+    <span class="cn">“Vague” 源自拉丁语 vagus，意为“游荡的”或“不确定的”，通过法语进入英语。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>vagus</em> – wandering, uncertain<br>
+      <span class="cn">拉丁语 vagus：漂泊的，不确定的</span><br><br>
+      <strong>Old French:</strong> <em>vague</em> – indistinct<br>
+      <span class="cn">古法语 vague：模糊的</span><br><br>
+      <strong>Modern English:</strong> <em>vague</em> – not clearly defined<br>
+      <span class="cn">现代英语 vague：不清晰的，不明确的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Unclear</td>
+          <td>Neutral</td>
+          <td>The instructions were unclear.</td>
+          <td>Direct</td>
+        </tr>
+        <tr>
+          <td>Ambiguous</td>
+          <td>Formal</td>
+          <td>The law's language is ambiguous.</td>
+          <td>Critical</td>
+        </tr>
+        <tr>
+          <td><strong>Vague</strong></td>
+          <td><strong>Standard</strong></td>
+          <td>She gave a vague response.</td>
+          <td>Neutral / Slightly negative</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Vague"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Examples of Vague vs Specific Language"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen for how “vague” is used to describe unclear language or memory.<br>
+      <span class="cn">听听视频中如何用“vague”来描述不清楚的语言或模糊的记忆。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Vague in the News</h3>
+    <p>
+      Critics argue the policy is too vague and open to misinterpretation.<br>
+      <span class="cn">批评者认为该政策过于模糊，容易被误解。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
