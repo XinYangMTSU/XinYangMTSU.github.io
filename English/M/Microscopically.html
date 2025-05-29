@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Microscopically</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔬 microscopically
+      <span class="pronunciation">/ˌmaɪ.krəˈskɒ.pɪ.kəl.i/</span>
+      <button class="audio-button" onclick="speak('Microscopically')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adverb<br><span class="cn">词性：副词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      In a way that is so small it can only be seen with a microscope; or, by examining something extremely carefully and in great detail.<br>
+      <span class="cn">显微镜下地；极其微小地；极为仔细地观察。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The cells were examined microscopically for signs of infection.<br>
+      <span class="cn">例句：这些细胞被在显微镜下检查是否有感染迹象。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She studied the document microscopically to catch every mistake.<br>
+      <span class="cn">例句：她极其仔细地检查了这份文件，力求找出每一个错误。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Minutely <span class="cn">微小地；细致地</span></li>
+        <li>Closely <span class="cn">密切地；仔细地</span></li>
+        <li>Thoroughly <span class="cn">彻底地</span></li>
+        <li>Scrupulously <span class="cn">一丝不苟地</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Microscopically" is formed from "microscopic" (tiny, as seen with a microscope) and the adverbial suffix “-ly.” "Microscopic" comes from Greek <em>mikros</em> (small) + <em>skopein</em> (to look or see).<br>
+    <span class="cn">“Microscopically” 来自“microscopic”（微小的），加上副词后缀 “-ly”。"Microscopic" 源自希腊语 mikros（小）和 skopein（看）。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong> <em>mikros</em> – small; <em>skopein</em> – to look<br>
+      <span class="cn">希腊语 mikros：小； skopein：看</span><br><br>
+      <strong>Modern English:</strong> <em>microscopically</em> – in an extremely small or detailed way<br>
+      <span class="cn">现代英语 microscopically：极小地；极仔细地</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Closely</td>
+          <td>Neutral</td>
+          <td>He looked closely at the pattern.</td>
+          <td>Focused</td>
+        </tr>
+        <tr>
+          <td>Minutely</td>
+          <td>Formal</td>
+          <td>The topic was examined minutely.</td>
+          <td>Scientific / Detailed</td>
+        </tr>
+        <tr>
+          <td><strong>Microscopically</strong></td>
+          <td><strong>Scientific / Emphatic</strong></td>
+          <td>It was microscopically analyzed.</td>
+          <td>Precise / Emphatic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Microscopically"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Science Clip - Microscopically Examining Life"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen for how “microscopically” is used in a biology context.<br>
+      <span class="cn">听听“microscopically”在生物学语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Microscopically in the News</h3>
+    <p>
+      Scientists examined the fossil microscopically to determine its species.<br>
+      <span class="cn">科学家用显微镜检查这块化石以确定其物种。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nature.com/" target="_blank" class="fancy-link">
+        📰 Read More – Nature.com
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
