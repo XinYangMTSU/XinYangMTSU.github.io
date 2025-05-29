@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Stout</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🛡️ stout
+      <span class="pronunciation">/staʊt/</span>
+      <button class="audio-button" onclick="speak('Stout')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective / Noun<br><span class="cn">词性：形容词 / 名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      (adj) Strong, brave, or thick and sturdy in build; (n) A dark, strong type of beer.<br>
+      <span class="cn">（形容词）强壮的，坚定的，厚实的；（名词）黑啤酒的一种，浓烈的啤酒。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> He made a stout defense of his beliefs.<br>
+      <span class="cn">例句：他坚定地为自己的信念辩护。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She poured herself a glass of stout to relax.<br>
+      <span class="cn">例句：她倒了一杯黑啤酒来放松一下。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Strong <span class="cn">强壮的</span></li>
+        <li>Bold <span class="cn">大胆的</span></li>
+        <li>Robust <span class="cn">健壮的</span></li>
+        <li>Courageous <span class="cn">有勇气的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Stout" comes from Middle English <em>stout</em>, meaning proud or brave, which originally came from Old French <em>estout</em> and from Germanic roots meaning "proud, bold." Later, it evolved to also mean thick or strong in structure.<br>
+    <span class="cn">“Stout” 来自中古英语 stout，意为“骄傲的”或“勇敢的”，最初源于古法语 estout，最终源自日耳曼语，意为“大胆的”。后来也有“厚实的、结实的”的意思。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old French:</strong> <em>estout</em> – bold, proud<br>
+      <span class="cn">古法语 estout：大胆的，骄傲的</span><br><br>
+      <strong>Middle English:</strong> <em>stout</em> – brave or strong<br>
+      <span class="cn">中古英语 stout：勇敢的，强壮的</span><br><br>
+      <strong>Modern English:</strong> <em>stout</em> – sturdy or dark beer<br>
+      <span class="cn">现代英语 stout：结实的或黑啤酒</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Strong</td>
+          <td>Neutral</td>
+          <td>She has strong opinions about politics.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Robust</td>
+          <td>Formal</td>
+          <td>The device is robust and reliable.</td>
+          <td>Technical</td>
+        </tr>
+        <tr>
+          <td><strong>Stout</strong></td>
+          <td><strong>Literary</strong></td>
+          <td>He was a stout man with a brave heart.</td>
+          <td>Old-fashioned / Vivid</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Stout"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Literary Use of 'Stout'"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Hear how “stout” is used in fantasy and historical narratives.<br>
+      <span class="cn">听听“stout”在奇幻与历史语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Stout in the News</h3>
+    <p>
+      The team made a stout effort to win the championship despite the odds.<br>
+      <span class="cn">尽管困难重重，这支队伍做出了顽强的努力来赢得冠军。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
