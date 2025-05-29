@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Unshackle</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔓 unshackle
+      <span class="pronunciation">/ʌnˈʃækəl/</span>
+      <button class="audio-button" onclick="speak('Unshackle')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      To set free or release from shackles, chains, or restrictions; to liberate.<br>
+      <span class="cn">解放；使摆脱束缚或限制。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The reforms were meant to unshackle the economy from outdated policies.<br>
+      <span class="cn">例句：这些改革旨在将经济从过时政策的束缚中解放出来。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The prisoner was unshackled before entering the courtroom.<br>
+      <span class="cn">例句：囚犯在进入法庭前被解开了镣铐。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Free <span class="cn">释放</span></li>
+        <li>Liberate <span class="cn">解放</span></li>
+        <li>Release <span class="cn">释放</span></li>
+        <li>Emancipate <span class="cn">解放（尤指奴隶）</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Unshackle" is formed by adding the prefix <em>un-</em> (meaning “not” or “opposite of”) to the noun <em>shackle</em> (a chain or restraint). It literally means to remove shackles.<br>
+    <span class="cn">“Unshackle” 由前缀 un-（表示“去除”）和名词 shackle（镣铐、束缚）组成，字面意思是“去掉镣铐”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle English:</strong> <em>shakel</em> – restraint or fetter<br>
+      <span class="cn">中古英语 shakel：束缚、枷锁</span><br><br>
+      <strong>Modern English:</strong> <em>unshackle</em> – to free from chains or restrictions<br>
+      <span class="cn">现代英语 unshackle：解除束缚或限制</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Free</td>
+          <td>Neutral</td>
+          <td>They freed the animals from the cages.</td>
+          <td>Simple / Positive</td>
+        </tr>
+        <tr>
+          <td>Liberate</td>
+          <td>Formal</td>
+          <td>The army liberated the occupied city.</td>
+          <td>Powerful / Heroic</td>
+        </tr>
+        <tr>
+          <td><strong>Unshackle</strong></td>
+          <td><strong>Vivid</strong></td>
+          <td>We must unshackle ourselves from fear.</td>
+          <td>Dramatic / Emphatic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Unshackle"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Use of Unshackle in Speech and Media"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen for “unshackle” as a metaphor in inspirational speeches.<br>
+      <span class="cn">听听“unshackle”如何在激励性演讲中作为隐喻使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Unshackle in the News</h3>
+    <p>
+      The new legislation aims to unshackle small businesses from excessive regulation.<br>
+      <span class="cn">新法案旨在将小型企业从过度监管中解放出来。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
