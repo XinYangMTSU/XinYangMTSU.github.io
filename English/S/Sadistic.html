@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Sadistic</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      😈 sadistic
+      <span class="pronunciation">/səˈdɪstɪk/</span>
+      <button class="audio-button" onclick="speak('Sadistic')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Taking pleasure in inflicting pain, suffering, or humiliation on others.<br>
+      <span class="cn">施虐的；以折磨他人取乐的。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The villain's sadistic grin sent chills down everyone’s spine.<br>
+      <span class="cn">例句：那恶棍施虐般的笑容让人脊背发凉。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He took a sadistic delight in mocking his classmates.<br>
+      <span class="cn">例句：他以嘲笑同学为乐，带有施虐倾向。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Cruel <span class="cn">残酷的</span></li>
+        <li>Vicious <span class="cn">恶毒的</span></li>
+        <li>Brutal <span class="cn">野蛮的</span></li>
+        <li>Malicious <span class="cn">恶意的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Sadistic" comes from the name of the Marquis de Sade, a French nobleman known for writing about cruelty and deriving pleasure from others’ suffering.<br>
+    <span class="cn">“Sadistic” 源自法国贵族萨德侯爵（Marquis de Sade），他以描写从折磨他人中获得快感的作品而闻名。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>French:</strong> <em>sade</em> – referring to de Sade's name<br>
+      <span class="cn">法语 sade：源自萨德侯爵的名字</span><br><br>
+      <strong>Modern English:</strong> <em>sadistic</em> – deriving pleasure from cruelty<br>
+      <span class="cn">现代英语 sadistic：从残忍中获得快感</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cruel</td>
+          <td>Neutral</td>
+          <td>The dictator was known for his cruel tactics.</td>
+          <td>Negative / Harsh</td>
+        </tr>
+        <tr>
+          <td>Vicious</td>
+          <td>Moderate</td>
+          <td>She launched a vicious verbal attack.</td>
+          <td>Hostile / Aggressive</td>
+        </tr>
+        <tr>
+          <td><strong>Sadistic</strong></td>
+          <td><strong>Strong</strong></td>
+          <td>The sadistic guard enjoyed causing pain.</td>
+          <td>Psychological / Dark</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Sadistic"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Sadistic Villains in Film"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen for how “sadistic” is used to describe characters who enjoy causing pain.<br>
+      <span class="cn">听听“sadistic”如何用于描述喜欢施虐的角色。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Sadistic in the News</h3>
+    <p>
+      Investigators described the attacks as calculated and sadistic.<br>
+      <span class="cn">调查人员称这些袭击是经过计算并带有施虐性质的。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
