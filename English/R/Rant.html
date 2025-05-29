@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Rant</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📢 rant
+      <span class="pronunciation">/rænt/</span>
+      <button class="audio-button" onclick="speak('Rant')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb / Noun<br><span class="cn">词性：动词 / 名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      To speak or shout at length in an angry, impassioned way (v); a long, loud, and often angry speech (n).<br>
+      <span class="cn">（动）怒吼；咆哮；激烈地长篇大论地说话。<br>（名）咆哮；激烈的长篇言论。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> He went on a rant about the poor customer service.<br>
+      <span class="cn">例句：他对糟糕的客户服务大发雷霆。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She ranted for twenty minutes about politics.<br>
+      <span class="cn">例句：她对政治问题激烈地讲了二十分钟。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Tirade <span class="cn">长篇激烈的演讲</span></li>
+        <li>Diatribe <span class="cn">抨击性的演讲</span></li>
+        <li>Outburst <span class="cn">（愤怒的）爆发</span></li>
+        <li>Lecture <span class="cn">训斥；教训</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Rant" likely originated in the 16th century Dutch word <em>ranten</em>, meaning “to talk foolishly” or “to rave.”<br>
+    <span class="cn">“Rant” 可能起源于 16 世纪的荷兰语 ranten，意为“胡说”或“狂叫”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Dutch:</strong> <em>ranten</em> – to rave, speak wildly<br>
+      <span class="cn">荷兰语 ranten：狂叫、胡说</span><br><br>
+      <strong>Modern English:</strong> <em>rant</em> – to speak loudly and angrily<br>
+      <span class="cn">现代英语 rant：怒吼、咆哮</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lecture</td>
+          <td>Neutral</td>
+          <td>Dad gave me a long lecture about responsibility.</td>
+          <td>Disapproving</td>
+        </tr>
+        <tr>
+          <td>Tirade</td>
+          <td>Formal</td>
+          <td>She launched into a tirade against injustice.</td>
+          <td>Angry / Political</td>
+        </tr>
+        <tr>
+          <td><strong>Rant</strong></td>
+          <td><strong>Informal</strong></td>
+          <td>He ranted about the traffic for hours.</td>
+          <td>Angry / Emotional</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Rant"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Famous Movie Rants"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Watch how characters rant emotionally in drama scenes.<br>
+      <span class="cn">观看角色如何在戏剧场景中激烈发言（rant）。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Rant in the News</h3>
+    <p>
+      The politician’s late-night rant on social media sparked controversy.<br>
+      <span class="cn">这位政客深夜在社交媒体上的咆哮引发了争议。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
