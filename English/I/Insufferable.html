@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Insufferable</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      😤 insufferable
+      <span class="pronunciation">/ɪnˈsʌf(ə)rəb(ə)l/</span>
+      <button class="audio-button" onclick="speak('Insufferable')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Too extreme to bear; intolerable — often used to describe someone or something unbearably annoying, arrogant, or unpleasant.<br>
+      <span class="cn">无法忍受的；令人极度恼火的。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> He was so insufferable at the meeting, constantly interrupting everyone.<br>
+      <span class="cn">例句：他在会议上表现得令人无法忍受，不停地打断别人。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The heat was insufferable that afternoon.<br>
+      <span class="cn">例句：那天下午的高温令人难以忍受。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Unbearable <span class="cn">无法忍受的</span></li>
+        <li>Intolerable <span class="cn">难以忍受的</span></li>
+        <li>Annoying <span class="cn">令人恼火的</span></li>
+        <li>Obnoxious <span class="cn">讨厌的，令人厌恶的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Insufferable" comes from Latin <em>in-</em> (not) + <em>sufferre</em> (to endure or tolerate), meaning "that which cannot be endured."<br>
+    <span class="cn">“Insufferable” 源自拉丁语 in-（不）+ sufferre（忍受），意为“无法忍受的”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>in-</em> (not) + <em>sufferre</em> (to bear)<br>
+      <span class="cn">拉丁语 in-（不）+ sufferre（忍受）</span><br><br>
+      <strong>Middle English:</strong> <em>insufferable</em> – incapable of being endured<br>
+      <span class="cn">中古英语 insufferable：不能忍受的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Unbearable</td>
+          <td>Neutral</td>
+          <td>The pain was unbearable.</td>
+          <td>Emotional / Descriptive</td>
+        </tr>
+        <tr>
+          <td>Intolerable</td>
+          <td>Formal</td>
+          <td>These working conditions are intolerable.</td>
+          <td>Serious / Formal</td>
+        </tr>
+        <tr>
+          <td><strong>Insufferable</strong></td>
+          <td><strong>Literary / Dramatic</strong></td>
+          <td>Her arrogance is insufferable.</td>
+          <td>Judgmental / Strong</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Insufferable"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Movie Scene Using 'Insufferable'"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen to how a character describes someone as “insufferable” in a dramatic context.<br>
+      <span class="cn">听听某角色如何在戏剧性语境中使用“insufferable”来形容某人。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Insufferable in the News</h3>
+    <p>
+      Critics called the host's behavior insufferable during the award show.<br>
+      <span class="cn">评论家称该主持人在颁奖典礼上的行为令人难以忍受。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – The New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
