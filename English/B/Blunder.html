@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Blunder</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ❗ blunder
+      <span class="pronunciation">/ˈblʌndər/</span>
+      <button class="audio-button" onclick="speak('Blunder')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun / Verb<br><span class="cn">词性：名词 / 动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      (n.) A careless or serious mistake.<br>
+      (v.) To make a careless or stupid mistake; to move clumsily.<br>
+      <span class="cn">(名词）疏忽错误；（动词）犯错；笨拙地行动。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> It was a major blunder to delete the final report without a backup.<br>
+      <span class="cn">例句：没有备份就删除最终报告是个严重失误。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He blundered into the meeting late and unprepared.<br>
+      <span class="cn">例句：他迟到并毫无准备地闯入了会议。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Mistake <span class="cn">错误</span></li>
+        <li>Slip-up <span class="cn">小失误</span></li>
+        <li>Error <span class="cn">过失</span></li>
+        <li>Fumble <span class="cn">失手；笨拙</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Blunder" likely comes from the Old Norse word <em>blundra</em>, meaning “to shut one's eyes” or “act blindly,” suggesting carelessness or lack of awareness.<br>
+    <span class="cn">“Blunder” 可能源自古诺斯语 blundra，意思是“闭上眼睛”或“盲目行动”，暗指粗心或缺乏判断。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old Norse:</strong> <em>blundra</em> – to shut one’s eyes<br>
+      <span class="cn">古诺斯语 blundra：闭上眼睛</span><br><br>
+      <strong>Middle English:</strong> <em>blunderen</em> – to stumble or act blindly<br>
+      <span class="cn">中古英语 blunderen：跌跌撞撞或盲目行事</span><br><br>
+      <strong>Modern English:</strong> <em>blunder</em> – a careless mistake<br>
+      <span class="cn">现代英语 blunder：粗心大意的错误</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mistake</td>
+          <td>Neutral</td>
+          <td>She made a mistake on the test.</td>
+          <td>General</td>
+        </tr>
+        <tr>
+          <td>Slip-up</td>
+          <td>Informal</td>
+          <td>Oops, that was a slip-up on my part.</td>
+          <td>Casual / Minor</td>
+        </tr>
+        <tr>
+          <td><strong>Blunder</strong></td>
+          <td><strong>Formal / Emphatic</strong></td>
+          <td>The CEO made a strategic blunder.</td>
+          <td>Serious / Critical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Blunder"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Famous Public Speaking Blunders"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen for moments where "blunder" is used to describe serious errors in public events.<br>
+      <span class="cn">听听视频中如何用“blunder”来描述公共场合的严重失误。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Blunder in the News</h3>
+    <p>
+      The airline’s scheduling blunder caused hundreds of flight delays nationwide.<br>
+      <span class="cn">航空公司的排班失误导致全国数百个航班延误。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
