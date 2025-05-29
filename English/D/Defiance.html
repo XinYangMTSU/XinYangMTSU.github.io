@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Defiance</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ✊ defiance
+      <span class="pronunciation">/dɪˈfaɪəns/</span>
+      <button class="audio-button" onclick="speak('Defiance')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Open resistance or bold disobedience to authority, rules, or expectations.<br>
+      <span class="cn">公然反抗；挑衅；违抗。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She stared in defiance at the officer, refusing to back down.<br>
+      <span class="cn">例句：她带着挑衅的目光盯着警官，拒绝退让。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> His defiance of the dress code got him suspended.<br>
+      <span class="cn">例句：他公然违反着装规定，被停学处理。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Rebellion <span class="cn">叛逆</span></li>
+        <li>Resistance <span class="cn">抵抗</span></li>
+        <li>Disobedience <span class="cn">不服从</span></li>
+        <li>Boldness <span class="cn">大胆</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Defiance" comes from the Middle French word <em>défiance</em>, meaning “challenge,” and from Latin <em>dis-</em> (apart) + <em>fidere</em> (to trust). Originally, it meant distrust or renunciation of trust.<br>
+    <span class="cn">“Defiance” 源自中古法语 défiance，意为“挑战”，更早来自拉丁语 dis-（分开）+ fidere（信任），最初含义是“不信任”或“拒绝信任”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>disfidere</em> – to distrust<br>
+      <span class="cn">拉丁语 disfidere：不信任</span><br><br>
+      <strong>Old French:</strong> <em>desfiance</em> – challenge or resistance<br>
+      <span class="cn">古法语 desfiance：挑战或抵抗</span><br><br>
+      <strong>Modern English:</strong> <em>defiance</em> – bold refusal or resistance<br>
+      <span class="cn">现代英语 defiance：大胆拒绝或反抗</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Resistance</td>
+          <td>Neutral</td>
+          <td>The resistance movement grew quickly.</td>
+          <td>Serious</td>
+        </tr>
+        <tr>
+          <td>Rebellion</td>
+          <td>Strong</td>
+          <td>The youth showed rebellion against their parents.</td>
+          <td>Edgy / Assertive</td>
+        </tr>
+        <tr>
+          <td><strong>Defiance</strong></td>
+          <td><strong>Moderate</strong></td>
+          <td>He acted in defiance of the rules.</td>
+          <td>Bold / Confrontational</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Defiance"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Defiance in Film and Literature"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen for how “defiance” is used when characters challenge authority.<br>
+      <span class="cn">听听角色如何在挑战权威时使用“defiance”。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Defiance in the News</h3>
+    <p>
+      Protesters marched in defiance of the curfew imposed by the government.<br>
+      <span class="cn">抗议者无视政府实施的宵禁而游行示威。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
