@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Hegemony</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🏛️ hegemony
+      <span class="pronunciation">/hɪˈdʒɛməni/, /ˈhɛdʒəˌmoʊni/</span>
+      <button class="audio-button" onclick="speak('Hegemony')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Leadership or dominance, especially by one country or social group over others.<br>
+      <span class="cn">霸权；主导权（尤指国家、社会集团之间的主导地位）。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The country used its economic power to establish hegemony over its neighbors.<br>
+      <span class="cn">例句：该国利用其经济实力确立了对邻国的主导地位。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Cultural hegemony can shape what is seen as “normal” in society.<br>
+      <span class="cn">例句：文化霸权可以影响社会对“正常”的认知。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Dominance <span class="cn">支配</span></li>
+        <li>Control <span class="cn">控制</span></li>
+        <li>Supremacy <span class="cn">至高无上</span></li>
+        <li>Leadership <span class="cn">领导地位</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Hegemony" comes from Greek <em>hēgemonia</em>, meaning “leadership, rule,” from <em>hēgemōn</em> (leader, guide).<br>
+    <span class="cn">“Hegemony” 源自希腊语 hēgemonia，意为“领导，统治”，来自 hēgemōn（领袖，向导）。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong> <em>hēgemonia</em> – leadership, authority<br>
+      <span class="cn">希腊语 hēgemonia：领导，权威</span><br><br>
+      <strong>Latin:</strong> <em>hegemonia</em> – leadership<br>
+      <span class="cn">拉丁语 hegemonia：领导</span><br><br>
+      <strong>Modern English:</strong> <em>hegemony</em> – political or cultural dominance<br>
+      <span class="cn">现代英语 hegemony：政治或文化主导地位</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Dominance</td>
+          <td>Neutral</td>
+          <td>They achieved dominance through military strength.</td>
+          <td>Neutral / Factual</td>
+        </tr>
+        <tr>
+          <td>Supremacy</td>
+          <td>Formal</td>
+          <td>The navy secured maritime supremacy.</td>
+          <td>Authoritative / Strategic</td>
+        </tr>
+        <tr>
+          <td><strong>Hegemony</strong></td>
+          <td><strong>Formal / Academic</strong></td>
+          <td>The cultural hegemony of the West shapes global media.</td>
+          <td>Analytical / Political</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Hegemony"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Understanding Hegemony in Politics and Culture"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen to how “hegemony” is used in discussions of power and influence.<br>
+      <span class="cn">听听“hegemony”如何用于权力与影响力的讨论中。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Hegemony in the News</h3>
+    <p>
+      Analysts debate whether U.S. hegemony is in decline in the face of a multipolar world.<br>
+      <span class="cn">分析人士正在讨论美国霸权是否正在多极化世界中走向衰落。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
