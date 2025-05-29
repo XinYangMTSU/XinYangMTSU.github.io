@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Doomed</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💀 doomed
+      <span class="pronunciation">/duːmd/</span>
+      <button class="audio-button" onclick="speak('Doomed')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Certain to suffer a terrible fate; destined to fail, be destroyed, or experience misfortune.<br>
+      <span class="cn">注定遭受不幸的；必然失败或毁灭的。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The mission was doomed from the start due to poor planning.<br>
+      <span class="cn">例句：由于计划不周，这项任务从一开始就注定要失败。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> They stared at the dark clouds, sensing the picnic was doomed.<br>
+      <span class="cn">例句：他们望着乌云，感觉野餐注定泡汤。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Fated <span class="cn">注定的</span></li>
+        <li>Condemned <span class="cn">被宣判的；注定的</span></li>
+        <li>Cursed <span class="cn">被诅咒的</span></li>
+        <li>Destined (to fail) <span class="cn">注定（失败）的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Doomed" comes from the word "doom," which originated from Old English <em>dōm</em>, meaning “judgment” or “fate.” Over time, it came to imply a terrible or inevitable fate.<br>
+    <span class="cn">“Doomed” 来自“doom”，该词源自古英语 dōm，意为“审判”或“命运”，后来演变为“悲惨或不可避免的命运”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>dōm</em> – judgment, decision<br>
+      <span class="cn">古英语 dōm：审判，裁决</span><br><br>
+      <strong>Middle English:</strong> <em>doome</em> – fate, condemnation<br>
+      <span class="cn">中古英语 doome：命运，审判</span><br><br>
+      <strong>Modern English:</strong> <em>doomed</em> – destined for disaster<br>
+      <span class="cn">现代英语 doomed：注定遭遇不幸</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fated</td>
+          <td>Neutral</td>
+          <td>She was fated to meet him again.</td>
+          <td>Romantic / Mystical</td>
+        </tr>
+        <tr>
+          <td>Condemned</td>
+          <td>Formal</td>
+          <td>The structure was condemned after the earthquake.</td>
+          <td>Legal / Harsh</td>
+        </tr>
+        <tr>
+          <td><strong>Doomed</strong></td>
+          <td><strong>Vivid</strong></td>
+          <td>The team was doomed from the beginning.</td>
+          <td>Dark / Dramatic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Doomed"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Movie Scene Using 'Doomed'"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen for how “doomed” is used to describe characters' inevitable downfall.<br>
+      <span class="cn">听听“doomed”如何用来描述角色无法逃脱的命运。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Doomed in the News</h3>
+    <p>
+      Without proper safety measures, the expedition was doomed from the outset.<br>
+      <span class="cn">如果没有适当的安全措施，这次探险从一开始就注定失败。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
