@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Obstinate</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🐐 obstinate
+      <span class="pronunciation">/ˈɑːbstɪnət/</span>
+      <button class="audio-button" onclick="speak('Obstinate')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Stubbornly refusing to change one’s opinion or chosen course of action, despite attempts to persuade one to do so.<br>
+      <span class="cn">固执的；顽固的；倔强的。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> He was too obstinate to admit that he had made a mistake.<br>
+      <span class="cn">例句：他太固执，不愿承认自己犯了错误。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The donkey remained obstinate, refusing to move no matter how hard we pushed.<br>
+      <span class="cn">例句：那头驴倔得很，无论我们怎么推它都不动。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Stubborn <span class="cn">顽固的</span></li>
+        <li>Headstrong <span class="cn">任性的</span></li>
+        <li>Unyielding <span class="cn">不屈服的</span></li>
+        <li>Inflexible <span class="cn">不灵活的；死板的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Obstinate" comes from Latin <em>obstinatus</em>, the past participle of <em>obstinare</em>, meaning “to persist, be resolved.”<br>
+    <span class="cn">“Obstinate” 源自拉丁语 obstinatus，是 obstinare（坚持、决心）的过去分词。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>obstinare</em> – to persist, to be determined<br>
+      <span class="cn">拉丁语 obstinare：坚持，决意</span><br><br>
+      <strong>Old French:</strong> <em>obstinat</em> – stubborn, fixed in opinion<br>
+      <span class="cn">古法语 obstinat：固执的</span><br><br>
+      <strong>Modern English:</strong> <em>obstinate</em> – unreasonably determined<br>
+      <span class="cn">现代英语 obstinate：不听劝的，顽固的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Stubborn</td>
+          <td>Informal</td>
+          <td>She's too stubborn to apologize.</td>
+          <td>Negative / Familiar</td>
+        </tr>
+        <tr>
+          <td>Headstrong</td>
+          <td>Neutral</td>
+          <td>He’s a headstrong teenager.</td>
+          <td>Rebellious / Bold</td>
+        </tr>
+        <tr>
+          <td><strong>Obstinate</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>The patient remained obstinate about refusing medication.</td>
+          <td>Formal / Critical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Obstinate"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Obstinate Characters in Film"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen to how “obstinate” is used to describe characters who won’t back down.<br>
+      <span class="cn">听听“obstinate”是如何用来形容那些绝不妥协的角色。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Obstinate in the News</h3>
+    <p>
+      Some critics say the government's obstinate stance is worsening the crisis.<br>
+      <span class="cn">一些批评人士认为政府的固执立场正在加剧危机。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
