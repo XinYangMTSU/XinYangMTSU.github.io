@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Blast</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💥 blast
+      <span class="pronunciation">/blæst/</span>
+      <button class="audio-button" onclick="speak('Blast')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun / Verb<br><span class="cn">词性：名词 / 动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      (n.) A strong explosion or sudden loud noise; a gust of wind; a fun or exciting event.<br>
+      (v.) To explode or destroy with a powerful force; to make a loud noise; to strongly criticize.<br>
+      <span class="cn">（名词）爆炸，猛烈的一阵（风、声音）；（动词）爆破，轰击，大声播放，猛烈批评。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> There was a loud blast in the distance.<br>
+      <span class="cn">例句：远处传来一声巨响。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The music was blasting from the speakers.<br>
+      <span class="cn">例句：音乐从音响中震耳欲聋地播放出来。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> We had a blast at the party last night!<br>
+      <span class="cn">例句：我们昨晚在派对上玩得很开心！</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Explosion <span class="cn">爆炸</span></li>
+        <li>Burst <span class="cn">爆发</span></li>
+        <li>Gust <span class="cn">一阵（风）</span></li>
+        <li>Criticize <span class="cn">批评</span></li>
+        <li>Party (informal) <span class="cn">派对（俚语）</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Blast" comes from Old English <em>blǣst</em>, meaning "a blowing or puff of wind." It is related to the word "blow" and evolved to describe explosions and loud events.<br>
+    <span class="cn">“Blast” 源自古英语 blǣst，意为“吹气、风的一阵”，后演变为指爆炸或巨响。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>blǣst</em> – a blowing, gust<br>
+      <span class="cn">古英语 blǣst：一阵风，吹气</span><br><br>
+      <strong>Modern English:</strong> <em>blast</em> – explosion, burst of sound, fun<br>
+      <span class="cn">现代英语 blast：爆炸，响声，狂欢</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Explosion</td>
+          <td>Neutral</td>
+          <td>The explosion shook the entire building.</td>
+          <td>Serious</td>
+        </tr>
+        <tr>
+          <td>Burst</td>
+          <td>Neutral</td>
+          <td>A burst of laughter filled the room.</td>
+          <td>Lively</td>
+        </tr>
+        <tr>
+          <td><strong>Blast</strong></td>
+          <td><strong>Flexible</strong></td>
+          <td>The blast shattered the windows.</td>
+          <td>Vivid / Dramatic / Informal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Blast"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Blast in Movies and Slang"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen for “blast” used both in action scenes and casual party settings.<br>
+      <span class="cn">听听“blast”在动作场景和派对语境中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Blast in the News</h3>
+    <p>
+      A gas leak caused a powerful blast that damaged several homes in the area.<br>
+      <span class="cn">煤气泄漏引发了强烈爆炸，造成该地区多所住宅受损。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
