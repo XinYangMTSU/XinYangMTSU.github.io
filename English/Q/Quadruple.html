@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Quadruple</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ✖️ quadruple
+      <span class="pronunciation">/kwɒˈdruːpl/</span>
+      <button class="audio-button" onclick="speak('Quadruple')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb / Adjective<br><span class="cn">词性：动词 / 形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      (v.) To increase or make four times as much or as many.<br>
+      (adj.) Fourfold; consisting of four parts.<br>
+      <span class="cn">(动词) 增加到四倍；使成四倍。<br>(形容词) 四倍的；由四部分组成的。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The company’s profits quadrupled in just two years.<br>
+      <span class="cn">例句：该公司的利润在短短两年内增长了四倍。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He performed a quadruple jump during the competition.<br>
+      <span class="cn">例句：他在比赛中完成了一个四周跳。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Increase fourfold <span class="cn">增加四倍</span></li>
+        <li>Multiply by four <span class="cn">乘以四</span></li>
+        <li>Expand <span class="cn">扩展</span></li>
+        <li>Augment significantly <span class="cn">大幅增强</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Quadruple" comes from Latin <em>quadruplus</em>, from <em>quattuor</em> (four) + <em>plus</em> (fold). It entered English through Late Middle French.<br>
+    <span class="cn">“Quadruple” 源自拉丁语 quadruplus，由 quattuor（四）和 plus（倍）构成，经中古法语传入英语。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>quadruplus</em> – fourfold<br>
+      <span class="cn">拉丁语 quadruplus：四倍</span><br><br>
+      <strong>Old French:</strong> <em>quadruple</em><br>
+      <span class="cn">古法语 quadruple</span><br><br>
+      <strong>Modern English:</strong> <em>quadruple</em> – to multiply by four<br>
+      <span class="cn">现代英语 quadruple：乘以四倍</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Double</td>
+          <td>Neutral</td>
+          <td>The price doubled last year.</td>
+          <td>Factual</td>
+        </tr>
+        <tr>
+          <td>Triple</td>
+          <td>Neutral</td>
+          <td>Sales tripled in one quarter.</td>
+          <td>Impressive</td>
+        </tr>
+        <tr>
+          <td><strong>Quadruple</strong></td>
+          <td><strong>Formal / Technical</strong></td>
+          <td>The dosage was quadrupled in the test group.</td>
+          <td>Scientific / Analytical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Quadruple"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/F0kZKjQne1I?start=20"
+      title="Figure Skater Lands Quadruple Jump"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> to hear “quadruple” used in a sports commentary.<br>
+      <span class="cn">听第 0:20 左右，了解“quadruple”在体育解说中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Quadruple in the News</h3>
+    <p>
+      The number of electric vehicle registrations has quadrupled over the past five years.<br>
+      <span class="cn">过去五年中，电动车注册数量增长了四倍。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
