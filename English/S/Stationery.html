@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Stationery</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ✉️ stationery
+      <span class="pronunciation">/ˈsteɪʃəˌnɛri/</span>
+      <button class="audio-button" onclick="speak('Stationery')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Materials used for writing, such as paper, pens, envelopes, and office supplies.<br>
+      <span class="cn">文具；书写或办公用具，如纸张、钢笔、信封等。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She has a drawer full of beautiful stationery for writing letters.<br>
+      <span class="cn">例句：她有一个抽屉装满了漂亮的信纸用来写信。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The bookstore sells pens, notebooks, and other stationery items.<br>
+      <span class="cn">例句：书店出售钢笔、笔记本及其他文具用品。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Writing supplies <span class="cn">书写用品</span></li>
+        <li>Office materials <span class="cn">办公用品</span></li>
+        <li>Paper goods <span class="cn">纸类商品</span></li>
+        <li>Desk items <span class="cn">办公桌用品</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Stationery" comes from the word "stationer," a term once used for booksellers and those who sold writing materials from fixed stalls (as opposed to traveling vendors).<br>
+    <span class="cn">“Stationery” 来自“stationer”（文具商），这个词原指从固定摊位出售书籍和书写用品的商人。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Medieval English:</strong> <em>stationer</em> – a person with a fixed shop for selling books<br>
+      <span class="cn">中世纪英语 stationer：在固定地点卖书的人</span><br><br>
+      <strong>Modern English:</strong> <em>stationery</em> – paper and office supplies<br>
+      <span class="cn">现代英语 stationery：书写及办公用品</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Supplies</td>
+          <td>Neutral</td>
+          <td>We need more art supplies.</td>
+          <td>Practical</td>
+        </tr>
+        <tr>
+          <td>Paper goods</td>
+          <td>Neutral</td>
+          <td>He shops for eco-friendly paper goods.</td>
+          <td>Eco-conscious</td>
+        </tr>
+        <tr>
+          <td><strong>Stationery</strong></td>
+          <td><strong>Standard</strong></td>
+          <td>She bought custom stationery for her wedding.</td>
+          <td>Polished / Refined</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Stationery"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      title="Stationery Tour by a Collector"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen to how “stationery” is used to describe letter-writing materials and desk items.<br>
+      <span class="cn">听视频中如何使用“stationery”来描述书信材料和办公物品。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Stationery in the News</h3>
+    <p>
+      Small businesses offering handmade stationery are growing in popularity as people seek personalized paper goods.<br>
+      <span class="cn">随着人们追求个性化的纸品，小型手工文具店日益流行。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
