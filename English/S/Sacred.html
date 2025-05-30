@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Sacred</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ✨ sacred
+      <span class="pronunciation">/ˈseɪ.krɪd/</span>
+      <button class="audio-button" onclick="speak('Sacred')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Regarded with deep respect or reverence, often in a religious or spiritual context; considered holy, valuable, or untouchable.<br>
+      <span class="cn">神圣的；不可侵犯的；受尊敬的（常用于宗教或精神领域）。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The temple is considered a sacred place by the locals.<br>
+      <span class="cn">例句：当地人认为这座庙宇是神圣的地方。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Freedom of speech is a sacred right in many democracies.<br>
+      <span class="cn">例句：言论自由在许多民主国家是一项神圣的权利。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Holy <span class="cn">神圣的</span></li>
+        <li>Divine <span class="cn">神的；神圣的</span></li>
+        <li>Revered <span class="cn">受尊敬的</span></li>
+        <li>Hallowed <span class="cn">被神圣化的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Sacred" comes from Latin <em>sacrare</em>, meaning “to consecrate, make holy,” from <em>sacer</em>, meaning “holy.”<br>
+    <span class="cn">“Sacred” 源自拉丁语 sacrare，意为“奉献、使神圣”，其词根 sacer 意为“神圣的”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>sacer → sacrare</em> – to make holy<br>
+      <span class="cn">拉丁语 sacer → sacrare：使神圣</span><br><br>
+      <strong>Middle English:</strong> <em>sacred</em> – set apart for worship<br>
+      <span class="cn">中古英语 sacred：用于崇拜的圣物</span><br><br>
+      <strong>Modern English:</strong> <em>sacred</em> – holy, revered<br>
+      <span class="cn">现代英语 sacred：神圣的、受尊敬的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Holy</td>
+          <td>Neutral</td>
+          <td>She visited the holy city of Jerusalem.</td>
+          <td>Spiritual</td>
+        </tr>
+        <tr>
+          <td>Revered</td>
+          <td>Formal</td>
+          <td>He was revered as a wise leader.</td>
+          <td>Respectful</td>
+        </tr>
+        <tr>
+          <td><strong>Sacred</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>The sacred texts were kept in a sealed room.</td>
+          <td>Religious / Serious</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Sacred"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/q_jO_IjlkT0?start=20"
+      title="Use of Sacred in Religious and Cultural Contexts"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> to hear how “sacred” is used in religious and philosophical speech.<br>
+      <span class="cn">听第 0:20 左右，了解“sacred”在宗教和哲学语境中的使用方式。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Sacred in the News</h3>
+    <p>
+      Indigenous communities continue to fight for the protection of their sacred lands.<br>
+      <span class="cn">原住民社区持续为保护他们的神圣土地而斗争。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
