@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Radical</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌱 radical
+      <span class="pronunciation">/ˈrædɪkəl/</span>
+      <button class="audio-button" onclick="speak('Radical')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective / Noun<br><span class="cn">词性：形容词 / 名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p><strong>As an adjective:</strong> Relating to or affecting the fundamental nature of something; far-reaching or extreme.<br>
+    <span class="cn">根本的；彻底的；极端的。</span><br><br>
+    <strong>As a noun:</strong> A person who advocates for complete or significant political or social reform.<br>
+    <span class="cn">激进分子；主张彻底改革的人。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The scientist proposed a radical new theory that challenged the mainstream view.<br>
+      <span class="cn">例句：这位科学家提出了一个激进的新理论，挑战了主流观点。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Radicals in the group demanded immediate change in leadership.<br>
+      <span class="cn">例句：组织中的激进分子要求领导层立即更换。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Revolutionary <span class="cn">革命性的</span></li>
+        <li>Extreme <span class="cn">极端的</span></li>
+        <li>Fundamental <span class="cn">根本的</span></li>
+        <li>Progressive <span class="cn">进步的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Radical" comes from Latin <em>radicalis</em>, meaning “of or having roots,” from <em>radix</em>, meaning “root.” Originally, it referred to going to the root or origin of something.<br>
+    <span class="cn">“Radical” 源自拉丁语 radicalis，意为“根本的”，来自 radix，意为“根”，最初指追本溯源。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>radix</em> – root<br>
+      <span class="cn">拉丁语 radix：根</span><br><br>
+      <strong>Late Latin:</strong> <em>radicalis</em> – relating to the root<br>
+      <span class="cn">晚期拉丁语 radicalis：关于根的</span><br><br>
+      <strong>Modern English:</strong> <em>radical</em> – fundamental or extreme<br>
+      <span class="cn">现代英语 radical：根本的；极端的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Extreme</td>
+          <td>Neutral</td>
+          <td>His views are considered extreme by many.</td>
+          <td>Intense</td>
+        </tr>
+        <tr>
+          <td>Progressive</td>
+          <td>Positive</td>
+          <td>She supports progressive social policies.</td>
+          <td>Optimistic</td>
+        </tr>
+        <tr>
+          <td><strong>Radical</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>The proposal represented a radical shift in direction.</td>
+          <td>Transformative</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Radical"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/RzDr18UYO18?start=40"
+      title="Use of Radical in a Historical or Political Context"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> to hear how “radical” is used in context.<br>
+      <span class="cn">听第 0:40 左右，了解“radical”在语境中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Radical in the News</h3>
+    <p>
+      The new policy represents a radical departure from traditional practices.<br>
+      <span class="cn">新政策标志着对传统做法的根本性改变。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
