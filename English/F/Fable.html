@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Fable</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🐢 fable
+      <span class="pronunciation">/ˈfeɪbəl/</span>
+      <button class="audio-button" onclick="speak('Fable')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>A short story, typically with animals as characters, that conveys a moral or lesson; a myth or legend.<br>
+    <span class="cn">寓言；通常以动物为主角并传达道德教训的短故事；神话传说。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The fable of the tortoise and the hare teaches that slow and steady wins the race.<br>
+      <span class="cn">例句：龟兔赛跑的寓言告诉我们，慢而稳定才能取胜。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Many of Aesop's fables are still taught in schools today.<br>
+      <span class="cn">例句：伊索的许多寓言至今仍在学校教授。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Tale <span class="cn">故事</span></li>
+        <li>Parable <span class="cn">寓言；比喻故事</span></li>
+        <li>Myth <span class="cn">神话</span></li>
+        <li>Allegory <span class="cn">寓言；讽喻</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Fable" comes from Latin <em>fabula</em>, meaning “story or tale,” from <em>fari</em> (to speak or tell). It entered English through Old French.<br>
+    <span class="cn">“Fable” 源自拉丁语 fabula，意为“故事、传说”，来自 fari（讲述、说话），通过古法语进入英语。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>fabula</em> – a story or tale<br>
+      <span class="cn">拉丁语 fabula：故事、传说</span><br><br>
+      <strong>Old French:</strong> <em>fable</em> – a tale with a moral<br>
+      <span class="cn">古法语 fable：带有寓意的故事</span><br><br>
+      <strong>Modern English:</strong> <em>fable</em> – a short story with a lesson<br>
+      <span class="cn">现代英语 fable：有教训的短故事</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Story</td>
+          <td>Neutral</td>
+          <td>She told me a story about her dog.</td>
+          <td>General</td>
+        </tr>
+        <tr>
+          <td>Myth</td>
+          <td>Formal</td>
+          <td>Greek myths explain the origins of the world.</td>
+          <td>Legendary</td>
+        </tr>
+        <tr>
+          <td><strong>Fable</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>The fable taught children an important lesson.</td>
+          <td>Instructive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Fable"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/0RUzfhwKGE8?start=10"
+      title="Fables for Kids – Animated Stories"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:10</strong> to hear how “fable” is used when introducing the story.<br>
+      <span class="cn">听第 0:10 左右，了解“fable”在介绍故事时的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Fable in the News</h3>
+    <p>
+      The movie is described as a modern fable about love and redemption.<br>
+      <span class="cn">这部电影被称为一则关于爱与救赎的现代寓言。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
