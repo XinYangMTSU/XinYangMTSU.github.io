@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Chewy</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🍬 chewy
+      <span class="pronunciation">/ˈtʃuːi/</span>
+      <button class="audio-button" onclick="speak('Chewy')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Having a texture that requires a lot of chewing; often used to describe certain candies, meats, or baked goods.<br>
+      <span class="cn">需要多次咀嚼的；有嚼劲的（常用于描述糖果、肉类或烘焙食品）。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The cookies were soft and chewy in the center.<br>
+      <span class="cn">例句：这些饼干中心柔软有嚼劲。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> I love chewy caramel candy—it lasts longer!<br>
+      <span class="cn">例句：我喜欢有嚼劲的焦糖糖果——可以吃更久！</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Gummy <span class="cn">胶状的，有弹性的</span></li>
+        <li>Tough <span class="cn">韧的，难嚼的</span></li>
+        <li>Springy <span class="cn">有弹性的</span></li>
+        <li>Rubbery <span class="cn">像橡皮的，有韧性的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Chewy" comes from the verb “chew” + suffix “-y,” which forms adjectives. “Chew” comes from Old English <em>ceowan</em>, meaning “to bite or gnaw.”<br>
+    <span class="cn">“Chewy” 由动词 chew（咀嚼）和形容词后缀 -y 组成。chew 源自古英语 ceowan，意为“咬、啃”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>ceowan</em> – to bite or gnaw<br>
+      <span class="cn">古英语 ceowan：咬或啃</span><br><br>
+      <strong>Modern English:</strong> <em>chewy</em> – requiring chewing; having a tough or elastic texture<br>
+      <span class="cn">现代英语 chewy：需要咀嚼的；有韧性的质地</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Texture Type</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Crispy</td>
+          <td>Thin and crunchy</td>
+          <td>The crust is crispy and golden.</td>
+          <td>Light / Crisp</td>
+        </tr>
+        <tr>
+          <td>Fudgy</td>
+          <td>Soft and dense</td>
+          <td>These brownies are wonderfully fudgy.</td>
+          <td>Rich / Indulgent</td>
+        </tr>
+        <tr>
+          <td><strong>Chewy</strong></td>
+          <td><strong>Elastic and moist</strong></td>
+          <td>The bagels are chewy and filling.</td>
+          <td>Satisfying / Textured</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Chewy"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/5Mzke7U0-Q8?start=40"
+      title="Use of Chewy in Cooking Shows"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> to hear how “chewy” is used to describe food in real-world cooking shows.<br>
+      <span class="cn">听第 0:40 左右，了解“chewy”在烹饪节目中如何用来形容食物。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Chewy in the News</h3>
+    <p>
+      A new bakery in town is gaining attention for its uniquely chewy mochi doughnuts.<br>
+      <span class="cn">本地一家新开的面包店因其独特有嚼劲的麻薯甜甜圈而引起关注。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/food" target="_blank" class="fancy-link">
+        🍩 Read More – BBC Food
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
