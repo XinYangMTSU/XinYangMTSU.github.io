@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Vessel</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🚢 vessel
+      <span class="pronunciation">/ˈvɛsəl/</span>
+      <button class="audio-button" onclick="speak('Vessel')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      A container for holding liquids; also used to refer to a ship or a large boat; or a tube in the body that carries blood or other fluids.<br>
+      <span class="cn">容器；船只；血管（或其他体液管道）。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She poured the soup into a large ceramic vessel.<br>
+      <span class="cn">例句：她把汤倒进一个大的陶瓷容器里。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The cargo vessel docked at the harbor this morning.<br>
+      <span class="cn">例句：这艘货船今天早上停靠在港口。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The surgeon carefully examined the blood vessels during the operation.<br>
+      <span class="cn">例句：外科医生在手术中仔细检查了血管。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Container <span class="cn">容器</span></li>
+        <li>Ship <span class="cn">船只</span></li>
+        <li>Craft <span class="cn">船（较小）</span></li>
+        <li>Blood vessel <span class="cn">血管</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Vessel" comes from Old French <em>vaissel</em>, from Latin <em>vascellum</em>, a diminutive of <em>vas</em> meaning “container or dish.” It later came to refer to ships and bodily fluid tubes.<br>
+    <span class="cn">“Vessel” 源自古法语 vaissel，拉丁语 vascellum（vas 的小词），vas 意为“容器、器皿”，后引申为船只和体内流体通道。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>vas</em> – container<br>
+      <span class="cn">拉丁语 vas：容器</span><br><br>
+      <strong>Old French:</strong> <em>vaissel</em> – dish, ship<br>
+      <span class="cn">古法语 vaissel：器皿、船</span><br><br>
+      <strong>Modern English:</strong> <em>vessel</em> – container, ship, or bodily tube<br>
+      <span class="cn">现代英语 vessel：容器、船只或体内通道</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Container</td>
+          <td>Neutral</td>
+          <td>He carried water in a metal container.</td>
+          <td>Practical</td>
+        </tr>
+        <tr>
+          <td>Ship</td>
+          <td>Neutral</td>
+          <td>The ship sailed across the ocean.</td>
+          <td>Descriptive</td>
+        </tr>
+        <tr>
+          <td><strong>Vessel</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>The vessel departed at dawn with medical supplies.</td>
+          <td>Technical / Formal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Vessel"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/mBHLp3OJEXI?start=30"
+      title="Use of Vessel in Nautical and Medical Contexts"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear “vessel” used in real-world examples.<br>
+      <span class="cn">听第 0:30 左右，了解“vessel”在实际语境中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Vessel in the News</h3>
+    <p>
+      A medical research team discovered a new type of vessel that carries nutrients in the brain.<br>
+      <span class="cn">一支医学研究团队发现了一种新的脑部营养输送血管。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
