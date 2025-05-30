@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Quota</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📊 quota
+      <span class="pronunciation">/ˈkwoʊtə/</span>
+      <button class="audio-button" onclick="speak('Quota')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      A fixed amount or number that is officially allowed, expected, or required; a share or portion assigned to someone or something.<br>
+      <span class="cn">定额；配额；规定数量；分配的份额。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The factory exceeded its monthly production quota.<br>
+      <span class="cn">例句：这家工厂超额完成了本月的生产配额。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Each student must read a quota of five books per semester.<br>
+      <span class="cn">例句：每位学生每学期必须阅读五本书作为任务量。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Allocation <span class="cn">分配额</span></li>
+        <li>Portion <span class="cn">份额</span></li>
+        <li>Limit <span class="cn">限制</span></li>
+        <li>Share <span class="cn">份儿</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Quota" comes from the Latin word <em>quota pars</em>, meaning “how large a part.” It was first used in English in the 17th century to refer to a proportional part or share.<br>
+    <span class="cn">“Quota” 源自拉丁语 quota pars，意为“某部分的大小”，17世纪进入英语，表示“比例份额”或“定额”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>quota pars</em> – how large a part<br>
+      <span class="cn">拉丁语 quota pars：某部分的大小</span><br><br>
+      <strong>English (17th century):</strong> <em>quota</em> – assigned portion<br>
+      <span class="cn">17世纪英语 quota：被分配的份额</span><br><br>
+      <strong>Modern Usage:</strong> a required or allowed number or portion<br>
+      <span class="cn">现代含义：规定或允许的数量/份额</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Allocation</td>
+          <td>Formal</td>
+          <td>The team received a new budget allocation.</td>
+          <td>Administrative</td>
+        </tr>
+        <tr>
+          <td>Share</td>
+          <td>Neutral</td>
+          <td>She took her share of the prize money.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td><strong>Quota</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>They set a quota for daily production.</td>
+          <td>Regulatory / Managerial</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Quota"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/fXzLtkb3mCE?start=12"
+      title="Use of Quota in Conversation and Business"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:12</strong> to hear how “quota” is used in business context.<br>
+      <span class="cn">听第 0:12 左右，了解“quota”在商务语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Quota in the News</h3>
+    <p>
+      The government introduced a new quota system to ensure fair representation of minority groups.<br>
+      <span class="cn">政府引入了新的配额制度，以确保少数群体的公平代表权。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
