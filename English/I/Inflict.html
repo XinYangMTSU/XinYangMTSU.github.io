@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Inflict</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      ⚔️ inflict
+      <span class="pronunciation">/ɪnˈflɪkt/</span>
+      <button class="audio-button" onclick="speak('Inflict')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To cause something unpleasant or painful to be suffered by someone or something.<br>
+    <span class="cn">施加（伤害、痛苦等）；使遭受。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The storm inflicted heavy damage on the coastal town.<br>
+      <span class="cn">例句：暴风雨对沿海城镇造成了严重破坏。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She never intended to inflict pain on anyone.<br>
+      <span class="cn">例句：她从未想过要让任何人受苦。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Impose <span class="cn">施加</span></li>
+        <li>Cause <span class="cn">造成</span></li>
+        <li>Deliver <span class="cn">施予（伤害、打击等）</span></li>
+        <li>Wreak <span class="cn">发泄；报复</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Inflict" comes from Latin <em>inflictus</em>, past participle of <em>infligere</em>, meaning “to strike against,” from <em>in-</em> (upon) + <em>fligere</em> (to strike).<br>
+    <span class="cn">“Inflict” 源自拉丁语 inflictus，是 infligere（打击、施加）的过去分词，in- 表“向”，fligere 表“打”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>infligere</em> – to strike or hit upon<br>
+      <span class="cn">拉丁语 infligere：打击，施加</span><br><br>
+      <strong>Old French:</strong> <em>inflicter</em> – to impose<br>
+      <span class="cn">古法语 inflicter：施加</span><br><br>
+      <strong>Modern English:</strong> <em>inflict</em> – to cause harm or suffering<br>
+      <span class="cn">现代英语 inflict：使遭受痛苦或损害</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Impose</td>
+          <td>Formal</td>
+          <td>The court imposed a fine on the company.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Wreak</td>
+          <td>Formal</td>
+          <td>The tornado wreaked havoc across the region.</td>
+          <td>Violent</td>
+        </tr>
+        <tr>
+          <td><strong>Inflict</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>They inflicted severe losses on the enemy.</td>
+          <td>Negative / Aggressive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Inflict"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/sUcz5K8GU6U?start=25"
+      title="Use of Inflict in Documentary or Speech"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:25</strong> to hear how “inflict” is used in a formal or serious context.<br>
+      <span class="cn">听第 0:25 左右，了解“inflict”在正式或严肃语境中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Inflict in the News</h3>
+    <p>
+      The report details how the policy may inflict economic harm on small businesses.<br>
+      <span class="cn">报告详细说明了该政策可能会对小企业造成经济损害。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
