@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Embrace</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🤗 embrace
+      <span class="pronunciation">/ɪmˈbreɪs/</span>
+      <button class="audio-button" onclick="speak('Embrace')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb / Noun<br><span class="cn">词性：动词 / 名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      (v.) To hold someone closely in your arms, especially as a sign of affection; to accept or support something willingly or enthusiastically.<br>
+      (n.) The act of holding someone closely; an act of acceptance or support.<br>
+      <span class="cn">（动词）拥抱；欣然接受<br>（名词）拥抱；接受</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She embraced her friend tightly after the long trip.<br>
+      <span class="cn">例句：长途旅行后她紧紧地拥抱了朋友。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The company has embraced new technology to stay competitive.<br>
+      <span class="cn">例句：为了保持竞争力，公司已欣然接受新技术。</span>
+    </div>
+
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Hug <span class="cn">拥抱</span></li>
+        <li>Welcome <span class="cn">欢迎；接受</span></li>
+        <li>Accept <span class="cn">接受</span></li>
+        <li>Adopt <span class="cn">采纳；采取</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Embrace" comes from Old French <em>embracer</em>, from Latin <em>bracchium</em> meaning “arm.” It originally referred to “putting arms around” and evolved to include accepting ideas or changes.<br>
+    <span class="cn">“Embrace” 源自古法语 embracer，来自拉丁语 bracchium，意为“手臂”。最初指“用手臂环绕”，后来引申为接受观点或改变。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>bracchium</em> – arm<br>
+      <span class="cn">拉丁语 bracchium：手臂</span><br><br>
+      <strong>Old French:</strong> <em>embracer</em> – to hug, to clasp<br>
+      <span class="cn">古法语 embracer：拥抱，抱紧</span><br><br>
+      <strong>Modern English:</strong> <em>embrace</em> – to hug or accept something willingly<br>
+      <span class="cn">现代英语 embrace：拥抱；欣然接受</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hug</td>
+          <td>Informal</td>
+          <td>They hugged each other after the game.</td>
+          <td>Warm / Casual</td>
+        </tr>
+        <tr>
+          <td>Adopt</td>
+          <td>Formal</td>
+          <td>The city adopted a new recycling policy.</td>
+          <td>Administrative</td>
+        </tr>
+        <tr>
+          <td><strong>Embrace</strong></td>
+          <td><strong>Neutral/Formal</strong></td>
+          <td>They embraced the idea of change with open minds.</td>
+          <td>Open / Positive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Embrace"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/9I1O02PvrJY?start=15"
+      title="Use of Embrace in Real Life Contexts"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:15</strong> to hear how “embrace” is used to describe emotional and conceptual acceptance.<br>
+      <span class="cn">听第 0:15 左右，了解“embrace”在表达情感和观念接受时的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Embrace in the News</h3>
+    <p>
+      More companies are embracing remote work as a permanent option for their employees.<br>
+      <span class="cn">越来越多的公司将远程办公作为员工的长期选择。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
