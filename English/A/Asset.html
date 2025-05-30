@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Asset</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💎 asset
+      <span class="pronunciation">/ˈæset/</span>
+      <button class="audio-button" onclick="speak('Asset')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Something valuable or useful that a person or organization owns, has, or benefits from; a positive quality or resource.<br>
+    <span class="cn">资产；有价值的人或物；优点。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Her communication skills are a great asset to the team.<br>
+      <span class="cn">例句：她的沟通能力是团队的重要资产。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The company listed its assets and liabilities in the report.<br>
+      <span class="cn">例句：公司在报告中列出了其资产与负债。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Advantage <span class="cn">优势</span></li>
+        <li>Resource <span class="cn">资源</span></li>
+        <li>Benefit <span class="cn">益处</span></li>
+        <li>Strength <span class="cn">优点；长处</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Asset" comes from the Anglo-Norman legal phrase <em>asetz</em>, meaning “enough,” derived from Latin <em>ad satis</em> ("to enough"), referring to having enough property to pay debts.<br>
+    <span class="cn">“Asset” 源自英诺曼法语 asetz，意为“足够”，来自拉丁语 ad satis（足够），原意为“拥有足够的财产来偿还债务”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>ad satis</em> – to enough<br>
+      <span class="cn">拉丁语 ad satis：足够</span><br><br>
+      <strong>Old French:</strong> <em>asez</em> – enough, sufficient<br>
+      <span class="cn">古法语 assez：足够的</span><br><br>
+      <strong>Modern English:</strong> <em>asset</em> – valuable item or quality<br>
+      <span class="cn">现代英语 asset：有价值的事物或优点</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Advantage</td>
+          <td>Neutral</td>
+          <td>This skill gives her an advantage.</td>
+          <td>Practical</td>
+        </tr>
+        <tr>
+          <td>Benefit</td>
+          <td>Neutral</td>
+          <td>One benefit of the job is flexibility.</td>
+          <td>Positive</td>
+        </tr>
+        <tr>
+          <td><strong>Asset</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>His creativity is a major asset.</td>
+          <td>Valuable / Strong</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Asset"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/2Jt9FdeLxpg?start=35"
+      title="Example of Asset in Business Context"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:35</strong> to hear how “asset” is used in a financial or business discussion.<br>
+      <span class="cn">听第 0:35 左右，了解“asset”在商业语境中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Asset in the News</h3>
+    <p>
+      Real estate remains a key asset for many investors in uncertain times.<br>
+      <span class="cn">在不确定时期，房地产仍然是许多投资者的关键资产。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
