@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Humanity</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌍 humanity
+      <span class="pronunciation">/hjuːˈmænəti/</span>
+      <button class="audio-button" onclick="speak('Humanity')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      1. All human beings collectively; the human race.<br>
+      2. Kindness, compassion, and benevolence toward others.<br>
+      <span class="cn">1. 人类；全体人类。<br>2. 人性；仁慈；善良。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> Climate change is a serious challenge facing all of humanity.<br>
+      <span class="cn">例句：气候变化是全人类面临的一个严峻挑战。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Her act of kindness restored his faith in humanity.<br>
+      <span class="cn">例句：她的善举让他重新相信人性。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Mankind <span class="cn">人类</span></li>
+        <li>Compassion <span class="cn">同情；怜悯</span></li>
+        <li>Kindness <span class="cn">善良；仁慈</span></li>
+        <li>Benevolence <span class="cn">仁爱；慈善</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Humanity" comes from Latin <em>humanitas</em>, meaning "human nature, kindness," from <em>humanus</em> meaning "human."<br>
+    <span class="cn">“Humanity” 源自拉丁语 humanitas，意为“人性、仁慈”，来自 humanus，意为“人的、人类的”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>humanus → humanitas</em> – human nature, kindness<br>
+      <span class="cn">拉丁语 humanus → humanitas：人性，仁爱</span><br><br>
+      <strong>Middle English:</strong> <em>humanite</em> – human character or kindness<br>
+      <span class="cn">中古英语 humanite：人的特性或仁慈</span><br><br>
+      <strong>Modern English:</strong> <em>humanity</em> – human beings or human compassion<br>
+      <span class="cn">现代英语 humanity：人类；人性；仁爱</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mankind</td>
+          <td>Neutral</td>
+          <td>Mankind has always sought to explore the unknown.</td>
+          <td>General / Scientific</td>
+        </tr>
+        <tr>
+          <td>Compassion</td>
+          <td>Formal</td>
+          <td>She acted with deep compassion for the victims.</td>
+          <td>Empathetic</td>
+        </tr>
+        <tr>
+          <td><strong>Humanity</strong></td>
+          <td><strong>Neutral/Formal</strong></td>
+          <td>War threatens the future of humanity.</td>
+          <td>Universal / Reflective</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Humanity"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/pW7e_5-35OU?start=20"
+      title="Use of Humanity in Ethical Discussions"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> to hear how “humanity” is used in moral and global contexts.<br>
+      <span class="cn">听第 0:20 左右，了解“humanity”在道德与全球语境中的使用方式。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Humanity in the News</h3>
+    <p>
+      Scientists warn that protecting biodiversity is crucial for the future of humanity.<br>
+      <span class="cn">科学家警告说，保护生物多样性对人类的未来至关重要。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
