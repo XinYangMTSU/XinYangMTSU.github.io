@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Deference</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🙇 deference
+      <span class="pronunciation">/ˈdefərəns/</span>
+      <button class="audio-button" onclick="speak('Deference')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Polite submission and respect shown to another person, especially due to their experience, status, or age.<br>
+    <span class="cn">尊重；敬意，尤指对年长者或有经验者的尊敬。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> He bowed his head in deference to the queen.<br>
+      <span class="cn">例句：他向女王低头致敬。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Out of deference to his teacher, he remained silent.<br>
+      <span class="cn">例句：出于对老师的尊重，他保持沉默。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Respect <span class="cn">尊重</span></li>
+        <li>Regard <span class="cn">敬意</span></li>
+        <li>Honor <span class="cn">敬重</span></li>
+        <li>Reverence <span class="cn">敬畏</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Deference" comes from Latin <em>deferre</em>, meaning “to bring down” or “submit,” which became the Old French <em>deferer</em>, meaning “show respect.”<br>
+    <span class="cn">“Deference” 源自拉丁语 deferre，意为“带来、服从”，后演变为古法语 deferer，意为“表示尊敬”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>deferre</em> – to submit or yield<br>
+      <span class="cn">拉丁语 deferre：服从、顺从</span><br><br>
+      <strong>Old French:</strong> <em>deferer</em> – to show respect<br>
+      <span class="cn">古法语 deferer：表示尊敬</span><br><br>
+      <strong>Modern English:</strong> <em>deference</em> – respectful submission<br>
+      <span class="cn">现代英语 deference：表示尊重的顺从</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Respect</td>
+          <td>Neutral</td>
+          <td>I respect her opinion.</td>
+          <td>General</td>
+        </tr>
+        <tr>
+          <td>Reverence</td>
+          <td>Formal</td>
+          <td>They held the monk in reverence.</td>
+          <td>Spiritual / Elevated</td>
+        </tr>
+        <tr>
+          <td><strong>Deference</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>She spoke with deference to her elders.</td>
+          <td>Polite / Submissive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Deference"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/4E3sOEk1mvU?start=45"
+      title="Example of Deference in Formal Setting"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> to hear how “deference” is used in a formal dialogue.<br>
+      <span class="cn">听第 0:45 左右，了解“deference”在正式语境中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Deference in the News</h3>
+    <p>
+      In a show of deference, the ambassador delayed the announcement until after the host country’s ceremony.<br>
+      <span class="cn">为了表示尊重，大使推迟了公告，等到东道国仪式结束后才发布。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
