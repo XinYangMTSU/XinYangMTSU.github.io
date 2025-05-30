@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Aesop</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      📜 Aesop
+      <span class="pronunciation">/ˈiːsɒp/</span>
+      <button class="audio-button" onclick="speak('Aesop')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Proper Noun<br><span class="cn">词性：专有名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Aesop is the name of a legendary ancient Greek storyteller, famous for writing short tales known as fables, which often feature animals and teach moral lessons.<br>
+    <span class="cn">伊索：古希腊著名寓言家，以撰写以动物为主角、寓意深刻的短篇故事而闻名。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> Aesop’s fables like "The Tortoise and the Hare" are still told to children around the world.<br>
+      <span class="cn">例句：伊索寓言如《龟兔赛跑》至今仍在全球各地讲给孩子听。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Many of Aesop’s stories use animals to represent human traits.<br>
+      <span class="cn">例句：伊索的许多故事用动物来象征人的性格特征。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>📖 Historical Background</h3>
+    <p><span style="font-size: 2rem;">🏛️</span> Aesop is believed to have lived in ancient Greece around the 6th century BCE. Though there is little historical evidence of his life, his fables have been passed down for centuries and translated into many languages.<br>
+    <span class="cn">据说伊索生活在公元前6世纪的古希腊，虽然关于他的生平资料甚少，但他的寓言世代流传，并被翻译成多种语言。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Influence and Legacy</h3>
+    <p>
+      Aesop’s name has become synonymous with short moral tales. His stories continue to be part of children's literature, school curricula, and global storytelling traditions.<br>
+      <span class="cn">“伊索”这个名字几乎成为寓言故事的代名词。他的故事至今仍是儿童文学、学校课程和全球讲故事传统的重要组成部分。</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📚 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Contribution</th>
+          <th>Famous For</th>
+          <th>Legacy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>La Fontaine</td>
+          <td>French fables</td>
+          <td>Witty animal stories</td>
+          <td>Adapted Aesop's ideas</td>
+        </tr>
+        <tr>
+          <td>Hans Christian Andersen</td>
+          <td>Fairy tales</td>
+          <td>The Little Mermaid</td>
+          <td>Romantic, emotional stories</td>
+        </tr>
+        <tr>
+          <td><strong>Aesop</strong></td>
+          <td><strong>Ancient Greek fables</strong></td>
+          <td>The Tortoise and the Hare</td>
+          <td>Timeless moral lessons</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – About Aesop</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/4PXxAEzxZr0?start=15"
+      title="Who Was Aesop? (Short Educational Video)"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:15</strong> to learn about Aesop’s life and his storytelling style.<br>
+      <span class="cn">听第 0:15 左右，了解伊索的生平及其讲故事的风格。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Aesop in the Modern World</h3>
+    <p>
+      Aesop’s stories are still used today to teach values such as honesty, patience, and humility.<br>
+      <span class="cn">伊索的故事如今仍被用来教育人们诚实、耐心与谦逊等价值观。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
