@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Forsake</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🚪 forsake
+      <span class="pronunciation">/fərˈseɪk/</span>
+      <button class="audio-button" onclick="speak('Forsake')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      To abandon or give up someone or something; to renounce or turn away from something once valued or held dear.<br>
+      <span class="cn">放弃；抛弃；遗弃（曾经重视或珍爱的事物或人）。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> He vowed never to forsake his friends in times of trouble.<br>
+      <span class="cn">例句：他发誓在困难时期决不抛弃朋友。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She forsook her luxurious lifestyle to live in the countryside.<br>
+      <span class="cn">例句：她放弃了奢华的生活方式，搬到乡下居住。</span>
+    </div>
+
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Abandon <span class="cn">放弃</span></li>
+        <li>Desert <span class="cn">遗弃</span></li>
+        <li>Renounce <span class="cn">声明放弃</span></li>
+        <li>Relinquish <span class="cn">正式放弃</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Forsake" comes from Old English <em>forsacan</em>, meaning “to refuse or renounce.” It combines <em>for-</em> (completely) and <em>sacan</em> (to quarrel or argue).<br>
+    <span class="cn">“Forsake” 源自古英语 forsacan，意为“拒绝、放弃”，由 for-（完全地）和 sacan（争辩）组成。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>forsacan</em> – to refuse, renounce<br>
+      <span class="cn">古英语 forsacan：拒绝、放弃</span><br><br>
+      <strong>Middle English:</strong> <em>forsaken</em> – to abandon<br>
+      <span class="cn">中古英语 forsaken：遗弃</span><br><br>
+      <strong>Modern English:</strong> <em>forsake</em> – to give up or abandon completely<br>
+      <span class="cn">现代英语 forsake：完全放弃或遗弃</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Abandon</td>
+          <td>Neutral</td>
+          <td>He abandoned the plan halfway through.</td>
+          <td>Decisive / Practical</td>
+        </tr>
+        <tr>
+          <td>Renounce</td>
+          <td>Formal</td>
+          <td>She renounced her citizenship.</td>
+          <td>Official / Serious</td>
+        </tr>
+        <tr>
+          <td><strong>Forsake</strong></td>
+          <td><strong>Formal / Literary</strong></td>
+          <td>He would never forsake his family.</td>
+          <td>Emotional / Strong</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Forsake"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/qgxlS4aHKf4?start=25"
+      title="Use of Forsake in Literature and Speech"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:25</strong> to hear how “forsake” is used in a dramatic or literary context.<br>
+      <span class="cn">听第 0:25 左右，了解“forsake”在戏剧性或文学语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Forsake in the News</h3>
+    <p>
+      Some citizens refused to forsake their traditions despite modern pressures.<br>
+      <span class="cn">尽管面临现代压力，一些公民仍不愿放弃他们的传统。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
