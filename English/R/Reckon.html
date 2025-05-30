@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Reckon</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🤔 reckon
+      <span class="pronunciation">/ˈrekən/</span>
+      <button class="audio-button" onclick="speak('Reckon')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>To think or believe something; to estimate or calculate; to consider or regard something in a particular way.<br>
+    <span class="cn">认为；估计；把……看作。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> I reckon we’ll arrive around noon.<br>
+      <span class="cn">例句：我估计我们中午左右到。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She’s reckoned to be one of the best violinists in the country.<br>
+      <span class="cn">例句：她被认为是全国最好的小提琴家之一。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Think <span class="cn">认为</span></li>
+        <li>Believe <span class="cn">相信</span></li>
+        <li>Estimate <span class="cn">估计</span></li>
+        <li>Suppose <span class="cn">猜想；设想</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Reckon" comes from Old English <em>gerecenian</em>, meaning “to recount or relate,” and later Middle English <em>rekenen</em> from Old Frisian and Middle Dutch, meaning “to count or calculate.”<br>
+    <span class="cn">“Reckon” 源自古英语 gerecenian，意为“讲述、叙述”，后在中古英语中演变为 rekenen，意为“计算、估算”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>gerecenian</em> – to explain or recount<br>
+      <span class="cn">古英语 gerecenian：讲述、解释</span><br><br>
+      <strong>Middle English:</strong> <em>rekenen</em> – to count<br>
+      <span class="cn">中古英语 rekenen：计算</span><br><br>
+      <strong>Modern English:</strong> <em>reckon</em> – to estimate, believe, or consider<br>
+      <span class="cn">现代英语 reckon：估计，认为</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Suppose</td>
+          <td>Neutral</td>
+          <td>I suppose we could try again tomorrow.</td>
+          <td>Informal</td>
+        </tr>
+        <tr>
+          <td>Estimate</td>
+          <td>Formal</td>
+          <td>We estimate the total cost at $500.</td>
+          <td>Practical</td>
+        </tr>
+        <tr>
+          <td><strong>Reckon</strong></td>
+          <td><strong>Informal</strong></td>
+          <td>I reckon he’ll be late again.</td>
+          <td>Casual / Conversational</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Reckon"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/sr8z2PWT6bU?start=50"
+      title="Use of Reckon in Conversation"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:50</strong> to hear how “reckon” is used in natural conversation.<br>
+      <span class="cn">听第 0:50 左右，了解“reckon”在口语中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Reckon in the News</h3>
+    <p>
+      Analysts reckon the market will rebound by the end of the quarter.<br>
+      <span class="cn">分析师认为市场将在本季度末反弹。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
