@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Arbitrary</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🎲 arbitrary
+      <span class="pronunciation">/ˈɑːrbətreri/</span>
+      <button class="audio-button" onclick="speak('Arbitrary')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>Based on random choice or personal whim, rather than any reason or system; not fixed by rules.<br>
+    <span class="cn">任意的；武断的；没有根据或系统的。</span></p>
+
+    <div class="example">
+      <strong>Example:</strong> The decision to change the deadline felt arbitrary and unfair.<br>
+      <span class="cn">例句：更改截止日期的决定显得任意而不公平。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He made an arbitrary choice without considering the consequences.<br>
+      <span class="cn">例句：他在未考虑后果的情况下作出了一个随意的选择。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Random <span class="cn">随机的</span></li>
+        <li>Capricious <span class="cn">变化无常的</span></li>
+        <li>Unreasoned <span class="cn">无理由的</span></li>
+        <li>Whimsical <span class="cn">异想天开的；反复无常的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Arbitrary" comes from Latin <em>arbitrarius</em>, meaning “depending on the will or judgment of someone,” from <em>arbiter</em> meaning “judge or ruler.”<br>
+    <span class="cn">“Arbitrary” 源自拉丁语 arbitrarius，意为“依靠某人意志或判断”，来自 arbiter，意为“仲裁者、裁判”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>arbiter</em> – judge or decision-maker<br>
+      <span class="cn">拉丁语 arbiter：裁判，决策者</span><br><br>
+      <strong>Late Latin:</strong> <em>arbitrarius</em> – based on personal discretion<br>
+      <span class="cn">晚期拉丁语 arbitrarius：依据个人判断的</span><br><br>
+      <strong>Modern English:</strong> <em>arbitrary</em> – based on random choice or whim<br>
+      <span class="cn">现代英语 arbitrary：依据随机选择或个人喜好</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Formality Level</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Random</td>
+          <td>Neutral</td>
+          <td>They picked a random number.</td>
+          <td>Casual</td>
+        </tr>
+        <tr>
+          <td>Capricious</td>
+          <td>Formal</td>
+          <td>The leader's capricious behavior worried the council.</td>
+          <td>Negative</td>
+        </tr>
+        <tr>
+          <td><strong>Arbitrary</strong></td>
+          <td><strong>Formal</strong></td>
+          <td>The rule was seen as arbitrary and unnecessary.</td>
+          <td>Critical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Arbitrary"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/JzhlfbVmXAE?start=20"
+      title="Example Use of Arbitrary in Context"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> to hear how “arbitrary” is used in discussion.<br>
+      <span class="cn">听第 0:20 左右，了解“arbitrary”的实际用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Arbitrary in the News</h3>
+    <p>
+      Critics say the new policy is arbitrary and lacks transparency.<br>
+      <span class="cn">批评者称新政策是武断的，缺乏透明度。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
