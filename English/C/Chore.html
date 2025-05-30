@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Chore</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧹 chore
+      <span class="pronunciation">/tʃɔːr/</span>
+      <button class="audio-button" onclick="speak('Chore')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      A routine or minor task, especially one that is done regularly around the house.<br>
+      <span class="cn">日常琐事；家庭杂务。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> Doing the dishes is my least favorite chore.<br>
+      <span class="cn">例句：洗碗是我最不喜欢的家务。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The children each have a weekly chore list to complete.<br>
+      <span class="cn">例句：孩子们每人都有一份每周的家务清单需要完成。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Task <span class="cn">任务</span></li>
+        <li>Duty <span class="cn">职责</span></li>
+        <li>Housework <span class="cn">家务</span></li>
+        <li>Errand <span class="cn">差事</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Chore" originates from Middle English <em>chare</em> or <em>chore</em>, meaning “a turn of work,” related to Old English <em>cearu</em> (care or concern).<br>
+    <span class="cn">“Chore” 源自中古英语 chare 或 chore，意为“一项工作”，与古英语 cearu（关心、照料）有关。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>cearu</em> – care, concern<br>
+      <span class="cn">古英语 cearu：关心，照料</span><br><br>
+      <strong>Middle English:</strong> <em>chare</em> – a turn of work<br>
+      <span class="cn">中古英语 chare：一项工作</span><br><br>
+      <strong>Modern English:</strong> <em>chore</em> – a routine household task<br>
+      <span class="cn">现代英语 chore：家庭日常杂务</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Task</td>
+          <td>General</td>
+          <td>She has many tasks to finish today.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Errand</td>
+          <td>Outside the home</td>
+          <td>I ran a few errands after work.</td>
+          <td>Informal</td>
+        </tr>
+        <tr>
+          <td><strong>Chore</strong></td>
+          <td><strong>Home / Routine</strong></td>
+          <td>Cleaning the bathroom is a weekend chore.</td>
+          <td>Routine / Mundane</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Chore"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/TZrYxYy-Rcc?start=20"
+      title="Daily Chore Routines for Families"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> to hear how “chore” is used in real-life family settings.<br>
+      <span class="cn">听第 0:20 左右，了解“chore”在日常家庭情境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Chore in the News</h3>
+    <p>
+      A recent study shows that assigning children regular chores can help build responsibility and independence.<br>
+      <span class="cn">最近一项研究显示，让孩子承担定期家务有助于培养责任感和独立性。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
