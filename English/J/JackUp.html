@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Jack Up</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🛠️ jack up
+      <span class="pronunciation">/dʒæk ʌp/</span>
+      <button class="audio-button" onclick="speak('Jack up')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Phrasal Verb<br><span class="cn">词性：动词短语</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      To suddenly raise or increase something, such as prices or pressure; to lift something (like a car) using a jack.<br>
+      <span class="cn">突然提高（价格、数量等）；用千斤顶抬起（如汽车）。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> They jacked up the prices right before the holiday season.<br>
+      <span class="cn">例句：他们在节假日前突然抬高了价格。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He jacked up the car to change the flat tire.<br>
+      <span class="cn">例句：他用千斤顶把车抬起来换轮胎。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Raise <span class="cn">提高</span></li>
+        <li>Increase <span class="cn">增加</span></li>
+        <li>Inflate <span class="cn">抬高</span></li>
+        <li>Hoist <span class="cn">举起</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the phrase <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> The phrase "jack up" comes from the noun "jack" (a mechanical lifting device) and the verb "up," meaning to lift or raise something. It later gained figurative meanings like "increase suddenly."<br>
+    <span class="cn">“Jack up” 源自“jack”（起重器）与“up”（向上），原意为“用千斤顶抬起”，后来引申为“突然增加”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>English:</strong> <em>jack (noun)</em> – a tool for lifting<br>
+      <span class="cn">英语 jack：起重器</span><br><br>
+      <strong>Phrasal Verb:</strong> <em>jack up</em> – to lift up or raise rapidly<br>
+      <span class="cn">动词短语 jack up：抬高、猛增</span><br><br>
+      <strong>Modern Usage:</strong> <em>jack up the prices</em>, <em>jack up the car</em><br>
+      <span class="cn">现代用法：提高价格，用千斤顶抬车</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Phrase</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Raise</td>
+          <td>General</td>
+          <td>The landlord raised the rent last month.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Inflate</td>
+          <td>Economic / Negative</td>
+          <td>They inflated the prices for tourists.</td>
+          <td>Critical</td>
+        </tr>
+        <tr>
+          <td><strong>Jack up</strong></td>
+          <td><strong>Informal / Action-Oriented</strong></td>
+          <td>They jacked up the ticket price overnight.</td>
+          <td>Casual / Strong</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Phrase "Jack Up"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/ApkEc5I8dqM?start=45"
+      title="Jack Up in Real Life Example"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> to hear how “jack up” is used in an everyday situation.<br>
+      <span class="cn">听第 0:45 左右，了解“jack up”在日常语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Jack Up in the News</h3>
+    <p>
+      Several airlines jacked up ticket prices due to fuel cost increases.<br>
+      <span class="cn">由于燃油成本上涨，多家航空公司提高了机票价格。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
