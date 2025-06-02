@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Loomed</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌫️ loomed
+      <span class="pronunciation">/luːmd/</span>
+      <button class="audio-button" onclick="speak('Loomed')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb (past tense)<br><span class="cn">词性：动词（过去式）</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Appeared as a large, shadowy, or threatening form; to seem imminent or about to happen in a worrying way.<br>
+      <span class="cn">隐约显现；赫然耸现；（尤指不祥之事）迫近。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> A dark shape loomed in the distance through the fog.<br>
+      <span class="cn">例句：一个黑影在雾中远处若隐若现。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> As the deadline loomed, the team worked late into the night.<br>
+      <span class="cn">例句：随着截止日期临近，团队加班加点工作。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Approached <span class="cn">接近</span></li>
+        <li>Emerged <span class="cn">浮现</span></li>
+        <li>Threatened <span class="cn">威胁</span></li>
+        <li>Hovered <span class="cn">徘徊</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Loom" (as a verb) comes from Middle English <em>lome</em>, meaning “to appear indistinctly,” possibly of Scandinavian origin.<br>
+    <span class="cn">“Loom”（动词）源自中古英语 lome，意为“模糊地出现”，可能起源于斯堪的纳维亚语言。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle English:</strong> <em>lome</em> – to appear, come into view<br>
+      <span class="cn">中古英语 lome：显现</span><br><br>
+      <strong>Modern English:</strong> <em>loom</em> – to appear in a threatening or large form<br>
+      <span class="cn">现代英语 loom：以可怕或模糊的形态显现</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Emerged</td>
+          <td>Neutral / Descriptive</td>
+          <td>A figure emerged from the shadows.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Threatened</td>
+          <td>Negative / Urgent</td>
+          <td>The storm threatened the coastal village.</td>
+          <td>Ominous</td>
+        </tr>
+        <tr>
+          <td><strong>Loomed</strong></td>
+          <td><strong>Descriptive / Tense</strong></td>
+          <td>The mountain loomed above them.</td>
+          <td>Dark / Foreboding</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Loomed"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/1lNYQeKpLRw?start=50"
+      title="Loomed Example in Storytelling"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:50</strong> to hear how “loomed” is used in a dramatic sentence.<br>
+      <span class="cn">听第 0:50 左右，了解“loomed”在叙述中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Loomed in the News</h3>
+    <p>
+      Economic uncertainty loomed over the markets as inflation continued to rise.<br>
+      <span class="cn">随着通货膨胀持续上升，市场笼罩在经济不确定性之下。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.reuters.com" target="_blank" class="fancy-link">
+        📰 Read More – Reuters
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
