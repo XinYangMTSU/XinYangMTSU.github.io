@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Exemplary</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌟 exemplary
+      <span class="pronunciation">/ɪɡˈzɛmpləri/</span>
+      <button class="audio-button" onclick="speak('Exemplary')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Serving as a desirable model; representing the best of its kind. Also, sometimes used to describe something that is a warning to others (punishment or behavior).<br>
+      <span class="cn">模范的；值得效仿的。有时也指起警示作用的（如惩罚）。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She received an award for her exemplary service to the community.<br>
+      <span class="cn">例句：她因对社区的模范服务而获奖。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The judge gave an exemplary sentence to deter future crimes.<br>
+      <span class="cn">例句：法官判了一个具有警示作用的刑罚，以震慑未来的犯罪行为。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Model <span class="cn">模范</span></li>
+        <li>Ideal <span class="cn">理想的</span></li>
+        <li>Commendable <span class="cn">值得称赞的</span></li>
+        <li>Illustrative <span class="cn">说明性的；示范性的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Exemplary" comes from Latin <em>exemplum</em> meaning "example." It evolved through Middle French <em>exemplaire</em> and Middle English.<br>
+    <span class="cn">“Exemplary” 源自拉丁语 exemplum，意为“例子”，经由中古法语 exemplaire 和中古英语演变而来。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>exemplum</em> – example<br>
+      <span class="cn">拉丁语 exemplum：例子</span><br><br>
+      <strong>Middle French:</strong> <em>exemplaire</em> – worthy of imitation<br>
+      <span class="cn">中古法语 exemplaire：值得效仿的</span><br><br>
+      <strong>Modern English:</strong> <em>exemplary</em> – serving as a model<br>
+      <span class="cn">现代英语 exemplary：模范的；起示范作用的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ideal</td>
+          <td>Abstract / Aspirational</td>
+          <td>He is the ideal candidate for the job.</td>
+          <td>Positive / Formal</td>
+        </tr>
+        <tr>
+          <td>Commendable</td>
+          <td>Behavior / Effort</td>
+          <td>Her honesty was commendable.</td>
+          <td>Respectful / Positive</td>
+        </tr>
+        <tr>
+          <td><strong>Exemplary</strong></td>
+          <td><strong>Behavior / Punishment</strong></td>
+          <td>She showed exemplary courage during the crisis.</td>
+          <td>High Praise / Sometimes Cautionary</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Exemplary"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/BHxGXZ9gWTk?start=20"
+      title="Exemplary Leadership Talk"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> to hear how “exemplary” is used in a leadership context.<br>
+      <span class="cn">听第 0:20 左右，了解“exemplary”在领导力语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Exemplary in the News</h3>
+    <p>
+      The firefighter’s exemplary bravery earned him national recognition.<br>
+      <span class="cn">这位消防员因其英勇无畏的表现而获得国家表彰。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – The New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
