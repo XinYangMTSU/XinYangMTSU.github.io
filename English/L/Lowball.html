@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Lowball</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💰 lowball
+      <span class="pronunciation">/ˈloʊˌbɔːl/</span>
+      <button class="audio-button" onclick="speak('Lowball')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb / Noun<br><span class="cn">词性：动词 / 名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      (Verb) To offer a price or estimate that is unfairly or intentionally lower than what is reasonable or expected.  
+      (Noun) An unreasonably low offer or estimate.<br>
+      <span class="cn">（动词）故意压低报价；低估。<br>（名词）低价；过低的出价。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> They tried to lowball me during salary negotiations.<br>
+      <span class="cn">例句：他们在薪资谈判中故意压低了报价。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The buyer made a lowball offer far below market value.<br>
+      <span class="cn">例句：买家给出的出价远低于市场价。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Underbid <span class="cn">压价</span></li>
+        <li>Undervalue <span class="cn">低估</span></li>
+        <li>Cheapen <span class="cn">贬值</span></li>
+        <li>Shortchange <span class="cn">少给钱</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Lowball" originated in American English in the mid-20th century, combining "low" (meaning small or below average) and "ball" (possibly from ballpark estimates). It was used to describe a negotiation tactic of offering less than fair value.<br>
+    <span class="cn">“Lowball” 起源于20世纪中期的美式英语，由“low”（低的）与“ball”（可能源自估价术语“ballpark”）组成，用于描述故意报低价的谈判策略。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>English:</strong> <em>low</em> – small, below average<br>
+      <span class="cn">英语 low：低的，低于平均</span><br><br>
+      <strong>English:</strong> <em>ball (as in ballpark estimate)</em> – general guess or offer<br>
+      <span class="cn">英语 ball：用于表达粗略估价</span><br><br>
+      <strong>Modern English:</strong> <em>lowball</em> – deliberately offer too low a value<br>
+      <span class="cn">现代英语 lowball：故意压低报价</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Underbid</td>
+          <td>Auctions / Business</td>
+          <td>They underbid the competition to win the contract.</td>
+          <td>Competitive / Strategic</td>
+        </tr>
+        <tr>
+          <td>Undervalue</td>
+          <td>Finance / Assets</td>
+          <td>The company undervalued its inventory.</td>
+          <td>Technical / Neutral</td>
+        </tr>
+        <tr>
+          <td><strong>Lowball</strong></td>
+          <td><strong>Negotiation / Informal</strong></td>
+          <td>The car dealer lowballed me on the trade-in value.</td>
+          <td>Casual / Critical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Lowball"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YQg-yys3cJQ?start=40"
+      title="Lowball in Negotiation"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> to hear how “lowball” is used in a real-world negotiation.<br>
+      <span class="cn">听第 0:40 左右，了解“lowball”在实际谈判中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Lowball in the News</h3>
+    <p>
+      Critics accused the insurance company of lowballing claims after the hurricane.<br>
+      <span class="cn">批评人士指责这家保险公司在飓风过后故意压低赔偿金额。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.reuters.com" target="_blank" class="fancy-link">
+        📰 Read More – Reuters
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
