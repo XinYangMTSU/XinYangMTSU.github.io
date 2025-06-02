@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Commission</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🏛️ commission
+      <span class="pronunciation">/kəˈmɪʃən/</span>
+      <button class="audio-button" onclick="speak('Commission')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun / Verb<br><span class="cn">词性：名词 / 动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      (Noun) A group officially authorized to perform a duty; an order granting authority; a payment to an agent for services.<br>
+      (Verb) To give an order for or authorize the creation of something.<br>
+      <span class="cn">（名词）委员会；授权；佣金。<br>（动词）委托；任命。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She received a commission to paint the mural.<br>
+      <span class="cn">例句：她接到了绘制壁画的委托。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The artist was commissioned by the city council.<br>
+      <span class="cn">例句：这位艺术家受市议会的委托。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Assignment <span class="cn">任务</span></li>
+        <li>Authorization <span class="cn">授权</span></li>
+        <li>Mandate <span class="cn">指令</span></li>
+        <li>Delegation <span class="cn">委派</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Commission" comes from Latin <em>committere</em>, meaning “to unite, bring together, entrust,” from <em>com-</em> (together) + <em>mittere</em> (to send).<br>
+    <span class="cn">“Commission” 源自拉丁语 committere，意为“委托、联合”，由 com-（一起）和 mittere（发送）组成。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>committere</em> – to entrust, commit<br>
+      <span class="cn">拉丁语 committere：委托，承担</span><br><br>
+      <strong>Old French:</strong> <em>commission</em> – a charge or authorization<br>
+      <span class="cn">古法语 commission：指令，委任</span><br><br>
+      <strong>Modern English:</strong> <em>commission</em> – the act of granting power, or a group tasked with duties<br>
+      <span class="cn">现代英语 commission：授权行为，或执行任务的组织</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mandate</td>
+          <td>Government / Legal</td>
+          <td>The governor issued a mandate for reform.</td>
+          <td>Formal / Official</td>
+        </tr>
+        <tr>
+          <td>Assignment</td>
+          <td>General / Academic</td>
+          <td>He finished the assignment last night.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td><strong>Commission</strong></td>
+          <td><strong>Art / Legal / Business</strong></td>
+          <td>She earned a commission on every sale.</td>
+          <td>Professional</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Commission"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/DgNZcdxW0_s?start=30"
+      title="Commission in Art and Politics"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear how “commission” is used in context.<br>
+      <span class="cn">听第 0:30 左右，了解“commission”在上下文中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Commission in the News</h3>
+    <p>
+      A new commission has been formed to investigate climate policy changes.<br>
+      <span class="cn">一个新委员会已成立，旨在调查气候政策变化。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
