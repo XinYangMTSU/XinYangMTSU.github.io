@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Splinter</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌲 splinter
+      <span class="pronunciation">/ˈsplɪntər/</span>
+      <button class="audio-button" onclick="speak('Splinter')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun / Verb<br><span class="cn">词性：名词 / 动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      (n.) A small, sharp piece of wood, glass, or other material that has broken off from a larger piece.<br>
+      (v.) To break or cause to break into small, sharp fragments.<br>
+      <span class="cn">（名词）碎片，尖刺（尤指木头或玻璃碎片）<br>（动词）使裂成碎片，分裂</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> He got a splinter in his finger while chopping wood.<br>
+      <span class="cn">例句：他在劈柴时手指扎进了一根木刺。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The mirror splintered into dozens of tiny shards.<br>
+      <span class="cn">例句：镜子裂成了数十块细小的碎片。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Fragment <span class="cn">碎片</span></li>
+        <li>Sliver <span class="cn">裂片</span></li>
+        <li>Chip <span class="cn">碎屑</span></li>
+        <li>Shard <span class="cn">碎片（尤指玻璃、陶瓷）</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Splinter" comes from Middle Dutch <em>splinter</em>, meaning "a splinter or sliver of wood," and is related to the word "split."<br>
+    <span class="cn">“Splinter” 源自中古荷兰语 splinter，意为“木头碎片、尖刺”，与英文 split（劈开）相关。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle Dutch:</strong> <em>splinter</em> – fragment of wood<br>
+      <span class="cn">中古荷兰语 splinter：木头碎片</span><br><br>
+      <strong>Old English:</strong> related to <em>split</em> – to break apart<br>
+      <span class="cn">古英语 split：劈裂</span><br><br>
+      <strong>Modern English:</strong> <em>splinter</em> – sharp fragment<br>
+      <span class="cn">现代英语 splinter：尖锐的碎片</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sliver</td>
+          <td>Wood / Metal</td>
+          <td>A sliver of glass got stuck in her foot.</td>
+          <td>Neutral / Descriptive</td>
+        </tr>
+        <tr>
+          <td>Shard</td>
+          <td>Glass / Ceramic</td>
+          <td>Shards of porcelain littered the floor.</td>
+          <td>Sharp / Dramatic</td>
+        </tr>
+        <tr>
+          <td><strong>Splinter</strong></td>
+          <td><strong>Wood / Pain / Breaking</strong></td>
+          <td>He cried out when the splinter pierced his skin.</td>
+          <td>Neutral / Ouch!</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Splinter"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/9Zzx3tDNM3E?start=22"
+      title="Splinter in Context"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:22</strong> to hear “splinter” used in natural dialogue.<br>
+      <span class="cn">听第 0:22 左右，了解“splinter”在日常对话中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Splinter in the News</h3>
+    <p>
+      A splinter group broke off from the main political party to form a new organization.<br>
+      <span class="cn">一个分裂组织从主要政党中脱离出来，成立了新组织。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
