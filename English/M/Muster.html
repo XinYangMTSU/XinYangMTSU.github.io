@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Muster</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🫡 muster
+      <span class="pronunciation">/ˈmʌstər/</span>
+      <button class="audio-button" onclick="speak('Muster')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb / Noun<br><span class="cn">词性：动词 / 名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      (v.) To gather or summon something (especially courage, strength, or support); to assemble troops.<br>
+      (n.) A gathering of people, especially soldiers.<br>
+      <span class="cn">（动词）鼓起（勇气、力量等）；集合（尤指士兵）<br>（名词）集合；点名</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> He tried to muster the courage to speak in front of the crowd.<br>
+      <span class="cn">例句：他努力鼓起勇气在众人面前讲话。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The general ordered a muster of all available troops.<br>
+      <span class="cn">例句：将军下令所有可用士兵集合。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Gather <span class="cn">集合</span></li>
+        <li>Summon <span class="cn">召唤</span></li>
+        <li>Assemble <span class="cn">集结</span></li>
+        <li>Mobilize <span class="cn">动员</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Muster" comes from Old French <em>mostrer</em> (to show), which came from Latin <em>monstrare</em>, meaning “to show or point out.” Originally it referred to showing troops for inspection.<br>
+    <span class="cn">“Muster” 源自古法语 mostrer（展示），来自拉丁语 monstrare，意为“展示、指出”，最初用于士兵集合点名时的展示。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>monstrare</em> – to show<br>
+      <span class="cn">拉丁语 monstrare：展示</span><br><br>
+      <strong>Old French:</strong> <em>mostrer</em> – to display troops<br>
+      <span class="cn">古法语 mostrer：展示军队</span><br><br>
+      <strong>Modern English:</strong> <em>muster</em> – to gather or summon<br>
+      <span class="cn">现代英语 muster：召集、集合</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Summon</td>
+          <td>Formal / Emotional</td>
+          <td>He summoned all his strength.</td>
+          <td>Formal / Dramatic</td>
+        </tr>
+        <tr>
+          <td>Mobilize</td>
+          <td>Military / Strategic</td>
+          <td>The country mobilized its army.</td>
+          <td>Serious</td>
+        </tr>
+        <tr>
+          <td><strong>Muster</strong></td>
+          <td><strong>Military / Emotional</strong></td>
+          <td>She mustered the courage to confess.</td>
+          <td>Neutral / Heroic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Muster"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/qv78OZ5kz8w?start=35"
+      title="Muster in Film Dialogue"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:35</strong> to hear how “muster” is used in a dramatic scene.<br>
+      <span class="cn">听第 0:35 左右，了解“muster”在戏剧场景中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Muster in the News</h3>
+    <p>
+      The team mustered all their resources to complete the mission on time.<br>
+      <span class="cn">团队动员了所有资源，按时完成了任务。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
