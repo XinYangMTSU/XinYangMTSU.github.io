@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Specimen</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔬 specimen
+      <span class="pronunciation">/ˈspɛsəmən/</span>
+      <button class="audio-button" onclick="speak('Specimen')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      An individual example or sample of something, especially used for scientific study or analysis.<br>
+      <span class="cn">样本；标本；（用于科学研究的）样品。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The scientist examined the blood specimen under a microscope.<br>
+      <span class="cn">例句：科学家在显微镜下检查血液样本。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The museum displayed a rare specimen of an extinct bird.<br>
+      <span class="cn">例句：博物馆展出了一个稀有的灭绝鸟类标本。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Sample <span class="cn">样品</span></li>
+        <li>Example <span class="cn">例子</span></li>
+        <li>Model <span class="cn">模型</span></li>
+        <li>Exemplar <span class="cn">范例</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Specimen" comes from Latin <em>specere</em>, meaning "to look" or "to observe," and <em>specimen</em>, meaning "a mark" or "example to observe."<br>
+    <span class="cn">“Specimen” 源自拉丁语 specere（观察）和 specimen（可观察的例子）。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>specimen</em> – example to be observed<br>
+      <span class="cn">拉丁语 specimen：用于观察的例子</span><br><br>
+      <strong>Modern English:</strong> <em>specimen</em> – sample or representative item<br>
+      <span class="cn">现代英语 specimen：样本、代表性物件</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sample</td>
+          <td>Everyday / Scientific</td>
+          <td>The doctor collected a tissue sample.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Exemplar</td>
+          <td>Education / Philosophy</td>
+          <td>She is an exemplar of integrity.</td>
+          <td>Formal / Admiring</td>
+        </tr>
+        <tr>
+          <td><strong>Specimen</strong></td>
+          <td><strong>Scientific / Museum</strong></td>
+          <td>The lab analyzed the water specimen.</td>
+          <td>Precise / Scientific</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Specimen"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/H0yxgEyH0nQ?start=45"
+      title="Scientific Specimen Explanation"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:45</strong> to hear how “specimen” is used in a science documentary.<br>
+      <span class="cn">听第 0:45 左右，了解“specimen”在科学纪录片中的使用。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Specimen in the News</h3>
+    <p>
+      Researchers discovered a preserved dinosaur specimen that offers new clues about its skin texture.<br>
+      <span class="cn">研究人员发现了一具保存完好的恐龙标本，揭示了其皮肤纹理的新线索。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nature.com" target="_blank" class="fancy-link">
+        📰 Read More – Nature Journal
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
