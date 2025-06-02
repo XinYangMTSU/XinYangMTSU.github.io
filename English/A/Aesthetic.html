@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Aesthetic</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🎨 aesthetic
+      <span class="pronunciation">/esˈθetɪk/</span>
+      <button class="audio-button" onclick="speak('Aesthetic')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective / Noun<br><span class="cn">词性：形容词 / 名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      (Adj.) Concerned with beauty or the appreciation of beauty.  
+      (Noun) A set of principles guiding the work of an artist or artistic movement.<br>
+      <span class="cn">（形容词）审美的；美学的；有关美的。<br>（名词）美感；美学标准。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The minimalist aesthetic emphasizes simplicity and clean lines.<br>
+      <span class="cn">例句：极简主义美学强调简洁与线条感。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Her room has a very cozy and vintage aesthetic.<br>
+      <span class="cn">例句：她的房间有一种非常舒适而复古的美感。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Artistic <span class="cn">艺术的</span></li>
+        <li>Visual <span class="cn">视觉的</span></li>
+        <li>Beautiful <span class="cn">美丽的</span></li>
+        <li>Stylish <span class="cn">有风格的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Aesthetic" comes from the Greek word <em>aisthētikos</em>, meaning “perceptible by the senses” or “sensitive.” It entered English in the 18th century through German philosophical texts.<br>
+    <span class="cn">“Aesthetic” 源自希腊语 aisthētikos，意为“感官可感知的”或“有感知力的”，18世纪通过德语哲学文献进入英语。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Greek:</strong> <em>aisthētikos</em> – sensitive, of perception<br>
+      <span class="cn">希腊语 aisthētikos：敏感的，感知的</span><br><br>
+      <strong>German:</strong> <em>ästhetisch</em> – pertaining to beauty<br>
+      <span class="cn">德语 ästhetisch：与美相关的</span><br><br>
+      <strong>Modern English:</strong> <em>aesthetic</em> – concerned with beauty and art<br>
+      <span class="cn">现代英语 aesthetic：关于美与艺术的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Artistic</td>
+          <td>General / Creative</td>
+          <td>She has an artistic eye for photography.</td>
+          <td>Creative / Positive</td>
+        </tr>
+        <tr>
+          <td>Stylish</td>
+          <td>Fashion / Design</td>
+          <td>He wore a very stylish suit to the event.</td>
+          <td>Trendy / Fashionable</td>
+        </tr>
+        <tr>
+          <td><strong>Aesthetic</strong></td>
+          <td><strong>Philosophical / Visual</strong></td>
+          <td>The aesthetic of the film was breathtaking.</td>
+          <td>Elegant / Reflective</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Aesthetic"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/Ntwz9WE7bCU?start=30"
+      title="What Is Aesthetic?"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear how “aesthetic” is used in design or cultural discussion.<br>
+      <span class="cn">听第 0:30 左右，了解“aesthetic”在设计或文化语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Aesthetic in the News</h3>
+    <p>
+      The new phone’s aesthetic combines elegance with minimalism, appealing to a younger audience.<br>
+      <span class="cn">这款新手机的美学设计融合了优雅与极简风格，吸引了年轻用户。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.designboom.com" target="_blank" class="fancy-link">
+        📰 Read More – DesignBoom
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
