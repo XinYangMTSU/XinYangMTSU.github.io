@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Bolster</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🛏️ bolster
+      <span class="pronunciation">/ˈboʊlstər/</span>
+      <button class="audio-button" onclick="speak('Bolster')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb / Noun<br><span class="cn">词性：动词 / 名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      (v.) To support or strengthen; to reinforce something that is weak or uncertain.<br>
+      (n.) A long, thick pillow that is placed under other pillows for support.<br>
+      <span class="cn">（动词）支持；增强；加强<br>（名词）长枕；垫枕</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The new evidence bolstered his argument in court.<br>
+      <span class="cn">例句：新证据增强了他在法庭上的辩护。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She leaned back against a soft bolster on the couch.<br>
+      <span class="cn">例句：她靠在沙发上的长枕上休息。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Strengthen <span class="cn">加强</span></li>
+        <li>Support <span class="cn">支持</span></li>
+        <li>Reinforce <span class="cn">巩固</span></li>
+        <li>Boost <span class="cn">提升</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Bolster" comes from Old English <em>bolster</em>, meaning a long pillow or cushion, which later took on the figurative sense of support or reinforcement.<br>
+    <span class="cn">“Bolster” 源自古英语 bolster，原意为长枕或靠垫，后来引申为“支持”或“加强”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>bolster</em> – cushion or pillow<br>
+      <span class="cn">古英语 bolster：靠垫或枕头</span><br><br>
+      <strong>Middle English:</strong> expanded meaning to support or prop up<br>
+      <span class="cn">中古英语：引申为“支撑、增强”</span><br><br>
+      <strong>Modern English:</strong> <em>bolster</em> – strengthen or support<br>
+      <span class="cn">现代英语 bolster：加强、支持</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Support</td>
+          <td>General</td>
+          <td>She supported his decision.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Reinforce</td>
+          <td>Military / Structural</td>
+          <td>The soldiers reinforced the barricade.</td>
+          <td>Technical / Strong</td>
+        </tr>
+        <tr>
+          <td><strong>Bolster</strong></td>
+          <td><strong>Formal / Emotional / Legal</strong></td>
+          <td>The study bolsters the theory.</td>
+          <td>Professional / Persuasive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Bolster"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/8Yy5U8Z_dhs?start=30"
+      title="Bolster in Legal Context"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear how “bolster” is used in formal speech.<br>
+      <span class="cn">听第 0:30 左右，了解“bolster”在正式语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Bolster in the News</h3>
+    <p>
+      The government unveiled a new plan to bolster cybersecurity efforts across the country.<br>
+      <span class="cn">政府公布了一项加强全国网络安全工作的最新计划。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nytimes.com" target="_blank" class="fancy-link">
+        📰 Read More – New York Times
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
