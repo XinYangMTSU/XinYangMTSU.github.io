@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Repell</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🛡️ repell
+      <span class="pronunciation">/rɪˈpɛl/</span>
+      <button class="audio-button" onclick="speak('Repell')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      To drive back or ward off; to resist effectively.<br>
+      <span class="cn">击退；抵制；使厌恶；排斥。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The fortress was built to repell enemy attacks.<br>
+      <span class="cn">例句：这座堡垒是为了击退敌人的进攻而建造的。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The strong smell repelled the insects.<br>
+      <span class="cn">例句：强烈的气味驱赶了昆虫。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Resist <span class="cn">抵抗</span></li>
+        <li>Drive away <span class="cn">赶走</span></li>
+        <li>Fend off <span class="cn">避开</span></li>
+        <li>Repulse <span class="cn">击退</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Repell" comes from Latin <em>repellere</em>, from <em>re-</em> (back) + <em>pellere</em> (to drive), meaning "to drive back."<br>
+    <span class="cn">“Repell” 源自拉丁语 repellere，由 re-（向后）和 pellere（驱使）组成，意为“击退”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>repellere</em> – to drive back<br>
+      <span class="cn">拉丁语 repellere：击退</span><br><br>
+      <strong>Old French:</strong> <em>repel</em> – to push back<br>
+      <span class="cn">古法语 repel：推回</span><br><br>
+      <strong>Modern English:</strong> <em>repell</em> – to drive or push away<br>
+      <span class="cn">现代英语 repell：驱逐，排斥</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Repulse</td>
+          <td>Military / Emotion</td>
+          <td>The army repulsed the invasion.</td>
+          <td>Strong / Forceful</td>
+        </tr>
+        <tr>
+          <td>Fend off</td>
+          <td>Everyday / Metaphorical</td>
+          <td>She tried to fend off the criticism.</td>
+          <td>Defensive</td>
+        </tr>
+        <tr>
+          <td><strong>Repell</strong></td>
+          <td><strong>General / Action</strong></td>
+          <td>The spray helps repell mosquitoes.</td>
+          <td>Neutral</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Repell"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/Fe2-25z5BwI?start=40"
+      title="Repell in Nature"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> to hear how “repell” is used in context.<br>
+      <span class="cn">听第 0:40 左右，了解“repell”在上下文中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Repell in the News</h3>
+    <p>
+      New eco-friendly sprays are designed to repell insects without harming the environment.<br>
+      <span class="cn">新的环保喷雾旨在驱赶昆虫，同时不伤害环境。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nationalgeographic.com/environment" target="_blank" class="fancy-link">
+        📰 Read More – National Geographic
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
