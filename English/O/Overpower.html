@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Overpower</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💪 overpower
+      <span class="pronunciation">/ˌoʊvərˈpaʊər/</span>
+      <button class="audio-button" onclick="speak('Overpower')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Verb<br><span class="cn">词性：动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      To defeat or overcome by superior force; to be too strong or intense to resist or handle.<br>
+      <span class="cn">以压倒性力量制服；（感情、气味等）使无法抗拒。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The police managed to overpower the suspect without using weapons.<br>
+      <span class="cn">例句：警方在未动用武器的情况下成功制服了嫌疑人。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The scent of the flowers overpowered the entire room.<br>
+      <span class="cn">例句：花香充满整个房间，令人难以忽视。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Defeat <span class="cn">击败</span></li>
+        <li>Subdue <span class="cn">制服</span></li>
+        <li>Overwhelm <span class="cn">压倒</span></li>
+        <li>Crush <span class="cn">压垮</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Overpower" comes from the prefix <em>over-</em> (meaning “excessively” or “above”) and the verb <em>power</em>, meaning “to exert strength.” Together, it means to exert strength to an overwhelming degree.<br>
+    <span class="cn">“Overpower” 源自前缀 over-（过度）与动词 power（施加力量），合起来意为“以过人的力量压制”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>ofer</em> – over, above<br>
+      <span class="cn">古英语 ofer：超过，高于</span><br><br>
+      <strong>Middle English:</strong> <em>power</em> from Old French <em>poeir</em><br>
+      <span class="cn">中古英语 power：力量（来自古法语）</span><br><br>
+      <strong>Modern English:</strong> <em>overpower</em> – to dominate with force<br>
+      <span class="cn">现代英语 overpower：用力量压倒或控制</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Subdue</td>
+          <td>Military / Police</td>
+          <td>The soldiers subdued the rebels.</td>
+          <td>Neutral / Formal</td>
+        </tr>
+        <tr>
+          <td>Overwhelm</td>
+          <td>Emotional / Situational</td>
+          <td>She was overwhelmed with gratitude.</td>
+          <td>Emotional</td>
+        </tr>
+        <tr>
+          <td><strong>Overpower</strong></td>
+          <td><strong>Physical / Sensory</strong></td>
+          <td>The heat was overpowering in the desert.</td>
+          <td>Forceful</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Overpower"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/B-fIRXJuNKI?start=35"
+      title="Overpower Example in Real Life"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:35</strong> to hear how “overpower” is used in context.<br>
+      <span class="cn">听第 0:35 左右，了解“overpower”在语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Overpower in the News</h3>
+    <p>
+      A security guard overpowered the intruder before the police arrived.<br>
+      <span class="cn">警察到达前，保安已制服了闯入者。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
