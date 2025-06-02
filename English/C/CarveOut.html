@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Carve Out</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🔨 carve out
+      <span class="pronunciation">/kɑːrv aʊt/</span>
+      <button class="audio-button" onclick="speak('Carve out')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Phrasal Verb<br><span class="cn">词性：短语动词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      To create or establish something through effort, often by cutting or removing a part; can refer to space, time, or opportunity.<br>
+      <span class="cn">通过努力或削减来开辟、赢得、挤出时间（空间、机会）等。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> She carved out a successful career in science.<br>
+      <span class="cn">例句：她在科学领域开创了成功的事业。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> I need to carve out some time for exercise this week.<br>
+      <span class="cn">例句：我这周得挤出一些时间来锻炼。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Establish <span class="cn">建立</span></li>
+        <li>Create <span class="cn">创造</span></li>
+        <li>Secure <span class="cn">争取</span></li>
+        <li>Dedicate (time) <span class="cn">专门腾出（时间）</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the phrase <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Carve out" originates from the literal act of carving material to shape something. Over time, it gained metaphorical meaning: to forcefully create or claim a portion of something.<br>
+    <span class="cn">“Carve out” 源自字面上雕刻物品的动作，后来引申为“努力争取、挤出或开辟”的含义。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Phrase Evolution</h3>
+    <p>
+      <strong>Literal:</strong> Carve out a statue from stone<br>
+      <span class="cn">字面义：从石头中雕刻出一座雕像</span><br><br>
+      <strong>Figurative:</strong> Carve out time or a niche<br>
+      <span class="cn">引申义：挤出时间或开创一片天地</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Phrase</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Carve out</td>
+          <td>Time / Career / Role</td>
+          <td>He carved out a niche in tech journalism.</td>
+          <td>Effortful / Positive</td>
+        </tr>
+        <tr>
+          <td>Set aside</td>
+          <td>Time / Space</td>
+          <td>Set aside 15 minutes each day for reading.</td>
+          <td>Neutral / Routine</td>
+        </tr>
+        <tr>
+          <td>Establish</td>
+          <td>Formal Roles / Careers</td>
+          <td>She established herself as a respected expert.</td>
+          <td>Professional / Formal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Phrase "Carve Out"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/BoFDbTeuGMU?start=42"
+      title="Carve Out Your Path"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:42</strong> to hear how “carve out” is used in a motivational or career context.<br>
+      <span class="cn">听第 0:42 左右，了解“carve out”在职场或励志语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Carve Out in the News</h3>
+    <p>
+      Entrepreneurs often have to carve out a market niche by offering unique services.<br>
+      <span class="cn">企业家往往必须通过提供独特服务来开辟市场空间。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.entrepreneur.com" target="_blank" class="fancy-link">
+        📰 Read More – Entrepreneur.com
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
