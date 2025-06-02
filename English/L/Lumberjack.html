@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Lumberjack</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🌲 lumberjack
+      <span class="pronunciation">/ˈlʌmbərˌdʒæk/</span>
+      <button class="audio-button" onclick="speak('Lumberjack')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      A person whose job is to cut down trees and transport the timber; a logger.<br>
+      <span class="cn">伐木工人；樵夫。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The lumberjack worked long hours in the forest, cutting and stacking logs.<br>
+      <span class="cn">例句：这位伐木工人长时间在森林里工作，砍伐并堆放木材。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> He dressed like a classic lumberjack, wearing a plaid shirt and heavy boots.<br>
+      <span class="cn">例句：他穿着格子衬衫和厚靴子，一副典型伐木工人的打扮。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Logger <span class="cn">伐木工</span></li>
+        <li>Woodsman <span class="cn">林务工人</span></li>
+        <li>Timber cutter <span class="cn">砍伐者</span></li>
+        <li>Forester <span class="cn">森林工作者</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Lumberjack" originated in North America in the 19th century, from "lumber" (wood cut for building) and "jack" (a generic term for man or worker).<br>
+    <span class="cn">“Lumberjack” 源于19世纪的北美，由“lumber”（建筑用木材）和“jack”（泛指工人）组成。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>English:</strong> <em>lumber</em> – timber prepared for use<br>
+      <span class="cn">英语 lumber：可用的木材</span><br><br>
+      <strong>English:</strong> <em>jack</em> – a man, worker, or laborer<br>
+      <span class="cn">英语 jack：男人或工人</span><br><br>
+      <strong>Modern English:</strong> <em>lumberjack</em> – person who fells and transports trees<br>
+      <span class="cn">现代英语 lumberjack：砍伐并运输树木的工人</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Logger</td>
+          <td>Industry</td>
+          <td>The logger used machines to harvest timber efficiently.</td>
+          <td>Neutral / Technical</td>
+        </tr>
+        <tr>
+          <td>Woodsman</td>
+          <td>Rural / Traditional</td>
+          <td>The woodsman knew every tree in the forest.</td>
+          <td>Rustic / Respectful</td>
+        </tr>
+        <tr>
+          <td><strong>Lumberjack</strong></td>
+          <td><strong>Classic / Cultural</strong></td>
+          <td>The lumberjack cut down pine trees with an axe.</td>
+          <td>Strong / Traditional</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Lumberjack"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/YQhJr5EXkYI?start=20"
+      title="Lumberjack Documentary"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> to hear how “lumberjack” is used in real-world context.<br>
+      <span class="cn">听第 0:20 左右，了解“lumberjack”在实际语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Lumberjack in the News</h3>
+    <p>
+      Modern lumberjacks now rely on advanced machinery to reduce manual labor and improve safety.<br>
+      <span class="cn">现代伐木工人如今依赖先进的机械来减少体力劳动并提高安全性。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.nationalforests.org" target="_blank" class="fancy-link">
+        📰 Read More – National Forest News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
