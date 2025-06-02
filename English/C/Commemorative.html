@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Commemorative</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🕊️ commemorative
+      <span class="pronunciation">/kəˈmɛmərətɪv/</span>
+      <button class="audio-button" onclick="speak('Commemorative')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Adjective<br><span class="cn">词性：形容词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      Serving to honor or preserve the memory of a person, event, or thing.<br>
+      <span class="cn">纪念的；用以纪念的。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> They held a commemorative ceremony for the fallen soldiers.<br>
+      <span class="cn">例句：他们为阵亡士兵举行了纪念仪式。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She bought a commemorative coin from the museum.<br>
+      <span class="cn">例句：她从博物馆买了一枚纪念币。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Memorial <span class="cn">纪念的</span></li>
+        <li>Honorary <span class="cn">荣誉的</span></li>
+        <li>Tributary <span class="cn">致敬的</span></li>
+        <li>Remembrance <span class="cn">回忆的</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Commemorative" comes from Latin <em>commemoratus</em>, past participle of <em>commemorare</em> ("to call to mind"), from <em>com-</em> (together) + <em>memor</em> (mindful).<br>
+    <span class="cn">“Commemorative” 源自拉丁语 commemoratus，是 commemorare 的过去分词，由 com-（一起）和 memor（记得）组成，意为“纪念”。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Latin:</strong> <em>commemorare</em> – to remember together<br>
+      <span class="cn">拉丁语 commemorare：共同记住</span><br><br>
+      <strong>Old French:</strong> <em>commémoratif</em> – commemorative<br>
+      <span class="cn">古法语 commémoratif：纪念的</span><br><br>
+      <strong>Modern English:</strong> <em>commemorative</em> – serving as a memorial<br>
+      <span class="cn">现代英语 commemorative：用于纪念的</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Memorial</td>
+          <td>Formal / Ceremonial</td>
+          <td>A memorial plaque was placed at the site.</td>
+          <td>Solemn</td>
+        </tr>
+        <tr>
+          <td>Honorary</td>
+          <td>Award / Title</td>
+          <td>He received an honorary degree.</td>
+          <td>Respectful</td>
+        </tr>
+        <tr>
+          <td><strong>Commemorative</strong></td>
+          <td><strong>Cultural / Historic</strong></td>
+          <td>They issued a commemorative stamp.</td>
+          <td>Respectful / Neutral</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Commemorative"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/QK7lbbKUpBY?start=25"
+      title="Commemorative Events Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:25</strong> to hear how “commemorative” is used in context.<br>
+      <span class="cn">听第 0:25 左右，了解“commemorative”在上下文中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Commemorative in the News</h3>
+    <p>
+      The city unveiled a new commemorative statue in honor of civil rights leaders.<br>
+      <span class="cn">这座城市揭幕了一座新的纪念雕像，以纪念民权领袖。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.history.com/news" target="_blank" class="fancy-link">
+        📰 Read More – History News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
