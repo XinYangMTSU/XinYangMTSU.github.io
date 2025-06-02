@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Bankruptcy</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      💸 bankruptcy
+      <span class="pronunciation">/ˈbæŋkrəptsi/</span>
+      <button class="audio-button" onclick="speak('Bankruptcy')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      The legal status of being unable to repay debts owed to creditors; financial failure.<br>
+      <span class="cn">破产；无力偿还债务的法律状态。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The company filed for bankruptcy after several unprofitable quarters.<br>
+      <span class="cn">例句：公司在连续几个季度亏损后申请了破产。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> Personal bankruptcy can have long-lasting effects on credit scores.<br>
+      <span class="cn">例句：个人破产会对信用评分造成长期影响。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Insolvency <span class="cn">资不抵债</span></li>
+        <li>Financial ruin <span class="cn">经济崩溃</span></li>
+        <li>Default <span class="cn">违约</span></li>
+        <li>Collapse <span class="cn">倒闭</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Bankruptcy" comes from Italian <em>banca rotta</em>, meaning "broken bench," referring to the practice of breaking a banker’s bench when they failed. It was adopted into French and then English.<br>
+    <span class="cn">“Bankruptcy” 源自意大利语 banca rotta，意为“破碎的长凳”，指的是古代银行家破产时，其长凳被打碎作为标志。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Italian:</strong> <em>banca rotta</em> – broken bank/bench<br>
+      <span class="cn">意大利语 banca rotta：破碎的银行/长凳</span><br><br>
+      <strong>French:</strong> <em>banqueroute</em> – financial failure<br>
+      <span class="cn">法语 banqueroute：经济破产</span><br><br>
+      <strong>Modern English:</strong> <em>bankruptcy</em> – legal financial collapse<br>
+      <span class="cn">现代英语 bankruptcy：破产的法律状态</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Insolvency</td>
+          <td>Legal / Financial</td>
+          <td>The firm showed signs of insolvency before declaring bankruptcy.</td>
+          <td>Formal</td>
+        </tr>
+        <tr>
+          <td>Collapse</td>
+          <td>General / Business</td>
+          <td>The sudden collapse of the startup shocked investors.</td>
+          <td>Dramatic</td>
+        </tr>
+        <tr>
+          <td><strong>Bankruptcy</strong></td>
+          <td><strong>Legal / Business</strong></td>
+          <td>He filed for bankruptcy protection under Chapter 11.</td>
+          <td>Neutral / Technical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Bankruptcy"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/p7TVgSWEZPM?start=40"
+      title="Bankruptcy Explained"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> to hear how “bankruptcy” is used in legal and financial discussion.<br>
+      <span class="cn">听第 0:40 左右，了解“bankruptcy”在法律和金融语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Bankruptcy in the News</h3>
+    <p>
+      Several major retailers filed for bankruptcy due to the pandemic’s economic impact.<br>
+      <span class="cn">受疫情影响，多家大型零售商申请破产保护。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.wsj.com" target="_blank" class="fancy-link">
+        📰 Read More – Wall Street Journal
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
