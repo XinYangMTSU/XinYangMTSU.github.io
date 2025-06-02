@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Torso</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🧍 torso
+      <span class="pronunciation">/ˈtɔːrsoʊ/</span>
+      <button class="audio-button" onclick="speak('Torso')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      The main part of the human body without the head, arms, or legs; the trunk.<br>
+      <span class="cn">人体的躯干部分，不包括头部、四肢；身体主干。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> He suffered injuries to his torso during the accident.<br>
+      <span class="cn">例句：事故中他躯干受伤。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The sculpture displayed only the torso of the athlete.<br>
+      <span class="cn">例句：这尊雕像只展现了运动员的躯干。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Trunk <span class="cn">躯干</span></li>
+        <li>Body <span class="cn">身体</span></li>
+        <li>Core <span class="cn">核心（身体中部）</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Torso" comes from Italian, originally meaning "stalk" or "trunk of a body." It refers to the central part of the human figure without limbs or head.<br>
+    <span class="cn">“Torso” 源自意大利语，原意为“茎干”或“身体主干”，用来表示没有四肢和头的中段身体部分。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Italian:</strong> <em>torso</em> – trunk, stalk<br>
+      <span class="cn">意大利语 torso：树干、躯干</span><br><br>
+      <strong>Latin root:</strong> <em>thyrsus</em> – stalk<br>
+      <span class="cn">拉丁词根 thyrsus：茎</span><br><br>
+      <strong>Modern English:</strong> <em>torso</em> – body without limbs or head<br>
+      <span class="cn">现代英语 torso：无四肢和头的身体</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Trunk</td>
+          <td>Anatomy / Tree</td>
+          <td>Strengthen your trunk muscles with core workouts.</td>
+          <td>Scientific / Fitness</td>
+        </tr>
+        <tr>
+          <td>Body</td>
+          <td>General</td>
+          <td>She has a strong upper body.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td><strong>Torso</strong></td>
+          <td><strong>Medical / Artistic</strong></td>
+          <td>The statue depicts a male torso in marble.</td>
+          <td>Formal / Descriptive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Torso"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/PEB5jZlZu6A?start=20"
+      title="Torso in Medical Context"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:20</strong> to hear “torso” used in a clinical setting.<br>
+      <span class="cn">听第 0:20 左右，了解“torso”在医学语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Torso in the News</h3>
+    <p>
+      The athlete’s torso strength played a critical role in his performance.<br>
+      <span class="cn">运动员的躯干力量在他的表现中起到了关键作用。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
