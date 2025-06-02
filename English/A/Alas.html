@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Alas</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      😔 alas
+      <span class="pronunciation">/əˈlæs/</span>
+      <button class="audio-button" onclick="speak('Alas')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Interjection<br><span class="cn">词性：感叹词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      An expression of sorrow, grief, or regret. Often used in literature or storytelling to show sadness or disappointment.<br>
+      <span class="cn">表示悲伤、遗憾或惋惜的感叹词，常用于文学或叙述中。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> Alas, the hero arrived too late to save the kingdom.<br>
+      <span class="cn">例句：唉，英雄来得太晚，未能拯救王国。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> She had hoped for a letter, but alas, none came.<br>
+      <span class="cn">例句：她原本盼望能收到一封信，但可惜没有。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Oh no <span class="cn">哎呀</span></li>
+        <li>Woe <span class="cn">哀叹</span></li>
+        <li>Sadly <span class="cn">悲伤地</span></li>
+        <li>Regrettably <span class="cn">遗憾地</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Alas" comes from Middle English, likely a combination of "ah" (a cry) and "las" (loss), expressing a feeling of sorrow or misfortune.<br>
+    <span class="cn">“Alas” 源自中古英语，可能由 “ah”（哀叹）与 “las”（损失）组合而成，用于表达悲伤或不幸之情。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Middle English:</strong> <em>alas</em> – expression of grief<br>
+      <span class="cn">中古英语 alas：悲伤的感叹词</span><br><br>
+      <strong>Old French:</strong> <em>hélas</em> – oh, woe!<br>
+      <span class="cn">古法语 hélas：哎呀，可惜</span><br><br>
+      <strong>Modern English:</strong> <em>alas</em> – sorrowful expression<br>
+      <span class="cn">现代英语 alas：表达悲伤或遗憾</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Oh no</td>
+          <td>Casual / Spoken</td>
+          <td>Oh no! I missed the train!</td>
+          <td>Informal / Surprised</td>
+        </tr>
+        <tr>
+          <td>Sadly</td>
+          <td>Narrative / Reflective</td>
+          <td>Sadly, he couldn’t attend the ceremony.</td>
+          <td>Gentle / Sorrowful</td>
+        </tr>
+        <tr>
+          <td><strong>Alas</strong></td>
+          <td><strong>Literary / Dramatic</strong></td>
+          <td>Alas, it was too late to change the outcome.</td>
+          <td>Poetic / Tragic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Alas"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/Hh_5UpoL2yA?start=30"
+      title="Alas in Shakespeare and Literature"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:30</strong> to hear how “alas” is used in dramatic or poetic English.<br>
+      <span class="cn">听第 0:30 左右，了解“alas”在文学或戏剧语境中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Alas in the News</h3>
+    <p>
+      The spacecraft was launched with high hopes—alas, it failed to reach orbit.<br>
+      <span class="cn">这艘宇宙飞船满载希望发射，唉，可惜未能进入轨道。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.npr.org" target="_blank" class="fancy-link">
+        📰 Read More – NPR News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
