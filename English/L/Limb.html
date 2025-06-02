@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Study: Limb</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="word-box">
+    <h2>
+      🦵 limb
+      <span class="pronunciation">/lɪm/</span>
+      <button class="audio-button" onclick="speak('Limb')">🔊 Play</button>
+    </h2>
+
+    <p><strong>Part of speech:</strong> Noun<br><span class="cn">词性：名词</span></p>
+
+    <h3>📖 Meaning:</h3>
+    <p>
+      A limb is an arm, leg, or similar appendage of a person or animal; also a large branch of a tree.<br>
+      <span class="cn">肢体（如手臂、腿）；（树的）大枝干。</span>
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong> The injury left him unable to move his lower limbs.<br>
+      <span class="cn">例句：受伤使他无法移动下肢。</span>
+    </div>
+
+    <div class="example">
+      <strong>Example:</strong> The squirrel jumped from limb to limb in the tree.<br>
+      <span class="cn">例句：松鼠在树枝之间跳跃。</span>
+    </div>
+  </div>
+
+  <div class="etymology">
+    <h3>🧩 Synonyms <span class="pronunciation">/ˈsɪnəˌnɪmz/</span> <button class="audio-button2" onclick="speak('Synonyms')">🔊 Play</button></h3>
+    <div class="fancy-list">
+      <ul>
+        <li>Arm <span class="cn">手臂</span></li>
+        <li>Leg <span class="cn">腿</span></li>
+        <li>Branch <span class="cn">树枝</span></li>
+        <li>Appendage <span class="cn">附属肢体</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>🔍 Etymology of the word <span class="pronunciation">/ˌɛtəˈmɑːlədʒi/</span> <button class="audio-button2" onclick="speak('Etymology')">🔊 Play</button></h3>
+    <p><span style="font-size: 2rem;">📚</span> "Limb" comes from Old English <em>lim</em>, meaning joint or member, and is related to words in Germanic and Scandinavian languages for arms and legs.<br>
+    <span class="cn">“Limb” 源自古英语 lim，意为关节或身体部位，与日耳曼语和斯堪的纳维亚语中表示手脚的词相关。</span></p>
+  </div>
+
+  <div class="etymology">
+    <h3>🧭 Word Evolution</h3>
+    <p>
+      <strong>Old English:</strong> <em>lim</em> – joint or body part<br>
+      <span class="cn">古英语 lim：关节或身体部位</span><br><br>
+      <strong>Old Norse:</strong> <em>limr</em> – limb<br>
+      <span class="cn">古挪威语 limr：四肢</span><br><br>
+      <strong>Modern English:</strong> <em>limb</em> – arm, leg, or tree branch<br>
+      <span class="cn">现代英语 limb：四肢或大树枝</span>
+    </p>
+  </div>
+
+  <div class="comparison-table">
+    <h3>📊 Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Context</th>
+          <th>Example Use</th>
+          <th>Tone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Arm</td>
+          <td>Human Body</td>
+          <td>He broke his arm in the fall.</td>
+          <td>Neutral</td>
+        </tr>
+        <tr>
+          <td>Branch</td>
+          <td>Tree</td>
+          <td>The branch snapped in the wind.</td>
+          <td>Natural</td>
+        </tr>
+        <tr>
+          <td><strong>Limb</strong></td>
+          <td><strong>Body or Tree</strong></td>
+          <td>The knight lost a limb in battle.</td>
+          <td>Formal / Anatomical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="etymology">
+    <h3>🎬 Clip Example – Use of the Word "Limb"</h3>
+    <center>
+      <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/GEq_tQhZ9-w?start=40"
+      title="Limb in Context"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+      </iframe>
+    </center>
+    <br>
+    <div class="word-box">
+      <span style="font-size: 2rem;">👂</span> Listen around <strong>0:40</strong> to hear “limb” used in a descriptive sentence.<br>
+      <span class="cn">听第 0:40 左右，了解“limb”在描述中的用法。</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="word-box">
+    <h3>📰 Limb in the News</h3>
+    <p>
+      The medical team worked tirelessly to save the patient's injured limb after the accident.<br>
+      <span class="cn">医疗团队在事故后不懈努力，试图挽救病人的受伤肢体。</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <a href="https://www.bbc.com/news" target="_blank" class="fancy-link">
+        📰 Read More – BBC News
+      </a>
+    </p>
+  </div>
+
+  <script>
+    let voices = [];
+    window.speechSynthesis.onvoiceschanged = () => {
+      voices = speechSynthesis.getVoices();
+    };
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.includes('en-US')) || voices[0];
+      utterance.voice = voice;
+      utterance.rate = 0.9;
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
