@@ -27,10 +27,10 @@ int main() {
 
     // Adjacency matrix for flight routes
     int flightMatrix[CITY_COUNT][CITY_COUNT] = {
-        {0, 1, 1, 0},  // NYC → LAX, NYC → ORD
-        {1, 0, 1, 0},  // LAX → NYC, LAX → ORD
-        {1, 1, 0, 1},  // ORD → NYC, ORD → LAX, ORD → DFW
-        {0, 0, 1, 0}   // DFW → ORD
+        {0, 1, 1, 0},  // NYC -> LAX, NYC -> ORD
+        {1, 0, 1, 0},  // LAX -> NYC, LAX -> ORD
+        {1, 1, 0, 1},  // ORD -> NYC, ORD -> LAX, ORD -> DFW
+        {0, 0, 1, 0}   // DFW -> ORD
     };
 
     // Display the flight routes matrix
