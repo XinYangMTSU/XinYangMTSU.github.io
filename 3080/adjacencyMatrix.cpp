@@ -24,6 +24,10 @@ int main() {
     for (int i = 0; i < CITY_COUNT; i++) {
         cityIndex[cities[i]] = i;
     }
+    /*
+    In C++, a map is a standard library container that stores key-value pairs in sorted order by key. 
+    It allows you to efficiently look up, insert, and delete elements based on a unique key.
+    */
 
     // Adjacency matrix for flight routes
     int flightMatrix[CITY_COUNT][CITY_COUNT] = {
