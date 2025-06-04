@@ -248,7 +248,8 @@ So: \( k = log_2(n)  \)
 	<li>&clubs; But in real life, \(n\) is not always a power of 2. 
 	When \(n\) is not a power of 2, the \(log_2(n)\) is not an integer. We can't make a partial comparison.
 	So we round down using &llcorner; \( log_2(n) \) &lrcorner; to reflect the number of full splits.
-	Finally, +1 -> the comparison at the final level.
+	</li>
+	<li>&clubs; However, the actual number of comparisons includes the final level—where the algorithm either finds the target or confirms it is not the target—which is not counted in &llcorner; \( log_2(n) \) &lrcorner;, so we add 1.
 	</li>
 	<li>&clubs; That’s why <font color="blue"><b>binary search takes &llcorner; \(log_2(n)\) &lrcorner; + 1 comparisons in the worst case</b></font>.</li>
 </ul>
