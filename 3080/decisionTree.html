@@ -203,7 +203,7 @@ x > L[i]: algorithm proceeds to the right half of the list
 
 <b><font color="blue">Big-O</font></b> describes how fast an algorithm grows with input size by providing an upper bound (i.e., the maximum time or steps) the algorithm might take.
 				
-<h2>Understanding the \(log_2(n)\) Steps in Binary Search</h2>
+<h2>Understanding the &llcorner; \(log_2(n)\) &lrcorner; + 1 Steps in Binary Search</h2>
 In <b><font color="blue">binary search</font></b>, you start with <b><font color="blue">\(n\) elements</font></b>, 
 and in each step, you divide the array into <b><font color="blue">2 halves</font></b>. Each halving step cuts the size by half:
 <br><br>
@@ -245,7 +245,7 @@ Take <font color="blue"><b>log base 2</b></font> on both sides: \( log_2(n) = k 
 So: \( k = log_2(n)  \) 
 <ul>
 	<li>&clubs; The number of times you can divide <font color="blue"><b>n</b></font> by <font color="blue"><b>2</b></font> before you reach 1 element is <font color="blue"><b>\( log_2(n) = k \)</b></font>.</li>
-	<li>&clubs; That’s why <font color="blue"><b>binary search takes \( log_2(n) = k \) steps in the worst case</b></font>.</li>
+	<li>&clubs; That’s why <font color="blue"><b>binary search takes &llcorner; \(log_2(n)\) &lrcorner; + 1 comparisons in the worst case</b></font>.</li>
 </ul>
 
 				<h1>Lower Bound for Searching</h1>
