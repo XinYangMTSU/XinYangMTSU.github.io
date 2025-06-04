@@ -247,8 +247,8 @@ So: \( k = log_2(n)  \)
 	<li>&clubs; The number of times you can divide <font color="blue"><b>n</b></font> by <font color="blue"><b>2</b></font> before you reach 1 element is <font color="blue"><b>\( log_2(n) = k \)</b></font>.</li>
 	<li>&clubs; But in real life, \(n\) is not always a power of 2. 
 	When \(n\) is not a power of 2, the \(log_2(n)\) is not an integer. We can't make a partial comparison.
-	So we round down using &llcorner; \( \) &lrcorner; to reflect the number of full splits.
-	+1 -> the comparison at the final level
+	So we round down using &llcorner; \( log_2(n) \) &lrcorner; to reflect the number of full splits.
+	Finally, +1 -> the comparison at the final level.
 	</li>
 	<li>&clubs; That’s why <font color="blue"><b>binary search takes &llcorner; \(log_2(n)\) &lrcorner; + 1 comparisons in the worst case</b></font>.</li>
 </ul>
