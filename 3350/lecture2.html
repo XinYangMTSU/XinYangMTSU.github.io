@@ -139,24 +139,79 @@
         padding: 18px 4vw 30px 4vw;
       }
     }
+
+
+    #sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#sidebar .subsections {
+  margin-left: 1.5em;
+  font-size: 0.94em;
+}
+#sidebar .subsections a {
+  font-size: 0.94em;
+  margin: 8px 0 8px 12px;
+  padding-left: 16px;
+  color: #b2bec3;
+  border-left: 2px solid transparent;
+  font-weight: 400;
+  box-shadow: none;
+  background: none;
+  gap: 0.6em;
+}
+#sidebar .subsections a:hover, #sidebar .subsections a.active {
+  color: #0984e3;
+  background: #f4f4f4;
+  border-left: 2px solid #74b9ff;
+  font-weight: 500;
+}
+
+    
   </style>
 </head>
 <body>
 
-  <nav id="sidebar">
-    <h2><i class="fas fa-book"></i> Contents</h2>
-    <a href="#what-is-ml"><i class="fas fa-robot"></i>1. What is Machine Learning?</a>
-    <a href="#types-ml"><i class="fas fa-layer-group"></i>2. Types of ML Systems</a>
-    <a href="#supervised"><i class="fas fa-chalkboard-teacher"></i>3. Supervised Learning</a>
-    <a href="#regression"><i class="fas fa-chart-line"></i>3.1 Regression</a>
-    <a href="#classification"><i class="fas fa-tags"></i>3.2 Classification</a>
-    <a href="#unsupervised"><i class="fas fa-search"></i>4. Unsupervised Learning</a>
-    <a href="#clustering"><i class="fas fa-chart-line"></i>4.1 Clustering</a>
-    <a href="#dim-reduction"><i class="fas fa-tags"></i>4.2 Dimensionality Reduction</a>
-    <a href="#reinforcement"><i class="fas fa-gamepad"></i>5. Reinforcement Learning</a>
-    <a href="#generative-ai"><i class="fas fa-magic"></i>6. Generative AI</a>
-    <a href="#references"><i class="fas fa-link"></i>References</a>
-  </nav>
+<nav id="sidebar">
+  <h2><i class="fas fa-book"></i> Contents</h2>
+  <ul>
+    <li><a href="#what-is-ml"><i class="fas fa-robot"></i>1. What is Machine Learning?</a></li>
+    <li><a href="#types-ml"><i class="fas fa-layer-group"></i>2. Types of ML Systems</a></li>
+    <li>
+      <a href="#supervised"><i class="fas fa-chalkboard-teacher"></i>3. Supervised Learning</a>
+      <div class="subsections">
+        <a href="#regression">3.1 Regression</a>
+        <a href="#classification">3.2 Classification</a>
+      </div>
+    </li>
+    <li>
+      <a href="#unsupervised"><i class="fas fa-search"></i>4. Unsupervised Learning</a>
+      <div class="subsections">
+        <a href="#clustering">4.1 Clustering</a>
+        <a href="#dim-reduction">4.2 Dimensionality Reduction</a>
+      </div>
+    </li>
+    <li>
+      <a href="#reinforcement"><i class="fas fa-gamepad"></i>5. Reinforcement Learning</a>
+      <div class="subsections">
+        <a href="#value-based">5.1 Value-Based Methods</a>
+        <a href="#policy-based">5.2 Policy-Based Methods</a>
+        <a href="#model-based">5.3 Model-Based Methods</a>
+      </div>
+    </li>
+    <li>
+      <a href="#generative-ai"><i class="fas fa-magic"></i>6. Generative AI</a>
+      <div class="subsections">
+        <a href="#gans">6.1 GANs</a>
+        <a href="#autoregressive">6.2 Autoregressive Models</a>
+        <a href="#diffusion">6.3 Diffusion Models</a>
+      </div>
+    </li>
+    <li><a href="#references"><i class="fas fa-link"></i>References</a></li>
+  </ul>
+</nav>
+
 
   <main id="content">
     <h1>Introduction to Machine Learning</h1>
