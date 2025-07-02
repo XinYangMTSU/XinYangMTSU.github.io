@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Intro to Machine Learning</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+      min-height: 100vh;
+    }
+    /* Sidebar */
+    #sidebar {
+      position: fixed;
+      width: 250px;
+      height: 100vh;
+      overflow-y: auto;
+      background: linear-gradient(135deg, #2c3e50 80%, #3498db 100%);
+      color: #ecf0f1;
+      padding: 38px 24px 24px 28px;
+      box-shadow: 2px 0 22px rgba(44,62,80,.13);
+      z-index: 10;
+    }
+    #sidebar h2 {
+      margin-top: 0;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #74b9ff;
+      margin-bottom: 1.7em;
+      text-align: left;
+    }
+    #sidebar a {
+      display: flex;
+      align-items: center;
+      color: #dfe6e9;
+      text-decoration: none;
+      margin: 16px 0 16px 10px;
+      font-weight: 500;
+      font-size: 1.08em;
+      border-left: 3px solid transparent;
+      padding-left: 14px;
+      transition: background .19s, color .19s, border .19s;
+      border-radius: 8px 0 0 8px;
+      gap: 0.7em;
+    }
+    #sidebar a:hover, #sidebar a.active {
+      color: #2d7edb;
+      background: #fff;
+      border-left: 3px solid #74b9ff;
+      font-weight: 700;
+      box-shadow: 1px 2px 8px 1px #b2bec3;
+    }
+    /* Main content */
+    #content {
+      margin-left: 270px;
+      padding: 56px 6vw 56px 6vw;
+      max-width: 900px;
+      width: 100vw;
+    }
+    h1 {
+      color: #1d2947;
+      font-size: 2.5em;
+      font-weight: 800;
+      margin-bottom: 0.4em;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 22px rgba(52, 152, 219, .13);
+    }
+    section {
+      margin-bottom: 55px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(44,62,80,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #74b9ff;
+      position: relative;
+    }
+    section:hover {
+      box-shadow: 0 10px 34px 3px rgba(41,128,185,0.12);
+      border-left: 7px solid #2d7edb;
+    }
+    section h3 {
+      border-bottom: 2px solid #74b9ff;
+      padding-bottom: 8px;
+      margin-top: 0;
+      color: #2980b9;
+      font-size: 1.5em;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+    pre {
+      background: #f6faff;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(52,152,219,0.08);
+    }
+    ul {
+      margin-left: 2.1em;
+      margin-bottom: 0;
+    }
+    /* Footer */
+    footer {
+      margin-top: 46px;
+      text-align: center;
+      color: #636e72;
+      font-size: 1.09em;
+      letter-spacing: 1px;
+      padding: 22px 0 14px 0;
+      border-top: 1px solid #dfe6e9;
+      background: none;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-weight: 500;
+    }
+    /* Sidebar Scrollbar */
+    #sidebar::-webkit-scrollbar {
+      width: 7px;
+      background: #22313a;
+    }
+    #sidebar::-webkit-scrollbar-thumb {
+      background: #3498db;
+      border-radius: 6px;
+    }
+    /* Responsive */
+    @media (max-width: 950px) {
+      #sidebar {
+        display: none;
+      }
+      #content {
+        margin-left: 0;
+        padding: 18px 4vw 30px 4vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="sidebar">
+    <h2><i class="fas fa-book"></i> Contents</h2>
+    <a href="#what-is-ml"><i class="fas fa-robot"></i>What is Machine Learning?</a>
+    <a href="#types-ml"><i class="fas fa-layer-group"></i>Types of ML Systems</a>
+    <a href="#supervised"><i class="fas fa-chalkboard-teacher"></i>Supervised Learning</a>
+    <a href="#regression"><i class="fas fa-chart-line"></i>Regression</a>
+    <a href="#classification"><i class="fas fa-tags"></i>Classification</a>
+    <a href="#unsupervised"><i class="fas fa-search"></i>Unsupervised Learning</a>
+    <a href="#reinforcement"><i class="fas fa-gamepad"></i>Reinforcement Learning</a>
+    <a href="#generative-ai"><i class="fas fa-magic"></i>Generative AI</a>
+  </nav>
+
+  <main id="content">
+    <h1>Introduction to Machine Learning</h1>
+
+    <section id="what-is-ml">
+      <h3>1. What is Machine Learning?</h3>
+      <p>
+        Machine learning (ML) is the process of training a model—a software component—to make useful predictions or generate content from data.
+      </p>
+    </section>
+
+    <section id="types-ml">
+      <h3>2. Types of ML Systems</h3>
+      <ul>
+        <li><strong>Supervised:</strong> trained with labeled data</li>
+        <li><strong>Unsupervised:</strong> finding structure in unlabeled data</li>
+        <li><strong>Reinforcement:</strong> learning via environment feedback</li>
+      </ul>
+    </section>
+
+    <section id="supervised">
+      <h3>3. Supervised Learning</h3>
+      <p>
+        Learn a mapping from inputs to known outputs. Common paradigms include regression and classification.
+      </p>
+    </section>
+
+    <section id="regression">
+      <h3>4. Regression</h3>
+      <p>Predict continuous values (e.g., house prices, temperature).</p>
+      <pre><code># Example (scikit-learn)
+from sklearn.linear_model import LinearRegression
+model = LinearRegression()
+model.fit(X_train, y_train)
+      </code></pre>
+    </section>
+
+    <section id="classification">
+      <h3>5. Classification</h3>
+      <p>Assign inputs to discrete categories (e.g., spam detection, digit recognition).</p>
+      <pre><code># Example (scikit-learn)
+from sklearn.tree import DecisionTreeClassifier
+clf = DecisionTreeClassifier()
+clf.fit(X_train, y_train)
+      </code></pre>
+    </section>
+
+    <section id="unsupervised">
+      <h3>6. Unsupervised Learning</h3>
+      <p>Discover patterns without labeled outputs—like clustering, dimensionality reduction.</p>
+    </section>
+
+    <section id="reinforcement">
+      <h3>7. Reinforcement Learning</h3>
+      <p>Agents learn by interacting with environments and receiving feedback (rewards or penalties).</p>
+    </section>
+
+    <section id="generative-ai">
+      <h3>8. Generative AI</h3>
+      <p>
+        Models that generate new data—text, images, audio—based on learned patterns (e.g., GPT, GANs).
+      </p>
+    </section>
+
+     <footer>
+      &copy; 2025 Xin Yang | Middle Tennessee State University<br>
+      Department of Computer Science
+    </footer>
+
+  </main>
+
+  <script>
+    // Smooth scrolling & highlight active link
+    const sidebarLinks = document.querySelectorAll('#sidebar a');
+    sidebarLinks.forEach(anchor => {
+      anchor.onclick = function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href'))
+          .scrollIntoView({ behavior: 'smooth' });
+      };
+    });
+
+    // Active link highlight on scroll
+    const sectionIds = Array.from(sidebarLinks).map(l => l.getAttribute('href'));
+    window.addEventListener('scroll', () => {
+      let current = sectionIds[0];
+      for (const id of sectionIds) {
+        const section = document.querySelector(id);
+        if (section && section.getBoundingClientRect().top - 80 < 0) {
+          current = id;
+        }
+      }
+      sidebarLinks.forEach(link => link.classList.remove('active'));
+      const activeLink = document.querySelector(`#sidebar a[href="${current}"]`);
+      if (activeLink) activeLink.classList.add('active');
+    });
+  </script>
+
+</body>
+</html>
