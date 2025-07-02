@@ -145,14 +145,15 @@
 
   <nav id="sidebar">
     <h2><i class="fas fa-book"></i> Contents</h2>
-    <a href="#what-is-ml"><i class="fas fa-robot"></i>What is Machine Learning?</a>
-    <a href="#types-ml"><i class="fas fa-layer-group"></i>Types of ML Systems</a>
-    <a href="#supervised"><i class="fas fa-chalkboard-teacher"></i>Supervised Learning</a>
-    <a href="#regression"><i class="fas fa-chart-line"></i>Regression</a>
-    <a href="#classification"><i class="fas fa-tags"></i>Classification</a>
-    <a href="#unsupervised"><i class="fas fa-search"></i>Unsupervised Learning</a>
-    <a href="#reinforcement"><i class="fas fa-gamepad"></i>Reinforcement Learning</a>
-    <a href="#generative-ai"><i class="fas fa-magic"></i>Generative AI</a>
+    <a href="#what-is-ml"><i class="fas fa-robot"></i>1. What is Machine Learning?</a>
+    <a href="#types-ml"><i class="fas fa-layer-group"></i>2. Types of ML Systems</a>
+    <a href="#supervised"><i class="fas fa-chalkboard-teacher"></i>3. Supervised Learning</a>
+    <a href="#regression"><i class="fas fa-chart-line"></i>3.1 Regression</a>
+    <a href="#classification"><i class="fas fa-tags"></i>3.2 Classification</a>
+    <a href="#unsupervised"><i class="fas fa-search"></i>4. Unsupervised Learning</a>
+    <a href="#reinforcement"><i class="fas fa-gamepad"></i>5. Reinforcement Learning</a>
+    <a href="#generative-ai"><i class="fas fa-magic"></i>6. Generative AI</a>
+    <a href="#references"><i class="fas fa-link"></i>References</a>
   </nav>
 
   <main id="content">
@@ -161,29 +162,34 @@
     <section id="what-is-ml">
       <h3>1. What is Machine Learning?</h3>
       <p>
-        Machine learning (ML) is the process of training a model—a software component—to make useful predictions or generate content from data.
+        Machine learning (ML) is the process of teaching computers to make decisions or predictions based on data, rather than through explicit programming. It powers many modern technologies, from recommendation engines to self-driving cars.
       </p>
     </section>
 
     <section id="types-ml">
       <h3>2. Types of ML Systems</h3>
       <ul>
-        <li><strong>Supervised:</strong> trained with labeled data</li>
-        <li><strong>Unsupervised:</strong> finding structure in unlabeled data</li>
-        <li><strong>Reinforcement:</strong> learning via environment feedback</li>
+        <li><strong>Supervised Learning</strong>: Learn a mapping from input to output with labeled data (e.g., classification, regression).</li>
+        <li><strong>Unsupervised Learning</strong>: Find hidden patterns or structures in data without explicit labels (e.g., clustering, dimensionality reduction).</li>
+        <li><strong>Reinforcement Learning</strong>: Learn to make a sequence of decisions by receiving rewards or penalties from the environment.</li>
+        <li><strong>Generative AI</strong>: Create new content (text, images, audio) that mimics real data distributions.</li>
       </ul>
     </section>
 
     <section id="supervised">
       <h3>3. Supervised Learning</h3>
       <p>
-        Learn a mapping from inputs to known outputs. Common paradigms include regression and classification.
+        The most common ML paradigm, where models learn from input-output pairs. Two main types:
       </p>
+      <ul>
+        <li><a href="#regression">3.1 Regression</a>: Predicting continuous values.</li>
+        <li><a href="#classification">3.2 Classification</a>: Assigning data to discrete categories.</li>
+      </ul>
     </section>
 
     <section id="regression">
-      <h3>4. Regression</h3>
-      <p>Predict continuous values (e.g., house prices, temperature).</p>
+      <h3>3.1 Regression</h3>
+      <p>Regression algorithms predict numeric values (e.g., house prices, temperature):</p>
       <pre><code># Example (scikit-learn)
 from sklearn.linear_model import LinearRegression
 model = LinearRegression()
@@ -192,8 +198,8 @@ model.fit(X_train, y_train)
     </section>
 
     <section id="classification">
-      <h3>5. Classification</h3>
-      <p>Assign inputs to discrete categories (e.g., spam detection, digit recognition).</p>
+      <h3>3.2 Classification</h3>
+      <p>Classification algorithms assign items to one of several categories (e.g., spam detection, image recognition):</p>
       <pre><code># Example (scikit-learn)
 from sklearn.tree import DecisionTreeClassifier
 clf = DecisionTreeClassifier()
@@ -202,29 +208,57 @@ clf.fit(X_train, y_train)
     </section>
 
     <section id="unsupervised">
-      <h3>6. Unsupervised Learning</h3>
-      <p>Discover patterns without labeled outputs—like clustering, dimensionality reduction.</p>
+      <h3>4. Unsupervised Learning</h3>
+      <p>Discover patterns and groupings in data without labels. Examples include clustering customers or reducing data dimensions with PCA.</p>
     </section>
 
     <section id="reinforcement">
-      <h3>7. Reinforcement Learning</h3>
-      <p>Agents learn by interacting with environments and receiving feedback (rewards or penalties).</p>
+      <h3>5. Reinforcement Learning</h3>
+      <p>Agents learn optimal strategies through trial and error in an environment, receiving feedback as rewards or penalties. Used in robotics, gaming, and more.</p>
     </section>
 
     <section id="generative-ai">
-      <h3>8. Generative AI</h3>
+      <h3>6. Generative AI</h3>
       <p>
-        Models that generate new data—text, images, audio—based on learned patterns (e.g., GPT, GANs).
+        Generative models, like GPT or GANs, create new data that resembles training data—used for text generation, art, deepfakes, etc.
       </p>
     </section>
 
-     <footer>
-      &copy; 2025 Xin Yang <br> 
+    <section id="references">
+      <h3>References</h3>
+      <ul>
+        <li>
+          <a href="https://developers.google.com/machine-learning/crash-course" target="_blank">
+            Google Machine Learning Crash Course
+          </a>
+        </li>
+        <li>
+          <a href="https://scikit-learn.org/stable/user_guide.html" target="_blank">
+            scikit-learn User Guide
+          </a>
+        </li>
+        <li>
+          <a href="https://www.coursera.org/learn/machine-learning" target="_blank">
+            Andrew Ng's Machine Learning (Coursera)
+          </a>
+        </li>
+        <li>
+          <a href="https://www.deeplearning.ai/short-courses/" target="_blank">
+            DeepLearning.AI Short Courses
+          </a>
+        </li>
+      </ul>
+    </section>
+    <footer>
+      &copy; 2025 Xin Yang <br>
       Department of Computer Science <br>
       Middle Tennessee State University <br>
     </footer>
-
   </main>
+
+
+
+  
 
   <script>
     // Smooth scrolling & highlight active link
