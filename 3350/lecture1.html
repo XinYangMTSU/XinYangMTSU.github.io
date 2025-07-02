@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Intro to Machine Learning</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+    }
+    /* Sidebar */
+    #sidebar {
+      position: fixed;
+      width: 220px;
+      height: 100vh;
+      overflow-y: auto;
+      background: #2c3e50;
+      color: #ecf0f1;
+      padding: 20px;
+    }
+    #sidebar h2 {
+      margin-top: 0;
+    }
+    #sidebar a {
+      display: block;
+      color: #ecf0f1;
+      text-decoration: none;
+      margin: 8px 0;
+    }
+    #sidebar a:hover {
+      text-decoration: underline;
+    }
+    /* Main content */
+    #content {
+      margin-left: 240px;
+      padding: 40px;
+      max-width: 800px;
+    }
+    section {
+      margin-bottom: 60px;
+    }
+    section h3 {
+      border-bottom: 2px solid #2980b9;
+      padding-bottom: 6px;
+      color: #2980b9;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="sidebar">
+    <h2>Contents</h2>
+    <a href="#what-is-ml">What is Machine Learning?</a>
+    <a href="#types-ml">Types of ML Systems</a>
+    <a href="#supervised">Supervised Learning</a>
+    <a href="#regression">Regression</a>
+    <a href="#classification">Classification</a>
+    <a href="#unsupervised">Unsupervised Learning</a>
+    <a href="#reinforcement">Reinforcement Learning</a>
+    <a href="#generative-ai">Generative AI</a>
+  </nav>
+
+  <main id="content">
+    <h1>Introduction to Machine Learning</h1>
+
+    <section id="what-is-ml">
+      <h3>1. What is Machine Learning?</h3>
+      <p>
+        Machine learning (ML) is the process of training a model—a software component—to make useful predictions or generate content from data :contentReference[oaicite:2]{index=2}.
+      </p>
+    </section>
+
+    <section id="types-ml">
+      <h3>2. Types of ML Systems</h3>
+      <p>
+        ML systems include:
+        <ul>
+          <li><strong>Supervised:</strong> trained with labeled data</li>
+          <li><strong>Unsupervised:</strong> finding structure in unlabeled data</li>
+          <li><strong>Reinforcement:</strong> learning via environment feedback</li>
+        </ul>
+      </p>
+    </section>
+
+    <section id="supervised">
+      <h3>3. Supervised Learning</h3>
+      <p>
+        Learn a mapping from inputs to known outputs. Common paradigms:
+      </p>
+    </section>
+
+    <section id="regression">
+      <h3>4. Regression</h3>
+      <p>Predict continuous values (e.g., house prices, temperature).</p>
+      <pre><code># Example (scikit‑learn)
+from sklearn.linear_model import LinearRegression
+model = LinearRegression()
+model.fit(X_train, y_train)
+      </code></pre>
+    </section>
+
+    <section id="classification">
+      <h3>5. Classification</h3>
+      <p>Assign inputs to discrete categories (e.g., spam detection, digit recognition).</p>
+      <pre><code># Example (scikit‑learn)
+from sklearn.tree import DecisionTreeClassifier
+clf = DecisionTreeClassifier()
+clf.fit(X_train, y_train)
+      </code></pre>
+    </section>
+
+    <section id="unsupervised">
+      <h3>6. Unsupervised Learning</h3>
+      <p>Discover patterns without labeled outputs—like clustering, dimensionality reduction.</p>
+    </section>
+
+    <section id="reinforcement">
+      <h3>7. Reinforcement Learning</h3>
+      <p>Agents learn by interacting with environments and receiving feedback (rewards or penalties).</p>
+    </section>
+
+    <section id="generative-ai">
+      <h3>8. Generative AI</h3>
+      <p>
+        Models that generate new data—text, images, audio—based on learned patterns (e.g., GPT, GANs).
+      </p>
+    </section>
+
+  </main>
+
+  <script>
+    // Smooth scrolling
+    document.querySelectorAll('#sidebar a').forEach(anchor => {
+      anchor.onclick = function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href'))
+          .scrollIntoView({ behavior: 'smooth' });
+      };
+    });
+  </script>
+
+</body>
+</html>
