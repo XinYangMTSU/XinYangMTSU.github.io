@@ -367,27 +367,31 @@ clf.fit(X_train, y_train)
     </p>
     
     <h4>Goal: </h4>
-    Learn to make the best possible decisions to achieve the highest total reward in the long run.
+    <p>
+      Learn to make the best possible decisions to achieve the highest total reward in the long run.
+    </p>
+    <br>
+
+    <p>
+      Reinforcement learning methods can be broadly grouped as:
+    </p>
     
     <div id="value-based">
       <h4>5.1 Value-Based Methods</h4>
       <p>
         Value-based methods estimate the expected reward of actions or states. The agent chooses actions to maximize these values.<br>
-        <strong>Examples:</strong> Q-Learning, Deep Q-Networks (DQN)
+        <ul>
+          <li><strong>Q-Learning:</strong>: Learns the value of taking a given action in a given state.</li>
+        </ul>
       </p>
     </div>
     <div id="policy-based">
       <h4>5.2 Policy-Based Methods</h4>
       <p>
         Policy-based methods directly optimize the policy that decides actions. These are often used when value-based methods are impractical.<br>
-        <strong>Examples:</strong> REINFORCE, Actor-Critic
-      </p>
-    </div>
-    <div id="model-based">
-      <h4>5.3 Model-Based Methods</h4>
-      <p>
-        Model-based methods learn a model of the environment and use it for planning or policy improvement.<br>
-        <strong>Examples:</strong> Dyna-Q, Monte Carlo Tree Search (MCTS)
+        <ul>
+          <li><strong>Policy Gradient methods:</strong> optimize the policy using gradient ascent.</li>
+        </ul>
       </p>
     </div>
   </section>
