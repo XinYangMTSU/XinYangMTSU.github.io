@@ -339,6 +339,176 @@
   <li><strong>Negative β<sub>j</sub></strong> → <em>y</em> decreases.</li>
 </ul>
 
+<h4>Linear Regression — All Steps (OLS)</h4>
+
+  <h3>Model & Notation</h3>
+  <p>Scalar form:</p>
+  <p>$$ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n + \epsilon $$</p>
+
+  <p>Matrix form:</p>
+  <p>
+    $$ \mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\epsilon} $$
+    where
+    $$ \mathbf{X} = 
+      \begin{bmatrix}
+        1 & x_{11} & \cdots & x_{1n} \\
+        1 & x_{21} & \cdots & x_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        1 & x_{m1} & \cdots & x_{mn}
+      \end{bmatrix},\quad
+      \boldsymbol{\beta} =
+      \begin{bmatrix}
+        \beta_0 \\ \beta_1 \\ \vdots \\ \beta_n
+      \end{bmatrix},\quad
+      \mathbf{y} =
+      \begin{bmatrix}
+        y_1 \\ y_2 \\ \vdots \\ y_m
+      \end{bmatrix}.
+    $$
+  </p>
+
+  <h3>Objective (Least Squares)</h3>
+  <p>Minimize the sum of squared errors (SSE):</p>
+  <p>
+    $$ \mathrm{SSE} = \sum_{i=1}^{m} (y_i - \hat{y}_i)^2
+       \;=\; (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y} - \mathbf{X}\boldsymbol{\beta}). $$
+  </p>
+
+  <h3>Normal Equations (Derivation Result)</h3>
+  <p>Set the derivative to zero and solve:</p>
+  <p>
+    $$ \mathbf{X}^\top \mathbf{X}\,\boldsymbol{\beta} \;=\; \mathbf{X}^\top \mathbf{y}
+       \quad\Rightarrow\quad
+       \hat{\boldsymbol{\beta}} \;=\; (\mathbf{X}^\top \mathbf{X})^{-1}\mathbf{X}^\top \mathbf{y}. $$
+  </p>
+
+  <hr>
+
+  <h3>Worked Example: Predicting House Price</h3>
+  <p>Model: 
+    $$ \text{Price} = \beta_0 + \beta_1 \cdot \text{Size} + \beta_2 \cdot \text{Bedrooms} + \epsilon $$
+  </p>
+
+  <h4>Data</h4>
+  <table border="1" cellpadding="6">
+    <tr><th>Size (sq.ft)</th><th>Bedrooms</th><th>Price ($)</th></tr>
+    <tr><td>1000</td><td>2</td><td>200{,}000</td></tr>
+    <tr><td>1500</td><td>3</td><td>280{,}000</td></tr>
+    <tr><td>2000</td><td>3</td><td>340{,}000</td></tr>
+    <tr><td>2500</td><td>4</td><td>400{,}000</td></tr>
+    <tr><td>3000</td><td>4</td><td>460{,}000</td></tr>
+  </table>
+
+  <h4>Step 1: Build \(\mathbf{X}\) and \(\mathbf{y}\)</h4>
+  <p>
+    $$ 
+    \mathbf{X} =
+    \begin{bmatrix}
+      1 & 1000 & 2 \\
+      1 & 1500 & 3 \\
+      1 & 2000 & 3 \\
+      1 & 2500 & 4 \\
+      1 & 3000 & 4
+    \end{bmatrix},\quad
+    \mathbf{y} =
+    \begin{bmatrix}
+      200000 \\ 280000 \\ 340000 \\ 400000 \\ 460000
+    \end{bmatrix}.
+    $$
+  </p>
+
+  <h4>Step 2: Compute \(\mathbf{X}^\top \mathbf{X}\) and \(\mathbf{X}^\top \mathbf{y}\)</h4>
+  <p>
+    Sufficient statistics:
+    \[
+      \sum 1 = 5,\quad
+      \sum \text{Size} = 10000,\quad
+      \sum \text{Bedrooms} = 16
+    \]
+    \[
+      \sum \text{Size}^2 = 22{,}500{,}000,\quad
+      \sum \text{Bedrooms}^2 = 54,\quad
+      \sum (\text{Size}\cdot \text{Bedrooms}) = 34{,}500
+    \]
+    \[
+      \sum \text{Price} = 1{,}680{,}000,\quad
+      \sum (\text{Size}\cdot \text{Price}) = 3{,}680{,}000{,}000,\quad
+      \sum (\text{Bedrooms}\cdot \text{Price}) = 5{,}700{,}000.
+    \]
+  </p>
+  <p>
+    Hence
+    $$
+    \mathbf{X}^\top \mathbf{X} =
+    \begin{bmatrix}
+      5 & 10000 & 16 \\
+      10000 & 22500000 & 34500 \\
+      16 & 34500 & 54
+    \end{bmatrix},
+    \quad
+    \mathbf{X}^\top \mathbf{y} =
+    \begin{bmatrix}
+      1680000 \\
+      3680000000 \\
+      5700000
+    \end{bmatrix}.
+    $$
+  </p>
+
+  <h4>Step 3: Solve for \(\hat{\boldsymbol{\beta}}\)</h4>
+  <p>
+    $$ \hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1}\mathbf{X}^\top \mathbf{y}. $$
+    (Skipping the explicit inverse for brevity; result below.)
+  </p>
+  <p>
+    $$ 
+      \boxed{
+      \hat{\beta}_0 = 64{,}000,\quad
+      \hat{\beta}_1 \approx 114.67,\quad
+      \hat{\beta}_2 \approx 13{,}333.33
+      }
+    $$
+  </p>
+
+  <h4>Step 4: Final Model</h4>
+  <p style="text-align:center; font-size:1.1em;">
+    $$ \widehat{\text{Price}} = 64{,}000 \;+\; 114.67 \cdot \text{Size} \;+\; 13{,}333.33 \cdot \text{Bedrooms} $$
+  </p>
+
+  <h4>Step 5: Predictions \((\hat{\mathbf{y}})\) & Errors</h4>
+  <p>
+    $$ 
+    \hat{\mathbf{y}} \approx
+    \begin{bmatrix}
+      205{,}333.33 \\
+      276{,}000.00 \\
+      333{,}333.33 \\
+      404{,}000.00 \\
+      461{,}333.33
+    \end{bmatrix},\quad
+    \mathbf{r} = \mathbf{y} - \hat{\mathbf{y}} \approx
+    \begin{bmatrix}
+      -5333.33 \\ 4000.00 \\ 6666.67 \\ -4000.00 \\ -1333.33
+    \end{bmatrix}.
+    $$
+  </p>
+
+  <h4>Step 6: Sum of Squared Errors (SSE)</h4>
+  <p>
+    $$
+      \mathrm{SSE} = \sum_{i=1}^{5}(y_i - \hat{y}_i)^2 \;\approx\; 1.0667 \times 10^8.
+    $$
+  </p>
+
+  <h4>Interpretation</h4>
+  <ul>
+    <li><strong>Intercept \(\beta_0\)</strong>: Baseline price when Size and Bedrooms are zero (a theoretical anchor).</li>
+    <li><strong>\(\beta_1\)</strong>: Each additional sq.ft adds about \$114.67 to the price, holding Bedrooms fixed.</li>
+    <li><strong>\(\beta_2\)</strong>: Each additional bedroom adds about \$13,333.33, holding Size fixed.</li>
+  </ul>
+
+
+    
       <h4>3.2 Ridge Regression</h4>
     
       <h4>3.3 Lasso Regression</h4>
