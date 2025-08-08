@@ -311,14 +311,20 @@
     <br>
     
     <h4>How Linear Regression Works</h4>
-    <ol>
-      <li><strong>Collect Data</strong> – Gather pairs of input features (<em>x</em><sub>1</sub>, <em>x</em><sub>2</sub>, …, <em>x</em><sub>n</sub>) and the known output (<em>y</em>).</li>
-      <li><strong>Fit the Model</strong> – Find the values of β<sub>0</sub>, β<sub>1</sub>, …, β<sub>n</sub> that make the predicted <em>y</em> values as close as possible to the actual <em>y</em> values in the training data.</li>
-      <li><strong>Minimize Error</strong> – The most common method is Ordinary Least Squares (OLS), which chooses coefficients to minimize the sum of squared errors (SSE):</li>
-    </ol>
+    
+    <!-- Put this once in your page (head or before </body>) -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+<ol>
+  <li><strong>Collect Data</strong> – Gather pairs of input features (\(x_1, x_2, \ldots, x_n\)) and the known output (\(y\)).</li>
+  <li><strong>Fit the Model</strong> – Find the values of \(\beta_0, \beta_1, \ldots, \beta_n\) that make the predicted \(y\) values as close as possible to the actual \(y\) values in the training data.</li>
+  <li><strong>Minimize Error</strong> – Ordinary Least Squares (OLS) minimizes the sum of squared errors:</li>
+</ol>
 
-    <p><strong>SSE</strong> = Σ<sub>i=1</sub><sup>m</sup> (y<sub>i</sub> − ŷ<sub>i</sub>)², where y<sub>i</sub> is the actual value and ŷ<sub>i</sub> is the predicted value.</p>
+<p>$$ \mathrm{SSE} = \sum_{i=1}^{m} (y_i - \hat{y}_i)^2 $$</p>
+<p>where \(y_i\) is the actual value and \(\hat{y}_i\) is the predicted value.</p>
 
+    
 
       <h4>3.2 Ridge Regression</h4>
     
