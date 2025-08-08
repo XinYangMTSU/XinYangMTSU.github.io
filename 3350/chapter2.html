@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Chapter 1: Intro to Machine Learning</title>
+  <title>Chapter 2: Supervised Learning</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
@@ -224,18 +224,6 @@
         <a href="#model-based">5.3 Model-Based Methods</a>
       </div>
     </li>
-    <li>
-      <a href="#generative-ai"><i class="fas fa-magic"></i>6. Generative AI</a>
-      <div class="subsections">
-        <a href="#gans">6.1 GANs</a>
-        <a href="#autoregressive">6.2 Autoregressive Models</a>
-        <a href="#diffusion">6.3 Diffusion Models</a>
-      </div>
-    </li>
-
-    <li><a href="#ai-ml-dl-diagram"><i class="fas fa-link"></i>7. Venn Diagram for AI, ML, and DL</a></li>
-    <li><a href="#ml-history"><i class="fas fa-link"></i>8. Short Timeline for History</a></li>
-    <li><a href="#nobel-ml"><i class="fas fa-link"></i>🎖️ Nobel Prizes for Machine Learning</a></li>
     
     <li><a href="#references"><i class="fas fa-link"></i>References</a></li>
   </ul>
@@ -429,121 +417,7 @@
     
   </section>
 
-  <section id="generative-ai">
-    <h3>6. Generative AI</h3>
-    <p>
-      Generative AI models are designed to produce new data that resembles the data they were trained on. These models are widely used for text generation, image synthesis, music, and more. Main types include:
-    </p>
-    <div id="gans">
-      <h4>6.1 Generative Adversarial Networks (GANs)</h4>
-      <p>
-        GANs use a generator and a discriminator in competition to produce increasingly realistic outputs. They are famous for generating realistic images and videos.
-      </p>
-    </div>
-    <div id="autoregressive">
-      <h4>6.2 Autoregressive Models</h4>
-      <p>
-        These models generate data one step at a time, with each output depending on previous outputs. <strong>Examples:</strong> GPT-4 (text), LSTM (music, text).
-      </p>
-    </div>
-    <div id="diffusion">
-      <h4>6.3 Diffusion Models</h4>
-      <p>
-        Diffusion models create data by learning to gradually denoise random input, producing some of the highest quality images to date. <strong>Examples:</strong> DALL·E 2, Stable Diffusion.
-      </p>
-    </div>
-  </section>
-
-
-  <section id="ai-ml-dl-diagram">
-  <h3>7. AI, Machine Learning, and Deep Learning: How Do They Relate?</h3>
-  <div style="display:flex; flex-wrap:wrap; gap:28px; align-items:center;">
-    <svg width="340" height="220" viewBox="0 0 340 220" style="background:transparent;">
-      <!-- AI Circle -->
-      <ellipse cx="170" cy="110" rx="155" ry="90" fill="#ffb3de22" stroke="#ff79c6" stroke-width="2"/>
-      <text x="55" y="65" fill="#ff79c6" font-size="1.45em" font-weight="bold">AI</text>
-      <!-- ML Circle -->
-      <ellipse cx="170" cy="120" rx="105" ry="62" fill="#ff79c660" stroke="#ff79c6" stroke-width="2"/>
-      <text x="120" y="115" fill="#ff79c6" font-size="1.2em" font-weight="bold">ML</text>
-      <!-- DL Circle -->
-      <ellipse cx="200" cy="135" rx="55" ry="34" fill="#ff79c6" fill-opacity="0.18" stroke="#ff79c6" stroke-width="2"/>
-      <text x="190" y="145" fill="#ff79c6" font-size="1em" font-weight="bold">DL</text>
-    </svg>
-    <ul style="flex:1; min-width:220px;">
-      <li><b>Artificial Intelligence (AI):</b> The broadest field, aiming to make computers “smart” by mimicking human intelligence.</li>
-      <li><b>Machine Learning (ML):</b> A subset of AI, where computers learn from data to make predictions.</li>
-      <li><b>Deep Learning (DL):</b> A specialized subset of ML, using neural networks with many layers (deep neural networks) to learn from large, complex datasets.</li>
-    </ul>
-  </div>
-</section>
-
-
-  <section id="ml-history">
-  <h3>8. A Brief History of Machine Learning</h3>
-  <ul>
-    <li><b>1950s:</b> The field of Artificial Intelligence (AI) begins; Alan Turing proposes the "Turing Test".</li>
-    <li><b>1959:</b> Arthur Samuel coins the term “Machine Learning”.</li>
-    <li><b>1980s:</b> Early neural networks advance as the backpropagation algorithm is developed—most notably by Geoffrey Hinton, David Rumelhart, and Ronald Williams.</li>
-    <li><b>1997:</b> IBM’s Deep Blue beats chess champion Garry Kasparov.</li>
-    <li><b>2012:</b> The Deep Learning revolution begins—AlexNet, developed by Alex Krizhevsky, Ilya Sutskever, and Geoffrey Hinton, wins the ImageNet competition.</li>
-    <li><b>2016–present:</b> Deep Learning powers breakthroughs in speech, vision, language (e.g., AlphaGo, GPT models, DALL·E, self-driving cars).</li>
-  </ul>
-</section>
-
-  <section id="latest-ai-trends">
-  <h3>9. The Latest in AI, ML, and Deep Learning (2024–2025)</h3>
-  <ul>
-    <li><b>OpenAI Sora:</b> A powerful AI model that generates realistic videos from simple text prompts—pushing the frontier of generative AI. (<a href="https://openai.com/sora" target="_blank">Official Site</a>)</li>
-    <li><b>Google Gemini:</b> Google’s latest multimodal AI, combining text, images, audio, and code for seamless cross-modal reasoning. (<a href="https://deepmind.google/technologies/gemini/" target="_blank">Learn more</a>)</li>
-    <li><b>Meta Llama 4:</b> An open-source large language model that rivals GPT-4 in benchmarks—used for chatbots, code, and more. (<a href="https://ai.meta.com/llama/" target="_blank">Meta AI</a>)</li>
-    <li><b>AlphaFold:</b> DeepMind’s new version predicts protein structures and interactions, revolutionizing drug discovery. (<a href="https://deepmind.google/science/alphafold/" target="_blank">AlphaFold</a>)</li>
-    <li><b>AI Art & Video Generation:</b> Tools like Midjourney, Stable Diffusion 3, and Runway ML are empowering creators to generate images and films with AI.</li>
-    <li><b>AI Agents:</b> Next-generation AI agents (e.g., Devin AI) can perform multi-step tasks, code, and even operate software autonomously.</li>
-  </ul>
-  <div style="display: flex; flex-wrap: wrap; gap: 28px; margin-top: 18px;">
-    <!-- Sora Video -->
-    <div style="flex: 1 1 320px; min-width: 320px; max-width: 420px;">
-      <iframe width="100%" height="225" src="https://www.youtube.com/embed/HK6y8DAPN_0" title="OpenAI Sora Demo" frameborder="0" allowfullscreen></iframe>
-      <p style="margin-top:8px;color:#ffb3de">OpenAI Sora: Text-to-Video Demo</p>
-    </div>
-    <!-- Gemini Video -->
-    <div style="flex: 1 1 320px; min-width: 320px; max-width: 420px;">
-      <iframe width="100%" height="225" src="https://www.youtube.com/embed/pEmCgIGpIoo" title="Google Gemini AI Demo" frameborder="0" allowfullscreen></iframe>
-      <p style="margin-top:8px;color:#ffb3de">Google Gemini: Multimodal AI</p>
-    </div>
-    <!-- Llama  Video -->
-    <div style="flex: 1 1 320px; min-width: 320px; max-width: 420px;">
-      <iframe width="100%" height="225" src="https://www.youtube.com/embed/hErSrkrCg6k" title="Meta Llama Overview" frameborder="0" allowfullscreen></iframe>
-      <p style="margin-top:8px;color:#ffb3de">Meta Llama: Open Source LLM</p>
-    </div>
-    <!-- AlphaFold  Video -->
-    <div style="flex: 1 1 320px; min-width: 320px; max-width: 420px;">
-      <iframe width="100%" height="225" src="https://www.youtube.com/embed/P_fHJIYENdI" title="AlphaFold 3 Explainer" frameborder="0" allowfullscreen></iframe>
-      <p style="margin-top:8px;color:#ffb3de">AlphaFold: Protein Structure</p>
-    </div>
-  </div>
-  <p style="color:#ffb3de; margin-top:16px; font-size:1.07em;">
-    <b>Explore more:</b> <a href="https://www.marktechpost.com/" target="_blank">MarkTechPost</a>, <a href="https://huggingface.co/" target="_blank">Hugging Face</a>, <a href="https://www.youtube.com/@TwoMinutePapers" target="_blank">Two Minute Papers (YouTube)</a>
-  </p>
-</section>
-
-  
-  <section id="nobel-ml">
-  <h3>🎖️ Nobel Prizes for Machine Learning (2024)</h3>
-  <ul>
-    <li>
-      <strong>Physics:</strong> John J. Hopfield &amp; Geoffrey E. Hinton — for foundational neural networks (Hopfield network, Boltzmann machine).
-    </li>
-    <li>
-      <strong>Chemistry:</strong> Demis Hassabis &amp; John Jumper (DeepMind) — for AI-driven protein structure prediction (AlphaFold).
-    </li>
-  </ul>
-  <p>
-    These awards illustrate machine learning’s deep impact—from theoretical underpinnings to revolutionizing biology.
-  </p>
-</section>
-
-
+ 
   <section id="references">
     <h3>References</h3>
     <ul>
