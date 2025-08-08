@@ -318,7 +318,7 @@
     
     <br>
     
-    <h3>How Linear Regression Works</h3>
+    <h4>How Linear Regression Works</h4>
     
     <!-- Put this once in your page (head or before </body>) -->
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -333,7 +333,7 @@
 <p>where \(y_i\) is the actual value and \(\hat{y}_i\) is the predicted value.</p>
 
 
-    <h3>Interpreting the Coefficients</h3>
+    <h4>Interpreting the Coefficients</h4>
 <ul>
   <li><strong>Intercept (β<sub>0</sub>)</strong> – The baseline prediction when all features are zero.</li>
   <li><strong>Coefficient (β<sub>j</sub>)</strong> – How much <em>y</em> changes when <em>x</em><sub>j</sub> increases by one unit, keeping all other features constant.</li>
@@ -341,7 +341,9 @@
   <li><strong>Negative β<sub>j</sub></strong> → <em>y</em> decreases.</li>
 </ul>
 
-  <h3>Model & Notation</h3>
+    <br>
+    
+  <h4>Model & Notation</h4>
   <p>Scalar form:</p>
   <p>$$ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n + \epsilon $$</p>
 
@@ -367,14 +369,14 @@
     $$
   </p>
 
-  <h3>Objective (Least Squares)</h3>
+  <h4>Objective (Least Squares)</h4>
   <p>Minimize the sum of squared errors (SSE):</p>
   <p>
     $$ \mathrm{SSE} = \sum_{i=1}^{m} (y_i - \hat{y}_i)^2
        \;=\; (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y} - \mathbf{X}\boldsymbol{\beta}). $$
   </p>
 
-  <h3>Normal Equations (Derivation Result)</h3>
+  <h4>Normal Equations (Derivation Result)</h4>
   <p>Set the derivative to zero and solve:</p>
   <p>
     $$ \mathbf{X}^\top \mathbf{X}\,\boldsymbol{\beta} \;=\; \mathbf{X}^\top \mathbf{y}
@@ -384,7 +386,7 @@
 
   <hr>
 
-  <h3>Worked Example: Predicting House Price</h3>
+  <h4>Worked Example: Predicting House Price</h4>
   <p>Model: 
     $$ \text{Price} = \beta_0 + \beta_1 \cdot \text{Size} + \beta_2 \cdot \text{Bedrooms} + \epsilon $$
   </p>
