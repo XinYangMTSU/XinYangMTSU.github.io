@@ -246,30 +246,19 @@
           and <b><font color="red">outputs</font></b> (labels).</Li>
       <li>Once trained, it can predict the output for new, unseen inputs.</li>
     </ul>
+
+    <h4>Analogy:</h4>
+    <p>
+      Think of supervised learning like a student studying with a set of practice problems and the answer key. 
+      The student uses these examples to learn patterns, then solves new problems without seeing the answers.
+    </p>
     
   </section>
-
-  <section id="types-ml">
-    <h3>2. Types of ML Systems</h3>
-    <ul>
-      <li><strong>Supervised Learning</strong>: Learn a mapping from input to output with labeled data (e.g., classification, regression).</li>
-      <li><strong>Unsupervised Learning</strong>: Find hidden patterns or structures in data without explicit labels (e.g., clustering, dimensionality reduction).</li>
-      <li><strong>Reinforcement Learning</strong>: Learn to make a sequence of decisions by receiving rewards or penalties from the environment.</li>
-      <li><strong>Generative AI</strong>: Create new content (text, images, audio) that mimics real data distributions.</li>
-    </ul>
-  </section>
+    
 
   <section id="supervised">
-    <h3>3. Supervised Learning</h3>
-    <p>
-      Supervised learning is a type of machine learning where the computer learns from labeled data—that means each example 
-      in your data comes with the correct answer (the "label").
-    </p>
 
-    <h4>Goal: </h4>
-    <p>
-    Learn a mapping from input (data) to output (label), so that the computer can make predictions about new, unseen data.
-    </p>
+    <h3>2. Types of Supervised Learning</h3>
     
     <h4>
       The two main types of supervised learning are:
@@ -285,9 +274,9 @@
         <li><strong>Ridge Regression (L2 Regularization): Linear regression with a penalty for large coefficients to prevent overfitting.</strong></li>
         <li><strong>Lasso Regression (L1 Regularization): Similar to ridge, but can shrink some coefficients to zero, performing feature selection.</strong></li>
       </ul>
-  
       
     </div>
+    
     <div id="classification">
       <h4>3.2 Classification</h4>
       <p>Classification algorithms <b><font color="red">predicte categories</font> </b> (e.g., spam detection, image recognition).
@@ -304,109 +293,6 @@
       </ul>
       
     </div>
-  </section>
-
-  <section id="unsupervised">
-    <h3>4. Unsupervised Learning</h3>
-    <p>
-      Unsupervised learning is a type of machine learning where the computer learns patterns or structures from data that 
-      is not labeled—meaning we don’t provide the correct answers.
-    </p>
-
-    <h4>Goal:</h4>
-    <p>
-      Find hidden patterns, groupings, or features in the data without knowing what the "right" answer is.
-    </p>
-
-    <h4>
-      The two main types of unsupervised learning are:
-    </h4>
-    
-    <div id="clustering">
-      <h4>4.1 Clustering</h4>
-      <p>Clustering algorithms group data points into clusters based on similarity or distance. 
-        Common methods include: </p>
-      <ul>
-        <li><strong>K-Means:</strong> Partitions data into a predefined number (K) of clusters by iteratively 
-          assigning points to the nearest cluster centroid and updating centroids, optimizing within-cluster similarity.</li>
-        <li><strong>Hierarchical Clustering:</strong> Builds a tree-like structure (dendrogram) of nested clusters by 
-          either progressively merging smaller clusters (agglomerative) or splitting larger clusters (divisive)</li>
-      </ul>
-    </div>
-    <div id="dim-reduction">
-      <h4>4.2 Dimensionality Reduction</h4>
-      <p>Dimensionality reduction algorithms reduce the number of input variables or features, making data easier to visualize and process. Popular techniques include:</p>
-      <ul>
-        <li><strong>PCA (Principal Component Analysis):</strong> Transforms data to a new set of orthogonal axes that maximize variance.</li>
-        <li><strong>ICA (Independent Component Analysis):</strong> Decomposes a multivariate signal into independent non-Gaussian components, often used in signal processing and brain imaging.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="reinforcement">
-    <h3>5. Reinforcement Learning</h3>
-    <p>
-      Reinforcement learning (RL) is a paradigm where agents learn optimal strategies by interacting with an environment and receiving feedback as rewards or penalties.
-      RL is for problems where you need to make a sequence of decisions over time, not just predict a single answer.
-    </p>
-
-    <p>
-      Reinforcement Learning (RL) is a type of machine learning where an agent (like a robot, computer program, or character in a game) learns how to act by 
-      interacting with an environment and receiving feedback in the form of rewards (positive points) or penalties (negative points), 
-      and gradually learns the best actions to achieve a goal.
-    </p>
-    
-    <h4>Goal: </h4>
-    <p>
-      Learn to make the best possible decisions to achieve the highest total reward in the long run.
-    </p>
-    
-    <h4>
-      Reinforcement learning methods can be broadly grouped as:
-    </h4>
-    
-    <div id="value-based">
-      <h4>5.1 Value-Based Methods</h4>
-      <p>
-        Value-based methods estimate the expected reward of actions or states. The agent chooses actions to maximize these values.<br>
-        <ul>
-          <li><strong>Q-Learning:</strong> Learns the value of taking a given action in a given state.</li>
-        </ul>
-      </p>
-    </div>
-    <div id="policy-based">
-      <h4>5.2 Policy-Based Methods</h4>
-      <p>
-        Policy-based methods directly optimize the policy that decides actions. These are often used when value-based methods are impractical.<br>
-        <ul>
-          <li><strong>Policy Gradient methods:</strong> optimize the policy using gradient ascent.</li>
-        </ul>
-      </p>
-    </div>
-
-    <H4>How is RL Different from Other ML Types?</H4>
-
-    <ul>
-      <li>In regression or classification, you learn from labeled data (inputs with correct answers).</li>
-      <li>In <b>RL</b>, you learn from interacting, trial-and-error: you try something, see what happens, and get better over time.</li>
-    </ul>
-    
-    <h4>Some real-world problems:</h4>
-
-    <b>1. Game Playing: </b>
-    <ul>
-        <li><b>Chess, Go, Poker, Video Games:</b> RL learns strategies by trial and error. </li>
-        <li><b>Example:</b> AlphaGo beat world champions—not by being told moves, but by learning to play over millions of games 
-        and maximizing win rewards.</li>
-     </ul>
-    
-      <b>2. Robotics: </b>
-      <ul>
-        <li><b>Self-driving cars, walking robots, robotic arms:</b>
-        Robots need to make a series of decisions (e.g., turn left, speed up, pick up an object). 
-          RL helps them learn these behaviors from experience in simulated or real worlds.</li>
-      </ul>
-    
   </section>
 
  
