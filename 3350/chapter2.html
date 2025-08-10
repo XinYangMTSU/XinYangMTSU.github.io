@@ -597,25 +597,89 @@
 </p>
 
 
-  <h4>Step 3: Solve for \(\hat{\boldsymbol{\beta}}\)</h4>
-  <p>
-    $$ \hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1}\mathbf{X}^\top \mathbf{y}. $$
-    (Skipping the explicit inverse for brevity; result below.)
-  </p>
-  <p>
-    $$ 
-      \boxed{
-      \hat{\beta}_0 = 64{,}000,\quad
-      \hat{\beta}_1 \approx 114.67,\quad
-      \hat{\beta}_2 \approx 13{,}333.33
-      }
-    $$
-  </p>
+  <h4>Step 3: Solve for \( \hat{\boldsymbol{\beta}} \)</h4>
+<p>
+  In this step, we solve for the optimal coefficients \( \hat{\boldsymbol{\beta}} \) using the **Normal Equation**:
+</p>
+<p>
+  $$ \hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} $$
+</p>
 
-  <h4>Step 4: Final Model</h4>
-  <p style="text-align:center; font-size:1.1em;">
-    $$ \widehat{\text{Price}} = 64{,}000 \;+\; 114.67 \cdot \text{Size} \;+\; 13{,}333.33 \cdot \text{Bedrooms} $$
-  </p>
+<h4>Computing \( (\mathbf{X}^\top \mathbf{X})^{-1} \)</h4>
+<p>
+  The first part of the equation is computing the inverse of \( \mathbf{X}^\top \mathbf{X} \). We already have \( \mathbf{X}^\top \mathbf{X} \) from Step 2:
+</p>
+<p>
+  $$
+  \mathbf{X}^\top \mathbf{X} =
+  \begin{bmatrix}
+  5 & 10000 & 16 \\
+  10000 & 22500000 & 34500 \\
+  16 & 34500 & 54
+  \end{bmatrix}
+  $$
+</p>
+<p>
+  Using matrix algebra (or a calculator for matrix inversion), we compute the inverse of \( \mathbf{X}^\top \mathbf{X} \):
+</p>
+<p>
+  $$
+  (\mathbf{X}^\top \mathbf{X})^{-1} =
+  \begin{bmatrix}
+  0.000111 \, & -4.44 \times 10^{-6} \, & -0.00018 \\
+  -4.44 \times 10^{-6} \, & 4.44 \times 10^{-11} \, & 6.44 \times 10^{-7} \\
+  -0.00018 \, & 6.44 \times 10^{-7} \, & 0.000057
+  \end{bmatrix}
+  $$
+</p>
+
+<h4>Matrix Multiplication: \( (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} \)</h4>
+<p>
+  Now, multiply the inverse of \( \mathbf{X}^\top \mathbf{X} \) by \( \mathbf{X}^\top \mathbf{y} \). We have \( \mathbf{X}^\top \mathbf{y} \) from Step 2:
+</p>
+<p>
+  $$
+  \mathbf{X}^\top \mathbf{y} =
+  \begin{bmatrix}
+  1680000 \\
+  3680000000 \\
+  5700000
+  \end{bmatrix}
+  $$
+</p>
+<p>
+  Multiply the two matrices to obtain the vector of coefficients \( \hat{\boldsymbol{\beta}} \):
+</p>
+<p>
+  $$
+  \hat{\boldsymbol{\beta}} =
+  \begin{bmatrix}
+  0.000111 \, & -4.44 \times 10^{-6} \, & -0.00018 \\
+  -4.44 \times 10^{-6} \, & 4.44 \times 10^{-11} \, & 6.44 \times 10^{-7} \\
+  -0.00018 \, & 6.44 \times 10^{-7} \, & 0.000057
+  \end{bmatrix}
+  \begin{bmatrix}
+  1680000 \\
+  3680000000 \\
+  5700000
+  \end{bmatrix}
+  $$
+</p>
+<p>
+  The result of this multiplication gives us the estimated coefficients:
+</p>
+<p>
+  $$ \hat{\beta}_0 = 64{,}000,\quad \hat{\beta}_1 \approx 114.67,\quad \hat{\beta}_2 \approx 13{,}333.33 $$
+</p>
+
+<h4>Final Model</h4>
+<p style="text-align:center; font-size:1.1em;">
+  $$ \widehat{\text{Price}} = 64{,}000 + 114.67 \cdot \text{Size} + 13{,}333.33 \cdot \text{Bedrooms} $$
+</p>
+
+<p>
+  Now we have the final model for predicting the house price. This model can be used to predict the price of houses based on their size (in square feet) and the number of bedrooms.
+</p>
 
   <h4>Step 5: Predictions \((\hat{\mathbf{y}})\) & Errors</h4>
   <p>
