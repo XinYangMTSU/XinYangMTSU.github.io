@@ -370,87 +370,74 @@
   </p>
 
 
-    <h4>Objective (Least Squares)</h4>
-    <p>The goal of Least Squares regression is to minimize the sum of squared errors (SSE), which represents the difference between the observed values <i>y<sub>i</sub></i> and the predicted values <i>&#770;y<sub>i</sub></i>.</p>
+<h4>Objective (Least Squares)</h4>
+<p>The goal of Least Squares regression is to minimize the sum of squared errors (SSE), which represents the difference between the observed values <i>y<sub>i</sub></i> and the predicted values <i>&#770;y<sub>i</sub></i>.</p>
 
-    <p><b>Formula:</b></p>
-    <p>
-        <span style="font-family: 'Courier New', monospace;">
-            SSE = &sum;<sub>i=1</sub><sup>m</sup> (y<sub>i</sub> - &#770;y<sub>i</sub>)<sup>2</sup>
-        </span>
-    </p>
-    <p>Where:</p>
-    <ul>
-        <li><i>y<sub>i</sub></i> is the actual observed value.</li>
-        <li><i>&#770;y<sub>i</sub></i> is the predicted value (the model's output).</li>
-    </ul>
+<p><b>Formula:</b></p>
+<p>
+    $$ \mathrm{SSE} = \sum_{i=1}^{m} (y_i - \hat{y}_i)^2
+       \;=\; (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y} - \mathbf{X}\boldsymbol{\beta}). $$
+</p>
 
-    <p>You can rewrite this using vector notation:</p>
-    <p>
-        <span style="font-family: 'Courier New', monospace;">
-            SSE = (y - X&#946;)<sup>&#8473;</sup>(y - X&#946;)
-        </span>
-    </p>
-    <p>Where:</p>
-    <ul>
-        <li><i>y</i> is the vector of observed values.</li>
-        <li><i>X</i> is the design matrix (input features for the data).</li>
-        <li><i>&#946;</i> is the vector of coefficients (parameters of the model).</li>
-    </ul>
-    <p>The expression <i>(y - X&#946;)</i> is the vector of errors (the differences between observed and predicted values).</p>
+<p>Where:</p>
+<ul>
+    <li><i>y<sub>i</sub></i> is the actual observed value.</li>
+    <li><i>&#770;y<sub>i</sub></i> is the predicted value (the model's output).</li>
+</ul>
 
-    <h4>Normal Equations (Derivation Result)</h4>
-    <p>Once we have the objective function (SSE), we need to find the values of <i>&#946;</i> that minimize this function. To do so, we take the derivative of the SSE with respect to <i>&#946;</i> and set it to zero to find the optimal coefficients.</p>
+<p>You can rewrite this using vector notation:</p>
+<p>
+    $$ \text{SSE} = (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top (\mathbf{y} - \mathbf{X}\boldsymbol{\beta}) $$
+</p>
+<p>Where:</p>
+<ul>
+    <li><i>y</i> is the vector of observed values.</li>
+    <li><i>X</i> is the design matrix (input features for the data).</li>
+    <li><i>&#946;</i> is the vector of coefficients (parameters of the model).</li>
+</ul>
+<p>The expression <i>(y - X&#946;)</i> is the vector of errors (the differences between observed and predicted values).</p>
 
-    <p><b>Derivation:</b></p>
-    <p>To minimize the SSE, we compute the derivative of the SSE with respect to <i>&#946;</i>, which gives us:</p>
-    <p>
-        <span style="font-family: 'Courier New', monospace;">
-            &part;SSE/&part;&#946; = -2 X<sup>&#8473;</sup> (y - X&#946;)
-        </span>
-    </p>
-    <p>We then set the derivative equal to zero:</p>
-    <p>
-        <span style="font-family: 'Courier New', monospace;">
-            -2 X<sup>&#8473;</sup> (y - X&#946;) = 0
-        </span>
-    </p>
-    <p>Simplifying this:</p>
-    <p>
-        <span style="font-family: 'Courier New', monospace;">
-            X<sup>&#8473;</sup> (y - X&#946;) = 0
-        </span>
-    </p>
-    <p>Expanding this:</p>
-    <p>
-        <span style="font-family: 'Courier New', monospace;">
-            X<sup>&#8473;</sup> y - X<sup>&#8473;</sup> X&#946; = 0
-        </span>
-    </p>
-    <p>Solving for <i>&#946;</i>, we get the Normal Equation:</p>
-    <p>
-        <span style="font-family: 'Courier New', monospace;">
-            X<sup>&#8473;</sup> X&#946; = X<sup>&#8473;</sup> y
-        </span>
-    </p>
-    <p>The solution to this equation gives the optimal values for the coefficients <i>&#946;</i>:</p>
-    <p>
-        <span style="font-family: 'Courier New', monospace;">
-            &#946;<sup>&#770;</sup> = (X<sup>&#8473;</sup> X)<sup>-1</sup> X<sup>&#8473;</sup> y
-        </span>
-    </p>
-    <p>Where:</p>
-    <ul>
-        <li><i>&#946;<sup>&#770;</sup></i> is the vector of estimated coefficients (the model parameters).</li>
-        <li><i>X<sup>&#8473;</sup> X</i> is the matrix of the transposed design matrix multiplied by the design matrix.</li>
-        <li><i>X<sup>&#8473;</sup> y</i> is the matrix multiplication of the transposed design matrix with the observed values vector.</li>
-    </ul>
+<h4>Normal Equations (Derivation Result)</h4>
+<p>Once we have the objective function (SSE), we need to find the values of <i>&#946;</i> that minimize this function. To do so, we take the derivative of the SSE with respect to <i>&#946;</i> and set it to zero to find the optimal coefficients.</p>
 
-    <h4>Key Points:</h4>
-    <ul>
-        <li>The Normal Equation provides a closed-form solution for the coefficients <i>&#946;</i> that minimizes the sum of squared errors.</li>
-        <li>Matrix inversion is required to solve for <i>&#946;</i>, which is computationally expensive for large datasets. For very large datasets, more efficient methods like gradient descent are often used.</li>
-    </ul>
+<p><b>Derivation:</b></p>
+<p>To minimize the SSE, we compute the derivative of the SSE with respect to <i>&#946;</i>, which gives us:</p>
+<p>
+    $$ \frac{\partial \text{SSE}}{\partial \boldsymbol{\beta}} = -2 \mathbf{X}^\top (\mathbf{y} - \mathbf{X}\boldsymbol{\beta}) $$
+</p>
+<p>We then set the derivative equal to zero:</p>
+<p>
+    $$ -2 \mathbf{X}^\top (\mathbf{y} - \mathbf{X}\boldsymbol{\beta}) = 0 $$
+</p>
+<p>Simplifying this:</p>
+<p>
+    $$ \mathbf{X}^\top (\mathbf{y} - \mathbf{X}\boldsymbol{\beta}) = 0 $$
+</p>
+<p>Expanding this:</p>
+<p>
+    $$ \mathbf{X}^\top \mathbf{y} - \mathbf{X}^\top \mathbf{X} \boldsymbol{\beta} = 0 $$
+</p>
+<p>Solving for <i>&#946;</i>, we get the Normal Equation:</p>
+<p>
+    $$ \mathbf{X}^\top \mathbf{X} \boldsymbol{\beta} = \mathbf{X}^\top \mathbf{y} $$
+</p>
+<p>The solution to this equation gives the optimal values for the coefficients <i>&#946;</i>:</p>
+<p>
+    $$ \hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} $$
+</p>
+<p>Where:</p>
+<ul>
+    <li><i>&#946;<sup>&#770;</sup></i> is the vector of estimated coefficients (the model parameters).</li>
+    <li><i>X<sup>&#8473;</sup> X</i> is the matrix of the transposed design matrix multiplied by the design matrix.</li>
+    <li><i>X<sup>&#8473;</sup> y</i> is the matrix multiplication of the transposed design matrix with the observed values vector.</li>
+</ul>
+
+<h4>Key Points:</h4>
+<ul>
+    <li>The Normal Equation provides a closed-form solution for the coefficients <i>&#946;</i> that minimizes the sum of squared errors.</li>
+    <li>Matrix inversion is required to solve for <i>&#946;</i>, which is computationally expensive for large datasets. For very large datasets, more efficient methods like gradient descent are often used.</li>
+</ul>
+
     
 
   <hr>
