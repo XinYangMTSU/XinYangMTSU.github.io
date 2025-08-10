@@ -538,11 +538,11 @@
     $$ 
     \hat{\mathbf{y}} \approx
     \begin{bmatrix}
-      205{,}333.33 \\
-      276{,}000.00 \\
-      333{,}333.33 \\
-      404{,}000.00 \\
-      461{,}333.33
+      205,333.33 \\
+      276,000.00 \\
+      333,333.33 \\
+      404,000.00 \\
+      461,333.33
     \end{bmatrix},\quad
     \mathbf{r} = \mathbf{y} - \hat{\mathbf{y}} \approx
     \begin{bmatrix}
@@ -565,6 +565,23 @@
     <li><strong>\(\beta_2\)</strong>: Each additional bedroom adds about \$13,333.33, holding Size fixed.</li>
   </ul>
 
+    <h4>Why is SSE Large?</h4>
+<p>A large SSE doesn't necessarily mean that the model is bad; it just means that the values you're predicting (house prices) are large. This is why you should scale the SSE to interpret it better, such as calculating the <b>Mean Squared Error (MSE)</b> or <b>Root Mean Squared Error (RMSE)</b>. These measures take the scale of the data into account:</p>
+
+<p><b>Mean Squared Error (MSE):</b></p>
+<p>
+    $$ \text{MSE} = \frac{\text{SSE}}{m} $$
+</p>
+<p>Where <i>m</i> is the number of data points (or samples). MSE gives you the average squared error per data point. For this example, the MSE is approximately <b>21,333,333.33</b>.</p>
+
+<p><b>Root Mean Squared Error (RMSE):</b></p>
+<p>
+    $$ \text{RMSE} = \sqrt{\text{MSE}} $$
+</p>
+<p>RMSE takes the square root of MSE, giving you the error in the same units as the original data (house prices, in this case), making it easier to interpret. For this example, the RMSE is approximately <b>4,618.80</b>.</p>
+
+<p>These metrics give you an idea of how much error you’re getting on average per prediction (in terms of the original units of the data). A smaller MSE or RMSE indicates better performance of the model.</p>
+<br>
 
     
       <h4>3.2 Ridge Regression</h4>
