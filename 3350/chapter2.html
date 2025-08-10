@@ -475,43 +475,127 @@
     $$
   </p>
 
-  <h4>Step 2: Compute \(\mathbf{X}^\top \mathbf{X}\) and \(\mathbf{X}^\top \mathbf{y}\)</h4>
-  <p>
-    Sufficient statistics:
-    \[
-      \sum 1 = 5,\quad
-      \sum \text{Size} = 10000,\quad
-      \sum \text{Bedrooms} = 16
-    \]
-    \[
-      \sum \text{Size}^2 = 22{,}500{,}000,\quad
-      \sum \text{Bedrooms}^2 = 54,\quad
-      \sum (\text{Size}\cdot \text{Bedrooms}) = 34{,}500
-    \]
-    \[
-      \sum \text{Price} = 1{,}680{,}000,\quad
-      \sum (\text{Size}\cdot \text{Price}) = 3{,}680{,}000{,}000,\quad
-      \sum (\text{Bedrooms}\cdot \text{Price}) = 5{,}700{,}000.
-    \]
-  </p>
-  <p>
-    Hence
-    $$
-    \mathbf{X}^\top \mathbf{X} =
+  <h4>Step 2: Compute \( \mathbf{X}^\top \mathbf{X} \) and \( \mathbf{X}^\top \mathbf{y} \)</h4>
+<p>
+  In this step, we calculate two important matrices that will help us solve for the coefficients \( \boldsymbol{\beta} \):
+</p>
+<ul>
+  <li><b>\( \mathbf{X}^\top \mathbf{X} \)</b>: The matrix product of the transpose of the design matrix \( \mathbf{X} \) and \( \mathbf{X} \) itself.</li>
+  <li><b>\( \mathbf{X}^\top \mathbf{y} \)</b>: The matrix product of the transpose of \( \mathbf{X} \) and the observed values \( \mathbf{y} \).</li>
+</ul>
+
+<h4>Transpose of \( \mathbf{X} \)</h4>
+<p>
+  The transpose of the design matrix \( \mathbf{X} \), denoted \( \mathbf{X}^\top \), is obtained by flipping the rows and columns of \( \mathbf{X} \):
+</p>
+<p>
+  $$ 
+  \mathbf{X}^\top =
+  \begin{bmatrix}
+  1 & 1 & 1 & 1 & 1 \\
+  1000 & 1500 & 2000 & 2500 & 3000 \\
+  2 & 3 & 3 & 4 & 4
+  \end{bmatrix}
+  $$
+</p>
+
+<h4>Matrix Multiplication: \( \mathbf{X}^\top \mathbf{X} \)</h4>
+<p>
+  Now, multiply \( \mathbf{X}^\top \) by \( \mathbf{X} \) to get the matrix product \( \mathbf{X}^\top \mathbf{X} \):
+</p>
+<p>
+  $$
+  \mathbf{X}^\top \mathbf{X} =
+  \begin{bmatrix}
+  1 & 1 & 1 & 1 & 1 \\
+  1000 & 1500 & 2000 & 2500 & 3000 \\
+  2 & 3 & 3 & 4 & 4
+  \end{bmatrix}
+  \begin{bmatrix}
+  1 & 1000 & 2 \\
+  1 & 1500 & 3 \\
+  1 & 2000 & 3 \\
+  1 & 2500 & 4 \\
+  1 & 3000 & 4
+  \end{bmatrix}
+  $$
+</p>
+<p>
+  The result of multiplying these matrices gives us the following:
+</p>
+<p>
+  $$
+  \mathbf{X}^\top \mathbf{X} =
+  \begin{bmatrix}
+  5 & 10000 & 16 \\
+  10000 & 22500000 & 34500 \\
+  16 & 34500 & 54
+  \end{bmatrix}
+  $$
+</p>
+
+<h4>Matrix Multiplication: \( \mathbf{X}^\top \mathbf{y} \)</h4>
+<p>
+  Next, multiply \( \mathbf{X}^\top \) by \( \mathbf{y} \) to get the matrix product \( \mathbf{X}^\top \mathbf{y} \):
+</p>
+<p>
+  $$
+  \mathbf{X}^\top \mathbf{y} =
+  \begin{bmatrix}
+  1 & 1 & 1 & 1 & 1 \\
+  1000 & 1500 & 2000 & 2500 & 3000 \\
+  2 & 3 & 3 & 4 & 4
+  \end{bmatrix}
+  \begin{bmatrix}
+  200000 \\
+  280000 \\
+  340000 \\
+  400000 \\
+  460000
+  \end{bmatrix}
+  $$
+</p>
+<p>
+  The result of this multiplication gives the following vector:
+</p>
+<p>
+  $$
+  \mathbf{X}^\top \mathbf{y} =
+  \begin{bmatrix}
+  1680000 \\
+  3680000000 \\
+  5700000
+  \end{bmatrix}
+  $$
+</p>
+
+<h4>Summary of Step 2 Results:</h4>
+<ul>
+  <li><b>\( \mathbf{X}^\top \mathbf{X} \)</b>: 
+    $$ 
     \begin{bmatrix}
-      5 & 10000 & 16 \\
-      10000 & 22500000 & 34500 \\
-      16 & 34500 & 54
-    \end{bmatrix},
-    \quad
-    \mathbf{X}^\top \mathbf{y} =
-    \begin{bmatrix}
-      1680000 \\
-      3680000000 \\
-      5700000
-    \end{bmatrix}.
+    5 & 10000 & 16 \\
+    10000 & 22500000 & 34500 \\
+    16 & 34500 & 54
+    \end{bmatrix}
     $$
-  </p>
+  </li>
+  <li><b>\( \mathbf{X}^\top \mathbf{y} \)</b>: 
+    $$ 
+    \begin{bmatrix}
+    1680000 \\
+    3680000000 \\
+    5700000
+    \end{bmatrix}
+    $$
+  </li>
+</ul>
+
+<p>These matrices will help us solve for the optimal coefficients in the next step using the Normal Equation:</p>
+<p>
+  $$ \hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} $$
+</p>
+
 
   <h4>Step 3: Solve for \(\hat{\boldsymbol{\beta}}\)</h4>
   <p>
