@@ -262,8 +262,7 @@
  
   <section id="supervised-reg">
     
-  <div id="regression">
-    
+  <div id="regression">  
       <h2>2. Regression</h2>
       <p>Regression algorithms <b><font color="red">predict numeric values</font></b> (e.g., house prices, temperature).
       Common methods include:
@@ -273,9 +272,11 @@
         <li><strong>Ridge Regression (L2 Regularization): Linear regression with a penalty for large coefficients to prevent overfitting.</strong></li>
         <li><strong>Lasso Regression (L1 Regularization): Similar to ridge, but can shrink some coefficients to zero, performing feature selection.</strong></li>
       </ul>
+  </div>
 
-      <br>
-    
+  
+    <div id="linear-regression">
+      
       <h4>2.1 Linear Regression</h4>
       <br>
       <b>Idea:</b>
@@ -829,7 +830,10 @@
 
 <p>These metrics give you an idea of how much error you’re getting on average per prediction (in terms of the original units of the data). A smaller MSE or RMSE indicates better performance of the model.</p>
 <br>
+</div>
 
+
+  <div id="ridge-regression">
     
       <h4>2.2 Ridge Regression</h4>
 
@@ -1070,7 +1074,11 @@ giving the same normal equations.</p>
   <li>Do not penalize the intercept; standardize features before ridge to make penalty comparable across features.</li>
   <li>Choose \(\lambda\) via cross-validation for best generalization.</li>
 </ul>
-    
+
+  </div>
+
+
+  <div id="lasso-regression">
     
       <h4>2.3 Lasso Regression</h4>
 
