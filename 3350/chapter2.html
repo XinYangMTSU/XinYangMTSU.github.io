@@ -506,28 +506,35 @@
 <p><b>Derivation:</b></p>
 <p>To minimize the SSE, we compute the derivative of the SSE with respect to <i>&#946;</i>, which gives us:</p>
 <p>
-    $$ \frac{\partial \text{SSE}}{\partial \boldsymbol{\beta}} = -2 \mathbf{X}^\top (\mathbf{y} - \mathbf{X}\boldsymbol{\beta}) $$
+    $$ 
+      \frac{\partial\,\mathrm{SSE}}{\partial \boldsymbol{\beta}}
+      \;=\;
+      -2\,\mathbf{X}^\top \mathbf{y}
+      \;+\;
+      2\,\mathbf{X}^\top \mathbf{X}\,\boldsymbol{\beta}.
+      $$ 
 </p>
-<p>We then set the derivative equal to zero:</p>
-<p>
-    $$ -2 \mathbf{X}^\top (\mathbf{y} - \mathbf{X}\boldsymbol{\beta}) = 0 $$
-</p>
-<p>Simplifying this:</p>
-<p>
-    $$ \mathbf{X}^\top (\mathbf{y} - \mathbf{X}\boldsymbol{\beta}) = 0 $$
-</p>
-<p>Expanding this:</p>
-<p>
-    $$ \mathbf{X}^\top \mathbf{y} - \mathbf{X}^\top \mathbf{X} \boldsymbol{\beta} = 0 $$
-</p>
-<p>Solving for <i>&#946;</i>, we get the Normal Equation:</p>
-<p>
-    $$ \mathbf{X}^\top \mathbf{X} \boldsymbol{\beta} = \mathbf{X}^\top \mathbf{y} $$
-</p>
-<p>The solution to this equation gives the optimal values for the coefficients <i>&#946;</i>:</p>
-<p>
-    $$ \hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} $$
-</p>
+
+    <p><strong>Set the gradient to zero and solve:</strong></p>
+    <p>
+      $$
+      -2\,\mathbf{X}^\top \mathbf{y} + 2\,\mathbf{X}^\top \mathbf{X}\,\hat{\boldsymbol{\beta}} \;=\; \mathbf{0}
+      \;\;\Longrightarrow\;\;
+      \mathbf{X}^\top \mathbf{X}\,\hat{\boldsymbol{\beta}} \;=\; \mathbf{X}^\top \mathbf{y}.
+      $$
+    </p>
+
+    <p><strong>Closed-form solution (if \( \mathbf{X}^\top \mathbf{X} \) is invertible):</strong></p>
+    <p>
+      $$
+      \boxed{\;
+      \hat{\boldsymbol{\beta}}
+      \;=\;
+      (\mathbf{X}^\top \mathbf{X})^{-1}\,\mathbf{X}^\top \mathbf{y}
+      \;}
+      $$
+    </p>
+
 <p>Where:</p>
 <ul>
     <li><i> \( \hat{\boldsymbol{\beta}} \) </i> is the vector of estimated coefficients (the model parameters).</li>
