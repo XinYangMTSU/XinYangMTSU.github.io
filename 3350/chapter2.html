@@ -1073,6 +1073,199 @@ giving the same normal equations.</p>
     
     
       <h4>2.3 Lasso Regression</h4>
+
+<b>Idea:</b>
+<p>
+  Lasso Regression (L1-regularized linear regression) fits a hyperplane like OLS but adds a penalty on the
+  <em>absolute size</em> of coefficients to prevent overfitting and to perform <b>feature selection</b>.
+  The goal is to <b><font color="red">minimize the squared error while pushing unimportant coefficients exactly to zero</font></b>
+  (sparse model).
+</p>
+
+<b>Equation:</b>
+<p style="text-align: center;">
+  Choose \( \boldsymbol{\beta} \) to minimize
+  \[
+    \mathrm{SSE}(\boldsymbol{\beta}) \;+\; \lambda \sum_{j=1}^{n} \lvert \beta_j \rvert,
+  \]
+  where the intercept \( \beta_0 \) is typically <em>not</em> penalized.
+</p>
+
+<p><strong>Where:</strong></p>
+<ul>
+  <li><em>y</em> = predicted output</li>
+  <li>\(\beta_0\) = intercept (value of <em>y</em> when all <em>x</em> are zero; usually unpenalized)</li>
+  <li>\(\beta_1, \beta_2, \ldots, \beta_n\) = coefficients (weights for each feature; L1 penalty can set some exactly to 0)</li>
+  <li><em>x</em><sub>1</sub>, <em>x</em><sub>2</sub>, …, <em>x</em><sub>n</sub> = input features</li>
+  <li>\(\lambda \ge 0\) = regularization strength (larger \(\lambda\) ⇒ stronger shrinkage, more zeros)</li>
+  <li>\(\varepsilon\) = error term</li>
+</ul>
+
+<br>
+
+<center>
+  <img src="images/lasso1.png" width="800px" height="300px" alt="Lasso encourages sparsity (L1 penalty)">
+</center>
+
+<br>
+
+<h4>How Lasso Regression Works</h4>
+
+<!-- Keep MathJax loaded once on the page -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<ol>
+  <li><strong>Collect Data</strong> – Gather features \((x_1, x_2, \ldots, x_n)\) and outputs \(y\).</li>
+  <li><strong>Standardize Features</strong> – Put features on comparable scales so the penalty treats them fairly; don’t penalize the intercept.</li>
+  <li><strong>Choose \(\lambda\)</strong> – Typically via cross-validation (try a grid; pick the best validation score).</li>
+  <li><strong>Fit the Model</strong> – Solve the L1-regularized optimization; common solvers include <em>coordinate descent</em> and <em>LARS</em>.</li>
+  <li><strong>Interpret</strong> – Some coefficients become exactly 0 ⇒ automatic feature selection, simpler model.</li>
+</ol>
+
+<h4>Interpreting the Coefficients</h4>
+<ul>
+  <li><strong>Intercept (\(\beta_0\))</strong> – Baseline prediction when all features are zero (unpenalized).</li>
+  <li><strong>Coefficient (\(\beta_j\))</strong> – Effect of feature \(x_j\) on \(y\) when others are held fixed.</li>
+  <li><strong>Sparsity</strong> – If \(\beta_j = 0\), feature \(x_j\) is effectively removed by the model.</li>
+</ul>
+
+<br>
+
+<h4>Model & Notation</h4>
+<p><b>Scalar form:</b></p>
+<p>
+  $$ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n + \epsilon $$
+</p>
+
+<p><b>Matrix form:</b></p>
+<p>
+  $$ \mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\epsilon} $$
+  where
+  $$ \mathbf{X} =
+    \begin{bmatrix}
+      1 & x_{11} & \cdots & x_{1n} \\
+      1 & x_{21} & \cdots & x_{2n} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      1 & x_{m1} & \cdots & x_{mn}
+    \end{bmatrix},\quad
+    \boldsymbol{\beta} =
+    \begin{bmatrix}
+      \beta_0 \\ \beta_1 \\ \vdots \\ \beta_n
+    \end{bmatrix},\quad
+    \mathbf{y} =
+    \begin{bmatrix}
+      y_1 \\ y_2 \\ \vdots \\ y_m
+    \end{bmatrix}.
+  $$
+</p>
+
+<h4>Objective (L1-Regularized Least Squares)</h4>
+<p>
+  $$ \mathrm{SSE} = \sum_{i=1}^{m} (y_i - \hat{y}_i)^2 = (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y} - \mathbf{X}\boldsymbol{\beta}) $$
+</p>
+<p>
+  Lasso minimizes
+  $$ \min_{\\boldsymbol{\beta}} \; (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta}) \;+\; \lambda \sum_{j=1}^{n} \lvert \beta_j \rvert, $$
+  with \(\beta_0\) typically excluded from the penalty. The L1 term is <em>nondifferentiable</em> at 0, which is why Lasso has no closed-form “normal equations” and instead uses iterative optimization.
+</p>
+
+<h4>Optimization & Soft-Thresholding (No Closed-Form)</h4>
+<p>
+  A common solver is <em>coordinate descent</em>. With standardized features (mean 0, variance 1) and centered targets (so the intercept is separate), the update for each coefficient has a closed-form soft-threshold:
+</p>
+<p style="text-align:center;">
+  $$ \beta_j \leftarrow \frac{1}{\|\mathbf{x}_j\|_2^2}\; S\!\left(\mathbf{x}_j^\top \bigl(\mathbf{y} - \sum_{k\ne j} \mathbf{x}_k \beta_k \bigr),\; \tfrac{\lambda}{2}\right), $$
+  where \( S(t,\gamma) = \mathrm{sign}(t)\,\max(|t|-\gamma,\,0) \) is the <b>soft-threshold</b> operator.
+</p>
+<p>
+  Intuition: if the correlation of feature \(j\) with the current residual is small, soft-thresholding sets \(\beta_j\) to <b>exactly zero</b>; otherwise it shrinks it toward zero.
+</p>
+
+<br>
+
+<hr>
+
+<h4>Worked Example: Predicting House Price (Lasso)</h4>
+<p>Use the same data as in Section 2.1:</p>
+
+<h4>Data</h4>
+<table border="1" cellpadding="6">
+  <tr><th>Size (sq.ft)</th><th>Bedrooms</th><th>Price ($)</th></tr>
+  <tr><td>1000</td><td>2</td><td>200,000</td></tr>
+  <tr><td>1500</td><td>3</td><td>280,000</td></tr>
+  <tr><td>2000</td><td>3</td><td>340,000</td></tr>
+  <tr><td>2500</td><td>4</td><td>400,000</td></tr>
+  <tr><td>3000</td><td>4</td><td>460,000</td></tr>
+</table>
+
+<h4>Step 1: Build \(\mathbf{X}\) and \(\mathbf{y}\)</h4>
+<p>
+  $$ 
+  \mathbf{X} =
+  \begin{bmatrix}
+    1 & 1000 & 2 \\
+    1 & 1500 & 3 \\
+    1 & 2000 & 3 \\
+    1 & 2500 & 4 \\
+    1 & 3000 & 4
+  \end{bmatrix},\quad
+  \mathbf{y} =
+  \begin{bmatrix}
+    200000 \\ 280000 \\ 340000 \\ 400000 \\ 460000
+  \end{bmatrix}.
+  $$
+</p>
+
+<h4>Step 2: Preprocess (Recommended for Lasso)</h4>
+<ul>
+  <li>Standardize the non-intercept columns (Size, Bedrooms) to mean 0 and variance 1.</li>
+  <li>Center \( \mathbf{y} \) (so the intercept can be estimated as the mean of \(y\)).</li>
+  <li>Do <em>not</em> penalize the intercept.</li>
+</ul>
+
+<h4>Step 3: Fit via Coordinate Descent (Conceptual)</h4>
+<ol>
+  <li>Initialize all \(\beta_j=0\) (or from OLS).</li>
+  <li>For \(j=1\) to \(n\): compute the partial residual, apply soft-threshold \(S(\cdot,\lambda/2)\), update \(\beta_j\).</li>
+  <li>Repeat passes over features until coefficients stabilize.</li>
+</ol>
+<p>
+  <b>What you’ll see:</b> with small \(\lambda\), coefficients are close to OLS; as \(\lambda\) increases, both shrink; if Bedrooms is less informative than Size,
+  Lasso will often set \(\beta_{\text{Bedrooms}}\) to <b>exactly 0</b> first (sparser model).
+</p>
+
+<h4>Final Model (Example Form)</h4>
+<p style="text-align:center; font-size:1.1em;">
+  $$ \widehat{\text{Price}} \;=\; \hat{\beta}_0 \;+\; \hat{\beta}_{\text{Size}}\cdot \text{Size} \;+\; \hat{\beta}_{\text{Bedrooms}}\cdot \text{Bedrooms}, $$
+  where for a sufficiently large \(\lambda\), you may get
+  $$ \hat{\beta}_{\text{Bedrooms}} = 0 \quad\Rightarrow\quad
+     \widehat{\text{Price}} \;=\; \hat{\beta}_0 \;+\; \hat{\beta}_{\text{Size}}\cdot \text{Size}. $$
+</p>
+
+<h4>Predictions \((\hat{\mathbf{y}})\) & Errors</h4>
+<p>
+  After fitting, compute \( \hat{\mathbf{y}} = \mathbf{X}\hat{\boldsymbol{\beta}} \), residuals \( \mathbf{r} = \mathbf{y} - \hat{\mathbf{y}} \),
+  and the usual metrics:
+</p>
+<p>
+  $$ \mathrm{SSE} = \sum_{i=1}^{m}(y_i - \hat{y}_i)^2,\quad
+     \mathrm{MSE} = \frac{\mathrm{SSE}}{m},\quad
+     \mathrm{RMSE} = \sqrt{\mathrm{MSE}}. $$
+</p>
+<p>
+  <em>Note:</em> Training error may increase slightly vs OLS (added penalty), but test error often improves thanks to reduced variance and feature selection.
+</p>
+
+<h4>Key Points</h4>
+<ul>
+  <li><b>Sparsity:</b> Lasso can set coefficients exactly to zero ⇒ built-in feature selection.</li>
+  <li><b>No closed-form solution:</b> solved by iterative methods (coordinate descent, LARS); the L1 penalty is nondifferentiable at 0.</li>
+  <li><b>Standardize features:</b> ensures fair penalization across features with different units.</li>
+  <li><b>Choose \(\lambda\) by cross-validation:</b> small \(\lambda\) ≈ OLS; large \(\lambda\) ⇒ simpler, sparser models.</li>
+  <li><b>Contrast with Ridge:</b> Ridge (L2) <em>shrinks</em> but rarely zeros; Lasso (L1) <em>shrinks and selects</em>.</li>
+</ul>
+
+    
       
   </div>
 
