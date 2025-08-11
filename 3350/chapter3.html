@@ -278,7 +278,7 @@
 
   <section id="logistic-regression">
 
-  <h4>2.2 Logistic Regression</h4>
+  <h4>2.1 Logistic Regression</h4>
   <br>
 
   <b>Idea:</b>
@@ -458,7 +458,7 @@
   
 <section id="knn">
 
-  <h4>2.4 k-Nearest Neighbors (kNN)</h4>
+  <h4>2.2 k-Nearest Neighbors (kNN)</h4>
   <br>
 
   <b>Idea:</b>
@@ -634,7 +634,151 @@
 </section>
 
 
-  
+  <section id="svm">
+
+  <h4>2.3 Support Vector Machines (SVM)</h4>
+  <br>
+
+  <b>Idea:</b>
+  <p>
+    Support Vector Machines are margin-based classifiers. They find a decision boundary that <b>maximizes the margin</b>
+    (distance) between classes while allowing some misclassifications when needed. The goal is to
+    <b><font color="red">separate classes with the widest possible margin</font></b> (for robustness), and optionally use
+    <em>kernels</em> to separate data that are not linearly separable.
+  </p>
+
+  <b>Equation (Linear SVM decision function):</b>
+  <p style="text-align:center;">
+    Decision score: \(\; f(\mathbf{x}) = \mathbf{w}^\top \mathbf{x} + b \;\) &nbsp;&nbsp;&nbsp;
+    Prediction: \(\; \hat{y} = \mathrm{sign}\!\big(f(\mathbf{x})\big)\).
+  </p>
+
+  <p><strong>Where:</strong></p>
+  <ul>
+    <li>\(\mathbf{w}\) = weight vector; \(b\) = bias (intercept)</li>
+    <li>\(\mathbf{x} = (x_1,\ldots,x_n)\) = feature vector</li>
+    <li>\(\hat{y} \in \{-1,+1\}\) = predicted class label</li>
+    <li>For non-linear SVM, replace inner products \(\mathbf{x}_i^\top \mathbf{x}_j\) with a kernel \(K(\mathbf{x}_i,\mathbf{x}_j)\)</li>
+  </ul>
+
+  <br>
+
+  <center>
+    <img src="images/svm1.png" width="800px" height="300px" alt="SVM maximum-margin separator with support vectors">
+  </center>
+
+  <br>
+
+  <h4>How SVM Works</h4>
+
+  <!-- Include MathJax once globally on your page if not already included -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <ol>
+    <li><strong>Collect Data</strong> – Feature vectors \(\mathbf{x}_i\) with labels \(y_i \in \{-1,+1\}\).</li>
+    <li><strong>Choose linear or kernel SVM</strong> – Linear for high-dimensional but roughly linear data; kernels (RBF/poly) for curved boundaries.</li>
+    <li><strong>Fit the model</strong> – Optimize a margin objective with regularization parameter \(C\) (trade-off: margin size vs. training errors).</li>
+    <li><strong>Predict</strong> – Use the sign of the decision score \(f(\mathbf{x})\). (Scores are margins, not probabilities.)</li>
+    <li><strong>Evaluate</strong> – Accuracy, precision/recall, F1, ROC-AUC; optionally calibrate probabilities (e.g., Platt scaling).</li>
+  </ol>
+
+  <h4>Interpreting the Model</h4>
+  <ul>
+    <li><strong>Support vectors</strong> – Training points on/inside the margin; they alone determine the boundary.</li>
+    <li><strong>Margin</strong> – Width \(= \dfrac{2}{\|\mathbf{w}\|}\); maximizing margin improves robustness.</li>
+    <li><strong>Parameter \(C\)</strong> – Larger \(C\) penalizes misclassification more (narrower margin, lower bias, higher variance). Smaller \(C\) allows a wider margin (higher bias, lower variance).</li>
+    <li><strong>Kernel</strong> – Implicitly maps features to a higher-dimensional space: \(K(\mathbf{x},\mathbf{z}) = \phi(\mathbf{x})^\top \phi(\mathbf{z})\).</li>
+  </ul>
+
+  <br>
+
+  <h4>Model &amp; Notation</h4>
+  <p><b>Primal (soft-margin, linear SVM):</b></p>
+  <p>
+    $$ \min_{\mathbf{w},\,b,\,\boldsymbol{\xi}\ge 0} \;\; \frac{1}{2}\|\mathbf{w}\|_2^2 + C \sum_{i=1}^{m} \xi_i
+       \quad \text{s.t.}\quad y_i \big(\mathbf{w}^\top \mathbf{x}_i + b\big) \ge 1 - \xi_i. $$
+  </p>
+
+  <p><b>Unconstrained hinge-loss form:</b></p>
+  <p>
+    $$ \min_{\mathbf{w},\,b} \;\; \frac{1}{2}\|\mathbf{w}\|_2^2 \;+\; C \sum_{i=1}^{m} \max\!\big(0,\, 1 - y_i(\mathbf{w}^\top \mathbf{x}_i + b)\big). $$
+  </p>
+
+  <p><b>Dual with kernels (decision rule):</b></p>
+  <p>
+    $$ \max_{\boldsymbol{\alpha}} \;\; \sum_{i=1}^{m}\alpha_i - \frac{1}{2}\sum_{i,j}\alpha_i\alpha_j y_i y_j K(\mathbf{x}_i,\mathbf{x}_j),
+       \quad 0 \le \alpha_i \le C,\; \sum_i \alpha_i y_i = 0, $$
+    $$ f(\mathbf{x}) = \sum_{i \in \mathcal{SV}} \alpha_i y_i\, K(\mathbf{x}_i,\mathbf{x}) + b. $$
+  </p>
+
+  <br>
+
+  <hr>
+
+  <h4>Worked Example: “Sold in 30 days” (Binary)</h4>
+  <p>We reuse the small dataset; set \(y = -1\) for “No”, \(y = +1\) for “Yes”.</p>
+
+  <h4>Data</h4>
+  <table border="1" cellpadding="6">
+    <tr><th>Size (sq.ft)</th><th>Bedrooms</th><th>Sold in 30 days (y)</th></tr>
+    <tr><td>1000</td><td>2</td><td>-1</td></tr>
+    <tr><td>1500</td><td>3</td><td>-1</td></tr>
+    <tr><td>2000</td><td>3</td><td>+1</td></tr>
+    <tr><td>2500</td><td>4</td><td>+1</td></tr>
+    <tr><td>3000</td><td>4</td><td>+1</td></tr>
+  </table>
+
+  <h4>Step 1: Build \(\mathbf{X}\) and \(\mathbf{y}\)</h4>
+  <p>
+    $$ 
+    \mathbf{X} =
+    \begin{bmatrix}
+      1000 & 2 \\
+      1500 & 3 \\
+      2000 & 3 \\
+      2500 & 4 \\
+      3000 & 4
+    \end{bmatrix},\quad
+    \mathbf{y} =
+    \begin{bmatrix}
+      -1 \\ -1 \\ +1 \\ +1 \\ +1
+    \end{bmatrix}.
+    $$
+  </p>
+
+  <h4>Step 2: Choose model &amp; hyperparameters</h4>
+  <ul>
+    <li>Scale features (recommended).</li>
+    <li>Linear SVM with \(C=1\) (baseline). Try RBF kernel with \(\gamma\) tuned via cross-validation if the boundary is curved.</li>
+  </ul>
+
+  <h4>Step 3: Fit</h4>
+  <p>
+    Train the SVM on \((\mathbf{X},\mathbf{y})\). The support vectors will be the examples closest to the boundary (in this toy set, likely near the transition around 2000–2500 sq.ft).
+  </p>
+
+  <h4>Step 4: Predict</h4>
+  <p>
+    For a new house \(\mathbf{x}_q=(2200,3)\), compute \(f(\mathbf{x}_q)\). If \(f(\mathbf{x}_q)&gt;0\) predict <b>+1 (Yes)</b>, else <b>-1 (No)</b>.
+  </p>
+
+  <h4>Step 5: Evaluation</h4>
+  <p>
+    Report accuracy, precision/recall, F1, ROC-AUC. For probability-like outputs, calibrate scores (e.g., Platt scaling) after training.
+  </p>
+
+  <h4>Key Points</h4>
+  <ul>
+    <li><b>Maximum-margin:</b> promotes robustness to small perturbations.</li>
+    <li><b>Support vectors only:</b> the decision boundary depends on a subset of training points.</li>
+    <li><b>\(C\) controls bias–variance:</b> large \(C\) fits training more tightly; small \(C\) widens the margin.</li>
+    <li><b>Kernels:</b> RBF, polynomial, and others enable non-linear boundaries via the kernel trick.</li>
+    <li><b>Scaling is essential:</b> SVMs are sensitive to feature scales.</li>
+    <li><b>Outputs are margins, not probabilities:</b> calibrate if you need probabilities.</li>
+  </ul>
+
+</section>
+
   
   
 
