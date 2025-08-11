@@ -779,6 +779,164 @@
 
 </section>
 
+
+  <section id="dt">
+
+  <h4>2.4 Decision Tree (Classification)</h4>
+  <br>
+
+  <b>Idea:</b>
+  <p>
+    A Decision Tree predicts a class by asking a sequence of <b>if–then</b> questions on features.
+    At each split, it chooses the feature/threshold that best <b><font color="red">separates the classes (reduces impurity)</font></b>.
+    The final prediction comes from the class majority at a leaf.
+  </p>
+
+  <b>Split Criteria (Impurity):</b>
+  <p style="text-align:center;">
+    Common impurities for classification:
+    <br>
+    <b>Gini:</b>
+    \( \displaystyle G(S) = 1 - \sum_{c} p_c^2 \)
+    &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+    <b>Entropy:</b>
+    \( \displaystyle H(S) = - \sum_{c} p_c \log_2 p_c \)
+  </p>
+  <p style="text-align:center;">
+    <b>Information Gain:</b>
+    \( \displaystyle \mathrm{Gain}(S,\text{split})
+       = \mathrm{Impurity}(S) - \sum_{v} \frac{|S_v|}{|S|}\,\mathrm{Impurity}(S_v) \)
+  </p>
+
+  <p><strong>Where:</strong></p>
+  <ul>
+    <li>\( S \) = current set of training samples at a node; \( S_v \) = subset after a split option \(v\)</li>
+    <li>\( p_c \) = fraction of class \(c\) in \(S\)</li>
+    <li>Impurity = Gini or Entropy (choose one consistently)</li>
+  </ul>
+
+  <br>
+
+  <center>
+    <img src="images/tree1.png" width="800px" height="300px" alt="Decision tree splitting space into class-pure regions">
+  </center>
+
+  <br>
+
+  <h4>How a Decision Tree Works</h4>
+
+  <!-- Include MathJax once globally on your page if not already included -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <ol>
+    <li><strong>Collect Data</strong> – Features \((x_1,\ldots,x_n)\) with class labels \(y\).</li>
+    <li><strong>Choose a split</strong> – For each feature/threshold, compute impurity reduction; pick the best.</li>
+    <li><strong>Recurse</strong> – Split the resulting subsets until a stopping rule (pure leaf, max depth, min samples).</li>
+    <li><strong>Predict</strong> – A new sample follows the if–then path; output the leaf’s majority class (optionally class probabilities).</li>
+    <li><strong>Prune/Tune</strong> – Limit depth or prune to avoid overfitting; evaluate with accuracy, precision/recall, F1, ROC-AUC.</li>
+  </ol>
+
+  <h4>Interpreting the Tree</h4>
+  <ul>
+    <li><strong>Rules:</strong> Each root-to-leaf path is a human-readable rule (e.g., <em>if Size &lt; 2000 then No</em>).</li>
+    <li><strong>Feature importance:</strong> Features used near the root (large impurity drop) are typically more influential.</li>
+    <li><strong>Probabilities:</strong> Leaf probabilities = class frequencies in that leaf.</li>
+  </ul>
+
+  <br>
+
+  <h4>Model &amp; Notation</h4>
+  <p>
+    A tree consists of <b>internal nodes</b> (tests like \(x_j \le t\)) and <b>leaves</b> (class distributions).
+    For a dataset \( \{(\mathbf{x}_i, y_i)\}_{i=1}^m \), a split at node \(N\) chooses feature \(j\) and threshold \(t\)
+    that maximize \( \mathrm{Gain}(S_N, (j,t)) \).
+  </p>
+
+  <h4>Objective</h4>
+  <p>
+    Greedy, top-down growth: at each node, pick the split with the <b>largest information gain</b> (or Gini decrease).
+    Overfitting is controlled via <b>pre-pruning</b> (max depth, min samples per leaf) or <b>post-pruning</b>
+    (e.g., cost-complexity pruning with parameter \( \alpha \)).
+  </p>
+
+  <br>
+
+  <hr>
+
+  <h4>Worked Example: “Sold in 30 Days”</h4>
+  <p>Binary labels: 1 = Yes, 0 = No. Features: Size (sq.ft), Bedrooms.</p>
+
+  <h4>Data</h4>
+  <table border="1" cellpadding="6">
+    <tr><th>Size (sq.ft)</th><th>Bedrooms</th><th>Sold in 30 days (y)</th></tr>
+    <tr><td>1000</td><td>2</td><td>0</td></tr>
+    <tr><td>1500</td><td>3</td><td>0</td></tr>
+    <tr><td>2000</td><td>3</td><td>1</td></tr>
+    <tr><td>2500</td><td>4</td><td>1</td></tr>
+    <tr><td>3000</td><td>4</td><td>1</td></tr>
+  </table>
+
+  <h4>Step 1: Parent Impurity</h4>
+  <p>
+    Class counts: 3 ones, 2 zeros ⇒ \(p_1 = 3/5,\; p_0 = 2/5\).
+  </p>
+  <p>
+    Gini:
+    \( \displaystyle G(S) = 1 - (3/5)^2 - (2/5)^2 = 1 - 9/25 - 4/25 = 12/25 = 0.48 \).
+    <br>
+    Entropy:
+    \( \displaystyle H(S) = -\tfrac{3}{5}\log_2\tfrac{3}{5} - \tfrac{2}{5}\log_2\tfrac{2}{5} \approx 0.971 \).
+  </p>
+
+  <h4>Step 2: Try a Split on Size</h4>
+  <p><b>Threshold \( \text{Size} &lt; 2000 \):</b></p>
+  <ul>
+    <li>Left: \((1000,2,0), (1500,3,0)\) ⇒ all 0 ⇒ Gini = 0</li>
+    <li>Right: \((2000,3,1), (2500,4,1), (3000,4,1)\) ⇒ all 1 ⇒ Gini = 0</li>
+  </ul>
+  <p>
+    Weighted child Gini = \( \tfrac{2}{5}\cdot 0 + \tfrac{3}{5}\cdot 0 = 0\).
+    <br>
+    <b>Information Gain = 0.48 − 0 = 0.48</b> (perfect split).
+  </p>
+
+  <p><b>Threshold \( \text{Size} &lt; 2250 \) (for comparison):</b></p>
+  <ul>
+    <li>Left (3 items): labels 0,0,1 ⇒ \(G = 1 - (2/3)^2 - (1/3)^2 = 4/9 \approx 0.444\)</li>
+    <li>Right (2 items): labels 1,1 ⇒ \(G = 0\)</li>
+  </ul>
+  <p>
+    Weighted child Gini \(= \tfrac{3}{5}\cdot 0.444 + \tfrac{2}{5}\cdot 0 \approx 0.267\).
+    <br>
+    <b>Information Gain ≈ 0.48 − 0.267 = 0.213</b>.
+  </p>
+
+  <h4>Step 3: Stopping / Pruning</h4>
+  <p>
+    For this toy set, the split <em>Size &lt; 2000</em> yields pure leaves, so the tree can stop (depth = 1).
+    In larger datasets, use max depth / min samples per leaf or post-pruning (\( \alpha \)) to avoid overfitting.
+  </p>
+
+  <h4>Final Tree (Rules)</h4>
+  <p style="text-align:center; font-size:1.05em;">
+    If \( \text{Size} &lt; 2000 \)\,: predict <b>No</b> (0); &nbsp; else: predict <b>Yes</b> (1).
+  </p>
+
+  <h4>Step 4: Predictions &amp; Evaluation</h4>
+  <p>
+    Apply the rule to training points (all classified correctly here). Report accuracy, precision/recall, F1; for calibrated probabilities, use leaf frequencies.
+  </p>
+
+  <h4>Key Points</h4>
+  <ul>
+    <li><b>Interpretable:</b> human-readable if–then rules.</li>
+    <li><b>No scaling needed:</b> handles mixed feature types and non-linear boundaries.</li>
+    <li><b>Can overfit:</b> control with depth/leaf constraints or pruning (\( \alpha \)).</li>
+    <li><b>Unstable alone:</b> small data changes can alter splits; ensembles (Random Forests, Gradient Boosted Trees) improve stability and accuracy.</li>
+  </ul>
+
+</section>
+
   
   
 
