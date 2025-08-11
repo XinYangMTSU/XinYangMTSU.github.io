@@ -1,1 +1,456 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chapter 3: Unsupervised Learning - Clustering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6; /* MAIN PINK FONT COLOR */
+    }
+    /* Sidebar */
+    #sidebar {
+      position: fixed;
+      width: 250px;
+      height: 100vh;
+      overflow-y: auto;
+      background: linear-gradient(135deg, #2a1e28 80%, #47223c 100%);
+      color: #ffb3de;
+      padding: 38px 24px 24px 28px;
+      box-shadow: 2px 0 24px rgba(255,121,198,.12);
+      z-index: 10;
+    }
+    #sidebar h2 {
+      margin-top: 0;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #ffb3de;
+      margin-bottom: 1.7em;
+      text-align: left;
+    }
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #sidebar .subsections {
+      margin-left: 1.5em;
+      font-size: 0.94em;
+    }
+    #sidebar .subsections a {
+      font-size: 0.94em;
+      margin: 8px 0 8px 12px;
+      padding-left: 16px;
+      color: #ffb3de;
+      border-left: 2px solid transparent;
+      font-weight: 400;
+      box-shadow: none;
+      background: none;
+      gap: 0.6em;
+    }
+    #sidebar .subsections a:hover, #sidebar .subsections a.active {
+      color: #ff79c6;
+      background: #21111b;
+      border-left: 2px solid #ff79c6;
+      font-weight: 500;
+    }
+    #sidebar a {
+      display: flex;
+      align-items: center;
+      color: #ffb3de;
+      text-decoration: none;
+      margin: 16px 0 16px 10px;
+      font-weight: 500;
+      font-size: 1.08em;
+      border-left: 3px solid transparent;
+      padding-left: 14px;
+      transition: background .19s, color .19s, border .19s;
+      border-radius: 8px 0 0 8px;
+      gap: 0.7em;
+    }
+    #sidebar a:hover, #sidebar a.active {
+      color: #ff79c6;
+      background: #21111b;
+      border-left: 3px solid #ff79c6;
+      font-weight: 700;
+      box-shadow: 1px 2px 8px 1px #2d3436;
+    }
+    /* Main content */
+    #content {
+      margin-left: 270px;
+      padding: 56px 6vw 56px 6vw;
+      max-width: 900px;
+      width: 100vw;
+      background: #1a1d1f;
+    }
+    h1 {
+      color: #ff79c6;
+      font-size: 2.5em;
+      font-weight: 800;
+      margin-bottom: 0.4em;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 16px rgba(255,121,198,.18);
+    }
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+    }
+    section:hover {
+      box-shadow: 0 10px 34px 3px rgba(255,121,198,0.13);
+      border-left: 7px solid #ffb3de;
+    }
+    section h3 {
+      border-bottom: 2px solid #ff79c6;
+      padding-bottom: 8px;
+      margin-top: 0;
+      color: #ff79c6;
+      font-size: 1.5em;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+    }
+    ul {
+      margin-left: 2.1em;
+      margin-bottom: 0;
+    }
+    footer {
+      margin-top: 46px;
+      text-align: center;
+      color: #ffb3de;
+      font-size: 1.09em;
+      letter-spacing: 1px;
+      padding: 22px 0 14px 0;
+      border-top: 1px solid #402138;
+      background: none;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-weight: 500;
+    }
+    #sidebar::-webkit-scrollbar {
+      width: 7px;
+      background: #47223c;
+    }
+    #sidebar::-webkit-scrollbar-thumb {
+      background: #ff79c6;
+      border-radius: 6px;
+    }
+    @media (max-width: 950px) {
+      #sidebar {
+        display: none;
+      }
+      #content {
+        margin-left: 0;
+        padding: 18px 4vw 30px 4vw;
+      }
+    }
+
+    /* Links */
+    a, a:visited {
+      color: #ff79c6;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    a:hover, a:focus {
+      color: #fff52e;
+      background: #19121a;
+      text-decoration: underline;
+    }
+    section#references a, section#references a:visited {
+      color: #ff79c6;
+      font-weight: 600;
+    }
+    section#references a:hover, section#references a:focus {
+      color: #fff52e;
+      background: #19121a;
+    }
+  </style>
+
+  <!-- MathJax (once per page) -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+</head>
+<body>
+<nav id="sidebar">
+  <h2><i class="fas fa-book"></i> Contents</h2>
+  <ul>
+    <li><a href="#what-is-unsupervised"><i class="fas fa-robot"></i>1. What is Unsupervised Learning?</a></li>
+    
+    <li>
+      <a href="#clustering"><i class="fas fa-layer-group"></i>2. Clustering</a>
+      <div class="subsections">
+        <a href="#kmeans">2.1 K-Means Clustering</a>
+        <a href="#hierarchical">2.2 Hierarchical Clustering</a>
+      </div>
+    </li>
+    
+    <li><a href="#references"><i class="fas fa-link"></i>References</a></li>
+  </ul>
+</nav>
+
+<main id="content">
+  <h1>Chapter 3: Unsupervised Learning — Clustering</h1>
+
+  <section id="what-is-unsupervised">
+    <h2>1. What is Unsupervised Learning?</h2>
+    <p>
+      Unsupervised learning discovers <b><font color="red">patterns and structure</font></b> in data without labeled outputs.
+      The algorithm only sees the features \( \mathbf{x} \) and tries to organize, compress, or represent them.
+    </p>
+
+    <h4>The goal:</h4>
+    <ul>
+      <li>Group similar examples (clustering), reduce dimensionality (PCA), or learn density/structure.</li>
+      <li>Provide insights when labels are unavailable or expensive to obtain.</li>
+    </ul>
+
+    <h4>Analogy:</h4>
+    <p>
+      Imagine sorting a box of mixed LEGO pieces by shape and color without knowing what set they belong to.
+      You create groups based on similarity — that’s clustering.
+    </p>
+
+    <h4>Main families:</h4>
+    <ul>
+       <li><b>Clustering</b> (K-Means, Hierarchical, DBSCAN, …)</li>
+       <li>Dimensionality Reduction (PCA, t-SNE, UMAP)</li>
+       <li>Density Estimation (GMMs, KDE)</li>
+    </ul>
+  </section>
+
+  <section id="clustering">
+    <h2>2. Clustering</h2>
+    <p>
+      Clustering methods partition data into groups (clusters) so that <b><font color="red">items in the same cluster are more similar</font></b>
+      to each other than to items in other clusters. Similarity is defined via a distance or a density notion.
+    </p>
+    <ul>
+      <li><strong>Prototype-based:</strong> K-Means minimizes within-cluster variance around centroids.</li>
+      <li><strong>Hierarchy-based:</strong> Hierarchical clustering builds a tree (dendrogram) of merges/splits.</li>
+    </ul>
+  </section>
+
+  <section id="kmeans">
+    <h4>2.1 K-Means Clustering</h4>
+    <br>
+
+    <b>Idea:</b>
+    <p>
+      Partition \(m\) points into \(k\) clusters, each represented by a centroid.
+      Assign each point to its nearest centroid, then recompute centroids as the mean of their assigned points.
+      Repeat until assignments stop changing. Goal: <b><font color="red">tight clusters, far apart</font></b>.
+    </p>
+
+    <b>Objective:</b>
+    <p style="text-align:center;">
+      $$
+      \min_{\{\mathcal{C}_1,\ldots,\mathcal{C}_k\}} \;\sum_{j=1}^{k}\; \sum_{\mathbf{x}_i \in \mathcal{C}_j}
+      \|\mathbf{x}_i - \boldsymbol{\mu}_j\|_2^2,
+      \quad \text{with } \boldsymbol{\mu}_j = \frac{1}{|\mathcal{C}_j|} \sum_{\mathbf{x}_i \in \mathcal{C}_j} \mathbf{x}_i.
+      $$
+    </p>
+
+    <p><strong>Where:</strong></p>
+    <ul>
+      <li>\(\mathcal{C}_j\) = set of points in cluster \(j\); \(\boldsymbol{\mu}_j\) = centroid of cluster \(j\).</li>
+      <li>Distance is usually Euclidean; features should be on comparable scales.</li>
+    </ul>
+
+    <br>
+
+    <center>
+      <img src="images/kmeans1.png" width="800px" height="300px" alt="K-Means: assign to nearest centroid, then update means">
+    </center>
+
+    <br>
+
+    <h4>How K-Means Works</h4>
+    <ol>
+      <li><strong>Choose \(k\)</strong> (number of clusters) — use domain knowledge or diagnostics (Elbow, Silhouette).</li>
+      <li><strong>Initialize centroids</strong> (random or <b>k-means++</b> for smarter seeding).</li>
+      <li><strong>Assignment step</strong> — assign each point to the nearest centroid.</li>
+      <li><strong>Update step</strong> — recompute each centroid as the mean of its assigned points.</li>
+      <li><strong>Repeat</strong> steps 3–4 until convergence (assignments stabilize or objective change is tiny).</li>
+    </ol>
+
+    <h4>Interpretation &amp; Tips</h4>
+    <ul>
+      <li><b>Scale features:</b> otherwise the largest-scale feature dominates the distance.</li>
+      <li><b>Initialization matters:</b> run multiple restarts; prefer k-means++.</li>
+      <li><b>Shape assumption:</b> best for roughly spherical, equal-variance clusters.</li>
+      <li><b>Complexity:</b> \(O(m k t d)\) for \(m\) points, \(k\) clusters, \(t\) iterations, \(d\) dimensions.</li>
+    </ul>
+
+    <h4>Worked Example (Toy 2D)</h4>
+    <p>
+      Points: \((1,1), (1.5,2), (3,4), (5,7), (3.5,5), (4.5,5), (3.5,4.5)\). Let \(k=2\). Initialize centroids at \((1,1)\) and \((5,7)\).
+    </p>
+    <ol>
+      <li><b>Assign:</b> \((1,1),(1.5,2)\) → cluster A; others → cluster B.</li>
+      <li><b>Update:</b> \(\mu_A=\big(\tfrac{1+1.5}{2}, \tfrac{1+2}{2}\big)=(1.25,1.5)\);
+        \(\mu_B=\big(\tfrac{3+5+3.5+4.5+3.5}{5}, \tfrac{4+7+5+5+4.5}{5}\big)=(3.9,5.1)\).</li>
+      <li><b>Reassign:</b> memberships don’t change → <b>converged</b>.</li>
+    </ol>
+
+    <h4>Choosing \(k\)</h4>
+    <ul>
+      <li><b>Elbow:</b> plot within-cluster SSE vs \(k\); look for the “elbow”.</li>
+      <li><b>Silhouette:</b> \( s(i)=\dfrac{b(i)-a(i)}{\max\{a(i),b(i)\}} \), where \(a(i)\) is mean intra-cluster distance and \(b(i)\) is the best alternative cluster distance.</li>
+    </ul>
+  </section>
+
+  <section id="hierarchical">
+    <h4>2.2 Hierarchical Clustering</h4>
+    <br>
+
+    <b>Idea:</b>
+    <p>
+      Build a <b>hierarchy of clusters</b> instead of committing to a single \(k\).
+      <em>Agglomerative</em> starts with each point as its own cluster and repeatedly merges the closest pair.
+      The result is a <b>dendrogram</b>; cut it at a chosen height to get clusters.
+    </p>
+
+    <b>Linkage (How to measure cluster–cluster distance):</b>
+    <p style="text-align:center;">
+      <b>Single:</b> \( \min_{x \in A,\, y \in B} \|x-y\| \) &nbsp; | &nbsp;
+      <b>Complete:</b> \( \max_{x \in A,\, y \in B} \|x-y\| \) &nbsp; | &nbsp;
+      <b>Average:</b> \( \frac{1}{|A||B|}\sum_{x \in A}\sum_{y \in B}\|x-y\| \) &nbsp; | &nbsp;
+      <b>Ward:</b> increase in within-cluster SSE when merging.
+    </p>
+
+    <p><strong>Where:</strong></p>
+    <ul>
+      <li>\(A,B\) are clusters; \(\|\cdot\|\) is usually Euclidean distance.</li>
+      <li>Ward’s method is variance-minimizing and often yields compact, spherical clusters.</li>
+    </ul>
+
+    <br>
+
+    <center>
+      <img src="images/hier1.png" width="800px" height="300px" alt="Hierarchical clustering dendrogram and cut height">
+    </center>
+
+    <br>
+
+    <h4>How Agglomerative Clustering Works</h4>
+    <ol>
+      <li><strong>Distance matrix:</strong> compute pairwise distances between all points.</li>
+      <li><strong>Initialize:</strong> each point is its own cluster.</li>
+      <li><strong>Repeat:</strong> find two closest clusters under the chosen linkage; merge them; update distances.</li>
+      <li><strong>Stop:</strong> when a single cluster remains (full tree built).</li>
+      <li><strong>Choose clusters:</strong> cut dendrogram at a height; the horizontal cut yields your grouping.</li>
+    </ol>
+
+    <h4>Worked Example (Sketch)</h4>
+    <p>
+      Using the same 2D points, <em>single-link</em> first merges near neighbors (e.g., \((3,4)\) with \((3.5,4.5)\)),
+      then gradually merges small groups into larger ones. With <em>complete-link</em>, merges are more conservative, producing tighter, rounder clusters. <em>Ward</em> tends to mimic K-Means behavior.
+    </p>
+
+    <h4>Interpretation &amp; Tips</h4>
+    <ul>
+      <li><b>No need to fix \(k\) in advance:</b> examine dendrogram and choose a cut.</li>
+      <li><b>Linkage choice matters:</b> single-link can “chain”; complete-link prefers compact clusters; Ward ≈ variance-minimizing.</li>
+      <li><b>Complexity:</b> typical implementations are \(O(m^2 \log m)\) time and \(O(m^2)\) memory for \(m\) points (due to distance matrix).</li>
+      <li><b>Scaling:</b> standardize features; distance is sensitive to scale.</li>
+    </ul>
+
+    <h4>Comparing K-Means vs Hierarchical</h4>
+    <ul>
+      <li><b>K-Means:</b> fast on large datasets, needs \(k\), prefers spherical clusters.</li>
+      <li><b>Hierarchical:</b> flexible, visual (dendrogram), heavier on memory/time, no fixed \(k\) required.</li>
+    </ul>
+  </section>
+
+  <section id="references">
+    <h3>References</h3>
+    <ul>
+      <li>
+        <a href="https://scikit-learn.org/stable/modules/clustering.html" target="_blank">
+          scikit-learn: Clustering
+        </a>
+      </li>
+      <li>
+        <a href="https://web.stanford.edu/~hastie/ElemStatLearn/" target="_blank">
+          The Elements of Statistical Learning (Hastie, Tibshirani, Friedman)
+        </a>
+      </li>
+      <li>
+        <a href="https://developers.google.com/machine-learning/crash-course" target="_blank">
+          Google Machine Learning Crash Course
+        </a>
+      </li>
+      <li>
+        <a href="https://cran.r-project.org/web/views/Cluster.html" target="_blank">
+          CRAN Task View: Cluster Analysis &amp; Finite Mixture Models
+        </a>
+      </li>
+      <li>Scholar GPT</li>
+    </ul>
+  </section>
+  <footer>
+    &copy; 2025 Xin Yang <br>
+    Department of Computer Science <br>
+    Middle Tennessee State University <br>
+  </footer>
+</main>
+
+<script>
+  // Smooth scrolling & highlight active link
+  const sidebarLinks = document.querySelectorAll('#sidebar a');
+  sidebarLinks.forEach(anchor => {
+    anchor.onclick = function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href'))
+        .scrollIntoView({ behavior: 'smooth' });
+    };
+  });
+
+  // Active link highlight on scroll
+  const sectionIds = Array.from(sidebarLinks).map(l => l.getAttribute('href'));
+  window.addEventListener('scroll', () => {
+    let current = sectionIds[0];
+    for (const id of sectionIds) {
+      const section = document.querySelector(id);
+      if (section && section.getBoundingClientRect().top - 80 < 0) {
+        current = id;
+      }
+    }
+    sidebarLinks.forEach(link => link.classList.remove('active'));
+    const activeLink = document.querySelector(`#sidebar a[href="${current}"]`);
+    if (activeLink) activeLink.classList.add('active');
+  });
+</script>
+
+</body>
+</html>
