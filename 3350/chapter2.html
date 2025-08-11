@@ -832,6 +832,245 @@
 
     
       <h4>2.2 Ridge Regression</h4>
+
+    <b>Idea:</b>
+<p>
+  Ridge Regression (L2-regularized linear regression) fits a hyperplane like OLS but adds a penalty on the size of the coefficients to reduce overfitting and handle multicollinearity.
+  The goal is to <b><font color="red">minimize the squared error while shrinking coefficients</font></b>.
+</p>
+
+<b>Equation:</b>
+<p style="text-align: center;">
+  \(\hat{\mathbf{y}} = \mathbf{X}\boldsymbol{\beta}\), &nbsp; and we choose \(\boldsymbol{\beta}\) to minimize
+  \[
+    \mathrm{SSE}(\boldsymbol{\beta}) + \lambda \sum_{j=1}^{n} \beta_j^2
+  \]
+  (note: the intercept \(\beta_0\) is typically <i>not</i> penalized).
+</p>
+
+<p><strong>Where:</strong></p>
+<ul>
+  <li>\( \lambda \ge 0 \) = regularization strength (larger \(\lambda\) means stronger shrinkage)</li>
+  <li>\( \beta_0 \) = intercept (usually not penalized)</li>
+  <li>\( \beta_1, \dots, \beta_n \) = coefficients for features</li>
+  <li>\( \mathbf{X} \) = design matrix, \( \mathbf{y} \) = targets</li>
+</ul>
+
+<br>
+
+<center>
+  <img src="images/ridge1.png" width="800px" height="300px" alt="Ridge shrinkage illustration">
+</center>
+
+<br>
+
+<h4>How Ridge Regression Works</h4>
+<ol>
+  <li><strong>Collect Data</strong> – Gather features \((x_1,\dots,x_n)\) and outputs \(y\).</li>
+  <li><strong>(Recommended) Standardize Features</strong> – Put features on comparable scales so the penalty treats them fairly.</li>
+  <li><strong>Choose \(\lambda\)</strong> – Typically via cross-validation.</li>
+  <li><strong>Fit the Model</strong> – Minimize squared error + L2 penalty to get \(\hat{\boldsymbol{\beta}}\).</li>
+  <li><strong>Evaluate</strong> – Check train/validation error; tune \(\lambda\) to balance bias–variance.</li>
+</ol>
+
+<h4>Model & Notation</h4>
+<p><b>Scalar form:</b></p>
+<p>
+  \( y = \beta_0 + \beta_1 x_1 + \cdots + \beta_n x_n + \epsilon \)
+</p>
+
+<p><b>Matrix form:</b></p>
+<p>
+  \( \mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\epsilon} \), with
+</p>
+<p>
+  \( \mathbf{X} =
+  \begin{bmatrix}
+    1 & x_{11} & \cdots & x_{1n} \\
+    1 & x_{21} & \cdots & x_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    1 & x_{m1} & \cdots & x_{mn}
+  \end{bmatrix},\;
+  \boldsymbol{\beta} =
+  \begin{bmatrix}
+    \beta_0 \\ \beta_1 \\ \vdots \\ \beta_n
+  \end{bmatrix},\;
+  \mathbf{y} =
+  \begin{bmatrix}
+    y_1 \\ y_2 \\ \vdots \\ y_m
+  \end{bmatrix}.
+  \)
+</p>
+
+<h4>Objective (Ridge / L2)</h4>
+<p>
+  Ridge minimizes
+  \[
+    \mathrm{SSE}(\boldsymbol{\beta}) + \lambda \sum_{j=1}^{n}\beta_j^2
+    \;=\;
+    \|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2 \;+\; \lambda\,\|\boldsymbol{\beta}_{1:n}\|_2^2.
+  \]
+  In vector form with a penalty matrix \(\mathbf{P}=\mathrm{diag}(0,1,\dots,1)\) (no penalty on \(\beta_0\)):
+  \[
+    \min_{\boldsymbol{\beta}} \; (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
+    \;+\; \lambda\,\boldsymbol{\beta}^\top \mathbf{P}\,\boldsymbol{\beta}.
+  \]
+</p>
+
+<h4>Normal Equation (Ridge)</h4>
+<p>
+  Take the gradient w.r.t. \(\boldsymbol{\beta}\), set to zero:
+</p>
+<p>
+  \[
+    -2\,\mathbf{X}^\top\mathbf{y} + 2\,\mathbf{X}^\top\mathbf{X}\,\hat{\boldsymbol{\beta}} + 2\lambda\,\mathbf{P}\,\hat{\boldsymbol{\beta}} = \mathbf{0}
+    \;\;\Longrightarrow\;\;
+    (\mathbf{X}^\top\mathbf{X} + \lambda\,\mathbf{P})\,\hat{\boldsymbol{\beta}} = \mathbf{X}^\top\mathbf{y}.
+  \]
+</p>
+<p>
+  If \(\mathbf{X}^\top\mathbf{X} + \lambda\,\mathbf{P}\) is invertible,
+  \[
+    \boxed{\;
+      \hat{\boldsymbol{\beta}}_{\text{ridge}}
+      =
+      (\mathbf{X}^\top\mathbf{X} + \lambda\,\mathbf{P})^{-1}\,\mathbf{X}^\top\mathbf{y}
+    \;}
+  \]
+</p>
+
+<p><i>Augmented-data view:</i> Ridge equals OLS on
+\(
+\tilde{\mathbf{X}} =
+\begin{bmatrix}
+\mathbf{X}\\[2pt] \sqrt{\lambda}\,\mathbf{P}^{1/2}
+\end{bmatrix},
+\;
+\tilde{\mathbf{y}} =
+\begin{bmatrix}
+\mathbf{y}\\[2pt] \mathbf{0}
+\end{bmatrix}
+\),
+giving the same normal equations.</p>
+
+<br>
+
+<hr>
+
+<h4>Worked Example: Predicting House Price (Ridge)</h4>
+<p>Use the same data as in 3.1 and let \( \lambda = 100 \). We do <b>not</b> penalize the intercept, so
+\(\mathbf{P}=\mathrm{diag}(0,1,1)\).</p>
+
+<h4>Step 1: Build \(\mathbf{X}\) and \(\mathbf{y}\)</h4>
+<p>
+  \( 
+  \mathbf{X} =
+  \begin{bmatrix}
+    1 & 1000 & 2 \\
+    1 & 1500 & 3 \\
+    1 & 2000 & 3 \\
+    1 & 2500 & 4 \\
+    1 & 3000 & 4
+  \end{bmatrix},\quad
+  \mathbf{y} =
+  \begin{bmatrix}
+    200000 \\ 280000 \\ 340000 \\ 400000 \\ 460000
+  \end{bmatrix}.
+  \)
+</p>
+
+<h4>Step 2: Compute \( \mathbf{X}^\top \mathbf{X} + \lambda \mathbf{P} \) and \( \mathbf{X}^\top \mathbf{y} \)</h4>
+<p>
+  From 3.1, \( \mathbf{X}^\top \mathbf{X} =
+  \begin{bmatrix}
+  5 & 10000 & 16 \\
+  10000 & 22500000 & 34500 \\
+  16 & 34500 & 54
+  \end{bmatrix} \), and
+  \( \mathbf{X}^\top \mathbf{y} =
+  \begin{bmatrix}
+  1680000 \\ 3680000000 \\ 5700000
+  \end{bmatrix}.
+  \)
+</p>
+<p>
+  With \( \lambda = 100 \) and \( \mathbf{P}=\mathrm{diag}(0,1,1) \):
+</p>
+<p>
+  \[
+  \mathbf{X}^\top \mathbf{X} + \lambda \mathbf{P} \;=\;
+  \begin{bmatrix}
+  5 & 10000 & 16 \\
+  10000 & 22500000 + 100 & 34500 \\
+  16 & 34500 & 54 + 100
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+  5 & 10000 & 16 \\
+  10000 & 22500010 & 34500 \\
+  16 & 34500 & 154
+  \end{bmatrix}.
+  \]
+</p>
+
+<h4>Step 3: Solve for \( \hat{\boldsymbol{\beta}}_{\text{ridge}} \)</h4>
+<p>
+  \[
+    \hat{\boldsymbol{\beta}}_{\text{ridge}}
+    = (\mathbf{X}^\top\mathbf{X} + \lambda \mathbf{P})^{-1}\,\mathbf{X}^\top\mathbf{y}
+    \;\approx\;
+    \begin{bmatrix}
+      79,962.23 \\
+      127.95 \\
+      40.01
+    \end{bmatrix}.
+  \]
+</p>
+
+<h4>Final Ridge Model (\(\lambda=100\))</h4>
+<p style="text-align:center; font-size:1.1em;">
+  \( \widehat{\text{Price}} = 79{,}962.23 \;+\; 127.95 \cdot \text{Size} \;+\; 40.01 \cdot \text{Bedrooms} \)
+</p>
+
+<h4>Predictions \((\hat{\mathbf{y}})\) & Errors</h4>
+<p>
+  \(
+  \hat{\mathbf{y}} \approx
+  \begin{bmatrix}
+    207,997.12 \\
+    272,014.56 \\
+    335,992.00 \\
+    400,009.44 \\
+    463,986.88
+  \end{bmatrix},\quad
+  \mathbf{r} = \mathbf{y} - \hat{\mathbf{y}} \approx
+  \begin{bmatrix}
+    -7,997.12 \\
+    7,985.44 \\
+    4,008.00 \\
+    -9.44 \\
+    -3,986.88
+  \end{bmatrix}.
+  \)
+</p>
+
+<h4>Training Error (for reference)</h4>
+<p>
+  \(
+    \mathrm{SSE} \approx 1.5968 \times 10^8,\quad
+    \mathrm{MSE} \approx 3.1936 \times 10^7,\quad
+    \mathrm{RMSE} \approx 5{,}651.20.
+  \)
+</p>
+
+<h4>Key Points</h4>
+<ul>
+  <li>Setting \(\lambda=0\) recovers OLS; larger \(\lambda\) shrinks coefficients (reduces variance, increases bias).</li>
+  <li>Ridge helps when features are highly correlated (\(\mathbf{X}^\top\mathbf{X}\) is ill-conditioned).</li>
+  <li>Do not penalize the intercept; standardize features before ridge to make penalty comparable across features.</li>
+  <li>Choose \(\lambda\) via cross-validation for best generalization.</li>
+</ul>
+    
     
       <h4>2.3 Lasso Regression</h4>
       
