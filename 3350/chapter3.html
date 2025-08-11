@@ -276,6 +276,185 @@
   </section>
 
 
+  <section id="logistic-regression">
+
+  <h4>2.2 Logistic Regression</h4>
+  <br>
+
+  <b>Idea:</b>
+  <p>
+    Logistic Regression models the probability of a <b>binary outcome</b> (e.g., 0/1, No/Yes) from input features by passing a linear combination of the features through a
+    <em>sigmoid</em> (logistic) function so the output is between 0 and 1. The goal is to
+    <b><font color="red">maximize the likelihood of the observed labels (equivalently, minimize cross-entropy loss)</font></b>.
+  </p>
+
+  <b>Equation:</b>
+  <p style="text-align: center;">
+    \( p(y=1 \mid \mathbf{x}) = \sigma\!\big(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_n x_n\big) \),
+    where \( \sigma(t) = \dfrac{1}{1 + e^{-t}} \).
+  </p>
+
+  <p><strong>Where:</strong></p>
+  <ul>
+    <li><em>y</em> ∈ {0, 1} is the class label (0 = negative class, 1 = positive class)</li>
+    <li>\(\beta_0\) = intercept</li>
+    <li>\(\beta_1, \beta_2, \ldots, \beta_n\) = feature coefficients</li>
+    <li><em>x</em><sub>1</sub>, …, <em>x</em><sub>n</sub> = input features</li>
+    <li>\(p(y=1 \mid \mathbf{x})\) = predicted probability of class 1</li>
+  </ul>
+
+  <br>
+
+  <center>
+    <img src="images/logistic1.png" width="800px" height="300px" alt="Sigmoid mapping a linear score to probability">
+  </center>
+
+  <br>
+
+  <h4>How Logistic Regression Works</h4>
+
+  <!-- Put this once in your page (head or before </body>) if not already included -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <ol>
+    <li><strong>Collect Data</strong> – Gather feature vectors \((x_1,\ldots,x_n)\) and binary labels \(y \in \{0,1\}\).</li>
+    <li><strong>Model the Probability</strong> – Use \( p_i = \sigma(\mathbf{x}_i^\top \boldsymbol{\beta}) \) to map scores to probabilities.</li>
+    <li><strong>Fit the Model</strong> – Choose \(\boldsymbol{\beta}\) to <em>maximize likelihood</em> (or minimize <em>cross-entropy</em>).</li>
+    <li><strong>Predict</strong> – Output probabilities \(p_i\); convert to class labels with a threshold (commonly 0.5).</li>
+    <li><strong>Evaluate</strong> – Use accuracy, precision/recall, F1, ROC-AUC, and log loss.</li>
+  </ol>
+
+  <h4>Interpreting the Coefficients</h4>
+  <ul>
+    <li><strong>Log-odds:</strong> Logistic Regression is linear in the <em>log-odds</em>:
+      \( \log \dfrac{p}{1-p} = \beta_0 + \beta_1 x_1 + \cdots + \beta_n x_n \).</li>
+    <li><strong>Odds ratio:</strong> A one-unit increase in \(x_j\) multiplies the odds by \(e^{\beta_j}\) (holding others fixed).</li>
+    <li><strong>Sign:</strong> \(\beta_j &gt; 0\) increases the probability (for higher \(x_j\)); \(\beta_j &lt; 0\) decreases it.</li>
+  </ul>
+
+  <br>
+
+  <h4>Model &amp; Notation</h4>
+  <p><b>Scalar form:</b></p>
+  <p>
+    $$ p(y=1 \mid \mathbf{x}) = \sigma\!\big(\beta_0 + \beta_1 x_1 + \cdots + \beta_n x_n\big), \quad
+       \sigma(t) = \frac{1}{1+e^{-t}}. $$
+    $$ \text{logit}(p) = \log\frac{p}{1-p} = \beta_0 + \beta_1 x_1 + \cdots + \beta_n x_n. $$
+  </p>
+
+  <p><b>Matrix form:</b></p>
+  <p>
+    $$ \mathbf{p} = \sigma(\mathbf{X}\boldsymbol{\beta}), \quad
+       \mathbf{X} =
+      \begin{bmatrix}
+        1 & x_{11} & \cdots & x_{1n} \\
+        1 & x_{21} & \cdots & x_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        1 & x_{m1} & \cdots & x_{mn}
+      \end{bmatrix}, \quad
+      \boldsymbol{\beta} =
+      \begin{bmatrix}
+        \beta_0 \\ \beta_1 \\ \vdots \\ \beta_n
+      \end{bmatrix}. $$
+  </p>
+
+  <h4>Objective (Maximum Likelihood / Cross-Entropy)</h4>
+  <p>
+    For samples \((\mathbf{x}_i, y_i)\) with \(y_i \in \{0,1\}\), the (negative) log-likelihood (a.k.a. cross-entropy loss) is
+  </p>
+  <p>
+    $$ \mathcal{L}(\boldsymbol{\beta})
+       = -\sum_{i=1}^{m}\Big[\, y_i \log p_i + (1-y_i)\log(1-p_i) \,\Big],
+       \quad p_i = \sigma(\mathbf{x}_i^\top \boldsymbol{\beta}). $$
+  </p>
+  <p>
+    In vector form, with \(\mathbf{p}=\sigma(\mathbf{X}\boldsymbol{\beta})\):
+    $$ \mathcal{L}(\boldsymbol{\beta}) = -\big( \mathbf{y}^\top \log \mathbf{p} + (\mathbf{1}-\mathbf{y})^\top \log (\mathbf{1}-\mathbf{p}) \big). $$
+  </p>
+
+  <h4>Optimization (No Closed-Form “Normal Equation”)</h4>
+  <p>
+    The gradient and Hessian of the <em>negative</em> log-likelihood are
+  </p>
+  <p>
+    $$ \nabla \mathcal{L}(\boldsymbol{\beta}) = \mathbf{X}^\top(\mathbf{p} - \mathbf{y}), \qquad
+       \nabla^2 \mathcal{L}(\boldsymbol{\beta}) = \mathbf{X}^\top \mathbf{W} \mathbf{X}, \;
+       \mathbf{W} = \mathrm{diag}(p_i(1-p_i)). $$
+  </p>
+  <p>
+    Setting the gradient to zero gives \( \mathbf{X}^\top(\mathbf{y}-\mathbf{p})=\mathbf{0} \), a nonlinear system with no closed-form solution.
+    We solve it iteratively (e.g., <em>gradient descent</em>, <em>Newton–Raphson</em> / IRLS).
+  </p>
+
+  <br>
+
+  <hr>
+
+  <h4>Worked Example: Binary Outcome (Illustration)</h4>
+  <p>Suppose we want to predict whether a house sells within 30 days (1 = Yes, 0 = No) using Size and Bedrooms.</p>
+
+  <h4>Data</h4>
+  <table border="1" cellpadding="6">
+    <tr><th>Size (sq.ft)</th><th>Bedrooms</th><th>Sold in 30 days (y)</th></tr>
+    <tr><td>1000</td><td>2</td><td>0</td></tr>
+    <tr><td>1500</td><td>3</td><td>0</td></tr>
+    <tr><td>2000</td><td>3</td><td>1</td></tr>
+    <tr><td>2500</td><td>4</td><td>1</td></tr>
+    <tr><td>3000</td><td>4</td><td>1</td></tr>
+  </table>
+
+  <h4>Step 1: Build \(\mathbf{X}\) and \(\mathbf{y}\)</h4>
+  <p>
+    $$ 
+    \mathbf{X} =
+    \begin{bmatrix}
+      1 & 1000 & 2 \\
+      1 & 1500 & 3 \\
+      1 & 2000 & 3 \\
+      1 & 2500 & 4 \\
+      1 & 3000 & 4
+    \end{bmatrix},\quad
+    \mathbf{y} =
+    \begin{bmatrix}
+      0 \\ 0 \\ 1 \\ 1 \\ 1
+    \end{bmatrix}.
+    $$
+  </p>
+
+  <h4>Step 2: Probability Model</h4>
+  <p>
+    For any coefficient vector \(\boldsymbol{\beta}\), compute scores \( \mathbf{z} = \mathbf{X}\boldsymbol{\beta} \) and probabilities
+    \( \mathbf{p} = \sigma(\mathbf{z}) \), with \( \sigma(t)=\dfrac{1}{1+e^{-t}} \).
+  </p>
+
+  <h4>Step 3: Fit by Maximum Likelihood</h4>
+  <p>
+    Minimize the cross-entropy:
+    $$ \min_{\boldsymbol{\beta}} \; -\sum_{i=1}^{5}\Big[\, y_i \log p_i + (1-y_i)\log(1-p_i) \,\Big], \quad p_i=\sigma(\mathbf{x}_i^\top \boldsymbol{\beta}). $$
+    Use an iterative optimizer (e.g., gradient descent or IRLS) to obtain \(\hat{\boldsymbol{\beta}}\).
+  </p>
+
+  <h4>Step 4: Predictions &amp; Decisions</h4>
+  <p>
+    Compute \( \hat{\mathbf{p}} = \sigma(\mathbf{X}\hat{\boldsymbol{\beta}}) \).
+    Classify with a threshold (e.g., predict 1 if \( \hat{p}_i \ge 0.5 \), else 0).
+  </p>
+
+  <h4>Step 5: Evaluation</h4>
+  <p>
+    Common metrics: accuracy, precision, recall, F1, ROC-AUC, and log loss.
+  </p>
+
+  <h4>Key Points</h4>
+  <ul>
+    <li>Outputs calibrated probabilities in \([0,1]\), not raw scores.</li>
+    <li>Linear decision boundary in feature space (after the logit transform).</li>
+    <li>No closed-form solution; solved by iterative optimization.</li>
+    <li>For regularization, use <b>Ridge (L2)</b> or <b>Lasso (L1)</b> penalties to improve generalization.</li>
+  </ul>
+
+</section>
+
   
 
   
