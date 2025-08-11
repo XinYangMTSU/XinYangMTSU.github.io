@@ -1,1 +1,485 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chapter 5: Unsupervised Learning - Dimensionality Reduction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6; /* MAIN PINK FONT COLOR */
+    }
+    /* Sidebar */
+    #sidebar {
+      position: fixed;
+      width: 250px;
+      height: 100vh;
+      overflow-y: auto;
+      background: linear-gradient(135deg, #2a1e28 80%, #47223c 100%);
+      color: #ffb3de;
+      padding: 38px 24px 24px 28px;
+      box-shadow: 2px 0 24px rgba(255,121,198,.12);
+      z-index: 10;
+    }
+    #sidebar h2 {
+      margin-top: 0;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #ffb3de;
+      margin-bottom: 1.7em;
+      text-align: left;
+    }
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #sidebar .subsections {
+      margin-left: 1.5em;
+      font-size: 0.94em;
+    }
+    #sidebar .subsections a {
+      font-size: 0.94em;
+      margin: 8px 0 8px 12px;
+      padding-left: 16px;
+      color: #ffb3de;
+      border-left: 2px solid transparent;
+      font-weight: 400;
+      box-shadow: none;
+      background: none;
+      gap: 0.6em;
+    }
+    #sidebar .subsections a:hover, #sidebar .subsections a.active {
+      color: #ff79c6;
+      background: #21111b;
+      border-left: 2px solid #ff79c6;
+      font-weight: 500;
+    }
+    #sidebar a {
+      display: flex;
+      align-items: center;
+      color: #ffb3de;
+      text-decoration: none;
+      margin: 16px 0 16px 10px;
+      font-weight: 500;
+      font-size: 1.08em;
+      border-left: 3px solid transparent;
+      padding-left: 14px;
+      transition: background .19s, color .19s, border .19s;
+      border-radius: 8px 0 0 8px;
+      gap: 0.7em;
+    }
+    #sidebar a:hover, #sidebar a.active {
+      color: #ff79c6;
+      background: #21111b;
+      border-left: 3px solid #ff79c6;
+      font-weight: 700;
+      box-shadow: 1px 2px 8px 1px #2d3436;
+    }
+    /* Main content */
+    #content {
+      margin-left: 270px;
+      padding: 56px 6vw 56px 6vw;
+      max-width: 900px;
+      width: 100vw;
+      background: #1a1d1f;
+    }
+    h1 {
+      color: #ff79c6;
+      font-size: 2.5em;
+      font-weight: 800;
+      margin-bottom: 0.4em;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 16px rgba(255,121,198,.18);
+    }
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+    }
+    section:hover {
+      box-shadow: 0 10px 34px 3px rgba(255,121,198,0.13);
+      border-left: 7px solid #ffb3de;
+    }
+    section h3 {
+      border-bottom: 2px solid #ff79c6;
+      padding-bottom: 8px;
+      margin-top: 0;
+      color: #ff79c6;
+      font-size: 1.5em;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+    }
+    ul {
+      margin-left: 2.1em;
+      margin-bottom: 0;
+    }
+    footer {
+      margin-top: 46px;
+      text-align: center;
+      color: #ffb3de;
+      font-size: 1.09em;
+      letter-spacing: 1px;
+      padding: 22px 0 14px 0;
+      border-top: 1px solid #402138;
+      background: none;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-weight: 500;
+    }
+    #sidebar::-webkit-scrollbar {
+      width: 7px;
+      background: #47223c;
+    }
+    #sidebar::-webkit-scrollbar-thumb {
+      background: #ff79c6;
+      border-radius: 6px;
+    }
+    @media (max-width: 950px) {
+      #sidebar {
+        display: none;
+      }
+      #content {
+        margin-left: 0;
+        padding: 18px 4vw 30px 4vw;
+      }
+    }
+
+    /* Links */
+    a, a:visited {
+      color: #ff79c6;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    a:hover, a:focus {
+      color: #fff52e;
+      background: #19121a;
+      text-decoration: underline;
+    }
+    section#references a, section#references a:visited {
+      color: #ff79c6;
+      font-weight: 600;
+    }
+    section#references a:hover, section#references a:focus {
+      color: #fff52e;
+      background: #19121a;
+    }
+  </style>
+
+  <!-- MathJax (once per page) -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+</head>
+<body>
+<nav id="sidebar">
+  <h2><i class="fas fa-book"></i> Contents</h2>
+  <ul>
+    <li><a href="#what-is-unsupervised"><i class="fas fa-robot"></i>1. What is Unsupervised Learning?</a></li>
+    
+    <li>
+      <a href="#dimred"><i class="fas fa-compress-arrows-alt"></i>2. Dimensionality Reduction</a>
+      <div class="subsections">
+        <a href="#pca">2.1 Principal Component Analysis (PCA)</a>
+        <a href="#ica">2.2 Independent Component Analysis (ICA)</a>
+      </div>
+    </li>
+
+    <li><a href="#references"><i class="fas fa-link"></i>References</a></li>
+  </ul>
+</nav>
+
+<main id="content">
+  <h1>Chapter 5: Unsupervised Learning — Dimensionality Reduction</h1>
+
+  <section id="what-is-unsupervised">
+    <h2>1. What is Unsupervised Learning?</h2>
+    <p>
+      Unsupervised learning uncovers <b><font color="red">structure and patterns</font></b> in data without labels.
+      In <b>dimensionality reduction</b>, we transform high-dimensional data into a lower-dimensional representation
+      that preserves as much important information (variance, independence, or geometry) as possible.
+    </p>
+
+    <h4>Why reduce dimension?</h4>
+    <ul>
+      <li>Visualization (2D/3D), noise reduction, de-correlation, faster models, less overfitting.</li>
+      <li>“Curse of dimensionality” relief: many algorithms behave better in fewer, informative dimensions.</li>
+    </ul>
+
+    <h4>Two classic approaches in this chapter:</h4>
+    <ul>
+      <li><b>Principal Component Analysis (PCA):</b> orthogonal directions capturing maximal variance.</li>
+      <li><b>Independent Component Analysis (ICA):</b> separate statistically independent sources (non-Gaussian).</li>
+    </ul>
+  </section>
+
+  <section id="dimred">
+    <h3>2. Dimensionality Reduction</h3>
+    <p>
+      Map \( \mathbf{X}\in\mathbb{R}^{m\times d} \) to \( \mathbf{Z}\in\mathbb{R}^{m\times k} \) with \(k\ll d\), keeping the essential structure.
+      Different methods formalize “essential” differently: <b>variance</b> (PCA), <b>statistical independence</b> (ICA), <b>manifold geometry</b> (t-SNE/UMAP).
+    </p>
+  </section>
+
+  <section id="pca">
+
+    <h4>2.1 Principal Component Analysis (PCA)</h4>
+    <br>
+
+    <b>Idea:</b>
+    <p>
+      Find orthogonal directions (principal components) along which the data vary the most, then project onto the top \(k\) components.
+      Goal: <b><font color="red">maximize captured variance (or equivalently minimize squared reconstruction error)</font></b>.
+    </p>
+
+    <b>Equations:</b>
+    <p style="text-align:center;">
+      Center data: \( \mathbf{X}_c = \mathbf{X} - \mathbf{1}\mu^\top \), with mean \( \mu = \frac{1}{m}\sum_{i=1}^m \mathbf{x}_i \).<br>
+      Covariance: \( \mathbf{\Sigma} = \frac{1}{m}\mathbf{X}_c^\top \mathbf{X}_c \).<br>
+      Eigen-decomposition: \( \mathbf{\Sigma}\mathbf{v}_j = \lambda_j \mathbf{v}_j \), with \( \lambda_1\ge\lambda_2\ge\cdots \).<br>
+      Projection to \(k\) PCs: \( \mathbf{Z} = \mathbf{X}_c \mathbf{V}_k \), where \( \mathbf{V}_k = [\mathbf{v}_1,\ldots,\mathbf{v}_k] \).
+    </p>
+
+    <p><strong>Where:</strong></p>
+    <ul>
+      <li>\(\mathbf{v}_j\) = principal direction (unit vector), \(\lambda_j\) = variance captured by \(\mathbf{v}_j\).</li>
+      <li>\(\mathbf{Z}\) are low-dimensional coordinates; reconstruct with \( \hat{\mathbf{X}} \approx \mathbf{Z}\mathbf{V}_k^\top + \mathbf{1}\mu^\top \).</li>
+    </ul>
+
+    <br>
+
+    <center>
+      <img src="images/pca1.png" width="800px" height="300px" alt="PCA: rotate to variance axes and project to top-k">
+    </center>
+
+    <br>
+
+    <h4>How PCA Works</h4>
+    <ol>
+      <li><strong>Standardize (optional but common):</strong> scale features to comparable units.</li>
+      <li><strong>Center:</strong> subtract feature means to form \( \mathbf{X}_c \).</li>
+      <li><strong>Compute PCs:</strong> eigendecompose covariance \( \mathbf{\Sigma} \), or do SVD: \( \mathbf{X}_c = \mathbf{U}\mathbf{S}\mathbf{V}^\top \).
+          The right singular vectors \( \mathbf{V} \) are PCs; singular values \( \mathbf{S} \) relate to variance.</li>
+      <li><strong>Choose \(k\):</strong> via explained variance ratio \( \sum_{j=1}^k \lambda_j / \sum_{j=1}^d \lambda_j \) (e.g., 95%).</li>
+      <li><strong>Project:</strong> \( \mathbf{Z} = \mathbf{X}_c \mathbf{V}_k \); use \( \mathbf{Z} \) for visualization or as features.</li>
+    </ol>
+
+    <h4>Interpreting PCA</h4>
+    <ul>
+      <li><b>Explained variance:</b> \( \lambda_j / \sum \lambda \) tells how much each PC contributes.</li>
+      <li><b>Loadings:</b> entries of \( \mathbf{v}_j \) show how original features contribute to each PC.</li>
+      <li><b>Orthogonality:</b> PCs are uncorrelated directions in feature space.</li>
+    </ul>
+
+    <br>
+
+    <h4>Model &amp; Notation</h4>
+    <p><b>Variance maximization (PC1):</b></p>
+    <p style="text-align:center;">
+      \( \mathbf{v}_1 = \arg\max_{\|\mathbf{v}\|=1} \; \mathbf{v}^\top \mathbf{\Sigma}\mathbf{v}
+         \quad\Rightarrow\quad \mathbf{\Sigma}\mathbf{v}_1=\lambda_1\mathbf{v}_1. \)
+    </p>
+    <p><b>Reconstruction view:</b> find rank-\(k\) approximation minimizing Frobenius error:</p>
+    <p style="text-align:center;">
+      \( \min_{\mathrm{rank}(\hat{\mathbf{X}})\le k} \|\mathbf{X}_c - \hat{\mathbf{X}}\|_F^2
+         \;\; \Rightarrow \;\; \hat{\mathbf{X}} = \mathbf{U}_k \mathbf{S}_k \mathbf{V}_k^\top \) (Eckart–Young–Mirsky).
+    </p>
+
+    <h4>Worked Example (2D → 1D)</h4>
+    <p>
+      Suppose points roughly along a slanted line in 2D. PCA rotates axes to align PC1 with the line of best spread
+      and drops PC2 (small variance). Projecting onto PC1 gives a 1D summary preserving most variance.
+    </p>
+
+    <h4>Choosing \(k\)</h4>
+    <ul>
+      <li><b>Scree plot:</b> eigenvalues \(\lambda_j\) vs component index; look for an “elbow”.</li>
+      <li><b>Cumulative variance:</b> pick the smallest \(k\) such that \( \sum_{j=1}^k \lambda_j / \sum_{j=1}^d \lambda_j \ge \tau \) (e.g., 0.95).</li>
+      <li><b>Cross-validation:</b> evaluate downstream task performance with different \(k\).</li>
+    </ul>
+
+    <h4>Key Points</h4>
+    <ul>
+      <li>PCA de-correlates features and compresses data along orthogonal directions of maximum variance.</li>
+      <li>Uses <b>second-order statistics</b> only; it doesn’t enforce statistical independence (that’s ICA’s job).</li>
+      <li>Centering is essential; scaling often recommended when units differ.</li>
+    </ul>
+
+  </section>
+
+  <section id="ica">
+
+    <h4>2.2 Independent Component Analysis (ICA)</h4>
+    <br>
+
+    <b>Idea:</b>
+    <p>
+      Assume observed signals are linear mixtures of hidden, statistically <b>independent</b> sources.
+      ICA <b><font color="red">unmixes</font></b> them by finding a demixing matrix that yields components as independent as possible.
+      Classic example: the “cocktail party” problem—recover individual voices from mixed microphone recordings.
+    </p>
+
+    <b>Generative model:</b>
+    <p style="text-align:center;">
+      Observations \( \mathbf{X} \in \mathbb{R}^{m\times d} \) arise from sources \( \mathbf{S}\in\mathbb{R}^{m\times d} \) via
+      \( \mathbf{X} = \mathbf{S}\mathbf{A}^\top \) (or \( \mathbf{X}^\top = \mathbf{A}\mathbf{S}^\top \) depending on convention),
+      with invertible mixing matrix \( \mathbf{A} \). ICA seeks \( \mathbf{W} \approx \mathbf{A}^{-1} \) so that
+      \( \mathbf{S} \approx \mathbf{X}\mathbf{W}^\top \) have <b>independent</b> components.
+    </p>
+
+    <p><strong>Assumptions (typical):</strong></p>
+    <ul>
+      <li>Sources are <b>statistically independent</b> and at most one is Gaussian.</li>
+      <li>Mixing is linear and stationary over samples.</li>
+    </ul>
+
+    <br>
+
+    <center>
+      <img src="images/ica1.png" width="800px" height="300px" alt="ICA: separate mixed observations into independent sources">
+    </center>
+
+    <br>
+
+    <h4>How ICA Works (FastICA sketch)</h4>
+    <ol>
+      <li><strong>Center &amp; Whiten:</strong> subtract mean; apply PCA-whitening so components are uncorrelated with unit variance.</li>
+      <li><strong>Optimize non-Gaussianity:</strong> find weight vectors \( \mathbf{w}_k \) maximizing non-Gaussianity of \( \mathbf{w}_k^\top \mathbf{X}_{\text{white}} \)
+          (e.g., maximize kurtosis or approximate negentropy with a contrast function \(G\)).</li>
+      <li><strong>Fixed-point iteration (FastICA):</strong> update \( \mathbf{w} \leftarrow \mathbb{E}\{ \mathbf{x} g(\mathbf{w}^\top \mathbf{x}) \} - \mathbb{E}\{ g'(\mathbf{w}^\top \mathbf{x}) \}\mathbf{w} \),
+          then normalize and decorrelate from previously found components.</li>
+      <li><strong>Recover sources:</strong> \( \hat{\mathbf{S}} = \mathbf{X}\mathbf{W}^\top \) (up to scale and permutation).</li>
+    </ol>
+
+    <h4>Objective (maximize independence / non-Gaussianity)</h4>
+    <p style="text-align:center;">
+      Maximize \( J(\mathbf{w}) = \big|\mathrm{E}\{G(\mathbf{w}^\top \mathbf{x})\} - \mathrm{E}\{G(v)\}\big|^2 \),
+      with \(v\sim\mathcal{N}(0,1)\) and suitable nonlinearity \(G\) (e.g., \(G(u)=\log\cosh(u)\), \(G(u)=-e^{-u^2/2}\)).
+    </p>
+    <p>
+      Intuition: independent non-Gaussian sources become <b>more non-Gaussian</b> when correctly unmixed; mixtures tend toward Gaussian by CLT.
+    </p>
+
+    <h4>Ambiguities &amp; Practical Notes</h4>
+    <ul>
+      <li><b>Scale:</b> each source’s scale is arbitrary; ICA recovers up to a multiplicative constant.</li>
+      <li><b>Permutation:</b> order of independent components is arbitrary.</li>
+      <li><b>Whitening first:</b> PCA-whitening simplifies ICA and speeds convergence.</li>
+      <li><b>Use cases:</b> EEG/MEG artifact removal, audio separation, image/text feature extraction.</li>
+    </ul>
+
+    <h4>Worked Example (Conceptual Cocktail Party)</h4>
+    <p>
+      Two speakers (independent sources) talk; two microphones record linear mixtures.
+      After centering and whitening the 2-channel recordings, FastICA finds two weight vectors.
+      Projecting the recordings onto these vectors yields two signals that sound like the individual speakers (up to scale/sign).
+    </p>
+
+    <h4>PCA vs ICA</h4>
+    <ul>
+      <li><b>PCA:</b> finds <em>uncorrelated</em> directions of maximal variance; components are orthogonal.</li>
+      <li><b>ICA:</b> finds <em>independent</em> (usually non-orthogonal) components by maximizing non-Gaussianity.</li>
+      <li>PCA is often used as a preprocessing/whitening step before ICA.</li>
+    </ul>
+
+    <h4>Key Points</h4>
+    <ul>
+      <li>ICA separates latent sources under independence &amp; non-Gaussianity assumptions.</li>
+      <li>Solutions are unique up to scale and permutation; whitening helps stability.</li>
+      <li>Great for source separation and artifact removal; not just for dimensionality reduction.</li>
+    </ul>
+
+  </section>
+
+  <section id="references">
+    <h3>References</h3>
+    <ul>
+      <li>
+        <a href="https://scikit-learn.org/stable/modules/decomposition.html" target="_blank">
+          scikit-learn: Decompositions (PCA, ICA, etc.)
+        </a>
+      </li>
+      <li>
+        <a href="https://web.stanford.edu/~hastie/ElemStatLearn/" target="_blank">
+          The Elements of Statistical Learning (Hastie, Tibshirani, Friedman)
+        </a>
+      </li>
+      <li>
+        <a href="https://research.ics.aalto.fi/ica/fastica/" target="_blank">
+          FastICA (Hyvärinen &amp; Oja)
+        </a>
+      </li>
+      <li>
+        <a href="https://developers.google.com/machine-learning/crash-course" target="_blank">
+          Google Machine Learning Crash Course
+        </a>
+      </li>
+      <li>Scholar GPT</li>
+    </ul>
+  </section>
+
+  <footer>
+    &copy; 2025 Xin Yang <br>
+    Department of Computer Science <br>
+    Middle Tennessee State University <br>
+  </footer>
+</main>
+
+<script>
+  // Smooth scrolling & highlight active link
+  const sidebarLinks = document.querySelectorAll('#sidebar a');
+  sidebarLinks.forEach(anchor => {
+    anchor.onclick = function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href'))
+        .scrollIntoView({ behavior: 'smooth' });
+    };
+  });
+
+  // Active link highlight on scroll
+  const sectionIds = Array.from(sidebarLinks).map(l => l.getAttribute('href'));
+  window.addEventListener('scroll', () => {
+    let current = sectionIds[0];
+    for (const id of sectionIds) {
+      const section = document.querySelector(id);
+      if (section && section.getBoundingClientRect().top - 80 < 0) {
+        current = id;
+      }
+    }
+    sidebarLinks.forEach(link => link.classList.remove('active'));
+    const activeLink = document.querySelector(`#sidebar a[href="${current}"]`);
+    if (activeLink) activeLink.classList.add('active');
+  });
+</script>
+
+</body>
+</html>
