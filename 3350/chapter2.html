@@ -440,17 +440,68 @@
 <p>Once we have the objective function (SSE), we need to find the values of <i>&#946;</i> that minimize this function. To do so, we take the derivative of the SSE with respect to <i>&#946;</i> and set it to zero to find the optimal coefficients.</p>
 
   <p><b> Expand the SSE: </b></p>
-    <p>
-      $$
-      \mathrm{SSE}
-      \;=\;
-      \mathbf{y}^\top \mathbf{y}
-      \;-\;
-      2\,\boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{y}
-      \;+\;
-      \boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{X}\,\boldsymbol{\beta}.
-      $$
-    </p>
+
+     <div class="step">
+      <p><strong>Start:</strong></p>
+      <p>
+        $$
+        \mathrm{SSE}=(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
+        $$
+      </p>
+    </div>
+
+    <div class="step">
+      <p><strong>Distribute (FOIL):</strong></p>
+      <p>
+        $$
+        =\;\mathbf{y}^\top\mathbf{y}
+        \;-\;\mathbf{y}^\top(\mathbf{X}\boldsymbol{\beta})
+        \;-\;(\mathbf{X}\boldsymbol{\beta})^\top\mathbf{y}
+        \;+\;(\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{X}\boldsymbol{\beta})
+        $$
+      </p>
+    </div>
+
+    <div class="step">
+      <p><strong>Use transpose rules:</strong> \((AB)^\top=B^\top A^\top\).</p>
+      <p>
+        A scalar equals its transpose, so  
+        $$
+        \mathbf{y}^\top \mathbf{X} \boldsymbol{\beta}
+        = (\mathbf{y}^\top \mathbf{X} \boldsymbol{\beta})^\top
+        = \boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{y}.
+        $$
+      </p>
+      <p>
+        Therefore:  
+        $$
+        - \mathbf{y}^\top\mathbf{X}\boldsymbol{\beta} \;-\; (\mathbf{X}\boldsymbol{\beta})^\top\mathbf{y}
+        \;=\; - \boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y} \;-\; \boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}
+        \;=\; -2\,\boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}.
+        $$
+      </p>
+      <p>
+        $$
+        (\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{X}\boldsymbol{\beta})
+        \;=\;\boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{X}\,\boldsymbol{\beta}.
+        $$
+      </p>
+    </div>
+
+    <div class="step">
+      <p><strong>Result:</strong></p>
+      <p>
+        $$
+        \boxed{
+        \mathrm{SSE}
+        \;=\;
+        \mathbf{y}^\top\mathbf{y}
+        \;-\; 2\,\boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}
+        \;+\; \boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{X}\,\boldsymbol{\beta}
+        }.
+        $$
+      </p>
+    </div>
     
 <p><b>Derivation:</b></p>
 <p>To minimize the SSE, we compute the derivative of the SSE with respect to <i>&#946;</i>, which gives us:</p>
