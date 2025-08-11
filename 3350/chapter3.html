@@ -456,7 +456,185 @@
 </section>
 
   
+<section id="knn">
 
+  <h4>2.4 k-Nearest Neighbors (kNN)</h4>
+  <br>
+
+  <b>Idea:</b>
+  <p>
+    k-Nearest Neighbors is a <b>non-parametric, instance-based</b> method. To make a prediction for a new point,
+    it looks at the <b>k closest training examples</b> and combines their labels/values:
+    majority vote for classification, average for regression.
+    The goal is to <b><font color="red">use local neighborhoods to predict</font></b> rather than fitting a global line or plane.
+  </p>
+
+  <b>Equation (Distance & Rules):</b>
+  <p style="text-align:center;">
+    Euclidean distance:
+    \[
+      d(\mathbf{x}_i,\mathbf{x}_q) \;=\; \sqrt{\sum_{j=1}^{n} (x_{ij} - x_{qj})^2}
+    \]
+    (Common alternatives: Manhattan \( \sum_j |x_{ij}-x_{qj}| \), Minkowski.)
+  </p>
+  <p><b>Prediction (Classification):</b> \(\hat{y} = \mathrm{mode}\{\,y_{i_1},\ldots,y_{i_k}\,\}\). Weighted variant:
+    \(\hat{p} = \dfrac{\sum_{r=1}^{k} w_r \, y_{i_r}}{\sum_{r=1}^{k} w_r}\), with \(w_r = \dfrac{1}{d_r + \varepsilon}\).
+  </p>
+  <p><b>Prediction (Regression):</b> \(\hat{y} = \dfrac{1}{k}\sum_{r=1}^{k} y_{i_r}\). Weighted:
+    \(\hat{y} = \dfrac{\sum_{r=1}^{k} w_r \, y_{i_r}}{\sum_{r=1}^{k} w_r}\).
+  </p>
+
+  <p><strong>Where:</strong></p>
+  <ul>
+    <li><em>k</em> = number of neighbors (hyperparameter)</li>
+    <li>Distance metric (Euclidean by default)</li>
+    <li>Weights (uniform or distance-weighted)</li>
+  </ul>
+
+  <br>
+
+  <center>
+    <img src="images/knn1.png" width="800px" height="300px" alt="kNN neighborhoods around a query point">
+  </center>
+
+  <br>
+
+  <h4>How kNN Works</h4>
+
+  <!-- Include MathJax once globally on your page if not already included -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <ol>
+    <li><strong>Collect Data</strong> – Keep the training examples in memory (lazy learning; no parameter fitting).</li>
+    <li><strong>Choose k, distance, weights</strong> – Often selected via cross-validation.</li>
+    <li><strong>Find neighbors</strong> – For a query point \( \mathbf{x}_q \), compute distances to all training points and pick the k smallest.</li>
+    <li><strong>Aggregate</strong> – Classification: majority vote; Regression: average (optionally distance-weighted).</li>
+    <li><strong>Evaluate</strong> – Use accuracy/F1/AUC for classification, or MSE/RMSE/MAE for regression.</li>
+  </ol>
+
+  <h4>Interpreting the Parameters</h4>
+  <ul>
+    <li><strong>k:</strong> Small k → low bias, high variance (sensitive/noisy). Large k → higher bias, smoother predictions.</li>
+    <li><strong>Distance weighting:</strong> Nearer points get more influence (e.g., \(w=1/(d+\varepsilon)\)).</li>
+    <li><strong>Feature scaling:</strong> <b>Standardize</b> features; otherwise large-scale features dominate distance.</li>
+  </ul>
+
+  <br>
+
+  <h4>Model & Notation</h4>
+  <p>
+    Given training set \(\{(\mathbf{x}_i, y_i)\}_{i=1}^m\) and a query \(\mathbf{x}_q\), let
+    \(i_1,\ldots,i_k\) index the k nearest neighbors by a chosen distance \(d(\cdot,\cdot)\).
+  </p>
+  <p>
+    <b>kNN-Classification:</b>
+    \(\hat{y} = \mathrm{mode}\{y_{i_1},\ldots,y_{i_k}\}\), or probability
+    \(\hat{p} = \frac{\sum_r w_r \, y_{i_r}}{\sum_r w_r}\).
+  </p>
+  <p>
+    <b>kNN-Regression:</b>
+    \(\hat{y} = \frac{1}{k}\sum_r y_{i_r}\) (uniform), or
+    \(\hat{y} = \frac{\sum_r w_r \, y_{i_r}}{\sum_r w_r}\) (distance-weighted).
+  </p>
+
+  <h4>Objective</h4>
+  <p>
+    kNN has <b>no explicit training objective</b> (no coefficients to fit). It is a <em>lazy learner</em>:
+    all computation happens at prediction time. The “objective” is implicit—use local neighborhoods to minimize local error.
+  </p>
+
+  <br>
+
+  <hr>
+
+  <h4>Worked Example: Predicting House Price (kNN-Regression)</h4>
+  <p>Use the same data as before. Predict the price for a query house with <b>Size = 2200</b> sq.ft and <b>Bedrooms = 3</b>.</p>
+
+  <h4>Data</h4>
+  <table border="1" cellpadding="6">
+    <tr><th>Size (sq.ft)</th><th>Bedrooms</th><th>Price ($)</th></tr>
+    <tr><td>1000</td><td>2</td><td>200,000</td></tr>
+    <tr><td>1500</td><td>3</td><td>280,000</td></tr>
+    <tr><td>2000</td><td>3</td><td>340,000</td></tr>
+    <tr><td>2500</td><td>4</td><td>400,000</td></tr>
+    <tr><td>3000</td><td>4</td><td>460,000</td></tr>
+  </table>
+
+  <h4>Step 1: Build \(\mathbf{X}\), \(\mathbf{y}\), and the query \(\mathbf{x}_q\)</h4>
+  <p>
+    \(\mathbf{X} = \begin{bmatrix}
+      1000 & 2\\
+      1500 & 3\\
+      2000 & 3\\
+      2500 & 4\\
+      3000 & 4
+    \end{bmatrix},\quad
+    \mathbf{y} = \begin{bmatrix}
+      200000\\ 280000\\ 340000\\ 400000\\ 460000
+    \end{bmatrix},\quad
+    \mathbf{x}_q = \begin{bmatrix}2200 & 3\end{bmatrix}.
+  \)
+  </p>
+
+  <h4>Step 2: Distances to the Query (Euclidean)</h4>
+  <p>
+    \( d_i = \sqrt{(\text{Size}_i - 2200)^2 + (\text{Bed}_i - 3)^2} \).
+  </p>
+  <table border="1" cellpadding="6">
+    <tr><th>Training point</th><th>(Size, Beds)</th><th>Distance to (2200,3)</th></tr>
+    <tr><td>1</td><td>(1000, 2)</td><td>≈ 1200.00</td></tr>
+    <tr><td>2</td><td>(1500, 3)</td><td>700.00</td></tr>
+    <tr><td>3</td><td>(2000, 3)</td><td>200.00</td></tr>
+    <tr><td>4</td><td>(2500, 4)</td><td>≈ 300.00</td></tr>
+    <tr><td>5</td><td>(3000, 4)</td><td>≈ 800.00</td></tr>
+  </table>
+
+  <h4>Step 3: Choose k and Neighbors</h4>
+  <p>
+    Let \(k=3\). The 3 nearest neighbors are points #3 (340,000), #4 (400,000), and #2 (280,000).
+  </p>
+
+  <h4>Step 4: Predict (Regression)</h4>
+  <p>
+    <b>Uniform kNN:</b>
+    \(\hat{y} = \frac{340{,}000 + 400{,}000 + 280{,}000}{3} = 340{,}000.\)
+  </p>
+  <p>
+    <b>Distance-weighted kNN</b> (with \(w_i = 1/(d_i+\varepsilon)\)):
+    \[
+      \hat{y}
+      \approx \frac{ \frac{340{,}000}{200} + \frac{400{,}000}{300} + \frac{280{,}000}{700} }
+      { \frac{1}{200} + \frac{1}{300} + \frac{1}{700} }
+      \;\approx\; 351{,}707.
+    \]
+  </p>
+
+  <p class="note">
+    <b>Scaling matters:</b> Size is measured in thousands while Bedrooms is small, so distance is dominated by Size.
+    In practice, <b>standardize</b> features before kNN.
+  </p>
+
+  <br>
+
+  <h4>Classification Note (Same Setup)</h4>
+  <p>
+    If the target were binary (e.g., Sold in 30 days: 0/1), the same neighbors would vote.
+    With labels \([1,1,0]\) among the 3 nearest, the majority is <b>1 (Yes)</b>, and a simple probability estimate is \(2/3 \approx 0.67\).
+  </p>
+
+  <h4>Key Points</h4>
+  <ul>
+    <li><b>Non-parametric, lazy:</b> No training fit; predicts via local neighborhoods.</li>
+    <li><b>Hyperparameters:</b> k, distance metric, and weighting—choose via cross-validation.</li>
+    <li><b>Feature scaling is essential.</b> Consider standardization or normalization.</li>
+    <li><b>Computational cost:</b> Naïve prediction is \(O(mn)\) per query; KD-trees/ball trees/ANN speed this up.</li>
+    <li><b>Curses in high-D:</b> Distances become less informative as dimension grows (curse of dimensionality).</li>
+  </ul>
+
+</section>
+
+
+  
   
   
 
