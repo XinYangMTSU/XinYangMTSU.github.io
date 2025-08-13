@@ -243,6 +243,146 @@ section#references a:hover, section#references a:focus {
 </nav>
 
 <main id="content">
+
+
+<section id="ridge-regression">
+      
+  <h4>2.2 Ridge Regression (L2 Regularization)</h4>
+  <br>
+  <b>Idea:</b>
+  <p>
+    Ridge Regression is an extension of Linear Regression that adds a <b><font color="red">penalty term to large coefficients</font></b>.
+    This penalty (L2 regularization) discourages the model from relying too heavily on any single feature, which helps 
+    prevent <b>overfitting</b>—especially when features are highly correlated (multicollinearity).
+  </p>
+
+  <b>Equation:</b>
+  <p style="text-align: center;">
+      \(\hat{\boldsymbol{\beta}} = \underset{\boldsymbol{\beta}}{\mathrm{argmin}}\; \sum_{i=1}^m (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^n \beta_j^2\)
+  </p>
+
+  <p><strong>Where:</strong></p>
+  <ul>
+    <li>\(y_i\) = actual output for sample \(i\)</li>
+    <li>\(\hat{y}_i\) = predicted output for sample \(i\)</li>
+    <li>\(\beta_j\) = coefficient for feature \(j\)</li>
+    <li>\(\lambda\) = regularization parameter (controls penalty strength)</li>
+  </ul>
+
+  <br>
+    
+  <center>
+    <img src="images/ridge_regression.png" width="800px" height="300px">
+  </center>
+    
+  <br>
+    
+  <h4>How Ridge Regression Works</h4>
+<ol>
+  <li><strong>Collect Data</strong> – Same as linear regression: gather feature values (\(x_1, \dots, x_n\)) and target values (\(y\)).</li>
+  <li><strong>Fit the Model</strong> – Minimize both the sum of squared errors (SSE) and the squared magnitude of coefficients.</li>
+  <li><strong>Regularization Effect</strong> – The \(\lambda\) term shrinks coefficients toward zero (but never exactly zero), reducing variance but slightly increasing bias.</li>
+</ol>
+
+<h4>Objective Function</h4>
+<p>The Ridge Regression objective combines the Least Squares loss with an L2 penalty:</p>
+<p>
+    $$ 
+    J(\boldsymbol{\beta}) = 
+    \underbrace{(\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y} - \mathbf{X}\boldsymbol{\beta})}_{\text{SSE}} 
+    \;+\; \lambda \underbrace{\boldsymbol{\beta}^\top \boldsymbol{\beta}}_{\text{L2 penalty}}
+    $$
+</p>
+<p>Where:</p>
+<ul>
+    <li>The SSE term ensures good fit to the data.</li>
+    <li>The L2 penalty discourages large coefficient values.</li>
+</ul>
+
+<h4>Matrix Form Solution</h4>
+<p>Taking derivatives of \(J(\boldsymbol{\beta})\) with respect to \(\boldsymbol{\beta}\) and setting to zero yields:</p>
+<p>
+    $$ 
+    (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})\,\hat{\boldsymbol{\beta}} = \mathbf{X}^\top \mathbf{y}
+    $$
+</p>
+<p>Thus, the closed-form solution is:</p>
+<p>
+    $$
+    \boxed{
+    \hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}
+    }
+    $$
+</p>
+
+<h4>Key Points:</h4>
+<ul>
+    <li>\(\lambda = 0\) → Ridge regression reduces to ordinary linear regression.</li>
+    <li>Larger \(\lambda\) → greater shrinkage of coefficients, reducing model complexity.</li>
+    <li>Ridge is useful when features are correlated, as it stabilizes coefficient estimates.</li>
+</ul>
+
+<hr>
+
+<h4>Worked Example: Predicting House Price (with Ridge Penalty)</h4>
+<p>Model: 
+    $$ \text{Price} = \beta_0 + \beta_1 \cdot \text{Size} + \beta_2 \cdot \text{Bedrooms} + \epsilon $$
+</p>
+
+<h4>Step 1: Build \(\mathbf{X}\) and \(\mathbf{y}\)</h4>
+<p>Same as in Linear Regression example.</p>
+
+<h4>Step 2: Compute \( \mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I} \)</h4>
+<p>For example, if:</p>
+<p>
+  $$
+  \mathbf{X}^\top \mathbf{X} =
+  \begin{bmatrix}
+  5 & 10000 & 16 \\
+  10000 & 22500000 & 34500 \\
+  16 & 34500 & 54
+  \end{bmatrix},\quad
+  \lambda = 100
+  $$
+</p>
+<p>Then:</p>
+<p>
+  $$
+  \mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I} =
+  \begin{bmatrix}
+  5+100 & 10000 & 16 \\
+  10000 & 22500000+100 & 34500 \\
+  16 & 34500 & 54+100
+  \end{bmatrix}
+  $$
+</p>
+
+<h4>Step 3: Solve for \(\hat{\boldsymbol{\beta}}\)</h4>
+<p>
+    $$ 
+    \hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}
+    $$
+</p>
+<p>The result will be similar to the linear regression coefficients but slightly smaller in magnitude.</p>
+
+<h4>Interpretation</h4>
+<ul>
+  <li><strong>Intercept (\(\beta_0\))</strong>: Baseline predicted price.</li>
+  <li><strong>\(\beta_1, \beta_2\)</strong>: Effect of size and bedrooms, slightly reduced to avoid overfitting.</li>
+</ul>
+
+<h4>Why Use Ridge?</h4>
+<ul>
+  <li>Prevents overfitting when you have many features.</li>
+  <li>Handles multicollinearity well.</li>
+  <li>Provides more stable predictions.</li>
+</ul>
+
+</section>
+
+
+
+  
   <h1>Introduction to Machine Learning</h1>
 
   <section id="what-is-ml">
