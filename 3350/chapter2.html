@@ -1018,7 +1018,7 @@
 <p><b>Scalar form:</b></p>
 <p>
   $$
-   y = \beta_0 + \beta_1 x_1 + \cdots + \beta_n x_n + \epsilon 
+   y = \beta_0 + \beta_1 x_1 + \cdots + \beta_n x_p + \epsilon 
   $$
 </p>
 
@@ -1283,7 +1283,7 @@ giving the same normal equations.</p>
 <h4>Model & Notation</h4>
 <p><b>Scalar form:</b></p>
 <p>
-  $$ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n + \epsilon $$
+  $$ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p + \epsilon $$
 </p>
 
 <p><b>Matrix form:</b></p>
@@ -1292,14 +1292,14 @@ giving the same normal equations.</p>
   where
   $$ \mathbf{X} =
     \begin{bmatrix}
-      1 & x_{11} & \cdots & x_{1n} \\
-      1 & x_{21} & \cdots & x_{2n} \\
+      1 & x_{11} & \cdots & x_{1p} \\
+      1 & x_{21} & \cdots & x_{2p} \\
       \vdots & \vdots & \ddots & \vdots \\
-      1 & x_{m1} & \cdots & x_{mn}
+      1 & x_{m1} & \cdots & x_{mp}
     \end{bmatrix},\quad
     \boldsymbol{\beta} =
     \begin{bmatrix}
-      \beta_0 \\ \beta_1 \\ \vdots \\ \beta_n
+      \beta_0 \\ \beta_1 \\ \vdots \\ \beta_p
     \end{bmatrix},\quad
     \mathbf{y} =
     \begin{bmatrix}
