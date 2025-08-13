@@ -1138,7 +1138,7 @@ giving the same normal equations.</p>
 
 <h4>Step 1: Build \(\mathbf{X}\) and \(\mathbf{y}\)</h4>
 <p>
-  \( 
+  $$
   \mathbf{X} =
   \begin{bmatrix}
     1 & 1000 & 2 \\
@@ -1151,12 +1151,14 @@ giving the same normal equations.</p>
   \begin{bmatrix}
     200000 \\ 280000 \\ 340000 \\ 400000 \\ 460000
   \end{bmatrix}.
-  \)
+  $$
 </p>
 
 <h4>Step 2: Compute \( \mathbf{X}^\top \mathbf{X} + \lambda \mathbf{P} \) and \( \mathbf{X}^\top \mathbf{y} \)</h4>
 <p>
-  From 3.1, \( \mathbf{X}^\top \mathbf{X} =
+  From the ridge regression section, 
+  $$ 
+  \mathbf{X}^\top \mathbf{X} =
   \begin{bmatrix}
   5 & 10000 & 16 \\
   10000 & 22500000 & 34500 \\
@@ -1166,7 +1168,7 @@ giving the same normal equations.</p>
   \begin{bmatrix}
   1680000 \\ 3680000000 \\ 5700000
   \end{bmatrix}.
-  \)
+  $$
 </p>
 <p>
   With \( \lambda = 100 \) and \( \mathbf{P}=\mathrm{diag}(0,1,1) \):
@@ -1207,7 +1209,7 @@ giving the same normal equations.</p>
   \( \widehat{\text{Price}} = 79{,}962.23 \;+\; 127.95 \cdot \text{Size} \;+\; 40.01 \cdot \text{Bedrooms} \)
 </p>
 
-<h4>Predictions \((\hat{\mathbf{y}})\) & Errors</h4>
+<h4>Step 4: Predictions \((\hat{\mathbf{y}})\) & Errors</h4>
 <p>
   \(
   \hat{\mathbf{y}} \approx
@@ -1229,13 +1231,13 @@ giving the same normal equations.</p>
   \)
 </p>
 
-<h4>Training Error (for reference)</h4>
+<h4>Step 5: Training Error (for reference)</h4>
 <p>
-  \(
+  $$
     \mathrm{SSE} \approx 1.5968 \times 10^8,\quad
     \mathrm{MSE} \approx 3.1936 \times 10^7,\quad
     \mathrm{RMSE} \approx 5{,}651.20.
-  \)
+  $$
 </p>
 
 <h4>Key Points</h4>
