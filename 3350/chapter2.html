@@ -282,15 +282,15 @@
       <b>Equation:</b>
 
       <p style="text-align: center;">
-          y = β<sub>0</sub> + β<sub>1</sub>x<sub>1</sub> + β<sub>2</sub>x<sub>2</sub> + &hellip; + β<sub>n</sub>x<sub>n</sub> + ε
+          y = β<sub>0</sub> + β<sub>1</sub>x<sub>1</sub> + β<sub>2</sub>x<sub>2</sub> + &hellip; + β<sub>p</sub>x<sub>p</sub> + ε
       </p>
 
     <p><strong>Where:</strong></p>
     <ul>
       <li><em>y</em> = predicted output</li>
       <li>β<sub>0</sub> = intercept (value of <em>y</em> when all <em>x</em> are zero)</li>
-      <li>β<sub>1</sub>, β<sub>2</sub>, …, β<sub>n</sub> = coefficients (weights for each feature)</li>
-      <li><em>x</em><sub>1</sub>, <em>x</em><sub>2</sub>, …, <em>x</em><sub>n</sub> = input features</li>
+      <li>β<sub>1</sub>, β<sub>2</sub>, …, β<sub>p</sub> = coefficients (weights for each feature)</li>
+      <li><em>x</em><sub>1</sub>, <em>x</em><sub>2</sub>, …, <em>x</em><sub>p</sub> = input features</li>
       <li>ε = error term (difference between predicted and actual values)</li>
     </ul>
 
@@ -329,7 +329,7 @@
     
   <h4>Model & Notation</h4>
   <p>Scalar form:</p>
-  <p>$$ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n + \epsilon $$</p>
+  <p>$$ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p + \epsilon $$</p>
 
   <p>Matrix form:</p>
   <p>
@@ -337,14 +337,14 @@
     where
     $$ \mathbf{X} = 
       \begin{bmatrix}
-        1 & x_{11} & \cdots & x_{1n} \\
-        1 & x_{21} & \cdots & x_{2n} \\
+        1 & x_{11} & \cdots & x_{1p} \\
+        1 & x_{21} & \cdots & x_{2p} \\
         \vdots & \vdots & \ddots & \vdots \\
-        1 & x_{m1} & \cdots & x_{mn}
+        1 & x_{m1} & \cdots & x_{mp}
       \end{bmatrix},\quad
       \boldsymbol{\beta} =
       \begin{bmatrix}
-        \beta_0 \\ \beta_1 \\ \vdots \\ \beta_n
+        \beta_0 \\ \beta_1 \\ \vdots \\ \beta_p
       \end{bmatrix},\quad
       \mathbf{y} =
       \begin{bmatrix}
