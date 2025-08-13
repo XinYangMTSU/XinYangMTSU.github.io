@@ -1052,26 +1052,67 @@
 </p>
 
 <h4>Normal Equation (Ridge)</h4>
-<p>
-  Take the gradient w.r.t. \(\boldsymbol{\beta}\), set to zero:
-</p>
-<p>
-  \[
-    -2\,\mathbf{X}^\top\mathbf{y} + 2\,\mathbf{X}^\top\mathbf{X}\,\hat{\boldsymbol{\beta}} + 2\lambda\,\mathbf{P}\,\hat{\boldsymbol{\beta}} = \mathbf{0}
-    \;\;\Longrightarrow\;\;
-    (\mathbf{X}^\top\mathbf{X} + \lambda\,\mathbf{P})\,\hat{\boldsymbol{\beta}} = \mathbf{X}^\top\mathbf{y}.
-  \]
-</p>
-<p>
-  If \(\mathbf{X}^\top\mathbf{X} + \lambda\,\mathbf{P}\) is invertible,
-  \[
-    \boxed{\;
+ <div class="step">
+    <p><b>Expand the objective:</b></p>
+    <p>
+      $$
+      J(\boldsymbol{\beta})
+      = (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
+      + \lambda\,\boldsymbol{\beta}^\top \mathbf{P}\,\boldsymbol{\beta}.
+      $$
+    </p>
+  </div>
+
+  <div class="step">
+    <p><b>Distribute (FOIL) the SSE part and use transpose rules:</b></p>
+    <p>
+      $$
+      (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
+      = \mathbf{y}^\top\mathbf{y}
+      - 2\,\boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}
+      + \boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{X}\,\boldsymbol{\beta}.
+      $$
+    </p>
+    <p>So
+      $$
+      J(\boldsymbol{\beta}) =
+      \mathbf{y}^\top\mathbf{y}
+      - 2\,\boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}
+      + \boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{X}\,\boldsymbol{\beta}
+      + \lambda\,\boldsymbol{\beta}^\top \mathbf{P}\,\boldsymbol{\beta}.
+      $$
+    </p>
+  </div>
+
+  <div class="step">
+    <p><b>Take gradient w.r.t. \( \boldsymbol{\beta} \) and set to zero:</b></p>
+    <p>
+      $$
+      \frac{\partial J}{\partial \boldsymbol{\beta}}
+      = -2\,\mathbf{X}^\top\mathbf{y}
+        + 2\,\mathbf{X}^\top\mathbf{X}\,\boldsymbol{\beta}
+        + 2\lambda\,\mathbf{P}\,\boldsymbol{\beta}
+      \;=\; \mathbf{0}.
+      $$
+    </p>
+    <p>
+      Rearranging:
+      $$
+      (\mathbf{X}^\top\mathbf{X} + \lambda\,\mathbf{P})\,\hat{\boldsymbol{\beta}}
+      = \mathbf{X}^\top\mathbf{y}.
+      $$
+    </p>
+    <p><b>Closed form (if invertible):</b>
+      $$
+      \boxed{\;
       \hat{\boldsymbol{\beta}}_{\text{ridge}}
       =
       (\mathbf{X}^\top\mathbf{X} + \lambda\,\mathbf{P})^{-1}\,\mathbf{X}^\top\mathbf{y}
-    \;}
-  \]
-</p>
+      \;}
+      $$
+    </p>
+  </div>
+  
 
 <p><i>Augmented-data view:</i> Ridge equals OLS on
 \(
