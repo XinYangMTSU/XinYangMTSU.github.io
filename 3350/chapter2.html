@@ -870,7 +870,7 @@
 
     \;\;\Longrightarrow\;\;
     
-    \|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2 \;+\; \lambda\,\|\boldsymbol{\beta}_{1:p}\|_2^2.
+    \|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2 \;+\; \lambda\,\|\boldsymbol{\beta}_{1:p}\|_2^2
   \]
 
      (note: the intercept \(\beta_0\) is typically <i>not</i> penalized).
@@ -878,10 +878,11 @@
 
 <p><strong>Where:</strong></p>
 <ul>
+  <li>\( \lambda \ge 0 \): &lambda; is the regularization strength parameter, 
+    it controls the amount of regularization applied</li>
   <li>\(  \lambda = 0 &rArr; Ridge = OLS \) (no penalty) </li>
-  <li>\( \lambda \ge 0 \) = regularization strength (larger \(\lambda\) means stronger shrinkage)</li>
   <li> Small &lambda; &rArr; weak shrinkage &rArr; coefficients close to OLS values </li>
-  <li> Large &lambda; &rArr; strong pull &rArr; coefficients much smaller, model more regularized. </li>
+  <li> Large &lambda; &rArr; strong shrinkage &rArr; coefficients much smaller, model more regularized. </li>
   <li>\( \beta_1, \dots, \beta_n \) = coefficients for features</li>
   <li>\( \mathbf{X} \) = design matrix </li>
   <li>\( \mathbf{y} \) = targets</li>
