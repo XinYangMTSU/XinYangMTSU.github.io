@@ -308,8 +308,8 @@
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
 <ol>
-  <li><strong>Collect Data</strong> – Gather pairs of input features (\(x_1, x_2, \ldots, x_n\)) and the known output (\(y\)).</li>
-  <li><strong>Fit the Model</strong> – Find the values of \(\beta_0, \beta_1, \ldots, \beta_n\) that make the predicted \(\hat{y}\) values as close as possible to the actual \(y\) values in the training data.</li>
+  <li><strong>Collect Data</strong> – Gather pairs of input features (\(x_1, x_2, \ldots, x_p\)) and the known output (\(y\)).</li>
+  <li><strong>Fit the Model</strong> – Find the values of \(\beta_0, \beta_1, \ldots, \beta_p\) that make the predicted \(\hat{y}\) values as close as possible to the actual \(y\) values in the training data.</li>
   <li><strong>Minimize Error</strong> – Ordinary Least Squares (OLS) minimizes the sum of squared errors:</li>
 </ol>
 
@@ -893,7 +893,7 @@
   <li>\(  \lambda = 0 &rArr; Ridge = OLS \) (no penalty) </li>
   <li> Small &lambda; &rArr; weak shrinkage &rArr; coefficients close to OLS values </li>
   <li> Large &lambda; &rArr; strong shrinkage &rArr; coefficients shrink toward zero, coefficients much smaller, model more regularized. </li>
-  <li>\( \beta_1, \dots, \beta_n \) = coefficients for features</li>
+  <li>\( \beta_1, \dots, \beta_p \) = coefficients for features</li>
   <li>\( \mathbf{X} \) = design matrix </li>
   <li>\( \mathbf{y} \) = targets</li>
   <li>\( p \) means the number of input feature </li>
@@ -1007,7 +1007,7 @@
 
 <h4>How Ridge Regression Works</h4>
 <ol>
-  <li><strong>Collect Data</strong> – Gather features \((x_1,\dots,x_n)\) and outputs \(y\).</li>
+  <li><strong>Collect Data</strong> – Gather features \((x_1,\dots,x_p)\) and outputs \(y\).</li>
   <li><strong>(Recommended) Standardize Features</strong> – Put features on comparable scales so the penalty treats them fairly.</li>
   <li><strong>Choose \(\lambda\)</strong> – Typically via cross-validation.</li>
   <li><strong>Fit the Model</strong> – Minimize squared error + L2 penalty to get \(\hat{\boldsymbol{\beta}}\).</li>
@@ -1018,7 +1018,7 @@
 <p><b>Scalar form:</b></p>
 <p>
   $$
-   y = \beta_0 + \beta_1 x_1 + \cdots + \beta_n x_p + \epsilon 
+   y = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p + \epsilon 
   $$
 </p>
 
@@ -1244,7 +1244,7 @@ giving the same normal equations.</p>
 <ul>
   <li><em>y</em> = predicted output</li>
   <li>\(\beta_0\) = intercept (value of <em>y</em> when all <em>x</em> are zero; usually unpenalized)</li>
-  <li>\(\beta_1, \beta_2, \ldots, \beta_n\) = coefficients (weights for each feature; L1 penalty can set some exactly to 0)</li>
+  <li>\(\beta_1, \beta_2, \ldots, \beta_p\) = coefficients (weights for each feature; L1 penalty can set some exactly to 0)</li>
   <li><em>x</em><sub>1</sub>, <em>x</em><sub>2</sub>, …, <em>x</em><sub>n</sub> = input features</li>
   <li>\(\lambda \ge 0\) = regularization strength (larger \(\lambda\) ⇒ stronger shrinkage, more zeros)</li>
   <li>\(\varepsilon\) = error term</li>
@@ -1264,7 +1264,7 @@ giving the same normal equations.</p>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <ol>
-  <li><strong>Collect Data</strong> – Gather features \((x_1, x_2, \ldots, x_n)\) and outputs \(y\).</li>
+  <li><strong>Collect Data</strong> – Gather features \((x_1, x_2, \ldots, x_p)\) and outputs \(y\).</li>
   <li><strong>Standardize Features</strong> – Put features on comparable scales so the penalty treats them fairly; don’t penalize the intercept.</li>
   <li><strong>Choose \(\lambda\)</strong> – Typically via cross-validation (try a grid; pick the best validation score).</li>
   <li><strong>Fit the Model</strong> – Solve the L1-regularized optimization; common solvers include <em>coordinate descent</em> and <em>LARS</em>.</li>
