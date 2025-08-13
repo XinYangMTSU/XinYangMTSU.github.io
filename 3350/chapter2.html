@@ -849,6 +849,15 @@
   (note: the intercept \(\beta_0\) is typically <i>not</i> penalized).
 </p>
 
+    <p style="text-align:center;">
+    Choose \( \boldsymbol{\beta} \) to minimize
+    \[
+      \underbrace{\sum_{i=1}^{m}\bigl(y_i - \hat{y}_i\bigr)^2}_{\text{SSE}}
+      \;+\;
+      \lambda \sum_{j=1}^{n} \beta_j^2,
+    \]
+  </p>
+
 <p><strong>Where:</strong></p>
 <ul>
   <li>\( \lambda \ge 0 \) = regularization strength (larger \(\lambda\) means stronger shrinkage)</li>
