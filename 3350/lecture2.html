@@ -247,6 +247,10 @@ section#references a:hover, section#references a:focus {
       <!-- Put this once in your page (head or before </body>) -->
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
+
+
+
+  <!-- Ridge Shrinkage Illustration — smaller circle, larger ellipse, tangent -->
 <svg viewBox="0 0 800 480" role="img" aria-labelledby="ridgeTitle ridgeDesc"
      style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
   <title id="ridgeTitle">Ridge Shrinkage Illustration</title>
@@ -256,7 +260,8 @@ section#references a:hover, section#references a:focus {
   </desc>
 
   <defs>
-    <marker id="arrow-pink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <marker id="arrow-pink" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0 0 L10 5 L0 10 z" fill="#ff79c6"></path>
     </marker>
     <style>
@@ -271,7 +276,7 @@ section#references a:hover, section#references a:focus {
     </style>
   </defs>
 
-  <!-- Axes (origin at 400,240) -->
+  <!-- Axes -->
   <g id="coords">
     <line x1="60"  y1="240" x2="760" y2="240" class="axis" />
     <line x1="400" y1="440" x2="400" y2="40"  class="axis" />
@@ -281,46 +286,46 @@ section#references a:hover, section#references a:focus {
     <text x="408" y="254" class="note">origin</text>
   </g>
 
-  <!-- L2 ball -->
+  <!-- Smaller L2 ball (reduced radius) -->
   <g id="l2-ball">
-    <circle cx="400" cy="240" r="140" class="l2"/>
-    <text x="268" y="388" class="label">L2 constraint: ‖β‖₂ ≤ t</text>
+    <circle cx="400" cy="240" r="90" class="l2"/>
+    <text x="230" y="366" class="label">L2 constraint: ‖β‖₂ ≤ t</text>
   </g>
 
-  <!-- OLS estimate -->
+  <!-- OLS (unregularized) -->
   <g id="ols">
     <text x="560" y="160" text-anchor="middle" dominant-baseline="middle"
           style="font:700 20px/1 Roboto, Arial, sans-serif; fill:#ffd166;">★</text>
     <text x="572" y="180" class="label">OLS (unregularized)</text>
   </g>
 
-  <!-- Shrinkage ray -->
+  <!-- Shrinkage direction (origin → OLS) -->
   <g id="shrink">
     <line x1="400" y1="240" x2="560" y2="160" class="guide"/>
     <text x="492" y="206" class="note">shrinkage direction</text>
   </g>
 
-  <!-- SSE contours centered at the OLS estimate -->
+  <!-- SSE contours (larger ellipse family) -->
   <g id="sse">
-    <!-- Inner contour (TANGENT to the circle at the ridge point) -->
-    <ellipse cx="560" cy="160" rx="38.9" ry="24.0" class="ellipse"
+    <!-- Main (larger) ellipse -->
+    <ellipse cx="560" cy="160" rx="110" ry="72" class="ellipse"
              transform="rotate(-25 560 160)"/>
-    <!-- Wider contours for context -->
-    <ellipse cx="560" cy="160" rx="58.3" ry="36.0" class="ellipse--wide"
+    <!-- Wider contours -->
+    <ellipse cx="560" cy="160" rx="150" ry="98" class="ellipse--wide"
              transform="rotate(-25 560 160)"/>
-    <ellipse cx="560" cy="160" rx="87.0" ry="54.0" class="ellipse--wide"
+    <ellipse cx="560" cy="160" rx="190" ry="124" class="ellipse--wide"
              transform="rotate(-25 560 160)"/>
-    <text x="592" y="92" class="label">SSE contours</text>
+    <text x="600" y="90" class="label">SSE contours</text>
   </g>
 
-  <!-- Ridge solution: tangency point on the circle along origin→OLS ray -->
-  <!-- Computed for r=140, OLS=(560,160): (525.2, 177.4) -->
+  <!-- Ridge point: placed on the circle along shrinkage line (≈ tangent visually) -->
+  <!-- This point is 90px from origin toward OLS along the guide line -->
   <g id="ridge">
-    <circle cx="525.2" cy="177.4" r="5.5" fill="#50fa7b" stroke="#1e1f22" stroke-width="1.5"/>
-    <text x="540" y="194" class="label" style="fill:#50fa7b;">Ridge solution (tangent)</text>
+    <circle cx="480.5" cy="199.8" r="5.5" fill="#50fa7b" stroke="#1e1f22" stroke-width="1.5"/>
+    <text x="494" y="218" class="label" style="fill:#50fa7b;">Ridge solution (tangent)</text>
   </g>
 
-  <!-- Mini-legend -->
+  <!-- Legend -->
   <g id="legend">
     <rect x="72" y="64" width="215" height="88" rx="10" ry="10"
           fill="rgba(33,17,27,.75)" stroke="#402138"/>
