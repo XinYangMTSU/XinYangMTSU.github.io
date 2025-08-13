@@ -1,198 +1,613 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Chapter 6: Model Evaluation, Validation, and Cross-Validation Techniques</title>
+  <title>Chapter 6: Model Evaluation, Validation, and Optimization</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
-    body {
+   body {
       font-family: 'Roboto', Arial, sans-serif;
       margin: 0;
       display: flex;
       background: #17191a;
       min-height: 100vh;
-      color: #ff79c6;
+      color: #ff79c6; /* MAIN PINK FONT COLOR */
     }
+    /* Sidebar */
     #sidebar {
       position: fixed;
       width: 250px;
-      height: 100%;
-      background: #1e1f26;
-      padding-top: 20px;
+      height: 100vh;
       overflow-y: auto;
+      background: linear-gradient(135deg, #2a1e28 80%, #47223c 100%);
+      color: #ffb3de;
+      padding: 38px 24px 24px 28px;
+      box-shadow: 2px 0 24px rgba(255,121,198,.12);
+      z-index: 10;
     }
     #sidebar h2 {
-      text-align: center;
-      color: #ff79c6;
-      margin-bottom: 20px;
+      margin-top: 0;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #ffb3de;
+      margin-bottom: 1.7em;
+      text-align: left;
     }
     #sidebar ul {
       list-style: none;
       padding: 0;
+      margin: 0;
     }
-    #sidebar ul li {
-      padding: 10px;
+    #sidebar .subsections {
+      margin-left: 1.5em;
+      font-size: 0.94em;
     }
-    #sidebar ul li a {
-      color: #f8f8f2;
-      text-decoration: none;
+    #sidebar .subsections a {
+      font-size: 0.94em;
+      margin: 8px 0 8px 12px;
+      padding-left: 16px;
+      color: #ffb3de;
+      border-left: 2px solid transparent;
+      font-weight: 400;
+      box-shadow: none;
+      background: none;
+      gap: 0.6em;
     }
-    #sidebar ul li a.active {
-      background: #44475a;
-      border-radius: 4px;
-    }
-    #content {
-      margin-left: 260px;
-      padding: 20px;
-      flex: 1;
-    }
-    h2, h3, h4 {
+    #sidebar .subsections a:hover, #sidebar .subsections a.active {
       color: #ff79c6;
+      background: #21111b;
+      border-left: 2px solid #ff79c6;
+      font-weight: 500;
     }
-    code {
-      background: #282a36;
-      padding: 2px 5px;
-      border-radius: 4px;
-      color: #50fa7b;
+    #sidebar a {
+      display: flex;
+      align-items: center;
+      color: #ffb3de;
+      text-decoration: none;
+      margin: 16px 0 16px 10px;
+      font-weight: 500;
+      font-size: 1.08em;
+      border-left: 3px solid transparent;
+      padding-left: 14px;
+      transition: background .19s, color .19s, border .19s;
+      border-radius: 8px 0 0 8px;
+      gap: 0.7em;
+    }
+    #sidebar a:hover, #sidebar a.active {
+      color: #ff79c6;
+      background: #21111b;
+      border-left: 3px solid #ff79c6;
+      font-weight: 700;
+      box-shadow: 1px 2px 8px 1px #2d3436;
+    }
+    /* Main content */
+    #content {
+      margin-left: 270px;
+      padding: 56px 6vw 56px 6vw;
+      max-width: 900px;
+      width: 100vw;
+      background: #1a1d1f;
+    }
+    h1 {
+      color: #ff79c6;
+      font-size: 2.5em;
+      font-weight: 800;
+      margin-bottom: 0.4em;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 16px rgba(255,121,198,.18);
+    }
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+    }
+    section:hover {
+      box-shadow: 0 10px 34px 3px rgba(255,121,198,0.13);
+      border-left: 7px solid #ffb3de;
+    }
+    section h3 {
+      border-bottom: 2px solid #ff79c6;
+      padding-bottom: 8px;
+      margin-top: 0;
+      color: #ff79c6;
+      font-size: 1.5em;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
     }
     pre {
-      background: #282a36;
-      padding: 10px;
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
       overflow-x: auto;
-      border-radius: 4px;
-      color: #f8f8f2;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
+    ul {
+      margin-left: 2.1em;
+      margin-bottom: 0;
     }
-    table, th, td {
-      border: 1px solid #44475a;
-    }
-    th, td {
-      padding: 8px;
+    footer {
+      margin-top: 46px;
       text-align: center;
+      color: #ffb3de;
+      font-size: 1.09em;
+      letter-spacing: 1px;
+      padding: 22px 0 14px 0;
+      border-top: 1px solid #402138;
+      background: none;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-weight: 500;
     }
-    th {
-      background-color: #44475a;
+    #sidebar::-webkit-scrollbar {
+      width: 7px;
+      background: #47223c;
+    }
+    #sidebar::-webkit-scrollbar-thumb {
+      background: #ff79c6;
+      border-radius: 6px;
+    }
+    @media (max-width: 950px) {
+      #sidebar {
+        display: none;
+      }
+      #content {
+        margin-left: 0;
+        padding: 18px 4vw 30px 4vw;
+      }
+    }
+
+    /* Links */
+    a, a:visited {
+      color: #ff79c6;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    a:hover, a:focus {
+      color: #fff52e;
+      background: #19121a;
+      text-decoration: underline;
+    }
+    section#references a, section#references a:visited {
+      color: #ff79c6;
+      font-weight: 600;
+    }
+    section#references a:hover, section#references a:focus {
+      color: #fff52e;
+      background: #19121a;
     }
   </style>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-  <div id="sidebar">
-    <h2>Ch 6: Evaluation</h2>
-    <ul>
-      <li><a href="#intro" class="active">Introduction</a></li>
-      <li><a href="#split">Train-Test-Validation Split</a></li>
-      <li><a href="#crossval">Cross-Validation</a></li>
-      <li><a href="#classification-metrics">Classification Metrics</a></li>
-      <li><a href="#regression-metrics">Regression Metrics</a></li>
-    </ul>
-  </div>
-  
-  <div id="content">
-    <section id="intro">
-      <h2>Introduction</h2>
-      <p>Evaluating machine learning models is crucial to understand their performance and generalization ability. This chapter covers common data splitting strategies, cross-validation techniques, and key evaluation metrics for both classification and regression models.</p>
-    </section>
+<nav id="sidebar">
+  <h2><i class="fas fa-book"></i> Contents</h2>
+  <ul>
+    <li><a href="#intro"><i class="fas fa-clipboard-check"></i>1. Why Evaluation & Validation?</a></li>
 
-    <section id="split">
-      <h3>Train-Test-Validation Split</h3>
-      <p>The dataset is typically divided into:</p>
-      <ul>
-        <li><b>Training set:</b> Used to fit the model.</li>
-        <li><b>Validation set:</b> Used to tune hyperparameters.</li>
-        <li><b>Test set:</b> Used for final evaluation.</li>
-      </ul>
+    <li>
+      <a href="#splits"><i class="fas fa-columns"></i>2. Train–Test–Validation</a>
+      <div class="subsections">
+        <a href="#holdout">2.1 Holdout Split</a>
+        <a href="#leakage">2.2 Data Leakage</a>
+      </div>
+    </li>
+
+    <li>
+      <a href="#cv"><i class="fas fa-th"></i>3. Cross-Validation</a>
+      <div class="subsections">
+        <a href="#kfold">3.1 K-Fold</a>
+        <a href="#loocv">3.2 LOOCV</a>
+        <a href="#stratk">3.3 Stratified K-Fold</a>
+      </div>
+    </li>
+
+    <li>
+      <a href="#cls-metrics"><i class="fas fa-check-double"></i>4. Classification Metrics</a>
+      <div class="subsections">
+        <a href="#acc">4.1 Accuracy</a>
+        <a href="#prec">4.2 Precision</a>
+        <a href="#recall">4.3 Recall</a>
+        <a href="#f1">4.4 F1-Score</a>
+        <a href="#cm">4.5 Confusion Matrix</a>
+        <a href="#roc">4.6 ROC &amp; AUC</a>
+      </div>
+    </li>
+
+    <li>
+      <a href="#reg-metrics"><i class="fas fa-chart-line"></i>5. Regression Metrics</a>
+      <div class="subsections">
+        <a href="#mse">5.1 MSE</a>
+        <a href="#rmse">5.2 RMSE</a>
+        <a href="#r2">5.3 R-Squared</a>
+      </div>
+    </li>
+
+    <li>
+      <a href="#opt"><i class="fas fa-sliders-h"></i>6. Optimization &amp; Tuning</a>
+      <div class="subsections">
+        <a href="#loss">6.1 Objective / Loss</a>
+        <a href="#gd">6.2 Gradient Descent</a>
+        <a href="#lr">6.3 Learning Rate</a>
+        <a href="#adam">6.4 Adam Optimizer</a>
+        <a href="#grid">6.5 Grid Search</a>
+        <a href="#random">6.6 Random Search</a>
+      </div>
+    </li>
+
+    <li>
+      <a href="#biasvar"><i class="fas fa-balance-scale"></i>7. Bias–Variance &amp; Prevention</a>
+      <div class="subsections">
+        <a href="#bias">7.1 Bias</a>
+        <a href="#variance">7.2 Variance</a>
+        <a href="#l1l2">7.3 L1/L2 Regularization</a>
+        <a href="#dropout">7.4 Dropout</a>
+        <a href="#augment">7.5 Data Augmentation</a>
+        <a href="#earlystop">7.6 Early Stopping</a>
+      </div>
+    </li>
+
+    <li><a href="#references"><i class="fas fa-link"></i>References</a></li>
+  </ul>
+</nav>
+
+<main id="content">
+  <h1>Chapter 6: Model Evaluation, Validation, Cross-Validation &amp; Optimization</h1>
+
+  <section id="intro">
+    <h2>1. Why Evaluation & Validation?</h2>
+    <p>
+      Training accuracy alone can be misleading. We need principled <b><font color="red">evaluation</font></b> to estimate generalization,
+      proper <b><font color="red">validation</font></b> to choose models/hyperparameters without test leakage, and solid
+      <b><font color="red">optimization</font></b> to actually minimize the right objective.
+    </p>
+  </section>
+
+  <section id="splits">
+    <h2>2. Train–Test–Validation</h2>
+
+    <div id="holdout">
+      <h4>2.1 Holdout Split</h4>
+      <p>Typical workflow: split once into Train/Validation/Test (e.g., 60/20/20 or 70/15/15).</p>
       <pre><code>from sklearn.model_selection import train_test_split
 
-# Split into train+validation and test
-X_train_val, X_test, y_train_val, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# 80% train+val / 20% test (use stratify for classification)
+X_trval, X_test, y_trval, y_test = train_test_split(X, y, test_size=0.2,
+                                                    stratify=y, random_state=42)
 
-# Split train into train and validation
-X_train, X_val, y_train, y_val = train_test_split(X_train_val, y_train_val, test_size=0.25, random_state=42)
-</code></pre>
-    </section>
+# split train into train / validation (now 60/20/20 overall)
+X_train, X_val, y_train, y_val = train_test_split(X_trval, y_trval, test_size=0.25,
+                                                  stratify=y_trval, random_state=42)</code></pre>
+      <p class="note"><b>Tip:</b> Keep the test set <b>untouched</b> until the very end.</p>
+    </div>
 
-    <section id="crossval">
-      <h3>Cross-Validation Techniques</h3>
-      <h4>K-Fold Cross-Validation</h4>
-      <p>Data is split into <i>k</i> folds. Each fold serves as a validation set once; average the results.</p>
-      <pre><code>from sklearn.model_selection import cross_val_score
-scores = cross_val_score(model, X, y, cv=5)
-print(scores.mean())</code></pre>
+    <div id="leakage">
+      <h4>2.2 Data Leakage</h4>
+      <ul>
+        <li>Fit scalers/encoders only on the <b>train</b> fold/split; apply to val/test.</li>
+        <li>Avoid peeking at test metrics while tuning.</li>
+        <li>Use <code>Pipeline</code> in scikit-learn to encapsulate preprocessing + model.</li>
+      </ul>
+      <pre><code>from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
 
-      <h4>Leave-One-Out Cross-Validation (LOOCV)</h4>
-      <p>Special case of K-Fold where k = number of samples.</p>
-      <pre><code>from sklearn.model_selection import LeaveOneOut
+pipe = Pipeline([
+  ("scaler", StandardScaler()),
+  ("clf", LogisticRegression(max_iter=1000))
+])
+pipe.fit(X_train, y_train)</code></pre>
+    </div>
+  </section>
+
+  <section id="cv">
+    <h2>3. Cross-Validation</h2>
+    <p>CV repeatedly splits the data to get a more reliable estimate and to tune hyperparameters.</p>
+
+    <div id="kfold">
+      <h4>3.1 K-Fold Cross-Validation</h4>
+      <p>Split into \(k\) folds; train on \(k-1\) and validate on the remaining; average the score.</p>
+      <pre><code>from sklearn.model_selection import KFold, cross_val_score
+cv = KFold(n_splits=5, shuffle=True, random_state=42)
+scores = cross_val_score(model, X, y, cv=cv, scoring="accuracy")
+print(scores.mean(), scores.std())</code></pre>
+    </div>
+
+    <div id="loocv">
+      <h4>3.2 Leave-One-Out (LOOCV)</h4>
+      <p>Extreme case of K-Fold with \(k=n\). Very low bias, potentially high variance; computationally expensive.</p>
+      <pre><code>from sklearn.model_selection import LeaveOneOut, cross_val_score
 loo = LeaveOneOut()
 scores = cross_val_score(model, X, y, cv=loo)</code></pre>
+    </div>
 
-      <h4>Stratified K-Fold Cross-Validation</h4>
-      <p>K-Fold that preserves class proportions in each fold.</p>
-      <pre><code>from sklearn.model_selection import StratifiedKFold
-skf = StratifiedKFold(n_splits=5)
-scores = cross_val_score(model, X, y, cv=skf)</code></pre>
-    </section>
+    <div id="stratk">
+      <h4>3.3 Stratified K-Fold (Classification)</h4>
+      <p>Preserves class proportions in each fold—important for imbalanced classes.</p>
+      <pre><code>from sklearn.model_selection import StratifiedKFold, cross_val_score
+skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+scores = cross_val_score(model, X, y, cv=skf, scoring="f1_macro")</code></pre>
+    </div>
+  </section>
 
-    <section id="classification-metrics">
-      <h3>Evaluation Metrics for Classification</h3>
-      <h4>Accuracy</h4>
-      <p>$$ \text{Accuracy} = \frac{\text{Number of correct predictions}}{\text{Total predictions}} $$</p>
-      <h4>Precision</h4>
-      <p>$$ \text{Precision} = \frac{\text{TP}}{\text{TP + FP}} $$</p>
-      <h4>Recall (Sensitivity)</h4>
-      <p>$$ \text{Recall} = \frac{\text{TP}}{\text{TP + FN}} $$</p>
-      <h4>F1-Score</h4>
-      <p>$$ F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision + Recall}} $$</p>
-      <h4>Confusion Matrix</h4>
-      <pre><code>from sklearn.metrics import confusion_matrix
-confusion_matrix(y_true, y_pred)</code></pre>
-      <h4>ROC Curve & AUC</h4>
+  <section id="cls-metrics">
+    <h2>4. Evaluation Metrics for Classification</h2>
+
+    <div id="acc">
+      <h4>4.1 Accuracy</h4>
+      <p>$$ \mathrm{Accuracy}=\frac{TP+TN}{TP+TN+FP+FN} $$</p>
+      <p>Good when classes are balanced; misleading if they are not.</p>
+    </div>
+
+    <div id="prec">
+      <h4>4.2 Precision</h4>
+      <p>$$ \mathrm{Precision}=\frac{TP}{TP+FP} $$</p>
+      <p>“Of predicted positives, how many were correct?”</p>
+    </div>
+
+    <div id="recall">
+      <h4>4.3 Recall (Sensitivity)</h4>
+      <p>$$ \mathrm{Recall}=\frac{TP}{TP+FN} $$</p>
+      <p>“Of actual positives, how many did we catch?”</p>
+    </div>
+
+    <div id="f1">
+      <h4>4.4 F1-Score</h4>
+      <p>$$ F1 = 2\cdot \frac{\mathrm{Precision}\cdot\mathrm{Recall}}{\mathrm{Precision}+\mathrm{Recall}} $$</p>
+      <pre><code>from sklearn.metrics import precision_recall_fscore_support
+prec, rec, f1, _ = precision_recall_fscore_support(y_true, y_pred, average="macro")</code></pre>
+    </div>
+
+    <div id="cm">
+      <h4>4.5 Confusion Matrix</h4>
+      <pre><code>from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+cm = confusion_matrix(y_true, y_pred, labels=clf.classes_)
+ConfusionMatrixDisplay(cm, display_labels=clf.classes_).plot()</code></pre>
+    </div>
+
+    <div id="roc">
+      <h4>4.6 ROC Curve &amp; AUC</h4>
+      <p>ROC plots TPR vs FPR as the threshold varies; AUC summarizes performance (1.0 is perfect, 0.5 is random).</p>
       <pre><code>from sklearn.metrics import roc_curve, roc_auc_score
-fpr, tpr, thresholds = roc_curve(y_true, y_scores)
-auc = roc_auc_score(y_true, y_scores)</code></pre>
-    </section>
+# y_score: probability estimates for positive class
+fpr, tpr, thr = roc_curve(y_true, y_score)
+auc = roc_auc_score(y_true, y_score)</code></pre>
+    </div>
+  </section>
 
-    <section id="regression-metrics">
-      <h3>Evaluation Metrics for Regression</h3>
-      <h4>Mean Squared Error (MSE)</h4>
-      <p>$$ \text{MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2 $$</p>
-      <h4>Root Mean Squared Error (RMSE)</h4>
-      <p>$$ \text{RMSE} = \sqrt{\text{MSE}} $$</p>
-      <h4>R-Squared</h4>
-      <p>$$ R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2} $$</p>
+  <section id="reg-metrics">
+    <h2>5. Evaluation Metrics for Regression</h2>
+
+    <div id="mse">
+      <h4>5.1 Mean Squared Error (MSE)</h4>
+      <p>$$ \mathrm{MSE}=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2 $$</p>
+    </div>
+
+    <div id="rmse">
+      <h4>5.2 Root Mean Squared Error (RMSE)</h4>
+      <p>$$ \mathrm{RMSE}=\sqrt{\mathrm{MSE}} $$</p>
+      <p>Same units as the target—often easier to interpret.</p>
+    </div>
+
+    <div id="r2">
+      <h4>5.3 R-Squared</h4>
+      <p>$$ R^2=1-\frac{\sum (y_i-\hat{y}_i)^2}{\sum (y_i-\bar{y})^2} $$</p>
       <pre><code>from sklearn.metrics import mean_squared_error, r2_score
-mse = mean_squared_error(y_true, y_pred)
+mse  = mean_squared_error(y_true, y_pred)
 rmse = mse**0.5
-r2 = r2_score(y_true, y_pred)</code></pre>
-    </section>
-  </div>
-  
-  <script>
-    // Simple scrollspy for active sidebar link
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('#sidebar ul li a');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 80;
-        if (pageYOffset >= sectionTop) {
-          current = section.getAttribute('id');
-        }
-      });
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) {
-          link.classList.add('active');
-        }
-      });
-    });
-  </script>
+r2   = r2_score(y_true, y_pred)</code></pre>
+    </div>
+  </section>
+
+  <section id="opt">
+    <h2>6. Optimization &amp; Hyperparameter Tuning</h2>
+
+    <div id="loss">
+      <h4>6.1 Objective Function (Loss)</h4>
+      <p>
+        Choose a loss that matches the task:
+        <br><b>Regression:</b> \( \mathcal{L}=\tfrac{1}{n}\sum (y-\hat y)^2 \) (MSE).
+        <br><b>Binary classification:</b> cross-entropy
+        \( \mathcal{L}=-\tfrac{1}{n}\sum [y\log \hat p + (1-y)\log(1-\hat p)] \).
+      </p>
+    </div>
+
+    <div id="gd">
+      <h4>6.2 Gradient Descent</h4>
+      <p>Iteratively update parameters along negative gradient:</p>
+      <p style="text-align:center;">
+        \( \theta \leftarrow \theta - \eta \nabla_{\theta}\mathcal{L}(\theta) \)
+      </p>
+      <ul>
+        <li><b>Batch:</b> all data per step (stable).</li>
+        <li><b>SGD:</b> one sample per step (noisy, fast).</li>
+        <li><b>Mini-batch:</b> common default.</li>
+      </ul>
+    </div>
+
+    <div id="lr">
+      <h4>6.3 Learning Rate</h4>
+      <p>\(\eta\) controls step size. Too small → slow; too large → divergence. Use schedules (step, cosine) or adaptive methods.</p>
+    </div>
+
+    <div id="adam">
+      <h4>6.4 Adam Optimizer</h4>
+      <p>Adaptive moments: keeps moving averages of gradients and squared gradients.</p>
+      <p style="text-align:center;">
+        \( m_t=\beta_1 m_{t-1}+(1-\beta_1)g_t,\;
+           v_t=\beta_2 v_{t-1}+(1-\beta_2)g_t^2 \) <br>
+        \( \hat m_t=\frac{m_t}{1-\beta_1^t},\;
+           \hat v_t=\frac{v_t}{1-\beta_2^t} \) <br>
+        \( \theta \leftarrow \theta - \eta \frac{\hat m_t}{\sqrt{\hat v_t}+\epsilon} \)
+      </p>
+      <p>Defaults: \(\beta_1{=}0.9,\;\beta_2{=}0.999,\;\epsilon{=}10^{-8}\).</p>
+    </div>
+
+    <div id="grid">
+      <h4>6.5 Grid Search</h4>
+      <p>Exhaustive search over a parameter grid with CV.</p>
+      <pre><code>from sklearn.model_selection import GridSearchCV
+param_grid = {"C":[0.1,1,10], "penalty":["l2"], "solver":["lbfgs","liblinear"]}
+gs = GridSearchCV(LogisticRegression(max_iter=2000), param_grid,
+                  cv=5, scoring="f1_macro", n_jobs=-1)
+gs.fit(X_train, y_train)
+print(gs.best_params_, gs.best_score_)</code></pre>
+    </div>
+
+    <div id="random">
+      <h4>6.6 Random Search</h4>
+      <p>Sample from distributions; often more efficient for large search spaces.</p>
+      <pre><code>from sklearn.model_selection import RandomizedSearchCV
+from scipy.stats import loguniform
+param_dist = {"C": loguniform(1e-3, 1e2)}
+rs = RandomizedSearchCV(LogisticRegression(max_iter=2000),
+                        param_distributions=param_dist,
+                        n_iter=40, cv=5, scoring="roc_auc",
+                        n_jobs=-1, random_state=42)
+rs.fit(X_train, y_train)
+print(rs.best_params_, rs.best_score_)</code></pre>
+    </div>
+  </section>
+
+  <section id="biasvar">
+    <h2>7. Bias–Variance Tradeoff &amp; Over/Underfitting Prevention</h2>
+
+    <div id="bias">
+      <h4>7.1 Bias</h4>
+      <p>Systematic error from overly simple assumptions. Symptoms: high training and validation error (underfitting).</p>
+    </div>
+
+    <div id="variance">
+      <h4>7.2 Variance</h4>
+      <p>Model is too sensitive to data fluctuations. Symptoms: low training error, high validation/test error (overfitting).</p>
+    </div>
+
+    <div id="l1l2">
+      <h4>7.3 L1/L2 Regularization</h4>
+      <p>
+        <b>L2 (Ridge):</b> \( \mathcal{L}+\lambda\sum \beta_j^2 \) — smooth shrinkage. <br>
+        <b>L1 (Lasso):</b> \( \mathcal{L}+\lambda\sum |\beta_j| \) — sparsity &amp; feature selection.
+      </p>
+      <pre><code>from sklearn.linear_model import LogisticRegression
+log_l2 = LogisticRegression(penalty="l2", C=1.0, max_iter=2000)
+log_l1 = LogisticRegression(penalty="l1", solver="liblinear", C=0.5, max_iter=2000)</code></pre>
+    </div>
+
+    <div id="dropout">
+      <h4>7.4 Dropout (Neural Nets)</h4>
+      <p>Randomly zero a fraction of activations during training; reduces co-adaptation, acts like model averaging.</p>
+      <pre><code># Keras example
+from tensorflow.keras import Sequential
+from tensorflow.keras.layers import Dense, Dropout
+
+model = Sequential([
+  Dense(256, activation="relu", input_shape=(d,)),
+  Dropout(0.5),
+  Dense(128, activation="relu"),
+  Dropout(0.3),
+  Dense(num_classes, activation="softmax")
+])</code></pre>
+    </div>
+
+    <div id="augment">
+      <h4>7.5 Data Augmentation</h4>
+      <p>Label-preserving transforms increase effective data size and robustness (images: flips/rotations; text: paraphrase; audio: noise/time-stretch).</p>
+      <pre><code># PyTorch vision transforms
+import torchvision.transforms as T
+train_tfms = T.Compose([
+  T.RandomResizedCrop(224),
+  T.RandomHorizontalFlip(),
+  T.ColorJitter(0.2,0.2,0.2),
+  T.ToTensor()
+])</code></pre>
+    </div>
+
+    <div id="earlystop">
+      <h4>7.6 Early Stopping</h4>
+      <p>Stop training when validation loss plateaus to prevent overfitting; restore best weights.</p>
+      <pre><code># Keras
+from tensorflow.keras.callbacks import EarlyStopping
+es = EarlyStopping(monitor="val_loss", patience=10, restore_best_weights=True)
+model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
+model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=200, callbacks=[es])</code></pre>
+    </div>
+  </section>
+
+  <section id="references">
+    <h3>References</h3>
+    <ul>
+      <li>
+        <a href="https://scikit-learn.org/stable/model_selection.html" target="_blank">
+          scikit-learn: Model Selection
+        </a>
+      </li>
+      <li>
+        <a href="https://scikit-learn.org/stable/modules/model_evaluation.html" target="_blank">
+          scikit-learn: Model Evaluation
+        </a>
+      </li>
+      <li>
+        <a href="https://deep-learning-book.github.io/" target="_blank">
+          Goodfellow, Bengio, Courville — Deep Learning
+        </a>
+      </li>
+      <li>Scholar GPT</li>
+    </ul>
+  </section>
+
+  <footer>
+    &copy; 2025 Xin Yang <br>
+    Department of Computer Science <br>
+    Middle Tennessee State University <br>
+  </footer>
+</main>
+
+<!-- MathJax (once per page) -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<script>
+  // Smooth scrolling & highlight active link
+  const sidebarLinks = document.querySelectorAll('#sidebar a');
+  sidebarLinks.forEach(anchor => {
+    anchor.onclick = function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href'))
+        .scrollIntoView({ behavior: 'smooth' });
+    };
+  });
+
+  // Active link highlight on scroll
+  const sectionIds = Array.from(sidebarLinks).map(l => l.getAttribute('href'));
+  window.addEventListener('scroll', () => {
+    let current = sectionIds[0];
+    for (const id of sectionIds) {
+      const section = document.querySelector(id);
+      if (section && section.getBoundingClientRect().top - 80 < 0) {
+        current = id;
+      }
+    }
+    sidebarLinks.forEach(link => link.classList.remove('active'));
+    const activeLink = document.querySelector(`#sidebar a[href="${current}"]`);
+    if (activeLink) activeLink.classList.add('active');
+  });
+</script>
+
 </body>
 </html>
