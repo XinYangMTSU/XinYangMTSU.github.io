@@ -1,1 +1,198 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chapter 6: Model Evaluation, Validation, and Cross-Validation Techniques</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+    }
+    #sidebar {
+      position: fixed;
+      width: 250px;
+      height: 100%;
+      background: #1e1f26;
+      padding-top: 20px;
+      overflow-y: auto;
+    }
+    #sidebar h2 {
+      text-align: center;
+      color: #ff79c6;
+      margin-bottom: 20px;
+    }
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    #sidebar ul li {
+      padding: 10px;
+    }
+    #sidebar ul li a {
+      color: #f8f8f2;
+      text-decoration: none;
+    }
+    #sidebar ul li a.active {
+      background: #44475a;
+      border-radius: 4px;
+    }
+    #content {
+      margin-left: 260px;
+      padding: 20px;
+      flex: 1;
+    }
+    h2, h3, h4 {
+      color: #ff79c6;
+    }
+    code {
+      background: #282a36;
+      padding: 2px 5px;
+      border-radius: 4px;
+      color: #50fa7b;
+    }
+    pre {
+      background: #282a36;
+      padding: 10px;
+      overflow-x: auto;
+      border-radius: 4px;
+      color: #f8f8f2;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    table, th, td {
+      border: 1px solid #44475a;
+    }
+    th, td {
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #44475a;
+    }
+  </style>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div id="sidebar">
+    <h2>Ch 6: Evaluation</h2>
+    <ul>
+      <li><a href="#intro" class="active">Introduction</a></li>
+      <li><a href="#split">Train-Test-Validation Split</a></li>
+      <li><a href="#crossval">Cross-Validation</a></li>
+      <li><a href="#classification-metrics">Classification Metrics</a></li>
+      <li><a href="#regression-metrics">Regression Metrics</a></li>
+    </ul>
+  </div>
+  
+  <div id="content">
+    <section id="intro">
+      <h2>Introduction</h2>
+      <p>Evaluating machine learning models is crucial to understand their performance and generalization ability. This chapter covers common data splitting strategies, cross-validation techniques, and key evaluation metrics for both classification and regression models.</p>
+    </section>
+
+    <section id="split">
+      <h3>Train-Test-Validation Split</h3>
+      <p>The dataset is typically divided into:</p>
+      <ul>
+        <li><b>Training set:</b> Used to fit the model.</li>
+        <li><b>Validation set:</b> Used to tune hyperparameters.</li>
+        <li><b>Test set:</b> Used for final evaluation.</li>
+      </ul>
+      <pre><code>from sklearn.model_selection import train_test_split
+
+# Split into train+validation and test
+X_train_val, X_test, y_train_val, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Split train into train and validation
+X_train, X_val, y_train, y_val = train_test_split(X_train_val, y_train_val, test_size=0.25, random_state=42)
+</code></pre>
+    </section>
+
+    <section id="crossval">
+      <h3>Cross-Validation Techniques</h3>
+      <h4>K-Fold Cross-Validation</h4>
+      <p>Data is split into <i>k</i> folds. Each fold serves as a validation set once; average the results.</p>
+      <pre><code>from sklearn.model_selection import cross_val_score
+scores = cross_val_score(model, X, y, cv=5)
+print(scores.mean())</code></pre>
+
+      <h4>Leave-One-Out Cross-Validation (LOOCV)</h4>
+      <p>Special case of K-Fold where k = number of samples.</p>
+      <pre><code>from sklearn.model_selection import LeaveOneOut
+loo = LeaveOneOut()
+scores = cross_val_score(model, X, y, cv=loo)</code></pre>
+
+      <h4>Stratified K-Fold Cross-Validation</h4>
+      <p>K-Fold that preserves class proportions in each fold.</p>
+      <pre><code>from sklearn.model_selection import StratifiedKFold
+skf = StratifiedKFold(n_splits=5)
+scores = cross_val_score(model, X, y, cv=skf)</code></pre>
+    </section>
+
+    <section id="classification-metrics">
+      <h3>Evaluation Metrics for Classification</h3>
+      <h4>Accuracy</h4>
+      <p>$$ \text{Accuracy} = \frac{\text{Number of correct predictions}}{\text{Total predictions}} $$</p>
+      <h4>Precision</h4>
+      <p>$$ \text{Precision} = \frac{\text{TP}}{\text{TP + FP}} $$</p>
+      <h4>Recall (Sensitivity)</h4>
+      <p>$$ \text{Recall} = \frac{\text{TP}}{\text{TP + FN}} $$</p>
+      <h4>F1-Score</h4>
+      <p>$$ F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision + Recall}} $$</p>
+      <h4>Confusion Matrix</h4>
+      <pre><code>from sklearn.metrics import confusion_matrix
+confusion_matrix(y_true, y_pred)</code></pre>
+      <h4>ROC Curve & AUC</h4>
+      <pre><code>from sklearn.metrics import roc_curve, roc_auc_score
+fpr, tpr, thresholds = roc_curve(y_true, y_scores)
+auc = roc_auc_score(y_true, y_scores)</code></pre>
+    </section>
+
+    <section id="regression-metrics">
+      <h3>Evaluation Metrics for Regression</h3>
+      <h4>Mean Squared Error (MSE)</h4>
+      <p>$$ \text{MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2 $$</p>
+      <h4>Root Mean Squared Error (RMSE)</h4>
+      <p>$$ \text{RMSE} = \sqrt{\text{MSE}} $$</p>
+      <h4>R-Squared</h4>
+      <p>$$ R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2} $$</p>
+      <pre><code>from sklearn.metrics import mean_squared_error, r2_score
+mse = mean_squared_error(y_true, y_pred)
+rmse = mse**0.5
+r2 = r2_score(y_true, y_pred)</code></pre>
+    </section>
+  </div>
+  
+  <script>
+    // Simple scrollspy for active sidebar link
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('#sidebar ul li a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 80;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
