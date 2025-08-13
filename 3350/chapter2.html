@@ -1026,14 +1026,14 @@
 <p>
   \( \mathbf{X} =
   \begin{bmatrix}
-    1 & x_{11} & \cdots & x_{1n} \\
-    1 & x_{21} & \cdots & x_{2n} \\
+    1 & x_{11} & \cdots & x_{1p} \\
+    1 & x_{21} & \cdots & x_{2p} \\
     \vdots & \vdots & \ddots & \vdots \\
-    1 & x_{m1} & \cdots & x_{mn}
+    1 & x_{m1} & \cdots & x_{mp}
   \end{bmatrix},\;
   \boldsymbol{\beta} =
   \begin{bmatrix}
-    \beta_0 \\ \beta_1 \\ \vdots \\ \beta_n
+    \beta_0 \\ \beta_1 \\ \vdots \\ \beta_p
   \end{bmatrix},\;
   \mathbf{y} =
   \begin{bmatrix}
@@ -1046,9 +1046,9 @@
 <p>
   Ridge minimizes
   \[
-    \mathrm{SSE}(\boldsymbol{\beta}) + \lambda \sum_{j=1}^{n}\beta_j^2
+    \mathrm{SSE}(\boldsymbol{\beta}) + \lambda \sum_{j=1}^{p}\beta_j^2
     \;=\;
-    \|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2 \;+\; \lambda\,\|\boldsymbol{\beta}_{1:n}\|_2^2.
+    \|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2 \;+\; \lambda\,\|\boldsymbol{\beta}_{1:p}\|_2^2.
   \]
   In vector form with a penalty matrix \(\mathbf{P}=\mathrm{diag}(0,1,\dots,1)\) (no penalty on \(\beta_0\)):
   \[
