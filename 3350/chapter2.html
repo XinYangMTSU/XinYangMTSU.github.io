@@ -880,7 +880,10 @@
 
     \;\;\Longrightarrow\;\;
     
-    \|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2 \;+\; \lambda\,\|\boldsymbol{\beta}_{1:p}\|_2^2
+    \underbrace{\|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2}_{\text{sum of squared residuals}}
+      \;+\;
+      \lambda\,\underbrace{\|\boldsymbol{\beta}_{1:p}\|_2^2}_{\text{sum of squared coefficients}}
+     
   \]
 
      (note: the intercept \(\beta_0\) is typically <i>not</i> penalized).
@@ -1163,7 +1166,7 @@ giving the same normal equations.</p>
   5 & 10000 & 16 \\
   10000 & 22500000 & 34500 \\
   16 & 34500 & 54
-  \end{bmatrix} , 
+  \end{bmatrix}, 
   
   \quad
   
