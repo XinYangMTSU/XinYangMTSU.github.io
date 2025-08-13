@@ -834,7 +834,8 @@
 <p>
    
     Ridge Regression extends Ordinary Least Squares (OLS) by adding an <b><font color="red">L2 penalty</font></b> on the size of the coefficients. 
-    This penalty discourages overly large weights, helping to reduce <b>overfitting</b> and improve <b>generalization</b>, especially when features are correlated or when \(p \approx m\).
+    This penalty discourages overly large weights, helping to reduce <b>overfitting</b> and improve <b>generalization</b>, 
+    especially when features are correlated or when \(p \approx m\).
     <br><br>
     In Ridge Regression, a penalty is an extra cost you add to the training objective for using large coefficient values. 
     It’s also called <b><font color="red">regularization</font></b>. By penalizing large coefficients, L2 regularization reduces reliance on single features and improves generalization.
@@ -847,7 +848,7 @@
 <p style="text-align: center;">
   \(\hat{\mathbf{y}} = \mathbf{X}\boldsymbol{\beta}\), &nbsp; and we choose \(\boldsymbol{\beta}\) to minimize
   \[
-    \mathrm{SSE}(\boldsymbol{\beta}) + \lambda \sum_{j=1}^{n} \beta_j^2
+    \mathrm{SSE}(\boldsymbol{\beta}) + \lambda \sum_{j=1}^{p} \beta_j^2
   \]
  
 </p>
@@ -859,7 +860,7 @@
       
       \underbrace{\sum_{i=1}^{m}\bigl(y_i - \hat{y}_i\bigr)^2}_{\text{SSE}}
       \;+\;
-      \underbrace{\lambda \sum_{j=1}^{n} \beta_j^2}_{\text{L2 penalty}}
+      \underbrace{\lambda \sum_{j=1}^{p} \beta_j^2}_{\text{L2 penalty}}
     \]
        
   </p>
@@ -869,7 +870,7 @@
 
     \;\;\Longrightarrow\;\;
     
-    \|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2 \;+\; \lambda\,\|\boldsymbol{\beta}_{1:n}\|_2^2.
+    \|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2 \;+\; \lambda\,\|\boldsymbol{\beta}_{1:p}\|_2^2.
   \]
 
      (note: the intercept \(\beta_0\) is typically <i>not</i> penalized).
@@ -882,7 +883,7 @@
   <li>\( \beta_1, \dots, \beta_n \) = coefficients for features</li>
   <li>\( \mathbf{X} \) = design matrix </li>
   <li>\( \mathbf{y} \) = targets</li>
-  <li>\( n \) means the number of input feature </li>
+  <li>\( p \) means the number of input feature </li>
 </ul>
 
 <br>
