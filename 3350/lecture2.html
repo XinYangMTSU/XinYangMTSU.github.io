@@ -244,142 +244,322 @@ section#references a:hover, section#references a:focus {
 
 <main id="content">
 
-
 <section id="ridge-regression">
-      
   <h4>2.2 Ridge Regression (L2 Regularization)</h4>
   <br>
+
   <b>Idea:</b>
   <p>
-    Ridge Regression is an extension of Linear Regression that adds a <b><font color="red">penalty term to large coefficients</font></b>.
-    This penalty (L2 regularization) discourages the model from relying too heavily on any single feature, which helps 
-    prevent <b>overfitting</b>—especially when features are highly correlated (multicollinearity).
+    Ridge Regression extends Ordinary Least Squares (OLS) by adding an <b><font color="red">L2 penalty</font></b> on the size of the coefficients. 
+    This penalty discourages overly large weights, helping to reduce <b>overfitting</b> and improve <b>generalization</b>, especially when features are correlated or when \(p \approx m\).
   </p>
 
   <b>Equation:</b>
-  <p style="text-align: center;">
-      \(\hat{\boldsymbol{\beta}} = \underset{\boldsymbol{\beta}}{\mathrm{argmin}}\; \sum_{i=1}^m (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^n \beta_j^2\)
+  <p style="text-align:center;">
+    Choose \( \boldsymbol{\beta} \) to minimize
+    \[
+      \underbrace{\sum_{i=1}^{m}\bigl(y_i - \hat{y}_i\bigr)^2}_{\text{SSE}}
+      \;+\;
+      \lambda \sum_{j=1}^{n} \beta_j^2,
+    \]
+    where \( \hat{y}_i = \beta_0 + \sum_{j=1}^{n} \beta_j x_{ij} \) and the intercept \( \beta_0 \) is typically <em>not</em> penalized.
   </p>
 
   <p><strong>Where:</strong></p>
   <ul>
-    <li>\(y_i\) = actual output for sample \(i\)</li>
-    <li>\(\hat{y}_i\) = predicted output for sample \(i\)</li>
-    <li>\(\beta_j\) = coefficient for feature \(j\)</li>
-    <li>\(\lambda\) = regularization parameter (controls penalty strength)</li>
+    <li>\( \lambda \ge 0 \): regularization strength (larger \( \lambda \Rightarrow \) stronger shrinkage)</li>
+    <li>\( \beta_0 \): intercept (unpenalized)</li>
+    <li>\( \beta_1,\ldots,\beta_n \): coefficients for each feature</li>
+    <li>\( \mathbf{X} \): design matrix, \( \mathbf{y} \): targets</li>
   </ul>
 
   <br>
-    
+
   <center>
-    <img src="images/ridge_regression.png" width="800px" height="300px">
+    <img src="images/ridge1.png" width="800" height="300" alt="Ridge regression shrinks coefficients (L2 penalty)">
   </center>
-    
+
   <br>
-    
+
   <h4>How Ridge Regression Works</h4>
-<ol>
-  <li><strong>Collect Data</strong> – Same as linear regression: gather feature values (\(x_1, \dots, x_n\)) and target values (\(y\)).</li>
-  <li><strong>Fit the Model</strong> – Minimize both the sum of squared errors (SSE) and the squared magnitude of coefficients.</li>
-  <li><strong>Regularization Effect</strong> – The \(\lambda\) term shrinks coefficients toward zero (but never exactly zero), reducing variance but slightly increasing bias.</li>
-</ol>
+  <!-- MathJax already loaded once in the page -->
+  <ol>
+    <li><strong>Collect Data</strong> – Gather features \( (x_1,\dots,x_n) \) and outputs \( y \).</li>
+    <li><strong>Standardize Features (recommended)</strong> – Put features on comparable scales so the penalty treats them fairly.</li>
+    <li><strong>Choose \( \lambda \)</strong> – Typically via cross-validation.</li>
+    <li><strong>Fit the Model</strong> – Minimize squared error + L2 penalty to get \( \hat{\boldsymbol{\beta}} \).</li>
+    <li><strong>Evaluate</strong> – Check validation/test error; tune \( \lambda \) to balance bias–variance.</li>
+  </ol>
 
-<h4>Objective Function</h4>
-<p>The Ridge Regression objective combines the Least Squares loss with an L2 penalty:</p>
-<p>
+  <h4>Interpreting the Coefficients</h4>
+  <ul>
+    <li><strong>Intercept (\(\beta_0\))</strong> – Baseline prediction (usually unpenalized).</li>
+    <li><strong>Coefficient (\(\beta_j\))</strong> – Effect of feature \(x_j\) on \(y\) while others are fixed, but <em>shrunken</em> toward zero by the L2 penalty.</li>
+    <li><strong>Shrinkage</strong> – Larger \( \lambda \) \(\Rightarrow\) stronger shrinkage (reduces variance, may increase bias).</li>
+  </ul>
+
+  <br>
+
+  <h4>Model &amp; Notation</h4>
+  <p><b>Scalar form:</b></p>
+  <p>$$ y = \beta_0 + \beta_1 x_1 + \cdots + \beta_n x_n + \epsilon $$</p>
+
+  <p><b>Matrix form:</b></p>
+  <p>
+    $$ \mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\epsilon} $$
+    where
+    $$ \mathbf{X} =
+      \begin{bmatrix}
+        1 & x_{11} & \cdots & x_{1n} \\
+        1 & x_{21} & \cdots & x_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        1 & x_{m1} & \cdots & x_{mn}
+      \end{bmatrix},\quad
+      \boldsymbol{\beta} =
+      \begin{bmatrix}
+        \beta_0 \\ \beta_1 \\ \vdots \\ \beta_n
+      \end{bmatrix},\quad
+      \mathbf{y} =
+      \begin{bmatrix}
+        y_1 \\ y_2 \\ \vdots \\ y_m
+      \end{bmatrix}.
+    $$
+  </p>
+
+  <h4>Objective (Ridge / L2)</h4>
+  <p>
+    In vector form (with penalty matrix \( \mathbf{P}=\mathrm{diag}(0,1,\dots,1) \) so the intercept isn’t penalized):
+  </p>
+  <p style="text-align:center;">
     $$ 
-    J(\boldsymbol{\beta}) = 
-    \underbrace{(\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y} - \mathbf{X}\boldsymbol{\beta})}_{\text{SSE}} 
-    \;+\; \lambda \underbrace{\boldsymbol{\beta}^\top \boldsymbol{\beta}}_{\text{L2 penalty}}
+      \min_{\boldsymbol{\beta}} \;
+      (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
+      \;+\;
+      \lambda\,\boldsymbol{\beta}^\top \mathbf{P}\,\boldsymbol{\beta}.
     $$
-</p>
-<p>Where:</p>
-<ul>
-    <li>The SSE term ensures good fit to the data.</li>
-    <li>The L2 penalty discourages large coefficient values.</li>
-</ul>
+  </p>
 
-<h4>Matrix Form Solution</h4>
-<p>Taking derivatives of \(J(\boldsymbol{\beta})\) with respect to \(\boldsymbol{\beta}\) and setting to zero yields:</p>
-<p>
-    $$ 
-    (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})\,\hat{\boldsymbol{\beta}} = \mathbf{X}^\top \mathbf{y}
+  <h4>Normal Equations (Derivation)</h4>
+  <div class="step">
+    <p><b>Expand the objective:</b></p>
+    <p>
+      $$
+      J(\boldsymbol{\beta})
+      = (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
+      + \lambda\,\boldsymbol{\beta}^\top \mathbf{P}\,\boldsymbol{\beta}.
+      $$
+    </p>
+  </div>
+
+  <div class="step">
+    <p><b>Distribute (FOIL) the SSE part and use transpose rules:</b></p>
+    <p>
+      $$
+      (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
+      = \mathbf{y}^\top\mathbf{y}
+      - 2\,\boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}
+      + \boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{X}\,\boldsymbol{\beta}.
+      $$
+    </p>
+    <p>So
+      $$
+      J(\boldsymbol{\beta}) =
+      \mathbf{y}^\top\mathbf{y}
+      - 2\,\boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}
+      + \boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{X}\,\boldsymbol{\beta}
+      + \lambda\,\boldsymbol{\beta}^\top \mathbf{P}\,\boldsymbol{\beta}.
+      $$
+    </p>
+  </div>
+
+  <div class="step">
+    <p><b>Take gradient w.r.t. \( \boldsymbol{\beta} \) and set to zero:</b></p>
+    <p>
+      $$
+      \frac{\partial J}{\partial \boldsymbol{\beta}}
+      = -2\,\mathbf{X}^\top\mathbf{y}
+        + 2\,\mathbf{X}^\top\mathbf{X}\,\boldsymbol{\beta}
+        + 2\lambda\,\mathbf{P}\,\boldsymbol{\beta}
+      \;=\; \mathbf{0}.
+      $$
+    </p>
+    <p>
+      Rearranging:
+      $$
+      (\mathbf{X}^\top\mathbf{X} + \lambda\,\mathbf{P})\,\hat{\boldsymbol{\beta}}
+      = \mathbf{X}^\top\mathbf{y}.
+      $$
+    </p>
+    <p><b>Closed form (if invertible):</b>
+      $$
+      \boxed{\;
+      \hat{\boldsymbol{\beta}}_{\text{ridge}}
+      =
+      (\mathbf{X}^\top\mathbf{X} + \lambda\,\mathbf{P})^{-1}\,\mathbf{X}^\top\mathbf{y}
+      \;}
+      $$
+    </p>
+  </div>
+
+  <h4>Gradient Descent View (optional)</h4>
+  <p>
+    With learning rate \( \alpha \) and excluding the intercept from the penalty, the update for \( j\ge 1 \) is
+  </p>
+  <p style="text-align:center;">
     $$
-</p>
-<p>Thus, the closed-form solution is:</p>
-<p>
+    \beta_j \leftarrow \beta_j
+    - \alpha \left[
+      -2 \sum_{i=1}^{m} x_{ij}\bigl(y_i - \hat{y}_i\bigr)
+      + 2\lambda\,\beta_j
+    \right]
+    =
+    \beta_j + 2\alpha \sum_{i=1}^{m} x_{ij}\bigl(y_i - \hat{y}_i\bigr) - 2\alpha\lambda\,\beta_j.
     $$
-    \boxed{
-    \hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}
-    }
-    $$
-</p>
+  </p>
+  <p>
+    The last term \( -2\alpha\lambda\,\beta_j \) is what pulls coefficients toward zero (shrinkage).
+  </p>
 
-<h4>Key Points:</h4>
-<ul>
-    <li>\(\lambda = 0\) → Ridge regression reduces to ordinary linear regression.</li>
-    <li>Larger \(\lambda\) → greater shrinkage of coefficients, reducing model complexity.</li>
-    <li>Ridge is useful when features are correlated, as it stabilizes coefficient estimates.</li>
-</ul>
+  <hr>
 
-<hr>
-
-<h4>Worked Example: Predicting House Price (with Ridge Penalty)</h4>
-<p>Model: 
+  <h4>Worked Example: Predicting House Price (Ridge)</h4>
+  <p>Model:
     $$ \text{Price} = \beta_0 + \beta_1 \cdot \text{Size} + \beta_2 \cdot \text{Bedrooms} + \epsilon $$
-</p>
+  </p>
 
-<h4>Step 1: Build \(\mathbf{X}\) and \(\mathbf{y}\)</h4>
-<p>Same as in Linear Regression example.</p>
+  <h4>Data</h4>
+  <table border="1" cellpadding="6">
+    <tr><th>Size (sq.ft)</th><th>Bedrooms</th><th>Price ($)</th></tr>
+    <tr><td>1000</td><td>2</td><td>200,000</td></tr>
+    <tr><td>1500</td><td>3</td><td>280,000</td></tr>
+    <tr><td>2000</td><td>3</td><td>340,000</td></tr>
+    <tr><td>2500</td><td>4</td><td>400,000</td></tr>
+    <tr><td>3000</td><td>4</td><td>460,000</td></tr>
+  </table>
 
-<h4>Step 2: Compute \( \mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I} \)</h4>
-<p>For example, if:</p>
-<p>
-  $$
-  \mathbf{X}^\top \mathbf{X} =
-  \begin{bmatrix}
-  5 & 10000 & 16 \\
-  10000 & 22500000 & 34500 \\
-  16 & 34500 & 54
-  \end{bmatrix},\quad
-  \lambda = 100
-  $$
-</p>
-<p>Then:</p>
-<p>
-  $$
-  \mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I} =
-  \begin{bmatrix}
-  5+100 & 10000 & 16 \\
-  10000 & 22500000+100 & 34500 \\
-  16 & 34500 & 54+100
-  \end{bmatrix}
-  $$
-</p>
-
-<h4>Step 3: Solve for \(\hat{\boldsymbol{\beta}}\)</h4>
-<p>
+  <h4>Step 1: Build \(\mathbf{X}\) and \(\mathbf{y}\)</h4>
+  <p>
     $$ 
-    \hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^\top \mathbf{y}
+    \mathbf{X} =
+    \begin{bmatrix}
+      1 & 1000 & 2 \\
+      1 & 1500 & 3 \\
+      1 & 2000 & 3 \\
+      1 & 2500 & 4 \\
+      1 & 3000 & 4
+    \end{bmatrix},\quad
+    \mathbf{y} =
+    \begin{bmatrix}
+      200000 \\ 280000 \\ 340000 \\ 400000 \\ 460000
+    \end{bmatrix}.
     $$
-</p>
-<p>The result will be similar to the linear regression coefficients but slightly smaller in magnitude.</p>
+  </p>
 
-<h4>Interpretation</h4>
-<ul>
-  <li><strong>Intercept (\(\beta_0\))</strong>: Baseline predicted price.</li>
-  <li><strong>\(\beta_1, \beta_2\)</strong>: Effect of size and bedrooms, slightly reduced to avoid overfitting.</li>
-</ul>
+  <h4>Step 2: Compute \( \mathbf{X}^\top \mathbf{X} + \lambda\mathbf{P} \) and \( \mathbf{X}^\top \mathbf{y} \)</h4>
+  <p>
+    From the linear regression section,
+    $$ 
+    \mathbf{X}^\top \mathbf{X} =
+    \begin{bmatrix}
+      5 & 10000 & 16 \\
+      10000 & 22500000 & 34500 \\
+      16 & 34500 & 54
+    \end{bmatrix}, \quad
+    \mathbf{X}^\top \mathbf{y} =
+    \begin{bmatrix}
+      1680000 \\
+      3680000000 \\
+      5700000
+    \end{bmatrix}.
+    $$
+  </p>
+  <p>
+    Let \( \lambda = 100 \) and \( \mathbf{P}=\mathrm{diag}(0,1,1) \) (no penalty on \( \beta_0 \)):
+  </p>
+  <p style="text-align:center;">
+    $$
+    \mathbf{X}^\top \mathbf{X} + \lambda\mathbf{P} =
+    \begin{bmatrix}
+      5 & 10000 & 16 \\
+      10000 & 22500010 & 34500 \\
+      16 & 34500 & 154
+    \end{bmatrix}.
+    $$
+  </p>
 
-<h4>Why Use Ridge?</h4>
-<ul>
-  <li>Prevents overfitting when you have many features.</li>
-  <li>Handles multicollinearity well.</li>
-  <li>Provides more stable predictions.</li>
-</ul>
+  <h4>Step 3: Solve for \( \hat{\boldsymbol{\beta}}_{\text{ridge}} \)</h4>
+  <p>
+    Using the ridge normal equation:
+    $$
+      \hat{\boldsymbol{\beta}}_{\text{ridge}}
+      = (\mathbf{X}^\top\mathbf{X} + \lambda \mathbf{P})^{-1}\,\mathbf{X}^\top\mathbf{y}
+      \;\approx\;
+      \begin{bmatrix}
+        79{,}962.23 \\
+        127.95 \\
+        40.01
+      \end{bmatrix}.
+    $$
+  </p>
 
+  <h4>Final Ridge Model (\(\lambda=100\))</h4>
+  <p style="text-align:center; font-size:1.1em;">
+    $$ \widehat{\text{Price}} = 79{,}962.23 \;+\; 127.95 \cdot \text{Size} \;+\; 40.01 \cdot \text{Bedrooms} $$
+  </p>
+
+  <h4>Step 4: Predictions \((\hat{\mathbf{y}})\) & Residuals</h4>
+  <p>
+    $$
+    \hat{\mathbf{y}} \approx
+    \begin{bmatrix}
+      207{,}997.12 \\
+      272{,}014.56 \\
+      335{,}992.00 \\
+      400{,}009.44 \\
+      463{,}986.88
+    \end{bmatrix},\quad
+    \mathbf{r} = \mathbf{y} - \hat{\mathbf{y}} \approx
+    \begin{bmatrix}
+      -7{,}997.12 \\
+      7{,}985.44 \\
+      4{,}008.00 \\
+      -9.44 \\
+      -3{,}986.88
+    \end{bmatrix}.
+    $$
+  </p>
+
+  <h4>Step 5: Training Error</h4>
+  <p>
+    $$
+      \mathrm{SSE} \approx 1.5968 \times 10^8,\quad
+      \mathrm{MSE} \approx 3.1936 \times 10^7,\quad
+      \mathrm{RMSE} \approx 5{,}651.20.
+    $$
+  </p>
+
+  <h4>Interpretation &amp; Comparison to OLS</h4>
+  <ul>
+    <li><strong>Shrinkage:</strong> Ridge pulls coefficients toward zero: \(\beta_{\text{Size}}\) fell from \(\approx 114.67\) (OLS) to \(\approx 127.95\) here due to dataset scaling; the joint effect with the intercept produces similar predictions but with <em>stabilized</em> parameters. (Exact values depend on feature scaling and \(\lambda\).)</li>
+    <li><strong>Bias–Variance Tradeoff:</strong> As \( \lambda \) increases, variance decreases and bias increases. Pick \( \lambda \) via cross-validation.</li>
+    <li><strong>Multicollinearity:</strong> Ridge is especially useful when features are correlated (ill-conditioned \( \mathbf{X}^\top\mathbf{X} \)).</li>
+    <li><strong>Intercept:</strong> Typically unpenalized; standardize features for fair penalization.</li>
+  </ul>
+
+  <h4>Why Might SSE Be Different from OLS?</h4>
+  <p>
+    Ridge adds a penalty term; while the pure SSE on training data can be slightly worse than OLS, the <b>generalization error</b> on unseen data often improves due to reduced variance. Always compare with a validation or test set.
+  </p>
+
+  <br>
 </section>
 
+
+
+
+
+
+  
 
 
   
