@@ -1530,14 +1530,18 @@ In vector form with a penalty matrix
 </p>
 
 <h4>Objective (L1-Regularized Least Squares)</h4>
-<p>
-  $$ \mathrm{SSE} = \sum_{i=1}^{m} (y_i - \hat{y}_i)^2 = (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y} - \mathbf{X}\boldsymbol{\beta}) $$
-</p>
-<p>
-  Lasso minimizes
-  $$ \min_{\\boldsymbol{\beta}} \; (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta}) \;+\; \lambda \sum_{j=1}^{n} \lvert \beta_j \rvert, $$
-  with \(\beta_0\) typically excluded from the penalty. The L1 term is <em>nondifferentiable</em> at 0, which is why Lasso has no closed-form “normal equations” and instead uses iterative optimization.
-</p>
+
+    <p>
+    Lasso minimizes:
+    \[
+      \mathrm{SSE}(\boldsymbol{\beta}) + \lambda \sum_{j=1}^p |\beta_j|
+      \;=\;
+      \|\mathbf{y} - \mathbf{X}\boldsymbol{\beta}\|_2^2
+      \;+\; \lambda \|\boldsymbol{\beta}_{1:p}\|_1
+    \]
+    This penalty tends to produce exact zeros in \(\beta_j\) for large enough \(\lambda\).
+  </p>
+    
 
 <h4>Optimization & Soft-Thresholding (No Closed-Form)</h4>
 <p>
