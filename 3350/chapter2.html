@@ -1082,22 +1082,49 @@
   \[
     \mathrm{SSE}(\boldsymbol{\beta}) + \lambda \sum_{j=1}^{p}\beta_j^2
     \;=\;
-    \|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2 \;+\; \lambda\,\|\boldsymbol{\beta}_{1:p}\|_2^2.
+    \|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2 \;+\; \lambda\,\|\boldsymbol{\beta}_{1:p}\|_2^2
   \]
   
 In vector form with a penalty matrix
-  \( \mathbf{P} = \mathrm{diag}(0,1,\dots,1) \)
+  \( \mathbf{P} = \mathrm{diag}(0,1,\dots,1) \) (no penalty on \( \beta_0 \))
   , 
-  
   \( \mathbf{P} \in \mathbb{R}^{(p+1)\times(p+1)}   \text{is a diagonal matrix whose diagonal entries are } [0,\,1,\,1,\,\dots,\,1] \)
   
-  (no penalty on \( \beta_0 \)):
+  
   
   \[
     \min_{\boldsymbol{\beta}} \; (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
     \;+\; \lambda\,\boldsymbol{\beta}^\top \mathbf{P}\,\boldsymbol{\beta}.
   \]
 </p>
+
+
+  <p>
+  \( \beta^\top P \beta \) is a quadratic form.
+  Since \( P \) is diagonal, multiplying out gives:
+</p>
+
+<p>
+  \[
+    \beta^\top P \beta
+    = 0 \cdot \beta_0^2
+    + 1 \cdot \beta_1^2
+    + 1 \cdot \beta_2^2
+    + \dots
+    + 1 \cdot \beta_p^2
+  \]
+</p>
+
+<p>
+  That’s exactly:
+</p>
+
+<p>
+  \[
+    \sum_{j=1}^p \beta_j^2
+  \]
+</p>
+  
 
 <h4>Normal Equation (Ridge)</h4>
  <div class="step">
