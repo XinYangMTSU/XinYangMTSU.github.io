@@ -1084,7 +1084,11 @@
     \;=\;
     \|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2 \;+\; \lambda\,\|\boldsymbol{\beta}_{1:p}\|_2^2.
   \]
-  In vector form with a penalty matrix \(\mathbf{P}=\mathrm{diag}(0,1,\dots,1)\) (no penalty on \(\beta_0\)):
+  
+In vector form with a penalty matrix
+  \( \mathbf{P} \in \mathbb{R}^{(p+1)\times(p+1)} = \mathrm{diag}(0,1,\dots,1) \)
+  (no penalty on \( \beta_0 \)):
+  
   \[
     \min_{\boldsymbol{\beta}} \; (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
     \;+\; \lambda\,\boldsymbol{\beta}^\top \mathbf{P}\,\boldsymbol{\beta}.
