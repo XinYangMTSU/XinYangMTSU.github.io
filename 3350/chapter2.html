@@ -1538,6 +1538,230 @@ In vector form with a penalty matrix
   </div>
 
   </section>
+
+
+
+
+  <section id="lasso-regression">
+
+  <h4>2.3 Lasso Regression</h4>
+
+  <b>Idea:</b>
+  <p>
+    Lasso Regression extends Ordinary Least Squares (OLS) by adding an 
+    <b><font color="red">L1 penalty</font></b> on the absolute values of the coefficients. 
+    This penalty encourages sparsity in the model — that is, it tends to drive some coefficients 
+    exactly to zero, effectively performing <b>feature selection</b> while fitting the model.
+    <br><br>
+    In Lasso Regression, the penalty is the sum of the absolute values of the coefficients 
+    (excluding the intercept). By penalizing the magnitude of coefficients, L1 regularization 
+    both reduces overfitting and simplifies the model by eliminating less important features.
+  </p>
+
+  <h4>When to use Regularization:</h4>
+  <ul>
+    <li>Preventing Overfitting</li>
+    <li>High Dimensionality (\(p \gg m\))</li>
+    <li>When you suspect many features are irrelevant or redundant</li>
+    <li>For automatic feature selection (Lasso can set coefficients to zero)</li>
+  </ul>
+
+  <p>
+    Lasso Regression (L1-regularized linear regression) fits a hyperplane like OLS but adds a penalty on the 
+    absolute size of the coefficients. The goal is to 
+    <b><font color="red">minimize the squared error while also encouraging sparsity</font></b>.
+  </p>
+
+  <b>Equation:</b>
+  <p style="text-align:center;">
+    \(\hat{\mathbf{y}} = \mathbf{X}\boldsymbol{\beta}\), &nbsp; and we choose \(\boldsymbol{\beta}\) to minimize:
+    \[
+      \mathrm{SSE}(\boldsymbol{\beta}) + \lambda \sum_{j=1}^{p} |\beta_j|
+    \]
+  </p>
+
+  <p style="text-align:center;">
+    \[
+      \;\;\Longrightarrow\;\;
+      \underbrace{\sum_{i=1}^{m} \bigl(y_i - \hat{y}_i\bigr)^2}_{\text{SSE}}
+      \;+\;
+      \underbrace{\lambda \sum_{j=1}^{p} |\beta_j|}_{\text{L1 penalty}}
+    \]
+  </p>
+
+  <p style="text-align:center;">
+    \[
+      \;\;\Longrightarrow\;\;
+      \underbrace{\|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2}_{\text{sum of squared residuals}}
+      \;+\;
+      \underbrace{\lambda \|\boldsymbol{\beta}_{1:p}\|_1}_{\text{sum of absolute coefficients}}
+    \]
+    (note: the intercept \(\beta_0\) is typically <i>not</i> penalized).
+  </p>
+
+  <p><strong>Where:</strong></p>
+  <ul>
+    <li>\(\lambda \ge 0\): controls the amount of regularization</li>
+    <li>\(\lambda = 0 \Rightarrow\) Lasso = OLS (no penalty)</li>
+    <li>Small \(\lambda\) → weak shrinkage → coefficients close to OLS values</li>
+    <li>Large \(\lambda\) → strong shrinkage → more coefficients set exactly to zero</li>
+    <li>\(\beta_1, \dots, \beta_p\) = coefficients for features</li>
+    <li>\(\mathbf{X}\) = design matrix</li>
+    <li>\(\mathbf{y}\) = targets</li>
+  </ul>
+
+  <br>
+
+  <h4 style="color:#ff79c6; margin-top:0;">What does <span style="white-space:nowrap;">\(\|\cdot\|_1\)</span> mean?</h4>
+  <p>
+    The notation <strong>\(\|\cdot\|_1\)</strong> means the <b><font color="red">L1 norm</font></b> 
+    (also called the <b>Manhattan norm</b> or <b>taxicab norm</b>).
+  </p>
+
+  <ul>
+    <li><strong>Double bars</strong> \(\|\cdot\|\) denote a norm in general.</li>
+    <li>The subscript 1 indicates the L1 norm.</li>
+  </ul>
+
+  <p><strong>Definition:</strong></p>
+  <p style="margin-left:1rem;">
+    For a vector \(\mathbf{v} = (v_1, \dots, v_n)\), the L1 norm is
+  </p>
+  <p style="text-align:center;">
+    \[
+      \|\mathbf{v}\|_1 = \sum_{i=1}^n |v_i|
+    \]
+  </p>
+
+  <br>
+
+  <!-- Lasso Constraint Illustration -->
+  <svg viewBox="0 0 800 480" style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
+    <title>Lasso Shrinkage Illustration</title>
+    <desc>Diamond-shaped L1 constraint, SSE ellipses, and Lasso solution at a corner point.</desc>
+    <defs>
+      <marker id="arrow-pink" viewBox="0 0 10 10" refX="8" refY="5"
+              markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" fill="#ff79c6"></path>
+      </marker>
+      <style>
+        .axis { stroke:#ff79c6; stroke-width:2; marker-end:url(#arrow-pink); }
+        .axisLabel { fill:#ffb3de; font: 500 13px Roboto, Arial, sans-serif; }
+        .ellipse { fill:none; stroke:#8be9fd; stroke-width:3; }
+        .l1 { fill:none; stroke:#ff79c6; stroke-width:3; }
+        .note { fill:#ffb3de; font: 500 12px Roboto, Arial, sans-serif; }
+        .label { fill:#ff79c6; font: 600 13px Roboto, Arial, sans-serif; }
+      </style>
+    </defs>
+
+    <!-- Axes -->
+    <line x1="60" y1="240" x2="760" y2="240" class="axis"/>
+    <line x1="400" y1="440" x2="400" y2="40" class="axis"/>
+    <text x="752" y="226" class="axisLabel">β₁</text>
+    <text x="410" y="54" class="axisLabel">β₂</text>
+
+    <!-- L1 constraint diamond -->
+    <polygon points="400,170 470,240 400,310 330,240" class="l1"/>
+    <text x="280" y="360" class="label">L1 constraint: ‖β‖₁ ≤ t</text>
+
+    <!-- SSE ellipses -->
+    <ellipse cx="560" cy="160" rx="110" ry="72" class="ellipse" transform="rotate(-25 560 160)"/>
+    <ellipse cx="560" cy="160" rx="150" ry="98" class="ellipse" style="stroke-opacity:.45;stroke-dasharray:6 6;" transform="rotate(-25 560 160)"/>
+
+    <!-- Lasso solution -->
+    <circle cx="470" cy="240" r="5.5" fill="#50fa7b"/>
+    <text x="480" y="260" class="label" style="fill:#50fa7b;">Lasso solution (corner → β₂=0)</text>
+  </svg>
+
+  <h4>How Lasso Regression Works</h4>
+  <ol>
+    <li><strong>Collect Data</strong> – Gather features \((x_1, \dots, x_p)\) and outputs \(y\).</li>
+    <li><strong>(Recommended) Standardize Features</strong> – Put features on comparable scales.</li>
+    <li><strong>Choose \(\lambda\)</strong> – Typically via cross-validation.</li>
+    <li><strong>Fit the Model</strong> – Minimize squared error + L1 penalty using an iterative algorithm (e.g., coordinate descent).</li>
+    <li><strong>Evaluate</strong> – Check train/validation error; tune \(\lambda\) to balance sparsity and accuracy.</li>
+  </ol>
+
+  <h4>Objective (Lasso / L1)</h4>
+  <p>
+    Lasso minimizes:
+    \[
+      \mathrm{SSE}(\boldsymbol{\beta}) + \lambda \sum_{j=1}^p |\beta_j|
+      \;=\;
+      \|\mathbf{y} - \mathbf{X}\boldsymbol{\beta}\|_2^2
+      \;+\; \lambda \|\boldsymbol{\beta}_{1:p}\|_1
+    \]
+    This penalty tends to produce exact zeros in \(\beta_j\) for large enough \(\lambda\).
+  </p>
+
+  <br>
+
+  <h4>Worked Example: Predicting House Price (Lasso)</h4>
+  <p>Using the same dataset as Ridge, but with \(\lambda = 5000\), solved approximately via coordinate descent.</p>
+
+  <h4>Step 1: Data</h4>
+  <p>
+    \[
+    \mathbf{X} =
+    \begin{bmatrix}
+      1 & 1000 & 2 \\
+      1 & 1500 & 3 \\
+      1 & 2000 & 3 \\
+      1 & 2500 & 4 \\
+      1 & 3000 & 4
+    \end{bmatrix},\quad
+    \mathbf{y} =
+    \begin{bmatrix}
+      200000 \\ 280000 \\ 340000 \\ 400000 \\ 460000
+    \end{bmatrix}
+    \]
+  </p>
+
+  <h4>Step 2: Approximate Lasso Solution</h4>
+  <p>Using coordinate descent (iterative updates), we get approximately:</p>
+  <p>
+    \[
+    \hat{\boldsymbol{\beta}}_{\text{lasso}} \approx
+    \begin{bmatrix}
+      80{,}000 \\
+      128 \\
+      0
+    \end{bmatrix}
+    \]
+    The second slope (\(\beta_2\)) is driven to zero — Lasso performs feature selection.
+  </p>
+
+  <h4>Step 3: Final Lasso Model (\(\lambda=5000\))</h4>
+  <p style="text-align:center; font-size:1.1em;">
+    \(\widehat{\text{Price}} = 80{,}000 \;+\; 128 \times \text{Size} \;+\; 0 \times \text{Bedrooms}\)
+  </p>
+
+  <h4>Step 4: Predictions & Errors</h4>
+  <p>
+    \[
+    \hat{\mathbf{y}} \approx
+    \begin{bmatrix}
+      208{,}000 \\
+      272{,}000 \\
+      336{,}000 \\
+      400{,}000 \\
+      464{,}000
+    \end{bmatrix},
+    \quad
+    \mathrm{RMSE} \approx 6{,}325.00
+    \]
+  </p>
+
+  <h4>Key Points</h4>
+  <ul>
+    <li>Lasso can shrink coefficients exactly to zero → feature selection.</li>
+    <li>L1 constraint region is a diamond → more likely to intersect SSE contours at axes.</li>
+    <li>No closed-form solution; solved via iterative optimization (coordinate descent, subgradient methods).</li>
+    <li>Standardizing features is essential for fair penalization.</li>
+  </ul>
+
+</section>
+
   
 
   <section id="references">
