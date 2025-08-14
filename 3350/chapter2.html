@@ -1571,11 +1571,12 @@ In vector form with a penalty matrix
     <li>For automatic feature selection (Lasso can set coefficients to zero)</li>
   </ul>
 
-  <p>
-    Lasso Regression (L1-regularized linear regression) fits a hyperplane like OLS but adds a penalty on the 
-    absolute size of the coefficients. The goal is to 
-    <b><font color="red">minimize the squared error while also encouraging sparsity</font></b>.
-  </p>
+ <p>
+  Lasso Regression (L1-regularized linear regression) fits a hyperplane like OLS but adds a penalty on the
+  <em>absolute size</em> of coefficients to prevent overfitting and to perform <b>feature selection</b>.
+  The goal is to <b><font color="red">minimize the squared error while pushing unimportant coefficients exactly to zero</font></b>
+  (sparse model).
+</p>
 
   <b>Equation:</b>
   <p style="text-align:center;">
