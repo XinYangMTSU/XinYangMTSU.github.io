@@ -1646,7 +1646,7 @@ In vector form with a penalty matrix
   </section>
 
 
-  <!-- Lasso Constraint Illustration (ellipse tangent at the corner) -->
+  <!-- Lasso Constraint Illustration (ellipse tangent at the corner, larger size) -->
 <svg viewBox="0 0 800 480" style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
   <title>Lasso Shrinkage Illustration</title>
   <desc>Diamond-shaped L1 constraint, SSE ellipses, and Lasso solution tangent at the corner point.</desc>
@@ -1675,16 +1675,17 @@ In vector form with a penalty matrix
   <polygon points="400,170 470,240 400,310 330,240" class="l1"/>
   <text x="280" y="360" class="label">L1 constraint: ‖β‖₁ ≤ t</text>
 
-  <!-- SSE ellipses (inner one tangent at the corner 470,240) -->
-  <!-- Inner ellipse: center (520,240), rx=50 => leftmost point at (470,240) -->
-  <ellipse cx="520" cy="240" rx="50" ry="34" class="ellipse"/>
-  <!-- Outer ellipse (wider contour), same center so it's outside the diamond -->
-  <ellipse cx="520" cy="240" rx="90" ry="60" class="ellipse" style="stroke-opacity:.45; stroke-dasharray:6 6;"/>
+  <!-- SSE ellipses (larger) -->
+  <!-- Inner ellipse tangent at (470,240): center (520,240), rx=50 -->
+  <ellipse cx="520" cy="240" rx="50" ry="44" class="ellipse"/>
+  <!-- Outer ellipse: scaled up for bigger contour -->
+  <ellipse cx="520" cy="240" rx="120" ry="90" class="ellipse" style="stroke-opacity:.45; stroke-dasharray:6 6;"/>
 
   <!-- Tangency / Lasso solution point (corner) -->
   <circle cx="470" cy="240" r="5.5" fill="#50fa7b"/>
   <text x="480" y="260" class="label" style="fill:#50fa7b;">Tangent point (corner → β₂ = 0)</text>
 </svg>
+
 
   
 
