@@ -1209,7 +1209,7 @@ In vector form with a penalty matrix
 <hr>
 
 <h4>Worked Example: Predicting House Price (Ridge)</h4>
-<p>Use the same data as in 3.1 and let \( \lambda = 100 \). We do <b>not</b> penalize the intercept, so
+<p>Use the same data as in 2.1 and let \( \lambda = 100 \). We do <b>not</b> penalize the intercept, so
 \(\mathbf{P}=\mathrm{diag}(0,1,1)\).</p>
 
 <h4>Step 1: Build \(\mathbf{X}\) and \(\mathbf{y}\)</h4>
@@ -1250,7 +1250,15 @@ In vector form with a penalty matrix
   $$
 </p>
 <p>
-  With \( \lambda = 100 \) and \( \mathbf{P}=\mathrm{diag}(0,1,1) \):
+  With \( \lambda = 100 \) and 
+  
+  \( \mathbf{P}=
+   \begin{bmatrix}
+      0 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & 0 & 1
+    \end{bmatrix}
+  \):
 </p>
 <p>
   \[
