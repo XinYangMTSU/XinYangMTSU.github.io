@@ -1438,43 +1438,43 @@ In vector form with a penalty matrix
 
   <br>
 
-  <!-- Lasso Constraint Illustration -->
-  <svg viewBox="0 0 800 480" style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
-    <title>Lasso Shrinkage Illustration</title>
-    <desc>Diamond-shaped L1 constraint, SSE ellipses, and Lasso solution at a corner point.</desc>
-    <defs>
-      <marker id="arrow-pink" viewBox="0 0 10 10" refX="8" refY="5"
-              markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-        <path d="M0 0 L10 5 L0 10 z" fill="#ff79c6"></path>
-      </marker>
-      <style>
-        .axis { stroke:#ff79c6; stroke-width:2; marker-end:url(#arrow-pink); }
-        .axisLabel { fill:#ffb3de; font: 500 13px Roboto, Arial, sans-serif; }
-        .ellipse { fill:none; stroke:#8be9fd; stroke-width:3; }
-        .l1 { fill:none; stroke:#ff79c6; stroke-width:3; }
-        .note { fill:#ffb3de; font: 500 12px Roboto, Arial, sans-serif; }
-        .label { fill:#ff79c6; font: 600 13px Roboto, Arial, sans-serif; }
-      </style>
-    </defs>
+ <!-- Lasso Constraint Illustration (ellipse above, rotated, adjusted up for tangent) -->
+<svg viewBox="0 0 800 480" style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
+  <title>Lasso Shrinkage Illustration</title>
+  <desc>Diamond-shaped L1 constraint, rotated SSE ellipse above the diamond, tangent at the top corner point.</desc>
+  <defs>
+    <marker id="arrow-pink" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#ff79c6"></path>
+    </marker>
+    <style>
+      .axis { stroke:#ff79c6; stroke-width:2; marker-end:url(#arrow-pink); }
+      .axisLabel { fill:#ffb3de; font: 500 13px Roboto, Arial, sans-serif; }
+      .ellipse { fill:none; stroke:#8be9fd; stroke-width:3; }
+      .l1 { fill:none; stroke:#ff79c6; stroke-width:3; }
+      .note { fill:#ffb3de; font: 500 12px Roboto, Arial, sans-serif; }
+      .label { fill:#ff79c6; font: 600 13px Roboto, Arial, sans-serif; }
+    </style>
+  </defs>
 
-    <!-- Axes -->
-    <line x1="60" y1="240" x2="760" y2="240" class="axis"/>
-    <line x1="400" y1="440" x2="400" y2="40" class="axis"/>
-    <text x="752" y="226" class="axisLabel">β₁</text>
-    <text x="410" y="54" class="axisLabel">β₂</text>
+  <!-- Axes -->
+  <line x1="60" y1="240" x2="760" y2="240" class="axis"/>
+  <line x1="400" y1="440" x2="400" y2="40" class="axis"/>
+  <text x="752" y="226" class="axisLabel">β₁</text>
+  <text x="410" y="54" class="axisLabel">β₂</text>
 
-    <!-- L1 constraint diamond -->
-    <polygon points="400,170 470,240 400,310 330,240" class="l1"/>
-    <text x="280" y="360" class="label">L1 constraint: ‖β‖₁ ≤ t</text>
+  <!-- L1 constraint diamond -->
+  <polygon points="400,170 470,240 400,310 330,240" class="l1"/>
+  <text x="280" y="360" class="label">L1 constraint: ‖β‖₁ ≤ t</text>
 
-    <!-- SSE ellipses -->
-    <ellipse cx="560" cy="160" rx="110" ry="72" class="ellipse" transform="rotate(-25 560 160)"/>
-    <ellipse cx="560" cy="160" rx="150" ry="98" class="ellipse" style="stroke-opacity:.45;stroke-dasharray:6 6;" transform="rotate(-25 560 160)"/>
+  <!-- SSE ellipses (moved up for tangency, rotated) -->
+  <ellipse cx="400" cy="110" rx="90" ry="60" class="ellipse" transform="rotate(20 400 110)"/>
+  <ellipse cx="400" cy="110" rx="150" ry="100" class="ellipse" style="stroke-opacity:.45; stroke-dasharray:6 6;" transform="rotate(20 400 110)"/>
 
-    <!-- Lasso solution -->
-    <circle cx="470" cy="240" r="5.5" fill="#50fa7b"/>
-    <text x="480" y="260" class="label" style="fill:#50fa7b;">Lasso solution (corner → β₂=0)</text>
-  </svg>
+  <!-- Tangency / Lasso solution point (top corner) -->
+  <circle cx="400" cy="170" r="5.5" fill="#50fa7b"/>
+  <text x="410" y="150" class="label" style="fill:#50fa7b;">Tangent point (corner → β₁ = 0)</text>
+</svg>
 
 
 <br>
@@ -1644,46 +1644,6 @@ In vector form with a penalty matrix
   </div>
 
   </section>
-
-
-  <!-- Lasso Constraint Illustration (ellipse above, bottom tangent with green point) -->
-<svg viewBox="0 0 800 480" style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
-  <title>Lasso Shrinkage Illustration</title>
-  <desc>Diamond-shaped L1 constraint, SSE ellipse above the diamond, tangent at the top corner point.</desc>
-  <defs>
-    <marker id="arrow-pink" viewBox="0 0 10 10" refX="8" refY="5"
-            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#ff79c6"></path>
-    </marker>
-    <style>
-      .axis { stroke:#ff79c6; stroke-width:2; marker-end:url(#arrow-pink); }
-      .axisLabel { fill:#ffb3de; font: 500 13px Roboto, Arial, sans-serif; }
-      .ellipse { fill:none; stroke:#8be9fd; stroke-width:3; }
-      .l1 { fill:none; stroke:#ff79c6; stroke-width:3; }
-      .note { fill:#ffb3de; font: 500 12px Roboto, Arial, sans-serif; }
-      .label { fill:#ff79c6; font: 600 13px Roboto, Arial, sans-serif; }
-    </style>
-  </defs>
-
-  <!-- Axes -->
-  <line x1="60" y1="240" x2="760" y2="240" class="axis"/>
-  <line x1="400" y1="440" x2="400" y2="40" class="axis"/>
-  <text x="752" y="226" class="axisLabel">β₁</text>
-  <text x="410" y="54" class="axisLabel">β₂</text>
-
-  <!-- L1 constraint diamond -->
-  <polygon points="400,170 470,240 400,310 330,240" class="l1"/>
-  <text x="280" y="360" class="label">L1 constraint: ‖β‖₁ ≤ t</text>
-
-  <!-- SSE ellipses (above, tangent at top corner) -->
-  <ellipse cx="400" cy="110" rx="90" ry="60" class="ellipse"/>
-  <ellipse cx="400" cy="110" rx="150" ry="100" class="ellipse" style="stroke-opacity:.45; stroke-dasharray:6 6;"/>
-
-  <!-- Tangency / Lasso solution point (top corner) -->
-  <circle cx="400" cy="170" r="5.5" fill="#50fa7b"/>
-  <text x="410" y="150" class="label" style="fill:#50fa7b;">Tangent point (corner → β₁ = 0)</text>
-</svg>
-
 
 
   <section id="references">
