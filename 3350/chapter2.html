@@ -1139,15 +1139,31 @@ In vector form with a penalty matrix
   </div>
 
   <div class="step">
+
     <p><b>Distribute (FOIL) the SSE part and use transpose rules:</b></p>
-    <p>
-      $$
-      (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
-      = \mathbf{y}^\top\mathbf{y}
-      - 2\,\boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}
-      + \boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{X}\,\boldsymbol{\beta}.
-      $$
-    </p>
+
+<p>
+  $$
+  (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
+  = \underbrace{\mathbf{y}^\top\mathbf{y}}_{\text{First}}
+    - \underbrace{\mathbf{y}^\top\mathbf{X}\boldsymbol{\beta}}_{\text{Outer}}
+    - \underbrace{\boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}}_{\text{Inner}}
+    + \underbrace{\boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{X}\,\boldsymbol{\beta}}_{\text{Last}}
+  $$
+</p>
+
+<p>
+  Using the fact that the Outer and Inner terms are equal scalars, we combine them:
+</p>
+
+<p>
+  $$
+  = \mathbf{y}^\top\mathbf{y}
+    - 2\,\boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}
+    + \boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{X}\,\boldsymbol{\beta}.
+  $$
+</p>
+    
     <p>So
       $$
       J(\boldsymbol{\beta}) =
