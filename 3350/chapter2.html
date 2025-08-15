@@ -815,7 +815,7 @@
 
 <p><b>Mean Squared Error (MSE):</b></p>
 <p>
-    $$ \text{MSE} = \frac{\text{SSE}}{m} $$
+    $$ \text{MSE} = \frac{\text{SSE}}{m} = \frac{1}{m} \sum_{i=1}^{m}(y_i - \hat{y}_i)^2 $$
 </p>
 <p>Where <i>m</i> is the number of data points (or samples). MSE gives you the average squared error per data point. For this example, the MSE is approximately <b>21,333,333.33</b>.</p>
 
@@ -826,6 +826,17 @@
 <p>RMSE takes the square root of MSE, giving you the error in the same units as the original data (house prices, in this case), making it easier to interpret. For this example, the RMSE is approximately <b>4,618.80</b>.</p>
 
 <p>These metrics give you an idea of how much error you’re getting on average per prediction (in terms of the original units of the data). A smaller MSE or RMSE indicates better performance of the model.</p>
+
+<p>
+   <b>Coefficient of Determination (\(𝑅^2\))</b>
+</p>
+<p>
+  $$ 
+  R^2 \;=\; 1 \;-\; \frac{\sum_{i=1}^{n}\bigl(y_i - \hat{y}_i\bigr)^2}
+                         {\sum_{i=1}^{n}\bigl(y_i - \bar{y}\bigr)^2}
+  $$
+</p>
+      
 <br>
       
 </section>
