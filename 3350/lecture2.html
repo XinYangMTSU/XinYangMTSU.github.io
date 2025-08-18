@@ -249,152 +249,225 @@ section#references a:hover, section#references a:focus {
 
 
   <section id="logistic-regression">
-      
-  <h4>3.1 Logistic Regression</h4>
-  <br>
-  <b>Idea:</b>
-  <p>
-    Logistic Regression is used when the target variable is <b>categorical</b> (e.g., 0/1, Yes/No, Spam/Not Spam). 
-    Instead of fitting a straight line, it models the probability that an observation belongs to a certain class. 
-    The output is bounded between <b>0 and 1</b> using the <em>sigmoid (logistic) function</em>.
-  </p>
-  
-  <b>Equation:</b>
-  <p style="text-align: center;">
-    \( P(y=1 \mid x) = \sigma(z) = \frac{1}{1 + e^{-z}} \), where \( z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p \)
-  </p>
-  
-  <p><strong>Where:</strong></p>
-  <ul>
-    <li>\( P(y=1 \mid x) \) = probability that the outcome belongs to class 1</li>
-    <li>\( \sigma(z) \) = sigmoid function, squashes real numbers into [0,1]</li>
-    <li>\( z \) = linear combination of features (same as Linear Regression)</li>
-    <li>\( \beta_j \) = model coefficients</li>
-  </ul>
+    
+    <h4>2.1 Logistic Regression</h4>
 
-  <br>
+    <!-- 1. Motivation -->
+    <h3>1. Motivation</h3>
+    <div class="card">
+      <p><strong>Problem with Linear Regression for classification:</strong></p>
+      <ul>
+        <li>Linear Regression can predict any real number (e.g., −3.2 or 2.7).</li>
+        <li>But classification tasks need <em>Yes/No</em> outputs (Admit/Reject, Spam/Not Spam, Disease/No Disease).</li>
+        <li>We need outputs between <strong>0 and 1</strong> so we can interpret them as <strong>probabilities</strong>.</li>
+      </ul>
+    </div>
 
-  <center>
-    <img src="images/logistic_sigmoid.png" width="700px" height="300px">
-  </center>
+    <!-- 2. Idea -->
+    <h3>2. Idea</h3>
+    <p>Logistic Regression takes the linear model from Linear Regression:</p>
+    <p class="eq">
+      $$ z \;=\; \beta_0 \;+\; \beta_1 x_1 \;+\; \cdots \;+\; \beta_p x_p $$
+    </p>
+    <p>and passes it through the <em>sigmoid</em> (logistic) function:</p>
+    <p class="eq">
+      $$ \sigma(z) \;=\; \frac{1}{1 + e^{-z}} $$
+    </p>
+    <ul>
+      <li>Output is always in \((0,1)\).</li>
+      <li>Can be interpreted as the probability of class \(1\).</li>
+    </ul>
 
-  <br>
+    <!-- 3. Equation -->
+    <h3>3. Equation</h3>
+    <p class="eq">
+      $$ P(y=1 \mid x) \;=\; \frac{1}{\,1 + e^{-(\beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p)}\,} $$
+    </p>
+    <p class="center small">If the probability \(\ge 0.5\) → predict \(1\); otherwise \(0\).</p>
 
-  <h4>How Logistic Regression Works</h4>
-  <ol>
-    <li><strong>Compute Linear Combination</strong> – Calculate \( z = \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p \).</li>
-    <li><strong>Apply Sigmoid Function</strong> – Map \( z \) into the probability range [0,1]:  
-        \( \hat{p} = \frac{1}{1+e^{-z}} \).</li>
-    <li><strong>Classification</strong> – Choose a threshold (commonly 0.5):  
-        If \( \hat{p} \geq 0.5 \), predict class 1; else predict class 0.</li>
-  </ol>
+    <!-- 4. Interpretation -->
+    <h3>4. Interpretation of Coefficients</h3>
+    <p>Each coefficient \(\beta_j\) changes the <strong>log-odds</strong> of the outcome:</p>
+    <p class="eq">
+      $$ \log\!\left(\frac{p}{1-p}\right) \;=\; \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p $$
+    </p>
+    <p>If you exponentiate \(\beta_j\), you get an <strong>odds ratio</strong>:</p>
+    <ul>
+      <li>\(e^{\beta_j} &gt; 1\): increases chance of the event.</li>
+      <li>\(e^{\beta_j} &lt; 1\): decreases chance of the event.</li>
+    </ul>
 
-  <br>
+    <!-- 5. Objective -->
+    <h3>5. Objective Function (How the Model Learns)</h3>
+    <p>Instead of minimizing squared error, Logistic Regression uses <strong>Maximum Likelihood Estimation (MLE)</strong>.</p>
+    <p class="eq">
+      $$ \ell(\boldsymbol{\beta}) \;=\; \sum_{i=1}^{m} \Big( y_i \log p_i \;+\; (1 - y_i)\log(1 - p_i) \Big), \quad p_i = \sigma(\mathbf{x}_i^\top \boldsymbol{\beta}) $$
+    </p>
+    <p><strong>Optimization:</strong> use <em>Gradient Descent</em> (or Newton-type methods) to find the best \(\boldsymbol{\beta}\).</p>
 
-  <h4>Interpreting the Coefficients</h4>
-  <ul>
-    <li><strong>Intercept (β<sub>0</sub>)</strong> – Log-odds of outcome = 1 when all predictors are zero.</li>
-    <li><strong>Coefficient (β<sub>j</sub>)</strong> – Change in the log-odds of outcome for a one-unit increase in \(x_j\), keeping other variables constant.</li>
-    <li>Exponentiating coefficients:  
-        \( e^{\beta_j} \) = odds ratio (multiplicative effect on odds of outcome = 1).</li>
-  </ul>
-
-  <br>
-
-  <h4>Model & Notation</h4>
-  <p>Scalar form:</p>
-  <p>
-    $$ \log \frac{p}{1-p} = \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p $$
-  </p>
-  <p>Matrix form:</p>
-  <p>
-    $$ \mathbf{p} = \sigma(\mathbf{X}\boldsymbol{\beta}) $$
-  </p>
-
-  <br>
-
-  <h4>Objective (Maximum Likelihood)</h4>
-  <p>
-    Instead of minimizing squared error, Logistic Regression uses <b>Maximum Likelihood Estimation (MLE)</b>.
-  </p>
-  <p>
-    The likelihood of observed data is:
-    $$
-    L(\boldsymbol{\beta}) = \prod_{i=1}^m p_i^{y_i} (1-p_i)^{(1-y_i)},
-    $$
-    where \( p_i = \sigma(\mathbf{x}_i^\top \boldsymbol{\beta}) \).
-  </p>
-  <p>
-    Log-likelihood (easier to optimize):
-    $$
-    \ell(\boldsymbol{\beta}) = \sum_{i=1}^m \big[ y_i \log p_i + (1-y_i)\log(1-p_i) \big].
-    $$
-  </p>
-  <p>
-    Goal: maximize \( \ell(\boldsymbol{\beta}) \).  
-    In practice, iterative methods like <b>Gradient Descent</b> or <b>Newton-Raphson</b> are used.
-  </p>
-
-  <br>
-
-  <h4>Worked Example: Predicting Student Admission</h4>
-  <p>Model:
-    $$
-    P(\text{Admit}=1) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 \cdot \text{GPA} + \beta_2 \cdot \text{TestScore})}}
-    $$
-  </p>
-
-  <h4>Data</h4>
-  <center>
-    <table border="1" cellpadding="6">
-      <tr><th>GPA</th><th>Test Score</th><th>Admitted (y)</th></tr>
-      <tr><td>3.0</td><td>600</td><td>0</td></tr>
-      <tr><td>3.5</td><td>650</td><td>0</td></tr>
-      <tr><td>3.8</td><td>700</td><td>1</td></tr>
-      <tr><td>4.0</td><td>720</td><td>1</td></tr>
-      <tr><td>2.8</td><td>580</td><td>0</td></tr>
+    <!-- 6. Example -->
+    <h3>6. Example</h3>
+    <p>Imagine predicting if a student is admitted based on GPA and test score.</p>
+    <table aria-label="Example dataset for admission">
+      <thead>
+        <tr><th>GPA</th><th>Test Score</th><th>Admitted (y)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>3.0</td><td>600</td><td>0</td></tr>
+        <tr><td>3.8</td><td>700</td><td>1</td></tr>
+        <tr><td>4.0</td><td>720</td><td>1</td></tr>
+        <tr><td>2.8</td><td>580</td><td>0</td></tr>
+      </tbody>
     </table>
-  </center>
 
-  <br>
+    <p class="eq">
+      $$ P(\text{Admit}=1) \;=\; \frac{1}{1 + e^{-(\beta_0 + \beta_1 \cdot \text{GPA} + \beta_2 \cdot \text{TestScore})}} $$
+    </p>
+    <div class="tip">
+      If for a new student (GPA = 3.6, Score = 680) we calculate \(p = 0.72\): that’s a 72% chance of admission → predict <strong>Admitted = 1</strong>.
+    </div>
 
-  <h4>Step 1: Define Likelihood</h4>
-  <p>
-    $$
-    \ell(\boldsymbol{\beta}) = \sum_{i=1}^5 \big[ y_i \log p_i + (1-y_i)\log(1-p_i) \big]
-    $$
-  </p>
+    <!-- 7. Key Points -->
+    <h3>7. Key Points for Students</h3>
+    <ul>
+      <li>Logistic Regression outputs <strong>probabilities</strong>, not raw continuous values.</li>
+      <li>A threshold (commonly 0.5) converts probability → class.</li>
+      <li>Uses <strong>MLE</strong>, not Ordinary Least Squares.</li>
+      <li>Works best when the relationship between features and <em>log-odds</em> is approximately linear.</li>
+    </ul>
 
-  <h4>Step 2: Estimate Parameters</h4>
-  <p>
-    Use numerical optimization (e.g., Gradient Descent) to maximize log-likelihood and obtain \(\hat{\boldsymbol{\beta}}\).
-  </p>
+    <!-- 8. Visualization -->
+    <h3>8. Visualization (for teaching)</h3>
+    <p>Sigmoid curve behavior:</p>
+    <ul>
+      <li>As \(z \to -\infty\), probability \(\to 0\).</li>
+      <li>As \(z \to +\infty\), probability \(\to 1\).</li>
+      <li>At \(z = 0\), probability \(= 0.5\).</li>
+    </ul>
 
-  <h4>Step 3: Predictions</h4>
-  <p>
-    For a new student with GPA = 3.6 and Test Score = 680:  
-    $$ z = \hat{\beta}_0 + \hat{\beta}_1 (3.6) + \hat{\beta}_2 (680) $$
-    $$ \hat{p} = \frac{1}{1 + e^{-z}} $$
-    If \( \hat{p} = 0.72 \), we predict Admit = 1.
-  </p>
+    <canvas id="sigmoidCanvas" width="720" height="380" aria-label="Sigmoid function plot"></canvas>
+    <div class="caption">Sigmoid function \( \sigma(z) = \dfrac{1}{1 + e^{-z}} \)</div>
 
-  <br>
+    <div class="hr"></div>
+    <p class="small">Tip: This section is self-contained. If your site already includes MathJax, you can remove the MathJax script tag above.</p>
 
-  <h4>Key Points:</h4>
-  <ul>
-    <li>Logistic Regression predicts probabilities, not continuous values.</li>
-    <li>Coefficients are interpreted in terms of <b>log-odds</b> and <b>odds ratios</b>.</li>
-    <li>Optimization is done via <b>MLE</b>, not closed-form Normal Equations.</li>
-    <li>Works well for binary classification; can be extended to multi-class via <b>softmax regression</b>.</li>
-  </ul>
+  <script>
+    // Draw a simple sigmoid plot on the canvas (z in [-8, 8])
+    (function drawSigmoid() {
+      const canvas = document.getElementById('sigmoidCanvas');
+      if (!canvas || !canvas.getContext) return;
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width, H = canvas.height;
 
-  <hr>
+      // Padding for axes
+      const pad = { left: 60, right: 20, top: 20, bottom: 50 };
+      const plotW = W - pad.left - pad.right;
+      const plotH = H - pad.top - pad.bottom;
 
+      // Domain & range
+      const zMin = -8, zMax = 8;
+      const pMin = 0,  pMax = 1;
+
+      const xScale = z => pad.left + ( (z - zMin) / (zMax - zMin) ) * plotW;
+      const yScale = p => pad.top + (1 - ( (p - pMin) / (pMax - pMin) )) * plotH; // invert y
+
+      // Clear
+      ctx.clearRect(0, 0, W, H);
+
+      // Background
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, W, H);
+
+      // Axes
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.lineWidth = 1;
+
+      // Border of plot area
+      ctx.strokeRect(pad.left, pad.top, plotW, plotH);
+
+      // Horizontal grid lines at p = 0, 0.5, 1
+      const gridPs = [0, 0.5, 1];
+      ctx.beginPath();
+      gridPs.forEach(p => {
+        const y = yScale(p);
+        ctx.moveTo(pad.left, y);
+        ctx.lineTo(pad.left + plotW, y);
+      });
+      ctx.stroke();
+
+      // Vertical grid lines at z = -6, -3, 0, 3, 6
+      const gridZs = [-6, -3, 0, 3, 6];
+      ctx.beginPath();
+      gridZs.forEach(z => {
+        const x = xScale(z);
+        ctx.moveTo(x, pad.top);
+        ctx.lineTo(x, pad.top + plotH);
+      });
+      ctx.stroke();
+
+      // Labels
+      ctx.fillStyle = '#374151';
+      ctx.font = '12px Roboto, sans-serif';
+      // y labels
+      gridPs.forEach(p => {
+        const y = yScale(p);
+        ctx.fillText(p.toFixed(1), 28, y + 4);
+      });
+      // x labels
+      gridZs.forEach(z => {
+        const x = xScale(z);
+        ctx.fillText(z.toString(), x - 6, pad.top + plotH + 18);
+      });
+
+      // Axis titles
+      ctx.font = '13px Roboto, sans-serif';
+      ctx.fillText('z', pad.left + plotW / 2, H - 18);
+      ctx.save();
+      ctx.translate(18, pad.top + plotH / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText('Probability  p = σ(z)', 0, 0);
+      ctx.restore();
+
+      // Sigmoid curve
+      ctx.strokeStyle = '#2563eb';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      const steps = 600;
+      for (let i = 0; i <= steps; i++) {
+        const t = i / steps;
+        const z = zMin + t * (zMax - zMin);
+        const p = 1 / (1 + Math.exp(-z));
+        const x = xScale(z);
+        const y = yScale(p);
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Mark p=0.5 at z=0
+      const x0 = xScale(0);
+      const y05 = yScale(0.5);
+      ctx.fillStyle = '#1f2937';
+      ctx.beginPath();
+      ctx.arc(x0, y05, 3.5, 0, 2 * Math.PI);
+      ctx.fill();
+
+      // Dashed helpers to axes
+      ctx.setLineDash([5, 4]);
+      ctx.strokeStyle = '#9ca3af';
+      ctx.beginPath();
+      ctx.moveTo(x0, y05);
+      ctx.lineTo(x0, pad.top + plotH);
+      ctx.moveTo(x0, y05);
+      ctx.lineTo(pad.left, y05);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    })();
+  </script>
 </section>
 
 
   
-  
+
   
 <section id="ridge-regression">
   <h4>2.2 Ridge Regression (L2 Regularization)</h4>
