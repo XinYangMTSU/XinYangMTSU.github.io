@@ -279,10 +279,10 @@
 
 <section id="logistic-regression">
     
-    <h4>2.1 Logistic Regression</h4>
+    <h3>2.1 Logistic Regression</h3>
 
     <!-- 1. Motivation -->
-    <h3>1. Motivation</h3>
+    <h4>1. Motivation</h4>
     <div class="card">
       <p><strong>Problem with Linear Regression for classification:</strong></p>
       <ul>
@@ -293,7 +293,7 @@
     </div>
 
     <!-- 2. Idea -->
-    <h3>2. Idea</h3>
+    <h4>2. Idea</h4>
     <p>Logistic Regression takes the linear model from Linear Regression:</p>
     <p class="eq">
       $$ z \;=\; \beta_0 \;+\; \beta_1 x_1 \;+\; \cdots \;+\; \beta_p x_p $$
@@ -308,14 +308,14 @@
     </ul>
 
     <!-- 3. Equation -->
-    <h3>3. Equation</h3>
+    <h4>3. Equation</h4>
     <p class="eq">
       $$ P(y=1 \mid x) \;=\; \frac{1}{\,1 + e^{-(\beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p)}\,} $$
     </p>
     <p class="center small">If the probability \(\ge 0.5\) → predict \(1\); otherwise \(0\).</p>
 
     <!-- 4. Interpretation -->
-    <h3>4. Interpretation of Coefficients</h3>
+    <h4>4. Interpretation of Coefficients</h4>
     <p>Each coefficient \(\beta_j\) changes the <strong>log-odds</strong> of the outcome:</p>
     <p class="eq">
       $$ \log\!\left(\frac{p}{1-p}\right) \;=\; \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p $$
@@ -327,7 +327,7 @@
     </ul>
 
     <!-- 5. Objective -->
-    <h3>5. Objective Function (How the Model Learns)</h3>
+    <h4>5. Objective Function (How the Model Learns)</h4>
     <p>Instead of minimizing squared error, Logistic Regression uses <strong>Maximum Likelihood Estimation (MLE)</strong>.</p>
     <p class="eq">
       $$ \ell(\boldsymbol{\beta}) \;=\; \sum_{i=1}^{m} \Big( y_i \log p_i \;+\; (1 - y_i)\log(1 - p_i) \Big), \quad p_i = \sigma(\mathbf{x}_i^\top \boldsymbol{\beta}) $$
@@ -335,7 +335,7 @@
     <p><strong>Optimization:</strong> use <em>Gradient Descent</em> (or Newton-type methods) to find the best \(\boldsymbol{\beta}\).</p>
 
     <!-- 6. Example -->
-    <h3>6. Example</h3>
+    <h4>6. Example</h4>
     <p>Imagine predicting if a student is admitted based on GPA and test score.</p>
     <table aria-label="Example dataset for admission">
       <thead>
@@ -357,7 +357,7 @@
     </div>
 
     <!-- 7. Key Points -->
-    <h3>7. Key Points for Students</h3>
+    <h4>7. Key Points for Students</h4>
     <ul>
       <li>Logistic Regression outputs <strong>probabilities</strong>, not raw continuous values.</li>
       <li>A threshold (commonly 0.5) converts probability → class.</li>
@@ -366,7 +366,7 @@
     </ul>
 
     <!-- 8. Visualization -->
-    <h3>8. Visualization (for teaching)</h3>
+    <h4>8. Visualization (for teaching)</h4>
     <p>Sigmoid curve behavior:</p>
     <ul>
       <li>As \(z \to -\infty\), probability \(\to 0\).</li>
