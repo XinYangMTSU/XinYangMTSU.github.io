@@ -248,98 +248,152 @@ section#references a:hover, section#references a:focus {
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 
+  <section id="logistic-regression">
+      
+  <h4>3.1 Logistic Regression</h4>
+  <br>
+  <b>Idea:</b>
+  <p>
+    Logistic Regression is used when the target variable is <b>categorical</b> (e.g., 0/1, Yes/No, Spam/Not Spam). 
+    Instead of fitting a straight line, it models the probability that an observation belongs to a certain class. 
+    The output is bounded between <b>0 and 1</b> using the <em>sigmoid (logistic) function</em>.
+  </p>
+  
+  <b>Equation:</b>
+  <p style="text-align: center;">
+    \( P(y=1 \mid x) = \sigma(z) = \frac{1}{1 + e^{-z}} \), where \( z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p \)
+  </p>
+  
+  <p><strong>Where:</strong></p>
+  <ul>
+    <li>\( P(y=1 \mid x) \) = probability that the outcome belongs to class 1</li>
+    <li>\( \sigma(z) \) = sigmoid function, squashes real numbers into [0,1]</li>
+    <li>\( z \) = linear combination of features (same as Linear Regression)</li>
+    <li>\( \beta_j \) = model coefficients</li>
+  </ul>
+
+  <br>
+
+  <center>
+    <img src="images/logistic_sigmoid.png" width="700px" height="300px">
+  </center>
+
+  <br>
+
+  <h4>How Logistic Regression Works</h4>
+  <ol>
+    <li><strong>Compute Linear Combination</strong> – Calculate \( z = \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p \).</li>
+    <li><strong>Apply Sigmoid Function</strong> – Map \( z \) into the probability range [0,1]:  
+        \( \hat{p} = \frac{1}{1+e^{-z}} \).</li>
+    <li><strong>Classification</strong> – Choose a threshold (commonly 0.5):  
+        If \( \hat{p} \geq 0.5 \), predict class 1; else predict class 0.</li>
+  </ol>
+
+  <br>
+
+  <h4>Interpreting the Coefficients</h4>
+  <ul>
+    <li><strong>Intercept (β<sub>0</sub>)</strong> – Log-odds of outcome = 1 when all predictors are zero.</li>
+    <li><strong>Coefficient (β<sub>j</sub>)</strong> – Change in the log-odds of outcome for a one-unit increase in \(x_j\), keeping other variables constant.</li>
+    <li>Exponentiating coefficients:  
+        \( e^{\beta_j} \) = odds ratio (multiplicative effect on odds of outcome = 1).</li>
+  </ul>
+
+  <br>
+
+  <h4>Model & Notation</h4>
+  <p>Scalar form:</p>
+  <p>
+    $$ \log \frac{p}{1-p} = \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p $$
+  </p>
+  <p>Matrix form:</p>
+  <p>
+    $$ \mathbf{p} = \sigma(\mathbf{X}\boldsymbol{\beta}) $$
+  </p>
+
+  <br>
+
+  <h4>Objective (Maximum Likelihood)</h4>
+  <p>
+    Instead of minimizing squared error, Logistic Regression uses <b>Maximum Likelihood Estimation (MLE)</b>.
+  </p>
+  <p>
+    The likelihood of observed data is:
+    $$
+    L(\boldsymbol{\beta}) = \prod_{i=1}^m p_i^{y_i} (1-p_i)^{(1-y_i)},
+    $$
+    where \( p_i = \sigma(\mathbf{x}_i^\top \boldsymbol{\beta}) \).
+  </p>
+  <p>
+    Log-likelihood (easier to optimize):
+    $$
+    \ell(\boldsymbol{\beta}) = \sum_{i=1}^m \big[ y_i \log p_i + (1-y_i)\log(1-p_i) \big].
+    $$
+  </p>
+  <p>
+    Goal: maximize \( \ell(\boldsymbol{\beta}) \).  
+    In practice, iterative methods like <b>Gradient Descent</b> or <b>Newton-Raphson</b> are used.
+  </p>
+
+  <br>
+
+  <h4>Worked Example: Predicting Student Admission</h4>
+  <p>Model:
+    $$
+    P(\text{Admit}=1) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 \cdot \text{GPA} + \beta_2 \cdot \text{TestScore})}}
+    $$
+  </p>
+
+  <h4>Data</h4>
+  <center>
+    <table border="1" cellpadding="6">
+      <tr><th>GPA</th><th>Test Score</th><th>Admitted (y)</th></tr>
+      <tr><td>3.0</td><td>600</td><td>0</td></tr>
+      <tr><td>3.5</td><td>650</td><td>0</td></tr>
+      <tr><td>3.8</td><td>700</td><td>1</td></tr>
+      <tr><td>4.0</td><td>720</td><td>1</td></tr>
+      <tr><td>2.8</td><td>580</td><td>0</td></tr>
+    </table>
+  </center>
+
+  <br>
+
+  <h4>Step 1: Define Likelihood</h4>
+  <p>
+    $$
+    \ell(\boldsymbol{\beta}) = \sum_{i=1}^5 \big[ y_i \log p_i + (1-y_i)\log(1-p_i) \big]
+    $$
+  </p>
+
+  <h4>Step 2: Estimate Parameters</h4>
+  <p>
+    Use numerical optimization (e.g., Gradient Descent) to maximize log-likelihood and obtain \(\hat{\boldsymbol{\beta}}\).
+  </p>
+
+  <h4>Step 3: Predictions</h4>
+  <p>
+    For a new student with GPA = 3.6 and Test Score = 680:  
+    $$ z = \hat{\beta}_0 + \hat{\beta}_1 (3.6) + \hat{\beta}_2 (680) $$
+    $$ \hat{p} = \frac{1}{1 + e^{-z}} $$
+    If \( \hat{p} = 0.72 \), we predict Admit = 1.
+  </p>
+
+  <br>
+
+  <h4>Key Points:</h4>
+  <ul>
+    <li>Logistic Regression predicts probabilities, not continuous values.</li>
+    <li>Coefficients are interpreted in terms of <b>log-odds</b> and <b>odds ratios</b>.</li>
+    <li>Optimization is done via <b>MLE</b>, not closed-form Normal Equations.</li>
+    <li>Works well for binary classification; can be extended to multi-class via <b>softmax regression</b>.</li>
+  </ul>
+
+  <hr>
+
+</section>
 
 
-  <!-- Ridge Shrinkage Illustration — smaller circle, larger ellipse, tangent -->
-<svg viewBox="0 0 800 480" role="img" aria-labelledby="ridgeTitle ridgeDesc"
-     style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
-  <title id="ridgeTitle">Ridge Shrinkage Illustration</title>
-  <desc id="ridgeDesc">
-    Axes for beta1 and beta2, a circular L2 constraint ball centered at the origin, OLS-centered SSE ellipses,
-    and the ridge solution at the tangency point between an ellipse and the L2 circle.
-  </desc>
-
-  <defs>
-    <marker id="arrow-pink" viewBox="0 0 10 10" refX="8" refY="5"
-            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#ff79c6"></path>
-    </marker>
-    <style>
-      .axis { stroke:#ff79c6; stroke-width:2; marker-end:url(#arrow-pink); }
-      .axisLabel { fill:#ffb3de; font: 500 13px Roboto, Arial, sans-serif; }
-      .note { fill:#ffb3de; font: 500 12px Roboto, Arial, sans-serif; }
-      .label { fill:#ff79c6; font: 600 13px Roboto, Arial, sans-serif; }
-      .ellipse { fill:none; stroke:#8be9fd; stroke-width:3; }
-      .ellipse--wide { fill:none; stroke:#8be9fd; stroke-opacity:.45; stroke-width:2; stroke-dasharray:6 6; }
-      .l2 { fill:none; stroke:#ff79c6; stroke-width:3; }
-      .guide { stroke:#9aa0a6; stroke-width:1.5; stroke-dasharray:6 6; }
-    </style>
-  </defs>
-
-  <!-- Axes -->
-  <g id="coords">
-    <line x1="60"  y1="240" x2="760" y2="240" class="axis" />
-    <line x1="400" y1="440" x2="400" y2="40"  class="axis" />
-    <text x="752" y="226" class="axisLabel">β₁</text>
-    <text x="410" y="54"  class="axisLabel">β₂</text>
-    <circle cx="400" cy="240" r="2.5" fill="#ff79c6"/>
-    <text x="408" y="254" class="note">origin</text>
-  </g>
-
-  <!-- Smaller L2 ball (reduced radius) -->
-  <g id="l2-ball">
-    <circle cx="400" cy="240" r="90" class="l2"/>
-    <text x="230" y="366" class="label">L2 constraint: ‖β‖₂ ≤ t</text>
-  </g>
-
-  <!-- OLS (unregularized) -->
-  <g id="ols">
-    <text x="560" y="160" text-anchor="middle" dominant-baseline="middle"
-          style="font:700 20px/1 Roboto, Arial, sans-serif; fill:#ffd166;">★</text>
-    <text x="572" y="180" class="label">OLS (unregularized)</text>
-  </g>
-
-  <!-- Shrinkage direction (origin → OLS) -->
-  <g id="shrink">
-    <line x1="400" y1="240" x2="560" y2="160" class="guide"/>
-    <text x="492" y="206" class="note">shrinkage direction</text>
-  </g>
-
-  <!-- SSE contours (larger ellipse family) -->
-  <g id="sse">
-    <!-- Main (larger) ellipse -->
-    <ellipse cx="560" cy="160" rx="110" ry="72" class="ellipse"
-             transform="rotate(-25 560 160)"/>
-    <!-- Wider contours -->
-    <ellipse cx="560" cy="160" rx="150" ry="98" class="ellipse--wide"
-             transform="rotate(-25 560 160)"/>
-    <ellipse cx="560" cy="160" rx="190" ry="124" class="ellipse--wide"
-             transform="rotate(-25 560 160)"/>
-    <text x="600" y="90" class="label">SSE contours</text>
-  </g>
-
-  <!-- Ridge point: placed on the circle along shrinkage line (≈ tangent visually) -->
-  <!-- This point is 90px from origin toward OLS along the guide line -->
-  <g id="ridge">
-    <circle cx="480.5" cy="199.8" r="5.5" fill="#50fa7b" stroke="#1e1f22" stroke-width="1.5"/>
-    <text x="494" y="218" class="label" style="fill:#50fa7b;">Ridge solution (tangent)</text>
-  </g>
-
-  <!-- Legend -->
-  <g id="legend">
-    <rect x="72" y="64" width="215" height="88" rx="10" ry="10"
-          fill="rgba(33,17,27,.75)" stroke="#402138"/>
-    <circle cx="92" cy="88" r="7" fill="none" stroke="#ff79c6" stroke-width="3"/>
-    <text x="110" y="92" class="note">L2 constraint ball</text>
-
-    <line x1="85" y1="114" x2="99" y2="114" class="ellipse"/>
-    <text x="110" y="118" class="note">SSE (loss) contour</text>
-
-    <text x="88" y="140" style="font:700 16px Roboto, Arial, sans-serif; fill:#ffd166;">★</text>
-    <text x="110" y="142" class="note">OLS estimate</text>
-  </g>
-</svg>
-
+  
   
   
 <section id="ridge-regression">
