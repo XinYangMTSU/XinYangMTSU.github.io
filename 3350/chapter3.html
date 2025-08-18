@@ -393,25 +393,14 @@
         <p>But \(z\) can be any real number. To turn \(z\) into a probability, we pass it through the sigmoid:</p>
         <p class="eq">$$ P(y=1 \mid x) = \sigma(z) $$</p>
         <p>The result is always between 0 and 1 → interpretable as probability.</p>
-          
-    </ul>
-   
-
-  
-  
-    <p>Sigmoid curve behavior:</p>
-    <ul>
-      <li>As \(z \to -\infty\), probability \(\to 0\).</li>
-      <li>As \(z \to +\infty\), probability \(\to 1\).</li>
-      <li>At \(z = 0\), probability \(= 0.5\).</li>
+      
     </ul>
 
     <canvas id="sigmoidCanvas" width="720" height="380" aria-label="Sigmoid function plot"></canvas>
+    <center>
     <div class="caption">Sigmoid function \( \sigma(z) = \dfrac{1}{1 + e^{-z}} \)</div>
-
-    <div class="hr"></div>
-    <p class="small">Tip: This section is self-contained. If your site already includes MathJax, you can remove the MathJax script tag above.</p>
-
+    </center>
+  
   <script>
     // Draw a simple sigmoid plot on the canvas (z in [-8, 8])
     (function drawSigmoid() {
