@@ -366,7 +366,39 @@
     </ul>
 
     <!-- 8. Visualization -->
-    <h4>8. Visualization (for teaching)</h4>
+    <h4>8. The Sigmoid (Logistic) Function</h4>
+
+    <ul>
+      <li>1. Definition</li>
+        <div class="card">
+          <p class="eq">$$ \sigma(z) = \frac{1}{1 + e^{-z}} $$</p>
+          <ul>
+            <li><strong>Input:</strong> any real number \( z \in (-\infty, +\infty) \).</li>
+            <li><strong>Output:</strong> a number between 0 and 1.</li>
+          </ul>
+        </div>
+
+      <li>2. Shape</li>
+        <ul>
+          <li>The graph looks like an S-shaped curve.</li>
+          <li>As \( z \to +\infty \), \( \sigma(z) \to 1 \).</li>
+          <li>As \( z \to -\infty \), \( \sigma(z) \to 0 \).</li>
+          <li>At \( z = 0 \), \( \sigma(0) = 0.5 \).</li>
+        </ul>
+        <p>That’s why it’s perfect for mapping any real number into a probability.</p>
+
+      <li>3. Why it’s used in Logistic Regression</li>
+        <p>Logistic Regression first computes a linear combination:</p>
+        <p class="eq">$$ z = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p $$</p>
+        <p>But \(z\) can be any real number. To turn \(z\) into a probability, we pass it through the sigmoid:</p>
+        <p class="eq">$$ P(y=1 \mid x) = \sigma(z) $$</p>
+        <p>The result is always between 0 and 1 → interpretable as probability.</p>
+          
+    </ul>
+   
+
+  
+  
     <p>Sigmoid curve behavior:</p>
     <ul>
       <li>As \(z \to -\infty\), probability \(\to 0\).</li>
