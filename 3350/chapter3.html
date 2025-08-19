@@ -449,8 +449,22 @@
     where \( \; p_i = \sigma(x_i^{\top}\boldsymbol{\beta}) = \dfrac{1}{1+e^{-x_i^{\top}\boldsymbol{\beta}}} \; \).
   </p>
 
+    <br>
+    
+     <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:12px 14px; margin-top:10px;">
+    There’s no closed-form solution for \( \boldsymbol{\beta} \) in logistic regression, so we use iterative optimization.
+  </div>
 
-     <h4>Equivalently: Minimize the Cross-Entropy Loss</h4>
+    <br>
+    
+    <li>6. Optimize (MLE): choose parameters that maximize the log-likelihood</li>
+
+    <div style="text-align:center; margin:8px 0;">
+      $$ \hat{\theta} \;=\; \arg\max_{\theta}\; \ell(\theta). $$
+    </div>
+
+    
+     <li>7. Equivalently: Minimize the Cross-Entropy Loss</li>
     
   <p><strong>Cross-entropy</strong> is just the <em>negative log-likelihood</em> for binary logistic regression.</p>
 
@@ -472,20 +486,7 @@
     \(\ell(\boldsymbol{\beta})\) is the same as minimizing its negative, i.e., the cross-entropy loss.
   </div>
     
-
-    <br>
-      
-    <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:12px 14px; margin-top:10px;">
-    There’s no closed-form solution for \( \boldsymbol{\beta} \) in logistic regression, so we use iterative optimization.
-  </div>
-
-    <br>
     
-    <li>6. Optimize (MLE): choose parameters that maximize the log-likelihood</li>
-
-    <div style="text-align:center; margin:8px 0;">
-      $$ \hat{\theta} \;=\; \arg\max_{\theta}\; \ell(\theta). $$
-    </div>
     
   </ul>
 
