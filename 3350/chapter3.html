@@ -395,7 +395,29 @@
     $$ \log\!\Bigg(\prod_{i} a_i\Bigg) \;=\; \sum_{i} \log a_i. $$
   </div>
 
+    <h4>Why do this? (three big reasons)</h4>
+  <ul style="padding-left:1.1rem; margin:10px 0;">
+    <li style="margin:8px 0;">
+      <strong>Numerical stability:</strong> Products of many small probabilities underflow to 0; sums of logs don’t.
+    </li>
 
+    <li style="margin:8px 0;">
+      <strong>Optimization convenience:</strong> sums are easier to differentiate:
+      <div style="text-align:center; margin:8px 0;">
+        $$ \nabla_{\theta}\,\ell(\theta) \;=\; \sum_{i=1}^{m} \nabla_{\theta}\,\log p\!\left(y_i \mid x_i;\,\theta\right), $$
+      </div>
+      so the gradient is just an additive sum of per-example gradients.
+    </li>
+
+    <li style="margin:8px 0;">
+      <strong>Same optimum:</strong> \(\log(\cdot)\) is strictly increasing, so
+      <div style="text-align:center; margin:8px 0;">
+        $$ \arg\max_{\theta}\, L(\theta) \;=\; \arg\max_{\theta}\, \ell(\theta). $$
+      </div>
+      Maximizing the product or the sum of logs gives the same best \(\theta\).
+    </li>
+  </ul>
+  
      <p>We maximize the log-likelihood (sums are easier &amp; numerically stable):</p>
 
     <p>(Equivalently, minimize \(-\ell(\boldsymbol{\beta})\), the <em>cross-entropy loss</em>.)</p>
