@@ -449,10 +449,37 @@
     where \( \; p_i = \sigma(x_i^{\top}\boldsymbol{\beta}) = \dfrac{1}{1+e^{-x_i^{\top}\boldsymbol{\beta}}} \; \).
   </p>
 
+
+     <h4>Equivalently: Minimize the Cross-Entropy Loss</h4>
+    
+  <p><strong>Cross-entropy</strong> is just the <em>negative log-likelihood</em> for binary logistic regression.</p>
+
+  <div style="text-align:center; margin:10px 0; background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:12px;">
+    $$ \min_{\boldsymbol{\beta}}\; -\ell(\boldsymbol{\beta})
+       \;=\; \min_{\boldsymbol{\beta}} \sum_{i=1}^{m}
+       \Big[\,-y_i \log p_i \;-\; (1-y_i)\log(1-p_i)\,\Big], \qquad
+       p_i=\sigma(x_i^{\top}\boldsymbol{\beta}). $$
+  </div>
+
+  <p style="margin-top:10px;">Often we use the <em>average</em> loss (same minimizer):</p>
+  <div style="text-align:center; margin:8px 0;">
+    $$ \min_{\boldsymbol{\beta}}\; \frac{1}{m}\sum_{i=1}^{m}
+       \Big[\,-y_i \log p_i \;-\; (1-y_i)\log(1-p_i)\,\Big]. $$
+  </div>
+
+  <div style="background:#eef6ff; border:1px solid #c7e0ff; border-radius:10px; padding:12px 14px; margin:12px 0;">
+    <strong>Why it’s equivalent:</strong> \(\log(\cdot)\) is strictly increasing, so maximizing the log-likelihood
+    \(\ell(\boldsymbol{\beta})\) is the same as minimizing its negative, i.e., the cross-entropy loss.
+  </div>
+    
+
+    <br>
       
     <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:12px 14px; margin-top:10px;">
     There’s no closed-form solution for \( \boldsymbol{\beta} \) in logistic regression, so we use iterative optimization.
   </div>
+
+    <br>
     
     <li>6. Optimize (MLE): choose parameters that maximize the log-likelihood</li>
 
