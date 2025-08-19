@@ -329,11 +329,64 @@
     <!-- 5. Objective -->
     <h4>5. Objective Function (How the Model Learns)</h4>
     <p>Instead of minimizing squared error, Logistic Regression uses <strong>Maximum Likelihood Estimation (MLE)</strong>.</p>
-    <p class="eq">
-      $$ \ell(\boldsymbol{\beta}) \;=\; \sum_{i=1}^{m} \Big( y_i \log p_i \;+\; (1 - y_i)\log(1 - p_i) \Big), \quad p_i = \sigma(\mathbf{x}_i^\top \boldsymbol{\beta}) $$
-    </p>
-    There’s no closed-form solution, so we use an iterative optimizer. <br>
-    <p><strong>Optimization:</strong> use <em>Gradient Descent</em> (or Newton-type methods) to find the best \(\boldsymbol{\beta}\).</p>
+
+  <h4>What is MLE?</h4>
+  <p><strong>Idea:</strong> pick the parameters that make the data you observed most probable under your model.</p>
+
+  <h4>Logistic Regression Setup</h4>
+  <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:14px 16px; margin:12px 0;">
+    <div style="text-align:center; margin:6px 0;">
+      $$ p_i \;=\; P(y_i=1 \mid x_i;\,\boldsymbol{\beta}) \;=\; \sigma(z_i)
+         \;=\; \frac{1}{1+e^{-z_i}}, \qquad z_i \;=\; x_i^{\top}\boldsymbol{\beta}. $$
+    </div>
+    <p style="margin:6px 0 0;">with binary outcomes \(y_i \in \{0,1\}\), \(i=1,\dots,m\).</p>
+  </div>
+
+  <h4>Likelihood</h4>
+  <p>The (joint) likelihood of all \(m\) samples is</p>
+  <div style="text-align:center; margin:6px 0;">
+    $$ L(\boldsymbol{\beta}) \;=\; \prod_{i=1}^{m} \; p_i^{\,y_i}\; (1-p_i)^{\,1-y_i}. $$
+  </div>
+
+  <h4>Log-Likelihood</h4>
+  <p>We maximize the log-likelihood (sums are easier &amp; numerically stable):</p>
+  <div style="text-align:center; margin:6px 0;">
+    $$ \ell(\boldsymbol{\beta}) \;=\; \sum_{i=1}^{m} \Big[\, y_i \log p_i \;+\; (1-y_i)\log(1-p_i) \,\Big]. $$
+  </div>
+  <p>(Equivalently, minimize \(-\ell(\boldsymbol{\beta})\), the <em>cross-entropy loss</em>.)</p>
+
+  <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:12px 14px; margin-top:10px;">
+    There’s no closed-form solution for \( \boldsymbol{\beta} \) in logistic regression, so we use iterative optimization.
+  </div>
+
+  <h4>How do we find \( \boldsymbol{\beta} \)?</h4>
+  <p><strong>Two common choices:</strong></p>
+
+  <ol style="padding-left:1.2rem; margin-top:6px;">
+    <li style="margin-bottom:10px;">
+      <strong>Gradient Descent (maximize \( \ell \))</strong>
+      <ul style="margin:6px 0 0 1.0rem;">
+        <li>Compute probabilities: 
+          <div style="text-align:center; margin:6px 0;">
+            $$ \mathbf{p} \;=\; \sigma(\mathbf{X}\boldsymbol{\beta}). $$
+          </div>
+        </li>
+        <li>Gradient of log-likelihood:
+          <div style="text-align:center; margin:6px 0;">
+            $$ \nabla \ell(\boldsymbol{\beta}) \;=\; \mathbf{X}^{\top}(\mathbf{y}-\mathbf{p}). $$
+          </div>
+        </li>
+        <li>Update rule (with small learning rate \( \eta \)):
+          <div style="text-align:center; margin:6px 0;">
+            $$ \boldsymbol{\beta} \;\leftarrow\; \boldsymbol{\beta} \;+\; \eta\, \mathbf{X}^{\top}(\mathbf{y}-\mathbf{p}), $$
+          </div>
+          repeat until convergence.
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+
 
     <!-- 6. Example -->
     <h4>6. Example</h4>
