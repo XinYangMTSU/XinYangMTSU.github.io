@@ -387,7 +387,11 @@
     <p>Apply <em>log</em>(·) to both sides:</p>
     
     <div style="text-align:center; margin:10px 0; background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:12px;">
-    $$ \ell(\theta) \;=\; \log L(\theta) \;=\; \sum_{i=1}^{m} \log\, p\!\left(y_i \mid x_i;\,\theta\right). $$
+    $$ \ell(\theta) 
+        \;=\; \log L(\theta) \;=\; \sum_{i=1}^{m} \log\, p\!\left(y_i \mid x_i;\,\theta\right) 
+        \;=\; \sum_{i=1}^{m} \log\!\Big( p_i^{\,y_i}\,(1-p_i)^{\,1-y_i} \Big).
+      
+      $$
   </div>
 
   <p style="margin-top:10px;">We used the identity</p>
@@ -427,7 +431,28 @@
     There’s no closed-form solution for \( \boldsymbol{\beta} \) in logistic regression, so we use iterative optimization.
   </div>
   <br>
-    <li>4. Optimize (MLE): choose parameters that maximize the log-likelihood</li>
+
+    <li>4. Expand each term using \( \log(a^b)=b\log a \)</li>
+    
+  <div style="text-align:center; margin:8px 0;">
+    $$ \log\!\Big( p_i^{\,y_i}\,(1-p_i)^{\,1-y_i} \Big)
+       \;=\; y_i \log p_i \;+\; (1-y_i)\log(1-p_i). $$
+  </div>
+
+    <li>5. Combine terms</li>
+    
+  <div style="text-align:center; margin:8px 0; background:#eef6ff; border:1px solid #c7e0ff; border-radius:10px; padding:12px;">
+    $$ \boxed{ \;
+       \ell(\boldsymbol{\beta})
+       \;=\; \sum_{i=1}^{m} \Big[\, y_i \log p_i \;+\; (1-y_i)\log(1-p_i) \,\Big]
+       \; } $$
+  </div>
+
+  <p style="margin-top:10px; text-align:center;">
+    where \( \; p_i = \sigma(x_i^{\top}\boldsymbol{\beta}) = \dfrac{1}{1+e^{-x_i^{\top}\boldsymbol{\beta}}} \; \).
+  </p>
+    
+    <li>6. Optimize (MLE): choose parameters that maximize the log-likelihood</li>
 
     <div style="text-align:center; margin:8px 0;">
       $$ \hat{\theta} \;=\; \arg\max_{\theta}\; \ell(\theta). $$
