@@ -333,6 +333,8 @@
   <h4>What is Maximum Likelihood Estimation (MLE)?</h4>
   <p><strong>Idea:</strong> pick the parameters that make the data you observed <b>most probable</b> under your model.</p>
 
+  <p>We maximize the log-likelihood (sums are easier &amp; numerically stable):</p>
+
    <div style="text-align:center; margin:6px 0;">
       $$ \ell(\boldsymbol{\beta}) \;=\; \sum_{i=1}^{m} \Big[\, y_i \log p_i \;+\; (1-y_i)\log(1-p_i) \,\Big]. $$
     </div>
@@ -422,14 +424,9 @@
     </li>
   </ul>
   
-     <p>We maximize the log-likelihood (sums are easier &amp; numerically stable):</p>
-
+     
     <p>(Equivalently, minimize \(-\ell(\boldsymbol{\beta})\), the <em>cross-entropy loss</em>.)</p>
-
     
-    <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:12px 14px; margin-top:10px;">
-    There’s no closed-form solution for \( \boldsymbol{\beta} \) in logistic regression, so we use iterative optimization.
-  </div>
   <br>
 
     <li>4. Expand each term using \( \log(a^b)=b\log a \)</li>
@@ -451,6 +448,11 @@
   <p style="margin-top:10px; text-align:center;">
     where \( \; p_i = \sigma(x_i^{\top}\boldsymbol{\beta}) = \dfrac{1}{1+e^{-x_i^{\top}\boldsymbol{\beta}}} \; \).
   </p>
+
+      
+    <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:12px 14px; margin-top:10px;">
+    There’s no closed-form solution for \( \boldsymbol{\beta} \) in logistic regression, so we use iterative optimization.
+  </div>
     
     <li>6. Optimize (MLE): choose parameters that maximize the log-likelihood</li>
 
