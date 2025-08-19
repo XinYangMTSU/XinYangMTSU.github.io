@@ -516,6 +516,62 @@
 
   <br>
 
+  <!-- Logistic: From Sigmoid to Log-Odds (self-contained block) -->
+<section id="sigmoid-to-logodds" style="font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; max-width:900px; margin:0 auto;">
+
+  <h4>9. From Sigmoid (Logistic) Function to Log-Odds</h4>
+  <p>We start from the sigmoid and derive the log-odds step by step.</p>
+
+  <ol style="padding-left:1.2rem;">
+    <li>
+      <strong>Start with the sigmoid function</strong>
+      <div style="text-align:center; margin:6px 0;">
+        $$ p \;=\; \sigma(z) \;=\; \frac{1}{1 + e^{-z}} $$
+      </div>
+    </li>
+
+    <li>
+      <strong>Invert the fraction</strong> — take reciprocals of both sides:
+      <div style="text-align:center; margin:6px 0;">
+        $$ \frac{1}{p} \;=\; 1 + e^{-z} $$
+      </div>
+    </li>
+
+    <li>
+      <strong>Subtract 1 from both sides</strong> and simplify:
+      <div style="text-align:center; margin:6px 0;">
+        $$ \frac{1}{p} - 1 \;=\; e^{-z}
+        \quad\Longrightarrow\quad
+        \frac{1-p}{p} \;=\; e^{-z} $$
+      </div>
+    </li>
+
+    <li>
+      <strong>Take natural log</strong>:
+      <div style="text-align:center; margin:6px 0;">
+        $$ \ln\!\left(\frac{1-p}{p}\right) \;=\; -z $$
+      </div>
+    </li>
+
+    <li>
+      <strong>Rearrange</strong> — multiply by \(-1\):
+      <div style="text-align:center; margin:6px 0;">
+        $$ \ln\!\left(\frac{p}{1-p}\right) \;=\; z $$
+      </div>
+    </li>
+  </ol>
+
+  <div style="border:1px solid #e5e7eb; background:#f9fafb; padding:12px 14px; border-radius:10px; margin-top:10px;">
+    <strong>✅ Final Result (Log-Odds / Logit)</strong>
+    <div style="text-align:center; margin-top:6px;">
+      $$ \text{Log-Odds} \;=\; \ln\!\left(\frac{p}{1-p}\right) \;=\; z \;=\; \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p $$
+    </div>
+  </div>
+</section>
+
+
+  <br>
+
   <h4>Model &amp; Notation</h4>
   <p><b>Scalar form:</b></p>
   <p>
