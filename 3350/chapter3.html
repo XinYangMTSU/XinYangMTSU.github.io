@@ -352,6 +352,29 @@
       $$ L(\boldsymbol{\beta}) \;=\; \prod_{i=1}^{m} \; p_i^{\,y_i}\; (1-p_i)^{\,1-y_i}. $$
     </div>
 
+      <ul style="padding-left:1.1rem; margin:12px 0;">
+    <li style="margin:6px 0;">
+      <strong>\(L(\theta)\) — the likelihood:</strong>
+      a score (function of the parameters \(\theta\)) that tells you how plausible \(\theta\) is
+      given the data you observed.
+    </li>
+
+    <li style="margin:6px 0;">
+      <strong>\(\displaystyle \prod_{i=1}^{m}\) — “product from \(i=1\) to \(m\)”:</strong>
+      multiply one term for each data point in the dataset.
+    </li>
+
+    <li style="margin:6px 0;">
+      <strong>\(p(y_i \mid x_i;\,\theta)\):</strong>
+      the model’s probability (or probability density) of observing label \(y_i\) for example \(i\),
+      given its features \(x_i\) and parameters \(\theta\).
+    </li>
+  </ul>
+
+  <div style="background:#eef6ff; border:1px solid #c7e0ff; border-radius:10px; padding:10px 12px; color:#0b3b79; margin-top:10px;">
+    <strong>Note.</strong> This product form assumes examples are independent (given their features); that’s why we can multiply their individual probabilities.
+  </div>
+    
     <li>3. Log-Likelihood</li>
      <p>We maximize the log-likelihood (sums are easier &amp; numerically stable):</p>
     <div style="text-align:center; margin:6px 0;">
