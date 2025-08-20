@@ -544,9 +544,11 @@
     <li>(ii) Newton’s Method </li>
   </ul> 
 
-    <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:12px 14px;margin:12px 0;">
-    <h5 style="margin:0 0 6px;">Practical, often-used choice: <em>Newton / IRLS</em></h5>
+
+    <h4>Practical, often-used choice: <em>Newton / IRLS</em></h4>
+  
     <p style="margin:6px 0;">Uses curvature (second-order info) for fast convergence on tabular data.</p>
+  
     <div style="text-align:center; margin:8px 0;">
       $$ \mathbf{p}=\sigma(\mathbf{X}\boldsymbol{\beta}),\quad
          \nabla \ell(\boldsymbol{\beta})=\mathbf{X}^{\top}(\mathbf{y}-\mathbf{p}),\quad
@@ -560,6 +562,7 @@
          \tilde{\mathbf{z}}=\mathbf{X}\boldsymbol{\beta}+\mathbf{W}^{-1}(\mathbf{y}-\mathbf{p}),\quad
          (\mathbf{X}^{\top}\mathbf{W}\mathbf{X})\,\boldsymbol{\beta}_{\text{new}}=\mathbf{X}^{\top}\mathbf{W}\,\tilde{\mathbf{z}}. $$
     </div>
+  
     <pre style="background:#fff;border:1px dashed #e5e7eb;border-radius:10px;padding:10px;margin:8px 0;white-space:pre-wrap;">Initialize β ← 0
 repeat
   p ← σ(X β)
@@ -568,16 +571,14 @@ repeat
   Solve: (Xᵀ W X) β_new = Xᵀ W z
   β ← β_new
 until convergence</pre>
+  
     <ul style="margin:6px 0 0 1rem;">
       <li><strong>Pros:</strong> few iterations, reliable near optimum.</li>
       <li><strong>When:</strong> small–medium number of features; standard choice in many GLM implementations.</li>
       <li><strong>Tip:</strong> standardize features; optionally add L2 regularization for stability.</li>
     </ul>
-  </div>
 
   <p style="color:#6b7280;margin-top:8px;"><em>Note:</em> Gradient Descent is simpler but usually slower and needs step-size tuning; Newton/IRLS (or quasi-Newton like L-BFGS) is typically preferred for logistic regression on tabular data.</p>
-
-
 
 
     <!-- 6. Example -->
