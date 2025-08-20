@@ -535,7 +535,17 @@
 
   <p>We optimize the log-likelihood (or minimize cross-entropy). There is no closed-form solution, 
     so we use iterative methods.</p>
+
+  <h5>How the Iteration Works?</h5>
   
+  <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:12px 14px;">
+    <p style="margin:0 0 8px;">
+      Start with an initial guess for the coefficients \( \boldsymbol{\beta} \), compute predictions, compare to the true labels, and update \( \boldsymbol{\beta} \) in the improving direction (e.g., gradient or Newton/IRLS step).
+    </p>
+    <p style="margin:0;">
+      Repeat this update–evaluate cycle until improvement is negligible—i.e., the log-likelihood no longer increases (equivalently, cross-entropy no longer decreases) and the parameters have converged.
+    </p>
+  </div>
   
   <p><strong>Two common choices:</strong></p>
 
