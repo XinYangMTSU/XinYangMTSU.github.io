@@ -547,7 +547,7 @@
 
     <h4>Practical, often-used choice: <em>Newton / IRLS</em></h4>
   
-    <p style="margin:6px 0;">Uses curvature (second-order info) for fast convergence on tabular data.</p>
+    <p>Uses curvature (second-order info) for fast convergence on tabular data.</p>
   
     <div style="text-align:center; margin:8px 0;">
       $$ \mathbf{p}=\sigma(\mathbf{X}\boldsymbol{\beta}),\quad
@@ -563,7 +563,7 @@
          (\mathbf{X}^{\top}\mathbf{W}\mathbf{X})\,\boldsymbol{\beta}_{\text{new}}=\mathbf{X}^{\top}\mathbf{W}\,\tilde{\mathbf{z}}. $$
     </div>
   
-    <pre style="background:#fff;border:1px dashed #e5e7eb;border-radius:10px;padding:10px;margin:8px 0;white-space:pre-wrap;">Initialize β ← 0
+    <pre>Initialize β ← 0
 repeat
   p ← σ(X β)
   W ← diag(p ∘ (1 − p))
