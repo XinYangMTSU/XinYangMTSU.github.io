@@ -345,13 +345,27 @@
     <li>1. Logistic Regression Setup</li>
 
       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:14px 16px; margin:12px 0;">
-    <div style="text-align:center; margin:6px 0;">
-      $$ p_i \;=\; P(y_i=1 \mid x_i;\,\boldsymbol{\beta}) \;=\; \sigma(z_i)
-         \;=\; \frac{1}{1+e^{-z_i}}, \qquad z_i \;=\; x_i^{\top}\boldsymbol{\beta}. $$
+        <div style="text-align:center; margin:6px 0;">
+          $$ p_i \;=\; P(y_i=1 \mid x_i;\,\boldsymbol{\beta}) \;=\; \sigma(z_i)
+             \;=\; \frac{1}{1+e^{-z_i}}, \qquad z_i \;=\; x_i^{\top}\boldsymbol{\beta}. $$
+        </div>
+        <p style="margin:6px 0 0;">with binary outcomes \(y_i \in \{0,1\}\), \(i=1,\dots,m\).</p>
     </div>
-    <p style="margin:6px 0 0;">with binary outcomes \(y_i \in \{0,1\}\), \(i=1,\dots,m\).</p>
-  </div>
 
+    <p style="margin:6px 0;">Each label \(y_i \in \{0,1\}\) has</p>
+      <div style="text-align:center; margin:8px 0;">
+        $$ 
+        P(y_i \mid x_i;\boldsymbol{\beta}) \;=\;
+        \begin{cases}
+          p_i, & y_i=1,\\[4pt]
+          1-p_i, & y_i=0
+        \end{cases}
+        \;=\; p_i^{\,y_i}\,(1-p_i)^{\,1-y_i}.
+        $$
+      </div>
+      <p style="margin:6px 0; color:#6b7280;"><em>(The exponents \(y_i\) and \(1-y_i\) act like on/off switches.)</em></p>
+    <br>
+    
     <li>2. Form the likelihood:</li>
     <p>The (joint) likelihood of all \(m\) samples is</p>
     <div style="text-align:center; margin:6px 0;">
