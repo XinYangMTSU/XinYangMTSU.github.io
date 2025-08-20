@@ -491,6 +491,20 @@
 
     
      <li>7. Equivalently: Minimize the Cross-Entropy Loss</li>
+
+    
+    <p style="margin:0 0 6px;"><strong>Equivalence:</strong> maximizing the log-likelihood is the same as minimizing its negative.</p>
+    
+    <div style="text-align:center; margin:6px 0;">
+      $$ \arg\max_{\theta}\,\ell(\theta) \;=\; \arg\min_{\theta}\,\big(-\ell(\theta)\big). $$
+    </div>
+
+    <p style="margin:6px 0;">The negative log-likelihood equals the cross-entropy loss:</p>
+  <div style="text-align:center; margin:8px 0; background:#eef6ff; border:1px solid #c7e0ff; border-radius:10px; padding:12px;">
+    $$ -\ell(\boldsymbol{\beta}) \;=\; \sum_{i=1}^{m}
+       \Big[ -y_i \log p_i \;-\; (1-y_i)\log(1-p_i) \Big],
+       \qquad p_i=\sigma\!\big(x_i^{\top}\boldsymbol{\beta}\big). $$
+  </div>
     
   <p><strong>Cross-entropy</strong> is just the <em>negative log-likelihood</em> for binary logistic regression.</p>
 
