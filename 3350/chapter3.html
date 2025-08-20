@@ -532,31 +532,51 @@
 
 
   <h4>How do we find \( \boldsymbol{\beta} \)?</h4>
+
+  <p>We optimize the log-likelihood (or minimize cross-entropy). There is no closed-form solution, 
+    so we use iterative methods.</p>
+  
+  
   <p><strong>Two common choices:</strong></p>
 
-  <ol style="padding-left:1.2rem; margin-top:6px;">
-    <li style="margin-bottom:10px;">
-      <strong>Gradient Descent (maximize \( \ell \))</strong>
-      <ul style="margin:6px 0 0 1.0rem;">
-        <li>Compute probabilities: 
-          <div style="text-align:center; margin:6px 0;">
-            $$ \mathbf{p} \;=\; \sigma(\mathbf{X}\boldsymbol{\beta}). $$
-          </div>
-        </li>
-        <li>Gradient of log-likelihood:
-          <div style="text-align:center; margin:6px 0;">
-            $$ \nabla \ell(\boldsymbol{\beta}) \;=\; \mathbf{X}^{\top}(\mathbf{y}-\mathbf{p}). $$
-          </div>
-        </li>
-        <li>Update rule (with small learning rate \( \eta \)):
-          <div style="text-align:center; margin:6px 0;">
-            $$ \boldsymbol{\beta} \;\leftarrow\; \boldsymbol{\beta} \;+\; \eta\, \mathbf{X}^{\top}(\mathbf{y}-\mathbf{p}), $$
-          </div>
-          repeat until convergence.
-        </li>
-      </ul>
-    </li>
-  </ol>
+  <ul>
+    <li>(i) Gradient Descent  </li>
+    <li>(ii) Newton’s Method </li>
+  </ul> 
+
+    <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:12px 14px;margin:12px 0;">
+    <h5 style="margin:0 0 6px;">Practical, often-used choice: <em>Newton / IRLS</em></h5>
+    <p style="margin:6px 0;">Uses curvature (second-order info) for fast convergence on tabular data.</p>
+    <div style="text-align:center; margin:8px 0;">
+      $$ \mathbf{p}=\sigma(\mathbf{X}\boldsymbol{\beta}),\quad
+         \nabla \ell(\boldsymbol{\beta})=\mathbf{X}^{\top}(\mathbf{y}-\mathbf{p}),\quad
+         \nabla^2\ell(\boldsymbol{\beta})=-\mathbf{X}^{\top}\mathbf{W}\mathbf{X},\;
+         \mathbf{W}=\mathrm{diag}\!\big(p_i(1-p_i)\big). $$
+      $$ \text{Newton update:}\qquad
+         \boldsymbol{\beta}_{\text{new}}
+         = \boldsymbol{\beta} - \big(\nabla^2\ell(\boldsymbol{\beta})\big)^{-1}\nabla\ell(\boldsymbol{\beta})
+         = \boldsymbol{\beta} + (\mathbf{X}^{\top}\mathbf{W}\mathbf{X})^{-1}\mathbf{X}^{\top}(\mathbf{y}-\mathbf{p}). $$
+      $$ \text{IRLS form (solve WLS each iteration):}\qquad
+         \tilde{\mathbf{z}}=\mathbf{X}\boldsymbol{\beta}+\mathbf{W}^{-1}(\mathbf{y}-\mathbf{p}),\quad
+         (\mathbf{X}^{\top}\mathbf{W}\mathbf{X})\,\boldsymbol{\beta}_{\text{new}}=\mathbf{X}^{\top}\mathbf{W}\,\tilde{\mathbf{z}}. $$
+    </div>
+    <pre style="background:#fff;border:1px dashed #e5e7eb;border-radius:10px;padding:10px;margin:8px 0;white-space:pre-wrap;">Initialize β ← 0
+repeat
+  p ← σ(X β)
+  W ← diag(p ∘ (1 − p))
+  z ← Xβ + W⁻¹ (y − p)
+  Solve: (Xᵀ W X) β_new = Xᵀ W z
+  β ← β_new
+until convergence</pre>
+    <ul style="margin:6px 0 0 1rem;">
+      <li><strong>Pros:</strong> few iterations, reliable near optimum.</li>
+      <li><strong>When:</strong> small–medium number of features; standard choice in many GLM implementations.</li>
+      <li><strong>Tip:</strong> standardize features; optionally add L2 regularization for stability.</li>
+    </ul>
+  </div>
+
+  <p style="color:#6b7280;margin-top:8px;"><em>Note:</em> Gradient Descent is simpler but usually slower and needs step-size tuning; Newton/IRLS (or quasi-Newton like L-BFGS) is typically preferred for logistic regression on tabular data.</p>
+
 
 
 
