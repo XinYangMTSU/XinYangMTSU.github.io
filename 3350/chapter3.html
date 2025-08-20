@@ -367,7 +367,16 @@
     <br>
     
     <li>2. Form the likelihood:</li>
-    <p>The (joint) likelihood of all \(m\) samples is</p>
+
+     <strong>Independence across samples (i.i.d.)</strong>
+      <p style="margin:6px 0;">Assuming examples are independent given their features and \(\boldsymbol{\beta}\), the joint probability of the whole dataset is the product of per-sample probabilities:</p>
+      
+    <div style="text-align:center; margin:8px 0;">
+        $$ L(\boldsymbol{\beta}) \;=\; \prod_{i=1}^{m} P(y_i \mid x_i;\boldsymbol{\beta}). $$
+      </div>
+    
+     <strong>Plug the Bernoulli form in</strong>
+
     <div style="text-align:center; margin:6px 0;">
       $$ L(\boldsymbol{\beta}) \;=\; \prod_{i=1}^{m} \; p_i^{\,y_i}\; (1-p_i)^{\,1-y_i}. $$
     </div>
