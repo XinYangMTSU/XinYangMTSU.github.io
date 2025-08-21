@@ -977,21 +977,157 @@ until convergence</pre>
 
   <br>
 
-  <center>
-    <img src="images/knn1.png" width="800px" height="300px" alt="kNN neighborhoods around a query point">
-  </center>
-
-  <br>
-
-
   <h4>Interpreting the Parameters</h4>
   <ul>
     <li><strong>k:</strong> Small k → low bias, high variance (sensitive/noisy). Large k → higher bias, smoother predictions.</li>
     <li><strong>Distance weighting:</strong> Nearer points get more influence (e.g., \(w=1/(d+\varepsilon)\)).</li>
     <li><strong>Feature scaling:</strong> <b>Standardize</b> features; otherwise large-scale features dominate distance.</li>
   </ul>
-
   <br>
+
+  <div class="wrap">
+  <h1>k-Nearest Neighbors (KNN) — Interactive Figure</h1>
+  <p class="muted">Move the slider to change <em>k</em>. The dashed circle shows the distance to the \(k\)-th nearest neighbor around the query point \(x^\*\).</p>
+
+  <div class="card row">
+    <div class="legend">
+      <span class="key"><span class="dot a"></span><span>Class A</span></span>
+      <span class="key"><span class="dot b"></span><span>Class B</span></span>
+      <span class="key"><span class="dot q"></span><span>Query \(x^\*\)</span></span>
+      <span class="slider">
+        <label for="k">k:</label>
+        <input id="k" type="range" min="1" max="11" step="2" value="5" />
+        <span id="kval" class="pill"><span>k</span><b>5</b></span>
+      </span>
+    </div>
+    <div id="pred" class="predict pill">Predicted: <b id="predClass">—</b></div>
+  </div>
+
+  <!-- Plot (600x420 viewBox; coordinates use pixels as data units) -->
+  <svg id="plot" viewBox="0 0 600 420" aria-label="KNN figure">
+    <!-- Grid -->
+    <g stroke-linecap="round">
+      <line class="axis" x1="40" y1="380" x2="580" y2="380"/>
+      <line class="axis" x1="40" y1="40"  x2="40"  y2="380"/>
+      <!-- vertical grid -->
+      <g class="grid">
+        <line x1="120" y1="40" x2="120" y2="380"/>
+        <line x1="200" y1="40" x2="200" y2="380"/>
+        <line x1="280" y1="40" x2="280" y2="380"/>
+        <line x1="360" y1="40" x2="360" y2="380"/>
+        <line x1="440" y1="40" x2="440" y2="380"/>
+        <line x1="520" y1="40" x2="520" y2="380"/>
+      </g>
+      <!-- horizontal grid -->
+      <g class="grid">
+        <line x1="40" y1="320" x2="580" y2="320"/>
+        <line x1="40" y1="260" x2="580" y2="260"/>
+        <line x1="40" y1="200" x2="580" y2="200"/>
+        <line x1="40" y1="140" x2="580" y2="140"/>
+        <line x1="40" y1="80"  x2="580" y2="80"/>
+      </g>
+    </g>
+
+    <!-- Neighborhood halo (updated by JS) -->
+    <circle id="halo" class="halo" cx="300" cy="200" r="1"></circle>
+
+    <!-- Query point -->
+    <g id="queryGroup">
+      <circle class="query" cx="300" cy="200" r="6"></circle>
+      <text class="label" x="310" y="194">query \(x^\*\)</text>
+    </g>
+
+    <!-- Points container -->
+    <g id="points"></g>
+  </svg>
+
+  <p class="notice">Note: The dashed circle radius equals the distance to the \(k\)-th nearest neighbor. Highlighted points are the \(k\) neighbors; majority vote determines the predicted class.</p>
+</div>
+
+<script>
+/* --- Data: two classes around different regions --- */
+const pts = [
+  // Class A (cyan)
+  {x:100,y:320,c:'A'},{x:120,y:280,c:'A'},{x:150,y:300,c:'A'},{x:160,y:250,c:'A'},
+  {x:190,y:290,c:'A'},{x:130,y:230,c:'A'},{x:170,y:210,c:'A'},{x:210,y:260,c:'A'},
+  // a few spread
+  {x:250,y:230,c:'A'},{x:220,y:190,c:'A'},
+
+  // Class B (violet)
+  {x:480,y:120,c:'B'},{x:450,y:90,c:'B'},{x:520,y:160,c:'B'},{x:500,y:200,c:'B'},
+  {x:430,y:150,c:'B'},{x:460,y:210,c:'B'},{x:520,y:240,c:'B'},
+  // a couple closer to center
+  {x:360,y:180,c:'B'},{x:380,y:220,c:'B'}
+];
+
+// Query point (center-ish)
+const query = {x:300, y:200};
+const kSlider = document.getElementById('k');
+const kVal = document.getElementById('kval').querySelector('b');
+const predClassEl = document.getElementById('predClass');
+const pointsG = document.getElementById('points');
+const halo = document.getElementById('halo');
+
+/* --- Draw all points --- */
+function renderPoints(nearestIdx = new Set()){
+  pointsG.innerHTML = '';
+  pts.forEach((p,i)=>{
+    const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+    const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('cx', p.x);
+    dot.setAttribute('cy', p.y);
+    dot.setAttribute('r', 6);
+    dot.setAttribute('class', `pt ${p.c==='A'?'a':'b'} ${nearestIdx.has(i)?'nn':''}`);
+    // outline nearest with white halo under
+    if(nearestIdx.has(i)){
+      const halo = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      halo.setAttribute('cx', p.x); halo.setAttribute('cy', p.y);
+      halo.setAttribute('r', 9);
+      halo.setAttribute('fill','none');
+      halo.setAttribute('stroke','#ffffff');
+      halo.setAttribute('stroke-opacity','.85');
+      halo.setAttribute('stroke-width','2');
+      g.appendChild(halo);
+    }
+    g.appendChild(dot);
+    pointsG.appendChild(g);
+  });
+}
+
+/* --- Compute k-nearest neighbors and update plot --- */
+function update(){
+  const k = parseInt(kSlider.value,10);
+  kVal.textContent = k;
+
+  // distances
+  const withD = pts.map((p,idx)=>({
+    idx,
+    d2: (p.x - query.x)**2 + (p.y - query.y)**2
+  })).sort((a,b)=>a.d2-b.d2);
+
+  const nn = withD.slice(0, k);
+  const idxSet = new Set(nn.map(o=>o.idx));
+  renderPoints(idxSet);
+
+  // circle radius = distance to kth neighbor
+  const r = Math.sqrt(nn[nn.length-1].d2);
+  halo.setAttribute('cx', query.x);
+  halo.setAttribute('cy', query.y);
+  halo.setAttribute('r', r);
+
+  // majority vote
+  let a=0,b=0;
+  nn.forEach(o => pts[o.idx].c==='A' ? a++ : b++);
+  const pred = (a>=b) ? 'Class A' : 'Class B';
+  predClassEl.textContent = `${pred} (vote ${a}:${b})`;
+  predClassEl.style.color = (a>=b) ? 'var(--cA)' : 'var(--cB)';
+}
+
+kSlider.addEventListener('input', update);
+renderPoints(new Set()); // initial render
+update();
+</script>
+  
   <hr>
 
   <h4>Worked Example: Predicting House Price (kNN-Regression)</h4>
