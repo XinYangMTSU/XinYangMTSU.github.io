@@ -248,225 +248,136 @@ section#references a:hover, section#references a:focus {
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 
-  <section id="logistic-regression">
-    
-    <h4>2.1 Logistic Regression</h4>
+  <!-- k-Nearest Neighbors (kNN) — self-contained section -->
+<section id="knn" style="font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; max-width:980px; margin:0 auto;">
+  <!-- MathJax (include once per page; remove if already loaded) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    <!-- 1. Motivation -->
-    <h3>1. Motivation</h3>
-    <div class="card">
-      <p><strong>Problem with Linear Regression for classification:</strong></p>
-      <ul>
-        <li>Linear Regression can predict any real number (e.g., −3.2 or 2.7).</li>
-        <li>But classification tasks need <em>Yes/No</em> outputs (Admit/Reject, Spam/Not Spam, Disease/No Disease).</li>
-        <li>We need outputs between <strong>0 and 1</strong> so we can interpret them as <strong>probabilities</strong>.</li>
-      </ul>
-    </div>
+  <h3>2.2 k-Nearest Neighbors (kNN)</h3>
 
-    <!-- 2. Idea -->
-    <h3>2. Idea</h3>
-    <p>Logistic Regression takes the linear model from Linear Regression:</p>
-    <p class="eq">
-      $$ z \;=\; \beta_0 \;+\; \beta_1 x_1 \;+\; \cdots \;+\; \beta_p x_p $$
-    </p>
-    <p>and passes it through the <em>sigmoid</em> (logistic) function:</p>
-    <p class="eq">
-      $$ \sigma(z) \;=\; \frac{1}{1 + e^{-z}} $$
-    </p>
+  <!-- 1. Motivation -->
+  <h4>1. Motivation</h4>
+  <div class="card" style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:12px 14px;">
+    <p><strong>When you don’t want to assume a specific functional form</strong> (like a line or a sigmoid), kNN lets the data speak locally:</p>
     <ul>
-      <li>Output is always in \((0,1)\).</li>
-      <li>Can be interpreted as the probability of class \(1\).</li>
+      <li>Predicts by looking at the <em>k most similar (nearest)</em> training points.</li>
+      <li>Works for <strong>classification</strong> (majority vote) and <strong>regression</strong> (average of neighbors).</li>
+      <li>Simple, intuitive, and can learn highly <strong>non-linear</strong> decision boundaries.</li>
     </ul>
+  </div>
 
-    <!-- 3. Equation -->
-    <h3>3. Equation</h3>
-    <p class="eq">
-      $$ P(y=1 \mid x) \;=\; \frac{1}{\,1 + e^{-(\beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p)}\,} $$
+  <!-- 2. Idea -->
+  <h4>2. Idea</h4>
+  <p>Given a new input \(x\), find its \(k\) nearest training samples under a chosen distance metric and aggregate their targets.</p>
+  <p class="eq" style="text-align:center;">
+    Classification: \(\;\hat{y}(x) = \operatorname{mode}\big(\{y_{(1)},\dots,y_{(k)}\}\big)\)
+  </p>
+  <p class="eq" style="text-align:center; margin-top:6px;">
+    Regression: \(\;\hat{y}(x) = \dfrac{1}{k}\sum_{i=1}^{k} y_{(i)}\)
+  </p>
+  <ul>
+    <li>\(y_{(i)}\) denotes the label/target of the \(i\)-th nearest neighbor to \(x\).</li>
+    <li>Optional: use <strong>distance-weighted</strong> votes/averages (closer neighbors count more).</li>
+  </ul>
+
+  <!-- 3. Distance (Equation) -->
+  <h4>3. Distance Metrics</h4>
+  <p>Common choices for numeric features:</p>
+  <div class="eq" style="text-align:center;">
+    Minkowski (order \(p\)): \(\quad d_p(x,x')=\Big(\sum_{j=1}^p |x_j-x'_j|^p\Big)^{1/p}\)
+  </div>
+  <ul>
+    <li>\(p=2\): Euclidean, \(\; d_2(x,x') = \sqrt{\sum_j (x_j-x'_j)^2}\)</li>
+    <li>\(p=1\): Manhattan, \(\; d_1(x,x') = \sum_j |x_j-x'_j|\)</li>
+    <li>\(p\to\infty\): Chebyshev, \(\; d_\infty(x,x')=\max_j |x_j-x'_j|\)</li>
+  </ul>
+  <p class="card" style="background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:10px 12px;">
+    <strong>Important:</strong> Scale/standardize features for distance to make sense; otherwise features with large units dominate.
+  </p>
+
+  <!-- 4. Prediction Equations -->
+  <h4>4. Prediction Rules</h4>
+  <div style="text-align:center; margin:6px 0;">
+    <p class="eq" style="margin:6px 0;">
+      Probability estimate for class \(c\): \(\quad \hat{P}(y=c\mid x)=\dfrac{1}{k}\sum_{i=1}^{k}\mathbf{1}[y_{(i)}=c]\)
     </p>
-    <p class="center small">If the probability \(\ge 0.5\) → predict \(1\); otherwise \(0\).</p>
-
-    <!-- 4. Interpretation -->
-    <h3>4. Interpretation of Coefficients</h3>
-    <p>Each coefficient \(\beta_j\) changes the <strong>log-odds</strong> of the outcome:</p>
-    <p class="eq">
-      $$ \log\!\left(\frac{p}{1-p}\right) \;=\; \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p $$
+    <p class="eq" style="margin:6px 0;">
+      Distance-weighted vote (example): \(\quad w_i=\dfrac{1}{d(x,x_{(i)})+\varepsilon},\;\;
+      \hat{P}(y=c\mid x)=\dfrac{\sum_{i=1}^k w_i\,\mathbf{1}[y_{(i)}=c]}{\sum_{i=1}^k w_i}\)
     </p>
-    <p>If you exponentiate \(\beta_j\), you get an <strong>odds ratio</strong>:</p>
-    <ul>
-      <li>\(e^{\beta_j} &gt; 1\): increases chance of the event.</li>
-      <li>\(e^{\beta_j} &lt; 1\): decreases chance of the event.</li>
-    </ul>
+  </div>
+  <p class="center small" style="text-align:center; color:#6b7280;">Use a threshold (e.g., 0.5) on \(\hat{P}(y=1\mid x)\) for binary classification.</p>
 
-    <!-- 5. Objective -->
-    <h3>5. Objective Function (How the Model Learns)</h3>
-    <p>Instead of minimizing squared error, Logistic Regression uses <strong>Maximum Likelihood Estimation (MLE)</strong>.</p>
-    <p class="eq">
-      $$ \ell(\boldsymbol{\beta}) \;=\; \sum_{i=1}^{m} \Big( y_i \log p_i \;+\; (1 - y_i)\log(1 - p_i) \Big), \quad p_i = \sigma(\mathbf{x}_i^\top \boldsymbol{\beta}) $$
-    </p>
-    <p><strong>Optimization:</strong> use <em>Gradient Descent</em> (or Newton-type methods) to find the best \(\boldsymbol{\beta}\).</p>
+  <!-- 5. Algorithm Steps -->
+  <h4>5. How kNN Works (Algorithm)</h4>
+  <ol style="padding-left:1.2rem;">
+    <li><strong>Store</strong> the training set \((X,y)\). (No model parameters to fit.)</li>
+    <li>For a new point \(x\): compute its distance to every training example.</li>
+    <li><strong>Select</strong> the \(k\) nearest examples.</li>
+    <li><strong>Aggregate</strong>: majority vote (classification) or mean (regression). Optionally, weight by distance.</li>
+  </ol>
 
-    <!-- 6. Example -->
-    <h3>6. Example</h3>
-    <p>Imagine predicting if a student is admitted based on GPA and test score.</p>
-    <table aria-label="Example dataset for admission">
-      <thead>
-        <tr><th>GPA</th><th>Test Score</th><th>Admitted (y)</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>3.0</td><td>600</td><td>0</td></tr>
-        <tr><td>3.8</td><td>700</td><td>1</td></tr>
-        <tr><td>4.0</td><td>720</td><td>1</td></tr>
-        <tr><td>2.8</td><td>580</td><td>0</td></tr>
-      </tbody>
-    </table>
+  <!-- 6. Hyperparameters & Choices -->
+  <h4>6. Hyperparameters & Practical Choices</h4>
+  <ul>
+    <li><strong>k (neighbors):</strong> small \(k\) → low bias, high variance; large \(k\) → higher bias, lower variance. Choose via cross-validation.</li>
+    <li><strong>Distance metric:</strong> Euclidean default for continuous; consider Manhattan/Chebyshev; for mixed data, use suitable metrics (e.g., Hamming/Gower).</li>
+    <li><strong>Weights:</strong> uniform vs. distance-weighted (helps when neighbor densities vary).</li>
+    <li><strong>Ties:</strong> pick odd \(k\) for binary classes or break ties by total distance.</li>
+    <li><strong>Feature scaling:</strong> standardize or normalize to prevent unit dominance.</li>
+  </ul>
 
-    <p class="eq">
-      $$ P(\text{Admit}=1) \;=\; \frac{1}{1 + e^{-(\beta_0 + \beta_1 \cdot \text{GPA} + \beta_2 \cdot \text{TestScore})}} $$
-    </p>
-    <div class="tip">
-      If for a new student (GPA = 3.6, Score = 680) we calculate \(p = 0.72\): that’s a 72% chance of admission → predict <strong>Admitted = 1</strong>.
-    </div>
+  <!-- 7. Complexity -->
+  <h4>7. Computational Cost</h4>
+  <ul>
+    <li><strong>Training:</strong> essentially \(O(1)\) (store the data).</li>
+    <li><strong>Prediction (naïve):</strong> \(O(mp)\) per query (compare to all \(m\) points with \(p\) features).</li>
+    <li><strong>Speed-ups:</strong> KD-tree / Ball-tree / Annoy / FAISS can reduce query time in low–moderate dimensions; benefits diminish in very high \(p\) (curse of dimensionality).</li>
+  </ul>
 
-    <!-- 7. Key Points -->
-    <h3>7. Key Points for Students</h3>
-    <ul>
-      <li>Logistic Regression outputs <strong>probabilities</strong>, not raw continuous values.</li>
-      <li>A threshold (commonly 0.5) converts probability → class.</li>
-      <li>Uses <strong>MLE</strong>, not Ordinary Least Squares.</li>
-      <li>Works best when the relationship between features and <em>log-odds</em> is approximately linear.</li>
-    </ul>
+  <!-- 8. Example -->
+  <h4>8. Worked Example (Binary Classification)</h4>
+  <p>Suppose we have 2D points with labels \(y\in\{0,1\}\):</p>
+  <table aria-label="Tiny kNN example" style="border-collapse:collapse; width:100%; margin-top:6px;">
+    <thead>
+      <tr>
+        <th style="text-align:left; border-bottom:1px solid #e5e7eb; padding:6px;">x₁</th>
+        <th style="text-align:left; border-bottom:1px solid #e5e7eb; padding:6px;">x₂</th>
+        <th style="text-align:left; border-bottom:1px solid #e5e7eb; padding:6px;">y</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:6px;">1.0</td><td style="padding:6px;">1.0</td><td style="padding:6px;">0</td></tr>
+      <tr><td style="padding:6px;">1.5</td><td style="padding:6px;">1.2</td><td style="padding:6px;">0</td></tr>
+      <tr><td style="padding:6px;">2.0</td><td style="padding:6px;">2.1</td><td style="padding:6px;">1</td></tr>
+      <tr><td style="padding:6px;">2.2</td><td style="padding:6px;">1.9</td><td style="padding:6px;">1</td></tr>
+    </tbody>
+  </table>
+  <p>Query point \(x^\star=(1.8,\,1.9)\), Euclidean distance, \(k=3\): the three closest points are likely
+    \((2.0,2.1, y{=}1),\ (2.2,1.9, y{=}1),\ (1.5,1.2, y{=}0)\) → majority class \(=1\).
+    Optionally estimate \(\hat{P}(y=1\mid x^\star)=2/3\approx0.67\).
+  </p>
 
-    <!-- 8. Visualization -->
-    <h3>8. Visualization (for teaching)</h3>
-    <p>Sigmoid curve behavior:</p>
-    <ul>
-      <li>As \(z \to -\infty\), probability \(\to 0\).</li>
-      <li>As \(z \to +\infty\), probability \(\to 1\).</li>
-      <li>At \(z = 0\), probability \(= 0.5\).</li>
-    </ul>
+  <!-- 9. Pros & Cons -->
+  <h4>9. Pros & Cons</h4>
+  <ul>
+    <li><strong>Pros:</strong> simple, non-parametric, flexible boundaries, no training time.</li>
+    <li><strong>Cons:</strong> slow queries on large datasets (without indexing), sensitive to feature scaling and irrelevant features, struggles in high dimensions.</li>
+  </ul>
 
-    <canvas id="sigmoidCanvas" width="720" height="380" aria-label="Sigmoid function plot"></canvas>
-    <div class="caption">Sigmoid function \( \sigma(z) = \dfrac{1}{1 + e^{-z}} \)</div>
-
-    <div class="hr"></div>
-    <p class="small">Tip: This section is self-contained. If your site already includes MathJax, you can remove the MathJax script tag above.</p>
-
-  <script>
-    // Draw a simple sigmoid plot on the canvas (z in [-8, 8])
-    (function drawSigmoid() {
-      const canvas = document.getElementById('sigmoidCanvas');
-      if (!canvas || !canvas.getContext) return;
-      const ctx = canvas.getContext('2d');
-      const W = canvas.width, H = canvas.height;
-
-      // Padding for axes
-      const pad = { left: 60, right: 20, top: 20, bottom: 50 };
-      const plotW = W - pad.left - pad.right;
-      const plotH = H - pad.top - pad.bottom;
-
-      // Domain & range
-      const zMin = -8, zMax = 8;
-      const pMin = 0,  pMax = 1;
-
-      const xScale = z => pad.left + ( (z - zMin) / (zMax - zMin) ) * plotW;
-      const yScale = p => pad.top + (1 - ( (p - pMin) / (pMax - pMin) )) * plotH; // invert y
-
-      // Clear
-      ctx.clearRect(0, 0, W, H);
-
-      // Background
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, W, H);
-
-      // Axes
-      ctx.strokeStyle = '#cbd5e1';
-      ctx.lineWidth = 1;
-
-      // Border of plot area
-      ctx.strokeRect(pad.left, pad.top, plotW, plotH);
-
-      // Horizontal grid lines at p = 0, 0.5, 1
-      const gridPs = [0, 0.5, 1];
-      ctx.beginPath();
-      gridPs.forEach(p => {
-        const y = yScale(p);
-        ctx.moveTo(pad.left, y);
-        ctx.lineTo(pad.left + plotW, y);
-      });
-      ctx.stroke();
-
-      // Vertical grid lines at z = -6, -3, 0, 3, 6
-      const gridZs = [-6, -3, 0, 3, 6];
-      ctx.beginPath();
-      gridZs.forEach(z => {
-        const x = xScale(z);
-        ctx.moveTo(x, pad.top);
-        ctx.lineTo(x, pad.top + plotH);
-      });
-      ctx.stroke();
-
-      // Labels
-      ctx.fillStyle = '#374151';
-      ctx.font = '12px Roboto, sans-serif';
-      // y labels
-      gridPs.forEach(p => {
-        const y = yScale(p);
-        ctx.fillText(p.toFixed(1), 28, y + 4);
-      });
-      // x labels
-      gridZs.forEach(z => {
-        const x = xScale(z);
-        ctx.fillText(z.toString(), x - 6, pad.top + plotH + 18);
-      });
-
-      // Axis titles
-      ctx.font = '13px Roboto, sans-serif';
-      ctx.fillText('z', pad.left + plotW / 2, H - 18);
-      ctx.save();
-      ctx.translate(18, pad.top + plotH / 2);
-      ctx.rotate(-Math.PI / 2);
-      ctx.fillText('Probability  p = σ(z)', 0, 0);
-      ctx.restore();
-
-      // Sigmoid curve
-      ctx.strokeStyle = '#2563eb';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      const steps = 600;
-      for (let i = 0; i <= steps; i++) {
-        const t = i / steps;
-        const z = zMin + t * (zMax - zMin);
-        const p = 1 / (1 + Math.exp(-z));
-        const x = xScale(z);
-        const y = yScale(p);
-        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-
-      // Mark p=0.5 at z=0
-      const x0 = xScale(0);
-      const y05 = yScale(0.5);
-      ctx.fillStyle = '#1f2937';
-      ctx.beginPath();
-      ctx.arc(x0, y05, 3.5, 0, 2 * Math.PI);
-      ctx.fill();
-
-      // Dashed helpers to axes
-      ctx.setLineDash([5, 4]);
-      ctx.strokeStyle = '#9ca3af';
-      ctx.beginPath();
-      ctx.moveTo(x0, y05);
-      ctx.lineTo(x0, pad.top + plotH);
-      ctx.moveTo(x0, y05);
-      ctx.lineTo(pad.left, y05);
-      ctx.stroke();
-      ctx.setLineDash([]);
-    })();
-  </script>
+  <!-- 10. Key Points -->
+  <h4>10. Key Points for Students</h4>
+  <ul>
+    <li>kNN is a <strong>lazy learner</strong>: it defers computation to prediction time.</li>
+    <li>Pick <strong>k</strong>, <strong>distance metric</strong>, and <strong>weights</strong> via validation.</li>
+    <li>Always <strong>scale</strong> features; consider dimensionality reduction (PCA) if \(p\) is large.</li>
+    <li>Classification uses majority vote; regression uses neighbor average (optionally weighted).</li>
+  </ul>
 </section>
 
-
   
+
+
 
   
 <section id="ridge-regression">
