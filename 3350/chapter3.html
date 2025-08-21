@@ -194,6 +194,60 @@
       color: #fff52e;
       background: #19121a;
     }
+
+
+
+     :root{
+    --bg:#0f172a;          /* slate-900 */
+    --panel:#111827;       /* gray-900 */
+    --muted:#94a3b8;       /* slate-400 */
+    --text:#e5e7eb;        /* gray-200 */
+    --cA:#22d3ee;          /* cyan-400 (Class A) */
+    --cB:#a78bfa;          /* violet-400 (Class B) */
+    --query:#fbbf24;       /* amber-300 */
+    --accent:#34d399;      /* emerald-400 */
+  }
+
+  .wrap{max-width:900px;margin:40px auto;padding:0 20px}
+  .muted{color:var(--muted)}
+  .card{
+    background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
+    border:1px solid rgba(148,163,184,.18);
+    border-radius:14px;padding:18px
+  }
+  .row{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 12px;border-radius:999px;border:1px solid rgba(148,163,184,.25);
+    background:rgba(2,6,23,.35);font-weight:600
+  }
+  .pill b{letter-spacing:.2px}
+  .legend{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .legend .key{display:inline-flex;align-items:center;gap:8px}
+  .dot{width:12px;height:12px;border-radius:50%}
+  .dot.a{background:var(--cA)}
+  .dot.b{background:var(--cB)}
+  .dot.q{background:var(--query);border:1px solid rgba(0,0,0,.25)}
+  .slider{display:flex;align-items:center;gap:10px}
+  input[type="range"]{width:200px}
+  .notice{font-size:.95rem;color:var(--muted)}
+  svg{width:100%;max-width:900px;height:auto;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));border-radius:12px}
+  .axis{stroke:#1f2937;stroke-width:1}
+  .grid{stroke:#1f2937;stroke-width:.5;opacity:.5}
+  .pt{stroke:rgba(0,0,0,.25);stroke-width:1}
+  .pt.a{fill:var(--cA)}
+  .pt.b{fill:var(--cB)}
+  .pt.nn{stroke-width:3}
+  .query{fill:var(--query);stroke:#000;stroke-width:1.2}
+  .halo{fill:none;stroke-dasharray:6 6;stroke:#e5e7eb;opacity:.7}
+  .label{fill:#e5e7eb;font-size:12px}
+  .predict{
+    border:1px solid rgba(52,211,153,.35);
+    background:linear-gradient(180deg,rgba(16,185,129,.12),rgba(16,185,129,.06));
+    border-radius:12px;padding:10px 12px;margin-left:auto
+  }
+    
+    
   </style>
 </head>
 <body>
@@ -986,7 +1040,7 @@ until convergence</pre>
   <br>
 
   <div class="wrap">
-  <h1>k-Nearest Neighbors (KNN) — Interactive Figure</h1>
+  <h4>k-Nearest Neighbors (KNN) — Interactive Figure</h4>
   <p class="muted">Move the slider to change <em>k</em>. The dashed circle shows the distance to the \(k\)-th nearest neighbor around the query point \(x^\*\).</p>
 
   <div class="card row">
