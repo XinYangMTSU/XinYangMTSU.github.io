@@ -1,879 +1,356 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Intro to Machine Learning</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <style>
-    
-   body {
-  font-family: 'Roboto', Arial, sans-serif;
-  margin: 0;
-  display: flex;
-  background: #17191a;
-  min-height: 100vh;
-  color: #e6e6e6;
-}
-/* Sidebar */
-#sidebar {
-  position: fixed;
-  width: 250px;
-  height: 100vh;
-  overflow-y: auto;
-  background: linear-gradient(135deg, #22252b 80%, #25304a 100%);
-  color: #ecf0f1;
-  padding: 38px 24px 24px 28px;
-  box-shadow: 2px 0 24px rgba(40,54,71,.15);
-  z-index: 10;
-}
-#sidebar h2 {
-  margin-top: 0;
-  font-size: 1.1em;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #7ed6df;
-  margin-bottom: 1.7em;
-  text-align: left;
-}
-#sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-#sidebar .subsections {
-  margin-left: 1.5em;
-  font-size: 0.94em;
-}
-#sidebar .subsections a {
-  font-size: 0.94em;
-  margin: 8px 0 8px 12px;
-  padding-left: 16px;
-  color: #a7b2be;
-  border-left: 2px solid transparent;
-  font-weight: 400;
-  box-shadow: none;
-  background: none;
-  gap: 0.6em;
-}
-#sidebar .subsections a:hover, #sidebar .subsections a.active {
-  color: #16a6ff;
-  background: #1a2330;
-  border-left: 2px solid #48b0f7;
-  font-weight: 500;
-}
-#sidebar a {
-  display: flex;
-  align-items: center;
-  color: #e6e6e6;
-  text-decoration: none;
-  margin: 16px 0 16px 10px;
-  font-weight: 500;
-  font-size: 1.08em;
-  border-left: 3px solid transparent;
-  padding-left: 14px;
-  transition: background .19s, color .19s, border .19s;
-  border-radius: 8px 0 0 8px;
-  gap: 0.7em;
-}
-#sidebar a:hover, #sidebar a.active {
-  color: #16a6ff;
-  background: #1a2330;
-  border-left: 3px solid #48b0f7;
-  font-weight: 700;
-  box-shadow: 1px 2px 8px 1px #2d3436;
-}
-/* Main content */
-#content {
-  margin-left: 270px;
-  padding: 56px 6vw 56px 6vw;
-  max-width: 900px;
-  width: 100vw;
-  background: #1a1d1f;
-}
-h1 {
-  color: #48b0f7;
-  font-size: 2.5em;
-  font-weight: 800;
-  margin-bottom: 0.4em;
-  letter-spacing: -1px;
-  text-shadow: 0 2px 16px rgba(72, 176, 247, .15);
-}
-section {
-  margin-bottom: 55px;
-  background: #22252b;
-  border-radius: 18px;
-  box-shadow: 0 4px 30px rgba(28,34,40,.12);
-  padding: 36px 32px 22px 32px;
-  transition: box-shadow .24s;
-  border-left: 7px solid #48b0f7;
-  position: relative;
-}
-section:hover {
-  box-shadow: 0 10px 34px 3px rgba(22,166,255,0.11);
-  border-left: 7px solid #7ed6df;
-}
-section h3 {
-  border-bottom: 2px solid #48b0f7;
-  padding-bottom: 8px;
-  margin-top: 0;
-  color: #16a6ff;
-  font-size: 1.5em;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  margin-bottom: 14px;
-}
-section h4 {
-  font-size: 1.18em;
-  color: #7ed6df;
-  margin-bottom: 5px;
-  margin-top: 30px;
-  font-weight: 600;
-  border-bottom: 1px solid #25304a;
-  padding-bottom: 2px;
-}
-pre {
-  background: #191d22;
-  color: #e6e6e6;
-  padding: 15px 18px;
-  border-radius: 8px;
-  font-size: 1.04em;
-  line-height: 1.7;
-  overflow-x: auto;
-  box-shadow: 0 2px 10px rgba(52,152,219,0.09);
-}
-ul {
-  margin-left: 2.1em;
-  margin-bottom: 0;
-}
-footer {
-  margin-top: 46px;
-  text-align: center;
-  color: #a7b2be;
-  font-size: 1.09em;
-  letter-spacing: 1px;
-  padding: 22px 0 14px 0;
-  border-top: 1px solid #33393f;
-  background: none;
-  font-family: 'Roboto', Arial, sans-serif;
-  font-weight: 500;
-}
-#sidebar::-webkit-scrollbar {
-  width: 7px;
-  background: #25304a;
-}
-#sidebar::-webkit-scrollbar-thumb {
-  background: #48b0f7;
-  border-radius: 6px;
-}
-@media (max-width: 950px) {
-  #sidebar {
-    display: none;
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Ridge vs Lasso — Interactive Figure</title>
+<style>
+  :root{
+    --bg:#0f172a; --panel:#111827; --muted:#94a3b8; --text:#e5e7eb;
+    --ridge:#22d3ee;   /* cyan - ridge */
+    --lasso:#a78bfa;   /* violet - lasso */
+    --ols:#f59e0b;     /* amber - OLS */
+    --sol:#34d399;     /* emerald - solution */
+    --ring: rgba(34, 211, 238, 0.25);
   }
-  #content {
-    margin-left: 0;
-    padding: 18px 4vw 30px 4vw;
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--text);
+    font:16px/1.5 system-ui,Segoe UI,Roboto,Arial}
+  .wrap{max-width:1100px;margin:36px auto;padding:0 16px 60px}
+  h1{font-size:1.4rem;margin:0 0 8px}
+  p.muted{color:var(--muted);margin:0 0 18px}
+  .controls{
+    display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+    background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
+    border:1px solid rgba(148,163,184,.18); border-radius:14px; padding:12px 14px; margin-bottom:14px
   }
-}
-
-    a, a:visited {
-  color: #4dc3ff;
-  text-decoration: underline;
-  transition: color 0.2s;
-}
-
-a:hover, a:focus {
-  color: #fff52e;
-  background: #191d22;
-  text-decoration: underline;
-}
-
-section#references a, section#references a:visited {
-  color: #4dc3ff;
-  font-weight: 600;
-}
-
-section#references a:hover, section#references a:focus {
-  color: #fff52e;
-  background: #191d22;
-}
-
-    
-  </style>
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;
+    border:1px solid rgba(148,163,184,.25); background:rgba(2,6,23,.35); font-weight:600
+  }
+  .grid2{display:grid;grid-template-columns:1fr;gap:16px}
+  @media (min-width:980px){ .grid2{grid-template-columns:1fr 1fr} }
+  .card{
+    background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
+    border:1px solid rgba(148,163,184,.18); border-radius:14px; padding:16px
+  }
+  .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .head h2{font-size:1.05rem;margin:0}
+  .legend{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:.95rem;color:var(--muted)}
+  .key{display:inline-flex;align-items:center;gap:8px}
+  .swatch{width:12px;height:12px;border-radius:50%}
+  .swatch.ols{background:var(--ols)}
+  .swatch.ridge{background:var(--ridge)}
+  .swatch.lasso{background:var(--lasso)}
+  .swatch.sol{background:var(--sol)}
+  .nums{display:flex;gap:10px;flex-wrap:wrap}
+  .nums .pill{font-size:.92rem}
+  .eq{opacity:.9}
+  .hl{font-weight:700}
+  svg{width:100%;height:auto;border-radius:12px}
+  .axes{stroke:#1f2937;stroke-width:1}
+  .tick{stroke:#1f2937;stroke-width:.6;opacity:.8}
+  .tickLabel{fill:#9ca3af;font-size:11px}
+  .rss{fill:none;stroke:#64748b;stroke-width:1.2;opacity:.65}
+  .rss.hl{stroke:#e5e7eb;stroke-width:2}
+  .olsPoint{fill:var(--ols);stroke:#000;stroke-width:1.1}
+  .solPoint{fill:var(--sol);stroke:#000;stroke-width:1.1}
+  .ridgeBall{fill:none;stroke:var(--ridge);stroke-width:2}
+  .lassoDiamond{fill:rgba(167,139,250,.12);stroke:var(--lasso);stroke-width:2}
+  .join{stroke:rgba(255,255,255,.6);stroke-width:1.2}
+  .cap{font-size:.92rem;color:var(--muted);margin-top:8px}
+  .badgel{border:1px dashed rgba(148,163,184,.4)}
+  .note{color:var(--muted);font-size:.92rem;margin-top:8px}
+  .eqbox{margin-top:8px;font-size:.92rem;color:#d1fae5}
+</style>
 </head>
 <body>
-<nav id="sidebar">
-  <h2><i class="fas fa-book"></i> Contents</h2>
-  <ul>
-    <li><a href="#what-is-ml"><i class="fas fa-robot"></i>1. What is Machine Learning?</a></li>
-    <li><a href="#types-ml"><i class="fas fa-layer-group"></i>2. Types of ML Systems</a></li>
-    <li>
-      <a href="#supervised"><i class="fas fa-chalkboard-teacher"></i>3. Supervised Learning</a>
-      <div class="subsections">
-        <a href="#regression">3.1 Regression</a>
-        <a href="#classification">3.2 Classification</a>
+<div class="wrap">
+  <h1>Interactive Ridge vs Lasso (2-parameter view)</h1>
+  <p class="muted">
+    We visualize the penalized least squares in the \((\beta_1,\beta_2)\) plane. RSS contours are centered at the OLS solution.
+    Ridge uses an L2 ball; Lasso uses an L1 diamond. The minimizer is the point where a contour first touches the constraint.
+  </p>
+
+  <div class="controls">
+    <label for="lam">λ:</label>
+    <input id="lam" type="range" min="0" max="2.5" step="0.05" value="0.60"/>
+    <span class="pill">λ = <b id="lamVal">0.60</b></span>
+    <span class="pill badgel">Design: orthonormal (for illustration)</span>
+    <span class="pill">β<sup>OLS</sup> = (<b id="b1ols">1.80</b>, <b id="b2ols">1.00</b>)</span>
+  </div>
+
+  <div class="grid2">
+    <!-- RIDGE -->
+    <div class="card" id="ridgeCard">
+      <div class="head">
+        <h2>Ridge (L2 penalty)</h2>
+        <div class="legend">
+          <span class="key"><span class="swatch ols"></span> OLS</span>
+          <span class="key"><span class="swatch ridge"></span> L2 ball</span>
+          <span class="key"><span class="swatch sol"></span> Solution</span>
+        </div>
       </div>
-    </li>
-    <li>
-      <a href="#unsupervised"><i class="fas fa-search"></i>4. Unsupervised Learning</a>
-      <div class="subsections">
-        <a href="#clustering">4.1 Clustering</a>
-        <a href="#dim-reduction">4.2 Dimensionality Reduction</a>
+
+      <svg id="ridgeSVG" viewBox="0 0 760 520" aria-label="Ridge figure">
+        <!-- axes -->
+        <g class="axes">
+          <line x1="140" y1="260" x2="620" y2="260"/>
+          <line x1="380" y1="20"  x2="380" y2="500"/>
+        </g>
+        <!-- ticks & labels -->
+        <g id="ridgeTicks"></g>
+
+        <!-- RSS contours -->
+        <g id="ridgeContours"></g>
+
+        <!-- Ridge constraint (L2 ball) -->
+        <circle id="ridgeBall" class="ridgeBall" cx="380" cy="260" r="80"></circle>
+
+        <!-- connection and points -->
+        <line id="ridgeJoin" class="join" x1="380" y1="260" x2="380" y2="260"/>
+        <circle id="ridgeOLS" class="olsPoint" cx="380" cy="260" r="6"></circle>
+        <circle id="ridgeSOL" class="solPoint" cx="380" cy="260" r="6"></circle>
+      </svg>
+
+      <div class="nums">
+        <span class="pill">Shrink factor: <b id="ridgeShrink">1/(1+λ)=0.625</b></span>
+        <span class="pill">β<sub>ridge</sub>(λ) = (<b id="ridgeB1">1.12</b>, <b id="ridgeB2">0.62</b>)</span>
+        <span class="pill">‖β‖₂ = <b id="ridgeNorm">1.28</b></span>
       </div>
-    </li>
-    <li>
-      <a href="#reinforcement"><i class="fas fa-gamepad"></i>5. Reinforcement Learning</a>
-      <div class="subsections">
-        <a href="#value-based">5.1 Value-Based Methods</a>
-        <a href="#policy-based">5.2 Policy-Based Methods</a>
-        <a href="#model-based">5.3 Model-Based Methods</a>
+      <div class="eqbox">Formula (orthonormal X): β̂<sub>ridge</sub>(λ) = β̂<sub>OLS</sub> / (1+λ)</div>
+    </div>
+
+    <!-- LASSO -->
+    <div class="card" id="lassoCard">
+      <div class="head">
+        <h2>Lasso (L1 penalty)</h2>
+        <div class="legend">
+          <span class="key"><span class="swatch ols"></span> OLS</span>
+          <span class="key"><span class="swatch lasso"></span> L1 diamond</span>
+          <span class="key"><span class="swatch sol"></span> Solution</span>
+        </div>
       </div>
-    </li>
-    <li>
-      <a href="#generative-ai"><i class="fas fa-magic"></i>6. Generative AI</a>
-      <div class="subsections">
-        <a href="#gans">6.1 GANs</a>
-        <a href="#autoregressive">6.2 Autoregressive Models</a>
-        <a href="#diffusion">6.3 Diffusion Models</a>
+
+      <svg id="lassoSVG" viewBox="0 0 760 520" aria-label="Lasso figure">
+        <!-- axes -->
+        <g class="axes">
+          <line x1="140" y1="260" x2="620" y2="260"/>
+          <line x1="380" y1="20"  x2="380" y2="500"/>
+        </g>
+        <!-- ticks & labels -->
+        <g id="lassoTicks"></g>
+
+        <!-- RSS contours -->
+        <g id="lassoContours"></g>
+
+        <!-- Lasso constraint (L1 diamond) -->
+        <polygon id="lassoDiamond" class="lassoDiamond" points=""></polygon>
+
+        <!-- connection and points -->
+        <line id="lassoJoin" class="join" x1="380" y1="260" x2="380" y2="260"/>
+        <circle id="lassoOLS" class="olsPoint" cx="380" cy="260" r="6"></circle>
+        <circle id="lassoSOL" class="solPoint" cx="380" cy="260" r="6"></circle>
+      </svg>
+
+      <div class="nums">
+        <span class="pill">Soft-threshold: <b id="lassoSoft">β̂ = sign(β̂<sub>OLS</sub>)·max(|β̂<sub>OLS</sub>|−λ,0)</b></span>
+        <span class="pill">β<sub>lasso</sub>(λ) = (<b id="lassoB1">1.20</b>, <b id="lassoB2">0.40</b>)</span>
+        <span class="pill">‖β‖₁ = <b id="lassoNorm">1.60</b></span>
       </div>
-    </li>
-    <li><a href="#references"><i class="fas fa-link"></i>References</a></li>
-  </ul>
-</nav>
-
-<main id="content">
-
-      <!-- Put this once in your page (head or before </body>) -->
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-
-  <!-- k-Nearest Neighbors (kNN) — self-contained section -->
-<section id="knn" style="font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6; max-width:980px; margin:0 auto;">
-  <!-- MathJax (include once per page; remove if already loaded) -->
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-  <h3>2.2 k-Nearest Neighbors (kNN)</h3>
-
-  <!-- 1. Motivation -->
-  <h4>1. Motivation</h4>
-  <div class="card" style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:12px 14px;">
-    <p><strong>When you don’t want to assume a specific functional form</strong> (like a line or a sigmoid), kNN lets the data speak locally:</p>
-    <ul>
-      <li>Predicts by looking at the <em>k most similar (nearest)</em> training points.</li>
-      <li>Works for <strong>classification</strong> (majority vote) and <strong>regression</strong> (average of neighbors).</li>
-      <li>Simple, intuitive, and can learn highly <strong>non-linear</strong> decision boundaries.</li>
-    </ul>
+      <div class="eqbox">Formula (orthonormal X): β̂<sub>lasso</sub>(λ) = SoftThresh(β̂<sub>OLS</sub>, λ)</div>
+    </div>
   </div>
 
-  <!-- 2. Idea -->
-  <h4>2. Idea</h4>
-  <p>Given a new input \(x\), find its \(k\) nearest training samples under a chosen distance metric and aggregate their targets.</p>
-  <p class="eq" style="text-align:center;">
-    Classification: \(\;\hat{y}(x) = \operatorname{mode}\big(\{y_{(1)},\dots,y_{(k)}\}\big)\)
+  <p class="note">
+    RSS level sets are drawn as circles centered at β̂<sub>OLS</sub> to emphasize geometry. The highlighted (brighter) circle is the contour passing through the current penalized solution (the tangency).
   </p>
-  <p class="eq" style="text-align:center; margin-top:6px;">
-    Regression: \(\;\hat{y}(x) = \dfrac{1}{k}\sum_{i=1}^{k} y_{(i)}\)
-  </p>
-  <ul>
-    <li>\(y_{(i)}\) denotes the label/target of the \(i\)-th nearest neighbor to \(x\).</li>
-    <li>Optional: use <strong>distance-weighted</strong> votes/averages (closer neighbors count more).</li>
-  </ul>
-
-  <!-- 3. Distance (Equation) -->
-  <h4>3. Distance Metrics</h4>
-  <p>Common choices for numeric features:</p>
-  <div class="eq" style="text-align:center;">
-    Minkowski (order \(p\)): \(\quad d_p(x,x')=\Big(\sum_{j=1}^p |x_j-x'_j|^p\Big)^{1/p}\)
-  </div>
-  <ul>
-    <li>\(p=2\): Euclidean, \(\; d_2(x,x') = \sqrt{\sum_j (x_j-x'_j)^2}\)</li>
-    <li>\(p=1\): Manhattan, \(\; d_1(x,x') = \sum_j |x_j-x'_j|\)</li>
-    <li>\(p\to\infty\): Chebyshev, \(\; d_\infty(x,x')=\max_j |x_j-x'_j|\)</li>
-  </ul>
-  <p class="card" style="background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:10px 12px;">
-    <strong>Important:</strong> Scale/standardize features for distance to make sense; otherwise features with large units dominate.
-  </p>
-
-  <!-- 4. Prediction Equations -->
-  <h4>4. Prediction Rules</h4>
-  <div style="text-align:center; margin:6px 0;">
-    <p class="eq" style="margin:6px 0;">
-      Probability estimate for class \(c\): \(\quad \hat{P}(y=c\mid x)=\dfrac{1}{k}\sum_{i=1}^{k}\mathbf{1}[y_{(i)}=c]\)
-    </p>
-    <p class="eq" style="margin:6px 0;">
-      Distance-weighted vote (example): \(\quad w_i=\dfrac{1}{d(x,x_{(i)})+\varepsilon},\;\;
-      \hat{P}(y=c\mid x)=\dfrac{\sum_{i=1}^k w_i\,\mathbf{1}[y_{(i)}=c]}{\sum_{i=1}^k w_i}\)
-    </p>
-  </div>
-  <p class="center small" style="text-align:center; color:#6b7280;">Use a threshold (e.g., 0.5) on \(\hat{P}(y=1\mid x)\) for binary classification.</p>
-
-  <!-- 5. Algorithm Steps -->
-  <h4>5. How kNN Works (Algorithm)</h4>
-  <ol style="padding-left:1.2rem;">
-    <li><strong>Store</strong> the training set \((X,y)\). (No model parameters to fit.)</li>
-    <li>For a new point \(x\): compute its distance to every training example.</li>
-    <li><strong>Select</strong> the \(k\) nearest examples.</li>
-    <li><strong>Aggregate</strong>: majority vote (classification) or mean (regression). Optionally, weight by distance.</li>
-  </ol>
-
-  <!-- 6. Hyperparameters & Choices -->
-  <h4>6. Hyperparameters & Practical Choices</h4>
-  <ul>
-    <li><strong>k (neighbors):</strong> small \(k\) → low bias, high variance; large \(k\) → higher bias, lower variance. Choose via cross-validation.</li>
-    <li><strong>Distance metric:</strong> Euclidean default for continuous; consider Manhattan/Chebyshev; for mixed data, use suitable metrics (e.g., Hamming/Gower).</li>
-    <li><strong>Weights:</strong> uniform vs. distance-weighted (helps when neighbor densities vary).</li>
-    <li><strong>Ties:</strong> pick odd \(k\) for binary classes or break ties by total distance.</li>
-    <li><strong>Feature scaling:</strong> standardize or normalize to prevent unit dominance.</li>
-  </ul>
-
-  <!-- 7. Complexity -->
-  <h4>7. Computational Cost</h4>
-  <ul>
-    <li><strong>Training:</strong> essentially \(O(1)\) (store the data).</li>
-    <li><strong>Prediction (naïve):</strong> \(O(mp)\) per query (compare to all \(m\) points with \(p\) features).</li>
-    <li><strong>Speed-ups:</strong> KD-tree / Ball-tree / Annoy / FAISS can reduce query time in low–moderate dimensions; benefits diminish in very high \(p\) (curse of dimensionality).</li>
-  </ul>
-
-  <!-- 8. Example -->
-  <h4>8. Worked Example (Binary Classification)</h4>
-  <p>Suppose we have 2D points with labels \(y\in\{0,1\}\):</p>
-  <table aria-label="Tiny kNN example" style="border-collapse:collapse; width:100%; margin-top:6px;">
-    <thead>
-      <tr>
-        <th style="text-align:left; border-bottom:1px solid #e5e7eb; padding:6px;">x₁</th>
-        <th style="text-align:left; border-bottom:1px solid #e5e7eb; padding:6px;">x₂</th>
-        <th style="text-align:left; border-bottom:1px solid #e5e7eb; padding:6px;">y</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td style="padding:6px;">1.0</td><td style="padding:6px;">1.0</td><td style="padding:6px;">0</td></tr>
-      <tr><td style="padding:6px;">1.5</td><td style="padding:6px;">1.2</td><td style="padding:6px;">0</td></tr>
-      <tr><td style="padding:6px;">2.0</td><td style="padding:6px;">2.1</td><td style="padding:6px;">1</td></tr>
-      <tr><td style="padding:6px;">2.2</td><td style="padding:6px;">1.9</td><td style="padding:6px;">1</td></tr>
-    </tbody>
-  </table>
-  <p>Query point \(x^\star=(1.8,\,1.9)\), Euclidean distance, \(k=3\): the three closest points are likely
-    \((2.0,2.1, y{=}1),\ (2.2,1.9, y{=}1),\ (1.5,1.2, y{=}0)\) → majority class \(=1\).
-    Optionally estimate \(\hat{P}(y=1\mid x^\star)=2/3\approx0.67\).
-  </p>
-
-  <!-- 9. Pros & Cons -->
-  <h4>9. Pros & Cons</h4>
-  <ul>
-    <li><strong>Pros:</strong> simple, non-parametric, flexible boundaries, no training time.</li>
-    <li><strong>Cons:</strong> slow queries on large datasets (without indexing), sensitive to feature scaling and irrelevant features, struggles in high dimensions.</li>
-  </ul>
-
-  <!-- 10. Key Points -->
-  <h4>10. Key Points for Students</h4>
-  <ul>
-    <li>kNN is a <strong>lazy learner</strong>: it defers computation to prediction time.</li>
-    <li>Pick <strong>k</strong>, <strong>distance metric</strong>, and <strong>weights</strong> via validation.</li>
-    <li>Always <strong>scale</strong> features; consider dimensionality reduction (PCA) if \(p\) is large.</li>
-    <li>Classification uses majority vote; regression uses neighbor average (optionally weighted).</li>
-  </ul>
-</section>
-
-  
-
-
-
-  
-<section id="ridge-regression">
-  <h4>2.2 Ridge Regression (L2 Regularization)</h4>
-  <br>
-
-  <b>Idea:</b>
-  <p>
-    Ridge Regression extends Ordinary Least Squares (OLS) by adding an <b><font color="red">L2 penalty</font></b> on the size of the coefficients. 
-    This penalty discourages overly large weights, helping to reduce <b>overfitting</b> and improve <b>generalization</b>, especially when features are correlated or when \(p \approx m\).
-  </p>
-
-  <b>Equation:</b>
-  <p style="text-align:center;">
-    Choose \( \boldsymbol{\beta} \) to minimize
-    \[
-      \underbrace{\sum_{i=1}^{m}\bigl(y_i - \hat{y}_i\bigr)^2}_{\text{SSE}}
-      \;+\;
-      \lambda \sum_{j=1}^{n} \beta_j^2,
-    \]
-    where \( \hat{y}_i = \beta_0 + \sum_{j=1}^{n} \beta_j x_{ij} \) and the intercept \( \beta_0 \) is typically <em>not</em> penalized.
-  </p>
-
-  <p><strong>Where:</strong></p>
-  <ul>
-    <li>\( \lambda \ge 0 \): regularization strength (larger \( \lambda \Rightarrow \) stronger shrinkage)</li>
-    <li>\( \beta_0 \): intercept (unpenalized)</li>
-    <li>\( \beta_1,\ldots,\beta_n \): coefficients for each feature</li>
-    <li>\( \mathbf{X} \): design matrix, \( \mathbf{y} \): targets</li>
-  </ul>
-
-  <br>
-
-  <center>
-    <img src="images/ridge1.png" width="800" height="300" alt="Ridge regression shrinks coefficients (L2 penalty)">
-  </center>
-
-  <br>
-
-  <h4>How Ridge Regression Works</h4>
-  <!-- MathJax already loaded once in the page -->
-  <ol>
-    <li><strong>Collect Data</strong> – Gather features \( (x_1,\dots,x_n) \) and outputs \( y \).</li>
-    <li><strong>Standardize Features (recommended)</strong> – Put features on comparable scales so the penalty treats them fairly.</li>
-    <li><strong>Choose \( \lambda \)</strong> – Typically via cross-validation.</li>
-    <li><strong>Fit the Model</strong> – Minimize squared error + L2 penalty to get \( \hat{\boldsymbol{\beta}} \).</li>
-    <li><strong>Evaluate</strong> – Check validation/test error; tune \( \lambda \) to balance bias–variance.</li>
-  </ol>
-
-  <h4>Interpreting the Coefficients</h4>
-  <ul>
-    <li><strong>Intercept (\(\beta_0\))</strong> – Baseline prediction (usually unpenalized).</li>
-    <li><strong>Coefficient (\(\beta_j\))</strong> – Effect of feature \(x_j\) on \(y\) while others are fixed, but <em>shrunken</em> toward zero by the L2 penalty.</li>
-    <li><strong>Shrinkage</strong> – Larger \( \lambda \) \(\Rightarrow\) stronger shrinkage (reduces variance, may increase bias).</li>
-  </ul>
-
-  <br>
-
-  <h4>Model &amp; Notation</h4>
-  <p><b>Scalar form:</b></p>
-  <p>$$ y = \beta_0 + \beta_1 x_1 + \cdots + \beta_n x_n + \epsilon $$</p>
-
-  <p><b>Matrix form:</b></p>
-  <p>
-    $$ \mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\epsilon} $$
-    where
-    $$ \mathbf{X} =
-      \begin{bmatrix}
-        1 & x_{11} & \cdots & x_{1n} \\
-        1 & x_{21} & \cdots & x_{2n} \\
-        \vdots & \vdots & \ddots & \vdots \\
-        1 & x_{m1} & \cdots & x_{mn}
-      \end{bmatrix},\quad
-      \boldsymbol{\beta} =
-      \begin{bmatrix}
-        \beta_0 \\ \beta_1 \\ \vdots \\ \beta_n
-      \end{bmatrix},\quad
-      \mathbf{y} =
-      \begin{bmatrix}
-        y_1 \\ y_2 \\ \vdots \\ y_m
-      \end{bmatrix}.
-    $$
-  </p>
-
-  <h4>Objective (Ridge / L2)</h4>
-  <p>
-    In vector form (with penalty matrix \( \mathbf{P}=\mathrm{diag}(0,1,\dots,1) \) so the intercept isn’t penalized):
-  </p>
-  <p style="text-align:center;">
-    $$ 
-      \min_{\boldsymbol{\beta}} \;
-      (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
-      \;+\;
-      \lambda\,\boldsymbol{\beta}^\top \mathbf{P}\,\boldsymbol{\beta}.
-    $$
-  </p>
-
-  <h4>Normal Equations (Derivation)</h4>
-  <div class="step">
-    <p><b>Expand the objective:</b></p>
-    <p>
-      $$
-      J(\boldsymbol{\beta})
-      = (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
-      + \lambda\,\boldsymbol{\beta}^\top \mathbf{P}\,\boldsymbol{\beta}.
-      $$
-    </p>
-  </div>
-
-  <div class="step">
-    <p><b>Distribute (FOIL) the SSE part and use transpose rules:</b></p>
-    <p>
-      $$
-      (\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
-      = \mathbf{y}^\top\mathbf{y}
-      - 2\,\boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}
-      + \boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{X}\,\boldsymbol{\beta}.
-      $$
-    </p>
-    <p>So
-      $$
-      J(\boldsymbol{\beta}) =
-      \mathbf{y}^\top\mathbf{y}
-      - 2\,\boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}
-      + \boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{X}\,\boldsymbol{\beta}
-      + \lambda\,\boldsymbol{\beta}^\top \mathbf{P}\,\boldsymbol{\beta}.
-      $$
-    </p>
-  </div>
-
-  <div class="step">
-    <p><b>Take gradient w.r.t. \( \boldsymbol{\beta} \) and set to zero:</b></p>
-    <p>
-      $$
-      \frac{\partial J}{\partial \boldsymbol{\beta}}
-      = -2\,\mathbf{X}^\top\mathbf{y}
-        + 2\,\mathbf{X}^\top\mathbf{X}\,\boldsymbol{\beta}
-        + 2\lambda\,\mathbf{P}\,\boldsymbol{\beta}
-      \;=\; \mathbf{0}.
-      $$
-    </p>
-    <p>
-      Rearranging:
-      $$
-      (\mathbf{X}^\top\mathbf{X} + \lambda\,\mathbf{P})\,\hat{\boldsymbol{\beta}}
-      = \mathbf{X}^\top\mathbf{y}.
-      $$
-    </p>
-    <p><b>Closed form (if invertible):</b>
-      $$
-      \boxed{\;
-      \hat{\boldsymbol{\beta}}_{\text{ridge}}
-      =
-      (\mathbf{X}^\top\mathbf{X} + \lambda\,\mathbf{P})^{-1}\,\mathbf{X}^\top\mathbf{y}
-      \;}
-      $$
-    </p>
-  </div>
-
-  <h4>Gradient Descent View (optional)</h4>
-  <p>
-    With learning rate \( \alpha \) and excluding the intercept from the penalty, the update for \( j\ge 1 \) is
-  </p>
-  <p style="text-align:center;">
-    $$
-    \beta_j \leftarrow \beta_j
-    - \alpha \left[
-      -2 \sum_{i=1}^{m} x_{ij}\bigl(y_i - \hat{y}_i\bigr)
-      + 2\lambda\,\beta_j
-    \right]
-    =
-    \beta_j + 2\alpha \sum_{i=1}^{m} x_{ij}\bigl(y_i - \hat{y}_i\bigr) - 2\alpha\lambda\,\beta_j.
-    $$
-  </p>
-  <p>
-    The last term \( -2\alpha\lambda\,\beta_j \) is what pulls coefficients toward zero (shrinkage).
-  </p>
-
-  <hr>
-
-  <h4>Worked Example: Predicting House Price (Ridge)</h4>
-  <p>Model:
-    $$ \text{Price} = \beta_0 + \beta_1 \cdot \text{Size} + \beta_2 \cdot \text{Bedrooms} + \epsilon $$
-  </p>
-
-  <h4>Data</h4>
-  <table border="1" cellpadding="6">
-    <tr><th>Size (sq.ft)</th><th>Bedrooms</th><th>Price ($)</th></tr>
-    <tr><td>1000</td><td>2</td><td>200,000</td></tr>
-    <tr><td>1500</td><td>3</td><td>280,000</td></tr>
-    <tr><td>2000</td><td>3</td><td>340,000</td></tr>
-    <tr><td>2500</td><td>4</td><td>400,000</td></tr>
-    <tr><td>3000</td><td>4</td><td>460,000</td></tr>
-  </table>
-
-  <h4>Step 1: Build \(\mathbf{X}\) and \(\mathbf{y}\)</h4>
-  <p>
-    $$ 
-    \mathbf{X} =
-    \begin{bmatrix}
-      1 & 1000 & 2 \\
-      1 & 1500 & 3 \\
-      1 & 2000 & 3 \\
-      1 & 2500 & 4 \\
-      1 & 3000 & 4
-    \end{bmatrix},\quad
-    \mathbf{y} =
-    \begin{bmatrix}
-      200000 \\ 280000 \\ 340000 \\ 400000 \\ 460000
-    \end{bmatrix}.
-    $$
-  </p>
-
-  <h4>Step 2: Compute \( \mathbf{X}^\top \mathbf{X} + \lambda\mathbf{P} \) and \( \mathbf{X}^\top \mathbf{y} \)</h4>
-  <p>
-    From the linear regression section,
-    $$ 
-    \mathbf{X}^\top \mathbf{X} =
-    \begin{bmatrix}
-      5 & 10000 & 16 \\
-      10000 & 22500000 & 34500 \\
-      16 & 34500 & 54
-    \end{bmatrix}, \quad
-    \mathbf{X}^\top \mathbf{y} =
-    \begin{bmatrix}
-      1680000 \\
-      3680000000 \\
-      5700000
-    \end{bmatrix}.
-    $$
-  </p>
-  <p>
-    Let \( \lambda = 100 \) and \( \mathbf{P}=\mathrm{diag}(0,1,1) \) (no penalty on \( \beta_0 \)):
-  </p>
-  <p style="text-align:center;">
-    $$
-    \mathbf{X}^\top \mathbf{X} + \lambda\mathbf{P} =
-    \begin{bmatrix}
-      5 & 10000 & 16 \\
-      10000 & 22500010 & 34500 \\
-      16 & 34500 & 154
-    \end{bmatrix}.
-    $$
-  </p>
-
-  <h4>Step 3: Solve for \( \hat{\boldsymbol{\beta}}_{\text{ridge}} \)</h4>
-  <p>
-    Using the ridge normal equation:
-    $$
-      \hat{\boldsymbol{\beta}}_{\text{ridge}}
-      = (\mathbf{X}^\top\mathbf{X} + \lambda \mathbf{P})^{-1}\,\mathbf{X}^\top\mathbf{y}
-      \;\approx\;
-      \begin{bmatrix}
-        79{,}962.23 \\
-        127.95 \\
-        40.01
-      \end{bmatrix}.
-    $$
-  </p>
-
-  <h4>Final Ridge Model (\(\lambda=100\))</h4>
-  <p style="text-align:center; font-size:1.1em;">
-    $$ \widehat{\text{Price}} = 79{,}962.23 \;+\; 127.95 \cdot \text{Size} \;+\; 40.01 \cdot \text{Bedrooms} $$
-  </p>
-
-  <h4>Step 4: Predictions \((\hat{\mathbf{y}})\) & Residuals</h4>
-  <p>
-    $$
-    \hat{\mathbf{y}} \approx
-    \begin{bmatrix}
-      207{,}997.12 \\
-      272{,}014.56 \\
-      335{,}992.00 \\
-      400{,}009.44 \\
-      463{,}986.88
-    \end{bmatrix},\quad
-    \mathbf{r} = \mathbf{y} - \hat{\mathbf{y}} \approx
-    \begin{bmatrix}
-      -7{,}997.12 \\
-      7{,}985.44 \\
-      4{,}008.00 \\
-      -9.44 \\
-      -3{,}986.88
-    \end{bmatrix}.
-    $$
-  </p>
-
-  <h4>Step 5: Training Error</h4>
-  <p>
-    $$
-      \mathrm{SSE} \approx 1.5968 \times 10^8,\quad
-      \mathrm{MSE} \approx 3.1936 \times 10^7,\quad
-      \mathrm{RMSE} \approx 5{,}651.20.
-    $$
-  </p>
-
-  <h4>Interpretation &amp; Comparison to OLS</h4>
-  <ul>
-    <li><strong>Shrinkage:</strong> Ridge pulls coefficients toward zero: \(\beta_{\text{Size}}\) fell from \(\approx 114.67\) (OLS) to \(\approx 127.95\) here due to dataset scaling; the joint effect with the intercept produces similar predictions but with <em>stabilized</em> parameters. (Exact values depend on feature scaling and \(\lambda\).)</li>
-    <li><strong>Bias–Variance Tradeoff:</strong> As \( \lambda \) increases, variance decreases and bias increases. Pick \( \lambda \) via cross-validation.</li>
-    <li><strong>Multicollinearity:</strong> Ridge is especially useful when features are correlated (ill-conditioned \( \mathbf{X}^\top\mathbf{X} \)).</li>
-    <li><strong>Intercept:</strong> Typically unpenalized; standardize features for fair penalization.</li>
-  </ul>
-
-  <h4>Why Might SSE Be Different from OLS?</h4>
-  <p>
-    Ridge adds a penalty term; while the pure SSE on training data can be slightly worse than OLS, the <b>generalization error</b> on unseen data often improves due to reduced variance. Always compare with a validation or test set.
-  </p>
-
-  <br>
-</section>
-
-
-
-
-
-
-  
-
-
-  
-  <h1>Introduction to Machine Learning</h1>
-
-  <section id="what-is-ml">
-    <h3>1. What is Machine Learning?</h3>
-    <p>
-      Machine learning (ML) is the process of teaching computers to make decisions or predictions based on data, rather than through explicit programming. It powers many modern technologies, from recommendation engines to self-driving cars.
-    </p>
-  </section>
-
-  <section id="types-ml">
-    <h3>2. Types of ML Systems</h3>
-    <ul>
-      <li><strong>Supervised Learning</strong>: Learn a mapping from input to output with labeled data (e.g., classification, regression).</li>
-      <li><strong>Unsupervised Learning</strong>: Find hidden patterns or structures in data without explicit labels (e.g., clustering, dimensionality reduction).</li>
-      <li><strong>Reinforcement Learning</strong>: Learn to make a sequence of decisions by receiving rewards or penalties from the environment.</li>
-      <li><strong>Generative AI</strong>: Create new content (text, images, audio) that mimics real data distributions.</li>
-    </ul>
-  </section>
-
-  <section id="supervised">
-    <h3>3. Supervised Learning</h3>
-    <p>
-      The most common ML paradigm, where models learn from input-output pairs. Two main types:
-    </p>
-    <div id="regression">
-      <h4>3.1 Regression</h4>
-      <p>Regression algorithms predict numeric values (e.g., house prices, temperature):</p>
-      <pre><code># Example (scikit-learn)
-from sklearn.linear_model import LinearRegression
-model = LinearRegression()
-model.fit(X_train, y_train)
-      </code></pre>
-    </div>
-    <div id="classification">
-      <h4>3.2 Classification</h4>
-      <p>Classification algorithms assign items to one of several categories (e.g., spam detection, image recognition):</p>
-      <pre><code># Example (scikit-learn)
-from sklearn.tree import DecisionTreeClassifier
-clf = DecisionTreeClassifier()
-clf.fit(X_train, y_train)
-      </code></pre>
-    </div>
-  </section>
-
-  <section id="unsupervised">
-    <h3>4. Unsupervised Learning</h3>
-    <p>
-      Unsupervised learning discovers patterns and groupings in data without labels. Two main types:
-    </p>
-    <div id="clustering">
-      <h4>4.1 Clustering</h4>
-      <p>Clustering algorithms group data points into clusters based on similarity or distance. Common methods include K-Means, Agglomerative Hierarchical Clustering, and DBSCAN.</p>
-    </div>
-    <div id="dim-reduction">
-      <h4>4.2 Dimensionality Reduction</h4>
-      <p>Dimensionality reduction algorithms reduce the number of input variables or features, making data easier to visualize and process. Popular techniques include:</p>
-      <ul>
-        <li><strong>PCA (Principal Component Analysis):</strong> Transforms data to a new set of orthogonal axes that maximize variance.</li>
-        <li><strong>ICA (Independent Component Analysis):</strong> Decomposes a multivariate signal into independent non-Gaussian components, often used in signal processing and brain imaging.</li>
-        <li><strong>t-SNE (t-distributed Stochastic Neighbor Embedding):</strong> Maps high-dimensional data to 2 or 3 dimensions for visualization, preserving local structure.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="reinforcement">
-    <h3>5. Reinforcement Learning</h3>
-    <p>
-      Reinforcement learning (RL) is a paradigm where agents learn optimal strategies by interacting with an environment and receiving feedback as rewards or penalties.
-    </p>
-    <div id="value-based">
-      <h4>5.1 Value-Based Methods</h4>
-      <p>
-        Value-based methods estimate the expected reward of actions or states. The agent chooses actions to maximize these values.<br>
-        <strong>Examples:</strong> Q-Learning, Deep Q-Networks (DQN)
-      </p>
-    </div>
-    <div id="policy-based">
-      <h4>5.2 Policy-Based Methods</h4>
-      <p>
-        Policy-based methods directly optimize the policy that decides actions. These are often used when value-based methods are impractical.<br>
-        <strong>Examples:</strong> REINFORCE, Actor-Critic
-      </p>
-    </div>
-    <div id="model-based">
-      <h4>5.3 Model-Based Methods</h4>
-      <p>
-        Model-based methods learn a model of the environment and use it for planning or policy improvement.<br>
-        <strong>Examples:</strong> Dyna-Q, Monte Carlo Tree Search (MCTS)
-      </p>
-    </div>
-  </section>
-
-  <section id="generative-ai">
-    <h3>6. Generative AI</h3>
-    <p>
-      Generative AI models are designed to produce new data that resembles the data they were trained on. These models are widely used for text generation, image synthesis, music, and more. Main types include:
-    </p>
-    <div id="gans">
-      <h4>6.1 Generative Adversarial Networks (GANs)</h4>
-      <p>
-        GANs use a generator and a discriminator in competition to produce increasingly realistic outputs. They are famous for generating realistic images and videos.
-      </p>
-    </div>
-    <div id="autoregressive">
-      <h4>6.2 Autoregressive Models</h4>
-      <p>
-        These models generate data one step at a time, with each output depending on previous outputs. <strong>Examples:</strong> GPT-4 (text), LSTM (music, text).
-      </p>
-    </div>
-    <div id="diffusion">
-      <h4>6.3 Diffusion Models</h4>
-      <p>
-        Diffusion models create data by learning to gradually denoise random input, producing some of the highest quality images to date. <strong>Examples:</strong> DALL·E 2, Stable Diffusion.
-      </p>
-    </div>
-  </section>
-
-  <section id="references">
-    <h3>References</h3>
-    <ul>
-      <li>
-        <a href="https://developers.google.com/machine-learning/crash-course" target="_blank">
-          Google Machine Learning Crash Course
-        </a>
-      </li>
-      <li>
-        <a href="https://scikit-learn.org/stable/user_guide.html" target="_blank">
-          scikit-learn User Guide
-        </a>
-      </li>
-      <li>
-        <a href="https://www.coursera.org/learn/machine-learning" target="_blank">
-          Andrew Ng's Machine Learning (Coursera)
-        </a>
-      </li>
-      <li>
-        <a href="https://www.deeplearning.ai/short-courses/" target="_blank">
-          DeepLearning.AI Short Courses
-        </a>
-      </li>
-    </ul>
-  </section>
-  <footer>
-    &copy; 2025 Xin Yang <br>
-    Department of Computer Science <br>
-    Middle Tennessee State University <br>
-  </footer>
-</main>
+</div>
 
 <script>
-  // Smooth scrolling & highlight active link
-  const sidebarLinks = document.querySelectorAll('#sidebar a');
-  sidebarLinks.forEach(anchor => {
-    anchor.onclick = function(e) {
-      e.preventDefault();
-      document.querySelector(this.getAttribute('href'))
-        .scrollIntoView({ behavior: 'smooth' });
-    };
-  });
+/* ==========================
+   Parameter space (data coords): [-3,3] x [-3,3]
+   Plot area (px): square 480x480 with center (cx,cy)=(380,260)
+========================== */
+const plot = { xmin:-3, xmax:3, ymin:-3, ymax:3, left:140, top:20, size:480 };
+const cx = 380, cy = 260, scale = plot.size / (plot.xmax - plot.xmin); // 480 / 6 = 80 px per unit
 
-  // Active link highlight on scroll
-  const sectionIds = Array.from(sidebarLinks).map(l => l.getAttribute('href'));
-  window.addEventListener('scroll', () => {
-    let current = sectionIds[0];
-    for (const id of sectionIds) {
-      const section = document.querySelector(id);
-      if (section && section.getBoundingClientRect().top - 80 < 0) {
-        current = id;
-      }
-    }
-    sidebarLinks.forEach(link => link.classList.remove('active'));
-    const activeLink = document.querySelector(`#sidebar a[href="${current}"]`);
-    if (activeLink) activeLink.classList.add('active');
+function xp(b1){ return cx + b1*scale; }
+function yp(b2){ return cy - b2*scale; }
+
+function clamp(v, lo, hi){ return Math.max(lo, Math.min(hi, v)); }
+function fmt(x, d=2){ return (+x).toFixed(d); }
+
+const lamSlider = document.getElementById('lam');
+const lamVal = document.getElementById('lamVal');
+
+/* OLS (fixed for the demo; you could make it draggable if desired) */
+const bOLS = { b1: 1.8, b2: 1.0 };
+document.getElementById('b1ols').textContent = fmt(bOLS.b1);
+document.getElementById('b2ols').textContent = fmt(bOLS.b2);
+
+/* Draw ticks for both SVGs */
+function drawTicks(containerId){
+  const g = document.getElementById(containerId);
+  g.innerHTML = '';
+  const ticks = [-3,-2,-1,0,1,2,3];
+  ticks.forEach(t=>{
+    // vertical ticks on x-axis (y=0)
+    const x = xp(t), y0 = yp(0);
+    const lt = line(x, y0-4, x, y0+4, 'tick');
+    const lbl = text(x-4, y0+16, t, 'tickLabel');
+    g.appendChild(lt); g.appendChild(lbl);
+    // horizontal ticks on y-axis (x=0)
+    const y = yp(t), x0 = xp(0);
+    const lth = line(x0-4, y, x0+4, y, 'tick');
+    const lblh = text(x0+8, y+4, t, 'tickLabel');
+    g.appendChild(lth); g.appendChild(lblh);
   });
+  // axis labels
+  g.appendChild(text(xp(3)+8, yp(0)+4, 'β₁', 'tickLabel'));
+  g.appendChild(text(xp(0)+6, yp(3)-10, 'β₂', 'tickLabel'));
+}
+
+function line(x1,y1,x2,y2,cls){
+  const el = document.createElementNS('http://www.w3.org/2000/svg','line');
+  el.setAttribute('x1',x1); el.setAttribute('y1',y1);
+  el.setAttribute('x2',x2); el.setAttribute('y2',y2);
+  el.setAttribute('class',cls);
+  return el;
+}
+
+function circle(cx,cy,r,cls){
+  const el = document.createElementNS('http://www.w3.org/2000/svg','circle');
+  el.setAttribute('cx',cx); el.setAttribute('cy',cy);
+  el.setAttribute('r',r); el.setAttribute('class',cls);
+  return el;
+}
+
+function text(x,y,str,cls){
+  const el = document.createElementNS('http://www.w3.org/2000/svg','text');
+  el.setAttribute('x',x); el.setAttribute('y',y);
+  el.setAttribute('class',cls); el.textContent = str;
+  return el;
+}
+
+function polygon(points, cls){
+  const el = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+  el.setAttribute('points', points.map(p=>p.join(',')).join(' '));
+  el.setAttribute('class', cls);
+  return el;
+}
+
+/* RSS circles centered at OLS (approximate: identity Hessian for clarity) */
+function drawContours(containerId, centerB, highlitRadius){
+  const g = document.getElementById(containerId);
+  g.innerHTML = '';
+  const radii = [0.6, 1.0, 1.4, 1.8, 2.2];
+  radii.forEach(r=>{
+    const c = circle(xp(centerB.b1), yp(centerB.b2), r*scale, 'rss');
+    g.appendChild(c);
+  });
+  if (highlitRadius !== null){
+    const ch = circle(xp(centerB.b1), yp(centerB.b2), highlitRadius*scale, 'rss hl');
+    g.appendChild(ch);
+  }
+}
+
+/* RIDGE: β̂ = βOLS / (1+λ) */
+function ridgeSolution(lambda){
+  const shrink = 1/(1+lambda);
+  return { b1: bOLS.b1*shrink, b2: bOLS.b2*shrink, shrink };
+}
+
+/* LASSO: soft-threshold coordinate-wise */
+function soft(x,t){ return Math.sign(x)*Math.max(Math.abs(x)-t, 0); }
+function lassoSolution(lambda){
+  // Illustrative scaling: threshold = λ (orthonormal & normalized)
+  const t = lambda;
+  const b1 = soft(bOLS.b1, t);
+  const b2 = soft(bOLS.b2, t);
+  return { b1, b2, thr: t };
+}
+
+/* Update both panels */
+function update(){
+  const lam = parseFloat(lamSlider.value);
+  lamVal.textContent = fmt(lam,2);
+
+  /* -------- RIDGE -------- */
+  const r = ridgeSolution(lam);
+  const ridgeB1 = r.b1, ridgeB2 = r.b2;
+  const rNorm = Math.hypot(ridgeB1, ridgeB2);
+  // update numbers
+  document.getElementById('ridgeShrink').textContent = `1/(1+λ)=${fmt(r.shrink,3)}`;
+  document.getElementById('ridgeB1').textContent = fmt(ridgeB1);
+  document.getElementById('ridgeB2').textContent = fmt(ridgeB2);
+  document.getElementById('ridgeNorm').textContent = fmt(rNorm);
+
+  // move OLS and SOL points
+  const ridgeOLS = document.getElementById('ridgeOLS');
+  ridgeOLS.setAttribute('cx', xp(bOLS.b1));
+  ridgeOLS.setAttribute('cy', yp(bOLS.b2));
+  const ridgeSOL = document.getElementById('ridgeSOL');
+  ridgeSOL.setAttribute('cx', xp(ridgeB1));
+  ridgeSOL.setAttribute('cy', yp(ridgeB2));
+
+  // constraint L2 ball radius = ||β̂||₂ (to visualize the boundary that binds)
+  const ridgeBall = document.getElementById('ridgeBall');
+  ridgeBall.setAttribute('r', rNorm*scale);
+
+  // join line from origin to solution
+  const ridgeJoin = document.getElementById('ridgeJoin');
+  ridgeJoin.setAttribute('x1', xp(0)); ridgeJoin.setAttribute('y1', yp(0));
+  ridgeJoin.setAttribute('x2', xp(ridgeB1)); ridgeJoin.setAttribute('y2', yp(ridgeB2));
+
+  // contours (highlight the one passing through β̂)
+  const ridgeRadiusHL = Math.hypot(ridgeB1 - bOLS.b1, ridgeB2 - bOLS.b2);
+  drawContours('ridgeContours', bOLS, ridgeRadiusHL);
+
+  /* -------- LASSO -------- */
+  const l = lassoSolution(lam);
+  const lassoB1 = l.b1, lassoB2 = l.b2;
+  const l1Norm = Math.abs(lassoB1) + Math.abs(lassoB2);
+  document.getElementById('lassoSoft').textContent = `β̂ = sign(β̂₀)·max(|β̂₀|−λ,0)`;
+  document.getElementById('lassoB1').textContent = fmt(lassoB1);
+  document.getElementById('lassoB2').textContent = fmt(lassoB2);
+  document.getElementById('lassoNorm').textContent = fmt(l1Norm);
+
+  // move OLS and SOL points
+  const lassoOLS = document.getElementById('lassoOLS');
+  lassoOLS.setAttribute('cx', xp(bOLS.b1));
+  lassoOLS.setAttribute('cy', yp(bOLS.b2));
+  const lassoSOL = document.getElementById('lassoSOL');
+  lassoSOL.setAttribute('cx', xp(lassoB1));
+  lassoSOL.setAttribute('cy', yp(lassoB2));
+
+  // diamond for L1: |b1| + |b2| <= s, with s = ||β̂||₁ (boundary that binds)
+  const s = l1Norm;
+  const diamondPts = [
+    [xp( s), yp( 0)],
+    [xp( 0), yp( s)],
+    [xp(-s), yp( 0)],
+    [xp( 0), yp(-s)]
+  ];
+  document.getElementById('lassoDiamond').setAttribute('points',
+    diamondPts.map(p=>p.join(',')).join(' '));
+
+  // join line from origin to solution
+  const lassoJoin = document.getElementById('lassoJoin');
+  lassoJoin.setAttribute('x1', xp(0)); lassoJoin.setAttribute('y1', yp(0));
+  lassoJoin.setAttribute('x2', xp(lassoB1)); lassoJoin.setAttribute('y2', yp(lassoB2));
+
+  // contours (highlight the one passing through β̂)
+  const lassoRadiusHL = Math.hypot(lassoB1 - bOLS.b1, lassoB2 - bOLS.b2);
+  drawContours('lassoContours', bOLS, lassoRadiusHL);
+}
+
+/* Init ticks */
+drawTicks('ridgeTicks');
+drawTicks('lassoTicks');
+
+/* Initial update */
+lamSlider.addEventListener('input', update);
+update();
 </script>
-
 </body>
 </html>
