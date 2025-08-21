@@ -944,6 +944,33 @@ until convergence</pre>
     The goal is to <b><font color="red">use local neighborhoods to predict</font></b> rather than fitting a global line or plane.
   </p>
 
+    <br> <br>
+  <p>Given a new input \(x\), find its \(k\) nearest training samples under a chosen distance metric and aggregate their targets.</p>
+  <p class="eq" style="text-align:center;">
+    Classification: \(\;\hat{y}(x) = \operatorname{mode}\big(\{y_{(1)},\dots,y_{(k)}\}\big)\)
+  </p>
+  <ul>
+    <li>\(y_{(i)}\) denotes the label/target of the \(i\)-th nearest neighbor to \(x\).</li>
+    <li>Optional: use <strong>distance-weighted</strong> votes/averages (closer neighbors count more).</li>
+  </ul>
+
+    <!-- 3. Distance (Equation) -->
+  <h4>3. Distance Metrics</h4>
+  <p>Common choices for numeric features:</p>
+  <div class="eq" style="text-align:center;">
+    Minkowski (order \(p\)): \(\quad d_p(x,x')=\Big(\sum_{j=1}^p |x_j-x'_j|^p\Big)^{1/p}\)
+  </div>
+  <ul>
+    <li>\(p=2\): Euclidean, \(\; d_2(x,x') = \sqrt{\sum_j (x_j-x'_j)^2}\)</li>
+    <li>\(p=1\): Manhattan, \(\; d_1(x,x') = \sum_j |x_j-x'_j|\)</li>
+    <li>\(p\to\infty\): Chebyshev, \(\; d_\infty(x,x')=\max_j |x_j-x'_j|\)</li>
+  </ul>
+  <p>
+    <strong>Important:</strong> Scale/standardize features for distance to make sense; otherwise features with large units dominate.
+  </p>
+
+  
+  
   <b>Equation (Distance & Rules):</b>
   <p style="text-align:center;">
     Euclidean distance:
