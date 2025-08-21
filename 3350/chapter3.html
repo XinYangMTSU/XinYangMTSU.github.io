@@ -1011,31 +1011,6 @@ until convergence</pre>
   </ul>
 
   <br>
-
-  <h4>Model & Notation</h4>
-  <p>
-    Given training set \(\{(\mathbf{x}_i, y_i)\}_{i=1}^m\) and a query \(\mathbf{x}_q\), let
-    \(i_1,\ldots,i_k\) index the k nearest neighbors by a chosen distance \(d(\cdot,\cdot)\).
-  </p>
-  <p>
-    <b>kNN-Classification:</b>
-    \(\hat{y} = \mathrm{mode}\{y_{i_1},\ldots,y_{i_k}\}\), or probability
-    \(\hat{p} = \frac{\sum_r w_r \, y_{i_r}}{\sum_r w_r}\).
-  </p>
-  <p>
-    <b>kNN-Regression:</b>
-    \(\hat{y} = \frac{1}{k}\sum_r y_{i_r}\) (uniform), or
-    \(\hat{y} = \frac{\sum_r w_r \, y_{i_r}}{\sum_r w_r}\) (distance-weighted).
-  </p>
-
-  <h4>Objective</h4>
-  <p>
-    kNN has <b>no explicit training objective</b> (no coefficients to fit). It is a <em>lazy learner</em>:
-    all computation happens at prediction time. The “objective” is implicit—use local neighborhoods to minimize local error.
-  </p>
-
-  <br>
-
   <hr>
 
   <h4>Worked Example: Predicting House Price (kNN-Regression)</h4>
