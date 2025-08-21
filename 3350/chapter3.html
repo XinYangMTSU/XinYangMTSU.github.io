@@ -967,26 +967,6 @@ until convergence</pre>
   <p>
     <strong>Important:</strong> Scale/standardize features for distance to make sense; otherwise features with large units dominate.
   </p>
-
-  
-  
-  <b>Equation (Distance & Rules):</b>
-  <p style="text-align:center;">
-    Euclidean distance:
-    \[
-      d(\mathbf{x}_i,\mathbf{x}_q) \;=\; \sqrt{\sum_{j=1}^{n} (x_{ij} - x_{qj})^2}
-    \]
-    (Common alternatives: Manhattan \( \sum_j |x_{ij}-x_{qj}| \), Minkowski.)
-  </p>
-  <p><b>Prediction (Classification):</b> \(\hat{y} = \mathrm{mode}\{\,y_{i_1},\ldots,y_{i_k}\,\}\). Weighted variant:
-    \(\hat{p} = \dfrac{\sum_{r=1}^{k} w_r \, y_{i_r}}{\sum_{r=1}^{k} w_r}\), with \(w_r = \dfrac{1}{d_r + \varepsilon}\).
-  </p>
-
-  <!--
-  <p><b>Prediction (Regression):</b> \(\hat{y} = \dfrac{1}{k}\sum_{r=1}^{k} y_{i_r}\). Weighted:
-    \(\hat{y} = \dfrac{\sum_{r=1}^{k} w_r \, y_{i_r}}{\sum_{r=1}^{k} w_r}\).
-  </p>
-  -->
   
   <p><strong>Where:</strong></p>
   <ul>
