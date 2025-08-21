@@ -1002,18 +1002,6 @@ until convergence</pre>
 
   <br>
 
-  <h4>How kNN Works</h4>
-
-  <!-- Include MathJax once globally on your page if not already included -->
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-  <ol>
-    <li><strong>Collect Data</strong> – Keep the training examples in memory (lazy learning; no parameter fitting).</li>
-    <li><strong>Choose k, distance, weights</strong> – Often selected via cross-validation.</li>
-    <li><strong>Find neighbors</strong> – For a query point \( \mathbf{x}_q \), compute distances to all training points and pick the k smallest.</li>
-    <li><strong>Aggregate</strong> – Classification: majority vote; Regression: average (optionally distance-weighted).</li>
-    <li><strong>Evaluate</strong> – Use accuracy/F1/AUC for classification, or MSE/RMSE/MAE for regression.</li>
-  </ol>
 
   <h4>Interpreting the Parameters</h4>
   <ul>
