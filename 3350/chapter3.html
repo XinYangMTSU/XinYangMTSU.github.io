@@ -595,7 +595,8 @@ until convergence</pre>
 
 
     <!-- 6. Example -->
-    <h4>6. Example</h4>
+    <h4>8. Real Example: Fitting \( \boldsymbol{\beta} \) on the Student Data</h4>
+  
     <p>Imagine predicting if a student is admitted based on GPA and test score.</p>
     <table aria-label="Example dataset for admission">
       <thead>
@@ -612,9 +613,95 @@ until convergence</pre>
     <p class="eq">
       $$ P(\text{Admit}=1) \;=\; \frac{1}{1 + e^{-(\beta_0 + \beta_1 \cdot \text{GPA} + \beta_2 \cdot \text{TestScore})}} $$
     </p>
+
+  <!--
     <div class="tip">
       If for a new student (GPA = 3.6, Score = 680) we calculate \(p = 0.72\): that’s a 72% chance of admission → predict <strong>Admitted = 1</strong>.
     </div>
+  -->
+
+  <div class="card" style="background:#fff7ed; border:1px solid #fed7aa; border-radius:12px; padding:12px 14px; margin:12px 0;">
+    <p><strong>Why regularize?</strong> With only four points, the classes are (nearly) perfectly separable, so the unregularized MLE can diverge (coefficients \(\to\pm\infty\)). To get a stable, finite solution we add a small L2 penalty and standardize features.</p>
+  </div>
+
+  <h5>Step 1 — Standardize features (z-scores)</h5>
+  <p>Compute z-scores for GPA and Test Score so each has mean 0 and standard deviation 1:</p>
+  <div class="eq" style="text-align:center; margin:8px 0;">
+    $$ \tilde{\text{GPA}}=\frac{\text{GPA}-\bar{\text{GPA}}}{s_{\text{GPA}}}, \qquad
+       \tilde{\text{Score}}=\frac{\text{Score}-\bar{\text{Score}}}{s_{\text{Score}}}. $$
+  </div>
+  <p class="small" style="color:#6b7280; margin-top:6px;">
+    For this tiny dataset, a reasonable summary is \(\bar{\text{GPA}}\approx3.40\), \(s_{\text{GPA}}\approx0.59\); \(\bar{\text{Score}}\approx650\), \(s_{\text{Score}}\approx70.2\).
+  </p>
+
+  <h5>Step 2 — Fit a regularized logistic regression</h5>
+  <p>Use L2 (ridge) regularization with a small strength (e.g., \(\lambda=1\), not penalizing the intercept). In terms of standardized features:</p>
+  <div class="eq" style="text-align:center; margin:8px 0;">
+    $$ p=\sigma\!\big(\beta_0 + \beta_1\,\tilde{\text{GPA}} + \beta_2\,\tilde{\text{Score}}\big). $$
+  </div>
+
+  <div class="card" style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:12px 14px; margin:12px 0;">
+    <p style="margin:0 0 6px;"><strong>Illustrative fitted coefficients (standardized features, small L2):</strong></p>
+    <table aria-label="Estimated coefficients" style="width:100%; border-collapse:collapse;">
+      <thead>
+        <tr>
+          <th style="text-align:left; border-bottom:1px solid #e5e7eb; padding:6px;">Coefficient</th>
+          <th style="text-align:left; border-bottom:1px solid #e5e7eb; padding:6px;">Estimate (≈)</th>
+          <th style="text-align:left; border-bottom:1px solid #e5e7eb; padding:6px;">Odds ratio per +1&nbsp;SD</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:6px;">\( \beta_0 \) (intercept)</td>
+          <td style="padding:6px;">\(\;\;0.00\)</td>
+          <td style="padding:6px;">—</td>
+        </tr>
+        <tr>
+          <td style="padding:6px;">\( \beta_1 \) (GPA, z-score)</td>
+          <td style="padding:6px;">\(\;0.73\)</td>
+          <td style="padding:6px;">\(e^{0.73}\approx 2.08\)</td>
+        </tr>
+        <tr>
+          <td style="padding:6px;">\( \beta_2 \) (Score, z-score)</td>
+          <td style="padding:6px;">\(\;0.74\)</td>
+          <td style="padding:6px;">\(e^{0.74}\approx 2.10\)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="small" style="color:#6b7280; margin-top:8px;">Values depend on the exact regularization strength and tiny-sample quirks; standardization makes coefficients comparable.</p>
+  </div>
+
+  <h5>Step 3 — Predict a new student</h5>
+  <p>For GPA = 3.6 and Score = 680:</p>
+  <div class="eq" style="text-align:center; margin:8px 0;">
+    $$ \tilde{\text{GPA}} \approx \frac{3.6-3.4}{0.59}\approx 0.34, \qquad
+       \tilde{\text{Score}} \approx \frac{680-650}{70.2}\approx 0.43. $$
+    $$ z \approx 0.00 + 0.73(0.34) + 0.74(0.43) \approx 0.56, \qquad
+       p=\sigma(z)\approx \frac{1}{1+e^{-0.56}}\approx 0.64. $$
+  </div>
+  <div class="tip" style="background:#ecfdf5; border:1px solid #a7f3d0; border-radius:10px; padding:10px 12px; margin:10px 0;">
+    With a 0.5 threshold, we predict <strong>Admitted = 1</strong> (about 64% probability). Thresholds can be tuned for precision/recall trade-offs.
+  </div>
+
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;">Show coefficients on <em>raw</em> features (illustrative)</summary>
+    <p style="margin:8px 0 0;">Using raw GPA and Score with L2 \((\lambda=1)\) can yield a numerically different but equivalent model after scaling (example values):</p>
+    <div class="eq" style="text-align:center; margin:8px 0;">
+      $$ p=\sigma\!\big(\beta_0 + \beta_1\,\text{GPA} + \beta_2\,\text{Score}\big), \quad
+         \beta_0\approx -87.16,\; \beta_1\approx 0.0011,\; \beta_2\approx 0.134. $$
+    </div>
+    <p class="small" style="color:#6b7280;">Different scaling changes the numerical size of coefficients but not the predicted probabilities for the same data.</p>
+  </details>
+
+  <div class="card" style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:12px 14px; margin:12px 0;">
+    <strong>Takeaways:</strong>
+    <ul style="margin:6px 0 0 1rem;">
+      <li>Use <strong>regularization</strong> (e.g., L2) on tiny or separable datasets to obtain finite, stable estimates.</li>
+      <li><strong>Standardize</strong> features to make coefficients comparable and optimization smoother.</li>
+      <li>Interpret \(e^{\beta_j}\) as the <strong>odds ratio</strong> per 1 SD (standardized) or per 1 unit (raw) increase in that feature.</li>
+    </ul>
+  </div>
+  
 
     <!-- 7. Key Points -->
     <h4>7. Key Points</h4>
