@@ -956,7 +956,10 @@ until convergence</pre>
   <b>Distance Metrics:</b>
   <p>Common choices for numeric features:</p>
   <div class="eq" style="text-align:center;">
-    Minkowski (order \(p\)): \(\quad d_p(x,x')=\Big(\sum_{j=1}^{p} |x_j-x'_j|^p\Big)^{1/p}\)
+    Minkowski (order \(p\)): 
+    $$ d_p(x,x')=\Big(\sum_{j=1}^{p} |x_j - x'_j|^{p}\Big)^{1/p} $$
+
+    \(\quad d_p(x,x')=\Big(\sum_{j=1}^{p} |x_j-x'_j|^p\Big)^{1/p}\)
   </div>
   <ul>
     <li>\(p=2\): Euclidean, \(\; d_2(x,x') = \sqrt{\sum_{j=1}^{n} (x_j-x'_j)^2}\)</li>
