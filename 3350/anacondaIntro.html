@@ -2,130 +2,192 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anaconda — Data Science Toolkit</title>
+  <title>Anaconda — Quickstart & Cheatsheet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
     :root{
-      --bg:#17191a;
-      --card:#202427;
-      --ink:#e6e6e6;
-      --muted:#b9c0c7;
-      --pink:#ff79c6;     /* highlight */
-      --mint:#50fa7b;     /* accents */
-      --cyan:#8be9fd;     /* accents */
-      --yellow:#f1fa8c;   /* accents */
-      --shadow: 0 10px 25px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
-      --radius: 18px;
+      --pink:#ff79c6; --pink2:#ffb3de; --bg:#17191a; --panel:#222025; --ink:#ffb3de;
     }
-
     *{box-sizing:border-box}
-    body{margin:0; font-family:Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif; background:var(--bg); color:var(--ink);}
-
-    .wrap{max-width:1200px; margin:auto; padding:48px 20px 80px;}
-
-    .kicker{color:var(--cyan); letter-spacing:.08em; text-transform:uppercase; font-weight:700; font-size:.9rem;}
-
-    h1{margin:.2rem 0 1.25rem; font-size:2.2rem; color:var(--pink);} 
-    p.lede{max-width:900px; color:var(--muted); font-size:1.05rem; line-height:1.6}
-
-    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:20px; margin-top:28px}
-
-    .card{grid-column:span 12; background:linear-gradient(135deg, rgba(32,36,39,.9), rgba(32,36,39,.6)); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:20px 22px; box-shadow:var(--shadow); position:relative; overflow:hidden}
-    .card .icon{width:46px; height:46px; display:grid; place-items:center; border-radius:12px; background:rgba(255,255,255,.06); color:var(--mint); font-size:1.15rem; margin-bottom:10px}
-    .card h3{margin:.2rem 0 .4rem; color:var(--ink); font-size:1.1rem}
-    .card p{margin:0; color:var(--muted); line-height:1.6}
-    .card ul{margin:.4rem 0 0 1.2rem; color:var(--muted)}
-
-    /* Feature color accents */
-    .accent-mint .icon{color:var(--mint)}
-    .accent-cyan .icon{color:var(--cyan)}
-    .accent-yellow .icon{color:var(--yellow)}
-    .accent-pink .icon{color:var(--pink)}
-
-    /* Two-column on large screens */
-    @media (min-width:860px){
-      .card.span-6{grid-column:span 6}
-      .card.span-4{grid-column:span 4}
-    }
-
-    /* Callout */
-    .callout{margin-top:28px; padding:18px 20px; border:1px dashed rgba(255,255,255,.18); border-radius:var(--radius); background:rgba(255,255,255,.03)}
-    .callout strong{color:var(--pink)}
-
-    /* Tag pill */
-    .tag{display:inline-flex; align-items:center; gap:.5rem; padding:.38rem .7rem; border-radius:999px; background:rgba(255,255,255,.06); font-size:.85rem; color:var(--muted); margin-right:.45rem}
-    .tag i{color:var(--cyan)}
-
-    /* Footer note */
-    .foot{margin-top:18px; font-size:.92rem; color:var(--muted)}
+    body{font-family:'Roboto',Arial,sans-serif;margin:0;display:flex;background:var(--bg);min-height:100vh;color:var(--pink)}
+    #sidebar{position:fixed;width:270px;height:100vh;overflow-y:auto;background:linear-gradient(135deg,#2a1e28 80%,#47223c 100%);color:var(--pink2);padding:36px 24px 24px 28px;box-shadow:2px 0 24px rgba(255,121,198,.12);z-index:10}
+    #sidebar h2{margin:0 0 18px;font-size:1.05rem;letter-spacing:.8px;text-transform:uppercase;color:var(--pink2)}
+    #sidebar a{display:flex;align-items:center;gap:.6em;color:var(--pink2);text-decoration:none;margin:12px 0 12px 8px;font-weight:500;font-size:1.02rem;border-left:3px solid transparent;padding-left:14px;border-radius:8px 0 0 8px}
+    #sidebar a:hover,#sidebar a.active{color:var(--pink);background:#21111b;border-left:3px solid var(--pink);font-weight:700;box-shadow:1px 2px 8px 1px #2d3436}
+    #content{margin-left:290px;padding:56px 6vw;max-width:980px;width:100vw;background:#1a1d1f}
+    h1{color:var(--pink);font-size:2.4rem;font-weight:800;margin:.1em 0 .6em;letter-spacing:-.5px;text-shadow:0 2px 16px rgba(255,121,198,.18)}
+    section{margin:0 0 44px;background:var(--panel);border-radius:18px;box-shadow:0 4px 30px rgba(255,121,198,.09);padding:26px 26px;border-left:7px solid var(--pink)}
+    section:hover{box-shadow:0 10px 34px 3px rgba(255,121,198,.13);border-left:7px solid var(--pink2)}
+    section h3{border-bottom:2px solid var(--pink);padding-bottom:8px;margin:0 0 14px;color:var(--pink);font-size:1.45rem;letter-spacing:.3px}
+    section h4{font-size:1.05rem;color:var(--pink2);margin:22px 0 8px;font-weight:700;border-bottom:1px solid var(--pink2);padding-bottom:3px}
+    p,li{color:var(--ink);line-height:1.65}
+    ul{margin-left:1.6em}
+    pre{position:relative;background:#19121a;color:var(--ink);padding:14px 16px;border-radius:10px;font-size:1.02rem;line-height:1.65;overflow:auto;box-shadow:0 2px 10px rgba(255,121,198,.11)}
+    .copy{position:absolute;top:8px;right:8px;padding:.35rem .55rem;border:1px solid #333;background:#111;color:#ddd;border-radius:8px;cursor:pointer}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    a,a:visited{color:var(--pink)}
+    footer{margin-top:40px;text-align:center;color:var(--ink);font-size:.98rem;letter-spacing:.4px;padding:18px 0;border-top:1px solid #402138;background:none}
+    @media (max-width: 980px){#sidebar{display:none}#content{margin:0;padding:26px 5vw}}
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <div class="tag"><i class="fa-solid fa-toolbox"></i> Python & R Toolkit</div>
-    <div class="tag"><i class="fa-solid fa-desktop"></i> Windows • macOS • Linux</div>
+  <aside id="sidebar">
+    <h2><i class="fa-solid fa-toolbox"></i> Anaconda Guide</h2>
+    <nav>
+      <a href="#intro" class="active"><i class="fa-solid fa-book-open"></i> 1. What is Anaconda?</a>
+      <a href="#why"><i class="fa-solid fa-star"></i> 2. Why use it?</a>
+      <a href="#install"><i class="fa-solid fa-download"></i> 3. Install & Setup</a>
+      <a href="#conda-basics"><i class="fa-solid fa-terminal"></i> 4. Conda Basics</a>
+      <a href="#envs"><i class="fa-solid fa-layer-group"></i> 5. Environments</a>
+      <a href="#jupyter"><i class="fa-solid fa-book"></i> 6. Jupyter Notebook</a>
+      <a href="#navigator"><i class="fa-solid fa-compass-drafting"></i> 7. Navigator (GUI)</a>
+      <a href="#troubleshoot"><i class="fa-solid fa-wrench"></i> 8. Troubleshooting</a>
+      <a href="#refs"><i class="fa-solid fa-link"></i> References</a>
+    </nav>
+  </aside>
 
-    <h1>Anaconda</h1>
-    <p class="lede">
-      <strong>Anaconda</strong> is a free, open-source distribution of <strong>Python (and R)</strong> built for
-      <em>data science, machine learning, and scientific computing</em>. Think of it as a
-      <strong>package manager + environment manager + big toolbox</strong>—so you can work faster and avoid dependency headaches.
-    </p>
+  <main id="content">
+    <h1>Anaconda — Quickstart & Cheatsheet</h1>
 
-    <section class="grid">
-      <!-- Pre-installed packages -->
-      <article class="card span-6 accent-mint">
-        <div class="icon"><i class="fa-solid fa-cubes"></i></div>
-        <h3>Comes with Data Science Packages Pre‑installed</h3>
-        <p>Hundreds of popular libraries are ready out-of-the-box:</p>
-        <ul>
-          <li><strong>NumPy</strong>, <strong>Pandas</strong>, <strong>Matplotlib</strong>, <strong>Scikit‑learn</strong></li>
-          <li><strong>Jupyter Notebook</strong> and more—no manual installs required</li>
-          <li>Save time and start analyzing immediately</li>
-        </ul>
-      </article>
-
-      <!-- Conda manager -->
-      <article class="card span-6 accent-cyan">
-        <div class="icon"><i class="fa-solid fa-diagram-project"></i></div>
-        <h3>Conda Package & Environment Manager</h3>
-        <p>Create <strong>isolated environments</strong> so projects never clash.</p>
-        <ul>
-          <li>Mix and match Python versions per project (e.g., 3.11 vs 3.9)</li>
-          <li>Pin exact library versions for reproducible results</li>
-          <li>Install via <code>conda install &lt;package&gt;</code> or <code>mamba</code> for speed</li>
-        </ul>
-      </article>
-
-      <!-- Jupyter Notebook -->
-      <article class="card span-4 accent-yellow">
-        <div class="icon"><i class="fa-solid fa-book-open"></i></div>
-        <h3>Jupyter Notebook</h3>
-        <p>Interactive coding, analysis, and visualization with cells. Perfect for labs, demos, and reports.</p>
-      </article>
-
-      <!-- Cross-platform -->
-      <article class="card span-4 accent-mint">
-        <div class="icon"><i class="fa-solid fa-globe"></i></div>
-        <h3>Cross‑platform</h3>
-        <p>Runs on <strong>Windows</strong>, <strong>macOS</strong>, and <strong>Linux</strong>. Same commands, consistent behavior.</p>
-      </article>
-
-      <!-- Navigator -->
-      <article class="card span-4 accent-pink">
-        <div class="icon"><i class="fa-solid fa-compass-drafting"></i></div>
-        <h3>Anaconda Navigator (GUI)</h3>
-        <p>Launch Jupyter or Spyder and manage packages/environments—no terminal required.</p>
-      </article>
+    <section id="intro">
+      <h3>1) What is Anaconda?</h3>
+      <p><b>Anaconda</b> is a free, open-source distribution of <b>Python (and R)</b> designed for <b>data science</b>, <b>machine learning</b>, and <b>scientific computing</b>. Think of it as a <b>package manager + environment manager + big toolbox</b> in one installer.</p>
+      <ul>
+        <li>Ships with hundreds of libraries (NumPy, Pandas, Matplotlib, Scikit‑learn, Jupyter).</li>
+        <li>Includes <b>conda</b> for package and environment management.</li>
+        <li>Works on Windows, macOS, and Linux.</li>
+      </ul>
     </section>
 
-    <div class="callout">
-      <p><strong>Why students love it:</strong> fast setup, fewer install issues, and a consistent toolkit for data science courses and research projects.</p>
-    </div>
+    <section id="why">
+      <h3>2) Why use it?</h3>
+      <ul>
+        <li><b>Faster setup</b>: everything you need for class and research is prebundled.</li>
+        <li><b>Fewer conflicts</b>: isolate projects so versions don’t clash.</li>
+        <li><b>Beginner‑friendly</b>: Anaconda Navigator provides a GUI to launch tools and manage environments.</li>
+      </ul>
+    </section>
 
-    <p class="foot">Tip: For advanced users, consider <code>Miniconda</code> or <code>Mambaforge</code> for a lighter base, then add only what you need.</p>
+    <section id="install">
+      <h3>3) Install & Setup</h3>
+      <p>Download Anaconda (Python 3.11) from the official site for your OS, then follow the steps below.</p>
+      <ul>
+        <li><a href="https://www.anaconda.com/download" target="_blank" rel="noopener">Official download page</a></li>
+      </ul>
+      <h4>Windows & macOS</h4>
+      <ul>
+        <li>Run the installer, choose "Just Me" (recommended) and let it add Anaconda to your PATH if prompted.</li>
+        <li>Open the <b>Anaconda Prompt</b> (Windows) or <b>Terminal</b> (macOS) to use <code>conda</code>.</li>
+      </ul>
+      <h4>Linux</h4>
+      <pre><button class="copy">Copy</button><code># Example: install to $HOME/anaconda3
+bash Anaconda3-*-Linux-x86_64.sh
+# follow prompts, then restart your shell</code></pre>
+      <h4>Verify</h4>
+      <pre><button class="copy">Copy</button><code>conda --version
+python -V
+python -c "import numpy, pandas, sklearn; print('OK')"</code></pre>
+    </section>
+
+    <section id="conda-basics">
+      <h3>4) Conda Basics</h3>
+      <pre><button class="copy">Copy</button><code># Search and install a package
+conda search pandas
+conda install pandas
+
+# Update conda & packages
+conda update conda
+conda update --all
+
+# Remove a package
+conda remove package-name</code></pre>
+    </section>
+
+    <section id="envs">
+      <h3>5) Environments</h3>
+      <p>Use separate environments to keep project dependencies clean and reproducible.</p>
+      <h4>Create / Activate / List</h4>
+      <pre><button class="copy">Copy</button><code># Create a new environment (Python 3.11)
+conda create -n ml-env python=3.11 -y
+conda activate ml-env
+conda env list</code></pre>
+      <h4>Install Common Tools</h4>
+      <pre><button class="copy">Copy</button><code>conda install numpy pandas matplotlib scikit-learn jupyter -y</code></pre>
+      <h4>Export / Recreate</h4>
+      <pre><button class="copy">Copy</button><code># Freeze environment to YAML
+conda env export --no-builds > environment.yml
+
+# Recreate on another machine
+conda env create -f environment.yml</code></pre>
+      <h4>Remove</h4>
+      <pre><button class="copy">Copy</button><code>conda deactivate
+conda env remove -n ml-env</code></pre>
+    </section>
+
+    <section id="jupyter">
+      <h3>6) Jupyter Notebook</h3>
+      <pre><button class="copy">Copy</button><code># Install (if not already)
+conda install jupyter -y
+
+# Launch in current environment
+jupyter notebook
+# or
+jupyter lab</code></pre>
+      <p>Tip: Create a dedicated environment per course or project and launch Jupyter from within that environment.</p>
+    </section>
+
+    <section id="navigator">
+      <h3>7) Anaconda Navigator (GUI)</h3>
+      <ul>
+        <li>Open <b>Anaconda Navigator</b> from your applications menu.</li>
+        <li>Use the left sidebar to select an environment.</li>
+        <li>Launch <b>Jupyter Notebook</b> or <b>Spyder</b>.</li>
+        <li>Install/update packages via the <b>Environments</b> tab.</li>
+      </ul>
+    </section>
+
+    <section id="troubleshoot">
+      <h3>8) Troubleshooting</h3>
+      <h4>Fix SSL / network issues</h4>
+      <pre><button class="copy">Copy</button><code>conda config --set ssl_verify true
+conda clean --all -y</code></pre>
+      <h4>Speed up installs (optional)</h4>
+      <pre><button class="copy">Copy</button><code># Mamba is a fast drop-in replacement for conda
+conda install -n base -c conda-forge mamba
+mamba install pandas numpy</code></pre>
+      <h4>PATH or activation issues</h4>
+      <pre><button class="copy">Copy</button><code># Initialize conda for your shell
+conda init
+# then restart your terminal</code></pre>
+    </section>
+
+    <section id="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://www.anaconda.com/download" target="_blank" rel="noopener">Anaconda Download</a></li>
+        <li><a href="https://docs.conda.io/" target="_blank" rel="noopener">Conda Documentation</a></li>
+        <li><a href="https://jupyter.org/" target="_blank" rel="noopener">Jupyter Project</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      &copy; 2025 Xin Yang • Anaconda Quickstart Page
+    </footer>
   </main>
+
+  <script>
+    // Simple copy buttons for all code blocks
+    document.querySelectorAll('pre .copy').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.nextElementSibling.innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          const old = btn.textContent; btn.textContent = 'Copied!';
+          setTimeout(() => btn.textContent = old, 1200);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
