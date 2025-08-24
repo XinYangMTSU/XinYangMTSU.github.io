@@ -1,362 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI/ML/DL/LLM Relationships</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 2.5em;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .diagram-container {
-            position: relative;
-            width: 100%;
-            height: 600px;
-            margin: 20px 0;
-            background: #f8f9fa;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        .ai-circle {
-            position: absolute;
-            top: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 700px;
-            height: 500px;
-            background: rgba(102, 126, 234, 0.1);
-            border: 3px solid #667eea;
-            border-radius: 50%;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            padding-top: 20px;
-        }
-        
-        .ai-label {
-            font-size: 28px;
-            font-weight: bold;
-            color: #667eea;
-            text-align: center;
-        }
-        
-        .ml-circle {
-            position: absolute;
-            top: 120px;
-            left: 200px;
-            width: 450px;
-            height: 350px;
-            background: rgba(118, 75, 162, 0.1);
-            border: 3px solid #764ba2;
-            border-radius: 50%;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            padding-top: 15px;
-        }
-        
-        .ml-label {
-            font-size: 24px;
-            font-weight: bold;
-            color: #764ba2;
-        }
-        
-        .dl-circle {
-            position: absolute;
-            top: 180px;
-            left: 280px;
-            width: 290px;
-            height: 230px;
-            background: rgba(255, 107, 107, 0.1);
-            border: 3px solid #ff6b6b;
-            border-radius: 50%;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            padding-top: 15px;
-        }
-        
-        .dl-label {
-            font-size: 20px;
-            font-weight: bold;
-            color: #ff6b6b;
-        }
-        
-        .llm-box {
-            position: absolute;
-            top: 280px;
-            left: 320px;
-            width: 120px;
-            height: 60px;
-            background: rgba(74, 144, 226, 0.9);
-            border: 2px solid #4a90e2;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-            text-align: center;
-        }
-        
-        .cv-box {
-            position: absolute;
-            top: 220px;
-            left: 460px;
-            width: 100px;
-            height: 50px;
-            background: rgba(74, 144, 226, 0.9);
-            border: 2px solid #4a90e2;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 12px;
-            text-align: center;
-        }
-        
-        .rl-box {
-            position: absolute;
-            top: 350px;
-            left: 380px;
-            width: 100px;
-            height: 50px;
-            background: rgba(74, 144, 226, 0.9);
-            border: 2px solid #4a90e2;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 12px;
-            text-align: center;
-        }
-        
-        .symbolic-box {
-            position: absolute;
-            top: 150px;
-            left: 80px;
-            width: 100px;
-            height: 60px;
-            background: rgba(52, 152, 219, 0.9);
-            border: 2px solid #3498db;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 12px;
-            text-align: center;
-        }
-        
-        .robotics-box {
-            position: absolute;
-            top: 250px;
-            left: 50px;
-            width: 100px;
-            height: 50px;
-            background: rgba(52, 152, 219, 0.9);
-            border: 2px solid #3498db;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 12px;
-            text-align: center;
-        }
-        
-        .classical-ml-box {
-            position: absolute;
-            top: 300px;
-            left: 230px;
-            width: 100px;
-            height: 50px;
-            background: rgba(155, 89, 182, 0.9);
-            border: 2px solid #9b59b6;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 11px;
-            text-align: center;
-        }
-        
-        .nlp-box {
-            position: absolute;
-            top: 200px;
-            left: 550px;
-            width: 80px;
-            height: 40px;
-            background: rgba(46, 204, 113, 0.9);
-            border: 2px solid #2ecc71;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 11px;
-            text-align: center;
-        }
-        
-        .legend {
-            margin-top: 30px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid;
-        }
-        
-        .legend-ai { border-left-color: #667eea; }
-        .legend-ml { border-left-color: #764ba2; }
-        .legend-dl { border-left-color: #ff6b6b; }
-        .legend-apps { border-left-color: #4a90e2; }
-        
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-        }
-        
-        .key-concepts {
-            margin-top: 30px;
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #667eea;
-        }
-        
-        .key-concepts h3 {
-            color: #333;
-            margin-top: 0;
-        }
-        
-        .flow-arrow {
-            position: absolute;
-            font-size: 30px;
-            color: #666;
-            font-weight: bold;
-        }
-        
-        @media (max-width: 768px) {
-            .diagram-container {
-                height: 400px;
-            }
-            .ai-circle, .ml-circle, .dl-circle {
-                transform: scale(0.6);
-            }
-            .legend {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>🤖 AI → ML → DL → LLMs Hierarchy</h1>
-        
-        <div class="diagram-container">
-            <!-- Artificial Intelligence (outermost) -->
-            <div class="ai-circle">
-                <div class="ai-label">Artificial Intelligence (AI)<br><small>Any system mimicking human intelligence</small></div>
-            </div>
-            
-            <!-- Machine Learning -->
-            <div class="ml-circle">
-                <div class="ml-label">Machine Learning (ML)<br><small>Learning from data</small></div>
-            </div>
-            
-            <!-- Deep Learning -->
-            <div class="dl-circle">
-                <div class="dl-label">Deep Learning (DL)<br><small>Multi-layer neural networks</small></div>
-            </div>
-            
-            <!-- Applications within Deep Learning -->
-            <div class="llm-box">Large Language Models (LLMs)</div>
-            <div class="cv-box">Computer Vision</div>
-            <div class="rl-box">Reinforcement Learning</div>
-            
-            <!-- Non-ML AI approaches -->
-            <div class="symbolic-box">Symbolic AI<br><small>(Rule-based)</small></div>
-            <div class="robotics-box">Robotics</div>
-            
-            <!-- Classical ML -->
-            <div class="classical-ml-box">Classical ML<br><small>(Decision Trees, SVM)</small></div>
-            
-            <!-- Other ML -->
-            <div class="nlp-box">NLP</div>
-        </div>
-        
-        <div class="legend">
-            <div class="legend-item legend-ai">
-                <div class="legend-color" style="background: #667eea;"></div>
-                <div><strong>AI:</strong> Broadest category - any intelligent behavior</div>
-            </div>
-            <div class="legend-item legend-ml">
-                <div class="legend-color" style="background: #764ba2;"></div>
-                <div><strong>ML:</strong> Subset of AI that learns from data</div>
-            </div>
-            <div class="legend-item legend-dl">
-                <div class="legend-color" style="background: #ff6b6b;"></div>
-                <div><strong>DL:</strong> Subset of ML using deep neural networks</div>
-            </div>
-            <div class="legend-item legend-apps">
-                <div class="legend-color" style="background: #4a90e2;"></div>
-                <div><strong>Applications:</strong> Specific implementations and use cases</div>
-            </div>
-        </div>
-        
-        <div class="key-concepts">
-            <h3>🎯 Key Teaching Points:</h3>
-            <p><strong>Nested Relationship:</strong> Each inner circle is a subset of the outer ones</p>
-            <p><strong>Your Flow is Correct:</strong> AI → ML → DL → LLMs represents the cutting-edge path</p>
-            <p><strong>Multiple Paths:</strong> Not all AI uses ML (symbolic AI), not all ML uses DL (classical algorithms)</p>
-            <p><strong>Current Trend:</strong> Most exciting developments (ChatGPT, GPT-4, etc.) follow the AI → ML → DL → LLMs path</p>
-        </div>
-    </div>
-</body>
-</html>
+<svg width="520" height="360" viewBox="0 0 520 360" style="background:transparent;">
+  <!-- AI Circle -->
+  <ellipse cx="230" cy="175" rx="220" ry="135" fill="#ffb3de22" stroke="#ff79c6" stroke-width="2"/>
+  <text x="90" y="55" fill="#ff79c6" font-size="1.6em" font-weight="bold">AI</text>
+
+  <!-- ML Circle -->
+  <ellipse cx="230" cy="185" rx="150" ry="90" fill="#ff79c660" stroke="#ff79c6" stroke-width="2"/>
+  <text x="190" y="160" fill="#ff79c6" font-size="1.3em" font-weight="bold">ML</text>
+
+  <!-- DL Circle -->
+  <ellipse cx="270" cy="205" rx="85" ry="52" fill="#ff79c6" fill-opacity="0.18" stroke="#ff79c6" stroke-width="2"/>
+  <text x="255" y="210" fill="#ff79c6" font-size="1.1em" font-weight="bold">DL</text>
+
+  <!-- Sub-branches inside DL -->
+  <rect x="340" y="70" width="140" height="30" rx="6" ry="6" fill="#ffe6f2" stroke="#ff79c6" stroke-width="1.5"/>
+  <text x="345" y="90" fill="#ff3399" font-size="0.9em" font-weight="bold">LLMs</text>
+
+  <rect x="340" y="110" width="140" height="30" rx="6" ry="6" fill="#ffe6f2" stroke="#ff79c6" stroke-width="1.5"/>
+  <text x="345" y="130" fill="#ff3399" font-size="0.9em" font-weight="bold">NLP</text>
+
+  <rect x="340" y="150" width="140" height="30" rx="6" ry="6" fill="#ffe6f2" stroke="#ff79c6" stroke-width="1.5"/>
+  <text x="345" y="170" fill="#ff3399" font-size="0.9em" font-weight="bold">Computer Vision</text>
+
+  <rect x="340" y="190" width="140" height="30" rx="6" ry="6" fill="#ffe6f2" stroke="#ff79c6" stroke-width="1.5"/>
+  <text x="345" y="210" fill="#ff3399" font-size="0.9em" font-weight="bold">Robotics</text>
+
+  <!-- Generative Models Main Box -->
+  <rect x="340" y="230" width="140" height="30" rx="6" ry="6" fill="#ffe6f2" stroke="#ff79c6" stroke-width="1.5"/>
+  <text x="345" y="250" fill="#ff3399" font-size="0.9em" font-weight="bold">Generative Models</text>
+
+  <!-- Sub-boxes under Generative Models -->
+  <rect x="340" y="270" width="65" height="25" rx="6" ry="6" fill="#fff0fa" stroke="#ff79c6" stroke-width="1.2"/>
+  <text x="345" y="287" fill="#ff3399" font-size="0.75em" font-weight="bold">GANs</text>
+
+  <rect x="415" y="270" width="65" height="25" rx="6" ry="6" fill="#fff0fa" stroke="#ff79c6" stroke-width="1.2"/>
+  <text x="420" y="287" fill="#ff3399" font-size="0.75em" font-weight="bold">VAEs</text>
+
+  <rect x="380" y="300" width="65" height="25" rx="6" ry="6" fill="#fff0fa" stroke="#ff79c6" stroke-width="1.2"/>
+  <text x="385" y="317" fill="#ff3399" font-size="0.75em" font-weight="bold">Diffusion</text>
+
+  <!-- Connector lines from DL to sub-branches -->
+  <line x1="295" y1="205" x2="340" y2="85" stroke="#ff79c6" stroke-width="1.5"/>
+  <line x1="295" y1="205" x2="340" y2="125" stroke="#ff79c6" stroke-width="1.5"/>
+  <line x1="295" y1="205" x2="340" y2="165" stroke="#ff79c6" stroke-width="1.5"/>
+  <line x1="295" y1="205" x2="340" y2="205" stroke="#ff79c6" stroke-width="1.5"/>
+  <line x1="295" y1="205" x2="340" y2="245" stroke="#ff79c6" stroke-width="1.5"/>
+
+  <!-- Connector lines for generative models -->
+  <line x1="410" y1="260" x2="372" y2="270" stroke="#ff79c6" stroke-width="1.2"/>
+  <line x1="410" y1="260" x2="447" y2="270" stroke="#ff79c6" stroke-width="1.2"/>
+  <line x1="410" y1="260" x2="412" y2="300" stroke="#ff79c6" stroke-width="1.2"/>
+</svg>
