@@ -346,13 +346,43 @@ print("\\nAfter normalizing currencies (all in USD):\\n", df)
 
   <section id="feature-eng">
     <h3>4. Feature Engineering</h3>
-    <p>Creating new features from existing ones can dramatically improve model performance.</p>
-    <ul>
-      <li>Date and time decomposition (e.g., extract day of week)</li>
-      <li>Polynomial features (e.g., square of a variable)</li>
-      <li>Aggregations (e.g., customer spend totals)</li>
-      <li>Domain knowledge features (e.g., BMI = weight/height²)</li>
-    </ul>
+    <p><b>Feature engineering</b> is the process of creating, modifying, or combining features (input variables) to improve the performance of machine learning models.
+      Creating new features from existing ones can dramatically improve model performance.</p>
+
+    <h4>Common Feature Engineering Techniques:</h4>
+
+    <h4>Mathematical Transformations</h4>
+  <ul>
+    <li>Log, square root, polynomial terms (e.g., <code>age²</code>).</li>
+  </ul>
+
+  <h4>Interaction Features</h4>
+  <ul>
+    <li>Multiply/combine two features (e.g., <code>height * weight = body surface area</code>).</li>
+  </ul>
+
+  <h4>Date/Time Features</h4>
+  <ul>
+    <li>Extract year, month, weekday, hour, time since event, seasonality.</li>
+  </ul>
+
+  <h4>Domain-Specific Features</h4>
+  <ul>
+    <li>Finance: debt-to-income ratio.</li>
+    <li>Healthcare: BMI = weight/height².</li>
+    <li>Marketing: customer lifetime value.</li>
+  </ul>
+
+  <h4>Aggregations</h4>
+  <ul>
+    <li>Total spend per customer, average order value, counts of transactions.</li>
+  </ul>
+
+  <h4>Binning/Discretization</h4>
+  <ul>
+    <li>Convert continuous variables into categories (e.g., age groups).</li>
+  </ul>
+    
   </section>
 
   <section id="feature-selection">
