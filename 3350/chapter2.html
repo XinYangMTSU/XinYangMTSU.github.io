@@ -268,7 +268,7 @@ pre .copy:hover {
     <br><br>
     Think of it like washing vegetables before cooking: the recipe (machine learning model or analysis) won’t work well if the ingredients (data) are dirty.
     <br>
-    <h4>Typical Cleaning Steps</h4>
+    <h4>Typical Cleaning Steps: </h4>
   <ul>
     <li><b>Remove duplicates</b> – drop repeated rows/records.</li>
     <li><b>Handle missing values</b> – delete, impute, or flag them.</li>
@@ -317,12 +317,16 @@ print("\\nAfter normalizing currencies (all in USD):\\n", df)
   </section>
 
   <section id="scaling">
-    <h3>3. Feature Scaling</h3>
-    <p>Scaling helps algorithms that rely on distance or gradients perform better. Common techniques:</p>
+    <h3>3. Data Transformation</h3>
+    
+    <p>Data Transformation is the process of converting cleaned data into a format that machine learning algorithms can understand and work with effectively.
+       It goes beyond just “fixing mistakes” (cleaning). Instead, it’s about reshaping, scaling, or encoding the data so that models can learn from it correctly.</p>
+
+    <h4>Common Data Transformation Techniques:</h4>
     <ul>
-      <li><b>Min-Max Scaling:</b> Rescales values to a range [0, 1]</li>
-      <li><b>Standardization (Z-score):</b> Centers data around mean with unit variance</li>
-      <li><b>Robust Scaling:</b> Uses median and IQR, resistant to outliers</li>
+      <li><b>Feature Scaling</b></li>
+      <li><b>Categorical Encoding</b></li>
+      <li><b>Normalization</b></li>
     </ul>
   </section>
 
