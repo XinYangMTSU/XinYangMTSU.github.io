@@ -1,1 +1,130 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chapter 2: Data Preprocessing & Feature Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    /* Same full CSS as Chapter 1 - preserved styling */
+    /* [ ... The entire style section from Chapter 1 goes here ... ] */
+  </style>
+</head>
+<body>
+<nav id="sidebar">
+  <h2><i class="fas fa-book"></i> Contents</h2>
+  <ul>
+    <li><a href="#intro"><i class="fas fa-database"></i>1. Why Data Preprocessing Matters</a></li>
+    <li><a href="#cleaning"><i class="fas fa-broom"></i>2. Data Cleaning</a></li>
+    <li><a href="#scaling"><i class="fas fa-balance-scale"></i>3. Feature Scaling</a></li>
+    <li><a href="#encoding"><i class="fas fa-language"></i>4. Categorical Encoding</a></li>
+    <li><a href="#imputation"><i class="fas fa-eraser"></i>5. Handling Missing Values</a></li>
+    <li><a href="#feature-eng"><i class="fas fa-tools"></i>6. Feature Engineering</a></li>
+    <li><a href="#feature-selection"><i class="fas fa-magic"></i>7. Feature Selection Techniques</a></li>
+    <li><a href="#pipeline"><i class="fas fa-stream"></i>8. Pipelines for Preprocessing</a></li>
+    <li><a href="#references"><i class="fas fa-link"></i>References</a></li>
+  </ul>
+</nav>
+
+<main id="content">
+  <h1>Chapter 2: Data Preprocessing & Feature Engineering</h1>
+
+  <section id="intro">
+    <h3>1. Why Data Preprocessing Matters</h3>
+    <p>Raw data is often incomplete, inconsistent, or noisy. Preprocessing ensures models learn from clean, well-structured inputs. Poor preprocessing can degrade even the best model’s performance.</p>
+  </section>
+
+  <section id="cleaning">
+    <h3>2. Data Cleaning</h3>
+    <p>Remove duplicates, fix inconsistencies, and correct errors before modeling. Cleaning steps:</p>
+    <ul>
+      <li>Dropping duplicate rows</li>
+      <li>Fixing typos or inconsistent formats (e.g., "N/A", "na", "null")</li>
+      <li>Normalizing units (e.g., dollars vs. euros)</li>
+    </ul>
+  </section>
+
+  <section id="scaling">
+    <h3>3. Feature Scaling</h3>
+    <p>Scaling helps algorithms that rely on distance or gradients perform better. Common techniques:</p>
+    <ul>
+      <li><b>Min-Max Scaling:</b> Rescales values to a range [0, 1]</li>
+      <li><b>Standardization (Z-score):</b> Centers data around mean with unit variance</li>
+      <li><b>Robust Scaling:</b> Uses median and IQR, resistant to outliers</li>
+    </ul>
+  </section>
+
+  <section id="encoding">
+    <h3>4. Categorical Encoding</h3>
+    <p>Machine learning models require numeric input, so we convert categories into numbers:</p>
+    <ul>
+      <li><b>One-Hot Encoding:</b> Converts each category into binary columns</li>
+      <li><b>Label Encoding:</b> Assigns an integer to each category (can mislead models if not ordinal)</li>
+      <li><b>Ordinal Encoding:</b> Encodes categories that have an inherent order</li>
+    </ul>
+  </section>
+
+  <section id="imputation">
+    <h3>5. Handling Missing Values</h3>
+    <p>Missing values can be handled through:</p>
+    <ul>
+      <li><b>Deletion:</b> Drop rows or columns with missing data</li>
+      <li><b>Imputation:</b> Fill in with mean, median, mode, or prediction</li>
+      <li><b>Flagging:</b> Add indicator variables for missing entries</li>
+    </ul>
+  </section>
+
+  <section id="feature-eng">
+    <h3>6. Feature Engineering</h3>
+    <p>Creating new features from existing ones can dramatically improve model performance.</p>
+    <ul>
+      <li>Date and time decomposition (e.g., extract day of week)</li>
+      <li>Polynomial features (e.g., square of a variable)</li>
+      <li>Aggregations (e.g., customer spend totals)</li>
+      <li>Domain knowledge features (e.g., BMI = weight/height²)</li>
+    </ul>
+  </section>
+
+  <section id="feature-selection">
+    <h3>7. Feature Selection Techniques</h3>
+    <ul>
+      <li><b>Filter Methods:</b> Correlation scores, Chi-Square test</li>
+      <li><b>Wrapper Methods:</b> Recursive Feature Elimination (RFE)</li>
+      <li><b>Embedded Methods:</b> Lasso (L1), Tree-based feature importance</li>
+    </ul>
+  </section>
+
+  <section id="pipeline">
+    <h3>8. Pipelines for Preprocessing</h3>
+    <p>Scikit-learn’s <code>Pipeline</code> allows you to bundle preprocessing and modeling steps together, making your code cleaner and more reproducible.</p>
+    <pre>
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+pipe = Pipeline([
+  ('scaler', StandardScaler()),
+  ('model', LogisticRegression())
+])
+pipe.fit(X_train, y_train)
+    </pre>
+  </section>
+
+  <section id="references">
+    <h3>References</h3>
+    <ul>
+      <li><a href="https://scikit-learn.org/stable/modules/preprocessing.html" target="_blank">Scikit-learn: Preprocessing</a></li>
+      <li><a href="https://www.kaggle.com/learn/feature-engineering" target="_blank">Kaggle: Feature Engineering Course</a></li>
+      <li><a href="https://www.analyticsvidhya.com/blog/2020/10/feature-engineering-techniques-explained/" target="_blank">AV: Feature Engineering</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    &copy; 2025 Xin Yang <br>
+    Department of Computer Science <br>
+    Middle Tennessee State University <br>
+  </footer>
+</main>
+</body>
+</html>
