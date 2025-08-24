@@ -162,39 +162,6 @@ print(df.columns.tolist())</code></pre>
     </section>
 
 
-    <section id="sklearn">
-      <h3>12) Using Pandas with Scikit‑learn</h3>
-      <pre><button class="copy">Copy</button><code>from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2_score
-import numpy as np
-
-# Super-simple example: predict salary from dept + tenure + city
-X = df[["dept","tenure_years","city"]]
-y = df["salary"]
-
-cat_cols = ["dept","city"]
-num_cols = ["tenure_years"]
-
-pre = ColumnTransformer([
-  ("num", "passthrough", num_cols),
-  ("cat", OneHotEncoder(handle_unknown="ignore"), cat_cols)
-])
-
-pipe = Pipeline([
-  ("prep", pre),
-  ("model", LinearRegression())
-])
-
-Xtr,Xte,ytr,yte = train_test_split(X,y, test_size=.3, random_state=42)
-pipe.fit(Xtr,ytr)
-pred = pipe.predict(Xte)
-print("R^2:", round(r2_score(yte,pred),3))</code></pre>
-    </section>
-
     <section id="refs">
       <h3>References</h3>
       <ul>
