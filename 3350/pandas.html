@@ -117,21 +117,6 @@ sales.to_csv("sales_clean.csv", index=False) # write
 # users = pd.read_sql_query("SELECT * FROM users", con)
 # users.to_sql("users_copy", con, if_exists="replace", index=False)</code></pre>
 
-      <h4>Tip: In‑Notebook Demo CSV</h4>
-      <pre><button class="copy">Copy</button><code>from io import StringIO
-import pandas as pd
-
-csv = StringIO("""id,name,dept,city,salary,hire_date
-1,Alice,IT,Nashville,95000,2021-03-01
-2,Bob,Sales,Memphis,72000,2020-08-15
-3,Charlie,IT,Nashville,102000,2019-11-20
-3,Charlie,IT,Nashville,102000,2019-11-20   # duplicate
-4,Dana,HR,Knoxville,,2022-01-10            # missing
-5,Eve,Sales,Chattanooga,68000,2023-06-05
-""")
-
-df = pd.read_csv(csv, comment="#")
-print(df)</code></pre>
     </section>
 
     <section id="inspect">
@@ -174,10 +159,6 @@ df["salary_imputed"] = (df["salary"] == median_salary).astype(int)</code></pre>
 )
 print(df.columns.tolist())</code></pre>
 
-      <h4>SettingWithCopy: Use .loc</h4>
-      <pre><button class="copy">Copy</button><code># Correct, explicit assignment with .loc
-mask = df["city"] == "Nashville"
-df.loc[mask, "salary"] = df.loc[mask, "salary"].mul(1.02)  # +2%</code></pre>
     </section>
 
 
