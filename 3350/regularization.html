@@ -1,357 +1,52 @@
+<svg width="520" height="360" viewBox="0 0 520 360" style="background:transparent;">
+  <!-- AI Circle -->
+  <ellipse cx="230" cy="175" rx="220" ry="135" fill="#ffb3de22" stroke="#ff79c6" stroke-width="2"/>
+  <text x="90" y="55" fill="#ff79c6" font-size="1.6em" font-weight="bold">AI</text>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Ridge vs Lasso — Interactive Figure</title>
-<style>
-  :root{
-    --bg:#0f172a; --panel:#111827; --muted:#94a3b8; --text:#e5e7eb;
-    --ridge:#22d3ee;   /* cyan - ridge */
-    --lasso:#a78bfa;   /* violet - lasso */
-    --ols:#f59e0b;     /* amber - OLS */
-    --sol:#34d399;     /* emerald - solution */
-    --ring: rgba(34, 211, 238, 0.25);
-  }
-  html,body{height:100%;margin:0;background:var(--bg);color:var(--text);
-    font:16px/1.5 system-ui,Segoe UI,Roboto,Arial}
-  .wrap{max-width:1100px;margin:36px auto;padding:0 16px 60px}
-  h1{font-size:1.4rem;margin:0 0 8px}
-  p.muted{color:var(--muted);margin:0 0 18px}
-  .controls{
-    display:flex;gap:14px;align-items:center;flex-wrap:wrap;
-    background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
-    border:1px solid rgba(148,163,184,.18); border-radius:14px; padding:12px 14px; margin-bottom:14px
-  }
-  .pill{
-    display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;
-    border:1px solid rgba(148,163,184,.25); background:rgba(2,6,23,.35); font-weight:600
-  }
-  .grid2{display:grid;grid-template-columns:1fr;gap:16px}
-  @media (min-width:980px){ .grid2{grid-template-columns:1fr 1fr} }
-  .card{
-    background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
-    border:1px solid rgba(148,163,184,.18); border-radius:14px; padding:16px
-  }
-  .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-  .head h2{font-size:1.05rem;margin:0}
-  .legend{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:.95rem;color:var(--muted)}
-  .key{display:inline-flex;align-items:center;gap:8px}
-  .swatch{width:12px;height:12px;border-radius:50%}
-  .swatch.ols{background:var(--ols)}
-  .swatch.ridge{background:var(--ridge)}
-  .swatch.lasso{background:var(--lasso)}
-  .swatch.sol{background:var(--sol)}
-  .nums{display:flex;gap:10px;flex-wrap:wrap}
-  .nums .pill{font-size:.92rem}
-  .eq{opacity:.9}
-  .hl{font-weight:700}
-  svg{width:100%;height:auto;border-radius:12px}
-  .axes{stroke:#1f2937;stroke-width:1}
-  .tick{stroke:#1f2937;stroke-width:.6;opacity:.8}
-  .tickLabel{fill:#9ca3af;font-size:11px}
-  .rss{fill:none;stroke:#64748b;stroke-width:1.2;opacity:.65}
-  .rss.hl{stroke:#e5e7eb;stroke-width:2}
-  .olsPoint{fill:var(--ols);stroke:#000;stroke-width:1.1}
-  .solPoint{fill:var(--sol);stroke:#000;stroke-width:1.1}
-  .ridgeBall{fill:none;stroke:var(--ridge);stroke-width:2}
-  .lassoDiamond{fill:rgba(167,139,250,.12);stroke:var(--lasso);stroke-width:2}
-  .join{stroke:rgba(255,255,255,.6);stroke-width:1.2}
-  .cap{font-size:.92rem;color:var(--muted);margin-top:8px}
-  .badgel{border:1px dashed rgba(148,163,184,.4)}
-  .note{color:var(--muted);font-size:.92rem;margin-top:8px}
-  .eqbox{margin-top:8px;font-size:.92rem;color:#d1fae5}
-</style>
-</head>
-<body>
-<div class="wrap">
-  <h1>Interactive Ridge vs Lasso (2-parameter view)</h1>
-  <p class="muted">
-    We visualize the penalized least squares in the \((\beta_1,\beta_2)\) plane. RSS contours are centered at the OLS solution.
-    Ridge uses an L2 ball; Lasso uses an L1 diamond. The minimizer is the point where a contour first touches the constraint.
-  </p>
+  <!-- ML Circle -->
+  <ellipse cx="230" cy="185" rx="150" ry="90" fill="#ff79c660" stroke="#ff79c6" stroke-width="2"/>
+  <text x="190" y="160" fill="#ff79c6" font-size="1.3em" font-weight="bold">ML</text>
 
-  <div class="controls">
-    <label for="lam">λ:</label>
-    <input id="lam" type="range" min="0" max="2.5" step="0.05" value="0.60"/>
-    <span class="pill">λ = <b id="lamVal">0.60</b></span>
-    <span class="pill badgel">Design: orthonormal (for illustration)</span>
-    <span class="pill">β<sup>OLS</sup> = (<b id="b1ols">1.80</b>, <b id="b2ols">1.00</b>)</span>
-  </div>
+  <!-- DL Circle -->
+  <ellipse cx="270" cy="205" rx="85" ry="52" fill="#ff79c6" fill-opacity="0.18" stroke="#ff79c6" stroke-width="2"/>
+  <text x="255" y="210" fill="#ff79c6" font-size="1.1em" font-weight="bold">DL</text>
 
-  <div class="grid2">
-    <!-- RIDGE -->
-    <div class="card" id="ridgeCard">
-      <div class="head">
-        <h2>Ridge (L2 penalty)</h2>
-        <div class="legend">
-          <span class="key"><span class="swatch ols"></span> OLS</span>
-          <span class="key"><span class="swatch ridge"></span> L2 ball</span>
-          <span class="key"><span class="swatch sol"></span> Solution</span>
-        </div>
-      </div>
+  <!-- Sub-branches inside DL -->
+  <rect x="340" y="70" width="140" height="30" rx="6" ry="6" fill="#ffe6f2" stroke="#ff79c6" stroke-width="1.5"/>
+  <text x="345" y="90" fill="#ff3399" font-size="0.9em" font-weight="bold">LLMs</text>
 
-      <svg id="ridgeSVG" viewBox="0 0 760 520" aria-label="Ridge figure">
-        <!-- axes -->
-        <g class="axes">
-          <line x1="140" y1="260" x2="620" y2="260"/>
-          <line x1="380" y1="20"  x2="380" y2="500"/>
-        </g>
-        <!-- ticks & labels -->
-        <g id="ridgeTicks"></g>
+  <rect x="340" y="110" width="140" height="30" rx="6" ry="6" fill="#ffe6f2" stroke="#ff79c6" stroke-width="1.5"/>
+  <text x="345" y="130" fill="#ff3399" font-size="0.9em" font-weight="bold">NLP</text>
 
-        <!-- RSS contours -->
-        <g id="ridgeContours"></g>
+  <rect x="340" y="150" width="140" height="30" rx="6" ry="6" fill="#ffe6f2" stroke="#ff79c6" stroke-width="1.5"/>
+  <text x="345" y="170" fill="#ff3399" font-size="0.9em" font-weight="bold">Computer Vision</text>
 
-        <!-- Ridge constraint (L2 ball) -->
-        <circle id="ridgeBall" class="ridgeBall" cx="380" cy="260" r="80"></circle>
+  <rect x="340" y="190" width="140" height="30" rx="6" ry="6" fill="#ffe6f2" stroke="#ff79c6" stroke-width="1.5"/>
+  <text x="345" y="210" fill="#ff3399" font-size="0.9em" font-weight="bold">Robotics</text>
 
-        <!-- connection and points -->
-        <line id="ridgeJoin" class="join" x1="380" y1="260" x2="380" y2="260"/>
-        <circle id="ridgeOLS" class="olsPoint" cx="380" cy="260" r="6"></circle>
-        <circle id="ridgeSOL" class="solPoint" cx="380" cy="260" r="6"></circle>
-      </svg>
+  <!-- Generative Models Main Box -->
+  <rect x="340" y="230" width="140" height="30" rx="6" ry="6" fill="#ffe6f2" stroke="#ff79c6" stroke-width="1.5"/>
+  <text x="345" y="250" fill="#ff3399" font-size="0.9em" font-weight="bold">Generative Models</text>
 
-      <div class="nums">
-        <span class="pill">Shrink factor: <b id="ridgeShrink">1/(1+λ)=0.625</b></span>
-        <span class="pill">β<sub>ridge</sub>(λ) = (<b id="ridgeB1">1.12</b>, <b id="ridgeB2">0.62</b>)</span>
-        <span class="pill">‖β‖₂ = <b id="ridgeNorm">1.28</b></span>
-      </div>
-      <div class="eqbox">Formula (orthonormal X): β̂<sub>ridge</sub>(λ) = β̂<sub>OLS</sub> / (1+λ)</div>
-    </div>
+  <!-- Sub-boxes under Generative Models -->
+  <rect x="340" y="270" width="65" height="25" rx="6" ry="6" fill="#fff0fa" stroke="#ff79c6" stroke-width="1.2"/>
+  <text x="345" y="287" fill="#ff3399" font-size="0.75em" font-weight="bold">GANs</text>
 
-    <!-- LASSO -->
-    <div class="card" id="lassoCard">
-      <div class="head">
-        <h2>Lasso (L1 penalty)</h2>
-        <div class="legend">
-          <span class="key"><span class="swatch ols"></span> OLS</span>
-          <span class="key"><span class="swatch lasso"></span> L1 diamond</span>
-          <span class="key"><span class="swatch sol"></span> Solution</span>
-        </div>
-      </div>
+  <rect x="415" y="270" width="65" height="25" rx="6" ry="6" fill="#fff0fa" stroke="#ff79c6" stroke-width="1.2"/>
+  <text x="420" y="287" fill="#ff3399" font-size="0.75em" font-weight="bold">VAEs</text>
 
-      <svg id="lassoSVG" viewBox="0 0 760 520" aria-label="Lasso figure">
-        <!-- axes -->
-        <g class="axes">
-          <line x1="140" y1="260" x2="620" y2="260"/>
-          <line x1="380" y1="20"  x2="380" y2="500"/>
-        </g>
-        <!-- ticks & labels -->
-        <g id="lassoTicks"></g>
+  <rect x="380" y="300" width="65" height="25" rx="6" ry="6" fill="#fff0fa" stroke="#ff79c6" stroke-width="1.2"/>
+  <text x="385" y="317" fill="#ff3399" font-size="0.75em" font-weight="bold">Diffusion</text>
 
-        <!-- RSS contours -->
-        <g id="lassoContours"></g>
+  <!-- Connector lines from DL to sub-branches -->
+  <line x1="295" y1="205" x2="340" y2="85" stroke="#ff79c6" stroke-width="1.5"/>
+  <line x1="295" y1="205" x2="340" y2="125" stroke="#ff79c6" stroke-width="1.5"/>
+  <line x1="295" y1="205" x2="340" y2="165" stroke="#ff79c6" stroke-width="1.5"/>
+  <line x1="295" y1="205" x2="340" y2="205" stroke="#ff79c6" stroke-width="1.5"/>
+  <line x1="295" y1="205" x2="340" y2="245" stroke="#ff79c6" stroke-width="1.5"/>
 
-        <!-- Lasso constraint (L1 diamond) -->
-        <polygon id="lassoDiamond" class="lassoDiamond" points=""></polygon>
-
-        <!-- connection and points -->
-        <line id="lassoJoin" class="join" x1="380" y1="260" x2="380" y2="260"/>
-        <circle id="lassoOLS" class="olsPoint" cx="380" cy="260" r="6"></circle>
-        <circle id="lassoSOL" class="solPoint" cx="380" cy="260" r="6"></circle>
-      </svg>
-
-      <div class="nums">
-        <span class="pill">Soft-threshold: <b id="lassoSoft">β̂ = sign(β̂<sub>OLS</sub>)·max(|β̂<sub>OLS</sub>|−λ,0)</b></span>
-        <span class="pill">β<sub>lasso</sub>(λ) = (<b id="lassoB1">1.20</b>, <b id="lassoB2">0.40</b>)</span>
-        <span class="pill">‖β‖₁ = <b id="lassoNorm">1.60</b></span>
-      </div>
-      <div class="eqbox">Formula (orthonormal X): β̂<sub>lasso</sub>(λ) = SoftThresh(β̂<sub>OLS</sub>, λ)</div>
-    </div>
-  </div>
-
-  <p class="note">
-    RSS level sets are drawn as circles centered at β̂<sub>OLS</sub> to emphasize geometry. The highlighted (brighter) circle is the contour passing through the current penalized solution (the tangency).
-  </p>
-</div>
-
-<script>
-/* ==========================
-   Parameter space (data coords): [-3,3] x [-3,3]
-   Plot area (px): square 480x480 with center (cx,cy)=(380,260)
-========================== */
-const plot = { xmin:-3, xmax:3, ymin:-3, ymax:3, left:140, top:20, size:480 };
-const cx = 380, cy = 260, scale = plot.size / (plot.xmax - plot.xmin); // 480 / 6 = 80 px per unit
-
-function xp(b1){ return cx + b1*scale; }
-function yp(b2){ return cy - b2*scale; }
-
-function clamp(v, lo, hi){ return Math.max(lo, Math.min(hi, v)); }
-function fmt(x, d=2){ return (+x).toFixed(d); }
-
-const lamSlider = document.getElementById('lam');
-const lamVal = document.getElementById('lamVal');
-
-/* OLS (fixed for the demo; you could make it draggable if desired) */
-const bOLS = { b1: 1.8, b2: 1.0 };
-document.getElementById('b1ols').textContent = fmt(bOLS.b1);
-document.getElementById('b2ols').textContent = fmt(bOLS.b2);
-
-/* Draw ticks for both SVGs */
-function drawTicks(containerId){
-  const g = document.getElementById(containerId);
-  g.innerHTML = '';
-  const ticks = [-3,-2,-1,0,1,2,3];
-  ticks.forEach(t=>{
-    // vertical ticks on x-axis (y=0)
-    const x = xp(t), y0 = yp(0);
-    const lt = line(x, y0-4, x, y0+4, 'tick');
-    const lbl = text(x-4, y0+16, t, 'tickLabel');
-    g.appendChild(lt); g.appendChild(lbl);
-    // horizontal ticks on y-axis (x=0)
-    const y = yp(t), x0 = xp(0);
-    const lth = line(x0-4, y, x0+4, y, 'tick');
-    const lblh = text(x0+8, y+4, t, 'tickLabel');
-    g.appendChild(lth); g.appendChild(lblh);
-  });
-  // axis labels
-  g.appendChild(text(xp(3)+8, yp(0)+4, 'β₁', 'tickLabel'));
-  g.appendChild(text(xp(0)+6, yp(3)-10, 'β₂', 'tickLabel'));
-}
-
-function line(x1,y1,x2,y2,cls){
-  const el = document.createElementNS('http://www.w3.org/2000/svg','line');
-  el.setAttribute('x1',x1); el.setAttribute('y1',y1);
-  el.setAttribute('x2',x2); el.setAttribute('y2',y2);
-  el.setAttribute('class',cls);
-  return el;
-}
-
-function circle(cx,cy,r,cls){
-  const el = document.createElementNS('http://www.w3.org/2000/svg','circle');
-  el.setAttribute('cx',cx); el.setAttribute('cy',cy);
-  el.setAttribute('r',r); el.setAttribute('class',cls);
-  return el;
-}
-
-function text(x,y,str,cls){
-  const el = document.createElementNS('http://www.w3.org/2000/svg','text');
-  el.setAttribute('x',x); el.setAttribute('y',y);
-  el.setAttribute('class',cls); el.textContent = str;
-  return el;
-}
-
-function polygon(points, cls){
-  const el = document.createElementNS('http://www.w3.org/2000/svg','polygon');
-  el.setAttribute('points', points.map(p=>p.join(',')).join(' '));
-  el.setAttribute('class', cls);
-  return el;
-}
-
-/* RSS circles centered at OLS (approximate: identity Hessian for clarity) */
-function drawContours(containerId, centerB, highlitRadius){
-  const g = document.getElementById(containerId);
-  g.innerHTML = '';
-  const radii = [0.6, 1.0, 1.4, 1.8, 2.2];
-  radii.forEach(r=>{
-    const c = circle(xp(centerB.b1), yp(centerB.b2), r*scale, 'rss');
-    g.appendChild(c);
-  });
-  if (highlitRadius !== null){
-    const ch = circle(xp(centerB.b1), yp(centerB.b2), highlitRadius*scale, 'rss hl');
-    g.appendChild(ch);
-  }
-}
-
-/* RIDGE: β̂ = βOLS / (1+λ) */
-function ridgeSolution(lambda){
-  const shrink = 1/(1+lambda);
-  return { b1: bOLS.b1*shrink, b2: bOLS.b2*shrink, shrink };
-}
-
-/* LASSO: soft-threshold coordinate-wise */
-function soft(x,t){ return Math.sign(x)*Math.max(Math.abs(x)-t, 0); }
-function lassoSolution(lambda){
-  // Illustrative scaling: threshold = λ (orthonormal & normalized)
-  const t = lambda;
-  const b1 = soft(bOLS.b1, t);
-  const b2 = soft(bOLS.b2, t);
-  return { b1, b2, thr: t };
-}
-
-/* Update both panels */
-function update(){
-  const lam = parseFloat(lamSlider.value);
-  lamVal.textContent = fmt(lam,2);
-
-  /* -------- RIDGE -------- */
-  const r = ridgeSolution(lam);
-  const ridgeB1 = r.b1, ridgeB2 = r.b2;
-  const rNorm = Math.hypot(ridgeB1, ridgeB2);
-  // update numbers
-  document.getElementById('ridgeShrink').textContent = `1/(1+λ)=${fmt(r.shrink,3)}`;
-  document.getElementById('ridgeB1').textContent = fmt(ridgeB1);
-  document.getElementById('ridgeB2').textContent = fmt(ridgeB2);
-  document.getElementById('ridgeNorm').textContent = fmt(rNorm);
-
-  // move OLS and SOL points
-  const ridgeOLS = document.getElementById('ridgeOLS');
-  ridgeOLS.setAttribute('cx', xp(bOLS.b1));
-  ridgeOLS.setAttribute('cy', yp(bOLS.b2));
-  const ridgeSOL = document.getElementById('ridgeSOL');
-  ridgeSOL.setAttribute('cx', xp(ridgeB1));
-  ridgeSOL.setAttribute('cy', yp(ridgeB2));
-
-  // constraint L2 ball radius = ||β̂||₂ (to visualize the boundary that binds)
-  const ridgeBall = document.getElementById('ridgeBall');
-  ridgeBall.setAttribute('r', rNorm*scale);
-
-  // join line from origin to solution
-  const ridgeJoin = document.getElementById('ridgeJoin');
-  ridgeJoin.setAttribute('x1', xp(0)); ridgeJoin.setAttribute('y1', yp(0));
-  ridgeJoin.setAttribute('x2', xp(ridgeB1)); ridgeJoin.setAttribute('y2', yp(ridgeB2));
-
-  // contours (highlight the one passing through β̂)
-  const ridgeRadiusHL = Math.hypot(ridgeB1 - bOLS.b1, ridgeB2 - bOLS.b2);
-  drawContours('ridgeContours', bOLS, ridgeRadiusHL);
-
-  /* -------- LASSO -------- */
-  const l = lassoSolution(lam);
-  const lassoB1 = l.b1, lassoB2 = l.b2;
-  const l1Norm = Math.abs(lassoB1) + Math.abs(lassoB2);
-  document.getElementById('lassoSoft').textContent = `β̂ = sign(β̂₀)·max(|β̂₀|−λ,0)`;
-  document.getElementById('lassoB1').textContent = fmt(lassoB1);
-  document.getElementById('lassoB2').textContent = fmt(lassoB2);
-  document.getElementById('lassoNorm').textContent = fmt(l1Norm);
-
-  // move OLS and SOL points
-  const lassoOLS = document.getElementById('lassoOLS');
-  lassoOLS.setAttribute('cx', xp(bOLS.b1));
-  lassoOLS.setAttribute('cy', yp(bOLS.b2));
-  const lassoSOL = document.getElementById('lassoSOL');
-  lassoSOL.setAttribute('cx', xp(lassoB1));
-  lassoSOL.setAttribute('cy', yp(lassoB2));
-
-  // diamond for L1: |b1| + |b2| <= s, with s = ||β̂||₁ (boundary that binds)
-  const s = l1Norm;
-  const diamondPts = [
-    [xp( s), yp( 0)],
-    [xp( 0), yp( s)],
-    [xp(-s), yp( 0)],
-    [xp( 0), yp(-s)]
-  ];
-  document.getElementById('lassoDiamond').setAttribute('points',
-    diamondPts.map(p=>p.join(',')).join(' '));
-
-  // join line from origin to solution
-  const lassoJoin = document.getElementById('lassoJoin');
-  lassoJoin.setAttribute('x1', xp(0)); lassoJoin.setAttribute('y1', yp(0));
-  lassoJoin.setAttribute('x2', xp(lassoB1)); lassoJoin.setAttribute('y2', yp(lassoB2));
-
-  // contours (highlight the one passing through β̂)
-  const lassoRadiusHL = Math.hypot(lassoB1 - bOLS.b1, lassoB2 - bOLS.b2);
-  drawContours('lassoContours', bOLS, lassoRadiusHL);
-}
-
-/* Init ticks */
-drawTicks('ridgeTicks');
-drawTicks('lassoTicks');
-
-/* Initial update */
-lamSlider.addEventListener('input', update);
-update();
-</script>
-</body>
-</html>
+  <!-- Connector lines for generative models -->
+  <line x1="410" y1="260" x2="372" y2="270" stroke="#ff79c6" stroke-width="1.2"/>
+  <line x1="410" y1="260" x2="447" y2="270" stroke="#ff79c6" stroke-width="1.2"/>
+  <line x1="410" y1="260" x2="412" y2="300" stroke="#ff79c6" stroke-width="1.2"/>
+</svg>
