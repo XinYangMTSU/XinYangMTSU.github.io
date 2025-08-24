@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pandas — Quickstart & Cheatsheet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    :root{
+      --pink:#ff79c6; --pink2:#ffb3de; --bg:#17191a; --panel:#222025; --ink:#ffb3de;
+    }
+    *{box-sizing:border-box}
+    body{font-family:'Roboto',Arial,sans-serif;margin:0;display:flex;background:var(--bg);min-height:100vh;color:var(--pink)}
+    #sidebar{position:fixed;width:270px;height:100vh;overflow-y:auto;background:linear-gradient(135deg,#2a1e28 80%,#47223c 100%);color:var(--pink2);padding:36px 24px 24px 28px;box-shadow:2px 0 24px rgba(255,121,198,.12);z-index:10}
+    #sidebar h2{margin:0 0 18px;font-size:1.05rem;letter-spacing:.8px;text-transform:uppercase;color:var(--pink2)}
+    #sidebar a{display:flex;align-items:center;gap:.6em;color:var(--pink2);text-decoration:none;margin:12px 0 12px 8px;font-weight:500;font-size:1.02rem;border-left:3px solid transparent;padding-left:14px;border-radius:8px 0 0 8px}
+    #sidebar a:hover,#sidebar a.active{color:var(--pink);background:#21111b;border-left:3px solid var(--pink);font-weight:700;box-shadow:1px 2px 8px 1px #2d3436}
+    #content{margin-left:290px;padding:56px 6vw;max-width:980px;width:100vw;background:#1a1d1f}
+    h1{color:var(--pink);font-size:2.4rem;font-weight:800;margin:.1em 0 .6em;letter-spacing:-.5px;text-shadow:0 2px 16px rgba(255,121,198,.18)}
+    section{margin:0 0 44px;background:var(--panel);border-radius:18px;box-shadow:0 4px 30px rgba(255,121,198,.09);padding:26px 26px;border-left:7px solid var(--pink)}
+    section:hover{box-shadow:0 10px 34px 3px rgba(255,121,198,.13);border-left:7px solid var(--pink2)}
+    section h3{border-bottom:2px solid var(--pink);padding-bottom:8px;margin:0 0 14px;color:var(--pink);font-size:1.45rem;letter-spacing:.3px}
+    section h4{font-size:1.05rem;color:var(--pink2);margin:22px 0 8px;font-weight:700;border-bottom:1px solid var(--pink2);padding-bottom:3px}
+    p,li{color:var(--ink);line-height:1.65}
+    ul{margin-left:1.6em}
+    pre{position:relative;background:#19121a;color:var(--ink);padding:14px 16px;border-radius:10px;font-size:1.02rem;line-height:1.65;overflow:auto;box-shadow:0 2px 10px rgba(255,121,198,.11)}
+    .copy{position:absolute;top:8px;right:8px;padding:.35rem .55rem;border:1px solid #333;background:#111;color:#ddd;border-radius:8px;cursor:pointer}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    a,a:visited{color:var(--pink)}
+    footer{margin-top:40px;text-align:center;color:var(--ink);font-size:.98rem;letter-spacing:.4px;padding:18px 0;border-top:1px solid #402138;background:none}
+    @media (max-width: 980px){#sidebar{display:none}#content{margin:0;padding:26px 5vw}}
+  </style>
+</head>
+<body>
+  <aside id="sidebar">
+    <h2><i class="fa-solid fa-table"></i> Pandas Guide</h2>
+    <nav>
+      <a href="#intro"><i class="fa-solid fa-book-open"></i> 1. What is Pandas?</a>
+      <a href="#install"><i class="fa-solid fa-download"></i> 2. Install & Setup</a>
+      <a href="#structures"><i class="fa-solid fa-layer-group"></i> 3. Core Data Structures</a>
+      <a href="#io"><i class="fa-solid fa-file-import"></i> 4. Reading/Writing Data</a>
+      <a href="#inspect"><i class="fa-solid fa-magnifying-glass"></i> 5. Inspect & Summarize</a>
+      <a href="#clean"><i class="fa-solid fa-broom"></i> 6. Cleaning</a>
+      <a href="#transform"><i class="fa-solid fa-wand-magic-sparkles"></i> 7. Transform</a>
+      <a href="#groupby"><i class="fa-solid fa-object-group"></i> 8. GroupBy & Aggregation</a>
+      <a href="#merge"><i class="fa-solid fa-code-branch"></i> 9. Merge & Join</a>
+      <a href="#timeseries"><i class="fa-regular fa-clock"></i> 10. Time Series</a>
+      <a href="#plot"><i class="fa-solid fa-chart-line"></i> 11. Quick Plot</a>
+      <a href="#sklearn"><i class="fa-solid fa-robot"></i> 12. With Scikit‑learn</a>
+      <a href="#refs"><i class="fa-solid fa-link"></i> References</a>
+    </nav>
+  </aside>
+
+  <main id="content">
+    <h1>Pandas — Quickstart & Cheatsheet</h1>
+
+    <section id="intro">
+      <h3>1) What is Pandas?</h3>
+      <p><b>Pandas</b> is a fast, flexible Python library for <b>data analysis</b> and <b>manipulation</b>. It provides labeled, table‑like data structures and rich utilities to load, clean, reshape, and analyze data. Think “Excel for Python,” but more powerful and scalable.</p>
+      <ul>
+        <li>Built on <b>NumPy</b>, integrates with <b>Matplotlib</b> and <b>Scikit‑learn</b>.</li>
+        <li>Works with CSV, Excel, SQL, JSON, Parquet, and more.</li>
+        <li>Great for cleaning (missing values, duplicates), transformation, grouping, joining, and time series.</li>
+      </ul>
+    </section>
+
+    <section id="install">
+      <h3>2) Install & Setup</h3>
+      <h4>Conda (recommended)</h4>
+      <pre><button class="copy">Copy</button><code>conda install pandas
+# or create a fresh env
+conda create -n pandas-env python=3.11 pandas jupyter -y
+conda activate pandas-env
+jupyter notebook</code></pre>
+      <h4>Pip</h4>
+      <pre><button class="copy">Copy</button><code>python -m pip install --upgrade pip
+pip install pandas jupyter matplotlib</code></pre>
+      <h4>Verify</h4>
+      <pre><button class="copy">Copy</button><code>import pandas as pd
+print(pd.__version__)</code></pre>
+    </section>
+
+    <section id="structures">
+      <h3>3) Core Data Structures</h3>
+      <ul>
+        <li><b>Series</b> – 1D labeled array (like a single column).</li>
+        <li><b>DataFrame</b> – 2D labeled table (like a sheet).</li>
+      </ul>
+      <pre><button class="copy">Copy</button><code>import pandas as pd
+
+s = pd.Series([10, 20, 30], index=["a","b","c"])   # Series
+print(s)
+
+df = pd.DataFrame({"Name":["Alice","Bob"], "Age":[25,30]})  # DataFrame
+print(df)</code></pre>
+    </section>
+
+    <section id="io">
+      <h3>4) Reading / Writing Data</h3>
+      <pre><button class="copy">Copy</button><code>import pandas as pd
+
+# CSV
+sales = pd.read_csv("sales.csv")          # read
+sales.to_csv("sales_clean.csv", index=False) # write
+
+# Excel (requires openpyxl)
+# pip install openpyxl
+# df = pd.read_excel("data.xlsx", sheet_name="Sheet1")
+
+# JSON
+# logs = pd.read_json("logs.json")
+
+# SQL (example with sqlite3)
+# import sqlite3
+# con = sqlite3.connect("my.db")
+# users = pd.read_sql_query("SELECT * FROM users", con)
+# users.to_sql("users_copy", con, if_exists="replace", index=False)</code></pre>
+
+      <h4>Tip: In‑Notebook Demo CSV</h4>
+      <pre><button class="copy">Copy</button><code>from io import StringIO
+import pandas as pd
+
+csv = StringIO("""id,name,dept,city,salary,hire_date
+1,Alice,IT,Nashville,95000,2021-03-01
+2,Bob,Sales,Memphis,72000,2020-08-15
+3,Charlie,IT,Nashville,102000,2019-11-20
+3,Charlie,IT,Nashville,102000,2019-11-20   # duplicate
+4,Dana,HR,Knoxville,,2022-01-10            # missing
+5,Eve,Sales,Chattanooga,68000,2023-06-05
+""")
+
+df = pd.read_csv(csv, comment="#")
+print(df)</code></pre>
+    </section>
+
+    <section id="inspect">
+      <h3>5) Inspect & Summarize</h3>
+      <pre><button class="copy">Copy</button><code>print(df.head())        # first rows
+print(df.info())        # column types + non-null counts
+print(df.describe())    # stats for numeric
+print(df.isna().mean()) # missing-value ratio per column
+print(df["dept"].value_counts())</code></pre>
+    </section>
+
+    <section id="clean">
+      <h3>6) Cleaning</h3>
+      <h4>Drop Duplicates & Normalize Missing</h4>
+      <pre><button class="copy">Copy</button><code>before = len(df)
+df = df.drop_duplicates()  # drop exact duplicates
+print("Dropped:", before - len(df))
+
+# Standardize missing tokens (examples):
+# df = df.replace({"na": pd.NA, "N/A": pd.NA, "null": pd.NA})
+
+# Ensure correct dtypes
+df["hire_date"] = pd.to_datetime(df["hire_date"], errors="coerce")
+
+print(df.isna().sum())</code></pre>
+
+      <h4>Fill Missing Values</h4>
+      <pre><button class="copy">Copy</button><code>df["salary"] = pd.to_numeric(df["salary"], errors="coerce")
+
+# Simple imputations
+median_salary = df["salary"].median()
+df["salary"] = df["salary"].fillna(median_salary)
+
+# Add indicator for imputed
+df["salary_imputed"] = (df["salary"] == median_salary).astype(int)</code></pre>
+
+      <h4>Column Cleaning & Renaming</h4>
+      <pre><button class="copy">Copy</button><code>df.columns = (
+    df.columns.str.strip().str.lower().str.replace(" ", "_", regex=False)
+)
+print(df.columns.tolist())</code></pre>
+
+      <h4>SettingWithCopy: Use .loc</h4>
+      <pre><button class="copy">Copy</button><code># Correct, explicit assignment with .loc
+mask = df["city"] == "Nashville"
+df.loc[mask, "salary"] = df.loc[mask, "salary"].mul(1.02)  # +2%</code></pre>
+    </section>
+
+
+    <section id="sklearn">
+      <h3>12) Using Pandas with Scikit‑learn</h3>
+      <pre><button class="copy">Copy</button><code>from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+import numpy as np
+
+# Super-simple example: predict salary from dept + tenure + city
+X = df[["dept","tenure_years","city"]]
+y = df["salary"]
+
+cat_cols = ["dept","city"]
+num_cols = ["tenure_years"]
+
+pre = ColumnTransformer([
+  ("num", "passthrough", num_cols),
+  ("cat", OneHotEncoder(handle_unknown="ignore"), cat_cols)
+])
+
+pipe = Pipeline([
+  ("prep", pre),
+  ("model", LinearRegression())
+])
+
+Xtr,Xte,ytr,yte = train_test_split(X,y, test_size=.3, random_state=42)
+pipe.fit(Xtr,ytr)
+pred = pipe.predict(Xte)
+print("R^2:", round(r2_score(yte,pred),3))</code></pre>
+    </section>
+
+    <section id="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://pandas.pydata.org/" target="_blank" rel="noopener">pandas.pydata.org</a></li>
+        <li><a href="https://pandas.pydata.org/docs/user_guide/10min.html" target="_blank" rel="noopener">10 Minutes to Pandas</a></li>
+        <li><a href="https://pandas.pydata.org/pandas-docs/stable/reference/index.html" target="_blank" rel="noopener">API Reference</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      &copy; 2025 Xin Yang • Pandas Quickstart Page
+    </footer>
+  </main>
+
+  <script>
+    // Simple copy buttons for all code blocks
+    document.querySelectorAll('pre .copy').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.nextElementSibling.innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          const old = btn.textContent; btn.textContent = 'Copied!';
+          setTimeout(() => btn.textContent = old, 1200);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
