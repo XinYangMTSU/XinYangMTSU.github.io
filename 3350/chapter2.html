@@ -268,12 +268,17 @@ pre .copy:hover {
     <br><br>
     Think of it like washing vegetables before cooking: the recipe (machine learning model or analysis) won’t work well if the ingredients (data) are dirty.
     <br>
-    <p>Remove duplicates, fix inconsistencies, and correct errors before modeling. Cleaning steps:</p>
-    <ul>
-      <li>Dropping duplicate rows</li>
-      <li>Fixing typos or inconsistent formats (e.g., "N/A", "na", "null")</li>
-      <li>Normalizing units (e.g., dollars vs. euros)</li>
-    </ul>
+    <h4>Typical Cleaning Steps</h4>
+  <ul>
+    <li><b>Remove duplicates</b> – drop repeated rows/records.</li>
+    <li><b>Handle missing values</b> – delete, impute, or flag them.</li>
+    <li><b>Fix inconsistent formats</b> – e.g., “N/A”, “na”, “null” → standardize to NaN.</li>
+    <li><b>Correct typos or categories</b> – unify values like “Male”, “M”, “male”.</li>
+    <li><b>Normalize units</b> – convert different units into the same scale (e.g., USD vs. EUR).</li>
+    <li><b>Outlier handling</b> – investigate and correct extreme or invalid values.</li>
+    <li><b>Type conversion</b> – ensure columns have the right data type (dates, numbers).</li>
+  </ul>
+    
     <h4>Python Example (Simulated Sales Dataset)</h4>
   <pre> <button class="copy">Copy</button> <code>
 import pandas as pd
