@@ -115,12 +115,7 @@ conda activate ml-env
 conda env list</code></pre>
       <h4>Install Common Tools</h4>
       <pre><button class="copy">Copy</button><code>conda install numpy pandas matplotlib scikit-learn jupyter -y</code></pre>
-      <h4>Export / Recreate</h4>
-      <pre><button class="copy">Copy</button><code># Freeze environment to YAML
-conda env export --no-builds > environment.yml
-
-# Recreate on another machine
-conda env create -f environment.yml</code></pre>
+      
       <h4>Remove</h4>
       <pre><button class="copy">Copy</button><code>conda deactivate
 conda env remove -n ml-env</code></pre>
