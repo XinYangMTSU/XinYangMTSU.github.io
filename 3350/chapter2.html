@@ -323,22 +323,29 @@ print("\\nAfter normalizing currencies (all in USD):\\n", df)
        It goes beyond just “fixing mistakes” (cleaning). Instead, it’s about reshaping, scaling, or encoding the data so that models can learn from it correctly.</p>
 
     <h4>Common Data Transformation Techniques:</h4>
-    <ul>
-      <li><b>Feature Scaling</b></li>
-      <li><b>Categorical Encoding</b></li>
-      <li><b>Normalization</b></li>
-    </ul>
+
+<h4>Feature Scaling</h4>
+  <ul>
+    <li><b>Standardization (Z-score):</b> mean = 0, variance = 1</li>
+    <li><b>Min-Max Scaling:</b> rescale to [0, 1]</li>
+    <li><b>Robust Scaling:</b> use median/IQR, less sensitive to outliers</li>
+  </ul>
+
+  <h4>Categorical Encoding</h4>
+  <ul>
+     <li><b>One-Hot Encoding:</b> Converts each category into binary columns</li>
+      <li><b>Label Encoding:</b> Assigns an integer to each category (can mislead models if not ordinal)</li>
+  </ul>
+
+  <h4>Normalization</h4>
+  <ul>
+    <li><b>Normalization:</b> transform values to a common range or distribution 
+      (e.g., log-transform skewed data).
+    </li>
+  </ul>
+    
   </section>
 
-  <section id="encoding">
-    <h3>4. Categorical Encoding</h3>
-    <p>Machine learning models require numeric input, so we convert categories into numbers:</p>
-    <ul>
-      <li><b>One-Hot Encoding:</b> Converts each category into binary columns</li>
-      <li><b>Label Encoding:</b> Assigns an integer to each category (can mislead models if not ordinal)</li>
-      <li><b>Ordinal Encoding:</b> Encodes categories that have an inherent order</li>
-    </ul>
-  </section>
 
   <section id="imputation">
     <h3>5. Handling Missing Values</h3>
