@@ -229,6 +229,41 @@
       <li>Fixing typos or inconsistent formats (e.g., "N/A", "na", "null")</li>
       <li>Normalizing units (e.g., dollars vs. euros)</li>
     </ul>
+    <h4>Python Example (Simulated Sales Dataset)</h4>
+  <pre>
+import pandas as pd
+
+# Example dataset with duplicates, inconsistent missing values, mixed currencies
+data = {
+    "customer": ["Alice", "Bob", "Alice", "Charlie", "Dana", "Eve"],
+    "country": ["USA", "USA", "USA", "Canada", "Canada", "USA"],
+    "spend": ["100 USD", "200 usd", "N/A", "150 CAD", "null", "300 USD"]
+}
+df = pd.DataFrame(data)
+
+print("Original DataFrame:\\n", df)
+
+# 1) Drop duplicate rows
+df = df.drop_duplicates()
+print("\\nAfter dropping duplicates:\\n", df)
+
+# 2) Fix inconsistent formats for missing values
+df['spend'] = df['spend'].replace(["N/A", "na", "null"], pd.NA)
+print("\\nAfter replacing missing tokens with NaN:\\n", df)
+
+# 3) Normalize units (convert CAD -> USD at 0.75 rate)
+def normalize_currency(value):
+    if pd.isna(value):
+        return None
+    val, unit = value.split()
+    val = float(val)
+    if unit.lower() == "cad":
+        return round(val * 0.75, 2)  # convert CAD to USD
+    return val  # already in USD
+
+df['spend_usd'] = df['spend'].apply(normalize_currency)
+print("\\nAfter normalizing currencies (all in USD):\\n", df)
+  </pre>
   </section>
 
   <section id="scaling">
