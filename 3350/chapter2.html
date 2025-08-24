@@ -195,6 +195,28 @@
       color: #fff52e;
       background: #19121a;
     }
+
+    pre {
+  position: relative;
+}
+
+pre .copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  background: #21111b;
+  border: 1px solid #ff79c6;
+  border-radius: 6px;
+  color: #ffb3de;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+pre .copy:hover {
+  background: #ff79c6;
+  color: #fff;
+}
+
     
   </style>
 </head>
@@ -231,7 +253,7 @@
       <li>Normalizing units (e.g., dollars vs. euros)</li>
     </ul>
     <h4>Python Example (Simulated Sales Dataset)</h4>
-  <pre>
+  <pre> <button class="copy">Copy</button> <code>
 import pandas as pd
 
 # Example dataset with duplicates, inconsistent missing values, mixed currencies
@@ -264,7 +286,7 @@ def normalize_currency(value):
 
 df['spend_usd'] = df['spend'].apply(normalize_currency)
 print("\\nAfter normalizing currencies (all in USD):\\n", df)
-  </pre>
+  </code> </pre>
   </section>
 
   <section id="scaling">
@@ -342,6 +364,21 @@ pipe.fit(X_train, y_train)
     </ul>
   </section>
 
+
+  <script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+  
   <footer>
     &copy; 2025 Xin Yang <br>
     Department of Computer Science <br>
