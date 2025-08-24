@@ -195,6 +195,9 @@
       color: #fff52e;
       background: #19121a;
     }
+    .copy{position:absolute;top:8px;right:8px;padding:.35rem .55rem;border:1px solid #333;background:#111;color:#ddd;border-radius:8px;cursor:pointer}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    
   </style>
 </head>
 <body>
@@ -230,7 +233,7 @@
       <li>Normalizing units (e.g., dollars vs. euros)</li>
     </ul>
     <h4>Python Example (Simulated Sales Dataset)</h4>
-  <pre>
+  <pre> <button class="copy">Copy</button><code>
 import pandas as pd
 
 # Example dataset with duplicates, inconsistent missing values, mixed currencies
@@ -263,7 +266,7 @@ def normalize_currency(value):
 
 df['spend_usd'] = df['spend'].apply(normalize_currency)
 print("\\nAfter normalizing currencies (all in USD):\\n", df)
-  </pre>
+  </code></pre>
   </section>
 
   <section id="scaling">
