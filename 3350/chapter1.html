@@ -241,7 +241,7 @@
       </div>
     </li>
     <li>
-      <a href="#generative-ai"><i class="fas fa-magic"></i>6. Generative AI</a>
+      <a href="#adversarial"><i class="fas fa-magic"></i>6. Adversarial Learning</a>
       <div class="subsections">
         <a href="#gans">6.1 GANs</a>
         <a href="#autoregressive">6.2 Autoregressive Models</a>
@@ -293,9 +293,14 @@
       <li><strong>Supervised Learning</strong>: Learn a mapping from input to output with labeled data (e.g., classification, regression).</li>
       <li><strong>Unsupervised Learning</strong>: Find hidden patterns or structures in data without explicit labels (e.g., clustering, dimensionality reduction).</li>
       <li><strong>Reinforcement Learning</strong>: Learn to make a sequence of decisions by receiving rewards or penalties from the environment to maximize cumulative reward.</li>
-      <br>
+      
+      <li><strong>Adversarial Learning</strong>: Two systems competing against each other, where one tries to fool the other while the other tries to detect deception.</li>
+      
+
+      <!--
       <li><strong>Generative AI</strong>: Create new content (text, images, audio) that mimics real data distributions.</li>
       Note: Generative AI is a capability, not a separate learning paradigm; often trained with self-supervised learning and sometimes fine-tuned with RL.
+      -->
     </ul>
     
   </section>
@@ -450,10 +455,12 @@
     
   </section>
 
-  <section id="generative-ai">
-    <h3>6. Generative AI</h3>
+  <section id="adversarial">
+    <h3>6. Adversarial Learning</h3>
     <p>
-      Generative AI models are designed to produce new data that resembles the data they were trained on. These models are widely used for text generation, image synthesis, music, and more. Main types include:
+      Adversarial Learning is a learning paradigm where two AI systems compete against each other in a game-like setup.
+      Unlike supervised/unsupervised/reinforcement learning, adversarial learning uses competition and minimax game theory as the core learning mechanism. 
+      The two systems push each other to improve through their adversarial relationship. Most Famous Example:
     </p>
     <div id="gans">
       <h4>6.1 Generative Adversarial Networks (GANs)</h4>
@@ -462,6 +469,8 @@
         <strong>Examples:</strong> StyleGAN3(high-fidelity image synthesis)
       </p>
     </div>
+
+    <!--
     <div id="autoregressive">
       <h4>6.2 Autoregressive Models</h4>
       <p>
@@ -476,6 +485,7 @@
         Diffusion models create data by learning to gradually denoise random input, producing some of the highest quality images to date. <strong>Examples:</strong> DALL·E 2 (text-to-image), OpenAI Sora (text-to-video/image).
       </p>
     </div>
+    -->
   </section>
 
 
