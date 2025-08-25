@@ -46,6 +46,45 @@
 	<li>Integers are typically stored with either 4 or 8 bytes</li>
 </ul>
 
+<section>
+  <h2>Decimal vs. Binary Storage Units</h2>
+
+  <h3>Decimal (SI system)</h3>
+  <ul>
+    <li><b>1 Kilobyte (KB)</b> = <b>1,000 bytes</b></li>
+    <li>Based on <b>powers of 10</b>.</li>
+    <li>Used by most <b>storage device manufacturers</b> (hard drives, SSDs, USBs).</li>
+    <li>Example: A "500 GB" hard drive = \(500 \times 10^9\) bytes.</li>
+  </ul>
+  <p>Here, <b>kilo</b> means 1,000, just like in kilometers (1 km = 1,000 meters).</p>
+
+  <h3>Binary (IEC system)</h3>
+  <ul>
+    <li><b>1 Kibibyte (KiB)</b> = <b>1,024 bytes</b></li>
+    <li>Based on <b>powers of 2</b>.</li>
+    <li>Used by most <b>operating systems</b> (Windows, Linux, macOS) when reporting file sizes.</li>
+    <li>Example: <b>1 MiB (mebibyte)</b> = 1,024 KiB = 1,048,576 bytes.</li>
+  </ul>
+  <p>Here, "<b>kibi</b>" comes from <b>kilo + binary</b>, meaning \(2^10\).</p>
+
+  <h3>Why the difference matters</h3>
+  <p>
+    If you buy a <b>1 TB hard drive</b>, the manufacturer means 1 terabyte =
+    <b>1,000,000,000,000 bytes (\(10^12\))</b>.
+  </p>
+  <p>
+    But your computer may report it as about <b>931 GiB</b>, because it divides
+    by \(1,024^3\) instead of \(1,000^3\).
+  </p>
+
+  <p><b>So the difference is in the base used:</b></p>
+  <ul>
+    <li><b>KB, MB, GB → Decimal (\(10^3, 10^6, 10^9\))</b></li>
+    <li><b>KiB, MiB, GiB → Binary (\( 2^10, 2^20, 2^30)</b></li>
+  </ul>
+</section>
+
+		
 <h2>Kilobyte or KB</h2>
 
 <ul>
