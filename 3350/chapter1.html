@@ -635,11 +635,27 @@
       </div>
 
       <div class="row">
-        <div class="hdr"><span class="y"><i class="fa-solid fa-chess"></i> 1997</span> Deep Blue beats Garry Kasparov</div>
+        <div class="hdr"><span class="y"><i class="fa-solid fa-chess"></i> 2006</span> Deep Belief Networks: Breaking through depth barriers </div>
         <div class="lead">What happened</div>
-        <div class="sub"><b>IBM Deep Blue</b> defeated world chess champion <b>Garry Kimovich Kasparov</b>.</div>
-        <div class="lead" style="margin-top:6px">Important nuance</div>
-        <div class="sub">Deep Blue relied on large‑scale search and expert evaluation (not modern ML). It showed that careful algorithms + massive compute can master complex tasks, but it wasn’t a learning breakthrough.</div>
+        <div class="sub">
+        By the 1990s and early 2000s, neural networks had hit a wall. While backpropagation worked well for shallow networks (2-4 layers), attempts to train very deep 
+          networks (5+ layers) consistently failed due to the vanishing gradient problem—training signals became too weak to effectively adjust the early layers. 
+          Additionally, networks would get stuck with poor random starting weights, and training was painfully slow and unreliable.  
+          <br><br>
+          In 2006, Geoffrey Hinton and his colleagues introduced Deep Belief Networks (DBNs) and demonstrated a revolutionary layer-by-layer pre-training approach. Instead of trying to train all layers simultaneously with backpropagation, 
+          DBNs first trained each layer individually to learn meaningful representations of the data. Each layer learned to reconstruct the patterns from the layer below it. 
+          Only after this pre-training phase would they use backpropagation to fine-tune the entire deep network.
+        </div>
+        <div class="lead" style="margin-top:6px">Why it matters</div>
+        <div class="sub">
+          DBNs proved that very deep networks (6-10+ layers) could be trained effectively, breaking through the depth limitations that had plagued the field for decades. 
+          This wasn't just a technical improvement—it fundamentally changed what neural networks could achieve. Deeper networks could learn much more complex and abstract representations, 
+          from simple edges and textures in early layers to complete objects and concepts in deeper layers.
+          <br><br>
+          This breakthrough ended the "AI Winter" and reignited serious academic and commercial interest in neural networks. DBNs showed that depth was crucial for artificial 
+          intelligence—the same principle that would later enable AlexNet's triumph, modern computer vision, and large language models. Hinton's work established the foundation for 
+          the entire deep learning revolution that followed.
+        </div>
       </div>
 
       <div class="row">
