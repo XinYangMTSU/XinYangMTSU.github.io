@@ -39,7 +39,7 @@
       <a href="#intro"><i class="fa-solid fa-book-open"></i> 1. What is Pandas?</a>
       <a href="#install"><i class="fa-solid fa-download"></i> 2. Install & Setup</a>
       <a href="#structures"><i class="fa-solid fa-layer-group"></i> 3. Core Data Structures</a>
-      <a href="#io"><i class="fa-solid fa-file-import"></i> 4. Reading/Writing Data</a>
+      <a href="#io"><i class="fa-solid fa-file-import"></i> 4. Common pandas tasks</a>
       <a href="#inspect"><i class="fa-solid fa-magnifying-glass"></i> 5. Inspect & Summarize</a>
       <a href="#refs"><i class="fa-solid fa-link"></i> References</a>
     </nav>
@@ -117,18 +117,8 @@ print(df)</code></pre>
         df.describe()          # Statistics
         df.groupby('column').sum()  # Group and aggregate
       </code></pre>
-
+      
     </section>
-
-    <section id="inspect">
-      <h3>5) Inspect & Summarize</h3>
-      <pre><button class="copy">Copy</button><code>print(df.head())        # first rows
-print(df.info())        # column types + non-null counts
-print(df.describe())    # stats for numeric
-print(df.isna().mean()) # missing-value ratio per column
-print(df["dept"].value_counts())</code></pre>
-    </section>
-
 
     <section id="refs">
       <h3>References</h3>
