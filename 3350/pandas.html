@@ -56,6 +56,16 @@
         <li>Works with CSV, Excel, SQL, JSON, Parquet, and more.</li>
         <li>Great for cleaning (missing values, duplicates), transformation, grouping, joining, and time series.</li>
       </ul>
+
+      <h4>What pandas does:</h4>
+
+      <ul>
+        <li><b>Reads data</b> from files (CSV, Excel, JSON, databases)</li>
+        <li><b>Cleans data</b> (remove duplicates, handle missing values)</li>
+        <li><b>Manipulates data</b> (filter, sort, group, merge)</li>
+        <li><b>Analyzes data</b> (statistics, aggregations)</li>
+      </ul>
+      
     </section>
 
     <section id="install">
@@ -90,25 +100,23 @@ print(df)</code></pre>
     </section>
 
     <section id="io">
-      <h3>4) Reading / Writing Data</h3>
-      <pre><button class="copy">Copy</button><code>import pandas as pd
-
-# CSV
-sales = pd.read_csv("sales.csv")          # read
-sales.to_csv("sales_clean.csv", index=False) # write
-
-# Excel (requires openpyxl)
-# pip install openpyxl
-# df = pd.read_excel("data.xlsx", sheet_name="Sheet1")
-
-# JSON
-# logs = pd.read_json("logs.json")
-
-# SQL (example with sqlite3)
-# import sqlite3
-# con = sqlite3.connect("my.db")
-# users = pd.read_sql_query("SELECT * FROM users", con)
-# users.to_sql("users_copy", con, if_exists="replace", index=False)</code></pre>
+      <h3>4) Common pandas tasks: </h3>
+      <pre><button class="copy">Copy</button><code>
+        # Read data
+        df = pd.read_csv('data.csv')
+        
+        # View data
+        df.head()      # First 5 rows
+        df.info()      # Data types and info
+        
+        # Clean data
+        df.drop_duplicates()    # Remove duplicates
+        df.fillna(0)           # Handle missing values
+        
+        # Analyze data
+        df.describe()          # Statistics
+        df.groupby('column').sum()  # Group and aggregate
+      </code></pre>
 
     </section>
 
@@ -121,40 +129,6 @@ print(df.isna().mean()) # missing-value ratio per column
 print(df["dept"].value_counts())</code></pre>
     </section>
 
-
-    <!--
-    <section id="clean">
-      <h3>6) Cleaning</h3>
-      <h4>Drop Duplicates & Normalize Missing</h4>
-      <pre><button class="copy">Copy</button><code>before = len(df)
-df = df.drop_duplicates()  # drop exact duplicates
-print("Dropped:", before - len(df))
-
-# Standardize missing tokens (examples):
-# df = df.replace({"na": pd.NA, "N/A": pd.NA, "null": pd.NA})
-
-# Ensure correct dtypes
-df["hire_date"] = pd.to_datetime(df["hire_date"], errors="coerce")
-
-print(df.isna().sum())</code></pre>
-
-      <h4>Fill Missing Values</h4>
-      <pre><button class="copy">Copy</button><code>df["salary"] = pd.to_numeric(df["salary"], errors="coerce")
-
-# Simple imputations
-median_salary = df["salary"].median()
-df["salary"] = df["salary"].fillna(median_salary)
-
-# Add indicator for imputed
-df["salary_imputed"] = (df["salary"] == median_salary).astype(int)</code></pre>
-
-      <h4>Column Cleaning & Renaming</h4>
-      <pre><button class="copy">Copy</button><code>df.columns = (
-    df.columns.str.strip().str.lower().str.replace(" ", "_", regex=False)
-)
-print(df.columns.tolist())</code></pre>
-    </section>
-  -->
 
     <section id="refs">
       <h3>References</h3>
