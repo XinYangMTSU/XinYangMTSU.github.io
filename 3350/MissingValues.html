@@ -170,6 +170,49 @@ print(f"After flagging: {len(df_flagged)} rows")
   </code> </pre>
 
 </section>
+
+
+  <section>
+  <h4>What is the difference between <code>None</code> and <code>NaN</code>?</h4>
+  <p>
+    In Python, <code>None</code> is the built-in “null” object — it represents the absence of a value.  
+    In pandas (and NumPy), when you pass a dictionary containing <code>None</code> into 
+    <code>pd.DataFrame()</code>, pandas automatically converts those <code>None</code> values into 
+    <code>NaN</code> (<strong>Not a Number</strong>).
+  </p>
+
+  <h2>How it works:</h2>
+
+  <p><strong>In plain Python:</strong></p>
+  <pre><code>value = None
+print(value)   # None
+print(type(value))  # &lt;class 'NoneType'&gt;
+  </code></pre>
+
+  <p><strong>In pandas DataFrame:</strong></p>
+  <pre><code>import pandas as pd
+
+data = {'Name': ['Alice', 'Bob', None],
+        'Age': [25, None, 30]}
+
+df = pd.DataFrame(data)
+print(df)
+  </code></pre>
+
+  <p><strong>Output:</strong></p>
+  <pre><code>    Name   Age
+0  Alice  25.0
+1    Bob   NaN
+2   None  30.0
+  </code></pre>
+
+  <p>
+    🔑 Key point: <code>None</code> becomes <code>NaN</code> because pandas is built on top of NumPy, 
+    and <code>NaN</code> is the standard way to represent missing values in scientific computing.
+  </p>
+</section>
+
+  
   
   <script>
   document.querySelectorAll("pre .copy").forEach(button => {
