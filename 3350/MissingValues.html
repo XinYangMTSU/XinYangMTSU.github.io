@@ -1,1 +1,194 @@
 
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chapter 2: Data Preprocessing & Feature Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6; /* MAIN PINK FONT COLOR */
+    }
+
+      section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+    }
+
+    
+    pre {
+  position: relative;
+}
+
+pre .copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  background: #21111b;
+  border: 1px solid #ff79c6;
+  border-radius: 6px;
+  color: #ffb3de;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+pre .copy:hover {
+  background: #ff79c6;
+  color: #fff;
+}
+
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+
+
+    footer {
+      margin-top: 46px;
+      text-align: center;
+      color: #ffb3de;
+      font-size: 1.09em;
+      letter-spacing: 1px;
+      padding: 22px 0 14px 0;
+      border-top: 1px solid #402138;
+      background: none;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-weight: 500;
+    }
+
+      section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+    }
+    
+  </style>
+</head>
+<body>
+
+<section>
+  
+<h4>Handle Missing Values in Python</h4>
+  <pre> <button class="copy">Copy</button> <code>
+  
+# Imports the pandas, numpy library
+import pandas as pd
+import numpy as np
+
+# Create simple dataset with missing values
+# Creates a dictionary with missing values represented as NaN (Not a Number)
+data = {'Name': ['Alice', 'Bob', None, 'Charlie', 'Eva'], 
+        'Age': [25, None, 30, 35, None],
+        'Salary': [50000, 60000, None, 70000, 55000]}
+
+# pd.DataFrame(data) converts the dictionary into a pandas DataFrame (like a table)
+df = pd.DataFrame(data)
+
+print("Original data with missing values:")
+print(df)
+print(f"\nRows before handling missing values: {len(df)}")
+
+# Check for missing values
+print(f"\nMissing values per column:")
+print(df.isnull().sum())
+
+# Method 1: DELETE rows with missing values
+print(f"\n=== METHOD 1: DELETE MISSING VALUES ===")
+df_deleted = df.dropna()  # Remove any row with missing values
+print("After deleting rows with missing values:")
+print(df_deleted)
+print(f"Rows after deletion: {len(df_deleted)}")
+
+# Method 2: IMPUTE (fill) missing values
+print(f"\n=== METHOD 2: IMPUTE MISSING VALUES ===")
+df_imputed = df.copy()
+
+# Fill missing names with 'Unknown'
+df_imputed['Name'] = df_imputed['Name'].fillna('Unknown')
+
+# Fill missing ages with the average age
+average_age = df_imputed['Age'].mean()
+df_imputed['Age'] = df_imputed['Age'].fillna(average_age)
+
+# Fill missing salaries with the median salary
+median_salary = df_imputed['Salary'].median()
+df_imputed['Salary'] = df_imputed['Salary'].fillna(median_salary)
+
+print("After imputing missing values:")
+print(df_imputed)
+
+# Method 3: FLAG missing values
+print(f"\n=== METHOD 3: FLAG MISSING VALUES ===")
+df_flagged = df.copy()
+
+# Create flag columns to indicate where data was missing
+df_flagged['Name_Missing'] = df_flagged['Name'].isnull()
+df_flagged['Age_Missing'] = df_flagged['Age'].isnull() 
+df_flagged['Salary_Missing'] = df_flagged['Salary'].isnull()
+
+# Then fill the missing values
+df_flagged['Name'] = df_flagged['Name'].fillna('Unknown')
+df_flagged['Age'] = df_flagged['Age'].fillna(df_flagged['Age'].mean())
+df_flagged['Salary'] = df_flagged['Salary'].fillna(df_flagged['Salary'].median())
+
+print("After flagging and filling missing values:")
+print(df_flagged)
+
+print(f"\n=== SUMMARY ===")
+print(f"Original dataset: {len(df)} rows")
+print(f"After deletion: {len(df_deleted)} rows")
+print(f"After imputation: {len(df_imputed)} rows")  
+print(f"After flagging: {len(df_flagged)} rows")
+  </code> </pre>
+
+</section>
+  
+  <script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+
+</body>
+</html>
