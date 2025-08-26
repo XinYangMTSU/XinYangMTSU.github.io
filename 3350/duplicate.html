@@ -59,10 +59,46 @@ pre .copy:hover {
   color: #fff;
 }
 
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+
+
+    footer {
+      margin-top: 46px;
+      text-align: center;
+      color: #ffb3de;
+      font-size: 1.09em;
+      letter-spacing: 1px;
+      padding: 22px 0 14px 0;
+      border-top: 1px solid #402138;
+      background: none;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-weight: 500;
+    }
+
+      section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+    }
     
   </style>
 </head>
 <body>
+
+<section>
 <h4>Removing Duplicates in Python</h4>
   <pre> <button class="copy">Copy</button> <code>
     # Imports the pandas library and gives it the shorthand name "pd"
@@ -91,7 +127,8 @@ pre .copy:hover {
     print("\nCleaned data after dropping duplicates::")
     print(df_clean)
   </code> </pre>
-
+</section>
+  
   <script>
   document.querySelectorAll("pre .copy").forEach(button => {
     button.addEventListener("click", () => {
