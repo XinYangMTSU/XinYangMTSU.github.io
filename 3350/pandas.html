@@ -39,7 +39,7 @@
       <a href="#intro"><i class="fa-solid fa-book-open"></i> 1. What is Pandas?</a>
       <a href="#install"><i class="fa-solid fa-download"></i> 2. Install & Setup</a>
       <a href="#structures"><i class="fa-solid fa-layer-group"></i> 3. Core Data Structures</a>
-      <a href="#io"><i class="fa-solid fa-file-import"></i> 4. Common pandas tasks</a>
+      <a href="#dataframe"><i class="fa-solid fa-file-import"></i> 4. What is DataFrame?</a>
       <a href="#refs"><i class="fa-solid fa-link"></i> References</a>
     </nav>
   </aside>
@@ -98,25 +98,73 @@ df = pd.DataFrame({"Name":["Alice","Bob"], "Age":[25,30]})  # DataFrame
 print(df)</code></pre>
     </section>
 
-    <section id="io">
-      <h3>4) Common pandas tasks: </h3>
-      <pre><button class="copy">Copy</button><code>
-        # Read data
-        df = pd.read_csv('data.csv')
-        
-        # View data
-        df.head()      # First 5 rows
-        df.info()      # Data types and info
-        
-        # Clean data
-        df.drop_duplicates()    # Remove duplicates
-        df.fillna(0)           # Handle missing values
-        
-        # Analyze data
-        df.describe()          # Statistics
-        df.groupby('column').sum()  # Group and aggregate
-      </code></pre>
+        <section id="dataframe">
+      <h3>4) What is DataFrame</h3>
+      <p><b>pd.DataFrame</b> is pandas' main data structure - it's like a table or spreadsheet in Python!</p>
       
+      <h4>What is DataFrame?</h4>
+      <ul>
+        <li><b>A 2D table</b> with rows and columns</li>
+        <li><b>Like Excel spreadsheet</b> but in Python</li>
+        <li><b>Each column can have different data types</b> (numbers, text, dates)</li>
+      </ul>
+
+      <h4>Creating a DataFrame</h4>
+      <pre><button class="copy">Copy</button><code>import pandas as pd
+
+# Method 1: From dictionary (most common)
+df = pd.DataFrame({
+    'Name': ['Alice', 'Bob', 'Charlie'],
+    'Age': [25, 30, 35],
+    'City': ['New York', 'London', 'Paris']
+})
+print(df)</code></pre>
+
+      <div class="table-like">Output:
+      Name  Age      City
+0    Alice   25  New York
+1      Bob   30    London
+2  Charlie   35     Paris</div>
+
+      <h4>Key Components</h4>
+      <ul>
+        <li><b>Columns:</b> Name, Age, City (vertical)</li>
+        <li><b>Rows:</b> Each person's data (horizontal)</li>
+        <li><b>Index:</b> Row numbers (0, 1, 2) - like row labels</li>
+      </ul>
+
+      <h4>Other ways to create DataFrames</h4>
+      <pre><button class="copy">Copy</button><code># Method 2: From list of lists
+data = [['Alice', 25], ['Bob', 30]]
+df = pd.DataFrame(data, columns=['Name', 'Age'])
+
+# Method 3: From CSV file
+df = pd.read_csv('data.csv')
+
+# Method 4: Empty DataFrame
+df = pd.DataFrame(columns=['Name', 'Age'])</code></pre>
+
+      <h4>Basic DataFrame operations</h4>
+      <pre><button class="copy">Copy</button><code># Get basic info
+print(df.shape)        # (3, 3) - 3 rows, 3 columns
+print(df.columns)      # ['Name', 'Age', 'City']
+print(df.index)        # RangeIndex(start=0, stop=3, step=1)
+
+# Access data
+print(df['Name'])      # Get Name column
+print(df.head())       # First 5 rows
+print(df.tail(2))      # Last 2 rows
+
+# Basic statistics
+print(df.describe())   # Summary statistics for numeric columns
+print(df.info())       # Data types and memory info</code></pre>
+
+      <h4>Think of DataFrame as:</h4>
+      <ul>
+        <li><b>Excel worksheet</b> - organized data in rows and columns</li>
+        <li><b>Database table</b> - structured data with column names</li>
+        <li><b>Collection of Series</b> - each column is a pandas Series</li>
+      </ul>
     </section>
 
     <section id="refs">
