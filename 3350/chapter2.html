@@ -295,9 +295,13 @@ pre .copy:hover {
     print(df)
     print(f"\nRows before dropping duplicates: {len(df)}")
     
+    # Check if ANY duplicates exist
+    has_duplicates = df.duplicated().any()
+    print(f"\nHas duplicates: {has_duplicates}")  # True
+    
     # Remove duplicates
     df_clean = df.drop_duplicates()
-    print(f"Rows after dropping duplicates: {len(df_clean)}")
+    print(f"\nRows after dropping duplicates: {len(df_clean)}")
     print("\nCleaned data after dropping duplicates::")
     print(df_clean)
   </code> </pre>
