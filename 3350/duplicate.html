@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -129,7 +125,31 @@ pre .copy:hover {
     print("\nCleaned data after dropping duplicates::")
     print(df_clean)
   </code> </pre>
+</section>
 
+<section>
+     <h4>What is a Dictionary?</h4>
+
+    <p>A <strong>dictionary</strong> in Python is a data structure that stores data in <strong>key-value pairs</strong>. 
+      Think of it like a real dictionary where you look up a word (key) to find its definition (value).</p>
+
+    <h4>Dictionary Basics</h4>
+
+    <p><strong>Creating:</strong></p>
+    <pre><code>my_dict = {'key1': 'value1', 'key2': 'value2'}</code></pre>
+
+    <p><strong>Accessing values:</strong></p>
+    <pre><code>names = data['Name']  # Gets ['Alice', 'Bob', 'Alice', 'Charlie']
+    ages = data['Age']    # Gets [25, 30, 25, 35]</code></pre>
+
+    <p><strong>Why use dictionaries for DataFrames?</strong></p>
+
+    <ul>
+        <li>Each key becomes a <strong>column name</strong></li>
+        <li>Each value (list) becomes the <strong>column data</strong></li>
+        <li>pandas uses this structure to create organized tables</li>
+    </ul>
+  
 </section>
   
   <script>
