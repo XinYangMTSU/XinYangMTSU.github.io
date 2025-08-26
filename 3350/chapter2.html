@@ -279,20 +279,26 @@ pre .copy:hover {
     
     <h4>Python Example</h4>
   <pre> <button class="copy">Copy</button> <code>
+    # Imports the pandas library and gives it the shorthand name "pd"
     import pandas as pd
+    
     # Create simple dataset with duplicates
+    
+    # Creates a dictionary with two lists: names and ages
     data = {'Name': ['Alice', 'Bob', 'Alice', 'Charlie'], 
-        'Age': [25, 30, 25, 35]}
-    df =  pd.DataFrame(data)
-
-    print("Original data:")
+            'Age': [25, 30, 25, 35]}
+    
+    # pd.DataFrame(data) converts the dictionary into a pandas DataFrame (like a table)
+    df = pd.DataFrame(data)
+    
+    print("Original data before dropping duplicates:")
     print(df)
-    print(f"\nRows before: {len(df)}")
-
+    print(f"\nRows before dropping duplicates: {len(df)}")
+    
     # Remove duplicates
     df_clean = df.drop_duplicates()
-    print(f"Rows after: {len(df_clean)}")
-    print("\nCleaned data:")
+    print(f"Rows after dropping duplicates: {len(df_clean)}")
+    print("\nCleaned data after dropping duplicates::")
     print(df_clean)
   </code> </pre>
   </section>
