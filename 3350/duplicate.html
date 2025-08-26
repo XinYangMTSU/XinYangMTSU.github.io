@@ -1,0 +1,116 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chapter 2: Data Preprocessing & Feature Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6; /* MAIN PINK FONT COLOR */
+    }
+
+      section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+    }
+
+    
+    pre {
+  position: relative;
+}
+
+pre .copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  background: #21111b;
+  border: 1px solid #ff79c6;
+  border-radius: 6px;
+  color: #ffb3de;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+pre .copy:hover {
+  background: #ff79c6;
+  color: #fff;
+}
+
+    
+  </style>
+</head>
+<body>
+<h4>Removing Duplicates in Python</h4>
+  <pre> <button class="copy">Copy</button> <code>
+    # Imports the pandas library and gives it the shorthand name "pd"
+    import pandas as pd
+    
+    # Create simple dataset with duplicates
+    
+    # Creates a dictionary with two lists: names and ages
+    data = {'Name': ['Alice', 'Bob', 'Alice', 'Charlie'], 
+            'Age': [25, 30, 25, 35]}
+    
+    # pd.DataFrame(data) converts the dictionary into a pandas DataFrame (like a table)
+    df = pd.DataFrame(data)
+    
+    print("Original data before dropping duplicates:")
+    print(df)
+    print(f"\nRows before dropping duplicates: {len(df)}")
+    
+    # Check if ANY duplicates exist
+    has_duplicates = df.duplicated().any()
+    print(f"\nHas duplicates: {has_duplicates}")  # True
+    
+    # Remove duplicates
+    df_clean = df.drop_duplicates()
+    print(f"\nRows after dropping duplicates: {len(df_clean)}")
+    print("\nCleaned data after dropping duplicates::")
+    print(df_clean)
+  </code> </pre>
+
+  <script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+  
+  <footer>
+    &copy; 2025 Xin Yang <br>
+    Department of Computer Science <br>
+    Middle Tennessee State University <br>
+  </footer>
+</main>
+</body>
+</html>
