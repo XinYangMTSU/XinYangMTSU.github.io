@@ -279,38 +279,21 @@ pre .copy:hover {
     
     <h4>Python Example (Simulated Sales Dataset)</h4>
   <pre> <button class="copy">Copy</button> <code>
-import pandas as pd
+    import pandas as pd
+    # Create simple dataset with duplicates
+    data = {'Name': ['Alice', 'Bob', 'Alice', 'Charlie'], 
+        'Age': [25, 30, 25, 35]}
+    df =  pd.DataFrame(data)
 
-# Example dataset with duplicates, inconsistent missing values, mixed currencies
-data = {
-    "customer": ["Alice", "Bob", "Alice", "Charlie", "Dana", "Eve"],
-    "country": ["USA", "USA", "USA", "Canada", "Canada", "USA"],
-    "spend": ["100 USD", "200 usd", "N/A", "150 CAD", "null", "300 USD"]
-}
-df = pd.DataFrame(data)
+    print("Original data:")
+    print(df)
+    print(f"\nRows before: {len(df)}")
 
-print("Original DataFrame:\\n", df)
-
-# 1) Drop duplicate rows
-df = df.drop_duplicates()
-print("\\nAfter dropping duplicates:\\n", df)
-
-# 2) Fix inconsistent formats for missing values
-df['spend'] = df['spend'].replace(["N/A", "na", "null"], pd.NA)
-print("\\nAfter replacing missing tokens with NaN:\\n", df)
-
-# 3) Normalize units (convert CAD -> USD at 0.75 rate)
-def normalize_currency(value):
-    if pd.isna(value):
-        return None
-    val, unit = value.split()
-    val = float(val)
-    if unit.lower() == "cad":
-        return round(val * 0.75, 2)  # convert CAD to USD
-    return val  # already in USD
-
-df['spend_usd'] = df['spend'].apply(normalize_currency)
-print("\\nAfter normalizing currencies (all in USD):\\n", df)
+    # Remove duplicates
+    df_clean = df.drop_duplicates()
+    print(f"Rows after: {len(df_clean)}")
+    print("\nCleaned data:")
+    print(df_clean)
   </code> </pre>
   </section>
 
