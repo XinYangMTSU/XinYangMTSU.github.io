@@ -305,6 +305,84 @@ pre .copy:hover {
     print("\nCleaned data after dropping duplicates::")
     print(df_clean)
   </code> </pre>
+  <br>
+
+    <h4>Handle Missing Values in Python</h4>
+<pre>
+<button class="copy">Copy</button>
+<code>
+# Imports the pandas, numpy library
+import pandas as pd
+import numpy as np
+
+# Create simple dataset with missing values
+# Creates a dictionary with missing values represented as NaN (Not a Number)
+data = {'Name': ['Alice', 'Bob', None, 'Charlie', 'Eva'], 
+        'Age': [25, None, 30, 35, None],
+        'Salary': [50000, 60000, None, 70000, 55000]}
+
+# pd.DataFrame(data) converts the dictionary into a pandas DataFrame (like a table)
+df = pd.DataFrame(data)
+
+print("Original data with missing values:")
+print(df)
+print(f"\nRows before handling missing values: {len(df)}")
+
+# Check for missing values
+print(f"\nMissing values per column:")
+print(df.isnull().sum())
+
+# Method 1: DELETE rows with missing values
+print(f"\n=== METHOD 1: DELETE MISSING VALUES ===")
+df_deleted = df.dropna()  # Remove any row with missing values
+print("After deleting rows with missing values:")
+print(df_deleted)
+print(f"Rows after deletion: {len(df_deleted)}")
+
+# Method 2: IMPUTE (fill) missing values
+print(f"\n=== METHOD 2: IMPUTE MISSING VALUES ===")
+df_imputed = df.copy()
+
+# Fill missing names with 'Unknown'
+df_imputed['Name'] = df_imputed['Name'].fillna('Unknown')
+
+# Fill missing ages with the average age
+average_age = df_imputed['Age'].mean()
+df_imputed['Age'] = df_imputed['Age'].fillna(average_age)
+
+# Fill missing salaries with the median salary
+median_salary = df_imputed['Salary'].median()
+df_imputed['Salary'] = df_imputed['Salary'].fillna(median_salary)
+
+print("After imputing missing values:")
+print(df_imputed)
+
+# Method 3: FLAG missing values
+print(f"\n=== METHOD 3: FLAG MISSING VALUES ===")
+df_flagged = df.copy()
+
+# Create flag columns to indicate where data was missing
+df_flagged['Name_Missing'] = df_flagged['Name'].isnull()
+df_flagged['Age_Missing'] = df_flagged['Age'].isnull() 
+df_flagged['Salary_Missing'] = df_flagged['Salary'].isnull()
+
+# Then fill the missing values
+df_flagged['Name'] = df_flagged['Name'].fillna('Unknown')
+df_flagged['Age'] = df_flagged['Age'].fillna(df_flagged['Age'].mean())
+df_flagged['Salary'] = df_flagged['Salary'].fillna(df_flagged['Salary'].median())
+
+print("After flagging and filling missing values:")
+print(df_flagged)
+
+print(f"\n=== SUMMARY ===")
+print(f"Original dataset: {len(df)} rows")
+print(f"After deletion: {len(df_deleted)} rows")
+print(f"After imputation: {len(df_imputed)} rows")  
+print(f"After flagging: {len(df_flagged)} rows")
+</code>
+</pre>
+  
+    
   </section>
 
   <section id="transformation">
