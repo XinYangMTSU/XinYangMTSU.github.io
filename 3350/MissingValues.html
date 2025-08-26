@@ -207,6 +207,11 @@ print(df)
 2   None  30.0
   </code></pre>
 
+  <ul>
+    <li><strong>Numeric columns:</strong> <code>None</code> → <code>NaN</code></li>
+    <li><strong>Object/string columns:</strong> <code>None</code> stays as <code>None</code>, but is still treated as missing</li>
+  </ul>
+    
   <p>
     🔑 Key point: <code>None</code> becomes <code>NaN</code> because pandas is built on top of NumPy, 
     and <code>NaN</code> is the standard way to represent missing values in scientific computing.
