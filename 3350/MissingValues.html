@@ -218,6 +218,78 @@ print(df)
   </p>
 </section>
 
+
+  <section>
+  <h4>What does "Imputation" mean?</h4>
+  <p>
+    <strong>Imputation</strong> = filling in missing data with some 
+    <em>reasonable replacement value</em> instead of leaving it blank.  
+    The goal is not to guess the “true” value, but to provide a useful substitute 
+    so the dataset remains complete for analysis or modeling.
+  </p>
+
+  <h2>How it works:</h2>
+
+  <p><strong>Example dataset with missing values:</strong></p>
+  <pre><code>import pandas as pd
+
+data = {'Name': ['Alice', 'Bob', 'Charlie', 'David'],
+        'Age': [25, None, 30, None]}
+
+df = pd.DataFrame(data)
+print(df)
+  </code></pre>
+
+  <p><strong>Output:</strong></p>
+  <pre><code>      Name   Age
+0    Alice  25.0
+1      Bob   NaN
+2  Charlie  30.0
+3    David   NaN
+  </code></pre>
+
+  <p><strong>Method 1: Fill with a fixed value</strong></p>
+  <pre><code>df['Age'] = df['Age'].fillna(0)
+print(df)
+
+# Output:
+#      Name   Age
+# 0    Alice  25.0
+# 1      Bob   0.0
+# 2  Charlie  30.0
+# 3    David   0.0
+  </code></pre>
+
+  <p><strong>Method 2: Fill with the average (mean)</strong></p>
+  <pre><code>df['Age'] = df['Age'].fillna(df['Age'].mean())
+print(df)
+
+# Output:
+#      Name   Age
+# 0    Alice  25.0
+# 1      Bob  27.5
+# 2  Charlie  30.0
+# 3    David  27.5
+  </code></pre>
+
+  <p><strong>Method 3: Fill with the last known value (forward fill)</strong></p>
+  <pre><code>df['Age'] = df['Age'].fillna(method='ffill')
+print(df)
+
+# Output:
+#      Name   Age
+# 0    Alice  25.0
+# 1      Bob  25.0
+# 2  Charlie  30.0
+# 3    David  30.0
+  </code></pre>
+
+  <p>
+    🔑 Key point: <strong>Imputation</strong> does not recover the true missing values, 
+    but it makes the dataset usable by avoiding blanks that could break analysis or machine learning models.
+  </p>
+</section>
+
   
   
   <script>
