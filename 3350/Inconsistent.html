@@ -116,6 +116,40 @@ print(df)
   </code> </pre>
 </section>
 
+
+  <section>
+  <h4>What is NumPy?</h4>
+  <p><strong>NumPy</strong> (Numerical Python) is a powerful Python library used for 
+     <strong>numerical and scientific computing</strong>. 
+     It provides fast and efficient operations on large arrays and matrices, 
+     making it a foundation for data science, machine learning, and statistics.</p>
+
+  <h4>Key Features:</h4>
+  <ul>
+    <li><strong>ndarray:</strong> A powerful n-dimensional array object for handling data.</li>
+    <li><strong>Mathematical functions:</strong> Linear algebra, statistics, trigonometry, etc.</li>
+    <li><strong>Integration with pandas:</strong> pandas is built on top of NumPy arrays.</li>
+    <li><strong>Speed:</strong> Much faster than standard Python lists for numerical operations.</li>
+  </ul>
+
+  <h4>Example: Using NumPy</h4>
+  <pre> <button class="copy">Copy</button> <code>
+import numpy as np
+
+# Create a simple NumPy array
+arr = np.array([1, 2, 3, 4, 5])
+print("NumPy Array:", arr)
+
+# Perform mathematical operations
+print("Array + 10:", arr + 10)       # adds 10 to each element
+print("Mean:", np.mean(arr))         # average
+print("Standard Deviation:", np.std(arr))
+print("Reshape:", arr.reshape(5,1))  # reshape to column vector
+  </code> </pre>
+</section>
+
+
+  
 <script>
   document.querySelectorAll("pre .copy").forEach(button => {
     button.addEventListener("click", () => {
