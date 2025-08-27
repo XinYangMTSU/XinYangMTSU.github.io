@@ -137,6 +137,25 @@ print(df_capped)
   </ul>
 </section>
 
+
+  <section>
+  <h4>Capping (Winsorization)</h4>
+  <p><strong>Capping</strong> (also called <strong>Winsorization</strong>) is an 
+     <strong>outlier handling technique</strong>.</p>
+
+  <p>Instead of removing outliers, we <strong>limit (cap)</strong> their values 
+     to the nearest acceptable boundary.</p>
+
+  <h4>👉 In practice:</h4>
+  <ul>
+    <li>If a value is <strong>too high</strong> (above the upper bound), replace it with the <strong>upper bound</strong>.</li>
+    <li>If a value is <strong>too low</strong> (below the lower bound), replace it with the <strong>lower bound</strong>.</li>
+  </ul>
+
+  <p>This way, the outlier stays in the dataset, but it no longer skews the statistics as much.</p>
+</section>
+
+
 <script>
   document.querySelectorAll("pre .copy").forEach(button => {
     button.addEventListener("click", () => {
