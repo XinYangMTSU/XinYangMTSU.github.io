@@ -86,17 +86,12 @@
 <body>
 
 <section>
-  <h4>Normalization: transform values to a common range or distribution</h4>
+  <h4>Log Normalization</h4>
   <p>
-    <strong>Normalization</strong> refers to techniques that transform data values so they share a <em>common scale</em> or <em>distribution</em>.  
-    This helps algorithms process data more effectively, especially when values differ greatly in scale or are skewed.
+    <b>Log Normalization</b> is a transformation where we apply a logarithmic function (like log base 10, natural log, or log base 2) to skewed data.
+    The goal is to reduce the impact of very large values and make the distribution more “normal-like” (closer to Gaussian).
   </p>
-  <p>Common approaches include:</p>
-  <ul>
-    <li><strong>Min-Max Scaling</strong> → rescales data to [0, 1]</li>
-    <li><strong>Z-score Standardization</strong> → mean = 0, variance = 1</li>
-    <li><strong>Log Transform</strong> → reduces skew in highly skewed distributions</li>
-  </ul>
+
 </section>
 
 <section>
@@ -121,20 +116,18 @@ print(df)
 </section>
 
 <section>
-  <h4>Why Normalize?</h4>
+  <h4>Why Use Log Normalization?</h4>
   <ul>
-    <li>Ensures all features contribute equally to distance-based algorithms (e.g., KNN, clustering).</li>
-    <li>Helps gradient-based optimizers converge faster.</li>
-    <li>Reduces skew and stabilizes variance in skewed data (via log/sqrt transforms).</li>
+    <li>Many datasets have skewed distributions (e.g., income, word counts, gene expression, web traffic).</li>
+    <li>A few extremely large values can dominate models.</li>
+    <li>Log transform compresses large numbers while spreading out small ones, making the data easier for algorithms to work with.</li>
   </ul>
 </section>
 
 <section>
   <h4>Limitations</h4>
   <ul>
-    <li>Log/sqrt transforms only apply to positive values (require shifting if negatives exist).</li>
-    <li>Min-Max scaling is sensitive to outliers.</li>
-    <li>Not all algorithms require normalization (e.g., tree-based models often don’t).</li>
+    <li>Log transforms only apply to positive values (require shifting if negatives exist).</li>
   </ul>
 </section>
   
