@@ -108,15 +108,15 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 
 # Sample dataset
-data = {'Color': ['Red', 'Blue', 'Green', 'Blue']}
+data = {'Size': ['Small', 'Medium', 'Large', 'Medium', 'Small']}
 df = pd.DataFrame(data)
 
 print("Original Data:")
 print(df)
 
-# Apply label encoding
+# Apply Label Encoding
 encoder = LabelEncoder()
-df['Color_Encoded'] = encoder.fit_transform(df['Color'])
+df['Size_Encoded'] = encoder.fit_transform(df['Size'])
 
 print("\nAfter Label Encoding:")
 print(df)
