@@ -1,1 +1,168 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Matplotlib — Quickstart Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    :root{
+      --pink:#ff79c6; --pink2:#ffb3de; --bg:#17191a; --panel:#222025; --ink:#ffb3de;
+    }
+    *{box-sizing:border-box}
+    body{font-family:'Roboto',Arial,sans-serif;margin:0;display:flex;background:var(--bg);min-height:100vh;color:var(--pink)}
+    #sidebar{position:fixed;width:270px;height:100vh;overflow-y:auto;background:linear-gradient(135deg,#2a1e28 80%,#47223c 100%);color:var(--pink2);padding:36px 24px 24px 28px;box-shadow:2px 0 24px rgba(255,121,198,.12);z-index:10}
+    #sidebar h2{margin:0 0 18px;font-size:1.05rem;letter-spacing:.8px;text-transform:uppercase;color:var(--pink2)}
+    #sidebar a{display:flex;align-items:center;gap:.6em;color:var(--pink2);text-decoration:none;margin:12px 0 12px 8px;font-weight:500;font-size:1.02rem;border-left:3px solid transparent;padding-left:14px;border-radius:8px 0 0 8px}
+    #sidebar a:hover,#sidebar a.active{color:var(--pink);background:#21111b;border-left:3px solid var(--pink);font-weight:700;box-shadow:1px 2px 8px 1px #2d3436}
+    #content{margin-left:290px;padding:56px 6vw;max-width:980px;width:100vw;background:#1a1d1f}
+    h1{color:var(--pink);font-size:2.4rem;font-weight:800;margin:.1em 0 .6em;letter-spacing:-.5px;text-shadow:0 2px 16px rgba(255,121,198,.18)}
+    section{margin:0 0 44px;background:var(--panel);border-radius:18px;box-shadow:0 4px 30px rgba(255,121,198,.09);padding:26px 26px;border-left:7px solid var(--pink)}
+    section:hover{box-shadow:0 10px 34px 3px rgba(255,121,198,.13);border-left:7px solid var(--pink2)}
+    section h3{border-bottom:2px solid var(--pink);padding-bottom:8px;margin:0 0 14px;color:var(--pink);font-size:1.45rem;letter-spacing:.3px}
+    section h4{font-size:1.05rem;color:var(--pink2);margin:22px 0 8px;font-weight:700;border-bottom:1px solid var(--pink2);padding-bottom:3px}
+    p,li{color:var(--ink);line-height:1.65}
+    ul{margin-left:1.6em}
+    pre{position:relative;background:#19121a;color:var(--ink);padding:14px 16px;border-radius:10px;font-size:1.02rem;line-height:1.65;overflow:auto;box-shadow:0 2px 10px rgba(255,121,198,.11)}
+    .copy{position:absolute;top:8px;right:8px;padding:.35rem .55rem;border:1px solid #333;background:#111;color:#ddd;border-radius:8px;cursor:pointer}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    a,a:visited{color:var(--pink)}
+    footer{margin-top:40px;text-align:center;color:var(--ink);font-size:.98rem;letter-spacing:.4px;padding:18px 0;border-top:1px solid #402138;background:none}
+    @media (max-width: 980px){#sidebar{display:none}#content{margin:0;padding:26px 5vw}}
+  </style>
+</head>
+<body>
+  <aside id="sidebar">
+    <h2><i class="fa-solid fa-chart-line"></i> Matplotlib Guide</h2>
+    <nav>
+      <a href="#intro"><i class="fa-solid fa-book-open"></i> 1. What is Matplotlib?</a>
+      <a href="#install"><i class="fa-solid fa-download"></i> 2. Install & Setup</a>
+      <a href="#basicplots"><i class="fa-solid fa-chart-column"></i> 3. Basic Plots</a>
+      <a href="#customize"><i class="fa-solid fa-paintbrush"></i> 4. Customization</a>
+      <a href="#refs"><i class="fa-solid fa-link"></i> References</a>
+    </nav>
+  </aside>
+
+  <main id="content">
+    <h1>Matplotlib — Quickstart Page</h1>
+
+    <section id="intro">
+      <h3>1) What is Matplotlib?</h3>
+      <p><b>Matplotlib</b> is Python’s most popular library for <b>data visualization</b>. It allows you to create a wide variety of static, animated, and interactive plots.</p>
+      <ul>
+        <li>Works seamlessly with <b>NumPy</b> and <b>Pandas</b>.</li>
+        <li>Supports line plots, bar charts, scatter plots, histograms, heatmaps, and more.</li>
+        <li>Highly customizable (colors, styles, annotations, multiple subplots).</li>
+      </ul>
+    </section>
+
+    <section id="install">
+      <h3>2) Install & Setup</h3>
+      <h4>Conda (recommended)</h4>
+      <pre><button class="copy">Copy</button><code>conda install matplotlib
+# or create a fresh env
+conda create -n mpl-env python=3.11 matplotlib jupyter -y
+conda activate mpl-env
+jupyter notebook</code></pre>
+      <h4>Pip</h4>
+      <pre><button class="copy">Copy</button><code>python -m pip install --upgrade pip
+pip install matplotlib jupyter</code></pre>
+      <h4>Verify</h4>
+      <pre><button class="copy">Copy</button><code>import matplotlib
+print(matplotlib.__version__)</code></pre>
+    </section>
+
+    <section id="basicplots">
+      <h3>3) Basic Plots</h3>
+      <h4>Line Plot</h4>
+      <pre><button class="copy">Copy</button><code>import matplotlib.pyplot as plt
+
+x = [1,2,3,4,5]
+y = [2,4,6,8,10]
+
+plt.plot(x, y, marker='o')
+plt.title("Line Plot")
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.show()</code></pre>
+
+      <h4>Bar Chart</h4>
+      <pre><button class="copy">Copy</button><code>categories = ['A','B','C']
+values = [10, 15, 7]
+
+plt.bar(categories, values, color="teal", edgecolor="black")
+plt.title("Bar Chart")
+plt.show()</code></pre>
+
+      <h4>Histogram</h4>
+      <pre><button class="copy">Copy</button><code>data = [7,8,5,6,3,4,5,8,9,6,7,8,5,4,6,9,10]
+
+plt.hist(data, bins=5, color="salmon", edgecolor="black")
+plt.title("Histogram")
+plt.show()</code></pre>
+
+      <h4>Scatter Plot</h4>
+      <pre><button class="copy">Copy</button><code>x = [5,7,8,7,2,17,2,9,4,11]
+y = [99,86,87,88,100,86,103,87,94,78]
+
+plt.scatter(x, y, color="purple")
+plt.title("Scatter Plot")
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.show()</code></pre>
+    </section>
+
+    <section id="customize">
+      <h3>4) Customization</h3>
+      <ul>
+        <li>Change colors, markers, line styles.</li>
+        <li>Add gridlines and annotations.</li>
+        <li>Create multiple subplots in one figure.</li>
+      </ul>
+      <pre><button class="copy">Copy</button><code>import numpy as np
+
+x = np.linspace(0, 10, 100)
+y1 = np.sin(x)
+y2 = np.cos(x)
+
+plt.figure(figsize=(8,5))
+plt.plot(x, y1, label="Sine", color="teal")
+plt.plot(x, y2, label="Cosine", color="orange", linestyle="--")
+plt.title("Sine vs Cosine")
+plt.xlabel("X")
+plt.ylabel("Value")
+plt.legend()
+plt.grid(True)
+plt.show()</code></pre>
+    </section>
+
+    <section id="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://matplotlib.org/" target="_blank">matplotlib.org</a></li>
+        <li><a href="https://matplotlib.org/stable/tutorials/index.html" target="_blank">Matplotlib Tutorials</a></li>
+        <li><a href="https://matplotlib.org/stable/gallery/index.html" target="_blank">Gallery of Examples</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      &copy; 2025 Xin Yang • Matplotlib Quickstart Page
+    </footer>
+  </main>
+
+  <script>
+    // Copy button functionality
+    document.querySelectorAll('pre .copy').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.nextElementSibling.innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          const old = btn.textContent; btn.textContent = 'Copied!';
+          setTimeout(() => btn.textContent = old, 1200);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
