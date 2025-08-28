@@ -1,1 +1,144 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Scikit-learn — Quickstart Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    :root{
+      --pink:#ff79c6; --pink2:#ffb3de; --bg:#17191a; --panel:#222025; --ink:#ffb3de;
+    }
+    *{box-sizing:border-box}
+    body{font-family:'Roboto',Arial,sans-serif;margin:0;display:flex;background:var(--bg);min-height:100vh;color:var(--pink)}
+    #sidebar{position:fixed;width:270px;height:100vh;overflow-y:auto;background:linear-gradient(135deg,#2a1e28 80%,#47223c 100%);color:var(--pink2);padding:36px 24px 24px 28px;box-shadow:2px 0 24px rgba(255,121,198,.12);z-index:10}
+    #sidebar h2{margin:0 0 18px;font-size:1.05rem;letter-spacing:.8px;text-transform:uppercase;color:var(--pink2)}
+    #sidebar a{display:flex;align-items:center;gap:.6em;color:var(--pink2);text-decoration:none;margin:12px 0 12px 8px;font-weight:500;font-size:1.02rem;border-left:3px solid transparent;padding-left:14px;border-radius:8px 0 0 8px}
+    #sidebar a:hover,#sidebar a.active{color:var(--pink);background:#21111b;border-left:3px solid var(--pink);font-weight:700;box-shadow:1px 2px 8px 1px #2d3436}
+    #content{margin-left:290px;padding:56px 6vw;max-width:980px;width:100vw;background:#1a1d1f}
+    h1{color:var(--pink);font-size:2.4rem;font-weight:800;margin:.1em 0 .6em;letter-spacing:-.5px;text-shadow:0 2px 16px rgba(255,121,198,.18)}
+    section{margin:0 0 44px;background:var(--panel);border-radius:18px;box-shadow:0 4px 30px rgba(255,121,198,.09);padding:26px 26px;border-left:7px solid var(--pink)}
+    section:hover{box-shadow:0 10px 34px 3px rgba(255,121,198,.13);border-left:7px solid var(--pink2)}
+    section h3{border-bottom:2px solid var(--pink);padding-bottom:8px;margin:0 0 14px;color:var(--pink);font-size:1.45rem;letter-spacing:.3px}
+    section h4{font-size:1.05rem;color:var(--pink2);margin:22px 0 8px;font-weight:700;border-bottom:1px solid var(--pink2);padding-bottom:3px}
+    p,li{color:var(--ink);line-height:1.65}
+    ul{margin-left:1.6em}
+    pre{position:relative;background:#19121a;color:var(--ink);padding:14px 16px;border-radius:10px;font-size:1.02rem;line-height:1.65;overflow:auto;box-shadow:0 2px 10px rgba(255,121,198,.11)}
+    .copy{position:absolute;top:8px;right:8px;padding:.35rem .55rem;border:1px solid #333;background:#111;color:#ddd;border-radius:8px;cursor:pointer}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    a,a:visited{color:var(--pink)}
+    footer{margin-top:40px;text-align:center;color:var(--ink);font-size:.98rem;letter-spacing:.4px;padding:18px 0;border-top:1px solid #402138;background:none}
+    @media (max-width: 980px){#sidebar{display:none}#content{margin:0;padding:26px 5vw}}
+  </style>
+</head>
+<body>
+  <aside id="sidebar">
+    <h2><i class="fa-solid fa-robot"></i> Scikit-learn Guide</h2>
+    <nav>
+      <a href="#intro"><i class="fa-solid fa-book-open"></i> 1. What is Scikit-learn?</a>
+      <a href="#install"><i class="fa-solid fa-download"></i> 2. Install & Setup</a>
+      <a href="#workflow"><i class="fa-solid fa-gears"></i> 3. ML Workflow</a>
+      <a href="#example"><i class="fa-solid fa-code"></i> 4. Example Code</a>
+      <a href="#refs"><i class="fa-solid fa-link"></i> References</a>
+    </nav>
+  </aside>
+
+  <main id="content">
+    <h1>Scikit-learn — Quickstart Page</h1>
+
+    <section id="intro">
+      <h3>1) What is Scikit-learn?</h3>
+      <p><b>Scikit-learn</b> (imported as <code>sklearn</code>) is one of the most popular open-source libraries for <b>machine learning in Python</b>.</p>
+      <ul>
+        <li><b>Data preprocessing</b> – scaling, encoding, splitting datasets</li>
+        <li><b>Machine learning models</b> – classification, regression, clustering</li>
+        <li><b>Model evaluation</b> – cross-validation, metrics</li>
+        <li><b>Dimensionality reduction</b> – PCA, feature selection</li>
+      </ul>
+
+      <h4>Why the name sklearn?</h4>
+      <p>The package is officially <b>scikit-learn</b>, but you import it as <code>sklearn</code> in Python.  
+      “Scikit” means <em>SciPy Toolkit</em>, as it was built on <code>NumPy</code>, <code>SciPy</code>, and integrates with <code>matplotlib</code>.</p>
+    </section>
+
+    <section id="install">
+      <h3>2) Install & Setup</h3>
+      <h4>Conda (recommended)</h4>
+      <pre><button class="copy">Copy</button><code>conda install scikit-learn
+# or create a fresh env
+conda create -n sklearn-env python=3.11 scikit-learn jupyter -y
+conda activate sklearn-env
+jupyter notebook</code></pre>
+
+      <h4>Pip</h4>
+      <pre><button class="copy">Copy</button><code>python -m pip install --upgrade pip
+pip install scikit-learn jupyter matplotlib</code></pre>
+
+      <h4>Verify</h4>
+      <pre><button class="copy">Copy</button><code>import sklearn
+print(sklearn.__version__)</code></pre>
+    </section>
+
+    <section id="workflow">
+      <h3>3) Typical ML Workflow with scikit-learn</h3>
+      <ol>
+        <li>Load dataset (CSV, built-in datasets)</li>
+        <li>Split data into train/test sets</li>
+        <li>Preprocess features (scaling, encoding, handling missing values)</li>
+        <li>Train a model (e.g., Logistic Regression, SVM, Decision Tree)</li>
+        <li>Evaluate performance (accuracy, precision, recall, F1, etc.)</li>
+        <li>Tune hyperparameters with cross-validation</li>
+      </ol>
+    </section>
+
+    <section id="example">
+      <h3>4) Example: Logistic Regression on Iris Dataset</h3>
+      <pre><button class="copy">Copy</button><code>from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+# Load dataset
+X, y = load_iris(return_X_y=True)
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train model
+model = LogisticRegression(max_iter=200)
+model.fit(X_train, y_train)
+
+# Evaluate
+y_pred = model.predict(X_test)
+print("Accuracy:", accuracy_score(y_test, y_pred))</code></pre>
+    </section>
+
+    <section id="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://scikit-learn.org/stable/" target="_blank">scikit-learn.org</a></li>
+        <li><a href="https://scikit-learn.org/stable/user_guide.html" target="_blank">User Guide</a></li>
+        <li><a href="https://scikit-learn.org/stable/modules/classes.html" target="_blank">API Reference</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      &copy; 2025 Xin Yang • Scikit-learn Quickstart Page
+    </footer>
+  </main>
+
+  <script>
+    document.querySelectorAll('pre .copy').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.nextElementSibling.innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          const old = btn.textContent; btn.textContent = 'Copied!';
+          setTimeout(() => btn.textContent = old, 1200);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
