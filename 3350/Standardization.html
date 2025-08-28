@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chapter 2: Data Preprocessing & Feature Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6; /* MAIN PINK FONT COLOR */
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+      position: relative;
+    }
+
+    pre .copy {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 4px 8px;
+      background: #21111b;
+      border: 1px solid #ff79c6;
+      border-radius: 6px;
+      color: #ffb3de;
+      font-size: 0.8em;
+      cursor: pointer;
+    }
+    pre .copy:hover {
+      background: #ff79c6;
+      color: #fff;
+    }
+
+    footer {
+      margin-top: 46px;
+      text-align: center;
+      color: #ffb3de;
+      font-size: 1.09em;
+      letter-spacing: 1px;
+      padding: 22px 0 14px 0;
+      border-top: 1px solid #402138;
+      background: none;
+      font-weight: 500;
+    }
+  </style>
+</head>
+  
+<body>
+
+<section>
+  <h4>Standardization (Z-score): mean = 0, variance = 1</h4>
+  <p>
+    <strong>Standardization</strong> (also called <em>Z-score normalization</em>) transforms data so that it has:
+  </p>
+  <ul>
+    <li><strong>Mean = 0</strong></li>
+    <li><strong>Variance = 1</strong> (Standard Deviation = 1)</li>
+  </ul>
+  <p>
+    Formula for standardization:
+  </p>
+  <pre><code>z = (x - μ) / σ</code></pre>
+  <p>
+    Where:
+    <ul>
+      <li><code>x</code> = original value</li>
+      <li><code>μ</code> = mean of the feature</li>
+      <li><code>σ</code> = standard deviation of the feature</li>
+    </ul>
+  </p>
+</section>
+
+<section>
+  <h4>Python Example: Standardization with scikit-learn</h4>
+  <pre> <button class="copy">Copy</button> <code>
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+
+# Sample dataset
+data = {'Score': [50, 80, 90, 100, 60]}
+df = pd.DataFrame(data)
+
+print("Original Data:")
+print(df)
+
+# Initialize scaler
+scaler = StandardScaler()
+
+# Fit and transform
+df['Score_Standardized'] = scaler.fit_transform(df[['Score']])
+
+print("\nAfter Standardization (Z-score):")
+print(df)
+  </code> </pre>
+</section>
+
+<section>
+  <h4>Why Standardize?</h4>
+  <ul>
+    <li>Many ML algorithms (e.g., Logistic Regression, KNN, Neural Networks) perform better when features are on a similar scale.</li>
+    <li>Helps gradient-based methods converge faster.</li>
+    <li>Avoids dominance of large-scale features over smaller ones.</li>
+  </ul>
+</section>
+  
+<script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
