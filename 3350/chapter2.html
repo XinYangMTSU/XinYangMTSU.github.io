@@ -327,7 +327,22 @@ pre .copy:hover {
     <li><b>Normalization: Min-Max Scaling:</b> rescale to [0, 1]</li>
      <a href="https://xinyangmtsu.github.io/3350/MinMaxScaling.html" target="_blank">Min-Max Scaling in Python</a>
   </ul>
+  <h3>Which Should You Use?</h3>
 
+    <ul>
+      <li>Use <b>Standardization</b> when:</li>
+      <ul>
+          <li>You don’t know the data distribution.</li>
+          <li>Your model assumes Gaussian-like features (Logistic Regression, SVM, PCA).</li>
+      </ul>
+      <li>Use <b>Normalization (Min-Max Scaling)</b> when:</li>
+      <ul>
+          <li>You know values must be bounded (e.g., pixel intensities [0,255] -> [0,1])</li>
+          <li>You’re using distance-based models (KNN, K-Means, Neural Nets)</li>
+      </ul>
+    </ul>
+
+    
   <h4>Categorical Encoding</h4>
   <ul>
      <li><b>One-Hot Encoding:</b> Converts each category into binary columns</li>
