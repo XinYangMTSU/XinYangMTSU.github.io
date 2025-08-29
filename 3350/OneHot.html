@@ -123,45 +123,45 @@ print(encoded)
 <section>
   <h4>Case Study: Titanic Dataset</h4>
   <pre> <button class="copy">Copy</button> <code>
-      import pandas as pd
-      from sklearn.datasets import fetch_openml
-      from sklearn.model_selection import train_test_split
-      from sklearn.linear_model import LogisticRegression
-      from sklearn.metrics import accuracy_score
-      
-      # 1. Load Titanic dataset
-      titanic = fetch_openml(name="titanic", version=1, as_frame=True, parser="auto")
-      df = titanic.frame
-      
-      # 2. Select useful columns
-      features = ["pclass", "sex", "age", "sibsp", "parch", "fare", "embarked"]
-      df = df[features + ["survived"]].dropna()
-      
-      X = df[features]
-      y = df["survived"].astype(int)
-      
-      # 3. One-Hot Encode categorical variables (sex, embarked)
-      X_encoded = pd.get_dummies(X, columns=["sex", "embarked"], drop_first=True, dtype=int)
-      # Dropping the first dummy column prevents the Dummy Variable Trap, 
-      # where one category column can be perfectly predicted from the others, 
-      # causing multicollinearity in linear models.
-      
-      print("Encoded Features (first 5 rows):")
-      print(X_encoded.head())
-      
-      # 4. Train-test split
-      X_train, X_test, y_train, y_test = train_test_split(
-          X_encoded, y, test_size=0.2, random_state=42
-      )
-      
-      # 5. Logistic Regression
-      logreg = LogisticRegression(max_iter=2000)
-      logreg.fit(X_train, y_train)
-      y_pred = logreg.predict(X_test)
-      
-      # 6. Accuracy
-      acc = accuracy_score(y_test, y_pred)
-      print("\nAccuracy with pd.get_dummies + Logistic Regression:", acc)
+import pandas as pd
+from sklearn.datasets import fetch_openml
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+# 1. Load Titanic dataset
+titanic = fetch_openml(name="titanic", version=1, as_frame=True, parser="auto")
+df = titanic.frame
+
+# 2. Select useful columns
+features = ["pclass", "sex", "age", "sibsp", "parch", "fare", "embarked"]
+df = df[features + ["survived"]].dropna()
+
+X = df[features]
+y = df["survived"].astype(int)
+
+# 3. One-Hot Encode categorical variables (sex, embarked)
+X_encoded = pd.get_dummies(X, columns=["sex", "embarked"], drop_first=True, dtype=int)
+# Dropping the first dummy column prevents the Dummy Variable Trap, 
+# where one category column can be perfectly predicted from the others, 
+# causing multicollinearity in linear models.
+
+print("Encoded Features (first 5 rows):")
+print(X_encoded.head())
+
+# 4. Train-test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X_encoded, y, test_size=0.2, random_state=42
+)
+
+# 5. Logistic Regression
+logreg = LogisticRegression(max_iter=2000)
+logreg.fit(X_train, y_train)
+y_pred = logreg.predict(X_test)
+
+# 6. Accuracy
+acc = accuracy_score(y_test, y_pred)
+print("\nAccuracy with pd.get_dummies + Logistic Regression:", acc)  
   </code> </pre>
 </section>
   
