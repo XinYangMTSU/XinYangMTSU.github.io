@@ -153,7 +153,8 @@ plt.hist(values_log, bins=30, color="darkred", edgecolor="black")
 plt.title(f"Log-Transformed Distribution: {feature}")
 plt.xlabel("log(1 + " + feature + ")")
 plt.ylabel("Frequency")
-
+# plt.tight_layout() automatically adjusts the spacing between subplots 
+# so things fit neatly within the figure.
 plt.tight_layout()
 plt.show()
   </code> </pre>
