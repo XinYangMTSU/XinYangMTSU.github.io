@@ -328,19 +328,11 @@ pre .copy:hover {
      <a href="https://xinyangmtsu.github.io/3350/MinMaxScaling.html" target="_blank">Min-Max Scaling in Python</a>
   </ul>
     
-  <h5>Which Should You Use?</h5>
+  <h5>Which Should We Use?</h5>
 
     <ul>
-      <li>Use <b>Standardization</b> when:</li>
-      <ul>
-          <li>You don’t know the data distribution.</li>
-          <li>Your model assumes Gaussian-like features (Logistic Regression, SVM, PCA).</li>
-      </ul>
-      <li>Use <b>Normalization (Min-Max Scaling)</b> when:</li>
-      <ul>
-          <li>You know values must be bounded (e.g., pixel intensities [0,255] --> [0,1])</li>
-          <li>You’re using distance-based models (KNN, K-Means, Neural Nets)</li>
-      </ul>
+      <li>Use <b>Standardization</b>: Better for normally distributed data.</li>
+      <li><b>Min-Max</b>: Better for uniformly distributed data or when you need bounded output.</li>
     </ul>
 
     
