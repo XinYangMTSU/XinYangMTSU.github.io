@@ -116,6 +116,51 @@ print(df)
 </section>
 
 <section>
+<h4>Case Study: Breast Cancer Dataset</h4>
+  <pre> <button class="copy">Copy</button> <code>
+import numpy as np
+import pandas as pd
+from sklearn.datasets import load_breast_cancer
+import matplotlib.pyplot as plt
+
+# 1. Load dataset as pandas DataFrame
+data = load_breast_cancer(as_frame=True)
+df = data.frame
+
+# Pick a skewed feature
+# Most traditional algorithms assume (or perform better when) features 
+# follow a normal-like distribution, which is why we often transform skewed data
+feature = "mean area"
+values = df[feature]
+
+# 2. Plot before log transform
+plt.figure(figsize=(12,5))
+
+plt.subplot(1,2,1)
+plt.hist(values, bins=30, color="teal", edgecolor="black")
+plt.title(f"Original Distribution: {feature}")
+plt.xlabel(feature)
+plt.ylabel("Frequency")
+
+# 3. Apply log transform
+values_log = np.log1p(values)  # log(1+x)
+# Why Use log1p Instead of log(x)? 
+# Handles zeros safely If x = 0, then log(0) is undefined  
+# But log1p(0) = log(1) = 0  So it won’t break on zero values.
+
+plt.subplot(1,2,2)
+plt.hist(values_log, bins=30, color="darkred", edgecolor="black")
+plt.title(f"Log-Transformed Distribution: {feature}")
+plt.xlabel("log(1 + " + feature + ")")
+plt.ylabel("Frequency")
+
+plt.tight_layout()
+plt.show()
+  </code> </pre>
+</section>
+  
+  
+<section>
   <h4>Why Use Log Normalization?</h4>
   <ul>
     <li>Many datasets have skewed distributions (e.g., income, word counts, gene expression, web traffic).</li>
