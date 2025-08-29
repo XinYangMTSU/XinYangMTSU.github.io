@@ -169,10 +169,11 @@ print(df)
 <section>
   <h4>Why Standardize?</h4>
   <ul>
+    <li>Different features often have different scales (e.g., height (150–200 cm) vs income (10,000–100,000)), 
+    Features with larger scales can dominate machine learning models.
+    Standardization puts all features on the same scale, so models treat them fairly.</li>
     <li>Many ML algorithms (e.g., Logistic Regression, KNN, Neural Networks) perform better when features are on a similar scale.</li>
     <li>Helps gradient-based methods converge faster.</li>
-    <li>Prevents features with large values (like income = thousands, age = tens) from dominating the model.</li>
-    <li>Ensures features with different scales (like height in cm and weight in kg) contribute fairly.</li>
   </ul>
 </section>
 
