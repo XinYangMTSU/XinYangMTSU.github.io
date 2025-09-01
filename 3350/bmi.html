@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chapter 2: Data Preprocessing & Feature Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+      position: relative;
+    }
+
+    pre .copy {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 4px 8px;
+      background: #21111b;
+      border: 1px solid #ff79c6;
+      border-radius: 6px;
+      color: #ffb3de;
+      font-size: 0.8em;
+      cursor: pointer;
+    }
+    pre .copy:hover {
+      background: #ff79c6;
+      color: #fff;
+    }
+  </style>
+</head>
+  
+<body>
+
+<section>
+  <h4>Interaction Features – Combining Existing Variables</h4>
+  <p>
+    Interaction features are new variables created by combining two or more existing features 
+    in a way that captures their relationship. For example, <code>BMI</code> is an interaction between 
+    <em>weight</em> and <em>height</em>, and <code>Age-adjusted BMI</code> captures how health risks may change 
+    with both body size and age.
+  </p>
+
+  <h4>Example: Creating BMI and Age-Adjusted BMI</h4>
+  <pre> <button class="copy">Copy</button> <code>
+import pandas as pd
+
+# Example dataset: patient records
+data = {
+    "patient_id": [1, 2, 3, 4],
+    "weight_kg": [70, 80, 60, 90],   # in kilograms
+    "height_m": [1.75, 1.80, 1.60, 1.95],  # in meters
+    "age": [25, 40, 35, 50]
+}
+
+df = pd.DataFrame(data)
+print("Original Data:")
+print(df)
+
+# --- Create Interaction Features ---
+# 1. BMI (interaction between weight and height)
+df["BMI"] = df["weight_kg"] / (df["height_m"] ** 2)
+
+# 2. Age-adjusted BMI (interaction between BMI and age)
+df["BMI_age_adjusted"] = df["BMI"] * df["age"]
+
+print("\nData with Interaction Features:")
+print(df)
+  </code> </pre>
+
+  <h4>Notes:</h4>
+  <ul>
+    <li><code>BMI</code> = weight ÷ height², a health indicator.</li>
+    <li><code>BMI_age_adjusted</code> = BMI × age, highlighting combined effects of age and BMI.</li>
+    <li>Interaction features often reveal patterns that single variables cannot capture on their own.</li>
+  </ul>
+</section>
+
+<script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
