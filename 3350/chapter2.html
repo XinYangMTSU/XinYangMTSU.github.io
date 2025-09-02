@@ -232,7 +232,7 @@ pre .copy:hover {
     <li><a href="#transformation"><i class="fas fa-balance-scale"></i>3. Data Transformation</a></li>
     <li><a href="#feature-eng"><i class="fas fa-tools"></i>4. Feature Engineering</a></li>
     <li><a href="#feature-selection"><i class="fas fa-magic"></i>5. Feature Selection Techniques</a></li>
-    <li><a href="#pipeline"><i class="fas fa-stream"></i>6. Pipelines for Preprocessing</a></li>
+    <li><a href="#dim-reduction"><i class="fas fa-stream"></i>6. Dimensionality Reduction</a></li>
     <li><a href="#references"><i class="fas fa-link"></i>References</a></li>
   </ul>
 </nav>
@@ -244,7 +244,7 @@ pre .copy:hover {
   <h3>1. What is Data Preprocessing?</h3>
   <p>
     <b>Data preprocessing</b> is the <b>entire set of steps</b> you take to prepare raw data so it can be effectively used in machine learning or analysis.
-    It’s like the whole kitchen prep before cooking: washing, chopping, measuring, marinating.
+    It’s like the whole kitchen prep before cooking: washing, chopping, measuring, and marinating.
   </p>
 
   <h4>It may include:</h4>
@@ -264,7 +264,7 @@ pre .copy:hover {
     
     <h4>What is Data Cleaning?</h4> 
     Data Cleaning (sometimes called data cleansing or data scrubbing) is the process of detecting and fixing errors, inconsistencies, and problems in raw data so it becomes accurate, consistent, and usable for analysis or modeling.
-    Data cleaning is just one part of preprocessing.
+    Data cleaning is just one part of the preprocessing process.
     It specifically means fixing mistakes, inconsistencies, or errors in data.
     <br><br>
     Think of it like washing vegetables before cooking: the recipe (machine learning model or analysis) won’t work well if the ingredients (data) are dirty.
@@ -311,7 +311,7 @@ pre .copy:hover {
 
     <ul>
       <li><b>Data Cleaning</b> removes errors and inconsistencies (fixing duplicates, missing values, wrong formats, etc.).</li>
-     <li><b>Data Transformation</b> reshapes or encodes that clean data into mathematically suitable forms for algorithms.</li>
+     <li><b>Data Transformation</b> reshapes or encodes the clean data into mathematically suitable forms for algorithms.</li>
     </ul>
     <p>
       Think of it as preparing ingredients not just by washing them (cleaning), but by cutting, measuring, 
@@ -459,20 +459,31 @@ pre .copy:hover {
     
   </section>
 
-  <section id="pipeline">
-    <h3>6. Pipelines for Preprocessing</h3>
-    <p>Scikit-learn’s <code>Pipeline</code> allows you to bundle preprocessing and modeling steps together, making your code cleaner and more reproducible.</p>
-    <pre>
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
+<section id="dim-reduction">
+  <h3>6. Dimensionality Reduction</h3>
+  <p>
+    Dimensionality Reduction techniques reduce the number of features while preserving as much information 
+    (variance or structure) as possible. This is especially useful when:
+  </p>
+  <ul>
+    <li>Datasets have <b>many correlated features</b>.</li>
+    <li>We want to <b>visualize high-dimensional data</b> in 2D or 3D.</li>
+    <li>Reducing dimensions can <b>improve model performance</b> and training speed.</li>
+  </ul>
 
-pipe = Pipeline([
-  ('scaler', StandardScaler()),
-  ('model', LogisticRegression())
-])
-pipe.fit(X_train, y_train)
-    </pre>
+  <h4>Principal Component Analysis (PCA)</h4>
+  <p>
+    PCA is the most widely used linear technique. It finds new axes (principal components) that capture 
+    the maximum variance in the data. The first component explains the most variance, the second is orthogonal 
+    to the first, and so on.
+  </p>
+  <p class="eq" style="text-align:center;">
+    $$ Z = XW $$
+  </p>
+  <p style="text-align:center;">
+    where \(W\) contains eigenvectors of the covariance matrix of \(X\).
+  </p>
+   
   </section>
 
   <section id="references">
