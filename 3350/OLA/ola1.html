@@ -97,6 +97,26 @@
       margin-bottom: 0.5em;
     }
 
+    /* Table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      color: #ffb3de;
+    }
+    th, td {
+      border: 1px solid #ff79c6;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #19121a;
+      color: #ff79c6;
+    }
+    tr:nth-child(even) {
+      background: #2b2b2b;
+    }
+
     /* Back-to-top button */
     #backToTop {
       position: fixed;
@@ -137,63 +157,20 @@
     The dataset contains 178 samples of wines with 13 features describing chemical properties, 
     and the target variable has 3 classes (wine types).
   </p>
-
-  <h4>Steps to Complete:</h4>
-  <ol>
-    <li><b>Load and Inspect the Dataset</b>
-      <ul>
-        <li>Use <code>sklearn.datasets.load_wine(as_frame=True)</code>.</li>
-        <li>Print the shape and first 5 rows.</li>
-      </ul>
-    </li>
-
-    <li><b>Data Cleaning</b>
-      <ul>
-        <li>Check for missing values and duplicates.</li>
-        <li>Report whether cleaning was needed.</li>
-      </ul>
-    </li>
-
-    <li><b>Data Transformation</b>
-      <ul>
-        <li>Standardize features using <code>StandardScaler</code>.</li>
-        <li>Explain why scaling is necessary here.</li>
-      </ul>
-    </li>
-
-    <li><b>Feature Engineering</b>
-      <ul>
-        <li>Create a new feature: <code>phenols_ratio = flavanoids / total_phenols</code>.</li>
-        <li>Explain why this might be meaningful.</li>
-      </ul>
-    </li>
-
-    <li><b>Feature Selection</b>
-      <ul>
-        <li>Use <code>chi2</code> test after discretizing features (KBinsDiscretizer).</li>
-        <li>Use <code>RFE</code> with Logistic Regression to select the top 8 features.</li>
-        <li>Compare classification accuracy with all features vs selected features.</li>
-      </ul>
-    </li>
-
-    <li><b>Dimensionality Reduction with PCA</b>
-      <ul>
-        <li>Apply PCA to reduce from 13 → 2 dimensions.</li>
-        <li>Plot the data points colored by wine class.</li>
-        <li>Report the explained variance ratio.</li>
-      </ul>
-    </li>
-
-    <li><b>Discussion</b>
-      <ul>
-        <li>Which features are most important for classifying wines?</li>
-        <li>Did PCA separate the classes well visually?</li>
-        <li>How did feature selection affect classification accuracy?</li>
-      </ul>
-    </li>
-  </ol>
 </section>
 
+<section>
+  <h4>Steps to Complete</h4>
+  <ol>
+    <li><b>Load and Inspect the Dataset</b></li>
+    <li><b>Data Cleaning</b></li>
+    <li><b>Data Transformation</b></li>
+    <li><b>Feature Engineering</b></li>
+    <li><b>Feature Selection</b></li>
+    <li><b>Dimensionality Reduction with PCA</b></li>
+    <li><b>Discussion</b></li>
+  </ol>
+</section>
 
 <section>
   <h4>Starter Code</h4>
@@ -230,7 +207,6 @@ print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
   </code></pre>
 </section>
 
-
 <section>
   <h4>Submission</h4>
   <p>
@@ -238,6 +214,22 @@ print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
     with all outputs and plots in D2L. 
     Include short explanations for each step. 
   </p>
+</section>
+
+<section>
+  <h4>Grading Distribution (Total: 100 points)</h4>
+  <table>
+    <tr><th>Task</th><th>Points</th></tr>
+    <tr><td>Load & Inspect Dataset</td><td>5</td></tr>
+    <tr><td>Data Cleaning</td><td>10</td></tr>
+    <tr><td>Data Transformation</td><td>15</td></tr>
+    <tr><td>Feature Engineering</td><td>10</td></tr>
+    <tr><td>Feature Selection</td><td>20</td></tr>
+    <tr><td>Dimensionality Reduction (PCA)</td><td>20</td></tr>
+    <tr><td>Discussion & Analysis</td><td>10</td></tr>
+    <tr><td>Code Style, Clarity, and Explanations</td><td>10</td></tr>
+    <tr><th>Total</th><th>100</th></tr>
+  </table>
 </section>
 
 <!-- Back-to-top button -->
