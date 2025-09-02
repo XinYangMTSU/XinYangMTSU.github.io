@@ -1,1 +1,252 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chapter 5: Ensemble Methods - Random Forests & Boosting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+    }
+    /* Sidebar */
+    #sidebar {
+      position: fixed;
+      width: 250px;
+      height: 100vh;
+      overflow-y: auto;
+      background: linear-gradient(135deg, #2a1e28 80%, #47223c 100%);
+      color: #ffb3de;
+      padding: 38px 24px 24px 28px;
+      box-shadow: 2px 0 24px rgba(255,121,198,.12);
+      z-index: 10;
+    }
+    #sidebar h2 {
+      margin-top: 0;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #ffb3de;
+      margin-bottom: 1.7em;
+      text-align: left;
+    }
+    #sidebar ul { list-style: none; padding: 0; margin: 0; }
+    #sidebar a {
+      display: flex;
+      align-items: center;
+      color: #ffb3de;
+      text-decoration: none;
+      margin: 16px 0 16px 10px;
+      font-weight: 500;
+      font-size: 1.08em;
+      border-left: 3px solid transparent;
+      padding-left: 14px;
+      border-radius: 8px 0 0 8px;
+      transition: background .19s, color .19s, border .19s;
+      gap: 0.7em;
+    }
+    #sidebar a:hover, #sidebar a.active {
+      color: #ff79c6;
+      background: #21111b;
+      border-left: 3px solid #ff79c6;
+      font-weight: 700;
+      box-shadow: 1px 2px 8px 1px #2d3436;
+    }
+    #content {
+      margin-left: 270px;
+      padding: 56px 6vw;
+      max-width: 900px;
+      background: #1a1d1f;
+    }
+    h1 {
+      font-size: 2.4em;
+      font-weight: 800;
+      color: #ff79c6;
+      margin-bottom: 0.5em;
+    }
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      padding: 32px;
+      border-left: 7px solid #ff79c6;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+    }
+    section h3 {
+      font-size: 1.5em;
+      font-weight: 700;
+      margin-top: 0;
+      border-bottom: 2px solid #ff79c6;
+      padding-bottom: 8px;
+    }
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-top: 28px;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 4px;
+    }
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 1.02em;
+      line-height: 1.6;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+    }
+    ul { margin-left: 1.6em; }
+    footer {
+      text-align: center;
+      margin-top: 46px;
+      color: #ffb3de;
+      font-size: 1.05em;
+      padding: 22px 0 14px;
+      border-top: 1px solid #402138;
+    }
+  </style>
+</head>
+<body>
+
+<nav id="sidebar">
+  <h2><i class="fas fa-book"></i> Contents</h2>
+  <ul>
+    <li><a href="#rf"><i class="fas fa-tree"></i> Random Forests</a></li>
+    <li><a href="#bagging"><i class="fas fa-clone"></i> Ensembles: Bagging & Boosting</a></li>
+    <li><a href="#gb"><i class="fas fa-bolt"></i> Gradient Boosting & XGBoost</a></li>
+    <li><a href="#references"><i class="fas fa-link"></i> References</a></li>
+  </ul>
+</nav>
+
+<main id="content">
+  <h1>Chapter 5: Ensemble Methods - Random Forests & Boosting</h1>
+
+  <section id="rf">
+    <h3>1. Random Forests</h3>
+    <p>
+      Random Forests are ensembles of Decision Trees trained on random subsets of the data and features. 
+      They combine the predictions of many trees to reduce overfitting and improve generalization.
+    </p>
+    <h4>Key Ideas</h4>
+    <ul>
+      <li><b>Bootstrap sampling:</b> each tree is trained on a random subset of data (with replacement).</li>
+      <li><b>Feature randomness:</b> each split considers only a random subset of features.</li>
+      <li><b>Prediction:</b> classification = majority vote, regression = average.</li>
+    </ul>
+    <h4>Python Example</h4>
+    <pre><code>
+from sklearn.datasets import load_breast_cancer
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+X, y = load_breast_cancer(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+rf = RandomForestClassifier(n_estimators=100, random_state=42)
+rf.fit(X_train, y_train)
+y_pred = rf.predict(X_test)
+
+print("Random Forest Accuracy:", accuracy_score(y_test, y_pred))
+    </code></pre>
+  </section>
+
+  <section id="bagging">
+    <h3>2. Ensembles: Bagging & Boosting</h3>
+    <h4>Bagging (Bootstrap Aggregating)</h4>
+    <ul>
+      <li>Train models in parallel on random bootstrap samples.</li>
+      <li>Aggregate predictions (majority vote / averaging).</li>
+      <li>Reduces variance, helps with overfitting (e.g., Random Forest).</li>
+    </ul>
+
+    <h4>Boosting</h4>
+    <ul>
+      <li>Sequentially train weak learners (shallow trees).</li>
+      <li>Each learner focuses more on misclassified samples.</li>
+      <li>Models are combined into a strong ensemble with weighted voting.</li>
+    </ul>
+    <p><b>Difference:</b> Bagging = parallel & variance reduction, Boosting = sequential & bias reduction.</p>
+  </section>
+
+  <section id="gb">
+    <h3>3. Gradient Boosting & XGBoost</h3>
+    <h4>Gradient Boosting</h4>
+    <p>
+      Gradient Boosting builds models sequentially, where each new model fits the <b>residual errors</b> of the previous models. 
+      It uses gradient descent to minimize a loss function.
+    </p>
+    <h4>Python Example (GradientBoostingClassifier)</h4>
+    <pre><code>
+from sklearn.ensemble import GradientBoostingClassifier
+
+gb = GradientBoostingClassifier(random_state=42)
+gb.fit(X_train, y_train)
+print("Gradient Boosting Accuracy:", gb.score(X_test, y_test))
+    </code></pre>
+
+    <h4>XGBoost</h4>
+    <ul>
+      <li>Extreme Gradient Boosting = optimized, scalable version of Gradient Boosting.</li>
+      <li>Features: regularization, handling missing values, parallelization, tree pruning.</li>
+      <li>Widely used in Kaggle competitions due to speed and accuracy.</li>
+    </ul>
+    <pre><code>
+import xgboost as xgb
+
+xgb_clf = xgb.XGBClassifier(use_label_encoder=False, eval_metric="logloss")
+xgb_clf.fit(X_train, y_train)
+print("XGBoost Accuracy:", xgb_clf.score(X_test, y_test))
+    </code></pre>
+  </section>
+
+  <section id="references">
+    <h3>References</h3>
+    <ul>
+      <li><a href="https://scikit-learn.org/stable/user_guide.html" target="_blank">scikit-learn User Guide</a></li>
+      <li><a href="https://xgboost.readthedocs.io" target="_blank">XGBoost Documentation</a></li>
+      <li>Scholar GPT</li>
+    </ul>
+  </section>
+
+  <footer>
+    &copy; 2025 Xin Yang <br>
+    Department of Computer Science <br>
+    Middle Tennessee State University <br>
+  </footer>
+</main>
+
+<script>
+  // Smooth scrolling & highlight active sidebar link
+  const sidebarLinks = document.querySelectorAll('#sidebar a');
+  const sectionIds = Array.from(sidebarLinks).map(l => l.getAttribute('href'));
+
+  sidebarLinks.forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      document.querySelector(link.getAttribute("href"))
+        .scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  window.addEventListener("scroll", () => {
+    let current = sectionIds[0];
+    for (const id of sectionIds) {
+      const sec = document.querySelector(id);
+      if (sec && sec.getBoundingClientRect().top - 80 < 0) current = id;
+    }
+    sidebarLinks.forEach(l => l.classList.remove("active"));
+    const active = document.querySelector(`#sidebar a[href="${current}"]`);
+    if (active) active.classList.add("active");
+  });
+</script>
+
+</body>
+</html>
