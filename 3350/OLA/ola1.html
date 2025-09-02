@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Homework – Data Preprocessing & Feature Engineering (Wine Dataset)</title>
+  <title>OLA1 – Data Preprocessing & Feature Engineering (Wine Dataset)</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
@@ -14,6 +13,22 @@
       min-height: 100vh;
       color: #ff79c6;
       padding: 20px;
+    }
+
+    /* Title section */
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    header h1 {
+      font-size: 2em;
+      margin: 0;
+      color: #ff79c6;
+    }
+    header p {
+      font-size: 0.95em;
+      color: #ffb3de;
+      margin-top: 6px;
     }
 
     section {
@@ -71,7 +86,6 @@
       font-size: 0.8em;
       cursor: pointer;
     }
-
     pre .copy:hover {
       background: #ff79c6;
       color: #fff;
@@ -82,15 +96,44 @@
       margin-top: 0.5em;
       margin-bottom: 0.5em;
     }
+
+    /* Back-to-top button */
+    #backToTop {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background-color: #ff79c6;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 1.3em;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    #backToTop:hover {
+      background-color: #ffb3de;
+      color: #17191a;
+    }
   </style>
 </head>
 <body>
 
+<header id="top">
+  <h1>OLA1 – Data Preprocessing & Feature Engineering</h1>
+  <p>Deadline: September 15, 2025</p>
+</header>
+
 <section>
-  <h3>OLA1 – Data Preprocessing & Feature Engineering</h3>
+  <h3>Overview</h3>
   <p>
-    In this assignment, you will practice **data preprocessing, feature engineering, feature selection, 
-    and dimensionality reduction** using the built-in <b>Wine Dataset</b> from scikit-learn. 
+    In this assignment, you will practice <b>data preprocessing, feature engineering, feature selection, 
+    and dimensionality reduction</b> using the built-in <b>Wine Dataset</b> from scikit-learn. 
     The dataset contains 178 samples of wines with 13 features describing chemical properties, 
     and the target variable has 3 classes (wine types).
   </p>
@@ -155,24 +198,19 @@
 <section>
   <h4>Starter Code</h4>
   <pre><button class="copy">Copy</button><code>
-# --- Please import necessary library here---
+# --- Please import necessary libraries here ---
 from sklearn.datasets import load_wine
-
 
 # --- 1. Load dataset ---
 wine = load_wine(as_frame=True)
 X = wine.data
 y = wine.target
 
-
 # --- 2. Data Cleaning ---
 
-    
 # --- 3. Standardize features ---
 
-    
 # --- 4. Feature Engineering ---
-
 
 # --- Train/Test split ---
 X_train, X_test, y_train, y_test = train_test_split(X_scaled, y,
@@ -186,12 +224,9 @@ print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
 
 # --- 5. Feature Selection ---
 
-    
 # --- 6. PCA (2D visualization) ---
 
-
 # --- 7. Discussion ---
-    
   </code></pre>
 </section>
 
@@ -202,9 +237,13 @@ print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
     Submit your Jupyter Notebook file <code>ola1.ipynb</code> 
     with all outputs and plots in D2L. 
     Include short explanations for each step. 
-    
   </p>
 </section>
+
+<!-- Back-to-top button -->
+<button id="backToTop" title="Go to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
 
 <script>
   document.querySelectorAll("pre .copy").forEach(button => {
@@ -216,6 +255,11 @@ print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
         setTimeout(() => button.textContent = old, 1500);
       });
     });
+  });
+
+  // Back-to-top button functionality
+  document.getElementById("backToTop").addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 </script>
 
