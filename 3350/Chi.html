@@ -84,32 +84,36 @@
   <h4>Example: Chi-Square Feature Selection</h4>
   <pre> <button class="copy">Copy</button> <code>
 import pandas as pd
+from sklearn.datasets import load_breast_cancer
+from sklearn.preprocessing import KBinsDiscretizer
 from sklearn.feature_selection import chi2, SelectKBest
-from sklearn.preprocessing import LabelEncoder
 
-# Example dataset: student pass/fail outcome
-data = {
-    "study_group": ["A", "A", "B", "B", "C", "C"],
-    "extra_classes": ["Yes", "No", "Yes", "No", "Yes", "No"],
-    "passed_exam": [1, 0, 1, 0, 1, 0]
-}
+# --- Load dataset ---
+cancer = load_breast_cancer(as_frame=True)
+X = cancer.data
+y = cancer.target   # 0 = malignant, 1 = benign
 
-df = pd.DataFrame(data)
-print("Original Data:")
-print(df)
+print("Original Data (first 5 rows):")
+print(X.head())
 
-# --- Encode categorical variables ---
-X = pd.get_dummies(df[["study_group", "extra_classes"]], drop_first=True)
-y = df["passed_exam"]
+# --- Discretize continuous features ---
+# Chi-Square requires non-negative categorical data
+discretizer = KBinsDiscretizer(n_bins=5, encode="ordinal", strategy="uniform")
+X_binned = pd.DataFrame(discretizer.fit_transform(X), columns=X.columns)
 
-# --- Apply Chi-Square Test ---
-chi_scores, p_values = chi2(X, y)
+print("\nBinned Features (for Chi-Square):")
+print(X_binned.head())
 
-for feature, score, p in zip(X.columns, chi_scores, p_values):
-    print(f"{feature}: Chi2 = {score:.2f}, p-value = {p:.4f}")
+# --- Apply Chi-Square test ---
+chi_scores, p_values = chi2(X_binned, y)
 
-# Select top k features
-X_new = SelectKBest(chi2, k=1).fit_transform(X, y)
+print("\nChi-Square Scores and p-values:")
+for feature, score, p in sorted(zip(X.columns, chi_scores, p_values), key=lambda x: x[1], reverse=True)[:10]:
+    print(f"{feature}: Chi2 = {score:.2f}, p-value = {p:.4e}")
+
+# --- Select top k features ---
+X_new = SelectKBest(chi2, k=5).fit_transform(X_binned, y)
+print("\nShape of reduced dataset:", X_new.shape)
   </code> </pre>
 
   <h4>Notes:</h4>
