@@ -1,107 +1,71 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>OLA1 – Data Preprocessing & Feature Engineering (Wine Dataset)</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OLA1 – Data Preprocessing & Feature Engineering</title>
   <style>
-   body {
-      font-family: 'Roboto', Arial, sans-serif;
-      margin: 0;
-      background: #17191a;
-      min-height: 100vh;
-      color: #ff79c6;
-      padding: 20px;
-    }
-
-    /* Title section */
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    header h1 {
-      font-size: 2em;
-      margin: 0;
-      color: #ff79c6;
-    }
-    header h3 {
-      font-size: 1em;
-      color: #ffb3de;
-      margin-top: 6px;
-    }
-
-    section {
-      margin-bottom: 45px;
-      background: #222025;
-      border-radius: 18px;
-      box-shadow: 0 4px 30px rgba(255,121,198,.09);
-      padding: 28px 26px 20px 26px;
-      border-left: 6px solid #ff79c6;
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
       max-width: 950px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    section h3 {
-      font-size: 1.3em;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #17191a;
       color: #ff79c6;
-      margin-bottom: 10px;
-      font-weight: 700;
     }
-
-    section h4 {
-      font-size: 1.15em;
+    .container {
+      background-color: #222025;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(255,121,198,0.15);
+    }
+    h1 {
+      text-align: center;
+      font-size: 26px;
+      color: #ff79c6;
+      margin-bottom: 6px;
+    }
+    h3.deadline {
+      text-align: center;
+      font-size: 15px;
       color: #ffb3de;
-      margin-bottom: 8px;
-      margin-top: 20px;
-      font-weight: 600;
-      border-bottom: 1px solid #ffb3de;
-      padding-bottom: 2px;
+      margin-top: 0;
+      margin-bottom: 20px;
     }
-
+    h3 {
+      color: #ff79c6;
+      font-size: 22px;
+      margin-bottom: 12px;
+      border-bottom: 3px solid #ff79c6;
+      padding-bottom: 6px;
+    }
+    h4 {
+      color: #ffb3de;
+      font-size: 18px;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 3px;
+    }
     pre {
       background: #19121a;
       color: #ffb3de;
-      padding: 15px 18px;
-      border-radius: 8px;
-      font-size: 1.04em;
-      line-height: 1.7;
-      overflow-x: auto;
-      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
-      position: relative;
-    }
-
-    pre .copy {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      padding: 4px 8px;
-      background: #21111b;
-      border: 1px solid #ff79c6;
+      padding: 15px;
       border-radius: 6px;
-      color: #ffb3de;
-      font-size: 0.8em;
-      cursor: pointer;
+      font-size: 0.95em;
+      overflow-x: auto;
     }
-    pre .copy:hover {
-      background: #ff79c6;
-      color: #fff;
+    code {
+      font-family: Consolas, monospace;
     }
-
-    ul {
-      margin-left: 1.6em;
-      margin-top: 0.5em;
-      margin-bottom: 0.5em;
-    }
-
-    /* Table styling - smaller */
     table {
-      width: 80%;
-      border-collapse: collapse;
+      width: 70%;
       margin: 15px auto;
-      color: #ffb3de;
+      border-collapse: collapse;
       font-size: 0.9em;
+      color: #ffb3de;
     }
     th, td {
       border: 1px solid #ff79c6;
@@ -115,8 +79,6 @@
     tr:nth-child(even) {
       background: #2b2b2b;
     }
-
-    /* Back-to-top button */
     #backToTop {
       position: fixed;
       bottom: 24px;
@@ -129,10 +91,10 @@
       height: 48px;
       font-size: 1.3em;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
       transition: background 0.2s;
     }
     #backToTop:hover {
@@ -143,12 +105,10 @@
 </head>
 <body>
 
-<header id="top">
+<div class="container">
   <h1>OLA1 – Data Preprocessing & Feature Engineering</h1>
-  <h3>Deadline: September 9th, 2025 (Tuesday)</h3>
-</header>
+  <h3 class="deadline">Deadline: September 9th, 2025 (Tuesday)</h3>
 
-<section>
   <h3>Objective</h3>
   <p>
     The purpose of this assignment is to practice <b>data preprocessing</b> using a real dataset. 
@@ -156,10 +116,8 @@
     feature selection, and dimensionality reduction</b>.  
     You will apply these techniques on the built-in <b>Wine Dataset</b> from scikit-learn. 
   </p>
-</section>
 
-<section>
-  <h4>Steps to Complete</h4>
+  <h3>Steps to Complete</h3>
   <ol>
     <li><b>Load and Inspect the Dataset</b>  
       – Load using <code>load_wine(as_frame=True)</code>, print shape, and show the first 5 rows.</li>
@@ -179,11 +137,9 @@
       – Reflect on which features were most important, how PCA separated classes, 
         and whether feature selection improved performance.</li>
   </ol>
-</section>
 
-<section>
-  <h4>Starter Code</h4>
-  <pre><button class="copy">Copy</button><code>
+  <h3>Starter Code</h3>
+  <pre><code>
 # --- Please import necessary libraries here ---
 from sklearn.datasets import load_wine
 
@@ -214,20 +170,16 @@ print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
 
 # --- 7. Discussion ---
   </code></pre>
-</section>
 
-<section>
-  <h4>Submission</h4>
+  <h3>Submission</h3>
   <p>
     Submit your Jupyter Notebook file <code>ola1.ipynb</code> 
     with all outputs and plots in D2L. 
     Include short explanations for each step. 
   </p>
-</section>
 
-<section>
-  <h4>Grading Distribution (Total: 100 points)</h4>
-  <table style="width:60%">
+  <h3>Grading Distribution (Total: 100 points)</h3>
+  <table>
     <tr><th>Task</th><th>Points</th></tr>
     <tr><td>Load & Inspect Dataset</td><td>5</td></tr>
     <tr><td>Data Cleaning</td><td>10</td></tr>
@@ -239,25 +191,12 @@ print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
     <tr><td>Code Style, Clarity, and Explanations</td><td>10</td></tr>
     <tr><th>Total</th><th>100</th></tr>
   </table>
-</section>
+</div>
 
 <!-- Back-to-top button -->
-<button id="backToTop" title="Go to top">
-  <i class="fas fa-arrow-up"></i>
-</button>
+<button id="backToTop" title="Go to top">↑</button>
 
 <script>
-  document.querySelectorAll("pre .copy").forEach(button => {
-    button.addEventListener("click", () => {
-      const code = button.nextElementSibling.innerText;
-      navigator.clipboard.writeText(code).then(() => {
-        const old = button.textContent;
-        button.textContent = "Copied!";
-        setTimeout(() => button.textContent = old, 1500);
-      });
-    });
-  });
-
   // Back-to-top button functionality
   document.getElementById("backToTop").addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
