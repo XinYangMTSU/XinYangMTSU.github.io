@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chapter 2: Data Preprocessing & Feature Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+      position: relative;
+    }
+
+    pre .copy {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 4px 8px;
+      background: #21111b;
+      border: 1px solid #ff79c6;
+      border-radius: 6px;
+      color: #ffb3de;
+      font-size: 0.8em;
+      cursor: pointer;
+    }
+    pre .copy:hover {
+      background: #ff79c6;
+      color: #fff;
+    }
+  </style>
+</head>
+  
+<body>
+
+<section>
+  <h4>Aggregations – Summarizing Data by Groups</h4>
+  <p>
+    Aggregations are summary features created by grouping data and calculating totals, averages, counts, or other statistics. 
+    They’re useful when you want to describe overall behavior (e.g., <em>average age by class</em>, 
+    <em>survival rate by gender</em>, <em>total fare by port</em> in the Titanic dataset).
+  </p>
+
+  <h4>Example: Aggregations in Python (Titanic Dataset)</h4>
+  <pre> <button class="copy">Copy</button> <code>
+import seaborn as sns
+import pandas as pd
+
+# Load Titanic dataset
+titanic = sns.load_dataset("titanic")
+print("Original Data:")
+print(titanic.head())
+
+# --- Aggregations ---
+# 1. Average age by passenger class
+avg_age_by_class = titanic.groupby("class")["age"].mean().reset_index()
+
+# 2. Survival rate by gender
+survival_by_gender = titanic.groupby("sex")["survived"].mean().reset_index()
+
+# 3. Total fare paid by embarkation port
+total_fare_by_port = titanic.groupby("embarked")["fare"].sum().reset_index()
+
+print("\nAverage Age by Class:")
+print(avg_age_by_class)
+
+print("\nSurvival Rate by Gender:")
+print(survival_by_gender)
+
+print("\nTotal Fare by Embarkation Port:")
+print(total_fare_by_port)
+  </code> </pre>
+
+  <h4>What <code>.reset_index()</code> Does</h4>
+  <p>
+    When you use <code>groupby()</code> in pandas, the grouping column(s) become the index of the result. 
+    That means instead of a regular column, <code>class</code>, <code>sex</code>, or <code>embarked</code> 
+    ends up as the row label (index).
+  </p>
+  <p>
+    <code>.reset_index()</code> converts that index back into a normal column, 
+    making the DataFrame easier to read and work with.
+  </p>
+
+  <h4>✅ Example Without <code>.reset_index()</code></h4>
+  <pre> <button class="copy">Copy</button> <code>
+avg_age_by_class = titanic.groupby("class")["age"].mean()
+print(avg_age_by_class)
+
+# Output:
+# class
+# First     38.23
+# Second    29.51
+# Third     25.14
+# Name: age, dtype: float64
+  </code> </pre>
+  <p>Here, <code>class</code> is the index, not a column.</p>
+
+  <h4>✅ Example With <code>.reset_index()</code></h4>
+  <pre> <button class="copy">Copy</button> <code>
+avg_age_by_class = titanic.groupby("class")["age"].mean().reset_index()
+print(avg_age_by_class)
+
+# Output:
+#     class    age
+# 0   First   38.23
+# 1  Second   29.51
+# 2   Third   25.14
+  </code> </pre>
+  <p>Now <code>class</code> is a column again, not the index — making it much easier to merge, export, or display in tables.</p>
+</section>
+
+<script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
