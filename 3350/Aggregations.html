@@ -121,7 +121,7 @@ print(total_fare_by_port)
     making the DataFrame easier to read and work with.
   </p>
 
-  <h4>✅ Example Without <code>.reset_index()</code></h4>
+  <h4>Example Without <code>.reset_index()</code></h4>
   <pre> <button class="copy">Copy</button> <code>
 avg_age_by_class = titanic.groupby("class")["age"].mean()
 print(avg_age_by_class)
@@ -135,7 +135,7 @@ print(avg_age_by_class)
   </code> </pre>
   <p>Here, <code>class</code> is the index, not a column.</p>
 
-  <h4>✅ Example With <code>.reset_index()</code></h4>
+  <h4>Example With <code>.reset_index()</code></h4>
   <pre> <button class="copy">Copy</button> <code>
 avg_age_by_class = titanic.groupby("class")["age"].mean().reset_index()
 print(avg_age_by_class)
