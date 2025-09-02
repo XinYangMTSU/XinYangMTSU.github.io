@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Homework – Data Preprocessing & Feature Engineering (Wine Dataset)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    section h3 {
+      font-size: 1.4em;
+      color: #ff79c6;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 8px;
+      margin-top: 24px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+      position: relative;
+    }
+
+    pre .copy {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 4px 8px;
+      background: #21111b;
+      border: 1px solid #ff79c6;
+      border-radius: 6px;
+      color: #ffb3de;
+      font-size: 0.8em;
+      cursor: pointer;
+    }
+
+    pre .copy:hover {
+      background: #ff79c6;
+      color: #fff;
+    }
+
+    ul {
+      margin-left: 1.6em;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+  </style>
+</head>
+<body>
+
+<section>
+  <h3>OLA1 – Data Preprocessing & Feature Engineering</h3>
+  <p>
+    In this assignment, you will practice **data preprocessing, feature engineering, feature selection, 
+    and dimensionality reduction** using the built-in <b>Wine Dataset</b> from scikit-learn. 
+    The dataset contains 178 samples of wines with 13 features describing chemical properties, 
+    and the target variable has 3 classes (wine types).
+  </p>
+
+  <h4>Steps to Complete:</h4>
+  <ol>
+    <li><b>Load and Inspect the Dataset</b>
+      <ul>
+        <li>Use <code>sklearn.datasets.load_wine(as_frame=True)</code>.</li>
+        <li>Print the shape and first 5 rows.</li>
+      </ul>
+    </li>
+
+    <li><b>Data Cleaning</b>
+      <ul>
+        <li>Check for missing values and duplicates.</li>
+        <li>Report whether cleaning was needed.</li>
+      </ul>
+    </li>
+
+    <li><b>Data Transformation</b>
+      <ul>
+        <li>Standardize features using <code>StandardScaler</code>.</li>
+        <li>Explain why scaling is necessary here.</li>
+      </ul>
+    </li>
+
+    <li><b>Feature Engineering</b>
+      <ul>
+        <li>Create a new feature: <code>phenols_ratio = flavanoids / total_phenols</code>.</li>
+        <li>Explain why this might be meaningful.</li>
+      </ul>
+    </li>
+
+    <li><b>Feature Selection</b>
+      <ul>
+        <li>Use <code>chi2</code> test after discretizing features (KBinsDiscretizer).</li>
+        <li>Use <code>RFE</code> with Logistic Regression to select the top 8 features.</li>
+        <li>Compare classification accuracy with all features vs selected features.</li>
+      </ul>
+    </li>
+
+    <li><b>Dimensionality Reduction with PCA</b>
+      <ul>
+        <li>Apply PCA to reduce from 13 → 2 dimensions.</li>
+        <li>Plot the data points colored by wine class.</li>
+        <li>Report the explained variance ratio.</li>
+      </ul>
+    </li>
+
+    <li><b>Discussion</b>
+      <ul>
+        <li>Which features are most important for classifying wines?</li>
+        <li>Did PCA separate the classes well visually?</li>
+        <li>How did feature selection affect classification accuracy?</li>
+      </ul>
+    </li>
+  </ol>
+</section>
+
+
+<section>
+  <h4>Starter Code</h4>
+  <pre><button class="copy">Copy</button><code>
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_wine
+from sklearn.preprocessing import StandardScaler, KBinsDiscretizer
+from sklearn.feature_selection import chi2, SelectKBest, RFE
+from sklearn.linear_model import LogisticRegression
+from sklearn.decomposition import PCA
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# --- Load dataset ---
+wine = load_wine(as_frame=True)
+X = wine.data
+y = wine.target
+print("Shape:", X.shape)
+print(X.head())
+
+# --- Standardize features ---
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# --- Feature Engineering ---
+X["phenols_ratio"] = X["flavanoids"] / X["total_phenols"]
+
+# --- Train/Test split ---
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y,
+                                                    test_size=0.2, random_state=42, stratify=y)
+
+# --- Baseline Logistic Regression ---
+baseline = LogisticRegression(max_iter=5000, solver="liblinear")
+baseline.fit(X_train, y_train)
+y_pred = baseline.predict(X_test)
+print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
+
+# --- PCA (2D visualization) ---
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_scaled)
+print("Explained Variance Ratio:", pca.explained_variance_ratio_)
+
+df_pca = pd.DataFrame(X_pca, columns=["PC1","PC2"])
+df_pca["target"] = y
+
+plt.figure(figsize=(8,6))
+for target, color, label in zip([0,1,2], ["red","green","blue"], wine.target_names):
+    plt.scatter(df_pca.loc[df_pca["target"]==target,"PC1"],
+                df_pca.loc[df_pca["target"]==target,"PC2"],
+                color=color, alpha=0.7, label=label)
+plt.xlabel("PC1")
+plt.ylabel("PC2")
+plt.title("PCA of Wine Dataset")
+plt.legend()
+plt.show()
+  </code></pre>
+</section>
+
+
+<section>
+  <h4>Submission</h4>
+  <p>
+    Submit your Jupyter Notebook file <code>wine_preprocessing.ipynb</code> 
+    with all outputs and plots. Include short explanations for each step. 
+  </p>
+</section>
+
+<script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
