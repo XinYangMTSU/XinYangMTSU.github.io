@@ -1,33 +1,206 @@
-   <svg width="420" height="280" viewBox="0 0 420 280" style="background:transparent;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OLA1 – Data Preprocessing & Feature Engineering</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #17191a;
+      color: #ff79c6;
+    }
+    .container {
+      background-color: #222025;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(255,121,198,0.15);
+    }
+    h1 {
+      text-align: center;
+      font-size: 26px;
+      color: #ff79c6;
+      margin-bottom: 6px;
+    }
+    h3.deadline {
+      text-align: center;
+      font-size: 15px;
+      color: #ffb3de;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+    h3 {
+      color: #ff79c6;
+      font-size: 22px;
+      margin-bottom: 12px;
+      border-bottom: 3px solid #ff79c6;
+      padding-bottom: 6px;
+    }
+    h4 {
+      color: #ffb3de;
+      font-size: 18px;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 3px;
+    }
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 0.95em;
+      overflow-x: auto;
+    }
+    code {
+      font-family: Consolas, monospace;
+    }
+    table {
+      width: 70%;
+      margin: 15px auto;
+      border-collapse: collapse;
+      font-size: 0.9em;
+      color: #ffb3de;
+    }
+    th, td {
+      border: 1px solid #ff79c6;
+      padding: 6px 10px;
+      text-align: left;
+    }
+    th {
+      background: #19121a;
+      color: #ff79c6;
+    }
+    tr:nth-child(even) {
+      background: #2b2b2b;
+    }
+    #backToTop {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background-color: #ff79c6;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 1.3em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      transition: background 0.2s;
+    }
+    #backToTop:hover {
+      background-color: #ffb3de;
+      color: #17191a;
+    }
+  </style>
+</head>
+<body>
 
-                <!-- AI Circle (outermost) -->
+<div class="container">
+  <h1>OLA1 – Data Preprocessing & Feature Engineering</h1>
+  <h3 class="deadline">Deadline: September 9th, 2025 (Tuesday)</h3>
 
-                <ellipse cx="210" cy="140" rx="190" ry="115" fill="#ffb3de22" stroke="#ff79c6" stroke-width="2"/>
+  <h3>Objective</h3>
+  <p>
+    The purpose of this assignment is to practice <b>data preprocessing</b> using a real dataset. 
+    Data preprocessing includes <b>data cleaning, data transformation, feature engineering, 
+    feature selection, and dimensionality reduction</b>.  
+    You will apply these techniques on the built-in <b>Wine Dataset</b> from scikit-learn. 
+  </p>
 
-                <text x="65" y="80" fill="#ff79c6" font-size="1.45em" font-weight="bold">AI</text>
+  <h3>Steps to Complete</h3>
+  <ol>
+    <li><b>Load and Inspect the Dataset</b>  
+      – Load using <code>load_wine(as_frame=True)</code>, print shape, and show the first 5 rows.</li>
+    <li><b>Data Cleaning</b>  
+      – Check for missing values and duplicates. Report if any issues exist and how you fixed them.</li>
+    <li><b>Data Transformation</b>  
+      – Standardize features with <code>StandardScaler</code>. Explain why scaling is necessary.</li>
+    <li><b>Feature Engineering</b>  
+      – Create <code>phenols_ratio = flavanoids / total_phenols</code>. Explain why this may matter.</li>
+    <li><b>Feature Selection</b>  
+      – Use <code>chi2</code> (with discretization) and <code>RFE</code> with Logistic Regression.  
+      – Compare accuracy using all features vs selected features.</li>
+    <li><b>Dimensionality Reduction with PCA</b>  
+      – Reduce features to 2 components and plot results with colors for wine classes.  
+      – Report explained variance ratio.</li>
+    <li><b>Discussion</b>  
+      – Reflect on which features were most important, how PCA separated classes, 
+        and whether feature selection improved performance.</li>
+  </ol>
 
-                
+  <h3>Starter Code</h3>
+  <pre><code>
+# --- Please import necessary libraries here ---
+from sklearn.datasets import load_wine
 
-                <!-- ML Circle -->
+# --- 1. Load dataset ---
+wine = load_wine(as_frame=True)
+X = wine.data
+y = wine.target
 
-                <ellipse cx="210" cy="150" rx="130" ry="80" fill="#ff79c660" stroke="#ff79c6" stroke-width="2"/>
+# --- 2. Data Cleaning ---
 
-                <text x="145" y="135" fill="#ff79c6" font-size="1.2em" font-weight="bold">ML</text>
+# --- 3. Standardize features ---
 
-                
+# --- 4. Feature Engineering ---
 
-                <!-- DL Circle -->
+# --- Train/Test split ---
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y,
+                                                    test_size=0.2, random_state=42, stratify=y)
 
-                <ellipse cx="240" cy="165" rx="75" ry="45" fill="#ff79c6" fill-opacity="0.18" stroke="#ff79c6" stroke-width="2"/>
+# --- Baseline Logistic Regression ---
+baseline = LogisticRegression(max_iter=5000, solver="liblinear")
+baseline.fit(X_train, y_train)
+y_pred = baseline.predict(X_test)
+print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
 
-                <text x="185" y="155" fill="#ff79c6" font-size="1em" font-weight="bold">DL</text>
+# --- 5. Feature Selection ---
 
-                
+# --- 6. PCA (2D visualization) ---
 
-                <!-- Generative AI Circle (innermost) -->
+# --- 7. Discussion ---
+  </code></pre>
 
-                <ellipse cx="255" cy="175" rx="30" ry="18" fill="#ff79c6" fill-opacity="0.4" stroke="#ff79c6" stroke-width="2"/>
+  <h3>Submission</h3>
+  <p>
+    Submit your Jupyter Notebook file <code>ola1.ipynb</code> 
+    with all outputs and plots in D2L. 
+    Include short explanations for each step. 
+  </p>
 
-                <text x="235" y="180" fill="#ff79c6" font-size="0.7em" font-weight="bold">Gen AI</text>
+  <h3>Grading Distribution (Total: 100 points)</h3>
+  <table>
+    <tr><th>Task</th><th>Points</th></tr>
+    <tr><td>Load & Inspect Dataset</td><td>5</td></tr>
+    <tr><td>Data Cleaning</td><td>10</td></tr>
+    <tr><td>Data Transformation</td><td>15</td></tr>
+    <tr><td>Feature Engineering</td><td>10</td></tr>
+    <tr><td>Feature Selection</td><td>20</td></tr>
+    <tr><td>Dimensionality Reduction (PCA)</td><td>20</td></tr>
+    <tr><td>Discussion & Analysis</td><td>10</td></tr>
+    <tr><td>Code Style, Clarity, and Explanations</td><td>10</td></tr>
+    <tr><th>Total</th><th>100</th></tr>
+  </table>
+</div>
 
-            </svg>
+<!-- Back-to-top button -->
+<button id="backToTop" title="Go to top">↑</button>
+
+<script>
+  // Back-to-top button functionality
+  document.getElementById("backToTop").addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+
+</body>
+</html>
