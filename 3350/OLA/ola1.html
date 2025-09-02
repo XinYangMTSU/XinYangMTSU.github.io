@@ -25,38 +25,36 @@
       margin: 0;
       color: #ff79c6;
     }
-    header p {
-      font-size: 0.95em;
+    header h3 {
+      font-size: 1em;
       color: #ffb3de;
       margin-top: 6px;
     }
 
     section {
-      margin-bottom: 55px;
+      margin-bottom: 45px;
       background: #222025;
       border-radius: 18px;
       box-shadow: 0 4px 30px rgba(255,121,198,.09);
-      padding: 36px 32px 22px 32px;
-      transition: box-shadow .24s;
-      border-left: 7px solid #ff79c6;
-      position: relative;
+      padding: 28px 26px 20px 26px;
+      border-left: 6px solid #ff79c6;
       max-width: 950px;
       margin-left: auto;
       margin-right: auto;
     }
 
     section h3 {
-      font-size: 1.4em;
+      font-size: 1.3em;
       color: #ff79c6;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       font-weight: 700;
     }
 
     section h4 {
-      font-size: 1.18em;
+      font-size: 1.15em;
       color: #ffb3de;
       margin-bottom: 8px;
-      margin-top: 24px;
+      margin-top: 20px;
       font-weight: 600;
       border-bottom: 1px solid #ffb3de;
       padding-bottom: 2px;
@@ -97,16 +95,17 @@
       margin-bottom: 0.5em;
     }
 
-    /* Table styling */
+    /* Table styling - smaller */
     table {
-      width: 100%;
+      width: 80%;
       border-collapse: collapse;
-      margin-top: 15px;
+      margin: 15px auto;
       color: #ffb3de;
+      font-size: 0.9em;
     }
     th, td {
       border: 1px solid #ff79c6;
-      padding: 10px;
+      padding: 6px 10px;
       text-align: left;
     }
     th {
@@ -145,34 +144,40 @@
 <body>
 
 <header id="top">
-  <h1></h1>
-  <br>
   <h1>OLA1 – Data Preprocessing & Feature Engineering</h1>
-  <h3><font color="red">Deadline: September 9th, 2025 (Tuesday)</font></h3>
+  <h3>Deadline: September 9th, 2025 (Tuesday)</h3>
 </header>
 
 <section>
   <h3>Overview</h3>
   <p>
-    The purpose of this assignment is to practice data preprocessing using a real dataset. 
-    Data preprocessing includes key steps such as <b>data cleaning</b>, <b>data transformation</b>, <b>feature engineering</b>, 
-    <b>feature selection</b>, and <b>dimensionality reduction</b>. You will apply these techniques to the built-in 
-    <b>Wine Dataset</b> from scikit-learn.
-    The dataset contains 178 samples of wines with 13 features describing chemical properties, 
-    and the target variable has 3 classes (wine types).
+    The purpose of this assignment is to practice <b>data preprocessing</b> using a real dataset. 
+    Data preprocessing includes <b>data cleaning, data transformation, feature engineering, 
+    feature selection, and dimensionality reduction</b>.  
+    You will apply these techniques on the built-in <b>Wine Dataset</b> from scikit-learn. 
   </p>
 </section>
 
 <section>
   <h4>Steps to Complete</h4>
   <ol>
-    <li><b>Load and Inspect the Dataset</b></li>
-    <li><b>Data Cleaning</b></li>
-    <li><b>Data Transformation</b></li>
-    <li><b>Feature Engineering</b></li>
-    <li><b>Feature Selection</b></li>
-    <li><b>Dimensionality Reduction with PCA</b></li>
-    <li><b>Discussion</b></li>
+    <li><b>Load and Inspect the Dataset</b>  
+      – Load using <code>load_wine(as_frame=True)</code>, print shape, and show the first 5 rows.</li>
+    <li><b>Data Cleaning</b>  
+      – Check for missing values and duplicates. Report if any issues exist and how you fixed them.</li>
+    <li><b>Data Transformation</b>  
+      – Standardize features with <code>StandardScaler</code>. Explain why scaling is necessary.</li>
+    <li><b>Feature Engineering</b>  
+      – Create <code>phenols_ratio = flavanoids / total_phenols</code>. Explain why this may matter.</li>
+    <li><b>Feature Selection</b>  
+      – Use <code>chi2</code> (with discretization) and <code>RFE</code> with Logistic Regression.  
+      – Compare accuracy using all features vs selected features.</li>
+    <li><b>Dimensionality Reduction with PCA</b>  
+      – Reduce features to 2 components and plot results with colors for wine classes.  
+      – Report explained variance ratio.</li>
+    <li><b>Discussion</b>  
+      – Reflect on which features were most important, how PCA separated classes, 
+        and whether feature selection improved performance.</li>
   </ol>
 </section>
 
