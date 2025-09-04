@@ -114,8 +114,14 @@ for feature, score, p in sorted(zip(X.columns, chi_scores, p_values), key=lambda
     print(f"{feature}: Chi2 = {score:.2f}, p-value = {p:.4e}")
 
 # --- Select top k features ---
-X_new = SelectKBest(chi2, k=5).fit_transform(X_binned, y)
+selector = SelectKBest(chi2, k=5)
+X_new = selector.fit_transform(X_binned, y)
 print("\nShape of reduced dataset:", X_new.shape)
+
+# Get selected feature names
+selected_features = X.columns[selector.get_support()]
+print("\nTop 5 selected features:")
+print(selected_features.tolist())
   </code> </pre>
 
   <h4>Notes:</h4>
