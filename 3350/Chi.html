@@ -97,7 +97,9 @@ print("Original Data (first 5 rows):")
 print(X.head())
 
 # --- Discretize continuous features ---
-# Chi-Square requires non-negative categorical data
+# The Chi-Square test is designed for categorical (count-based, non-negative integer) data.
+# Many machine learning datasets have continuous numerical features (like area, radius, concavity in your cancer dataset).
+# To apply Chi-Square, we need to convert continuous values into discrete categories (bins).
 discretizer = KBinsDiscretizer(n_bins=5, encode="ordinal", strategy="uniform")
 X_binned = pd.DataFrame(discretizer.fit_transform(X), columns=X.columns)
 
@@ -121,6 +123,7 @@ print("\nShape of reduced dataset:", X_new.shape)
     <li>Used only for <strong>categorical features</strong> (after encoding to numeric form).</li>
     <li>A <code>p-value &lt; 0.05</code> means the feature and target are likely dependent (useful for prediction).</li>
     <li>Chi-Square requires non-negative values, so apply to counts or one-hot encoded features only.</li>
+  
   </ul>
 </section>
 
