@@ -86,12 +86,15 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Example dataset: student performance
 data = {
     "study_hours": [5, 10, 2, 8, 12, 3],
     "sleep_hours": [7, 6, 8, 5, 6, 9],
-    "exam_score": [75, 88, 50, 82, 95, 55]
+    "exam_score": [75, 88, 50, 82, 95, 55],
+    # Irrelevant feature (random numbers, not related to exam score)
+    "shoe_size": [8, 9, 10, 7, 11, 9]
 }
 
 df = pd.DataFrame(data)
