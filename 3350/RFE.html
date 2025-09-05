@@ -137,20 +137,44 @@ print("\nSelected Features by RFE:")
 print(selected_features.tolist())
   </code> </pre>
 
-  <div class="note">
-    <p>
-      The Breast Cancer dataset has many features that are <strong>redundant or highly correlated</strong> 
-      (e.g., <code>mean radius</code>, <code>perimeter</code>, and <code>area</code> are all strongly correlated).
-    </p>
-    <p>
-      Logistic Regression performs just as well with only 10 carefully chosen features because those 10 
-      already capture most of the signal.
-    </p>
-    <p>
-      RFE helps us see which features are the most informative and can safely drop the rest 
-      without losing accuracy.
-    </p>
-  </div>
+  <h4>Notes:</h4>
+  <ul>
+    <li>The Breast Cancer dataset has many features that are <strong>redundant or highly correlated</strong> 
+      (e.g., <code>mean radius</code>, <code>perimeter</code>, and <code>area</code> are all strongly correlated).</li>
+    <li>Logistic Regression performs just as well with only 10 carefully chosen features because those 10 
+      already capture most of the signal.</li>
+    <li>RFE helps us see which features are the most informative and can safely drop the rest 
+      without losing accuracy.</li>
+  </ul>
+    
+
+  <h4><strong>Other models you can use with RFE</strong></h4>
+
+    <ul>
+      <li>Any estimator with either:
+        <ul>
+          <li><code>.coef_</code> (coefficients) — examples:
+            <ul>
+              <li>Linear Regression (<code>LinearRegression</code>)</li>
+              <li>Logistic Regression (<code>LogisticRegression</code>)</li>
+              <li>Linear SVM (<code>SVC(kernel="linear")</code> or <code>LinearSVC</code>)</li>
+              <li>Ridge / Lasso / Elastic Net (<code>Ridge</code>, <code>Lasso</code>, <code>ElasticNet</code>)</li>
+            </ul>
+          </li>
+          <li><code>.feature_importances_</code> — examples:
+            <ul>
+              <li>Decision Tree (<code>DecisionTreeClassifier</code> / <code>DecisionTreeRegressor</code>)</li>
+              <li>Random Forest (<code>RandomForestClassifier</code> / <code>RandomForestRegressor</code>)</li>
+              <li>Gradient Boosting (<code>GradientBoostingClassifier</code> / <code>GradientBoostingRegressor</code>)</li>
+              <li>Extra Trees (<code>ExtraTreesClassifier</code> / <code>ExtraTreesRegressor</code>)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+
+  
 </section>
 
 <script>
