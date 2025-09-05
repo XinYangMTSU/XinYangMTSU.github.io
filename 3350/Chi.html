@@ -131,6 +131,26 @@ print(selected_features.tolist())
     <li>Chi-Square requires non-negative values, so apply to counts or one-hot encoded features only.</li>
   
   </ul>
+
+  <ul>
+  <li>
+    <strong>The Chi-Square test (χ²)</strong> works on <em>categorical / count-based data</em>.
+  </li>
+  <li>
+    Our dataset features are <strong>continuous</strong> (e.g., <code>radius = 17.99</code>, <code>texture = 10.38</code>).<br>
+    Chi² doesn’t make sense directly on raw floats.
+  </li>
+  <li>
+    <strong>Solution:</strong> Use <code>KBinsDiscretizer</code> to cut continuous values into bins:
+    <ul>
+      <li><code>n_bins=5</code>: Each feature is divided into 5 intervals (very low → very high).</li>
+      <li><code>encode="ordinal"</code>: Assigns bin numbers <code>0,1,2,3,4</code>.</li>
+      <li><code>strategy="uniform"</code>: Bins are equally spaced.</li>
+    </ul>
+  </li>
+</ul>
+
+  
 </section>
 
 <script>
