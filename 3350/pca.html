@@ -129,6 +129,42 @@ plt.title("PCA of Iris Dataset")
 plt.legend()
 plt.grid(True, linestyle="--", alpha=0.5)
 plt.show()
+
+# ================================
+# Step 5: Classification Comparison
+# ================================
+
+# Train/test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42, stratify=y
+)
+
+# Pipeline WITHOUT PCA (scale -> logistic regression)
+pipe_no_pca = Pipeline([
+    ("scaler", StandardScaler()),
+    ("clf", LogisticRegression(max_iter=2000))
+])
+
+# Pipeline WITH PCA (scale -> PCA(2) -> logistic regression)
+pipe_pca = Pipeline([
+    ("scaler", StandardScaler()),
+    ("pca", PCA(n_components=2)),
+    ("clf", LogisticRegression(max_iter=2000))
+])
+
+# Fit & evaluate on test set
+pipe_no_pca.fit(X_train, y_train)
+pipe_pca.fit(X_train, y_train)
+
+y_pred_no_pca = pipe_no_pca.predict(X_test)
+y_pred_pca = pipe_pca.predict(X_test)
+
+acc_no_pca = accuracy_score(y_test, y_pred_no_pca)
+acc_pca = accuracy_score(y_test, y_pred_pca)
+
+print("\n=== Test Accuracy ===")
+print(f"Without PCA : {acc_no_pca:.4f}")
+print(f"With PCA(3) : {acc_pca:.4f}")
   </code> </pre>
 
   <h4>Notes:</h4>
