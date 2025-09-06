@@ -295,313 +295,267 @@
 
 <!--    -->
 
-<section id="linreg-pro" class="linreg-card">
-  <h3 style="margin-top:0;">Interactive: Single-Model Regression (Custom f(x))</h3>
 
+<section id="linreg-demo" class="linreg-card">
+  <h3 style="margin-top:0;">Interactive: Linear Regression (Drag the points!)</h3>
   <div class="linreg-toolbar">
-    <button data-action="reset">Reset points</button>
-    <button data-action="add">Add point</button>
+    <button id="lr-reset">Reset</button>
+    <button id="lr-add">Add point</button>
     <label class="linreg-toggle">
-      <input type="checkbox" data-action="show-resid" />
+      <input type="checkbox" id="lr-show-residuals" />
       Show residuals
     </label>
   </div>
 
-  <!-- Custom function controls (your single model). f(x) can use a and b -->
-  <div class="lr-controls">
-    <div class="ctrl-row">
-      <label>a (slope)</label>
-      <input type="range" data-role="a-range" min="-5" max="5" step="0.01" value="1">
-      <input type="number" data-role="a-num" min="-20" max="20" step="0.01" value="1">
-    </div>
-    <div class="ctrl-row">
-      <label>b (intercept)</label>
-      <input type="range" data-role="b-range" min="-10" max="10" step="0.01" value="0">
-      <input type="number" data-role="b-num" min="-50" max="50" step="0.01" value="0">
-    </div>
-    <div class="ctrl-row">
-      <label>f(x) =</label>
-      <input data-role="expr" value="a*x + b" size="30" class="mono">
-      <small>Use <span class="mono">x, a, b</span> and + − * / ^ ( ) .</small>
-    </div>
-  </div>
-
   <div class="linreg-stats">
-    <span data-out="eq" class="mono"></span>
-    <span data-out="r2" class="mono"></span>
-    <span data-out="mse" class="mono"></span>
+    <span id="lr-equation" class="mono">y = a x + b</span>
+    <span id="lr-r2" class="mono">R² = —</span>
+    <span class="mono">a = <span id="lr-a">—</span></span>
+    <span class="mono">b = <span id="lr-b">—</span></span>
+    <span class="mono">n = <span id="lr-n">—</span></span>
+    <span class="mono">x̄ = <span id="lr-xbar">—</span></span>
+    <span class="mono">ȳ = <span id="lr-ybar">—</span></span>
+    <span class="mono">SSE = <span id="lr-sse">—</span></span>
+    <span class="mono">MSE = <span id="lr-mse">—</span></span>
   </div>
 
-  <svg class="plot" viewBox="0 0 700 500" width="100%"
+  <svg id="lr-svg" viewBox="0 0 700 430" width="100%"
        style="max-width:900px; display:block; background:#151218; border-radius:14px; box-shadow:0 6px 22px rgba(255,121,198,.08)"></svg>
 
   <p class="linreg-note">
-    Drag points. Edit <span class="mono">a</span>, <span class="mono">b</span>, or the formula. The single line is your model <span class="mono">y = f(x)</span>.
+    <b>Tip:</b> Drag the magenta points. The least-squares line and parameters update instantly.
+    Toggle residuals to see vertical errors from each point to the line. The small white ✚ marks the centroid (x̄, ȳ).
   </p>
 </section>
 
 <style>
-  /* Scoped styles to avoid collisions */
-  #linreg-pro.linreg-card{
+  #linreg-demo.linreg-card{
     background:#222025;border-radius:18px;padding:22px 22px 16px 22px;
     border-left:7px solid #ff79c6; box-shadow:0 4px 30px rgba(255,121,198,.09);
   }
-  #linreg-pro .linreg-toolbar{
+  #linreg-demo .linreg-toolbar{
     display:flex;gap:10px;align-items:center;margin:12px 0 10px 0;flex-wrap:wrap;
   }
-  #linreg-pro button{
+  #linreg-demo button{
     background:#ff79c6;border:none;color:#1a1d1f;padding:8px 12px;border-radius:10px;
     font-weight:700;cursor:pointer;box-shadow:0 3px 12px rgba(255,121,198,.35)
   }
-  #linreg-pro button:hover{ filter:brightness(1.05); }
-  #linreg-pro .linreg-toggle{ display:inline-flex; gap:8px; align-items:center; color:#ffb3de; }
+  #linreg-demo button:hover{ filter:brightness(1.05); }
+  #linreg-demo .linreg-toggle{ display:inline-flex;gap:8px;align-items:center; color:#ffb3de; }
 
-  #linreg-pro .lr-controls{ background:#1e1a21; border:1px solid #3a2a34; border-radius:12px; padding:10px 12px; margin:8px 0 12px; }
-  #linreg-pro .ctrl-row{ display:grid; grid-template-columns:120px 1fr 120px; gap:10px; align-items:center; margin:6px 0; }
-  #linreg-pro input[type="number"], #linreg-pro input[type="text"]{ 
-    background:#2a2028; border:1px solid #4a3340; color:#ffb3de; border-radius:8px; padding:6px 8px;
-  }
-  #linreg-pro input[type="range"]{ width:100%; }
-  #linreg-pro .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-
-  #linreg-pro .linreg-stats{
-    display:flex;gap:18px;flex-wrap:wrap;margin:8px 0 14px 0;
+  #linreg-demo .linreg-stats{
+    display:flex;gap:16px;flex-wrap:wrap;margin:8px 0 14px 0;
     color:#ffb3de;font-weight:600;
   }
-  #linreg-pro .linreg-note{ color:#ffb3de;margin-top:10px; }
+  #linreg-demo .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  #linreg-demo .linreg-note{ color:#ffb3de;margin-top:10px; }
 
-  /* Plot styles */
-  #linreg-pro .plot .axis path, #linreg-pro .plot .axis line{ stroke:#6a5060; }
-  #linreg-pro .plot .axis text{ fill:#ffb3de; font-size:12px; }
-  #linreg-pro .plot .point{ fill:#ff79c6; cursor:grab; }
-  #linreg-pro .plot .point:active{ cursor:grabbing; }
-  #linreg-pro .plot .model-curve{ fill:none; stroke:#7fd7ff; stroke-width:3; }
-  #linreg-pro .plot .residual{ stroke:#7fd7ff; stroke-dasharray:4 4; opacity:.9; }
-  #linreg-pro .plot .grid line{ stroke:#2f2630; }
-  #linreg-pro .plot .zero-axis{ stroke:#9a7888; stroke-width:1.5; }
+  /* SVG styles */
+  #lr-svg .axis path, #lr-svg .axis line{ stroke:#6a5060; }
+  #lr-svg .axis text{ fill:#ffb3de;font-size:12px; }
+  #lr-svg .grid line{ stroke:#2f2630; }
+  #lr-svg .point{ fill:#ff79c6; cursor:grab; }
+  #lr-svg .point:active{ cursor:grabbing; }
+  #lr-svg .fit-line{ stroke:#fff52e; stroke-width:3; }
+  #lr-svg .residual{ stroke:#7fd7ff; stroke-dasharray:4 4; opacity:.9; }
+  #lr-svg .centroid{ stroke:#ffffff; }
 </style>
 
 <script>
 (function(){
-  const root = document.getElementById('linreg-pro');
-  const svg  = root.querySelector('svg.plot');
+  // ====== Config ======
+  const svg = document.getElementById('lr-svg');
+  const W = 700, H = 430, PAD = 50;
+  const innerW = W - PAD*2, innerH = H - PAD*2;
+  const XMIN=0, XMAX=10, YMIN=0, YMAX=10;
+
+  // Scales
+  const x2px = x => PAD + (x - XMIN) / (XMAX - XMIN) * innerW;
+  const y2px = y => H - PAD - (y - YMIN) / (YMAX - YMIN) * innerH;
+  const px2x = px => XMIN + (px - PAD) / innerW * (XMAX - XMIN);
+  const px2y = py => YMIN + (H - PAD - py) / innerH * (YMAX - YMIN);
+
+  // SVG helpers / groups
   const svgns = "http://www.w3.org/2000/svg";
+  const gGrid = mk('g'), gAxes = mk('g'), gResiduals = mk('g'),
+        gLine = mk('g'), gPoints = mk('g'), gOverlay = mk('g');
+  svg.append(gGrid, gAxes, gResiduals, gLine, gPoints, gOverlay);
 
-  // Geometry & scales (−10 … 10 in both axes)
-  const W=700,H=500,PAD=55, innerW=W-PAD*2, innerH=H-PAD*2;
-  const XMIN=-10,XMAX=10,YMIN=-10,YMAX=10;
+  // UI
+  const showResiduals = document.getElementById('lr-show-residuals');
+  const eqEl  = document.getElementById('lr-equation');
+  const r2El  = document.getElementById('lr-r2');
+  const aEl   = document.getElementById('lr-a');
+  const bEl   = document.getElementById('lr-b');
+  const nEl   = document.getElementById('lr-n');
+  const xbarEl= document.getElementById('lr-xbar');
+  const ybarEl= document.getElementById('lr-ybar');
+  const sseEl = document.getElementById('lr-sse');
+  const mseEl = document.getElementById('lr-mse');
 
-  const x2px = x => PAD + (x - XMIN)/(XMAX - XMIN)*innerW;
-  const y2px = y => H - PAD - (y - YMIN)/(YMAX - YMIN)*innerH;
-  const px2x = px => XMIN + (px - PAD)/innerW*(XMAX - XMIN);
-  const px2y = py => YMIN + (H - PAD - py)/innerH*(YMAX - YMIN);
+  document.getElementById('lr-reset').addEventListener('click', ()=>{ seedData(true); render(); });
+  document.getElementById('lr-add').addEventListener('click', ()=>{ pts.push({x:rnd(0.3,9.7), y:rnd(0.3,9.7)}); render(); });
+  showResiduals.addEventListener('change', render);
 
-  // Groups
-  const gGrid = mk('g'); const gAxes = mk('g');
-  const gResiduals = mk('g'); const gModel = mk('g'); const gPts = mk('g');
-  svg.append(gGrid,gAxes,gResiduals,gModel,gPts);
-
-  // Controls
-  const btnReset = root.querySelector('[data-action="reset"]');
-  const btnAdd   = root.querySelector('[data-action="add"]');
-  const chkResid = root.querySelector('[data-action="show-resid"]');
-
-  const aRange = root.querySelector('[data-role="a-range"]');
-  const aNum   = root.querySelector('[data-role="a-num"]');
-  const bRange = root.querySelector('[data-role="b-range"]');
-  const bNum   = root.querySelector('[data-role="b-num"]');
-  const exprInput = root.querySelector('[data-role="expr"]');
-
-  const outEq  = root.querySelector('[data-out="eq"]');
-  const outR2  = root.querySelector('[data-out="r2"]');
-  const outMSE = root.querySelector('[data-out="mse"]');
-
-  // Draw grid & axes once
+  // Draw grid/axes once
   drawGrid(); drawAxes();
 
-  // Data (seed around a*x+b with noise, spanning negatives & positives)
+  // Data
   let pts = [];
-  function seedData(){
+  function seedData(reset=false){
     pts = [];
-    const a=0.8, b=1.0;
-    for(let i=0;i<14;i++){
-      const x = rnd(-9,9);
-      const y = a*x + b + rnd(-2.0, 2.0);
+    const a=0.8, b=1.2;
+    const n = 12;
+    for(let i=0;i<n;i++){
+      const x = rnd(0.6,9.4);
+      const y = a*x + b + rnd(-1.2, 1.2);
       pts.push({x,y});
     }
+    if(reset) dragging = null;
   }
   seedData();
 
-  // Model state (single model f(x) using a,b)
-  let a = parseFloat(aRange.value);
-  let b = parseFloat(bRange.value);
-  let expr = exprInput.value;
-
-  // Drag state — single set of listeners
-  let draggingIndex = null;
-  svg.addEventListener('mousemove', onMouseMove);
-  window.addEventListener('mouseup', ()=> draggingIndex=null);
-
-  // Events
-  aRange.addEventListener('input', ()=>{ a=+aRange.value; aNum.value=aRange.value; render(); });
-  aNum  .addEventListener('input', ()=>{ a=+aNum.value;   aRange.value=aNum.value; render(); });
-  bRange.addEventListener('input', ()=>{ b=+bRange.value; bNum.value=bRange.value; render(); });
-  bNum  .addEventListener('input', ()=>{ b=+bNum.value;   bRange.value=bNum.value; render(); });
-  exprInput.addEventListener('input', ()=>{ expr=exprInput.value; render(); });
-
-  btnReset.addEventListener('click', ()=>{ seedData(); render(); });
-  btnAdd.addEventListener('click', ()=>{ pts.push({x:rnd(-10,10),y:rnd(-10,10)}); render(); });
-  chkResid.addEventListener('change', render);
-
-  function onMouseMove(e){
-    if(draggingIndex===null) return;
-    const pt = getMousePos(svg,e);
+  // Drag handling — attach one set of listeners (no duplicates)
+  let dragging = null; // index or null
+  svg.addEventListener('mousemove', e=>{
+    if(dragging===null) return;
+    const pt = getMousePos(svg, e);
     const nx = clamp(px2x(pt.x), XMIN, XMAX);
     const ny = clamp(px2y(pt.y), YMIN, YMAX);
-    pts[draggingIndex] = {x:nx, y:ny};
+    pts[dragging] = {x:nx, y:ny};
     render();
-  }
+  });
+  window.addEventListener('mouseup', ()=>{ dragging=null; });
 
+  // Initial render
+  render();
+
+  // ====== Render ======
   function render(){
-    // Update equation display
-    outEq.textContent = `Model: y = ${expr}`;
+    const stats = fitLine(pts); // {a,b,r2,ybar,xbar,Sxx,Sxy,SSE,MSE,n}
 
-    // Build yhat function from expr (safe-ish)
-    const yhat = makeUserFn(expr);
+    // Update stats UI
+    eqEl.textContent = `y = ${fmt(stats.a)} x + ${fmt(stats.b)}`;
+    r2El.textContent = `R² = ${fmt(stats.r2,3)}`;
+    aEl.textContent = fmt(stats.a);
+    bEl.textContent = fmt(stats.b);
+    nEl.textContent = stats.n;
+    xbarEl.textContent = fmt(stats.xbar);
+    ybarEl.textContent = fmt(stats.ybar);
+    sseEl.textContent = fmt(stats.SSE,3);
+    mseEl.textContent = fmt(stats.MSE,3);
 
-    // Stats
-    const {r2, mse} = modelStats(pts, yhat);
-    outR2.textContent  = isFinite(r2)  ? `R² = ${fmt(r2,3)}` : `R² = —`;
-    outMSE.textContent = isFinite(mse) ? `MSE = ${fmt(mse,3)}` : `MSE = —`;
-
-    // Residuals (to your single model)
-    gResiduals.innerHTML='';
-    if(chkResid.checked){
+    // Residuals
+    gResiduals.innerHTML = '';
+    if(showResiduals.checked){
       pts.forEach(p=>{
-        const yh = yhat(p.x, a, b);
-        if(!isFinite(yh)) return;
-        gResiduals.append(mk('line',{
+        const yhat = stats.a*p.x + stats.b;
+        gResiduals.append(mk('line', {
           class:'residual',
           x1:x2px(p.x), y1:y2px(p.y),
-          x2:x2px(p.x), y2:y2px(yh)
+          x2:x2px(p.x), y2:y2px(yhat)
         }));
       });
     }
 
-    // Draw your single model curve/path
-    gModel.innerHTML='';
-    const path = mk('path',{class:'model-curve'});
-    const N=220; let d=''; let started=false;
-    for(let i=0;i<=N;i++){
-      const x = XMIN + (XMAX - XMIN)*i/N;
-      const y = yhat(x, a, b);
-      if(!isFinite(y)) { started=false; continue; }
-      const cmd = started ? 'L' : 'M';
-      d += `${cmd}${x2px(x)},${y2px(y)} `;
-      started = true;
-    }
-    path.setAttribute('d', d);
-    gModel.append(path);
+    // Best-fit line across full domain
+    gLine.innerHTML = '';
+    gLine.append(mk('line', {
+      class:'fit-line',
+      x1:x2px(XMIN), y1:y2px(stats.a*XMIN + stats.b),
+      x2:x2px(XMAX), y2:y2px(stats.a*XMAX + stats.b)
+    }));
+
+    // Centroid marker (x̄, ȳ)
+    gOverlay.innerHTML = '';
+    const cx = x2px(stats.xbar), cy = y2px(stats.ybar);
+    gOverlay.append(mk('line', {class:'centroid', x1:cx-6, y1:cy, x2:cx+6, y2:cy}));
+    gOverlay.append(mk('line', {class:'centroid', x1:cx, y1:cy-6, x2:cx, y2:cy+6}));
 
     // Points
-    gPts.innerHTML='';
+    gPoints.innerHTML = '';
     pts.forEach((p,i)=>{
-      const c = mk('circle',{class:'point', r:6, cx:x2px(p.x), cy:y2px(p.y)});
-      c.addEventListener('mousedown', ()=>{ draggingIndex=i; });
-      gPts.append(c);
+      const c = mk('circle', {class:'point', r:6, cx:x2px(p.x), cy:y2px(p.y)});
+      c.addEventListener('mousedown', ()=>{ dragging = i; });
+      gPoints.append(c);
     });
   }
 
-  // ---------- Math/stat helpers ----------
-  function modelStats(data, yhatFn){
-    if(data.length===0) return {r2:NaN, mse:NaN};
-    const ybar = data.reduce((s,p)=>s+p.y,0)/data.length;
-    let ss_res=0, ss_tot=0, n=0;
-    for(const p of data){
-      const yh = yhatFn(p.x, a, b);
-      if(!isFinite(yh)) continue;
-      const err = p.y - yh;
-      ss_res += err*err; n++;
-      ss_tot += (p.y - ybar)**2;
+  // ====== Math: OLS fit ======
+  function fitLine(data){
+    const n = data.length || 1;
+    let sx=0, sy=0, sxx=0, syy=0, sxy=0;
+    for(const {x,y} of data){ sx+=x; sy+=y; sxx+=x*x; syy+=y*y; sxy+=x*y; }
+    const xbar = sx/n, ybar = sy/n;
+    const Sxx = sxx - n*xbar*xbar;
+    const Sxy = sxy - n*xbar*ybar;
+    const a   = (Sxx===0) ? 0 : (Sxy/Sxx);
+    const b   = ybar - a*xbar;
+
+    // Errors
+    let SSE = 0;
+    for(const {x,y} of data){
+      const yhat = a*x + b;
+      SSE += (y - yhat) ** 2;
     }
-    const mse = n ? ss_res/n : NaN;
-    const r2  = ss_tot ? (1 - ss_res/ss_tot) : 1;
-    return {r2, mse};
+    const MSE = SSE / n;
+
+    // R^2
+    let SST = 0;
+    for(const {y} of data){ SST += (y - ybar) ** 2; }
+    const R2 = (SST === 0) ? 1 : (1 - SSE / SST);
+
+    return {a, b, r2:R2, ybar, xbar, Sxx, Sxy, SSE, MSE, n};
   }
 
-  // Build a safe-ish evaluator that allows digits, x, a, b, + - * / ^ ( ) .
-  function makeUserFn(expr){
-    const safe = (expr||'').replace(/\s+/g,'').replace(/\^/g,'**');
-    if(!/^[0-9xXaAbB+\-*/().]+$/.test(safe)){
-      return ()=>NaN;
-    }
-    try{
-      // eslint-disable-next-line no-new-func
-      const f = new Function('x','a','b', `return (${safe});`);
-      return (x,a,b)=>{
-        const y = f(x,a,b);
-        return (typeof y==='number' && isFinite(y)) ? y : NaN;
-      };
-    }catch{
-      return ()=>NaN;
-    }
-  }
-
-  // ---------- Axes & grid ----------
+  // ====== Axes & grid ======
   function drawGrid(){
-    const g = mk('g',{class:'grid'});
-
-    // minor grid: every 1; major ticks every 2
-    for(let x=Math.ceil(XMIN); x<=XMAX; x++){
-      g.append(mk('line',{x1:x2px(x), y1:y2px(YMIN), x2:x2px(x), y2:y2px(YMAX)}));
+    const g = mk('g', {class:'grid'});
+    for(let x=0; x<=10; x++){
+      g.append(mk('line', {x1:x2px(x), y1:y2px(0), x2:x2px(x), y2:y2px(10)}));
     }
-    for(let y=Math.ceil(YMIN); y<=YMAX; y++){
-      g.append(mk('line',{x1:x2px(XMIN), y1:y2px(y), x2:x2px(XMAX), y2:y2px(y)}));
+    for(let y=0; y<=10; y++){
+      g.append(mk('line', {x1:x2px(0), y1:y2px(y), x2:x2px(10), y2:y2px(y)}));
     }
     svg.append(g);
   }
-
   function drawAxes(){
-    const g = mk('g',{class:'axis'});
-    // x=0 and y=0 axes
-    g.append(mk('line',{class:'zero-axis', x1:x2px(XMIN), y1:y2px(0), x2:x2px(XMAX), y2:y2px(0)}));
-    g.append(mk('line',{class:'zero-axis', x1:x2px(0), y1:y2px(YMIN), x2:x2px(0), y2:y2px(YMAX)}));
-
-    // major ticks/labels every 2
-    const step = 2;
-    for(let x=Math.ceil(XMIN/step)*step; x<=XMAX; x+=step){
-      const px=x2px(x);
-      g.append(mk('line',{x1:px, y1:y2px(0)-4, x2:px, y2:y2px(0)+4}));
-      const t=mk('text',{x:px,y:y2px(0)+18,'text-anchor':'middle'}); t.textContent=x; g.append(t);
+    const g = mk('g', {class:'axis'});
+    g.append(mk('line', {x1:PAD, y1:y2px(0), x2:PAD+innerW, y2:y2px(0)}));
+    g.append(mk('line', {x1:x2px(0), y1:PAD, x2:x2px(0), y2:PAD+innerH}));
+    for(let x=0;x<=10;x+=1){
+      const px = x2px(x);
+      g.append(mk('line', {x1:px, y1:y2px(0)-4, x2:px, y2:y2px(0)+4}));
+      const t = mk('text', {x:px, y:y2px(0)+18, 'text-anchor':'middle'}); t.textContent = x; g.append(t);
     }
-    for(let y=Math.ceil(YMIN/step)*step; y<=YMAX; y+=step){
-      const py=y2px(y);
-      g.append(mk('line',{x1:x2px(0)-4, y1:py, x2:x2px(0)+4, y2:py}));
-      const t=mk('text',{x:x2px(0)-10, y:py+4, 'text-anchor':'end'}); t.textContent=y; g.append(t);
+    for(let y=0;y<=10;y+=1){
+      const py = y2px(y);
+      g.append(mk('line', {x1:x2px(0)-4, y1:py, x2:x2px(0)+4, y2:py}));
+      const t = mk('text', {x:x2px(0)-10, y:py+4, 'text-anchor':'end'}); t.textContent = y; g.append(t);
     }
-
-    // axis titles
-    const xl = mk('text',{x: PAD+innerW/2, y: y2px(0)+40, 'text-anchor':'middle'}); xl.textContent='x';
-    const yl = mk('text',{x: x2px(0)-35, y: PAD+innerH/2, 'text-anchor':'middle',
-                           transform:`rotate(-90 ${x2px(0)-35} ${PAD+innerH/2})`}); yl.textContent='y';
-    svg.append(g,xl,yl);
+    const xl = mk('text', {x: PAD+innerW/2, y: y2px(0)+40, 'text-anchor':'middle'}); xl.textContent = 'x';
+    const yl = mk('text', {x: x2px(0)-30, y: PAD+innerH/2, 'text-anchor':'middle', transform:`rotate(-90 ${x2px(0)-30} ${PAD+innerH/2})`}); yl.textContent = 'y';
+    svg.append(g, xl, yl);
   }
 
-  // ---------- DOM helpers ----------
-  function mk(tag, attrs={}){ const el=document.createElementNS(svgns,tag); for(const [k,v] of Object.entries(attrs)) el.setAttribute(k,v); return el; }
-  function getMousePos(svgEl, evt){ const pt=svgEl.createSVGPoint(); pt.x=evt.clientX; pt.y=evt.clientY; const ctm=svgEl.getScreenCTM().inverse(); return pt.matrixTransform(ctm); }
-
-  // ---------- Utils ----------
+  // ====== Helpers ======
+  function mk(tag, attrs={}){
+    const el = document.createElementNS(svgns, tag);
+    for(const [k,v] of Object.entries(attrs)) el.setAttribute(k,v);
+    return el;
+  }
   function rnd(a,b){ return a + Math.random()*(b-a); }
   function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
-  function fmt(n,d=3){ if(!isFinite(n)) return '—'; const s=(+n).toFixed(d); return s.replace(/\.?0+$/,''); }
-
-  // Initial paint
-  render();
-
-  // After initial render, attach point mousedown (needs circles present)
-  function attachPointHandlers(){
-    // handled in render when creating circles; we keep mousemove global
+  function getMousePos(svgEl, evt){
+    const pt = svgEl.createSVGPoint();
+    pt.x = evt.clientX; pt.y = evt.clientY;
+    const ctm = svgEl.getScreenCTM().inverse();
+    return pt.matrixTransform(ctm);
+  }
+  function fmt(num, d=2){
+    if(!isFinite(num)) return '—';
+    const s = (+num).toFixed(d);
+    return s.replace(/\.?0+$/,'');
   }
 })();
 </script>
