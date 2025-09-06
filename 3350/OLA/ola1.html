@@ -161,9 +161,9 @@ y = wine.target
 
 # --- 2. Data Cleaning ---
 
-# --- 3. Standardize features ---
-
-# --- 4. Feature Engineering ---
+# --- 3. Feature Engineering ---
+    
+# --- 4. Standardize features ---
 
 # --- Train/Test split ---
 X_train, X_test, y_train, y_test = train_test_split(X_scaled, y,
@@ -176,9 +176,15 @@ y_pred = baseline.predict(X_test)
 print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
 
 # --- 5. Feature Selection ---
+# For the chi-square test, use X_clean as input, since the test requires non-negative values and standardization will generate negative values.
 
+
+# For RFE, you can use X_scale as input.
+    
 # --- 6. PCA (2D visualization) ---
+# For PCA, you can use X_scale as input.
 
+    
 # --- 7. Discussion ---
   </code></pre>
 
