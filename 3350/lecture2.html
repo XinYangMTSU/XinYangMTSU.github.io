@@ -1,206 +1,294 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OLA1 – Data Preprocessing & Feature Engineering</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      max-width: 950px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #17191a;
-      color: #ff79c6;
-    }
-    .container {
-      background-color: #222025;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 12px rgba(255,121,198,0.15);
-    }
-    h1 {
-      text-align: center;
-      font-size: 26px;
-      color: #ff79c6;
-      margin-bottom: 6px;
-    }
-    h3.deadline {
-      text-align: center;
-      font-size: 15px;
-      color: #ffb3de;
-      margin-top: 0;
-      margin-bottom: 20px;
-    }
-    h3 {
-      color: #ff79c6;
-      font-size: 22px;
-      margin-bottom: 12px;
-      border-bottom: 3px solid #ff79c6;
-      padding-bottom: 6px;
-    }
-    h4 {
-      color: #ffb3de;
-      font-size: 18px;
-      margin-top: 20px;
-      margin-bottom: 8px;
-      border-bottom: 1px solid #ffb3de;
-      padding-bottom: 3px;
-    }
-    pre {
-      background: #19121a;
-      color: #ffb3de;
-      padding: 15px;
-      border-radius: 6px;
-      font-size: 0.95em;
-      overflow-x: auto;
-    }
-    code {
-      font-family: Consolas, monospace;
-    }
-    table {
-      width: 70%;
-      margin: 15px auto;
-      border-collapse: collapse;
-      font-size: 0.9em;
-      color: #ffb3de;
-    }
-    th, td {
-      border: 1px solid #ff79c6;
-      padding: 6px 10px;
-      text-align: left;
-    }
-    th {
-      background: #19121a;
-      color: #ff79c6;
-    }
-    tr:nth-child(even) {
-      background: #2b2b2b;
-    }
-    #backToTop {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background-color: #ff79c6;
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      font-size: 1.3em;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      transition: background 0.2s;
-    }
-    #backToTop:hover {
-      background-color: #ffb3de;
-      color: #17191a;
-    }
-  </style>
-</head>
-<body>
+<section id="linreg-demo" class="linreg-card">
+  <h3 style="margin-top:0;">Interactive: Linear Regression (Drag the points!)</h3>
+  <div class="linreg-toolbar">
+    <button id="lr-reset">Reset</button>
+    <button id="lr-add">Add point</button>
+    <label class="linreg-toggle">
+      <input type="checkbox" id="lr-show-residuals" />
+      Show residuals
+    </label>
+  </div>
 
-<div class="container">
-  <h1>OLA1 – Data Preprocessing & Feature Engineering</h1>
-  <h3 class="deadline">Deadline: September 9th, 2025 (Tuesday)</h3>
+  <div class="linreg-stats">
+    <span id="lr-equation">y = a x + b</span>
+    <span id="lr-r2">R² = —</span>
+  </div>
 
-  <h3>Objective</h3>
-  <p>
-    The purpose of this assignment is to practice <b>data preprocessing</b> using a real dataset. 
-    Data preprocessing includes <b>data cleaning, data transformation, feature engineering, 
-    feature selection, and dimensionality reduction</b>.  
-    You will apply these techniques on the built-in <b>Wine Dataset</b> from scikit-learn. 
+  <svg id="lr-svg" viewBox="0 0 700 430" width="100%" style="max-width:900px; display:block; background:#151218; border-radius:14px; box-shadow:0 6px 22px rgba(255,121,198,.08)"></svg>
+
+  <p class="linreg-note">
+    <b>Tip:</b> Drag the magenta points. The least-squares line, equation, and R² update instantly.
+    Toggle residuals to see vertical errors from each point to the line.
   </p>
+</section>
 
-  <h3>Steps to Complete</h3>
-  <ol>
-    <li><b>Load and Inspect the Dataset</b>  
-      – Load using <code>load_wine(as_frame=True)</code>, print shape, and show the first 5 rows.</li>
-    <li><b>Data Cleaning</b>  
-      – Check for missing values and duplicates. Report if any issues exist and how you fixed them.</li>
-    <li><b>Data Transformation</b>  
-      – Standardize features with <code>StandardScaler</code>. Explain why scaling is necessary.</li>
-    <li><b>Feature Engineering</b>  
-      – Create <code>phenols_ratio = flavanoids / total_phenols</code>. Explain why this may matter.</li>
-    <li><b>Feature Selection</b>  
-      – Use <code>chi2</code> (with discretization) and <code>RFE</code> with Logistic Regression.  
-      – Compare accuracy using all features vs selected features.</li>
-    <li><b>Dimensionality Reduction with PCA</b>  
-      – Reduce features to 2 components and plot results with colors for wine classes.  
-      – Report explained variance ratio.</li>
-    <li><b>Discussion</b>  
-      – Reflect on which features were most important, how PCA separated classes, 
-        and whether feature selection improved performance.</li>
-  </ol>
-
-  <h3>Starter Code</h3>
-  <pre><code>
-# --- Please import necessary libraries here ---
-from sklearn.datasets import load_wine
-
-# --- 1. Load dataset ---
-wine = load_wine(as_frame=True)
-X = wine.data
-y = wine.target
-
-# --- 2. Data Cleaning ---
-
-# --- 3. Standardize features ---
-
-# --- 4. Feature Engineering ---
-
-# --- Train/Test split ---
-X_train, X_test, y_train, y_test = train_test_split(X_scaled, y,
-                                                    test_size=0.2, random_state=42, stratify=y)
-
-# --- Baseline Logistic Regression ---
-baseline = LogisticRegression(max_iter=5000, solver="liblinear")
-baseline.fit(X_train, y_train)
-y_pred = baseline.predict(X_test)
-print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
-
-# --- 5. Feature Selection ---
-
-# --- 6. PCA (2D visualization) ---
-
-# --- 7. Discussion ---
-  </code></pre>
-
-  <h3>Submission</h3>
-  <p>
-    Submit your Jupyter Notebook file <code>ola1.ipynb</code> 
-    with all outputs and plots in D2L. 
-    Include short explanations for each step. 
-  </p>
-
-  <h3>Grading Distribution (Total: 100 points)</h3>
-  <table>
-    <tr><th>Task</th><th>Points</th></tr>
-    <tr><td>Load & Inspect Dataset</td><td>5</td></tr>
-    <tr><td>Data Cleaning</td><td>10</td></tr>
-    <tr><td>Data Transformation</td><td>15</td></tr>
-    <tr><td>Feature Engineering</td><td>10</td></tr>
-    <tr><td>Feature Selection</td><td>20</td></tr>
-    <tr><td>Dimensionality Reduction (PCA)</td><td>20</td></tr>
-    <tr><td>Discussion & Analysis</td><td>10</td></tr>
-    <tr><td>Code Style, Clarity, and Explanations</td><td>10</td></tr>
-    <tr><th>Total</th><th>100</th></tr>
-  </table>
-</div>
-
-<!-- Back-to-top button -->
-<button id="backToTop" title="Go to top">↑</button>
+<style>
+  #linreg-demo.linreg-card{
+    background:#222025;border-radius:18px;padding:22px 22px 16px 22px;
+    border-left:7px solid #ff79c6; box-shadow:0 4px 30px rgba(255,121,198,.09);
+  }
+  #linreg-demo .linreg-toolbar{
+    display:flex;gap:10px;align-items:center;margin:12px 0 10px 0;flex-wrap:wrap;
+  }
+  #linreg-demo button{
+    background:#ff79c6;border:none;color:#1a1d1f;padding:8px 12px;border-radius:10px;
+    font-weight:700;cursor:pointer;box-shadow:0 3px 12px rgba(255,121,198,.35)
+  }
+  #linreg-demo button:hover{ filter:brightness(1.05); }
+  #linreg-demo .linreg-toggle{ display:inline-flex;gap:8px;align-items:center; }
+  #linreg-demo .linreg-stats{
+    display:flex;gap:18px;flex-wrap:wrap;margin:8px 0 14px 0;
+    color:#ffb3de;font-weight:600;
+  }
+  #linreg-demo .linreg-note{ color:#ffb3de;margin-top:10px; }
+  /* SVG styles */
+  #lr-svg .axis path, #lr-svg .axis line{ stroke:#6a5060; }
+  #lr-svg .axis text{ fill:#ffb3de;font-size:12px; }
+  #lr-svg .point{ fill:#ff79c6; cursor:grab; }
+  #lr-svg .point:active{ cursor:grabbing; }
+  #lr-svg .fit-line{ stroke:#fff52e; stroke-width:3; }
+  #lr-svg .residual{ stroke:#7fd7ff; stroke-dasharray:4 4; opacity:.9; }
+  #lr-svg .grid line{ stroke:#2f2630; }
+  #lr-svg .tooltip{
+    pointer-events:none; font-size:12px; fill:#111; 
+  }
+</style>
 
 <script>
-  // Back-to-top button functionality
-  document.getElementById("backToTop").addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-</script>
+(function(){
+  // ====== Config ======
+  const svg = document.getElementById('lr-svg');
+  const W = 700, H = 430, PAD = 50;
+  const innerW = W - PAD*2, innerH = H - PAD*2;
+  const XMIN=0, XMAX=10, YMIN=0, YMAX=10;
 
-</body>
-</html>
+  // Utilities: scales
+  const x2px = x => PAD + (x - XMIN) / (XMAX - XMIN) * innerW;
+  const y2px = y => H - PAD - (y - YMIN) / (YMAX - YMIN) * innerH;
+  const px2x = px => XMIN + (px - PAD) / innerW * (XMAX - XMIN);
+  const px2y = py => YMIN + (H - PAD - py) / innerH * (YMAX - YMIN);
+
+  // SVG helpers
+  const svgns = "http://www.w3.org/2000/svg";
+  const gGrid = mk('g'); const gAxes = mk('g');
+  const gResiduals = mk('g'); const gLine = mk('g'); const gPoints = mk('g');
+  svg.append(gGrid); svg.append(gAxes); svg.append(gResiduals); svg.append(gLine); svg.append(gPoints);
+
+  // Grid
+  drawGrid();
+
+  // Axes
+  drawAxes();
+
+  // Data
+  let pts = [];
+  function seedData(){
+    pts = [];
+    const a=0.8, b=1.2;
+    for(let i=0;i<12;i++){
+      const x = rnd(0.5,9.5);
+      const y = a*x + b + rnd(-1.2, 1.2);
+      pts.push({x,y});
+    }
+  }
+  seedData();
+
+  // UI
+  const showResidualsCheckbox = document.getElementById('lr-show-residuals');
+  const eqEl = document.getElementById('lr-equation');
+  const r2El = document.getElementById('lr-r2');
+  document.getElementById('lr-reset').addEventListener('click', ()=>{ seedData(); render(); });
+  document.getElementById('lr-add').addEventListener('click', ()=>{
+    pts.push({x:rnd(0,10), y:rnd(0,10)}); render();
+  });
+  showResidualsCheckbox.addEventListener('change', render);
+
+  // Tooltip
+  const tip = mk('text', {class:'tooltip', x: 8, y: 18});
+  const tipBg = mk('rect', {fill:'#ffb3de', rx:6, ry:6, x:4, y:4, width:120, height:20, opacity:0.9});
+  tip.textContent = '';
+  svg.append(tipBg); svg.append(tip);
+
+  // Drag state
+  let dragging = null;
+
+  // Render
+  function render(){
+    // Fit line (ordinary least squares)
+    const {a, b, r2} = fitLine(pts);
+
+    // Update equation text
+    eqEl.textContent = `y = ${fmt(a)} x + ${fmt(b)}`;
+    r2El.textContent = `R² = ${fmt(r2,3)}`;
+
+    // Residuals
+    gResiduals.innerHTML = '';
+    if(showResidualsCheckbox.checked){
+      pts.forEach(p=>{
+        const yhat = a*p.x + b;
+        gResiduals.append(mk('line', {
+          class:'residual',
+          x1:x2px(p.x), y1:y2px(p.y),
+          x2:x2px(p.x), y2:y2px(yhat)
+        }));
+      });
+    }
+
+    // Line segment across plot
+    gLine.innerHTML = '';
+    const xA = XMIN, yA = a*xA + b;
+    const xB = XMAX, yB = a*xB + b;
+    const line = mk('line', {
+      class:'fit-line',
+      x1:x2px(xA), y1:y2px(yA),
+      x2:x2px(xB), y2:y2px(yB)
+    });
+    gLine.append(line);
+
+    // Points
+    gPoints.innerHTML = '';
+    pts.forEach((p, i)=>{
+      const c = mk('circle', {class:'point', r:6, cx:x2px(p.x), cy:y2px(p.y)});
+      c.addEventListener('mousedown', (e)=>{ dragging = {i, dx:0, dy:0}; c.style.filter='brightness(1.2)'; });
+      svg.addEventListener('mousemove', (e)=>{
+        if(dragging && dragging.i===i){
+          const pt = getMousePos(svg, e);
+          let nx = clamp(px2x(pt.x), XMIN, XMAX);
+          let ny = clamp(px2y(pt.y), YMIN, YMAX);
+          pts[i] = {x:nx, y:ny};
+          c.setAttribute('cx', x2px(nx));
+          c.setAttribute('cy', y2px(ny));
+          // live update while dragging
+          const fit = fitLine(pts);
+          eqEl.textContent = `y = ${fmt(fit.a)} x + ${fmt(fit.b)}`;
+          r2El.textContent = `R² = ${fmt(fit.r2,3)}`;
+          // update line
+          const y1 = fit.a*XMIN + fit.b, y2 = fit.a*XMAX + fit.b;
+          line.setAttribute('x1', x2px(XMIN));
+          line.setAttribute('y1', y2px(y1));
+          line.setAttribute('x2', x2px(XMAX));
+          line.setAttribute('y2', y2px(y2));
+          // update residual (only if shown)
+          if(showResidualsCheckbox.checked){
+            gResiduals.innerHTML = '';
+            pts.forEach(pp=>{
+              const yh = fit.a*pp.x + fit.b;
+              gResiduals.append(mk('line', {
+                class:'residual',
+                x1:x2px(pp.x), y1:y2px(pp.y),
+                x2:x2px(pp.x), y2:y2px(yh)
+              }));
+            });
+          }
+          // tooltip
+          showTip(`(${fmt(nx,2)}, ${fmt(ny,2)})`);
+        }
+      });
+      window.addEventListener('mouseup', ()=>{
+        if(dragging){ dragging=null; c.style.filter=''; hideTip(); }
+      });
+      c.addEventListener('mouseenter', ()=> showTip(`(${fmt(p.x,2)}, ${fmt(p.y,2)})`) );
+      c.addEventListener('mouseleave', ()=> hideTip() );
+      gPoints.append(c);
+    });
+  }
+
+  // ====== Math: OLS fit (slope a, intercept b, R^2) ======
+  function fitLine(data){
+    const n = data.length;
+    let sx=0, sy=0, sxx=0, syy=0, sxy=0;
+    for(const {x,y} of data){
+      sx += x; sy += y;
+      sxx += x*x; syy += y*y; sxy += x*y;
+    }
+    const xbar = sx/n, ybar = sy/n;
+    const varx = sxx - n*xbar*xbar;
+    const covxy = sxy - n*xbar*ybar;
+    const a = (varx === 0) ? 0 : (covxy / varx);
+    const b = ybar - a*xbar;
+    // R^2
+    let ss_res = 0, ss_tot = 0;
+    for(const {x,y} of data){
+      const yhat = a*x + b;
+      ss_res += (y - yhat) ** 2;
+      ss_tot += (y - ybar) ** 2;
+    }
+    const r2 = (ss_tot === 0) ? 1 : (1 - ss_res/ss_tot);
+    return {a, b, r2};
+  }
+
+  // ====== Axes & grid ======
+  function drawGrid(){
+    const g = mk('g', {class:'grid'});
+    // vertical
+    for(let x=0; x<=10; x++){
+      g.append(mk('line', {x1:x2px(x), y1:y2px(0), x2:x2px(x), y2:y2px(10)}));
+    }
+    // horizontal
+    for(let y=0; y<=10; y++){
+      g.append(mk('line', {x1:x2px(0), y1:y2px(y), x2:x2px(10), y2:y2px(y)}));
+    }
+    svg.append(g);
+  }
+
+  function drawAxes(){
+    const g = mk('g', {class:'axis'});
+    // axes lines
+    g.append(mk('line', {x1:PAD, y1:y2px(0), x2:PAD+innerW, y2:y2px(0)}));
+    g.append(mk('line', {x1:x2px(0), y1:PAD, x2:x2px(0), y2:PAD+innerH}));
+    // ticks & labels
+    for(let x=0;x<=10;x+=1){
+      const px = x2px(x);
+      g.append(mk('line', {x1:px, y1:y2px(0)-4, x2:px, y2:y2px(0)+4}));
+      const t = mk('text', {x:px, y:y2px(0)+18, 'text-anchor':'middle'});
+      t.textContent = x;
+      g.append(t);
+    }
+    for(let y=0;y<=10;y+=1){
+      const py = y2px(y);
+      g.append(mk('line', {x1:x2px(0)-4, y1:py, x2:x2px(0)+4, y2:py}));
+      const t = mk('text', {x:x2px(0)-10, y:py+4, 'text-anchor':'end'});
+      t.textContent = y;
+      g.append(t);
+    }
+    // axis labels
+    const xl = mk('text', {x: PAD+innerW/2, y: y2px(0)+40, 'text-anchor':'middle'});
+    xl.textContent = 'x';
+    const yl = mk('text', {x: x2px(0)-30, y: PAD+innerH/2, 'text-anchor':'middle', transform:`rotate(-90 ${x2px(0)-30} ${PAD+innerH/2})`});
+    yl.textContent = 'y';
+    svg.append(g);
+    svg.append(xl); svg.append(yl);
+  }
+
+  // ====== Helpers ======
+  function mk(tag, attrs={}){
+    const el = document.createElementNS(svgns, tag);
+    for(const [k,v] of Object.entries(attrs)) el.setAttribute(k,v);
+    return el;
+  }
+  function rnd(a,b){ return a + Math.random()*(b-a); }
+  function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
+  function fmt(num, d=2){
+    if(!isFinite(num)) return '—';
+    const s = num.toFixed(d);
+    // trim trailing zeros
+    return s.replace(/\.?0+$/,'');
+  }
+  function getMousePos(svgEl, evt){
+    const pt = svgEl.createSVGPoint();
+    pt.x = evt.clientX; pt.y = evt.clientY;
+    const ctm = svgEl.getScreenCTM().inverse();
+    return pt.matrixTransform(ctm);
+  }
+  function showTip(text){
+    tip.textContent = text;
+    const bb = tip.getBBox();
+    tipBg.setAttribute('width', bb.width + 12);
+    tipBg.setAttribute('height', bb.height + 10);
+  }
+  function hideTip(){ tip.textContent=''; tipBg.setAttribute('width', 0); tipBg.setAttribute('height', 0); }
+
+  // Initial render
+  render();
+})();
+</script>
