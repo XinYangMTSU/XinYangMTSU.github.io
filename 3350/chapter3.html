@@ -292,6 +292,7 @@
       <li>β<sub>1</sub>, β<sub>2</sub>, …, β<sub>p</sub> = coefficients (weights for each feature). Effect of feature \(x_j\) on \(y\) when others are held fixed.</li>
       <li><em>x</em><sub>1</sub>, <em>x</em><sub>2</sub>, …, <em>x</em><sub>p</sub> = input features</li>
       <li><strong>Sparsity</strong> – If \(\beta_j = 0\), feature \(x_j\) is effectively removed by the model.</li>
+      <li><i>\( p \)</i> means the number of input feature.</li>
       <li><em>ε</em> = error term (difference between predicted and actual values)</li>
     </ul>
 
@@ -358,13 +359,12 @@
   </p>
 
 
-<h4>Objective (Least Squares)</h4>
+<h4>Objective (Ordinary Least Squares)</h4>
 <p>The goal of Ordinary Least Squares (OLS) regression is to minimize the sum of squared errors (SSE), which represents the difference between the observed values <i>y<sub>i</sub></i> and the predicted values <i>\( \hat{y}_i \)</i>.</p>
 
 <p><b>Formula:</b></p>
 <p>
-    $$ \mathrm{SSE} = \sum_{i=1}^{m} (y_i - \hat{y}_i)^2
-       \;=\; (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top(\mathbf{y} - \mathbf{X}\boldsymbol{\beta}). $$
+    $$ \mathrm{SSE} = \sum_{i=1}^{m} (y_i - \hat{y}_i)^2 $$
 </p>
 
 <p>Where:</p>
@@ -372,7 +372,6 @@
     <li><i>\( y_i \)</i> is the actual observed value.</li>
     <li>  \( \hat{y}_i \) is the predicted value (the model's output).</li>
     <li><i>\( m \) </i> is the number of data points.</li>
-    <li><i>\( p \)</i> means the number of input feature.</li>
 </ul>
 
 <p>You can rewrite this using vector notation:</p>
