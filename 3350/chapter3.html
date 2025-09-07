@@ -659,62 +659,52 @@ After computing the inverse and multiplying, we get:
 
 <p>
 The performance of a regression model can be evaluated using several metrics. 
-We start with the <b>Sum of Squared Errors (SSE)</b>:
 </p>
 
-<p>
+<ul>
+  <li><b>Sum of Squared Errors (SSE)</b>:</li>
+  <p>
   $$
     \mathrm{SSE} = \sum_{i=1}^{m}(y_i - \hat{y}_i)^2 \;\approx\; 1.0667 \times 10^8
   $$
 </p>
-
-<p>
+  <p>
 A large SSE doesn’t necessarily mean the model is poor—it simply reflects that 
 we are predicting large values (house prices). To make the error easier to interpret, 
 we scale SSE into other metrics: 
 </p>
-
-<ul>
-  <li><b>Mean Squared Error (MSE):</b> the average squared error per data point</li>
-
-  $$
-  \text{MSE} = \frac{\text{SSE}}{m} 
-  = \frac{1}{m} \sum_{i=1}^{m}(y_i - \hat{y}_i)^2
-  $$
   
+<li><b>Mean Squared Error (MSE):</b> the average squared error per data point</li>
+   $$
+  \text{MSE} = \frac{\text{SSE}}{m} 
+  = \frac{1}{m} \sum_{i=1}^{m}(y_i - \hat{y}_i)^2 \approx 21{,}333{,}333.33
+  $$
+
   <li><b>Root Mean Squared Error (RMSE):</b> the square root of MSE, expressed in the same units as the target variable</li>
 
-   $$
-  \text{RMSE} = \sqrt{\text{MSE}}
+    $$
+  \text{RMSE} = \sqrt{\text{MSE}} \approx 4618.80
   $$
-  
-</ul>
 
-
-<p>
-For this example: 
-$$ \text{MSE} \approx 21{,}333{,}333.33, \quad \text{RMSE} \approx 4618.80 $$
-</p>
-
-<p>
+  <p>
 These values tell us that, on average, predictions are off by about \$4,600. 
 Smaller MSE or RMSE values indicate better model performance.
 </p>
 
-<p><b>Coefficient of Determination (\(R^2\))</b></p>
-<p>
-The \(R^2\) score measures the proportion of variance in the target variable 
-explained by the model:
-</p>
-
-<p>
-  $$
+  <li><b>Coefficient of Determination (\(R^2\))</b></li>
+   $$
   R^2 \;=\; 1 \;-\; 
   \frac{\sum_{i=1}^{m}\bigl(y_i - \hat{y}_i\bigr)^2}
        {\sum_{i=1}^{m}\bigl(y_i - \bar{y}\bigr)^2}
   $$
+
+  <p>
+The \(R^2\) score measures the proportion of variance in the target variable 
+explained by the model:
 </p>
-      
+  
+</ul>
+  
 <br>
 
 <h4>Note on Feature Scaling</h4>
