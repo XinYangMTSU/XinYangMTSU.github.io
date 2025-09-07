@@ -360,6 +360,30 @@
 
 
 <h4>Objective Function (Ordinary Least Squares)</h4>
+
+  <h5>What is an Objective Function?</h5>
+
+<ul>
+  <li>In <strong>mathematics, optimization, and machine learning</strong>, the objective function is the function we want to 
+      <strong>optimize</strong> (minimize or maximize).</li>
+  <li>It represents the <em>goal</em> of the learning or fitting process.</li>
+  <li><strong>In Linear Regression:</strong>
+    <ul>
+      <li>The goal is to make predictions \(\hat{y}_i\) close to the true values \(y_i\).</li>
+      <li>The <strong>Sum of Squared Errors (SSE)</strong) is defined as the objective function:</li>
+    </ul>
+    <p style="text-align: center;">
+      \[
+      \mathrm{SSE}(\beta) = \sum_{i=1}^{m} (y_i - \hat{y}_i)^2
+      \]
+    </p>
+    <ul>
+      <li>Here, \(\beta\) are the parameters (coefficients) we want to learn.</li>
+      <li>Minimizing SSE gives us the <strong>best-fit line (or hyperplane)</strong> in regression.</li>
+    </ul>
+  </li>
+</ul>
+      
 <p>The goal of Ordinary Least Squares (OLS) regression is to minimize the sum of squared errors (SSE), which represents the difference between the observed values <i>y<sub>i</sub></i> and the predicted values <i>\( \hat{y}_i \)</i>.</p>
 
 <p><b>Formula:</b></p>
