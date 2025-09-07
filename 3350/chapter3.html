@@ -513,34 +513,28 @@ If
       
 <p style="color: #ffb3de;"><b><u>Step 4: Differentiate with respect to \(\boldsymbol{\beta}\)</u></b></p>
 
-<p>
-To minimize the SSE, we compute the derivative of the SSE with respect to \(\boldsymbol{\beta}\).
-Now, take the derivative with respect to \(\boldsymbol{\beta}\). Recall these matrix calculus rules:
-</p>
-      
-<ul>
+  <ul>
+
+    <li>To minimize the SSE, we compute the derivative of the SSE with respect to \(\boldsymbol{\beta}\).
+Now, take the derivative with respect to \(\boldsymbol{\beta}\). Recall these matrix calculus rules:</li>
+    <ul>
   <li>\(\frac{\partial}{\partial \boldsymbol{\beta}} \; \mathbf{a}^\top \boldsymbol{\beta} = \mathbf{a}\)</li>
   <li>\(\frac{\partial}{\partial \boldsymbol{\beta}} \; \boldsymbol{\beta}^\top A \boldsymbol{\beta} = (A + A^\top)\boldsymbol{\beta}\). If \(A\) is symmetric, this simplifies to \(2A\boldsymbol{\beta}\).</li>
 </ul>
-
-<p>
-Since \(\mathbf{X}^\top \mathbf{X}\) is always symmetric
+    <li>Since \(\mathbf{X}^\top \mathbf{X}\) is always symmetric
 (because \((\mathbf{X}^\top \mathbf{X})^\top = \mathbf{X}^\top (\mathbf{X}^\top)^\top = \mathbf{X}^\top \mathbf{X}\)),
-we can apply the symmetric case directly.
-</p>
+we can apply the symmetric case directly.</li>
 
-<p>
-Therefore:
-</p>
-
-<p>
+    <li>Therefore:</li>
+    <p>
   $$
   \frac{\partial \,\mathrm{SSE}}{\partial \boldsymbol{\beta}}
   = -2\,\mathbf{X}^\top \mathbf{y}
   + 2\,\mathbf{X}^\top \mathbf{X}\,\boldsymbol{\beta}.
   $$
 </p>
-
+    
+  </ul>
 
 <p style="color: #ffb3de;"><b><u>Step 5: Set gradient = 0 and solve</u></b></p>
 <p>
