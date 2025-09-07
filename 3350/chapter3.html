@@ -424,87 +424,8 @@ If
 
 <p>This shows that \(\mathbf{r}^\top \mathbf{r}\) is exactly the <strong>Sum of Squared Errors (SSE)</strong>.</p>
       
-
  <!--   -->
 
-      
-<b>What is an Objective Function?</b>
-
-<ul>
-  <li>In <strong>mathematics, optimization, and machine learning</strong>, the objective function is the function we want to 
-      <strong>optimize</strong> (minimize or maximize).</li>
-  <li>It represents the <em>goal</em> of the learning or fitting process.</li>
-  <li><strong>In Linear Regression:</strong>
-    <ul>
-      <li>The goal is to make predictions \(\hat{y}_i\) close to the true values \(y_i\).</li>
-      <li>The <strong>Sum of Squared Errors (SSE)</strong) is defined as the objective function:</li>
-    </ul>
-    <p style="text-align: center;">
-      \[
-      \mathrm{SSE}(\beta) = \sum_{i=1}^{m} (y_i - \hat{y}_i)^2
-      \]
-    </p>
-    <ul>
-      <li>Here, \(\beta\) are the parameters (coefficients) we want to learn.</li>
-      <li>Minimizing SSE gives us the <strong>best-fit line (or hyperplane)</strong> in regression.</li>
-    </ul>
-  </li>
-</ul>
-      
-<p>The goal of Ordinary Least Squares (OLS) regression is to minimize the sum of squared errors (SSE), which represents the difference between the observed values <i>y<sub>i</sub></i> and the predicted values <i>\( \hat{y}_i \)</i>.</p>
-
-<p><b>Formula:</b></p>
-<p>
-    $$ \mathrm{SSE}(\beta) = \sum_{i=1}^{m} (y_i - \hat{y}_i)^2 $$
-</p>
-
-<p>Where:</p>
-<ul>
-    <li><i>\( y_i \)</i> is the actual observed value.</li>
-    <li>  \( \hat{y}_i \) is the predicted value (the model's output).</li>
-    <li><i>\( m \) </i> is the number of data points.</li>
-</ul>
-
-<p>You can rewrite this using vector notation:</p>
-<p>
-    $$ \text{SSE}(\beta) = \sum_{i=1}^{m} (y_i - \hat{y}_i)^2 = (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top (\mathbf{y} - \mathbf{X}\boldsymbol{\beta}) $$
-</p>
-<p>Where:</p>
-<ul>
-    <li><i>\( \mathbf{y} \)</i> is the vector of observed values.</li>
-    <li><i>\( \mathbf{X} \)</i> is the design matrix (input features for the data).</li>
-    <li><i>\( \mathbf{&#946;} \)</i> is the vector of coefficients (parameters of the model).</li>
-</ul>
-<p>The expression <i> \( (y - X&#946;) \)</i> is the vector of errors (the differences between observed and predicted values).</p>
-
-<p>If
-      $$
-      \mathbf{r} =
-      \begin{bmatrix}
-        r_1 \\ r_2 \\ \vdots \\ r_m
-      \end{bmatrix},
-      $$
-      then
-      $$
-      \mathbf{r}^\top \mathbf{r} =
-      \begin{bmatrix}
-        r_1 & r_2 & \dots & r_m
-      \end{bmatrix}
-      \begin{bmatrix}
-        r_1 \\ r_2 \\ \vdots \\ r_m
-      \end{bmatrix}
-      = r_1^2 + r_2^2 + \cdots + r_m^2
-      $$
-    </p>
-
-    <p>That’s exactly the <strong>Sum of Squared Errors (SSE)</strong>.
-
-
-
-
-
-
-      
     <p>Residual Vector:
       $$
       \mathbf{r} \;=\; \mathbf{y} \;-\; \mathbf{X}\,\boldsymbol{\beta}
