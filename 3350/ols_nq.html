@@ -98,7 +98,7 @@
   <h1>Worked Example: Predicting House Price</h1>
   </center>
   <h2>Method 1: OLS via Normal Equation</h2>
-  <h4 id="full-script">Full Python Script <a href="#full-script" class="anchor" aria-label="Direct link">¶</a></h4>
+  <h4 id="full-script">Full Python Script</h4>
   <pre><button class="copy">Copy</button><code>
 # ========================================================
 # Worked Example: Predicting House Price
@@ -181,24 +181,6 @@ print(f"RMSE = {RMSE:.2f}")
 print(f"R^2  = {R2:.4f}")
   </code></pre>
 
-  <h4 id="step-7">Step 7: Metrics (SSE, MSE, RMSE, R²) <a href="#step-7" class="anchor" aria-label="Direct link">¶</a></h4>
-  <p>Just the metrics block, in case students want to copy only this part:</p>
-  <pre><button class="copy">Copy</button><code>
-# --- Metrics (Normal Equation) ---
-SSE = float(np.sum(residuals**2))
-MSE = SSE / len(y)
-RMSE = np.sqrt(MSE)
-
-y_mean = float(np.mean(y))
-TSS = float(np.sum((y - y_mean)**2))
-R2 = 1.0 - SSE / TSS
-
-print("\n--- Metrics (Normal Equation) ---")
-print(f"SSE  = {SSE:.2f}")
-print(f"MSE  = {MSE:.2f}")
-print(f"RMSE = {RMSE:.2f}")
-print(f"R^2  = {R2:.4f}")
-  </code></pre>
 </section>
 
 <script>
