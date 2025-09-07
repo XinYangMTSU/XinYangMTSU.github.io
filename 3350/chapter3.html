@@ -441,7 +441,101 @@ If
     </p>
 
     <br>
-    
+
+
+   <h4>Solving for \( \beta \): The Closed-Form OLS Solution in Linear Regression</h4>
+
+<p>After defining the objective function (SSE), the next step is to solve for the coefficients 
+\(\boldsymbol{\beta}\) that minimize this function. This is done using the 
+<strong>Ordinary Least Squares (OLS)</strong> method.</p>
+
+<p><b>Step 1: Express SSE in matrix form</b></p>
+<p>
+  $$
+  \mathrm{SSE} = (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})
+  $$
+</p>
+
+<p><b>Step 2: Expand the quadratic form</b></p>
+<p>
+  $$
+  =\;\mathbf{y}^\top \mathbf{y}
+  \;-\;\mathbf{y}^\top \mathbf{X}\boldsymbol{\beta}
+  \;-\;(\mathbf{X}\boldsymbol{\beta})^\top \mathbf{y}
+  \;+\;(\mathbf{X}\boldsymbol{\beta})^\top (\mathbf{X}\boldsymbol{\beta})
+  $$
+</p>
+
+<p><b>Step 3: Simplify using transpose rules</b></p>
+<ul>
+  <li>\((AB)^\top = B^\top A^\top\)</li>
+  <li>A scalar equals its transpose</li>
+</ul>
+
+<p>
+  $$
+  - \mathbf{y}^\top \mathbf{X}\boldsymbol{\beta} - (\mathbf{X}\boldsymbol{\beta})^\top \mathbf{y}
+  = -2\,\boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{y}
+  $$
+</p>
+<p>
+  $$
+  (\mathbf{X}\boldsymbol{\beta})^\top (\mathbf{X}\boldsymbol{\beta})
+  = \boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{X}\,\boldsymbol{\beta}
+  $$
+</p>
+
+<p><b>Resulting SSE:</b></p>
+<p>
+  $$
+  \mathrm{SSE}
+  = \mathbf{y}^\top \mathbf{y}
+  - 2\,\boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{y}
+  + \boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{X}\,\boldsymbol{\beta}
+  $$
+</p>
+
+<p><b>Step 4: Differentiate with respect to \(\boldsymbol{\beta}\)</b></p>
+<p>
+  $$
+  \frac{\partial \,\mathrm{SSE}}{\partial \boldsymbol{\beta}}
+  = -2\,\mathbf{X}^\top \mathbf{y}
+  + 2\,\mathbf{X}^\top \mathbf{X}\,\boldsymbol{\beta}
+  $$
+</p>
+
+<p><b>Step 5: Set gradient = 0 and solve</b></p>
+<p>
+  $$
+  \mathbf{X}^\top \mathbf{X}\,\hat{\boldsymbol{\beta}} = \mathbf{X}^\top \mathbf{y}
+  $$
+</p>
+
+<p><b>Step 6: Closed-form solution (Normal Equation)</b></p>
+<p>
+  $$
+  \boxed{
+  \hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1}\,\mathbf{X}^\top \mathbf{y}
+  }
+  $$
+</p>
+
+<p><b>Where:</b></p>
+<ul>
+  <li>\(\hat{\boldsymbol{\beta}}\): estimated coefficients (parameters)</li>
+  <li>\(\mathbf{X}^\top \mathbf{X}\): feature covariance matrix</li>
+  <li>\(\mathbf{X}^\top \mathbf{y}\): correlation between features and target</li>
+</ul>
+
+<h4>Key Points:</h4>
+<ul>
+  <li>The <strong>Normal Equation</strong> provides a closed-form solution for the coefficients that minimize SSE.</li>
+  <li>Computing the inverse of \(\mathbf{X}^\top \mathbf{X}\) can be expensive for large datasets, so iterative methods like gradient descent are often used instead.</li>
+</ul>
+   
+      
+
+<!-- -->
 <h4>
   Solving for \( \beta \): The Closed-Form OLS Solution in Linear Regression
 </h4>
@@ -554,9 +648,7 @@ If
     <li>The Normal Equation provides a closed-form solution for the coefficients <i>&#946;</i> that minimizes the sum of squared errors.</li>
     <li>Matrix inversion is required to solve for <i>&#946;</i>, which is computationally expensive for large datasets. For very large datasets, more efficient methods like gradient descent are often used.</li>
 </ul>
-
-    
-
+<!-- -->
   <hr>
 
   <h4>Worked Example: Predicting House Price</h4>
