@@ -582,7 +582,7 @@ we can apply the symmetric case directly.</li>
   $$ \text{Price} = \beta_0 + \beta_1 \cdot \text{Size} + \beta_2 \cdot \text{Bedrooms} + \epsilon $$
 </p>
 
-<h4>Step 1: Data</h4>
+<p style="color: #ffb3de;"><b><u>Step 1: Data</u></b></p>
 <center>  
 <table border="1" cellpadding="6">
   <tr><th>Size (sq.ft)</th><th>Bedrooms</th><th>Price ($)</th></tr>
@@ -594,7 +594,7 @@ we can apply the symmetric case directly.</li>
 </table>
 </center>  
 
-<h4>Step 2: Build Matrices \( \mathbf{X} \) and \( \mathbf{y} \)</h4>
+<p style="color: #ffb3de;"><b><u>Step 2: Build Matrices \( \mathbf{X} \) and \( \mathbf{y} \)</u></b></p>
 <p>
   $$
   \mathbf{X} =
@@ -612,7 +612,7 @@ we can apply the symmetric case directly.</li>
   $$
 </p>
 
-<h4>Step 3: Compute \( \mathbf{X}^\top \mathbf{X} \) and \( \mathbf{X}^\top \mathbf{y} \)</h4>
+<p style="color: #ffb3de;"><b><u>Step 3: Compute \( \mathbf{X}^\top \mathbf{X} \) and \( \mathbf{X}^\top \mathbf{y} \)</u></b></p>
 <ul>
   <li>\( \mathbf{X}^\top \mathbf{X} \): feature covariance matrix</li>
   <li>\( \mathbf{X}^\top \mathbf{y} \): feature–target correlation</li>
@@ -633,7 +633,7 @@ we can apply the symmetric case directly.</li>
   $$
 </p>
 
-<h4>Step 4: Solve the Normal Equation</h4>
+<p style="color: #ffb3de;"><b><u>Step 4: Solve the Normal Equation</u></b></p>
 <p>
   $$ \hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y} $$
 </p>
@@ -645,7 +645,7 @@ After computing the inverse and multiplying, we get:
   $$ \hat{\beta}_0 = 64{,}000, \quad \hat{\beta}_1 \approx 114.67, \quad \hat{\beta}_2 \approx 13{,}333.33 $$
 </p>
  
-<h4>Step 5: Final Model</h4>
+<p style="color: #ffb3de;"><b><u>Step 5: Final Model</u></b></p>
 <p style="text-align:center; font-size:1.1em;">
   $$ \widehat{\text{Price}} = 64{,}000 + 114.67 \times \text{Size} + 13{,}333.33 \times \text{Bedrooms} $$
 </p>
@@ -657,7 +657,7 @@ After computing the inverse and multiplying, we get:
   <li>\(\beta_2\): each additional bedroom adds about \$13,333.33.</li>
 </ul>
 
-<h4>Step 6: Predictions \((\hat{\mathbf{y}})\) & Errors</h4>
+<p style="color: #ffb3de;"><b><u>Step 6: Predictions \((\hat{\mathbf{y}})\) & Errors</u></b></p>
 <p>
   $$
   \hat{\mathbf{y}} \approx
@@ -671,8 +671,7 @@ After computing the inverse and multiplying, we get:
   $$
 </p>
 
-<h4>Step 7: Model Evaluation — SSE, MSE, RMSE, and \(R^2\)</h4>
-
+<p style="color: #ffb3de;"><b><u>Step 7: Model Evaluation — SSE, MSE, RMSE, and \(R^2\)</u></b></p>
 <p>
 The performance of a regression model can be evaluated using several metrics. 
 </p>
