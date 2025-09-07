@@ -628,11 +628,18 @@ After computing the inverse and multiplying, we get:
 <p>
   $$ \hat{\beta}_0 = 64{,}000, \quad \hat{\beta}_1 \approx 114.67, \quad \hat{\beta}_2 \approx 13{,}333.33 $$
 </p>
-
+ 
 <h4>Step 5: Final Model</h4>
 <p style="text-align:center; font-size:1.1em;">
   $$ \widehat{\text{Price}} = 64{,}000 + 114.67 \times \text{Size} + 13{,}333.33 \times \text{Bedrooms} $$
 </p>
+
+<b>Interpret Coefficients:</b>
+<ul>
+  <li>\(\beta_0\): baseline house price (anchor point).</li>
+  <li>\(\beta_1\): each additional sq.ft adds about \$114.67.</li>
+  <li>\(\beta_2\): each additional bedroom adds about \$13,333.33.</li>
+</ul>
 
 <h4>Step 6: Predictions \((\hat{\mathbf{y}})\) & Errors</h4>
 <p>
@@ -708,13 +715,6 @@ explained by the model:
   $$
 </p>
 
-
-<h4>Step 8: Interpret Coefficients</h4>
-<ul>
-  <li>\(\beta_0\): baseline house price (anchor point).</li>
-  <li>\(\beta_1\): each additional sq.ft adds about \$114.67.</li>
-  <li>\(\beta_2\): each additional bedroom adds about \$13,333.33.</li>
-</ul>
 
 <h4>Note on Feature Scaling</h4>
 <p>
