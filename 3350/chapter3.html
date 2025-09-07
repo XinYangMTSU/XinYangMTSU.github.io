@@ -695,13 +695,19 @@ Smaller MSE or RMSE values indicate better model performance.
    $$
   R^2 \;=\; 1 \;-\; 
   \frac{\sum_{i=1}^{m}\bigl(y_i - \hat{y}_i\bigr)^2}
-       {\sum_{i=1}^{m}\bigl(y_i - \bar{y}\bigr)^2}
+       {\sum_{i=1}^{m}\bigl(y_i - \bar{y}\bigr)^2} \approx 0.9974
   $$
 
   <p>
 The \(R^2\) score measures the proportion of variance in the target variable 
 explained by the model:
 </p>
+
+  <ul>
+  <li><strong>\( R^2 \) = 1.0</strong> — Perfect fit: model explains 100% of the variance in \(y\).</li>
+  <li><strong>\( R^2 \) = 0.0</strong> — Model explains 0% of the variance: as good as predicting the mean.</li>
+  <li><strong>\( R^2 \) &lt; 0</strong> — Model is worse than predicting the mean: poor predictive performance.</li>
+</ul>
   
 </ul>
   
@@ -731,13 +737,6 @@ solution can handle features of different magnitudes.
 </ul>
 
     
-<h4>Range &amp; Meaning</h4>
-<ul>
-  <li><strong>\( R^2 \) = 1.0</strong> — Perfect fit: model explains 100% of the variance in \(y\).</li>
-  <li><strong>\( R^2 \) = 0.0</strong> — Model explains 0% of the variance: as good as predicting the mean.</li>
-  <li><strong>\( R^2 \) &lt; 0</strong> — Model is worse than predicting the mean: poor predictive performance.</li>
-</ul>
-
 <!-- MathJax loader (optional, only needed for the \(y\) math) -->
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
 
