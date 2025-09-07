@@ -648,15 +648,7 @@ After computing the inverse and multiplying, we get:
   $$
 </p>
 
-<h4>Step 7: Evaluate with SSE, MSE, RMSE</h4>
-<p>
-  
-  $$ \mathrm{SSE} \approx 1.0667 \times 10^8, \quad
-     \text{MSE} \approx 21{,}333{,}333.33, \quad
-     \text{RMSE} \approx 4618.80 $$
-</p>
-
-<h4>Step 67: Model Evaluation — SSE, MSE, RMSE, and \(R^2\)</h4>
+<h4>Step 7: Model Evaluation — SSE, MSE, RMSE, and \(R^2\)</h4>
 
 <p>
 The performance of a regression model can be evaluated using several metrics. 
@@ -677,17 +669,20 @@ we scale SSE into other metrics:
 
 <ul>
   <li><b>Mean Squared Error (MSE):</b> the average squared error per data point</li>
-  <li><b>Root Mean Squared Error (RMSE):</b> the square root of MSE, expressed in the same units as the target variable</li>
-</ul>
 
-<p>
   $$
   \text{MSE} = \frac{\text{SSE}}{m} 
-  = \frac{1}{m} \sum_{i=1}^{m}(y_i - \hat{y}_i)^2, 
-  \quad 
+  = \frac{1}{m} \sum_{i=1}^{m}(y_i - \hat{y}_i)^2
+  $$
+  
+  <li><b>Root Mean Squared Error (RMSE):</b> the square root of MSE, expressed in the same units as the target variable</li>
+
+   $$
   \text{RMSE} = \sqrt{\text{MSE}}
   $$
-</p>
+  
+</ul>
+
 
 <p>
 For this example: 
