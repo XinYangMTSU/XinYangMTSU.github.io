@@ -1,380 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Interactive 3D Linear Regression</title>
-  <style>
-    body{
-      margin:0;background:#1a1d1f;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
-      color:#ffb3de
-    }
-    .container{max-width:1000px;margin:28px auto;padding:0 16px}
+<p><b>Step 4: Differentiate with respect to \(\boldsymbol{\beta}\)</b></p>
 
-    /* Card */
-    #linreg3d.linreg-card{
-      background:#222025;border-radius:18px;padding:22px 22px 16px 22px;
-      border-left:7px solid #ff79c6; box-shadow:0 4px 30px rgba(255,121,198,.09);
-    }
+<p>
+We start from the expression for the Sum of Squared Errors (SSE):
+</p>
 
-    /* Title + Tip in the same pink */
-    #linreg3d h3,
-    #linreg3d .linreg-note { color:#ff79c6 !important; }
+<p>
+  $$
+  \mathrm{SSE} = ( \mathbf{y} - \mathbf{X}\boldsymbol{\beta} )^\top ( \mathbf{y} - \mathbf{X}\boldsymbol{\beta}).
+  $$
+</p>
 
-    #linreg3d .linreg-toolbar{
-      display:flex;gap:10px;align-items:center;margin:12px 0 10px 0;flex-wrap:wrap;
-    }
-    #linreg3d button{
-      background:#ff79c6;border:none;color:#1a1d1f;padding:8px 12px;border-radius:10px;
-      font-weight:700;cursor:pointer;box-shadow:0 3px 12px rgba(255,121,198,.35)
-    }
-    #linreg3d button:hover{ filter:brightness(1.05); }
-    #linreg3d .linreg-toggle{ display:inline-flex;gap:8px;align-items:center; color:#ffb3de; }
-    #linreg3d .linreg-stats{
-      display:flex;gap:16px;flex-wrap:wrap;margin:8px 0 14px 0;
-      color:#ffb3de;font-weight:600;
-    }
-    #linreg3d .mono{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    }
-    #linreg3d .linreg-controls3d{
-      display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 14px 0;color:#ffb3de;
-    }
-    #linreg3d input, #linreg3d select{
-      background:#2a2028;border:1px solid #4a3340;color:#ffb3de;border-radius:8px;padding:6px 8px;
-    }
-    #plot3d{
-      width:100%;max-width:900px;height:560px;border-radius:14px;box-shadow:0 6px 22px rgba(255,121,198,.08)
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <section id="linreg3d" class="linreg-card">
-      <h3 style="margin-top:0;">Interactive: 3D Linear Regression (y = a·x + b·z + c)</h3>
+<p>
+Expanding this quadratic form:
+</p>
 
-      <div class="linreg-toolbar">
-        <button data-action="reset3d">Reset</button>
-        <button data-action="add3d">Add point</button>
-        <label class="linreg-toggle">
-          <input type="checkbox" data-action="show-resid-3d" />
-          Show residuals
-        </label>
-      </div>
+<p>
+  $$
+  \mathrm{SSE} 
+  = \mathbf{y}^\top \mathbf{y} 
+  - 2 \mathbf{y}^\top \mathbf{X}\boldsymbol{\beta} 
+  + \boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{X}\boldsymbol{\beta}.
+  $$
+</p>
 
-      <div class="linreg-stats">
-        <span class="mono">y = <span data-out="a">—</span>·x + <span data-out="b">—</span>·z + <span data-out="c">—</span></span>
-        <span class="mono">R² = <span data-out="r2">—</span></span>
-        <span class="mono">n = <span data-out="n">—</span></span>
-        <span class="mono">x̄ = <span data-out="xbar">—</span></span>
-        <span class="mono">z̄ = <span data-out="zbar">—</span></span>
-        <span class="mono">ȳ = <span data-out="ybar">—</span></span>
-      </div>
+<p>
+Now, take the derivative with respect to \(\boldsymbol{\beta}\). Recall these matrix calculus rules:
+</p>
+<ul>
+  <li>\(\frac{\partial}{\partial \boldsymbol{\beta}} \; \mathbf{a}^\top \boldsymbol{\beta} = \mathbf{a}\)</li>
+  <li>\(\frac{\partial}{\partial \boldsymbol{\beta}} \; \boldsymbol{\beta}^\top A \boldsymbol{\beta} = (A + A^\top)\boldsymbol{\beta}\). If \(A\) is symmetric, this simplifies to \(2A\boldsymbol{\beta}\).</li>
+</ul>
 
-      <div class="linreg-controls3d">
-        <label>Selected point:
-          <select data-role="pt-select"></select>
-        </label>
-        <label>x: <input type="number" step="0.1" data-role="pt-x"></label>
-        <label>z: <input type="number" step="0.1" data-role="pt-z"></label>
-        <label>y: <input type="number" step="0.1" data-role="pt-y"></label>
-        <button data-action="apply-pt">Apply</button>
-      </div>
+<p>
+Since \(\mathbf{X}^\top \mathbf{X}\) is always symmetric
+(because \((\mathbf{X}^\top \mathbf{X})^\top = \mathbf{X}^\top (\mathbf{X}^\top)^\top = \mathbf{X}^\top \mathbf{X}\)),
+we can apply the symmetric case directly.
+</p>
 
-      <div id="plot3d"></div>
+<p>
+Therefore:
+</p>
 
-      <p class="linreg-note">
-        Rotate/zoom the scene. Click a magenta point to select it, edit its coordinates, and watch the fitted plane and parameters update.
-      </p>
-    </section>
-  </div>
-
-  <!-- Plotly CDN -->
-  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-
-  <script>
-  (function(){
-    const root = document.getElementById('linreg3d');
-    const plotEl = document.getElementById('plot3d');
-
-    // Ranges (−10 … 10 in x, z, y)
-    const MIN = -10, MAX = 10;
-
-    // UI
-    const btnReset = root.querySelector('[data-action="reset3d"]');
-    const btnAdd = root.querySelector('[data-action="add3d"]');
-    const chkResid = root.querySelector('[data-action="show-resid-3d"]');
-    const sel = root.querySelector('[data-role="pt-select"]');
-    const inX = root.querySelector('[data-role="pt-x"]');
-    const inZ = root.querySelector('[data-role="pt-z"]');
-    const inY = root.querySelector('[data-role="pt-y"]');
-    const btnApply = root.querySelector('[data-action="apply-pt"]');
-
-    const outA = root.querySelector('[data-out="a"]');
-    const outB = root.querySelector('[data-out="b"]');
-    const outC = root.querySelector('[data-out="c"]');
-    const outR2 = root.querySelector('[data-out="r2"]');
-    const outN = root.querySelector('[data-out="n"]');
-    const outXbar = root.querySelector('[data-out="xbar"]');
-    const outZbar = root.querySelector('[data-out="zbar"]');
-    const outYbar = root.querySelector('[data-out="ybar"]');
-
-    // Data
-    let pts = [];
-    let selected = 0;
-
-    function seedData(){
-      pts = [];
-      const trueA = 0.6, trueB = -0.4, trueC = 1.2;
-      for(let i=0;i<22;i++){
-        const x = rnd(-8,8);
-        const z = rnd(-8,8);
-        const y = trueA*x + trueB*z + trueC + rnd(-1.6, 1.6);
-        pts.push({x,z,y});
-      }
-      selected = 0;
-      refreshSelect();
-    }
-
-    function refreshSelect(){
-      sel.innerHTML = '';
-      pts.forEach((_, i)=>{
-        const opt = document.createElement('option');
-        opt.value = i; opt.textContent = `#${i}`;
-        sel.appendChild(opt);
-      });
-      sel.value = String(selected);
-      const p = pts[selected] || {x:0,z:0,y:0};
-      inX.value = p.x.toFixed(2);
-      inZ.value = p.z.toFixed(2);
-      inY.value = p.y.toFixed(2);
-    }
-
-    // Fit plane y = a x + b z + c via normal equations
-    function fitPlane(data){
-      const n = data.length;
-      if(!n) return {a:0,b:0,c:0,r2:NaN,xbar:0,zbar:0,ybar:0,n:0};
-
-      let Sx=0,Sz=0,Sy=0,Sxx=0,Szz=0,Sxz=0,Sxy=0,Szy=0;
-      for(const {x,z,y} of data){
-        Sx+=x; Sz+=z; Sy+=y;
-        Sxx+=x*x; Szz+=z*z; Sxz+=x*z;
-        Sxy+=x*y; Szy+=z*y;
-      }
-      const xbar=Sx/n, zbar=Sz/n, ybar=Sy/n;
-
-      // Normal matrix (X^T X) and vector (X^T y)
-      // [Sxx  Sxz  Sx ] [a] = [Sxy]
-      // [Sxz  Szz  Sz ] [b]   [Szy]
-      // [Sx   Sz   n  ] [c]   [Sy ]
-      const A = [
-        [Sxx, Sxz, Sx],
-        [Sxz, Szz, Sz],
-        [Sx , Sz , n ]
-      ];
-      const b = [Sxy, Szy, Sy];
-
-      // tiny ridge for numerical stability if near singular
-      const eps = 1e-8;
-      for(let i=0;i<3;i++) A[i][i] += eps;
-
-      const coeff = solve3x3(A,b); // [a,b,c]
-      const a=coeff[0], bb=coeff[1], c=coeff[2];
-
-      // R^2
-      let SSE=0, SST=0;
-      for(const {x,z,y} of data){
-        const yh = a*x + bb*z + c;
-        SSE += (y - yh)**2;
-        SST += (y - ybar)**2;
-      }
-      const r2 = SST===0 ? 1 : (1 - SSE/SST);
-      return {a, b:bb, c, r2, xbar, zbar, ybar, n};
-    }
-
-    function solve3x3(A,b){
-      // Inverse via adjugate (fine for 3x3)
-      const det = det3(A);
-      if (Math.abs(det) < 1e-12) return [0,0,0];
-      const inv = inv3(A, det);
-      return [
-        inv[0][0]*b[0] + inv[0][1]*b[1] + inv[0][2]*b[2],
-        inv[1][0]*b[0] + inv[1][1]*b[1] + inv[1][2]*b[2],
-        inv[2][0]*b[0] + inv[2][1]*b[1] + inv[2][2]*b[2],
-      ];
-    }
-    function det3(m){
-      const [[a,b,c],[d,e,f],[g,h,i]] = m;
-      return a*(e*i - f*h) - b*(d*i - f*g) + c*(d*h - e*g);
-    }
-    function inv3(m, det){
-      const [[a,b,c],[d,e,f],[g,h,i]] = m;
-      const cof = [
-        [ (e*i - f*h), -(b*i - c*h),  (b*f - c*e)],
-        [-(d*i - f*g),  (a*i - c*g), -(a*f - c*d)],
-        [ (d*h - e*g), -(a*h - b*g),  (a*e - b*d)]
-      ];
-      // transpose cofactor / det
-      return [
-        [cof[0][0]/det, cof[1][0]/det, cof[2][0]/det],
-        [cof[0][1]/det, cof[1][1]/det, cof[2][1]/det],
-        [cof[0][2]/det, cof[1][2]/det, cof[2][2]/det],
-      ];
-    }
-
-    // Make plane grid for Plotly surface
-    function makePlaneGrid(a,b,c){
-      const N = 20;
-      const xs = linspace(MIN, MAX, N);
-      const zs = linspace(MIN, MAX, N);
-      const Y = [];
-      for(let zi=0; zi<N; zi++){
-        const z = zs[zi];
-        const row = [];
-        for(let xi=0; xi<N; xi++){
-          const x = xs[xi];
-          row.push(a*x + b*z + c);
-        }
-        Y.push(row);
-      }
-      return {xs, zs, Y};
-    }
-
-    function linspace(a,b,n){
-      const arr = []; const step=(b-a)/(n-1);
-      for(let i=0;i<n;i++) arr.push(a + i*step);
-      return arr;
-    }
-    function rnd(a,b){ return a + Math.random()*(b-a); }
-    function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
-    function fmt(n,d=3){ if(!isFinite(n)) return '—'; const s=(+n).toFixed(d); return s.replace(/\.0+$/,'').replace(/\.$/,''); }
-
-    // Build Plot
-    function render(){
-      const {a,b,c,r2,xbar,zbar,ybar,n} = fitPlane(pts);
-
-      // outputs
-      outA.textContent = fmt(a);
-      outB.textContent = fmt(b);
-      outC.textContent = fmt(c);
-      outR2.textContent = fmt(r2);
-      outN.textContent = n;
-      outXbar.textContent = fmt(xbar);
-      outZbar.textContent = fmt(zbar);
-      outYbar.textContent = fmt(ybar);
-
-      const xs = pts.map(p=>p.x);
-      const zs = pts.map(p=>p.z);
-      const ys = pts.map(p=>p.y);
-
-      // Plane surface
-      const surf = makePlaneGrid(a,b,c);
-
-      const pointsTrace = {
-        type:'scatter3d',
-        mode:'markers',
-        x: xs, y: zs, z: ys,
-        marker: {
-          color: pts.map((_,i)=> i===selected ? '#ffd1ec' : '#ff79c6'),
-          size: pts.map((_,i)=> i===selected ? 7.5 : 6),
-          line: {width:0}
-        },
-        name:'Points',
-        hovertemplate:'x:%{x:.2f}<br>z:%{y:.2f}<br>y:%{z:.2f}<extra></extra>'
-      };
-
-      const planeTrace = {
-        type:'surface',
-        x: surf.xs,
-        y: surf.zs,
-        z: surf.Y,
-        opacity: 0.55,
-        showscale:false,
-        colorscale:[[0,'#fff52e'],[1,'#fff52e']],
-        name:'Fit plane'
-      };
-
-      // Residuals (vertical segments in y)
-      let residTrace = null;
-      if (chkResid.checked){
-        const rx = [], ry = [], rz = [];
-        for(const p of pts){
-          const yh = a*p.x + b*p.z + c;
-          rx.push(p.x); ry.push(p.z); rz.push(p.y);
-          rx.push(p.x); ry.push(p.z); rz.push(yh);
-          rx.push(null); ry.push(null); rz.push(null); // segment break
-        }
-        residTrace = {
-          type:'scatter3d',
-          mode:'lines',
-          x: rx, y: ry, z: rz,
-          line:{color:'#7fd7ff', width:3, dash:'dot'},
-          name:'Residuals',
-          hoverinfo:'skip'
-        };
-      }
-
-      const data = residTrace ? [planeTrace, pointsTrace, residTrace] : [planeTrace, pointsTrace];
-
-      const layout = {
-        paper_bgcolor:'#151218',
-        plot_bgcolor:'#151218',
-        scene:{
-          xaxis:{title:'x', range:[MIN,MAX], zeroline:true, zerolinecolor:'#9a7888', color:'#ffb3de', gridcolor:'#2f2630'},
-          yaxis:{title:'z', range:[MIN,MAX], zeroline:true, zerolinecolor:'#9a7888', color:'#ffb3de', gridcolor:'#2f2630'},
-          zaxis:{title:'y', range:[MIN,MAX], zeroline:true, zerolinecolor:'#9a7888', color:'#ffb3de', gridcolor:'#2f2630'},
-          camera:{eye:{x:1.6,y:1.4,z:1.0}}
-        },
-        margin:{l:0,r:0,t:6,b:0},
-        showlegend:false
-      };
-
-      Plotly.react(plotEl, data, layout, {responsive:true, displaylogo:false});
-    }
-
-    // Events
-    btnReset.addEventListener('click', ()=>{ seedData(); render(); });
-    btnAdd.addEventListener('click', ()=>{
-      pts.push({
-        x:rnd(MIN+1,MAX-1),
-        z:rnd(MIN+1,MAX-1),
-        y:rnd(MIN+1,MAX-1)
-      });
-      selected = pts.length-1;
-      refreshSelect();
-      render();
-    });
-    chkResid.addEventListener('change', render);
-
-    sel.addEventListener('change', ()=>{
-      selected = +sel.value;
-      const p = pts[selected];
-      inX.value = p.x.toFixed(2); inZ.value = p.z.toFixed(2); inY.value = p.y.toFixed(2);
-      render();
-    });
-    btnApply.addEventListener('click', ()=>{
-      if(pts[selected]){
-        pts[selected].x = clamp(parseFloat(inX.value), MIN, MAX);
-        pts[selected].z = clamp(parseFloat(inZ.value), MIN, MAX);
-        pts[selected].y = clamp(parseFloat(inY.value), MIN, MAX);
-        render();
-      }
-    });
-
-    // Click a point in the plot to select + load into inputs
-    plotEl.addEventListener('plotly_click', (ev)=>{
-      const pt = ev.points && ev.points[0];
-      if(!pt || pt.curveNumber !== 1) return; // curve 1 == pointsTrace (plane is 0)
-      selected = pt.pointIndex;
-      refreshSelect();
-      render();
-    });
-
-    // Init
-    seedData();
-    render();
-  })();
-  </script>
-</body>
-</html>
+<p>
+  $$
+  \frac{\partial \,\mathrm{SSE}}{\partial \boldsymbol{\beta}}
+  = -2\,\mathbf{X}^\top \mathbf{y}
+  + 2\,\mathbf{X}^\top \mathbf{X}\,\boldsymbol{\beta}.
+  $$
+</p>
