@@ -520,6 +520,64 @@ To minimize the SSE, we compute the derivative of the SSE with respect to \(\bol
   $$
 </p>
 
+      
+<!-- -->
+<hr>
+<p><b>Step 4: Differentiate with respect to \(\boldsymbol{\beta}\)</b></p>
+
+<p>
+We start from the expression for the Sum of Squared Errors (SSE):
+</p>
+
+<p>
+  $$
+  \mathrm{SSE} = ( \mathbf{y} - \mathbf{X}\boldsymbol{\beta} )^\top ( \mathbf{y} - \mathbf{X}\boldsymbol{\beta}).
+  $$
+</p>
+
+<p>
+Expanding this quadratic form:
+</p>
+
+<p>
+  $$
+  \mathrm{SSE} 
+  = \mathbf{y}^\top \mathbf{y} 
+  - 2 \mathbf{y}^\top \mathbf{X}\boldsymbol{\beta} 
+  + \boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{X}\boldsymbol{\beta}.
+  $$
+</p>
+
+<p>
+Now, take the derivative with respect to \(\boldsymbol{\beta}\). Recall these matrix calculus rules:
+</p>
+<ul>
+  <li>\(\frac{\partial}{\partial \boldsymbol{\beta}} \; \mathbf{a}^\top \boldsymbol{\beta} = \mathbf{a}\)</li>
+  <li>\(\frac{\partial}{\partial \boldsymbol{\beta}} \; \boldsymbol{\beta}^\top A \boldsymbol{\beta} = (A + A^\top)\boldsymbol{\beta}\). If \(A\) is symmetric, this simplifies to \(2A\boldsymbol{\beta}\).</li>
+</ul>
+
+<p>
+Since \(\mathbf{X}^\top \mathbf{X}\) is always symmetric
+(because \((\mathbf{X}^\top \mathbf{X})^\top = \mathbf{X}^\top (\mathbf{X}^\top)^\top = \mathbf{X}^\top \mathbf{X}\)),
+we can apply the symmetric case directly.
+</p>
+
+<p>
+Therefore:
+</p>
+
+<p>
+  $$
+  \frac{\partial \,\mathrm{SSE}}{\partial \boldsymbol{\beta}}
+  = -2\,\mathbf{X}^\top \mathbf{y}
+  + 2\,\mathbf{X}^\top \mathbf{X}\,\boldsymbol{\beta}.
+  $$
+</p>
+
+      
+<hr>
+<!-- -->
+
 <p><b>Step 5: Set gradient = 0 and solve</b></p>
 <p>
   $$
