@@ -288,10 +288,11 @@
     <p><strong>Where:</strong></p>
     <ul>
       <li><em>y</em> = predicted output</li>
-      <li>β<sub>0</sub> = intercept (value of <em>y</em> when all <em>x</em> are zero)</li>
-      <li>β<sub>1</sub>, β<sub>2</sub>, …, β<sub>p</sub> = coefficients (weights for each feature)</li>
+      <li>β<sub>0</sub> = intercept (value of <em>y</em> when all <em>x</em> are zero). Baseline prediction when all features are zero (unpenalized)</li>
+      <li>β<sub>1</sub>, β<sub>2</sub>, …, β<sub>p</sub> = coefficients (weights for each feature). Effect of feature \(x_j\) on \(y\) when others are held fixed.</li>
       <li><em>x</em><sub>1</sub>, <em>x</em><sub>2</sub>, …, <em>x</em><sub>p</sub> = input features</li>
-      <li>ε = error term (difference between predicted and actual values)</li>
+      <li><strong>Sparsity</strong> – If \(\beta_j = 0\), feature \(x_j\) is effectively removed by the model.</li>
+      <li><em>ε</em> = error term (difference between predicted and actual values)</li>
     </ul>
 
   <br>
@@ -323,7 +324,7 @@
 <p>$$ \mathrm{SSE} = \sum_{i=1}^{m} (y_i - \hat{y}_i)^2 $$</p>
 <p>where \(y_i\) is the actual value and \(\hat{y}_i\) is the predicted value.</p>
 
-
+<!--
     <h4>Interpreting the Coefficients</h4>
 <ul>
   <li><strong>Intercept (β<sub>0</sub>)</strong> – The baseline prediction when all features are zero.</li>
@@ -331,7 +332,7 @@
   <li><strong>Positive β<sub>j</sub></strong> → <em>y</em> increases.</li>
   <li><strong>Negative β<sub>j</sub></strong> → <em>y</em> decreases.</li>
 </ul>
-
+-->
     <br>
     
   <h4>Model & Notation</h4>
