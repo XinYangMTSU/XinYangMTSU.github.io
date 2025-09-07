@@ -469,17 +469,23 @@ If
 <p><b>Step 3: Simplify using transpose rules</b></p>
 <ul>
   <li>Transpose rules:\((AB)^\top = B^\top A^\top\). So, we get:</li>
+
+  $$
+        (\mathbf{X}\boldsymbol{\beta})^\top\mathbf{y}
+        \;=\; \boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}
+  $$
   
-    $$
+  $$
   (\mathbf{X}\boldsymbol{\beta})^\top (\mathbf{X}\boldsymbol{\beta})
   = \boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{X}\,\boldsymbol{\beta}
   $$
+  
   <li>A scalar equals its transpose. So, we get:</li> 
    
    $$
         \mathbf{y}^\top \mathbf{X} \boldsymbol{\beta}
         = (\mathbf{y}^\top \mathbf{X} \boldsymbol{\beta})^\top
-        = \boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{y}.
+        = \boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{y}
     $$
 </ul>
 
@@ -487,7 +493,7 @@ If
    $$
         - \mathbf{y}^\top\mathbf{X}\boldsymbol{\beta} \;-\; (\mathbf{X}\boldsymbol{\beta})^\top\mathbf{y}
         \;=\; - \boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y} \;-\; \boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}
-        \;=\; -2\,\boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}.
+        \;=\; -2\,\boldsymbol{\beta}^\top\mathbf{X}^\top\mathbf{y}
     $$
 </p>
 
