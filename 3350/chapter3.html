@@ -451,14 +451,14 @@ If
 \(\boldsymbol{\beta}\) that minimize this function. This is done using the 
 <strong>Ordinary Least Squares (OLS)</strong> method.</p>
 
-<p><b>Step 1: Express SSE in matrix form</b></p>
+<p><b><u>Step 1: Express SSE in matrix form</u></b></p>
 <p>
   $$
   \mathrm{SSE} = (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^\top (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})
   $$
 </p>
 
-<p><b>Step 2: Expand the quadratic form</b></p>
+<p><b><u>Step 2: Expand the quadratic form</u></b></p>
 <p>
   $$
   =\;\mathbf{y}^\top \mathbf{y}
@@ -468,7 +468,7 @@ If
   $$
 </p>
 
-<p><b>Step 3: Simplify using transpose rules</b></p>
+<p><b><u>Step 3: Simplify using transpose rules</u></b></p>
 <ul>
   <li>Transpose rules:\((AB)^\top = B^\top A^\top\). So, we get:</li>
 
@@ -511,7 +511,7 @@ If
 </p>
 </ul>
       
-<p><b>Step 4: Differentiate with respect to \(\boldsymbol{\beta}\)</b></p>
+<p><b><u>Step 4: Differentiate with respect to \(\boldsymbol{\beta}\)</u></b></p>
 
 <p>
 To minimize the SSE, we compute the derivative of the SSE with respect to \(\boldsymbol{\beta}\).
@@ -542,7 +542,7 @@ Therefore:
 </p>
 
 
-<p><b>Step 5: Set gradient = 0 and solve</b></p>
+<p><b><u>Step 5: Set gradient = 0 and solve</u></b></p>
 <p>
   $$
   -2\,\mathbf{X}^\top \mathbf{y} + 2\,\mathbf{X}^\top \mathbf{X}\,\hat{\boldsymbol{\beta}} \;=\; \mathbf{0}
@@ -555,7 +555,7 @@ Therefore:
   $$
 </p>
 
-<p><b>Step 6: Closed-form solution (Normal Equation)</b></p>
+<p><b><u>Step 6: Closed-form solution (Normal Equation)</u></b></p>
 <p>
   $$
   \boxed{
