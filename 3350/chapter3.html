@@ -834,6 +834,32 @@ To minimize the SSE, we compute the derivative of the SSE with respect to \(\bol
     <li><strong>\(\beta_2\)</strong>: Each additional bedroom adds about \$13,333.33, holding Size fixed.</li>
   </ul>
 
+
+<h4>Note on Feature Scaling</h4>
+<p>
+In Chapter 1, we emphasized the importance of <b>feature scaling</b>. 
+Scaling helps when features are measured on very different ranges, 
+because it ensures that no single feature dominates the learning process. 
+For example, <i>Size</i> is in the thousands (sq.ft), while <i>Bedrooms</i> 
+is a single-digit number.
+</p>
+
+<p>
+In this worked example, we skipped scaling because the goal is to 
+<b>demonstrate the mathematics of Ordinary Least Squares (OLS)</b> 
+using the Normal Equation. OLS works without scaling, since the closed-form 
+solution can handle features of different magnitudes. 
+</p>
+
+<p><b>However, standardization is recommended when:</b></p>
+<ul>
+  <li>You use <b>gradient descent</b> to fit the model (scaling improves convergence speed).</li>
+  <li>You want to <b>compare coefficients</b> across features (scaling puts them on the same scale).</li>
+  <li>You apply <b>regularization methods</b> such as Ridge or Lasso (scaling ensures fair penalization).</li>
+</ul>
+
+      
+
     <h4>Why is SSE Large?</h4>
 <p>A large SSE doesn't necessarily mean that the model is bad; it just means that the values you're predicting (house prices) are large. This is why you should scale the SSE to interpret it better, such as calculating the <b>Mean Squared Error (MSE)</b> or <b>Root Mean Squared Error (RMSE)</b>. These measures take the scale of the data into account:</p>
 
