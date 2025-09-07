@@ -650,10 +650,69 @@ After computing the inverse and multiplying, we get:
 
 <h4>Step 7: Evaluate with SSE, MSE, RMSE</h4>
 <p>
+  
   $$ \mathrm{SSE} \approx 1.0667 \times 10^8, \quad
      \text{MSE} \approx 21{,}333{,}333.33, \quad
      \text{RMSE} \approx 4618.80 $$
 </p>
+
+<h4>Step 67: Model Evaluation — SSE, MSE, RMSE, and \(R^2\)</h4>
+
+<p>
+The performance of a regression model can be evaluated using several metrics. 
+We start with the <b>Sum of Squared Errors (SSE)</b>:
+</p>
+
+<p>
+  $$
+    \mathrm{SSE} = \sum_{i=1}^{m}(y_i - \hat{y}_i)^2 \;\approx\; 1.0667 \times 10^8
+  $$
+</p>
+
+<p>
+A large SSE doesn’t necessarily mean the model is poor—it simply reflects that 
+we are predicting large values (house prices). To make the error easier to interpret, 
+we scale SSE into other metrics: 
+</p>
+
+<ul>
+  <li><b>Mean Squared Error (MSE):</b> the average squared error per data point</li>
+  <li><b>Root Mean Squared Error (RMSE):</b> the square root of MSE, expressed in the same units as the target variable</li>
+</ul>
+
+<p>
+  $$
+  \text{MSE} = \frac{\text{SSE}}{m} 
+  = \frac{1}{m} \sum_{i=1}^{m}(y_i - \hat{y}_i)^2, 
+  \quad 
+  \text{RMSE} = \sqrt{\text{MSE}}
+  $$
+</p>
+
+<p>
+For this example: 
+$$ \text{MSE} \approx 21{,}333{,}333.33, \quad \text{RMSE} \approx 4618.80 $$
+</p>
+
+<p>
+These values tell us that, on average, predictions are off by about \$4,600. 
+Smaller MSE or RMSE values indicate better model performance.
+</p>
+
+<p><b>Coefficient of Determination (\(R^2\))</b></p>
+<p>
+The \(R^2\) score measures the proportion of variance in the target variable 
+explained by the model:
+</p>
+
+<p>
+  $$
+  R^2 \;=\; 1 \;-\; 
+  \frac{\sum_{i=1}^{m}\bigl(y_i - \hat{y}_i\bigr)^2}
+       {\sum_{i=1}^{m}\bigl(y_i - \bar{y}\bigr)^2}
+  $$
+</p>
+
 
 <h4>Step 8: Interpret Coefficients</h4>
 <ul>
