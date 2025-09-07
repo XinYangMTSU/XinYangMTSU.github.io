@@ -1,1 +1,179 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Worked Example: House Price — OLS via scikit-learn LinearRegression</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h2 {
+      margin: 0 0 10px 0;
+      color: #ffb3de;
+      font-weight: 700;
+    }
+
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+
+    a.anchor {
+      text-decoration: none;
+      margin-left: .5rem;
+      opacity: .6;
+      color: #ffb3de;
+    }
+    a.anchor:hover { opacity: 1; }
+
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+      position: relative;
+    }
+
+    pre .copy {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 4px 8px;
+      background: #21111b;
+      border: 1px solid #ff79c6;
+      border-radius: 6px;
+      color: #ffb3de;
+      font-size: 0.8em;
+      cursor: pointer;
+    }
+    pre .copy:hover {
+      background: #ff79c6;
+      color: #fff;
+    }
+
+    ul.toc {
+      padding-left: 18px;
+      margin-top: 8px;
+    }
+    ul.toc li { margin: 4px 0; }
+    ul.toc a { color: #ffb3de; }
+  </style>
+</head>
+
+<body>
+
+<section>
+  <center>
+  <h1>Worked Example: Predicting House Price</h1>
+  </center>
+  <h4>Method 2: OLS via scikit-learn LinearRegression</h4>
+  
+  <pre><button class="copy">Copy</button><code>
+  # ========================================================
+# Worked Example: Predicting House Price
+# Method 2: OLS via sklearn LinearRegression
+# ========================================================
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+
+# --------------------------------------------------------
+# Step 1: Data 
+# Build the feature vectors and target. 
+# Keep dtype=float for linear algebra and sklearn.
+# --------------------------------------------------------
+size  = np.array([1000, 1500, 2000, 2500, 3000], dtype=float)
+bed   = np.array([2, 3, 3, 4, 4], dtype=float)
+price = np.array([200_000, 280_000, 340_000, 400_000, 460_000], dtype=float)
+
+# Design matrix for sklearn 
+# no intercept column needed; sklearn adds it if fit_intercept=True
+X = np.column_stack([size, bed])   # shape (5, 2)
+y = price                           # shape (5,)
+
+# --------------------------------------------------------
+# Step 2: Fit the LinearRegression model (estimate coefficients)
+# --------------------------------------------------------
+lin = LinearRegression(fit_intercept=True)
+lin.fit(X, y)
+
+beta0_skl = lin.intercept_          # β0 (intercept)
+beta1_skl, beta2_skl = lin.coef_    # β1 (size), β2 (bedrooms)
+
+# --------------------------------------------------------
+# Step 3: Predict and evaluate (SSE, MSE, RMSE, R^2)
+# --------------------------------------------------------
+y_hat_skl = lin.predict(X)
+residuals = y - y_hat_skl
+
+SSE_skl = float(np.sum(residuals**2))
+MSE_skl = SSE_skl / len(y)
+RMSE_skl = np.sqrt(MSE_skl)
+R2_skl = r2_score(y, y_hat_skl)     # same as 1 - SSE/TSS
+
+print("\n=== sklearn LinearRegression ===")
+print(f"β0 (Intercept) = {beta0_skl:.2f}")
+print(f"β1 (Size)      = {beta1_skl:.2f}")
+print(f"β2 (Bedrooms)  = {beta2_skl:.2f}")
+
+print("\nPredictions (sklearn) =", np.round(y_hat_skl, 2))
+print("Residuals             =", np.round(residuals, 2))
+
+print("\n--- Metrics (sklearn) ---")
+print(f"SSE  = {SSE_skl:.2f}")
+print(f"MSE  = {MSE_skl:.2f}")
+print(f"RMSE = {RMSE_skl:.2f}")
+print(f"R^2  = {R2_skl:.4f}")
+  </code></pre>
+
+</section>
+
+<script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
+
