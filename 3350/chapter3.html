@@ -889,17 +889,37 @@ solution can handle features of different magnitudes.
     <b><font color="red">it is still a linear model in the expanded feature space</font></b>.
   </p>
     
-  <b>Equation (example with one feature):</b>
+  <b>Equation (1-D, degree d):</b>
   <p style="text-align: center;">
-    y = β<sub>0</sub> + β<sub>1</sub>x + β<sub>2</sub>x<sup>2</sup> + β<sub>3</sub>x<sup>3</sup> + … + β<sub>d</sub>x<sup>d</sup> + ε
+    y = β<sub>0</sub> + β<sub>1</sub>x + β<sub>2</sub>x<sup>2</sup> + … + β<sub>d</sub>x<sup>d</sup> + ε
+  </p>
+
+  <b>Equation (multi-feature, degree 2 example):</b>
+  <p style="text-align: center;">
+    y = β<sub>0</sub> 
+      + β<sub>1</sub>x<sub>1</sub> + β<sub>2</sub>x<sub>2</sub> 
+      + β<sub>3</sub>x<sub>1</sub><sup>2</sup> + β<sub>4</sub>x<sub>2</sub><sup>2</sup> 
+      + β<sub>5</sub>x<sub>1</sub>x<sub>2</sub> + ε
   </p>
 
   <p><strong>Where:</strong></p>
   <ul>
-    <li><i>d</i> = polynomial degree</li>
-    <li>Adding higher-degree terms lets the model capture curves and complex patterns</li>
+    <li><i>d</i> = polynomial degree (controls model flexibility)</li>
+    <li>Higher-degree terms allow the model to capture curves and feature interactions</li>
     <li>Still solved by Ordinary Least Squares (OLS) after expanding the feature set</li>
   </ul>
+
+  <br>
+    
+  <center>
+    <img src="images/polynomial_regression.png" width="800px" height="300px">
+  </center>
+
+  <h4>Interactive: Polynomial Regression</h4>
+  <ul>
+    <li><a href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html" target="_blank">Scikit-learn Demo</a></li>
+  </ul>
+      
   <br>
     
   <h4>How Polynomial Regression Works</h4>
@@ -909,6 +929,7 @@ solution can handle features of different magnitudes.
       \[
       x \;\;\longrightarrow\;\; [\,x,\,x^2,\,x^3,\,\ldots,\,x^d\,]
       \]
+      or, for multiple features, include all monomials up to degree \(d\).
     </li>
     <li><strong>Fit a Linear Model</strong> – Apply OLS on the expanded features to estimate coefficients \(\beta\).</li>
     <li><strong>Prediction</strong> – Use the polynomial equation to generate predictions \(\hat{y}\).</li>
@@ -975,6 +996,7 @@ solution can handle features of different magnitudes.
   </ul>
 
 </section>
+
 
 <!-- -->
   
