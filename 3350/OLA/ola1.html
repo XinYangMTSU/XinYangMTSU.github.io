@@ -172,22 +172,19 @@ y = data_clean["target"]
 # --- 4. Feature Engineering ---
 # Create new feature: phenols_ratio
 
-    
-# --- 5. Feature Engineering ---
-
-# --- 6. Train/test split --- 
+# --- 5. Train/test split --- 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
     
-# --- 7. Baseline Logistic Regression  --- 
+# --- 6. Baseline Logistic Regression  --- 
 # --- Baseline Logistic Regression ---
 baseline = LogisticRegression(max_iter=5000, solver="liblinear")
 baseline.fit(X_train, y_train)
 y_pred = baseline.predict(X_test)
 print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
 
-# --- 8. Logistic Regression with Standardization ---
+# --- 7. Logistic Regression with Standardization ---
 # Make sure standardization only fits to training data
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)  # fit on train only
@@ -196,39 +193,18 @@ X_test_scaled  = scaler.transform(X_test)
 #
 print("Scaled Accuracy (all features):", f"{scaled_acc:.4f}")
     
-# --- 9. Feature Selection: Chi-square test ---
+# --- 8. Feature Selection: Chi-square test ---
 # For the chi-square test, please don't apply standardization
 
-    
 
-# --- 10. Feature Selection: Apply RFE (select top 5 features) ---
+# --- 9. Feature Selection: Apply RFE (select top 5 features) ---
 # For RFE, you can apply standardization first, make sure it only fits to training data
 
     
-# --- 11. PCA (2D visualization) ---
-pca = PCA(n_components=2)
-X_pca = pca.fit_transform(X_train_scaled)
+# --- 10. PCA (2D visualization) ---
+# Please make sure to fit only on the scaled training data
 
-print("Explained Variance Ratio:", pca.explained_variance_ratio_)
-
-df_pca = pd.DataFrame(X_pca, columns=["PC1", "PC2"])
-df_pca["target"] = y
-
-# Plot PCA
-plt.figure(figsize=(8,6))
-for target, color, label in zip([0,1,2], ["red","green","blue"], wine.target_names):
-    plt.scatter(df_pca.loc[df_pca["target"]==target,"PC1"],
-                df_pca.loc[df_pca["target"]==target,"PC2"],
-                color=color, alpha=0.7, label=label)
-
-plt.xlabel("Principal Component 1")
-plt.ylabel("Principal Component 2")
-plt.title("PCA of Wine Dataset (2 Components)")
-plt.legend()
-plt.grid(True, linestyle="--", alpha=0.5)
-plt.show()
-
-# --- 12. PCA (3D visualization) ---
+# --- 11. PCA (3D visualization) ---
 from mpl_toolkits.mplot3d import Axes3D  # 3D projection
 
 # PCA with 3 components
