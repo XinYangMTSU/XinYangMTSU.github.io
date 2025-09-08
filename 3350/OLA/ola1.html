@@ -165,18 +165,19 @@ y = wine.target
 # --- 2. Data Cleaning ---
 
 # --- 3. Feature Engineering ---
-    
+
 # --- Train/Test split ---
 X_train, X_test, y_train, y_test = train_test_split(X_cleaned, y,
                                                     test_size=0.2, random_state=42, stratify=y)
 
+    
 # --- Baseline Logistic Regression ---
 baseline = LogisticRegression(max_iter=5000, solver="liblinear")
 baseline.fit(X_train, y_train)
 y_pred = baseline.predict(X_test)
 print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
 
-# --- 4. Standardize features ---
+# --- 4. Standardize Features ---
 # Make sure standardization only fits to training data
 
     
@@ -185,10 +186,11 @@ print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
 # and standardization will generate negative values.
 
 
-# For RFE, you can use X_scale as input.
+# For RFE, you can use standardization before RFE
+
     
 # --- 6. PCA (2D visualization) ---
-# For PCA, you can use X_scale as input.
+# For PCA, you can use standardization before PCA
 
     
 # --- 7. Discussion ---
