@@ -198,12 +198,12 @@ print("Scaled Accuracy (all features):", accuracy_score(y_test, y_pred_scaled))
 # For the chi-square test, please don't apply standardization
 # (1) Discretize (fit only on train)
 discretizer = KBinsDiscretizer(n_bins=5, encode="ordinal", strategy="uniform")
-X_train_binned = discretizer.fit_transform(X_train)
+X_train_binned = discretizer.fit_transform(X_train) # fit on train only
 X_test_binned  = discretizer.transform(X_test)
 
 # (2) SelectKBest with chi2 as the scoring function
 selector = SelectKBest(score_func=chi2, k=10)  # choose k you want
-X_train_sel = selector.fit_transform(X_train_binned, y_train)   # fit on train
+X_train_sel = selector.fit_transform(X_train_binned, y_train)   # fit on train only
 X_test_sel  = selector.transform(X_test_binned)   
     
 # 
