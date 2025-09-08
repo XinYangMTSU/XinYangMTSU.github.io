@@ -182,15 +182,15 @@ print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
 
     
 # --- 5. Feature Selection ---
-# For the chi-square test, use cleaned X as input, since the test requires non-negative values 
+# For the chi-square test, use cleaned X as input, since the chi-square test requires non-negative values 
 # and standardization will generate negative values.
 
 
-# For RFE, you can use standardization before RFE
+# For RFE, you can use standardization X as input, make sure only fits to training data
 
     
 # --- 6. PCA (2D visualization) ---
-# For PCA, you can use standardization before PCA
+# For PCA, you can use standardization X as input, make sure only fits to training data
 
     
 # --- 7. Discussion ---
