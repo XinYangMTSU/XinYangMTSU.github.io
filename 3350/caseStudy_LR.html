@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>California Housing — Linear Regression (Train/Test)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h1, h2 {
+      margin: 0 0 10px 0;
+      color: #ffb3de;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 8px;
+      margin-top: 26px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 4px;
+    }
+
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+      position: relative;
+      white-space: pre;
+    }
+
+    pre .copy {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 4px 8px;
+      background: #21111b;
+      border: 1px solid #ff79c6;
+      border-radius: 6px;
+      color: #ffb3de;
+      font-size: 0.8em;
+      cursor: pointer;
+    }
+    pre .copy:hover {
+      background: #ff79c6;
+      color: #fff;
+    }
+
+    ul {
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+    code.inline {
+      background: #19121a;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+<section>
+  <h1>California Housing Data Set</h1>
+  <p style="margin-top:10px;">
+    <b>Task:</b> Regression — predict median house value in each census block group.<br/>
+    <b>Rows (samples):</b> 20,640 block groups. &nbsp; <b>Columns (features):</b> 8 numeric predictors (all continuous).<br/>
+    <b>Target:</b> <code class="inline">MedHouseVal</code> (median house value) in units of $100,000 (e.g., 2.00 ⇒ $200,000).
+  </p>
+
+  <h4>Feature names &amp; meaning</h4>
+  <ul>
+    <li><b>MedInc</b> — median income in block group (in tens of thousands of dollars).</li>
+    <li><b>HouseAge</b> — median house age (years).</li>
+    <li><b>AveRooms</b> — average number of rooms per household.</li>
+    <li><b>AveBedrms</b> — average number of bedrooms per household.</li>
+    <li><b>Population</b> — block group population.</li>
+    <li><b>AveOccup</b> — average occupants per household.</li>
+    <li><b>Latitude</b> — block latitude.</li>
+    <li><b>Longitude</b> — block longitude.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>LinearRegression (Train/Test) — Full Example</h2>
+  <h4>Copy &amp; run in your notebook</h4>
+  <pre><button class="copy">Copy</button><code>
+# ========================================================
+# California Housing — LinearRegression
+# Uses all features, simple cleaning, train/test split
+# Shows BOTH training and testing metrics
+# ========================================================
+import numpy as np
+import pandas as pd
+
+from sklearn.datasets import fetch_california_housing
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score, mean_squared_error
+
+RANDOM_STATE = 42
+
+# 1) Load data
+data = fetch_california_housing(as_frame=True)
+df_all = data.frame  # features + target ('MedHouseVal') in one DataFrame
+
+# 2) Data cleaning (check missing values and duplicates)
+has_missing = df_all.isna().any().any()
+duplicates_found = int(df_all.duplicated().sum())
+
+if duplicates_found > 0:
+    df_all = df_all.drop_duplicates().reset_index(drop=True)
+if has_missing:
+    df_all = df_all.fillna(df_all.mean(numeric_only=True))
+
+# Get X, y after cleaning
+X = df_all.drop(columns=["MedHouseVal"])
+y = df_all["MedHouseVal"]
+
+# 3) Train / test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=RANDOM_STATE
+)
+
+# 4) Train a Linear Regression model on the training set
+# Learn the coefficients from X_train and y_train
+lr = LinearRegression()
+lr.fit(X_train, y_train)
+
+# 5) Predict and compute metrics for TRAIN and TEST
+# --- Train ---
+y_pred_train = lr.predict(X_train)
+mse_train = mean_squared_error(y_train, y_pred_train)
+rmse_train = np.sqrt(mse_train)
+r2_train = r2_score(y_train, y_pred_train)
+sse_train = np.sum((y_train - y_pred_train) ** 2)
+
+# --- Test ---
+y_pred_test = lr.predict(X_test)
+mse_test = mean_squared_error(y_test, y_pred_test)
+rmse_test = np.sqrt(mse_test)
+r2_test = r2_score(y_test, y_pred_test)
+sse_test = np.sum((y_test - y_pred_test) ** 2)
+
+# 6) Put results in a tidy DataFrame
+results_df = pd.DataFrame(
+    [
+        {"Split": "Train", "R^2": r2_train, "RMSE": rmse_train, "MSE": mse_train, "SSE": sse_train},
+        {"Split": "Test",  "R^2": r2_test,  "RMSE": rmse_test,  "MSE": mse_test,  "SSE": sse_test},
+    ]
+).set_index("Split")
+
+# 7) Results
+print(f"any_missing: {has_missing}")
+print(f"duplicates_found: {duplicates_found}")
+print(results_df)
+  </code></pre>
+</section>
+
+<script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
