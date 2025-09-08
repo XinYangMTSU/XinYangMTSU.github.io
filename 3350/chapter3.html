@@ -628,6 +628,11 @@ we can apply the symmetric case directly. </p>
   <li>The <strong>Normal Equation</strong> provides a closed-form solution for the coefficients that minimize SSE.</li>
   <li>Computing the inverse of \(\mathbf{X}^\top \mathbf{X}\) can be expensive for large datasets.
   For very large datasets, more efficient methods like gradient descent are often used.</li>
+  <li>
+  <strong>Don’t compute</strong> <code>(X<sup>T</sup>X)<sup>-1</sup>X<sup>T</sup>y</code> yourself.<br>
+  Use <code>sklearn.linear_model.LinearRegression</code> instead — it solves the same OLS problem with a
+  numerically stable least-squares solver (SVD/QR), handles the intercept correctly, and avoids fragile matrix inverses.
+  </li>
 </ul>     
 <br>
 <!-- -->
