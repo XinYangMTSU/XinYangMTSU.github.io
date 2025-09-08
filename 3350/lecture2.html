@@ -1,50 +1,111 @@
-<p><b>Step 4: Differentiate with respect to \(\boldsymbol{\beta}\)</b></p>
+<section id="polynomial-regression">
+      
+  <h4>2.2 Polynomial Regression</h4>
+  <br>
+  <b>Idea:</b>
+  <p>
+    Polynomial Regression is an extension of Linear Regression that models 
+    a nonlinear relationship between input features and the target variable 
+    by introducing polynomial terms (squared, cubic, etc.). 
+    Although the curve looks nonlinear in the original input space, 
+    <b><font color="red">it is still a linear model in the expanded feature space</font></b>.
+  </p>
+    
+  <b>Equation (example with one feature):</b>
+  <p style="text-align: center;">
+    y = β<sub>0</sub> + β<sub>1</sub>x + β<sub>2</sub>x<sup>2</sup> + β<sub>3</sub>x<sup>3</sup> + … + β<sub>d</sub>x<sup>d</sup> + ε
+  </p>
 
-<p>
-We start from the expression for the Sum of Squared Errors (SSE):
-</p>
+  <p><strong>Where:</strong></p>
+  <ul>
+    <li><i>d</i> = polynomial degree</li>
+    <li>Adding higher-degree terms lets the model capture curves and complex patterns</li>
+    <li>Still solved by Ordinary Least Squares (OLS) after expanding the feature set</li>
+  </ul>
 
-<p>
+  <br>
+    
+  <center>
+    <img src="images/polynomial_regression.png" width="800px" height="300px">
+  </center>
+
+  <h4>Interactive: Polynomial Regression</h4>
+  <ul>
+    <li><a href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html" target="_blank">Scikit-learn Demo</a></li>
+  </ul>
+      
+  <br>
+    
+  <h4>How Polynomial Regression Works</h4>
+  <ol>
+    <li><strong>Collect Data</strong> – Pairs of inputs (\(x\)) and outputs (\(y\)).</li>
+    <li><strong>Feature Expansion</strong> – Transform the input feature into higher-order terms:
+      \[
+      x \;\;\longrightarrow\;\; [\,x,\,x^2,\,x^3,\,\ldots,\,x^d\,]
+      \]
+    </li>
+    <li><strong>Fit a Linear Model</strong> – Apply OLS on the expanded features to estimate coefficients \(\beta\).</li>
+    <li><strong>Prediction</strong> – Use the polynomial equation to generate predictions \(\hat{y}\).</li>
+  </ol>
+
+  <br>
+
+  <h4>Matrix Form</h4>
+  <p>
+    With polynomial expansion, the design matrix \( \mathbf{X} \) changes. 
+    For degree 3 with one feature:
+  </p>
+
+  <p style="text-align:center;">
   $$
-  \mathrm{SSE} = ( \mathbf{y} - \mathbf{X}\boldsymbol{\beta} )^\top ( \mathbf{y} - \mathbf{X}\boldsymbol{\beta}).
+  \mathbf{X} =
+  \begin{bmatrix}
+    1 & x_1 & x_1^2 & x_1^3 \\
+    1 & x_2 & x_2^2 & x_2^3 \\
+    \vdots & \vdots & \vdots & \vdots \\
+    1 & x_m & x_m^2 & x_m^3
+  \end{bmatrix}, \quad
+  \mathbf{y} =
+  \begin{bmatrix}
+    y_1 \\ y_2 \\ \vdots \\ y_m
+  \end{bmatrix}.
   $$
-</p>
+  </p>
 
-<p>
-Expanding this quadratic form:
-</p>
+  <p>
+  The solution is still obtained via the Normal Equation:
+  \[
+  \hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1}\mathbf{X}^\top \mathbf{y}
+  \]
+  </p>
 
-<p>
-  $$
-  \mathrm{SSE} 
-  = \mathbf{y}^\top \mathbf{y} 
-  - 2 \mathbf{y}^\top \mathbf{X}\boldsymbol{\beta} 
-  + \boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{X}\boldsymbol{\beta}.
-  $$
-</p>
+  <br>
 
-<p>
-Now, take the derivative with respect to \(\boldsymbol{\beta}\). Recall these matrix calculus rules:
-</p>
-<ul>
-  <li>\(\frac{\partial}{\partial \boldsymbol{\beta}} \; \mathbf{a}^\top \boldsymbol{\beta} = \mathbf{a}\)</li>
-  <li>\(\frac{\partial}{\partial \boldsymbol{\beta}} \; \boldsymbol{\beta}^\top A \boldsymbol{\beta} = (A + A^\top)\boldsymbol{\beta}\). If \(A\) is symmetric, this simplifies to \(2A\boldsymbol{\beta}\).</li>
-</ul>
+  <h4>Worked Example: Predicting House Price (Nonlinear)</h4>
+  <p>
+    Suppose house price depends not only linearly on <i>Size</i>, but also 
+    shows curvature (e.g., very large houses may not increase proportionally in price). 
+    A polynomial term like <i>Size²</i> can capture this effect.
+  </p>
 
-<p>
-Since \(\mathbf{X}^\top \mathbf{X}\) is always symmetric
-(because \((\mathbf{X}^\top \mathbf{X})^\top = \mathbf{X}^\top (\mathbf{X}^\top)^\top = \mathbf{X}^\top \mathbf{X}\)),
-we can apply the symmetric case directly.
-</p>
+  <p style="color: #ffb3de;"><b><u>Model:</u></b></p>
+  <p style="text-align:center;">
+    $$ \text{Price} = \beta_0 + \beta_1 \cdot \text{Size} + \beta_2 \cdot \text{Size}^2 + \epsilon $$
+  </p>
 
-<p>
-Therefore:
-</p>
+  <p>
+    Expanding features in this way lets the model fit a curve rather than a straight line, 
+    improving flexibility at the cost of interpretability.
+  </p>
 
-<p>
-  $$
-  \frac{\partial \,\mathrm{SSE}}{\partial \boldsymbol{\beta}}
-  = -2\,\mathbf{X}^\top \mathbf{y}
-  + 2\,\mathbf{X}^\top \mathbf{X}\,\boldsymbol{\beta}.
-  $$
-</p>
+  <br>
+
+  <h4>Key Points:</h4>
+  <ul>
+    <li>Polynomial regression is still a linear model in the coefficients.</li>
+    <li>Increasing degree \(d\) makes the model more flexible, but risks <b>overfitting</b>.</li>
+    <li>Use cross-validation to choose an appropriate degree.</li>
+    <li>For high-dimensional data, prefer regularization (Ridge, Lasso) to control complexity.</li>
+  </ul>
+
+</section>
