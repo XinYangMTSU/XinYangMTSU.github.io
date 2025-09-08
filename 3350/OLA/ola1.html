@@ -189,13 +189,20 @@ print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
 
 # --- 8. Logistic Regression with Standardization ---
 # Make sure standardization only fits to training data
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)  # fit on train only
+X_test_scaled  = scaler.transform(X_test)
+# 
+#
+print("Scaled Accuracy (all features):", f"{scaled_acc:.4f}")
     
 # --- 9. Feature Selection: Chi-square test ---
-# For the chi-square test, use cleaned X as input, since the chi-square test requires non-negative values 
-# and standardization will generate negative values.
+# For the chi-square test, please don't apply standardization
+
+    
 
 # --- 10. Feature Selection: Apply RFE (select top 5 features) ---
-# For RFE, you can use standardization X as input, make sure only fits to training data
+# For RFE, you can apply standardization first, make sure it only fits to training data
 
     
 # --- 11. PCA (2D visualization) ---
