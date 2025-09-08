@@ -822,58 +822,7 @@ solution can handle features of different magnitudes.
   
 <!-- MathJax loader (optional, only needed for the \(y\) math) -->
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
-<br>
-
-<section id="polynomial-regression">
-  <h4>2.2 Polynomial Regression</h4>
-  <br>
-
-  <b>Idea:</b>
-  <p>
-    Create extra features from the originals (squares, cubes, and interactions like
-    <em>x</em><sub>1</sub><em>x</em><sub>2</sub>) so a linear model can fit curved relationships.
-    The model is <b>nonlinear in the features</b> but still <b>linear in the coefficients</b>.
-  </p>
-
-  <b>Equation (1-D, degree <i>d</i>):</b>
-  <p style="text-align:center;">
-    y = β<sub>0</sub> + β<sub>1</sub>x + β<sub>2</sub>x<sup>2</sup> + &hellip; + β<sub>d</sub>x<sup>d</sup> + ε
-  </p>
-
-  <b>Equation (multi-feature, degree 2 example):</b>
-  <p style="text-align:center;">
-    y = β<sub>0</sub>
-      + &sum;<sub>j=1</sub><sup>p</sup> β<sub>j</sub>x<sub>j</sub>
-      + &sum;<sub>j=1</sub><sup>p</sup> β<sub>jj</sub>x<sub>j</sub><sup>2</sup>
-      + &sum;<sub>1&nbsp;&le;&nbsp;j&nbsp;&lt;&nbsp;k&nbsp;&le;&nbsp;p</sub> β<sub>jk</sub>x<sub>j</sub>x<sub>k</sub>
-      + ε
-  </p>
-
-  <p><strong>Where:</strong></p>
-  <ul>
-    <li><em>y</em> = predicted output.</li>
-    <li>β<sub>0</sub> = intercept (baseline prediction when all features are zero).</li>
-    <li>β’s = coefficients learned from data (one for each polynomial/interaction term).</li>
-    <li><em>x</em><sub>j</sub> = original input features; we also include powers like x<sub>j</sub><sup>2</sup>, x<sub>j</sub><sup>3</sup>, … and interactions x<sub>j</sub>x<sub>k</sub>.</li>
-    <li><i>d</i> = polynomial degree (hyperparameter controlling model flexibility).</li>
-    <li><em>ε</em> = error term (difference between predicted and actual values).</li>
-  </ul>
-
-  <b>When to use:</b>
-  <ul>
-    <li>Relationships look curved or involve interactions between features.</li>
-  </ul>
-
-  <b>Tips:</b>
-  <ul>
-    <li><strong>Standardize</strong> features after expansion (scales vary widely after squaring/cubing).</li>
-    <li>Watch for <strong>overfitting</strong> as degree increases; prefer validation and consider <strong>Ridge/Lasso</strong>.</li>
-    <li>In scikit-learn, use a pipeline: <code>PolynomialFeatures</code> → <code>StandardScaler</code> → <code>LinearRegression</code>.</li>
-  </ul>
-  <br>
-</section>
-
-  
+<br>  
 <!-- -->
 
 <section id="polynomial-regression">
@@ -912,17 +861,6 @@ solution can handle features of different magnitudes.
     <li><em>ε</em> = error term (difference between predicted and actual values).</li>
     <li>Higher-degree terms allow the model to capture curves and feature interactions</li>
     <li>Still solved by Ordinary Least Squares (OLS) after expanding the feature set</li>
-  </ul>
-
-  <br>
-    
-  <center>
-    <img src="images/polynomial_regression.png" width="800px" height="300px">
-  </center>
-
-  <h4>Interactive: Polynomial Regression</h4>
-  <ul>
-    <li><a href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html" target="_blank">Scikit-learn Demo</a></li>
   </ul>
       
   <br>
