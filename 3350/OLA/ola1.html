@@ -196,7 +196,7 @@ print("Scaled Accuracy (all features):", accuracy_score(y_test, y_pred_scaled))
     
 # --- 8. Logistic Regression with Feature Selection: Chi-square test ---
 # For the chi-square test, please don't apply standardization
-# (1) Discretize (fit only on train, transform test)
+# (1) Discretize (fit only on train)
 discretizer = KBinsDiscretizer(n_bins=5, encode="ordinal", strategy="uniform")
 X_train_binned = discretizer.fit_transform(X_train)
 X_test_binned  = discretizer.transform(X_test)
