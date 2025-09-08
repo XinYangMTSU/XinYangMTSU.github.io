@@ -904,7 +904,12 @@ solution can handle features of different magnitudes.
 
   <p><strong>Where:</strong></p>
   <ul>
-    <li><i>d</i> = polynomial degree (controls model flexibility)</li>
+    <li><em>y</em> = predicted output.</li>
+    <li>β<sub>0</sub> = intercept (baseline prediction when all features are zero).</li>
+    <li>β’s = coefficients learned from data (one for each polynomial/interaction term).</li>
+    <li><em>x</em><sub>j</sub> = original input features; we also include powers like x<sub>j</sub><sup>2</sup>, x<sub>j</sub><sup>3</sup>, … and interactions x<sub>j</sub>x<sub>k</sub>.</li>
+    <li><i>d</i> = polynomial degree (hyperparameter controlling model flexibility).</li>
+    <li><em>ε</em> = error term (difference between predicted and actual values).</li>
     <li>Higher-degree terms allow the model to capture curves and feature interactions</li>
     <li>Still solved by Ordinary Least Squares (OLS) after expanding the feature set</li>
   </ul>
