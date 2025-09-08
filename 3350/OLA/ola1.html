@@ -163,36 +163,42 @@ data = wine.frame   # full DataFrame (features + target)
 
 # --- 2. Data Cleaning ---
 #  (check missing values and duplicates)
+#
 
-# --- 3. Feature Engineering ---
+# --- 3. Split the cleaned data into X and y ---  
+X = data_clean.drop(columns=["target"])
+y = data_clean["target"]
+    
+# --- 4. Feature Engineering ---
 # Create new feature: phenols_ratio
 
-# --- 4. Feature Engineering ---
+    
+# --- 5. Feature Engineering ---
 
-# --- 5. Train/test split --- 
+# --- 6. Train/test split --- 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
     
-# --- 6. Baseline Logistic Regression  --- 
+# --- 7. Baseline Logistic Regression  --- 
 # --- Baseline Logistic Regression ---
 baseline = LogisticRegression(max_iter=5000, solver="liblinear")
 baseline.fit(X_train, y_train)
 y_pred = baseline.predict(X_test)
 print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
 
-# --- 7. Logistic Regression with Standardization ---
+# --- 8. Logistic Regression with Standardization ---
 # Make sure standardization only fits to training data
     
-# --- 8. Feature Selection: Chi-square test ---
+# --- 9. Feature Selection: Chi-square test ---
 # For the chi-square test, use cleaned X as input, since the chi-square test requires non-negative values 
 # and standardization will generate negative values.
 
-# --- 9. Feature Selection: Apply RFE (select top 5 features) ---
+# --- 10. Feature Selection: Apply RFE (select top 5 features) ---
 # For RFE, you can use standardization X as input, make sure only fits to training data
 
     
-# --- 10. PCA (2D visualization) ---
+# --- 11. PCA (2D visualization) ---
 pca = PCA(n_components=2)
 X_pca = pca.fit_transform(X_train_scaled)
 
@@ -215,7 +221,7 @@ plt.legend()
 plt.grid(True, linestyle="--", alpha=0.5)
 plt.show()
 
-# --- 11. PCA (3D visualization) ---
+# --- 12. PCA (3D visualization) ---
 from mpl_toolkits.mplot3d import Axes3D  # 3D projection
 
 # PCA with 3 components
@@ -247,7 +253,8 @@ ax.legend()
 plt.show()
 
     
-# --- 12. Discussion ---
+# --- 13. Discussion ---
+# 
   </code></pre>
 
   <h3>Submission</h3>
