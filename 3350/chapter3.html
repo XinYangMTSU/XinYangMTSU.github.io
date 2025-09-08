@@ -516,11 +516,59 @@ If
   <ul>
 
     <li>To minimize the SSE, we compute the derivative of the SSE with respect to \(\boldsymbol{\beta}\).
-Now, take the derivative with respect to \(\boldsymbol{\beta}\). Recall these matrix calculus rules:</li>
+    Now, take the derivative with respect to \(\boldsymbol{\beta}\).</li>
+    
+    <li>Recall the first matrix calculus rule:</li>
     <ul>
-  <li>\(\frac{\partial}{\partial \boldsymbol{\beta}} \; \mathbf{a}^\top \boldsymbol{\beta} = \mathbf{a}\)</li>
-  <li>\(\frac{\partial}{\partial \boldsymbol{\beta}} \; \boldsymbol{\beta}^\top A \boldsymbol{\beta} = (A + A^\top)\boldsymbol{\beta}\). If \(A\) is symmetric, this simplifies to \(2A\boldsymbol{\beta}\).</li>
-</ul>
+      <li>\(\frac{\partial}{\partial \boldsymbol{\beta}} \; \mathbf{a}^\top \boldsymbol{\beta} = \mathbf{a}\)</li>
+    </ul>
+    
+      <p><strong>Your term is</strong> \( 2\,\boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{y} \). Here’s why the rule applies:</p>
+
+  <ol>
+    <li>
+      <strong>Treat the data as constants.</strong><br>
+      In linear regression, \( \mathbf{X} \) and \( \mathbf{y} \) are fixed numbers. So define
+      \( \mathbf{c} := \mathbf{X}^\top \mathbf{y} \). Then \( \mathbf{c} \) is a constant vector (same size as \( \boldsymbol{\beta} \)).
+    </li>
+
+    <li>
+      <strong>Rewrite to match the rule.</strong><br>
+      \[
+        \boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{y}
+        \;=\;
+        \boldsymbol{\beta}^\top \mathbf{c}
+        \;=\;
+        \mathbf{c}^\top \boldsymbol{\beta}.
+      \]
+      (For scalars, \( \mathbf{a}^\top \boldsymbol{\beta} = \boldsymbol{\beta}^\top \mathbf{a} \).)
+    </li>
+
+    <li>
+      <strong>Apply the rule.</strong><br>
+      \[
+        \frac{\partial}{\partial \boldsymbol{\beta}}\bigl(2\,\mathbf{c}^\top \boldsymbol{\beta}\bigr)
+        \;=\; 2\,\mathbf{c}
+        \;=\; 2\,\mathbf{X}^\top \mathbf{y}.
+      \]
+    </li>
+  </ol>
+
+  <p><strong>So:</strong></p>
+  <p style="margin-left:8px;">
+    \[
+      \frac{\partial}{\partial \boldsymbol{\beta}}
+      \bigl(2\,\boldsymbol{\beta}^\top \mathbf{X}^\top \mathbf{y}\bigr)
+      \;=\; 2\,\mathbf{X}^\top \mathbf{y}.
+    \]
+  </p> 
+    
+    
+    <li>Recall the second matrix calculus rule:</li>
+    <ul>
+    <li>\(\frac{\partial}{\partial \boldsymbol{\beta}} \; \boldsymbol{\beta}^\top A \boldsymbol{\beta} = (A + A^\top)\boldsymbol{\beta}\). If \(A\) is symmetric, this simplifies to \(2A\boldsymbol{\beta}\).</li>
+    </ul>
+    
     <li>Since \(\mathbf{X}^\top \mathbf{X}\) is always symmetric
 (because \((\mathbf{X}^\top \mathbf{X})^\top = \mathbf{X}^\top (\mathbf{X}^\top)^\top = \mathbf{X}^\top \mathbf{X}\)),
 we can apply the symmetric case directly.</li>
