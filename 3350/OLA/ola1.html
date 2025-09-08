@@ -213,7 +213,15 @@ print("Chi2 Accuracy (top 10 features):", accuracy_score(y_test, y_pred_chi))
 
     
 # --- 9. Logistic Regression with Feature Selection: RFE (select top 5 features) ---
-# For RFE, you can apply standardization first, make sure it only fits to training data
+# For RFE, you can apply standardization first, and make sure it only fits to training data
+    
+# Base estimator for RFE: LogisticRegression
+base_est = LogisticRegression(max_iter=5000, solver="liblinear")
+
+# RFE on Train only
+rfe = RFE(estimator=base_est, n_features_to_select=5, step=1)
+X_train_rfe = rfe.fit_transform(X_train_scaled, y_train)
+X_test_rfe  = rfe.transform(X_test_scaled)
 
 # 
 # finish your code here
