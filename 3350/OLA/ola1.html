@@ -194,13 +194,31 @@ X_test_scaled  = scaler.transform(X_test)
 #    
 print("Scaled Accuracy (all features):", accuracy_score(y_test, y_pred_scale))
     
-# --- 8. Feature Selection: Chi-square test ---
+# --- 8. Logistic Regression with Feature Selection: Chi-square test ---
 # For the chi-square test, please don't apply standardization
+# (1) Discretize (fit only on train, transform test)
+discretizer = KBinsDiscretizer(n_bins=5, encode="ordinal", strategy="uniform")
+X_train_binned = discretizer.fit_transform(X_train)
+X_test_binned  = discretizer.transform(X_test)
 
+# (2) SelectKBest with chi2 as the scoring function
+selector = SelectKBest(score_func=chi2, k=10)
+X_train_sel = selector.fit_transform(X_train_binned, y_train)   # fit on train
+X_test_sel  = selector.transform(X_test_binned)   
 
-# --- 9. Feature Selection: Apply RFE (select top 5 features) ---
+# 
+# finish your code here
+# 
+print("Chi2 Accuracy (top 10 features):", accuracy_score(y_test, y_pred_chi))
+
+    
+# --- 9. Logistic Regression with Feature Selection: RFE (select top 5 features) ---
 # For RFE, you can apply standardization first, make sure it only fits to training data
 
+# 
+# finish your code here
+# 
+print("RFE Accuracy (top 10 features):", accuracy_score(y_test, y_pred_rfe))
     
 # --- 10. PCA (2D visualization) ---
 # Please make sure to fit only on the scaled training data
