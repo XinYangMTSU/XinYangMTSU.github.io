@@ -190,8 +190,9 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)  # fit on train only
 X_test_scaled  = scaler.transform(X_test)
 # 
-#
-print("Scaled Accuracy (all features):", f"{scaled_acc:.4f}")
+# finish your code here
+#    
+print("Scaled Accuracy (all features):", accuracy_score(y_test, y_pred_scale))
     
 # --- 8. Feature Selection: Chi-square test ---
 # For the chi-square test, please don't apply standardization
