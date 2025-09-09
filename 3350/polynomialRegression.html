@@ -188,7 +188,6 @@ results_all = pd.concat([
 
 # 6) Display results
 results_df = results_all.set_index(["Model", "Split"])
-pd.set_option("display.float_format", "{:,.3f}".format)
 print(results_df)
 
 # 7) Plot fitted curves
