@@ -1,9 +1,10 @@
-<!-- Ridge Shrinkage Illustration — contour ellipse SHRINKS to L2 tangency -->
+<!-- Ridge: Contour EXPANDS from OLS center to first touch the L2 ball -->
 <svg viewBox="0 0 800 480" role="img" aria-labelledby="ridgeTitle ridgeDesc"
      style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
-  <title id="ridgeTitle">Ridge Shrinkage Illustration (Contour Shrinks to Tangency)</title>
+  <title id="ridgeTitle">Ridge Contour Expansion to Tangency</title>
   <desc id="ridgeDesc">
-    SSE level-set ellipse centered at the OLS solution shrinks until it first touches the L2 ball, showing the Ridge tangency.
+    A single SSE level set (ellipse) centered at OLS (★) expands outward until it first touches
+    the L2 ball; that tangency point is the Ridge solution.
   </desc>
 
   <defs>
@@ -13,11 +14,10 @@
     </marker>
     <style>
       .axis { stroke:#ff79c6; stroke-width:2; marker-end:url(#arrow-pink); }
-      .axisLabel { fill:#ffb3de; font: 500 13px Roboto, Arial, sans-serif; }
-      .note { fill:#ffb3de; font: 500 12px Roboto, Arial, sans-serif; }
-      .label { fill:#ff79c6; font: 600 13px Roboto, Arial, sans-serif; }
+      .axisLabel { fill:#ffb3de; font:500 13px Roboto, Arial, sans-serif; }
+      .note { fill:#ffb3de; font:500 12px Roboto, Arial, sans-serif; }
+      .label { fill:#ff79c6; font:600 13px Roboto, Arial, sans-serif; }
       .ellipse { fill:none; stroke:#8be9fd; stroke-width:3; }
-      .ellipse--wide { fill:none; stroke:#8be9fd; stroke-opacity:.35; stroke-width:2; stroke-dasharray:6 6; }
       .l2 { fill:none; stroke:#ff79c6; stroke-width:3; }
       .guide { stroke:#9aa0a6; stroke-width:1.5; stroke-dasharray:6 6; }
     </style>
@@ -52,25 +52,18 @@
     <text x="492" y="206" class="note">shrinkage direction</text>
   </g>
 
-  <!-- Context ellipses (static, wide) -->
-  <g id="sse-static">
-    <ellipse cx="560" cy="160" rx="190" ry="124" class="ellipse--wide" transform="rotate(-25 560 160)"/>
-    <ellipse cx="560" cy="160" rx="150" ry="98"  class="ellipse--wide" transform="rotate(-25 560 160)"/>
-  </g>
-
-  <!-- Animated SHRINKING contour to tangency (rx: 190→110, ry: 124→72) -->
+  <!-- Animated expanding contour (from tiny to tangency). Rotated to match your figure. -->
   <g id="sse-anim" transform="rotate(-25 560 160)">
-    <ellipse id="shrinkEllipse" cx="560" cy="160" rx="190" ry="124" class="ellipse">
-      <animate attributeName="rx" from="190" to="110" dur="2.8s" begin="0s" fill="freeze" />
-      <animate attributeName="ry" from="124" to="72"  dur="2.8s" begin="0s" fill="freeze" />
-      <!-- optional easing effect -->
-      <animate attributeName="stroke-width" from="3" to="3.6" dur="2.8s" begin="0s" fill="freeze" />
+    <ellipse id="expandEllipse" cx="560" cy="160" rx="5" ry="3" class="ellipse">
+      <!-- expand to tangency radii -->
+      <animate attributeName="rx" from="5" to="110" dur="2.8s" begin="0s" fill="freeze" />
+      <animate attributeName="ry" from="3" to="72"  dur="2.8s" begin="0s" fill="freeze" />
     </ellipse>
   </g>
 
-  <!-- Tangency highlight (appears when shrink finishes) -->
+  <!-- Tangency marker fades in right when the ellipse first touches the circle -->
   <g id="ridge">
-    <circle cx="459.6" cy="210.2" r="5.5" fill="#50fa7b" stroke="#1e1f22" stroke-width="1.5">
+    <circle cx="459.6" cy="210.2" r="5.5" fill="#50fa7b" stroke="#1e1f22" stroke-width="1.5" opacity="0">
       <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.8s" fill="freeze"/>
     </circle>
     <text x="474" y="228" class="label" style="fill:#50fa7b; opacity:0;">
@@ -79,17 +72,6 @@
     </text>
   </g>
 
-  <!-- Legend -->
-  <g id="legend">
-    <rect x="72" y="64" width="245" height="110" rx="10" ry="10"
-          fill="rgba(33,17,27,.75)" stroke="#402138"/>
-    <circle cx="92" cy="88" r="7" fill="none" stroke="#ff79c6" stroke-width="3"/>
-    <text x="110" y="92" class="note">L2 constraint ball</text>
-
-    <line x1="85" y1="114" x2="99" y2="114" class="ellipse"/>
-    <text x="110" y="118" class="note">SSE contour (shrinking)</text>
-
-    <text x="88" y="140" style="font:700 16px Roboto, Arial, sans-serif; fill:#ffd166;">★</text>
-    <text x="110" y="142" class="note">OLS center of ellipses</text>
-  </g>
+  <!-- Optional: hint label for the contour -->
+  <text x="600" y="90" class="label">SSE contour (expanding)</text>
 </svg>
