@@ -118,11 +118,16 @@ from sklearn.pipeline import Pipeline
 from sklearn.metrics import r2_score, mean_squared_error
 
 RANDOM_STATE = 42
+np.random.seed(RANDOM_STATE)
 
 # 1) Generate synthetic quadratic dataset
-np.random.seed(RANDOM_STATE)
+# X is evenly spaced between –3 and 3 (80 points)
 X = np.linspace(-3, 3, 80).reshape(-1, 1)
+
+# y_true=0.5x^2+x+2 --> this is the real curve (a parabola)
 y_true = 0.5 * X[:, 0]**2 + X[:, 0] + 2    # true quadratic curve
+
+#We add random noise so it looks like messy, real-world data
 y = y_true + np.random.randn(len(X)) * 1.5 # add noise
 
 # 2) Train / test split
@@ -132,6 +137,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # 3) Helper function to evaluate models
 def evaluate_model(name, model, X_train, y_train, X_test, y_test):
+    
     model.fit(X_train, y_train)
 
     # --- Train ---
@@ -156,14 +162,17 @@ def evaluate_model(name, model, X_train, y_train, X_test, y_test):
     return results
 
 # 4) Define models
+
 lin_reg  = LinearRegression()
 
-poly3 = Pipeline([
+# creates features x, x^2
+poly2 = Pipeline([
     ("scaler", StandardScaler()),
-    ("poly", PolynomialFeatures(degree=3, include_bias=False)),
+    ("poly", PolynomialFeatures(degree=2, include_bias=False)),
     ("linreg", LinearRegression())
 ])
 
+# creates features x, x^2, x^3, x^4, x^5, x^6, x^7, x^8
 poly8 = Pipeline([
     ("scaler", StandardScaler()),
     ("poly", PolynomialFeatures(degree=8, include_bias=False)),
@@ -173,7 +182,7 @@ poly8 = Pipeline([
 # 5) Evaluate models
 results_all = pd.concat([
     evaluate_model("Linear Regression", lin_reg, X_train, y_train, X_test, y_test),
-    evaluate_model("Polynomial d=3", poly3, X_train, y_train, X_test, y_test),
+    evaluate_model("Polynomial d=2", poly2, X_train, y_train, X_test, y_test),
     evaluate_model("Polynomial d=8", poly8, X_train, y_train, X_test, y_test),
 ], ignore_index=True)
 
@@ -184,12 +193,12 @@ print(results_df)
 
 # 7) Plot fitted curves
 X_curve = np.linspace(-3, 3, 200).reshape(-1, 1)
-plt.scatter(X, y, label="Data (with noise)")
-plt.plot(X_curve, 0.5*X_curve[:,0]**2 + X_curve[:,0] + 2, "--", label="True function")
+plt.scatter(X, y, color="black", label="Data (with noise)")
+plt.plot(X_curve, 0.5*X_curve[:,0]**2 + X_curve[:,0] + 2, "g--", label="True function")
 
-plt.plot(X_curve, lin_reg.fit(X_train, y_train).predict(X_curve), label="Linear Regression")
-plt.plot(X_curve, poly3.fit(X_train, y_train).predict(X_curve), label="Polynomial d=3")
-plt.plot(X_curve, poly8.fit(X_train, y_train).predict(X_curve), label="Polynomial d=8")
+plt.plot(X_curve, lin_reg.fit(X_train, y_train).predict(X_curve), "r-", label="Linear Regression")
+plt.plot(X_curve, poly2.fit(X_train, y_train).predict(X_curve), "b-", label="Polynomial d=2")
+plt.plot(X_curve, poly8.fit(X_train, y_train).predict(X_curve), "m-", label="Polynomial d=8")
 
 plt.legend()
 plt.title("Linear vs Polynomial Regression (Train/Test split)")
