@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Worked Example: OLS vs Ridge (High-Dimensional Breast Cancer)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h1, h2, h4 {
+      margin: 0 0 10px 0;
+      color: #ffb3de;
+      font-weight: 700;
+    }
+
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+
+    a.anchor {
+      text-decoration: none;
+      margin-left: .5rem;
+      opacity: .6;
+      color: #ffb3de;
+    }
+    a.anchor:hover { opacity: 1; }
+
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+      position: relative;
+      max-width: 100%;
+    }
+
+    pre .copy {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 4px 8px;
+      background: #21111b;
+      border: 1px solid #ff79c6;
+      border-radius: 6px;
+      color: #ffb3de;
+      font-size: 0.8em;
+      cursor: pointer;
+    }
+    pre .copy:hover {
+      background: #ff79c6;
+      color: #fff;
+    }
+
+    ul.toc {
+      padding-left: 18px;
+      margin-top: 8px;
+    }
+    ul.toc li { margin: 4px 0; }
+    ul.toc a { color: #ffb3de; }
+  </style>
+</head>
+
+<body>
+
+<section>
+  <center>
+    <h1>Worked Example: OLS vs Ridge</h1>
+    <div>High-Dimensional Breast Cancer Data (Polynomial Expansion)</div>
+  </center>
+
+  <h4>Method: OLS vs Ridge with PolynomialFeatures (degree = 3)</h4>
+
+  <pre><button class="copy">Copy</button><code>
+# ========================================================
+# Breast Cancer Data — OLS vs Ridge (High-dimensional demo)
+# Polynomial feature expansion, train/test split, compare
+# ========================================================
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LinearRegression, RidgeCV
+from sklearn.metrics import r2_score, mean_squared_error
+
+RANDOM_STATE = 42
+
+# 1) Load dataset
+data = load_breast_cancer()
+X, y = data.data, data.target   # binary labels (0/1)
+n_features = X.shape[1]
+
+# 2) Expand to polynomial features (degree=3)
+# Includes x, x^2, x^3 and all cross-terms → high dimensional
+poly = PolynomialFeatures(degree=3, include_bias=False)
+X_poly = poly.fit_transform(X)
+print(f"Original features: {n_features} → After expansion: {X_poly.shape[1]}")
+
+# 3) Train / test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X_poly, y, test_size=0.3, random_state=RANDOM_STATE
+)
+
+# 4) Helper function to evaluate models
+def evaluate_model(name, model, X_train, y_train, X_test, y_test):
+    model.fit(X_train, y_train)
+
+    # --- Train ---
+    y_pred_train = model.predict(X_train)
+    mse_train = mean_squared_error(y_train, y_pred_train)
+    rmse_train = np.sqrt(mse_train)
+    r2_train = r2_score(y_train, y_pred_train)
+    sse_train = np.sum((y_train - y_pred_train) ** 2)
+
+    # --- Test ---
+    y_pred_test = model.predict(X_test)
+    mse_test = mean_squared_error(y_test, y_pred_test)
+    rmse_test = np.sqrt(mse_test)
+    r2_test = r2_score(y_test, y_pred_test)
+    sse_test = np.sum((y_test - y_pred_test) ** 2)
+
+    # Collect results
+    results = pd.DataFrame([
+        {"Model": name, "Split": "Train", "R^2": r2_train, "RMSE": rmse_train, "MSE": mse_train, "SSE": sse_train},
+        {"Model": name, "Split": "Test",  "R^2": r2_test,  "RMSE": rmse_test,  "MSE": mse_test,  "SSE": sse_test},
+    ])
+    return results
+
+# 5) Define models
+ols = Pipeline([
+    ("scaler", StandardScaler()),
+    ("linreg", LinearRegression())
+])
+
+ridge = Pipeline([
+    ("scaler", StandardScaler()),
+    ("ridge", RidgeCV(alphas=np.logspace(-3, 3, 30), cv=5))
+])
+
+# 6) Evaluate models
+results_df = pd.DataFrame(
+    pd.concat([
+        evaluate_model("OLS", ols, X_train, y_train, X_test, y_test),
+        evaluate_model("Ridge", ridge, X_train, y_train, X_test, y_test),
+    ])
+).set_index(["Model", "Split"])
+
+# 7) Display results
+print("\n=== Train/Test Metrics (high-dimensional case) ===")
+print(results_df)
+print("\nRidge alpha chosen:", ridge.named_steps["ridge"].alpha_)
+
+# 8) Coefficient magnitudes
+coef_ols   = ols.named_steps["linreg"].coef_
+coef_ridge = ridge.named_steps["ridge"].coef_
+
+plt.figure(figsize=(8,4.5))
+idx = np.arange(len(coef_ols))
+plt.semilogy(idx, np.abs(coef_ols), "ro", markersize=3, label="OLS")
+plt.semilogy(idx, np.abs(coef_ridge), "bo", markersize=3, label="Ridge")
+plt.title("Coefficient Magnitudes (OLS vs Ridge)")
+plt.xlabel("Feature index")
+plt.ylabel("Absolute coefficient (log scale)")
+plt.legend()
+plt.tight_layout()
+plt.show()
+  </code></pre>
+
+</section>
+
+<script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
