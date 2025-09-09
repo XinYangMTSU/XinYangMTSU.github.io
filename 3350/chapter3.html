@@ -1261,7 +1261,20 @@ In vector form with a penalty matrix
   \]
 </p>
   
-
+<p><b>Objective (penalized least squares):</b></p>
+  <p style="text-align:center;">
+    \[
+      \hat{\boldsymbol{\beta}}_{\text{ridge}}
+      \;=\;
+      \arg\min_{\boldsymbol{\beta}}
+      \left(
+        \|\,\mathbf{y} - \mathbf{X}\boldsymbol{\beta}\,\|_2^2
+        \;+\;
+        \lambda \|\boldsymbol{\beta}\|_2^2
+      \right)
+    \]
+  </p>
+  
 <h4>Normal Equation (Ridge)</h4>
  <div class="step">
     <p><b>Expand the objective:</b></p>
