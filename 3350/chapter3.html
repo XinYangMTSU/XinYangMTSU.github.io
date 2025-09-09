@@ -1472,6 +1472,8 @@ In vector form with a penalty matrix
   <li>Ridge helps when features are highly correlated (\(\mathbf{X}^\top\mathbf{X}\) is ill-conditioned).</li>
   <li>Do not penalize the intercept; standardize features before ridge to make penalty comparable across features.</li>
   <li>Choose \(\lambda\) via cross-validation for best generalization.</li>
+  <li>Noisy features --> shrunk, don’t dominate the model.</li>
+  <li>Redundant (correlated) features --> it shrinks both correlated features toward smaller, more balanced values.</li>
 </ul>
 
   </section>
