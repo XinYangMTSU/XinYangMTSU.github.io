@@ -1,111 +1,144 @@
-<section id="polynomial-regression">
-      
-  <h4>2.2 Polynomial Regression</h4>
-  <br>
-  <b>Idea:</b>
+<section id="ridge-anim">
+  <h4>Ridge: Contour Expands to Tangency (Dynamic)</h4>
   <p>
-    Polynomial Regression is an extension of Linear Regression that models 
-    a nonlinear relationship between input features and the target variable 
-    by introducing polynomial terms (squared, cubic, etc.). 
-    Although the curve looks nonlinear in the original input space, 
-    <b><font color="red">it is still a linear model in the expanded feature space</font></b>.
-  </p>
-    
-  <b>Equation (example with one feature):</b>
-  <p style="text-align: center;">
-    y = β<sub>0</sub> + β<sub>1</sub>x + β<sub>2</sub>x<sup>2</sup> + β<sub>3</sub>x<sup>3</sup> + … + β<sub>d</sub>x<sup>d</sup> + ε
+    Press <b>Play</b> to watch the loss contour grow outward from the OLS minimum (★).
+    The moment it first <em>touches</em> the L2 circle is the Ridge solution (tangency).
   </p>
 
-  <p><strong>Where:</strong></p>
-  <ul>
-    <li><i>d</i> = polynomial degree</li>
-    <li>Adding higher-degree terms lets the model capture curves and complex patterns</li>
-    <li>Still solved by Ordinary Least Squares (OLS) after expanding the feature set</li>
-  </ul>
+  <div style="display:flex; gap:18px; align-items:center; flex-wrap:wrap;">
+    <div>
+      <!-- Animated SVG -->
+      <svg id="ridgeAnimSvg" viewBox="0 0 800 480"
+           style="max-width:480px;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
+        <defs>
+          <marker id="arrow-pink" viewBox="0 0 10 10" refX="8" refY="5"
+                  markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="#ff79c6"></path>
+          </marker>
+          <style>
+            .axis{stroke:#ff79c6; stroke-width:2; marker-end:url(#arrow-pink);}
+            .axisLabel{fill:#ffb3de; font:500 13px Roboto, Arial, sans-serif;}
+            .note{fill:#ffb3de; font:500 12px Roboto, Arial, sans-serif;}
+            .label{fill:#ff79c6; font:600 13px Roboto, Arial, sans-serif;}
+            .ellipse{fill:none; stroke:#8be9fd; stroke-width:3;}
+            .l2{fill:none; stroke:#ff79c6; stroke-width:3;}
+          </style>
+        </defs>
 
-  <br>
-    
-  <center>
-    <img src="images/polynomial_regression.png" width="800px" height="300px">
-  </center>
+        <!-- Axes -->
+        <g id="coords">
+          <line x1="60"  y1="240" x2="760" y2="240" class="axis" />
+          <line x1="400" y1="440" x2="400" y2="40"  class="axis" />
+          <text x="752" y="226" class="axisLabel">β₁</text>
+          <text x="410" y="54"  class="axisLabel">β₂</text>
+          <circle cx="400" cy="240" r="2.5" fill="#ff79c6"/>
+          <text x="408" y="254" class="note">origin</text>
+        </g>
 
-  <h4>Interactive: Polynomial Regression</h4>
-  <ul>
-    <li><a href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html" target="_blank">Scikit-learn Demo</a></li>
-  </ul>
-      
-  <br>
-    
-  <h4>How Polynomial Regression Works</h4>
-  <ol>
-    <li><strong>Collect Data</strong> – Pairs of inputs (\(x\)) and outputs (\(y\)).</li>
-    <li><strong>Feature Expansion</strong> – Transform the input feature into higher-order terms:
-      \[
-      x \;\;\longrightarrow\;\; [\,x,\,x^2,\,x^3,\,\ldots,\,x^d\,]
-      \]
-    </li>
-    <li><strong>Fit a Linear Model</strong> – Apply OLS on the expanded features to estimate coefficients \(\beta\).</li>
-    <li><strong>Prediction</strong> – Use the polynomial equation to generate predictions \(\hat{y}\).</li>
-  </ol>
+        <!-- Ridge L2 ball (centered at origin (400,240), radius 70) -->
+        <g id="l2-ball">
+          <circle cx="400" cy="240" r="70" class="l2"/>
+          <text x="210" y="356" class="label">L2 constraint: ‖β‖₂ ≤ t</text>
+        </g>
 
-  <br>
+        <!-- OLS (unregularized) at (560,160) -->
+        <g id="ols">
+          <text x="560" y="160" text-anchor="middle" dominant-baseline="middle"
+                style="font:700 20px/1 Roboto, Arial, sans-serif; fill:#ffd166;">★</text>
+          <text x="572" y="180" class="label">OLS (unregularized)</text>
+        </g>
 
-  <h4>Matrix Form</h4>
-  <p>
-    With polynomial expansion, the design matrix \( \mathbf{X} \) changes. 
-    For degree 3 with one feature:
-  </p>
+        <!-- One animated SSE contour (ellipse centered on OLS, rotated -25°).
+             We animate rx/ry from tiny to the "tangency" size, then freeze. -->
+        <g id="animContour" transform="rotate(-25 560 160)">
+          <ellipse id="growEllipse" cx="560" cy="160" rx="5" ry="3" class="ellipse">
+            <!-- Animate radii: from small to tangency radii (≈ first contact) -->
+            <animate id="rxAnim" attributeName="rx" from="5" to="110" dur="2.8s" fill="freeze" begin="indefinite" />
+            <animate id="ryAnim" attributeName="ry" from="3" to="72"  dur="2.8s" fill="freeze" begin="indefinite" />
+          </ellipse>
+        </g>
 
-  <p style="text-align:center;">
-  $$
-  \mathbf{X} =
-  \begin{bmatrix}
-    1 & x_1 & x_1^2 & x_1^3 \\
-    1 & x_2 & x_2^2 & x_2^3 \\
-    \vdots & \vdots & \vdots & \vdots \\
-    1 & x_m & x_m^2 & x_m^3
-  \end{bmatrix}, \quad
-  \mathbf{y} =
-  \begin{bmatrix}
-    y_1 \\ y_2 \\ \vdots \\ y_m
-  \end{bmatrix}.
-  $$
-  </p>
+        <!-- Tangency dot (hidden until we reach the touching level) -->
+        <circle id="tangentDot" cx="459.6" cy="210.2" r="6"
+                fill="#50fa7b" stroke="#1e1f22" stroke-width="1.5" opacity="0"/>
+        <text id="tangentLabel" x="474" y="228" class="label" style="fill:#50fa7b; opacity:0;">
+          Ridge solution (tangent)
+        </text>
+      </svg>
+    </div>
 
-  <p>
-  The solution is still obtained via the Normal Equation:
-  \[
-  \hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1}\mathbf{X}^\top \mathbf{y}
-  \]
-  </p>
+    <!-- Controls -->
+    <div>
+      <button id="btnPlay"  style="padding:.5rem .8rem;border-radius:10px;border:1px solid #ff79c6;background:#21111b;color:#ffb3de;cursor:pointer;">▶ Play</button>
+      <button id="btnPause" style="padding:.5rem .8rem;border-radius:10px;border:1px solid #ff79c6;background:#21111b;color:#ffb3de;cursor:pointer;">⏸ Pause</button>
+      <button id="btnReset" style="padding:.5rem .8rem;border-radius:10px;border:1px solid #ff79c6;background:#21111b;color:#ffb3de;cursor:pointer;">⟲ Reset</button>
 
-  <br>
+      <p class="note" style="margin-top:.8rem;">
+        The ellipse is a level set of SSE centered at ★. It grows until it first touches the circle (‖β‖₂ ≤ t).
+      </p>
+    </div>
+  </div>
 
-  <h4>Worked Example: Predicting House Price (Nonlinear)</h4>
-  <p>
-    Suppose house price depends not only linearly on <i>Size</i>, but also 
-    shows curvature (e.g., very large houses may not increase proportionally in price). 
-    A polynomial term like <i>Size²</i> can capture this effect.
-  </p>
+  <script>
+    (function() {
+      const svg = document.getElementById('ridgeAnimSvg');
+      const rxAnim = svg.querySelector('#rxAnim');
+      const ryAnim = svg.querySelector('#ryAnim');
+      const tangentDot = svg.querySelector('#tangentDot');
+      const tangentLabel = svg.querySelector('#tangentLabel');
 
-  <p style="color: #ffb3de;"><b><u>Model:</u></b></p>
-  <p style="text-align:center;">
-    $$ \text{Price} = \beta_0 + \beta_1 \cdot \text{Size} + \beta_2 \cdot \text{Size}^2 + \epsilon $$
-  </p>
+      const btnPlay  = document.getElementById('btnPlay');
+      const btnPause = document.getElementById('btnPause');
+      const btnReset = document.getElementById('btnReset');
 
-  <p>
-    Expanding features in this way lets the model fit a curve rather than a straight line, 
-    improving flexibility at the cost of interpretability.
-  </p>
+      // Start animation from current state
+      btnPlay.addEventListener('click', () => {
+        // Start both animations if not already running
+        rxAnim.beginElement();
+        ryAnim.beginElement();
 
-  <br>
+        // Reveal the tangency point when animation ends
+        const showTangent = () => {
+          tangentDot.setAttribute('opacity', '1');
+          tangentLabel.style.opacity = 1;
+          rxAnim.removeEventListener('endEvent', showTangent);
+          ryAnim.removeEventListener('endEvent', showTangent);
+        };
+        rxAnim.addEventListener('endEvent', showTangent);
+        ryAnim.addEventListener('endEvent', showTangent);
+      });
 
-  <h4>Key Points:</h4>
-  <ul>
-    <li>Polynomial regression is still a linear model in the coefficients.</li>
-    <li>Increasing degree \(d\) makes the model more flexible, but risks <b>overfitting</b>.</li>
-    <li>Use cross-validation to choose an appropriate degree.</li>
-    <li>For high-dimensional data, prefer regularization (Ridge, Lasso) to control complexity.</li>
-  </ul>
+      // Pause by freezing computed style (SMIL pause is not universally supported);
+      // we do a simple hack: get current rx/ry and reset animations to start from there.
+      btnPause.addEventListener('click', () => {
+        const ellipse = svg.querySelector('#growEllipse');
+        const rx = ellipse.getAttribute('rx');
+        const ry = ellipse.getAttribute('ry');
 
+        // Reset animations with new from/to = current -> current (freezes)
+        rxAnim.setAttribute('from', rx);
+        rxAnim.setAttribute('to', rx);
+        ryAnim.setAttribute('from', ry);
+        ryAnim.setAttribute('to', ry);
+
+        rxAnim.beginElement();
+        ryAnim.beginElement();
+      });
+
+      // Reset to initial (small ellipse, hide tangency)
+      btnReset.addEventListener('click', () => {
+        const ellipse = svg.querySelector('#growEllipse');
+        ellipse.setAttribute('rx', 5);
+        ellipse.setAttribute('ry', 3);
+
+        rxAnim.setAttribute('from', 5);
+        rxAnim.setAttribute('to', 110);
+        ryAnim.setAttribute('from', 3);
+        ryAnim.setAttribute('to', 72);
+
+        tangentDot.setAttribute('opacity', '0');
+        tangentLabel.style.opacity = 0;
+      });
+    })();
+  </script>
 </section>
