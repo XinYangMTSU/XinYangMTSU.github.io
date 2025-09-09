@@ -1,100 +1,212 @@
-<svg viewBox="0 0 800 480" role="img" aria-labelledby="ridgeTitle ridgeDesc"
-     style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
-  <title id="ridgeTitle">Ridge Shrinkage Illustration</title>
-  <desc id="ridgeDesc">
-    Axes for beta1 and beta2, a circular L2 constraint ball centered at the origin, OLS-centered SSE ellipses,
-    and the ridge solution at the tangency point between an ellipse and the L2 circle.
-  </desc>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>OLS with Correlated Features vs Ridge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #17191a;
+      --panel: #222025;
+      --ink: #ffb3de;
+      --accent: #ff79c6;
+      --shadow: rgba(255,121,198,.12);
+      --muted: #c7b3c8;
+    }
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      padding: 24px;
+    }
+    section {
+      margin: 28px auto;
+      background: var(--panel);
+      border-radius: 18px;
+      border-left: 7px solid var(--accent);
+      box-shadow: 0 6px 28px var(--shadow);
+      max-width: 940px;
+      padding: 28px 30px;
+    }
+    h1, h2, h3 {
+      color: var(--ink);
+      margin: 0 0 10px 0;
+    }
+    h1 { font-size: 2.0rem; color: var(--accent); text-shadow: 0 2px 16px rgba(255,121,198,.18); }
+    h2 { font-size: 1.35rem; margin-top: 18px; }
+    p { line-height: 1.6; }
+    .callout {
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 14px 16px;
+      background: #20161e;
+      margin: 16px 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .chip {
+      display: inline-block;
+      padding: 6px 10px;
+      font-size: .92rem;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      margin: 2px 6px 2px 0;
+      opacity: .9;
+    }
+    code.inline { background:#19121a; padding:2px 6px; border-radius:6px; }
+    .equation { text-align:center; margin: 12px 0; }
+    .note { color: var(--muted); font-size: .96rem; }
+    .legend { font-size: .92rem; color: var(--muted); }
+    .kbd { background:#19121a; padding:2px 6px; border-radius:6px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .list { margin-left: 1.1rem; }
+    .svgwrap { background:#1e1f22; border-radius:12px; padding:10px; box-shadow:0 4px 20px var(--shadow); }
+    a, a:visited { color: var(--accent); }
+  </style>
+</head>
+<body>
 
-  <defs>
-    <marker id="arrow-pink" viewBox="0 0 10 10" refX="8" refY="5"
-            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#ff79c6"></path>
-    </marker>
-    <style>
-      .axis { stroke:#ff79c6; stroke-width:2; marker-end:url(#arrow-pink); }
-      .axisLabel { fill:#ffb3de; font: 500 13px Roboto, Arial, sans-serif; }
-      .note { fill:#ffb3de; font: 500 12px Roboto, Arial, sans-serif; }
-      .label { fill:#ff79c6; font: 600 13px Roboto, Arial, sans-serif; }
-      .ellipse { fill:none; stroke:#8be9fd; stroke-width:3; }
-      .ellipse--wide { fill:none; stroke:#8be9fd; stroke-opacity:.45; stroke-width:2; stroke-dasharray:6 6; }
-      .l2 { fill:none; stroke:#ff79c6; stroke-width:3; }
-      .guide { stroke:#9aa0a6; stroke-width:1.5; stroke-dasharray:6 6; }
-    </style>
-  </defs>
+<section>
+  <h1>Why OLS Struggles with Correlated Features — and How Ridge Helps</h1>
+  <p class="note">
+    Multicollinearity (features that carry overlapping information) makes OLS coefficients unstable.
+    Ridge adds a small penalty that keeps coefficients small and stable, improving generalization.
+  </p>
+</section>
 
-  <!-- Axes -->
-  <g id="coords">
-    <line x1="60"  y1="240" x2="760" y2="240" class="axis" />
-    <line x1="400" y1="440" x2="400" y2="40"  class="axis" />
-    <text x="752" y="226" class="axisLabel">β₁</text>
-    <text x="410" y="54"  class="axisLabel">β₂</text>
-    <circle cx="400" cy="240" r="2.5" fill="#ff79c6"/>
-    <text x="408" y="254" class="note">origin</text>
-  </g>
+<section>
+  <h2>Problem Setup: Correlated Features in OLS</h2>
+  <p>Suppose we have two features describing the same tumor size concept:</p>
+  <ul class="list">
+    <li>\(x_1 =\) size of tumor (cm)</li>
+    <li>\(x_2 =\) diameter of tumor (cm)</li>
+  </ul>
+  <p>They’re almost the same measurement ⇒ <b>highly correlated</b>.</p>
 
-  <!-- Smaller L2 ball (reduced radius to 70) -->
-  <g id="l2-ball">
-    <circle cx="400" cy="240" r="70" class="l2"/>
-    <text x="210" y="356" class="label">L2 constraint: ‖β‖₂ ≤ t</text>
-  </g>
+  <div class="equation">
+    \[
+      y \;=\; \beta_0 + \beta_1 x_1 + \beta_2 x_2
+    \]
+  </div>
 
-  <!-- OLS (unregularized) -->
-  <g id="ols">
-    <text x="560" y="160" text-anchor="middle" dominant-baseline="middle"
-          style="font:700 20px/1 Roboto, Arial, sans-serif; fill:#ffd166;">★</text>
-    <text x="572" y="180" class="label">OLS (unregularized)</text>
-  </g>
+  <p>Because \(x_1 \approx x_2\), there are many coefficient pairs \((\beta_1, \beta_2)\) that yield nearly the same predictions:</p>
+  <div class="grid">
+    <div class="callout">
+      <b>Solution A:</b> \(\beta_1 = 100,\; \beta_2 = -98\)<br/>
+      <span class="legend">Large, opposite signs; sensitive to tiny data changes.</span>
+    </div>
+    <div class="callout">
+      <b>Solution B:</b> \(\beta_1 = 2,\; \beta_2 = 0\)<br/>
+      <span class="legend">Pushes weight onto \(x_1\).</span>
+    </div>
+    <div class="callout">
+      <b>Solution C:</b> \(\beta_1 = 50,\; \beta_2 = 50\)<br/>
+      <span class="legend">Shares weight, same predictions as A/B up to noise.</span>
+    </div>
+  </div>
 
-  <!-- Shrinkage direction (origin → OLS) -->
-  <g id="shrink">
-    <line x1="400" y1="240" x2="560" y2="160" class="guide"/>
-    <text x="492" y="206" class="note">shrinkage direction</text>
-  </g>
+  <p><b>Key issue:</b> OLS “doesn’t care” which combination it picks, so coefficients can swing wildly with tiny changes in the data — this hurts stability and test performance.</p>
+</section>
 
-  <!-- SSE contours (original static ones) -->
-  <g id="sse">
-    <ellipse cx="560" cy="160" rx="110" ry="72" class="ellipse"
-             transform="rotate(-25 560 160)"/>
-    <ellipse cx="560" cy="160" rx="150" ry="98" class="ellipse--wide"
-             transform="rotate(-25 560 160)"/>
-    <ellipse cx="560" cy="160" rx="190" ry="124" class="ellipse--wide"
-             transform="rotate(-25 560 160)"/>
-    <text x="600" y="90" class="label">SSE contours</text>
-  </g>
+<section>
+  <h2>Ridge’s Fix: Penalize Large Coefficients</h2>
+  <p>Ridge modifies the objective by adding an L2 penalty on the coefficient magnitudes:</p>
 
-  <!-- NEW: Animated SSE contour that EXPANDS from tiny to first-touch (tangency) -->
-  <g id="sse-anim" transform="rotate(-25 560 160)">
-    <!-- Start small near the OLS center (cx=560, cy=160), grow to rx=110, ry=72 -->
-    <ellipse id="expandEllipse" cx="560" cy="160" rx="5" ry="3" class="ellipse">
-      <animate attributeName="rx" from="5" to="110" dur="2.8s" begin="0s" fill="freeze" />
-      <animate attributeName="ry" from="3" to="72"  dur="2.8s" begin="0s" fill="freeze" />
-    </ellipse>
-  </g>
+  <div class="equation">
+    \[
+      \hat{\boldsymbol{\beta}}_{\text{ridge}}
+      \;=\;
+      \arg\min_{\boldsymbol{\beta}}
+      \Big(
+        \|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2
+        \;+\;
+        \lambda \|\boldsymbol{\beta}\|_2^2
+      \Big)
+    \]
+  </div>
 
-  <!-- Ridge point (moved inward to sit on circle radius 70) -->
-  <g id="ridge">
-    <circle cx="459.6" cy="210.2" r="5.5" fill="#50fa7b" stroke="#1e1f22" stroke-width="1.5">
-      <!-- Fade-in right when the expanding contour reaches tangency -->
-      <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.8s" fill="freeze"/>
-    </circle>
-    <text x="474" y="228" class="label" style="fill:#50fa7b; opacity:0;">
-      Ridge solution (tangent)
-      <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.8s" fill="freeze"/>
-    </text>
-  </g>
+  <p>Closed-form (normal equation) view:</p>
+  <div class="equation">
+    \[
+      \hat{\boldsymbol{\beta}}_{\text{ridge}}
+      \;=\;
+      (\mathbf{X}^\top\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^\top\mathbf{y}
+    \]
+  </div>
 
-  <!-- Legend -->
-  <g id="legend">
-    <rect x="72" y="64" width="215" height="88" rx="10" ry="10"
-          fill="rgba(33,17,27,.75)" stroke="#402138"/>
-    <circle cx="92" cy="88" r="7" fill="none" stroke="#ff79c6" stroke-width="3"/>
-    <text x="110" y="92" class="note">L2 constraint ball</text>
+  <div class="callout">
+    <b>Interpretation:</b> Big coefficients are “expensive,” so solutions like \((100, -98)\) are discouraged.
+    More balanced solutions like \((50, 50)\) are cheaper under the penalty and typically generalize better.
+  </div>
 
-    <line x1="85" y1="114" x2="99" y2="114" class="ellipse"/>
-    <text x="110" y="118" class="note">SSE (loss) contour</text>
+  <p><b>Effect with correlated features:</b> Ridge tends to <i>spread weight</i> across them, shrinking both toward smaller,
+  more stable values instead of letting one blow up while the other cancels it.</p>
+</section>
 
-    <text x="88" y="140" style="font:700 16px Roboto, Arial, sans-serif; fill:#ffd166;">★</text>
-    <text x="110" y="142" class="note">OLS estimate</text>
-  </g>
-</svg>
+<section>
+  <h2>Geometric Intuition (Sketch)</h2>
+  <div class="svgwrap">
+    <svg viewBox="0 0 800 420" role="img" aria-label="Ridge vs OLS coefficient geometry" style="max-width:100%;height:auto;">
+      <!-- axes -->
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="#ff79c6"></path>
+        </marker>
+      </defs>
+      <line x1="70" y1="210" x2="760" y2="210" stroke="#ff79c6" stroke-width="2" marker-end="url(#arrow)"/>
+      <line x1="400" y1="380" x2="400" y2="40"  stroke="#ff79c6" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="748" y="196" fill="#ffb3de" font-size="13">β₁</text>
+      <text x="410" y="56"  fill="#ffb3de" font-size="13">β₂</text>
+
+      <!-- L2 ball -->
+      <circle cx="400" cy="210" r="90" fill="none" stroke="#ff79c6" stroke-width="3"/>
+      <text x="275" y="330" fill="#ff79c6" font-size="13">L2 constraint: ‖β‖₂ ≤ t</text>
+
+      <!-- OLS point and SSE ellipse family center -->
+      <text x="600" y="140" fill="#ffd166" font-size="20">★</text>
+      <text x="612" y="160" fill="#ffb3de" font-size="13">OLS (unregularized)</text>
+
+      <!-- SSE contours (level sets around OLS) -->
+      <g fill="none" stroke="#8be9fd">
+        <ellipse cx="600" cy="140" rx="100" ry="64" transform="rotate(-25 600 140)" stroke-width="3"/>
+        <ellipse cx="600" cy="140" rx="140" ry="90" transform="rotate(-25 600 140)" stroke-opacity=".45" stroke-dasharray="6 6" stroke-width="2"/>
+        <ellipse cx="600" cy="140" rx="180" ry="116" transform="rotate(-25 600 140)" stroke-opacity=".35" stroke-dasharray="6 6" stroke-width="2"/>
+      </g>
+      <text x="640" y="86" fill="#8be9fd" font-size="13">SSE contours</text>
+
+      <!-- Ridge tangency point -->
+      <circle cx="472" cy="182" r="6" fill="#50fa7b" stroke="#1e1f22" stroke-width="1.5"/>
+      <text x="484" y="198" fill="#50fa7b" font-size="13">Ridge solution (tangent)</text>
+    </svg>
+  </div>
+  <p class="note">Ridge picks the first place an SSE contour touches the L2 circle. This yields the smallest error among all
+  coefficient vectors with \(\|\beta\|_2 \le t\) — i.e., small, stable coefficients.</p>
+</section>
+
+<section>
+  <h2>Intuition & Takeaways</h2>
+  <div class="grid">
+    <div class="callout">
+      <b>OLS intuition</b><br/>
+      “Any combo works if predictions match.” ⇒ Coefficients can be extreme and unstable with correlated features.
+    </div>
+    <div class="callout">
+      <b>Ridge intuition</b><br/>
+      “Keep coefficients small.” ⇒ Shares weight across correlated features, yielding stable, generalizable models.
+    </div>
+  </div>
+  <p>
+    <span class="chip">Multicollinearity</span>
+    <span class="chip">Coefficient stability</span>
+    <span class="chip">Generalization</span>
+    <span class="chip">Bias–Variance Tradeoff</span>
+  </p>
+</section>
+
+<!-- MathJax (load once per page) -->
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>
