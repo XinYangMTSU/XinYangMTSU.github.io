@@ -180,14 +180,15 @@ poly8 = Pipeline([
 ])
 
 # 5) Evaluate models
-results_all = pd.concat([
-    evaluate_model("Linear Regression", lin_reg, X_train, y_train, X_test, y_test),
-    evaluate_model("Polynomial d=2", poly2, X_train, y_train, X_test, y_test),
-    evaluate_model("Polynomial d=8", poly8, X_train, y_train, X_test, y_test),
-], ignore_index=True)
+results_df = pd.DataFrame(
+    pd.concat([
+        evaluate_model("Linear Regression", lin_reg, X_train, y_train, X_test, y_test),
+        evaluate_model("Polynomial d=2", poly2, X_train, y_train, X_test, y_test),
+        evaluate_model("Polynomial d=8", poly8, X_train, y_train, X_test, y_test),
+    ])
+).set_index(["Model", "Split"])
 
 # 6) Display results
-results_df = results_all.set_index(["Model", "Split"])
 print(results_df)
 
 # 7) Plot fitted curves
