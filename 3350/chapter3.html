@@ -1063,6 +1063,110 @@ solution can handle features of different magnitudes.
 <br>
 
 <h4>Ridge Shrinkage Illustration</h4>
+
+<svg viewBox="0 0 800 480" role="img" aria-labelledby="ridgeTitle ridgeDesc"
+     style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
+  <title id="ridgeTitle">Ridge Shrinkage Illustration</title>
+  <desc id="ridgeDesc">
+    Axes for beta1 and beta2, a circular L2 constraint ball centered at the origin, OLS-centered SSE ellipses,
+    and the ridge solution at the tangency point between an ellipse and the L2 circle.
+  </desc>
+
+  <defs>
+    <marker id="arrow-pink" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#ff79c6"></path>
+    </marker>
+    <style>
+      .axis { stroke:#ff79c6; stroke-width:2; marker-end:url(#arrow-pink); }
+      .axisLabel { fill:#ffb3de; font: 500 13px Roboto, Arial, sans-serif; }
+      .note { fill:#ffb3de; font: 500 12px Roboto, Arial, sans-serif; }
+      .label { fill:#ff79c6; font: 600 13px Roboto, Arial, sans-serif; }
+      .ellipse { fill:none; stroke:#8be9fd; stroke-width:3; }
+      .ellipse--wide { fill:none; stroke:#8be9fd; stroke-opacity:.45; stroke-width:2; stroke-dasharray:6 6; }
+      .l2 { fill:none; stroke:#ff79c6; stroke-width:3; }
+      .guide { stroke:#9aa0a6; stroke-width:1.5; stroke-dasharray:6 6; }
+    </style>
+  </defs>
+
+  <!-- Axes -->
+  <g id="coords">
+    <line x1="60"  y1="240" x2="760" y2="240" class="axis" />
+    <line x1="400" y1="440" x2="400" y2="40"  class="axis" />
+    <text x="752" y="226" class="axisLabel">β₁</text>
+    <text x="410" y="54"  class="axisLabel">β₂</text>
+    <circle cx="400" cy="240" r="2.5" fill="#ff79c6"/>
+    <text x="408" y="254" class="note">origin</text>
+  </g>
+
+  <!-- Smaller L2 ball (reduced radius to 70) -->
+  <g id="l2-ball">
+    <circle cx="400" cy="240" r="70" class="l2"/>
+    <text x="210" y="356" class="label">L2 constraint: ‖β‖₂ ≤ t</text>
+  </g>
+
+  <!-- OLS (unregularized) -->
+  <g id="ols">
+    <text x="560" y="160" text-anchor="middle" dominant-baseline="middle"
+          style="font:700 20px/1 Roboto, Arial, sans-serif; fill:#ffd166;">★</text>
+    <text x="572" y="180" class="label">OLS (unregularized)</text>
+  </g>
+
+  <!-- Shrinkage direction (origin → OLS) -->
+  <g id="shrink">
+    <line x1="400" y1="240" x2="560" y2="160" class="guide"/>
+    <text x="492" y="206" class="note">shrinkage direction</text>
+  </g>
+
+  <!-- SSE contours (original static ones) -->
+  <g id="sse">
+    <ellipse cx="560" cy="160" rx="110" ry="72" class="ellipse"
+             transform="rotate(-25 560 160)"/>
+    <ellipse cx="560" cy="160" rx="150" ry="98" class="ellipse--wide"
+             transform="rotate(-25 560 160)"/>
+    <ellipse cx="560" cy="160" rx="190" ry="124" class="ellipse--wide"
+             transform="rotate(-25 560 160)"/>
+    <text x="600" y="90" class="label">SSE contours</text>
+  </g>
+
+  <!-- NEW: Animated SSE contour that EXPANDS from tiny to first-touch (tangency) -->
+  <g id="sse-anim" transform="rotate(-25 560 160)">
+    <!-- Start small near the OLS center (cx=560, cy=160), grow to rx=110, ry=72 -->
+    <ellipse id="expandEllipse" cx="560" cy="160" rx="5" ry="3" class="ellipse">
+      <animate attributeName="rx" from="5" to="110" dur="2.8s" begin="0s" fill="freeze" />
+      <animate attributeName="ry" from="3" to="72"  dur="2.8s" begin="0s" fill="freeze" />
+    </ellipse>
+  </g>
+
+  <!-- Ridge point (moved inward to sit on circle radius 70) -->
+  <g id="ridge">
+    <circle cx="459.6" cy="210.2" r="5.5" fill="#50fa7b" stroke="#1e1f22" stroke-width="1.5">
+      <!-- Fade-in right when the expanding contour reaches tangency -->
+      <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.8s" fill="freeze"/>
+    </circle>
+    <text x="474" y="228" class="label" style="fill:#50fa7b; opacity:0;">
+      Ridge solution (tangent)
+      <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.8s" fill="freeze"/>
+    </text>
+  </g>
+
+  <!-- Legend -->
+  <g id="legend">
+    <rect x="72" y="64" width="215" height="88" rx="10" ry="10"
+          fill="rgba(33,17,27,.75)" stroke="#402138"/>
+    <circle cx="92" cy="88" r="7" fill="none" stroke="#ff79c6" stroke-width="3"/>
+    <text x="110" y="92" class="note">L2 constraint ball</text>
+
+    <line x1="85" y1="114" x2="99" y2="114" class="ellipse"/>
+    <text x="110" y="118" class="note">SSE (loss) contour</text>
+
+    <text x="88" y="140" style="font:700 16px Roboto, Arial, sans-serif; fill:#ffd166;">★</text>
+    <text x="110" y="142" class="note">OLS estimate</text>
+  </g>
+</svg>
+
+
+  
 <!-- Ridge Shrinkage Illustration — smaller L2 circle -->
 <svg viewBox="0 0 800 480" role="img" aria-labelledby="ridgeTitle ridgeDesc"
      style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
