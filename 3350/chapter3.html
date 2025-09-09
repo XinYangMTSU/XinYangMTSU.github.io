@@ -209,6 +209,8 @@
         <a href="#polynomial-regression">2.2 Polynomial Regression</a>
         <a href="#ridge-regression">2.3 Ridge Regression</a>
         <a href="#lasso-regression">2.4 Lasso Regression</a>
+        <a href="#elastic-net-regression">2.5 Elastic Net Regression</a>
+        
       </div>
     </li>
     
@@ -1760,6 +1762,97 @@ In vector form with a penalty matrix
   </div>
 
   </section>
+
+
+  <section id="elastic-net-regression">
+  <h4>2.5 Elastic Net Regression</h4>
+
+  <b>Idea:</b>
+  <p>
+    <b>Elastic Net</b> combines the strengths of <b>Ridge (L2)</b> and <b>Lasso (L1)</b>.
+    It shrinks coefficients (like Ridge) and can set some of them exactly to zero (like Lasso).
+    This is especially useful when you have <b>many correlated features</b> or when pure L1 is unstable.
+  </p>
+
+  <h4>Objective (Elastic Net)</h4>
+  <p style="text-align:center;">
+    Minimize
+    \[
+      \mathrm{SSE}(\boldsymbol{\beta})\;+\;\lambda\left(\,
+      (1-\alpha)\,\frac{\|\boldsymbol{\beta}_{1:p}\|_2^2}{2}
+      \;+\;
+      \alpha\,\|\boldsymbol{\beta}_{1:p}\|_1
+      \right)
+    \]
+  </p>
+  <ul>
+    <li>\(\mathrm{SSE}(\boldsymbol{\beta}) = \|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2\)</li>
+    <li>\(\lambda \ge 0\) = overall regularization strength</li>
+    <li>\(0 \le \alpha \le 1\) (a.k.a. <code>l1_ratio</code> in sklearn)</li>
+    <li>\(\alpha = 0 \Rightarrow\) Ridge; &nbsp; \(\alpha = 1 \Rightarrow\) Lasso</li>
+    <li>Intercept \(\beta_0\) is typically <em>not</em> penalized</li>
+  </ul>
+
+  <h4>When to Use Elastic Net</h4>
+  <ul>
+    <li>Features are <b>highly correlated</b> (groups of related predictors)</li>
+    <li>You want a balance of <b>shrinkage</b> (stability) and <b>sparsity</b> (feature selection)</li>
+    <li>Lasso alone is <b>unstable</b> (selects 1 feature from a correlated group at random)</li>
+  </ul>
+
+  <h4>Bias–Variance Behavior</h4>
+  <ul>
+    <li>Increasing \(\lambda\) → more shrinkage → higher bias, lower variance</li>
+    <li>Increasing \(\alpha\) (toward 1) → more L1 → more sparsity (more coefficients driven to zero)</li>
+    <li>Decreasing \(\alpha\) (toward 0) → more L2 → less sparsity, more group-wise shrinkage</li>
+  </ul>
+
+  <h4>Scikit-learn Example</h4>
+  <pre><code>
+# Elastic Net with scaling and simple hyperparameter search
+from sklearn.linear_model import ElasticNet
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import GridSearchCV, KFold
+
+pipe = Pipeline([
+    ("scaler", StandardScaler()),
+    ("enet", ElasticNet(max_iter=10000, fit_intercept=True, random_state=42))
+])
+
+param_grid = {
+    "enet__alpha": [0.0005, 0.001, 0.01, 0.1, 1.0],   # λ (overall strength)
+    "enet__l1_ratio": [0.1, 0.3, 0.5, 0.7, 0.9]      # α (mix: 0=Ridge ... 1=Lasso)
+}
+
+cv = KFold(n_splits=5, shuffle=True, random_state=42)
+
+search = GridSearchCV(
+    pipe,
+    param_grid=param_grid,
+    scoring="neg_root_mean_squared_error",  # minimize RMSE
+    cv=cv,
+    n_jobs=-1
+)
+search.fit(X_train, y_train)
+
+print("Best params:", search.best_params_)
+print("Train RMSE:", -search.best_score_)
+
+best_model = search.best_estimator_
+test_rmse = (( (y_test - best_model.predict(X_test))**2 ).mean())**0.5
+print("Test RMSE:", test_rmse)
+  </code></pre>
+
+  <h4>Tips</h4>
+  <ul>
+    <li><b>Always standardize</b> features before Elastic Net so penalties are fair across scales.</li>
+    <li>Start with <code>l1_ratio</code> around <b>0.3–0.7</b>, tune by cross-validation.</li>
+    <li>Use cross-validation to pick both <code>alpha</code> (λ) and <code>l1_ratio</code> (α).</li>
+    <li>Interpretation: non-zero coefficients indicate selected features; magnitude is shrunk.</li>
+  </ul>
+</section>
+
 
 
   <section id="references">
