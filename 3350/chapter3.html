@@ -1488,6 +1488,37 @@ In vector form with a penalty matrix
   <li>Redundant (correlated) features --> it shrinks both correlated features toward smaller, more balanced values.</li>
 </ul>
 
+
+  <table style="width:80%;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #ccc; text-align:left; width:50%;">Linear Regression works well when…</th>
+      <th style="border:1px solid #ccc; text-align:left; width:50%;">Ridge Regression is better when…</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #ccc; padding:10px;">
+        <ul style="margin:0; padding-left:18px;">
+          <li>You have more observations than features</li>
+          <li>Features aren’t highly correlated with each other</li>
+          <li>You want the most interpretable model possible</li>
+          <li>Overfitting isn’t a concern</li>
+        </ul>
+      </td>
+      <td style="border:1px solid #ccc; padding:10px;">
+        <ul style="margin:0; padding-left:18px;">
+          <li>You have multicollinearity (features are highly correlated)</li>
+          <li>You have many features relative to observations</li>
+          <li>You’re experiencing overfitting</li>
+          <li>You want more stable, generalizable predictions</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  
   </section>
 
   <section id="lasso-regression">
