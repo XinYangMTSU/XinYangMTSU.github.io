@@ -166,14 +166,12 @@ def evaluate_model(name, model, X_train, y_train, X_test, y_test):
 lin_reg  = LinearRegression()
 
 poly2 = Pipeline([
-    ("scaler", StandardScaler()),
     # creates features x, x^2
     ("poly", PolynomialFeatures(degree=2, include_bias=False)),
     ("linreg", LinearRegression())
 ])
 
 poly8 = Pipeline([
-    ("scaler", StandardScaler()),
     # creates features x, x^2, x^3, x^4, x^5, x^6, x^7, x^8
     ("poly", PolynomialFeatures(degree=8, include_bias=False)),
     ("linreg", LinearRegression())
