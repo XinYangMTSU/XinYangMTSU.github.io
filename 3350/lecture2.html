@@ -70,6 +70,7 @@
 <body>
 
 <!-- -->
+  
 <svg viewBox="0 0 800 480" role="img" aria-labelledby="lassoTitle lassoDesc"
      style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
   <title id="lassoTitle">Lasso Shrinkage Illustration</title>
@@ -89,7 +90,6 @@
       .note { fill:#ffb3de; font: 500 12px Roboto, Arial, sans-serif; }
       .label { fill:#ff79c6; font: 600 13px Roboto, Arial, sans-serif; }
       .ellipse { fill:none; stroke:#8be9fd; stroke-width:3; }
-      .ellipse--wide { fill:none; stroke:#8be9fd; stroke-opacity:.45; stroke-width:2; stroke-dasharray:6 6; }
       .l1 { fill:none; stroke:#ff79c6; stroke-width:3; }
       .guide { stroke:#9aa0a6; stroke-width:1.5; stroke-dasharray:6 6; }
     </style>
@@ -124,22 +124,12 @@
     <text x="492" y="206" class="note">shrinkage direction</text>
   </g>
 
-  <!-- SSE contours -->
-  <g id="sse">
-    <ellipse cx="560" cy="160" rx="110" ry="72" class="ellipse"
-             transform="rotate(-25 560 160)"/>
-    <ellipse cx="560" cy="160" rx="150" ry="98" class="ellipse--wide"
-             transform="rotate(-25 560 160)"/>
-    <ellipse cx="560" cy="160" rx="190" ry="124" class="ellipse--wide"
-             transform="rotate(-25 560 160)"/>
-    <text x="600" y="90" class="label">SSE contours</text>
-  </g>
-
-  <!-- NEW: Animated SSE contour that expands -->
-  <g id="sse-anim" transform="rotate(-25 560 160)">
+  <!-- Animated SSE contour -->
+  <g id="sse-anim">
     <ellipse id="expandEllipse" cx="560" cy="160" rx="5" ry="3" class="ellipse">
-      <animate attributeName="rx" from="5" to="110" dur="2.8s" begin="0s" fill="freeze" />
-      <animate attributeName="ry" from="3" to="72"  dur="2.8s" begin="0s" fill="freeze" />
+      <!-- Grow until it touches the diamond corner (470,240) -->
+      <animate attributeName="rx" from="5" to="95" dur="2.8s" begin="0s" fill="freeze" />
+      <animate attributeName="ry" from="3" to="80"  dur="2.8s" begin="0s" fill="freeze" />
     </ellipse>
   </g>
 
@@ -168,8 +158,6 @@
     <text x="110" y="160" class="note">OLS estimate</text>
   </g>
 </svg>
-
-
 
 <!-- -->
 
