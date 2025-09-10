@@ -203,6 +203,15 @@ plt.tight_layout()
 plt.show()
   </code></pre>
 
+<h4>Why Use Log Scale?</h4>
+
+  The <b>semilogy()</b> function uses a logarithmic y-axis because:
+  
+  <ul>
+    <li>OLS coefficients can vary by orders of magnitude (some might be 0.01, others might be 1000)</li>
+    <li>Log scale lets you see both small and large coefficients clearly on the same plot</li>
+    <li>Makes it easy to see Ridge's shrinkage effect</li>
+  </ul>
 </section>
 
 <script>
