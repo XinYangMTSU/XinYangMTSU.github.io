@@ -67,177 +67,37 @@
     a, a:visited { color: var(--accent); }
   </style>
 </head>
+  
 <body>
 
-
-
-<svg viewBox="0 0 800 480" role="img" aria-labelledby="lassoTitle lassoDesc"
-     style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
-  <title id="lassoTitle">Lasso Shrinkage Illustration</title>
-  <desc id="lassoDesc">
-    Axes for beta1 and beta2, a diamond-shaped L1 constraint centered at the origin,
-    OLS-centered SSE ellipses, and the lasso solution at a corner of the diamond (sparse solution).
-  </desc>
-
-  <defs>
-    <marker id="arrow-pink" viewBox="0 0 10 10" refX="8" refY="5"
-            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#ff79c6"></path>
-    </marker>
-    <style>
-      .axis { stroke:#ff79c6; stroke-width:2; marker-end:url(#arrow-pink); }
-      .axisLabel { fill:#ffb3de; font: 500 13px Roboto, Arial, sans-serif; }
-      .note { fill:#ffb3de; font: 500 12px Roboto, Arial, sans-serif; }
-      .label { fill:#ff79c6; font: 600 13px Roboto, Arial, sans-serif; }
-      .ellipse { fill:none; stroke:#8be9fd; stroke-width:3; }
-      .l1 { fill:none; stroke:#ff79c6; stroke-width:3; }
-      .guide { stroke:#9aa0a6; stroke-width:1.5; stroke-dasharray:6 6; }
-    </style>
-  </defs>
-
-  <!-- Axes -->
-  <g id="coords">
-    <line x1="60"  y1="240" x2="760" y2="240" class="axis" />
-    <line x1="400" y1="440" x2="400" y2="40"  class="axis" />
-    <text x="752" y="226" class="axisLabel">β₁</text>
-    <text x="410" y="54"  class="axisLabel">β₂</text>
-    <circle cx="400" cy="240" r="2.5" fill="#ff79c6"/>
-    <text x="408" y="254" class="note">origin</text>
-  </g>
-
-  <!-- L1 diamond constraint -->
-  <g id="l1-ball">
-    <polygon points="400,170 470,240 400,310 330,240" class="l1"/>
-    <text x="210" y="356" class="label">L1 constraint: ‖β‖₁ ≤ t</text>
-  </g>
-
-  <!-- OLS (unregularized) -->
-  <g id="ols">
-    <text x="560" y="160" text-anchor="middle" dominant-baseline="middle"
-          style="font:700 20px/1 Roboto, Arial, sans-serif; fill:#ffd166;">★</text>
-    <text x="572" y="180" class="label">OLS (unregularized)</text>
-  </g>
-
-  <!-- Shrinkage direction -->
-  <g id="shrink">
-    <line x1="400" y1="240" x2="560" y2="160" class="guide"/>
-    <text x="492" y="206" class="note">shrinkage direction</text>
-  </g>
-
-  <!-- Animated SSE contour: aligned with vector (-90,+80) -->
-  <g id="sse-anim">
-    <ellipse id="expandEllipse" cx="560" cy="160" rx="5" ry="3" class="ellipse"
-             transform="rotate(138 560 160)">
-      <!-- final radii tuned so ellipse just touches (470,240) -->
-      <animate attributeName="rx" from="5" to="120" dur="2.8s" begin="0s" fill="freeze" />
-      <animate attributeName="ry" from="3" to="45"  dur="2.8s" begin="0s" fill="freeze" />
-    </ellipse>
-  </g>
-
-  <!-- Lasso solution (corner of diamond) -->
-  <g id="lasso">
-    <circle cx="470" cy="240" r="6" fill="#50fa7b" stroke="#1e1f22" stroke-width="1.5" opacity="0">
-      <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.8s" fill="freeze"/>
-    </circle>
-    <text x="482" y="258" class="label" style="fill:#50fa7b; opacity:0;">
-      Lasso solution (corner, sparse)
-      <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.8s" fill="freeze"/>
-    </text>
-  </g>
-
-  <!-- Legend -->
-  <g id="legend">
-    <rect x="72" y="64" width="240" height="110" rx="10" ry="10"
-          fill="rgba(33,17,27,.75)" stroke="#402138"/>
-    <polygon points="100,88 114,102 100,116 86,102" class="l1"/>
-    <text x="125" y="105" class="note">L1 constraint (diamond)</text>
-
-    <line x1="85" y1="132" x2="99" y2="132" class="ellipse"/>
-    <text x="110" y="136" class="note">SSE (loss) contour</text>
-
-    <text x="88" y="158" style="font:700 16px Roboto, Arial, sans-serif; fill:#ffd166;">★</text>
-    <text x="110" y="160" class="note">OLS estimate</text>
-  </g>
-</svg>
-
-
-  
-<!-- -->
-
-  <svg viewBox="0 0 800 480" role="img" aria-labelledby="lassoTitle lassoDesc"
-     style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
-  <title id="lassoTitle">Lasso Shrinkage Illustration</title>
-  <desc id="lassoDesc">
-    Axes for beta1 and beta2, a diamond-shaped L1 constraint centered at the origin,
-    OLS-centered SSE ellipses, and the lasso solution at a corner of the diamond (sparse solution).
-  </desc>
-
-  <defs>
-    <marker id="arrow-pink" viewBox="0 0 10 10" refX="8" refY="5"
-            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#ff79c6"></path>
-    </marker>
-    <style>
-      .axis { stroke:#ff79c6; stroke-width:2; marker-end:url(#arrow-pink); }
-      .axisLabel { fill:#ffb3de; font: 500 13px Roboto, Arial, sans-serif; }
-      .note { fill:#ffb3de; font: 500 12px Roboto, Arial, sans-serif; }
-      .label { fill:#ff79c6; font: 600 13px Roboto, Arial, sans-serif; }
-      .ellipse { fill:none; stroke:#8be9fd; stroke-width:3; }
-      .l1 { fill:none; stroke:#ff79c6; stroke-width:3; }
-      .guide { stroke:#9aa0a6; stroke-width:1.5; stroke-dasharray:6 6; }
-    </style>
-  </defs>
-
-  <!-- Axes -->
-  <g id="coords">
-    <line x1="60"  y1="240" x2="760" y2="240" class="axis" />
-    <line x1="400" y1="440" x2="400" y2="40"  class="axis" />
-    <text x="752" y="226" class="axisLabel">β₁</text>
-    <text x="410" y="54"  class="axisLabel">β₂</text>
-    <circle cx="400" cy="240" r="2.5" fill="#ff79c6"/>
-    <text x="408" y="254" class="note">origin</text>
-  </g>
-
-  <!-- L1 diamond constraint -->
-  <g id="l1-ball">
-    <polygon points="400,170 470,240 400,310 330,240" class="l1"/>
-    <text x="210" y="356" class="label">L1 constraint: ‖β₁‖ + ‖β₂‖ ≤ t</text>
-  </g>
-
-  <!-- OLS (unregularized) -->
-  <g id="ols">
-    <text x="560" y="160" text-anchor="middle" dominant-baseline="middle"
-          style="font:700 20px/1 Roboto, Arial, sans-serif; fill:#ffd166;">★</text>
-    <text x="572" y="180" class="label">OLS (unregularized)</text>
-  </g>
-
-  <!-- Shrinkage direction -->
-  <g id="shrink">
-    <line x1="400" y1="240" x2="560" y2="160" class="guide"/>
-    <text x="492" y="206" class="note">shrinkage direction</text>
-  </g>
-
-  <!-- Animated SSE contour that touches the lasso solution -->
-  <g id="sse-anim">
-    <ellipse id="expandEllipse" cx="560" cy="160" rx="5" ry="3" class="ellipse">
-      <animate attributeName="rx" from="5" to="120" dur="2.8s" begin="0s" fill="freeze" />
-      <animate attributeName="ry" from="3" to="121"  dur="2.8s" begin="0s" fill="freeze" />
-    </ellipse>
-  </g>
-
-  <!-- Lasso solution (corner of diamond) -->
-  <g id="lasso">
-    <circle cx="470" cy="240" r="6" fill="#50fa7b" stroke="#1e1f22" stroke-width="1.5" opacity="0">
-      <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.8s" fill="freeze"/>
-    </circle>
-    <text x="482" y="258" class="label" style="fill:#50fa7b; opacity:0;">
-      Lasso solution (corner, sparse)
-      <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.8s" fill="freeze"/>
-    </text>
-  </g>
-
-</svg>
-
+<table style="width:100%; border-collapse:collapse; font-family:Arial, sans-serif;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #ccc; padding:10px; background:#f7f7f9; text-align:left; width:50%;">Linear Regression works well when…</th>
+      <th style="border:1px solid #ccc; padding:10px; background:#f7f7f9; text-align:left; width:50%;">Ridge Regression is better when…</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #ccc; padding:10px;">
+        <ul style="margin:0; padding-left:18px;">
+          <li>You have more observations than features</li>
+          <li>Features aren’t highly correlated with each other</li>
+          <li>You want the most interpretable model possible</li>
+          <li>Overfitting isn’t a concern</li>
+        </ul>
+      </td>
+      <td style="border:1px solid #ccc; padding:10px;">
+        <ul style="margin:0; padding-left:18px;">
+          <li>You have multicollinearity (features are highly correlated)</li>
+          <li>You have many features relative to observations</li>
+          <li>You’re experiencing overfitting</li>
+          <li>You want more stable, generalizable predictions</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <!-- -->
 
