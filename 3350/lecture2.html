@@ -124,12 +124,11 @@
     <text x="492" y="206" class="note">shrinkage direction</text>
   </g>
 
-  <!-- Animated SSE contour -->
+  <!-- Animated SSE contour that touches the lasso solution -->
   <g id="sse-anim">
     <ellipse id="expandEllipse" cx="560" cy="160" rx="5" ry="3" class="ellipse">
-      <!-- Grow until it touches the diamond corner (470,240) -->
-      <animate attributeName="rx" from="5" to="95" dur="2.8s" begin="0s" fill="freeze" />
-      <animate attributeName="ry" from="3" to="80"  dur="2.8s" begin="0s" fill="freeze" />
+      <animate attributeName="rx" from="5" to="120" dur="2.8s" begin="0s" fill="freeze" />
+      <animate attributeName="ry" from="3" to="121"  dur="2.8s" begin="0s" fill="freeze" />
     </ellipse>
   </g>
 
@@ -144,20 +143,8 @@
     </text>
   </g>
 
-  <!-- Legend -->
-  <g id="legend">
-    <rect x="72" y="64" width="240" height="110" rx="10" ry="10"
-          fill="rgba(33,17,27,.75)" stroke="#402138"/>
-    <polygon points="100,88 114,102 100,116 86,102" class="l1"/>
-    <text x="125" y="105" class="note">L1 constraint (diamond)</text>
-
-    <line x1="85" y1="132" x2="99" y2="132" class="ellipse"/>
-    <text x="110" y="136" class="note">SSE (loss) contour</text>
-
-    <text x="88" y="158" style="font:700 16px Roboto, Arial, sans-serif; fill:#ffd166;">★</text>
-    <text x="110" y="160" class="note">OLS estimate</text>
-  </g>
 </svg>
+
 
 <!-- -->
 
