@@ -1510,29 +1510,29 @@ In vector form with a penalty matrix
   
 <h4>Linear Regression vs. Ridge Regression</h4>
   
-  <table style="width:100%;">
+<table style="width:100%; border-collapse:collapse; font-family:Arial, sans-serif; margin-top:12px;">
   <thead>
     <tr>
-      <th style="text-align:left;">Linear Regression works well when…</th>
-      <th style="text-align:left;">Ridge Regression is better when…</th>
+      <th style="border:1px solid #ccc; padding:10px; background:#2a1e28; color:#ffb3de; text-align:left; width:50%;">Linear Regression</th>
+      <th style="border:1px solid #ccc; padding:10px; background:#2a1e28; color:#ffb3de; text-align:left; width:50%;">Ridge Regression</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>
+      <td style="border:1px solid #ccc; padding:10px;">
         <ul style="margin:0; padding-left:18px;">
-          <li>You have more observations than features</li>
-          <li>Features aren’t highly correlated with each other</li>
-          <li>You want the most interpretable model possible</li>
-          <li>Overfitting isn’t a concern</li>
+          <li>Works well when you have <b>more observations than features</b></li>
+          <li>Assumes features are <b>not highly correlated</b></li>
+          <li>Provides the <b>most interpretable coefficients</b></li>
+          <li>Overfitting is <b>not a big concern</b></li>
         </ul>
       </td>
-      <td>
+      <td style="border:1px solid #ccc; padding:10px;">
         <ul style="margin:0; padding-left:18px;">
-          <li>You have multicollinearity (features are highly correlated)</li>
-          <li>You have many features relative to observations</li>
-          <li>You’re experiencing overfitting</li>
-          <li>You want more stable, generalizable predictions</li>
+          <li>Better with <b>multicollinearity</b> (highly correlated features)</li>
+          <li>Useful when you have <b>many features relative to observations</b></li>
+          <li>Reduces <b>overfitting</b> by shrinking coefficients</li>
+          <li>Gives <b>more stable and generalizable predictions</b></li>
         </ul>
       </td>
     </tr>
