@@ -65,30 +65,35 @@
     .list { margin-left: 1.1rem; }
     .svgwrap { background:#1e1f22; border-radius:12px; padding:10px; box-shadow:0 4px 20px var(--shadow); }
     a, a:visited { color: var(--accent); }
+    .assumption {
+      background: #19121a;
+      border: 2px dashed var(--accent);
+      padding: 16px;
+      border-radius: 12px;
+      margin: 20px 0;
+      font-style: italic;
+      color: var(--muted);
+    }
   </style>
 </head>
   
 <body>
 
-<!-- -->
-
-  
 <section>
-  <h1>Why OLS Struggles with Correlated Features — and How Ridge Helps</h1>
+  <h1>Problem Setup: Correlated Features in OLS</h1>
   <p class="note">
-    Multicollinearity (features that carry overlapping information) makes OLS coefficients unstable.
-    Ridge adds a small penalty that keeps coefficients small and stable, improving generalization.
+    When features are highly correlated, OLS can produce wildly different coefficient values that yield nearly identical predictions, making the model unstable and hard to interpret.
   </p>
 </section>
 
 <section>
-  <h2>Problem Setup: Correlated Features in OLS</h2>
+  <h2>The Multicollinearity Scenario</h2>
   <p>Suppose we have two features describing the same tumor size concept:</p>
   <ul class="list">
     <li>\(x_1 =\) size of tumor (cm)</li>
     <li>\(x_2 =\) diameter of tumor (cm)</li>
   </ul>
-  <p>They’re almost the same measurement ⇒ <b>highly correlated</b>.</p>
+  <p>They're almost the same measurement ⇒ <b>highly correlated</b>.</p>
 
   <div class="equation">
     \[
@@ -96,28 +101,53 @@
     \]
   </div>
 
+  <div class="assumption">
+    <b>Key Assumption:</b> Since \(x_1 \approx x_2\) (highly correlated), we can substitute \(x_2 \approx x_1\) to see how different coefficient combinations affect predictions.
+  </div>
+
   <p>Because \(x_1 \approx x_2\), there are many coefficient pairs \((\beta_1, \beta_2)\) that yield nearly the same predictions:</p>
   <div class="grid">
     <div class="callout">
       <b>Solution A:</b> \(\beta_1 = 100,\; \beta_2 = -98\)<br/>
+      <b>Prediction:</b> \(100x_1 - 98x_2 \approx 100x_1 - 98x_1 = 2x_1\)<br/>
       <span class="legend">Large, opposite signs; sensitive to tiny data changes.</span>
     </div>
     <div class="callout">
       <b>Solution B:</b> \(\beta_1 = 2,\; \beta_2 = 0\)<br/>
-      <span class="legend">Pushes weight onto \(x_1\).</span>
+      <b>Prediction:</b> \(2x_1 + 0x_2 = 2x_1\)<br/>
+      <span class="legend">Pushes weight onto \(x_1\), ignores \(x_2\) completely.</span>
     </div>
     <div class="callout">
-      <b>Solution C:</b> \(\beta_1 = 50,\; \beta_2 = 50\)<br/>
-      <span class="legend">Shares weight, same predictions as A/B up to noise.</span>
+      <b>Solution C:</b> \(\beta_1 = 1,\; \beta_2 = 1\)<br/>
+      <b>Prediction:</b> \(1x_1 + 1x_2 \approx x_1 + x_1 = 2x_1\)<br/>
+      <span class="legend">Distributes weight equally between correlated features.</span>
     </div>
   </div>
 
-  <p><b>Key issue:</b> OLS “doesn’t care” which combination it picks, so coefficients can swing wildly with tiny changes in the data — this hurts stability and test performance.</p>
+  <p><b>Key issue:</b> All three solutions produce nearly identical predictions (\(\approx 2x_1\)), but have drastically different coefficient values! OLS "doesn't care" which combination it picks, so coefficients can swing wildly with tiny changes in the data — this hurts stability and test performance.</p>
 </section>
 
 <section>
-  <h2>Ridge’s Fix: Penalize Large Coefficients</h2>
-  <p>Ridge modifies the objective by adding an L2 penalty on the coefficient magnitudes:</p>
+  <h2>Why This Matters</h2>
+  <div class="grid">
+    <div class="callout">
+      <b>❌ Unstable Coefficients</b><br/>
+      Small changes in training data can cause coefficients to jump between these equivalent solutions.
+    </div>
+    <div class="callout">
+      <b>❌ Poor Interpretability</b><br/>
+      Coefficients don't reflect true feature importance when they can be arbitrarily large or small.
+    </div>
+    <div class="callout">
+      <b>❌ Reduced Generalization</b><br/>
+      Extreme coefficient values often don't generalize well to new, unseen data.
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Ridge Regression: The Solution</h2>
+  <p>Ridge adds a penalty for large coefficients, naturally preferring more balanced solutions:</p>
 
   <div class="equation">
     \[
@@ -132,62 +162,11 @@
     \]
   </div>
 
-  <p>Closed-form (normal equation) view:</p>
-  <div class="equation">
-    \[
-      \hat{\boldsymbol{\beta}}_{\text{ridge}}
-      \;=\;
-      (\mathbf{X}^\top\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^\top\mathbf{y}
-    \]
-  </div>
-
   <div class="callout">
-    <b>Interpretation:</b> Big coefficients are “expensive,” so solutions like \((100, -98)\) are discouraged.
-    More balanced solutions like \((50, 50)\) are cheaper under the penalty and typically generalize better.
+    <b>How Ridge Helps:</b> Among our three solutions, Ridge would heavily penalize Solution A (\(\beta_1^2 + \beta_2^2 = 100^2 + (-98)^2 = 19,604\)) compared to Solution C (\(\beta_1^2 + \beta_2^2 = 1^2 + 1^2 = 2\)). This naturally pushes toward more balanced, stable coefficient combinations.
   </div>
 
-  <p><b>Effect with correlated features:</b> Ridge tends to <i>spread weight</i> across them, shrinking both toward smaller,
-  more stable values instead of letting one blow up while the other cancels it.</p>
-</section>
-
-<section>
-  <h2>Geometric Intuition (Sketch)</h2>
-  <div class="svgwrap">
-    <svg viewBox="0 0 800 420" role="img" aria-label="Ridge vs OLS coefficient geometry" style="max-width:100%;height:auto;">
-      <!-- axes -->
-      <defs>
-        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-          <path d="M0 0 L10 5 L0 10 z" fill="#ff79c6"></path>
-        </marker>
-      </defs>
-      <line x1="70" y1="210" x2="760" y2="210" stroke="#ff79c6" stroke-width="2" marker-end="url(#arrow)"/>
-      <line x1="400" y1="380" x2="400" y2="40"  stroke="#ff79c6" stroke-width="2" marker-end="url(#arrow)"/>
-      <text x="748" y="196" fill="#ffb3de" font-size="13">β₁</text>
-      <text x="410" y="56"  fill="#ffb3de" font-size="13">β₂</text>
-
-      <!-- L2 ball -->
-      <circle cx="400" cy="210" r="90" fill="none" stroke="#ff79c6" stroke-width="3"/>
-      <text x="275" y="330" fill="#ff79c6" font-size="13">L2 constraint: ‖β‖₂ ≤ t</text>
-
-      <!-- OLS point and SSE ellipse family center -->
-      <text x="600" y="140" fill="#ffd166" font-size="20">★</text>
-      <text x="612" y="160" fill="#ffb3de" font-size="13">OLS (unregularized)</text>
-
-      <!-- SSE contours (level sets around OLS) -->
-      <g fill="none" stroke="#8be9fd">
-        <ellipse cx="600" cy="140" rx="100" ry="64" transform="rotate(-25 600 140)" stroke-width="3"/>
-        <ellipse cx="600" cy="140" rx="140" ry="90" transform="rotate(-25 600 140)" stroke-opacity=".45" stroke-dasharray="6 6" stroke-width="2"/>
-        <ellipse cx="600" cy="140" rx="180" ry="116" transform="rotate(-25 600 140)" stroke-opacity=".35" stroke-dasharray="6 6" stroke-width="2"/>
-      </g>
-      <text x="640" y="86" fill="#8be9fd" font-size="13">SSE contours</text>
-
-      <!-- Ridge tangency point -->
-      <circle cx="472" cy="182" r="6" fill="#50fa7b" stroke="#1e1f22" stroke-width="1.5"/>
-      <text x="484" y="198" fill="#50fa7b" font-size="13">Ridge solution (tangent)</text>
-    </svg>
-  </div>
-  <p class="note">Ridge picks the first place an SSE contour touches the L2 circle. This yields the smallest error among all
-  coefficient vectors with \(\|\beta\|_2 \le t\) — i.e., small, stable coefficients.</p>
+  <p><b>Effect with correlated features:</b> Ridge tends to <i>spread weight</i> across correlated features, shrinking coefficients toward smaller, more stable values instead of letting one blow up while the other cancels it out.</p>
 </section>
 
 <section>
@@ -195,11 +174,11 @@
   <div class="grid">
     <div class="callout">
       <b>OLS intuition</b><br/>
-      “Any combo works if predictions match.” ⇒ Coefficients can be extreme and unstable with correlated features.
+      "Any coefficient combination works if predictions match." ⇒ Coefficients can be extreme and unstable with correlated features.
     </div>
     <div class="callout">
       <b>Ridge intuition</b><br/>
-      “Keep coefficients small.” ⇒ Shares weight across correlated features, yielding stable, generalizable models.
+      "Keep coefficients small and balanced." ⇒ Shares weight across correlated features, yielding stable, generalizable models.
     </div>
   </div>
   <p>
