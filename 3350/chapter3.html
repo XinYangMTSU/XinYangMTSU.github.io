@@ -970,6 +970,24 @@ solution can handle features of different magnitudes.
     It’s also called <b><font color="red">regularization</font></b>. By penalizing large coefficients, L2 regularization reduces reliance on single features and improves generalization.
     <br><br>
 
+    <h4>What Does Penalizing Large Coefficients Mean?</h4>
+   <p>If a coefficient \( \beta_j \) becomes large, then \( \beta_j^2 \) becomes <em>very</em> large. In Ridge Regression, we add a penalty to the training objective that grows with the squared size of the coefficients, so the optimizer “prefers” smaller values to avoid extra cost.</p>
+
+        <p class="muted">Ordinary Least Squares (OLS):</p>
+        \[
+          \min_{\boldsymbol\beta} \ \|\, y - X\boldsymbol\beta \,\|_2^2
+        \]
+        <p class="muted">Ridge Regression (L2 regularization):</p>
+        \[
+          \min_{\boldsymbol\beta} \ \|\, y - X\boldsymbol\beta \,\|_2^2 \;+\; \lambda \sum_j \beta_j^2
+          \;=\;
+          \min_{\boldsymbol\beta} \ \|\, y - X\boldsymbol\beta \,\|_2^2 \;+\; \lambda \,\|\boldsymbol\beta\|_2^2
+        \]
+
+      <p>Because the penalty term \( \lambda \sum_j \beta_j^2 \) increases rapidly when any \( \beta_j \) grows, Ridge tends to <strong>shrink coefficients</strong>, spreading weight across multiple features rather than relying heavily on one or two.</p>
+
+  
+  
     <h4>When to use Regularization:</h4>
     <ul>
       <li>Preventing Overfitting</li>
