@@ -133,7 +133,7 @@ X_train_raw, X_test_raw, y_train, y_test = train_test_split(
 # 3) Polynomial feature expansion (degree=3)
 # Includes x, x^2, x^3 and all cross-terms → high dimensional
 poly = PolynomialFeatures(degree=3)
-X_train = poly.fit_transform(X_train_raw) (fit only on training data)
+X_train = poly.fit_transform(X_train_raw) # (fit only on training data)
 X_test  = poly.transform(X_test_raw)
 
 print(f"Original features: {n_features} → After expansion: {X_train.shape[1]}")
