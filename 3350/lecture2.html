@@ -71,7 +71,7 @@
 
 
 
-  <svg viewBox="0 0 800 480" role="img" aria-labelledby="lassoTitle lassoDesc"
+<svg viewBox="0 0 800 480" role="img" aria-labelledby="lassoTitle lassoDesc"
      style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
   <title id="lassoTitle">Lasso Shrinkage Illustration</title>
   <desc id="lassoDesc">
@@ -124,12 +124,13 @@
     <text x="492" y="206" class="note">shrinkage direction</text>
   </g>
 
-  <!-- Animated SSE contour that grows until tangent at (470,240) -->
+  <!-- Animated SSE contour: aligned with vector (-90,+80) -->
   <g id="sse-anim">
     <ellipse id="expandEllipse" cx="560" cy="160" rx="5" ry="3" class="ellipse"
-             transform="rotate(-20 560 160)">
-      <animate attributeName="rx" from="5" to="160" dur="2.8s" begin="0s" fill="freeze" />
-      <animate attributeName="ry" from="3" to="65"  dur="2.8s" begin="0s" fill="freeze" />
+             transform="rotate(138 560 160)">
+      <!-- final radii tuned so ellipse just touches (470,240) -->
+      <animate attributeName="rx" from="5" to="120" dur="2.8s" begin="0s" fill="freeze" />
+      <animate attributeName="ry" from="3" to="45"  dur="2.8s" begin="0s" fill="freeze" />
     </ellipse>
   </g>
 
@@ -159,8 +160,8 @@
   </g>
 </svg>
 
-  
 
+  
 <!-- -->
 
   <svg viewBox="0 0 800 480" role="img" aria-labelledby="lassoTitle lassoDesc"
