@@ -205,6 +205,16 @@ plt.ylabel("y")
 plt.show()
   </code></pre>
 
+<h3>What Pipeline means</h3>
+In scikit-learn, a Pipeline is a way to chain multiple preprocessing steps and a model into a single object.
+It guarantees that:
+  
+<UL>
+  <LI>The steps are applied in order.</LI>
+  <LI>When you call .fit(X, y), each step transforms the data and passes it along.</LI>
+  <LI>When you call .predict(X), the same transformations happen automatically.</LI>
+</UL>
+  
 </section>
 
 <script>
