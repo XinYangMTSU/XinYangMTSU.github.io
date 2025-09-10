@@ -1079,6 +1079,15 @@ solution can handle features of different magnitudes.
     <li>So the optimization process will "prefer" smaller coefficients to avoid extra cost.</li>
     <li>In other words, the model will spread out weights across multiple features instead of relying heavily on one or two.</li>
   </ul>
+  <br>
+
+   <h4>Why Is This Helpful?</h4>
+  <ul>
+    <li><strong>Reduces overfitting:</strong> Large coefficients often mean the model is fitting noise or peculiarities in the training data.</li>
+    <li><strong>Improves generalization:</strong> By keeping coefficients small, the model is simpler and more stable when making predictions on new data.</li>
+    <li><strong>Handles multicollinearity:</strong> When features are highly correlated, OLS may produce unstable, huge coefficients. Ridge “shrinks” them toward zero, making them more reliable.</li>
+  </ul>
+  
   
   <br>
 <h4>Ridge Shrinkage Illustration</h4>
@@ -1506,6 +1515,7 @@ In vector form with a penalty matrix
   <li>Noisy features --> shrunk, don’t dominate the model.</li>
   <li>Redundant (correlated) features --> it shrinks both correlated features toward smaller, more balanced values.</li>
 </ul>
+
 <br>
   
 <h4>Linear Regression vs. Ridge Regression</h4>
