@@ -138,7 +138,6 @@ X_test  = poly.transform(X_test_raw)
 
 print(f"Original features: {n_features} → After expansion: {X_train.shape[1]}")
     
-
 # 4) Helper function to evaluate models
 def evaluate_model(name, model, X_train, y_train, X_test, y_test):
     model.fit(X_train, y_train)
