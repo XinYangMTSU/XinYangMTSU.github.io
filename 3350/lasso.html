@@ -257,14 +257,6 @@ print(f"\nLasso nonzero coefficients: {nz} / {len(coef_lasso)} "
     <div class="chip"><b>Lasso (ℓ₁):</b> Shrinks and zeroes many coefficients → sparse, interpretable model with similar test performance to Ridge.</div>
   </div>
 
-  <h4 id="notes">Notes & Tips</h4>
-  <ul>
-    <li><b>Data leakage:</b> Fit the polynomial transformer on <i>training</i> only (as done). Same principle for scalers, encoders, selectors.</li>
-    <li><b>Alpha grids:</b> For Lasso stability on many features, try a wider grid (e.g., <code>np.logspace(-4,2,80)</code>) and/or <code>tol=1e-4</code>.</li>
-    <li><b>Log plot:</b> We use <code>semilogy</code> so you can see both tiny and large coefficients clearly.</li>
-    <li><b>Binary labels with linear regression:</b> OK for showing shrinkage; for classification metrics use LogisticRegression / ROC-AUC.</li>
-  </ul>
-
 </section>
 
 <script>
