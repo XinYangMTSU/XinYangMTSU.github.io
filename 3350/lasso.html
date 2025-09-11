@@ -253,7 +253,7 @@ print(f"\nLasso nonzero coefficients: {nz} / {len(coef_lasso)} "
   <h4 id="interpret">Interpreting Results</h4>
   <div class="grid">
     <div class="chip"><b>OLS:</b> Trains to near-perfect fit (R²≈1) but generalizes poorly (often negative test R²) due to massive feature space → classic overfitting.</div>
-    <div class="chip"><b>Ridge (ℓ₂):</b> Shrinks all coefficients; typically best test R² here, with stable generalization. High α means strong shrinkage.</div>
+    <div class="chip"><b>Ridge (ℓ₂):</b> Shrinks all coefficients; typically best test R² here, with stable generalization. High \(\lambda\) means strong shrinkage.</div>
     <div class="chip"><b>Lasso (ℓ₁):</b> Shrinks and zeroes many coefficients → sparse, interpretable model with similar test performance to Ridge.</div>
   </div>
 
