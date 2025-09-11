@@ -1902,7 +1902,14 @@ In vector form with a penalty matrix
   <li><b>Sparsity:</b> Lasso can set coefficients exactly to zero ⇒ built-in feature selection.</li>
   <li><b>No closed-form solution:</b> solved by iterative methods (coordinate descent, LARS); the L1 penalty is nondifferentiable at 0.</li>
   <li><b>Standardize features:</b> ensures fair penalization across features with different units.</li>
-  <li><b>Choose \(\lambda\) by cross-validation:</b> small \(\lambda\) ≈ OLS; large \(\lambda\) ⇒ simpler, sparser models.</li>
+  <li><b>Choose \(\lambda\) by cross-validation: </li>
+  <ul>
+      <li><b>λ = 0:</b> Regular linear regression (no penalty)</li>
+      <li><b>Small λ:</b> Light penalty, keeps most features</li>
+      <li><b>Large λ:</b> Heavy penalty, zeros out many coefficients</li>
+      <li><b>Very large λ:</b> All coefficients become zero</li>
+  </ul>
+ 
   <li><b>Contrast with Ridge:</b> Ridge (L2) <em>shrinks</em> but rarely zeros; Lasso (L1) <em>shrinks and selects</em>.</li>
 </ul>
       
