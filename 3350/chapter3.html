@@ -1810,6 +1810,7 @@ In vector form with a penalty matrix
 
 <h4>Optimization & Soft-Thresholding (No Closed-Form)</h4>
 <p>
+  Unlike ordinary least squares, Lasso has <b>no closed-form solution</b> due to the non-differentiable L1 penalty at β = 0.
   A common solver is <em>coordinate descent</em>. With standardized features (mean 0, variance 1) and centered targets (so the intercept is separate), the update for each coefficient has a closed-form soft-threshold:
 </p>
 <p style="text-align:center;">
