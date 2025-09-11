@@ -123,23 +123,10 @@
   <center>
     <h1>Worked Example: OLS vs Ridge vs Lasso</h1>
     <div class="subtitle">High-Dimensional Breast Cancer Data (Polynomial Expansion, degree = 3)</div>
-    <div style="margin-top:10px">
-      <span class="pill"><i class="fa-solid fa-laptop-code"></i> scikit-learn</span>
-      <span class="pill"><i class="fa-solid fa-shapes"></i> PolynomialFeatures</span>
-      <span class="pill"><i class="fa-solid fa-scale-balanced"></i> Regularization</span>
-      <span class="pill"><i class="fa-solid fa-chart-line"></i> Coefficient Shrinkage</span>
-    </div>
   </center>
 
-  <h4 id="overview">Overview</h4>
-  <p>
-    We compare three linear models on a high-dimensional expansion of the Breast Cancer dataset:
-    <b>OLS</b> (no regularization), <b>Ridge</b> (ℓ<sub>2</sub>), and <b>Lasso</b> (ℓ<sub>1</sub>).
-    After a cubic polynomial expansion, the feature space explodes, making OLS overfit while
-    regularized methods maintain generalization.
-  </p>
-
-  <h4 id="code">Full Python Code (copy & run)</h4>
+  <h4> Method: OLS vs Ridge vs Lasso with PolynomialFeatures (degree = 3) </h4>
+  
   <pre><button class="copy">Copy</button><code>
 # ========================================================
 # Breast Cancer Data — OLS vs Ridge vs Lasso (High-dimensional demo)
