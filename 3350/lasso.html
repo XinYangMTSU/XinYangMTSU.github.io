@@ -249,12 +249,6 @@ print(f"\nLasso nonzero coefficients: {nz} / {len(coef_lasso)} "
 # Lasso: Almost as good as Ridge, but with sparsity (helps interpretability).
   </code></pre>
 
-  <h4 id="run">How to Run</h4>
-  <ol>
-    <li>Install requirements: <code>pip install numpy pandas matplotlib scikit-learn</code></li>
-    <li>Save the code as <code>ols_ridge_lasso_demo.py</code> and run: <code>python ols_ridge_lasso_demo.py</code></li>
-    <li>Inspect the printed metrics and the coefficient magnitude plot.</li>
-  </ol>
 
   <h4 id="interpret">Interpreting Results</h4>
   <div class="grid">
@@ -271,10 +265,6 @@ print(f"\nLasso nonzero coefficients: {nz} / {len(coef_lasso)} "
     <li><b>Binary labels with linear regression:</b> OK for showing shrinkage; for classification metrics use LogisticRegression / ROC-AUC.</li>
   </ul>
 
-  <div class="note">
-    Want to extend this? Add a second plot with predictions vs. true labels, or switch to a
-    <code>Pipeline</code> that includes <code>PolynomialFeatures</code> inside (for end-to-end CV without leakage).
-  </div>
 </section>
 
 <script>
