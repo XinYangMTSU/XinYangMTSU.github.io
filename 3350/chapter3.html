@@ -1502,7 +1502,7 @@ In vector form with a penalty matrix
     \mathrm{SSE} \approx 1.5968 \times 10^8,\quad
     \mathrm{MSE} \approx 3.1936 \times 10^7,\quad
     \mathrm{RMSE} \approx 5{,}651.20, \quad
-    \mathrm{RMSE} \approx 0.9961
+    \mathrm{R^2} \approx 0.9961
   $$
 </p>
 
@@ -1892,7 +1892,11 @@ In vector form with a penalty matrix
 <p>
   $$ \mathrm{SSE} = \sum_{i=1}^{m}(y_i - \hat{y}_i)^2,\quad
      \mathrm{MSE} = \frac{\mathrm{SSE}}{m},\quad
-     \mathrm{RMSE} = \sqrt{\mathrm{MSE}}. $$
+     \mathrm{RMSE} = \sqrt{\mathrm{MSE}}, \quad
+     \mathrm{R^2} =  \;=\; 1 \;-\; 
+  \frac{\sum_{i=1}^{m}\bigl(y_i - \hat{y}_i\bigr)^2}
+       {\sum_{i=1}^{m}\bigl(y_i - \bar{y}\bigr)^2}
+  $$
 </p>
 <p>
   <em>Note:</em> Training error may increase slightly vs OLS (added penalty), but test error often improves thanks to reduced variance and feature selection.
