@@ -1,195 +1,336 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>OLS with Correlated Features vs Ridge</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #17191a;
-      --panel: #222025;
-      --ink: #ffb3de;
-      --accent: #ff79c6;
-      --shadow: rgba(255,121,198,.12);
-      --muted: #c7b3c8;
-    }
-    body {
-      font-family: 'Roboto', Arial, sans-serif;
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      padding: 24px;
-    }
-    section {
-      margin: 28px auto;
-      background: var(--panel);
-      border-radius: 18px;
-      border-left: 7px solid var(--accent);
-      box-shadow: 0 6px 28px var(--shadow);
-      max-width: 940px;
-      padding: 28px 30px;
-    }
-    h1, h2, h3 {
-      color: var(--ink);
-      margin: 0 0 10px 0;
-    }
-    h1 { font-size: 2.0rem; color: var(--accent); text-shadow: 0 2px 16px rgba(255,121,198,.18); }
-    h2 { font-size: 1.35rem; margin-top: 18px; }
-    p { line-height: 1.6; }
-    .callout {
-      border: 1px solid var(--accent);
-      border-radius: 12px;
-      padding: 14px 16px;
-      background: #20161e;
-      margin: 16px 0;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-    }
-    .chip {
-      display: inline-block;
-      padding: 6px 10px;
-      font-size: .92rem;
-      border: 1px solid var(--ink);
-      border-radius: 999px;
-      margin: 2px 6px 2px 0;
-      opacity: .9;
-    }
-    code.inline { background:#19121a; padding:2px 6px; border-radius:6px; }
-    .equation { text-align:center; margin: 12px 0; }
-    .note { color: var(--muted); font-size: .96rem; }
-    .legend { font-size: .92rem; color: var(--muted); }
-    .kbd { background:#19121a; padding:2px 6px; border-radius:6px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
-    .list { margin-left: 1.1rem; }
-    .svgwrap { background:#1e1f22; border-radius:12px; padding:10px; box-shadow:0 4px 20px var(--shadow); }
-    a, a:visited { color: var(--accent); }
-    .assumption {
-      background: #19121a;
-      border: 2px dashed var(--accent);
-      padding: 16px;
-      border-radius: 12px;
-      margin: 20px 0;
-      font-style: italic;
-      color: var(--muted);
-    }
-  </style>
-</head>
-  
-<body>
+<section id="elastic-net-regression">
+    
+      <h4>2.5 Elastic Net Regression</h4>
 
-<section>
-  <h1>Multicollinearity Problem: Correlated Features in OLS</h1>
-  <p class="note">
-    When features are highly correlated, OLS can produce wildly different coefficient values that yield nearly identical predictions, making the model unstable and hard to interpret.
+<b>Idea:</b>
+
+    <p>
+    <b>Elastic Net</b> is a type of linear regression that combines both Ridge and Lasso regression by adding 
+    <b><font color="red">both L1 and L2 penalties</font></b> to the standard regression equation.
+    Elastic Net Regression extends Ordinary Least Squares (OLS) by adding a weighted combination of 
+    L1 penalty (from Lasso) and L2 penalty (from Ridge). This combination allows the model to benefit from both 
+    the <b>feature selection</b> capability of Lasso and the <b>stability</b> of Ridge regression.
+    <br><br>
+    In Elastic Net Regression, the penalty is a linear combination of the L1 norm (sum of absolute values) 
+    and the L2 norm (sum of squares) of the coefficients. By combining both penalties, Elastic Net can handle 
+    correlated features better than Lasso while still performing feature selection, making it particularly 
+    useful when you have groups of correlated features.
   </p>
-</section>
 
-<section>
-  <h2>The Multicollinearity Scenario</h2>
-  <p>Suppose we have two features describing the same tumor size concept:</p>
-  <ul class="list">
-    <li>\(x_1 =\) size of tumor (cm)</li>
-    <li>\(x_2 =\) diameter of tumor (cm)</li>
+  <h4>When to use Elastic Net:</h4>
+  <ul>
+    <li>When you have <b>groups of correlated features</b> and want to select them together</li>
+    <li>High Dimensionality (\(p \gg m\)) with multicollinearity</li>
+    <li>When Lasso is too unstable due to correlation</li>
+    <li>When Ridge doesn't provide enough sparsity</li>
+    <li>For automatic feature selection with better stability than Lasso alone</li>
   </ul>
-  <p>They're almost the same measurement ⇒ <b>highly correlated</b>.</p>
 
-  <div class="equation">
+ <p>
+  Elastic Net Regression fits a hyperplane like OLS but adds a penalty that combines both the
+  <em>absolute size</em> (L1) and <em>squared size</em> (L2) of coefficients to balance between 
+  <b>feature selection and stability</b>. The goal is to 
+  <b><font color="red">minimize the squared error while achieving both sparsity and grouping effect</font></b>.
+</p>
+
+  <b>Equation:</b>
+  <p style="text-align:center;">
+    \(\hat{\mathbf{y}} = \mathbf{X}\boldsymbol{\beta}\), &nbsp; and we choose \(\boldsymbol{\beta}\) to minimize:
     \[
-      y \;=\; \beta_0 + \beta_1 x_1 + \beta_2 x_2
+      \mathrm{SSE}(\boldsymbol{\beta}) + \lambda_1 \sum_{j=1}^{p} |\beta_j| + \lambda_2 \sum_{j=1}^{p} \beta_j^2
     \]
-  </div>
-
-  <div class="assumption">
-    <b>Key Assumption:</b> Since \(x_1 \approx x_2\) (highly correlated), we can substitute \(x_2 \approx x_1\) to see how different coefficient combinations affect predictions.
-  </div>
-
-  <p>Because \(x_1 \approx x_2\), there are many coefficient pairs \((\beta_1, \beta_2)\) that yield nearly the same predictions:</p>
-  <div class="grid">
-    <div class="callout">
-      <b>Solution A:</b> \(\beta_1 = 100,\; \beta_2 = -98\)<br/>
-      <b>Prediction:</b> \(100x_1 - 98x_2 \approx 100x_1 - 98x_1 = 2x_1\)<br/>
-      <span class="legend">Large, opposite signs; sensitive to tiny data changes.</span>
-    </div>
-    <div class="callout">
-      <b>Solution B:</b> \(\beta_1 = 2,\; \beta_2 = 0\)<br/>
-      <b>Prediction:</b> \(2x_1 + 0x_2 = 2x_1\)<br/>
-      <span class="legend">Pushes weight onto \(x_1\), ignores \(x_2\) completely.</span>
-    </div>
-    <div class="callout">
-      <b>Solution C:</b> \(\beta_1 = 1,\; \beta_2 = 1\)<br/>
-      <b>Prediction:</b> \(1x_1 + 1x_2 \approx x_1 + x_1 = 2x_1\)<br/>
-      <span class="legend">Distributes weight equally between correlated features.</span>
-    </div>
-  </div>
-
-  <p><b>Key issue:</b> All three solutions produce nearly identical predictions (\(\approx 2x_1\)), but have drastically different coefficient values! OLS "doesn't care" which combination it picks, so coefficients can swing wildly with tiny changes in the data — this hurts stability and test performance.</p>
-</section>
-
-<section>
-  <h2>Why This Matters</h2>
-  <div class="grid">
-    <div class="callout">
-      <b>❌ Unstable Coefficients</b><br/>
-      Small changes in training data can cause coefficients to jump between these equivalent solutions.
-    </div>
-    <div class="callout">
-      <b>❌ Poor Interpretability</b><br/>
-      Coefficients don't reflect true feature importance when they can be arbitrarily large or small.
-    </div>
-    <div class="callout">
-      <b>❌ Reduced Generalization</b><br/>
-      Extreme coefficient values often don't generalize well to new, unseen data.
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2>Ridge Regression: The Solution</h2>
-  <p>Ridge adds a penalty for large coefficients, naturally preferring more balanced solutions:</p>
-
-  <div class="equation">
-    \[
-      \hat{\boldsymbol{\beta}}_{\text{ridge}}
-      \;=\;
-      \arg\min_{\boldsymbol{\beta}}
-      \Big(
-        \|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2
-        \;+\;
-        \lambda \|\boldsymbol{\beta}\|_2^2
-      \Big)
-    \]
-  </div>
-
-  <div class="callout">
-    <b>How Ridge Helps:</b> Among our three solutions, Ridge would heavily penalize Solution A (\(\beta_1^2 + \beta_2^2 = 100^2 + (-98)^2 = 19,604\)) compared to Solution C (\(\beta_1^2 + \beta_2^2 = 1^2 + 1^2 = 2\)). This naturally pushes toward more balanced, stable coefficient combinations.
-  </div>
-
-  <p><b>Effect with correlated features:</b> Ridge tends to <i>spread weight</i> across correlated features, shrinking coefficients toward smaller, more stable values instead of letting one blow up while the other cancels it out.</p>
-</section>
-
-<section>
-  <h2>Intuition & Takeaways</h2>
-  <div class="grid">
-    <div class="callout">
-      <b>OLS intuition</b><br/>
-      "Any coefficient combination works if predictions match." ⇒ Coefficients can be extreme and unstable with correlated features.
-    </div>
-    <div class="callout">
-      <b>Ridge intuition</b><br/>
-      "Keep coefficients small and balanced." ⇒ Shares weight across correlated features, yielding stable, generalizable models.
-    </div>
-  </div>
-  <p>
-    <span class="chip">Multicollinearity</span>
-    <span class="chip">Coefficient stability</span>
-    <span class="chip">Generalization</span>
-    <span class="chip">Bias–Variance Tradeoff</span>
   </p>
-</section>
 
-<!-- MathJax (load once per page) -->
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</body>
-</html>
+  <p style="text-align:center;">
+    \[
+      \;\;\Longrightarrow\;\;
+      \underbrace{\sum_{i=1}^{m} \bigl(y_i - \hat{y}_i\bigr)^2}_{\text{SSE}}
+      \;+\;
+      \underbrace{\lambda_1 \sum_{j=1}^{p} |\beta_j|}_{\text{L1 penalty (Lasso)}}
+      \;+\;
+      \underbrace{\lambda_2 \sum_{j=1}^{p} \beta_j^2}_{\text{L2 penalty (Ridge)}}
+    \]
+  </p>
+
+  <p style="text-align:center;">
+    \[
+      \;\;\Longrightarrow\;\;
+      \underbrace{\|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2}_{\text{sum of squared residuals}}
+      \;+\;
+      \underbrace{\lambda_1 \|\boldsymbol{\beta}_{1:p}\|_1}_{\text{L1 norm}}
+      \;+\;
+      \underbrace{\lambda_2 \|\boldsymbol{\beta}_{1:p}\|_2^2}_{\text{L2 norm squared}}
+    \]
+    (note: the intercept \(\beta_0\) is typically <i>not</i> penalized).
+  </p>
+
+  <p><strong>Alternative Parameterization:</strong></p>
+  <p style="text-align:center;">
+    \[
+      \|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2 + \lambda \left[ \alpha \|\boldsymbol{\beta}_{1:p}\|_1 + (1-\alpha) \|\boldsymbol{\beta}_{1:p}\|_2^2 \right]
+    \]
+  </p>
+
+  <p><strong>Where:</strong></p>
+  <ul>
+    <li>\(\lambda \ge 0\): overall regularization strength</li>
+    <li>\(\alpha \in [0,1]\): mixing parameter between L1 and L2</li>
+    <li>\(\alpha = 1 \Rightarrow\) Elastic Net = Lasso (pure L1)</li>
+    <li>\(\alpha = 0 \Rightarrow\) Elastic Net = Ridge (pure L2)</li>
+    <li>\(\alpha = 0.5\) gives equal weight to both penalties</li>
+    <li>\(\lambda_1 = \lambda \alpha\) and \(\lambda_2 = \lambda (1-\alpha)\)</li>
+    <li>\(\beta_1, \dots, \beta_p\) = coefficients for features</li>
+    <li>\(\mathbf{X}\) = design matrix</li>
+    <li>\(\mathbf{y}\) = targets</li>
+  </ul>
+
+  <br>
+
+  <h4>What does the Combined Penalty mean?</h4>
+  <p>
+    The Elastic Net penalty combines the <b><font color="red">L1 norm</font></b> (Manhattan distance) 
+    and the <b><font color="blue">L2 norm squared</font></b> (Euclidean distance squared).
+  </p>
+
+  <ul>
+    <li><strong>L1 component</strong> \(\|\boldsymbol{\beta}\|_1 = \sum_{j=1}^p |\beta_j|\) promotes <b>sparsity</b></li>
+    <li><strong>L2 component</strong> \(\|\boldsymbol{\beta}\|_2^2 = \sum_{j=1}^p \beta_j^2\) promotes <b>stability and grouping</b></li>
+  </ul>
+
+  <p><strong>Geometric Interpretation:</strong></p>
+  <p style="margin-left:1rem;">
+    The constraint region is a combination of a diamond (L1) and a circle (L2), creating a shape that's 
+    "rounded" at the corners, allowing for both sparsity and stability.
+  </p>
+
+  <br>
+
+  <h4>Elastic Net Constraint Illustration</h4>
+<svg viewBox="0 0 800 480" role="img" aria-labelledby="elasticTitle elasticDesc"
+     style="max-width:100%;height:auto;background:#1e1f22;border-radius:12px;box-shadow:0 4px 24px rgba(255,121,198,.12)">
+  <title id="elasticTitle">Elastic Net Constraint Illustration</title>
+  <desc id="elasticDesc">
+    Axes for beta1 and beta2, showing the Elastic Net constraint region as a rounded diamond shape,
+    combining L1 and L2 constraints, with OLS-centered SSE ellipses and the Elastic Net solution.
+  </desc>
+
+  <defs>
+    <marker id="arrow-pink" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#ff79c6"></path>
+    </marker>
+    <style>
+      .axis { stroke:#ff79c6; stroke-width:2; marker-end:url(#arrow-pink); }
+      .axisLabel { fill:#ffb3de; font: 500 13px Roboto, Arial, sans-serif; }
+      .note { fill:#ffb3de; font: 500 12px Roboto, Arial, sans-serif; }
+      .label { fill:#ff79c6; font: 600 13px Roboto, Arial, sans-serif; }
+      .ellipse { fill:none; stroke:#8be9fd; stroke-width:3; }
+      .elastic { fill:none; stroke:#bd93f9; stroke-width:3; }
+      .guide { stroke:#9aa0a6; stroke-width:1.5; stroke-dasharray:6 6; }
+    </style>
+  </defs>
+
+  <!-- Axes -->
+  <g id="coords">
+    <line x1="60"  y1="240" x2="760" y2="240" class="axis" />
+    <line x1="400" y1="440" x2="400" y2="40"  class="axis" />
+    <text x="752" y="226" class="axisLabel">β₁</text>
+    <text x="410" y="54"  class="axisLabel">β₂</text>
+    <circle cx="400" cy="240" r="2.5" fill="#ff79c6"/>
+    <text x="408" y="254" class="note">origin</text>
+  </g>
+
+  <!-- Elastic Net constraint (rounded diamond) -->
+  <g id="elastic-ball">
+    <path d="M 400 170 
+             Q 450 190 470 240 
+             Q 450 290 400 310 
+             Q 350 290 330 240 
+             Q 350 190 400 170 Z" 
+          class="elastic"/>
+    <text x="190" y="356" class="label">Elastic Net constraint</text>
+  </g>
+
+  <!-- OLS (unregularized) -->
+  <g id="ols">
+    <text x="560" y="160" text-anchor="middle" dominant-baseline="middle"
+          style="font:700 20px/1 Roboto, Arial, sans-serif; fill:#ffd166;">★</text>
+    <text x="572" y="180" class="label">OLS (unregularized)</text>
+  </g>
+
+  <!-- Shrinkage direction -->
+  <g id="shrink">
+    <line x1="400" y1="240" x2="560" y2="160" class="guide"/>
+    <text x="492" y="206" class="note">shrinkage direction</text>
+  </g>
+
+  <!-- Animated SSE contour -->
+  <g id="sse-anim">
+    <ellipse id="expandEllipse" cx="560" cy="160" rx="5" ry="3" class="ellipse"
+             transform="rotate(138 560 160)">
+      <animate attributeName="rx" from="5" to="120" dur="2.8s" begin="0s" fill="freeze" />
+      <animate attributeName="ry" from="3" to="45"  dur="2.8s" begin="0s" fill="freeze" />
+    </ellipse>
+  </g>
+
+  <!-- Elastic Net solution -->
+  <g id="elastic-solution">
+    <circle cx="455" cy="210" r="6" fill="#50fa7b" stroke="#1e1f22" stroke-width="1.5" opacity="0">
+      <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.8s" fill="freeze"/>
+    </circle>
+    <text x="467" y="228" class="label" style="fill:#50fa7b; opacity:0;">
+      Elastic Net solution (balanced)
+      <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="2.8s" fill="freeze"/>
+    </text>
+  </g>
+
+  <!-- Legend -->
+  <g id="legend">
+    <rect x="72" y="64" width="260" height="110" rx="10" ry="10"
+          fill="rgba(33,17,27,.75)" stroke="#402138"/>
+    
+    <path d="M 100 88 Q 110 92 114 102 Q 110 112 100 116 Q 90 112 86 102 Q 90 92 100 88 Z" 
+          class="elastic"/>
+    <text x="125" y="105" class="note">Elastic Net constraint</text>
+
+    <line x1="85" y1="132" x2="99" y2="132" class="ellipse"/>
+    <text x="110" y="136" class="note">SSE (loss) contour</text>
+
+    <text x="88" y="158" style="font:700 16px Roboto, Arial, sans-serif; fill:#ffd166;">★</text>
+    <text x="110" y="160" class="note">OLS estimate</text>
+  </g>
+</svg>
+
+<br>
+
+<h4>How Elastic Net Regression Works</h4>
+
+<ol>
+  <li><strong>Collect Data</strong> – Gather features \((x_1, x_2, \ldots, x_p)\) and outputs \(y\).</li>
+  <li><strong>Standardize Features</strong> – Put features on comparable scales for fair penalization.</li>
+  <li><strong>Choose \(\lambda\) and \(\alpha\)</strong> – Use cross-validation to select both the regularization strength and mixing parameter.</li>
+  <li><strong>Fit the Model</strong> – Solve the combined L1+L2 regularized optimization using coordinate descent or other iterative methods.</li>
+  <li><strong>Interpret</strong> – Benefits from both sparsity (some coefficients = 0) and grouping effect (correlated features selected together).</li>
+</ol>
+
+<h4>Interpreting the Coefficients</h4>
+<ul>
+  <li><strong>Intercept (\(\beta_0\))</strong> – Baseline prediction when all features are zero (unpenalized).</li>
+  <li><strong>Coefficient (\(\beta_j\))</strong> – Effect of feature \(x_j\) on \(y\) when others are held fixed, with balanced shrinkage.</li>
+  <li><strong>Sparsity with Stability</strong> – Some coefficients become zero (feature selection) while correlated groups are handled more stably than pure Lasso.</li>
+  <li><strong>Grouping Effect</strong> – Correlated features tend to have similar (non-zero) coefficients rather than arbitrary selection.</li>
+</ul>
+
+<br>
+
+<h4>Model & Notation</h4>
+<p><b>Scalar form:</b></p>
+<p>
+  $$ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p + \epsilon $$
+</p>
+
+<p><b>Matrix form:</b></p>
+<p>
+  $$ \mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\epsilon} $$
+</p>
+
+<h4>Objective Function (Combined L1 + L2 Regularization)</h4>
+
+<p>
+Elastic Net minimizes:
+\[
+  \|\mathbf{y} - \mathbf{X}\boldsymbol{\beta}\|_2^2
+  \;+\; \lambda \left[ \alpha \|\boldsymbol{\beta}_{1:p}\|_1 + (1-\alpha) \|\boldsymbol{\beta}_{1:p}\|_2^2 \right]
+\]
+This combines the sparsity-inducing L1 penalty with the stability-promoting L2 penalty.
+</p>
+
+<h4>Optimization & Coordinate Descent</h4>
+<p>
+  Like Lasso, Elastic Net has <b>no closed-form solution</b> due to the L1 component. 
+  The most common solver is <em>coordinate descent</em> with a modified soft-thresholding operator.
+  <br><br>
+  The coordinate descent update for Elastic Net involves a modified soft-threshold that accounts for both penalties:
+</p>
+<p style="text-align:center;">
+  $$ \beta_j \leftarrow \frac{1}{1 + \lambda(1-\alpha)}\; S\!\left(\mathbf{x}_j^\top \mathbf{r}_{-j},\; \lambda\alpha\right) $$
+  where \( S(t,\gamma) = \mathrm{sign}(t)\,\max(|t|-\gamma,\,0) \) is the soft-threshold operator and \(\mathbf{r}_{-j}\) is the partial residual.
+</p>
+<p>
+  The denominator \(1 + \lambda(1-\alpha)\) comes from the L2 penalty and provides additional shrinkage and stability.
+</p>
+
+<b>Fit via Coordinate Descent</b>
+<ol>
+  <li>Initialize all \(\beta_j=0\) (or from a simpler model).</li>
+  <li>For \(j=1\) to \(p\): compute partial residual, apply modified soft-threshold, update \(\beta_j\).</li>
+  <li>Repeat passes over features until coefficients converge.</li>
+</ol>
+
+<br>
+
+<h4>Key Points</h4>
+<ul>
+  <li><b>Best of Both Worlds:</b> Combines Lasso's feature selection with Ridge's stability.</li>
+  <li><b>Grouping Effect:</b> When features are correlated, Elastic Net tends to select them together rather than arbitrarily picking one.</li>
+  <li><b>Two Hyperparameters:</b> Need to tune both \(\lambda\) (regularization strength) and \(\alpha\) (L1 vs L2 balance).</li>
+  <li><b>Handles Multicollinearity:</b> More stable than Lasso when features are highly correlated.</li>
+  <li><b>Iterative Solution:</b> Requires coordinate descent or similar algorithms; no closed-form solution.</li>
+  <li><b>Feature Selection with Stability:</b> Achieves sparsity while maintaining predictive stability.</li>
+</ul>
+
+<h4>Linear Regression vs. Ridge Regression vs. Lasso Regression vs. Elastic Net Regression</h4>
+  
+<table style="width:100%; border-collapse:collapse; font-family:Arial, sans-serif; margin-top:12px;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #ccc; padding:10px; background:#2a1e28; color:#ffb3de; text-align:left; width:25%;">Linear Regression</th>
+      <th style="border:1px solid #ccc; padding:10px; background:#2a1e28; color:#ffb3de; text-align:left; width:25%;">Ridge Regression</th>
+      <th style="border:1px solid #ccc; padding:10px; background:#2a1e28; color:#ffb3de; text-align:left; width:25%;">Lasso Regression</th>
+      <th style="border:1px solid #ccc; padding:10px; background:#2a1e28; color:#ffb3de; text-align:left; width:25%;">Elastic Net Regression</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #ccc; padding:10px;">
+        <ul style="margin:0; padding-left:18px;">
+          <li>Works well when you have <b>more observations than features</b></li>
+          <li>Assumes features are <b>not highly correlated</b></li>
+          <li>Provides the <b>most interpretable coefficients</b></li>
+          <li>Prone to <b>overfitting</b></li>
+        </ul>
+      </td>
+      <td style="border:1px solid #ccc; padding:10px;">
+        <ul style="margin:0; padding-left:18px;">
+          <li>Better with <b>multicollinearity</b> (highly correlated features)</li>
+          <li>Useful when you have <b>many features relative to observations</b></li>
+          <li>Reduces <b>overfitting</b> by shrinking coefficients</li>
+          <li>Gives <b>more stable and generalizable predictions</b></li>
+        </ul>
+      </td>
+      <td style="border:1px solid #ccc; padding:10px;">
+        <ul style="margin:0; padding-left:18px;">
+          <li>Performs <b>automatic feature selection</b> (sets coefficients to 0)</li>
+          <li>Best when you have <b>many irrelevant features</b></li>
+          <li>Creates <b>sparse models</b> that are highly interpretable</li>
+          <li>Can be <b>unstable</b> with highly correlated features</li>
+        </ul>
+      </td>
+      <td style="border:1px solid #ccc; padding:10px;">
+        <ul style="margin:0; padding-left:18px;">
+          <li>Combines <b>feature selection and stability</b></li>
+          <li>Handles <b>groups of correlated features</b> better than Lasso</li>
+          <li>Creates <b>sparse but stable models</b></li>
+          <li>Requires tuning <b>two hyperparameters</b> (λ and α)</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+    
+  </div>
+
+  </section>
+
+<!-- Keep MathJax loaded for equations -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
