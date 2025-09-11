@@ -1813,7 +1813,8 @@ In vector form with a penalty matrix
   Unlike ordinary least squares, Lasso has <b>no closed-form solution</b> due to the non-differentiable L1 penalty at β = 0.
   It has no closed-form solution when you try to solve for all β simultaneously. 
   A common solver is <em>coordinate descent</em>. Instead of solving for all coefficients at once, coordinate descent says: 
-  "Let me fix all coefficients except one, and solve just for that one."
+  "Let me fix all coefficients except one, and solve just for that one." 
+  <br>
   With standardized features (mean 0, variance 1) and centered targets (so the intercept is separate), the update for each coefficient has a closed-form soft-threshold:
 </p>
 <p style="text-align:center;">
