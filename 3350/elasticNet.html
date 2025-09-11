@@ -243,8 +243,8 @@ test_scores  = results_df.loc[(slice(None), "Test"),  "R^2"]
 train_scores = results_df.loc[(slice(None), "Train"), "R^2"]
 
 summary = pd.DataFrame({
-    "Train R²": train_scores.values,
-    "Test R²":  test_scores.values,
+    "Train R^2": train_scores.values,
+    "Test R^2":  test_scores.values,
     "Overfitting (Train - Test)": train_scores.values - test_scores.values
 }, index=["OLS", "Ridge", "Lasso", "Elastic Net"]).round(4)
 print(summary)
