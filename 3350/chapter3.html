@@ -1917,7 +1917,47 @@ In vector form with a penalty matrix
  
   <li><b>Contrast with Ridge:</b> Ridge (L2) <em>shrinks</em> but rarely zeros; Lasso (L1) <em>shrinks and selects</em>.</li>
 </ul>
-      
+
+<h4>Linear Regression vs. Ridge Regression vs. Lasso Regression</h4>
+  
+<table style="width:100%; border-collapse:collapse; font-family:Arial, sans-serif; margin-top:12px;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #ccc; padding:10px; background:#2a1e28; color:#ffb3de; text-align:left; width:33.33%;">Linear Regression</th>
+      <th style="border:1px solid #ccc; padding:10px; background:#2a1e28; color:#ffb3de; text-align:left; width:33.33%;">Ridge Regression</th>
+      <th style="border:1px solid #ccc; padding:10px; background:#2a1e28; color:#ffb3de; text-align:left; width:33.33%;">Lasso Regression</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #ccc; padding:10px;">
+        <ul style="margin:0; padding-left:18px;">
+          <li>Works well when you have <b>more observations than features</b></li>
+          <li>Assumes features are <b>not highly correlated</b></li>
+          <li>Provides the <b>most interpretable coefficients</b></li>
+          <li>Prone to <b>overfitting</b></li>
+        </ul>
+      </td>
+      <td style="border:1px solid #ccc; padding:10px;">
+        <ul style="margin:0; padding-left:18px;">
+          <li>Better with <b>multicollinearity</b> (highly correlated features)</li>
+          <li>Useful when you have <b>many features relative to observations</b></li>
+          <li>Reduces <b>overfitting</b> by shrinking coefficients</li>
+          <li>Gives <b>more stable and generalizable predictions</b></li>
+        </ul>
+      </td>
+      <td style="border:1px solid #ccc; padding:10px;">
+        <ul style="margin:0; padding-left:18px;">
+          <li>Performs <b>automatic feature selection</b> (sets coefficients to 0)</li>
+          <li>Best when you have <b>many irrelevant features</b></li>
+          <li>Creates <b>sparse models</b> that are highly interpretable</li>
+          <li>Can be <b>unstable</b> with highly correlated features</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+    
   </div>
 
   </section>
