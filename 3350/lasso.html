@@ -1,1 +1,143 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Worked Example: OLS vs Ridge vs Lasso (High-Dimensional Breast Cancer)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+   :root{
+      --bg: #17191a;
+      --card: #222025;
+      --ink: #ff79c6;
+      --ink-soft: #ffb3de;
+      --ink-dim: #caa0c9;
+      --chip: #21111b;
+   }
+   *{box-sizing:border-box}
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      min-height: 100vh;
+      color: var(--ink);
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 55px;
+      background: var(--card);
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid var(--ink);
+      position: relative;
+      max-width: 980px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    section:hover { box-shadow: 0 8px 60px rgba(255,121,198,.15); }
+
+    h1, h2, h3, h4 {
+      margin: 0 0 10px 0;
+      color: var(--ink-soft);
+      font-weight: 700;
+    }
+    h1{font-size: 1.9rem}
+    .subtitle{color: var(--ink-dim); margin-top: 6px; font-size: .98rem}
+
+    section h4 {
+      font-size: 1.12em;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+      margin-top: 28px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--ink-soft);
+      padding-bottom: 6px;
+    }
+
+    .pill {
+      display:inline-block;
+      padding: 6px 10px;
+      border: 1px solid var(--ink);
+      background: var(--chip);
+      color: var(--ink-soft);
+      border-radius: 999px;
+      font-size: .85rem;
+      margin-right: 6px;
+      margin-top: 6px;
+    }
+
+    pre {
+      background: #19121a;
+      color: #ffd3ee;
+      padding: 16px 18px 18px 18px;
+      border-radius: 10px;
+      font-size: 0.98em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+      position: relative;
+      max-width: 100%;
+      border: 1px solid rgba(255,121,198,.25);
+    }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+
+    .copy {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 6px 10px;
+      background: var(--chip);
+      border: 1px solid var(--ink);
+      border-radius: 8px;
+      color: var(--ink-soft);
+      font-size: 0.82em;
+      cursor: pointer;
+    }
+    .copy:hover { background: var(--ink); color: #111; }
+
+    ul, ol { margin-top: 6px; margin-bottom: 4px; }
+    li { margin: 6px 0; }
+
+    .note{
+      background:#19121a; border:1px dashed rgba(255,121,198,.35);
+      padding:10px 12px; border-radius:10px; color:#ffd3ee; font-size:.96rem
+    }
+
+    .grid{
+      display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap:10px; margin-top:10px
+    }
+    .chip{
+      padding:10px 12px; border-radius:12px; background:#1b141c; border:1px solid rgba(255,121,198,.25);
+      color:#ffd3ee; font-size:.95rem
+    }
+  </style>
+</head>
+
+<body>
+
+<section>
+  <center>
+    <h1>Worked Example: OLS vs Ridge vs Lasso</h1>
+    <div class="subtitle">High-Dimensional Breast Cancer Data (Polynomial Expansion, degree = 3)</div>
+    <div style="margin-top:10px">
+      <span class="pill"><i class="fa-solid fa-laptop-code"></i> scikit-learn</span>
+      <span class="pill"><i class="fa-solid fa-shapes"></i> PolynomialFeatures</span>
+      <span class="pill"><i class="fa-solid fa-scale-balanced"></i> Regularization</span>
+      <span class="pill"><i class="fa-solid fa-chart-line"></i> Coefficient Shrinkage</span>
+    </div>
+  </center>
+
+  <h4 id="overview">Overview</h4>
+  <p>
+    We compare three linear models on a high-dimensional expansion of the Breast Cancer dataset:
+    <b>OLS</b> (no regularization), <b>Ridge</b> (ℓ<sub>2</sub>), and <b>Lasso</b> (ℓ<sub>1</sub>).
+    After a cubic polynomial expansion, the feature space explodes, making OLS overfit while
+    regularized methods maintain generalization.
+  </p>
+
+  <h4 id="code">Full Python Code (copy & run)</h4>
