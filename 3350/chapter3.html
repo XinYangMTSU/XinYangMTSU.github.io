@@ -1833,10 +1833,12 @@ In vector form with a penalty matrix
   <li>Check Convergence: <p><strong>After each full pass through all features, check if:</strong></p></li>
             
             <ul>
-                <li><code> ||β_new - β_old||  < tolerance </code>, OR</li>
-                <li><code>|objective_new - objective_old| < tolerance</code>, OR</li>
+                <li><code> ||β_new - β_old|| \(<\) tolerance </code>, OR</li>
+                <li><code>|objective_new - objective_old| \(<\) tolerance </code>, OR</li>
                 <li>Maximum iterations reached</li>
             </ul>
+  <li>If converged: Stop and return final coefficients</li>
+  <li>If not converged: Go back to step 2 for another pass</li>
 </ol>
     
 <em>Note:</em> Training error may increase slightly vs OLS (added penalty), but test error often improves thanks to reduced variance and feature selection.
