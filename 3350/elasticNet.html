@@ -105,7 +105,7 @@
 
   <pre><button class="copy">Copy</button><code>
 # ========================================================
-# Breast Cancer Data — OLS vs Ridge vs Lasso vs Elastic Net (High-dimensional demo)
+# Breast Cancer Data — OLS vs Ridge vs Lasso vs Elastic Net (FAST, no CV)
 # Polynomial feature expansion, train/test split, compare
 # ========================================================
 import numpy as np
@@ -116,10 +116,18 @@ from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import PolynomialFeatures, StandardScaler
 from sklearn.pipeline import Pipeline
-from sklearn.linear_model import LinearRegression, RidgeCV, LassoCV, ElasticNetCV
+from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
 from sklearn.metrics import r2_score, mean_squared_error
 
 RANDOM_STATE = 42
+
+# Fixed hyperparameters you provided
+RIDGE_ALPHA = 75.431201
+LASSO_ALPHA = 0.002057
+LASSO_MAX_ITER = 3514
+ENET_ALPHA = 0.002121
+ENET_L1_RATIO = 0.900
+ENET_MAX_ITER = 4576
 
 # 1) Load dataset
 data = load_breast_cancer()
@@ -164,7 +172,7 @@ def evaluate_model(name, model, X_train, y_train, X_test, y_test):
     ])
     return results
 
-# 5) Define models
+# 5) Define models (no cross-validation; fixed params; fast)
 ols = Pipeline([
     ("scaler", StandardScaler()),
     ("linreg", LinearRegression())
@@ -172,21 +180,18 @@ ols = Pipeline([
 
 ridge = Pipeline([
     ("scaler", StandardScaler()),
-    ("ridge", RidgeCV(alphas=np.logspace(-3, 3, 30), cv=5))
+    ("ridge", Ridge(alpha=RIDGE_ALPHA, random_state=RANDOM_STATE))
 ])
 
 lasso = Pipeline([
     ("scaler", StandardScaler()),
-    ("lasso", LassoCV(alphas=np.logspace(-3, 3, 60), cv=5, max_iter=20000, random_state=RANDOM_STATE))
+    ("lasso", Lasso(alpha=LASSO_ALPHA, max_iter=LASSO_MAX_ITER, selection="cyclic", random_state=RANDOM_STATE))
 ])
 
 elastic_net = Pipeline([
     ("scaler", StandardScaler()),
-    ("elastic", ElasticNetCV(
-        alphas=np.logspace(-3, 3, 30),
-        l1_ratio=[0.1, 0.3, 0.5, 0.7, 0.9],
-        cv=5, max_iter=20000, random_state=RANDOM_STATE
-    ))
+    ("elastic", ElasticNet(alpha=ENET_ALPHA, l1_ratio=ENET_L1_RATIO,
+                           max_iter=ENET_MAX_ITER, selection="cyclic", random_state=RANDOM_STATE))
 ])
 
 # 6) Evaluate models
@@ -199,15 +204,21 @@ results_df = pd.DataFrame(
     ])
 ).set_index(["Model", "Split"])
 
-# 7) Display results + chosen hyperparameters
+# 7) Display results + (echo) fixed hyperparameters and achieved iterations
 print("\n=== Train/Test Metrics (high-dimensional case) ===")
 print(results_df)
 
-print("\nChosen hyperparameters:")
-print(f"Ridge alpha:           {ridge.named_steps['ridge'].alpha_:.6f}")
-print(f"Lasso alpha:           {lasso.named_steps['lasso'].alpha_:.6f}")
-print(f"Elastic Net alpha:     {elastic_net.named_steps['elastic'].alpha_:.6f}")
-print(f"Elastic Net l1_ratio:  {elastic_net.named_steps['elastic'].l1_ratio_:.3f}")
+print("\nHyperparameters used (no CV):")
+print(f"Ridge alpha:           {ridge.named_steps['ridge'].alpha:.6f}")
+print(f"Lasso alpha:           {lasso.named_steps['lasso'].alpha:.6f}")
+print(f"Elastic Net alpha:     {elastic_net.named_steps['elastic'].alpha:.6f}")
+print(f"Elastic Net l1_ratio:  {elastic_net.named_steps['elastic'].l1_ratio:.3f}")
+
+# After fit, report actual iterations taken (if available)
+if hasattr(lasso.named_steps["lasso"], "n_iter_"):
+    print(f"Lasso iterations (n_iter_):       {lasso.named_steps['lasso'].n_iter_}")
+if hasattr(elastic_net.named_steps["elastic"], "n_iter_"):
+    print(f"Elastic Net iterations (n_iter_): {elastic_net.named_steps['elastic'].n_iter_}")
 
 # 8) Coefficient magnitudes
 coef_ols         = ols.named_steps["linreg"].coef_
