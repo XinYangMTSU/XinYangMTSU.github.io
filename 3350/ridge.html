@@ -163,15 +163,16 @@ def evaluate_model(name, model, X_train, y_train, X_test, y_test):
     ])
     return results
 
-# 5) Define models
+# 5) Define models 
+# Create pipelines with named steps
 ols = Pipeline([
     ("scaler", StandardScaler()),
-    ("linreg", LinearRegression())
+    ("linreg", LinearRegression()) # ← This name "linreg"
 ])
 
 ridge = Pipeline([
     ("scaler", StandardScaler()),
-    ("ridge", RidgeCV(alphas=np.logspace(-3, 3, 30), cv=5))
+    ("ridge", RidgeCV(alphas=np.logspace(-3, 3, 30), cv=5)) # ← This name "ridge"
 ])
 
 # 6) Evaluate models
@@ -213,6 +214,24 @@ plt.show()
     <li>Makes it easy to see Ridge's shrinkage effect</li>
     <li>We cannot take the logarithm of negative numbers or zero</li>
   </ul>
+
+<h4>named_steps</h4>
+   <ul>
+     <li><b>named_steps</b> comes from <b>scikit-learn Pipelines</b>.</li>
+     <li>When creating a Pipeline, each step receives a name. The named_steps attribute provides access to 
+  individual components of the pipeline by those names.</li>
+     <li>What <b>named_steps</b> gives you:</li>
+
+     <ul>
+         <li>A dictionary-like object where keys are the step names</li>
+         <li>Values are the actual fitted estimator objects</li>
+         <li>Access to any attribute/method of individual pipeline components</li>
+     </ul>
+   </ul>
+  
+  named_steps is basically how to "reach into" a pipeline to get at the individual models inside it.
+
+  
 </section>
 
 <script>
