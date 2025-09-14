@@ -348,8 +348,8 @@
        <div id="leakage">
       <h4>Simple train/test split</h4>
       <ul>
-        <li>Fit scalers/encoders only on the <b>train</b> fold/split; apply to val/test.</li>
-        <li>Avoid peeking at test metrics while tuning.</li>
+        <li>Simple train/test split (e.g., 80/20)</li>
+        <li>Fit scalers/encoders only on the <b>train</b> fold/split; apply to test.</li>
         <li>Use <code>Pipeline</code> in scikit-learn to encapsulate preprocessing + model.</li>
       </ul>
       <pre><code>from sklearn.pipeline import Pipeline
@@ -365,7 +365,7 @@ pipe.fit(X_train, y_train)</code></pre>
 
     <h4>Train/Validation/Test</h4>
           
-     <p>Train/Validation/Test (e.g., 60/20/20 or 70/15/15).</p>
+     <p>Three-way split: train/validation/test (e.g., 60/20/20).</p>
       <pre><code>from sklearn.model_selection import train_test_split
 
 # 80% train+val / 20% test (use stratify for classification)
