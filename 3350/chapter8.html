@@ -203,19 +203,13 @@
     <li><a href="#intro"><i class="fas fa-clipboard-check"></i>1. Why Evaluation & Validation?</a></li>
 
     <li>
-      <a href="#splits"><i class="fas fa-columns"></i>2. Train–Test–Validation</a>
+      <a href="#splits"><i class="fas fa-columns"></i>2. Common Validation Strategies</a>
       <div class="subsections">
         <a href="#holdout">2.1 Holdout Split</a>
-        <a href="#leakage">2.2 Data Leakage</a>
-      </div>
-    </li>
-
-    <li>
-      <a href="#cv"><i class="fas fa-th"></i>3. Cross-Validation</a>
-      <div class="subsections">
-        <a href="#kfold">3.1 K-Fold</a>
-        <a href="#loocv">3.2 LOOCV</a>
-        <a href="#stratk">3.3 Stratified K-Fold</a>
+        <a href="#kfold">2.2 K-Fold Cross-Validatio</a>
+        <a href="#loocv">2.3 LOOCV</a>
+        <a href="#stratk">2.4 Stratified K-Fold</a>
+        <a href="#nestcv">2.5 Nested Cross-Validation</a>
       </div>
     </li>
 
@@ -301,61 +295,48 @@
     
   </section>
 
-
-  
   
   <section id="splits">
 
     <h2>Common Validation Strategies</h2>
 
-    <ol>
-        <li>
-            <strong>Holdout Validation</strong>
+            <h4><strong>Holdout Validation</strong></h4>
             <ul>
                 <li><strong>Simple train/test split</strong> (e.g., 80/20)</li>
                 <li><strong>Three-way split</strong>: train/validation/test (e.g., 60/20/20)</li>
                 <li>Fast and simple, but can be unreliable with small datasets</li>
             </ul>
-        </li>
-        
-        <li>
-            <strong>K-Fold Cross-Validation</strong>
+   
+            <h4><strong>K-Fold Cross-Validation</strong></h4>
             <ul>
                 <li>Split data into k equal folds (typically k=5 or k=10)</li>
                 <li>Train on k-1 folds, validate on remaining fold</li>
                 <li>Repeat k times, average results</li>
                 <li>More robust than holdout, uses all data</li>
             </ul>
-        </li>
-        
-        <li>
-            <strong>Leave-One-Out Cross-Validation (LOOCV)</strong>
+
+            <h4><strong>Leave-One-Out Cross-Validation (LOOCV)</strong></h4>
             <ul>
                 <li>Special case of k-fold where k = number of samples</li>
                 <li>Train on n-1 samples, validate on 1 sample</li>
                 <li>Very thorough but computationally expensive</li>
                 <li>Good for very small datasets</li>
             </ul>
-        </li>
-        
-        <li>
-            <strong>Stratified Validation</strong>
+
+            <h4><strong>Stratified Validation</strong></h4>
             <ul>
                 <li>Maintains class distribution across splits</li>
                 <li>Essential for imbalanced datasets</li>
                 <li>Can be applied to holdout or cross-validation</li>
             </ul>
-        </li>
-        
-        <li>
-            <strong>Nested Cross-Validation</strong>
+
+            <h4><strong>Nested Cross-Validation</strong></h4>
             <ul>
                 <li>Outer loop for evaluation, inner loop for hyperparameter tuning</li>
                 <li>Provides unbiased performance estimates</li>
                 <li><span class="highlight">Gold standard but computationally intensive</span></li>
             </ul>
-        </li>
-    </ol>
+
 
 
     <div id="holdout">
