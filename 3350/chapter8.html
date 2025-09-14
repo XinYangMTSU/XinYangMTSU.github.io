@@ -337,8 +337,9 @@
                 <li><span class="highlight">Gold standard but computationally intensive</span></li>
             </ul>
 
-
-
+  </section>
+  
+  <section>
     <div id="holdout">
       <h4>2.1 Holdout Split</h4>
       <p>Typical workflow: split once into Train/Validation/Test (e.g., 60/20/20 or 70/15/15).</p>
@@ -373,29 +374,31 @@ pipe.fit(X_train, y_train)</code></pre>
     </div>
   </section>
 
-  <section id="cv">
-    <h2>3. Cross-Validation</h2>
-    <p>CV repeatedly splits the data to get a more reliable estimate and to tune hyperparameters.</p>
-
+  <section>
     <div id="kfold">
-      <h4>3.1 K-Fold Cross-Validation</h4>
+      <h4>3.2 K-Fold Cross-Validation</h4>
       <p>Split into \(k\) folds; train on \(k-1\) and validate on the remaining; average the score.</p>
       <pre><code>from sklearn.model_selection import KFold, cross_val_score
 cv = KFold(n_splits=5, shuffle=True, random_state=42)
 scores = cross_val_score(model, X, y, cv=cv, scoring="accuracy")
 print(scores.mean(), scores.std())</code></pre>
     </div>
+  </section>
 
+
+  <section>
     <div id="loocv">
-      <h4>3.2 Leave-One-Out (LOOCV)</h4>
+      <h4>3.3 Leave-One-Out (LOOCV)</h4>
       <p>Extreme case of K-Fold with \(k=n\). Very low bias, potentially high variance; computationally expensive.</p>
       <pre><code>from sklearn.model_selection import LeaveOneOut, cross_val_score
 loo = LeaveOneOut()
 scores = cross_val_score(model, X, y, cv=loo)</code></pre>
     </div>
+  </section>
 
+  <section>
     <div id="stratk">
-      <h4>3.3 Stratified K-Fold (Classification)</h4>
+      <h4>3.4 Stratified K-Fold (Classification)</h4>
       <p>Preserves class proportions in each fold—important for imbalanced classes.</p>
       <pre><code>from sklearn.model_selection import StratifiedKFold, cross_val_score
 skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
@@ -404,6 +407,15 @@ scores = cross_val_score(model, X, y, cv=skf, scoring="f1_macro")</code></pre>
   </section>
 
 
+   <section>
+    <div id="stratk">
+      <h4>3.5 Nested Cross-Validation </h4>
+      <p>Preserves class proportions in each fold—important for imbalanced classes.</p>
+      <pre><code>from sklearn.model_selection import StratifiedKFold, cross_val_score
+skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+scores = cross_val_score(model, X, y, cv=skf, scoring="f1_macro")</code></pre>
+    </div>
+  </section>
 
   
   <section id="cls-metrics">
