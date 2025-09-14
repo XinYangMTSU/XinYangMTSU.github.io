@@ -301,8 +301,62 @@
     
   </section>
 
+
+  
+  
   <section id="splits">
-    <h2>2. Train–Test–Validation</h2>
+
+    <h2>Common Validation Strategies</h2>
+
+    <ol>
+        <li>
+            <strong>Holdout Validation</strong>
+            <ul>
+                <li><strong>Simple train/test split</strong> (e.g., 80/20)</li>
+                <li><strong>Three-way split</strong>: train/validation/test (e.g., 60/20/20)</li>
+                <li>Fast and simple, but can be unreliable with small datasets</li>
+            </ul>
+        </li>
+        
+        <li>
+            <strong>K-Fold Cross-Validation</strong>
+            <ul>
+                <li>Split data into k equal folds (typically k=5 or k=10)</li>
+                <li>Train on k-1 folds, validate on remaining fold</li>
+                <li>Repeat k times, average results</li>
+                <li>More robust than holdout, uses all data</li>
+            </ul>
+        </li>
+        
+        <li>
+            <strong>Leave-One-Out Cross-Validation (LOOCV)</strong>
+            <ul>
+                <li>Special case of k-fold where k = number of samples</li>
+                <li>Train on n-1 samples, validate on 1 sample</li>
+                <li>Very thorough but computationally expensive</li>
+                <li>Good for very small datasets</li>
+            </ul>
+        </li>
+        
+        <li>
+            <strong>Stratified Validation</strong>
+            <ul>
+                <li>Maintains class distribution across splits</li>
+                <li>Essential for imbalanced datasets</li>
+                <li>Can be applied to holdout or cross-validation</li>
+            </ul>
+        </li>
+        
+        <li>
+            <strong>Nested Cross-Validation</strong>
+            <ul>
+                <li>Outer loop for evaluation, inner loop for hyperparameter tuning</li>
+                <li>Provides unbiased performance estimates</li>
+                <li><span class="highlight">Gold standard but computationally intensive</span></li>
+            </ul>
+        </li>
+    </ol>
+
 
     <div id="holdout">
       <h4>2.1 Holdout Split</h4>
@@ -368,6 +422,9 @@ scores = cross_val_score(model, X, y, cv=skf, scoring="f1_macro")</code></pre>
     </div>
   </section>
 
+
+
+  
   <section id="cls-metrics">
     <h2>4. Evaluation Metrics for Classification</h2>
 
