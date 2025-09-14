@@ -147,6 +147,39 @@ print("OLS Test RMSE:", rmse(y_test, y_pred))
 print("coef_ shape:", ols.coef_.shape)
   </code></pre>
   <div class="note">Params to discuss: <code>fit_intercept</code>, <code>positive</code>. Attributes: <code>coef_</code>, <code>intercept_</code>.</div>
+
+    <h4>Parameters & attributes to know</h4>
+    <ul>
+      <li><code>fit_intercept=True</code> — Add an intercept term. If your design matrix <code>X</code> already contains a bias column (e.g., from <code>PolynomialFeatures(include_bias=True)</code>), set <code>fit_intercept=False</code> to avoid a duplicated constant.
+        <pre><button class="copy">Copy</button><code># If X already has a column of ones
+ols_noint = LinearRegression(fit_intercept=False).fit(X_train, y_train)</code></pre>
+      </li>
+      <li><code>positive=False</code> — Constrain coefficients to be ≥ 0 (supported for dense inputs). Useful when coefficients must be non‑negative by domain knowledge (e.g., additive parts). May be slower and can reduce accuracy if the true relationship has negative effects.
+        <pre><button class="copy">Copy</button><code>ols_pos = LinearRegression(positive=True).fit(X_train, y_train)
+print((ols_pos.coef_ >= 0).all())  # True</code></pre>
+      </li>
+      <li><code>copy_X=True</code> — If <code>False</code>, <code>X</code> may be overwritten during fitting (slightly lower memory). Keep <code>True</code> unless memory is tight.</li>
+      <li><code>n_jobs=None</code> — Parallelize across targets when <code>y</code> is 2D (multi‑output regression).</li>
+      <li><strong>Attributes</strong> — <code>coef_</code> (shape <code>(n_features,)</code> or <code>(n_targets, n_features)</code>), <code>intercept_</code> (scalar or <code>(n_targets,)</code>), <code>rank_</code>, <code>singular_</code>, <code>n_features_in_</code>, <code>feature_names_in_</code> (if available).</li>
+      <li><strong>sample_weight</strong> — Not an init parameter, but <code>.fit(..., sample_weight=...)</code> is supported:
+        <pre><button class="copy">Copy</button><code>w = np.linspace(1, 2, X_train.shape[0])  # example weights
+ols_w = LinearRegression().fit(X_train, y_train, sample_weight=w)</code></pre>
+      </li>
+    </ul>
+
+    <h4>What you usually set (90% of the time)</h4>
+    <ul>
+      <li><strong>Nothing</strong> — defaults are fine for most uses.</li>
+      <li><code>fit_intercept=False</code> <em>only</em> if your <code>X</code> already has a bias column (e.g., a column of ones or <code>PolynomialFeatures(include_bias=True)</code>).</li>
+      <li><code>sample_weight=...</code> at <code>.fit()</code> time when some samples should count more/less (heteroscedastic noise, duplicates, domain weighting).
+        <pre><button class="copy">Copy</button><code>w = np.ones(len(y_train)); w[y_train &gt; y_train.mean()] = 2.0
+ols_w = LinearRegression().fit(X_train, y_train, sample_weight=w)</code></pre>
+      </li>
+      <li><code>positive=True</code> <em>only</em> if coefficients must be non‑negative by domain constraints.</li>
+      <li><code>n_jobs</code> only matters for multi‑output targets (<code>y</code> is 2D); otherwise it has no effect.</li>
+      <li><code>copy_X=False</code> is a niche memory optimization; keep <code>True</code> unless you know you need it.</li>
+    </ul>
+
 </section>
 
 <section id="poly">
