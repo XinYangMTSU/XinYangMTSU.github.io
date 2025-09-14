@@ -101,23 +101,10 @@
     <h1>Quick Guide: LinearRegression, PolynomialFeatures, Ridge, Lasso & ElasticNet</h1>
     <div class="note">scikit‑learn usage with pipelines • scaling • cross‑validation • plotting</div>
   </center>
-
-  <h4>Contents</h4>
-  <ul class="toc">
-    <li><a href="#setup">0. Setup & Sample Data</a></li>
-    <li><a href="#linear">1. LinearRegression (OLS)</a></li>
-    <li><a href="#poly">2. PolynomialFeatures + LinearRegression</a></li>
-    <li><a href="#ridge">3. Ridge (L2)</a></li>
-    <li><a href="#lasso">4. Lasso (L1)</a></li>
-    <li><a href="#enet">5. ElasticNet (L1 + L2)</a></li>
-    <li><a href="#cv">6. Cross‑Validation Shortcuts</a></li>
-    <li><a href="#plot">7. Quick Plot — Predicted vs Actual</a></li>
-    <li><a href="#refs">8. Official References</a></li>
-  </ul>
 </section>
 
 <section id="setup">
-  <h2>0) Setup & Sample Data <a class="anchor" href="#setup">¶</a></h2>
+  <h2>0) Setup & Sample Data <a class="anchor" href="#setup"></a></h2>
   <pre><button class="copy">Copy</button><code>
 # ========================================================
 # Setup & Sample Data
@@ -146,7 +133,7 @@ def rmse(y_true, y_pred):
 </section>
 
 <section id="linear">
-  <h2>1) LinearRegression (OLS) <a class="anchor" href="#linear">¶</a></h2>
+  <h2>1) LinearRegression (OLS) </h2>
   <h4>Minimal usage</h4>
   <pre><button class="copy">Copy</button><code>
 from sklearn.linear_model import LinearRegression
@@ -163,7 +150,7 @@ print("coef_ shape:", ols.coef_.shape)
 </section>
 
 <section id="poly">
-  <h2>2) PolynomialFeatures + LinearRegression <a class="anchor" href="#poly">¶</a></h2>
+  <h2>2) PolynomialFeatures + LinearRegression</h2>
   <h4>Pipeline with degree‑2 features</h4>
   <pre><button class="copy">Copy</button><code>
 from sklearn.preprocessing import PolynomialFeatures
@@ -181,7 +168,7 @@ print("Poly‑2 OLS Test R^2:", poly2_ols.score(X_test, y_test))
 </section>
 
 <section id="ridge">
-  <h2>3) Ridge (L2 Regularization) <a class="anchor" href="#ridge">¶</a></h2>
+  <h2>3) Ridge (L2 Regularization) </h2>
   <h4>Pipeline with scaling</h4>
   <pre><button class="copy">Copy</button><code>
 from sklearn.preprocessing import StandardScaler
@@ -200,7 +187,7 @@ print("Ridge Test R^2:", ridge.score(X_test, y_test))
 </section>
 
 <section id="lasso">
-  <h2>4) Lasso (L1 Regularization) <a class="anchor" href="#lasso">¶</a></h2>
+  <h2>4) Lasso (L1 Regularization)</h2>
   <h4>Sparse solutions & feature selection</h4>
   <pre><button class="copy">Copy</button><code>
 from sklearn.linear_model import Lasso
@@ -219,7 +206,7 @@ print("Lasso Test R^2:", lasso.score(X_test, y_test))
 </section>
 
 <section id="enet">
-  <h2>5) ElasticNet (L1 + L2) <a class="anchor" href="#enet">¶</a></h2>
+  <h2>5) ElasticNet (L1 + L2)</h2>
   <h4>Balance sparsity & stability</h4>
   <pre><button class="copy">Copy</button><code>
 from sklearn.linear_model import ElasticNet
@@ -237,7 +224,7 @@ print("ElasticNet Test R^2:", enet.score(X_test, y_test))
 </section>
 
 <section id="cv">
-  <h2>6) Cross‑Validation Shortcuts <a class="anchor" href="#cv">¶</a></h2>
+  <h2>6) Cross‑Validation Shortcuts</h2>
   <h4>RidgeCV, LassoCV, ElasticNetCV</h4>
   <pre><button class="copy">Copy</button><code>
 from sklearn.linear_model import RidgeCV, LassoCV, ElasticNetCV
@@ -271,7 +258,7 @@ print("ElasticNetCV Test R^2:", enet_cv.score(X_test, y_test))
 </section>
 
 <section id="plot">
-  <h2>7) Quick Plot — Predicted vs Actual <a class="anchor" href="#plot">¶</a></h2>
+  <h2>7) Quick Plot — Predicted vs Actual </h2>
   <h4>Swap <code>model</code> to compare OLS / Ridge / Lasso / ENet / Poly pipelines</h4>
   <pre><button class="copy">Copy</button><code>
 # Choose a fitted model object, e.g. ridge, lasso, enet, poly2_ols, ridge_cv, ...
@@ -289,7 +276,7 @@ plt.show()
 </section>
 
 <section id="refs">
-  <h2>8) Official References <a class="anchor" href="#refs">¶</a></h2>
+  <h2>8) Official References</h2>
   <ul class="toc">
     <li><a target="_blank" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html">sklearn.linear_model.LinearRegression</a></li>
     <li><a target="_blank" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html">sklearn.preprocessing.PolynomialFeatures</a></li>
