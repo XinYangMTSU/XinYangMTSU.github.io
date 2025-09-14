@@ -102,35 +102,6 @@
   </center>
 </section>
 
-<section id="setup">
-  <h2>0) Setup & Sample Data <a class="anchor" href="#setup"></a></h2>
-  <pre><button class="copy">Copy</button><code>
-# ========================================================
-# Setup & Sample Data
-# ========================================================
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.datasets import make_regression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, PolynomialFeatures
-from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
-
-RANDOM_STATE = 42
-
-# Synthetic regression data (no internet needed)
-X, y = make_regression(n_samples=600, n_features=8, noise=15, random_state=RANDOM_STATE)
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=RANDOM_STATE
-)
-
-def rmse(y_true, y_pred):
-    return mean_squared_error(y_true, y_pred, squared=False)
-  </code></pre>
-</section>
-
 <section id="linear">
   <h2>1) LinearRegression (OLS) </h2>
   <h4>Minimal usage</h4>
@@ -141,10 +112,8 @@ ols = LinearRegression()
 ols.fit(X_train, y_train)
 
 y_pred = ols.predict(X_test)
-print("OLS Test R^2:", r2_score(y_test, y_pred))
-print("OLS Test RMSE:", rmse(y_test, y_pred))
-print("coef_ shape:", ols.coef_.shape)
-  </code></pre>
+</code></pre>
+  
   <div class="note">Params to discuss: <code>fit_intercept</code>, <code>positive</code>. Attributes: <code>coef_</code>, <code>intercept_</code>.</div>
 
     <h4>Parameters & attributes to know</h4>
