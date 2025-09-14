@@ -1,516 +1,579 @@
 import React, { useState, useEffect } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, ScatterPlot, Scatter } from 'recharts';
-import { Play, Download, FileText, Activity, TrendingUp, Zap } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Play, BarChart3, Split, Shuffle, Target, AlertTriangle, CheckCircle, Code, BookOpen, Users } from 'lucide-react';
 
-const GeneExpressionAnalysis = () => {
-  const [currentStep, setCurrentStep] = useState('dataset');
-  const [isRunning, setIsRunning] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [results, setResults] = useState({});
-  const [selectedDataset, setSelectedDataset] = useState('GSE2034');
-  
-  // Simulated datasets with realistic parameters
-  const datasets = {
-    'GSE2034': {
-      name: 'Breast Cancer Survival',
-      samples: 286,
-      features: 22283,
-      target: 'Time to distant metastasis',
-      description: 'Gene expression profiles of primary breast tumors'
-    },
-    'GSE25066': {
-      name: 'Breast Cancer Subtype',
-      samples: 508,
-      features: 54675,
-      target: 'Molecular subtype classification',
-      description: 'Large-scale breast cancer gene expression study'
-    },
-    'GSE72094': {
-      name: 'Lung Cancer Response',
-      samples: 442,
-      features: 19417,
-      target: 'Response to therapy',
-      description: 'Lung adenocarcinoma treatment response prediction'
-    }
-  };
+const MLEvaluationTutorial = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [showCode, setShowCode] = useState(false);
 
-  // Generate realistic gene expression data
-  const generateGeneData = (nSamples, nFeatures) => {
-    const data = [];
-    const geneNames = Array.from({length: nFeatures}, (_, i) => `Gene_${i + 1}`);
-    
-    for (let i = 0; i < nSamples; i++) {
-      const sample = { sample_id: `Sample_${i + 1}` };
-      
-      // Generate correlated gene expressions with some noise
-      for (let j = 0; j < Math.min(nFeatures, 50); j++) { // Limit for demo
-        // Log-normal distribution typical of gene expression
-        const baseExpression = Math.log2(Math.random() * 1000 + 1);
-        const noise = (Math.random() - 0.5) * 2;
-        sample[geneNames[j]] = Math.max(0, baseExpression + noise);
-      }
-      
-      // Generate target variable
-      const riskScore = Object.values(sample).slice(1, 11).reduce((sum, val) => sum + val, 0) / 10;
-      sample.target = riskScore + Math.random() * 2;
-      
-      data.push(sample);
-    }
-    
-    return { data, geneNames: geneNames.slice(0, 50) };
-  };
-
-  // Regression models implementation
-  const regressionModels = {
-    'Linear Regression': (X, y) => {
-      // Simple linear regression with regularization
-      const n = X.length;
-      const p = X[0].length;
-      const lambda = 0.01;
-      
-      // Simplified normal equation with regularization
-      let predictions = [];
-      let mse = 0;
-      
-      for (let i = 0; i < n; i++) {
-        let pred = X[i].reduce((sum, val, idx) => sum + val * (0.1 + Math.random() * 0.1), 0);
-        predictions.push(pred);
-        mse += Math.pow(y[i] - pred, 2);
-      }
-      
-      return {
-        predictions,
-        mse: mse / n,
-        r2: 1 - mse / (n * Math.var(y)),
-        coefficients: Array.from({length: p}, () => Math.random() * 0.2 - 0.1)
-      };
-    },
-    
-    'Ridge Regression': (X, y) => {
-      const n = X.length;
-      const p = X[0].length;
-      const lambda = 1.0;
-      
-      let predictions = [];
-      let mse = 0;
-      
-      for (let i = 0; i < n; i++) {
-        let pred = X[i].reduce((sum, val, idx) => sum + val * (0.08 + Math.random() * 0.08), 0);
-        predictions.push(pred);
-        mse += Math.pow(y[i] - pred, 2);
-      }
-      
-      return {
-        predictions,
-        mse: mse / n,
-        r2: 1 - mse / (n * Math.var(y)),
-        lambda,
-        coefficients: Array.from({length: p}, () => Math.random() * 0.15 - 0.075)
-      };
-    },
-    
-    'Lasso Regression': (X, y) => {
-      const n = X.length;
-      const p = X[0].length;
-      const lambda = 0.1;
-      
-      let predictions = [];
-      let mse = 0;
-      const sparsity = 0.7; // 70% of coefficients will be zero
-      
-      for (let i = 0; i < n; i++) {
-        let pred = X[i].reduce((sum, val, idx) => {
-          const coef = Math.random() > sparsity ? (Math.random() * 0.3 - 0.15) : 0;
-          return sum + val * coef;
-        }, 0);
-        predictions.push(pred);
-        mse += Math.pow(y[i] - pred, 2);
-      }
-      
-      const coefficients = Array.from({length: p}, () => 
-        Math.random() > sparsity ? (Math.random() * 0.3 - 0.15) : 0
-      );
-      const nonZeroCoefs = coefficients.filter(c => c !== 0).length;
-      
-      return {
-        predictions,
-        mse: mse / n,
-        r2: 1 - mse / (n * Math.var(y)),
-        lambda,
-        coefficients,
-        sparsity: `${nonZeroCoefs}/${p} features selected`
-      };
-    },
-    
-    'Elastic Net': (X, y) => {
-      const n = X.length;
-      const p = X[0].length;
-      const alpha = 0.5;
-      const lambda = 0.1;
-      
-      let predictions = [];
-      let mse = 0;
-      const sparsity = 0.5; // 50% sparsity
-      
-      for (let i = 0; i < n; i++) {
-        let pred = X[i].reduce((sum, val, idx) => {
-          const coef = Math.random() > sparsity ? (Math.random() * 0.25 - 0.125) : 0;
-          return sum + val * coef;
-        }, 0);
-        predictions.push(pred);
-        mse += Math.pow(y[i] - pred, 2);
-      }
-      
-      const coefficients = Array.from({length: p}, () => 
-        Math.random() > sparsity ? (Math.random() * 0.25 - 0.125) : 0
-      );
-      const nonZeroCoefs = coefficients.filter(c => c !== 0).length;
-      
-      return {
-        predictions,
-        mse: mse / n,
-        r2: 1 - mse / (n * Math.var(y)),
-        alpha,
-        lambda,
-        coefficients,
-        sparsity: `${nonZeroCoefs}/${p} features selected`
-      };
-    }
-  };
-
-  // Helper function to calculate variance
-  Math.var = (arr) => {
-    const mean = arr.reduce((sum, val) => sum + val, 0) / arr.length;
-    return arr.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / arr.length;
-  };
-
-  const runAnalysis = async () => {
-    setIsRunning(true);
-    setProgress(0);
-    setCurrentStep('download');
-    
-    // Simulate dataset download
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setProgress(20);
-    
-    setCurrentStep('preprocess');
-    const dataset = datasets[selectedDataset];
-    const { data, geneNames } = generateGeneData(dataset.samples, Math.min(dataset.features, 50));
-    
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setProgress(40);
-    
-    // Preprocessing
-    setCurrentStep('models');
-    const X = data.map(sample => geneNames.map(gene => sample[gene]));
-    const y = data.map(sample => sample.target);
-    
-    // Run all models
-    const modelResults = {};
-    const modelNames = Object.keys(regressionModels);
-    
-    for (let i = 0; i < modelNames.length; i++) {
-      const modelName = modelNames[i];
-      await new Promise(resolve => setTimeout(resolve, 800));
-      
-      const result = regressionModels[modelName](X, y);
-      modelResults[modelName] = result;
-      
-      setProgress(40 + (i + 1) * 15);
-    }
-    
-    // Generate comparison data
-    const comparisonData = modelNames.map(name => ({
-      model: name.replace(' Regression', ''),
-      mse: modelResults[name].mse.toFixed(4),
-      r2: modelResults[name].r2.toFixed(4),
-      mse_num: modelResults[name].mse,
-      r2_num: modelResults[name].r2
-    }));
-    
-    // Generate feature importance data
-    const featureImportance = geneNames.slice(0, 10).map((gene, idx) => ({
-      gene,
-      lasso: Math.abs(modelResults['Lasso Regression'].coefficients[idx] || 0),
-      ridge: Math.abs(modelResults['Ridge Regression'].coefficients[idx] || 0),
-      elastic: Math.abs(modelResults['Elastic Net'].coefficients[idx] || 0)
-    })).sort((a, b) => (b.lasso + b.ridge + b.elastic) - (a.lasso + a.ridge + a.elastic));
-    
-    // Generate prediction scatter plot data
-    const scatterData = data.slice(0, 50).map((sample, idx) => ({
-      actual: y[idx],
-      linear: modelResults['Linear Regression'].predictions[idx],
-      lasso: modelResults['Lasso Regression'].predictions[idx],
-      ridge: modelResults['Ridge Regression'].predictions[idx]
-    }));
-    
-    setResults({
-      dataset,
-      data,
-      geneNames,
-      modelResults,
-      comparisonData,
-      featureImportance,
-      scatterData,
-      summary: {
-        totalSamples: data.length,
-        totalFeatures: geneNames.length,
-        bestModel: comparisonData.reduce((best, current) => 
-          parseFloat(current.r2) > parseFloat(best.r2) ? current : best
-        )
-      }
-    });
-    
-    setProgress(100);
-    setCurrentStep('results');
-    setIsRunning(false);
-  };
-
-  const ProgressBar = ({ progress }) => (
-    <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
-      <div 
-        className="bg-blue-600 h-2 rounded-full transition-all duration-300" 
-        style={{ width: `${progress}%` }}
-      ></div>
-    </div>
-  );
-
-  const StepIndicator = ({ currentStep }) => {
-    const steps = [
-      { id: 'dataset', label: 'Dataset Selection', icon: FileText },
-      { id: 'download', label: 'Data Download', icon: Download },
-      { id: 'preprocess', label: 'Preprocessing', icon: Activity },
-      { id: 'models', label: 'Model Training', icon: TrendingUp },
-      { id: 'results', label: 'Results', icon: Zap }
-    ];
-    
-    return (
-      <div className="flex justify-between mb-6">
-        {steps.map((step, idx) => {
-          const Icon = step.icon;
-          const isActive = currentStep === step.id;
-          const isCompleted = steps.findIndex(s => s.id === currentStep) > idx;
-          
-          return (
-            <div key={step.id} className="flex flex-col items-center">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                isActive ? 'bg-blue-600 text-white' :
-                isCompleted ? 'bg-green-500 text-white' :
-                'bg-gray-200 text-gray-600'
-              }`}>
-                <Icon size={16} />
-              </div>
-              <span className={`text-xs mt-1 ${isActive ? 'text-blue-600' : 'text-gray-600'}`}>
-                {step.label}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
-
-  return (
-    <div className="max-w-7xl mx-auto p-6 bg-white">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          🧬 High-Dimensional Gene Expression Analysis
-        </h1>
-        <p className="text-gray-600">
-          Comprehensive regression analysis on real gene expression datasets from GEO
-        </p>
-      </div>
-
-      <StepIndicator currentStep={currentStep} />
-
-      {currentStep === 'dataset' && (
-        <div className="bg-gray-50 p-6 rounded-lg mb-6">
-          <h2 className="text-xl font-semibold mb-4">📊 Select Dataset</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            {Object.entries(datasets).map(([id, dataset]) => (
-              <div 
-                key={id}
-                className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                  selectedDataset === id ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'
-                }`}
-                onClick={() => setSelectedDataset(id)}
-              >
-                <h3 className="font-semibold text-lg">{id}</h3>
-                <p className="text-sm text-gray-600 mb-2">{dataset.name}</p>
-                <div className="text-xs space-y-1">
-                  <div>📊 Samples: {dataset.samples}</div>
-                  <div>🧬 Features: {dataset.features.toLocaleString()}</div>
-                  <div>🎯 Target: {dataset.target}</div>
-                </div>
-                <p className="text-xs text-gray-500 mt-2">{dataset.description}</p>
-              </div>
-            ))}
+  const slides = [
+    // Slide 1: Title
+    {
+      id: 'title',
+      title: 'Machine Learning Evaluation & Validation',
+      content: (
+        <div className="text-center py-12">
+          <div className="mb-8">
+            <BarChart3 className="w-24 h-24 mx-auto text-blue-500 mb-4" />
+            <h1 className="text-4xl font-bold text-gray-800 mb-4">
+              ML Evaluation & Validation
+            </h1>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Learn the fundamental concepts of proper model evaluation, validation strategies, 
+              and how to avoid common pitfalls in machine learning
+            </p>
           </div>
-          
-          <button 
-            onClick={runAnalysis}
-            disabled={isRunning}
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-          >
-            <Play size={16} />
-            {isRunning ? 'Running Analysis...' : 'Start Analysis'}
-          </button>
+          <div className="grid grid-cols-3 gap-6 max-w-4xl mx-auto mt-12">
+            <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
+              <Target className="w-12 h-12 text-blue-500 mx-auto mb-3" />
+              <h3 className="font-semibold text-blue-800">Evaluation</h3>
+              <p className="text-sm text-blue-600">Measure true performance</p>
+            </div>
+            <div className="bg-green-50 p-6 rounded-lg border border-green-200">
+              <Split className="w-12 h-12 text-green-500 mx-auto mb-3" />
+              <h3 className="font-semibold text-green-800">Validation</h3>
+              <p className="text-sm text-green-600">Choose best models</p>
+            </div>
+            <div className="bg-purple-50 p-6 rounded-lg border border-purple-200">
+              <Shuffle className="w-12 h-12 text-purple-500 mx-auto mb-3" />
+              <h3 className="font-semibold text-purple-800">Cross-Validation</h3>
+              <p className="text-sm text-purple-600">Robust estimation</p>
+            </div>
+          </div>
         </div>
-      )}
+      )
+    },
+    
+    // Slide 2: Why Evaluation Matters
+    {
+      id: 'why-evaluation',
+      title: '1. Why Evaluation & Validation?',
+      content: (
+        <div className="space-y-8">
+          <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-r-lg">
+            <div className="flex items-center mb-4">
+              <AlertTriangle className="w-6 h-6 text-red-500 mr-2" />
+              <h3 className="text-lg font-semibold text-red-800">The Problem</h3>
+            </div>
+            <p className="text-red-700 mb-4">
+              <strong>Training accuracy alone can be misleading!</strong>
+            </p>
+            <div className="bg-white p-4 rounded border">
+              <code className="text-sm">
+                model.fit(X_train, y_train)<br/>
+                train_score = model.score(X_train, y_train)  # 99% accuracy!<br/>
+                test_score = model.score(X_test, y_test)     # 65% accuracy 😞
+              </code>
+            </div>
+          </div>
 
-      {isRunning && (
-        <div className="bg-blue-50 p-6 rounded-lg mb-6">
-          <h2 className="text-xl font-semibold mb-4">🔄 Analysis in Progress</h2>
-          <ProgressBar progress={progress} />
-          <p className="text-sm text-gray-600">
-            {currentStep === 'download' && '📥 Downloading dataset from GEO database...'}
-            {currentStep === 'preprocess' && '🧼 Preprocessing: log-transform, normalization, scaling...'}
-            {currentStep === 'models' && '🤖 Training regression models: Linear, Ridge, Lasso, Elastic Net...'}
-          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
+              <Target className="w-8 h-8 text-blue-500 mb-3" />
+              <h4 className="font-semibold text-blue-800 mb-2">Evaluation</h4>
+              <p className="text-blue-700 text-sm">
+                Estimate how well your model will perform on <strong>unseen data</strong> (generalization)
+              </p>
+            </div>
+            <div className="bg-green-50 p-6 rounded-lg border border-green-200">
+              <CheckCircle className="w-8 h-8 text-green-500 mb-3" />
+              <h4 className="font-semibold text-green-800 mb-2">Validation</h4>
+              <p className="text-green-700 text-sm">
+                Choose best models and hyperparameters <strong>without test leakage</strong>
+              </p>
+            </div>
+            <div className="bg-purple-50 p-6 rounded-lg border border-purple-200">
+              <BarChart3 className="w-8 h-8 text-purple-500 mb-3" />
+              <h4 className="font-semibold text-purple-800 mb-2">Optimization</h4>
+              <p className="text-purple-700 text-sm">
+                Actually minimize the <strong>right objective</strong> for your problem
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+            <p className="text-yellow-800">
+              <strong>Key Insight:</strong> We need to simulate how our model performs on "future" data we haven't seen yet.
+            </p>
+          </div>
         </div>
-      )}
+      )
+    },
 
-      {results.summary && (
+    // Slide 3: Train-Test-Validation Split
+    {
+      id: 'train-test-split',
+      title: '2. Train–Test–Validation Splits',
+      content: (
+        <div className="space-y-8">
+          <div className="bg-gradient-to-r from-blue-50 to-green-50 p-6 rounded-lg">
+            <h3 className="text-xl font-semibold mb-4 text-gray-800">The Three-Way Split</h3>
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              <div className="bg-blue-100 p-4 rounded border-2 border-blue-300">
+                <h4 className="font-semibold text-blue-800">Training Set (60-70%)</h4>
+                <p className="text-sm text-blue-700">Learn patterns & fit model</p>
+              </div>
+              <div className="bg-yellow-100 p-4 rounded border-2 border-yellow-300">
+                <h4 className="font-semibold text-yellow-800">Validation Set (15-20%)</h4>
+                <p className="text-sm text-yellow-700">Tune hyperparameters</p>
+              </div>
+              <div className="bg-green-100 p-4 rounded border-2 border-green-300">
+                <h4 className="font-semibold text-green-800">Test Set (15-20%)</h4>
+                <p className="text-sm text-green-700">Final evaluation</p>
+              </div>
+            </div>
+            
+            <div className="bg-white p-4 rounded border">
+              <div className="flex items-center mb-2">
+                <Code className="w-4 h-4 mr-2" />
+                <span className="font-semibold">Implementation</span>
+              </div>
+              <pre className="text-sm text-gray-800 overflow-x-auto">
+{`from sklearn.model_selection import train_test_split
+
+# First split: 80% train+val / 20% test
+X_temp, X_test, y_temp, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+# Second split: 60% train / 20% val (from the 80%)
+X_train, X_val, y_train, y_val = train_test_split(
+    X_temp, y_temp, test_size=0.25, random_state=42, stratify=y_temp
+)`}
+              </pre>
+            </div>
+          </div>
+
+          <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg">
+            <div className="flex items-center mb-2">
+              <AlertTriangle className="w-5 h-5 text-red-500 mr-2" />
+              <strong className="text-red-800">Golden Rule</strong>
+            </div>
+            <p className="text-red-700">
+              Keep the test set <strong>completely untouched</strong> until the very end! 
+              Only use it once for final evaluation.
+            </p>
+          </div>
+        </div>
+      )
+    },
+
+    // Slide 4: Data Leakage
+    {
+      id: 'data-leakage',
+      title: '2.2 Data Leakage - The Silent Killer',
+      content: (
         <div className="space-y-6">
-          {/* Dataset Summary */}
-          <div className="bg-green-50 p-6 rounded-lg">
-            <h2 className="text-xl font-semibold mb-4">✅ Analysis Complete</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-green-600">{results.summary.totalSamples}</div>
-                <div className="text-sm text-gray-600">Samples</div>
+          <div className="bg-red-100 border border-red-300 p-6 rounded-lg">
+            <div className="flex items-center mb-4">
+              <AlertTriangle className="w-6 h-6 text-red-600 mr-2" />
+              <h3 className="text-xl font-semibold text-red-800">What is Data Leakage?</h3>
+            </div>
+            <p className="text-red-700 mb-4">
+              When information from the future (validation/test sets) accidentally "leaks" into your training process, 
+              leading to <strong>overly optimistic performance estimates</strong>.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-red-50 p-6 rounded-lg border border-red-200">
+              <h4 className="font-semibold text-red-800 mb-3 flex items-center">
+                <span className="text-red-600 mr-2">❌</span> Wrong Way
+              </h4>
+              <pre className="text-sm text-red-700 bg-red-100 p-3 rounded">
+{`# LEAKAGE! Scaling on full data
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Then split
+X_train, X_test = train_test_split(X_scaled, ...)`}
+              </pre>
+              <p className="text-sm text-red-600 mt-2">
+                The scaler "sees" test data during fit()!
+              </p>
+            </div>
+
+            <div className="bg-green-50 p-6 rounded-lg border border-green-200">
+              <h4 className="font-semibold text-green-800 mb-3 flex items-center">
+                <span className="text-green-600 mr-2">✅</span> Correct Way
+              </h4>
+              <pre className="text-sm text-green-700 bg-green-100 p-3 rounded">
+{`# Split first
+X_train, X_test = train_test_split(X, ...)
+
+# Scale only on training data
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)`}
+              </pre>
+              <p className="text-sm text-green-600 mt-2">
+                Scaler only learns from training data!
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
+            <h4 className="font-semibold text-blue-800 mb-3">Pipeline Solution</h4>
+            <pre className="text-sm text-blue-700 bg-blue-100 p-4 rounded">
+{`from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+# Pipeline prevents leakage automatically
+pipe = Pipeline([
+    ("scaler", StandardScaler()),
+    ("classifier", LogisticRegression(max_iter=1000))
+])
+
+pipe.fit(X_train, y_train)  # Scaler only sees training data`}
+            </pre>
+          </div>
+
+          <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+            <p className="text-yellow-800">
+              <strong>Remember:</strong> Any preprocessing step (scaling, encoding, feature selection) 
+              should only "see" the training fold during cross-validation!
+            </p>
+          </div>
+        </div>
+      )
+    },
+
+    // Slide 5: Cross-Validation Introduction
+    {
+      id: 'cv-intro',
+      title: '3. Cross-Validation',
+      content: (
+        <div className="space-y-8">
+          <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-lg">
+            <div className="flex items-center mb-4">
+              <Shuffle className="w-8 h-8 text-purple-500 mr-3" />
+              <h3 className="text-2xl font-semibold text-gray-800">Why Cross-Validation?</h3>
+            </div>
+            <p className="text-gray-700 text-lg mb-4">
+              A single train/validation split might be <strong>unlucky</strong>. 
+              CV gives us multiple "chances" to evaluate our model more reliably.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h4 className="text-xl font-semibold text-gray-800">Single Split Problems</h4>
+              <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+                <ul className="space-y-2 text-red-700">
+                  <li>• Validation set might be "too easy" or "too hard"</li>
+                  <li>• Results depend on random split</li>
+                  <li>• Wastes data (validation set sits unused)</li>
+                  <li>• High variance in performance estimates</li>
+                </ul>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600">{results.summary.totalFeatures}</div>
-                <div className="text-sm text-gray-600">Gene Features</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600">4</div>
-                <div className="text-sm text-gray-600">Models Trained</div>
-              </div>
-              <div className="text-center">
-                <div className="text-lg font-bold text-orange-600">{results.summary.bestModel.model}</div>
-                <div className="text-sm text-gray-600">Best Model</div>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="text-xl font-semibold text-gray-800">Cross-Validation Benefits</h4>
+              <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                <ul className="space-y-2 text-green-700">
+                  <li>• Every sample gets to be in validation once</li>
+                  <li>• More robust performance estimates</li>
+                  <li>• Better use of available data</li>
+                  <li>• Can compute confidence intervals</li>
+                </ul>
               </div>
             </div>
           </div>
 
-          {/* Model Comparison */}
-          <div className="bg-white p-6 rounded-lg border">
-            <h3 className="text-xl font-semibold mb-4">📊 Model Performance Comparison</h3>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
+            <h4 className="font-semibold text-blue-800 mb-3">The Cross-Validation Process</h4>
+            <div className="grid grid-cols-5 gap-2 mb-4">
+              {[1,2,3,4,5].map(fold => (
+                <div key={fold} className="text-center">
+                  <div className="bg-blue-200 p-2 rounded mb-1 text-sm font-semibold">
+                    Fold {fold}
+                  </div>
+                  <div className={`p-1 rounded text-xs ${fold === 1 ? 'bg-yellow-200 text-yellow-800' : 'bg-green-200 text-green-800'}`}>
+                    {fold === 1 ? 'Validation' : 'Training'}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="text-blue-700 text-sm">
+              Each fold serves as validation once, training four times. Final score = average of all folds.
+            </p>
+          </div>
+        </div>
+      )
+    },
+
+    // Slide 6: K-Fold Cross-Validation
+    {
+      id: 'k-fold',
+      title: '3.1 K-Fold Cross-Validation',
+      content: (
+        <div className="space-y-6">
+          <div className="bg-blue-50 p-6 rounded-lg">
+            <h3 className="text-xl font-semibold text-blue-800 mb-4">How K-Fold Works</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-medium mb-2">Mean Squared Error (Lower is Better)</h4>
-                <ResponsiveContainer width="100%" height={250}>
-                  <BarChart data={results.comparisonData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="model" />
-                    <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="mse_num" fill="#ef4444" />
-                  </BarChart>
-                </ResponsiveContainer>
+                <h4 className="font-semibold mb-2">Algorithm:</h4>
+                <ol className="list-decimal list-inside space-y-2 text-blue-700">
+                  <li>Split data into <strong>k</strong> equal folds</li>
+                  <li>For each fold i = 1 to k:</li>
+                  <li className="ml-4">• Use fold i as validation</li>
+                  <li className="ml-4">• Use other k-1 folds as training</li>
+                  <li className="ml-4">• Train model and compute score</li>
+                  <li>Average all k scores</li>
+                </ol>
               </div>
               <div>
-                <h4 className="font-medium mb-2">R² Score (Higher is Better)</h4>
-                <ResponsiveContainer width="100%" height={250}>
-                  <BarChart data={results.comparisonData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="model" />
-                    <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="r2_num" fill="#22c55e" />
-                  </BarChart>
-                </ResponsiveContainer>
+                <h4 className="font-semibold mb-2">Visual Representation:</h4>
+                <div className="space-y-2">
+                  {[1,2,3,4,5].map(fold => (
+                    <div key={fold} className="flex">
+                      <span className="text-xs w-12">Fold {fold}:</span>
+                      <div className="flex-1 flex">
+                        {[1,2,3,4,5].map(segment => (
+                          <div 
+                            key={segment} 
+                            className={`flex-1 h-6 border border-gray-300 ${
+                              segment === fold ? 'bg-yellow-300' : 'bg-green-300'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="text-xs mt-2">
+                  <span className="inline-block w-4 h-4 bg-green-300 border mr-2"></span>Training
+                  <span className="inline-block w-4 h-4 bg-yellow-300 border mr-2 ml-4"></span>Validation
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Feature Importance */}
-          <div className="bg-white p-6 rounded-lg border">
-            <h3 className="text-xl font-semibold mb-4">🧬 Top Gene Feature Importance</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={results.featureImportance}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="gene" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="lasso" fill="#8b5cf6" name="Lasso" />
-                <Bar dataKey="ridge" fill="#06b6d4" name="Ridge" />
-                <Bar dataKey="elastic" fill="#f59e0b" name="Elastic Net" />
-              </BarChart>
-            </ResponsiveContainer>
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <div className="flex items-center mb-3">
+              <Code className="w-5 h-5 mr-2" />
+              <h4 className="font-semibold">Implementation</h4>
+            </div>
+            <pre className="text-sm bg-gray-100 p-4 rounded overflow-x-auto">
+{`from sklearn.model_selection import KFold, cross_val_score
+from sklearn.linear_model import LogisticRegression
+
+# Create 5-fold CV
+cv = KFold(n_splits=5, shuffle=True, random_state=42)
+
+# Model
+model = LogisticRegression(max_iter=1000)
+
+# Perform cross-validation
+scores = cross_val_score(model, X, y, cv=cv, scoring="accuracy")
+
+print(f"CV Scores: {scores}")
+print(f"Mean CV Score: {scores.mean():.3f} (+/- {scores.std() * 2:.3f})")
+
+# Output example:
+# CV Scores: [0.85 0.88 0.82 0.87 0.86]
+# Mean CV Score: 0.856 (+/- 0.048)`}
+            </pre>
           </div>
 
-          {/* Predictions vs Actual */}
-          <div className="bg-white p-6 rounded-lg border">
-            <h3 className="text-xl font-semibold mb-4">🎯 Predictions vs Actual Values</h3>
-            <ResponsiveContainer width="100%" height={400}>
-              <LineChart data={results.scatterData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="actual" label={{ value: 'Actual Values', position: 'insideBottom', offset: -5 }} />
-                <YAxis label={{ value: 'Predicted Values', angle: -90, position: 'insideLeft' }} />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="actual" stroke="#374151" strokeWidth={2} dot={false} name="Perfect Prediction" />
-                <Line type="monotone" dataKey="linear" stroke="#ef4444" strokeWidth={2} dot={{ r: 3 }} name="Linear Regression" />
-                <Line type="monotone" dataKey="lasso" stroke="#8b5cf6" strokeWidth={2} dot={{ r: 3 }} name="Lasso Regression" />
-                <Line type="monotone" dataKey="ridge" stroke="#06b6d4" strokeWidth={2} dot={{ r: 3 }} name="Ridge Regression" />
-              </LineChart>
-            </ResponsiveContainer>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+              <h4 className="font-semibold text-green-800 mb-2">Typical k values:</h4>
+              <ul className="text-sm text-green-700 space-y-1">
+                <li>• <strong>k=5:</strong> Good balance, most common</li>
+                <li>• <strong>k=10:</strong> More robust, slower</li>
+                <li>• <strong>k=n:</strong> LOOCV (next slide)</li>
+              </ul>
+            </div>
+            <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+              <h4 className="font-semibold text-yellow-800 mb-2">Trade-offs:</h4>
+              <ul className="text-sm text-yellow-700 space-y-1">
+                <li>• <strong>Higher k:</strong> Less bias, more variance</li>
+                <li>• <strong>Lower k:</strong> More bias, less variance</li>
+                <li>• <strong>Computation:</strong> k times slower</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      )
+    },
+
+    // Slide 7: LOOCV and Stratified K-Fold
+    {
+      id: 'advanced-cv',
+      title: '3.2 Leave-One-Out & Stratified K-Fold',
+      content: (
+        <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* LOOCV */}
+            <div className="bg-purple-50 p-6 rounded-lg border border-purple-200">
+              <h3 className="text-xl font-semibold text-purple-800 mb-4">Leave-One-Out CV (LOOCV)</h3>
+              <p className="text-purple-700 mb-4">
+                Extreme case where k = n (number of samples). Each sample is validation once.
+              </p>
+              
+              <div className="bg-purple-100 p-4 rounded mb-4">
+                <h4 className="font-semibold text-purple-800 mb-2">Characteristics:</h4>
+                <ul className="text-sm text-purple-700 space-y-1">
+                  <li>• <strong>Very low bias</strong> (almost all data for training)</li>
+                  <li>• <strong>High variance</strong> (training sets are very similar)</li>
+                  <li>• <strong>Computationally expensive</strong> (n models to train)</li>
+                  <li>• <strong>Deterministic</strong> (no randomness in splits)</li>
+                </ul>
+              </div>
+
+              <pre className="text-sm bg-purple-100 p-3 rounded">
+{`from sklearn.model_selection import LeaveOneOut
+
+loo = LeaveOneOut()
+scores = cross_val_score(model, X, y, cv=loo)
+print(f"LOOCV Score: {scores.mean():.3f}")`}
+              </pre>
+            </div>
+
+            {/* Stratified K-Fold */}
+            <div className="bg-green-50 p-6 rounded-lg border border-green-200">
+              <h3 className="text-xl font-semibold text-green-800 mb-4">Stratified K-Fold</h3>
+              <p className="text-green-700 mb-4">
+                Maintains the <strong>same class distribution</strong> in each fold. Essential for imbalanced datasets!
+              </p>
+              
+              <div className="bg-green-100 p-4 rounded mb-4">
+                <h4 className="font-semibold text-green-800 mb-2">Why Stratify?</h4>
+                <div className="text-sm text-green-700 space-y-2">
+                  <div>Original: 90% Class A, 10% Class B</div>
+                  <div>• Regular K-Fold: Some folds might have 0% Class B!</div>
+                  <div>• Stratified: Each fold has ~90% A, ~10% B</div>
+                </div>
+              </div>
+
+              <pre className="text-sm bg-green-100 p-3 rounded">
+{`from sklearn.model_selection import StratifiedKFold
+
+skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+scores = cross_val_score(model, X, y, cv=skf, scoring="f1_macro")
+print(f"Stratified CV: {scores.mean():.3f}")`}
+              </pre>
+            </div>
           </div>
 
-          {/* Model Details Table */}
-          <div className="bg-white p-6 rounded-lg border">
-            <h3 className="text-xl font-semibold mb-4">📋 Detailed Model Results</h3>
+          <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
+            <h3 className="text-xl font-semibold text-blue-800 mb-4">Comparison Summary</h3>
             <div className="overflow-x-auto">
-              <table className="w-full border-collapse">
+              <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-gray-50">
-                    <th className="border p-3 text-left">Model</th>
-                    <th className="border p-3 text-left">MSE</th>
-                    <th className="border p-3 text-left">R²</th>
-                    <th className="border p-3 text-left">Special Properties</th>
+                  <tr className="bg-blue-100">
+                    <th className="p-3 text-left">Method</th>
+                    <th className="p-3 text-left">When to Use</th>
+                    <th className="p-3 text-left">Pros</th>
+                    <th className="p-3 text-left">Cons</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {Object.entries(results.modelResults).map(([name, result]) => (
-                    <tr key={name}>
-                      <td className="border p-3 font-medium">{name}</td>
-                      <td className="border p-3">{result.mse.toFixed(4)}</td>
-                      <td className="border p-3">{result.r2.toFixed(4)}</td>
-                      <td className="border p-3">
-                        {result.lambda && `λ = ${result.lambda}`}
-                        {result.alpha && `, α = ${result.alpha}`}
-                        {result.sparsity && (
-                          <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs ml-2">
-                            {result.sparsity}
-                          </span>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
+                <tbody className="text-blue-700">
+                  <tr className="border-b border-blue-200">
+                    <td className="p-3 font-semibold">K-Fold (k=5)</td>
+                    <td className="p-3">General purpose, balanced datasets</td>
+                    <td className="p-3">Fast, good bias-variance trade-off</td>
+                    <td className="p-3">May not preserve class distribution</td>
+                  </tr>
+                  <tr className="border-b border-blue-200">
+                    <td className="p-3 font-semibold">Stratified K-Fold</td>
+                    <td className="p-3">Classification, imbalanced data</td>
+                    <td className="p-3">Maintains class ratios</td>
+                    <td className="p-3">Only for classification</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-semibold">LOOCV</td>
+                    <td className="p-3">Small datasets, need low bias</td>
+                    <td className="p-3">Maximum use of data</td>
+                    <td className="p-3">Very slow, high variance</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
           </div>
-
-          {/* Insights */}
-          <div className="bg-amber-50 p-6 rounded-lg">
-            <h3 className="text-xl font-semibold mb-4">💡 Key Insights</h3>
-            <div className="space-y-2 text-sm">
-              <p>• <strong>Best Performing Model:</strong> {results.summary.bestModel.model} with R² = {results.summary.bestModel.r2}</p>
-              <p>• <strong>Feature Selection:</strong> Lasso and Elastic Net automatically selected the most relevant genes</p>
-              <p>• <strong>Overfitting Control:</strong> Ridge regression shows good bias-variance tradeoff</p>
-              <p>• <strong>High-Dimensional Challenge:</strong> With {results.dataset.features} genes and {results.dataset.samples} samples, regularization is crucial</p>
-              <p>• <strong>Biological Relevance:</strong> Selected features may represent important cancer biomarkers</p>
-            </div>
-          </div>
         </div>
-      )}
-    </div>
-  );
-};
+      )
+    },
 
-export default GeneExpressionAnalysis;
+    // Slide 8: Hands-on Example
+    {
+      id: 'hands-on',
+      title: 'Hands-On Example: Putting It All Together',
+      content: (
+        <div className="space-y-6">
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg">
+            <h3 className="text-xl font-semibold mb-4 text-gray-800">Complete Workflow Example</h3>
+            <p className="text-gray-700 mb-4">
+              Let's implement a proper ML pipeline with evaluation, avoiding data leakage!
+            </p>
+          </div>
+
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <pre className="text-sm text-gray-800 overflow-x-auto">
+{`import pandas as pd
+from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score, StratifiedKFold
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import classification_report, confusion_matrix
+
+# 1. LOAD DATA
+# Assume we have X (features) and y (labels)
+
+# 2. TRAIN/TEST SPLIT (80/20)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+# 3. CREATE PIPELINE (prevents leakage!)
+pipe = Pipeline([
+    ('scaler', StandardScaler()),
+    ('classifier', LogisticRegression(max_iter=1000))
+])
+
+# 4. HYPERPARAMETER TUNING with CV
+param_grid = {
+    'classifier__C': [0.01, 0.1, 1, 10, 100],
+    'classifier__penalty': ['l1', 'l2', 'elasticnet']
+}
+
+# Use stratified CV for grid search
+cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+grid_search = GridSearchCV(
+    pipe, param_grid, cv=cv, scoring='f1_macro', n_jobs=-1
+)
+
+# Fit on training data only
+grid_search.fit(X_train, y_train)
+
+print(f"Best parameters: {grid_search.best_params_}")
+print(f"Best CV score: {grid_search.best_score_:.3f}")
+
+# 5. FINAL EVALUATION (on test set - only once!)
+best_model = grid_search.best_estimator_
+test_score = best_model.score(X_test, y_test)
+y_pred = best_model.predict(X_test)
+
+print(f"\\nFinal test accuracy: {test_score:.3f}")
+print("\\nClassification Report:")
+print(classification_report(y_test, y_pred))`}
+            </pre>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+              <h4 className="font-semibold text-green-800 mb-3">✅ What We Did Right</h4>
+              <ul className="text-sm text-green-700 space-y-2">
+                <li>• Split data before any preprocessing</li>
+                <li>• Used Pipeline to prevent leakage</li>
+                <li>• Stratified CV for hyperparameter tuning</li>
+                <li>• Only touched test set once at the end</li>
+                <li>• Proper evaluation metrics</li>
+              </ul>
+            </div>
+
+            <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+              <h4 className="font-semibold text-blue-800 mb-3">📊 Key Takeaways</h4>
+              <ul className="text-sm text-blue-700
