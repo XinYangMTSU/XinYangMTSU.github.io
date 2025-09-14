@@ -342,6 +342,7 @@
   <section>
     
     <div id="holdout">
+      
       <h4>2.1 Holdout Split</h4>
 
        <div id="leakage">
@@ -381,19 +382,20 @@ X_train, X_val, y_train, y_val = train_test_split(X_trval, y_trval, test_size=0.
 
   <section>
     <div id="kfold">
-      <h4>3.2 K-Fold Cross-Validation</h4>
+      <h4>2.2 K-Fold Cross-Validation</h4>
       <p>Split into \(k\) folds; train on \(k-1\) and validate on the remaining; average the score.</p>
       <pre><code>from sklearn.model_selection import KFold, cross_val_score
 cv = KFold(n_splits=5, shuffle=True, random_state=42)
 scores = cross_val_score(model, X, y, cv=cv, scoring="accuracy")
 print(scores.mean(), scores.std())</code></pre>
     </div>
+    
   </section>
 
 
   <section>
     <div id="loocv">
-      <h4>3.3 Leave-One-Out (LOOCV)</h4>
+      <h4>2.3 Leave-One-Out (LOOCV)</h4>
       <p>Extreme case of K-Fold with \(k=n\). Very low bias, potentially high variance; computationally expensive.</p>
       <pre><code>from sklearn.model_selection import LeaveOneOut, cross_val_score
 loo = LeaveOneOut()
@@ -403,7 +405,7 @@ scores = cross_val_score(model, X, y, cv=loo)</code></pre>
 
   <section>
     <div id="stratk">
-      <h4>3.4 Stratified K-Fold (Classification)</h4>
+      <h4>2.4 Stratified K-Fold (Classification)</h4>
       <p>Preserves class proportions in each fold—important for imbalanced classes.</p>
       <pre><code>from sklearn.model_selection import StratifiedKFold, cross_val_score
 skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
@@ -414,7 +416,7 @@ scores = cross_val_score(model, X, y, cv=skf, scoring="f1_macro")</code></pre>
 
    <section>
     <div id="stratk">
-      <h4>3.5 Nested Cross-Validation </h4>
+      <h4>2.5 Nested Cross-Validation </h4>
       <p></p>
       <pre><code></code></pre>
     </div>
