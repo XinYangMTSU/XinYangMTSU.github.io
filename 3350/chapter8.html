@@ -340,23 +340,12 @@
   </section>
   
   <section>
+    
     <div id="holdout">
       <h4>2.1 Holdout Split</h4>
-      <p>Typical workflow: split once into Train/Validation/Test (e.g., 60/20/20 or 70/15/15).</p>
-      <pre><code>from sklearn.model_selection import train_test_split
 
-# 80% train+val / 20% test (use stratify for classification)
-X_trval, X_test, y_trval, y_test = train_test_split(X, y, test_size=0.2,
-                                                    stratify=y, random_state=42)
-
-# split train into train / validation (now 60/20/20 overall)
-X_train, X_val, y_train, y_val = train_test_split(X_trval, y_trval, test_size=0.25,
-                                                  stratify=y_trval, random_state=42)</code></pre>
-      <p class="note"><b>Tip:</b> Keep the test set <b>untouched</b> until the very end.</p>
-    </div>
-
-    <div id="leakage">
-      <h4>2.2 Data Leakage</h4>
+       <div id="leakage">
+      <h4>Simple train/test split</h4>
       <ul>
         <li>Fit scalers/encoders only on the <b>train</b> fold/split; apply to val/test.</li>
         <li>Avoid peeking at test metrics while tuning.</li>
@@ -371,6 +360,22 @@ pipe = Pipeline([
   ("clf", LogisticRegression(max_iter=1000))
 ])
 pipe.fit(X_train, y_train)</code></pre>
+
+
+    <h4>Train/Validation/Test</h4>
+          
+     <p>Train/Validation/Test (e.g., 60/20/20 or 70/15/15).</p>
+      <pre><code>from sklearn.model_selection import train_test_split
+
+# 80% train+val / 20% test (use stratify for classification)
+X_trval, X_test, y_trval, y_test = train_test_split(X, y, test_size=0.2,
+                                                    stratify=y, random_state=42)
+
+# split train into train / validation (now 60/20/20 overall)
+X_train, X_val, y_train, y_val = train_test_split(X_trval, y_trval, test_size=0.25,
+                                                  stratify=y_trval, random_state=42)</code></pre>
+      <p class="note"><b>Tip:</b> Keep the test set <b>untouched</b> until the very end.</p>
+       
     </div>
   </section>
 
