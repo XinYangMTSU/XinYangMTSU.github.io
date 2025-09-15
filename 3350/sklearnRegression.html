@@ -527,28 +527,137 @@ lr     = poly_lr.named_steps["lr"]       # the LinearRegression estimator</code>
             <li><strong>Feature Scaling</strong>: Consider adding StandardScaler before PolynomialFeatures
                 since polynomial terms can have very different scales.</li>
         </ul>
-
     </section>
 
 
 <section id="ridge">
   <h2>3) Ridge (L2 Regularization) </h2>
-  <h4>Pipeline with scaling</h4>
+  <h4></h4>
   <pre><button class="copy">Copy</button><code>
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import Ridge
-from sklearn.pipeline import Pipeline
+# ========================================================
+# California Housing — Ridge (L2 Regularization)
+# Standardizes features, train/test split
+# Shows BOTH training and testing metrics
+# ========================================================
+import numpy as np
+import pandas as pd
 
+from sklearn.datasets import fetch_california_housing
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import Ridge
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import r2_score, mean_squared_error
+
+RANDOM_STATE = 42
+
+# 1) Load data
+data = fetch_california_housing(as_frame=True)
+df_all = data.frame  # features + target ('MedHouseVal')
+
+# 2) Data cleaning (check missing values and duplicates)
+has_missing = df_all.isna().any().any()
+duplicates_found = int(df_all.duplicated().sum())
+
+if duplicates_found > 0:
+    df_all = df_all.drop_duplicates().reset_index(drop=True)
+if has_missing:
+    df_all = df_all.fillna(df_all.mean(numeric_only=True))
+
+# Get X, y after cleaning
+X = df_all.drop(columns=["MedHouseVal"])  # DataFrame (names → for display)
+y = df_all["MedHouseVal"]
+
+# 3) Train / test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=RANDOM_STATE
+)
+
+# 4) Train a Ridge model in a scaled pipeline (recommended)
 ridge = Pipeline([
     ("scaler", StandardScaler()),
     ("ridge", Ridge(alpha=1.0, random_state=RANDOM_STATE))
 ])
 
 ridge.fit(X_train, y_train)
-print("Ridge Test R^2:", ridge.score(X_test, y_test))
+
+# 5) Predict and compute metrics for TRAIN and TEST
+# --- Train ---
+y_pred_train = ridge.predict(X_train)
+mse_train = mean_squared_error(y_train, y_pred_train)
+rmse_train = np.sqrt(mse_train)
+r2_train = r2_score(y_train, y_pred_train)
+sse_train = np.sum((y_train - y_pred_train) ** 2)
+
+# --- Test ---
+y_pred_test = ridge.predict(X_test)
+mse_test = mean_squared_error(y_test, y_pred_test)
+rmse_test = np.sqrt(mse_test)
+r2_test = r2_score(y_test, y_pred_test)
+sse_test = np.sum((y_test - y_pred_test) ** 2)
+
+# 6) Put results in a tidy DataFrame
+results_df = pd.DataFrame(
+    [
+        {"Split": "Train", "R^2": r2_train, "RMSE": rmse_train, "MSE": mse_train, "SSE": sse_train},
+        {"Split": "Test",  "R^2": r2_test,  "RMSE": rmse_test,  "MSE": mse_test,  "SSE": sse_test},
+    ]
+).set_index("Split")
+
+# 7) Results
+print(f"any_missing: {has_missing}")
+print(f"duplicates_found: {duplicates_found}")
+print(results_df)
+
+# 8) ## Learned attributes after fit (on the estimator step)
+print("--- learned attributes (Ridge in pipeline) ---")
+r = ridge.named_steps["ridge"]
+print("coef_.shape:", r.coef_.shape)
+print("coef_:", np.round(r.coef_, 3))
+print("intercept_:", np.round(float(r.intercept_), 3))
+print("n_features_in_:", r.n_features_in_)
+# feature_names_in_ is typically unavailable after a StandardScaler step; show original names instead
+if hasattr(r, 'feature_names_in_'):
+    print("feature_names_in_:", list(r.feature_names_in_))
+else:
+    print("feature_names (from original X):", list(X.columns))
+print("alpha:", r.alpha)
   </code></pre>
-  <div class="note">Tune <code>alpha</code>; larger ⇒ more shrinkage. Scaling makes the penalty fair across features.</div>
+  
+  <div class="note">Params to discuss: <code>alpha</code>, <code>fit_intercept</code>, <code>solver</code>, <code>max_iter</code>, <code>tol</code>. <br>
+      <strong>Scale your features</strong> (as shown) so the L2 penalty treats features fairly. Use <code>RidgeCV</code> or <code>GridSearchCV</code> to select a good <code>alpha</code>.</div>
+
+  <h4>Vocabulary: parameters vs attributes</h4>
+  <ul>
+    <li><strong>Parameters</strong> — chosen before training. Key ones for Ridge: <code>alpha</code> (regularization strength), <code>fit_intercept</code>, <code>solver</code> (usually <code>'auto'</code>), <code>max_iter</code>/<code>tol</code> for iterative solvers, <code>random_state</code> (used by some solvers).</li>
+    <li><strong>Attributes</strong> — appear after <code>.fit()</code>: <code>coef_</code>, <code>intercept_</code>, <code>n_features_in_</code> (and <code>feature_names_in_</code> when available).</li>
+  </ul>
+
+  <h4>Ridge Parameters to Know</h4>
+  <ul>
+    <li><strong>alpha</strong> (default=1.0): L2 strength. Larger → more shrinkage. Tune via <code>RidgeCV</code> or <code>GridSearchCV</code>.</li>
+    <li><strong>fit_intercept</strong> (default=True): Intercept term; keep True unless your design already includes a bias column.</li>
+    <li><strong>solver</strong> (default='auto'): Lets sklearn choose an algorithm based on data. You can also try <code>'sag'</code>/<code>'saga'</code> for large-scale, or <code>'lsqr'</code>/<code>'cholesky'</code>/<code>'svd'</code> in specific cases.</li>
+    <li><strong>max_iter</strong>, <strong>tol</strong>: Relevant for iterative solvers (e.g., <code>'sag'</code>/<code>'saga'</code>); increase <code>max_iter</code> if you see convergence warnings.</li>
+  </ul>
+
+  <h4>Ridge Attributes to Know</h4>
+  <ul>
+    <li><strong>intercept_</strong> : Independent term in the linear model.</li>
+    <li><strong>coef_</strong> : Estimated coefficients after L2 shrinkage.</li>
+    <li><strong>n_features_in_</strong> : Number of features seen during fit.</li>
+    <li><strong>feature_names_in_</strong> : Present only if the estimator received a DataFrame directly; with a <code>Pipeline</code> that outputs NumPy arrays, names are not propagated by default.</li>
+  </ul>
+
+  <h4>What you usually set</h4>
+  <ul>
+    <li><strong>alpha</strong> (via CV).</li>
+    <li><strong>Scaling</strong>: include <code>StandardScaler()</code> in a pipeline.</li>
+    <li><strong>max_iter</strong> only if using iterative solvers and you see convergence warnings.</li>
+  </ul>
+
 </section>
+
 
 <section id="lasso">
   <h2>4) Lasso (L1 Regularization)</h2>
