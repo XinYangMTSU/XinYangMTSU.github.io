@@ -417,11 +417,11 @@ print(f"Polynomial features: {linear_reg.n_features_in_}")
           <ul>
               <li>For <strong>n</strong> original features with degree <strong>d</strong>, the total number of polynomial features is:</li>
                \(
-                   C(n + d, d) - 1 = \frac{(n + d)!}{(d! \times n!)} - 1
+                   C(n + d, d) - 1 = \frac{(n + d)!}{d! \times n!} - 1
                \)
               <li>For n=8, d=2:</li>
                \(
-                C(8 + 2, 2) - 1 = C(10, 2) - 1 = \frac{10!}{(2! \times 8!)} -1 = \frac{10 \times 9}{(2 \times 1)} - 1 = 44
+                C(8 + 2, 2) - 1 = C(10, 2) - 1 = \frac{10!}{2! \times 8!} -1 = \frac{10 \times 9 \times 8!}{2! \times 8!} -1 = \frac{10 \times 9}{(2 \times 1)} - 1 = 45 - 1 = 44
                 \)
           </ul>
           
