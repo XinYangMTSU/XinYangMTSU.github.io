@@ -257,6 +257,7 @@ ols_noint = LinearRegression(fit_intercept=False).fit(X_train, y_train)</code></
 
 
 <section id="polynomial">
+  
         <h2>2) Polynomial Regression = PolynomialFeatures + LinearRegression </h2>
          <div class="note">Combinatorics: output features grow as <code>C(n + d, d) - 1</code> when <code>include_bias=False</code>. Consider regularization and scaling for higher degrees.</div>
         <pre><button class="copy">Copy</button><code>
@@ -459,7 +460,14 @@ LinearRegression(fit_intercept=True)  # Default</code></pre>
                 Usually keep default unless you have specific memory layout needs.</li>
         </ul>
 
-      
+        <h4>PolynomialFeatures Attributes to Know</h4>
+        <ul>
+            <li><strong>n_features_in_</strong> :  Number of features seen during fit.</li>
+            <li><strong>feature_names_in_</strong> : Names of features seen during fit.</li>
+            <li><strong>n_output_features_</strong> : The total number of polynomial output features.
+            The number of output features is computed by iterating over all suitably sized combinations of input features.</li>
+        </ul>
+  
         <h4>Pipeline Benefits</h4>
         <ul>
             <li><strong>Prevents Data Leakage</strong>: Ensures preprocessing is fitted only on training data,
