@@ -404,6 +404,17 @@ print(f"Polynomial features: {linear_reg.n_features_in_}")
 </li>
 <li><strong>Total:</strong> 8 original + 8 squared + 28 interactions = <strong>44 features</strong></li>
 </ul>
+
+          <b style="text-decoration: underline;"> The mathematical formula:</b>
+            <p>For <strong>n</strong> original features with degree <strong>d</strong>, the total number of polynomial features is:</p>
+            \(
+               C(n + d, d) = \frac{(n + d)!}{(d! \times n!)}</strong>
+           \)
+            <p>For n=8, d=2:</p>
+            \(
+                C(8 + 2, 2) = C(10, 2) = \frac{10!}{(2! \times 8!)} = \frac{10 \times 9}{(2 \times 1)} = 45
+            \)
+          
           <br>
           
             <li><strong>Pipeline</strong> — chains preprocessing and model steps together.
