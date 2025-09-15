@@ -135,14 +135,14 @@ y_pred = ols.predict(X_test)
   
     <h4>Parameters to know</h4>
     <ul>
-      <li><code>fit_intercept=True</code> — Add an intercept term. If your design matrix <code>X</code> already contains a bias column (e.g., from <code>PolynomialFeatures(include_bias=True)</code>), set <code>fit_intercept=False</code> to avoid a duplicated constant.
+      <li><code>fit_intercept=True</code> : Add an intercept term. If your design matrix <code>X</code> already contains a bias column (e.g., from <code>PolynomialFeatures(include_bias=True)</code>), set <code>fit_intercept=False</code> to avoid a duplicated constant.
         <pre><button class="copy">Copy</button><code># If X already has a column of ones
 ols_noint = LinearRegression(fit_intercept=False).fit(X_train, y_train)</code></pre>
       </li>
-      <li><code>positive=False</code> — Constrain coefficients to be ≥ 0 (supported for dense inputs). Useful when coefficients must be non‑negative by domain knowledge (e.g., additive parts). 
+      <li><code>positive=False</code> : When set to True, forces the coefficients to be positive. This option is only supported for dense arrays. Useful when coefficients must be non‑negative by domain knowledge (e.g., additive parts). 
         May be slower and can reduce accuracy if the true relationship has negative effects.
       </li>
-      <li><code>copy_X=True</code> — If <code>False</code>, <code>X</code> may be overwritten during fitting (slightly lower memory). Keep <code>True</code> unless memory is tight.</li>
+      <li><code>copy_X</code> (default=True) : If True, X will be copied; else, it may be overwritten. Keep <code>True</code> unless memory is tight.</li>
       <li><code>n_jobs=None</code> — Parallelize across targets when <code>y</code> is 2D (multi‑output regression).</li>
 
     </ul>
