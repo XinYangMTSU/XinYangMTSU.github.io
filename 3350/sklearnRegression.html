@@ -377,7 +377,15 @@ print(f"Polynomial features: {linear_reg.n_features_in_}")
             <li><strong>Polynomial Features</strong> — transforms original features into polynomial combinations.
                 For degree=2 with features [x1, x2]: creates [x1, x2, x1², x2², x1*x2].
                 This allows linear regression to capture non-linear relationships.</li>
-            <br>
+              <br>
+            <li><strong>Pipeline</strong> — chains preprocessing and model steps together.
+                Ensures transformations are applied consistently to train/test data and prevents data leakage.</li>
+              <br>
+            <li><strong>Feature Explosion</strong> — polynomial features can create many new features quickly.
+                With n original features and degree d: creates C(n+d, d) features.
+                Example: 8 features, degree 2 → 44 features; degree 3 → 164 features!</li>
+
+           <br>
             <b style="text-decoration: underline;">Polynomial Features Breakdown: 8 Original Features --> 44 Total Features</b>
 
         <ul class="poly-expanded-list">
@@ -419,11 +427,6 @@ print(f"Polynomial features: {linear_reg.n_features_in_}")
           
           <br>
           
-            <li><strong>Pipeline</strong> — chains preprocessing and model steps together.
-                Ensures transformations are applied consistently to train/test data and prevents data leakage.</li>
-            <li><strong>Feature Explosion</strong> — polynomial features can create many new features quickly.
-                With n original features and degree d: creates C(n+d, d) features.
-                Example: 8 features, degree 2 → 44 features; degree 3 → 164 features!</li>
         </ul>
 
         <h4>PolynomialFeatures Parameters to Know</h4>
