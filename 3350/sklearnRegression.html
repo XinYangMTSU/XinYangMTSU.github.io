@@ -627,12 +627,6 @@ print("alpha:", r.alpha)
   <div class="note">Params to discuss: <code>alpha</code>, <code>fit_intercept</code>, <code>solver</code>, <code>max_iter</code>, <code>tol</code>. <br>
       <strong>Scale your features</strong> (as shown) so the L2 penalty treats features fairly. Use <code>RidgeCV</code> or <code>GridSearchCV</code> to select a good <code>alpha</code>.</div>
 
-  <h4>Vocabulary: parameters vs attributes</h4>
-  <ul>
-    <li><strong>Parameters</strong> — chosen before training. Key ones for Ridge: <code>alpha</code> (regularization strength), <code>fit_intercept</code>, <code>solver</code> (usually <code>'auto'</code>), <code>max_iter</code>/<code>tol</code> for iterative solvers, <code>random_state</code> (used by some solvers).</li>
-    <li><strong>Attributes</strong> — appear after <code>.fit()</code>: <code>coef_</code>, <code>intercept_</code>, <code>n_features_in_</code> (and <code>feature_names_in_</code> when available).</li>
-  </ul>
-
   <h4>Ridge Parameters to Know</h4>
   <ul>
     <li><strong>alpha</strong> (default=1.0): L2 strength. Larger → more shrinkage. Tune via <code>RidgeCV</code> or <code>GridSearchCV</code>.</li>
@@ -902,17 +896,9 @@ print("feature_names_in_:", list(X.columns))
     ElasticNet blends L1 (sparsity/feature selection) and L2 (stability/shrinkage).
   </div>
 
-  <h4>Vocabulary: parameters vs attributes</h4>
+  <h4>Vocabulary: Blended penalty</h4>
   <ul>
-    <li><strong>Parameters</strong> — set before training.
-      Examples for <code>ElasticNet</code>:
-      <code>alpha</code> (overall regularization strength),
-      <code>l1_ratio</code> (0 → Ridge-like, 1 → Lasso-like),
-      <code>max_iter</code>, <code>tol</code>, <code>fit_intercept</code>.
-    </li>
-    <li><strong>Attributes</strong> — available after <code>.fit()</code>.
-      Examples: <code>coef_</code>, <code>intercept_</code>, <code>n_iter_</code>, <code>n_features_in_</code>.
-    </li>
+    
     <li><strong>Blended penalty</strong> — L1 encourages zeros (feature selection), L2 stabilizes and shares weight across correlated predictors.</li>
   </ul>
 
