@@ -635,8 +635,15 @@ print("alpha:", r.alpha)
     <li><strong>fit_intercept</strong> (default=True): Intercept term; keep True unless your design already includes a bias column.</li>
     <li><strong>solver</strong> (default='auto'): Solver to use in the computational routines. 'auto' chooses the solver automatically based on the type of data. You can also try <code>'sag'</code>/<code>'saga'</code> for large-scale, or <code>'lsqr'</code>/<code>'cholesky'</code>/<code>'svd'</code> in specific cases.</li>
     <li><strong>max_iter</strong> (default=None) : Maximum number of iterations for conjugate gradient solver.  (e.g., <code>'sag'</code>/<code>'saga'</code>); increase <code>max_iter</code> if you see convergence warnings.</li>
-    <li><strong>tol</strong>: The precision of the solution (coef_) is determined by tol which specifies a different convergence criterion for each solver.</li>
-
+    <li><strong>tol</strong> (default=1e-4): The precision of the solution (coef_) is determined by tol which specifies a different convergence criterion for each solver.</li>
+    <li><strong>random_state</strong> (default=None): Controls the shuffling of data when using solvers that rely on stochastic (randomized) optimization, specifically sag (Stochastic Average Gradient) and saga (a variant with L1 support).</li>
+    When you set solver="auto"
+    <ul>
+        <li>solver="auto" means scikit-learn will pick the best solver based on your data (size, penalty, etc.).</li>
+        <li>If the automatically chosen solver is deterministic (lbfgs, newton-cg, liblinear, etc.), the random_state parameter has no effect.</li>
+        <li>If the automatically chosen solver is stochastic (sag or saga), then random_state does matter, because those solvers shuffle the training data.</li>
+    </ul>
+    
   </ul>
 
   <h4>Ridge Attributes to Know</h4>
