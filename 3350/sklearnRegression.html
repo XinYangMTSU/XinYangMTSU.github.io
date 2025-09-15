@@ -167,10 +167,6 @@ ols_noint = LinearRegression(fit_intercept=False).fit(X_train, y_train)</code></
     <ul>
       <li><strong>Nothing</strong> — defaults are fine for most uses.</li>
       <li><code>fit_intercept=False</code> <em>only</em> if your <code>X</code> already has a bias column (e.g., a column of ones or <code>PolynomialFeatures(include_bias=True)</code>).</li>
-      <li><code>sample_weight=...</code> at <code>.fit()</code> time when some samples should count more/less (heteroscedastic noise, duplicates, domain weighting).
-        <pre><button class="copy">Copy</button><code>w = np.ones(len(y_train)); w[y_train &gt; y_train.mean()] = 2.0
-ols_w = LinearRegression().fit(X_train, y_train, sample_weight=w)</code></pre>
-      </li>
       <li><code>positive=True</code> <em>only</em> if coefficients must be non‑negative by domain constraints.</li>
       <li><code>n_jobs</code> only matters for multi‑output targets (<code>y</code> is 2D); otherwise it has no effect.</li>
       <li><code>copy_X=False</code> is a niche memory optimization; keep <code>True</code> unless you know you need it.</li>
