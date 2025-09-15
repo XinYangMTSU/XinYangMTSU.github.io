@@ -477,12 +477,12 @@ LinearRegression(fit_intercept=True)  # Default</code></pre>
           <pre><button class="copy">Copy</button><code>poly_lr = Pipeline([
               ("poly", PolynomialFeatures(degree=2, include_bias=False)),
               ("scaler", StandardScaler()),
-                  ("lr", LinearRegression())
-          ])</code></pre>
+              ("lr", LinearRegression())
+])</code></pre>
           You can access each step like this:
            <pre><button class="copy">Copy</button><code>poly   = poly_lr.named_steps["poly"]     # the PolynomialFeatures transformer
-      scaler = poly_lr.named_steps["scaler"]   # the StandardScaler
-      lr     = poly_lr.named_steps["lr"]       # the LinearRegression estimator
+scaler = poly_lr.named_steps["scaler"]   # the StandardScaler
+lr     = poly_lr.named_steps["lr"]       # the LinearRegression estimator
             </code></pre>
             <li><strong>Consistent Workflow</strong>: Same preprocessing applied automatically during prediction.</li>
             <li><strong>Grid Search Friendly</strong>: Can tune both preprocessing and model parameters together.
