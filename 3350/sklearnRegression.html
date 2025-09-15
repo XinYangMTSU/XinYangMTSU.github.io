@@ -949,6 +949,16 @@ print("feature_names_in_:", list(X.columns))
     <li><strong>fit_intercept=False</strong> only if your <code>X</code> already includes a bias column.</li>
   </ul>
 
+  <h4>ElasticNet Attributes to Know</h4>
+<ul>
+  <li><strong>intercept_</strong>: Independent bias term of the model.</li>
+  <li><strong>coef_</strong>: Learned feature weights. 
+    <br>L1 penalty can drive some coefficients to 0 (sparsity), while L2 shrinks but rarely zeros them completely.</li>
+  <li><strong>n_features_in_</strong>: Number of input features seen during fit.</li>
+  <li><strong>feature_names_in_</strong>: Names of input features (if provided).</li>
+  <li><strong>n_iter_</strong>: Actual number of iterations run until convergence.</li>
+</ul>
+
   <h4>What you usually set</h4>
   <ul>
     <li><strong>alpha</strong> and <strong>l1_ratio</strong> via <code>ElasticNetCV</code>.</li>
