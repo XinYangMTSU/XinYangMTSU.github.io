@@ -246,7 +246,7 @@ ols_noint = LinearRegression(fit_intercept=False).fit(X_train, y_train)</code></
     </ul>
 
 
-    <h4>What you usually set (90% of the time)</h4>
+    <h4>What you usually set</h4>
     <ul>
       <li><strong>Nothing</strong> — defaults are fine for most uses.</li>
       <li><code>fit_intercept=False</code> <em>only</em> if your <code>X</code> already has a bias column 
@@ -478,11 +478,27 @@ LinearRegression(fit_intercept=True)  # Default</code></pre>
             <li><strong>Consistent Workflow</strong>: Same preprocessing applied automatically during prediction.</li>
           
             <li><strong>Grid Search Friendly</strong>: Can tune both preprocessing and model parameters together.
-                <pre><button class="copy">Copy</button><code># Can tune both polynomial degree and regularization
+                <pre><button class="copy">Copy</button><code>from sklearn.model_selection import GridSearchCV
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler, PolynomialFeatures
+from sklearn.linear_model import Ridge
+import numpy as np
+
+pipe = Pipeline([
+    ("poly", PolynomialFeatures(include_bias=False)),
+    ("scaler", StandardScaler()),
+    ("ridge", Ridge())
+])
+
 param_grid = {
-    'poly__degree': [1, 2, 3],
-    'linear__fit_intercept': [True, False]
-}</code></pre>
+    "poly__degree": [1, 2, 3],
+    "ridge__alpha": np.logspace(-3, 3, 30),
+}
+
+search = GridSearchCV(pipe, param_grid, cv=5, n_jobs=-1, scoring="r2")
+search.fit(X_train, y_train)
+print(search.best_params_)
+</code></pre>
             </li>
           
             <li><strong>named_steps</strong>: named_steps is a handy attribute on a scikit-learn Pipeline.
