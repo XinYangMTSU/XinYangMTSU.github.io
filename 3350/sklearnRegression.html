@@ -605,26 +605,9 @@ print("ElasticNetCV Test R^2:", enet_cv.score(X_test, y_test))
   </code></pre>
 </section>
 
-<section id="plot">
-  <h2>7) Quick Plot — Predicted vs Actual </h2>
-  <h4>Swap <code>model</code> to compare OLS / Ridge / Lasso / ENet / Poly pipelines</h4>
-  <pre><button class="copy">Copy</button><code>
-# Choose a fitted model object, e.g. ridge, lasso, enet, poly2_ols, ridge_cv, ...
-model = ridge
-
-yhat = model.predict(X_test)
-plt.figure()
-plt.scatter(y_test, yhat, alpha=0.6)
-plt.xlabel("Actual"); plt.ylabel("Predicted")
-plt.title("Predicted vs Actual")
-lim = [min(y_test.min(), yhat.min()), max(y_test.max(), yhat.max())]
-plt.plot(lim, lim, linestyle='--')
-plt.show()
-  </code></pre>
-</section>
 
 <section id="refs">
-  <h2>8) Official References</h2>
+  <h2>7) Official References</h2>
   <ul class="toc">
     <li><a target="_blank" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html">sklearn.linear_model.LinearRegression</a></li>
     <li><a target="_blank" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html">sklearn.preprocessing.PolynomialFeatures</a></li>
