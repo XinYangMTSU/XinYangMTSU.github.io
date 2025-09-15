@@ -259,7 +259,7 @@ ols_noint = LinearRegression(fit_intercept=False).fit(X_train, y_train)</code></
 <section id="polynomial">
   
         <h2>2) Polynomial Regression = PolynomialFeatures + LinearRegression </h2>
-         <div class="note">Combinatorics: output features grow as <code>C(n + d, d) - 1</code> when <code>include_bias=False</code>. Consider regularization and scaling for higher degrees.</div>
+         
         <pre><button class="copy">Copy</button><code>
 # ========================================================
 # California Housing — Polynomial Regression
@@ -456,8 +456,9 @@ LinearRegression(fit_intercept=True)  # Default</code></pre>
 # interaction_only=False → [x1, x2, x1², x2², x1*x2] 
 # interaction_only=True  → [x1, x2, x1*x2]  # No x1², x2²</code></pre>
             </li>
-            <li><strong>order</strong> (default='C'): Output array order. 'C' for C-style, 'F' for Fortran-style.
-                Usually keep default unless you have specific memory layout needs.</li>
+            <li><strong>order</strong> (default='C'): order='C' (row-major, default): rows are stored contiguously in memory. 
+              Most scikit-learn estimators expect/convert to this, so it’s the safe default.
+              order='F' (column-major / Fortran): columns are contiguous.</li>
         </ul>
 
         <h4>PolynomialFeatures Attributes to Know</h4>
