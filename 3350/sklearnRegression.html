@@ -772,6 +772,25 @@ print("nonzero coefficients:", np.count_nonzero(lasso.coef_))
     <li><strong>selection</strong> (default="cyclic"): Coordinate descent order. "random" can converge faster sometimes.
     If set to 'random', a random coefficient is updated every iteration rather than looping over features sequentially by default. 
     This (setting to ‘random’) often leads to significantly faster convergence especially when tol is higher than 1e-4.</li>
+    Lasso in scikit-learn is trained using coordinate descent:
+    <ul>
+        <li>It updates one coefficient (feature weight) at a time while holding the others fixed.</li>
+        <li>This process repeats until convergence.</li>
+    </ul>
+    Two ways of choosing which coefficient to update:
+    <ul>
+        <li>selection="cyclic" (default)</li>
+        <ul>
+            <li>Goes through the features in order:</li>
+            <li>Update coef 1 → coef 2 → coef 3 → … → coef n, then back to coef 1.</li>
+            <li>Very predictable and simple.</li>
+        </ul>
+        <li>selection="random"</li>
+        <ul>
+            <li>At each step, picks a random coefficient to update instead of following a fixed order.</li>
+            <li>Over time, all coefficients still get updated, but the order is shuffled.</li>
+        </ul>
+    </ul>
   </ul>
 
   <h4>Lasso Attributes to Know</h4>
