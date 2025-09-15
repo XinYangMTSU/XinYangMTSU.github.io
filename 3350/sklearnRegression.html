@@ -764,11 +764,14 @@ print("nonzero coefficients:", np.count_nonzero(lasso.coef_))
 
   <h4>Lasso Parameters to Know</h4>
   <ul>
-    <li><strong>alpha</strong> (default=1.0): Regularization strength. Higher → more shrinkage and sparsity.</li>
+    <li><strong>alpha</strong> (default=1.0): Constant that multiplies the L1 term, controlling regularization strength. alpha must be a non-negative float i.e. in [0, inf).
+      Higher → more shrinkage and sparsity.</li>
     <li><strong>max_iter</strong> (default=1000): Max optimization iterations. Raise if you see convergence warnings.</li>
     <li><strong>tol</strong> (default=1e-4): Optimization tolerance. Smaller → stricter convergence.</li>
     <li><strong>fit_intercept</strong> (default=True): Whether to add an intercept term.</li>
-    <li><strong>selection</strong> (default="cyclic"): Coordinate descent order. "random" can converge faster sometimes.</li>
+    <li><strong>selection</strong> (default="cyclic"): Coordinate descent order. "random" can converge faster sometimes.
+    If set to 'random', a random coefficient is updated every iteration rather than looping over features sequentially by default. 
+    This (setting to ‘random’) often leads to significantly faster convergence especially when tol is higher than 1e-4.</li>
   </ul>
 
   <h4>Lasso Attributes to Know</h4>
