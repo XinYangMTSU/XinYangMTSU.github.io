@@ -377,43 +377,8 @@ print(f"Polynomial features: {linear_reg.n_features_in_}")
             <li><strong>Polynomial Features</strong> — transforms original features into polynomial combinations.
                 For degree=2 with features [x1, x2]: creates [x1, x2, x1², x2², x1*x2].
                 This allows linear regression to capture non-linear relationships.</li>
-            <li><strong>Pipeline</strong> — chains preprocessing and model steps together.
-                Ensures transformations are applied consistently to train/test data and prevents data leakage.</li>
-            <li><strong>Feature Explosion</strong> — polynomial features can create many new features quickly.
-                With n original features and degree d: creates C(n+d, d) features.
-                Example: 8 features, degree 2 → 44 features; degree 3 → 164 features!</li>
-        </ul>
 
-        <h4>PolynomialFeatures Parameters</h4>
-        <ul>
-            <li><strong>degree</strong> (default=2): The degree of polynomial features.
-                Higher degrees capture more complex relationships but risk overfitting.
-                <pre><button class="copy">Copy</button><code># Linear: y = a + b*x1 + c*x2
-poly_1 = PolynomialFeatures(degree=1)  # Just original features
-
-# Quadratic: y = a + b*x1 + c*x2 + d*x1² + e*x2² + f*x1*x2  
-poly_2 = PolynomialFeatures(degree=2)  # Adds squared and interaction terms
-
-# Cubic: adds x1³, x2³, x1²*x2, x1*x2², etc.
-poly_3 = PolynomialFeatures(degree=3)</code></pre>
-            </li>
-            <li><strong>include_bias</strong> (default=True): Whether to include a bias column (column of ones).
-                Set to False when using with LinearRegression(fit_intercept=True) to avoid redundancy.
-                <pre><button class="copy">Copy</button><code># Recommended: let LinearRegression handle intercept
-PolynomialFeatures(degree=2, include_bias=False)
-LinearRegression(fit_intercept=True)  # Default</code></pre>
-            </li>
-            <li><strong>interaction_only</strong> (default=False): If True, only interaction features are produced.
-                No pure polynomial terms (like x1², x2²), only products between different features (x1*x2).
-                <pre><button class="copy">Copy</button><code># With [x1, x2] and degree=2:
-# interaction_only=False → [x1, x2, x1², x2², x1*x2] 
-# interaction_only=True  → [x1, x2, x1*x2]  # No x1², x2²</code></pre>
-            </li>
-            <li><strong>order</strong> (default='C'): Output array order. 'C' for C-style, 'F' for Fortran-style.
-                Usually keep default unless you have specific memory layout needs.</li>
-        </ul>
-
-        <h4>Polynomial Features Breakdown: 8 Original Features --> 44 Total Features</h4>
+            <h4>Polynomial Features Breakdown: 8 Original Features --> 44 Total Features</h4>
 
         <ul class="poly-expanded-list">
 <li><strong>Original features (8):</strong>
@@ -439,6 +404,44 @@ LinearRegression(fit_intercept=True)  # Default</code></pre>
 </li>
 <li><strong>Total:</strong> 8 original + 8 squared + 28 interactions = <strong>44 features</strong></li>
 </ul>
+          
+            <li><strong>Pipeline</strong> — chains preprocessing and model steps together.
+                Ensures transformations are applied consistently to train/test data and prevents data leakage.</li>
+            <li><strong>Feature Explosion</strong> — polynomial features can create many new features quickly.
+                With n original features and degree d: creates C(n+d, d) features.
+                Example: 8 features, degree 2 → 44 features; degree 3 → 164 features!</li>
+        </ul>
+
+        <h4>PolynomialFeatures Parameters</h4>
+        <ul>
+            <li><strong>degree</strong> (default=2): The degree of polynomial features.
+                Higher degrees capture more complex relationships but risk overfitting.
+                <pre><button class="copy">Copy</button><code># Linear: y = a + b*x1 + c*x2
+poly_1 = PolynomialFeatures(degree=1)  # Just original features
+
+# Quadratic: y = a + b*x1 + c*x2 + d*x1² + e*x2² + f*x1*x2  
+poly_2 = PolynomialFeatures(degree=2)  # Adds squared and interaction terms
+
+# Cubic: adds x1³, x2³, x1²*x2, x1*x2², etc.
+poly_3 = PolynomialFeatures(degree=3)</code></pre>
+            </li>
+          
+            <li><strong>include_bias</strong> (default=True): Whether to include a bias column (column of ones).
+                Set to False when using with LinearRegression(fit_intercept=True) to avoid redundancy.
+                <pre><button class="copy">Copy</button><code># Recommended: let LinearRegression handle intercept
+PolynomialFeatures(degree=2, include_bias=False)
+LinearRegression(fit_intercept=True)  # Default</code></pre>
+            </li>
+            <li><strong>interaction_only</strong> (default=False): If True, only interaction features are produced.
+                No pure polynomial terms (like x1², x2²), only products between different features (x1*x2).
+                <pre><button class="copy">Copy</button><code># With [x1, x2] and degree=2:
+# interaction_only=False → [x1, x2, x1², x2², x1*x2] 
+# interaction_only=True  → [x1, x2, x1*x2]  # No x1², x2²</code></pre>
+            </li>
+            <li><strong>order</strong> (default='C'): Output array order. 'C' for C-style, 'F' for Fortran-style.
+                Usually keep default unless you have specific memory layout needs.</li>
+        </ul>
+
       
         <h4>Pipeline Benefits</h4>
         <ul>
