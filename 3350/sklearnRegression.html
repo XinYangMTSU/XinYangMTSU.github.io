@@ -255,23 +255,200 @@ ols_noint = LinearRegression(fit_intercept=False).fit(X_train, y_train)</code></
 
 </section>
 
-<section id="poly">
-  <h2>2) PolynomialFeatures + LinearRegression</h2>
-  <h4>Pipeline with degree‑2 features</h4>
-  <pre><button class="copy">Copy</button><code>
+
+ 
+
+<section id="polynomial">
+        <h2>2) Polynomial Regression = PolynomialFeatures + LinearRegression </h2>
+         <div class="note">Combinatorics: output features grow as <code>C(n + d, d) - 1</code> when <code>include_bias=False</code>. Consider regularization and scaling for higher degrees.</div>
+        <pre><button class="copy">Copy</button><code>
+# ========================================================
+# California Housing — Polynomial Regression
+# Uses PolynomialFeatures + LinearRegression pipeline
+# Shows BOTH training and testing metrics
+# ========================================================
+import numpy as np
+import pandas as pd
+
+from sklearn.datasets import fetch_california_housing
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import Pipeline
+from sklearn.metrics import r2_score, mean_squared_error
 
-poly2_ols = Pipeline([
-    ("poly", PolynomialFeatures(degree=2, include_bias=False)),
-    ("ols", LinearRegression())
+RANDOM_STATE = 42
+
+# 1) Load data
+data = fetch_california_housing(as_frame=True)
+df_all = data.frame  # features + target ('MedHouseVal') in one DataFrame
+
+# 2) Data cleaning (check missing values and duplicates)
+has_missing = df_all.isna().any().any()
+duplicates_found = int(df_all.duplicated().sum())
+
+if duplicates_found > 0:
+    df_all = df_all.drop_duplicates().reset_index(drop=True)
+if has_missing:
+    df_all = df_all.fillna(df_all.mean(numeric_only=True))
+
+# Get X, y after cleaning
+X = df_all.drop(columns=["MedHouseVal"])
+y = df_all["MedHouseVal"]
+
+# 3) Train / test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=RANDOM_STATE
+)
+
+# 4) Create Polynomial Regression pipeline
+# degree=2: adds x^2, x1*x2, etc. terms
+poly_reg = Pipeline([
+    ('poly', PolynomialFeatures(degree=2, include_bias=False)),
+    ('linear', LinearRegression())
 ])
 
-poly2_ols.fit(X_train, y_train)
-print("Poly‑2 OLS Test R^2:", poly2_ols.score(X_test, y_test))
-  </code></pre>
-  <div class="note">Combinatorics: output features grow as <code>C(n + d, d) - 1</code> when <code>include_bias=False</code>. Consider regularization and scaling for higher degrees.</div>
-</section>
+# Fit the pipeline
+poly_reg.fit(X_train, y_train)
+
+# 5) Predict and compute metrics for TRAIN and TEST
+# --- Train ---
+y_pred_train = poly_reg.predict(X_train)
+mse_train = mean_squared_error(y_train, y_pred_train)
+rmse_train = np.sqrt(mse_train)
+r2_train = r2_score(y_train, y_pred_train)
+sse_train = np.sum((y_train - y_pred_train) ** 2)
+
+# --- Test ---
+y_pred_test = poly_reg.predict(X_test)
+mse_test = mean_squared_error(y_test, y_pred_test)
+rmse_test = np.sqrt(mse_test)
+r2_test = r2_score(y_test, y_pred_test)
+sse_test = np.sum((y_test - y_pred_test) ** 2)
+
+# 6) Put results in a tidy DataFrame
+results_df = pd.DataFrame(
+    [
+        {"Split": "Train", "R^2": r2_train, "RMSE": rmse_train, "MSE": mse_train, "SSE": sse_train},
+        {"Split": "Test",  "R^2": r2_test,  "RMSE": rmse_test,  "MSE": mse_test,  "SSE": sse_test},
+    ]
+).set_index("Split")
+
+# 7) Results
+print(f"any_missing: {has_missing}")
+print(f"duplicates_found: {duplicates_found}")
+print(results_df)
+
+# 8) ## Pipeline and learned attributes
+print("--- Pipeline Information ---")
+print("Pipeline steps:", poly_reg.steps)
+
+# Get the polynomial transformer and linear regression
+poly_features = poly_reg.named_steps['poly']
+linear_reg = poly_reg.named_steps['linear']
+
+print("--- PolynomialFeatures attributes ---")
+print("degree:", poly_features.degree)
+print("n_features_in_:", poly_features.n_features_in_)
+print("n_output_features_:", poly_features.n_output_features_)
+
+print("--- LinearRegression attributes (after polynomial transformation) ---")
+print("coef_.shape:", linear_reg.coef_.shape)
+print("coef_ (first 10):", np.round(linear_reg.coef_[:10], 3))
+print("intercept_:", np.round(float(linear_reg.intercept_), 3))
+print("n_features_in_:", linear_reg.n_features_in_)
+
+if hasattr(linear_reg, 'rank_'):
+    print("rank_:", linear_reg.rank_)
+if hasattr(linear_reg, 'singular_'):
+    print("singular_ (first 5):", np.round(linear_reg.singular_[:5], 3))
+    print(f"Length of singular_: {len(linear_reg.singular_)}")
+
+print(f"Original features: {X.shape[1]}")
+print(f"Polynomial features: {linear_reg.n_features_in_}")
+</code></pre>
+
+        <div class="note">Key components: <code>PolynomialFeatures</code> for feature expansion, <code>Pipeline</code> for combining steps.
+            <br>
+            Parameters to discuss: <code>degree</code>, <code>include_bias</code>, <code>interaction_only</code>.
+        </div>
+
+        <h4>Vocabulary: Polynomial Features</h4>
+        
+        <ul>
+            <li><strong>Polynomial Features</strong> — transforms original features into polynomial combinations.
+                For degree=2 with features [x1, x2]: creates [x1, x2, x1², x2², x1*x2].
+                This allows linear regression to capture non-linear relationships.</li>
+            <li><strong>Pipeline</strong> — chains preprocessing and model steps together.
+                Ensures transformations are applied consistently to train/test data and prevents data leakage.</li>
+            <li><strong>Feature Explosion</strong> — polynomial features can create many new features quickly.
+                With n original features and degree d: creates C(n+d, d) features.
+                Example: 8 features, degree 2 → 44 features; degree 3 → 164 features!</li>
+        </ul>
+
+        <h4>PolynomialFeatures Parameters</h4>
+        <ul>
+            <li><strong>degree</strong> (default=2): The degree of polynomial features.
+                Higher degrees capture more complex relationships but risk overfitting.
+                <pre><button class="copy">Copy</button><code># Linear: y = a + b*x1 + c*x2
+poly_1 = PolynomialFeatures(degree=1)  # Just original features
+
+# Quadratic: y = a + b*x1 + c*x2 + d*x1² + e*x2² + f*x1*x2  
+poly_2 = PolynomialFeatures(degree=2)  # Adds squared and interaction terms
+
+# Cubic: adds x1³, x2³, x1²*x2, x1*x2², etc.
+poly_3 = PolynomialFeatures(degree=3)</code></pre>
+            </li>
+            <li><strong>include_bias</strong> (default=True): Whether to include a bias column (column of ones).
+                Set to False when using with LinearRegression(fit_intercept=True) to avoid redundancy.
+                <pre><button class="copy">Copy</button><code># Recommended: let LinearRegression handle intercept
+PolynomialFeatures(degree=2, include_bias=False)
+LinearRegression(fit_intercept=True)  # Default</code></pre>
+            </li>
+            <li><strong>interaction_only</strong> (default=False): If True, only interaction features are produced.
+                No pure polynomial terms (like x1², x2²), only products between different features (x1*x2).
+                <pre><button class="copy">Copy</button><code># With [x1, x2] and degree=2:
+# interaction_only=False → [x1, x2, x1², x2², x1*x2] 
+# interaction_only=True  → [x1, x2, x1*x2]  # No x1², x2²</code></pre>
+            </li>
+            <li><strong>order</strong> (default='C'): Output array order. 'C' for C-style, 'F' for Fortran-style.
+                Usually keep default unless you have specific memory layout needs.</li>
+        </ul>
+
+        <h4>Pipeline Benefits</h4>
+        <ul>
+            <li><strong>Prevents Data Leakage</strong>: Ensures preprocessing is fitted only on training data,
+                then applied to both train and test sets.</li>
+            <li><strong>Cleaner Code</strong>: Single object to fit, predict, and cross-validate.</li>
+            <li><strong>Consistent Workflow</strong>: Same preprocessing applied automatically during prediction.</li>
+            <li><strong>Grid Search Friendly</strong>: Can tune both preprocessing and model parameters together.
+                <pre><button class="copy">Copy</button><code># Can tune both polynomial degree and regularization
+param_grid = {
+    'poly__degree': [1, 2, 3],
+    'linear__fit_intercept': [True, False]
+}</code></pre>
+            </li>
+        </ul>
+
+        <h4>Common Patterns</h4>
+        <ul>
+            <li><strong>Standard Setup</strong>: 
+                <code>PolynomialFeatures(degree=2, include_bias=False) + LinearRegression()</code></li>
+            <li><strong>With Regularization</strong>: Use Ridge/Lasso instead of LinearRegression to handle
+                the many features created by polynomial expansion.</li>
+            <li><strong>Feature Scaling</strong>: Consider adding StandardScaler before PolynomialFeatures
+                since polynomial terms can have very different scales.</li>
+        </ul>
+
+        <h4>What you usually set (90% of the time)</h4>
+        <ul>
+            <li><strong>degree=2</strong> — good balance between complexity and interpretability.</li>
+            <li><code>include_bias=False</code> — let LinearRegression handle the intercept.</li>
+            <li><strong>Consider regularization</strong> — Ridge/Lasso often better than plain LinearRegression
+                with polynomial features due to the increased number of parameters.</li>
+        </ul>
+    </section>
+
 
 <section id="ridge">
   <h2>3) Ridge (L2 Regularization) </h2>
