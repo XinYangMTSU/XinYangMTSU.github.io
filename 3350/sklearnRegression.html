@@ -150,11 +150,13 @@ print((ols_pos.coef_ >= 0).all())  # True</code></pre>
 
     <h4>Attributes to know</h4>
     <ul>
-      <li><strong>Attributes</strong> — <code>coef_</code> (shape <code>(n_features,)</code> or <code>(n_targets, n_features)</code>), <code>intercept_</code> (scalar or <code>(n_targets,)</code>), <code>rank_</code>, <code>singular_</code>, <code>n_features_in_</code>, <code>feature_names_in_</code> (if available).</li>
-      <li><strong>sample_weight</strong> — Not an init parameter, but <code>.fit(..., sample_weight=...)</code> is supported:
-        <pre><button class="copy">Copy</button><code>w = np.linspace(1, 2, X_train.shape[0])  # example weights
-ols_w = LinearRegression().fit(X_train, y_train, sample_weight=w)</code></pre>
-      </li>
+      <li><strong>intercept_</strong> : Independent term in the linear model. float or array of shape (n_targets,)</li>
+      <li><strong>coef_</strong> : Estimated coefficients for the linear regression problem. coef_array of shape (n_features, ) or (n_targets, n_features)</li>
+      <li><strong>n_features_in_</strong> : Number of features seen during fit. </li>
+      <li><strong>feature_names_in_</strong> : Names of features seen during fit. 
+        Defined only when X has feature names that are all strings.</li>
+      <li><strong>rank_</strong> : Rank of matrix X. Only available when X is dense.</li>
+      <li><strong>singular_</strong> : Singular values of X. Only available when X is dense.</li>
     </ul>
 
 
