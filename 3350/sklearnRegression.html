@@ -655,9 +655,130 @@ print("alpha:", r.alpha)
     <li><strong>Scaling</strong>: include <code>StandardScaler()</code> in a pipeline.</li>
     <li><strong>max_iter</strong> only if using iterative solvers and you see convergence warnings.</li>
   </ul>
-
 </section>
 
+<section id="lasso">
+  <h2>2) Lasso (L1) Regression</h2>
+  <h4></h4>
+
+  <pre><button class="copy">Copy</button><code>
+# ========================================================
+# California Housing — Lasso (L1) Regression
+# Standardizes features (important for L1), train/test split
+# Shows BOTH training and testing metrics + sparsity (# of nonzero coeffs)
+# ========================================================
+import numpy as np
+import pandas as pd
+
+from sklearn.datasets import fetch_california_housing
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import Lasso
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import r2_score, mean_squared_error
+
+RANDOM_STATE = 42
+
+# 1) Load data
+data = fetch_california_housing(as_frame=True)
+df_all = data.frame
+
+# 2) Data cleaning
+has_missing = df_all.isna().any().any()
+duplicates_found = int(df_all.duplicated().sum())
+
+if duplicates_found > 0:
+    df_all = df_all.drop_duplicates().reset_index(drop=True)
+if has_missing:
+    df_all = df_all.fillna(df_all.mean(numeric_only=True))
+
+X = df_all.drop(columns=["MedHouseVal"])
+y = df_all["MedHouseVal"]
+
+# 3) Train / test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=RANDOM_STATE
+)
+
+# 4) Pipeline: Standardize -> Lasso
+lasso_pipe = Pipeline([
+    ("scaler", StandardScaler()),
+    ("lasso", Lasso(alpha=0.01, max_iter=10_000, tol=1e-4))
+])
+
+lasso_pipe.fit(X_train, y_train)
+
+# 5) Predict and compute metrics
+y_pred_train = lasso_pipe.predict(X_train)
+y_pred_test  = lasso_pipe.predict(X_test)
+
+# Metrics
+def eval_metrics(y_true, y_pred):
+    mse = mean_squared_error(y_true, y_pred)
+    rmse = np.sqrt(mse)
+    r2 = r2_score(y_true, y_pred)
+    sse = np.sum((y_true - y_pred) ** 2)
+    return r2, rmse, mse, sse
+
+r2_train, rmse_train, mse_train, sse_train = eval_metrics(y_train, y_pred_train)
+r2_test,  rmse_test,  mse_test,  sse_test  = eval_metrics(y_test,  y_pred_test)
+
+results_df = pd.DataFrame(
+    [
+        {"Split": "Train", "R^2": r2_train, "RMSE": rmse_train, "MSE": mse_train, "SSE": sse_train},
+        {"Split": "Test",  "R^2": r2_test,  "RMSE": rmse_test,  "MSE": mse_test,  "SSE": sse_test},
+    ]
+).set_index("Split")
+
+print(results_df)
+
+lasso = lasso_pipe.named_steps["lasso"]
+print("--- learned attributes ---")
+print("coef_.shape:", lasso.coef_.shape)
+print("coef_:", np.round(lasso.coef_, 3))
+print("intercept_:", np.round(float(lasso.intercept_), 3))
+print("n_features_in_:", lasso.n_features_in_)
+print("nonzero coefficients:", np.count_nonzero(lasso.coef_))
+</code></pre>
+
+  <div class="note">
+    Params to discuss: <code>alpha</code>, <code>max_iter</code>, <code>tol</code>, <code>fit_intercept</code>, <code>selection</code>.
+    <br>
+    Attributes: <code>coef_</code>, <code>intercept_</code>, <code>n_iter_</code>, <code>n_features_in_</code>.
+  </div>
+
+  <h4>Vocabulary: Sparsity</h4>
+  <ul>
+    <li><strong>Sparsity</strong> — L1 drives many coefficients to zero, performing implicit feature selection.</li>
+  </ul>
+
+  <h4>Lasso Parameters to Know</h4>
+  <ul>
+    <li><strong>alpha</strong> (default=1.0): Regularization strength. Higher → more shrinkage and sparsity.</li>
+    <li><strong>max_iter</strong> (default=1000): Max optimization iterations. Raise if you see convergence warnings.</li>
+    <li><strong>tol</strong> (default=1e-4): Optimization tolerance. Smaller → stricter convergence.</li>
+    <li><strong>fit_intercept</strong> (default=True): Whether to add an intercept term.</li>
+    <li><strong>selection</strong> (default="cyclic"): Coordinate descent order. "random" can converge faster sometimes.</li>
+  </ul>
+
+  <h4>Lasso Attributes to Know</h4>
+  <ul>
+    <li><strong>intercept_</strong>: Independent bias term of the model.</li>
+    <li><strong>coef_</strong>: Learned feature weights (many will be exactly 0).</li>
+    <li><strong>n_features_in_</strong>: Number of input features seen during fit.</li>
+    <li><strong>feature_names_in_</strong>: Names of input features (if provided).</li>
+    <li><strong>n_iter_</strong>: Actual number of iterations run until convergence.</li>
+  </ul>
+
+  <h4>What you usually set</h4>
+  <ul>
+    <li><strong>alpha</strong> — tune with <code>LassoCV</code> for best generalization.</li>
+    <li><strong>max_iter</strong> — increase if you hit convergence warnings.</li>
+    <li><strong>fit_intercept=False</strong> only if <code>X</code> already has a bias column.</li>
+  </ul>
+</section>
+
+  
 
 <section id="lasso">
   <h2>4) Lasso (L1 Regularization)</h2>
