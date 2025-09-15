@@ -213,7 +213,7 @@ if hasattr(lr, 'singular_'):
         The intercept \( \beta_0 \) is stored in <code>intercept_</code>.</li>
     </ul>
   
-    <h4>LinearRegression Parameters to know</h4>
+    <h4>LinearRegression Parameters to Know</h4>
     <ul>
       <li><strong>fit_intercept</strong> (default=True): Add an intercept term. If your design matrix <code>X</code> already contains a bias column (e.g., from <code>PolynomialFeatures(include_bias=True)</code>), set <code>fit_intercept=False</code> to avoid a duplicated constant.
         <pre><button class="copy">Copy</button><code># If X already has a column of ones
@@ -233,7 +233,7 @@ ols_noint = LinearRegression(fit_intercept=False).fit(X_train, y_train)</code></
 
     </ul>
 
-    <h4>LinearRegression Attributes to know</h4>
+    <h4>LinearRegression Attributes to Know</h4>
     <ul>
       <li><strong>intercept_</strong> : Independent term in the linear model. float or array of shape (n_targets,)</li>
       <li><strong>coef_</strong> : Estimated coefficients for the linear regression problem. coef_array of shape (n_features, ) or (n_targets, n_features)</li>
