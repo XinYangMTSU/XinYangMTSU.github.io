@@ -629,10 +629,14 @@ print("alpha:", r.alpha)
 
   <h4>Ridge Parameters to Know</h4>
   <ul>
-    <li><strong>alpha</strong> (default=1.0): L2 strength. Larger → more shrinkage. Tune via <code>RidgeCV</code> or <code>GridSearchCV</code>.</li>
+    <li><strong>alpha</strong> (default=1.0): 
+      Constant that multiplies the L2 term, controlling regularization strength. alpha must be a non-negative float i.e. in [0, inf).
+      L2 strength. Larger → more shrinkage. Tune via <code>RidgeCV</code> or <code>GridSearchCV</code>.</li>
     <li><strong>fit_intercept</strong> (default=True): Intercept term; keep True unless your design already includes a bias column.</li>
-    <li><strong>solver</strong> (default='auto'): Lets sklearn choose an algorithm based on data. You can also try <code>'sag'</code>/<code>'saga'</code> for large-scale, or <code>'lsqr'</code>/<code>'cholesky'</code>/<code>'svd'</code> in specific cases.</li>
-    <li><strong>max_iter</strong>, <strong>tol</strong>: Relevant for iterative solvers (e.g., <code>'sag'</code>/<code>'saga'</code>); increase <code>max_iter</code> if you see convergence warnings.</li>
+    <li><strong>solver</strong> (default='auto'): Solver to use in the computational routines. 'auto' chooses the solver automatically based on the type of data. You can also try <code>'sag'</code>/<code>'saga'</code> for large-scale, or <code>'lsqr'</code>/<code>'cholesky'</code>/<code>'svd'</code> in specific cases.</li>
+    <li><strong>max_iter</strong> (default=None) : Maximum number of iterations for conjugate gradient solver.  (e.g., <code>'sag'</code>/<code>'saga'</code>); increase <code>max_iter</code> if you see convergence warnings.</li>
+    <li><strong>tol</strong>: The precision of the solution (coef_) is determined by tol which specifies a different convergence criterion for each solver.</li>
+
   </ul>
 
   <h4>Ridge Attributes to Know</h4>
