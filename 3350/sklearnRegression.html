@@ -144,7 +144,9 @@ ols_noint = LinearRegression(fit_intercept=False).fit(X_train, y_train)</code></
       </li>
       <li><code>copy_X</code> (default=True) : If True, X will be copied; else, it may be overwritten. Keep <code>True</code> unless memory is tight.</li>
       <li><code>n_jobs</code> (default=None):  is a parameter that controls parallel processing - how many CPU cores to use simultaneously for computation to speed up the process.
-      <b>None</b> Use 1 processor (default). <b>-1</b> Use ALL available processors</li>
+      <b>None</b> Use 1 processor (default). <b>-1</b> Use ALL available processors.
+      Set n_jobs=-1 when doing computationally expensive tasks like grid search or cross-validation to use all your CPU cores and speed things up!
+      </li>
 
     </ul>
 
