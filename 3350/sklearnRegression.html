@@ -146,7 +146,7 @@ ols_noint = LinearRegression(fit_intercept=False).fit(X_train, y_train)</code></
       When copy_X=True (the default), the copied data is stored in the model's internal memory RAM -  it only exists in your program's memory while the model object exists.
       </li>
       <li><strong>n_jobs</strong> (default=None):  is a parameter that controls parallel processing - how many CPU cores to use simultaneously for computation to speed up the process.
-      <b>None</b> Use 1 processor (default). <b>-1</b> Use ALL available processors.
+      <b>None</b> Use 1 processor (default). <b>-1</b> Use ALL available processors. <b>n > 1</b> Use n processors.
       Set n_jobs=-1 when doing computationally expensive tasks like grid search or cross-validation to use all your CPU cores and speed things up!
       </li>
 
