@@ -244,6 +244,10 @@ ols_noint = LinearRegression(fit_intercept=False).fit(X_train, y_train)</code></
       <b>Matrix rank</b> = the number of linearly independent columns (features) in your data matrix.</li>
       <li><strong>singular_</strong> : Singular values of X. Only available when X is dense.
       <b>dense matrix</b> - a matrix where most or all of the entries contain non-zero values, as opposed to a <b>sparse matrix</b> where most entries are zero.
+      
+       A singular value is a nonnegative number from the Singular Value Decomposition (SVD) that measures how much a matrix stretches vectors along specific directions. 
+      In regression, they control stability: large ones carry strong signal, while tiny ones cause instability that Ridge/Lasso fix.
+        Large singular values: Important patterns in your data. Small singular values: Noise or redundant information. Zero singular values: Perfect linear dependence (multicollinearity).
       </li>
     </ul>
 
