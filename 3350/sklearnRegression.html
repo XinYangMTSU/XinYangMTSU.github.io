@@ -455,7 +455,7 @@ param_grid = {
             </li>
         </ul>
 
-        <h4>Common Patterns</h4>
+      <h4>What you usually set</h4>
         <ul>
             <li><strong>Standard Setup</strong>: 
                 <code>PolynomialFeatures(degree=2, include_bias=False) + LinearRegression()</code></li>
@@ -465,13 +465,6 @@ param_grid = {
                 since polynomial terms can have very different scales.</li>
         </ul>
 
-        <h4>What you usually set (90% of the time)</h4>
-        <ul>
-            <li><strong>degree=2</strong> — good balance between complexity and interpretability.</li>
-            <li><code>include_bias=False</code> — let LinearRegression handle the intercept.</li>
-            <li><strong>Consider regularization</strong> — Ridge/Lasso often better than plain LinearRegression
-                with polynomial features due to the increased number of parameters.</li>
-        </ul>
     </section>
 
 
