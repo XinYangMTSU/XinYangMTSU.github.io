@@ -404,16 +404,18 @@ print(f"Polynomial features: {linear_reg.n_features_in_}")
 </li>
 <li><strong>Total:</strong> 8 original + 8 squared + 28 interactions = <strong>44 features</strong></li>
 </ul>
-
+          <br>
           <b style="text-decoration: underline;"> The mathematical formula:</b>
-            <p>For <strong>n</strong> original features with degree <strong>d</strong>, the total number of polynomial features is:</p>
-            \(
-               C(n + d, d) = \frac{(n + d)!}{(d! \times n!)}</strong>
-           \)
-            <p>For n=8, d=2:</p>
-            \(
-                C(8 + 2, 2) = C(10, 2) = \frac{10!}{(2! \times 8!)} = \frac{10 \times 9}{(2 \times 1)} = 45
-            \)
+          <ul>
+              <li>For <strong>n</strong> original features with degree <strong>d</strong>, the total number of polynomial features is:</li>
+               \(
+                   C(n + d, d) - 1 = \frac{(n + d)!}{(d! \times n!)} - 1
+               \)
+              <li>For n=8, d=2:</li>
+               \(
+                C(8 + 2, 2) - 1 = C(10, 2) - 1 = \frac{10!}{(2! \times 8!)} -1 = \frac{10 \times 9}{(2 \times 1)} - 1 = 44
+                \)
+          </ul>
           
           <br>
           
