@@ -642,6 +642,10 @@ print("alpha:", r.alpha)
         <li>solver="auto" means scikit-learn will pick the best solver based on your data (size, penalty, etc.).</li>
         <li>If the automatically chosen solver is deterministic (lbfgs, newton-cg, liblinear, etc.), the random_state parameter has no effect.</li>
         <li>If the automatically chosen solver is stochastic (sag or saga), then random_state does matter, because those solvers shuffle the training data.</li>
+        <ul>
+            <li>If you set random_state=None (default): Each call may produce different results, since the internal RNG (random number generator) is not fixed.</li>
+            <li>If you set random_state=int (e.g., random_state=42): The randomness is reproducible — the shuffle will be the same every run.</li>
+        </ul>
     </ul>
     
   </ul>
