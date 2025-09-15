@@ -143,7 +143,8 @@ ols_noint = LinearRegression(fit_intercept=False).fit(X_train, y_train)</code></
         May be slower and can reduce accuracy if the true relationship has negative effects.
       </li>
       <li><code>copy_X</code> (default=True) : If True, X will be copied; else, it may be overwritten. Keep <code>True</code> unless memory is tight.</li>
-      <li><code>n_jobs=None</code> — Parallelize across targets when <code>y</code> is 2D (multi‑output regression).</li>
+      <li><code>n_jobs</code> (default=None):  is a parameter that controls parallel processing - how many CPU cores to use simultaneously for computation to speed up the process.
+      <b>None</b> Use 1 processor (default). <b>-1</b> Use ALL available processors</li>
 
     </ul>
 
