@@ -304,8 +304,8 @@ X_train, X_test, y_train, y_test = train_test_split(
 # 4) Create Polynomial Regression pipeline
 # degree=2: adds x^2, x1*x2, etc. terms
 poly_reg = Pipeline([
-    ("scaler", StandardScaler()),
     ('poly', PolynomialFeatures(degree=2, include_bias=False)),
+    ("scaler", StandardScaler()),
     ('linear', LinearRegression())
 ])
 
