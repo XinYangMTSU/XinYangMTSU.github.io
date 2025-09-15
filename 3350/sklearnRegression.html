@@ -139,9 +139,8 @@ y_pred = ols.predict(X_test)
         <pre><button class="copy">Copy</button><code># If X already has a column of ones
 ols_noint = LinearRegression(fit_intercept=False).fit(X_train, y_train)</code></pre>
       </li>
-      <li><code>positive=False</code> — Constrain coefficients to be ≥ 0 (supported for dense inputs). Useful when coefficients must be non‑negative by domain knowledge (e.g., additive parts). May be slower and can reduce accuracy if the true relationship has negative effects.
-        <pre><button class="copy">Copy</button><code>ols_pos = LinearRegression(positive=True).fit(X_train, y_train)
-print((ols_pos.coef_ >= 0).all())  # True</code></pre>
+      <li><code>positive=False</code> — Constrain coefficients to be ≥ 0 (supported for dense inputs). Useful when coefficients must be non‑negative by domain knowledge (e.g., additive parts). 
+        May be slower and can reduce accuracy if the true relationship has negative effects.
       </li>
       <li><code>copy_X=True</code> — If <code>False</code>, <code>X</code> may be overwritten during fitting (slightly lower memory). Keep <code>True</code> unless memory is tight.</li>
       <li><code>n_jobs=None</code> — Parallelize across targets when <code>y</code> is 2D (multi‑output regression).</li>
