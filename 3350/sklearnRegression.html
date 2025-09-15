@@ -388,7 +388,7 @@ if hasattr(linear_reg, 'singular_'):
                 Ensures transformations are applied consistently to train/test data and prevents data leakage.</li>
               <br>
             <li><strong>Feature Explosion</strong> — polynomial features can create many new features quickly.
-                With n original features and degree d: creates C(n+d, d) features.
+                With n original features and degree d: creates C(n+d, d) - 1 features.
                 Example: 8 features, degree 2 → 44 features; degree 3 → 164 features!</li>
 
            <br>
