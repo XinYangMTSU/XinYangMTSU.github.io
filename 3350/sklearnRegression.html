@@ -256,8 +256,6 @@ ols_noint = LinearRegression(fit_intercept=False).fit(X_train, y_train)</code></
 </section>
 
 
- 
-
 <section id="polynomial">
         <h2>2) Polynomial Regression = PolynomialFeatures + LinearRegression </h2>
          <div class="note">Combinatorics: output features grow as <code>C(n + d, d) - 1</code> when <code>include_bias=False</code>. Consider regularization and scaling for higher degrees.</div>
@@ -415,6 +413,33 @@ LinearRegression(fit_intercept=True)  # Default</code></pre>
                 Usually keep default unless you have specific memory layout needs.</li>
         </ul>
 
+        <h4>Polynomial Features Breakdown: 8 Original Features --> 44 Total Features</h4>
+
+        <ul class="poly-expanded-list">
+<li><strong>Original features (8):</strong>
+<div>\( x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8 \)</div>
+</li>
+<li><strong>With degree = 2, new features:</strong>
+<ul>
+<li><strong>1. Squared terms (8 new features):</strong>
+<div>\( x_1^2, x_2^2, x_3^2, x_4^2, x_5^2, x_6^2, x_7^2, x_8^2 \)</div>
+</li>
+<li><strong>2. Interaction terms (28 new features):</strong>
+<ul>
+<li>\( x_\timesx_2, x_1\timesx_3, x_1\timesx_4, x_1\timesx_5, x_1\timesx_6, x_1\timesx_7, x_1\timesx_8 \) <b>(7 terms)</b></li>
+<li>\( x_2\timesx_3, x_2\timesx_4, x_2\timesx_5, x_2\timesx_6, x_2\timesx_7, x_2\timesx_8 \) <b>(6 terms)</b></li>
+<li>\( x_3\timesx_4, x_3\timesx_5, x_3\timesx_6, x_3\timesx_7, x_3\timesx_8 \) <b>(5 terms)</b></li>
+<li>\( x_4\timesx_5, x_4\timesx_6, x_4\timesx_7, x_4\timesx_8 \) <b>(4 terms)</b></li>
+<li>\( x_5\timesx_6, x_5\timesx_7, x_5\timesx_8 \) <b>(3 terms)</b></li>
+<li>\( x_6\timesx_7, x_6\timesx_8 \) <b>(2 terms)</b></li>
+<li>\( x_7\timesx_7 \) <b>(1 term)</b></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Total:</strong> 8 original + 8 squared + 28 interactions = <strong>44 features</strong></li>
+</ul>
+      
         <h4>Pipeline Benefits</h4>
         <ul>
             <li><strong>Prevents Data Leakage</strong>: Ensures preprocessing is fitted only on training data,
