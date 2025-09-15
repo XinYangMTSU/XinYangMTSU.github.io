@@ -640,7 +640,10 @@ print("alpha:", r.alpha)
       L2 strength. Larger → more shrinkage. Tune via <code>RidgeCV</code> or <code>GridSearchCV</code>.</li>
     <li><strong>fit_intercept</strong> (default=True): Intercept term; keep True unless your design already includes a bias column.</li>
     <li><strong>solver</strong> (default='auto'): Solver to use in the computational routines. 'auto' chooses the solver automatically based on the type of data. You can also try <code>'sag'</code>/<code>'saga'</code> for large-scale, or <code>'lsqr'</code>/<code>'cholesky'</code>/<code>'svd'</code> in specific cases.</li>
-    <li><strong>max_iter</strong> (default=None) : Maximum number of iterations for conjugate gradient solver.  (e.g., <code>'sag'</code>/<code>'saga'</code>); increase <code>max_iter</code> if you see convergence warnings.</li>
+    <li><strong>max_iter</strong> (default=None) : Maximum number of iterations for conjugate gradient solver. 
+      For ‘sparse_cg’ and ‘lsqr’ solvers, the default value is determined by scipy.sparse.linalg. 
+      For ‘sag’ solver, the default value is 1000. For ‘lbfgs’ solver, the default value is 15000.
+      Increase <code>max_iter</code> if you see convergence warnings.</li>
     <li><strong>tol</strong> (default=1e-4): The precision of the solution (coef_) is determined by tol which specifies a different convergence criterion for each solver.</li>
     <li><strong>random_state</strong> (default=None): Controls the shuffling of data when using solvers that rely on stochastic (randomized) optimization, specifically sag (Stochastic Average Gradient) and saga (a variant with L1 support).</li>
     When you set solver="auto"
