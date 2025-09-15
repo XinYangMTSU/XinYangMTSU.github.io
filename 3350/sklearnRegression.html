@@ -658,7 +658,7 @@ print("alpha:", r.alpha)
 </section>
 
 <section id="lasso">
-  <h2>2) Lasso (L1) Regression</h2>
+  <h2>4) Lasso (L1) Regression</h2>
   <h4></h4>
 
   <pre><button class="copy">Copy</button><code>
@@ -778,29 +778,9 @@ print("nonzero coefficients:", np.count_nonzero(lasso.coef_))
   </ul>
 </section>
 
-  
-
-<section id="lasso">
-  <h2>4) Lasso (L1 Regularization)</h2>
-  <h4>Sparse solutions & feature selection</h4>
-  <pre><button class="copy">Copy</button><code>
-from sklearn.linear_model import Lasso
-from sklearn.pipeline import Pipeline
-
-lasso = Pipeline([
-    ("scaler", StandardScaler()),
-    ("lasso", Lasso(alpha=0.05, max_iter=20000, random_state=RANDOM_STATE))
-])
-
-lasso.fit(X_train, y_train)
-print("Lasso non‑zero features:", np.count_nonzero(lasso[-1].coef_))
-print("Lasso Test R^2:", lasso.score(X_test, y_test))
-  </code></pre>
-  <div class="note">Increase <code>max_iter</code> if you hit convergence warnings. Zeroed coefficients ≠ causal truth.</div>
-</section>
 
 <section id="elasticnet">
-  <h2>3) ElasticNet (L1 + L2)</h2>
+  <h2>5) ElasticNet (L1 + L2)</h2>
   <h4></h4>
 
   <pre><button class="copy">Copy</button><code>
