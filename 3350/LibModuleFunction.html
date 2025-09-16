@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quick Guide: sklearn, Library, Module & Function (Python)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h1 { color:#ffb3de; margin:0 0 8px 0; }
+    h2 {
+      margin: 0 0 10px 0;
+      color: #ffb3de;
+      font-weight: 700;
+    }
+
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+
+    a.anchor {
+      text-decoration: none;
+      margin-left: .5rem;
+      opacity: .6;
+      color: #ffb3de;
+    }
+    a.anchor:hover { opacity: 1; }
+
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+      position: relative;
+    }
+
+    pre .copy {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 4px 8px;
+      background: #21111b;
+      border: 1px solid #ff79c6;
+      border-radius: 6px;
+      color: #ffb3de;
+      font-size: 0.8em;
+      cursor: pointer;
+    }
+    pre .copy:hover {
+      background: #ff79c6;
+      color: #fff;
+    }
+
+    ul.toc {
+      padding-left: 18px;
+      margin-top: 8px;
+    }
+    ul.toc li { margin: 4px 0; }
+    ul.toc a { color: #ffb3de; }
+
+    .note { color:#ffd7f0; opacity:.9; }
+    .pill {
+      display:inline-block; background:#19121a; border:1px solid #ff79c6; border-radius:999px; padding:4px 10px; margin:2px 8px 2px 0; font-size:.9em
+    }
+  </style>
+</head>
+
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<section id="top">
+  <center>
+    <h1>Quick Guide: <span class="pill">sklearn</span> <span class="pill">library</span> <span class="pill">module</span> <span class="pill">function</span></h1>
+  </center>
+</section>
+
+<section id="overview">
+  <h2>1) Overview (The Big Picture)</h2>
+  <p>
+    In Python, code is organized hierarchically:
+  </p>
+  <pre><button class="copy">Copy</button><code>
+# Library (a collection of modules/packages)
+import sklearn            # the scikit-learn machine learning library
+
+# Module (a file or subpackage with code you can import)
+from sklearn import datasets   # a module inside sklearn
+
+# Function (a specific tool inside a module)
+from sklearn.datasets import load_iris  # one function from that module
+
+iris = load_iris()  # use it
+</code></pre>
+</section>
+
+<section id="defs">
+  <h2>2) Definitions</h2>
+
+  <h4>Library</h4>
+  <ul>
+    <li>A <strong>library</strong> is a collection of reusable code (modules/packages) you can import to avoid reinventing the wheel.</li>
+    <li>Examples: <code>numpy</code>, <code>pandas</code>, <code>matplotlib</code>, <code>sklearn</code>.</li>
+  </ul>
+
+  <h4>Package vs Module</h4>
+  <ul>
+    <li>A <strong>module</strong> is a <em>single</em> Python file (<code>something.py</code>) containing functions, classes, or variables.</li>
+    <li>A <strong>package</strong> is a <em>folder</em> (directory) with an <code>__init__.py</code> that can contain <em>many</em> modules and subpackages.</li>
+    <li><span class="note">sklearn is a <em>package</em> composed of many modules like <code>sklearn.datasets</code>, <code>sklearn.linear_model</code>, etc.</span></li>
+  </ul>
+
+  <h4>Function (and Class)</h4>
+  <ul>
+    <li>A <strong>function</strong> is a named block of code you can call (e.g., <code>load_iris()</code>).</li>
+    <li>A <strong>class</strong> defines objects/behaviors (e.g., <code>LinearRegression</code>), which you <em>instantiate</em> then <code>.fit()</code>/<code>.predict()</code>.</li>
+  </ul>
+</section>
+
+<section id="imports">
+  <h2>3) Import Patterns (Best Practice)</h2>
+  <h4>Import a module</h4>
+  <pre><button class="copy">Copy</button><code>
+from sklearn import datasets
+iris = datasets.load_iris()
+</code></pre>
+
+  <h4>Import a specific function or class</h4>
+  <pre><button class="copy">Copy</button><code>
+from sklearn.datasets import load_iris
+iris = load_iris()
+</code></pre>
+
+  <h4>Use aliases for brevity</h4>
+  <pre><button class="copy">Copy</button><code>
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LinearRegression as LR
+
+model = LR().fit([[1],[2],[3]], [2,4,6])
+print(model.predict([[4]]))  # -> [8.]
+</code></pre>
+
+</section>
+
+
+<section id="datasets">
+  <h2>5) What is <code>sklearn.datasets</code>?</h2>
+  <p>
+    <code>sklearn.datasets</code> is a <strong>module</strong> that provides toy datasets, fetchers for real datasets, and synthetic data generators.
+  </p>
+  <ul>
+    <li>Toy loaders: <code>load_iris()</code>, <code>load_diabetes()</code>, <code>load_wine()</code>, <code>load_breast_cancer()</code></li>
+    <li>Fetchers: <code>fetch_california_housing()</code>, <code>fetch_20newsgroups()</code>, <code>fetch_openml()</code></li>
+    <li>Synthetic: <code>make_classification()</code>, <code>make_regression()</code>, <code>make_blobs()</code>, <code>make_moons()</code></li>
+  </ul>
+
+  <h4>Example (Diabetes as DataFrame)</h4>
+  <pre><button class="copy">Copy</button><code>
+from sklearn.datasets import load_diabetes
+
+# Return a Bunch with a pandas DataFrame
+D = load_diabetes(as_frame=True)
+df = D.frame  # features + target
+print(df.head())
+
+# Access pieces
+X = D.data
+y = D.target
+print(D.feature_names)  # ['age','sex','bmi','bp','s1','s2','s3','s4','s5','s6']
+</code></pre>
+</section>
+
+<section id="dirhelp">
+  <h2>6) Discoverability: <code>dir()</code> & <code>help()</code></h2>
+  <p>
+    Use Python’s built‑ins to explore what’s inside a library/module/object and how to use it.
+  </p>
+  <h4><code>dir()</code> — list available names</h4>
+  <pre><button class="copy">Copy</button><code>
+import sklearn
+for name in dir(sklearn):
+    print(name)
+</code></pre>
+
+  <h4><code>help()</code> — show docstring/usage</h4>
+  <pre><button class="copy">Copy</button><code>
+from sklearn.datasets import load_iris
+help(load_iris)      # open docs in the console
+print(load_iris.__doc__[:400])  # peek first 400 chars
+</code></pre>
+</section>
+
+<section id="faq">
+  <h2>7) FAQ</h2>
+
+  <h4>Is Matplotlib part of sklearn?</h4>
+  <ul>
+    <li>No. It’s a separate plotting library: <code>import matplotlib.pyplot as plt</code>.</li>
+  </ul>
+
+  <h4>Quick plotting starter</h4>
+  <pre><button class="copy">Copy</button><code>
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_diabetes
+
+D = load_diabetes(as_frame=True)
+df = D.frame
+
+plt.scatter(df["bmi"], df["target"], alpha=0.6)
+plt.title("BMI vs Diabetes Progression")
+plt.xlabel("BMI (standardized)")
+plt.ylabel("Progression score (1 yr)")
+plt.show()
+</code></pre>
+</section>
+
+<section id="refs">
+  <h2>8) Handy References</h2>
+  <ul class="toc">
+    <li><a target="_blank" href="https://scikit-learn.org/stable/">scikit‑learn User Guide</a></li>
+    <li><a target="_blank" href="https://docs.python.org/3/tutorial/modules.html">Python Tutorial — Modules</a></li>
+    <li><a target="_blank" href="https://matplotlib.org/stable/">Matplotlib Docs</a></li>
+  </ul>
+</section>
+  
+<script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
