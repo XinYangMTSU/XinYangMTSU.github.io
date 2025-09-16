@@ -235,9 +235,11 @@ help(load_iris)      # open docs in the console
 import matplotlib.pyplot as plt
 from sklearn.datasets import load_diabetes
 
+# Load the diabetes dataset as a pandas DataFrame (instead of raw NumPy arrays)
 D = load_diabetes(as_frame=True)
 df = D.frame
 
+# Create a scatter plot
 plt.scatter(df["bmi"], df["target"], alpha=0.6)
 plt.title("BMI vs Diabetes Progression")
 plt.xlabel("BMI (standardized)")
