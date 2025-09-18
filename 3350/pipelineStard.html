@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pipeline + StandardScaler: Evaluation & Boxplots (sklearn + matplotlib)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 { color:#ffb3de; margin:0 0 8px 0; }
+    h2 { margin: 0 0 10px 0; color: #ffb3de; font-weight: 700; }
+    section h4 {
+      font-size: 1.18em; color: #ffb3de; margin-bottom: 5px; margin-top: 30px;
+      font-weight: 600; border-bottom: 1px solid #ffb3de; padding-bottom: 2px;
+    }
+    pre {
+      background: #19121a; color: #ffb3de; padding: 15px 18px; border-radius: 8px;
+      font-size: 1.04em; line-height: 1.7; overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11); position: relative;
+    }
+    pre .copy {
+      position: absolute; top: 8px; right: 8px; padding: 4px 8px;
+      background: #21111b; border: 1px solid #ff79c6; border-radius: 6px;
+      color: #ffb3de; font-size: 0.8em; cursor: pointer;
+    }
+    pre .copy:hover { background: #ff79c6; color: #fff; }
+    .pill {
+      display:inline-block; background:#19121a; border:1px solid #ff79c6;
+      border-radius:999px; padding:4px 10px; margin:2px 8px 2px 0; font-size:.9em
+    }
+    .note { color:#ffd7f0; opacity:.9; }
+    ul { margin-top: 8px; }
+    code.inline { background:#19121a; padding:2px 6px; border-radius:6px; }
+  </style>
+</head>
+<body>
+
+<section id="top">
+  <center>
+    <h1>
+      <span class="pill">Pipeline</span> &nbsp;·&nbsp;
+      <span class="pill">StandardScaler</span>
+    </h1>
+  </center>
+</section>
+
+
+<section id="pipeline-basic">
+  <h2>1) Build a leak-free Pipeline with StandardScaler</h2>
+  <p>
+    <code class="inline">StandardScaler</code> is applied <em>inside</em> the pipeline so it’s fit only on training folds during CV, avoiding leakage.
+  </p>
+  <pre><button class="copy">Copy</button><code>
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
+
+# Examples: swap 'model' to try different estimators
+ols = Pipeline([
+    ("scaler", StandardScaler()),
+    ("linreg", LinearRegression())
+])
+
+ridge = Pipeline([
+    ("scaler", StandardScaler()),
+    ("ridge", Ridge(alpha=1.0, random_state=0))
+])
+
+lasso = Pipeline([
+    ("scaler", StandardScaler()),
+    ("lasso", Lasso(alpha=0.05, random_state=0, max_iter=10000))
+])
+
+elastic = Pipeline([
+    ("scaler", StandardScaler()),
+    ("elastic", ElasticNet(alpha=0.1, l1_ratio=0.5, random_state=0, max_iter=10000))
+])
+</code></pre>
+</section>
+
+<section id="eval-func">
+  <h2>2) Tidy evaluation helper: <code>evaluate_model(...)</code></h2>
+  <p>
+    This function trains a regression model, evaluates it on both training and test sets using SSE, MSE, RMSE, and R², and
+    returns the results in a tidy DataFrame.
+  </p>
+  <pre><button class="copy">Copy</button><code>
+import numpy as np
+import pandas as pd
+from sklearn.metrics import mean_squared_error, r2_score
+
+def evaluate_model(name, model, X_train, y_train, X_test, y_test):
+    """
+    Fits 'model' on (X_train, y_train), evaluates on both train and test,
+    and returns a tidy 2-row DataFrame (Train/Test) with SSE, MSE, RMSE, R^2.
+    """
+    # Fit
+    model.fit(X_train, y_train)
+
+    # Predictions
+    y_pred_train = model.predict(X_train)
+    y_pred_test  = model.predict(X_test)
+
+    # Ensure NumPy arrays for arithmetic
+    y_train_np = y_train.to_numpy() if hasattr(y_train, "to_numpy") else np.asarray(y_train)
+    y_test_np  = y_test.to_numpy()  if hasattr(y_test, "to_numpy")  else np.asarray(y_test)
+
+    # Metrics — Test
+    sse_test = np.sum((y_test_np - y_pred_test)**2)
+    mse_test = mean_squared_error(y_test_np, y_pred_test)
+    rmse_test = np.sqrt(mse_test)
+    r2_test = r2_score(y_test_np, y_pred_test)
+
+    # Metrics — Train
+    sse_train = np.sum((y_train_np - y_pred_train)**2)
+    mse_train = mean_squared_error(y_train_np, y_pred_train)
+    rmse_train = np.sqrt(mse_train)
+    r2_train = r2_score(y_train_np, y_pred_train)
+
+    # Collect
+    results = pd.DataFrame([
+        {"Model": name, "Split": "Train",
+         "SSE": sse_train, "MSE": mse_train, "RMSE": rmse_train, "R^2": r2_train},
+        {"Model": name, "Split": "Test",
+         "SSE": sse_test, "MSE": mse_test, "RMSE": rmse_test, "R^2": r2_test}
+    ])
+    return results, (y_pred_train, y_pred_test)
+</code></pre>
+</section>
+
+<section id="usage">
+  <h2>3) Example usage (Diabetes dataset)</h2>
+  <p>Quick demo: compare OLS vs Ridge vs Lasso using the same standardized features.</p>
+  <pre><button class="copy">Copy</button><code>
+from sklearn.datasets import fetch_california_housing
+from sklearn.model_selection import train_test_split
+
+# Data
+D = fetch_california_housing(as_frame=True)
+X = D.data
+y = D.target
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+ols = Pipeline([
+    ("scaler", StandardScaler()),
+    ("linreg", LinearRegression())
+])
+
+ridge = Pipeline([
+    ("scaler", StandardScaler()),
+    ("ridge", Ridge(alpha=1.0, random_state=0))
+])
+
+lasso = Pipeline([
+    ("scaler", StandardScaler()),
+    ("lasso", Lasso(alpha=0.05, random_state=0, max_iter=10000))
+])
+
+elastic = Pipeline([
+    ("scaler", StandardScaler()),
+    ("elastic", ElasticNet(alpha=0.1, l1_ratio=0.5, random_state=0, max_iter=10000))
+])
+
+# Evaluate a few pipelines
+
+results_df =  pd.concat([
+                evaluate_model("OLS", ols, X_train, y_train, X_test, y_test),
+                evaluate_model("Ridge", ridge, X_train, y_train, X_test, y_test),
+                evaluate_model("Lasso", lasso, X_train, y_train, X_test, y_test),
+                evaluate_model("EN", en, X_train, y_train, X_test, y_test)
+]).set_index(["Model","Split"])
+
+print(results_df)
+</code></pre>
+</section>
+
+
+
+
+
+<script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
