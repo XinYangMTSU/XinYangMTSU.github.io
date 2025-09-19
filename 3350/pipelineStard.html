@@ -65,36 +65,35 @@
 
 
 <section id="pipeline-basic">
-  <h2>1) Build a leak-free Pipeline with StandardScaler</h2>
+  <h2>1) What is Pipeline?</h2>
+ 
   <p>
-    <code class="inline">StandardScaler</code> is applied <em>inside</em> the pipeline so it’s fit only on training folds during CV, avoiding leakage.
+    In scikit-learn, a Pipeline is a tool that lets you chain multiple steps of a machine learning workflow into a single object.
   </p>
-  <pre><button class="copy">Copy</button><code>
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
+   <ul>
+    <li>Cleaner code -> keeps preprocessing and modeling together.</li>
+    <li>No data leakage -> transformations (like StandardScaler) are fit only on the training data.</li>
+    <li>Consistency -> guarantees the same steps are applied to both training and test data.</li>
+  </ul>
 
-# Examples: swap 'model' to try different estimators
+  <h4>Pipeline Syntax</h4>
+  <pre><code>
+Pipeline([
+    ("step_name", transformer_or_model),
+    ("step_name", transformer_or_model),
+    ...
+])</code></pre>
+
+  <ul>
+    <li>Pipeline([...]) -> creates a pipeline object.</li>
+  </ul>
+  
+   <pre><button class="copy">Copy</button><code>from sklearn.pipeline import Pipeline
 ols = Pipeline([
-    ("scaler", StandardScaler()),
-    ("linreg", LinearRegression())
-])
-
-ridge = Pipeline([
-    ("scaler", StandardScaler()),
-    ("ridge", Ridge(alpha=1.0, random_state=0))
-])
-
-lasso = Pipeline([
-    ("scaler", StandardScaler()),
-    ("lasso", Lasso(alpha=0.05, random_state=0, max_iter=10000))
-])
-
-elastic = Pipeline([
-    ("scaler", StandardScaler()),
-    ("elastic", ElasticNet(alpha=0.1, l1_ratio=0.5, random_state=0, max_iter=10000))
-])
-</code></pre>
+    ("scaler", StandardScaler()),       # Step 1: scale features
+    ("linreg", LinearRegression())      # Step 2: apply linear regression
+])</code></pre>
+  
 </section>
 
 <section id="eval-func">
