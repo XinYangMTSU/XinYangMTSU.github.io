@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OLA2 – Regression Workflow Assignment: Diabetes Dataset</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 950px; margin: 0 auto; padding: 20px; background-color: #17191a; color: #ff79c6; }
+    .container { background-color: #222025; padding: 30px; border-radius: 8px; box-shadow: 0 2px 12px rgba(255,121,198,0.15); }
+    h1 { text-align: center; font-size: 26px; color: #ff79c6; margin-bottom: 6px; }
+    h2.course-title { text-align: center; font-size: 28px; color: #ffb3de; margin-bottom: 18px; }
+    h3.deadline { text-align: center; font-size: 15px; color: #ffb3de; margin-top: 0; margin-bottom: 20px; }
+    h3 { color: #ff79c6; font-size: 22px; margin-bottom: 12px; border-bottom: 3px solid #ff79c6; padding-bottom: 6px; }
+    h4 { color: #ffb3de; font-size: 18px; margin-top: 20px; margin-bottom: 8px; border-bottom: 1px solid #ffb3de; padding-bottom: 3px; }
+    pre { background: #19121a; color: #ffb3de; padding: 15px; border-radius: 6px; font-size: 0.95em; overflow-x: auto; }
+    code { font-family: Consolas, monospace; }
+    table { width: 70%; margin: 15px auto; border-collapse: collapse; font-size: 0.9em; color: #ffb3de; }
+    th, td { border: 1px solid #ff79c6; padding: 6px 10px; text-align: left; }
+    th { background: #19121a; color: #ff79c6; }
+    tr:nth-child(even) { background: #2b2b2b; }
+    #backToTop { position: fixed; bottom: 24px; right: 24px; background-color: #ff79c6; color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 1.3em; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25); transition: background 0.2s; }
+    #backToTop:hover { background-color: #ffb3de; color: #17191a; }
+    footer { text-align: center; margin-top: 30px; font-size: 0.9em; color: #ffb3de; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="course-title">CSCI 3350 -- Machine Learning</h2>
+  <h1>OLA2 – Practice: Dataset Loading, Preprocessing, Splitting, Visualization, Pipelines & Model Evaluation </h1>
+  <h3 class="deadline"><font color="red">Deadline:</font> September 28th, 2025 (Sunday)</h3>
+
+  <h3>Objective</h3>
+  <p>
+    Reproduce the <b>exact workflow</b> used in the provided notebook (<code>sep-17.ipynb</code>) using the
+    <b>Diabetes</b> dataset for a regression task. The main purpose is to practice how to use these libraries
+    and modules:
+  </p>
+
+  <h4>Library</h4>
+  <ul>
+    <li><b>Machine Learning Library</b> → <code>sklearn</code></li>
+    <li><b>DataFrame</b> → <code>pandas</code></li>
+    <li><b>NumPy</b> → <code>numpy</code></li>
+  </ul>
+
+  <h4>Module</h4>
+  <ul>
+    <li><b>Dataset Loading</b> → <code>sklearn.datasets</code></li>
+    <li><b>Dataset Preprocessing</b> → <code>sklearn.preprocessing</code></li>
+    <li><b>Data Splitting</b> → <code>sklearn.model_selection</code></li>
+    <li><b>Visualization</b> → <code>matplotlib.pyplot</code></li>
+    <li><b>Regression Model</b> → <code>sklearn.linear_model</code></li>
+    <li><b>Pipeline</b> → <code>sklearn.pipline</code></li>
+    <li><b>Evaluate Metrics</b> → <code>sklearn.metric</code></li>
+  </ul>
+
+  <h3>Requirements</h3>
+  <ol>
+    <li><b>Step 1: Load the dataset</b><br/>
+        Use <code>load_diabetes(as_frame=True)</code> to create a DataFrame with features and <code>target</code>.
+        Print its shape, column names, and the first 5 rows.
+    </li>
+
+    <li><b>Step 2: Preprocess data</b><br/>
+        <ul>
+          <li>Handle missing values</li>
+          <li>Handle duplicates</li>
+        </ul>
+    </li>
+
+    <li><b>Step 3: Split into training and testing sets</b><br/>
+        Apply <code>train_test_split</code> (with the same <code>test_size</code> and <code>random_state</code> as in the code).
+
+    </li>
+
+    <li><b>Step 4: Visualize results with Matplotlib</b><br/>
+        Plot figures with <code>matplotlib.pyplot</code>, including:
+        <ul>
+          <li>At least one scatter plot (e.g., <code>bmi</code> vs <code>target</code>).</li>
+          <li>At least one histogram plot (e.g., <code>bmi</code>) </li>
+        </ul>
+    </li>
+
+    <li><b>Step 5:  Build Pipelines with StandardScale (OLS, Ridge, Lasso, Elastic Net)</b><br/>
+      Build pipelines with:
+      <ul>
+          <li>Preprocessing: StandardScaler</li>
+          <li>Linear Model: LinearRegression, Ridge, Lasso, ElasticNet</li>
+      </ul>
+   </li>
+
+   <li><b>Step 6: Define Evaluate Model</b></li>
+    <ul>
+        <li>Create a function: evaluate_model(...)</li>
+        <li>Evaluate Metrics: SSE, MSE, RMSE, R2</li>
+    </ul>
+
+    <li><b>Step 7: Evaluate and Compare Models</b></li>
+     <ul>
+         <li>Evaluate all models</li>
+         <li>Concatenate results and print</li>
+     </ul>
+
+  </ol>
+
+
+
+  <h3>Starter Code</h3>
+  <pre><code>
+# --- Imports Library/Modules/Function ---
+
+
+# --- 1) Load dataset ---
+
+
+# --- 2) Preprocess(Missing Values and Duplicates Handling) ---
+
+
+# --- 3) Split Training/Testing Data ---
+
+
+# --- 4) Visualization (use matplotlib for scattering) ---
+
+
+# --- 5) Build Pipelines with StandardScaler---
+# Define pipeline: StandardScaler
+# Define pipelines: LinearRegression, Ridge, Lasso, ElasticNet
+
+
+# --- 6) Define evaluate_model(...)
+# SSE, MSE, RMSE, R2
+
+
+# --- 7) Evaluate and Compare Models
+# Evaluate model
+# Concatenate results_df and print
+
+
+  </code></pre>
+
+  </code></pre>
+
+  <h3>Grading Distribution (Total: 100 points)</h3>
+  <table>
+    <tr><th>Task</th><th>Points</th></tr>
+    <tr><td>Datasets: correct loading & inspection</td><td>10</td></tr>
+    <tr><td>Preprocessing: missing values and duplicates handle</td><td>10</td></tr>
+    <tr><td>Splitting: correct use of sklearn.model_selection</td><td>10</td></tr>
+    <tr><td>Visualization: correct scatter plot and histogram plot</td><td>20</td></tr>
+    <tr><td>Define pipelines with StandardScale: LinearRegression, Ridge, Lasso, ElasticNet</td><td>10</td></tr>
+    <tr><td>Create evaluate function: evaluate_model</td><td>20</td></tr>
+    <tr><td>Evaluate and Compare models: Concatenate results_df and print</td><td>10</td></tr>
+    <tr><td>Clarity: explanations and code organization</td><td>10</td></tr>
+    <tr><th>Total</th><th>100</th></tr>
+  </table>
+
+  <h3>Notes</h3>
+  <ul>
+    <li>Stick to the modules listed above; you do <b>not</b> need model training for this OLA.</li>
+    <li>If the uploaded notebook used additional preprocessing utilities, include them and explain why.</li>
+  </ul>
+
+  <footer>
+    Copy Right @ Dr. Xin Yang <br>
+    Department Of Computer Science <br>
+    Middle Tennessee State University
+  </footer>
+</div>
+
+<button id="backToTop" title="Go to top">↑</button>
+<script>
+  document.getElementById("backToTop").addEventListener("click", function() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+</body>
+</html>
