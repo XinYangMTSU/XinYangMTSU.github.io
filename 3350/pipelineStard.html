@@ -93,7 +93,12 @@ ols = Pipeline([
     ("scaler", StandardScaler()),       # Step 1: scale features
     ("linreg", LinearRegression())      # Step 2: apply linear regression
 ])</code></pre>
-  
+
+    <ul>
+      <li>We can access individual steps :</li>
+      <pre><code>ols.named_steps["scaler"]     # gives you the StandardScaler object
+ols.named_steps["linreg"]         # gives you the OLS object</code></pre>
+    </ul>
 </section>
 
 <section id="eval-func">
