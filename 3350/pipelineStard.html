@@ -169,17 +169,17 @@ ols = Pipeline([
 
 ridge = Pipeline([
     ("scaler", StandardScaler()),
-    ("ridge", Ridge(alpha=1.0, random_state=0))
+    ("ridge", Ridge(alpha=100))
 ])
 
 lasso = Pipeline([
     ("scaler", StandardScaler()),
-    ("lasso", Lasso(alpha=0.05, random_state=0, max_iter=10000))
+    ("lasso", Lasso(alpha=0.05))
 ])
 
 elastic = Pipeline([
     ("scaler", StandardScaler()),
-    ("elastic", ElasticNet(alpha=0.1, l1_ratio=0.5, random_state=0, max_iter=10000))
+    ("elastic", ElasticNet(alpha=0.1, l1_ratio=0.5))
 ])
 
 # Evaluate a few pipelines
