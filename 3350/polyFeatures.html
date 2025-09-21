@@ -1,1 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Polynomial Features (sklearn) — Why & How</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 { color:#ffb3de; margin:0 0 8px 0; }
+    h2 { margin: 0 0 10px 0; color: #ffb3de; font-weight: 700; }
+    section h4 {
+      font-size: 1.18em; color: #ffb3de; margin-bottom: 5px; margin-top: 24px;
+      font-weight: 600; border-bottom: 1px solid #ffb3de; padding-bottom: 2px;
+    }
+    pre {
+      background: #19121a; color: #ffb3de; padding: 15px 18px; border-radius: 8px;
+      font-size: 1.04em; line-height: 1.7; overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11); position: relative;
+    }
+    pre .copy {
+      position: absolute; top: 8px; right: 8px; padding: 4px 8px;
+      background: #21111b; border: 1px solid #ff79c6; border-radius: 6px;
+      color: #ffb3de; font-size: 0.8em; cursor: pointer;
+    }
+    pre .copy:hover { background: #ff79c6; color: #fff; }
+    .pill {
+      display:inline-block; background:#19121a; border:1px solid #ff79c6;
+      border-radius:999px; padding:4px 10px; margin:2px 8px 2px 0; font-size:.9em
+    }
+    .note { color:#ffd7f0; opacity:.9; }
+    ul { margin-top: 8px; }
+    code.inline { background:#19121a; padding:2px 6px; border-radius:6px; }
+  </style>
+</head>
+<body>
+
+<section id="top">
+  <center>
+    <h1>
+      <span class="pill">Pipeline</span> &nbsp;·&nbsp;
+      <span class="pill">StandardScaler</span> &nbsp;·&nbsp;
+      <span class="pill">PolynomialFeatures</span>
+    </h1>
+  </center>
+</section>
+
+<section id="what-why">
+  <h2>1) What are Polynomial Features &amp; Why use them?</h2>
+  <p>
+    <b>Polynomial features</b> expand your original features into powers and products
+    (e.g., <code class="inline">x</code> → <code class="inline">[x, x², x³]</code>). 
+    You still fit a <i>linear</i> model in the expanded feature space, which lets the prediction be a <i>curve</i> in the original space.
+  </p>
+  <ul>
+    <li><b>Linear in parameters</b> (still solvable by OLS/Ridge/Lasso), but <b>nonlinear in input</b> → can fit curves.</li>
+    <li><b>Bias–variance tradeoff:</b> higher degree adds flexibility but risks overfitting. Use regularization (Ridge/Lasso) and CV.</li>
+    <li><b>Scale first:</b> powers can explode; use <code class="inline">StandardScaler</code> before the linear step.</li>
+  </ul>
+
+  <h4>Basic usage</h4>
+  <pre><button class="copy">Copy</button><code>from sklearn.preprocessing import PolynomialFeatures
+
+poly = PolynomialFeatures(degree=2, include_bias=False)
+X_poly = poly.fit_transform(X)  # expands columns into powers/products
+poly.get_feature_names_out()    # names like ['x0', 'x1', 'x0^2', 'x0 x1', 'x1^2']</code></pre>
+  <p class="note">Tip: <code class="inline">include_bias=False</code> avoids adding a constant column (the model already has an intercept).</p>
+</section>
+
+<section id="interaction">
+  <h2>2) With vs. Without Interaction Terms</h2>
+  <p>
+    Interactions let features <i>combine</i> (e.g., <code class="inline">x₁·x₂</code>) so the model can capture “<i>x₁’s effect depends on x₂</i>”.
+  </p>
+  <h4>Include interactions (default: <code>interaction_only=False</code>)</h4>
+  <pre><button class="copy">Copy</button><code>PolynomialFeatures(degree=2, include_bias=False, interaction_only=False)
+# Creates: x1, x2, x1^2, x1 x2, x2^2</code></pre>
+
+  <h4>No interactions (set <code>interaction_only=True</code>)</h4>
+  <pre><button class="copy">Copy</button><code>PolynomialFeatures(degree=2, include_bias=False, interaction_only=True)
+# Creates: x1, x2, x1 x2   (no squared terms)</code></pre>
+
+  <h4>Only powers (no cross terms)</h4>
+  <pre><button class="copy">Copy</button><code># Keep interaction_only=False AND drop cross terms manually by column selection,
+# or just fit per-feature powers yourself if you truly want only x1^2, x2^2, ...</code></pre>
+</section>
+
+<section id="pipeline">
+  <h2>3) Clean &amp; safe: use a Pipeline</h2>
+  <p>
+    Put <code class="inline">PolynomialFeatures</code>, <code class="inline">StandardScaler</code>, and a linear model into one pipeline.
+    This avoids data leakage and keeps code tidy.
+  </p>
+
+  <h4>Pipeline Syntax</h4>
+  <pre><code>Pipeline([
+    ("poly", PolynomialFeatures(degree=2, include_bias=False)),
+    ("scaler", StandardScaler()),
+    ("linreg", LinearRegression())
+])</code></pre>
+
+  <h4>Minimal working example</h4>
+  <pre><button class="copy">Copy</button><code>import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+from sklearn.linear_model import LinearRegression, Ridge
+from sklearn.pipeline import Pipeline
+
+# Toy data: 1D curve y = 2 - 3x + 0.8x^2 + noise
+rng = np.random.RandomState(42)
+X = np.linspace(-3, 3, 120).reshape(-1, 1)
+y = 2 - 3*X.ravel() + 0.8*(X.ravel()**2) + rng.normal(0, 1, size=X.shape[0])
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+poly_ols = Pipeline([
+    ("poly", PolynomialFeatures(degree=2, include_bias=False)),
+    ("scaler", StandardScaler()),
+    ("linreg", LinearRegression())
+])
+
+poly_ridge = Pipeline([
+    ("poly", PolynomialFeatures(degree=3, include_bias=False)),
+    ("scaler", StandardScaler()),
+    ("ridge", Ridge(alpha=1.0))
+])
+
+for name, model in [("Poly-OLS (deg=2)", poly_ols), ("Poly-Ridge (deg=3)", poly_ridge)]:
+    model.fit(X_train, y_train)
+    r2_train = model.score(X_train, y_train)
+    r2_test  = model.score(X_test, y_test)
+    print(f"{name} -> R^2 Train: {r2_train:.3f} | R^2 Test: {r2_test:.3f}")</code></pre>
+
+  <p class="note">
+    Start with low degree (2 or 3). If variance is high (train ≫ test), try <code class="inline">Ridge</code>/<code class="inline">Lasso</code> or lower the degree.
+  </p>
+</section>
+
+<script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
 
