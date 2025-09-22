@@ -111,6 +111,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures, StandardScaler
@@ -119,20 +120,23 @@ from sklearn.metrics import r2_score, mean_squared_error
 
 RANDOM_STATE = 42
 np.random.seed(RANDOM_STATE)
-
+pd.set_option("display.float_format", "{:.4f}".format)
+    
 # 1) Generate synthetic quadratic dataset
 # X is evenly spaced between –3 and 3 (80 points)
 X = np.linspace(-3, 3, 80).reshape(-1, 1)
 
-# y_true=0.5x^2+x+2 --> this is the real curve (a parabola)
-y_true = 0.5 * X[:, 0]**2 + X[:, 0] + 2    # true quadratic curve
+# y_true= 0.5x^2+x+2 --> this is the real curve (a parabola)
+y_true = 0.5 * X**2 + X + 2    # true quadratic curve
 
 #We add random noise so it looks like messy, real-world data
 y = y_true + np.random.randn(len(X)) * 1.5 # add noise
 
+X_matrix = X.reshape(-1, 1)
+    
 # 2) Train / test split
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=RANDOM_STATE
+    X_matrix, y, test_size=0.3, random_state=RANDOM_STATE
 )
 
 # 3) Helper function to evaluate models
@@ -163,15 +167,20 @@ def evaluate_model(name, model, X_train, y_train, X_test, y_test):
 
 # 4) Define models
 
-lin_reg  = LinearRegression()
+lin_reg  = Pipeline([
+    ("scaler", StandardScaler()),
+    ("linre", LinearRegression())
+])
 
 poly2 = Pipeline([
+    ("scaler", StandardScaler()),
     # creates features x, x^2
     ("poly", PolynomialFeatures(degree=2, include_bias=False)),
     ("linreg", LinearRegression())
 ])
 
 poly8 = Pipeline([
+    ("scaler", StandardScaler()),
     # creates features x, x^2, x^3, x^4, x^5, x^6, x^7, x^8
     ("poly", PolynomialFeatures(degree=8, include_bias=False)),
     ("linreg", LinearRegression())
@@ -189,8 +198,9 @@ print(results_df)
 
 # 7) Plot fitted curves
 X_curve = np.linspace(-3, 3, 200).reshape(-1, 1)
+    
 plt.scatter(X, y, color="black", label="Data (with noise)")
-plt.plot(X_curve, 0.5*X_curve[:,0]**2 + X_curve[:,0] + 2, "g--", label="True function")
+plt.plot(X_matrix, y_true, "g--", label="True function")
 
 plt.plot(X_curve, lin_reg.fit(X_train, y_train).predict(X_curve), "r-", label="Linear Regression")
 plt.plot(X_curve, poly2.fit(X_train, y_train).predict(X_curve), "b-", label="Polynomial d=2")
