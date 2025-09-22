@@ -124,7 +124,7 @@ pd.set_option("display.float_format", "{:.4f}".format)
     
 # 1) Generate synthetic quadratic dataset
 # X is evenly spaced between –3 and 3 (80 points)
-X = np.linspace(-3, 3, 80).reshape(-1, 1)
+X = np.linspace(-3, 3, 80)
 
 # y_true= 0.5x^2+x+2 --> this is the real curve (a parabola)
 y_true = 0.5 * X**2 + X + 2    # true quadratic curve
