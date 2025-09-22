@@ -178,13 +178,11 @@ poly8 = Pipeline([
 ])
 
 # 5) Evaluate models
-results_df = pd.DataFrame(
-    pd.concat([
+results_df = pd.concat([
         evaluate_model("Linear Regression", lin_reg, X_train, y_train, X_test, y_test),
         evaluate_model("Polynomial d=2", poly2, X_train, y_train, X_test, y_test),
         evaluate_model("Polynomial d=8", poly8, X_train, y_train, X_test, y_test),
-    ])
-).set_index(["Model", "Split"])
+    ]).set_index(["Model", "Split"])
 
 # 6) Display results
 print(results_df)
