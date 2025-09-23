@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>K-Fold Cross-Validation — Worked Example</title>
+  <title>K-Fold Cross-Validation · Pipeline + StandardScaler</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
@@ -14,234 +14,414 @@
       color: #ff79c6;
       padding: 20px;
     }
-
     section {
       margin-bottom: 55px;
       background: #222025;
       border-radius: 18px;
       box-shadow: 0 4px 30px rgba(255,121,198,.09);
       padding: 36px 32px 22px 32px;
-      transition: box-shadow .24s;
       border-left: 7px solid #ff79c6;
       position: relative;
       max-width: 950px;
       margin-left: auto;
       margin-right: auto;
     }
-
-    h1, h2, h3, h4 {
-      margin: 0 0 10px 0;
-      color: #ffb3de;
-      font-weight: 700;
-    }
-
+    h1 { color:#ffb3de; margin:0 0 8px 0; }
+    h2 { margin: 0 0 10px 0; color: #ffb3de; font-weight: 700; }
     section h4 {
-      font-size: 1.18em;
-      color: #ffb3de;
-      margin-bottom: 5px;
-      margin-top: 30px;
-      font-weight: 600;
-      border-bottom: 1px solid #ffb3de;
-      padding-bottom: 2px;
+      font-size: 1.18em; color: #ffb3de; margin-bottom: 5px; margin-top: 30px;
+      font-weight: 600; border-bottom: 1px solid #ffb3de; padding-bottom: 2px;
     }
-
-    a.anchor {
-      text-decoration: none;
-      margin-left: .5rem;
-      opacity: .6;
-      color: #ffb3de;
-    }
-    a.anchor:hover { opacity: 1; }
-
+    p { color:#ffd7f0; }
     pre {
-      background: #19121a;
-      color: #ffb3de;
-      padding: 15px 18px;
-      border-radius: 8px;
-      font-size: 1.04em;
-      line-height: 1.7;
-      overflow-x: auto;
-      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
-      position: relative;
-      max-width: 100%;
+      background: #19121a; color: #ffb3de; padding: 15px 18px; border-radius: 8px;
+      font-size: 1.04em; line-height: 1.7; overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11); position: relative;
+      white-space: pre;
     }
-
     pre .copy {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      padding: 4px 8px;
-      background: #21111b;
-      border: 1px solid #ff79c6;
-      border-radius: 6px;
-      color: #ffb3de;
-      font-size: 0.8em;
-      cursor: pointer;
+      position: absolute; top: 8px; right: 8px; padding: 4px 8px;
+      background: #21111b; border: 1px solid #ff79c6; border-radius: 6px;
+      color: #ffb3de; font-size: 0.8em; cursor: pointer;
     }
-    pre .copy:hover {
-      background: #ff79c6;
-      color: #fff;
+    pre .copy:hover { background: #ff79c6; color: #fff; }
+    .pill {
+      display:inline-block; background:#19121a; border:1px solid #ff79c6;
+      border-radius:999px; padding:4px 10px; margin:2px 8px 2px 0; font-size:.9em
     }
-
-    ul.toc {
-      padding-left: 18px;
-      margin-top: 8px;
-    }
-    ul.toc li { margin: 4px 0; }
-    ul.toc a { color: #ffb3de; }
-    .muted { color: #d4a7c4; opacity: .9; }
+    .note { color:#ffd7f0; opacity:.9; }
+    ul { margin-top: 8px; color:#ffd7f0; }
+    code.inline { background:#19121a; padding:2px 6px; border-radius:6px; }
+    .legend { display:flex; gap:14px; align-items:center; margin:8px 0 18px; }
+    .swatch { width:16px; height:16px; border-radius:4px; display:inline-block; border:1px solid #00000033; }
+    .swatch.train { background:#6fc3df; }   /* teal-blue */
+    .swatch.val   { background:#ff79c6; }   /* pink */
+    .svgwrap{ background:#1a151c; border-radius:12px; padding:10px; box-shadow: inset 0 0 0 1px rgba(255,121,198,0.2);}
+    .rowlbl{ font-size:0.95em; fill:#ffb3de; }
   </style>
 </head>
-
 <body>
 
-<section>
+<section id="top">
   <center>
-    <h1>K-Fold Cross-Validation</h1>
-    <div class="muted">Reliable model evaluation by rotating through k validation folds</div>
+    <h1>
+      <span class="pill">K-Fold Cross-Validation</span> &nbsp;·&nbsp;
+      <span class="pill">Pipeline</span> &nbsp;·&nbsp;
+      <span class="pill">StandardScaler</span>
+    </h1>
   </center>
+  <p class="note">
+    K-Fold CV splits the training data into <em>K</em> equal parts (“folds”). Each round, one fold is used as the
+    <strong>validation</strong> set while the remaining K-1 folds form the <strong>training</strong> set. Results are averaged across folds.
+    This gives a more reliable estimate of out-of-sample performance and helps choose hyperparameters (e.g., <code class="inline">alpha</code>).
+  </p>
 
-  <h4>Description</h4>
-  <ul class="toc">
-    <li>Partition the dataset into <b>k</b> equal folds (commonly <b>k = 5</b> or <b>k = 10</b>).</li>
-    <li>Train on <b>k−1</b> folds, validate on the remaining fold.</li>
-    <li>Repeat <b>k</b> times, each time changing which fold is used for validation.</li>
-    <li>Report the <b>average performance</b> across folds.</li>
-  </ul>
-
-  <h4>Pros</h4>
-  <ul>
-    <li>More reliable than a single holdout split—<b>all data</b> is used for both training and validation.</li>
-  </ul>
-
-  <h4>Cons</h4>
-  <ul>
-    <li>More <b>computationally expensive</b> than a simple train/test split.</li>
-  </ul>
-
-  <h4>Worked Example (Regression + Classification)</h4>
-  <pre><button class="copy">Copy</button><code>
-# ========================================================
-# K-Fold Cross-Validation — Regression & Classification
-# Uses scikit-learn's KFold/StratifiedKFold and cross_val_score
-# ========================================================
-import numpy as np
-import pandas as pd
-
-from sklearn.datasets import load_diabetes, load_breast_cancer
-from sklearn.linear_model import LinearRegression, LogisticRegression
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import KFold, StratifiedKFold, cross_val_score
-
-RANDOM_STATE = 42
-np.random.seed(RANDOM_STATE)
-pd.set_option("display.float_format", "{:.4f}".format)
-
-# -----------------------------
-# 1) Regression with K-Fold (k=5)
-# -----------------------------
-X_reg, y_reg = load_diabetes(return_X_y=True, as_frame=False)
-
-reg_pipeline = Pipeline([
-    ("scaler", StandardScaler()),
-    ("model", LinearRegression())
-])
-
-k = 5
-kf = KFold(n_splits=k, shuffle=True, random_state=RANDOM_STATE)
-
-# R^2 across folds
-r2_scores = cross_val_score(reg_pipeline, X_reg, y_reg, cv=kf, scoring="r2")
-print(f"[Regression] {k}-Fold R^2 scores:", r2_scores)
-print(f"[Regression] Mean R^2: {r2_scores.mean():.4f}  ± {r2_scores.std():.4f}")
-
-# -----------------------------
-# 2) Classification with StratifiedKFold (k=10)
-# -----------------------------
-X_clf, y_clf = load_breast_cancer(return_X_y=True, as_frame=False)
-
-clf_pipeline = Pipeline([
-    ("scaler", StandardScaler()),
-    ("model", LogisticRegression(max_iter=1000, random_state=RANDOM_STATE))
-])
-
-k_cls = 10
-skf = StratifiedKFold(n_splits=k_cls, shuffle=True, random_state=RANDOM_STATE)
-
-# Accuracy across folds
-acc_scores = cross_val_score(clf_pipeline, X_clf, y_clf, cv=skf, scoring="accuracy")
-print(f"[Classification] {k_cls}-Fold Accuracy:", acc_scores)
-print(f"[Classification] Mean Acc: {acc_scores.mean():.4f}  ± {acc_scores.std():.4f}")
-
-# -----------------------------
-# Notes:
-# - Use KFold for regression, StratifiedKFold for classification (preserves class ratios).
-# - Set shuffle=True and a random_state for reproducible splits.
-# - You can swap 'scoring' to 'neg_mean_squared_error', 'f1', 'roc_auc', etc.
-  </code></pre>
-
-  <h4>When to Use</h4>
-  <ul>
-    <li><b>Small–medium datasets</b> where a single holdout split might be unstable.</li>
-    <li>When you need a <b>more reliable estimate</b> of generalization performance.</li>
-  </ul>
-
-  <h4>Common Pitfalls (and Fixes)</h4>
-  <ul>
-    <li><b>Data leakage</b>: put <i>all</i> preprocessing inside a <code>Pipeline</code> so it’s fit only on each training fold.</li>
-    <li><b>Imbalanced classes</b>: use <code>StratifiedKFold</code> for classification.</li>
-    <li><b>Non-shuffled data</b>: set <code>shuffle=True</code> (+ <code>random_state</code>) unless time-order matters.</li>
-    <li><b>Time series</b>: use <code>TimeSeriesSplit</code>, not standard K-Fold.</li>
-  </ul>
-
-  <h4>Optional: Nested Cross-Validation (for unbiased model selection)</h4>
-  <pre><button class="copy">Copy</button><code>
-from sklearn.model_selection import GridSearchCV, KFold, cross_val_score
-from sklearn.svm import SVR
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-
-X, y = load_diabetes(return_X_y=True)
-
-inner_cv = KFold(n_splits=5, shuffle=True, random_state=42)   # hyperparameter tuning
-outer_cv = KFold(n_splits=5, shuffle=True, random_state=123)  # performance estimate
-
-pipe = Pipeline([
-    ("scaler", StandardScaler()),
-    ("svr", SVR())
-])
-
-param_grid = {"svr__C": [0.1, 1, 10], "svr__gamma": ["scale", 0.01, 0.1], "svr__kernel": ["rbf"]}
-
-search = GridSearchCV(pipe, param_grid=param_grid, cv=inner_cv, scoring="neg_mean_squared_error")
-nested_scores = cross_val_score(search, X, y, cv=outer_cv, scoring="neg_mean_squared_error")
-
-print("Nested CV (neg MSE) mean ± std:", nested_scores.mean(), "±", nested_scores.std())
-  </code></pre>
-
-  <h3>Quick Summary</h3>
-  <ul>
-    <li><b>K-Fold</b> rotates the validation fold to use every sample for both training and validation.</li>
-    <li><b>Pros</b>: more reliable estimates than a single split. <b>Cons</b>: higher compute cost.</li>
-    <li><b>StratifiedKFold</b> for classification; standard <b>KFold</b> for regression.</li>
-    <li>Always wrap preprocessing + model in a <b>Pipeline</b> to avoid leakage.</li>
-  </ul>
+  <p class="note">
+  In practice, <strong><font color="red">5-fold</font></strong> and <strong><font color="red">10-fold</font></strong> cross-validation are the most commonly used.
+  Five folds give a good balance between bias and variance with reasonable compute cost, while ten folds provide a
+  slightly lower bias estimate at the expense of longer training time. Both are widely accepted as standards in applied
+  machine learning.
+</p>
 
 </section>
 
-<script>
-  document.querySelectorAll("pre .copy").forEach(button => {
-    button.addEventListener("click", () => {
-      const code = button.nextElementSibling.innerText;
-      navigator.clipboard.writeText(code).then(() => {
-        const old = button.textContent;
-        button.textContent = "Copied!";
-        setTimeout(() => button.textContent = old, 1500);
+<section id="kfold-figure">
+  <h2>1) Visual: 5-Fold Cross-Validation</h2>
+  <div class="legend">
+    <span class="swatch train"></span> <span>Train folds</span>
+    <span class="swatch val"></span> <span>Validation fold</span>
+  </div>
+
+  <div class="svgwrap">
+  <!-- Inline SVG: 5 rows = 5 folds. Each row shows which chunk is validation (pink), others train (blue). -->
+  <svg viewBox="0 0 800 240" width="100%" height="auto" role="img" aria-label="Five-fold cross-validation diagram">
+    <defs>
+      <style>
+        .blk { rx:6; ry:6; stroke:#0e0b10; stroke-width:1; }
+        .train { fill:#6fc3df; }  /* blue */
+        .val { fill:#ff79c6; }    /* pink */
+        .lab { fill:#ffb3de; font: 600 14px 'Roboto', Arial, sans-serif; }
+        .axis { stroke:#3a2f36; stroke-width:1; }
+      </style>
+    </defs>
+
+    <!-- grid guide -->
+    <line x1="90" y1="25" x2="750" y2="25" class="axis"/>
+    <line x1="90" y1="70" x2="750" y2="70" class="axis"/>
+    <line x1="90" y1="115" x2="750" y2="115" class="axis"/>
+    <line x1="90" y1="160" x2="750" y2="160" class="axis"/>
+    <line x1="90" y1="205" x2="750" y2="205" class="axis"/>
+
+    <!-- Row labels -->
+    <text x="20" y="45"  class="lab">Fold 1</text>
+    <text x="20" y="90"  class="lab">Fold 2</text>
+    <text x="20" y="135" class="lab">Fold 3</text>
+    <text x="20" y="180" class="lab">Fold 4</text>
+    <text x="20" y="225" class="lab">Fold 5</text>
+
+    <!-- Layout constants for 5 blocks -->
+    <!-- Each row has five blocks; the i-th block in row i is the validation block. -->
+    <!-- Row 1 -->
+    <rect x="90"  y="30" width="126" height="28" class="blk val"/>
+    <rect x="222" y="30" width="126" height="28" class="blk train"/>
+    <rect x="354" y="30" width="126" height="28" class="blk train"/>
+    <rect x="486" y="30" width="126" height="28" class="blk train"/>
+    <rect x="618" y="30" width="126" height="28" class="blk train"/>
+
+    <!-- Row 2 -->
+    <rect x="90"  y="75" width="126" height="28" class="blk train"/>
+    <rect x="222" y="75" width="126" height="28" class="blk val"/>
+    <rect x="354" y="75" width="126" height="28" class="blk train"/>
+    <rect x="486" y="75" width="126" height="28" class="blk train"/>
+    <rect x="618" y="75" width="126" height="28" class="blk train"/>
+
+    <!-- Row 3 -->
+    <rect x="90"  y="120" width="126" height="28" class="blk train"/>
+    <rect x="222" y="120" width="126" height="28" class="blk train"/>
+    <rect x="354" y="120" width="126" height="28" class="blk val"/>
+    <rect x="486" y="120" width="126" height="28" class="blk train"/>
+    <rect x="618" y="120" width="126" height="28" class="blk train"/>
+
+    <!-- Row 4 -->
+    <rect x="90"  y="165" width="126" height="28" class="blk train"/>
+    <rect x="222" y="165" width="126" height="28" class="blk train"/>
+    <rect x="354" y="165" width="126" height="28" class="blk train"/>
+    <rect x="486" y="165" width="126" height="28" class="blk val"/>
+    <rect x="618" y="165" width="126" height="28" class="blk train"/>
+
+    <!-- Row 5 -->
+    <rect x="90"  y="210" width="126" height="28" class="blk train"/>
+    <rect x="222" y="210" width="126" height="28" class="blk train"/>
+    <rect x="354" y="210" width="126" height="28" class="blk train"/>
+    <rect x="486" y="210" width="126" height="28" class="blk train"/>
+    <rect x="618" y="210" width="126" height="28" class="blk val"/>
+  </svg>
+  </div>
+
+  <p class="note" style="margin-top:14px;">
+    In each fold, the pink block is held out for validation; the blue blocks are used for training. The model is refit K times,
+    and validation scores are averaged. You then pick hyperparameters that perform best on average.
+  </p>
+
+</section>
+
+<section id="kfold-figure-10">
+  <h2>2) Visual: 10-Fold Cross-Validation</h2>
+  <div class="legend">
+    <span class="swatch train"></span> <span>Train folds</span>
+    <span class="swatch val"></span> <span>Validation fold</span>
+  </div>
+
+  <div class="svgwrap">
+  <!-- Inline SVG: 10 rows = 10 folds. Each row shows which chunk is validation (pink), others train (blue). -->
+  <svg viewBox="0 0 900 460" width="100%" height="auto" role="img" aria-label="Ten-fold cross-validation diagram">
+    <defs>
+      <style>
+        .blk { rx:4; ry:4; stroke:#0e0b10; stroke-width:1; }
+        .train { fill:#6fc3df; }
+        .val { fill:#ff79c6; }
+        .lab { fill:#ffb3de; font: 600 13px 'Roboto', Arial, sans-serif; }
+        .axis { stroke:#3a2f36; stroke-width:1; }
+      </style>
+    </defs>
+
+    <!-- Row labels -->
+    <text x="20" y="35"  class="lab">Fold 1</text>
+    <text x="20" y="75"  class="lab">Fold 2</text>
+    <text x="20" y="115" class="lab">Fold 3</text>
+    <text x="20" y="155" class="lab">Fold 4</text>
+    <text x="20" y="195" class="lab">Fold 5</text>
+    <text x="20" y="235" class="lab">Fold 6</text>
+    <text x="20" y="275" class="lab">Fold 7</text>
+    <text x="20" y="315" class="lab">Fold 8</text>
+    <text x="20" y="355" class="lab">Fold 9</text>
+    <text x="20" y="395" class="lab">Fold 10</text>
+
+    <!-- Each row has 10 blocks (one validation, 9 train). Block width shrinks to fit -->
+    <!-- Row height/spacing -->
+    <!-- Row 1 -->
+    <rect x="90"  y="20" width="70" height="28" class="blk val"/>
+    <rect x="162" y="20" width="70" height="28" class="blk train"/>
+    <rect x="234" y="20" width="70" height="28" class="blk train"/>
+    <rect x="306" y="20" width="70" height="28" class="blk train"/>
+    <rect x="378" y="20" width="70" height="28" class="blk train"/>
+    <rect x="450" y="20" width="70" height="28" class="blk train"/>
+    <rect x="522" y="20" width="70" height="28" class="blk train"/>
+    <rect x="594" y="20" width="70" height="28" class="blk train"/>
+    <rect x="666" y="20" width="70" height="28" class="blk train"/>
+    <rect x="738" y="20" width="70" height="28" class="blk train"/>
+
+    <!-- Row 2 -->
+    <rect x="90"  y="60" width="70" height="28" class="blk train"/>
+    <rect x="162" y="60" width="70" height="28" class="blk val"/>
+    <rect x="234" y="60" width="70" height="28" class="blk train"/>
+    <rect x="306" y="60" width="70" height="28" class="blk train"/>
+    <rect x="378" y="60" width="70" height="28" class="blk train"/>
+    <rect x="450" y="60" width="70" height="28" class="blk train"/>
+    <rect x="522" y="60" width="70" height="28" class="blk train"/>
+    <rect x="594" y="60" width="70" height="28" class="blk train"/>
+    <rect x="666" y="60" width="70" height="28" class="blk train"/>
+    <rect x="738" y="60" width="70" height="28" class="blk train"/>
+
+    <!-- Row 3 -->
+    <rect x="90"  y="100" width="70" height="28" class="blk train"/>
+    <rect x="162" y="100" width="70" height="28" class="blk train"/>
+    <rect x="234" y="100" width="70" height="28" class="blk val"/>
+    <rect x="306" y="100" width="70" height="28" class="blk train"/>
+    <rect x="378" y="100" width="70" height="28" class="blk train"/>
+    <rect x="450" y="100" width="70" height="28" class="blk train"/>
+    <rect x="522" y="100" width="70" height="28" class="blk train"/>
+    <rect x="594" y="100" width="70" height="28" class="blk train"/>
+    <rect x="666" y="100" width="70" height="28" class="blk train"/>
+    <rect x="738" y="100" width="70" height="28" class="blk train"/>
+
+    <!-- Row 4 -->
+    <rect x="90"  y="140" width="70" height="28" class="blk train"/>
+    <rect x="162" y="140" width="70" height="28" class="blk train"/>
+    <rect x="234" y="140" width="70" height="28" class="blk train"/>
+    <rect x="306" y="140" width="70" height="28" class="blk val"/>
+    <rect x="378" y="140" width="70" height="28" class="blk train"/>
+    <rect x="450" y="140" width="70" height="28" class="blk train"/>
+    <rect x="522" y="140" width="70" height="28" class="blk train"/>
+    <rect x="594" y="140" width="70" height="28" class="blk train"/>
+    <rect x="666" y="140" width="70" height="28" class="blk train"/>
+    <rect x="738" y="140" width="70" height="28" class="blk train"/>
+
+    <!-- Row 5 -->
+    <rect x="90"  y="180" width="70" height="28" class="blk train"/>
+    <rect x="162" y="180" width="70" height="28" class="blk train"/>
+    <rect x="234" y="180" width="70" height="28" class="blk train"/>
+    <rect x="306" y="180" width="70" height="28" class="blk train"/>
+    <rect x="378" y="180" width="70" height="28" class="blk val"/>
+    <rect x="450" y="180" width="70" height="28" class="blk train"/>
+    <rect x="522" y="180" width="70" height="28" class="blk train"/>
+    <rect x="594" y="180" width="70" height="28" class="blk train"/>
+    <rect x="666" y="180" width="70" height="28" class="blk train"/>
+    <rect x="738" y="180" width="70" height="28" class="blk train"/>
+
+    <!-- Row 6 -->
+    <rect x="90"  y="220" width="70" height="28" class="blk train"/>
+    <rect x="162" y="220" width="70" height="28" class="blk train"/>
+    <rect x="234" y="220" width="70" height="28" class="blk train"/>
+    <rect x="306" y="220" width="70" height="28" class="blk train"/>
+    <rect x="378" y="220" width="70" height="28" class="blk train"/>
+    <rect x="450" y="220" width="70" height="28" class="blk val"/>
+    <rect x="522" y="220" width="70" height="28" class="blk train"/>
+    <rect x="594" y="220" width="70" height="28" class="blk train"/>
+    <rect x="666" y="220" width="70" height="28" class="blk train"/>
+    <rect x="738" y="220" width="70" height="28" class="blk train"/>
+
+    <!-- Row 7 -->
+    <rect x="90"  y="260" width="70" height="28" class="blk train"/>
+    <rect x="162" y="260" width="70" height="28" class="blk train"/>
+    <rect x="234" y="260" width="70" height="28" class="blk train"/>
+    <rect x="306" y="260" width="70" height="28" class="blk train"/>
+    <rect x="378" y="260" width="70" height="28" class="blk train"/>
+    <rect x="450" y="260" width="70" height="28" class="blk train"/>
+    <rect x="522" y="260" width="70" height="28" class="blk val"/>
+    <rect x="594" y="260" width="70" height="28" class="blk train"/>
+    <rect x="666" y="260" width="70" height="28" class="blk train"/>
+    <rect x="738" y="260" width="70" height="28" class="blk train"/>
+
+    <!-- Row 8 -->
+    <rect x="90"  y="300" width="70" height="28" class="blk train"/>
+    <rect x="162" y="300" width="70" height="28" class="blk train"/>
+    <rect x="234" y="300" width="70" height="28" class="blk train"/>
+    <rect x="306" y="300" width="70" height="28" class="blk train"/>
+    <rect x="378" y="300" width="70" height="28" class="blk train"/>
+    <rect x="450" y="300" width="70" height="28" class="blk train"/>
+    <rect x="522" y="300" width="70" height="28" class="blk train"/>
+    <rect x="594" y="300" width="70" height="28" class="blk val"/>
+    <rect x="666" y="300" width="70" height="28" class="blk train"/>
+    <rect x="738" y="300" width="70" height="28" class="blk train"/>
+
+    <!-- Row 9 -->
+    <rect x="90"  y="340" width="70" height="28" class="blk train"/>
+    <rect x="162" y="340" width="70" height="28" class="blk train"/>
+    <rect x="234" y="340" width="70" height="28" class="blk train"/>
+    <rect x="306" y="340" width="70" height="28" class="blk train"/>
+    <rect x="378" y="340" width="70" height="28" class="blk train"/>
+    <rect x="450" y="340" width="70" height="28" class="blk train"/>
+    <rect x="522" y="340" width="70" height="28" class="blk train"/>
+    <rect x="594" y="340" width="70" height="28" class="blk train"/>
+    <rect x="666" y="340" width="70" height="28" class="blk val"/>
+    <rect x="738" y="340" width="70" height="28" class="blk train"/>
+
+    <!-- Row 10 -->
+    <rect x="90"  y="380" width="70" height="28" class="blk train"/>
+    <rect x="162" y="380" width="70" height="28" class="blk train"/>
+    <rect x="234" y="380" width="70" height="28" class="blk train"/>
+    <rect x="306" y="380" width="70" height="28" class="blk train"/>
+    <rect x="378" y="380" width="70" height="28" class="blk train"/>
+    <rect x="450" y="380" width="70" height="28" class="blk train"/>
+    <rect x="522" y="380" width="70" height="28" class="blk train"/>
+    <rect x="594" y="380" width="70" height="28" class="blk train"/>
+    <rect x="666" y="380" width="70" height="28" class="blk train"/>
+    <rect x="738" y="380" width="70" height="28" class="blk val"/>
+  </svg>
+  </div>
+
+  <p class="note" style="margin-top:14px;">
+    With 10 folds, each block is smaller. This gives more validation runs (10 instead of 5), which usually means
+    a lower-bias estimate of model performance, though at the cost of more computation. Along with 5-fold CV,
+    10-fold CV is one of the most widely used settings in applied machine learning.
+  </p>
+</section>
+
+
+<section id="cv-code">
+  <h2>3) Simple CV: <code>RidgeCV</code>, <code>LassoCV</code>, <code>ElasticNetCV</code></h2>
+  <p>
+      These estimators run cross-validation internally to choose the best hyperparameters. We still keep them inside a
+      <code class="inline">Pipeline</code> with <code class="inline">StandardScaler</code> to avoid leakage.
+    </p>
+    <pre><button class="copy">Copy</button><code>import numpy as np
+  import pandas as pd
+  from sklearn.datasets import fetch_california_housing
+  from sklearn.model_selection import train_test_split
+  from sklearn.pipeline import Pipeline
+  from sklearn.preprocessing import StandardScaler
+  from sklearn.linear_model import LinearRegression, RidgeCV, LassoCV, ElasticNetCV
+  from sklearn.metrics import mean_squared_error, r2_score
+
+  RANDOM_STATE = 42
+  np.random.seed(RANDOM_STATE)
+
+  # Data
+  D = fetch_california_housing(as_frame=True)
+  X, y = D.data, D.target
+  X_train, X_test, y_train, y_test = train_test_split(
+      X, y, test_size=0.2, random_state=RANDOM_STATE, shuffle=True
+  )
+
+  def evaluate_model(name, model, X_train, y_train, X_test, y_test):
+      model.fit(X_train, y_train)
+      ytr = model.predict(X_train); yte = model.predict(X_test)
+      def rows(split, yt, yp):
+          mse = mean_squared_error(yt, yp)
+          return {"Model": name, "Split": split,
+                  "SSE": float(np.sum((yt - yp)**2)),
+                  "MSE": float(mse),
+                  "RMSE": float(np.sqrt(mse)),
+                  "R^2": float(r2_score(yt, yp))}
+      return pd.DataFrame([rows("Train", y_train, ytr), rows("Test", y_test, yte)])
+
+  # Baseline OLS
+  ols = Pipeline([("scaler", StandardScaler()), ("lr", LinearRegression())])
+
+  # RidgeCV (tunes alpha)
+  ridge = Pipeline([
+      ("scaler", StandardScaler()),
+      ("ridge", RidgeCV(alphas=np.logspace(-3, 3, 50), cv=5))
+  ])
+
+  # LassoCV (tunes alpha)
+  lasso = Pipeline([
+      ("scaler", StandardScaler()),
+      ("lasso", LassoCV(alphas=np.logspace(-3, 1, 50), cv=5, max_iter=10000, random_state=RANDOM_STATE))
+  ])
+
+  # ElasticNetCV (tunes alpha & l1_ratio)
+  elastic = Pipeline([
+      ("scaler", StandardScaler()),
+      ("en", ElasticNetCV(alphas=np.logspace(-3, 1, 30),
+                          l1_ratio=[0.1,0.3,0.5,0.7,0.9],
+                          cv=5, max_iter=10000, random_state=RANDOM_STATE))
+  ])
+
+  # Evaluate
+  results = pd.concat([
+      evaluate_model("OLS", ols, X_train, y_train, X_test, y_test),
+      evaluate_model("RidgeCV", ridge, X_train, y_train, X_test, y_test),
+      evaluate_model("LassoCV", lasso, X_train, y_train, X_test, y_test),
+      evaluate_model("ElasticNetCV", elastic, X_train, y_train, X_test, y_test)
+  ]).set_index(["Model","Split"])
+
+  print(results)
+  print("Best Ridge alpha  :", ridge.named_steps["ridge"].alpha_)
+  print("Best Lasso alpha  :", lasso.named_steps["lasso"].alpha_)
+  print("Best EN alpha     :", elastic.named_steps["en"].alpha_)
+  print("Best EN l1_ratio  :", elastic.named_steps["en"].l1_ratio_)
+  </code></pre>
+
+    <p class="note">
+      Tip: For classification, prefer <code class="inline">StratifiedKFold</code> to keep class balance per fold.
+    </p>
+  </section>
+
+
+  <script>
+    document.querySelectorAll("pre .copy").forEach(button => {
+      button.addEventListener("click", () => {
+        const code = button.nextElementSibling.innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          const old = button.textContent;
+          button.textContent = "Copied!";
+          setTimeout(() => button.textContent = old, 1500);
+        });
       });
     });
-  });
-</script>
+  </script>
 
-</body>
-</html>
+  </body>
+  </html>
