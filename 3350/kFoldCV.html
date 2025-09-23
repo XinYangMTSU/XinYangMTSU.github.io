@@ -335,74 +335,128 @@
       These estimators run cross-validation internally to choose the best hyperparameters. We still keep them inside a
       <code class="inline">Pipeline</code> with <code class="inline">StandardScaler</code> to avoid leakage.
     </p>
-    <pre><button class="copy">Copy</button><code>import numpy as np
-  import pandas as pd
-  from sklearn.datasets import fetch_california_housing
-  from sklearn.model_selection import train_test_split
-  from sklearn.pipeline import Pipeline
-  from sklearn.preprocessing import StandardScaler
-  from sklearn.linear_model import LinearRegression, RidgeCV, LassoCV, ElasticNetCV
-  from sklearn.metrics import mean_squared_error, r2_score
+    <pre><button class="copy">Copy</button><code># Import libraries
+import numpy as np
+import pandas as pd
 
-  RANDOM_STATE = 42
-  np.random.seed(RANDOM_STATE)
+# Dataset: California housing (regression problem)
+from sklearn.datasets import fetch_california_housing
+from sklearn.model_selection import train_test_split
 
-  # Data
-  D = fetch_california_housing(as_frame=True)
-  X, y = D.data, D.target
-  X_train, X_test, y_train, y_test = train_test_split(
-      X, y, test_size=0.2, random_state=RANDOM_STATE, shuffle=True
-  )
+# Build ML pipeline: scaling + model
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
-  def evaluate_model(name, model, X_train, y_train, X_test, y_test):
-      model.fit(X_train, y_train)
-      ytr = model.predict(X_train); yte = model.predict(X_test)
-      def rows(split, yt, yp):
-          mse = mean_squared_error(yt, yp)
-          return {"Model": name, "Split": split,
-                  "SSE": float(np.sum((yt - yp)**2)),
-                  "MSE": float(mse),
-                  "RMSE": float(np.sqrt(mse)),
-                  "R^2": float(r2_score(yt, yp))}
-      return pd.DataFrame([rows("Train", y_train, ytr), rows("Test", y_test, yte)])
+# Linear models with built-in CV
+from sklearn.linear_model import LinearRegression, RidgeCV, LassoCV, ElasticNetCV
 
-  # Baseline OLS
-  ols = Pipeline([("scaler", StandardScaler()), ("lr", LinearRegression())])
+# Metrics
+from sklearn.metrics import mean_squared_error, r2_score
 
-  # RidgeCV (tunes alpha)
-  ridge = Pipeline([
-      ("scaler", StandardScaler()),
-      ("ridge", RidgeCV(alphas=np.logspace(-3, 3, 50), cv=5))
-  ])
+# Set random seed for reproducibility
+RANDOM_STATE = 42
+np.random.seed(RANDOM_STATE)
 
-  # LassoCV (tunes alpha)
-  lasso = Pipeline([
-      ("scaler", StandardScaler()),
-      ("lasso", LassoCV(alphas=np.logspace(-3, 1, 50), cv=5, max_iter=10000, random_state=RANDOM_STATE))
-  ])
+# --------------------------------------------------------
+# 1. Load dataset
+# --------------------------------------------------------
+D = fetch_california_housing(as_frame=True)   # returns data + target as pandas DataFrame
+X, y = D.data, D.target                       # X = features, y = house price target
 
-  # ElasticNetCV (tunes alpha & l1_ratio)
-  elastic = Pipeline([
-      ("scaler", StandardScaler()),
-      ("en", ElasticNetCV(alphas=np.logspace(-3, 1, 30),
-                          l1_ratio=[0.1,0.3,0.5,0.7,0.9],
-                          cv=5, max_iter=10000, random_state=RANDOM_STATE))
-  ])
+# Split into train (80%) and test (20%)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=RANDOM_STATE, shuffle=True
+)
 
-  # Evaluate
-  results = pd.concat([
-      evaluate_model("OLS", ols, X_train, y_train, X_test, y_test),
-      evaluate_model("RidgeCV", ridge, X_train, y_train, X_test, y_test),
-      evaluate_model("LassoCV", lasso, X_train, y_train, X_test, y_test),
-      evaluate_model("ElasticNetCV", elastic, X_train, y_train, X_test, y_test)
-  ]).set_index(["Model","Split"])
+# --------------------------------------------------------
+# 2. Define evaluation helper function
+# --------------------------------------------------------
+def evaluate_model(name, model, X_train, y_train, X_test, y_test):
+    """
+    Fits model, predicts on train/test, and returns a DataFrame with metrics:
+    SSE, MSE, RMSE, R².
+    """
+    model.fit(X_train, y_train)   # train the model
+    ytr = model.predict(X_train)  # predictions on train
+    yte = model.predict(X_test)   # predictions on test
+    
+    # inner helper for computing metrics per split
+    def rows(split, yt, yp):
+        mse = mean_squared_error(yt, yp)
+        return {
+            "Model": name,
+            "Split": split,
+            "SSE": np.sum((yt - yp)**2),  # sum of squared errors
+            "MSE": mse,                   # mean squared error
+            "RMSE": np.sqrt(mse),         # root mean squared error
+            "R^2": r2_score(yt, yp)       # coefficient of determination
+        }
+    
+    # Collect results for Train and Test
+    return pd.DataFrame([
+        rows("Train", y_train, ytr),
+        rows("Test", y_test, yte)
+    ])
 
-  print(results)
-  print("Best Ridge alpha  :", ridge.named_steps["ridge"].alpha_)
-  print("Best Lasso alpha  :", lasso.named_steps["lasso"].alpha_)
-  print("Best EN alpha     :", elastic.named_steps["en"].alpha_)
-  print("Best EN l1_ratio  :", elastic.named_steps["en"].l1_ratio_)
-  </code></pre>
+# --------------------------------------------------------
+# 3. Define models (each inside a Pipeline with StandardScaler)
+# --------------------------------------------------------
+
+# Baseline OLS regression
+ols = Pipeline([
+    ("scaler", StandardScaler()), 
+    ("lr", LinearRegression())
+])
+
+# Ridge regression with cross-validation (tunes alpha)
+ridge = Pipeline([
+    ("scaler", StandardScaler()),
+    ("ridge", RidgeCV(alphas=np.logspace(-3, 3, 50), cv=5))
+])
+
+# Lasso regression with cross-validation (tunes alpha)
+lasso = Pipeline([
+    ("scaler", StandardScaler()),
+    ("lasso", LassoCV(
+        alphas=np.logspace(-3, 1, 50),  # test a grid of alpha values
+        cv=5,                           # 5-fold cross-validation
+        max_iter=10000, 
+        random_state=RANDOM_STATE
+    ))
+])
+
+# Elastic Net regression with cross-validation (tunes alpha & l1_ratio)
+elastic = Pipeline([
+    ("scaler", StandardScaler()),
+    ("en", ElasticNetCV(
+        alphas=np.logspace(-3, 1, 30),   # alpha grid
+        l1_ratio=[0.1,0.3,0.5,0.7,0.9], # mix between L1 and L2 penalty
+        cv=5, 
+        max_iter=10000, 
+        random_state=RANDOM_STATE
+    ))
+])
+
+# --------------------------------------------------------
+# 4. Evaluate all models and combine results
+# --------------------------------------------------------
+results = pd.concat([
+    evaluate_model("OLS", ols, X_train, y_train, X_test, y_test),
+    evaluate_model("RidgeCV", ridge, X_train, y_train, X_test, y_test),
+    evaluate_model("LassoCV", lasso, X_train, y_train, X_test, y_test),
+    evaluate_model("ElasticNetCV", elastic, X_train, y_train, X_test, y_test)
+]).set_index(["Model", "Split"])
+
+# Show metrics table
+print(results)
+
+# --------------------------------------------------------
+# 5. Display best hyperparameters chosen by CV
+# --------------------------------------------------------
+print("Best Ridge alpha  :", ridge.named_steps["ridge"].alpha_)
+print("Best Lasso alpha  :", lasso.named_steps["lasso"].alpha_)
+print("Best EN alpha     :", elastic.named_steps["en"].alpha_)
+print("Best EN l1_ratio  :", elastic.named_steps["en"].l1_ratio_)</code></pre>
 
     <p class="note">
       Tip: For classification, prefer <code class="inline">StratifiedKFold</code> to keep class balance per fold.
