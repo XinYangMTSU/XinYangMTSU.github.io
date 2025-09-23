@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>K-Fold Cross-Validation — Worked Example</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0 0 10px 0;
+      color: #ffb3de;
+      font-weight: 700;
+    }
+
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+
+    a.anchor {
+      text-decoration: none;
+      margin-left: .5rem;
+      opacity: .6;
+      color: #ffb3de;
+    }
+    a.anchor:hover { opacity: 1; }
+
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+      position: relative;
+      max-width: 100%;
+    }
+
+    pre .copy {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 4px 8px;
+      background: #21111b;
+      border: 1px solid #ff79c6;
+      border-radius: 6px;
+      color: #ffb3de;
+      font-size: 0.8em;
+      cursor: pointer;
+    }
+    pre .copy:hover {
+      background: #ff79c6;
+      color: #fff;
+    }
+
+    ul.toc {
+      padding-left: 18px;
+      margin-top: 8px;
+    }
+    ul.toc li { margin: 4px 0; }
+    ul.toc a { color: #ffb3de; }
+    .muted { color: #d4a7c4; opacity: .9; }
+  </style>
+</head>
+
+<body>
+
+<section>
+  <center>
+    <h1>K-Fold Cross-Validation</h1>
+    <div class="muted">Reliable model evaluation by rotating through k validation folds</div>
+  </center>
+
+  <h4>Description</h4>
+  <ul class="toc">
+    <li>Partition the dataset into <b>k</b> equal folds (commonly <b>k = 5</b> or <b>k = 10</b>).</li>
+    <li>Train on <b>k−1</b> folds, validate on the remaining fold.</li>
+    <li>Repeat <b>k</b> times, each time changing which fold is used for validation.</li>
+    <li>Report the <b>average performance</b> across folds.</li>
+  </ul>
+
+  <h4>Pros</h4>
+  <ul>
+    <li>More reliable than a single holdout split—<b>all data</b> is used for both training and validation.</li>
+  </ul>
+
+  <h4>Cons</h4>
+  <ul>
+    <li>More <b>computationally expensive</b> than a simple train/test split.</li>
+  </ul>
+
+  <h4>Worked Example (Regression + Classification)</h4>
+  <pre><button class="copy">Copy</button><code>
+# ========================================================
+# K-Fold Cross-Validation — Regression & Classification
+# Uses scikit-learn's KFold/StratifiedKFold and cross_val_score
+# ========================================================
+import numpy as np
+import pandas as pd
+
+from sklearn.datasets import load_diabetes, load_breast_cancer
+from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import KFold, StratifiedKFold, cross_val_score
+
+RANDOM_STATE = 42
+np.random.seed(RANDOM_STATE)
+pd.set_option("display.float_format", "{:.4f}".format)
+
+# -----------------------------
+# 1) Regression with K-Fold (k=5)
+# -----------------------------
+X_reg, y_reg = load_diabetes(return_X_y=True, as_frame=False)
+
+reg_pipeline = Pipeline([
+    ("scaler", StandardScaler()),
+    ("model", LinearRegression())
+])
+
+k = 5
+kf = KFold(n_splits=k, shuffle=True, random_state=RANDOM_STATE)
+
+# R^2 across folds
+r2_scores = cross_val_score(reg_pipeline, X_reg, y_reg, cv=kf, scoring="r2")
+print(f"[Regression] {k}-Fold R^2 scores:", r2_scores)
+print(f"[Regression] Mean R^2: {r2_scores.mean():.4f}  ± {r2_scores.std():.4f}")
+
+# -----------------------------
+# 2) Classification with StratifiedKFold (k=10)
+# -----------------------------
+X_clf, y_clf = load_breast_cancer(return_X_y=True, as_frame=False)
+
+clf_pipeline = Pipeline([
+    ("scaler", StandardScaler()),
+    ("model", LogisticRegression(max_iter=1000, random_state=RANDOM_STATE))
+])
+
+k_cls = 10
+skf = StratifiedKFold(n_splits=k_cls, shuffle=True, random_state=RANDOM_STATE)
+
+# Accuracy across folds
+acc_scores = cross_val_score(clf_pipeline, X_clf, y_clf, cv=skf, scoring="accuracy")
+print(f"[Classification] {k_cls}-Fold Accuracy:", acc_scores)
+print(f"[Classification] Mean Acc: {acc_scores.mean():.4f}  ± {acc_scores.std():.4f}")
+
+# -----------------------------
+# Notes:
+# - Use KFold for regression, StratifiedKFold for classification (preserves class ratios).
+# - Set shuffle=True and a random_state for reproducible splits.
+# - You can swap 'scoring' to 'neg_mean_squared_error', 'f1', 'roc_auc', etc.
+  </code></pre>
+
+  <h4>When to Use</h4>
+  <ul>
+    <li><b>Small–medium datasets</b> where a single holdout split might be unstable.</li>
+    <li>When you need a <b>more reliable estimate</b> of generalization performance.</li>
+  </ul>
+
+  <h4>Common Pitfalls (and Fixes)</h4>
+  <ul>
+    <li><b>Data leakage</b>: put <i>all</i> preprocessing inside a <code>Pipeline</code> so it’s fit only on each training fold.</li>
+    <li><b>Imbalanced classes</b>: use <code>StratifiedKFold</code> for classification.</li>
+    <li><b>Non-shuffled data</b>: set <code>shuffle=True</code> (+ <code>random_state</code>) unless time-order matters.</li>
+    <li><b>Time series</b>: use <code>TimeSeriesSplit</code>, not standard K-Fold.</li>
+  </ul>
+
+  <h4>Optional: Nested Cross-Validation (for unbiased model selection)</h4>
+  <pre><button class="copy">Copy</button><code>
+from sklearn.model_selection import GridSearchCV, KFold, cross_val_score
+from sklearn.svm import SVR
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+X, y = load_diabetes(return_X_y=True)
+
+inner_cv = KFold(n_splits=5, shuffle=True, random_state=42)   # hyperparameter tuning
+outer_cv = KFold(n_splits=5, shuffle=True, random_state=123)  # performance estimate
+
+pipe = Pipeline([
+    ("scaler", StandardScaler()),
+    ("svr", SVR())
+])
+
+param_grid = {"svr__C": [0.1, 1, 10], "svr__gamma": ["scale", 0.01, 0.1], "svr__kernel": ["rbf"]}
+
+search = GridSearchCV(pipe, param_grid=param_grid, cv=inner_cv, scoring="neg_mean_squared_error")
+nested_scores = cross_val_score(search, X, y, cv=outer_cv, scoring="neg_mean_squared_error")
+
+print("Nested CV (neg MSE) mean ± std:", nested_scores.mean(), "±", nested_scores.std())
+  </code></pre>
+
+  <h3>Quick Summary</h3>
+  <ul>
+    <li><b>K-Fold</b> rotates the validation fold to use every sample for both training and validation.</li>
+    <li><b>Pros</b>: more reliable estimates than a single split. <b>Cons</b>: higher compute cost.</li>
+    <li><b>StratifiedKFold</b> for classification; standard <b>KFold</b> for regression.</li>
+    <li>Always wrap preprocessing + model in a <b>Pipeline</b> to avoid leakage.</li>
+  </ul>
+
+</section>
+
+<script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
