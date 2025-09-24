@@ -461,7 +461,35 @@ print("Best EN l1_ratio  :", elastic.named_steps["en"].l1_ratio_)</code></pre>
     </p>
   </section>
 
+  
+  <section id="cv-alpha-selection">
+  <h2>4) How CV Picks the Best <code>alpha</code></h2>
+  <p>
+    For models like <code class="inline">LassoCV</code>, <code class="inline">RidgeCV</code>, and
+    <code class="inline">ElasticNetCV</code>, the regularization strength <code class="inline">alpha</code>
+    is not chosen manually. Instead, cross-validation is used to automatically find the value of
+    <code class="inline">alpha</code> that yields the best performance.
+  </p>
+  <ul>
+    <li><b>Step 1:</b> Pick a candidate <code class="inline">alpha</code> from the grid.</li>
+    <li><b>Step 2:</b> Run <em>5-fold cross-validation</em>:
+      <ul>
+        <li>Split the training set into 5 folds.</li>
+        <li>Train on 4 folds, validate on the remaining 1 fold.</li>
+        <li>Repeat until each fold has served as the validation set once.</li>
+      </ul>
+    </li>
+    <li><b>Step 3:</b> Compute 5 validation errors for this <code class="inline">alpha</code> and average them.</li>
+    <li><b>Step 4:</b> Repeat Steps 1–3 for every candidate <code class="inline">alpha</code>.</li>
+    <li><b>Step 5:</b> Choose the <code class="inline">alpha</code> with the <strong>smallest average validation error</strong>.</li>
+  </ul>
+  <p class="note">
+    👉 Each <code class="inline">alpha</code> → 5 validation errors (from the 5 folds) → average them → keep the average.<br>
+    After looping through all alphas, the one with the smallest average validation error is chosen as the best (<code class="inline">alpha_</code>).
+  </p>
+</section>
 
+  
   <script>
     document.querySelectorAll("pre .copy").forEach(button => {
       button.addEventListener("click", () => {
