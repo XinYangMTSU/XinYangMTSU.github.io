@@ -96,6 +96,25 @@
   </center>
   <p class="note">
     <strong><font color="red">Underfitting</font></strong> happens when the model is too simple to capture the underlying relationship in the data (high bias).
+    <h3>Symptoms</h3>
+  <ul>
+    <li>High training error (model doesn’t even fit the training set well).</li>
+    <li>High test error (generalizes poorly because it never learned the true signal).</li>
+  </ul>
+
+  <h3>Causes</h3>
+  <ul>
+    <li>Model is too simple (e.g., fitting a straight line to quadratic data).</li>
+    <li>Too much regularization (e.g., Ridge/Lasso penalizing weights so strongly that coefficients shrink too much).</li>
+    <li>Not enough or poor-quality features.</li>
+  </ul>
+
+  <h3>Fixes</h3>
+  <ul>
+    <li>Add more features or use feature engineering (polynomial features, interaction terms).</li>
+    <li>Use a more complex model (e.g., Random Forest instead of Linear Regression).</li>
+    <li>Reduce regularization strength.</li>
+  </ul>
     <br><br>
     <strong><font color="red">Overfitting</font></strong>
     happens when the model is too complex and memorizes noise (high variance).
