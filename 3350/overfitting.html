@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Overfitting vs Underfitting · Pipeline + StandardScaler</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 { color:#ffb3de; margin:0 0 8px 0; }
+    h2 { margin: 0 0 10px 0; color: #ffb3de; font-weight: 700; }
+    section h4 {
+      font-size: 1.18em; color: #ffb3de; margin-bottom: 5px; margin-top: 30px;
+      font-weight: 600; border-bottom: 1px solid #ffb3de; padding-bottom: 2px;
+    }
+    p { color:#ffd7f0; }
+    pre {
+      background: #19121a; color: #ffb3de; padding: 15px 18px; border-radius: 8px;
+      font-size: 1.04em; line-height: 1.7; overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11); position: relative;
+      white-space: pre;
+    }
+    pre .copy {
+      position: absolute; top: 8px; right: 8px; padding: 4px 8px;
+      background: #21111b; border: 1px solid #ff79c6; border-radius: 6px;
+      color: #ffb3de; font-size: 0.8em; cursor: pointer;
+    }
+    pre .copy:hover { background: #ff79c6; color: #fff; }
+    .pill {
+      display:inline-block; background:#19121a; border:1px solid #ff79c6;
+      border-radius:999px; padding:4px 10px; margin:2px 8px 2px 0; font-size:.9em
+    }
+    .note { color:#ffd7f0; opacity:.9; }
+    ul { margin-top: 8px; color:#ffd7f0; }
+    code.inline { background:#19121a; padding:2px 6px; border-radius:6px; }
+    .legend { display:flex; gap:14px; align-items:center; margin:8px 0 18px; flex-wrap: wrap;}
+    .swatch { width:16px; height:16px; border-radius:4px; display:inline-block; border:1px solid #00000033; }
+    .swatch.data { background:#ffb347; }       /* orange */
+    .swatch.true { background:transparent; border:2px dashed #9ec5ff; width:18px; height:10px; border-radius:2px;}
+    .swatch.lin  { background:#5fbf5f; }       /* green  */
+    .swatch.quad { background:#ff79c6; }       /* magenta */
+    .swatch.over { background:#ffd84d; }       /* yellow  */
+    .svgwrap{ background:#1a151c; border-radius:12px; padding:10px; box-shadow: inset 0 0 0 1px rgba(255,121,198,0.2);}
+    canvas { width:100%; height:auto; display:block; }
+    .annote {
+      position:absolute; color:#ffd7f0; background:rgba(25,18,26,0.7);
+      padding:8px 10px; border-radius:8px; border:1px solid rgba(255,121,198,0.4);
+      font-size:0.9em;
+    }
+  </style>
+
+  <style>
+  /* add below your existing .annote style */
+  .annote.under {
+    color: #5fbf5f;                  /* green */
+    border-color: rgba(95,191,95,0.6);
+  }
+  .annote.good  {
+    color: #ff79c6;                  /* pink (magenta) */
+    border-color: rgba(255,121,198,0.6);
+  }
+  .annote.over  {
+    color: #ffb347;                  /* orange */
+    border-color: rgba(255,179,71,0.6);
+  }
+</style>
+
+
+</head>
+<body>
+
+<section id="top">
+  <center>
+    <h1>
+      <span class="pill">Overfitting vs Underfitting</span>
+    </h1>
+  </center>
+  <p class="note">
+    <strong><font color="red">Underfitting</font></strong> happens when the model is too simple to capture the true pattern (high bias).
+    <br><br>
+    <strong><font color="red">Overfitting</font></strong>
+    happens when the model is too complex and memorizes noise (high variance).
+    <br><br>
+    A good model strikes a balance and generalizes well.
+  </p>
+</section>
+
+<section id="figure">
+  <h2>1) Visual: Underfitting, Good Fit, Overfitting</h2>
+  <div class="legend">
+    <span class="swatch data"></span> <span>Data (with noise)</span>
+    <span class="swatch true"></span> <span>True function</span>
+    <span class="swatch lin"></span> <span>Underfitting (Linear)</span>
+    <span class="swatch quad"></span> <span>Good Fit (Quadratic)</span>
+    <span class="swatch over"></span> <span>Overfitting (Wiggly)</span>
+  </div>
+
+  <div class="svgwrap" style="position:relative;">
+    <canvas id="fitCanvas" width="880" height="520" aria-label="Underfitting vs Overfitting figure"></canvas>
+
+    <!-- Labels (absolute; positioned by JS after draw if you want) -->
+
+    <div id="label-under" class="annote under" style="left:80px; top:110px;">
+      <b>Underfitting</b><br>Model too simple<br>(high bias)
+    </div>
+
+    <div id="label-good" class="annote good" style="left:330px; top:260px;">
+      <b>Good Fit</b><br>Captures trend<br>(balanced)
+    </div>
+
+    <div id="label-over" class="annote over" style="right:40px; top:70px;">
+      <b>Overfitting</b><br>Follows noise<br>(high variance)
+    </div>
+
+  </div>
+
+  <p class="note" style="margin-top:14px;">
+    Orange points are noisy samples drawn from a quadratic ground-truth. The green line is a linear fit (underfitting).
+    The magenta curve is a quadratic fit (good). The yellow curve exaggerates wiggles to illustrate overfitting.
+  </p>
+</section>
+
+<section id="study-notes">
+  <h2>2) Quick Study Notes</h2>
+  <ul>
+    <li><b>Underfitting</b>: high training error and high test error.</li>
+    <li><b>Overfitting</b>: low training error but high test error.</li>
+    <li><b>Fix overfitting</b>: regularization (Ridge/Lasso/ElasticNet), more data, simpler model, cross-validation.</li>
+    <li><b>Fix underfitting</b>: add features/complexity, reduce regularization.</li>
+  </ul>
+</section>
+
+<script>
+  // ------- Drawing utilities -------
+  const canvas = document.getElementById('fitCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const PAD = 60;
+
+  // Data generation: true quadratic + noise
+  function linspace(a, b, n){
+    return Array.from({length:n}, (_,i)=> a + (b-a)*i/(n-1));
+  }
+
+  // Coordinate mapping (x in [-3,3], y autoscaled from data)
+  const X = linspace(-3, 3, 25);
+  const yTrue = X.map(x => 0.5*x*x + x + 2);
+  const rng = mulberry32(0xC0FFEE);
+  const y = yTrue.map(v => v + randn(rng)*2.0);
+
+  // Fit linear regression y = a + b x
+  function fitLinear(xs, ys){
+    const n = xs.length;
+    const mx = mean(xs), my = mean(ys);
+    let num = 0, den = 0;
+    for(let i=0;i<n;i++){ num += (xs[i]-mx)*(ys[i]-my); den += (xs[i]-mx)**2; }
+    const b = num/(den||1e-9), a = my - b*mx;
+    return {a,b};
+  }
+
+  // Fit quadratic regression y = a + b x + c x^2  (normal equations)
+  function fitQuadratic(xs, ys){
+    const n = xs.length;
+    let Sx=0,Sx2=0,Sx3=0,Sx4=0,Sy=0,Sxy=0,Sx2y=0;
+    for(let i=0;i<n;i++){
+      const x=xs[i], y=ys[i], x2=x*x, x3=x2*x, x4=x3*x;
+      Sx+=x; Sx2+=x2; Sx3+=x3; Sx4+=x4; Sy+=y; Sxy+=x*y; Sx2y+=x2*y;
+    }
+    // Solve 3x3 system: [ [n, Sx, Sx2], [Sx, Sx2, Sx3], [Sx2, Sx3, Sx4] ] [a,b,c]^T = [Sy, Sxy, Sx2y]^T
+    function solve3(A,b){
+      const m=[[...A[0]],[...A[1]],[...A[2]]], v=[...b];
+      // Gaussian elimination
+      for(let i=0;i<3;i++){
+        // pivot
+        let p=i; for(let r=i+1;r<3;r++) if(Math.abs(m[r][i])>Math.abs(m[p][i])) p=r;
+        [m[i],m[p]]=[m[p],m[i]]; [v[i],v[p]]=[v[p],v[i]];
+        const piv = m[i][i] || 1e-12;
+        for(let j=i;j<3;j++) m[i][j]/=piv; v[i]/=piv;
+        for(let r=0;r<3;r++){
+          if(r===i) continue;
+          const f=m[r][i];
+          for(let j=i;j<3;j++) m[r][j]-=f*m[i][j];
+          v[r]-=f*v[i];
+        }
+      }
+      return v; // solution
+    }
+    const A = [[n,Sx,Sx2],[Sx,Sx2,Sx3],[Sx2,Sx3,Sx4]];
+    const b = [Sy,Sxy,Sx2y];
+    const [a,b1,c]=solve3(A,b);
+    return {a:a, b:b1, c:c};
+  }
+
+  // Overfit curve: exaggerate wiggles around the quadratic to simulate high-variance fit
+  function overfit(x){
+    const base = 0.5*x*x + x + 2;
+    return base + 2.2*Math.sin(6*x) + 1.2*Math.sin(11*x)*(1 - Math.exp(-0.6*(x*x)));
+  }
+
+  // Helpers
+  function mean(arr){ return arr.reduce((s,v)=>s+v,0)/arr.length; }
+  function mulberry32(a){ return function(){ var t = a += 0x6D2B79F5; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; } }
+  function randn(rng){ // Box–Muller
+    let u=0,v=0; while(u===0) u=rng(); while(v===0) v=rng();
+    return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);
+  }
+
+  // Determine y-range for plotting
+  const Xcurve = linspace(-3,3,400);
+  const yTrueCurve = Xcurve.map(x => 0.5*x*x + x + 2);
+  const yOver = Xcurve.map(overfit);
+  const ymin = Math.min(...y, ...yTrueCurve, ...yOver) - 1;
+  const ymax = Math.max(...y, ...yTrueCurve, ...yOver) + 1;
+
+  // Mapping functions
+  const x2px = x => PAD + (x + 3) * (W - 2*PAD) / 6;
+  const y2px = yv => H - PAD - (yv - ymin) * (H - 2*PAD) / (ymax - ymin);
+
+  // Axes
+  function drawAxes(){
+    ctx.strokeStyle = "#3a2f36"; ctx.lineWidth = 1;
+    // X axis
+    ctx.beginPath(); ctx.moveTo(PAD, H-PAD); ctx.lineTo(W-PAD, H-PAD); ctx.stroke();
+    // Y axis
+    ctx.beginPath(); ctx.moveTo(PAD, PAD); ctx.lineTo(PAD, H-PAD); ctx.stroke();
+
+    ctx.fillStyle = "#ffb3de"; ctx.font = "13px Roboto, Arial";
+    ctx.fillText("X", W-PAD+10, H-PAD+5);
+    ctx.fillText("y", PAD-12, PAD-10);
+  }
+
+  function drawDashedCurve(xs, ys, color){
+    ctx.save();
+    ctx.setLineDash([8,6]);
+    ctx.strokeStyle = color; ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(x2px(xs[0]), y2px(ys[0]));
+    for(let i=1;i<xs.length;i++) ctx.lineTo(x2px(xs[i]), y2px(ys[i]));
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawCurve(xs, ys, color, width=2){
+    ctx.strokeStyle = color; ctx.lineWidth = width;
+    ctx.beginPath();
+    ctx.moveTo(x2px(xs[0]), y2px(ys[0]));
+    for(let i=1;i<xs.length;i++) ctx.lineTo(x2px(xs[i]), y2px(ys[i]));
+    ctx.stroke();
+  }
+
+  function drawPoints(xs, ys, color){
+    ctx.fillStyle = color; ctx.strokeStyle = "#00000055";
+    xs.forEach((x,i) => {
+      const px = x2px(x), py = y2px(ys[i]);
+      ctx.beginPath(); ctx.arc(px, py, 4.5, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    drawAxes();
+
+    // Data points
+    drawPoints(X, y, "#ffb347");
+
+    // True function (dashed)
+    drawDashedCurve(Xcurve, yTrueCurve, "#9ec5ff");
+
+    // Fits
+    const {a:al, b:bl} = fitLinear(X, y);
+    const yLin = Xcurve.map(x => al + bl*x);
+    drawCurve(Xcurve, yLin, "#5fbf5f", 2); // green
+
+    const {a:aq, b:bq, c:cq} = fitQuadratic(X, y);
+    const yQuad = Xcurve.map(x => aq + bq*x + cq*x*x);
+    drawCurve(Xcurve, yQuad, "#ff79c6", 2.5); // magenta
+
+    drawCurve(Xcurve, yOver, "#ffd84d", 2.5); // yellow
+  }
+
+  draw();
+
+  // Optional: enable repositioning labels on window resize (simple approach)
+  window.addEventListener('resize', ()=>{ /* canvas is responsive via CSS width only */ });
+</script>
+
+</body>
+</html>
