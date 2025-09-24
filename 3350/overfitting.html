@@ -119,6 +119,26 @@
     <strong><font color="red">Overfitting</font></strong>
     happens when the model is too complex and memorizes noise (high variance).
     <br><br>
+     <h4>Symptoms</h4>
+  <ul>
+    <li>Low training error (fits training data almost perfectly).</li>
+    <li>High test error (fails to generalize to unseen data).</li>
+  </ul>
+
+  <h4>Causes</h4>
+  <ul>
+    <li>Model is too complex relative to the dataset size (e.g., a deep neural network on 100 data points).</li>
+    <li>Too many features compared to the number of samples.</li>
+    <li>Noisy data not handled properly.</li>
+  </ul>
+
+  <h4>Fixes</h4>
+  <ul>
+    <li>Regularization (Ridge, Lasso, ElasticNet) → penalizes large coefficients, reduces complexity.</li>
+    <li>Get more data (more examples smooth out noise).</li>
+    <li>Simplify the model (reduce polynomial degree, prune decision trees).</li>
+    <li>Use cross-validation → to tune hyperparameters properly and detect overfitting.</li>
+  </ul>
     A good model strikes a balance and generalizes well.
   </p>
 </section>
