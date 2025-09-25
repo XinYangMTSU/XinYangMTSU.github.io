@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>K-Fold Cross-Validation · Pipeline + StandardScaler</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 { color:#ffb3de; margin:0 0 8px 0; }
+    h2 { margin: 0 0 10px 0; color: #ffb3de; font-weight: 700; }
+    section h4 {
+      font-size: 1.18em; color: #ffb3de; margin-bottom: 5px; margin-top: 30px;
+      font-weight: 600; border-bottom: 1px solid #ffb3de; padding-bottom: 2px;
+    }
+    p { color:#ffd7f0; }
+    pre {
+      background: #19121a; color: #ffb3de; padding: 15px 18px; border-radius: 8px;
+      font-size: 1.04em; line-height: 1.7; overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11); position: relative;
+      white-space: pre;
+    }
+    pre .copy {
+      position: absolute; top: 8px; right: 8px; padding: 4px 8px;
+      background: #21111b; border: 1px solid #ff79c6; border-radius: 6px;
+      color: #ffb3de; font-size: 0.8em; cursor: pointer;
+    }
+    pre .copy:hover { background: #ff79c6; color: #fff; }
+    .pill {
+      display:inline-block; background:#19121a; border:1px solid #ff79c6;
+      border-radius:999px; padding:4px 10px; margin:2px 8px 2px 0; font-size:.9em
+    }
+    .note { color:#ffd7f0; opacity:.9; }
+    ul { margin-top: 8px; color:#ffd7f0; }
+    code.inline { background:#19121a; padding:2px 6px; border-radius:6px; }
+    .legend { display:flex; gap:14px; align-items:center; margin:8px 0 18px; }
+    .swatch { width:16px; height:16px; border-radius:4px; display:inline-block; border:1px solid #00000033; }
+    .swatch.train { background:#6fc3df; }   /* teal-blue */
+    .swatch.val   { background:#ff79c6; }   /* pink */
+    .svgwrap{ background:#1a151c; border-radius:12px; padding:10px; box-shadow: inset 0 0 0 1px rgba(255,121,198,0.2);}
+    .rowlbl{ font-size:0.95em; fill:#ffb3de; }
+  </style>
+</head>
+<body>
+
+<section>
+
+  <svg viewBox="0 0 900 1500" width="100%" height="auto" role="img" aria-label="Vertical leakage zoom-in: one global scaler for Train used across all inner CV folds (Val hidden)">
+  <defs>
+    <style>
+      .box { fill:#19121a; stroke:#ff79c6; stroke-width:2; rx:12; ry:12; }
+      .ds  { fill:#1d2230; stroke:#6fc3df; stroke-width:1.8; rx:12; ry:12; }
+      .ok  { fill:#19121a; stroke:#7CFC7C; stroke-width:1.8; rx:12; ry:12; }
+      .fold { fill:#141018; stroke:#54425a; stroke-width:1.6; rx:10; ry:10; }
+      .train { fill:#222638; stroke:#6fc3df; }
+      .val { fill:#26331f; stroke:#7CFC7C; }
+      .scaler { fill:#19121a; stroke:#ffb3de; stroke-width:2; rx:10; ry:10; }
+      .arrow { stroke:#ffb3de; stroke-width:2; marker-end:url(#ah1); }
+      .arrow-red { stroke:#ff4d6d; stroke-width:2.6; marker-end:url(#ah1); }
+      .back { stroke:#ff4d6d; stroke-dasharray:6 6; stroke-width:2; marker-end:url(#ah1); }
+      .lbl { fill:#ffb3de; font:600 20px 'Roboto', Arial, sans-serif; }
+      .small { fill:#ffd7f0; font: 15px 'Roboto', Arial, sans-serif; }
+      .tiny { fill:#ffd7f0; font: 13px 'Roboto', Arial, sans-serif; }
+      .red { fill:#ff9c9c; font:600 16px 'Roboto', Arial, sans-serif; }
+      .green { fill:#b7ffb7; font:600 16px 'Roboto', Arial, sans-serif; }
+      /* Hidden validation placeholders */
+      .hiddenVal { fill:#00000000; stroke:#7CFC7C; stroke-dasharray:8 6; opacity:0.35; }
+      .ghostTxt { fill:#b7ffb7; opacity:0.65; font: 13px 'Roboto', Arial, sans-serif; }
+    </style>
+
+    <marker id="ah1" markerWidth="12" markerHeight="8" refX="10.5" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#ffb3de"></polygon>
+    </marker>
+  </defs>
+
+  <!-- Header band: Train split and global scaler -->
+  <rect x="60" y="20" width="300" height="74" class="ds"/>
+  <text x="210" y="62" text-anchor="middle" class="lbl">Train (80% of Full)</text>
+
+  <line x1="360" y1="57" x2="520" y2="57" class="arrow"/>
+  <rect x="520" y="20" width="320" height="74" class="scaler"/>
+  <text x="680" y="50" text-anchor="middle" class="lbl">Fit ONE scaler on ALL Train → (μ, σ)</text>
+  <text x="680" y="74" text-anchor="middle" class="small">These μ,σ include EVERY fold’s validation rows</text>
+
+  <!-- Fan-out arrow downward to folds -->
+  <line x1="680" y1="94" x2="680" y2="150" class="arrow-red"/>
+
+  <!-- ===== Vertical stack of 5 folds ===== -->
+  <!-- helper: top Y for first fold -->
+  <!-- Fold template width/height -->
+  <!-- Each fold block: 780w x 170h -->
+  <!-- FOLD 1 -->
+  <g transform="translate(60,150)">
+    <rect x="0" y="0" width="780" height="170" class="fold"/>
+    <text x="16" y="22" class="small">Fold 1</text>
+
+    <!-- Train_1 -->
+    <rect x="20" y="55" width="160" height="60" class="train"/>
+    <text x="100" y="89" text-anchor="middle" class="tiny">Train₁</text>
+
+    <!-- Apply global μ,σ -->
+    <line x1="180" y1="85" x2="270" y2="85" class="arrow-red"/>
+    <rect x="270" y="59" width="64" height="52" class="scaler"/>
+    <text x="302" y="87" text-anchor="middle" class="tiny">μ,σ</text>
+
+    <!-- Val_1 (hidden) -->
+    <line x1="334" y1="85" x2="430" y2="85" class="arrow-red"/>
+    <rect x="430" y="55" width="160" height="60" class="hiddenVal"/>
+    <text x="510" y="88" text-anchor="middle" class="ghostTxt">Val₁ (hidden)</text>
+
+    <!-- Back-contribution (leak) dashed to global scaler -->
+    <line x1="510" y1="55" x2="620" y2="-56" class="back"/>
+    <text x="560" y="30" class="red">Val₁ contributes to μ,σ</text>
+  </g>
+
+  <!-- FOLD 2 -->
+  <g transform="translate(60,345)">
+    <rect x="0" y="0" width="780" height="170" class="fold"/>
+    <text x="16" y="22" class="small">Fold 2</text>
+
+    <rect x="20" y="55" width="160" height="60" class="train"/>
+    <text x="100" y="89" text-anchor="middle" class="tiny">Train₂</text>
+
+    <line x1="180" y1="85" x2="270" y2="85" class="arrow-red"/>
+    <rect x="270" y="59" width="64" height="52" class="scaler"/>
+    <text x="302" y="87" text-anchor="middle" class="tiny">μ,σ</text>
+
+    <line x1="334" y1="85" x2="430" y2="85" class="arrow-red"/>
+    <rect x="430" y="55" width="160" height="60" class="hiddenVal"/>
+    <text x="510" y="88" text-anchor="middle" class="ghostTxt">Val₂ (hidden)</text>
+
+    <line x1="510" y1="55" x2="640" y2="-246" class="back"/>
+    <text x="560" y="30" class="red">Val₂ contributes</text>
+  </g>
+
+  <!-- FOLD 3 -->
+  <g transform="translate(60,540)">
+    <rect x="0" y="0" width="780" height="170" class="fold"/>
+    <text x="16" y="22" class="small">Fold 3</text>
+
+    <rect x="20" y="55" width="160" height="60" class="train"/>
+    <text x="100" y="89" text-anchor="middle" class="tiny">Train₃</text>
+
+    <line x1="180" y1="85" x2="270" y2="85" class="arrow-red"/>
+    <rect x="270" y="59" width="64" height="52" class="scaler"/>
+    <text x="302" y="87" text-anchor="middle" class="tiny">μ,σ</text>
+
+    <line x1="334" y1="85" x2="430" y2="85" class="arrow-red"/>
+    <rect x="430" y="55" width="160" height="60" class="hiddenVal"/>
+    <text x="510" y="88" text-anchor="middle" class="ghostTxt">Val₃ (hidden)</text>
+
+    <line x1="510" y1="55" x2="660" y2="-436" class="back"/>
+    <text x="560" y="30" class="red">Val₃ contributes</text>
+  </g>
+
+  <!-- FOLD 4 -->
+  <g transform="translate(60,735)">
+    <rect x="0" y="0" width="780" height="170" class="fold"/>
+    <text x="16" y="22" class="small">Fold 4</text>
+
+    <rect x="20" y="55" width="160" height="60" class="train"/>
+    <text x="100" y="89" text-anchor="middle" class="tiny">Train₄</text>
+
+    <line x1="180" y1="85" x2="270" y2="85" class="arrow-red"/>
+    <rect x="270" y="59" width="64" height="52" class="scaler"/>
+    <text x="302" y="87" text-anchor="middle" class="tiny">μ,σ</text>
+
+    <line x1="334" y1="85" x2="430" y2="85" class="arrow-red"/>
+    <rect x="430" y="55" width="160" height="60" class="hiddenVal"/>
+    <text x="510" y="88" text-anchor="middle" class="ghostTxt">Val₄ (hidden)</text>
+
+    <line x1="510" y1="55" x2="680" y2="-626" class="back"/>
+    <text x="560" y="30" class="red">Val₄ contributes</text>
+  </g>
+
+  <!-- FOLD 5 -->
+  <g transform="translate(60,930)">
+    <rect x="0" y="0" width="780" height="170" class="fold"/>
+    <text x="16" y="22" class="small">Fold 5</text>
+
+    <rect x="20" y="55" width="160" height="60" class="train"/>
+    <text x="100" y="89" text-anchor="middle" class="tiny">Train₅</text>
+
+    <line x1="180" y1="85" x2="270" y2="85" class="arrow-red"/>
+    <rect x="270" y="59" width="64" height="52" class="scaler"/>
+    <text x="302" y="87" text-anchor="middle" class="tiny">μ,σ</text>
+
+    <line x1="334" y1="85" x2="430" y2="85" class="arrow-red"/>
+    <rect x="430" y="55" width="160" height="60" class="hiddenVal"/>
+    <text x="510" y="88" text-anchor="middle" class="ghostTxt">Val₅ (hidden)</text>
+
+    <line x1="510" y1="55" x2="700" y2="-816" class="back"/>
+    <text x="560" y="30" class="red">Val₅ contributes</text>
+  </g>
+
+  <!-- Key point -->
+  <rect x="60" y="1125" width="780" height="84" class="box"/>
+  <text x="450" y="1152" text-anchor="middle" class="lbl">Key point</text>
+  <text x="450" y="1178" text-anchor="middle" class="small">
+    One shared scaler (μ,σ from ALL Train) is applied to every fold’s Train; each fold’s Val (hidden) helped set μ,σ → leakage during model selection.
+  </text>
+
+  <!-- After CV: Test evaluation row -->
+  <rect x="60" y="1235" width="320" height="74" class="ds"/>
+  <text x="220" y="1274" text-anchor="middle" class="lbl">Best hyperparams from leaky CV</text>
+
+  <line x1="380" y1="1272" x2="500" y2="1272" class="arrow"/>
+  <rect x="500" y="1235" width="240" height="74" class="box"/>
+  <text x="620" y="1274" text-anchor="middle" class="lbl">Refit on Train with same global μ,σ</text>
+
+  <line x1="740" y1="1272" x2="840" y2="1272" class="arrow"/>
+  <rect x="60" y="1335" width="780" height="74" class="ok"/>
+  <text x="450" y="1375" text-anchor="middle" class="green">Evaluate once on Test (held out; tuning was biased by inner leakage)</text>
+
+  <!-- Note -->
+  <text x="450" y="1460" text-anchor="middle" class="red">
+    Validation boxes are intentionally hidden; dashed lines show their (improper) contribution to μ,σ.
+  </text>
+</svg>
+</section>
+
+
+
+  <section id="leak-scaler-corrected">
+    <h2>Leakage during CV (inside Train only): <code>StandardScaler</code> fit on full Train before inner CV</h2>
+    <p class="note">
+      The scaler computes μ, σ using <em>all</em> rows of the 80% Train split, then inner 5-fold CV runs on data already scaled with those μ, σ.
+      Each validation fold thus "sees" its own statistics → mild leakage in hyperparameter tuning. The Test split is separate and only used once.
+    </p>
+      <svg viewBox="0 0 1280 660" width="100%" height="auto" role="img" aria-label="Leakage confined to Train split; Train/Test split (Full centered, Test/Eval moved down)">
+        <defs>
+          <style>
+            .box { fill:#19121a; stroke:#ff79c6; stroke-width:2; rx:12; ry:12; }
+            .ds  { fill:#1d2230; stroke:#6fc3df; stroke-width:1.8; rx:12; ry:12; }
+            .ok  { fill:#19121a; stroke:#7CFC7C; stroke-width:1.8; rx:12; ry:12; }
+            .arrow { stroke:#ffb3de; stroke-width:2; marker-end:url(#ah1); }
+            .lbl   { fill:#ffb3de; font:600 20px 'Roboto', Arial, sans-serif; }
+            .small { fill:#ffd7f0; font: 17px 'Roboto', Arial, sans-serif; }
+            .green { fill:#b7ffb7; font:600 17px 'Roboto', Arial, sans-serif; }
+            .red   { fill:#ff9c9c; font:600 17px 'Roboto', Arial, sans-serif; }
+            .bracket { fill:none; stroke:#ff4d4d; stroke-width:2.2; rx:14; ry:14; }
+            .pin { fill:#ff79c6; stroke:#0e0b10; stroke-width:1; }
+          </style>
+          <marker id="ah1" markerWidth="12" markerHeight="8" refX="10.5" refY="4" orient="auto">
+            <polygon points="0 0, 12 4, 0 8" fill="#ffb3de"></polygon>
+          </marker>
+        </defs>
+
+        <!-- Full Data (moved down & centered between Train center=171 and Test center=456 → Full center≈314) -->
+        <rect x="30" y="278" width="240" height="72" class="ds"/>
+        <text x="150" y="321" text-anchor="middle" class="lbl">Full Data (X, y)</text>
+
+        <!-- Train (unchanged) -->
+        <rect x="330" y="135" width="260" height="72" class="ds"/>
+        <text x="460" y="178" text-anchor="middle" class="lbl">Train (80%)</text>
+        <circle cx="350" cy="171" r="6" class="pin"/>
+
+        <!-- Test (moved down a little) -->
+        <rect x="330" y="420" width="260" height="72" class="ok"/>
+        <text x="460" y="463" text-anchor="middle" class="lbl">Test (20%)</text>
+        <circle cx="350" cy="456" r="6" class="pin"/>
+
+        <!-- Straight arrows from Full (right-center 270,314) → Train/Test centers -->
+        <line x1="270" y1="314" x2="330" y2="171" class="arrow"/>
+        <line x1="270" y1="314" x2="330" y2="456" class="arrow"/>
+
+        <!-- TRAIN branch: global scaling on ALL Train -->
+        <line x1="590" y1="171" x2="690" y2="171" class="arrow"/>
+        <rect x="690" y="135" width="560" height="84" class="box"/>
+        <text x="970" y="180" text-anchor="middle" class="lbl">Fit StandardScaler() on ALL Train → transform Train</text>
+        <text x="970" y="206" text-anchor="middle" class="small">μ, σ computed using every row in Train</text>
+
+        <!-- TRAIN branch: inner 5-fold CV -->
+        <line x1="590" y1="261" x2="690" y2="261" class="arrow"/>
+        <rect x="690" y="225" width="560" height="84" class="box"/>
+        <text x="970" y="270" text-anchor="middle" class="lbl">Inner 5-fold CV (RidgeCV / LassoCV / ElasticNetCV)</text>
+        <text x="970" y="296" text-anchor="middle" class="small">CV sees data scaled with global Train μ, σ</text>
+
+        <!-- Leakage bracket -->
+        <rect x="670" y="118" width="600" height="230" class="bracket"/>
+        <text x="970" y="360" text-anchor="middle" class="red">
+          Leakage is confined to Train: folds use scaling stats from themselves
+        </text>
+        <text x="970" y="384" text-anchor="middle" class="red">Leak risk here (during tuning)</text>
+
+        <!-- Final evaluation (moved down to align with new Test center=456) -->
+        <line x1="590" y1="456" x2="690" y2="456" class="arrow"/>
+        <rect x="690" y="415" width="560" height="84" class="ok"/>
+        <text x="970" y="458" text-anchor="middle" class="lbl">Evaluate tuned model on Test (once)</text>
+        <text x="970" y="484" text-anchor="middle" class="green">OK: not used in tuning → unbiased final estimate</text>
+      </svg>
+
+  </section>
+
+
+  <section id="no-leakage-gridsearch">
+    <h2>No Leakage during CV: <code>StandardScaler</code> inside <code>Pipeline</code> with <code>GridSearchCV</code></h2>
+    <p class="note">
+      The scaler is included inside the pipeline. During inner CV, each fold computes its own μ, σ
+      from the training portion only. Validation folds never "see" their own statistics →
+      no leakage in hyperparameter tuning. The Test split is still held out for the final unbiased estimate.
+    </p>
+    <svg viewBox="0 0 1280 660" width="100%" height="auto" role="img" aria-label="No leakage; scaler inside pipeline with GridSearchCV">
+      <defs>
+        <style>
+          .box { fill:#19121a; stroke:#ff79c6; stroke-width:2; rx:12; ry:12; }
+          .ds  { fill:#1d2230; stroke:#6fc3df; stroke-width:1.8; rx:12; ry:12; }
+          .ok  { fill:#19121a; stroke:#7CFC7C; stroke-width:1.8; rx:12; ry:12; }
+          .arrow { stroke:#ffb3de; stroke-width:2; marker-end:url(#ah1); }
+          .lbl   { fill:#ffb3de; font:600 20px 'Roboto', Arial, sans-serif; }
+          .small { fill:#ffd7f0; font: 17px 'Roboto', Arial, sans-serif; }
+          .green { fill:#b7ffb7; font:600 17px 'Roboto', Arial, sans-serif; }
+        </style>
+        <marker id="ah1" markerWidth="12" markerHeight="8" refX="10.5" refY="4" orient="auto">
+          <polygon points="0 0, 12 4, 0 8" fill="#ffb3de"></polygon>
+        </marker>
+      </defs>
+
+      <!-- Full Data -->
+      <rect x="30" y="278" width="240" height="72" class="ds"/>
+      <text x="150" y="321" text-anchor="middle" class="lbl">Full Data (X, y)</text>
+
+      <!-- Train -->
+      <rect x="330" y="135" width="260" height="72" class="ds"/>
+      <text x="460" y="178" text-anchor="middle" class="lbl">Train (80%)</text>
+      <circle cx="350" cy="171" r="6" class="pin"/>
+
+      <!-- Test -->
+      <rect x="330" y="420" width="260" height="72" class="ok"/>
+      <text x="460" y="463" text-anchor="middle" class="lbl">Test (20%)</text>
+      <circle cx="350" cy="456" r="6" class="pin"/>
+
+      <!-- Arrows from Full → Train/Test -->
+      <line x1="270" y1="314" x2="330" y2="171" class="arrow"/>
+      <line x1="270" y1="314" x2="330" y2="456" class="arrow"/>
+
+      <!-- TRAIN branch: Pipeline with scaler + model -->
+      <line x1="590" y1="171" x2="690" y2="171" class="arrow"/>
+      <rect x="690" y="135" width="560" height="84" class="box"/>
+      <text x="970" y="180" text-anchor="middle" class="lbl">Pipeline: [StandardScaler(), Model]</text>
+      <text x="970" y="206" text-anchor="middle" class="small">Scaler refit inside each CV fold</text>
+
+      <!-- TRAIN branch: inner 5-fold CV with GridSearchCV -->
+      <line x1="590" y1="261" x2="690" y2="261" class="arrow"/>
+      <rect x="690" y="225" width="560" height="84" class="box"/>
+      <text x="970" y="270" text-anchor="middle" class="lbl">Inner 5-fold CV via GridSearchCV</text>
+      <text x="970" y="296" text-anchor="middle" class="small">No leakage: folds only use stats from their training parts</text>
+
+      <!-- Final evaluation -->
+      <line x1="590" y1="456" x2="690" y2="456" class="arrow"/>
+      <rect x="690" y="415" width="560" height="84" class="ok"/>
+      <text x="970" y="458" text-anchor="middle" class="lbl">Evaluate tuned pipeline on Test (once)</text>
+      <text x="970" y="484" text-anchor="middle" class="green">OK: Test never used in tuning</text>
+    </svg>
+  </section>
+
+<section>
+  <svg viewBox="0 0 980 1700" width="100%" height="auto" role="img" aria-label="Vertical CV leakage emphasis: ONE global scaler fit on ALL Train then applied to all folds (leakage)">
+    <defs>
+      <style>
+        .band { fill:#1a1020; stroke:#ff79c6; stroke-width:2; rx:14; ry:14; }
+        .ds   { fill:#1d2230; stroke:#6fc3df; stroke-width:2; rx:12; ry:12; }
+        .fold { fill:#141018; stroke:#54425a; stroke-width:1.6; rx:10; ry:10; }
+        .ok   { fill:#19121a; stroke:#7CFC7C; stroke-width:2; rx:12; ry:12; }
+        .scaler { fill:#19121a; stroke:#ffb3de; stroke-width:2.4; rx:10; ry:10; }
+        .train { fill:#222638; stroke:#6fc3df; }
+        .val   { fill:#26331f; stroke:#7CFC7C; }
+        .valHidden { fill:#0000; stroke:#7CFC7C; stroke-dasharray:8 6; opacity:0.4; }
+        .arrow { stroke:#ffb3de; stroke-width:2; marker-end:url(#ah); }
+        .arrow-red { stroke:#ff4d6d; stroke-width:2.8; marker-end:url(#ah); }
+        .back { stroke:#ff4d6d; stroke-dasharray:6 6; stroke-width:2; marker-end:url(#ah); }
+        .lbl  { fill:#ffd7f0; font:600 20px 'Roboto', Arial, sans-serif; }
+        .big  { fill:#ffb3de; font:700 22px 'Roboto', Arial, sans-serif; }
+        .tiny { fill:#ffd7f0; font:13px 'Roboto', Arial, sans-serif; }
+        .ghost{ fill:#b7ffb7; font:13px 'Roboto', Arial, sans-serif; opacity:0.7; }
+        .redt { fill:#ff9c9c; font:700 16px 'Roboto', Arial, sans-serif; }
+        .greent { fill:#b7ffb7; font:700 16px 'Roboto', Arial, sans-serif; }
+        .step { fill:#ff79c6; font:700 18px 'Roboto', Arial, sans-serif; }
+        .pill { fill:#2a1633; stroke:#ff79c6; stroke-width:1.6; rx:16; ry:16; }
+        .highlight { fill:#2b1230; stroke:#ff4d6d; stroke-width:2; rx:14; ry:14; }
+      </style>
+      <marker id="ah" markerWidth="12" markerHeight="8" refX="10.5" refY="4" orient="auto">
+        <polygon points="0 0, 12 4, 0 8" fill="#ffb3de"></polygon>
+      </marker>
+    </defs>
+
+    <!-- Emphasis banner -->
+    <rect x="40" y="20" width="900" height="130" class="highlight"/>
+    <text x="490" y="66" text-anchor="middle" class="big">
+      EMPHASIS → One global (μ, σ) is fitted using ALL rows in Train (80%)
+    </text>
+    <text x="490" y="96" text-anchor="middle" class="lbl">
+      Then EVERY Train row is transformed with that same scaler before 5-fold CV.
+    </text>
+    <text x="490" y="122" text-anchor="middle" class="redt">
+      Result: the validation data for tuning has already been “seen” by the scaler → leakage.
+    </text>
+
+    <!-- Step 1: Split + Fit global scaler -->
+    <rect x="60" y="170" width="320" height="76" class="ds"/>
+    <text x="220" y="212" text-anchor="middle" class="lbl">Train (80% of Full)</text>
+
+    <rect x="410" y="160" width="510" height="96" class="scaler"/>
+    <text x="665" y="195" text-anchor="middle" class="big">STEP 1 — Fit ONE scaler on ALL Train → (μ, σ)</text>
+    <text x="665" y="220" text-anchor="middle" class="tiny">μ,σ reflect statistics of ALL Train rows (includes each future fold’s Val portion)</text>
+
+    <line x1="220" y1="246" x2="220" y2="300" class="arrow"/>
+    <line x1="665" y1="256" x2="665" y2="310" class="arrow-red"/>
+
+    <!-- Step 2: Transform ALL Train once with that scaler -->
+    <rect x="60" y="310" width="860" height="86" class="band"/>
+    <text x="490" y="352" text-anchor="middle" class="big">STEP 2 — Transform ALL Train with the fitted (μ, σ)</text>
+
+    <!-- Fan-out to folds -->
+    <line x1="490" y1="396" x2="490" y2="450" class="arrow-red"/>
+
+    <!-- ===== Vertical stack of 5 folds (CV happens AFTER global transform) ===== -->
+    <!-- Fold template: 860w x 175h -->
+    <!-- FOLD 1 -->
+    <g transform="translate(60,450)">
+      <rect x="0" y="0" width="860" height="175" class="fold"/>
+      <rect x="16" y="10" width="122" height="32" class="pill"/>
+      <text x="77" y="32" text-anchor="middle" class="step">STEP 3: CV</text>
+      <text x="170" y="32" class="lbl">Fold 1 (run on already standardized data)</text>
+
+      <!-- Train_1 (subset of standardized Train) -->
+      <rect x="30" y="70" width="210" height="64" class="train"/>
+      <text x="135" y="103" text-anchor="middle" class="tiny">Train₁ (std. by global μ,σ)</text>
+
+      <!-- Apply same global μ,σ box (visual reminder) -->
+      <line x1="240" y1="100" x2="320" y2="100" class="arrow-red"/>
+      <rect x="320" y="76" width="86" height="52" class="scaler"/>
+      <text x="363" y="104" text-anchor="middle" class="tiny">μ,σ</text>
+
+      <!-- Val_1 (hidden but influenced) -->
+      <line x1="406" y1="100" x2="520" y2="100" class="arrow-red"/>
+      <rect x="520" y="70" width="210" height="64" class="valHidden"/>
+      <text x="625" y="103" text-anchor="middle" class="ghost">Val₁ (hidden; already seen by scaler)</text>
+
+      <!-- Back-contribution up to the “fit” step -->
+      <line x1="625" y1="70" x2="665" y2="-240" class="back"/>
+      <text x="680" y="52" class="redt">Val₁ contributed to μ,σ (leakage)</text>
+    </g>
+
+    <!-- FOLD 2 -->
+    <g transform="translate(60,645)">
+      <rect x="0" y="0" width="860" height="175" class="fold"/>
+      <rect x="16" y="10" width="122" height="32" class="pill"/>
+      <text x="77" y="32" text-anchor="middle" class="step">STEP 3: CV</text>
+      <text x="170" y="32" class="lbl">Fold 2 (run on already standardized data)</text>
+
+      <rect x="30" y="70" width="210" height="64" class="train"/>
+      <text x="135" y="103" text-anchor="middle" class="tiny">Train₂ (std. by global μ,σ)</text>
+
+      <line x1="240" y1="100" x2="320" y2="100" class="arrow-red"/>
+      <rect x="320" y="76" width="86" height="52" class="scaler"/>
+      <text x="363" y="104" text-anchor="middle" class="tiny">μ,σ</text>
+
+      <line x1="406" y1="100" x2="520" y2="100" class="arrow-red"/>
+      <rect x="520" y="70" width="210" height="64" class="valHidden"/>
+      <text x="625" y="103" text-anchor="middle" class="ghost">Val₂ (hidden; already seen)</text>
+
+      <line x1="625" y1="70" x2="685" y2="-430" class="back"/>
+      <text x="690" y="52" class="redt">Val₂ contributed to μ,σ</text>
+    </g>
+
+    <!-- FOLD 3 -->
+    <g transform="translate(60,840)">
+      <rect x="0" y="0" width="860" height="175" class="fold"/>
+      <rect x="16" y="10" width="122" height="32" class="pill"/>
+      <text x="77" y="32" text-anchor="middle" class="step">STEP 3: CV</text>
+      <text x="170" y="32" class="lbl">Fold 3 (run on already standardized data)</text>
+
+      <rect x="30" y="70" width="210" height="64" class="train"/>
+      <text x="135" y="103" text-anchor="middle" class="tiny">Train₃ (std. by global μ,σ)</text>
+
+      <line x1="240" y1="100" x2="320" y2="100" class="arrow-red"/>
+      <rect x="320" y="76" width="86" height="52" class="scaler"/>
+      <text x="363" y="104" text-anchor="middle" class="tiny">μ,σ</text>
+
+      <line x1="406" y1="100" x2="520" y2="100" class="arrow-red"/>
+      <rect x="520" y="70" width="210" height="64" class="valHidden"/>
+      <text x="625" y="103" text-anchor="middle" class="ghost">Val₃ (hidden; already seen)</text>
+
+      <line x1="625" y1="70" x2="705" y2="-620" class="back"/>
+      <text x="700" y="52" class="redt">Val₃ contributed to μ,σ</text>
+    </g>
+
+    <!-- FOLD 4 -->
+    <g transform="translate(60,1035)">
+      <rect x="0" y="0" width="860" height="175" class="fold"/>
+      <rect x="16" y="10" width="122" height="32" class="pill"/>
+      <text x="77" y="32" text-anchor="middle" class="step">STEP 3: CV</text>
+      <text x="170" y="32" class="lbl">Fold 4 (run on already standardized data)</text>
+
+      <rect x="30" y="70" width="210" height="64" class="train"/>
+      <text x="135" y="103" text-anchor="middle" class="tiny">Train₄ (std. by global μ,σ)</text>
+
+      <line x1="240" y1="100" x2="320" y2="100" class="arrow-red"/>
+      <rect x="320" y="76" width="86" height="52" class="scaler"/>
+      <text x="363" y="104" text-anchor="middle" class="tiny">μ,σ</text>
+
+      <line x1="406" y1="100" x2="520" y2="100" class="arrow-red"/>
+      <rect x="520" y="70" width="210" height="64" class="valHidden"/>
+      <text x="625" y="103" text-anchor="middle" class="ghost">Val₄ (hidden; already seen)</text>
+
+      <line x1="625" y1="70" x2="725" y2="-810" class="back"/>
+      <text x="710" y="52" class="redt">Val₄ contributed to μ,σ</text>
+    </g>
+
+    <!-- FOLD 5 -->
+    <g transform="translate(60,1230)">
+      <rect x="0" y="0" width="860" height="175" class="fold"/>
+      <rect x="16" y="10" width="122" height="32" class="pill"/>
+      <text x="77" y="32" text-anchor="middle" class="step">STEP 3: CV</text>
+      <text x="170" y="32" class="lbl">Fold 5 (run on already standardized data)</text>
+
+      <rect x="30" y="70" width="210" height="64" class="train"/>
+      <text x="135" y="103" text-anchor="middle" class="tiny">Train₅ (std. by global μ,σ)</text>
+
+      <line x1="240" y1="100" x2="320" y2="100" class="arrow-red"/>
+      <rect x="320" y="76" width="86" height="52" class="scaler"/>
+      <text x="363" y="104" text-anchor="middle" class="tiny">μ,σ</text>
+
+      <line x1="406" y1="100" x2="520" y2="100" class="arrow-red"/>
+      <rect x="520" y="70" width="210" height="64" class="valHidden"/>
+      <text x="625" y="103" text-anchor="middle" class="ghost">Val₅ (hidden; already seen)</text>
+
+      <line x1="625" y1="70" x2="745" y2="-1000" class="back"/>
+      <text x="720" y="52" class="redt">Val₅ contributed to μ,σ</text>
+    </g>
+
+    <!-- After CV -->
+    <rect x="60" y="1435" width="360" height="78" class="ds"/>
+    <text x="240" y="1476" text-anchor="middle" class="lbl">Best hyperparams (from leaky CV)</text>
+
+    <line x1="420" y1="1474" x2="560" y2="1474" class="arrow"/>
+    <rect x="560" y="1435" width="360" height="78" class="ok"/>
+    <text x="740" y="1476" text-anchor="middle" class="greent">
+      Final Test evaluated once (held out) — but tuning was biased by leakage
+    </text>
+
+    <!-- Footer note -->
+    <text x="490" y="1660" text-anchor="middle" class="redt">
+      Correct fix: fit the scaler separately inside each fold using only that fold’s Train_k, then transform Train_k and Val_k with that per-fold scaler.
+    </text>
+  </svg>
+
+</section>
