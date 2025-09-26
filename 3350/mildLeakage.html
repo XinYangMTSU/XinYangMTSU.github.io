@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>K-Fold Cross-Validation · Pipeline + StandardScaler</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+    section {
+      margin: 0 auto 40px auto;              /* reduced bottom space */
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 24px 24px 18px 24px;          /* slightly tighter padding */
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 950px;
+    }
+    h1 { color:#ffb3de; margin:0 0 8px 0; }
+    h2 { margin: 0 0 8px 0; color: #ffb3de; font-weight: 700; }
+    section h4 {
+      font-size: 1.18em; color: #ffb3de; margin: 20px 0 6px 0;
+      font-weight: 600; border-bottom: 1px solid #ffb3de; padding-bottom: 2px;
+    }
+    p { color:#ffd7f0; margin: 10px 0; }
+    pre {
+      background: #19121a; color: #ffb3de; padding: 12px 14px; border-radius: 8px;
+      font-size: 1.04em; line-height: 1.7; overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11); position: relative;
+      white-space: pre;
+      margin: 12px 0 0 0;
+    }
+    pre .copy {
+      position: absolute; top: 8px; right: 8px; padding: 4px 8px;
+      background: #21111b; border: 1px solid #ff79c6; border-radius: 6px;
+      color: #ffb3de; font-size: 0.8em; cursor: pointer;
+    }
+    pre .copy:hover { background: #ff79c6; color: #fff; }
+    .pill {
+      display:inline-block; background:#19121a; border:1px solid #ff79c6;
+      border-radius:999px; padding:4px 10px; margin:2px 8px 2px 0; font-size:.9em
+    }
+    .note { color:#ffd7f0; opacity:.9; margin-top:10px; }
+    ul { margin-top: 8px; color:#ffd7f0; }
+    code.inline { background:#19121a; padding:2px 6px; border-radius:6px; }
+    .legend { display:flex; gap:12px; align-items:center; margin:6px 0 10px; } /* tighter */
+    .swatch { width:16px; height:16px; border-radius:4px; display:inline-block; border:1px solid #00000033; }
+    .swatch.train { background:#6fc3df; }   /* teal-blue */
+    .swatch.val   { background:#ff79c6; }   /* pink */
+    .swatch.test  { background:#f9a825; } /* orange */
+    .svgwrap{ background:#1a151c; border-radius:12px; padding:8px; box-shadow: inset 0 0 0 1px rgba(255,121,198,0.2);}
+    .rowlbl{ font-size:0.95em; fill:#ffb3de; }
+  </style>
+</head>
+<body>
+
+<center>  <h1>Mild inner-CV leakage: RidgeCV, LassoCV, ElasticNetCV</h1> </center>
+
+<br>
+
+<section id="kfold-figure">
+
+
+  <h2>1) Full Dataset (100%)</h2>
+
+  <div class="legend">
+    <span class="swatch train"></span> <span>Train</span>
+    <span class="swatch test"></span> <span>Test</span>
+  </div>
+
+  <div class="svgwrap">
+    <!-- Full row span = 880px (x: 90→970). 5 blocks, NO GAPS: width=176 each -->
+    <svg viewBox="0 0 980 120" width="100%" height="auto" role="img" aria-label="Full dataset split">
+      <defs>
+        <style>
+          .blk { rx:8; ry:8; stroke:#0e0b10; stroke-width:1; }
+          .train { fill:#6fc3df; } .val { fill:#ff79c6; } .test { fill:#f9a825; }
+          .axis { stroke:#3a2f36; stroke-width:1; }
+          .inlbl { fill:#111; font:700 14px 'Roboto', Arial, sans-serif; }
+        </style>
+      </defs>
+
+      <line x1="90" y1="30" x2="970" y2="30" class="axis"/>
+
+      <!-- 5 blocks (no gaps): x = 90, 266, 442, 618, 794 ; width=176 -->
+      <rect x="90"  y="40" width="176" height="40" class="blk train"/>
+      <rect x="266" y="40" width="176" height="40" class="blk train"/>
+      <rect x="442" y="40" width="176" height="40" class="blk train"/>
+      <rect x="618" y="40" width="176" height="40" class="blk train"/>
+      <rect x="794" y="40" width="176" height="40" class="blk test"/>
+
+      <text x="178" y="66" class="inlbl" text-anchor="middle">train</text>
+      <text x="354" y="66" class="inlbl" text-anchor="middle">train</text>
+      <text x="530" y="66" class="inlbl" text-anchor="middle">train</text>
+      <text x="706" y="66" class="inlbl" text-anchor="middle">train</text>
+      <text x="882" y="66" class="inlbl" text-anchor="middle">test</text>
+    </svg>
+  </div>
+
+  <br><br>
+
+  <h2>2) Training Data (80%)</h2>
+
+  <div class="svgwrap">
+    <!-- Span exactly the four blue blocks from Full: 704px (x: 90→794). 4 blocks, width=176 each -->
+    <svg viewBox="0 0 980 120" width="100%" height="auto" role="img" aria-label="Training pool as four contiguous chunks (same size as Full)">
+      <defs>
+        <style>
+          .blk { rx:8; ry:8; stroke:#0e0b10; stroke-width:1; }
+          .train { fill:#6fc3df; } .axis { stroke:#3a2f36; stroke-width:1; }
+          .inlbl { fill:#111; font:700 14px 'Roboto', Arial, sans-serif; }
+        </style>
+      </defs>
+
+      <!-- guide line over exactly x: 90→794 -->
+      <line x1="90" y1="30" x2="794" y2="30" class="axis"/>
+
+      <!-- SAME sizes/positions as the first four blocks in Full -->
+      <rect x="90"  y="40" width="176" height="40" class="blk train"/>
+      <rect x="266" y="40" width="176" height="40" class="blk train"/>
+      <rect x="442" y="40" width="176" height="40" class="blk train"/>
+      <rect x="618" y="40" width="176" height="40" class="blk train"/>
+
+      <text x="178" y="66" class="inlbl" text-anchor="middle">train</text>
+      <text x="354" y="66" class="inlbl" text-anchor="middle">train</text>
+      <text x="530" y="66" class="inlbl" text-anchor="middle">train</text>
+      <text x="706" y="66" class="inlbl" text-anchor="middle">train</text>
+    </svg>
+  </div>
+
+<pre><code>
+  eg:
+  ridge = Pipeline([
+  ("scaler", StandardScaler()),
+  ("ridge", RidgeCV(alphas=np.logspace(-3, 3, 50), cv=5))
+  ])
+  ridge.fit(X_train, y_train)
+</pre></code>
+<BR>
+<br>
+  <h2>3) Scaled Data (80%)</h2>
+
+  The scaler computes μ and σ using <em>all</em> rows of the training data,
+  and the entire training set is then standardized with the same μ,σ.
+
+  <br>
+  <br>
+
+
+  <div class="svgwrap">
+    <svg viewBox="0 0 980 120" width="100%" height="auto" role="img" aria-label="Scaled training chunks (same size as Full)">
+      <defs>
+        <style>
+          .blk { rx:8; ry:8; stroke:#0e0b10; stroke-width:1; }
+          .val { fill:#ff79c6; } .axis { stroke:#3a2f36; stroke-width:1; }
+          .inlbl { fill:#111; font:700 14px 'Roboto', Arial, sans-serif; }
+        </style>
+      </defs>
+
+      <!-- same 4-block span: x 90→794 -->
+      <line x1="90" y1="30" x2="794" y2="30" class="axis"/>
+
+      <rect x="90"  y="40" width="176" height="40" class="blk train"/>
+      <rect x="266" y="40" width="176" height="40" class="blk train"/>
+      <rect x="442" y="40" width="176" height="40" class="blk train"/>
+      <rect x="618" y="40" width="176" height="40" class="blk train"/>
+
+      <text x="178" y="66" class="inlbl" text-anchor="middle">scaled</text>
+      <text x="354" y="66" class="inlbl" text-anchor="middle">scaled</text>
+      <text x="530" y="66" class="inlbl" text-anchor="middle">scaled</text>
+      <text x="706" y="66" class="inlbl" text-anchor="middle">scaled</text>
+    </svg>
+  </div>
+
+<BR>
+<br>
+  <h2>4) 5-Fold Cross-Validation</h2>
+  Then inner 5-fold CV runs on data already scaled with those μ, σ.
+        Each validation fold thus "sees" its own statistics → mild leakage in hyperparameter tuning.
+
+  <div class="legend">
+    <span class="swatch train"></span> <span>Train folds</span>
+    <span class="swatch val"></span> <span>Validation fold</span>
+  </div>
+
+  <div class="svgwrap">
+    <!-- CV uses the SAME span as the 4 training blocks: 704px (x: 90→794). 5 blocks, NO GAPS: width = 704/5 = 140.8 -->
+    <svg viewBox="0 0 980 340" width="100%" height="auto" role="img" aria-label="Five-fold cross-validation diagram (contiguous, same span as training)">
+      <defs>
+        <style>
+          .blk { rx:8; ry:8; stroke:#0e0b10; stroke-width:1; }
+          .train { fill:#6fc3df; }
+          .val   { fill:#ff79c6; }
+          .lab   { fill:#ffb3de; font:600 14px 'Roboto', Arial, sans-serif; }
+          .axis  { stroke:#3a2f36; stroke-width:1; }
+          .inlbl { fill:#111; font:700 14px 'Roboto', Arial, sans-serif; }
+        </style>
+      </defs>
+
+      <!-- guides for the 704px span -->
+      <line x1="90" y1="30"  x2="794" y2="30"  class="axis"/>
+      <line x1="90" y1="90"  x2="794" y2="90"  class="axis"/>
+      <line x1="90" y1="150" x2="794" y2="150" class="axis"/>
+      <line x1="90" y1="210" x2="794" y2="210" class="axis"/>
+      <line x1="90" y1="270" x2="794" y2="270" class="axis"/>
+
+      <!-- Row labels -->
+      <text x="20" y="55"  class="lab">Fold 1</text>
+      <text x="20" y="115" class="lab">Fold 2</text>
+      <text x="20" y="175" class="lab">Fold 3</text>
+      <text x="20" y="235" class="lab">Fold 4</text>
+      <text x="20" y="295" class="lab">Fold 5</text>
+
+      <!-- constants for 5 equal no-gap parts over 704px:
+           width = 140.8 ; x = 90, 230.8, 371.6, 512.4, 653.2 -->
+      <!-- Fold 1 -->
+      <rect x="90"    y="40" width="140.8" height="40" class="blk val"/>
+      <rect x="230.8" y="40" width="140.8" height="40" class="blk train"/>
+      <rect x="371.6" y="40" width="140.8" height="40" class="blk train"/>
+      <rect x="512.4" y="40" width="140.8" height="40" class="blk train"/>
+      <rect x="653.2" y="40" width="140.8" height="40" class="blk train"/>
+      <text x="160.4" y="66" class="inlbl" text-anchor="middle">val</text>
+      <text x="301.2" y="66" class="inlbl" text-anchor="middle">train</text>
+      <text x="442.0" y="66" class="inlbl" text-anchor="middle">train</text>
+      <text x="582.8" y="66" class="inlbl" text-anchor="middle">train</text>
+      <text x="723.6" y="66" class="inlbl" text-anchor="middle">train</text>
+
+      <!-- Fold 2 -->
+      <rect x="90"    y="100" width="140.8" height="40" class="blk train"/>
+      <rect x="230.8" y="100" width="140.8" height="40" class="blk val"/>
+      <rect x="371.6" y="100" width="140.8" height="40" class="blk train"/>
+      <rect x="512.4" y="100" width="140.8" height="40" class="blk train"/>
+      <rect x="653.2" y="100" width="140.8" height="40" class="blk train"/>
+      <text x="160.4" y="126" class="inlbl" text-anchor="middle">train</text>
+      <text x="301.2" y="126" class="inlbl" text-anchor="middle">val</text>
+      <text x="442.0" y="126" class="inlbl" text-anchor="middle">train</text>
+      <text x="582.8" y="126" class="inlbl" text-anchor="middle">train</text>
+      <text x="723.6" y="126" class="inlbl" text-anchor="middle">train</text>
+
+      <!-- Fold 3 -->
+      <rect x="90"    y="160" width="140.8" height="40" class="blk train"/>
+      <rect x="230.8" y="160" width="140.8" height="40" class="blk train"/>
+      <rect x="371.6" y="160" width="140.8" height="40" class="blk val"/>
+      <rect x="512.4" y="160" width="140.8" height="40" class="blk train"/>
+      <rect x="653.2" y="160" width="140.8" height="40" class="blk train"/>
+      <text x="160.4" y="186" class="inlbl" text-anchor="middle">train</text>
+      <text x="301.2" y="186" class="inlbl" text-anchor="middle">train</text>
+      <text x="442.0" y="186" class="inlbl" text-anchor="middle">val</text>
+      <text x="582.8" y="186" class="inlbl" text-anchor="middle">train</text>
+      <text x="723.6" y="186" class="inlbl" text-anchor="middle">train</text>
+
+      <!-- Fold 4 -->
+      <rect x="90"    y="220" width="140.8" height="40" class="blk train"/>
+      <rect x="230.8" y="220" width="140.8" height="40" class="blk train"/>
+      <rect x="371.6" y="220" width="140.8" height="40" class="blk train"/>
+      <rect x="512.4" y="220" width="140.8" height="40" class="blk val"/>
+      <rect x="653.2" y="220" width="140.8" height="40" class="blk train"/>
+      <text x="160.4" y="246" class="inlbl" text-anchor="middle">train</text>
+      <text x="301.2" y="246" class="inlbl" text-anchor="middle">train</text>
+      <text x="442.0" y="246" class="inlbl" text-anchor="middle">train</text>
+      <text x="582.8" y="246" class="inlbl" text-anchor="middle">val</text>
+      <text x="723.6" y="246" class="inlbl" text-anchor="middle">train</text>
+
+      <!-- Fold 5 -->
+      <rect x="90"    y="280" width="140.8" height="40" class="blk train"/>
+      <rect x="230.8" y="280" width="140.8" height="40" class="blk train"/>
+      <rect x="371.6" y="280" width="140.8" height="40" class="blk train"/>
+      <rect x="512.4" y="280" width="140.8" height="40" class="blk train"/>
+      <rect x="653.2" y="280" width="140.8" height="40" class="blk val"/>
+      <text x="160.4" y="306" class="inlbl" text-anchor="middle">train</text>
+      <text x="301.2" y="306" class="inlbl" text-anchor="middle">train</text>
+      <text x="442.0" y="306" class="inlbl" text-anchor="middle">train</text>
+      <text x="582.8" y="306" class="inlbl" text-anchor="middle">train</text>
+      <text x="723.6" y="306" class="inlbl" text-anchor="middle">val</text>
+    </svg>
+  </div>
+
+  <BR>
+    <p class="note">
+      <h4>How leakage happens in this setup</h4>
+      In <em>Scaled Data</em>, a single <code>StandardScaler</code> is fit once on <u>all</u> training rows and then applied to every chunk.
+      When you then run <em>5-Fold Cross-Validation</em>, each fold’s validation block (pink) has already been standardized using mean/std computed from the <u>entire</u> training pool — which includes that very validation block.
+      That means information from the validation rows influenced the transform they are evaluated with → a mild, optimistic bias (data leakage).
+      <br><br>
+      <strong>Why it’s subtle</strong><br>
+      You never touched the test set and you used CV, but because the scaler was fit <em>before</em> CV (globally), CV sees validation data through a transform learned with knowledge of those validation rows.
+      <br><br>
+    </p>
+
+</section>
+
+<section id="cv-code">
+  <h2>3)How to Fix Mild inner-CV leakage</h2>
+
+  <p class="note">
+    Let CV refit the scaler inside each fold, using only the fold’s training portion.
+    In scikit-learn, wrap preprocessing and the model in a single pipeline and tune
+    with <code>GridSearchCV</code> or <code>RandomizedSearchCV</code> using non-CV estimators:
+  </p>
+
+
+<pre><code>from sklearn.model_selection import GridSearchCV
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import Ridge  # not RidgeCV
+
+ridge_pipe = Pipeline([
+    ("scaler", StandardScaler()),
+    ("ridge", Ridge())
+])
+
+ridge_grid = {"ridge__alpha": [0.1, 1, 10]}
+
+ridge = GridSearchCV(
+    ridge_pipe,
+    ridge_grid,
+    cv=5, scoring="neg_mean_squared_error", n_jobs=-1
+)
+ridge.fit(X_train, y_train)  # scaler refits inside each CV fold, no leakage
+</code></pre>
+
+
+<script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
