@@ -331,9 +331,17 @@
 <section id="cv-code">
   <h2>3) Simple CV: <code>RidgeCV</code>, <code>LassoCV</code>, <code>ElasticNetCV</code></h2>
   <p>
-      These estimators run cross-validation internally to choose the best hyperparameters. We still keep them inside a
-      <code class="inline">Pipeline</code> with <code class="inline">StandardScaler</code>.
+      These estimators run cross-validation internally to choose the best hyperparameters. 
     </p>
+
+   <p class="note">
+      <font color="red">Mild inner-CV leakage</font>: With RidgeCV / LassoCV / ElasticNetCV inside a Pipeline, 
+      the Pipeline.fit(X_train, y_train) first fits StandardScaler on the entire X_train and then runs the 
+      model's internal CV on already-scaled data. That means each CV fold's validation split was scaled 
+      using statistics (mean/std) computed from all of X_train — including that fold’s validation rows. 
+      That's mild inner-CV leakage.
+    </p>
+  
     <pre><button class="copy">Copy</button><code># Import libraries
 import numpy as np
 import pandas as pd
@@ -466,13 +474,7 @@ print("Best EN l1_ratio  :", elastic.named_steps["en"].l1_ratio_)</code></pre>
       Tip: For classification, prefer <code class="inline">StratifiedKFold</code> to keep class balance per fold.
     </p>
 
-    <p class="note">
-      <font color="red">Mild inner-CV leakage</font>: With RidgeCV / LassoCV / ElasticNetCV inside a Pipeline, 
-      the Pipeline.fit(X_train, y_train) first fits StandardScaler on the entire X_train and then runs the 
-      model's internal CV on already-scaled data. That means each CV fold's validation split was scaled 
-      using statistics (mean/std) computed from all of X_train — including that fold’s validation rows. 
-      That's mild inner-CV leakage.
-    </p>
+   
   </section>
 
   
