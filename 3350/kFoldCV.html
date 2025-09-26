@@ -79,7 +79,7 @@
   Five folds give a good balance between bias and variance with reasonable compute cost, while ten folds provide a
   slightly lower bias estimate at the expense of longer training time. Both are widely accepted as standards in applied
   machine learning.
-</p>
+  </p>
 
 </section>
 
@@ -463,6 +463,14 @@ print("Best EN l1_ratio  :", elastic.named_steps["en"].l1_ratio_)</code></pre>
 
     <p class="note">
       Tip: For classification, prefer <code class="inline">StratifiedKFold</code> to keep class balance per fold.
+    </p>
+
+    <p class="note">
+      <font color="red">Mild inner-CV leakage</font>: With RidgeCV / LassoCV / ElasticNetCV inside a Pipeline, 
+      the Pipeline.fit(X_train, y_train) first fits StandardScaler on the entire X_train and then runs the 
+      model's internal CV on already-scaled data. That means each CV fold's validation split was scaled 
+      using statistics (mean/std) computed from all of X_train — including that fold’s validation rows. 
+      That's mild inner-CV leakage.
     </p>
   </section>
 
