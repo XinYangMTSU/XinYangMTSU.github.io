@@ -63,9 +63,85 @@
 <body>
 
 <center>  <h1>Mild inner-CV leakage: RidgeCV, LassoCV, ElasticNetCV</h1> </center>
+<br>
+<br>
+
+
+    <section id="leak-scaler-corrected">
+    <h2>Leakage during CV (inside Train only): <code>StandardScaler</code> fit on full Train before inner CV</h2>
+    <p class="note">
+      The scaler computes μ, σ using <em>all</em> rows of the 80% Train split, then inner 5-fold CV runs on data already scaled with those μ, σ.
+      Each validation fold thus "sees" its own statistics → mild leakage in hyperparameter tuning. The Test split is separate and only used once.
+    </p>
+      <svg viewBox="0 0 1280 660" width="100%" height="auto" role="img" aria-label="Leakage confined to Train split; Train/Test split (Full centered, Test/Eval moved down)">
+        <defs>
+          <style>
+            .box { fill:#19121a; stroke:#ff79c6; stroke-width:2; rx:12; ry:12; }
+            .ds  { fill:#1d2230; stroke:#6fc3df; stroke-width:1.8; rx:12; ry:12; }
+            .ok  { fill:#19121a; stroke:#7CFC7C; stroke-width:1.8; rx:12; ry:12; }
+            .arrow { stroke:#ffb3de; stroke-width:2; marker-end:url(#ah1); }
+            .lbl   { fill:#ffb3de; font:600 20px 'Roboto', Arial, sans-serif; }
+            .small { fill:#ffd7f0; font: 17px 'Roboto', Arial, sans-serif; }
+            .green { fill:#b7ffb7; font:600 17px 'Roboto', Arial, sans-serif; }
+            .red   { fill:#ff9c9c; font:600 17px 'Roboto', Arial, sans-serif; }
+            .bracket { fill:none; stroke:#ff4d4d; stroke-width:2.2; rx:14; ry:14; }
+            .pin { fill:#ff79c6; stroke:#0e0b10; stroke-width:1; }
+          </style>
+          <marker id="ah1" markerWidth="12" markerHeight="8" refX="10.5" refY="4" orient="auto">
+            <polygon points="0 0, 12 4, 0 8" fill="#ffb3de"></polygon>
+          </marker>
+        </defs>
+
+        <!-- Full Data (moved down & centered between Train center=171 and Test center=456 → Full center≈314) -->
+        <rect x="30" y="278" width="240" height="72" class="ds"/>
+        <text x="150" y="321" text-anchor="middle" class="lbl">Full Data (X, y)</text>
+
+        <!-- Train (unchanged) -->
+        <rect x="330" y="135" width="260" height="72" class="ds"/>
+        <text x="460" y="178" text-anchor="middle" class="lbl">Train (80%)</text>
+        <circle cx="350" cy="171" r="6" class="pin"/>
+
+        <!-- Test (moved down a little) -->
+        <rect x="330" y="420" width="260" height="72" class="ok"/>
+        <text x="460" y="463" text-anchor="middle" class="lbl">Test (20%)</text>
+        <circle cx="350" cy="456" r="6" class="pin"/>
+
+        <!-- Straight arrows from Full (right-center 270,314) → Train/Test centers -->
+        <line x1="270" y1="314" x2="330" y2="171" class="arrow"/>
+        <line x1="270" y1="314" x2="330" y2="456" class="arrow"/>
+
+        <!-- TRAIN branch: global scaling on ALL Train -->
+        <line x1="590" y1="171" x2="690" y2="171" class="arrow"/>
+        <rect x="690" y="135" width="560" height="84" class="box"/>
+        <text x="970" y="180" text-anchor="middle" class="lbl">Fit StandardScaler() on ALL Train → transform Train</text>
+        <text x="970" y="206" text-anchor="middle" class="small">μ, σ computed using every row in Train</text>
+
+        <!-- TRAIN branch: inner 5-fold CV -->
+        <line x1="590" y1="261" x2="690" y2="261" class="arrow"/>
+        <rect x="690" y="225" width="560" height="84" class="box"/>
+        <text x="970" y="270" text-anchor="middle" class="lbl">Inner 5-fold CV (RidgeCV / LassoCV / ElasticNetCV)</text>
+        <text x="970" y="296" text-anchor="middle" class="small">CV sees data scaled with global Train μ, σ</text>
+
+        <!-- Leakage bracket -->
+        <rect x="670" y="118" width="600" height="230" class="bracket"/>
+        <text x="970" y="360" text-anchor="middle" class="red">
+          Leakage is confined to Train: folds use scaling stats from themselves
+        </text>
+        <text x="970" y="384" text-anchor="middle" class="red">Leak risk here (during tuning)</text>
+
+        <!-- Final evaluation (moved down to align with new Test center=456) -->
+        <line x1="590" y1="456" x2="690" y2="456" class="arrow"/>
+        <rect x="690" y="415" width="560" height="84" class="ok"/>
+        <text x="970" y="458" text-anchor="middle" class="lbl">Evaluate tuned model on Test (once)</text>
+        <text x="970" y="484" text-anchor="middle" class="green">OK: not used in tuning → unbiased final estimate</text>
+      </svg>
+
+  </section>
+
 
 <br>
 
+  
 <section id="kfold-figure">
 
 
