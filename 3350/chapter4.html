@@ -568,8 +568,9 @@
   <h4>Solving the MLE Objective Function for Logistic Regression</h4>
 
   The MLE problem for logistic regression <b>cannot be solved analytically</b> (no closed-form solution exists). 
-  Instead, we use <b>iterative optimization methods</b>.
-  <br>
+  Instead, we use <b>iterative optimization methods</b>. Gradient descent is the basic algorithm used to 
+  solve this type of optimization problem, but in practice, more efficient solvers are often preferred.
+  <br><br>
   In scikit-learn's LogisticRegression, common solvers include LBFGS (Limited-memory Broyden-Fletcher-Goldfarb-Shanno), 
   liblinear (coordinate descent), newton-cg (Newton's method with conjugate gradient), 
   sag/saga (stochastic average gradient), which iteratively update parameters to 
