@@ -569,6 +569,11 @@
 
   The MLE problem for logistic regression <b>cannot be solved analytically</b> (no closed-form solution exists). 
   Instead, we use <b>iterative optimization methods</b>.
+  <br>
+  In scikit-learn's LogisticRegression, common solvers include LBFGS (Limited-memory Broyden-Fletcher-Goldfarb-Shanno), 
+  liblinear (coordinate descent), newton-cg (Newton's method with conjugate gradient), 
+  sag/saga (stochastic average gradient), which iteratively update parameters to 
+  minimize the negative log-likelihood.
   
   <!--
   <h4>How it works?</h4>
