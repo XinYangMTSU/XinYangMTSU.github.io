@@ -550,7 +550,9 @@
    <div style="text-align:center; margin:6px 0;">
       $$ \ell(\boldsymbol{\beta}) \;=\; \sum_{i=1}^{m} \Big[\, y_i \log p_i \;+\; (1-y_i)\log(1-p_i) \,\Big]. $$
     </div>
-  
+
+
+  <!--
   <h4>How it works?</h4>
 
   <ul>
@@ -804,9 +806,10 @@ until convergence</pre>
 
   <p><em>Note:</em> Gradient Descent is simpler but usually slower and needs step-size tuning; 
     Newton/IRLS (or quasi-Newton like L-BFGS) is typically preferred for logistic regression on tabular data.</p>
-
+-->
 
     <!-- 6. Example -->
+  <!-- 
     <h4>8. Real Example: Fitting \( \boldsymbol{\beta} \) on the Student Data</h4>
   
     <p>Imagine predicting if a student is admitted based on GPA and test score.</p>
@@ -826,12 +829,14 @@ until convergence</pre>
       $$ P(\text{Admit}=1) \;=\; \frac{1}{1 + e^{-(\beta_0 + \beta_1 \cdot \text{GPA} + \beta_2 \cdot \text{TestScore})}} $$
     </p>
 
+  -->
   <!--
     <div class="tip">
       If for a new student (GPA = 3.6, Score = 680) we calculate \(p = 0.72\): that’s a 72% chance of admission → predict <strong>Admitted = 1</strong>.
     </div>
   -->
 
+  <!--
   <div class="card" style="background:#fff7ed; border:1px solid #fed7aa; border-radius:12px; padding:12px 14px; margin:12px 0;">
     <p><strong>Why regularize?</strong> With only four points, the classes are (nearly) perfectly separable, so the unregularized MLE can diverge (coefficients \(\to\pm\infty\)). To get a stable, finite solution we add a small L2 penalty and standardize features.</p>
   </div>
@@ -913,7 +918,7 @@ until convergence</pre>
       <li>Interpret \(e^{\beta_j}\) as the <strong>odds ratio</strong> per 1 SD (standardized) or per 1 unit (raw) increase in that feature.</li>
     </ul>
   </div>
-  
+    -->
 
     <!-- 7. Key Points -->
     <h4>7. Key Points</h4>
