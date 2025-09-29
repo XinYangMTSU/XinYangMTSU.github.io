@@ -920,16 +920,11 @@ until convergence</pre>
   </div>
     -->
 
-    <!-- 7. Key Points -->
-    <h4>7. Key Points</h4>
-    <ul>
-      <li>Logistic Regression outputs <strong>probabilities</strong>, not raw continuous values.</li>
-      <li>A threshold (commonly 0.5) converts probability → class.</li>
-      <li>Uses <strong>MLE</strong>, not Ordinary Least Squares.</li>
-      <li>Works best when the relationship between features and <em>log-odds</em> is approximately linear.</li>
-    </ul>
-
-   
+   <h4>5. Evaluation</h4>
+  <p>
+    Common metrics: accuracy, precision, recall, F1, ROC-AUC.
+  </p>
+ 
 
   <br>
   <!--
@@ -986,18 +981,17 @@ until convergence</pre>
   <hr>
   -->
   
-  <h4>Step 5: Evaluation</h4>
-  <p>
-    Common metrics: accuracy, precision, recall, F1, ROC-AUC.
-  </p>
 
-  <h4>Key Points</h4>
-  <ul>
-    <li>Outputs calibrated probabilities in \([0,1]\), not raw scores.</li>
-    <li>Linear decision boundary in feature space (after the logit transform).</li>
-    <li>No closed-form solution; solved by iterative optimization.</li>
-    <li>For regularization, use <b>Ridge (L2)</b> or <b>Lasso (L1)</b> penalties to improve generalization.</li>
-  </ul>
+  <!-- 7. Key Points -->
+    <h4>7. Key Points</h4>
+    <ul>
+      <li>Logistic Regression outputs <strong>probabilities</strong> in \([0,1]\), not raw continuous values.</li>
+      <li>A threshold (commonly 0.5) converts probability → class.</li>
+      <li>Uses <strong>MLE</strong>, not Ordinary Least Squares.</li>
+      <li>Linear decision boundary in feature space (after the logit transform).</li>
+      <li>No closed-form solution; solved by iterative optimization.</li>
+      <li>Works best when the relationship between features and <em>log-odds</em> is approximately linear.</li>
+    </ul>
 
 </section>
 
