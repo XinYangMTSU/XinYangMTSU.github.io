@@ -545,13 +545,20 @@
   <h4>What is Maximum Likelihood Estimation (MLE)?</h4>
   <p><strong>Idea:</strong> pick the parameters that make the data you observed <b>most probable</b> under your model.</p>
 
-  <p>We maximize the log-likelihood (sums are easier &amp; numerically stable):</p>
+  <p>We maximize the log-likelihood:</p>
 
    <div style="text-align:center; margin:6px 0;">
       $$ \ell(\boldsymbol{\beta}) \;=\; \sum_{i=1}^{m} \Big[\, y_i \log p_i \;+\; (1-y_i)\log(1-p_i) \,\Big]. $$
     </div>
 
+  <strong>or</strong>
+  
+  <p>Equivalently, we minimize the negative log‑likelihood (log loss):</p>
 
+ <div style="text-align:center; margin:6px 0;">
+          $$ J(\boldsymbol{\beta}) \,=\, -\ell(\boldsymbol{\beta}) \,=\, -\sum_{i=1}^{m} \Big[\, y_i \log p_i \;+\; (1-y_i)\log(1-p_i) \,\Big]. $$
+        </div>
+  
   <!--
   <h4>How it works?</h4>
 
