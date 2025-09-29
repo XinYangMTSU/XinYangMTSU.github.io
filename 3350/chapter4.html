@@ -364,6 +364,158 @@
       <li>Can be interpreted as the probability of class \(1\).</li>
     </ul>
 
+
+     <!-- 8. Visualization -->
+    <h5>The Sigmoid (Logistic) Function</h5>
+
+    <ul>
+      <li>1. Definition</li>
+        <div class="card">
+          <p class="eq">$$ \sigma(z) = \frac{1}{1 + e^{-z}} $$</p>
+          <ul>
+            <li><strong>Input:</strong> any real number \( z \in (-\infty, +\infty) \).</li>
+            <li><strong>Output:</strong> a number between 0 and 1.</li>
+          </ul>
+        </div>
+
+      <li>2. Shape</li>
+        <ul>
+          <li>The graph looks like an S-shaped curve.</li>
+          <li>As \( z \to +\infty \), \( \sigma(z) \to 1 \).</li>
+          <li>As \( z \to -\infty \), \( \sigma(z) \to 0 \).</li>
+          <li>At \( z = 0 \), \( \sigma(0) = 0.5 \).</li>
+        </ul>
+        <p>That’s why it’s perfect for mapping any real number into a probability.</p>
+
+      <li>3. Why it’s used in Logistic Regression</li>
+        <p>Logistic Regression first computes a linear combination:</p>
+        <p class="eq">$$ z = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p $$</p>
+        <p>But \(z\) can be any real number. To turn \(z\) into a probability, we pass it through the sigmoid:</p>
+        <p class="eq">$$ P(y=1 \mid x) = \sigma(z) $$</p>
+        <p>The result is always between 0 and 1 → interpretable as probability.</p>
+      
+    </ul>
+
+    <canvas id="sigmoidCanvas" width="720" height="380" aria-label="Sigmoid function plot"></canvas>
+    <center>
+    <div class="caption">Sigmoid function \( \sigma(z) = \dfrac{1}{1 + e^{-z}} \)</div>
+    </center>
+  
+  <script>
+    // Draw a simple sigmoid plot on the canvas (z in [-8, 8])
+    (function drawSigmoid() {
+      const canvas = document.getElementById('sigmoidCanvas');
+      if (!canvas || !canvas.getContext) return;
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width, H = canvas.height;
+
+      // Padding for axes
+      const pad = { left: 60, right: 20, top: 20, bottom: 50 };
+      const plotW = W - pad.left - pad.right;
+      const plotH = H - pad.top - pad.bottom;
+
+      // Domain & range
+      const zMin = -8, zMax = 8;
+      const pMin = 0,  pMax = 1;
+
+      const xScale = z => pad.left + ( (z - zMin) / (zMax - zMin) ) * plotW;
+      const yScale = p => pad.top + (1 - ( (p - pMin) / (pMax - pMin) )) * plotH; // invert y
+
+      // Clear
+      ctx.clearRect(0, 0, W, H);
+
+      // Background
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, W, H);
+
+      // Axes
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.lineWidth = 1;
+
+      // Border of plot area
+      ctx.strokeRect(pad.left, pad.top, plotW, plotH);
+
+      // Horizontal grid lines at p = 0, 0.5, 1
+      const gridPs = [0, 0.5, 1];
+      ctx.beginPath();
+      gridPs.forEach(p => {
+        const y = yScale(p);
+        ctx.moveTo(pad.left, y);
+        ctx.lineTo(pad.left + plotW, y);
+      });
+      ctx.stroke();
+
+      // Vertical grid lines at z = -6, -3, 0, 3, 6
+      const gridZs = [-6, -3, 0, 3, 6];
+      ctx.beginPath();
+      gridZs.forEach(z => {
+        const x = xScale(z);
+        ctx.moveTo(x, pad.top);
+        ctx.lineTo(x, pad.top + plotH);
+      });
+      ctx.stroke();
+
+      // Labels
+      ctx.fillStyle = '#374151';
+      ctx.font = '12px Roboto, sans-serif';
+      // y labels
+      gridPs.forEach(p => {
+        const y = yScale(p);
+        ctx.fillText(p.toFixed(1), 28, y + 4);
+      });
+      // x labels
+      gridZs.forEach(z => {
+        const x = xScale(z);
+        ctx.fillText(z.toString(), x - 6, pad.top + plotH + 18);
+      });
+
+      // Axis titles
+      ctx.font = '13px Roboto, sans-serif';
+      ctx.fillText('z', pad.left + plotW / 2, H - 18);
+      ctx.save();
+      ctx.translate(18, pad.top + plotH / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText('Probability  p = σ(z)', 0, 0);
+      ctx.restore();
+
+      // Sigmoid curve
+      ctx.strokeStyle = '#2563eb';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      const steps = 600;
+      for (let i = 0; i <= steps; i++) {
+        const t = i / steps;
+        const z = zMin + t * (zMax - zMin);
+        const p = 1 / (1 + Math.exp(-z));
+        const x = xScale(z);
+        const y = yScale(p);
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Mark p=0.5 at z=0
+      const x0 = xScale(0);
+      const y05 = yScale(0.5);
+      ctx.fillStyle = '#1f2937';
+      ctx.beginPath();
+      ctx.arc(x0, y05, 3.5, 0, 2 * Math.PI);
+      ctx.fill();
+
+      // Dashed helpers to axes
+      ctx.setLineDash([5, 4]);
+      ctx.strokeStyle = '#9ca3af';
+      ctx.beginPath();
+      ctx.moveTo(x0, y05);
+      ctx.lineTo(x0, pad.top + plotH);
+      ctx.moveTo(x0, y05);
+      ctx.lineTo(pad.left, y05);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    })();
+  </script>
+
+  <br>
+  
     <!-- 3. Equation -->
     <h4>3. Equation</h4>
     <p class="eq">
@@ -772,154 +924,7 @@ until convergence</pre>
       <li>Works best when the relationship between features and <em>log-odds</em> is approximately linear.</li>
     </ul>
 
-    <!-- 8. Visualization -->
-    <h4>The Sigmoid (Logistic) Function</h4>
-
-    <ul>
-      <li>1. Definition</li>
-        <div class="card">
-          <p class="eq">$$ \sigma(z) = \frac{1}{1 + e^{-z}} $$</p>
-          <ul>
-            <li><strong>Input:</strong> any real number \( z \in (-\infty, +\infty) \).</li>
-            <li><strong>Output:</strong> a number between 0 and 1.</li>
-          </ul>
-        </div>
-
-      <li>2. Shape</li>
-        <ul>
-          <li>The graph looks like an S-shaped curve.</li>
-          <li>As \( z \to +\infty \), \( \sigma(z) \to 1 \).</li>
-          <li>As \( z \to -\infty \), \( \sigma(z) \to 0 \).</li>
-          <li>At \( z = 0 \), \( \sigma(0) = 0.5 \).</li>
-        </ul>
-        <p>That’s why it’s perfect for mapping any real number into a probability.</p>
-
-      <li>3. Why it’s used in Logistic Regression</li>
-        <p>Logistic Regression first computes a linear combination:</p>
-        <p class="eq">$$ z = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p $$</p>
-        <p>But \(z\) can be any real number. To turn \(z\) into a probability, we pass it through the sigmoid:</p>
-        <p class="eq">$$ P(y=1 \mid x) = \sigma(z) $$</p>
-        <p>The result is always between 0 and 1 → interpretable as probability.</p>
-      
-    </ul>
-
-    <canvas id="sigmoidCanvas" width="720" height="380" aria-label="Sigmoid function plot"></canvas>
-    <center>
-    <div class="caption">Sigmoid function \( \sigma(z) = \dfrac{1}{1 + e^{-z}} \)</div>
-    </center>
-  
-  <script>
-    // Draw a simple sigmoid plot on the canvas (z in [-8, 8])
-    (function drawSigmoid() {
-      const canvas = document.getElementById('sigmoidCanvas');
-      if (!canvas || !canvas.getContext) return;
-      const ctx = canvas.getContext('2d');
-      const W = canvas.width, H = canvas.height;
-
-      // Padding for axes
-      const pad = { left: 60, right: 20, top: 20, bottom: 50 };
-      const plotW = W - pad.left - pad.right;
-      const plotH = H - pad.top - pad.bottom;
-
-      // Domain & range
-      const zMin = -8, zMax = 8;
-      const pMin = 0,  pMax = 1;
-
-      const xScale = z => pad.left + ( (z - zMin) / (zMax - zMin) ) * plotW;
-      const yScale = p => pad.top + (1 - ( (p - pMin) / (pMax - pMin) )) * plotH; // invert y
-
-      // Clear
-      ctx.clearRect(0, 0, W, H);
-
-      // Background
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, W, H);
-
-      // Axes
-      ctx.strokeStyle = '#cbd5e1';
-      ctx.lineWidth = 1;
-
-      // Border of plot area
-      ctx.strokeRect(pad.left, pad.top, plotW, plotH);
-
-      // Horizontal grid lines at p = 0, 0.5, 1
-      const gridPs = [0, 0.5, 1];
-      ctx.beginPath();
-      gridPs.forEach(p => {
-        const y = yScale(p);
-        ctx.moveTo(pad.left, y);
-        ctx.lineTo(pad.left + plotW, y);
-      });
-      ctx.stroke();
-
-      // Vertical grid lines at z = -6, -3, 0, 3, 6
-      const gridZs = [-6, -3, 0, 3, 6];
-      ctx.beginPath();
-      gridZs.forEach(z => {
-        const x = xScale(z);
-        ctx.moveTo(x, pad.top);
-        ctx.lineTo(x, pad.top + plotH);
-      });
-      ctx.stroke();
-
-      // Labels
-      ctx.fillStyle = '#374151';
-      ctx.font = '12px Roboto, sans-serif';
-      // y labels
-      gridPs.forEach(p => {
-        const y = yScale(p);
-        ctx.fillText(p.toFixed(1), 28, y + 4);
-      });
-      // x labels
-      gridZs.forEach(z => {
-        const x = xScale(z);
-        ctx.fillText(z.toString(), x - 6, pad.top + plotH + 18);
-      });
-
-      // Axis titles
-      ctx.font = '13px Roboto, sans-serif';
-      ctx.fillText('z', pad.left + plotW / 2, H - 18);
-      ctx.save();
-      ctx.translate(18, pad.top + plotH / 2);
-      ctx.rotate(-Math.PI / 2);
-      ctx.fillText('Probability  p = σ(z)', 0, 0);
-      ctx.restore();
-
-      // Sigmoid curve
-      ctx.strokeStyle = '#2563eb';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      const steps = 600;
-      for (let i = 0; i <= steps; i++) {
-        const t = i / steps;
-        const z = zMin + t * (zMax - zMin);
-        const p = 1 / (1 + Math.exp(-z));
-        const x = xScale(z);
-        const y = yScale(p);
-        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-
-      // Mark p=0.5 at z=0
-      const x0 = xScale(0);
-      const y05 = yScale(0.5);
-      ctx.fillStyle = '#1f2937';
-      ctx.beginPath();
-      ctx.arc(x0, y05, 3.5, 0, 2 * Math.PI);
-      ctx.fill();
-
-      // Dashed helpers to axes
-      ctx.setLineDash([5, 4]);
-      ctx.strokeStyle = '#9ca3af';
-      ctx.beginPath();
-      ctx.moveTo(x0, y05);
-      ctx.lineTo(x0, pad.top + plotH);
-      ctx.moveTo(x0, y05);
-      ctx.lineTo(pad.left, y05);
-      ctx.stroke();
-      ctx.setLineDash([]);
-    })();
-  </script>
+   
 
   <br>
 
