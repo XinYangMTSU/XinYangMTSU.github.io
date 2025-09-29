@@ -1,387 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logistic Regression Example</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            margin: 0;
-            background: #17191a;
-            min-height: 100vh;
-            color: #ff79c6;
-            padding: 20px;
-        }
-        section {
-            margin-bottom: 55px;
-            background: #222025;
-            border-radius: 18px;
-            box-shadow: 0 4px 30px rgba(255,121,198,.09);
-            padding: 36px 32px 22px 32px;
-            border-left: 7px solid #ff79c6;
-            position: relative;
-            max-width: 950px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        h1 { 
-            color:#ffb3de; 
-            margin:0 0 8px 0; 
-            text-align: center;
-        }
-        h2 { 
-            margin: 0 0 10px 0; 
-            color: #ffb3de; 
-            font-weight: 700; 
-        }
-        h3 {
-            font-size: 1.18em; 
-            color: #ffb3de; 
-            margin-bottom: 5px; 
-            margin-top: 30px;
-            font-weight: 600; 
-            border-bottom: 1px solid #ffb3de; 
-            padding-bottom: 2px;
-        }
-        p { 
-            color:#ffd7f0; 
-            line-height: 1.6;
-        }
-        .subtitle {
-            text-align: center;
-            color: #ffd7f0;
-            margin-bottom: 20px;
-            font-size: 1.1em;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: #19121a;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        th {
-            background: #ff79c6;
-            color: #fff;
-            padding: 12px;
-            text-align: center;
-            font-weight: 700;
-        }
-        td {
-            padding: 10px;
-            text-align: center;
-            border-bottom: 1px solid #3a2f36;
-            color: #ffd7f0;
-        }
-        tr:hover {
-            background: #2a2328;
-        }
-        .passed {
-            color: #5fbf5f;
-            font-weight: bold;
-        }
-        .failed {
-            color: #ff6b6b;
-            font-weight: bold;
-        }
-        .formula-box {
-            background: #19121a;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border: 1px solid rgba(255,121,198,0.3);
-            box-shadow: 0 2px 10px rgba(255,121,198,0.11);
-        }
-        .formula {
-            font-size: 1.3em;
-            text-align: center;
-            margin: 10px 0;
-            color: #ffb3de;
-        }
-        .fraction {
-            display: inline-block;
-            vertical-align: middle;
-            text-align: center;
-            margin: 0 5px;
-        }
-        .numerator {
-            display: block;
-            border-bottom: 2px solid #ffb3de;
-            padding-bottom: 5px;
-            margin-bottom: 5px;
-        }
-        .denominator {
-            display: block;
-            padding-top: 5px;
-        }
-        .step {
-            background: #19121a;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 8px;
-            border: 1px solid rgba(255,121,198,0.3);
-        }
-        .step h4 {
-            color: #ff79c6;
-            margin-top: 0;
-            font-size: 1.1em;
-        }
-        .highlight {
-            background: rgba(255,215,0,0.2);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #ffd700;
-        }
-        .key-point {
-            background: rgba(255,121,198,0.15);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border-left: 4px solid #ff79c6;
-            color: #ffd7f0;
-        }
-        .decision-boundary {
-            background: rgba(255,215,0,0.15);
-        }
-        ul {
-            margin-top: 8px;
-            color: #ffd7f0;
-            line-height: 1.7;
-        }
-        .pill {
-            display:inline-block; 
-            background:#19121a; 
-            border:1px solid #ff79c6;
-            border-radius:999px; 
-            padding:6px 16px; 
-            margin:4px; 
-            font-size:1em;
-        }
-        .note {
-            color: #ffd7f0;
-            opacity: 0.9;
-            font-style: italic;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Logistic Regression · Interactive Example</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 { color:#ffb3de; margin:0 0 8px 0; text-align: center; }
+    h2 { margin: 0 0 10px 0; color: #ffb3de; font-weight: 700; }
+    h3 {
+      font-size: 1.18em; color: #ffb3de; margin-bottom: 5px; margin-top: 30px;
+      font-weight: 600; border-bottom: 1px solid #ffb3de; padding-bottom: 2px;
+    }
+    p { color:#ffd7f0; line-height: 1.6; }
+    .pill {
+      display:inline-block; background:#19121a; border:1px solid #ff79c6;
+      border-radius:999px; padding:6px 16px; margin:4px; font-size:1em;
+    }
+    .note { color:#ffd7f0; opacity:.9; font-style: italic; }
+    ul { margin-top: 8px; color:#ffd7f0; line-height: 1.7; }
+    .legend { display:flex; gap:14px; align-items:center; margin:8px 0 18px; flex-wrap: wrap;}
+    .swatch { width:16px; height:16px; border-radius:4px; display:inline-block; border:1px solid #00000033; }
+    .swatch.pos { background:#7CFC7C; }
+    .swatch.neg { background:#ff7b7b; }
+    .swatch.bound { background:#8ef0d9; }
+    .svgwrap{ background:#1a151c; border-radius:12px; padding:10px; box-shadow: inset 0 0 0 1px rgba(255,121,198,0.2);}
+    canvas { width:100%; height:auto; display:block; }
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+    .box{background:#19121a;border:1px solid #3a2c36;border-radius:12px;padding:16px;color:#ffd7f0}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
+    .row{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom: 10px;}
+    label{color:#ffd7f0;}
+    label input{width:100px; padding: 4px 8px; background:#222025; color:#ffd7f0; border:1px solid #ff79c6; border-radius:4px;}
+    table{border-collapse:collapse; width:100%; margin: 10px 0;}
+    th,td{border:1px solid #3a2f36; padding:6px 8px; color:#ffd7f0; text-align:center}
+    th{background:#1c1620; font-weight: 700;}
+    .btn{background:#21111b;border:1px solid #ff79c6;color:#ffb3de;border-radius:8px;padding:8px 16px;cursor:pointer;font-weight:600;}
+    .btn:hover{background:#ff79c6;color:#111}
+    .key-point {
+      background: rgba(255,121,198,0.15);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      border-left: 4px solid #ff79c6;
+      color: #ffd7f0;
+    }
+    .formula {
+      font-size: 1.2em;
+      text-align: center;
+      margin: 10px 0;
+      color: #ffb3de;
+      font-family: 'Times New Roman', serif;
+    }
+    .metric-row {
+      display: flex;
+      justify-content: space-around;
+      margin: 10px 0;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .metric-box {
+      background: #222025;
+      padding: 10px 15px;
+      border-radius: 8px;
+      border: 1px solid #ff79c6;
+      text-align: center;
+    }
+    .metric-label {
+      font-size: 0.9em;
+      color: #ffb3de;
+    }
+    .metric-value {
+      font-size: 1.4em;
+      font-weight: 700;
+      color: #7CFC7C;
+    }
+  </style>
+  <!-- Include MathJax once globally on your page if not already included -->
+ <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 </head>
 <body>
 
-<section>
-    <h1><span class="pill">Logistic Regression Example</span></h1>
-    <div class="subtitle">Predicting Student Exam Pass/Fail Based on Study Hours</div>
-    
-    <h2>The Problem</h2>
-    <p>We want to predict whether a student will <strong>pass</strong> (1) or <strong>fail</strong> (0) an exam based on the number of hours they studied.</p>
-    
-    <h3>Our Training Data</h3>
-    <table>
-        <tr>
-            <th>Student</th>
-            <th>Study Hours (x)</th>
-            <th>Result (y)</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>0.5</td>
-            <td class="failed">0 (Fail)</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>1.0</td>
-            <td class="failed">0 (Fail)</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>1.5</td>
-            <td class="failed">0 (Fail)</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>2.0</td>
-            <td class="failed">0 (Fail)</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>2.5</td>
-            <td class="passed">1 (Pass)</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>3.0</td>
-            <td class="passed">1 (Pass)</td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>3.5</td>
-            <td class="passed">1 (Pass)</td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>4.0</td>
-            <td class="passed">1 (Pass)</td>
-        </tr>
-    </table>
+<section id="top">
+  <h1><span class="pill">Logistic Regression Explained</span></h1>
+  <p>This interactive demo shows how logistic regression works using a real dataset: predicting student admission (admit/reject) based on two exam scores. You can adjust the model parameters and see how they affect predictions!</p>
 </section>
 
-<section>
-    <h2>The Logistic Regression Model</h2>
-    
-    <div class="formula-box">
-        <p><strong>Step 1: Linear Combination</strong></p>
-        <div class="formula">z = θ₀ + θ₁x</div>
-        <p class="note" style="text-align: center;">Where θ₀ is the intercept and θ₁ is the coefficient for study hours</p>
+<section id="problem">
+  <h2>The Problem</h2>
+  <p>We have data from 24 students with their scores on two exams and whether they were admitted (1) or not admitted (0) to a program. Our goal is to build a model that can predict admission for new students based on their exam scores.</p>
+
+  <div class="key-point">
+    <strong>Why Logistic Regression?</strong> Unlike linear regression (which predicts continuous values), logistic regression predicts probabilities between 0 and 1, making it perfect for binary classification problems like admit/reject.
+  </div>
+</section>
+
+<section id="data">
+  <h2>1) The Dataset</h2>
+  <div class="grid2">
+    <div class="box">
+      <h3 style="margin-top:0;">24 Student Records</h3>
+      <table aria-label="dataset">
+        <thead><tr><th>Student</th><th>Exam 1</th><th>Exam 2</th><th>Admitted</th></tr></thead>
+        <tbody id="dataBody"></tbody>
+      </table>
     </div>
-    
-    <div class="formula-box">
-        <p><strong>Step 2: Sigmoid Function</strong></p>
-        <div class="formula">
-            h(x) = 
-            <div class="fraction">
-                <span class="numerator">1</span>
-                <span class="denominator">1 + e<sup>-z</sup></span>
-            </div>
+    <div class="box">
+      <h3 style="margin-top:0;">Visual Representation</h3>
+      <div class="legend">
+        <span class="swatch pos"></span> <span>Admitted (1)</span>
+        <span class="swatch neg"></span> <span>Not Admitted (0)</span>
+        <span class="swatch bound"></span> <span>Decision Boundary</span>
+      </div>
+      <div class="svgwrap">
+        <canvas id="plot" width="880" height="520" aria-label="Decision boundary plot"></canvas>
+      </div>
+      <p class="note" style="margin-top:8px">Green dots = admitted students, Red dots = rejected students. The cyan line is our model's decision boundary.</p>
+    </div>
+  </div>
+</section>
+
+<section id="model">
+  <h2>2) The Model</h2>
+  <p>Logistic regression works in two steps:</p>
+
+  <div class="box" style="margin: 15px 0;">
+    <h3 style="margin-top:0;">Step 1: Linear Combination (z-score)</h3>
+    <div class="formula">z = β₀ + β₁·Exam1 + β₂·Exam2</div>
+    <p class="note">This combines the features into a single score. Higher z means more likely to be admitted.</p>
+  </div>
+
+  <div class="box" style="margin: 15px 0;">
+    <h3 style="margin-top:0;">Step 2: Sigmoid Function (convert to probability)</h3>
+    <div class="formula">P(Admit = 1) = 1 / (1 + e<sup>-z</sup>)</div>
+    <p class="note">The sigmoid "squashes" z into a probability between 0 and 1.</p>
+  </div>
+
+  <div class="key-point">
+    <strong>Decision Boundary:</strong> When P = 0.5 (i.e., z = 0), we're right on the boundary between admit and reject. This creates a straight line in our 2D feature space: <span class="mono">β₀ + β₁·Exam1 + β₂·Exam2 = 0</span>
+  </div>
+</section>
+
+<section id="fit">
+  <h2>3) Train the Model & Make Predictions</h2>
+  <div class="grid2">
+    <div class="box">
+      <h3 style="margin-top:0;">Training Parameters</h3>
+      <div class="row">
+        <label>Learning Rate <input id="lr" type="number" step="0.01" value="0.5"></label>
+        <label>Iterations <input id="iters" type="number" step="100" value="3000"></label>
+      </div>
+      <button class="btn" id="fitBtn">Train Model</button>
+
+      <h3>Learned Parameters</h3>
+      <table>
+        <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>β₀ (intercept)</td><td id="b0" class="mono">—</td></tr>
+          <tr><td>β₁ (Exam1 weight)</td><td id="b1" class="mono">—</td></tr>
+          <tr><td>β₂ (Exam2 weight)</td><td id="b2" class="mono">—</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Final Loss: <span id="loss" class="mono">—</span></p>
+
+      <h3>Training Metrics</h3>
+      <div class="metric-row">
+        <div class="metric-box">
+          <div class="metric-label">Accuracy</div>
+          <div class="metric-value" id="acc">—</div>
         </div>
-        <p class="note" style="text-align: center;">This converts z to a probability between 0 and 1</p>
-    </div>
-    
-    <div class="key-point">
-        <strong>🔑 Key Insight:</strong> The sigmoid function "squashes" any real number into the range [0, 1], making it perfect for probabilities!
-    </div>
-</section>
-
-<section>
-    <h2>Our Trained Model</h2>
-    <p>After training on our data, suppose we get these parameters:</p>
-    <div class="formula-box">
-        <div class="formula">θ₀ = -4.0 (intercept)</div>
-        <div class="formula">θ₁ = 2.0 (coefficient for study hours)</div>
-    </div>
-    
-    <p>So our complete model is:</p>
-    <div class="formula-box">
-        <div class="formula">z = -4.0 + 2.0 × (study hours)</div>
-        <div class="formula">
-            P(Pass) = 
-            <div class="fraction">
-                <span class="numerator">1</span>
-                <span class="denominator">1 + e<sup>-z</sup></span>
-            </div>
+        <div class="metric-box">
+          <div class="metric-label">Precision</div>
+          <div class="metric-value" id="prec">—</div>
         </div>
+        <div class="metric-box">
+          <div class="metric-label">Recall</div>
+          <div class="metric-value" id="rec">—</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">F1 Score</div>
+          <div class="metric-value" id="f1">—</div>
+        </div>
+      </div>
     </div>
+
+    <div class="box">
+      <h3 style="margin-top:0;">Make a Prediction</h3>
+      <p>Enter exam scores for a new student:</p>
+      <div class="row">
+        <label>Exam 1 Score <input id="px1" type="number" step="1" value="65"></label>
+        <label>Exam 2 Score <input id="px2" type="number" step="1" value="62"></label>
+      </div>
+      <button class="btn" id="predBtn">Predict Admission</button>
+
+      <div style="margin-top:20px; padding:15px; background:#222025; border-radius:8px;">
+        <h3 style="margin-top:0;">Prediction Results</h3>
+        <p><strong>Step 1: Calculate z-score</strong></p>
+        <p id="zCalc" class="mono" style="margin-left:20px;">—</p>
+
+        <p><strong>Step 2: Apply sigmoid to get probability</strong></p>
+        <p id="probCalc" class="mono" style="margin-left:20px;">—</p>
+
+        <p><strong>Step 3: Make decision (threshold = 0.5)</strong></p>
+        <p id="decision" style="margin-left:20px; font-size:1.3em; font-weight:700;">—</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section>
-    <h2>Making Predictions</h2>
-    <p>Let's predict for different study hours:</p>
-    
-    <div class="step">
-        <h4>Example 1: Student studied 1 hour</h4>
-        <p><strong>Step 1:</strong> Calculate z</p>
-        <div class="formula">z = -4.0 + 2.0 × 1 = -2.0</div>
-        
-        <p><strong>Step 2:</strong> Apply sigmoid</p>
-        <div class="formula">P(Pass) = 1 / (1 + e<sup>2.0</sup>) = 1 / (1 + 7.389) = 0.119</div>
-        
-        <p><strong>Result:</strong> <span class="highlight">11.9% chance of passing</span> → Predict <span class="failed">FAIL</span></p>
-    </div>
-    
-    <div class="step">
-        <h4>Example 2: Student studied 2 hours</h4>
-        <p><strong>Step 1:</strong> Calculate z</p>
-        <div class="formula">z = -4.0 + 2.0 × 2 = 0.0</div>
-        
-        <p><strong>Step 2:</strong> Apply sigmoid</p>
-        <div class="formula">P(Pass) = 1 / (1 + e<sup>0</sup>) = 1 / (1 + 1) = 0.50</div>
-        
-        <p><strong>Result:</strong> <span class="highlight">50% chance of passing</span> → Right at the decision boundary!</p>
-    </div>
-    
-    <div class="step">
-        <h4>Example 3: Student studied 3 hours</h4>
-        <p><strong>Step 1:</strong> Calculate z</p>
-        <div class="formula">z = -4.0 + 2.0 × 3 = 2.0</div>
-        
-        <p><strong>Step 2:</strong> Apply sigmoid</p>
-        <div class="formula">P(Pass) = 1 / (1 + e<sup>-2.0</sup>) = 1 / (1 + 0.135) = 0.881</div>
-        
-        <p><strong>Result:</strong> <span class="highlight">88.1% chance of passing</span> → Predict <span class="passed">PASS</span></p>
-    </div>
-    
-    <div class="step">
-        <h4>Example 4: Student studied 4 hours</h4>
-        <p><strong>Step 1:</strong> Calculate z</p>
-        <div class="formula">z = -4.0 + 2.0 × 4 = 4.0</div>
-        
-        <p><strong>Step 2:</strong> Apply sigmoid</p>
-        <div class="formula">P(Pass) = 1 / (1 + e<sup>-4.0</sup>) = 1 / (1 + 0.018) = 0.982</div>
-        
-        <p><strong>Result:</strong> <span class="highlight">98.2% chance of passing</span> → Predict <span class="passed">PASS</span></p>
-    </div>
+<section id="interpret">
+  <h2>4) How Training Works:</h2>
+
+
+  <div class="key-point">
+    The model uses gradient descent to iteratively adjust β₀, β₁, and β₂ to minimize the log loss (cross-entropy). It learns which combination of exam scores best predicts admission by looking at all 24 training examples.
+  </div>
+
+  <div style="text-align:center; margin:6px 0;">
+         $$ J(\boldsymbol{\beta}) \,=\, -\ell(\boldsymbol{\beta}) \,=\, -\sum_{i=1}^{m} \Big[\, y_i \log p_i \;+\; (1-y_i)\log(1-p_i) \,\Big]. $$
+       </div>
+
 </section>
 
-<section>
-    <h2>Summary of All Predictions</h2>
-    <table>
-        <tr>
-            <th>Study Hours</th>
-            <th>z value</th>
-            <th>P(Pass)</th>
-            <th>Prediction (threshold = 0.5)</th>
-        </tr>
-        <tr>
-            <td>0.5</td>
-            <td>-3.0</td>
-            <td>0.047</td>
-            <td class="failed">FAIL</td>
-        </tr>
-        <tr>
-            <td>1.0</td>
-            <td>-2.0</td>
-            <td>0.119</td>
-            <td class="failed">FAIL</td>
-        </tr>
-        <tr>
-            <td>1.5</td>
-            <td>-1.0</td>
-            <td>0.269</td>
-            <td class="failed">FAIL</td>
-        </tr>
-        <tr class="decision-boundary">
-            <td><strong>2.0</strong></td>
-            <td><strong>0.0</strong></td>
-            <td><strong>0.500</strong></td>
-            <td><strong>Decision Boundary</strong></td>
-        </tr>
-        <tr>
-            <td>2.5</td>
-            <td>1.0</td>
-            <td>0.731</td>
-            <td class="passed">PASS</td>
-        </tr>
-        <tr>
-            <td>3.0</td>
-            <td>2.0</td>
-            <td>0.881</td>
-            <td class="passed">PASS</td>
-        </tr>
-        <tr>
-            <td>3.5</td>
-            <td>3.0</td>
-            <td>0.953</td>
-            <td class="passed">PASS</td>
-        </tr>
-        <tr>
-            <td>4.0</td>
-            <td>4.0</td>
-            <td>0.982</td>
-            <td class="passed">PASS</td>
-        </tr>
-    </table>
-</section>
+<script>
+// ======== Dataset: 24 students (Exam1, Exam2, Admit) ========
+const data = [
+  [34, 78, 0], [30, 43, 0], [35, 72, 0], [60, 86, 1], [79, 75, 1], [45, 56, 0],
+  [61, 96, 1], [75, 46, 1], [62, 58, 0], [43, 51, 0], [69, 70, 1], [67, 66, 1],
+  [70, 89, 1], [52, 59, 0], [57, 82, 1], [46, 45, 0], [77, 90, 1], [85, 76, 1],
+  [20, 30, 0], [50, 43, 0], [90, 88, 1], [88, 62, 1], [55, 48, 0], [63, 72, 1]
+];
+
+// Populate table
+const tbody = document.getElementById('dataBody');
+data.forEach((r,i)=>{
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td>${i+1}</td><td>${r[0]}</td><td>${r[1]}</td><td style="color:${r[2]?'#7CFC7C':'#ff7b7b'}">${r[2]}</td>`;
+  tbody.appendChild(tr);
+});
+
+// ======== Math helpers ========
+const sigmoid = z => 1/(1+Math.exp(-z));
+
+// Normalize features to [0,1] range for better numerical stability
+function normalize(X){
+  const x1 = X.map(r=>r[0]), x2 = X.map(r=>r[1]);
+  const min1 = Math.min(...x1), max1 = Math.max(...x1);
+  const min2 = Math.min(...x2), max2 = Math.max(...x2);
+  const range1 = max1-min1 || 1, range2 = max2-min2 || 1;
+  const Z = X.map(r=>[(r[0]-min1)/range1, (r[1]-min2)/range2]);
+  return {Z, min:[min1,min2], range:[range1,range2]};
+}
+
+// Log loss (cross-entropy)
+function logloss(beta, X, y){
+  const n = y.length; let s = 0;
+  for(let i=0;i<n;i++){
+    const z = beta[0] + beta[1]*X[i][0] + beta[2]*X[i][1];
+    const p = sigmoid(z);
+    s += - (y[i]*Math.log(p + 1e-12) + (1-y[i])*Math.log(1-p + 1e-12));
+  }
+  return s/n;
+}
+
+// Gradient Descent
+function fitLogisticGD(X, y, {lr=0.5, iters=3000}={}){
+  const n = y.length; let b0=0, b1=0, b2=0; let loss=Infinity;
+  for(let t=0;t<iters;t++){
+    let g0=0,g1=0,g2=0;
+    for(let i=0;i<n;i++){
+      const z = b0 + b1*X[i][0] + b2*X[i][1];
+      const p = sigmoid(z);
+      const e = p - y[i];
+      g0 += e; g1 += e*X[i][0]; g2 += e*X[i][1];
+    }
+    g0 /= n; g1 /= n; g2 /= n;
+    b0 -= lr*g0; b1 -= lr*g1; b2 -= lr*g2;
+  }
+  loss = logloss([b0,b1,b2], X, y);
+  return {beta:[b0,b1,b2], loss};
+}
+
+// Plot
+function drawPlot(points, boundaryLine){
+  const canvas = document.getElementById('plot');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height, PAD=50;
+  const xs = points.map(p=>p[0]), ys = points.map(p=>p[1]);
+  const xmin=Math.min(...xs)-5, xmax=Math.max(...xs)+5;
+  const ymin=Math.min(...ys)-5, ymax=Math.max(...ys)+5;
+  const x2px = x=> PAD + (x-xmin)*(W-2*PAD)/(xmax-xmin);
+  const y2px = y=> H-PAD - (y-ymin)*(H-2*PAD)/(ymax-ymin);
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = '#0f0c12'; ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle = '#3a2f36'; ctx.strokeRect(PAD, PAD, W-2*PAD, H-2*PAD);
+
+  // axes labels
+  ctx.fillStyle = '#ffb3de'; ctx.font='13px Roboto, Arial';
+  ctx.fillText('Exam 1', W/2-20, H-12);
+  ctx.save(); ctx.translate(12,H/2+20); ctx.rotate(-Math.PI/2); ctx.fillText('Exam 2', 0,0); ctx.restore();
+
+  // points
+  points.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(x2px(p[0]), y2px(p[1]), 5, 0, Math.PI*2);
+    ctx.fillStyle = p[2]===1 ? '#7CFC7C' : '#ff7b7b';
+    ctx.strokeStyle = '#0008';
+    ctx.fill(); ctx.stroke();
+  });
+
+  // boundary
+  if(boundaryLine){
+    ctx.strokeStyle = '#8ef0d9'; ctx.lineWidth=2.5;
+    ctx.beginPath();
+    ctx.moveTo(x2px(boundaryLine.x1), y2px(boundaryLine.y1));
+    ctx.lineTo(x2px(boundaryLine.x2), y2px(boundaryLine.y2));
+    ctx.stroke();
+  }
+}
+
+let model = null;
+
+function trainModel(){
+  const X = data.map(r=>[r[0], r[1]]);
+  const y = data.map(r=>r[2]);
+  const {Z, min, range} = normalize(X);
+
+  const lr = parseFloat(document.getElementById('lr').value) || 0.5;
+  const iters = parseInt(document.getElementById('iters').value,10) || 3000;
+  const fit = fitLogisticGD(Z, y, {lr, iters});
+
+  model = {beta:fit.beta, min, range};
+
+  // Update UI
+  document.getElementById('b0').textContent = fit.beta[0].toFixed(4);
+  document.getElementById('b1').textContent = fit.beta[1].toFixed(4);
+  document.getElementById('b2').textContent = fit.beta[2].toFixed(4);
+  document.getElementById('loss').textContent = fit.loss.toFixed(4);
+
+  // Decision boundary in original space
+  const b0=fit.beta[0], b1=fit.beta[1], b2=fit.beta[2];
+  const xs = data.map(r=>r[0]);
+  const xMin = Math.min(...xs)-5, xMax = Math.max(...xs)+5;
+  // z = b0 + b1*x1_norm + b2*x2_norm = 0
+  // x2 = min2 + range2 * ( (-b0 - b1*(x1-min1)/range1) / b2 )
+  function yOnBoundary(x1){
+    const x1n = (x1-min[0])/range[0];
+    const x2n = (-b0 - b1*x1n) / (b2||1e-9);
+    return min[1] + range[1] * x2n;
+  }
+  const line = {x1:xMin, y1:yOnBoundary(xMin), x2:xMax, y2:yOnBoundary(xMax)};
+
+  drawPlot(data, line);
+
+  // Metrics
+  const preds = Z.map(z => sigmoid(b0 + b1*z[0] + b2*z[1]));
+  let TP=0,FP=0,TN=0,FN=0;
+  for(let i=0;i<y.length;i++){
+    const yhat = preds[i] >= 0.5 ? 1 : 0;
+    if(y[i]===1 && yhat===1) TP++;
+    else if(y[i]===0 && yhat===1) FP++;
+    else if(y[i]===0 && yhat===0) TN++;
+    else FN++;
+  }
+  const acc = (TP+TN)/(TP+TN+FP+FN);
+  const prec = TP/(TP+FP||1);
+  const rec = TP/(TP+FN||1);
+  const f1 = (prec+rec>0)? 2*prec*rec/(prec+rec) : 0;
+  document.getElementById('acc').textContent = acc.toFixed(3);
+  document.getElementById('prec').textContent = prec.toFixed(3);
+  document.getElementById('rec').textContent = rec.toFixed(3);
+  document.getElementById('f1').textContent = f1.toFixed(3);
+}
+
+function predictOne(){
+  if(!model){ alert('Please train the model first!'); return; }
+  const x1 = parseFloat(document.getElementById('px1').value);
+  const x2 = parseFloat(document.getElementById('px2').value);
+
+  const x1n = (x1 - model.min[0]) / model.range[0];
+  const x2n = (x2 - model.min[1]) / model.range[1];
+  const [b0,b1,b2] = model.beta;
+  const z = b0 + b1*x1n + b2*x2n;
+  const p = sigmoid(z);
+
+  document.getElementById('zCalc').textContent =
+    `z = ${b0.toFixed(4)} + ${b1.toFixed(4)}×${x1n.toFixed(4)} + ${b2.toFixed(4)}×${x2n.toFixed(4)} = ${z.toFixed(4)}`;
+  document.getElementById('probCalc').textContent =
+    `P(Admit=1) = 1/(1+e^(-${z.toFixed(4)})) = ${p.toFixed(4)} = ${(p*100).toFixed(1)}%`;
+
+  const decision = p >= 0.5 ?
+    `✅ ADMITTED (probability ${(p*100).toFixed(1)}%)` :
+    `❌ NOT ADMITTED (probability ${(p*100).toFixed(1)}%)`;
+  document.getElementById('decision').innerHTML = decision;
+  document.getElementById('decision').style.color = p >= 0.5 ? '#7CFC7C' : '#ff7b7b';
+}
+
+document.getElementById('fitBtn').addEventListener('click', trainModel);
+document.getElementById('predBtn').addEventListener('click', predictOne);
+
+// Initial training
+trainModel();
+</script>
 
 </body>
 </html>
