@@ -245,12 +245,16 @@
 
     <section id="lr">
   <h2>Learning Rate (η)</h2>
-  <p>The <b>learning rate</b> controls the <em>step size</em> when updating parameters (β₀, β₁, β₂, …) during training.</p>
+  <p>In Gradient Descent, the <b>learning rate</b> controls the <em>step size</em> when updating parameters (β₀, β₁, β₂, …) during training.</p>
   <ul>
     <li>If the learning rate is <b>too large</b>, the algorithm may overshoot the minimum of the cost function, fail to converge, or even diverge.</li>
     <li>If the learning rate is <b>too small</b>, convergence will be very slow because parameter updates are tiny.</li>
     <li>A good learning rate balances speed and stability. Typical values are between 0.01 and 0.1, but depend on the dataset.</li>
+    <li><b>Gradient Descent is a basic, general-purpose optimizer, but scikit-learn's <code>LogisticRegression</code> uses more advanced 
+      solvers (e.g., LBFGS, liblinear, saga) that leverage curvature/line-search, typically converge faster, and don't 
+      require a manual learning rate.</b></li>
   </ul>
+      
 </section>
 
 <script>
