@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>k-Nearest Neighbors · Interactive Example</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 { color:#ffb3de; margin:0 0 8px 0; text-align: center; }
+    h2 { margin: 0 0 10px 0; color: #ffb3de; font-weight: 700; }
+    h3 {
+      font-size: 1.18em; color: #ffb3de; margin-bottom: 5px; margin-top: 30px;
+      font-weight: 600; border-bottom: 1px solid #ffb3de; padding-bottom: 2px;
+    }
+    p { color:#ffd7f0; line-height: 1.6; }
+    .pill {
+      display:inline-block; background:#19121a; border:1px solid #ff79c6;
+      border-radius:999px; padding:6px 16px; margin:4px; font-size:1em;
+    }
+    .note { color:#ffd7f0; opacity:.9; font-style: italic; }
+    ul { margin-top: 8px; color:#ffd7f0; line-height: 1.7; }
+    .legend { display:flex; gap:14px; align-items:center; margin:8px 0 18px; flex-wrap: wrap;}
+    .swatch { width:16px; height:16px; border-radius:4px; display:inline-block; border:1px solid #00000033; }
+    .swatch.cat { background:#7CFC7C; }
+    .swatch.dog { background:#ff7b7b; }
+    .swatch.bird { background:#ffd966; }
+    .swatch.test { background:#8ef0d9; }
+    .swatch.neighbor { background:#bd93f9; }
+    .svgwrap{ background:#1a151c; border-radius:12px; padding:10px; box-shadow: inset 0 0 0 1px rgba(255,121,198,0.2);}
+    canvas { width:100%; height:auto; display:block; cursor: crosshair; }
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+    .box{background:#19121a;border:1px solid #3a2c36;border-radius:12px;padding:16px;color:#ffd7f0}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
+    .row{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom: 10px;}
+    label{color:#ffd7f0;}
+    label input, label select{width:100px; padding: 4px 8px; background:#222025; color:#ffd7f0; border:1px solid #ff79c6; border-radius:4px;}
+    table{border-collapse:collapse; width:100%; margin: 10px 0;}
+    th,td{border:1px solid #3a2f36; padding:6px 8px; color:#ffd7f0; text-align:center}
+    th{background:#1c1620; font-weight: 700;}
+    .btn{background:#21111b;border:1px solid #ff79c6;color:#ffb3de;border-radius:8px;padding:8px 16px;cursor:pointer;font-weight:600;}
+    .btn:hover{background:#ff79c6;color:#111}
+    .key-point {
+      background: rgba(255,121,198,0.15);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      border-left: 4px solid #ff79c6;
+      color: #ffd7f0;
+    }
+    .formula {
+      font-size: 1.2em;
+      text-align: center;
+      margin: 10px 0;
+      color: #ffb3de;
+      font-family: 'Times New Roman', serif;
+    }
+    .vote-box {
+      display: inline-block;
+      padding: 8px 12px;
+      margin: 3px;
+      border-radius: 6px;
+      font-weight: 600;
+      border: 2px solid;
+    }
+    .vote-cat { background: rgba(124,252,124,0.2); border-color: #7CFC7C; color: #7CFC7C; }
+    .vote-dog { background: rgba(255,123,123,0.2); border-color: #ff7b7b; color: #ff7b7b; }
+    .vote-bird { background: rgba(255,217,102,0.2); border-color: #ffd966; color: #ffd966; }
+    .neighbor-list {
+      background: #222025;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+    .neighbor-item {
+      padding: 8px;
+      margin: 4px 0;
+      background: #19121a;
+      border-radius: 4px;
+      border-left: 3px solid;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<section id="top">
+  <h1><span class="pill">k-Nearest Neighbors Explained</span></h1>
+  <p>This interactive demo shows how k-Nearest Neighbors (kNN) works for classification. kNN is one of the simplest machine learning algorithms: it classifies new data points based on the classes of their nearest neighbors. Click anywhere on the plot to classify a new point!</p>
+</section>
+
+<section id="problem">
+  <h2>The Problem</h2>
+  <p>We have 30 data points representing three classes: Cats, Dogs, and Birds. Each point has two features (Feature 1 and Feature 2). Our goal is to predict the class of a new data point based on its k nearest neighbors.</p>
+
+  <div class="key-point">
+    <strong>How kNN Works:</strong> To classify a new point, kNN finds the k closest training points (using distance) and takes a majority vote of their classes. No training phase needed - it's a "lazy learner" that stores all data and computes at prediction time!
+  </div>
+</section>
+
+<section id="data">
+  <h2>1) The Dataset</h2>
+  <div class="grid2">
+    <div class="box">
+      <h3 style="margin-top:0;">30 Training Points</h3>
+      <table aria-label="dataset">
+        <thead><tr><th>#</th><th>Feature 1</th><th>Feature 2</th><th>Class</th></tr></thead>
+        <tbody id="dataBody"></tbody>
+      </table>
+    </div>
+    <div class="box">
+      <h3 style="margin-top:0;">Visual Representation</h3>
+      <div class="legend">
+        <span class="swatch cat"></span> <span>Cat</span>
+        <span class="swatch dog"></span> <span>Dog</span>
+        <span class="swatch bird"></span> <span>Bird</span>
+        <span class="swatch test"></span> <span>Test Point</span>
+        <span class="swatch neighbor"></span> <span>Nearest Neighbors</span>
+      </div>
+      <div class="svgwrap">
+        <canvas id="plot" width="880" height="520" aria-label="kNN classification plot"></canvas>
+      </div>
+      <p class="note" style="margin-top:8px">Click anywhere on the plot to classify a new point! The algorithm will find the k nearest neighbors and predict the class.</p>
+    </div>
+  </div>
+</section>
+
+<section id="algorithm">
+  <h2>2) The kNN Algorithm</h2>
+  <p>kNN works in three simple steps:</p>
+
+  <div class="box" style="margin: 15px 0;">
+    <h3 style="margin-top:0;">Step 1: Calculate Distances</h3>
+    <div class="formula">d(x, x<sub>i</sub>) = √[(x₁ - x<sub>i1</sub>)² + (x₂ - x<sub>i2</sub>)²]</div>
+    <p class="note">Compute the Euclidean distance from the new point to every training point.</p>
+  </div>
+
+  <div class="box" style="margin: 15px 0;">
+    <h3 style="margin-top:0;">Step 2: Find k Nearest Neighbors</h3>
+    <p class="note">Sort all training points by distance and select the k closest ones.</p>
+  </div>
+
+  <div class="box" style="margin: 15px 0;">
+    <h3 style="margin-top:0;">Step 3: Majority Vote (Mode)</h3>
+    <div class="formula">ŷ = mode({y<sub>(1)</sub>, y<sub>(2)</sub>, ..., y<sub>(k)</sub>})</div>
+    <p class="note">Take the most common class among the k neighbors. That's your prediction!</p>
+  </div>
+
+  <div class="key-point">
+    <strong>Choosing k:</strong> The value of k is crucial!
+    <ul style="margin-top:8px;">
+      <li><strong>Small k (e.g., k=1):</strong> Sensitive to noise, can overfit</li>
+      <li><strong>Large k:</strong> Smoother decision boundaries, but may underfit</li>
+      <li><strong>Odd k:</strong> Helps avoid ties in binary/multiclass problems</li>
+      <li><strong>Typical values:</strong> k = 3, 5, 7, or use cross-validation</li>
+    </ul>
+  </div>
+</section>
+
+<section id="interactive">
+  <h2>3) Interactive Classification</h2>
+  <div class="grid2">
+    <div class="box">
+      <h3 style="margin-top:0;">kNN Parameters</h3>
+      <div class="row">
+        <label>k (neighbors): 
+          <select id="kValue">
+            <option value="1">1</option>
+            <option value="3">3</option>
+            <option value="5" selected>5</option>
+            <option value="7">7</option>
+            <option value="9">9</option>
+          </select>
+        </label>
+        <label>Distance: 
+          <select id="distMetric">
+            <option value="euclidean">Euclidean</option>
+            <option value="manhattan">Manhattan</option>
+          </select>
+        </label>
+      </div>
+
+      <h3>Manual Input</h3>
+      <div class="row">
+        <label>Feature 1 <input id="f1" type="number" step="0.5" value="5.0"></label>
+        <label>Feature 2 <input id="f2" type="number" step="0.5" value="5.0"></label>
+      </div>
+      <button class="btn" id="classifyBtn">Classify Point</button>
+      <p class="note" style="margin-top:8px;">Or click directly on the plot above!</p>
+    </div>
+
+    <div class="box">
+      <h3 style="margin-top:0;">Prediction Results</h3>
+      <div id="results" style="min-height:200px;">
+        <p class="note">Click on the plot or enter values to classify a point...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="distance">
+  <h2>4) Distance Metrics</h2>
+  <p>kNN relies on distance calculations. Two common metrics:</p>
+
+  <div class="grid2">
+    <div class="box">
+      <h3 style="margin-top:0;">Euclidean Distance</h3>
+      <div class="formula">d = √[(x₁-y₁)² + (x₂-y₂)²]</div>
+      <p class="note">Straight-line distance ("as the crow flies"). Most commonly used. Sensitive to feature scales.</p>
+    </div>
+    <div class="box">
+      <h3 style="margin-top:0;">Manhattan Distance</h3>
+      <div class="formula">d = |x₁-y₁| + |x₂-y₂|</div>
+      <p class="note">Grid-based distance (like walking city blocks). Less sensitive to outliers. Good for high-dimensional data.</p>
+    </div>
+  </div>
+
+  <div class="key-point">
+    <strong>Important:</strong> Always normalize/standardize your features before using kNN! Features with larger scales will dominate the distance calculation. For example, age (0-100) vs. income (0-1,000,000).
+  </div>
+</section>
+
+<section id="properties">
+  <h2>5) kNN Properties</h2>
+  
+  <div class="grid2">
+    <div class="box">
+      <h3 style="margin-top:0; color:#7CFC7C;">✓ Advantages</h3>
+      <ul>
+        <li>Simple and intuitive</li>
+        <li>No training phase (lazy learning)</li>
+        <li>Naturally handles multiclass</li>
+        <li>Non-parametric (no assumptions about data distribution)</li>
+        <li>Can capture complex decision boundaries</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3 style="margin-top:0; color:#ff7b7b;">✗ Disadvantages</h3>
+      <ul>
+        <li>Slow prediction (must compute all distances)</li>
+        <li>Requires lots of memory (stores all data)</li>
+        <li>Sensitive to irrelevant features</li>
+        <li>Sensitive to feature scaling</li>
+        <li>Struggles with high-dimensional data (curse of dimensionality)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="tips">
+  <h2>6) Practical Tips</h2>
+  <div class="key-point">
+    <strong>Best Practices for kNN:</strong>
+    <ul>
+      <li><strong>Feature Scaling:</strong> Always standardize features (e.g., StandardScaler in scikit-learn)</li>
+      <li><strong>Choosing k:</strong> Use cross-validation to find optimal k</li>
+      <li><strong>Odd k:</strong> Prefer odd values to avoid ties</li>
+      <li><strong>Data Size:</strong> Works best with moderate dataset sizes (thousands, not millions)</li>
+      <li><strong>Feature Selection:</strong> Remove irrelevant features that add noise</li>
+      <li><strong>Dimensionality:</strong> Consider dimensionality reduction (PCA) for high-dimensional data</li>
+    </ul>
+  </div>
+</section>
+
+<script>
+// ======== Dataset: 30 points (Feature1, Feature2, Class) ========
+const classNames = ['Cat', 'Dog', 'Bird'];
+const classColors = ['#7CFC7C', '#ff7b7b', '#ffd966'];
+
+const data = [
+  // Cats (class 0) - bottom-left cluster
+  [2, 2, 0], [2.5, 1.8, 0], [1.8, 2.3, 0], [2.2, 2.5, 0], [1.5, 2, 0],
+  [2.8, 2.2, 0], [2.3, 1.5, 0], [1.9, 1.7, 0], [2.6, 2.8, 0], [1.7, 2.6, 0],
+  
+  // Dogs (class 1) - top-right cluster
+  [7, 7, 1], [7.5, 6.8, 1], [6.8, 7.3, 1], [7.2, 7.5, 1], [6.5, 7, 1],
+  [7.8, 7.2, 1], [7.3, 6.5, 1], [6.9, 6.7, 1], [7.6, 7.8, 1], [6.7, 7.6, 1],
+  
+  // Birds (class 2) - middle-top cluster
+  [5, 8, 2], [5.5, 7.8, 2], [4.8, 8.3, 2], [5.2, 8.5, 2], [4.5, 8, 2],
+  [5.8, 8.2, 2], [5.3, 7.5, 2], [4.9, 7.7, 2], [5.6, 8.8, 2], [4.7, 8.6, 2]
+];
+
+// Populate table
+const tbody = document.getElementById('dataBody');
+data.forEach((r,i)=>{
+  const tr = document.createElement('tr');
+  const className = classNames[r[2]];
+  const color = classColors[r[2]];
+  tr.innerHTML = `<td>${i+1}</td><td>${r[0]}</td><td>${r[1]}</td><td style="color:${color}">${className}</td>`;
+  tbody.appendChild(tr);
+});
+
+// ======== Distance functions ========
+function euclideanDist(x1, y1, x2, y2) {
+  return Math.sqrt((x1-x2)**2 + (y1-y2)**2);
+}
+
+function manhattanDist(x1, y1, x2, y2) {
+  return Math.abs(x1-x2) + Math.abs(y1-y2);
+}
+
+// ======== kNN Classification ========
+function knnClassify(testX, testY, k, distMetric) {
+  const distFunc = distMetric === 'manhattan' ? manhattanDist : euclideanDist;
+  
+  // Calculate distances to all training points
+  const distances = data.map((point, idx) => ({
+    idx: idx,
+    dist: distFunc(testX, testY, point[0], point[1]),
+    class: point[2],
+    x: point[0],
+    y: point[1]
+  }));
+  
+  // Sort by distance and take k nearest
+  distances.sort((a, b) => a.dist - b.dist);
+  const neighbors = distances.slice(0, k);
+  
+  // Count votes for each class
+  const votes = [0, 0, 0];
+  neighbors.forEach(n => votes[n.class]++);
+  
+  // Find class with most votes (mode)
+  const predictedClass = votes.indexOf(Math.max(...votes));
+  
+  return { predictedClass, neighbors, votes };
+}
+
+// ======== Plotting ========
+let testPoint = null;
+let nearestNeighbors = [];
+
+function drawPlot() {
+  const canvas = document.getElementById('plot');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height, PAD = 50;
+  
+  const xmin = 0, xmax = 10, ymin = 0, ymax = 10;
+  const x2px = x => PAD + (x - xmin) * (W - 2 * PAD) / (xmax - xmin);
+  const y2px = y => H - PAD - (y - ymin) * (H - 2 * PAD) / (ymax - ymin);
+  
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#0f0c12';
+  ctx.fillRect(0, 0, W, H);
+  ctx.strokeStyle = '#3a2f36';
+  ctx.strokeRect(PAD, PAD, W - 2 * PAD, H - 2 * PAD);
+  
+  // Axes labels
+  ctx.fillStyle = '#ffb3de';
+  ctx.font = '13px Roboto, Arial';
+  ctx.fillText('Feature 1', W / 2 - 30, H - 12);
+  ctx.save();
+  ctx.translate(12, H / 2 + 30);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('Feature 2', 0, 0);
+  ctx.restore();
+  
+  // Draw lines to nearest neighbors
+  if (testPoint && nearestNeighbors.length > 0) {
+    ctx.strokeStyle = '#bd93f9';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([5, 3]);
+    nearestNeighbors.forEach(n => {
+      ctx.beginPath();
+      ctx.moveTo(x2px(testPoint.x), y2px(testPoint.y));
+      ctx.lineTo(x2px(n.x), y2px(n.y));
+      ctx.stroke();
+    });
+    ctx.setLineDash([]);
+  }
+  
+  // Draw training points
+  data.forEach(p => {
+    const isNeighbor = nearestNeighbors.some(n => n.x === p[0] && n.y === p[1]);
+    ctx.beginPath();
+    ctx.arc(x2px(p[0]), y2px(p[1]), isNeighbor ? 8 : 5, 0, Math.PI * 2);
+    ctx.fillStyle = classColors[p[2]];
+    ctx.strokeStyle = isNeighbor ? '#bd93f9' : '#0008';
+    ctx.lineWidth = isNeighbor ? 3 : 1;
+    ctx.fill();
+    ctx.stroke();
+  });
+  
+  // Draw test point
+  if (testPoint) {
+    ctx.beginPath();
+    ctx.arc(x2px(testPoint.x), y2px(testPoint.y), 7, 0, Math.PI * 2);
+    ctx.fillStyle = '#8ef0d9';
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.fill();
+    ctx.stroke();
+  }
+  
+  // Store conversion functions for click handling
+  canvas.px2x = px => xmin + (px - PAD) * (xmax - xmin) / (W - 2 * PAD);
+  canvas.px2y = py => ymax - (py - PAD) * (ymax - ymin) / (H - 2 * PAD);
+}
+
+function displayResults(x, y, result) {
+  const { predictedClass, neighbors, votes } = result;
+  const className = classNames[predictedClass];
+  const color = classColors[predictedClass];
+  
+  let html = `
+    <h3 style="margin-top:0;">Test Point: (${x.toFixed(2)}, ${y.toFixed(2)})</h3>
+    
+    <p><strong>Step 1: Calculate Distances</strong></p>
+    <div class="neighbor-list">
+  `;
+  
+  neighbors.forEach((n, i) => {
+    const nClass = classNames[n.class];
+    const nColor = classColors[n.class];
+    html += `
+      <div class="neighbor-item" style="border-color:${nColor}">
+        <strong>Neighbor ${i+1}:</strong> (${n.x}, ${n.y}) - ${nClass} - Distance: ${n.dist.toFixed(3)}
+      </div>
+    `;
+  });
+  
+  html += `</div>`;
+  
+  html += `
+    <p><strong>Step 2: Count Votes (Mode)</strong></p>
+    <div style="margin:10px 0;">
+      <span class="vote-box vote-cat">Cat: ${votes[0]}</span>
+      <span class="vote-box vote-dog">Dog: ${votes[1]}</span>
+      <span class="vote-box vote-bird">Bird: ${votes[2]}</span>
+    </div>
+  `;
+  
+  html += `
+    <p><strong>Step 3: Prediction</strong></p>
+    <div style="font-size:1.3em; font-weight:700; color:${color}; margin-top:10px;">
+      Predicted Class: ${className}
+    </div>
+    <p class="note">The test point is classified as <strong>${className}</strong> because ${votes[predictedClass]} out of ${neighbors.length} neighbors are ${className}s (most frequent).</p>
+  `;
+  
+  document.getElementById('results').innerHTML = html;
+}
+
+function classify() {
+  const x = parseFloat(document.getElementById('f1').value);
+  const y = parseFloat(document.getElementById('f2').value);
+  const k = parseInt(document.getElementById('kValue').value);
+  const distMetric = document.getElementById('distMetric').value;
+  
+  testPoint = { x, y };
+  const result = knnClassify(x, y, k, distMetric);
+  nearestNeighbors = result.neighbors;
+  
+  drawPlot();
+  displayResults(x, y, result);
+}
+
+// Canvas click handler
+document.getElementById('plot').addEventListener('click', (e) => {
+  const canvas = e.target;
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  const px = (e.clientX - rect.left) * scaleX;
+  const py = (e.clientY - rect.top) * scaleY;
+  
+  const x = canvas.px2x(px);
+  const y = canvas.px2y(py);
+  
+  // Clamp to bounds
+  const xClamped = Math.max(0, Math.min(10, x));
+  const yClamped = Math.max(0, Math.min(10, y));
+  
+  document.getElementById('f1').value = xClamped.toFixed(2);
+  document.getElementById('f2').value = yClamped.toFixed(2);
+  
+  classify();
+});
+
+document.getElementById('classifyBtn').addEventListener('click', classify);
+document.getElementById('kValue').addEventListener('change', () => {
+  if (testPoint) classify();
+});
+document.getElementById('distMetric').addEventListener('change', () => {
+  if (testPoint) classify();
+});
+
+// Initial draw
+drawPlot();
+</script>
+
+</body>
+</html>
