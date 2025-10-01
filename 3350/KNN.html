@@ -305,7 +305,7 @@ print(predictions)  # [250000, 180000, 320000, ...]</pre>
   <ul>
     <li><strong>Same algorithm, different aggregation:</strong> Both use k-nearest neighbors, but classification uses voting and regression uses averaging.</li>
     <li><strong>Same hyperparameters:</strong> Both use <code class="inline">n_neighbors</code>, <code class="inline">weights</code>, <code class="inline">metric</code>, etc.</li>
-    <li><strong>Same preprocessing needs:</strong> Both require feature scaling (StandardScaler or RobustScaler).</li>
+    <li><strong>Same preprocessing needs:</strong> Both require feature scaling (eg: StandardScaler).</li>
     <li><strong>Both in sklearn.neighbors:</strong> Part of the same module because they share the same nearest-neighbor search infrastructure.</li>
     <li><strong>Weights matter more in regression:</strong> <code class="inline">weights='distance'</code> often significantly improves regression performance.</li>
     <li><strong>Different evaluation metrics:</strong> Use accuracy/F1 for classification, R²/RMSE for regression.</li>
