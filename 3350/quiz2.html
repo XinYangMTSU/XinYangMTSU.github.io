@@ -1,1 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz 2 - Chapter 3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+    .start-btn {
+      background: rgba(255,255,255,0.95);
+      color: #667eea;
+      border: none;
+      border-radius: 15px;
+      padding: 30px 40px;
+      font-size: 1.3em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      display: block;
+      margin: 0 auto;
+    }
+    .start-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    .quiz-card {
+      background: rgba(255,255,255,0.95);
+      color: #333;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+    }
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #667eea;
+    }
+    .question-number {
+      font-size: 1.1em;
+      color: #f5576c;
+      font-weight: bold;
+    }
+    .score {
+      font-size: 1.1em;
+      color: #764ba2;
+      font-weight: bold;
+    }
+    .question-text {
+      font-size: 1.4em;
+      margin-bottom: 25px;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .option {
+      background: #f8f9fa;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1.05em;
+    }
+    .option:hover {
+      background: #e8eaf6;
+      border-color: #667eea;
+      transform: translateX(5px);
+    }
+    .option.correct {
+      background: #4caf50;
+      color: white;
+      border-color: #4caf50;
+    }
+    .option.incorrect {
+      background: #f44336;
+      color: white;
+      border-color: #f44336;
+    }
+    .option.disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    .text-input {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1.05em;
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 10px 0;
+      box-sizing: border-box;
+    }
+    .text-input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    textarea.text-input {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .submit-btn {
+      background: #667eea;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      margin-top: 10px;
+    }
+    .submit-btn:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+    }
+    .sample-answer {
+      background: #e3f2fd;
+      border-left: 4px solid #2196f3;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 8px;
+    }
+    .key-points ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+    .key-points li {
+      color: #333;
+      margin: 5px 0;
+    }
+    .feedback {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 1.05em;
+      line-height: 1.6;
+    }
+    .feedback.correct {
+      background: #e8f5e9;
+      color: #2e7d32;
+      border-left: 4px solid #4caf50;
+    }
+    .feedback.incorrect {
+      background: #ffebee;
+      color: #c62828;
+      border-left: 4px solid #f44336;
+    }
+    .btn-container {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+      justify-content: center;
+    }
+    .btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+    .btn-primary {
+      background: #667eea;
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+    }
+    .results {
+      text-align: center;
+      padding: 30px;
+    }
+    .results h2 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    .results-stats {
+      font-size: 1.5em;
+      margin: 20px 0;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 10px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #4caf50, #8bc34a);
+      transition: width 0.3s;
+      border-radius: 10px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
 
+  <div class="container">
+    <h1><i class="fas fa-chart-line"></i> Quiz 2</h1>
+    <p class="subtitle">Chapter 3: Supervised Learning - Regression</p>
+
+    <div id="startScreen">
+      <button class="start-btn" onclick="startQuiz()">
+        <i class="fas fa-play-circle"></i> Start Quiz
+      </button>
+    </div>
+
+    <div id="progressContainer" class="hidden">
+      <div class="progress-bar">
+        <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <div id="quizCard" class="quiz-card hidden">
+      <div class="question-header">
+        <span class="question-number" id="questionNumber"></span>
+        <span class="score" id="score"></span>
+      </div>
+      
+      <div class="question-text" id="questionText"></div>
+      <div class="options" id="options"></div>
+      <div id="feedback" class="feedback hidden"></div>
+      
+      <div class="btn-container">
+        <button id="nextBtn" class="btn btn-primary hidden" onclick="nextQuestion()">
+          Next Question <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="results" class="quiz-card hidden">
+      <div class="results">
+        <h2><i class="fas fa-trophy"></i> Quiz Complete!</h2>
+        <div class="results-stats">
+          <div id="finalScore"></div>
+          <div id="percentage"></div>
+        </div>
+        <div class="btn-container">
+          <button class="btn btn-primary" onclick="location.reload()">
+            <i class="fas fa-redo"></i> Try Again
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+const questions = [
+  {
+    type: "fill-blank",
+    question: "Linear Regression minimizes the __________ (SSE), which is the sum of squared differences between actual and predicted values.",
+    answer: "sum of squared errors",
+    acceptableAnswers: ["sum of squared errors", "sse", "sumofsquarederrors"],
+    explanation: "Linear Regression's objective is to minimize SSE = sum of (y - y_predicted) squared."
+  },
+  {
+    type: "short-answer",
+    question: "What is overfitting? Describe its symptoms and provide two methods to fix it.",
+    sampleAnswer: "Overfitting occurs when a model is too complex and memorizes training data including noise. Symptoms: low training error but high test error. Fixes: (1) Use regularization like Ridge/Lasso/Elastic Net, (2) Get more training data or use cross-validation.",
+    keyPoints: ["memorizes", "complex", "training error", "test error", "regularization"],
+    explanation: "Overfitting: model learns noise in training data. Fix with regularization, more data, simpler model, or cross-validation."
+  },
+  {
+    type: "fill-blank",
+    question: "Ridge Regression adds an __________ penalty (L2) to the objective function.",
+    answer: "l2",
+    acceptableAnswers: ["l2", "l2 penalty", "l-2"],
+    explanation: "Ridge uses L2 regularization: adds lambda times sum of coefficient squared to penalize large weights."
+  },
+  {
+    type: "multiple-choice",
+    question: "What is the objective function that Linear Regression minimizes?",
+    options: ["Sum of Squared Errors (SSE)", "Accuracy", "F1 Score", "Confusion Matrix"],
+    correct: 0,
+    explanation: "Linear Regression minimizes SSE (Sum of Squared Errors), also called the residual sum of squares."
+  },
+  {
+    type: "multiple-choice",
+    question: "What does Ridge Regression add to the Linear Regression objective function?",
+    options: ["L1 penalty (sum of absolute values)", "L2 penalty (sum of squared coefficients)", "No penalty", "Both L1 and L2"],
+    correct: 1,
+    explanation: "Ridge adds L2 penalty: lambda times sum of coefficient squared."
+  },
+  {
+    type: "multiple-choice",
+    question: "Which regression model uses both L1 and L2 penalties?",
+    options: ["Linear Regression", "Ridge Regression", "Lasso Regression", "Elastic Net Regression"],
+    correct: 3,
+    explanation: "Elastic Net combines both L1 (Lasso) and L2 (Ridge) penalties for regularization."
+  },
+  {
+    type: "multiple-choice",
+    question: "What does polynomial regression do?",
+    options: ["Removes features", "Expands features with polynomial terms", "Only scales features", "Removes outliers"],
+    correct: 1,
+    explanation: "Polynomial regression creates polynomial features (x squared, x cubed, etc.) to capture non-linear relationships."
+  },
+  {
+    type: "multiple-choice",
+    question: "What does R-squared measure?",
+    options: ["Sum of errors", "Proportion of variance explained by the model", "Number of features", "Training time"],
+    correct: 1,
+    explanation: "R-squared indicates the proportion of variance in the dependent variable explained by the model (0 to 1)."
+  },
+  {
+    type: "multiple-choice",
+    question: "Which metric is the square root of MSE?",
+    options: ["SSE", "R-squared", "RMSE", "MAE"],
+    correct: 2,
+    explanation: "RMSE (Root Mean Squared Error) equals square root of MSE."
+  },
+  {
+    type: "multiple-choice",
+    question: "What indicates overfitting?",
+    options: ["High training error, high test error", "Low training error, high test error", "High training error, low test error", "Low training error, low test error"],
+    correct: 1,
+    explanation: "Overfitting: model memorizes training data (low train error) but fails to generalize (high test error)."
+  },
+  {
+    type: "multiple-choice",
+    question: "Which sklearn module contains regression models?",
+    options: ["sklearn.preprocessing", "sklearn.linear_model", "sklearn.datasets", "sklearn.metrics"],
+    correct: 1,
+    explanation: "sklearn.linear_model contains LinearRegression, Ridge, Lasso, ElasticNet, etc."
+  },
+  {
+    type: "multiple-choice",
+    question: "What characterizes underfitting?",
+    options: ["Model is too complex", "Model is too simple (high bias)", "Model memorizes data", "Model has perfect accuracy"],
+    correct: 1,
+    explanation: "Underfitting occurs when the model is too simple to capture underlying patterns (high bias)."
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+function startQuiz() {
+  document.getElementById('startScreen').classList.add('hidden');
+  document.getElementById('progressContainer').classList.remove('hidden');
+  document.getElementById('quizCard').classList.remove('hidden');
+  
+  questions.sort(() => Math.random() - 0.5);
+  currentQuestion = 0;
+  score = 0;
+  displayQuestion();
+}
+
+function displayQuestion() {
+  const q = questions[currentQuestion];
+  
+  document.getElementById('questionNumber').textContent = 
+    'Question ' + (currentQuestion + 1) + '/' + questions.length;
+  document.getElementById('score').textContent = 
+    'Score: ' + score + '/' + currentQuestion;
+  document.getElementById('questionText').textContent = q.question;
+  document.getElementById('feedback').classList.add('hidden');
+  document.getElementById('nextBtn').classList.add('hidden');
+  
+  const progress = (currentQuestion / questions.length) * 100;
+  document.getElementById('progressFill').style.width = progress + '%';
+  
+  const optionsDiv = document.getElementById('options');
+  optionsDiv.innerHTML = '';
+  
+  if (q.type === 'fill-blank') {
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'text-input';
+    input.id = 'fillBlankInput';
+    input.placeholder = 'Type your answer here...';
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') checkFillBlank();
+    });
+    optionsDiv.appendChild(input);
+    
+    const submitBtn = document.createElement('button');
+    submitBtn.className = 'submit-btn';
+    submitBtn.textContent = 'Submit Answer';
+    submitBtn.onclick = checkFillBlank;
+    optionsDiv.appendChild(submitBtn);
+    
+    setTimeout(function() { input.focus(); }, 100);
+  } else if (q.type === 'short-answer') {
+    const textarea = document.createElement('textarea');
+    textarea.className = 'text-input';
+    textarea.id = 'shortAnswerInput';
+    textarea.placeholder = 'Type your answer here... (Be specific and include examples)';
+    optionsDiv.appendChild(textarea);
+    
+    const submitBtn = document.createElement('button');
+    submitBtn.className = 'submit-btn';
+    submitBtn.textContent = 'Submit Answer';
+    submitBtn.onclick = checkShortAnswer;
+    optionsDiv.appendChild(submitBtn);
+    
+    setTimeout(function() { textarea.focus(); }, 100);
+  } else {
+    for (let i = 0; i < q.options.length; i++) {
+      const optionDiv = document.createElement('div');
+      optionDiv.className = 'option';
+      optionDiv.textContent = q.options[i];
+      optionDiv.onclick = function() { selectOption(i); };
+      optionsDiv.appendChild(optionDiv);
+    }
+  }
+  
+  answered = false;
+}
+
+function checkFillBlank() {
+  if (answered) return;
+  
+  const input = document.getElementById('fillBlankInput');
+  const userAnswer = input.value.trim().toLowerCase();
+  const q = questions[currentQuestion];
+  
+  if (!userAnswer) {
+    alert('Please enter an answer!');
+    return;
+  }
+  
+  answered = true;
+  input.disabled = true;
+  
+  let isCorrect = false;
+  for (let i = 0; i < q.acceptableAnswers.length; i++) {
+    if (userAnswer === q.acceptableAnswers[i].toLowerCase() || 
+        userAnswer.includes(q.acceptableAnswers[i].toLowerCase())) {
+      isCorrect = true;
+      break;
+    }
+  }
+  
+  if (isCorrect) {
+    score++;
+    document.getElementById('feedback').className = 'feedback correct';
+    document.getElementById('feedback').innerHTML = 
+      '<i class="fas fa-check-circle"></i> <strong>Correct!</strong><br>Your answer: "' + input.value + '"<br>' + q.explanation;
+  } else {
+    document.getElementById('feedback').className = 'feedback incorrect';
+    document.getElementById('feedback').innerHTML = 
+      '<i class="fas fa-times-circle"></i> <strong>Incorrect.</strong><br>Your answer: "' + input.value + '"<br>Correct answer: <strong>' + q.answer + '</strong><br>' + q.explanation;
+  }
+  
+  document.getElementById('feedback').classList.remove('hidden');
+  document.getElementById('nextBtn').classList.remove('hidden');
+  document.getElementById('score').textContent = 'Score: ' + score + '/' + (currentQuestion + 1);
+}
+
+function checkShortAnswer() {
+  if (answered) return;
+  
+  const textarea = document.getElementById('shortAnswerInput');
+  const userAnswer = textarea.value.trim();
+  const q = questions[currentQuestion];
+  
+  if (!userAnswer) {
+    alert('Please enter an answer!');
+    return;
+  }
+  
+  answered = true;
+  textarea.disabled = true;
+  
+  const lowerAnswer = userAnswer.toLowerCase();
+  let pointsMatched = 0;
+  
+  for (let i = 0; i < q.keyPoints.length; i++) {
+    if (lowerAnswer.includes(q.keyPoints[i].toLowerCase())) {
+      pointsMatched++;
+    }
+  }
+  
+  const threshold = Math.ceil(q.keyPoints.length * 0.6);
+  const isCorrect = pointsMatched >= threshold;
+  
+  if (isCorrect) {
+    score++;
+    document.getElementById('feedback').className = 'feedback correct';
+    document.getElementById('feedback').innerHTML = 
+      '<i class="fas fa-check-circle"></i> <strong>Good answer!</strong><br>You covered ' + pointsMatched + '/' + q.keyPoints.length + ' key points.<br><div class="sample-answer"><strong>Sample Answer:</strong><br>' + q.sampleAnswer + '</div>';
+  } else {
+    let keyPointsList = '';
+    for (let i = 0; i < q.keyPoints.length; i++) {
+      keyPointsList += '<li>' + q.keyPoints[i] + '</li>';
+    }
+    document.getElementById('feedback').className = 'feedback incorrect';
+    document.getElementById('feedback').innerHTML = 
+      '<i class="fas fa-info-circle"></i> <strong>Needs more detail.</strong><br>You covered ' + pointsMatched + '/' + q.keyPoints.length + ' key points.<br><div class="sample-answer"><strong>Sample Answer:</strong><br>' + q.sampleAnswer + '<div class="key-points"><strong>Key points:</strong><ul>' + keyPointsList + '</ul></div></div>';
+  }
+  
+  document.getElementById('feedback').classList.remove('hidden');
+  document.getElementById('nextBtn').classList.remove('hidden');
+  document.getElementById('score').textContent = 'Score: ' + score + '/' + (currentQuestion + 1);
+}
+
+function selectOption(index) {
+  if (answered) return;
+  
+  answered = true;
+  const q = questions[currentQuestion];
+  const options = document.querySelectorAll('.option');
+  
+  for (let i = 0; i < options.length; i++) {
+    options[i].classList.add('disabled');
+  }
+  
+  options[q.correct].classList.add('correct');
+  
+  if (index === q.correct) {
+    score++;
+    document.getElementById('feedback').className = 'feedback correct';
+    document.getElementById('feedback').innerHTML = 
+      '<i class="fas fa-check-circle"></i> <strong>Correct!</strong><br>' + q.explanation;
+  } else {
+    options[index].classList.add('incorrect');
+    document.getElementById('feedback').className = 'feedback incorrect';
+    document.getElementById('feedback').innerHTML = 
+      '<i class="fas fa-times-circle"></i> <strong>Incorrect.</strong><br>' + q.explanation;
+  }
+  
+  document.getElementById('feedback').classList.remove('hidden');
+  document.getElementById('nextBtn').classList.remove('hidden');
+  document.getElementById('score').textContent = 'Score: ' + score + '/' + (currentQuestion + 1);
+}
+
+function nextQuestion() {
+  currentQuestion++;
+  
+  if (currentQuestion < questions.length) {
+    displayQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function showResults() {
+  document.getElementById('quizCard').classList.add('hidden');
+  document.getElementById('progressContainer').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  
+  const percentage = Math.round((score / questions.length) * 100);
+  
+  document.getElementById('finalScore').innerHTML = 
+    'You scored <strong>' + score + '</strong> out of <strong>' + questions.length + '</strong>';
+  
+  let message = '';
+  if (percentage >= 90) message = 'Outstanding!';
+  else if (percentage >= 80) message = 'Great job!';
+  else if (percentage >= 70) message = 'Good work!';
+  else if (percentage >= 60) message = 'Keep practicing!';
+  else message = 'Review the material and try again!';
+  
+  document.getElementById('percentage').innerHTML = 
+    '<strong>' + percentage + '%</strong><br>' + message;
+  
+  document.getElementById('progressFill').style.width = '100%';
+}
+</script>
+
+</body>
+</html>
