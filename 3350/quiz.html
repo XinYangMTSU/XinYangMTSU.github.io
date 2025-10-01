@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ML Quiz Game - Test 1 Prep</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+    .chapter-select {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .chapter-btn {
+      background: rgba(255,255,255,0.95);
+      color: #667eea;
+      border: none;
+      border-radius: 15px;
+      padding: 30px 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .chapter-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    .quiz-card {
+      background: rgba(255,255,255,0.95);
+      color: #333;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+    }
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #667eea;
+    }
+    .question-number {
+      font-size: 1.1em;
+      color: #667eea;
+      font-weight: bold;
+    }
+    .score {
+      font-size: 1.1em;
+      color: #764ba2;
+      font-weight: bold;
+    }
+    .question-text {
+      font-size: 1.4em;
+      margin-bottom: 25px;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .option {
+      background: #f8f9fa;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1.05em;
+    }
+    .option:hover {
+      background: #e8eaf6;
+      border-color: #667eea;
+      transform: translateX(5px);
+    }
+    .option.selected {
+      background: #667eea;
+      color: white;
+      border-color: #667eea;
+    }
+    .option.correct {
+      background: #4caf50;
+      color: white;
+      border-color: #4caf50;
+    }
+    .option.incorrect {
+      background: #f44336;
+      color: white;
+      border-color: #f44336;
+    }
+    .option.disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    .feedback {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 1.05em;
+      line-height: 1.6;
+    }
+    .feedback.correct {
+      background: #e8f5e9;
+      color: #2e7d32;
+      border-left: 4px solid #4caf50;
+    }
+    .feedback.incorrect {
+      background: #ffebee;
+      color: #c62828;
+      border-left: 4px solid #f44336;
+    }
+    .btn-container {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+      justify-content: center;
+    }
+    .btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+    .btn-primary {
+      background: #667eea;
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: #764ba2;
+      color: white;
+    }
+    .btn-secondary:hover {
+      background: #653a8a;
+      transform: translateY(-2px);
+    }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .results {
+      text-align: center;
+      padding: 30px;
+    }
+    .results h2 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    .results-stats {
+      font-size: 1.5em;
+      margin: 20px 0;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 10px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #4caf50, #8bc34a);
+      transition: width 0.3s;
+      border-radius: 10px;
+    }
+    .hidden {
+      display: none;
+    }
+    code {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1><i class="fas fa-brain"></i> ML Test 1 Quiz</h1>
+    <p class="subtitle">Practice questions for Chapters 1-3</p>
+
+    <!-- Chapter Selection -->
+    <div id="chapterSelect" class="chapter-select">
+      <button class="chapter-btn" onclick="startQuiz('ch1-2')">
+        <i class="fas fa-book"></i><br>
+        Chapters 1 & 2<br>
+        <small>Intro & Preprocessing</small>
+      </button>
+      <button class="chapter-btn" onclick="startQuiz('ch3')">
+        <i class="fas fa-chart-line"></i><br>
+        Chapter 3<br>
+        <small>Regression Models</small>
+      </button>
+      <button class="chapter-btn" onclick="startQuiz('all')">
+        <i class="fas fa-star"></i><br>
+        All Chapters<br>
+        <small>Complete Practice</small>
+      </button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div id="progressContainer" class="hidden">
+      <div class="progress-bar">
+        <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- Quiz Card -->
+    <div id="quizCard" class="quiz-card hidden">
+      <div class="question-header">
+        <span class="question-number" id="questionNumber">Question 1/10</span>
+        <span class="score" id="score">Score: 0/0</span>
+      </div>
+      
+      <div class="question-text" id="questionText"></div>
+      
+      <div class="options" id="options"></div>
+      
+      <div id="feedback" class="feedback hidden"></div>
+      
+      <div class="btn-container">
+        <button id="nextBtn" class="btn btn-primary hidden" onclick="nextQuestion()">
+          Next Question <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="results" class="quiz-card hidden">
+      <div class="results">
+        <h2><i class="fas fa-trophy"></i> Quiz Complete!</h2>
+        <div class="results-stats">
+          <div id="finalScore"></div>
+          <div id="percentage"></div>
+        </div>
+        <div class="btn-container">
+          <button class="btn btn-primary" onclick="location.reload()">
+            <i class="fas fa-redo"></i> Try Again
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+const questions = {
+  'ch1-2': [
+    {
+      question: "What type of machine learning uses labeled data to train models?",
+      options: ["Supervised Learning", "Unsupervised Learning", "Reinforcement Learning", "Adversarial Learning"],
+      correct: 0,
+      explanation: "Supervised learning uses labeled training data where both input features and output labels are provided."
+    },
+    {
+      question: "Which of the following is a classification task?",
+      options: ["Predicting house prices", "Spam email detection", "Stock price forecasting", "Temperature prediction"],
+      correct: 1,
+      explanation: "Spam email detection is a classification task (spam vs. not spam). The others are regression tasks predicting continuous values."
+    },
+    {
+      question: "What is the primary purpose of standardization in data preprocessing?",
+      options: ["Remove missing values", "Scale features to similar ranges", "Remove duplicates", "Create new features"],
+      correct: 1,
+      explanation: "Standardization (using StandardScaler) transforms features to have mean=0 and std=1, putting them on similar scales."
+    },
+    {
+      question: "Which regularization technique can perform automatic feature selection by shrinking coefficients to exactly zero?",
+      options: ["Ridge (L2)", "Lasso (L1)", "StandardScaler", "Polynomial Features"],
+      correct: 1,
+      explanation: "Lasso (L1 regularization) can shrink coefficients to exactly zero, effectively performing feature selection."
+    },
+    {
+      question: "What is the correct way to handle missing values before model training?",
+      options: ["Ignore them", "Replace with mean/median or use imputation", "Delete the entire dataset", "Convert them to strings"],
+      correct: 1,
+      explanation: "Missing values should be handled through imputation (mean, median, KNN) or other appropriate methods before training."
+    },
+    {
+      question: "In unsupervised learning, what is the main characteristic of the data?",
+      options: ["Data has labels", "Data has no labels", "Data must be images", "Data must be text"],
+      correct: 1,
+      explanation: "Unsupervised learning works with unlabeled data, finding patterns without predefined output labels."
+    },
+    {
+      question: "Which sklearn module is used for splitting data into train and test sets?",
+      options: ["sklearn.preprocessing", "sklearn.model_selection", "sklearn.metrics", "sklearn.datasets"],
+      correct: 1,
+      explanation: "sklearn.model_selection contains train_test_split and cross-validation functions."
+    },
+    {
+      question: "What is feature engineering?",
+      options: ["Removing features", "Creating new features from existing ones", "Only scaling features", "Deleting missing values"],
+      correct: 1,
+      explanation: "Feature engineering creates new meaningful features from existing data (e.g., interaction terms, polynomial features)."
+    },
+    {
+      question: "Which Python library is primarily used for machine learning?",
+      options: ["matplotlib", "numpy", "sklearn (scikit-learn)", "pandas"],
+      correct: 2,
+      explanation: "sklearn (scikit-learn) is the primary machine learning library in Python."
+    },
+    {
+      question: "What does data cleaning involve?",
+      options: ["Only removing duplicates", "Handling missing values and duplicates", "Only scaling features", "Only creating new features"],
+      correct: 1,
+      explanation: "Data cleaning includes handling missing values, removing duplicates, and dealing with outliers."
+    }
+  ],
+  
+  'ch3': [
+    {
+      question: "What is the objective function that Linear Regression minimizes?",
+      options: ["Sum of Squared Errors (SSE)", "Accuracy", "F1 Score", "Confusion Matrix"],
+      correct: 0,
+      explanation: "Linear Regression minimizes SSE (Sum of Squared Errors), also called the residual sum of squares."
+    },
+    {
+      question: "What does Ridge Regression add to the Linear Regression objective function?",
+      options: ["L1 penalty (sum of absolute values)", "L2 penalty (sum of squared coefficients)", "No penalty", "Both L1 and L2"],
+      correct: 1,
+      explanation: "Ridge adds L2 penalty: λ × Σ(coefficient²), which penalizes large coefficient values."
+    },
+    {
+      question: "Which regression model uses both L1 and L2 penalties?",
+      options: ["Linear Regression", "Ridge Regression", "Lasso Regression", "Elastic Net Regression"],
+      correct: 3,
+      explanation: "Elastic Net combines both L1 (Lasso) and L2 (Ridge) penalties for regularization."
+    },
+    {
+      question: "What does polynomial regression do?",
+      options: ["Removes features", "Expands features with polynomial terms", "Only scales features", "Removes outliers"],
+      correct: 1,
+      explanation: "Polynomial regression creates polynomial features (x², x³, etc.) to capture non-linear relationships."
+    },
+    {
+      question: "What does R² (R-squared) measure?",
+      options: ["Sum of errors", "Proportion of variance explained by the model", "Number of features", "Training time"],
+      correct: 1,
+      explanation: "R² indicates the proportion of variance in the dependent variable explained by the model (0 to 1)."
+    },
+    {
+      question: "Which metric is the square root of MSE?",
+      options: ["SSE", "R²", "RMSE", "MAE"],
+      correct: 2,
+      explanation: "RMSE (Root Mean Squared Error) = √MSE, giving error in original units."
+    },
+    {
+      question: "What indicates overfitting?",
+      options: ["High training error, high test error", "Low training error, high test error", "High training error, low test error", "Low training error, low test error"],
+      correct: 1,
+      explanation: "Overfitting: model memorizes training data (low train error) but fails to generalize (high test error)."
+    },
+    {
+      question: "What is the best way to fix overfitting?",
+      options: ["Add more features", "Use regularization (Ridge/Lasso)", "Use a more complex model", "Reduce training data"],
+      correct: 1,
+      explanation: "Regularization (Ridge, Lasso, Elastic Net) penalizes model complexity and reduces overfitting."
+    },
+    {
+      question: "What does MSE stand for?",
+      options: ["Maximum Squared Error", "Mean Squared Error", "Minimum Standard Error", "Model Selection Error"],
+      correct: 1,
+      explanation: "MSE = Mean Squared Error = average of squared prediction errors."
+    },
+    {
+      question: "Which sklearn module contains regression models?",
+      options: ["sklearn.preprocessing", "sklearn.linear_model", "sklearn.datasets", "sklearn.metrics"],
+      correct: 1,
+      explanation: "sklearn.linear_model contains LinearRegression, Ridge, Lasso, ElasticNet, etc."
+    },
+    {
+      question: "What characterizes underfitting?",
+      options: ["Model is too complex", "Model is too simple (high bias)", "Model memorizes data", "Model has perfect accuracy"],
+      correct: 1,
+      explanation: "Underfitting occurs when the model is too simple to capture underlying patterns (high bias)."
+    },
+    {
+      question: "What is the formula for MSE?",
+      options: ["Σ(y - ŷ)", "Σ(y - ŷ)² / n", "√(Σ(y - ŷ)² / n)", "Σ|y - ŷ|"],
+      correct: 1,
+      explanation: "MSE = (1/n) × Σ(actual - predicted)² = average of squared errors."
+    }
+  ]
+};
+
+let currentQuiz = [];
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+function startQuiz(type) {
+  document.getElementById('chapterSelect').classList.add('hidden');
+  document.getElementById('progressContainer').classList.remove('hidden');
+  document.getElementById('quizCard').classList.remove('hidden');
+  
+  if (type === 'all') {
+    currentQuiz = [...questions['ch1-2'], ...questions['ch3']];
+  } else {
+    currentQuiz = [...questions[type]];
+  }
+  
+  // Shuffle questions
+  currentQuiz.sort(() => Math.random() - 0.5);
+  
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+  
+  displayQuestion();
+}
+
+function displayQuestion() {
+  const q = currentQuiz[currentQuestion];
+  
+  document.getElementById('questionNumber').textContent = 
+    `Question ${currentQuestion + 1}/${currentQuiz.length}`;
+  document.getElementById('score').textContent = 
+    `Score: ${score}/${currentQuestion}`;
+  document.getElementById('questionText').textContent = q.question;
+  document.getElementById('feedback').classList.add('hidden');
+  document.getElementById('nextBtn').classList.add('hidden');
+  
+  // Update progress
+  const progress = ((currentQuestion) / currentQuiz.length) * 100;
+  document.getElementById('progressFill').style.width = progress + '%';
+  
+  // Display options
+  const optionsDiv = document.getElementById('options');
+  optionsDiv.innerHTML = '';
+  
+  q.options.forEach((option, index) => {
+    const optionDiv = document.createElement('div');
+    optionDiv.className = 'option';
+    optionDiv.textContent = option;
+    optionDiv.onclick = () => selectOption(index);
+    optionDiv.dataset.index = index;
+    optionsDiv.appendChild(optionDiv);
+  });
+  
+  answered = false;
+}
+
+function selectOption(index) {
+  if (answered) return;
+  
+  answered = true;
+  const q = currentQuiz[currentQuestion];
+  const options = document.querySelectorAll('.option');
+  
+  // Disable all options
+  options.forEach(opt => opt.classList.add('disabled'));
+  
+  // Mark correct answer
+  options[q.correct].classList.add('correct');
+  
+  // Check if selected answer is correct
+  if (index === q.correct) {
+    score++;
+    document.getElementById('feedback').className = 'feedback correct';
+    document.getElementById('feedback').innerHTML = 
+      `<i class="fas fa-check-circle"></i> <strong>Correct!</strong><br>${q.explanation}`;
+  } else {
+    options[index].classList.add('incorrect');
+    document.getElementById('feedback').className = 'feedback incorrect';
+    document.getElementById('feedback').innerHTML = 
+      `<i class="fas fa-times-circle"></i> <strong>Incorrect.</strong><br>${q.explanation}`;
+  }
+  
+  document.getElementById('feedback').classList.remove('hidden');
+  document.getElementById('nextBtn').classList.remove('hidden');
+  
+  // Update score display
+  document.getElementById('score').textContent = 
+    `Score: ${score}/${currentQuestion + 1}`;
+}
+
+function nextQuestion() {
+  currentQuestion++;
+  
+  if (currentQuestion < currentQuiz.length) {
+    displayQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function showResults() {
+  document.getElementById('quizCard').classList.add('hidden');
+  document.getElementById('progressContainer').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  
+  const percentage = Math.round((score / currentQuiz.length) * 100);
+  
+  document.getElementById('finalScore').innerHTML = 
+    `You scored <strong>${score}</strong> out of <strong>${currentQuiz.length}</strong>`;
+  
+  let message = '';
+  if (percentage >= 90) message = 'Outstanding! 🌟';
+  else if (percentage >= 80) message = 'Great job! 🎉';
+  else if (percentage >= 70) message = 'Good work! 👍';
+  else if (percentage >= 60) message = 'Keep practicing! 📚';
+  else message = 'Review the material and try again! 💪';
+  
+  document.getElementById('percentage').innerHTML = 
+    `<strong>${percentage}%</strong><br>${message}`;
+  
+  // Update progress to 100%
+  document.getElementById('progressFill').style.width = '100%';
+}
+</script>
+
+</body>
+</html>
