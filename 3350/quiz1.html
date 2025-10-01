@@ -262,11 +262,11 @@
         <span class="question-number" id="questionNumber"></span>
         <span class="score" id="score"></span>
       </div>
-      
+
       <div class="question-text" id="questionText"></div>
       <div class="options" id="options"></div>
       <div id="feedback" class="feedback hidden"></div>
-      
+
       <div class="btn-container">
         <button id="nextBtn" class="btn btn-primary hidden" onclick="nextQuestion()">
           Next Question <i class="fas fa-arrow-right"></i>
@@ -361,6 +361,20 @@ const questions = [
     options: ["matplotlib", "numpy", "sklearn (scikit-learn)", "pandas"],
     correct: 2,
     explanation: "sklearn (scikit-learn) is the primary machine learning library in Python."
+  },
+  {
+    type: "multiple-choice",
+    question: "What is the primary purpose of One-Hot Encoding?",
+    options: ["To normalize numerical features", "To convert categorical variables into binary vectors", "To remove outliers from data", "To reduce dimensionality"],
+    correct: 1,
+    explanation: "One-Hot Encoding converts categorical variables into binary (0/1) vectors, creating a separate column for each category. This allows machine learning algorithms to work with categorical data."
+  },
+  {
+    type: "short-answer",
+    question: "Explain what Recursive Feature Elimination (RFE) does and why it is useful in machine learning.",
+    sampleAnswer: "RFE is a feature selection method that recursively removes the least important features based on model coefficients/importance scores. It trains a model, ranks features by importance, removes the weakest ones, and repeats until the desired number of features remains. This helps reduce overfitting and improve model performance.",
+    keyPoints: ["feature selection", "recursive", "removes", "importance", "performance"],
+    explanation: "RFE iteratively builds models and eliminates the least important features, helping to identify the most relevant predictors and reduce model complexity."
   }
 ];
 
@@ -372,7 +386,7 @@ function startQuiz() {
   document.getElementById('startScreen').classList.add('hidden');
   document.getElementById('progressContainer').classList.remove('hidden');
   document.getElementById('quizCard').classList.remove('hidden');
-  
+
   questions.sort(() => Math.random() - 0.5);
   currentQuestion = 0;
   score = 0;
@@ -381,21 +395,21 @@ function startQuiz() {
 
 function displayQuestion() {
   const q = questions[currentQuestion];
-  
-  document.getElementById('questionNumber').textContent = 
+
+  document.getElementById('questionNumber').textContent =
     'Question ' + (currentQuestion + 1) + '/' + questions.length;
-  document.getElementById('score').textContent = 
+  document.getElementById('score').textContent =
     'Score: ' + score + '/' + currentQuestion;
   document.getElementById('questionText').textContent = q.question;
   document.getElementById('feedback').classList.add('hidden');
   document.getElementById('nextBtn').classList.add('hidden');
-  
+
   const progress = (currentQuestion / questions.length) * 100;
   document.getElementById('progressFill').style.width = progress + '%';
-  
+
   const optionsDiv = document.getElementById('options');
   optionsDiv.innerHTML = '';
-  
+
   if (q.type === 'fill-blank') {
     const input = document.createElement('input');
     input.type = 'text';
@@ -406,13 +420,13 @@ function displayQuestion() {
       if (e.key === 'Enter') checkFillBlank();
     });
     optionsDiv.appendChild(input);
-    
+
     const submitBtn = document.createElement('button');
     submitBtn.className = 'submit-btn';
     submitBtn.textContent = 'Submit Answer';
     submitBtn.onclick = checkFillBlank;
     optionsDiv.appendChild(submitBtn);
-    
+
     setTimeout(function() { input.focus(); }, 100);
   } else if (q.type === 'short-answer') {
     const textarea = document.createElement('textarea');
@@ -420,13 +434,13 @@ function displayQuestion() {
     textarea.id = 'shortAnswerInput';
     textarea.placeholder = 'Type your answer here... (Be specific and include examples)';
     optionsDiv.appendChild(textarea);
-    
+
     const submitBtn = document.createElement('button');
     submitBtn.className = 'submit-btn';
     submitBtn.textContent = 'Submit Answer';
     submitBtn.onclick = checkShortAnswer;
     optionsDiv.appendChild(submitBtn);
-    
+
     setTimeout(function() { textarea.focus(); }, 100);
   } else {
     for (let i = 0; i < q.options.length; i++) {
@@ -437,45 +451,45 @@ function displayQuestion() {
       optionsDiv.appendChild(optionDiv);
     }
   }
-  
+
   answered = false;
 }
 
 function checkFillBlank() {
   if (answered) return;
-  
+
   const input = document.getElementById('fillBlankInput');
   const userAnswer = input.value.trim().toLowerCase();
   const q = questions[currentQuestion];
-  
+
   if (!userAnswer) {
     alert('Please enter an answer!');
     return;
   }
-  
+
   answered = true;
   input.disabled = true;
-  
+
   let isCorrect = false;
   for (let i = 0; i < q.acceptableAnswers.length; i++) {
-    if (userAnswer === q.acceptableAnswers[i].toLowerCase() || 
+    if (userAnswer === q.acceptableAnswers[i].toLowerCase() ||
         userAnswer.includes(q.acceptableAnswers[i].toLowerCase())) {
       isCorrect = true;
       break;
     }
   }
-  
+
   if (isCorrect) {
     score++;
     document.getElementById('feedback').className = 'feedback correct';
-    document.getElementById('feedback').innerHTML = 
+    document.getElementById('feedback').innerHTML =
       '<i class="fas fa-check-circle"></i> <strong>Correct!</strong><br>Your answer: "' + input.value + '"<br>' + q.explanation;
   } else {
     document.getElementById('feedback').className = 'feedback incorrect';
-    document.getElementById('feedback').innerHTML = 
+    document.getElementById('feedback').innerHTML =
       '<i class="fas fa-times-circle"></i> <strong>Incorrect.</strong><br>Your answer: "' + input.value + '"<br>Correct answer: <strong>' + q.answer + '</strong><br>' + q.explanation;
   }
-  
+
   document.getElementById('feedback').classList.remove('hidden');
   document.getElementById('nextBtn').classList.remove('hidden');
   document.getElementById('score').textContent = 'Score: ' + score + '/' + (currentQuestion + 1);
@@ -483,35 +497,35 @@ function checkFillBlank() {
 
 function checkShortAnswer() {
   if (answered) return;
-  
+
   const textarea = document.getElementById('shortAnswerInput');
   const userAnswer = textarea.value.trim();
   const q = questions[currentQuestion];
-  
+
   if (!userAnswer) {
     alert('Please enter an answer!');
     return;
   }
-  
+
   answered = true;
   textarea.disabled = true;
-  
+
   const lowerAnswer = userAnswer.toLowerCase();
   let pointsMatched = 0;
-  
+
   for (let i = 0; i < q.keyPoints.length; i++) {
     if (lowerAnswer.includes(q.keyPoints[i].toLowerCase())) {
       pointsMatched++;
     }
   }
-  
+
   const threshold = Math.ceil(q.keyPoints.length * 0.6);
   const isCorrect = pointsMatched >= threshold;
-  
+
   if (isCorrect) {
     score++;
     document.getElementById('feedback').className = 'feedback correct';
-    document.getElementById('feedback').innerHTML = 
+    document.getElementById('feedback').innerHTML =
       '<i class="fas fa-check-circle"></i> <strong>Good answer!</strong><br>You covered ' + pointsMatched + '/' + q.keyPoints.length + ' key points.<br><div class="sample-answer"><strong>Sample Answer:</strong><br>' + q.sampleAnswer + '</div>';
   } else {
     let keyPointsList = '';
@@ -519,10 +533,10 @@ function checkShortAnswer() {
       keyPointsList += '<li>' + q.keyPoints[i] + '</li>';
     }
     document.getElementById('feedback').className = 'feedback incorrect';
-    document.getElementById('feedback').innerHTML = 
+    document.getElementById('feedback').innerHTML =
       '<i class="fas fa-info-circle"></i> <strong>Needs more detail.</strong><br>You covered ' + pointsMatched + '/' + q.keyPoints.length + ' key points.<br><div class="sample-answer"><strong>Sample Answer:</strong><br>' + q.sampleAnswer + '<div class="key-points"><strong>Key points:</strong><ul>' + keyPointsList + '</ul></div></div>';
   }
-  
+
   document.getElementById('feedback').classList.remove('hidden');
   document.getElementById('nextBtn').classList.remove('hidden');
   document.getElementById('score').textContent = 'Score: ' + score + '/' + (currentQuestion + 1);
@@ -530,29 +544,29 @@ function checkShortAnswer() {
 
 function selectOption(index) {
   if (answered) return;
-  
+
   answered = true;
   const q = questions[currentQuestion];
   const options = document.querySelectorAll('.option');
-  
+
   for (let i = 0; i < options.length; i++) {
     options[i].classList.add('disabled');
   }
-  
+
   options[q.correct].classList.add('correct');
-  
+
   if (index === q.correct) {
     score++;
     document.getElementById('feedback').className = 'feedback correct';
-    document.getElementById('feedback').innerHTML = 
+    document.getElementById('feedback').innerHTML =
       '<i class="fas fa-check-circle"></i> <strong>Correct!</strong><br>' + q.explanation;
   } else {
     options[index].classList.add('incorrect');
     document.getElementById('feedback').className = 'feedback incorrect';
-    document.getElementById('feedback').innerHTML = 
+    document.getElementById('feedback').innerHTML =
       '<i class="fas fa-times-circle"></i> <strong>Incorrect.</strong><br>' + q.explanation;
   }
-  
+
   document.getElementById('feedback').classList.remove('hidden');
   document.getElementById('nextBtn').classList.remove('hidden');
   document.getElementById('score').textContent = 'Score: ' + score + '/' + (currentQuestion + 1);
@@ -560,7 +574,7 @@ function selectOption(index) {
 
 function nextQuestion() {
   currentQuestion++;
-  
+
   if (currentQuestion < questions.length) {
     displayQuestion();
   } else {
@@ -572,22 +586,22 @@ function showResults() {
   document.getElementById('quizCard').classList.add('hidden');
   document.getElementById('progressContainer').classList.add('hidden');
   document.getElementById('results').classList.remove('hidden');
-  
+
   const percentage = Math.round((score / questions.length) * 100);
-  
-  document.getElementById('finalScore').innerHTML = 
+
+  document.getElementById('finalScore').innerHTML =
     'You scored <strong>' + score + '</strong> out of <strong>' + questions.length + '</strong>';
-  
+
   let message = '';
   if (percentage >= 90) message = 'Outstanding!';
   else if (percentage >= 80) message = 'Great job!';
   else if (percentage >= 70) message = 'Good work!';
   else if (percentage >= 60) message = 'Keep practicing!';
   else message = 'Review the material and try again!';
-  
-  document.getElementById('percentage').innerHTML = 
+
+  document.getElementById('percentage').innerHTML =
     '<strong>' + percentage + '%</strong><br>' + message;
-  
+
   document.getElementById('progressFill').style.width = '100%';
 }
 </script>
