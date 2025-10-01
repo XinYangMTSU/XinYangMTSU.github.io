@@ -159,38 +159,7 @@ predictions = knn_reg.predict(X_test)
   </div>
 </section>
 
-<section id="visual">
-  <h2>Visual Comparison</h2>
   
-  <h3>Classification: Majority Vote</h3>
-  <div class="legend">
-    <span class="swatch blue"></span> <span>Class A</span>
-    <span class="swatch red"></span> <span>Class B</span>
-    <span style="font-size: 1.2em; margin-left: 10px;">⭐</span> <span>New Point (to classify)</span>
-  </div>
-  <div class="svgwrap">
-    <canvas id="classCanvas" width="900" height="400" aria-label="KNN Classification"></canvas>
-  </div>
-  <p class="note">
-    With k=5, the algorithm finds the 5 nearest neighbors. In this case: 3 blue (Class A) and 2 red (Class B).
-    <strong>Prediction: Class A</strong> (majority vote wins!)
-  </p>
-
-  <h3 style="margin-top: 40px;">Regression: Average Value</h3>
-  <div class="legend">
-    <span class="swatch green"></span> <span>Training Points</span>
-    <span class="swatch line"></span> <span>KNN Prediction</span>
-    <span style="font-size: 1.2em; margin-left: 10px;">⭐</span> <span>New Point (to predict)</span>
-  </div>
-  <div class="svgwrap">
-    <canvas id="regCanvas" width="900" height="400" aria-label="KNN Regression"></canvas>
-  </div>
-  <p class="note">
-    With k=5, the algorithm finds the 5 nearest neighbors and averages their y-values.
-    <strong>Prediction: Average of neighbors</strong> (e.g., (3+4+3.5+4.2+3.8)/5 = 3.7)
-  </p>
-</section>
-
 <section id="comparison-table">
   <h2>Side-by-Side Comparison</h2>
   
