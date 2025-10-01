@@ -1080,7 +1080,15 @@ until convergence</pre>
 
   <b>Idea:</b>
   <p>
-    k-Nearest Neighbors is a <b>non-parametric, instance-based</b> method. To make a prediction for a new point,
+    k-Nearest Neighbors is a <b>non-parametric, instance-based</b> method. 
+
+    <b>Non-parametric</b> means it doesn't assume any fixed form for the decision boundary and doesn't learn a fixed set of parameters during training.
+    <br>
+    <b>Instance-based</b> means it stores all the training data and makes predictions by directly comparing new points to those stored examples.
+
+    <br>
+    <br>
+    To make a prediction for a new point,
     it looks at the <b>k closest training examples</b> and combines their labels/values:
     <font color="red">majority vote</font> for classification, <font color="red">average</font> for regression.
     The goal is to <b><font color="red">use local neighborhoods to predict</font></b> rather than fitting a global line or plane.
