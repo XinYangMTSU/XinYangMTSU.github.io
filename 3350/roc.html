@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ROC Curve Visualizer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+  <script>
+    // MathJax v3 config
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$', '$']],
+        processEscapes: true
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Roboto',Arial,sans-serif;background:#17191a;min-height:100vh;color:#ff79c6;padding:20px}
+    section{margin:0 auto 55px auto;background:#222025;border-radius:18px;box-shadow:0 4px 30px rgba(255,121,198,.09);padding:36px 32px 22px 32px;border-left:7px solid #ff79c6;position:relative;max-width:1400px}
+    h1{color:#ffb3de;margin:0 0 8px 0;text-align:center;font-size:2.5em}
+    h2{margin:0 0 20px 0;color:#ffb3de;font-weight:700;font-size:1.8em}
+    h3{font-size:1.18em;color:#ffb3de;margin-bottom:15px;font-weight:600}
+    p{color:#ffd7f0;line-height:1.8}
+    .subtitle{text-align:center;color:#ffd7f0;opacity:.9;font-size:1.1em;margin-bottom:20px}
+    .pill{display:inline-block;background:#19121a;border:1px solid #ff79c6;border-radius:999px;padding:4px 10px;margin:2px 8px 2px 0;font-size:.9em}
+    .viz-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;margin-bottom:40px}
+    .viz-panel{background:#19121a;border-radius:12px;padding:25px;box-shadow:0 2px 10px rgba(255,121,198,0.11);border:1px solid rgba(255,121,198,0.2)}
+    canvas{width:100%;border-radius:8px;background:#0d0a0e;box-shadow:0 2px 8px rgba(0,0,0,0.3);display:block}
+    .controls{margin-top:25px}
+    .controls .row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px}
+    label{font-weight:600;color:#ffb3de}
+    input[type="range"]{width:100%}
+    input, select{padding:8px 12px;border:2px solid rgba(255,121,198,0.3);border-radius:6px;font-size:1em;background:#19121a;color:#ffd7f0;transition:border-color .3s}
+    input:focus, select:focus{outline:none;border-color:#ff79c6}
+    button{background:#ff79c6;color:#fff;border:none;padding:12px 25px;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;transition:all .3s;box-shadow:0 4px 6px rgba(255,121,198,0.3);margin-right:10px;margin-top:10px}
+    button:hover{background:#ffb3de;transform:translateY(-2px);box-shadow:0 6px 12px rgba(255,121,198,0.4)}
+    button:active{transform:translateY(0)}
+    .info-section{background:#2a252b;border-radius:12px;padding:25px;margin-top:30px;border:1px solid rgba(255,121,198,0.2)}
+    .info-section h3{color:#ffb3de;margin-bottom:15px;font-size:1.3em;border-bottom:1px solid #ff79c6;padding-bottom:8px}
+    .card{background:#2a252b;border:1px solid rgba(255,121,198,0.25);border-radius:10px;padding:16px}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .kpi{display:flex;align-items:baseline;gap:8px;margin:6px 0}
+    .kpi .v{font-weight:700;color:#fff}
+    table{width:100%;border-collapse:collapse;color:#ffd7f0;margin-top:8px}
+    th,td{border:1px solid rgba(255,121,198,0.2);padding:8px;text-align:center}
+    th{color:#ffb3de;background:#1e1a20}
+    @media (max-width:1200px){.viz-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<section>
+  <center><h1><span class="pill">ROC Curve Visualizer</span></h1></center>
+  <p class="subtitle">Interactive exploration of the Receiver Operating Characteristic (ROC), with AUC, confusion matrix, and a probability threshold.</p>
+</section>
+
+<section>
+  <div class="info-section">
+    <h3>What is ROC (Receiver Operating Characteristic)?</h3>
+
+    ROC (Receiver Operating Characteristic) Curve is a graph that illustrates the performance of a
+    binary classification model at all possible classification thresholds. <br><br>
+
+    <h4>What is a Classification Threshold?</h4>
+
+    A <b>threshold</b> is simply a cut-off point we use to turn a model's probability score into a final,
+    definitive prediction (either 0 or 1).
+
+    <br><br>
+
+    <b>The plot</b>: It plots the <b>True Positive Rate (TPR)</b>, also known as <b>Sensitivity</b> or <b>Recall</b>,
+    on the Y-axis against the <b>False Positive Rate (FPR)</b> on the X-axis.
+    <br><br>
+
+   The diagonal dashed line represents random guessing. The <b>Area Under the Curve</b> (AUC) summarizes overall separability (1.0 = perfect, 0.5 = random).</p>
+    <div class="card" style="margin-top:12px">
+      <div>$\text{TPR} = \frac{TP}{TP+FN}, \quad \text{FPR} = \frac{FP}{FP+TN}$</div>
+    </div>
+  </div>
+
+
+  <div class="info-section">
+    <h3>What is AUC (Area Under the Curve)?</h3>
+      AUC (Area Under the Curve) is a single scalar value that quantifies the overall ability of the
+      classifier to distinguish between the positive and negative classes across all possible thresholds.
+      It's the area beneath the entire ROC curve.
+
+      <br><br>
+
+    <h4>AUC values range from 0 to 1:</h4>
+
+        <ul>
+          <li><b>AUC = 1.0</b>: Perfect model (distinguishes all classes correctly)</li>
+          <li><b>AUC = 0.5</b>: The model performs no better than random guessing (represented by the diagonal line on the ROC plot)</li>
+          <li><b>AUC > 0.5</b>: The model is better than random.</li>
+        </ul>
+  </div>
+</section>
+
+<section>
+  <div class="viz-grid">
+    <!-- Left: ROC Canvas -->
+    <div class="viz-panel">
+      <h2>ROC Curve</h2>
+      <canvas id="rocCanvas" width="700" height="520"></canvas>
+      <div class="controls">
+        <div class="row">
+          <div>
+            <label>Probability Threshold: <span id="thVal">0.50</span></label>
+            <input id="thSlider" type="range" min="0" max="1" step="0.01" value="0.50" />
+          </div>
+          <div>
+            <label>Dataset size:</label>
+            <select id="nSelect">
+              <option value="100">100</option>
+              <option value="300" selected>300</option>
+              <option value="1000">1000</option>
+            </select>
+          </div>
+        </div>
+        <button id="regen">Regenerate Data</button>
+      </div>
+    </div>
+
+    <!-- Right: KPIs + Confusion Matrix -->
+    <div class="viz-panel">
+      <h2>Metrics at Threshold</h2>
+      <div class="grid-2">
+        <div class="card">
+          <div class="kpi">AUC: <span class="v" id="aucVal">—</span></div>
+          <div class="kpi">TPR (Sensitivity): <span class="v" id="tprVal">—</span></div>
+          <div class="kpi">FPR: <span class="v" id="fprVal">—</span></div>
+          <div class="kpi">Specificity: <span class="v" id="specVal">—</span></div>
+          <div class="kpi">Precision: <span class="v" id="precVal">—</span></div>
+          <div class="kpi">Recall: <span class="v" id="recVal">—</span></div>
+          <div class="kpi">F1: <span class="v" id="f1Val">—</span></div>
+        </div>
+        <div class="card">
+          <table>
+            <thead>
+              <tr><th></th><th>Pred +</th><th>Pred −</th></tr>
+            </thead>
+            <tbody>
+              <tr><th>Actual +</th><td id="tp">—</td><td id="fn">—</td></tr>
+              <tr><th>Actual −</th><td id="fp">—</td><td id="tn">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  // ===== Canvas HiDPI helper =====
+  function setupHiDPI(canvas) {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width  = Math.round(rect.width  * dpr);
+    canvas.height = Math.round(rect.height * dpr);
+    const ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return ctx;
+  }
+
+  const rocCanvas = document.getElementById('rocCanvas');
+  let rocCtx = setupHiDPI(rocCanvas);
+  window.addEventListener('resize', () => { rocCtx = setupHiDPI(rocCanvas); drawROC(); });
+
+  // ===== Data simulation =====
+  // Each sample has: y (0/1), s (score), p (probability via sigmoid)
+  let scores = [];
+
+  function regenerate() {
+    const n = parseInt(document.getElementById('nSelect').value, 10);
+    const posPct = 0.5; // fixed 50% positives
+    const sep = 1.5;    // fixed separation (difficulty)
+
+    scores = [];
+    const nPos = Math.max(1, Math.round(n * posPct));
+    const nNeg = Math.max(1, n - nPos);
+
+    // Positives ~ N(mu_p, 1), Negatives ~ N(mu_n, 1)
+    const mu_p =  sep/2; // +0.75 when sep=1.5
+    const mu_n = -sep/2; // -0.75
+
+    function randn() {
+      // Box–Muller
+      let u = 0, v = 0; while(u===0) u=Math.random(); while(v===0) v=Math.random();
+      return Math.sqrt(-2*Math.log(u)) * Math.cos(2*Math.PI*v);
+    }
+
+    // Generate scores, then convert to probabilities p = sigmoid(s)
+    for (let i=0; i<nPos; i++) {
+      const s = randn() + mu_p;
+      const p = 1/(1 + Math.exp(-s));
+      scores.push({ y:1, s, p });
+    }
+    for (let i=0; i<nNeg; i++) {
+      const s = randn() + mu_n;
+      const p = 1/(1 + Math.exp(-s));
+      scores.push({ y:0, s, p });
+    }
+
+    computeCurve();
+    updateAtThreshold();
+  }
+
+  // ===== ROC computation =====
+  let roc = [];     // [{fpr,tpr,thr}] where thr is a probability threshold
+  let auc = 0;
+  let thrList = []; // probability thresholds used to generate ROC (descending)
+  let best = { fpr:0, tpr:0, thr:0, J:-Infinity }; // <<< added
+
+  function computeCurve() {
+    // Build probability thresholds from data (descending), with guards to cover endpoints
+    const uniqP = Array.from(new Set(scores.map(o => o.p))).sort((a,b) => b - a);
+    thrList = [1.000001, ...uniqP, -0.000001]; // ensures ROC includes (0,0) and (1,1)
+
+    const pts = [];
+    for (const thr of thrList) {
+      let tp=0, fp=0, tn=0, fn=0;
+      for (const {y,p} of scores) {
+        const pred = (p >= thr) ? 1 : 0;
+        if (y===1 && pred===1) tp++;
+        else if (y===1 && pred===0) fn++;
+        else if (y===0 && pred===1) fp++;
+        else tn++;
+      }
+      const tpr = tp + fn ? tp/(tp+fn) : 0;
+      const fpr = fp + tn ? fp/(fp+tn) : 0;
+      pts.push({ fpr, tpr, thr });
+    }
+
+    // Sort by FPR asc, then TPR asc
+    pts.sort((a,b) => a.fpr === b.fpr ? a.tpr - b.tpr : a.fpr - b.fpr);
+    roc = pts;
+
+    // Trapezoidal AUC
+    let area = 0;
+    for (let i=1; i<roc.length; i++) {
+      const x1 = roc[i-1].fpr, y1 = roc[i-1].tpr;
+      const x2 = roc[i].fpr,   y2 = roc[i].tpr;
+      area += (x2 - x1) * (y1 + y2) / 2;
+    }
+    auc = Math.max(0, Math.min(1, area));
+
+    // <<< added: Find best Youden index J = TPR - FPR
+    best = { fpr:0, tpr:0, thr:0, J:-Infinity };
+    for (const pt of roc) {
+      const J = pt.tpr - pt.fpr;
+      if (J > best.J) best = { ...pt, J };
+    }
+  }
+
+  // ===== Drawing =====
+  function drawAxes(ctx, W, H, pad){
+    ctx.clearRect(0,0,W,H);
+    // Grid
+    ctx.strokeStyle = '#2a252b'; ctx.lineWidth = 1;
+    for (let i=0;i<=10;i++){
+      const x = pad + i*(W-2*pad)/10;
+      const y = pad + i*(H-2*pad)/10;
+      ctx.beginPath(); ctx.moveTo(Math.floor(x)+0.5, pad); ctx.lineTo(Math.floor(x)+0.5, H-pad); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(pad, Math.floor(y)+0.5); ctx.lineTo(W-pad, Math.floor(y)+0.5); ctx.stroke();
+    }
+    // Axes box
+    ctx.strokeStyle = '#ff79c6'; ctx.lineWidth = 2;
+    ctx.strokeRect(pad, pad, W-2*pad, H-2*pad);
+    // Labels
+    ctx.fillStyle = '#ffd7f0'; ctx.font = '600 14px Roboto, Arial';
+    ctx.fillText('FPR (False Positive Rate)', pad, H - pad + 20);
+    ctx.save(); ctx.translate(10, pad+ (H-2*pad)/2); ctx.rotate(-Math.PI/2);
+    ctx.fillText('TPR (True Positive Rate)', 0, 0); ctx.restore();
+  }
+
+  function drawROC() {
+    const ctx = rocCtx;
+    const W = rocCanvas.width  / (window.devicePixelRatio || 1);
+    const H = rocCanvas.height / (window.devicePixelRatio || 1);
+    const pad = 50;
+
+    drawAxes(ctx, W, H, pad);
+
+    // Diagonal (random)
+    ctx.strokeStyle = '#8a7d88'; ctx.setLineDash([6,6]); ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(pad, H-pad);
+    ctx.lineTo(W-pad, pad);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // ROC polyline
+    if (!roc.length) return;
+    ctx.strokeStyle = '#ff79c6'; ctx.lineWidth = 3;
+    ctx.beginPath();
+    for (let i=0;i<roc.length;i++){
+      const x = pad + roc[i].fpr * (W-2*pad);
+      const y = H - pad - roc[i].tpr * (H-2*pad);
+      if (i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+
+    // <<< added: mark best Youden point (green square)
+    if (Number.isFinite(best.fpr) && Number.isFinite(best.tpr)) {
+      const bx = pad + best.fpr * (W-2*pad);
+      const by = H - pad - best.tpr * (H-2*pad);
+      ctx.fillStyle = '#10b981';
+      ctx.fillRect(bx - 6, by - 6, 12, 12);
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(bx - 6, by - 6, 12, 12);
+    }
+
+    // AUC label
+    document.getElementById('aucVal').textContent = auc.toFixed(3);
+
+    // Highlight current threshold point: pick ROC point nearest to slider threshold
+    const thr = parseFloat(document.getElementById('thSlider').value);
+    const nearest = roc.reduce((bestPt,pt) =>
+      Math.abs(pt.thr - thr) < Math.abs(bestPt.thr - thr) ? pt : bestPt, roc[0]);
+
+    const cx = pad + nearest.fpr * (W-2*pad);
+    const cy = H - pad - nearest.tpr * (H-2*pad);
+
+    ctx.fillStyle = '#fff';
+    ctx.beginPath(); ctx.arc(cx, cy, 6, 0, Math.PI*2); ctx.fill();
+    ctx.strokeStyle = '#ffb3de'; ctx.lineWidth = 2; ctx.stroke();
+  }
+
+  // ===== Metrics at threshold =====
+  function updateAtThreshold(){
+    const thr = parseFloat(document.getElementById('thSlider').value);
+    document.getElementById('thVal').textContent = thr.toFixed(2);
+
+    let tp=0, fp=0, tn=0, fn=0;
+    for (const {y,p} of scores){
+      const pred = (p >= thr) ? 1 : 0;
+      if (y===1 && pred===1) tp++; else if (y===1 && pred===0) fn++;
+      else if (y===0 && pred===1) fp++; else tn++;
+    }
+
+    const tpr = (tp+fn) ? tp/(tp+fn) : 0;
+    const fpr = (fp+tn) ? fp/(fp+tn) : 0;
+    const prec = (tp+fp) ? tp/(tp+fp) : 0;
+    const rec = tpr;
+    const spec = (tn+fp) ? tn/(tn+fp) : 0;
+    const f1 = (prec+rec) ? (2*prec*rec)/(prec+rec) : 0;
+
+    // KPIs
+    document.getElementById('tprVal').textContent  = tpr.toFixed(3);
+    document.getElementById('fprVal').textContent  = fpr.toFixed(3);
+    document.getElementById('specVal').textContent = spec.toFixed(3);
+    document.getElementById('precVal').textContent = prec.toFixed(3);
+    document.getElementById('recVal').textContent  = rec.toFixed(3);
+    document.getElementById('f1Val').textContent   = f1.toFixed(3);
+
+    // Confusion matrix
+    document.getElementById('tp').textContent = tp;
+    document.getElementById('fn').textContent = fn;
+    document.getElementById('fp').textContent = fp;
+    document.getElementById('tn').textContent = tn;
+
+    drawROC();
+  }
+
+  // ===== Wire up =====
+  document.getElementById('regen').addEventListener('click', regenerate);
+  document.getElementById('thSlider').addEventListener('input', updateAtThreshold);
+  document.getElementById('nSelect').addEventListener('change', regenerate);
+
+  // Initial render
+  document.addEventListener('DOMContentLoaded', ()=> {
+    regenerate();
+    if (window.MathJax?.typesetPromise) MathJax.typesetPromise();
+  });
+</script>
+
+
+<section>
+  <div class="info-section">
+    <p>
+      The green square marks the ROC point where the <b>Youden Index</b> is maximized:
+      $
+        J =  \text{TPR} - \text{FPR}
+      $
+      This corresponds to the <b>probability threshold</b> that best balances sensitivity (true positive rate)
+      against the false positive rate, under equal weighting of the two error types.
+    </p>
+
+    <p class="card" style="margin-top:12px">
+      <b>Summary:</b> The green square is the threshold where \(J\) is largest (best trade-off). The white circle shows the
+      <i>current</i> threshold you set with the slider. You can compare the two to see how moving the threshold changes TPR/FPR.
+    </p>
+  </div>
+</section>
+
+
+<section>
+  <h3>ROC and AUC Online Tutoring</h3>
+  <a href="https://www.youtube.com/watch?v=4jRBRDbJemM"
+     target="_blank" rel="noopener noreferrer"
+     style="color:#8be9fd; text-decoration:underline; text-underline-offset:3px;">
+    https://www.youtube.com/watch?v=4jRBRDbJemM
+  </a>
+
+</section>
+
+</body>
+</html>
