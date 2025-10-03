@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ROC Curve: Why Probabilities Are Required</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <script>
+    // MathJax v3 config
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']], // Use $$ for block display
+        processEscapes: true
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+
+  <script>
+    // Simple script to copy code blocks (Optional but good UX)
+    function copyCode(button) {
+      const codeBlock = button.previousElementSibling;
+      navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+        button.textContent = 'Copied!';
+        setTimeout(() => button.textContent = 'Copy', 2000);
+      });
+    }
+  </script>
+
+  <style>
+    /* Base Styles (from template) */
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 { color:#ffb3de; margin:0 0 8px 0; }
+    h2 { margin: 0 0 10px 0; color: #ffb3de; font-weight: 700; }
+    section h4 {
+      font-size: 1.18em; color: #ffb3de; margin-bottom: 5px; margin-top: 30px;
+      font-weight: 600; border-bottom: 1px solid #ffb3de; padding-bottom: 2px;
+    }
+    p { color:#ffd7f0; line-height: 1.6; }
+    pre {
+      background: #19121a; color: #ffb3de; padding: 15px 18px; border-radius: 8px;
+      font-size: 1.04em; line-height: 1.7; overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11); position: relative;
+      white-space: pre;
+      margin: 20px 0;
+    }
+    pre .copy {
+      position: absolute; top: 8px; right: 8px; padding: 4px 8px;
+      background: #21111b; border: 1px solid #ff79c6; border-radius: 6px;
+      color: #ffb3de; font-size: 0.8em; cursor: pointer;
+    }
+    pre .copy:hover { background: #ff79c6; color: #fff; }
+    .pill {
+      display:inline-block; background:#19121a; border:1px solid #ff79c6;
+      border-radius:999px; padding:4px 10px; margin:2px 8px 2px 0; font-size:.9em
+    }
+    .note { color:#ffd7f0; opacity:.9; }
+    ul { margin-top: 8px; color:#ffd7f0; padding-left: 20px; }
+    ul li { margin-bottom: 8px; line-height: 1.6; }
+    code.inline { background:#19121a; padding:2px 6px; border-radius:6px; color:#ffb3de; font-weight: 700;}
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #3a2f36;
+        color: #ffd7f0;
+    }
+    th {
+        background-color: #2a252b;
+        color: #ffb3de;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    .code-explanation {
+        background-color: #2a252b;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px dashed #ff79c680;
+    }
+  </style>
+</head>
+<body>
+
+<section id="top">
+  <center>
+    <h1>
+      <span class="pill">ROC Curve Essentials</span>
+    </h1>
+  </center>
+
+  <h2>
+    Why $\mathbf{y\_prob}$ is Required for the ROC Curve
+  </h2>
+
+  <p>
+    The ROC curve is fundamentally based on evaluating a model's performance **at all possible classification thresholds**. This requires the model's raw **probability (or score) output**, not just the final binary prediction (0 or 1).
+  </p>
+
+  <h4 style="margin-top:20px;">The Core Code Snippet</h4>
+
+  <pre style="position:relative;">
+<code class="code-block">y_prob = best_model.predict_proba(X_test)[:, 1]</code><button class="copy" onclick="copyCode(this)">Copy</button>
+  </pre>
+
+  <p>
+    This single line of code is necessary to transform the model's output into the specific format required by the $\text{ROC}$ curve function.
+  </p>
+
+</section>
+
+<section id="roc-requirements">
+  <h2>1. What $\text{roc\_curve}$ Requires</h2>
+
+  <p>
+    The Scikit-learn function $\text{roc\_curve}(\mathbf{y_{true}}, \mathbf{y_{score}})$ needs two arrays to work:
+  </p>
+
+  <ul>
+    <li>
+      <strong><code class="inline">y_true</code> (or $\mathbf{y\_test}$):</strong> The true binary labels (the actual 0s and 1s) from the hold-out testing data.
+    </li>
+    <li>
+      <strong><code class="inline">y_score</code> (or $\mathbf{y\_prob}$):</strong> The **continuous prediction scores or probabilities** assigned by the model for the positive class.
+    </li>
+  </ul>
+
+  <p>
+    The $\text{roc\_curve}$ function systematically tests every unique probability value in $\mathbf{y\_prob}$ as a potential **threshold** and calculates the corresponding True Positive Rate (TPR) and False Positive Rate (FPR) for each point.
+  </p>
+</section>
+
+<section id="code-breakdown">
+  <h2>2. Breakdown of the Code Snippet</h2>
+
+  <div class="code-explanation">
+
+    <h4>A. $\text{best\_model.predict\_proba(X\_test)}$</h4>
+    <p>
+      Most classification models (like Logistic Regression, Random Forest, etc.) don't just output a single 0 or 1. They output the **predicted probability for each class**.
+    </p>
+
+    <p>
+      This function returns a NumPy array with **two columns**:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Column 0</th>
+          <th>Column 1</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Probability of the **Negative** class (\(P(y=0)\))</td>
+          <td>Probability of the **Positive** class (\(P(y=1)\))</td>
+        </tr>
+        <tr>
+          <td>0.95</td>
+          <td>0.05</td>
+        </tr>
+        <tr>
+          <td>0.12</td>
+          <td>0.88</td>
+        </tr>
+        <tr>
+          <td>0.51</td>
+          <td>0.49</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4 style="margin-top:20px;">B. $\mathbf{[:, 1]}$ (NumPy Slicing)</h4>
+    <p>
+      This is NumPy's slicing syntax. It selects:
+    </p>
+    <ul>
+      <li>The colon ($\mathbf{:}$): Selects **all rows**.</li>
+      <li>The one ($\mathbf{1}$): Selects only the **second column** (index 1).</li>
+    </ul>
+    <p>
+      By selecting only the second column, you isolate the 1D array of continuous probabilities specifically for the **positive class** (\(P(y=1)\)). This is the crucial **score array** needed to generate the ROC curve.
+    </p>
+
+  </div>
+</section>
+
+<section id="why-not-predict">
+  <h2>3. Why $\text{predict()}$ Isn't Used</h2>
+
+  <p>
+    Using $\text{best\_model.predict(X\_test)}$ would only give you the **final binary decisions** (e.g., $[0, 1, 0, ...]$).
+  </p>
+
+  <ul>
+    <li>
+      The $\text{predict()}$ function is based on a single, fixed threshold (usually $0.5$).
+    </li>
+    <li>
+      The ROC curve needs to plot the model's performance at **all thresholds** (e.g., $0.1, 0.2, 0.6, 0.9$, etc.).
+    </li>
+  </ul>
+
+  <p>
+    The binary decisions from $\text{predict()}$ contain only one point of information (the 0.5 threshold point). The raw probability score from $\text{predict\_proba()}$ is what allows for this comprehensive, **threshold-independent analysis** across the entire range from 0 to 1.
+  </p>
+</section>
+
+</body>
+</html>
