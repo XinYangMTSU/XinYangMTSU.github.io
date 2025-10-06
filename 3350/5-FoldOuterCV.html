@@ -181,8 +181,6 @@ def cv5_report(name, model, X, y, outer_splits=5):
     skf = StratifiedKFold(n_splits=outer_splits, shuffle=True, random_state=SEED)
 
     rows = []
-    mean_fpr = np.linspace(0, 1, 101)  # prepared if you later want mean ROC
-    tprs = []
     aucs = []
 
     plt.figure(figsize=(6,5))
@@ -248,7 +246,7 @@ def cv5_report(name, model, X, y, outer_splits=5):
     # Add identifying info for the mean row
     mean_row.update({"Model": name, "Fold": "MEAN", "n_test": df["n_test"].sum()})
     # Append the mean row to the DataFrame
-    df = pd.concat([df, pd.DataFrame([mean_row])], ignore_index=True)
+    df = pd.concat([df, pd.DataFrame([mean_row])])
     return df
 
 # -------------------------------
