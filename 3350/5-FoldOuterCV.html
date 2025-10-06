@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>5-Fold Outer CV · StratifiedKFold + GridSearchCV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 980px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 { color:#ffb3de; margin:0 0 8px 0; }
+    h2 { margin: 0 0 10px 0; color: #ffb3de; font-weight: 700; }
+    section h4 {
+      font-size: 1.18em; color: #ffb3de; margin-bottom: 5px; margin-top: 30px;
+      font-weight: 600; border-bottom: 1px solid #ffb3de; padding-bottom: 2px;
+    }
+    p { color:#ffd7f0; }
+    pre {
+      background: #19121a; color: #ffb3de; padding: 15px 18px; border-radius: 8px;
+      font-size: 1.04em; line-height: 1.7; overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11); position: relative;
+      white-space: pre;
+    }
+    pre .copy {
+      position: absolute; top: 8px; right: 8px; padding: 4px 8px;
+      background: #21111b; border: 1px solid #ff79c6; border-radius: 6px;
+      color: #ffb3de; font-size: 0.8em; cursor: pointer;
+    }
+    pre .copy:hover { background: #ff79c6; color: #fff; }
+    .pill {
+      display:inline-block; background:#19121a; border:1px solid #ff79c6;
+      border-radius:999px; padding:4px 10px; margin:2px 8px 2px 0; font-size:.9em
+    }
+    .note { color:#ffd7f0; opacity:.9; }
+    ul { margin-top: 8px; color:#ffd7f0; }
+    code.inline { background:#19121a; padding:2px 6px; border-radius:6px; }
+    .legend { display:flex; gap:14px; align-items:center; margin:8px 0 18px; }
+    .swatch { width:16px; height:16px; border-radius:4px; display:inline-block; border:1px solid #00000033; }
+    .swatch.train { background:#6fc3df; }   /* teal-blue */
+    .swatch.val   { background:#ff79c6; }   /* pink */
+    .svgwrap{ background:#1a151c; border-radius:12px; padding:10px; box-shadow: inset 0 0 0 1px rgba(255,121,198,0.2);}
+    .lab { fill:#ffb3de; font: 600 14px 'Roboto', Arial, sans-serif; }
+    .axis { stroke:#3a2f36; stroke-width:1; }
+  </style>
+</head>
+<body>
+
+<section id="top">
+  <center>
+    <h1>
+      <span class="pill">5-Fold Outer Cross-Validation</span>
+      <span class="pill">StratifiedKFold + (optional) GridSearchCV</span>
+    </h1>
+  </center>
+  <p class="note">
+    This page demonstrates a <b>5-fold outer CV</b> routine for classification. On each outer fold we fit either a plain estimator
+    or a <code class="inline">GridSearchCV</code> (when passed) and evaluate on the held-out fold. We report Accuracy, Precision, Recall, F1, AUC,
+    and plot ROC curves for each fold. A summary row with the mean metrics is appended at the end.
+  </p>
+</section>
+
+<section id="cv-visual">
+  <h2>1) Visual: 5-Fold Cross-Validation</h2>
+  <div class="legend">
+    <span class="swatch train"></span> <span>Train folds</span>
+    <span class="swatch val"></span> <span>Validation fold</span>
+  </div>
+
+  <div class="svgwrap">
+  <!-- Inline SVG: 5 rows = 5 folds. Each row shows which chunk is validation (pink), others train (blue). -->
+  <svg viewBox="0 0 800 240" width="100%" height="auto" role="img" aria-label="Five-fold cross-validation diagram">
+    <!-- grid guides -->
+    <line x1="90" y1="25" x2="750" y2="25" class="axis"/>
+    <line x1="90" y1="70" x2="750" y2="70" class="axis"/>
+    <line x1="90" y1="115" x2="750" y2="115" class="axis"/>
+    <line x1="90" y1="160" x2="750" y2="160" class="axis"/>
+    <line x1="90" y1="205" x2="750" y2="205" class="axis"/>
+
+    <!-- Row labels -->
+    <text x="20" y="45"  class="lab">Fold 1</text>
+    <text x="20" y="90"  class="lab">Fold 2</text>
+    <text x="20" y="135" class="lab">Fold 3</text>
+    <text x="20" y="180" class="lab">Fold 4</text>
+    <text x="20" y="225" class="lab">Fold 5</text>
+
+    <!-- Layout constants for 5 blocks; the i-th block in row i is the validation block -->
+    <!-- Row 1 -->
+    <rect x="90"  y="30" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#ff79c6"></rect>
+    <rect x="222" y="30" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="354" y="30" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="486" y="30" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="618" y="30" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+
+    <!-- Row 2 -->
+    <rect x="90"  y="75" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="222" y="75" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#ff79c6"></rect>
+    <rect x="354" y="75" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="486" y="75" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="618" y="75" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+
+    <!-- Row 3 -->
+    <rect x="90"  y="120" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="222" y="120" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="354" y="120" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#ff79c6"></rect>
+    <rect x="486" y="120" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="618" y="120" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+
+    <!-- Row 4 -->
+    <rect x="90"  y="165" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="222" y="165" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="354" y="165" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="486" y="165" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#ff79c6"></rect>
+    <rect x="618" y="165" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+
+    <!-- Row 5 -->
+    <rect x="90"  y="210" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="222" y="210" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="354" y="210" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="486" y="210" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#6fc3df"></rect>
+    <rect x="618" y="210" width="126" height="28" style="rx:6; ry:6; stroke:#0e0b10; stroke-width:1; fill:#ff79c6"></rect>
+  </svg>
+  </div>
+
+  <p class="note" style="margin-top:14px;">
+    In each fold, the pink block is held out for validation; the blue blocks are used for training. The estimator is refit 5 times,
+    and validation scores are averaged. If you pass a <code class="inline">GridSearchCV</code> object, each outer fold runs an inner search and then evaluates the best estimator on its held-out split.
+  </p>
+
+  <h3>Nested Cross-Validation</h3>
+
+  <ul>
+      <li>Outer 5 folds → used to test how well the model performs on new data.</li>
+      <li>Inner 5 folds → used to find the best hyperparameters (like C, k, etc.).</li>
+  </ul>
+
+</section>
+
+<section id="cv-code">
+  <h2>2) Code: 5-Fold Outer CV Function</h2>
+  <pre><button class="copy">Copy</button><code># Minimal imports you need
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from sklearn.model_selection import StratifiedKFold
+from sklearn.base import clone
+from sklearn.metrics import (
+    accuracy_score, precision_score, recall_score, f1_score,
+    roc_curve, auc
+)
+
+SEED = 42  # set once for reproducibility
+
+def cv5_report(name, model, X, y, outer_splits=5):
+    """
+    5-fold outer CV that:
+      - Fits the GridSearchCV estimator on each training fold
+      - Uses best_estimator_ if present
+      - Computes per-fold Accuracy, Precision, Recall, F1, AUC
+      - Plots fold-wise ROC curves
+      - Returns a DataFrame with per-fold rows and a final 'MEAN' row
+    """
+    skf = StratifiedKFold(n_splits=outer_splits, shuffle=True, random_state=SEED)
+
+    rows = []
+    mean_fpr = np.linspace(0, 1, 101)  # prepared if you later want mean ROC
+    tprs = []
+    aucs = []
+
+    plt.figure(figsize=(6,5))
+    # It returns an iterator that yields a pair of index arrays (train_idx, test_idx) for each fold.
+    # enumerate(..., 1) means the counter starts from 1 (so you get folds 1–5 instead of 0–4)
+    for fold, (train_idx, test_idx) in enumerate(skf.split(X, y), 1):
+        X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
+        y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
+        # .iloc[...] is used to select rows by those integer positions from X and y.
+
+        # It copies the model type, it does not copy any trained weights or fitted data.
+        # So each fold (and inner grid, if any) starts fresh.
+        est = clone(model)
+        est.fit(X_train, y_train)
+
+        if hasattr(est, "best_estimator_"):
+            best = est.best_estimator_
+        else:
+            best = est
+
+        # Predictions
+        y_pred = best.predict(X_test)
+        y_prob = best.predict_proba(X_test)[:, 1]
+
+        # Metrics
+        acc  = accuracy_score(y_test, y_pred)
+        prec = precision_score(y_test, y_pred)
+        rec  = recall_score(y_test, y_pred)
+        f1   = f1_score(y_test, y_pred)
+
+        fpr, tpr, _ = roc_curve(y_test, y_prob)
+        fold_auc = auc(fpr, tpr)
+        aucs.append(fold_auc)
+
+        # Plot each fold ROC
+        plt.plot(fpr, tpr, alpha=0.7, label=f"Fold {fold} AUC={fold_auc:.3f}")
+
+        rows.append({
+            "Model": name,
+            "Fold": fold,
+            "Accuracy": acc,
+            "Precision": prec,
+            "Recall": rec,
+            "F1": f1,
+            "AUC": fold_auc,
+            "n_test": len(y_test)
+        })
+
+    # Diagonal reference
+    plt.plot([0,1], [0,1], "k--", lw=1)
+    plt.xlabel("False Positive Rate")
+    plt.ylabel("True Positive Rate")
+    plt.title(f"5-Fold ROC — {name}")
+    plt.legend(loc="lower right")
+    plt.grid(True, alpha=0.3)
+    plt.show()
+
+    # Summary row
+    # Convert results list -> DataFrame
+    df = pd.DataFrame(rows)
+    # Compute mean of numeric columns and convert to dict
+    mean_row = df[["Accuracy","Precision","Recall","F1","AUC"]].mean().to_dict()
+    # Add identifying info for the mean row
+    mean_row.update({"Model": name, "Fold": "MEAN", "n_test": df["n_test"].sum()})
+    # Append the mean row to the DataFrame
+    df = pd.concat([df, pd.DataFrame([mean_row])], ignore_index=True)
+    return df
+
+# -------------------------------
+# Tiny usage example (binary data)
+# -------------------------------
+if __name__ == "__main__":
+    from sklearn.datasets import load_breast_cancer
+    from sklearn.pipeline import Pipeline
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.linear_model import LogisticRegression
+
+    data = load_breast_cancer(as_frame=True)
+    X = data.data
+    y = data.target
+
+    lr = Pipeline([
+        ("scaler", StandardScaler()),
+        ("lr", LogisticRegression(max_iter=5000))
+    ])
+
+    results = cv5_report("LR", lr, X, y, outer_splits=5)
+    print(results)</code></pre>
+
+  <p class="note">
+    The function accepts either a plain estimator (e.g., Pipeline(LogisticRegression)) or a <code class="inline">GridSearchCV</code>.
+    When a search object is passed, the outer fold uses its <code class="inline">best_estimator_</code> to evaluate the held-out data.
+  </p>
+</section>
+
+<section id="mean-roc-optional">
+  <h2>3) (Optional) Add Mean ROC Across Folds</h2>
+  <p class="note">
+    If you’d like to draw a <b>mean ROC curve</b>, interpolate each fold’s TPR onto a common FPR grid (e.g., <code class="inline">np.linspace(0,1,101)</code>), then average TPRs. Here’s the minimal addition:
+  </p>
+  <pre><button class="copy">Copy</button><code># Inside the CV loop, right after computing (fpr, tpr, _):
+tpr_i = np.interp(mean_fpr, fpr, tpr)   # align to common FPR grid
+tpr_i[0] = 0.0
+tprs.append(tpr_i)
+
+# After the loop, before plt.show():
+mean_tpr = np.mean(tprs, axis=0)
+mean_tpr[-1] = 1.0
+mean_auc = auc(mean_fpr, mean_tpr)
+std_auc  = np.std(aucs)
+
+plt.plot(mean_fpr, mean_tpr, lw=2, label=f"Mean ROC AUC={mean_auc:.3f} \u00B1 {std_auc:.3f}")</code></pre>
+</section>
+
+<script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
