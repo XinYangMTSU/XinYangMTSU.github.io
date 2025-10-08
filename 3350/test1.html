@@ -9,6 +9,16 @@
 
 <body>
 
+	 <script>
+    // Load MathJax
+    (function () {
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      document.head.appendChild(script);
+    })();
+  </script>
+	
 	<div id="main">
 
 		<h1>Test 1</h1>
@@ -59,6 +69,9 @@
 				<li>* Linear Regression</li>
 				<ul>
 					<li>Objective Function</li>
+					  <div class="eq">\( \displaystyle
+    						\min_{w,b}\; \frac{1}{2n}\sum_{i=1}^{n}\big(y_i - (x_i^\top w + b)\big)^2
+ 					 \)</div>
 				</ul>
 				<li>* Polnomial Regression</li>
 				<ul>
