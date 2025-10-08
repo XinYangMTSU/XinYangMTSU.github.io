@@ -67,10 +67,10 @@
 
   <h3>Requirements</h3>
   <ol>
-    <li><b>Step 1: Load the Wine Quality Dataset</b><br/>
-        Use <code>fetch_openml('wine-quality-white', version=1, as_frame=True, parser='auto')</code> to load the dataset.
+    <li><b>Step 1: Load the Diabetes Dataset</b><br/>
+        Use <code>fetch_openml('diabetes', version=1, as_frame=True)</code> to load the dataset.
         <ul>
-          <li>Create a binary classification target: <span class="highlight">quality >= 6 → 1 (good), quality < 6 → 0 (bad)</span></li>
+          <li>Create a binary classification target: <span class="highlight">'tested_positive' → 1, 'tested_negative' → 0</span></li>
           <li>Print shape, feature names, and target distribution</li>
           <li>Print the first 5 rows</li>
         </ul>
@@ -164,8 +164,19 @@
 SEED = 42
 
 # --- 1) Load Dataset ---
-# Load wine quality dataset
-# Create binary target (quality >= 6 → 1, quality < 6 → 0)
+# Load diabetes dataset (Pima Indians Diabetes Database)
+diabetes_data = fetch_openml('diabetes', version=1, as_frame=True)
+
+# Extract features and target
+X = diabetes_data.data
+y_raw = diabetes_data.target
+
+# Create binary target: 'tested_positive' → 1, 'tested_negative' → 0
+y = (y_raw == 'tested_positive').astype(int)
+
+# Clean column names
+X.columns = X.columns.str.strip().str.replace(' ', '_')
+
 # Print shape, feature names, target distribution, first 5 rows
 
 
