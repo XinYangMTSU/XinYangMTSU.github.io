@@ -183,6 +183,25 @@ X.columns = X.columns.str.strip().str.replace(' ', '_')
 # --- 2) Preprocess Data ---
 # Handle missing values
 # Remove duplicates
+
+# Handle zeros in medical measurements (often represent missing data)
+# Features that shouldn't be zero: plas, pres, skin, insu, mass
+print(f"\nChecking for suspicious zero values in medical measurements...")
+zero_counts = {}
+for col in ['plas', 'pres', 'skin', 'insu', 'mass']:
+    zero_count = (X[col] == 0).sum()
+    if zero_count > 0:
+        zero_counts[col] = zero_count
+        print(f"  {col}: {zero_count} zeros found")
+
+# Replace zeros with NaN for these features, then fill with median
+print(f"\nReplacing suspicious zeros with median values...")
+for col in ['plas', 'pres', 'skin', 'insu', 'mass']:
+    X[col] = X[col].replace(0, np.nan)
+    X[col] = X[col].fillna(X[col].median())
+
+print("Zero values handled successfully.")
+    
 # Print cleaned dataset shape
 
 
