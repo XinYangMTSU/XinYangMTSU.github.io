@@ -174,9 +174,7 @@ y_raw = diabetes_data.target
 # Create binary target: 'tested_positive' → 1, 'tested_negative' → 0
 y = (y_raw == 'tested_positive').astype(int)
 
-# Clean column names
-X.columns = X.columns.str.strip().str.replace(' ', '_')
-
+    
 # Print shape, feature names, target distribution, first 5 rows
 
 
