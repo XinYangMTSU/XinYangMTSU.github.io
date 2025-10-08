@@ -180,7 +180,7 @@ def cv5_report(name, model, X, y, outer_splits=5):
     """
     skf = StratifiedKFold(n_splits=outer_splits, shuffle=True, random_state=SEED)
 
-    rows = []
+    folds = []
     aucs = []
 
     plt.figure(figsize=(6,5))
@@ -218,15 +218,14 @@ def cv5_report(name, model, X, y, outer_splits=5):
         # Plot each fold ROC
         plt.plot(fpr, tpr, alpha=0.7, label=f"Fold {fold} AUC={fold_auc:.3f}")
 
-        rows.append({
+        folds.append({
             "Model": name,
             "Fold": fold,
             "Accuracy": acc,
             "Precision": prec,
             "Recall": rec,
             "F1": f1,
-            "AUC": fold_auc,
-            "n_test": len(y_test)
+            "AUC": fold_auc
         })
 
     # Diagonal reference
