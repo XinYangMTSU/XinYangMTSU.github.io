@@ -240,14 +240,22 @@ def cv5_report(name, model, X, y, outer_splits=5):
 
     # Summary row
     # Convert results list -> DataFrame
-    df = pd.DataFrame(rows)
+    df = pd.DataFrame(folds)
+    
     # Compute mean of numeric columns and convert to dict
-    mean_row = df[["Accuracy","Precision","Recall","F1","AUC"]].mean().to_dict()
-    # Add identifying info for the mean row
-    mean_row.update({"Model": name, "Fold": "MEAN", "n_test": df["n_test"].sum()})
+    mean_row = {
+              "Model":name, "Fold": "Mean", 
+              "Accuracy": df["Accuracy"].mean(), 
+              "Precision":df["Precision"].mean(), 
+              "Recall":df["Recall"].mean(), 
+              "F1":df["F1"].mean(), 
+              "AUC": df["AUC"].mean()
+            }
+
     # Append the mean row to the DataFrame
-    df = pd.concat([df, pd.DataFrame([mean_row])])
-    return df
+    results = pd.concat([df, pd.DataFrame([mean_row])], ignore_index=True)
+
+    return results
 
 # -------------------------------
 # Tiny usage example (binary data)
