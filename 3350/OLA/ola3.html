@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OLA3 – Classification Workflow with Nested Cross-Validation</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 950px; margin: 0 auto; padding: 20px; background-color: #17191a; color: #ff79c6; }
+    .container { background-color: #222025; padding: 30px; border-radius: 8px; box-shadow: 0 2px 12px rgba(255,121,198,0.15); }
+    h1 { text-align: center; font-size: 26px; color: #ff79c6; margin-bottom: 6px; }
+    h2.course-title { text-align: center; font-size: 28px; color: #ffb3de; margin-bottom: 18px; }
+    h3.deadline { text-align: center; font-size: 15px; color: #ffb3de; margin-top: 0; margin-bottom: 20px; }
+    h3 { color: #ff79c6; font-size: 22px; margin-bottom: 12px; border-bottom: 3px solid #ff79c6; padding-bottom: 6px; }
+    h4 { color: #ffb3de; font-size: 18px; margin-top: 20px; margin-bottom: 8px; border-bottom: 1px solid #ffb3de; padding-bottom: 3px; }
+    pre { background: #19121a; color: #ffb3de; padding: 15px; border-radius: 6px; font-size: 0.95em; overflow-x: auto; }
+    code { font-family: Consolas, monospace; }
+    ul { color: #ffb3de; }
+    ol { color: #ffb3de; }
+    p { color: #ffb3de; }
+    li { margin-bottom: 8px; }
+    table { width: 70%; margin: 15px auto; border-collapse: collapse; font-size: 0.9em; color: #ffb3de; }
+    th, td { border: 1px solid #ff79c6; padding: 6px 10px; text-align: left; }
+    th { background: #19121a; color: #ff79c6; }
+    tr:nth-child(even) { background: #2b2b2b; }
+    .highlight { background-color: #3d2940; padding: 2px 6px; border-radius: 3px; color: #ff79c6; }
+    #backToTop { position: fixed; bottom: 24px; right: 24px; background-color: #ff79c6; color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 1.3em; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25); transition: background 0.2s; }
+    #backToTop:hover { background-color: #ffb3de; color: #17191a; }
+    footer { text-align: center; margin-top: 30px; font-size: 0.9em; color: #ffb3de; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="course-title">CSCI 3350 -- Machine Learning</h2>
+  <h1>OLA3 – Classification with Nested Cross-Validation & Hyperparameter Tuning</h1>
+  <h3 class="deadline"><font color="red">Deadline:</font> October 19th, 2025 (Sunday)</h3>
+
+  <h3>Objective</h3>
+  <p>
+    Apply <b>nested cross-validation</b> and <b>hyperparameter tuning</b> techniques to a classification task using the
+    <b>Wine Quality</b> dataset (binary classification). The main purpose is to practice:
+  </p>
+
+  <h4>Key Concepts</h4>
+  <ul>
+    <li><b>Pipeline Construction</b> → Combining preprocessing and models</li>
+    <li><b>Grid Search with Cross-Validation</b> → <code>GridSearchCV</code></li>
+    <li><b>Stratified K-Fold Cross-Validation</b> → <code>StratifiedKFold</code></li>
+    <li><b>Classification Metrics</b> → Accuracy, Precision, Recall, F1-Score, AUC-ROC</li>
+    <li><b>ROC Curve Visualization</b> → Multiple folds on one plot</li>
+    <li><b>Model Comparison</b> → Evaluate multiple models and compare results</li>
+  </ul>
+
+  <h4>Required Libraries & Modules</h4>
+  <ul>
+    <li><b>Machine Learning</b> → <code>sklearn</code></li>
+    <li><b>Data Handling</b> → <code>pandas</code>, <code>numpy</code></li>
+    <li><b>Dataset Loading</b> → <code>sklearn.datasets</code></li>
+    <li><b>Preprocessing</b> → <code>sklearn.preprocessing.StandardScaler</code></li>
+    <li><b>Pipeline</b> → <code>sklearn.pipeline.Pipeline</code></li>
+    <li><b>Classification Models</b> → <code>sklearn.neighbors.KNeighborsClassifier</code>, <code>sklearn.linear_model.LogisticRegression</code></li>
+    <li><b>Hyperparameter Tuning</b> → <code>sklearn.model_selection.GridSearchCV</code></li>
+    <li><b>Cross-Validation</b> → <code>sklearn.model_selection.StratifiedKFold</code></li>
+    <li><b>Metrics</b> → <code>sklearn.metrics</code> (accuracy_score, precision_score, recall_score, f1_score, roc_curve, auc)</li>
+    <li><b>Visualization</b> → <code>matplotlib.pyplot</code></li>
+  </ul>
+
+  <h3>Requirements</h3>
+  <ol>
+    <li><b>Step 1: Load the Wine Quality Dataset</b><br/>
+        Use <code>fetch_openml('wine-quality-white', version=1, as_frame=True, parser='auto')</code> to load the dataset.
+        <ul>
+          <li>Create a binary classification target: <span class="highlight">quality >= 6 → 1 (good), quality < 6 → 0 (bad)</span></li>
+          <li>Print shape, feature names, and target distribution</li>
+          <li>Print the first 5 rows</li>
+        </ul>
+    </li>
+
+    <li><b>Step 2: Preprocess Data</b><br/>
+        <ul>
+          <li>Check for and handle missing values (if any)</li>
+          <li>Check for and remove duplicates (if any)</li>
+          <li>Print the cleaned dataset shape</li>
+        </ul>
+    </li>
+
+    <li><b>Step 3: Exploratory Data Analysis (EDA)</b><br/>
+        Create visualizations using <code>matplotlib.pyplot</code>:
+        <ul>
+          <li>Create at least <b>two scatter plots</b> (e.g., alcohol vs. density, colored by quality)</li>
+          <li>Create at least <b>one histogram</b> (e.g., distribution of alcohol content)</li>
+        </ul>
+    </li>
+
+    <li><b>Step 4: Build Classification Pipelines with GridSearchCV</b><br/>
+        Build <b>two pipelines</b> with hyperparameter tuning:
+        <ul>
+          <li><b>K-Nearest Neighbors (KNN)</b>
+            <ul>
+              <li>Pipeline: StandardScaler → KNeighborsClassifier</li>
+              <li>Grid parameters: <code>n_neighbors</code> = np.arange(1,31,2)</li>
+            </ul>
+          </li>
+          <li><b>Logistic Regression (LR)</b>
+            <ul>
+              <li>Pipeline: StandardScaler → LogisticRegression</li>
+              <li>Grid parameters: <code>C</code> = np.logspace(-3, 3, 50)</li>
+              <li>Set <code>max_iter=200_000</code> to ensure convergence</li>
+            </ul>
+          </li>
+        </ul>
+        All GridSearchCV should use:
+        <ul>
+          <li><code>cv=5</code> (5-fold cross-validation)</li>
+          <li><code>n_jobs=-1</code> (use all CPU cores)</li>
+          <li><code>scoring='accuracy'</code></li>
+        </ul>
+    </li>
+
+    <li><b>Step 5: Create Nested Cross-Validation Evaluation Function</b><br/>
+        Define a function: <code>cv_report(name, model, X, y, outer_splits=5)</code>
+        <ul>
+          <li>Use <code>StratifiedKFold</code> for outer loop (with <code>shuffle=True</code> and <code>random_state=42</code>)</li>
+          <li>For each fold:
+            <ul>
+              <li>Split data into train/test</li>
+              <li>Fit the GridSearchCV model on training data</li>
+              <li>Get best estimator and make predictions on test data</li>
+              <li>Calculate metrics: <b>Accuracy, Precision, Recall, F1-Score, AUC-ROC</b></li>
+              <li>Plot ROC curve for each fold</li>
+            </ul>
+          </li>
+          <li>Create a combined ROC plot showing all 5 folds for the model</li>
+          <li>Return a DataFrame with:
+            <ul>
+              <li>Each fold's performance metrics</li>
+              <li>Mean performance across all folds</li>
+            </ul>
+          </li>
+        </ul>
+    </li>
+
+    <li><b>Step 6: Evaluate and Compare All Models</b><br/>
+        <ul>
+          <li>Run <code>cv_report()</code> for all two models (KNN, Logistic Regression)</li>
+          <li>Concatenate all results into a single DataFrame</li>
+          <li>Display the complete results table showing performance comparison</li>
+          <li>Print the best performing model based on mean AUC</li>
+        </ul>
+    </li>
+
+    <li><b>Step 7: Analysis and Interpretation</b><br/>
+        <ul>
+          <li>Print the best hyperparameters found for each model</li>
+          <li>Write a brief comparison (2-3 sentences) discussing which model performed best and why</li>
+        </ul>
+    </li>
+  </ol>
+
+  <h3>Starter Code</h3>
+  <pre><code># --- Import Libraries/Modules/Functions ----
+
+# Set random seed for reproducibility
+SEED = 42
+
+# --- 1) Load Dataset ---
+# Load wine quality dataset
+# Create binary target (quality >= 6 → 1, quality < 6 → 0)
+# Print shape, feature names, target distribution, first 5 rows
+
+
+# --- 2) Preprocess Data ---
+# Handle missing values
+# Remove duplicates
+# Print cleaned dataset shape
+
+
+# --- 3) Exploratory Data Analysis ---
+# Create 2 scatter plots
+# Create 1 histogram
+
+
+# --- 4) Build Pipelines with GridSearchCV ---
+# KNN Pipeline
+# TODO: Create knn_pipe and knn_grid
+# TODO: Create knn GridSearchCV
+
+# Logistic Regression Pipeline
+# TODO: Create lr_pipe and lr_grid
+# TODO: Create lr GridSearchCV
+
+
+# --- 5) Define cv_report Function ---
+def cv_report(name, model, X, y, outer_splits=5):
+    """
+    Perform nested cross-validation and generate performance report.
+
+    Parameters:
+    -----------
+    name : str
+        Model name for display
+    model : estimator
+        GridSearchCV object or fitted model
+    X : DataFrame
+        Feature matrix
+    y : Series
+        Target vector
+    outer_splits : int
+        Number of folds for outer CV
+
+    Returns:
+    --------
+    DataFrame with fold-wise and mean metrics
+    """
+    # TODO: Implement StratifiedKFold
+    # TODO: Loop through folds
+    # TODO: Train model, make predictions
+    # TODO: Calculate metrics (Accuracy, Precision, Recall, F1, AUC)
+    # TODO: Plot ROC curves
+    # TODO: Return results DataFrame
+    pass
+
+
+# --- 6) Evaluate and Compare Models ---
+# TODO: Run cv_report for all models
+# TODO: Concatenate results
+# TODO: Print comparison table
+
+
+# --- 7) Analysis and Interpretation ---
+# TODO: Print best hyperparameters for each model
+# TODO: Write brief comparison of model performance
+
+  </code></pre>
+
+  <h3>Expected Output</h3>
+  <p>Your notebook should produce:</p>
+  <ul>
+    <li><b>2 ROC curve plots</b> (one for each model, showing 5 folds each)</li>
+    <li><b>EDA visualizations</b> (2 scatter plots, 1 histogram)</li>
+    <li><b>Results DataFrame</b> with all models and their fold-wise + mean performance</li>
+    <li><b>Best hyperparameters</b> for each model</li>
+    <li><b>Written analysis</b> comparing model performance</li>
+  </ul>
+
+  <h3>Grading Distribution (Total: 100 points)</h3>
+  <table>
+    <tr><th>Task</th><th>Points</th></tr>
+    <tr><td>Dataset loading & binary target creation</td><td>10</td></tr>
+    <tr><td>Preprocessing: missing values and duplicates</td><td>10</td></tr>
+    <tr><td>EDA: class distribution, scatter plots, histogram</td><td>15</td></tr>
+    <tr><td>Pipeline construction (KNN, LR, SVM) with GridSearchCV</td><td>15</td></tr>
+    <tr><td>cv_report function implementation</td><td>20</td></tr>
+    <tr><td>ROC curve visualization (3 plots, 5 folds each)</td><td>10</td></tr>
+    <tr><td>Model evaluation and comparison table</td><td>10</td></tr>
+    <tr><td>Hyperparameter analysis and written interpretation</td><td>5</td></tr>
+    <tr><td>Code organization, comments, and clarity</td><td>5</td></tr>
+    <tr><th>Total</th><th>100</th></tr>
+  </table>
+
+  <h3>Notes</h3>
+  <ul>
+    <li><b>Nested Cross-Validation:</b> GridSearchCV handles inner CV for hyperparameter tuning; StratifiedKFold in cv_report handles outer CV for performance estimation.</li>
+    <li><b>Random State:</b> Use <code>random_state=42</code> throughout for reproducibility.</li>
+    <li><b>Interpretation:</b> Pay attention to the trade-off between precision and recall, especially for imbalanced classes.</li>
+    <li><b>ROC Curves:</b> Each model should have ONE combined plot showing all 5 folds with different colors/labels.</li>
+    <li><b>Code Quality:</b> Add comments explaining each major step. Use meaningful variable names.</li>
+  </ul>
+
+  <footer>
+    Copyright @ Dr. Xin Yang <br>
+    Department of Computer Science <br>
+    Middle Tennessee State University
+  </footer>
+</div>
+
+<button id="backToTop" title="Go to top">↑</button>
+<script>
+  document.getElementById("backToTop").addEventListener("click", function() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+</body>
+</html>
