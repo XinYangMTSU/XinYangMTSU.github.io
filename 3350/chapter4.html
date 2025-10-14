@@ -1330,7 +1330,92 @@ update();
   <br>
 
   <center>
-    <img src="images/svm1.png" width="800px" height="300px" alt="SVM maximum-margin separator with support vectors">
+    <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .grid { stroke: #1f2937; stroke-width: 0.5; opacity: 0.3; }
+      .point-a { fill: #22d3ee; stroke: #0891b2; stroke-width: 1.5; }
+      .point-b { fill: #a78bfa; stroke: #7c3aed; stroke-width: 1.5; }
+      .support-ring { stroke: #fbbf24; stroke-width: 3; fill: none; }
+      .margin-line { stroke: #f97316; stroke-width: 2; stroke-dasharray: 8,4; opacity: 0.9; }
+      .decision-boundary { stroke: #10b981; stroke-width: 3; }
+      .margin-region { fill: #10b981; opacity: 0.1; }
+      .label-text { fill: #e5e7eb; font-size: 14px; font-family: 'Roboto', Arial, sans-serif; font-weight: 500; }
+      .title-text { fill: #ff79c6; font-size: 18px; font-family: 'Roboto', Arial, sans-serif; font-weight: 700; }
+      .annotation { fill: #fbbf24; font-size: 13px; font-family: 'Roboto', Arial, sans-serif; font-weight: 600; }
+      .legend-ring { stroke: #fbbf24; stroke-width: 3; fill: none; }
+      .tick { stroke: #fbbf24; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="800" height="400" fill="#1a1d1f"/>
+
+  <!-- Margin region + lines + boundary -->
+  <polygon class="margin-region" points="0,322.5 800,22.5 800,82.5 0,382.5" />
+  <line class="margin-line" x1="0" y1="322.5" x2="800" y2="22.5"/>   <!-- +1 -->
+  <line class="margin-line" x1="0" y1="382.5" x2="800" y2="82.5"/>   <!-- -1 -->
+  <line class="decision-boundary" x1="0" y1="352.5" x2="800" y2="52.5"/> <!-- 0 -->
+
+  <!-- Class points -->
+  <circle class="point-a" cx="120" cy="360" r="7"/>
+  <circle class="point-a" cx="180" cy="350" r="7"/>
+  <circle class="point-a" cx="150" cy="340" r="7"/>
+  <circle class="point-a" cx="220" cy="345" r="7"/>
+  <circle class="point-a" cx="200" cy="330" r="7"/>
+  <circle class="point-a" cx="260" cy="340" r="7"/>
+  <circle class="point-a" cx="240" cy="320" r="7"/>
+
+  <circle class="point-b" cx="520" cy="140" r="7"/>
+  <circle class="point-b" cx="580" cy="120" r="7"/>
+  <circle class="point-b" cx="550" cy="110" r="7"/>
+  <circle class="point-b" cx="620" cy="90"  r="7"/>
+  <circle class="point-b" cx="600" cy="80"  r="7"/>
+  <circle class="point-b" cx="660" cy="70"  r="7"/>
+  <circle class="point-b" cx="640" cy="85"  r="7"/>
+
+  <!-- Support Vectors (+1 side should be Class B / purple) -->
+  <circle class="point-b" cx="280" cy="217.5" r="7"/>
+  <circle class="point-b" cx="320" cy="202.5" r="7"/>
+  <circle class="support-ring" cx="280" cy="217.5" r="11"/>
+  <circle class="support-ring" cx="320" cy="202.5" r="11"/>
+
+  <!-- Support Vectors (−1 side should be Class A / cyan) -->
+  <circle class="point-a" cx="480" cy="202.5" r="7"/>
+  <circle class="point-a" cx="440" cy="217.5" r="7"/>
+  <circle class="support-ring" cx="480" cy="202.5" r="11"/>
+  <circle class="support-ring" cx="440" cy="217.5" r="11"/>
+
+  <!-- Margin = 1/||w|| bar -->
+  <g>
+    <line x1="400" y1="202.5" x2="390.1" y2="176.2" stroke="#fbbf24" stroke-width="2"/>
+    <line class="tick" x1="394" y1="204.8" x2="406" y2="200.2"/>
+    <line class="tick" x1="384" y1="178.4" x2="396" y2="174"/>
+    <text class="annotation" x="370" y="162">margin = 1 / ||w||</text>
+  </g>
+
+  <!-- Total margin bar -->
+  <g>
+    <line x1="140.137" y1="269.949" x2="159.863" y2="322.551" stroke="#fbbf24" stroke-width="2"/>
+    <line class="tick" x1="134.519" y1="272.055" x2="145.755" y2="267.842"/>
+    <line class="tick" x1="154.245" y1="324.658" x2="165.481" y2="320.445"/>
+    <text class="annotation" x="110" y="260">total margin = 2 / ||w||</text>
+  </g>
+
+  <!-- Labels -->
+  <text class="title-text" x="250" y="30">SVM: Maximum-Margin Separator</text>
+  <text class="label-text" x="95"  y="380" fill="#22d3ee">Class A</text>
+  <text class="label-text" x="650" y="60"  fill="#a78bfa">Class B</text>
+  <text class="annotation" x="210" y="290" font-size="12">w·x + b = +1</text>
+  <text class="annotation" x="565" y="70"  font-size="12">w·x + b = -1</text>
+
+  <!-- Decision boundary -->
+  <text class="label-text" x="360" y="214" font-size="12" fill="#10b981">w·x + b = 0</text>
+
+  <!-- Legend -->
+  <circle class="legend-ring" cx="580" cy="365" r="11"/>
+  <text class="label-text" x="595" y="370" font-size="12">Support Vectors (yellow ring)</text>
+</svg>
+
   </center>
 
   <br>
