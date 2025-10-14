@@ -1324,7 +1324,7 @@ update();
     
   <h4>Mathematical Equation (Linear SVM decision function):</h4>
 
-  <h5>Linear SVM (Linearly Separable Case)</h5>
+  <h4>Linear SVM (Linearly Separable Case)</h4>
 
      <p>For a binary classification problem with labels \( y_i \in \{-1, +1\} \) and feature vectors \( \mathbf{x}_i \), the decision boundary is a hyperplane:</p>
   
@@ -1451,26 +1451,30 @@ update();
 
   <br>
 
-  <h4>How SVM Works</h4>
+  <h5>Margin and Support Vectors</h5>
 
-  <!-- Include MathJax once globally on your page if not already included -->
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <p>The <strong>margin</strong> is the distance from the hyperplane to the nearest data points. The margin width is:</p>
+  
+  <p class="eq">
+    $$ \text{Margin} = \frac{2}{\|\mathbf{w}\|} $$
+  </p>
 
-  <ol>
-    <li><strong>Collect Data</strong> – Feature vectors \(\mathbf{x}_i\) with labels \(y_i \in \{-1,+1\}\).</li>
-    <li><strong>Choose linear or kernel SVM</strong> – Linear for high-dimensional but roughly linear data; kernels (RBF/poly) for curved boundaries.</li>
-    <li><strong>Fit the model</strong> – Optimize a margin objective with regularization parameter \(C\) (trade-off: margin size vs. training errors).</li>
-    <li><strong>Predict</strong> – Use the sign of the decision score \(f(\mathbf{x})\). (Scores are margins, not probabilities.)</li>
-    <li><strong>Evaluate</strong> – Accuracy, precision/recall, F1, ROC-AUC; optionally calibrate probabilities (e.g., Platt scaling).</li>
-  </ol>
+  <p>To maximize the margin, we minimize \( \|\mathbf{w}\| \) (or equivalently, minimize \( \frac{1}{2}\|\mathbf{w}\|^2 \)).</p>
 
-  <h4>Interpreting the Model</h4>
-  <ul>
-    <li><strong>Support vectors</strong> – Training points on/inside the margin; they alone determine the boundary.</li>
-    <li><strong>Margin</strong> – Width \(= \dfrac{2}{\|\mathbf{w}\|}\); maximizing margin improves robustness.</li>
-    <li><strong>Parameter \(C\)</strong> – Larger \(C\) penalizes misclassification more (narrower margin, lower bias, higher variance). Smaller \(C\) allows a wider margin (higher bias, lower variance).</li>
-    <li><strong>Kernel</strong> – Implicitly maps features to a higher-dimensional space: \(K(\mathbf{x},\mathbf{z}) = \phi(\mathbf{x})^\top \phi(\mathbf{z})\).</li>
-  </ul>
+  <h5>Optimization Problem (Hard Margin SVM)</h5>
+
+  <p>For linearly separable data, SVM solves:</p>
+
+  <div class="card">
+    <p class="eq">
+      $$ \min_{\mathbf{w}, b} \quad \frac{1}{2}\|\mathbf{w}\|^2 $$
+    </p>
+    <p class="eq">
+      $$ \text{subject to} \quad y_i(\mathbf{w}^T \mathbf{x}_i + b) \geq 1 \quad \text{for all } i $$
+    </p>
+    <p class="small center">The constraint ensures all points are correctly classified with at least margin 1.</p>
+  </div>
+   
 
   <br>
 
