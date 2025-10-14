@@ -1436,8 +1436,8 @@ update();
   <text class="title-text" x="250" y="30">SVM: Maximum-Margin Separator</text>
   <text class="label-text" x="95"  y="380" fill="#22d3ee">Class A</text>
   <text class="label-text" x="650" y="60"  fill="#a78bfa">Class B</text>
-  <text class="annotation" x="210" y="290" font-size="12">w·x + b = +1</text>
-  <text class="annotation" x="565" y="70"  font-size="12">w·x + b = -1</text>
+  <text class="annotation" x="210" y="290" font-size="12">w·x + b >= +1</text>
+  <text class="annotation" x="565" y="70"  font-size="12">w·x + b <= -1</text>
 
   <!-- Decision boundary -->
   <text class="label-text" x="360" y="214" font-size="12" fill="#10b981">w·x + b = 0</text>
@@ -1474,7 +1474,12 @@ update();
     </p>
     <p class="small center">The constraint ensures all points are correctly classified with at least margin 1.</p>
   </div>
-   
+
+    <p>
+  <strong>Translation:</strong> "Find the values of 
+  <strong>w</strong> (weights) and <strong>b</strong> (bias) that 
+  <strong>minimize</strong> \( \frac{1}{2}\|\mathbf{w}\|^2 \)"
+  </p>
 
   <br>
 
