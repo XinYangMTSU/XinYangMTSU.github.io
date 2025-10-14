@@ -1478,24 +1478,7 @@ update();
 
   <br>
 
-  <h4>Model &amp; Notation</h4>
-  <p><b>Primal (soft-margin, linear SVM):</b></p>
-  <p>
-    $$ \min_{\mathbf{w},\,b,\,\boldsymbol{\xi}\ge 0} \;\; \frac{1}{2}\|\mathbf{w}\|_2^2 + C \sum_{i=1}^{m} \xi_i
-       \quad \text{s.t.}\quad y_i \big(\mathbf{w}^\top \mathbf{x}_i + b\big) \ge 1 - \xi_i. $$
-  </p>
-
-  <p><b>Unconstrained hinge-loss form:</b></p>
-  <p>
-    $$ \min_{\mathbf{w},\,b} \;\; \frac{1}{2}\|\mathbf{w}\|_2^2 \;+\; C \sum_{i=1}^{m} \max\!\big(0,\, 1 - y_i(\mathbf{w}^\top \mathbf{x}_i + b)\big). $$
-  </p>
-
-  <p><b>Dual with kernels (decision rule):</b></p>
-  <p>
-    $$ \max_{\boldsymbol{\alpha}} \;\; \sum_{i=1}^{m}\alpha_i - \frac{1}{2}\sum_{i,j}\alpha_i\alpha_j y_i y_j K(\mathbf{x}_i,\mathbf{x}_j),
-       \quad 0 \le \alpha_i \le C,\; \sum_i \alpha_i y_i = 0, $$
-    $$ f(\mathbf{x}) = \sum_{i \in \mathcal{SV}} \alpha_i y_i\, K(\mathbf{x}_i,\mathbf{x}) + b. $$
-  </p>
+    
 
   <br>
 
