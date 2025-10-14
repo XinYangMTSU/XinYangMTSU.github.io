@@ -1322,7 +1322,29 @@ update();
   </ul>
   <br>
     
-  <h4>Equation (Linear SVM decision function):</h4>
+  <h4>Mathematical Equation (Linear SVM decision function):</h4>
+
+  <h5>Linear SVM (Linearly Separable Case)</h5>
+
+     <p>For a binary classification problem with labels \( y_i \in \{-1, +1\} \) and feature vectors \( \mathbf{x}_i \), the decision boundary is a hyperplane:</p>
+  
+  <p class="eq">
+    $$ \mathbf{w}^T \mathbf{x} + b = 0 $$
+  </p>
+
+  <p>where \( \mathbf{w} \) is the weight vector (normal to the hyperplane) and \( b \) is the bias term.</p>
+
+  <div class="card">
+    <p><strong>Classification Rule:</strong></p>
+    <p class="eq">
+      $$ \text{Predict } y = \begin{cases} 
+      +1 & \text{if } \mathbf{w}^T \mathbf{x} + b \geq 0 \\
+      -1 & \text{if } \mathbf{w}^T \mathbf{x} + b < 0
+      \end{cases} $$
+    </p>
+  </div>
+
+    <br>
   <p style="text-align:center;">
     Decision score: \(\; f(\mathbf{x}) = \mathbf{w}^\top \mathbf{x} + b \;\) &nbsp;&nbsp;&nbsp;
     Prediction: \(\; \hat{y} = \mathrm{sign}\!\big(f(\mathbf{x})\big)\).
