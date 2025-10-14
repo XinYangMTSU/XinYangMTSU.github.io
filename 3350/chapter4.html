@@ -1313,7 +1313,16 @@ update();
     <em>kernels</em> to separate data that are not linearly separable.
   </p>
 
-  <b>Equation (Linear SVM decision function):</b>
+  <p>Support Vector Machine (SVM) is a powerful classification algorithm that:</p>
+  <ul>
+    <li>Finds the <strong>hyperplane</strong> (decision boundary) that best separates classes.</li>
+    <li>Maximizes the <strong>margin</strong> between classes — the distance from the hyperplane to the nearest data points.</li>
+    <li>The nearest data points are called <strong>support vectors</strong> — they "support" or define the decision boundary.</li>
+    <li>Can handle non-linear classification using the <strong>kernel trick</strong>.</li>
+  </ul>
+  <br>
+    
+  <h4>Equation (Linear SVM decision function):</h4>
   <p style="text-align:center;">
     Decision score: \(\; f(\mathbf{x}) = \mathbf{w}^\top \mathbf{x} + b \;\) &nbsp;&nbsp;&nbsp;
     Prediction: \(\; \hat{y} = \mathrm{sign}\!\big(f(\mathbf{x})\big)\).
