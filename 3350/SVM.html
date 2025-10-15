@@ -71,8 +71,6 @@
   <p class="subtitle">Visual Demonstration: separating line, margin, and support vectors.</p>
 </section>
 
-<!-- Add this BEFORE the <script> tag -->
-
 <!-- 2D Section -->
 <section>
   <h2>📊 SVM in 2D</h2>
@@ -145,10 +143,6 @@
           <div>
             <label>C: <span id="cVal3d">1.0</span></label>
             <input id="cSlider3d" type="range" min="0.01" max="10" step="0.01" value="1.0" />
-          </div>
-          <div>
-            <label>Spread: <span id="spreadVal3d">1.5</span></label>
-            <input id="spreadSlider3d" type="range" min="0.5" max="3" step="0.1" value="1.5" />
           </div>
         </div>
 
@@ -418,7 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateReadouts2d();
   draw2d();
 
-  // ==================== 3D SVM CODE (completed & wired) ====================
+  // ==================== 3D SVM CODE ====================
   let scene, camera, renderer;
   let pointMeshes3d = [];
   let planeMesh = null, marginPlane1 = null, marginPlane2 = null;
@@ -535,7 +529,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (showMargin){
-      const margin = 1 / Math.sqrt(wnorm2);     // distance from center plane to each margin plane
+      const margin = 1 / Math.sqrt(wnorm2);
       const offset = normal.clone().multiplyScalar(margin);
       const matM = new THREE.MeshBasicMaterial({color: 0x8a7d88, opacity: 0.25, transparent: true, side: THREE.DoubleSide});
 
@@ -554,9 +548,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function animate3d(){ requestAnimationFrame(animate3d); renderer.render(scene, camera); }
 
-  function generatePoints3d(spread = 1.5){
+  function generatePoints3d(){
     points3d = [];
     const n = 24;
+    const spread = 1.5;
     for (let i = 0; i < n; i++){
       points3d.push({ x: -2 + (Math.random()-0.5)*spread, y:  1 + (Math.random()-0.5)*spread, z:  1 + (Math.random()-0.5)*spread, yc:  1 });
       points3d.push({ x:  2 + (Math.random()-0.5)*spread, y: -1 + (Math.random()-0.5)*spread, z: -1 + (Math.random()-0.5)*spread, yc: -1 });
@@ -615,13 +610,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const res = trainSVM3D(points3d, C, 0.01, 2000);
     w3d = res.w; b3d = res.b; supportIdx3d = res.svIdx; trained3d = true;
     updateReadouts3d();
-    // redraw planes
     if (planeMesh) scene.remove(planeMesh);
     if (marginPlane1) scene.remove(marginPlane1);
     if (marginPlane2) scene.remove(marginPlane2);
     drawPlanes3d();
   });
-
 
   document.getElementById('resetViewBtn3d').addEventListener('click', ()=>{
     camera.position.set(8, 8, 8); camera.lookAt(0,0,0);
@@ -631,35 +624,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('cVal3d').textContent = (+e.target.value).toFixed(2);
   });
 
-
   document.getElementById('showPlane3d').addEventListener('change', ()=>{
-    // Remove old planes first
     if (planeMesh) { scene.remove(planeMesh); planeMesh = null; }
     if (marginPlane1) { scene.remove(marginPlane1); marginPlane1 = null; }
     if (marginPlane2) { scene.remove(marginPlane2); marginPlane2 = null; }
-    // Redraw with current settings
     drawPlanes3d();
   });
 
   document.getElementById('showMarginPlanes3d').addEventListener('change', ()=>{
-    // Remove old planes first
     if (planeMesh) { scene.remove(planeMesh); planeMesh = null; }
     if (marginPlane1) { scene.remove(marginPlane1); marginPlane1 = null; }
     if (marginPlane2) { scene.remove(marginPlane2); marginPlane2 = null; }
-    // Redraw with current settings
     drawPlanes3d();
   });
 
   document.getElementById('regenerateBtn3d').addEventListener('click', ()=>{
-    const spread = parseFloat(document.getElementById('spreadSlider3d').value);
-    generatePoints3d(spread);
-    document.getElementById('spreadVal3d').textContent = spread.toFixed(1);
-    // Reset training state
+    generatePoints3d();
     trained3d = false;
     supportIdx3d.clear();
     w3d = [0, 0, 1];
     b3d = 0;
-    // Clear and redraw
     clear3d();
     addPoints3d();
     updateReadouts3d();
@@ -667,7 +651,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---- Init 3D scene ----
   initScene3d();
-  generatePoints3d(1.5);
+  generatePoints3d();
   addPoints3d();
   animate3d();
   updateReadouts3d();
@@ -682,9 +666,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-
-
-
-
-
+</body>
 </html>
