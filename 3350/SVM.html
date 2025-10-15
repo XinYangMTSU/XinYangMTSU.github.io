@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SVM Playground — Margin & Support Vectors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+  <script>
+    // MathJax v3 config
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$', '$']],
+        processEscapes: true
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Roboto',Arial,sans-serif;background:#17191a;min-height:100vh;color:#ff79c6;padding:20px}
+    section{margin:0 auto 55px auto;background:#222025;border-radius:18px;box-shadow:0 4px 30px rgba(255,121,198,.09);padding:36px 32px 22px 32px;border-left:7px solid #ff79c6;position:relative;max-width:1400px}
+    h1{color:#ffb3de;margin:0 0 8px 0;text-align:center;font-size:2.5em}
+    h2{margin:0 0 20px 0;color:#ffb3de;font-weight:700;font-size:1.8em}
+    h3{font-size:1.18em;color:#ffb3de;margin-bottom:15px;font-weight:600}
+    p{color:#ffd7f0;line-height:1.8}
+    .subtitle{text-align:center;color:#ffd7f0;opacity:.9;font-size:1.1em;margin-bottom:20px}
+    .pill{display:inline-block;background:#19121a;border:1px solid #ff79c6;border-radius:999px;padding:4px 10px;margin:2px 8px 2px 0;font-size:.9em}
+    .viz-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;margin-bottom:40px}
+    .viz-panel{background:#19121a;border-radius:12px;padding:25px;box-shadow:0 2px 10px rgba(255,121,198,0.11);border:1px solid rgba(255,121,198,0.2)}
+    canvas{width:100%;border-radius:8px;background:#0d0a0e;box-shadow:0 2px 8px rgba(0,0,0,0.3);display:block}
+    .controls{margin-top:25px}
+    .controls .row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px}
+    .controls .row.three{grid-template-columns:1fr 1fr 1fr}
+    label{font-weight:600;color:#ffb3de}
+    input[type="range"]{width:100%}
+    input, select{padding:8px 12px;border:2px solid rgba(255,121,198,0.3);border-radius:6px;font-size:1em;background:#19121a;color:#ffd7f0;transition:border-color .3s}
+    input:focus, select:focus{outline:none;border-color:#ff79c6}
+    button{background:#ff79c6;color:#fff;border:none;padding:12px 25px;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;transition:all .3s;box-shadow:0 4px 6px rgba(255,121,198,0.3);margin-right:10px;margin-top:10px}
+    button:hover{background:#ffb3de;transform:translateY(-2px);box-shadow:0 6px 12px rgba(255,121,198,0.4)}
+    button:active{transform:translateY(0)}
+    .info-section{background:#2a252b;border-radius:12px;padding:25px;margin-top:30px;border:1px solid rgba(255,121,198,0.2)}
+    .info-section h3{color:#ffb3de;margin-bottom:15px;font-size:1.3em;border-bottom:1px solid #ff79c6;padding-bottom:8px}
+    .card{background:#2a252b;border:1px solid rgba(255,121,198,0.25);border-radius:10px;padding:16px}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .kpi{display:flex;align-items:baseline;gap:8px;margin:6px 0}
+    .kpi .v{font-weight:700;color:#fff}
+    .toggles{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
+    .toggle{display:flex;align-items:center;gap:6px}
+    .toggle input{width:auto}
+    .legend{display:flex;align-items:center;gap:12px;margin-top:10px;color:#ffd7f0}
+    .legend .dot{width:12px;height:12px;border-radius:50%}
+    .legend .pos{background:#22c55e}
+    .legend .neg{background:#ef4444}
+    .legend .sv {background:#fff;border:2px solid #10b981}
+    table{width:100%;border-collapse:collapse;color:#ffd7f0;margin-top:8px}
+    th,td{border:1px solid rgba(255,121,198,0.2);padding:8px;text-align:center}
+    th{color:#ffb3de;background:#1e1a20}
+    code.inline{background:#1e1a20;padding:2px 6px;border-radius:4px;border:1px solid rgba(255,121,198,0.25);color:#ffd7f0}
+    @media (max-width:1200px){.viz-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<section>
+  <center><h1><span class="pill">SVM Playground</span></h1></center>
+  <p class="subtitle">Visual Demonstration: separating line, margin, and support vectors.</p>
+</section>
+
+<!-- Add this BEFORE the <script> tag -->
+
+<!-- 2D Section -->
+<section>
+  <h2>📊 SVM in 2D</h2>
+  <div class="viz-grid">
+    <div class="viz-panel">
+      <h3>Interactive 2D Canvas</h3>
+      <canvas id="svmCanvas2d" width="720" height="560" style="cursor:crosshair"></canvas>
+
+      <div class="legend">
+        <span class="dot pos"></span><span>Positive (+1)</span>
+        <span class="dot neg"></span><span>Negative (−1)</span>
+        <span class="dot sv"></span><span>Support Vector</span>
+      </div>
+
+      <div class="controls">
+        <div class="row">
+          <div>
+            <label>Class to Add</label>
+            <select id="classSelect2d">
+              <option value="1" selected>+1 (Positive)</option>
+              <option value="-1">−1 (Negative)</option>
+            </select>
+          </div>
+          <div>
+            <label>C: <span id="cVal2d">1.0</span></label>
+            <input id="cSlider2d" type="range" min="0.01" max="10" step="0.01" value="1.0" />
+          </div>
+        </div>
+
+        <div class="toggles">
+          <label class="toggle"><input type="checkbox" id="showBoundary2d" checked> Boundary</label>
+          <label class="toggle"><input type="checkbox" id="showMargin2d" checked> Margin</label>
+          <label class="toggle"><input type="checkbox" id="showSV2d" checked> Support Vectors</label>
+        </div>
+
+        <button id="trainBtn2d">Train SVM</button>
+        <button id="clearBtn2d">Clear</button>
+        <button id="seedBtn2d">Seed Example</button>
+      </div>
+    </div>
+
+    <div class="viz-panel">
+      <h3>Readouts</h3>
+      <div class="card">
+        <div class="kpi">w: <span class="v" id="wVal2d">[—, —]</span></div>
+        <div class="kpi">b: <span class="v" id="bVal2d">—</span></div>
+        <div class="kpi">‖w‖: <span class="v" id="normVal2d">—</span></div>
+        <div class="kpi">Margin: <span class="v" id="marginVal2d">—</span></div>
+        <div class="kpi"># SV: <span class="v" id="svCount2d">—</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3D Section -->
+<section>
+  <h2>🎲 SVM in 3D</h2>
+  <div class="viz-grid">
+    <div class="viz-panel">
+      <h3>Interactive 3D View</h3>
+      <div id="canvas3d" style="width:100%;height:500px"></div>
+
+      <div class="legend">
+        <span class="dot pos"></span><span>Positive (+1)</span>
+        <span class="dot neg"></span><span>Negative (−1)</span>
+      </div>
+
+      <div class="controls">
+        <div class="row">
+          <div>
+            <label>C: <span id="cVal3d">1.0</span></label>
+            <input id="cSlider3d" type="range" min="0.01" max="10" step="0.01" value="1.0" />
+          </div>
+          <div>
+            <label>Spread: <span id="spreadVal3d">1.5</span></label>
+            <input id="spreadSlider3d" type="range" min="0.5" max="3" step="0.1" value="1.5" />
+          </div>
+        </div>
+
+        <div class="toggles">
+          <label class="toggle"><input type="checkbox" id="showPlane3d" checked> Plane</label>
+          <label class="toggle"><input type="checkbox" id="showMarginPlanes3d" checked> Margins</label>
+          <label class="toggle"><input type="checkbox" id="showSV3d" checked> Support Vectors</label>
+        </div>
+
+        <button id="trainBtn3d">Train SVM</button>
+        <button id="regenerateBtn3d">Regenerate</button>
+        <button id="resetViewBtn3d">Reset View</button>
+      </div>
+    </div>
+
+    <div class="viz-panel">
+      <h3>Readouts</h3>
+      <div class="card">
+        <div class="kpi">w: <span class="v" id="wVal3d">[—, —, —]</span></div>
+        <div class="kpi">b: <span class="v" id="bVal3d">—</span></div>
+        <div class="kpi">‖w‖: <span class="v" id="normVal3d">—</span></div>
+        <div class="kpi">Margin: <span class="v" id="marginVal3d">—</span></div>
+        <div class="kpi"># SV: <span class="v" id="svCount3d">—</span></div>
+        <div class="kpi"># Points: <span class="v" id="pointCount3d">—</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // ==================== 2D SVM CODE ====================
+  function setupHiDPI(canvas){
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width  = Math.round(rect.width  * dpr);
+    canvas.height = Math.round(rect.height * dpr);
+    const ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return ctx;
+  }
+
+  const world2d = {xmin:-5, xmax:5, ymin:-5, ymax:5, pad: 40};
+
+  function worldToScreen2d(x, y, canvas){
+    const rect = canvas.getBoundingClientRect();
+    const W = rect.width, H = rect.height, pad = world2d.pad;
+    const sx = pad + (x - world2d.xmin) * (W - 2*pad) / (world2d.xmax - world2d.xmin);
+    const sy = H - pad - (y - world2d.ymin) * (H - 2*pad) / (world2d.ymax - world2d.ymin);
+    return [sx, sy];
+  }
+  function screenToWorld2d(sx, sy, canvas){
+    const rect = canvas.getBoundingClientRect();
+    const W = rect.width, H = rect.height, pad = world2d.pad;
+    const x = world2d.xmin + (sx - pad) * (world2d.xmax - world2d.xmin) / (W - 2*pad);
+    const y = world2d.ymin + (H - pad - sy) * (H - 2*pad) / (world2d.ymax - world2d.ymin);
+    return [x, y];
+  }
+
+  const canvas2d = document.getElementById('svmCanvas2d');
+  let ctx2d = setupHiDPI(canvas2d);
+  window.addEventListener('resize', () => { ctx2d = setupHiDPI(canvas2d); draw2d(); });
+
+  let points2d = [];
+  let w2d = [0,0], b2d = 0, trained2d = false;
+  let supportIdx2d = new Set();
+
+  function drawAxes2d(){
+    const rect = canvas2d.getBoundingClientRect();
+    const W = rect.width, H = rect.height, pad = world2d.pad;
+    ctx2d.clearRect(0,0,W,H);
+
+    ctx2d.strokeStyle = '#2a252b'; ctx2d.lineWidth = 1;
+    for (let i=world2d.xmin;i<=world2d.xmax;i++){
+      const [sx1, sy1] = worldToScreen2d(i, world2d.ymin, canvas2d);
+      const [sx2, sy2] = worldToScreen2d(i, world2d.ymax, canvas2d);
+      ctx2d.beginPath(); ctx2d.moveTo(Math.floor(sx1)+0.5, Math.floor(sy1)+0.5);
+      ctx2d.lineTo(Math.floor(sx2)+0.5, Math.floor(sy2)+0.5); ctx2d.stroke();
+    }
+    for (let j=world2d.ymin;j<=world2d.ymax;j++){
+      const [sx1, sy1] = worldToScreen2d(world2d.xmin, j, canvas2d);
+      const [sx2, sy2] = worldToScreen2d(world2d.xmax, j, canvas2d);
+      ctx2d.beginPath(); ctx2d.moveTo(Math.floor(sx1)+0.5, Math.floor(sy1)+0.5);
+      ctx2d.lineTo(Math.floor(sx2)+0.5, Math.floor(sy2)+0.5); ctx2d.stroke();
+    }
+
+    ctx2d.strokeStyle = '#ff79c6'; ctx2d.lineWidth = 2;
+    ctx2d.strokeRect(pad, pad, W-2*pad, H-2*pad);
+  }
+
+  function drawPoints2d(){
+    for (let i=0;i<points2d.length;i++){
+      const p = points2d[i];
+      const [sx, sy] = worldToScreen2d(p.x, p.y, canvas2d);
+      const r = 6;
+
+      if (document.getElementById('showSV2d').checked && supportIdx2d.has(i)) {
+        ctx2d.fillStyle = '#ffffff';
+        ctx2d.beginPath(); ctx2d.arc(sx, sy, r+4, 0, Math.PI*2); ctx2d.fill();
+        ctx2d.strokeStyle = '#10b981'; ctx2d.lineWidth = 2; ctx2d.stroke();
+      }
+
+      ctx2d.fillStyle = p.yc === 1 ? '#22c55e' : '#ef4444';
+      ctx2d.beginPath(); ctx2d.arc(sx, sy, r, 0, Math.PI*2); ctx2d.fill();
+    }
+  }
+
+  function lineFromWB2d(w, b){
+    const [w1, w2] = w;
+    const pts = [];
+    const xs = [world2d.xmin, world2d.xmax];
+    const ys = [world2d.ymin, world2d.ymax];
+
+    function y_at_x(x){ return -(w1/w2)*x - b/w2; }
+    function x_at_y(y){ return -(w2/w1)*y - b/w1; }
+
+    if (Math.abs(w2) > 1e-9){
+      for (const x of xs){
+        const y = y_at_x(x);
+        if (y >= world2d.ymin && y <= world2d.ymax) pts.push([x,y]);
+      }
+    }
+    if (Math.abs(w1) > 1e-9){
+      for (const y of ys){
+        const x = x_at_y(y);
+        if (x >= world2d.xmin && x <= world2d.xmax) pts.push([x,y]);
+      }
+    }
+    const uniq = [];
+    for (const p of pts){
+      if (!uniq.some(q=>Math.hypot(q[0]-p[0], q[1]-p[1])<1e-6)) uniq.push(p);
+    }
+    return uniq.slice(0,2);
+  }
+
+  function drawBoundaryAndMargins2d(){
+    if (!trained2d || !document.getElementById('showBoundary2d').checked) return;
+    const pts = lineFromWB2d(w2d, b2d);
+    if (pts.length < 2) return;
+
+    const [p1, p2] = pts;
+    const [sx1, sy1] = worldToScreen2d(p1[0], p1[1], canvas2d);
+    const [sx2, sy2] = worldToScreen2d(p2[0], p2[1], canvas2d);
+
+    ctx2d.strokeStyle = '#ffb3de'; ctx2d.lineWidth = 3;
+    ctx2d.beginPath(); ctx2d.moveTo(sx1, sy1); ctx2d.lineTo(sx2, sy2); ctx2d.stroke();
+
+    if (document.getElementById('showMargin2d').checked){
+      const norm = Math.hypot(w2d[0], w2d[1]);
+      if (norm > 1e-9){
+        const nx = w2d[0]/norm, ny = w2d[1]/norm;
+        const d = 1/norm;
+
+        const p1p = [p1[0] + nx*d, p1[1] + ny*d];
+        const p2p = [p2[0] + nx*d, p2[1] + ny*d];
+        const p1m = [p1[0] - nx*d, p1[1] - ny*d];
+        const p2m = [p2[0] - nx*d, p2[1] - ny*d];
+
+        const [s1x, s1y] = worldToScreen2d(p1p[0], p1p[1], canvas2d);
+        const [s2x, s2y] = worldToScreen2d(p2p[0], p2p[1], canvas2d);
+        const [t1x, t1y] = worldToScreen2d(p1m[0], p1m[1], canvas2d);
+        const [t2x, t2y] = worldToScreen2d(p2m[0], p2m[1], canvas2d);
+
+        ctx2d.setLineDash([8,6]); ctx2d.strokeStyle = '#8a7d88'; ctx2d.lineWidth = 2;
+        ctx2d.beginPath(); ctx2d.moveTo(s1x, s1y); ctx2d.lineTo(s2x, s2y); ctx2d.stroke();
+        ctx2d.beginPath(); ctx2d.moveTo(t1x, t1y); ctx2d.lineTo(t2x, t2y); ctx2d.stroke();
+        ctx2d.setLineDash([]);
+      }
+    }
+  }
+
+  function draw2d(){ drawAxes2d(); drawBoundaryAndMargins2d(); drawPoints2d(); }
+
+  function trainSVM2D(data, C = 1.0, learningRate = 0.01, iterations = 1000){
+    if (data.length === 0) return {w:[0,0], b:0, svIdx:new Set()};
+    let w = [Math.random()*0.01, Math.random()*0.01];
+    let b = 0;
+    const n = data.length;
+    function dot(a,b){return a[0]*b[0] + a[1]*b[1];}
+
+    for (let iter=0; iter<iterations; iter++){
+      let dw = [0, 0];
+      let db = 0;
+      for (let i=0; i<n; i++){
+        const xi = [data[i].x, data[i].y];
+        const yi = data[i].yc;
+        const margin = yi * (dot(w, xi) + b);
+        if (margin < 1){
+          dw[0] += w[0] - C * yi * xi[0];
+          dw[1] += w[1] - C * yi * xi[1];
+          db += -C * yi;
+        } else {
+          dw[0] += w[0];
+          dw[1] += w[1];
+        }
+      }
+      dw[0] /= n; dw[1] /= n; db /= n;
+      w[0] -= learningRate * dw[0];
+      w[1] -= learningRate * dw[1];
+      b    -= learningRate * db;
+    }
+
+    const svIdx = new Set();
+    const tol = 0.15;
+    for (let i=0; i<data.length; i++){
+      const m = data[i].yc * (w[0]*data[i].x + w[1]*data[i].y + b);
+      if (m < 1 + tol) svIdx.add(i);
+    }
+    return {w, b, svIdx};
+  }
+
+  function updateReadouts2d(){
+    const norm = Math.hypot(w2d[0], w2d[1]);
+    document.getElementById('wVal2d').textContent = `[${w2d[0].toFixed(3)}, ${w2d[1].toFixed(3)}]`;
+    document.getElementById('bVal2d').textContent = b2d.toFixed(3);
+    document.getElementById('normVal2d').textContent = norm.toFixed(3);
+    document.getElementById('marginVal2d').textContent = norm > 0 ? (2/norm).toFixed(3) : '—';
+    document.getElementById('svCount2d').textContent = supportIdx2d.size;
+  }
+
+  canvas2d.addEventListener('click', (e)=>{
+    const rect = canvas2d.getBoundingClientRect();
+    const sx = e.clientX - rect.left;
+    const sy = e.clientY - rect.top;
+    let [x,y] = screenToWorld2d(sx, sy, canvas2d);
+    const yc = parseInt(document.getElementById('classSelect2d').value,10);
+    points2d.push({x,y,yc});
+    trained2d = false;
+    supportIdx2d.clear();
+    updateReadouts2d();
+    draw2d();
+  });
+
+  document.getElementById('trainBtn2d').addEventListener('click', ()=>{
+    if (points2d.length === 0) return;
+    const C = parseFloat(document.getElementById('cSlider2d').value);
+    const res = trainSVM2D(points2d, C, 0.01, 1000);
+    w2d = res.w; b2d = res.b; supportIdx2d = res.svIdx; trained2d = true;
+    updateReadouts2d();
+    draw2d();
+  });
+  document.getElementById('clearBtn2d').addEventListener('click', ()=>{
+    points2d = []; w2d=[0,0]; b2d=0; trained2d=false; supportIdx2d.clear();
+    updateReadouts2d(); draw2d();
+  });
+  document.getElementById('seedBtn2d').addEventListener('click', ()=>{
+    points2d = [];
+    function addCluster(cx, cy, label){
+      for (let i=0;i<15;i++){
+        const dx = (Math.random()*1.4 - 0.7);
+        const dy = (Math.random()*1.4 - 0.7);
+        points2d.push({x:cx+dx, y:cy+dy, yc:label});
+      }
+    }
+    addCluster(-2.5,  1.5, +1);
+    addCluster( 2.5, -1.5, -1);
+    trained2d=false; supportIdx2d.clear();
+    updateReadouts2d(); draw2d();
+  });
+  document.getElementById('cSlider2d').addEventListener('input', (e)=>{
+    document.getElementById('cVal2d').textContent = (+e.target.value).toFixed(2);
+  });
+  document.getElementById('showBoundary2d').addEventListener('change', draw2d);
+  document.getElementById('showMargin2d').addEventListener('change', draw2d);
+  document.getElementById('showSV2d').addEventListener('change', draw2d);
+
+  updateReadouts2d();
+  draw2d();
+
+  // ==================== 3D SVM CODE (completed & wired) ====================
+  let scene, camera, renderer;
+  let pointMeshes3d = [];
+  let planeMesh = null, marginPlane1 = null, marginPlane2 = null;
+  let points3d = [];
+  let w3d = [0, 0, 1], b3d = 0, trained3d = false;
+  let supportIdx3d = new Set();
+
+  const container = document.getElementById('canvas3d');
+
+  function initScene3d(){
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0d0a0e);
+
+    camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+    camera.position.set(8, 8, 8);
+    camera.lookAt(0, 0, 0);
+
+    renderer = new THREE.WebGLRenderer({antialias: true});
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.innerHTML = '';
+    container.appendChild(renderer.domElement);
+
+    // Simple mouse controls (rotate + zoom)
+    let isDragging = false;
+    let previousMousePosition = {x: 0, y: 0};
+    let rotation = {x: 0, y: 0};
+
+    renderer.domElement.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      previousMousePosition = {x: e.clientX, y: e.clientY};
+    });
+    renderer.domElement.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - previousMousePosition.x;
+      const dy = e.clientY - previousMousePosition.y;
+      rotation.y += dx * 0.005;
+      rotation.x = Math.max(-Math.PI/2, Math.min(Math.PI/2, rotation.x + dy * 0.005));
+      const radius = 12;
+      camera.position.x = radius * Math.cos(rotation.x) * Math.sin(rotation.y);
+      camera.position.y = radius * Math.sin(rotation.x);
+      camera.position.z = radius * Math.cos(rotation.x) * Math.cos(rotation.y);
+      camera.lookAt(0, 0, 0);
+      previousMousePosition = {x: e.clientX, y: e.clientY};
+    });
+    window.addEventListener('mouseup', () => { isDragging = false; });
+
+    renderer.domElement.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = e.deltaY * 0.01;
+      const currentDistance = camera.position.length();
+      const newDistance = Math.max(5, Math.min(30, currentDistance + delta));
+      camera.position.multiplyScalar(newDistance / currentDistance);
+    });
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambientLight);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    directionalLight.position.set(5, 10, 7);
+    scene.add(directionalLight);
+
+    const axesHelper = new THREE.AxesHelper(5);
+    scene.add(axesHelper);
+  }
+
+  function clear3d(){
+    pointMeshes3d.forEach(m => scene.remove(m));
+    pointMeshes3d = [];
+    if (planeMesh) scene.remove(planeMesh);
+    if (marginPlane1) scene.remove(marginPlane1);
+    if (marginPlane2) scene.remove(marginPlane2);
+    planeMesh = marginPlane1 = marginPlane2 = null;
+  }
+
+  function addPoints3d(){
+    const geom = new THREE.SphereGeometry(0.08, 16, 16);
+    const matPos = new THREE.MeshStandardMaterial({color: 0x22c55e});
+    const matNeg = new THREE.MeshStandardMaterial({color: 0xef4444});
+    points3d.forEach(p => {
+      const mesh = new THREE.Mesh(geom, p.yc === 1 ? matPos : matNeg);
+      mesh.position.set(p.x, p.y, p.z);
+      scene.add(mesh);
+      pointMeshes3d.push(mesh);
+    });
+  }
+
+  function drawPlanes3d(){
+    // Always clear existing planes so redraws don't stack
+    if (planeMesh) { scene.remove(planeMesh); planeMesh = null; }
+    if (marginPlane1) { scene.remove(marginPlane1); marginPlane1 = null; }
+    if (marginPlane2) { scene.remove(marginPlane2); marginPlane2 = null; }
+
+    if (!trained3d) return;
+
+    const showMain   = document.getElementById('showPlane3d').checked;
+    const showMargin = document.getElementById('showMarginPlanes3d').checked;
+    if (!showMain && !showMargin) return;
+
+    const normal = new THREE.Vector3(w3d[0], w3d[1], w3d[2]).normalize();
+    const size = 8;
+
+    // Common geometry & transforms
+    const planeGeom = new THREE.PlaneGeometry(size, size);
+    const wnorm2 = w3d[0]*w3d[0] + w3d[1]*w3d[1] + w3d[2]*w3d[2];
+    const x0 = new THREE.Vector3(-b3d*w3d[0]/wnorm2, -b3d*w3d[1]/wnorm2, -b3d*w3d[2]/wnorm2);
+    const base = new THREE.Vector3(0,0,1);
+    const quat = new THREE.Quaternion().setFromUnitVectors(base, normal);
+
+    if (showMain){
+      const planeMat = new THREE.MeshBasicMaterial({color: 0xffb3de, opacity: 0.3, transparent: true, side: THREE.DoubleSide});
+      planeMesh = new THREE.Mesh(planeGeom, planeMat);
+      planeMesh.setRotationFromQuaternion(quat);
+      planeMesh.position.copy(x0);
+      scene.add(planeMesh);
+    }
+
+    if (showMargin){
+      const margin = 1 / Math.sqrt(wnorm2);     // distance from center plane to each margin plane
+      const offset = normal.clone().multiplyScalar(margin);
+      const matM = new THREE.MeshBasicMaterial({color: 0x8a7d88, opacity: 0.25, transparent: true, side: THREE.DoubleSide});
+
+      marginPlane1 = new THREE.Mesh(planeGeom.clone(), matM);
+      marginPlane1.setRotationFromQuaternion(quat);
+      marginPlane1.position.copy(x0.clone().add(offset));
+      scene.add(marginPlane1);
+
+      marginPlane2 = new THREE.Mesh(planeGeom.clone(), matM);
+      marginPlane2.setRotationFromQuaternion(quat);
+      marginPlane2.position.copy(x0.clone().addScaledVector(offset, -1));
+      scene.add(marginPlane2);
+    }
+  }
+
+
+  function animate3d(){ requestAnimationFrame(animate3d); renderer.render(scene, camera); }
+
+  function generatePoints3d(spread = 1.5){
+    points3d = [];
+    const n = 24;
+    for (let i = 0; i < n; i++){
+      points3d.push({ x: -2 + (Math.random()-0.5)*spread, y:  1 + (Math.random()-0.5)*spread, z:  1 + (Math.random()-0.5)*spread, yc:  1 });
+      points3d.push({ x:  2 + (Math.random()-0.5)*spread, y: -1 + (Math.random()-0.5)*spread, z: -1 + (Math.random()-0.5)*spread, yc: -1 });
+    }
+    document.getElementById('pointCount3d').textContent = points3d.length;
+  }
+
+  // Simple (demo) 3D linear SVM via gradient descent on hinge loss
+  function trainSVM3D(data, C = 1.0, lr = 0.01, iters = 1500){
+    if (!data.length) return {w:[0,0,1], b:0, svIdx:new Set()};
+    let w = [Math.random()*0.01, Math.random()*0.01, 1];
+    let b = 0;
+    const n = data.length;
+    function dot3(a,b){ return a[0]*b[0] + a[1]*b[1] + a[2]*b[2]; }
+
+    for (let t=0; t<iters; t++){
+      let dw = [0,0,0], db = 0;
+      for (let i=0;i<n;i++){
+        const xi = [data[i].x, data[i].y, data[i].z];
+        const yi = data[i].yc;
+        const margin = yi * (dot3(w, xi) + b);
+        if (margin < 1){
+          dw[0] += w[0] - C * yi * xi[0];
+          dw[1] += w[1] - C * yi * xi[1];
+          dw[2] += w[2] - C * yi * xi[2];
+          db    += -C * yi;
+        } else {
+          dw[0] += w[0]; dw[1] += w[1]; dw[2] += w[2];
+        }
+      }
+      dw[0] /= n; dw[1] /= n; dw[2] /= n; db /= n;
+      w[0] -= lr*dw[0]; w[1] -= lr*dw[1]; w[2] -= lr*dw[2]; b -= lr*db;
+    }
+
+    const svIdx = new Set();
+    const tol = 0.2;
+    for (let i=0;i<data.length;i++){
+      const m = data[i].yc * (w[0]*data[i].x + w[1]*data[i].y + w[2]*data[i].z + b);
+      if (m < 1 + tol) svIdx.add(i);
+    }
+    return {w,b,svIdx};
+  }
+
+  function updateReadouts3d(){
+    const norm = Math.hypot(w3d[0], w3d[1], w3d[2]);
+    document.getElementById('wVal3d').textContent = `[${w3d[0].toFixed(3)}, ${w3d[1].toFixed(3)}, ${w3d[2].toFixed(3)}]`;
+    document.getElementById('bVal3d').textContent = b3d.toFixed(3);
+    document.getElementById('normVal3d').textContent = norm.toFixed(3);
+    document.getElementById('marginVal3d').textContent = norm > 0 ? (2/norm).toFixed(3) : '—';
+    document.getElementById('svCount3d').textContent = supportIdx3d.size;
+  }
+
+  // ---- Wire up 3D controls ----
+  document.getElementById('trainBtn3d').addEventListener('click', ()=>{
+    const C = parseFloat(document.getElementById('cSlider3d').value);
+    const res = trainSVM3D(points3d, C, 0.01, 2000);
+    w3d = res.w; b3d = res.b; supportIdx3d = res.svIdx; trained3d = true;
+    updateReadouts3d();
+    // redraw planes
+    if (planeMesh) scene.remove(planeMesh);
+    if (marginPlane1) scene.remove(marginPlane1);
+    if (marginPlane2) scene.remove(marginPlane2);
+    drawPlanes3d();
+  });
+
+
+  document.getElementById('resetViewBtn3d').addEventListener('click', ()=>{
+    camera.position.set(8, 8, 8); camera.lookAt(0,0,0);
+  });
+
+  document.getElementById('cSlider3d').addEventListener('input', (e)=>{
+    document.getElementById('cVal3d').textContent = (+e.target.value).toFixed(2);
+  });
+
+
+  document.getElementById('showPlane3d').addEventListener('change', ()=>{
+    // Remove old planes first
+    if (planeMesh) { scene.remove(planeMesh); planeMesh = null; }
+    if (marginPlane1) { scene.remove(marginPlane1); marginPlane1 = null; }
+    if (marginPlane2) { scene.remove(marginPlane2); marginPlane2 = null; }
+    // Redraw with current settings
+    drawPlanes3d();
+  });
+
+  document.getElementById('showMarginPlanes3d').addEventListener('change', ()=>{
+    // Remove old planes first
+    if (planeMesh) { scene.remove(planeMesh); planeMesh = null; }
+    if (marginPlane1) { scene.remove(marginPlane1); marginPlane1 = null; }
+    if (marginPlane2) { scene.remove(marginPlane2); marginPlane2 = null; }
+    // Redraw with current settings
+    drawPlanes3d();
+  });
+
+  document.getElementById('regenerateBtn3d').addEventListener('click', ()=>{
+    const spread = parseFloat(document.getElementById('spreadSlider3d').value);
+    generatePoints3d(spread);
+    document.getElementById('spreadVal3d').textContent = spread.toFixed(1);
+    // Reset training state
+    trained3d = false;
+    supportIdx3d.clear();
+    w3d = [0, 0, 1];
+    b3d = 0;
+    // Clear and redraw
+    clear3d();
+    addPoints3d();
+    updateReadouts3d();
+  });
+
+  // ---- Init 3D scene ----
+  initScene3d();
+  generatePoints3d(1.5);
+  addPoints3d();
+  animate3d();
+  updateReadouts3d();
+
+  // Reflow renderer on resize
+  window.addEventListener('resize', ()=>{
+    if (!renderer) return;
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    camera.aspect = container.clientWidth / container.clientHeight;
+    camera.updateProjectionMatrix();
+  });
+});
+</script>
+
+
+
+
+
+
+</html>
