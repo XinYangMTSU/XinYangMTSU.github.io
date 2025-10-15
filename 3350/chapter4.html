@@ -1361,6 +1361,19 @@ update();
     Prediction: \(\; \hat{y} = \mathrm{sign}\!\big(f(\mathbf{x})\big)\).
   </p>
 
+<p style="text-align:center;">
+    <strong>Decision score (standard form):</strong> 
+    $$f(\mathbf{x}) = \sum_{j=1}^{m} \alpha_j y_j (\mathbf{x}_j^\top \mathbf{x}) + b$$
+</p>
+<p style="text-align:center;">
+    <strong>Decision score (with x_i notation):</strong> 
+    $$f(\mathbf{x}_i) = \sum_{j=1}^{m} \alpha_j y_j (\mathbf{x}_j^\top \mathbf{x}_i) + b$$
+</p>
+<p style="text-align:center;">
+    <strong>Prediction:</strong> 
+    $$\hat{y}_i = \mathrm{sign}\!\big(f(\mathbf{x}_i)\big) = \mathrm{sign}\left(\sum_{j=1}^{m} \alpha_j y_j (\mathbf{x}_j^\top \mathbf{x}_i) + b\right)$$
+</p>
+
   <p><strong>Where:</strong></p>
   <ul>
     <li>\(\mathbf{w}\) = weight vector; \(b\) = bias (intercept)</li>
