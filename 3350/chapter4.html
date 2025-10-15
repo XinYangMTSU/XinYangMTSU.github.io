@@ -1496,10 +1496,13 @@ update();
   <p class="small center">The slack variables (ξ) allow some misclassifications. Parameter C controls the trade-off between margin width and training errors.</p>
 </div>
 
-    <p>
-  <strong>Translation:</strong> Find the decision boundary <strong>(w, b)</strong> that balances margin width with training errors, 
-      where C controls the trade-off and ξᵢ (found automatically) measures each violation.
-  </p>
+<p>
+  <strong>Translation (soft-margin SVM):</strong>
+  Find the decision boundary <strong>(<var>w</var>, <var>b</var>)</strong> that balances a wide margin with training errors.
+  The hyperparameter <strong>C</strong> controls this trade-off, and the slack variables
+  <strong>&xi;<sub>i</sub> &ge; 0</strong> quantify margin violations or misclassifications and are chosen by the optimization.
+</p>
+
   <!--
   <hr>
   <h4>Worked Example: “Sold in 30 days” (Binary)</h4>
