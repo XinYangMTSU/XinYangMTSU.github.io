@@ -1475,6 +1475,18 @@ update();
     <p class="small center">The constraint ensures all points are correctly classified with at least margin 1.</p>
   </div>
 
+    <br>
+  
+<div class="card">
+  <p class="eq">
+    $$ \min_{\mathbf{w}, b, \xi} \quad \frac{1}{2}\|\mathbf{w}\|^2 + C \sum_{i=1}^{n} \xi_i $$
+  </p>
+  <p class="eq">
+    $$ \text{subject to} \quad y_i(\mathbf{w}^T \mathbf{x}_i + b) \geq 1 - \xi_i \quad \text{and} \quad \xi_i \geq 0 \quad \text{for all } i $$
+  </p>
+  <p class="small center">The slack variables (ξ) allow some misclassifications. Parameter C controls the trade-off between margin width and training errors.</p>
+</div>
+
     <p>
   <strong>Translation:</strong> "Find the values of 
   <strong>w</strong> (weights) and <strong>b</strong> (bias) that 
