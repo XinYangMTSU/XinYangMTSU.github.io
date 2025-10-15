@@ -1503,6 +1503,26 @@ update();
   <strong>&xi;<sub>i</sub> &ge; 0</strong> quantify margin violations or misclassifications and are chosen by the optimization.
 </p>
 
+
+  <div class="cases">
+    <div class="case">
+      <div class="case-title">Perfect Point</div>
+      <div class="case-value">ξᵢ = 0</div>
+      <p style="color:#ffd7f0;font-size:0.9em">Outside margin on correct side</p>
+    </div>
+    <div class="case">
+      <div class="case-title">Margin Violation</div>
+      <div class="case-value">0 < ξᵢ < 1</div>
+      <p style="color:#ffd7f0;font-size:0.9em">Inside margin but correctly classified</p>
+    </div>
+    <div class="case">
+      <div class="case-title">Misclassified</div>
+      <div class="case-value">ξᵢ ≥ 1</div>
+      <p style="color:#ffd7f0;font-size:0.9em">On wrong side of boundary</p>
+    </div>
+  </div>
+       
+
   <!--
   <hr>
   <h4>Worked Example: “Sold in 30 days” (Binary)</h4>
