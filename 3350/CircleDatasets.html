@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Circles Dataset Classification · Decision Boundaries</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6;
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+      max-width: 980px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 { color:#ffb3de; margin:0 0 8px 0; }
+    h2 { margin: 0 0 10px 0; color: #ffb3de; font-weight: 700; }
+    section h4 {
+      font-size: 1.18em; color: #ffb3de; margin-bottom: 5px; margin-top: 30px;
+      font-weight: 600; border-bottom: 1px solid #ffb3de; padding-bottom: 2px;
+    }
+    p { color:#ffd7f0; }
+    pre {
+      background: #19121a; color: #ffb3de; padding: 15px 18px; border-radius: 8px;
+      font-size: 1.04em; line-height: 1.7; overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11); position: relative;
+      white-space: pre;
+    }
+    pre .copy {
+      position: absolute; top: 8px; right: 8px; padding: 4px 8px;
+      background: #21111b; border: 1px solid #ff79c6; border-radius: 6px;
+      color: #ffb3de; font-size: 0.8em; cursor: pointer;
+    }
+    pre .copy:hover { background: #ff79c6; color: #fff; }
+    .pill {
+      display:inline-block; background:#19121a; border:1px solid #ff79c6;
+      border-radius:999px; padding:4px 10px; margin:2px 8px 2px 0; font-size:.9em
+    }
+    .note { color:#ffd7f0; opacity:.9; }
+    ul { margin-top: 8px; color:#ffd7f0; }
+    code.inline { background:#19121a; padding:2px 6px; border-radius:6px; }
+    .legend { display:flex; gap:14px; align-items:center; margin:8px 0 18px; flex-wrap: wrap; }
+    .swatch { width:16px; height:16px; border-radius:4px; display:inline-block; border:1px solid #00000033; }
+    .swatch.class0 { background:#6fc3df; }
+    .swatch.class1 { background:#ff79c6; }
+    .swatch.boundary { background:linear-gradient(135deg, #6fc3df 50%, #ff79c6 50%); }
+    .svgwrap{ background:#1a151c; border-radius:12px; padding:10px; box-shadow: inset 0 0 0 1px rgba(255,121,198,0.2);}
+    .lab { fill:#ffb3de; font: 600 14px 'Roboto', Arial, sans-serif; }
+    .axis { stroke:#3a2f36; stroke-width:1; }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .model-card {
+      background: #19121a;
+      border-radius: 12px;
+      padding: 15px;
+      border: 1px solid rgba(255,121,198,0.2);
+      text-align: center;
+    }
+    .model-card h3 {
+      color: #ffb3de;
+      margin: 0 0 10px 0;
+      font-size: 1.1em;
+    }
+    .accuracy {
+      color: #6fc3df;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(111,195,223,0.1), rgba(255,121,198,0.1));
+      border: 1px solid rgba(255,121,198,0.3);
+      border-radius: 12px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    .comment {
+      color: #8be9fd;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+<section id="top">
+  <center>
+    <h1>
+      <span class="pill">Circles Dataset</span>
+      <span class="pill">Decision Boundaries</span>
+      <span class="pill">SVM Kernels & More</span>
+    </h1>
+  </center>
+  <p class="note">
+    This page demonstrates classification on the <b>make_circles</b> dataset - a non-linearly separable problem where points form
+    concentric circles. We'll visualize how different algorithms and kernels handle this challenging pattern.
+  </p>
+</section>
+
+<section id="dataset-visual">
+  <h2>1) The Circles Dataset</h2>
+  <div class="legend">
+    <span class="swatch class0"></span> <span>Class 0 (Outer Circle)</span>
+    <span class="swatch class1"></span> <span>Class 1 (Inner Circle)</span>
+    <span class="swatch boundary"></span> <span>Decision Boundary</span>
+  </div>
+
+  <div class="svgwrap">
+  <svg viewBox="0 0 400 400" width="100%" height="auto" role="img" aria-label="Circles dataset visualization">
+    <!-- Grid lines -->
+    <line x1="50" y1="200" x2="350" y2="200" class="axis" stroke-dasharray="5,5" opacity="0.3"/>
+    <line x1="200" y1="50" x2="200" y2="350" class="axis" stroke-dasharray="5,5" opacity="0.3"/>
+
+    <!-- Outer circle points (Class 0 - teal) -->
+    <circle cx="280" cy="120" r="4" fill="#6fc3df" opacity="0.8"/>
+    <circle cx="120" cy="120" r="4" fill="#6fc3df" opacity="0.8"/>
+    <circle cx="120" cy="280" r="4" fill="#6fc3df" opacity="0.8"/>
+    <circle cx="280" cy="280" r="4" fill="#6fc3df" opacity="0.8"/>
+    <circle cx="200" cy="90" r="4" fill="#6fc3df" opacity="0.8"/>
+    <circle cx="200" cy="310" r="4" fill="#6fc3df" opacity="0.8"/>
+    <circle cx="90" cy="200" r="4" fill="#6fc3df" opacity="0.8"/>
+    <circle cx="310" cy="200" r="4" fill="#6fc3df" opacity="0.8"/>
+    <circle cx="250" cy="100" r="4" fill="#6fc3df" opacity="0.8"/>
+    <circle cx="150" cy="100" r="4" fill="#6fc3df" opacity="0.8"/>
+    <circle cx="100" cy="150" r="4" fill="#6fc3df" opacity="0.8"/>
+    <circle cx="100" cy="250" r="4" fill="#6fc3df" opacity="0.8"/>
+    <circle cx="150" cy="300" r="4" fill="#6fc3df" opacity="0.8"/>
+    <circle cx="250" cy="300" r="4" fill="#6fc3df" opacity="0.8"/>
+    <circle cx="300" cy="250" r="4" fill="#6fc3df" opacity="0.8"/>
+    <circle cx="300" cy="150" r="4" fill="#6fc3df" opacity="0.8"/>
+
+    <!-- Inner circle points (Class 1 - pink) -->
+    <circle cx="200" cy="160" r="4" fill="#ff79c6" opacity="0.8"/>
+    <circle cx="200" cy="240" r="4" fill="#ff79c6" opacity="0.8"/>
+    <circle cx="160" cy="200" r="4" fill="#ff79c6" opacity="0.8"/>
+    <circle cx="240" cy="200" r="4" fill="#ff79c6" opacity="0.8"/>
+    <circle cx="220" cy="180" r="4" fill="#ff79c6" opacity="0.8"/>
+    <circle cx="180" cy="180" r="4" fill="#ff79c6" opacity="0.8"/>
+    <circle cx="180" cy="220" r="4" fill="#ff79c6" opacity="0.8"/>
+    <circle cx="220" cy="220" r="4" fill="#ff79c6" opacity="0.8"/>
+    <circle cx="210" cy="190" r="4" fill="#ff79c6" opacity="0.8"/>
+    <circle cx="190" cy="190" r="4" fill="#ff79c6" opacity="0.8"/>
+    <circle cx="190" cy="210" r="4" fill="#ff79c6" opacity="0.8"/>
+    <circle cx="210" cy="210" r="4" fill="#ff79c6" opacity="0.8"/>
+
+    <!-- Circular boundary visualization -->
+    <circle cx="200" cy="200" r="60" fill="none" stroke="#ff79c6" stroke-width="1" stroke-dasharray="5,5" opacity="0.5"/>
+    <circle cx="200" cy="200" r="110" fill="none" stroke="#6fc3df" stroke-width="1" stroke-dasharray="5,5" opacity="0.5"/>
+
+    <text x="200" y="380" class="lab" text-anchor="middle">Non-linear Separation Required</text>
+  </svg>
+  </div>
+
+  <p class="note" style="margin-top:14px;">
+    The <code class="inline">make_circles</code> dataset creates two concentric circles with added noise.
+    Linear classifiers will struggle, while non-linear methods (RBF kernel, KNN) can capture the circular boundary.
+  </p>
+</section>
+
+<section id="data-generation">
+  <h2>2) Data Generation Code</h2>
+  <pre><button class="copy">Copy</button><code>from sklearn.datasets import make_circles
+import numpy as np
+
+def make_circles_data():
+    <span class="comment"># Creates 2 classes: inner circle (1) and outer circle (0)</span>
+    X, y = make_circles(
+        n_samples=100,     <span class="comment"># Total number of points</span>
+        noise=0.05,        <span class="comment"># Standard deviation of Gaussian noise</span>
+        factor=0.5,        <span class="comment"># Scale factor between circles (0 < factor < 1)</span>
+        random_state=42    <span class="comment"># For reproducibility</span>
+    )
+    print(f"Classes: {np.unique(y)}")  <span class="comment"># Output: [0, 1]</span>
+    print(f"Shape: X={X.shape}, y={y.shape}")  <span class="comment"># X=(100, 2), y=(100,)</span>
+
+    return X, y</code></pre>
+</section>
+
+<section id="boundary-plotting">
+  <h2>3) Decision Boundary Visualization</h2>
+  <pre><button class="copy">Copy</button><code>def plot_decision_boundary(ax, clf, X, y, title=""):
+    <span class="comment"># Create mesh grid covering the feature space</span>
+    x_min, x_max = X[:,0].min() - 0.5, X[:,0].max() + 0.5
+    y_min, y_max = X[:,1].min() - 0.5, X[:,1].max() + 0.5
+
+    <span class="comment"># Generate a grid of points (100x100 = 10,000 points)</span>
+    xx, yy = np.meshgrid(
+        np.linspace(x_min, x_max, 100),
+        np.linspace(y_min, y_max, 100)
+    )
+
+    <span class="comment"># Predict class for each point in the mesh</span>
+    <span class="comment"># Stack creates shape (10000, 2) for prediction</span>
+    Z = clf.predict(np.stack([xx.ravel(), yy.ravel()], axis=1))
+    Z = Z.reshape(xx.shape)  <span class="comment"># Reshape back to 100x100</span>
+
+    <span class="comment"># Plot filled contours (decision regions)</span>
+    ax.contourf(xx, yy, Z, alpha=0.4)
+
+    <span class="comment"># Overlay actual data points</span>
+    ax.scatter(X[:,0], X[:,1], c=y)
+
+    <span class="comment"># Add title with accuracy score</span>
+    score = clf.score(X, y)
+    ax.grid(True)
+    ax.set_title(f'{title} Acc: {score:.2f}', fontsize=10)</code></pre>
+
+  <div class="highlight-box">
+    <h4>How Decision Boundary Plotting Works:</h4>
+    <ul>
+      <li><b>Mesh Grid:</b> Creates a dense grid of points covering the entire feature space</li>
+      <li><b>Predictions:</b> Classifies every point in the grid using the trained model</li>
+      <li><b>Contour Plot:</b> Colors regions based on predicted class, creating visual boundaries</li>
+      <li><b>Data Overlay:</b> Plots actual training points on top to show model fit</li>
+    </ul>
+  </div>
+</section>
+
+<section id="svm-kernels">
+  <h2>4) SVM Kernel Comparison</h2>
+
+  <pre><button class="copy">Copy</button><code>def circles_demo():
+    X, y = make_circles_data()
+
+    <span class="comment"># Test different SVM kernels</span>
+    kernels = [
+        ("Linear", 'linear'),
+        ("Polynomial", 'poly'),
+        ("RBF", 'rbf'),
+        ("Sigmoid", 'sigmoid')
+    ]
+
+    fig, axes = plt.subplots(2, 2, figsize=(10, 10))
+
+    <span class="comment"># Train and plot each kernel</span>
+    for ax, (name, kernel) in zip(axes.flatten(), kernels):
+        svm = SVC(kernel=kernel)
+        svm.fit(X, y)
+        plot_decision_boundary(ax, svm, X, y, f"SVM({name})")
+
+    plt.suptitle('SVM Kernel Comparison on Circles Data',
+                 fontsize=14, fontweight='bold')
+    plt.show()</code></pre>
+</section>
+
+<section id="model-comparison">
+  <h2>5) KNN vs Logistic Regression vs RBF SVM</h2>
+
+  <pre><button class="copy">Copy</button><code>def circles_demo_knn_logreg_rbf():
+    X, y = make_circles_data()
+
+    models = [
+        ("KNN (k=5)", Pipeline([
+            ("scaler", StandardScaler()),
+            ("clf", KNeighborsClassifier(n_neighbors=5))
+        ])),
+        ("Logistic Regression", Pipeline([
+            ("scaler", StandardScaler()),
+            ("clf", LogisticRegression())
+        ])),
+        ("RBF SVM", Pipeline([
+            ("scaler", StandardScaler()),
+            ("clf", SVC(kernel="rbf", C=1.0, gamma="scale"))
+        ])),
+    ]
+
+    fig, axes = plt.subplots(1, 3, figsize=(12, 4))
+
+    for ax, (name, clf) in zip(axes, models):
+        clf.fit(X, y)
+        plot_decision_boundary(ax, clf, X, y, f"{name}")
+
+    plt.suptitle("KNN vs Logistic vs RBF SVM on Circles",
+                 fontsize=14, fontweight="bold")
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
+    plt.show()</code></pre>
+</section>
+
+<section id="complete-code">
+  <h2>6) Complete Implementation</h2>
+  <pre><button class="copy">Copy</button><code>from sklearn.datasets import make_circles
+import matplotlib.pyplot as plt
+from sklearn.svm import SVC
+import numpy as np
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import StandardScaler
+import warnings
+warnings.filterwarnings('ignore')
+
+<span class="comment"># ============================================</span>
+<span class="comment"># Data Generation</span>
+<span class="comment"># ============================================</span>
+def make_circles_data():
+    X, y = make_circles(n_samples=100, noise=0.05, factor=0.5, random_state=42)
+    print(f"Unique classes: {np.unique(y)}")
+    return X, y
+
+<span class="comment"># ============================================</span>
+<span class="comment"># Plotting Decision Boundary</span>
+<span class="comment"># ============================================</span>
+def plot_decision_boundary(ax, clf, X, y, title=""):
+    <span class="comment"># Create mesh</span>
+    x_min, x_max = X[:,0].min() - 0.5, X[:,0].max() + 0.5
+    y_min, y_max = X[:,1].min() - 0.5, X[:,1].max() + 0.5
+
+    <span class="comment"># Create grid of points</span>
+    xx, yy = np.meshgrid(np.linspace(x_min, x_max, 100),
+                         np.linspace(y_min, y_max, 100))
+
+    <span class="comment"># Predict on mesh</span>
+    Z = clf.predict(np.stack([xx.ravel(), yy.ravel()], axis=1))
+    Z = Z.reshape(xx.shape)
+
+    <span class="comment"># Plot boundary and data</span>
+    ax.contourf(xx, yy, Z, alpha=0.4)
+    ax.scatter(X[:,0], X[:,1], c=y)
+
+    <span class="comment"># Add title with accuracy</span>
+    score = clf.score(X, y)
+    ax.grid(True)
+    ax.set_title(f'{title} Acc: {score:.2f}', fontsize=10)
+
+<span class="comment"># ============================================</span>
+<span class="comment"># Demo 1: SVM Kernels</span>
+<span class="comment"># ============================================</span>
+def circles_demo():
+    X, y = make_circles_data()
+
+    kernels = [
+        ("Linear", 'linear'),
+        ("Polynomial", 'poly'),
+        ("RBF", 'rbf'),
+        ("Sigmoid", 'sigmoid')
+    ]
+
+    fig, axes = plt.subplots(2, 2, figsize=(10, 10))
+
+    for ax, (name, kernel) in zip(axes.flatten(), kernels):
+        svm = SVC(kernel=kernel)
+        svm.fit(X, y)
+        plot_decision_boundary(ax, svm, X, y, f"SVM({name})")
+
+    plt.suptitle('SVM Kernel Comparison on Circles Data',
+                 fontsize=14, fontweight='bold')
+    plt.show()
+
+<span class="comment"># ============================================</span>
+<span class="comment"># Demo 2: Model Comparison</span>
+<span class="comment"># ============================================</span>
+def circles_demo_knn_logreg_rbf():
+    X, y = make_circles_data()
+
+    models = [
+        ("KNN (k=5)", Pipeline([
+            ("scaler", StandardScaler()),
+            ("clf", KNeighborsClassifier(n_neighbors=5))
+        ])),
+        ("Logistic Regression", Pipeline([
+            ("scaler", StandardScaler()),
+            ("clf", LogisticRegression())
+        ])),
+        ("RBF SVM", Pipeline([
+            ("scaler", StandardScaler()),
+            ("clf", SVC(kernel="rbf", C=1.0, gamma="scale"))
+        ])),
+    ]
+
+    fig, axes = plt.subplots(1, 3, figsize=(12, 4))
+
+    for ax, (name, clf) in zip(axes, models):
+        clf.fit(X, y)
+        plot_decision_boundary(ax, clf, X, y, f"{name}")
+
+    plt.suptitle("KNN vs Logistic vs RBF SVM on Circles",
+                 fontsize=14, fontweight="bold")
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
+    plt.show()
+
+<span class="comment"># ============================================</span>
+<span class="comment"># MAIN</span>
+<span class="comment"># ============================================</span>
+if __name__ == "__main__":
+    print("="*50)
+    print("1. SVM Kernel Comparison")
+    print("="*50)
+    circles_demo()
+
+    print("="*50)
+    print("2. KNN vs Logistic vs RBF SVM")
+    print("="*50)
+    circles_demo_knn_logreg_rbf()</code></pre>
+</section>
+
+<section id="key-insights">
+  <h2>7) Key Insights & Takeaways</h2>
+
+  <div class="highlight-box">
+    <h4>🎯 Why RBF SVM Works Best:</h4>
+    <ul>
+      <li>The RBF kernel creates circular decision boundaries naturally</li>
+      <li>It maps data to infinite-dimensional space where circles become linearly separable</li>
+      <li>The gamma parameter controls the "tightness" of the circular boundary</li>
+    </ul>
+  </div>
+
+  <div class="highlight-box">
+    <h4>📊 Performance Summary:</h4>
+    <ul>
+      <li><b>Best:</b> RBF SVM (~100% accuracy) - perfect for radial patterns</li>
+      <li><b>Good:</b> KNN (~97% accuracy) - captures local structure well</li>
+      <li><b>Moderate:</b> Polynomial SVM (~85% accuracy) - depends on degree</li>
+      <li><b>Poor:</b> Linear SVM, Logistic Regression (~48% accuracy) - can't handle non-linearity</li>
+      <li><b>Poor:</b> Sigmoid SVM (~52% accuracy) - wrong shape for this problem</li>
+    </ul>
+  </div>
+
+  <h4>When to Use Each Model:</h4>
+  <ul>
+    <li><b>Linear models:</b> When classes are linearly separable or as baseline</li>
+    <li><b>Polynomial kernel:</b> When decision boundary has polynomial shape</li>
+    <li><b>RBF kernel:</b> General-purpose non-linear problems, especially circular/radial patterns</li>
+    <li><b>KNN:</b> When local patterns matter more than global structure</li>
+    <li><b>Sigmoid kernel:</b> Rarely used in practice, similar to neural networks</li>
+  </ul>
+</section>
+
+<script>
+  document.querySelectorAll("pre .copy").forEach(button => {
+    button.addEventListener("click", () => {
+      const code = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
