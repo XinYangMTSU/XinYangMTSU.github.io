@@ -1830,7 +1830,14 @@ Test: =================================
   <ul>
     <li><b>Criterion</b>: <code>gini</code> or <code>entropy</code> (classification); <code>mse</code> (regression)</li>
     <li><b>max_depth</b>: maximum tree depth (controls complexity)</li>
+    <ul>
+      <li>If it's too large → the tree may overfit.</li>
+      <li>If it's too small → the tree may underfit.</li>
+    </ul>
     <li><b>min_samples_split</b>, <b>min_samples_leaf</b>: minimum samples to split or to be a leaf</li>
+    <ul>
+        <li>Higher values prevent the tree from growing too deep.</li>
+    </ul>
     <li><b>max_features</b>: number of features to consider at each split (important in ensembles)</li>
   </ul>
   
