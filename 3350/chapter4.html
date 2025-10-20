@@ -1777,6 +1777,212 @@ update();
 
 </section>
 
+<!--
+Test: =================================
+-->
+
+<section id="dt">
+
+  <h4>2.3 Decision Tree (CART)</h4>
+  <br>
+
+  <b>Idea:</b>
+  <p>
+    A Decision Tree is a <b>greedy, recursive partitioning</b> method that splits the feature space into
+    axis-aligned regions to make predictions.
+    <br><br>
+    At each node, it searches over candidate <b>features</b> and <b>thresholds</b> to find the split that
+    most reduces class impurity (classification) or variance (regression).
+    <br>
+    The process repeats on each child node until a <b>stopping condition</b> is met (e.g., max depth,
+    too few samples), followed optionally by <b>pruning</b> to reduce overfitting.
+  </p>
+
+  <p><b>Classification impurity:</b></p>
+  <ul>
+    <li><b>Gini</b>: \( \displaystyle G(t)=1-\sum_{k=1}^{K} p_{k}(t)^2 \)</li>
+    <li><b>Entropy</b>: \( \displaystyle H(t)=-\sum_{k=1}^{K} p_{k}(t)\log p_{k}(t) \)</li>
+  </ul>
+
+  <p><b>Split quality (classification):</b></p>
+  <div class="eq" style="text-align:center;">
+    Information Gain \(=\; \mathrm{Impurity}(t) \;-\;
+    \Big[\frac{N_L}{N}\,\mathrm{Impurity}(t_L) + \frac{N_R}{N}\,\mathrm{Impurity}(t_R)\Big]\)
+  </div>
+  <ul>
+    <li>\(t\): current node; \(t_L,t_R\): left/right child after a split</li>
+    <li>\(N, N_L, N_R\): sample counts; \(p_k(t)\): class proportion at node \(t\)</li>
+  </ul>
+
+  <p><b>Regression impurity:</b> typically <b>MSE</b> (variance):
+    \( \displaystyle \frac{1}{N}\sum_{i=1}^{N}(y_i-\bar y)^2 \)</p>
+
+  <br>
+
+  <p><strong>Where (key choices):</strong></p>
+  <ul>
+    <li><b>Criterion</b>: <code>gini</code> or <code>entropy</code> (classification); <code>mse</code>/<code>mae</code> (regression)</li>
+    <li><b>max_depth</b>: maximum tree depth (controls complexity)</li>
+    <li><b>min_samples_split</b>, <b>min_samples_leaf</b>: minimum samples to split or to be a leaf</li>
+    <li><b>max_features</b>: number of features to consider at each split (important in ensembles)</li>
+    <li><b>ccp_alpha</b> (cost-complexity pruning): larger \(\alpha\) ⇒ simpler pruned tree</li>
+  </ul>
+
+  <br>
+
+  <h4>Interpreting the Parameters</h4>
+  <ul>
+    <li><strong>Depth & leaf size:</strong> Deeper trees with tiny leaves → low bias, high variance (overfit).
+      Shallower trees / larger leaves → higher bias, lower variance.</li>
+    <li><strong>Criterion:</strong> Entropy is more sensitive near 0/1 probabilities; Gini is faster and often comparable.</li>
+    <li><strong>Pruning (<code>ccp_alpha</code>):</strong> Trades a bit of training fit for better generalization.</li>
+  </ul>
+
+  <br>
+
+  <div class="wrap">
+    <h4>Decision Tree — Interactive Split (1D demo)</h4>
+    <p class="muted">
+      Drag the threshold slider \( \tau \) to split the x-axis into Left (\(x \le \tau\)) and Right (\(x > \tau\)).
+      We compute the <em>weighted Gini impurity</em> of the split and show the predicted class on each side (majority vote).
+    </p>
+
+    <div class="card row">
+      <div class="legend">
+        <span class="key"><span class="dot a"></span><span>Class A</span></span>
+        <span class="key"><span class="dot b"></span><span>Class B</span></span>
+        <span class="slider">
+          <label for="thr">threshold \( \tau \):</label>
+          <input id="thr" type="range" min="40" max="560" step="2" value="300" />
+          <span id="thrval" class="pill"><span>τ</span><b>300</b></span>
+        </span>
+      </div>
+      <div id="gini" class="predict pill">Weighted Gini: <b id="giniVal">—</b></div>
+    </div>
+
+    <!-- Plot (1D along x; points jittered in y just for visibility) -->
+    <svg id="dt-plot" viewBox="0 0 600 220" aria-label="Decision Tree 1D split">
+      <!-- axis -->
+      <g stroke-linecap="round">
+        <line class="axis" x1="40" y1="180" x2="580" y2="180"/>
+        <line class="axis" x1="40" y1="40"  x2="40"  y2="180"/>
+        <!-- ticks -->
+        <g class="grid">
+          <line x1="120" y1="40" x2="120" y2="180"/><line x1="200" y1="40" x2="200" y2="180"/>
+          <line x1="280" y1="40" x2="280" y2="180"/><line x1="360" y1="40" x2="360" y2="180"/>
+          <line x1="440" y1="40" x2="440" y2="180"/><line x1="520" y1="40" x2="520" y2="180"/>
+        </g>
+      </g>
+
+      <!-- vertical split line -->
+      <line id="splitLine" x1="300" y1="40" x2="300" y2="180" class="split"></line>
+
+      <!-- region predictions -->
+      <text id="leftPred"  class="label" x="80"  y="60">Left: —</text>
+      <text id="rightPred" class="label" x="480" y="60">Right: —</text>
+
+      <!-- points -->
+      <g id="dt-points"></g>
+    </svg>
+
+    <p class="notice">
+      The tree chooses the split (feature & threshold) that <b>minimizes weighted impurity</b>.
+      In higher dimensions, it searches over features and thresholds at each node.
+    </p>
+  </div>
+
+  <script>
+  // --- Synthetic 1D data: two overlapping clusters along x ---
+  const dtPts = [
+    // Class A (cluster near ~160 and ~260)
+    {x:100,c:'A'},{x:130,c:'A'},{x:150,c:'A'},{x:170,c:'A'},{x:190,c:'A'},
+    {x:220,c:'A'},{x:250,c:'A'},{x:260,c:'A'},{x:240,c:'A'},
+    // Class B (cluster near ~380 and ~470)
+    {x:340,c:'B'},{x:360,c:'B'},{x:380,c:'B'},{x:400,c:'B'},{x:420,c:'B'},
+    {x:450,c:'B'},{x:470,c:'B'},{x:490,c:'B'}
+  ];
+  const jitterY = (min=80,max=160)=> min + Math.random()*(max-min);
+  const dtG = document.getElementById('dt-points');
+  const splitLine = document.getElementById('splitLine');
+  const thrSlider = document.getElementById('thr');
+  const thrVal = document.getElementById('thrval').querySelector('b');
+  const giniEl = document.getElementById('giniVal');
+  const leftPred = document.getElementById('leftPred');
+  const rightPred = document.getElementById('rightPred');
+
+  function renderDtPoints(){
+    dtG.innerHTML = '';
+    dtPts.forEach(p=>{
+      const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      dot.setAttribute('cx', p.x);
+      dot.setAttribute('cy', jitterY());
+      dot.setAttribute('r', 6);
+      dot.setAttribute('class', `pt ${p.c==='A'?'a':'b'}`);
+      dtG.appendChild(dot);
+    });
+  }
+
+  function gini(counts){
+    const n = counts.A + counts.B;
+    if(n===0) return 0;
+    const pA = counts.A / n, pB = counts.B / n;
+    return 1 - (pA*pA + pB*pB);
+    // (for >2 classes, sum p_k^2 across classes)
+  }
+
+  function updateSplit(){
+    const tau = parseInt(thrSlider.value,10);
+    thrVal.textContent = tau;
+    splitLine.setAttribute('x1', tau);
+    splitLine.setAttribute('x2', tau);
+
+    // Partition
+    const L = dtPts.filter(p => p.x <= tau);
+    const R = dtPts.filter(p => p.x >  tau);
+
+    // Counts per side
+    const cntL = {A: L.filter(p=>p.c==='A').length, B: L.filter(p=>p.c==='B').length};
+    const cntR = {A: R.filter(p=>p.c==='A').length, B: R.filter(p=>p.c==='B').length};
+
+    const nL = L.length, nR = R.length, N = nL + nR;
+    const gL = gini(cntL), gR = gini(cntR);
+    const wGini = (N===0) ? 0 : (nL/N)*gL + (nR/N)*gR;
+
+    giniEl.textContent = wGini.toFixed(3);
+
+    // Majority predictions
+    const predL = (cntL.A===0 && cntL.B===0) ? '—' : (cntL.A >= cntL.B ? 'Class A' : 'Class B');
+    const predR = (cntR.A===0 && cntR.B===0) ? '—' : (cntR.A >= cntR.B ? 'Class A' : 'Class B');
+    leftPred.textContent  = `Left: ${predL} (${cntL.A}:${cntL.B})`;
+    rightPred.textContent = `Right: ${predR} (${cntR.A}:${cntR.B})`;
+
+    leftPred.style.fill  = (predL==='Class A') ? 'var(--cA)' : (predL==='—' ? '#666' : 'var(--cB)');
+    rightPred.style.fill = (predR==='Class A') ? 'var(--cA)' : (predR==='—' ? '#666' : 'var(--cB)';
+  }
+
+  renderDtPoints();
+  updateSplit();
+  thrSlider.addEventListener('input', updateSplit);
+  </script>
+
+  <hr>
+
+  <h4>Key Points</h4>
+  <ul>
+    <li><b>Greedy, local decisions:</b> Each split is chosen to best reduce impurity on that node.</li>
+    <li><b>High variance model:</b> Trees can overfit; control with <code>max_depth</code>, leaf sizes, or <b>pruning</b>.</li>
+    <li><b>Interpretability:</b> Paths from root to leaf form human-readable rules.</li>
+    <li><b>Ensembles shine:</b> Random Forests and Gradient Boosted Trees reduce variance and often improve accuracy.</li>
+  </ul>
+
+</section>
+
+<!--
+Test: =================================
+-->
+
+  
+
   <section id="nb">
 
   <h4>2.5 Naive Bayes</h4>
