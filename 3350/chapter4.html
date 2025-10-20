@@ -1817,6 +1817,7 @@ Test: =================================
   <ul>
   <li><b>Goal:</b> Measure how much a split (a decision) improves the “purity” of the data in the decision tree.</li>
   <li><b>Higher Information Gain →</b> Better split (greater reduction in impurity).</li>
+  <li>Not a new impurity measure, but a difference between before and after splitting.</li>
 </ul>
   
   
@@ -1825,7 +1826,7 @@ Test: =================================
 
   <br>
 
-  <p><strong>Where (key choices):</strong></p>
+  <p><strong>>Hyperparameters:</strong></p>
   <ul>
     <li><b>Criterion</b>: <code>gini</code> or <code>entropy</code> (classification); <code>mse</code> (regression)</li>
     <li><b>max_depth</b>: maximum tree depth (controls complexity)</li>
