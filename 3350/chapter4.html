@@ -1630,9 +1630,26 @@ Test: =================================
   <b>Idea:</b>
   <p>
     A Decision Tree predicts a class by asking a sequence of <b>if–then</b> questions on features.
+    Each question (called a split) checks one feature (like age, income, or test score) and decides which branch to follow next.
+    <br>
     At each split, it chooses the feature/threshold that best <b><font color="red">separates the classes (reduces impurity)</font></b>.
+    The tree doesn't choose questions randomly — it looks for the best question that divides the training data into groups that are as pure as possible.
+    <br>
+    <b><font color="red">Impurity</font></b> means how mixed the classes are in a group. 
+    <ul>
+      <li>If a node has 50% spam and 50% not spam → very impure.</li>
+      <li>If a node has 100% spam → perfectly pure.</li>
+    </ul>
+    The algorithm tests all possible features and thresholds, computes impurity (using measures like Gini or Entropy), 
+    and picks the one that reduces impurity the most.
+    <br>
     The final prediction comes from the class majority at a leaf.
-  
+    Once all questions are answered and you reach a leaf node, the tree makes a prediction.
+    That leaf stores the majority class of the training samples that ended up there.
+    <ul>
+      <li>Example: if 80% of the samples at that leaf are ``Spam" and 20% are ``Not Spam", 
+        the prediction for any new data point reaching that leaf is “Spam.”</li>
+    </ul>
     <br><br>
     At each node, it searches over candidate <b>features</b> and <b>thresholds</b> to find the split that
     most reduces class impurity (classification) or variance (regression).
