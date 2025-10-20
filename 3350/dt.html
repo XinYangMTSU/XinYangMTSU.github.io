@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CART Decision Tree — Breast Cancer (sklearn)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- MathJax v3 config -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [["$", "$"]],
+        processEscapes: true
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Roboto',Arial,sans-serif;background:#17191a;min-height:100vh;color:#ff79c6;padding:20px}
+    section{margin:0 auto 55px auto;background:#222025;border-radius:18px;box-shadow:0 4px 30px rgba(255,121,198,.09);padding:36px 32px 22px 32px;border-left:7px solid #ff79c6;position:relative;max-width:1600px}
+    h1{color:#ffb3de;margin:0 0 8px 0;text-align:center;font-size:2.5em}
+    h2{margin:0 0 20px 0;color:#ffb3de;font-weight:700;font-size:1.8em}
+    h3{font-size:1.18em;color:#ffb3de;margin-bottom:15px;font-weight:600}
+    p{color:#ffd7f0;line-height:1.8}
+    .subtitle{text-align:center;color:#ffd7f0;opacity:.9;font-size:1.1em;margin-bottom:20px}
+    .pill{display:inline-block;background:#19121a;border:1px solid #ff79c6;border-radius:999px;padding:4px 10px;margin:2px 8px 2px 0;font-size:.9em}
+    .grid{display:grid;grid-template-columns:1fr;gap:30px;margin-bottom:20px}
+    .viz-panel{background:#19121a;border-radius:12px;padding:25px;box-shadow:0 2px 10px rgba(255,121,198,0.11);border:1px solid rgba(255,121,198,0.2)}
+    .info-section{background:#2a252b;border-radius:12px;padding:25px;margin-top:30px;border:1px solid rgba(255,121,198,0.2)}
+    .info-section h3{color:#ffb3de;margin-bottom:15px;font-size:1.3em;border-bottom:1px solid #ff79c6;padding-bottom:8px}
+    .card{background:#2a252b;border:1px solid rgba(255,121,198,0.25);border-radius:10px;padding:16px}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .kpi{display:flex;align-items:baseline;gap:8px;margin:6px 0}
+    .kpi .v{font-weight:700;color:#fff}
+    code, pre{background:#1e1a20;color:#e6dbff;border:1px solid rgba(255,121,198,0.25);border-radius:8px;padding:10px;display:block;overflow:auto}
+    ul{margin:10px 0 10px 22px}
+    li{color:#ffd7f0;margin-bottom:6px;line-height:1.65}
+    .legend{font-size:.9em;color:#ffd7f0;opacity:.9;margin-top:10px}
+    svg{max-width:100%;height:auto;display:block}
+    .node{fill:#fff;stroke:#333;stroke-width:1.3;rx:10}
+    .leaf{fill:#d4f4dd}
+    .leaf-malignant{fill:#ffd4d4}
+    .rule{font:600 11px/1.25 system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    .samples{font:700 10px/1.25 system-ui,-apple-system,Segoe UI,Roboto,Arial;fill:#000}
+    .class-dist{font:9px/1.25 system-ui,-apple-system,Segoe UI,Roboto,Arial;fill:#444}
+    .lbl{font:11px/1.25 system-ui,-apple-system,Segoe UI,Roboto,Arial;fill:#222}
+    .edge{stroke:#666;stroke-width:1.4}
+    .yn{font:700 10px/1 system-ui,-apple-system,Segoe UI,Roboto,Arial;fill:#ff4d6d}
+    .badge{display:inline-block;background:#19121a;border:1px solid #ff79c6;border-radius:8px;padding:4px 8px;margin-left:8px;color:#ffd7f0}
+    .stats-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));gap:15px;margin-top:20px}
+    .stat-card{background:#1e1a20;border:1px solid rgba(255,121,198,0.3);border-radius:8px;padding:12px;text-align:center}
+    .stat-card .value{font-size:1.4em;font-weight:700;color:#fff}
+    .stat-card .label{font-size:0.85em;color:#ffd7f0;opacity:0.9;margin-top:4px}
+    @media (max-width:1200px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <section>
+    <center>
+      <h1><span class="pill">Decision Tree (CART)</span></h1>
+      <p class="subtitle">Full tree example using <code>sklearn.datasets.load_breast_cancer(as_frame=True)</code>
+      </p>
+    </center>
+  </section>
+
+  <section>
+    <div class="viz-panel">
+      <h2>Multi-Level Decision Tree with Sample Counts</h2>
+      <p>
+        This tree shows how the breast cancer dataset (569 samples: 212 malignant, 357 benign) is split recursively.
+        Each node displays the splitting criterion, sample count, and class distribution.
+      </p>
+      
+      <!-- Enhanced tree visualization with sample counts -->
+      <svg viewBox="0 0 1200 600" role="img" aria-label="Decision tree with sample counts">
+        <!-- Edges -->
+        <g class="edge">
+          <!-- Level 1 edges -->
+          <line x1="600" y1="90" x2="300" y2="190"/>
+          <line x1="600" y1="90" x2="900" y2="190"/>
+          
+          <!-- Level 2 edges (left subtree) -->
+          <line x1="300" y1="250" x2="150" y2="350"/>
+          <line x1="300" y1="250" x2="450" y2="350"/>
+          
+          <!-- Level 2 edges (right subtree) -->
+          <line x1="900" y1="250" x2="750" y2="350"/>
+          <line x1="900" y1="250" x2="1050" y2="350"/>
+          
+          <!-- Level 3 edges (far left) -->
+          <line x1="150" y1="410" x2="75" y2="490"/>
+          <line x1="150" y1="410" x2="225" y2="490"/>
+          
+          <!-- Level 3 edges (mid left) -->
+          <line x1="450" y1="410" x2="375" y2="490"/>
+          <line x1="450" y1="410" x2="525" y2="490"/>
+          
+          <!-- Level 3 edges (mid right) -->
+          <line x1="750" y1="410" x2="675" y2="490"/>
+          <line x1="750" y1="410" x2="825" y2="490"/>
+          
+          <!-- Level 3 edges (far right) -->
+          <line x1="1050" y1="410" x2="975" y2="490"/>
+          <line x1="1050" y1="410" x2="1125" y2="490"/>
+        </g>
+        
+        <!-- Yes/No labels -->
+        <g class="yn">
+          <text x="430" y="145">Yes</text>
+          <text x="770" y="145">No</text>
+          
+          <text x="210" y="295">Yes</text>
+          <text x="390" y="295">No</text>
+          
+          <text x="820" y="295">Yes</text>
+          <text x="980" y="295">No</text>
+          
+          <text x="105" y="445">Yes</text>
+          <text x="195" y="445">No</text>
+          
+          <text x="405" y="445">Yes</text>
+          <text x="495" y="445">No</text>
+          
+          <text x="705" y="445">Yes</text>
+          <text x="795" y="445">No</text>
+          
+          <text x="1005" y="445">Yes</text>
+          <text x="1095" y="445">No</text>
+        </g>
+        
+        <!-- Root Node -->
+        <g>
+          <rect class="node" x="500" y="30" width="200" height="90" rx="10"/>
+          <text class="rule" x="600" y="55" text-anchor="middle">worst perimeter ≤ 106.1</text>
+          <text class="samples" x="600" y="75" text-anchor="middle">samples = 569</text>
+          <text class="class-dist" x="600" y="90" text-anchor="middle">[212 malignant, 357 benign]</text>
+          <text class="lbl" x="600" y="105" text-anchor="middle">Gini = 0.468</text>
+        </g>
+        
+        <!-- Level 2 Left -->
+        <g>
+          <rect class="node" x="200" y="190" width="200" height="90" rx="10"/>
+          <text class="rule" x="300" y="215" text-anchor="middle">worst concave points ≤ 0.136</text>
+          <text class="samples" x="300" y="235" text-anchor="middle">samples = 379</text>
+          <text class="class-dist" x="300" y="250" text-anchor="middle">[21 malignant, 358 benign]</text>
+          <text class="lbl" x="300" y="265" text-anchor="middle">Gini = 0.108</text>
+        </g>
+        
+        <!-- Level 2 Right -->
+        <g>
+          <rect class="node" x="800" y="190" width="200" height="90" rx="10"/>
+          <text class="rule" x="900" y="215" text-anchor="middle">mean texture ≤ 19.91</text>
+          <text class="samples" x="900" y="235" text-anchor="middle">samples = 190</text>
+          <text class="class-dist" x="900" y="250" text-anchor="middle">[191 malignant, 9 benign]</text>
+          <text class="lbl" x="900" y="265" text-anchor="middle">Gini = 0.093</text>
+        </g>
+        
+        <!-- Level 3 Far Left -->
+        <g>
+          <rect class="node" x="50" y="350" width="200" height="90" rx="10"/>
+          <text class="rule" x="150" y="375" text-anchor="middle">worst radius ≤ 14.93</text>
+          <text class="samples" x="150" y="395" text-anchor="middle">samples = 352</text>
+          <text class="class-dist" x="150" y="410" text-anchor="middle">[5 malignant, 347 benign]</text>
+          <text class="lbl" x="150" y="425" text-anchor="middle">Gini = 0.028</text>
+        </g>
+        
+        <!-- Level 3 Mid Left -->
+        <g>
+          <rect class="node" x="350" y="350" width="200" height="90" rx="10"/>
+          <text class="rule" x="450" y="375" text-anchor="middle">worst texture ≤ 25.67</text>
+          <text class="samples" x="450" y="395" text-anchor="middle">samples = 27</text>
+          <text class="class-dist" x="450" y="410" text-anchor="middle">[16 malignant, 11 benign]</text>
+          <text class="lbl" x="450" y="425" text-anchor="middle">Gini = 0.481</text>
+        </g>
+        
+        <!-- Level 3 Mid Right -->
+        <g>
+          <rect class="node" x="650" y="350" width="200" height="90" rx="10"/>
+          <text class="rule" x="750" y="375" text-anchor="middle">area error ≤ 48.98</text>
+          <text class="samples" x="750" y="395" text-anchor="middle">samples = 37</text>
+          <text class="class-dist" x="750" y="410" text-anchor="middle">[28 malignant, 9 benign]</text>
+          <text class="lbl" x="750" y="425" text-anchor="middle">Gini = 0.371</text>
+        </g>
+        
+        <!-- Level 3 Far Right -->
+        <g>
+          <rect class="node" x="950" y="350" width="200" height="90" rx="10"/>
+          <text class="rule" x="1050" y="375" text-anchor="middle">worst area ≤ 785.8</text>
+          <text class="samples" x="1050" y="395" text-anchor="middle">samples = 153</text>
+          <text class="class-dist" x="1050" y="410" text-anchor="middle">[153 malignant, 0 benign]</text>
+          <text class="lbl" x="1050" y="425" text-anchor="middle">Gini = 0.0</text>
+        </g>
+        
+        <!-- Level 4 Leaf Nodes -->
+        <!-- Far left leaves -->
+        <g>
+          <rect class="node leaf" x="20" y="470" width="110" height="80" rx="10"/>
+          <text class="rule" x="75" y="495" text-anchor="middle">Leaf</text>
+          <text class="samples" x="75" y="510" text-anchor="middle">samples = 333</text>
+          <text class="class-dist" x="75" y="525" text-anchor="middle">[0, 333]</text>
+          <text class="lbl" x="75" y="540" text-anchor="middle">Class: Benign</text>
+        </g>
+        
+        <g>
+          <rect class="node leaf" x="170" y="470" width="110" height="80" rx="10"/>
+          <text class="rule" x="225" y="495" text-anchor="middle">Leaf</text>
+          <text class="samples" x="225" y="510" text-anchor="middle">samples = 19</text>
+          <text class="class-dist" x="225" y="525" text-anchor="middle">[5, 14]</text>
+          <text class="lbl" x="225" y="540" text-anchor="middle">Class: Benign</text>
+        </g>
+        
+        <!-- Mid left leaves -->
+        <g>
+          <rect class="node leaf" x="320" y="470" width="110" height="80" rx="10"/>
+          <text class="rule" x="375" y="495" text-anchor="middle">Leaf</text>
+          <text class="samples" x="375" y="510" text-anchor="middle">samples = 4</text>
+          <text class="class-dist" x="375" y="525" text-anchor="middle">[0, 4]</text>
+          <text class="lbl" x="375" y="540" text-anchor="middle">Class: Benign</text>
+        </g>
+        
+        <g>
+          <rect class="node leaf-malignant" x="470" y="470" width="110" height="80" rx="10"/>
+          <text class="rule" x="525" y="495" text-anchor="middle">Leaf</text>
+          <text class="samples" x="525" y="510" text-anchor="middle">samples = 23</text>
+          <text class="class-dist" x="525" y="525" text-anchor="middle">[16, 7]</text>
+          <text class="lbl" x="525" y="540" text-anchor="middle">Class: Malignant</text>
+        </g>
+        
+        <!-- Mid right leaves -->
+        <g>
+          <rect class="node leaf-malignant" x="620" y="470" width="110" height="80" rx="10"/>
+          <text class="rule" x="675" y="495" text-anchor="middle">Leaf</text>
+          <text class="samples" x="675" y="510" text-anchor="middle">samples = 28</text>
+          <text class="class-dist" x="675" y="525" text-anchor="middle">[19, 9]</text>
+          <text class="lbl" x="675" y="540" text-anchor="middle">Class: Malignant</text>
+        </g>
+        
+        <g>
+          <rect class="node leaf-malignant" x="770" y="470" width="110" height="80" rx="10"/>
+          <text class="rule" x="825" y="495" text-anchor="middle">Leaf</text>
+          <text class="samples" x="825" y="510" text-anchor="middle">samples = 9</text>
+          <text class="class-dist" x="825" y="525" text-anchor="middle">[9, 0]</text>
+          <text class="lbl" x="825" y="540" text-anchor="middle">Class: Malignant</text>
+        </g>
+        
+        <!-- Far right leaves -->
+        <g>
+          <rect class="node leaf-malignant" x="920" y="470" width="110" height="80" rx="10"/>
+          <text class="rule" x="975" y="495" text-anchor="middle">Leaf</text>
+          <text class="samples" x="975" y="510" text-anchor="middle">samples = 3</text>
+          <text class="class-dist" x="975" y="525" text-anchor="middle">[3, 0]</text>
+          <text class="lbl" x="975" y="540" text-anchor="middle">Class: Malignant</text>
+        </g>
+        
+        <g>
+          <rect class="node leaf-malignant" x="1070" y="470" width="110" height="80" rx="10"/>
+          <text class="rule" x="1125" y="495" text-anchor="middle">Leaf</text>
+          <text class="samples" x="1125" y="510" text-anchor="middle">samples = 150</text>
+          <text class="class-dist" x="1125" y="525" text-anchor="middle">[150, 0]</text>
+          <text class="lbl" x="1125" y="540" text-anchor="middle">Class: Malignant</text>
+        </g>
+      </svg>
+      
+      <p class="legend">
+        <b>Green leaves:</b> Benign prediction (majority class) | <b>Red leaves:</b> Malignant prediction | 
+        Numbers show [malignant count, benign count]
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="info-section">
+      <h3>Tree Statistics</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="value">4</div>
+          <div class="label">Tree Depth</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">569</div>
+          <div class="label">Total Samples</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">8</div>
+          <div class="label">Leaf Nodes</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">7</div>
+          <div class="label">Decision Nodes</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">212</div>
+          <div class="label">Malignant Cases</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">357</div>
+          <div class="label">Benign Cases</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="info-section">
+      <h3>How to Read This Tree</h3>
+      <ul>
+        <li><b>Each internal node</b> shows a decision rule (feature ≤ threshold)</li>
+        <li><b>Sample counts</b> show how many training examples reach each node</li>
+        <li><b>Class distribution</b> [malignant, benign] shows the split at each node</li>
+        <li><b>Gini impurity</b> measures how "mixed" the classes are (0 = pure, 0.5 = perfectly mixed)</li>
+        <li><b>Leaf nodes</b> make the final prediction based on majority class</li>
+        <li>The tree successfully separates most cases - notice the large pure leaf with 333 benign samples!</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="info-section">
+      <h3>Key Observations</h3>
+      <p>
+        <b>First split (worst perimeter ≤ 106.1):</b> This single feature separates the data remarkably well! 
+        The left branch gets 379 samples (mostly benign), while the right gets 190 (mostly malignant).
+      </p>
+      <p>
+        <b>Pure nodes:</b> Several leaf nodes are completely pure (Gini = 0), meaning they contain only one class. 
+        The largest pure node contains 333 benign samples - that's 93% of all benign cases classified with just two decisions!
+      </p>
+      <p>
+        <b>Feature importance:</b> Notice how "worst" features (worst perimeter, worst concave points, worst radius) 
+        appear frequently - these capture the most extreme measurements and are highly predictive.
+      </p>
+    </div>
+  </section>
+
+</body>
+</html>
