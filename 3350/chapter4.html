@@ -1742,7 +1742,7 @@ Test: =================================
     <li><b>p<sub>k</sub>(t)</b> = proportion (probability) of class <b>k</b> in node <b>t</b></li>
     <li><b>G(t)</b>: impurity score (0 = pure, high = mixed)</li>
     </ul>
-
+  <br>
     <table border="1">
   <thead>
     <tr>
@@ -1765,10 +1765,43 @@ Test: =================================
     </tr>
   </tbody>
 </table>
-
+  <br>
     
     
     <li><b>Entropy</b>: \( \displaystyle H(t)=-\sum_{k=1}^{K} p_{k}(t)\log p_{k}(t) \)</li>
+
+    <p><b>Intuition:</b></p>
+<ul>
+  <li>Entropy comes from information theory — it measures <b>disorder</b> or <b>uncertainty</b>.</li>
+  <li>A node with all samples from one class has no uncertainty → <b>Entropy = 0</b>.</li>
+  <li>A node with a 50–50 split has maximum uncertainty → <b>Entropy = 1</b> (for two classes).</li>
+</ul>
+ <br>
+
+    <table border="1"">
+  <thead>
+    <tr>
+      <th>Class Distribution</th>
+      <th>Entropy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>100% Spam</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>50% Spam, 50% Not Spam</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <td>70% Spam, 30% Not Spam</td>
+      <td>0.88</td>
+    </tr>
+  </tbody>
+</table>
+
+  
   </ul>
 
   <p><b>Split quality (classification):</b></p>
