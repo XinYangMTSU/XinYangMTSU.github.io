@@ -1676,7 +1676,7 @@ Test: =================================
   #dt-mini .rule { font: 600 12px/1.2 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; }
   #dt-mini .lbl  { font: 12px/1.2 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; fill:#333; }
   #dt-mini .edge { stroke:#666; stroke-width:1.2; }
-  #dt-mini .yn   { font: 11px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial; fill:#555; }
+  #dt-mini .yn   { font: 11px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial; fill:#d62d20; font-weight:600; } /* red color */
 </style>
 
 <figure id="dt-mini" aria-label="Decision tree example">
@@ -1691,7 +1691,7 @@ Test: =================================
       <line x1="520" y1="140" x2="600" y2="240" />
     </g>
 
-    <!-- Edge labels -->
+    <!-- Edge labels (now red) -->
     <text class="yn" x="280" y="110">Yes</text>
     <text class="yn" x="448" y="110">No</text>
     <text class="yn" x="156" y="188">Yes</text>
@@ -1703,14 +1703,14 @@ Test: =================================
     <rect class="node" x="300" y="48" width="120" height="48" />
     <text class="rule" x="360" y="78" text-anchor="middle">Is age &lt; 30?</text>
 
-    <!-- Internal nodes (moved further up) -->
+    <!-- Internal nodes -->
     <rect class="node" x="140" y="116" width="120" height="48" />
     <text class="rule" x="200" y="146" text-anchor="middle">Income &gt; 60k?</text>
 
     <rect class="node" x="460" y="116" width="120" height="48" />
     <text class="rule" x="520" y="146" text-anchor="middle">Credit score &gt; 700?</text>
 
-    <!-- Leaves (slightly raised for visual balance) -->
+    <!-- Leaves -->
     <rect class="node leaf" x="60"  y="232" width="120" height="48" />
     <text class="lbl" x="120" y="262" text-anchor="middle">Approved</text>
 
@@ -1724,7 +1724,7 @@ Test: =================================
     <text class="lbl" x="620" y="262" text-anchor="middle">Rejected</text>
   </svg>
   <figcaption class="lbl" style="margin-top:.5rem;">
-    Example: The tree asks a sequence of yes/no questions (internal nodes). Each branch is the outcome, and each leaf is the final class.
+    Example: The tree asks a sequence of yes/no questions (internal nodes). Each branch is the outcome (red labels), and each leaf is the final class.
   </figcaption>
 </figure>
 
