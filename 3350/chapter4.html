@@ -1742,7 +1742,32 @@ Test: =================================
     <li><b>p<sub>k</sub>(t)</b> = proportion (probability) of class <b>k</b> in node <b>t</b></li>
     <li><b>G(t)</b>: impurity score (0 = pure, high = mixed)</li>
     </ul>
-  
+
+    <table border="1">
+  <thead>
+    <tr>
+      <th>Class Distribution</th>
+      <th>Gini</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>100% Spam</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>50% Spam, 50% Not Spam</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <td>70% Spam, 30% Not Spam</td>
+      <td>0.42</td>
+    </tr>
+  </tbody>
+</table>
+
+    
+    
     <li><b>Entropy</b>: \( \displaystyle H(t)=-\sum_{k=1}^{K} p_{k}(t)\log p_{k}(t) \)</li>
   </ul>
 
