@@ -1791,6 +1791,12 @@ Test: =================================
     A Decision Tree is a <b>greedy, recursive partitioning</b> method that splits the feature space into
     axis-aligned regions to make predictions.
     <br><br>
+    
+    A Decision Tree predicts a class by asking a sequence of <b>if–then</b> questions on features.
+    At each split, it chooses the feature/threshold that best <b><font color="red">separates the classes (reduces impurity)</font></b>.
+    The final prediction comes from the class majority at a leaf.
+  
+    <br><br>
     At each node, it searches over candidate <b>features</b> and <b>thresholds</b> to find the split that
     most reduces class impurity (classification) or variance (regression).
     <br>
