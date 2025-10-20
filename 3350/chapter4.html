@@ -1737,6 +1737,13 @@ Test: =================================
   <p><b>Classification impurity:</b></p>
   <ul>
     <li><b>Gini</b>: \( \displaystyle G(t)=1-\sum_{k=1}^{K} p_{k}(t)^2 \)</li>
+    where:
+    <ul>
+    <li><b>K</b> = number of classes</li>
+    <li><b>p<sub>k</sub>(t)</b> = proportion (probability) of class <b>k</b> in node <b>t</b></li>
+    <li><b>G(t)</b>: impurity score (0 = pure, high = mixed)</li>
+    </ul>
+  
     <li><b>Entropy</b>: \( \displaystyle H(t)=-\sum_{k=1}^{K} p_{k}(t)\log p_{k}(t) \)</li>
   </ul>
 
