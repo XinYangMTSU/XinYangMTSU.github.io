@@ -1963,14 +1963,17 @@ Test: =================================
   </p>
 
   <br>
-
+    
   <h4>Key Points</h4>
   <ul>
-    <li><b>Simple and fast:</b> closed-form parameter estimates; scales well.</li>
-    <li><b>Works well with little data:</b> especially Multinomial NB for text.</li>
-    <li><b>Sensitive to independence violations:</b> correlated features can bias posteriors.</li>
-    <li><b>Smoothing is essential</b> for Multinomial/Bernoulli to avoid zero probabilities.</li>
-    <li><b>Use log-space</b> for products of probabilities to avoid underflow.</li>
+    <li><b>Fast and simple:</b> Training is just counting frequencies; prediction is multiplication of probabilities.</li>
+    <li><b>Low variance, moderate-to-high bias:</b> The independence assumption is often wrong, introducing bias, but prevents overfitting.</li>
+    <li><b>Works well with small datasets:</b> Requires less training data than discriminative models like logistic regression.</li>
+    <li><b>Handles high-dimensional data:</b> Scales well with many features (common in text classification).</li>
+    <li><b>Probabilistic output:</b> Provides class probabilities, not just predictions.</li>
+    <li><b>Robust to irrelevant features:</b> Irrelevant features contribute equally to all classes, canceling out in the decision.</li>
+    <li><b>Requires feature independence:</b> Performance degrades when features are highly correlated (though often still usable).</li>
+    <li><b>Popular for text classification:</b> Spam filtering, sentiment analysis, document categorization.</li>
   </ul>
 
 </section>
