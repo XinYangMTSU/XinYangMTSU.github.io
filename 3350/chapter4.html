@@ -1900,24 +1900,38 @@ Test: =================================
       <li>Example: if P(Spam | features) = 0.85 and P(Not Spam | features) = 0.15, the prediction is "Spam".</li>
     </ul>
     <br>
-  <b>Equation (Posterior via Bayes’ Rule):</b>
-  <p style="text-align:center;">
-    $$ P(y=c \mid \mathbf{x}) \;\propto\; P(y=c)\,\prod_{j=1}^{n} P(x_j \mid y=c). $$
+    
+     <h4>Naive Bayes Classifier — Concept</h4>
+  <p>
+    Naive Bayes applies <b>Bayes' Theorem</b> to compute the probability of each class given the input features. It assumes all features contribute <b>independently</b> to the probability of the class, which greatly simplifies the computation.
   </p>
 
-  <p><strong>Where:</strong></p>
-  <ul>
-    <li>\(y \in \{1,\ldots,C\}\) is the class label.</li>
-    <li>\(\mathbf{x} = (x_1,\ldots,x_n)\) are features.</li>
-    <li>\(P(y=c)\) is the class prior; \(P(x_j \mid y=c)\) is the class-conditional likelihood for feature \(j\).</li>
-  </ul>
-
+  <div class="eq" style="text-align:center;">
+    \( \displaystyle P(C_k \mid \mathbf{x}) = \frac{P(\mathbf{x} \mid C_k) \, P(C_k)}{P(\mathbf{x})} \)
+  </div>
   <br>
 
-  <center>
-    <img src="images/nb1.png" width="800" height="300" alt="Naive Bayes: class-wise feature likelihoods multiply into posteriors">
-  </center>
+  <ul>
+    <li><b>P(C<sub>k</sub> | x):</b> Posterior probability — probability of class C<sub>k</sub> given features <b>x</b>.</li>
+    <li><b>P(x | C<sub>k</sub>):</b> Likelihood — probability of observing features <b>x</b> given class C<sub>k</sub>.</li>
+    <li><b>P(C<sub>k</sub>):</b> Prior probability — overall probability of class C<sub>k</sub> in training data.</li>
+    <li><b>P(x):</b> Evidence — probability of observing features <b>x</b> (constant across classes, so often ignored).</li>
+  </ul>
 
+  <p>
+    With the <b>independence assumption</b>, the likelihood factorizes:
+  </p>
+  <div class="eq" style="text-align:center;">
+    \( \displaystyle P(\mathbf{x} \mid C_k) = \prod_{i=1}^{n} P(x_i \mid C_k) \)
+  </div>
+  <br>
+
+  <p><b>Classification decision:</b></p>
+  <div class="eq" style="text-align:center;">
+    \( \displaystyle \hat{y} = \arg\max_{C_k} \, P(C_k) \prod_{i=1}^{n} P(x_i \mid C_k) \)
+  </div>
+  <br>
+    
   <br>
 
   <h4>How Naive Bayes Works</h4>
