@@ -1958,6 +1958,67 @@ Test: =================================
     </ul>
   </ul>
   <br>
+  <!-- Simple visual (SVG) -->
+  <style>
+    #nb-mini svg { max-width: 680px; width: 100%; height: auto; }
+    #nb-mini .box { fill:#fff; stroke:#333; stroke-width:1.2; rx:6; }
+    #nb-mini .classbox { fill:#f6f8ff; }
+    #nb-mini .txt { font: 600 12px/1.2 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; }
+    #nb-mini .lbl { font: 11px/1.2 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; fill:#333; }
+    #nb-mini .arrow { stroke:#666; stroke-width:1.5; fill:none; marker-end:url(#arrowhead); }
+    #nb-mini .prob { font: 11px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial; fill:#d62d20; font-weight:600; }
+  </style>
+
+  <figure id="nb-mini" aria-label="Naive Bayes example">
+
+    <h4>Example</h4>
+    <br>
+    <h5>
+      The classifier computes probability for each class given the features, then predicts the class with the highest probability.
+    </h5>
+
+    <svg viewBox="0 0 720 300" role="img">
+      <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+          <polygon points="0 0, 10 3, 0 6" fill="#666" />
+        </marker>
+      </defs>
+
+      <!-- Input features -->
+      <rect class="box" x="50" y="70" width="140" height="40" />
+      <text class="txt" x="120" y="95" text-anchor="middle">Features: x₁, x₂, ..., xₙ</text>
+
+      <!-- Arrow to classes -->
+      <line class="arrow" x1="190" y1="90" x2="250" y2="90" />
+
+      <!-- Class probabilities -->
+      <rect class="box classbox" x="250" y="30" width="180" height="40" />
+      <text class="txt" x="340" y="50" text-anchor="middle">P(Spam | x)</text>
+      <text class="prob" x="340" y="62" text-anchor="middle">= 0.85</text>
+
+      <rect class="box classbox" x="250" y="90" width="180" height="40" />
+      <text class="txt" x="340" y="110" text-anchor="middle">P(Not Spam | x)</text>
+      <text class="prob" x="340" y="122" text-anchor="middle">= 0.15</text>
+
+      <rect class="box classbox" x="250" y="150" width="180" height="40" />
+      <text class="txt" x="340" y="170" text-anchor="middle">P(Other | x)</text>
+      <text class="prob" x="340" y="182" text-anchor="middle">= 0.00</text>
+
+      <!-- Arrow to prediction -->
+      <line class="arrow" x1="430" y1="50" x2="490" y2="50" />
+
+      <!-- Final prediction -->
+      <rect class="box" x="490" y="30" width="140" height="40" />
+      <text class="txt" x="560" y="55" text-anchor="middle">Prediction: Spam</text>
+
+      <!-- Formula annotation -->
+      <h5>
+        Choose class with max probability: ŷ = argmax P(Cₖ) · ∏ P(xᵢ | Cₖ)
+      </h5>
+
+    </svg>
+  </figure>
+  <br>
     
   <!-- Include MathJax once globally on your page if not already included -->
  
