@@ -1932,30 +1932,8 @@ Test: =================================
   </div>
   <br>
     
-  <br>
-
-  <h4>How Naive Bayes Works</h4>
-
   <!-- Include MathJax once globally on your page if not already included -->
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-  <ol>
-    <li><strong>Choose a variant</strong> – Common choices:
-      <ul>
-        <li><b>Gaussian NB</b>: continuous features \(x_j \sim \mathcal{N}(\mu_{jc}, \sigma^2_{jc})\).</li>
-        <li><b>Multinomial NB</b>: counts/frequencies (e.g., word counts in text) with Laplace/Lidstone smoothing.</li>
-        <li><b>Bernoulli NB</b>: binary features (word present/absent).</li>
-      </ul>
-    </li>
-    <li><strong>Estimate parameters</strong> – Priors \( \hat P(y=c)=n_c/m \). For Gaussian NB:
-      \( \hat\mu_{jc}=\tfrac{1}{n_c}\sum_{i:y_i=c} x_{ij} \), 
-      \( \hat\sigma^2_{jc}=\tfrac{1}{n_c}\sum_{i:y_i=c}(x_{ij}-\hat\mu_{jc})^2 \).</li>
-    <li><strong>Score a new sample</strong> – Compute
-      \( \log P(y=c) + \sum_j \log P(x_j \mid y=c) \) (use logs to avoid underflow).</li>
-    <li><strong>Predict</strong> – Choose the class with the highest (log) posterior (MAP decision).</li>
-    <li><strong>Evaluate</strong> – Accuracy, precision/recall, F1, ROC-AUC; log-loss if you care about probabilities.</li>
-  </ol>
-
+ 
   <h4>Interpreting the Parameters</h4>
   <ul>
     <li><strong>Class priors</strong> \(P(y=c)\) reflect base rates of classes.</li>
