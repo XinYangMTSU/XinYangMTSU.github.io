@@ -1889,13 +1889,17 @@ Test: =================================
     Naive Bayes predicts a class by calculating the <b>probability</b> that a data point belongs to each class, 
     then choosing the class with the <b><font color="red">highest probability</font></b>.
   </p>
-    <br>
     
     It uses <b>Bayes' Theorem</b> to compute these probabilities based on the training data. 
     The key simplification — and why it's called "naive" — is that it assumes all features are 
     <b><font color="red">independent</font></b> given the class label.
-    <br>
+    <br><br>
     <b><font color="red">Independence assumption</font></b> means that knowing the value of one feature doesn't tell you anything about another feature (given the class).
+    <br>
+      The final prediction comes from comparing posterior probabilities. For a new data point, the classifier computes the probability of each class given the observed features and predicts the class with the highest probability.
+    <ul>
+      <li>Example: if P(Spam | features) = 0.85 and P(Not Spam | features) = 0.15, the prediction is "Spam".</li>
+    </ul>
     <br>
   <b>Equation (Posterior via Bayes’ Rule):</b>
   <p style="text-align:center;">
