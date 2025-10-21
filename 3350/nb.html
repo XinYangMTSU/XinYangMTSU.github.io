@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Naive Bayes Training & Prediction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Put this once in your page (head or before </body>) -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- MathJax v3 config -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [["$", "$"]],
+        processEscapes: true
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Roboto',Arial,sans-serif;background:#17191a;min-height:100vh;color:#ff79c6;padding:20px}
+    section{margin:0 auto 55px auto;background:#222025;border-radius:18px;box-shadow:0 4px 30px rgba(255,121,198,.09);padding:36px 32px 22px 32px;border-left:7px solid #ff79c6;position:relative;max-width:1600px}
+    h1{color:#ffb3de;margin:0 0 8px 0;text-align:center;font-size:2.5em}
+    h2{margin:0 0 20px 0;color:#ffb3de;font-weight:700;font-size:1.8em}
+    h3{font-size:1.18em;color:#ffb3de;margin-bottom:15px;font-weight:600}
+    p{color:#ffd7f0;line-height:1.8;margin-bottom:12px}
+    .subtitle{text-align:center;color:#ffd7f0;opacity:.9;font-size:1.1em;margin-bottom:20px}
+    .pill{display:inline-block;background:#19121a;border:1px solid #ff79c6;border-radius:999px;padding:4px 10px;margin:2px 8px 2px 0;font-size:.9em}
+    .grid{display:grid;grid-template-columns:1fr;gap:30px;margin-bottom:20px}
+    .viz-panel{background:#19121a;border-radius:12px;padding:25px;box-shadow:0 2px 10px rgba(255,121,198,0.11);border:1px solid rgba(255,121,198,0.2)}
+    .info-section{background:#2a252b;border-radius:12px;padding:25px;margin-top:30px;border:1px solid rgba(255,121,198,0.2)}
+    .info-section h3{color:#ffb3de;margin-bottom:15px;font-size:1.3em;border-bottom:1px solid #ff79c6;padding-bottom:8px}
+    .card{background:#2a252b;border:1px solid rgba(255,121,198,0.25);border-radius:10px;padding:16px;margin-bottom:15px}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .kpi{display:flex;align-items:baseline;gap:8px;margin:6px 0}
+    .kpi .v{font-weight:700;color:#fff}
+    code{background:#1e1a20;color:#e6dbff;border:1px solid rgba(255,121,198,0.25);border-radius:6px;padding:2px 6px;font-size:0.9em}
+    pre{background:#1e1a20;color:#e6dbff;border:1px solid rgba(255,121,198,0.25);border-radius:8px;padding:15px;display:block;overflow:auto;margin:10px 0}
+    ul{margin:10px 0 10px 22px}
+    li{color:#ffd7f0;margin-bottom:6px;line-height:1.65}
+    .legend{font-size:.9em;color:#ffd7f0;opacity:.9;margin-top:10px}
+    table{width:100%;border-collapse:collapse;margin:15px 0}
+    table th{background:#19121a;color:#ffb3de;padding:10px;text-align:left;border:1px solid rgba(255,121,198,0.3)}
+    table td{background:#2a252b;color:#ffd7f0;padding:10px;border:1px solid rgba(255,121,198,0.2)}
+    .badge{display:inline-block;background:#19121a;border:1px solid #ff79c6;border-radius:8px;padding:4px 8px;margin-left:8px;color:#ffd7f0;font-size:0.85em}
+    .stats-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));gap:15px;margin-top:20px}
+    .stat-card{background:#1e1a20;border:1px solid rgba(255,121,198,0.3);border-radius:8px;padding:12px;text-align:center}
+    .stat-card .value{font-size:1.4em;font-weight:700;color:#fff}
+    .stat-card .label{font-size:0.85em;color:#ffd7f0;opacity:0.9;margin-top:4px}
+    .step-number{display:inline-block;background:#ff79c6;color:#17191a;font-weight:700;width:30px;height:30px;border-radius:50%;text-align:center;line-height:30px;margin-right:10px}
+    .formula-box{background:#1e1a20;border:2px solid #ff79c6;border-radius:10px;padding:20px;margin:15px 0;text-align:center}
+    .highlight{color:#fff;font-weight:600;background:#ff79c644;padding:2px 6px;border-radius:4px}
+    .spam{color:#ff4d6d;font-weight:600}
+    .ham{color:#4dff88;font-weight:600}
+    @media (max-width:1200px){.grid{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <section>
+    <center>
+      <h1><span class="pill">Naive Bayes Training & Prediction</span></h1>
+      <p class="subtitle">Step-by-step guide: From training data to making predictions
+      </p>
+    </center>
+  </section>
+
+  <!-- STEP 1: TRAINING DATA -->
+  <section>
+    <div class="viz-panel">
+      <h2><span class="step-number">1</span>Training Data</h2>
+      <p>
+        Let's build a <b>spam filter</b> using Naive Bayes. Here's our training dataset with email features:
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Email ID</th>
+            <th>Contains "free"</th>
+            <th>Contains "meeting"</th>
+            <th>Length (words)</th>
+            <th>Exclamation count</th>
+            <th>Label</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Yes</td>
+            <td>No</td>
+            <td>45</td>
+            <td>3</td>
+            <td><span class="spam">Spam</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Yes</td>
+            <td>No</td>
+            <td>52</td>
+            <td>5</td>
+            <td><span class="spam">Spam</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Yes</td>
+            <td>No</td>
+            <td>38</td>
+            <td>4</td>
+            <td><span class="spam">Spam</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>No</td>
+            <td>Yes</td>
+            <td>200</td>
+            <td>0</td>
+            <td><span class="ham">Not Spam</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>No</td>
+            <td>Yes</td>
+            <td>180</td>
+            <td>1</td>
+            <td><span class="ham">Not Spam</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>No</td>
+            <td>Yes</td>
+            <td>220</td>
+            <td>0</td>
+            <td><span class="ham">Not Spam</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-section">
+        <h3>Dataset Summary</h3>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="value">6</div>
+            <div class="label">Total Emails</div>
+          </div>
+          <div class="stat-card">
+            <div class="value">3</div>
+            <div class="label">Spam Emails</div>
+          </div>
+          <div class="stat-card">
+            <div class="value">3</div>
+            <div class="label">Not Spam Emails</div>
+          </div>
+          <div class="stat-card">
+            <div class="value">4</div>
+            <div class="label">Features</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2: CALCULATE PRIORS -->
+  <section>
+    <div class="viz-panel">
+      <h2><span class="step-number">2</span>Calculate Prior Probabilities P(C<sub>k</sub>)</h2>
+      <p>
+        <b>Priors</b> represent how common each class is in the training data. Simply count how many emails belong to each class:
+      </p>
+
+      <div class="formula-box">
+        <p style="color:#ffd7f0;margin-bottom:10px;">Prior Probability Formula:</p>
+        \[ P(\text{Class}) = \frac{\text{Count of that class}}{\text{Total samples}} \]
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>P(Spam)</h3>
+          <p>
+            Number of Spam emails: <span class="highlight">3</span><br>
+            Total emails: <span class="highlight">6</span>
+          </p>
+          <div class="formula-box">
+            \[ P(\text{Spam}) = \frac{3}{6} = 0.5 \]
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>P(Not Spam)</h3>
+          <p>
+            Number of Not Spam emails: <span class="highlight">3</span><br>
+            Total emails: <span class="highlight">6</span>
+          </p>
+          <div class="formula-box">
+            \[ P(\text{Not Spam}) = \frac{3}{6} = 0.5 \]
+          </div>
+        </div>
+      </div>
+
+      <p class="legend">
+        <b>Interpretation:</b> Both classes are equally common in our training data (50% each).
+      </p>
+    </div>
+  </section>
+
+  <!-- STEP 3: CALCULATE LIKELIHOODS -->
+  <section>
+    <div class="viz-panel">
+      <h2><span class="step-number">3</span>Calculate Likelihoods P(x<sub>i</sub> | C<sub>k</sub>)</h2>
+      <p>
+        For each feature, calculate statistics <b>separately for each class</b>. We'll use <b>Gaussian Naive Bayes</b> for continuous features (length, exclamation count) and simple counting for binary features.
+      </p>
+
+      <h3 style="margin-top:25px;">A. Binary Features (Contains "free", Contains "meeting")</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>P(feature=Yes | Spam)</th>
+            <th>P(feature=Yes | Not Spam)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Contains "free"</b></td>
+            <td>3/3 = <span class="highlight">1.0</span></td>
+            <td>0/3 = <span class="highlight">0.0</span> → smoothed to 0.001</td>
+          </tr>
+          <tr>
+            <td><b>Contains "meeting"</b></td>
+            <td>0/3 = <span class="highlight">0.0</span> → smoothed to 0.001</td>
+            <td>3/3 = <span class="highlight">1.0</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="legend">
+        <b>Note:</b> We apply <b>smoothing</b> (α = 0.001) to avoid zero probabilities for unseen feature values.
+      </p>
+
+      <h3 style="margin-top:25px;">B. Continuous Features (Length, Exclamation count)</h3>
+      <p>For Gaussian Naive Bayes, calculate <b>mean (μ)</b> and <b>standard deviation (σ)</b> for each feature in each class:</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3><span class="spam">Spam Class</span></h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Mean (μ)</th>
+                <th>Std Dev (σ)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Length</b></td>
+                <td>(45+52+38)/3 = <span class="highlight">45.0</span></td>
+                <td><span class="highlight">5.7</span></td>
+              </tr>
+              <tr>
+                <td><b>Exclamation</b></td>
+                <td>(3+5+4)/3 = <span class="highlight">4.0</span></td>
+                <td><span class="highlight">0.82</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3><span class="ham">Not Spam Class</span></h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Mean (μ)</th>
+                <th>Std Dev (σ)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Length</b></td>
+                <td>(200+180+220)/3 = <span class="highlight">200.0</span></td>
+                <td><span class="highlight">16.3</span></td>
+              </tr>
+              <tr>
+                <td><b>Exclamation</b></td>
+                <td>(0+1+0)/3 = <span class="highlight">0.33</span></td>
+                <td><span class="highlight">0.47</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="formula-box" style="margin-top:20px;">
+        <p style="color:#ffd7f0;margin-bottom:10px;">Gaussian Probability Formula:</p>
+        \[ P(x_i \mid C_k) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x_i - \mu)^2}{2\sigma^2}\right) \]
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 4: MODEL STORAGE -->
+  <section>
+    <div class="viz-panel">
+      <h2><span class="step-number">4</span>Store the Trained Model</h2>
+      <p>
+        The "trained model" is simply these stored statistics. No complex weights or optimization needed!
+      </p>
+
+      <div class="info-section">
+        <h3>Trained Model Parameters</h3>
+        <pre>
+<b>Priors:</b>
+  P(Spam) = 0.5
+  P(Not Spam) = 0.5
+
+<b>Binary Feature Probabilities:</b>
+  P("free"=Yes | Spam) = 1.0
+  P("free"=Yes | Not Spam) = 0.001
+  P("meeting"=Yes | Spam) = 0.001
+  P("meeting"=Yes | Not Spam) = 1.0
+
+<b>Gaussian Parameters for "Length":</b>
+  Spam: μ = 45.0, σ = 5.7
+  Not Spam: μ = 200.0, σ = 16.3
+
+<b>Gaussian Parameters for "Exclamation count":</b>
+  Spam: μ = 4.0, σ = 0.82
+  Not Spam: μ = 0.33, σ = 0.47
+        </pre>
+      </div>
+
+      <p class="legend">
+        <b>That's it!</b> Training is complete. The model is just a collection of probabilities and statistics.
+      </p>
+    </div>
+  </section>
+
+  <!-- STEP 5: NEW DATA PREDICTION -->
+  <section>
+    <div class="viz-panel">
+      <h2><span class="step-number">5</span>Making Predictions on New Data</h2>
+      <p>
+        Now let's classify a <b>new email</b> using our trained model:
+      </p>
+
+      <div class="card" style="background:#19121a;">
+        <h3>New Email to Classify:</h3>
+        <ul>
+          <li>Contains "free": <span class="highlight">Yes</span></li>
+          <li>Contains "meeting": <span class="highlight">No</span></li>
+          <li>Length: <span class="highlight">50 words</span></li>
+          <li>Exclamation count: <span class="highlight">3</span></li>
+        </ul>
+      </div>
+
+      <h3 style="margin-top:25px;">Step 5A: Calculate Probability for Each Class</h3>
+      <p>Use Bayes' theorem with the independence assumption:</p>
+
+      <div class="formula-box">
+        \[ P(C_k \mid \mathbf{x}) \propto P(C_k) \prod_{i=1}^{n} P(x_i \mid C_k) \]
+      </div>
+
+      <div class="grid-2" style="margin-top:20px;">
+        <div class="card">
+          <h3><span class="spam">Spam Score</span></h3>
+          <p><b>Start with prior:</b></p>
+          <p>P(Spam) = <span class="highlight">0.5</span></p>
+
+          <p style="margin-top:15px;"><b>Multiply by feature likelihoods:</b></p>
+          <ul style="font-size:0.9em;">
+            <li>P("free"=Yes | Spam) = <span class="highlight">1.0</span></li>
+            <li>P("meeting"=No | Spam) = <span class="highlight">0.999</span></li>
+            <li>P(Length=50 | Spam) ≈ <span class="highlight">0.053</span></li>
+            <li>P(Exclamation=3 | Spam) ≈ <span class="highlight">0.326</span></li>
+          </ul>
+
+          <div class="formula-box" style="margin-top:15px;">
+            \[ \text{Score} = 0.5 \times 1.0 \times 0.999 \times 0.053 \times 0.326 \]
+            \[ = \mathbf{0.00863} \]
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><span class="ham">Not Spam Score</span></h3>
+          <p><b>Start with prior:</b></p>
+          <p>P(Not Spam) = <span class="highlight">0.5</span></p>
+
+          <p style="margin-top:15px;"><b>Multiply by feature likelihoods:</b></p>
+          <ul style="font-size:0.9em;">
+            <li>P("free"=Yes | Not Spam) = <span class="highlight">0.001</span></li>
+            <li>P("meeting"=No | Not Spam) = <span class="highlight">0.001</span></li>
+            <li>P(Length=50 | Not Spam) ≈ <span class="highlight">0.00000007</span></li>
+            <li>P(Exclamation=3 | Not Spam) ≈ <span class="highlight">0.000002</span></li>
+          </ul>
+
+          <div class="formula-box" style="margin-top:15px;">
+            \[ \text{Score} = 0.5 \times 0.001 \times 0.001 \times 0.00000007 \times 0.000002 \]
+            \[ = \mathbf{7 \times 10^{-17}} \]
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:25px;">Step 5B: Make the Final Prediction</h3>
+      <p>Choose the class with the <b>highest probability</b>:</p>
+
+      <div class="info-section">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="value" style="color:#ff4d6d;">0.00863</div>
+            <div class="label">P(Spam | x)</div>
+          </div>
+          <div class="stat-card">
+            <div class="value">VS</div>
+            <div class="label"></div>
+          </div>
+          <div class="stat-card">
+            <div class="value" style="color:#4dff88;">7×10⁻¹⁷</div>
+            <div class="label">P(Not Spam | x)</div>
+          </div>
+        </div>
+
+        <h2 style="text-align:center;margin-top:30px;color:#fff;font-size:2em;">
+          Prediction: <span class="spam">SPAM</span> ✓
+        </h2>
+        <p style="text-align:center;margin-top:10px;">
+          The model is extremely confident this is spam because it contains "free", has a short length, and multiple exclamation marks!
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY INSIGHTS -->
+  <section>
+    <div class="info-section">
+      <h3>Why Naive Bayes is Fast</h3>
+      <ul>
+        <li><b>No optimization needed:</b> Unlike logistic regression or neural networks, there's no gradient descent or iterative weight updates</li>
+        <li><b>Simple counting:</b> Training is just counting frequencies and computing basic statistics (mean, std dev)</li>
+        <li><b>Linear time complexity:</b> Training time is O(n × d) where n = samples, d = features</li>
+        <li><b>Instant predictions:</b> Classification is just multiplying pre-computed probabilities</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="info-section">
+      <h3>Key Takeaways</h3>
+      <ul>
+        <li><b>Training = Counting + Statistics:</b> No complex optimization, just compute probabilities from data</li>
+        <li><b>The "Model" = Stored Numbers:</b> Priors, means, standard deviations, and feature probabilities</li>
+        <li><b>Prediction = Probability Comparison:</b> Multiply probabilities for each class, pick the highest</li>
+        <li><b>Independence Assumption:</b> We assume features don't affect each other (rarely true, but works well anyway!)</li>
+        <li><b>Smoothing is Critical:</b> Prevents zero probabilities from unseen feature combinations</li>
+        <li><b>Scales Well:</b> Works great with high-dimensional data (like text with thousands of words)</li>
+      </ul>
+    </div>
+  </section>
+
+</body>
+</html>
