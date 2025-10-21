@@ -1933,33 +1933,6 @@ Test: =================================
     \( \displaystyle \hat{y} = \arg\max_{C_k} \, P(C_k) \prod_{i=1}^{n} P(x_i \mid C_k) \)
   </div>
   <br>
-
-
-      <h4>Types of Naive Bayes:</h4>
-  <p>Different variants handle different types of features:</p>
-  <ul>
-    <li><b>Gaussian Naive Bayes:</b> For continuous features, assumes features follow a <b>normal (Gaussian) distribution</b> within each class.</li>
-    <ul>
-      <li>\( \displaystyle P(x_i \mid C_k) = \frac{1}{\sqrt{2\pi\sigma_{k,i}^2}} \exp\left(-\frac{(x_i - \mu_{k,i})^2}{2\sigma_{k,i}^2}\right) \)</li>
-      <li>where μ and σ are the mean and standard deviation of feature i in class k</li>
-    </ul>
-    <br>
-
-    <li><b>Multinomial Naive Bayes:</b> For discrete count data (e.g., word counts in text).</li>
-    <ul>
-      <li>Commonly used in <b>text classification</b> and spam filtering</li>
-      <li>\( \displaystyle P(x_i \mid C_k) = \frac{N_{k,i} + \alpha}{N_k + \alpha n} \)</li>
-      <li>where N<sub>k,i</sub> is count of feature i in class k, α is smoothing parameter</li>
-    </ul>
-    <br>
-
-    <li><b>Bernoulli Naive Bayes:</b> For binary features (presence/absence).</li>
-    <ul>
-      <li>Each feature is either 0 (absent) or 1 (present)</li>
-      <li>Useful when you only care whether a word appears, not how many times</li>
-    </ul>
-  </ul>
-  <br>
   <!-- Simple visual (SVG) -->
   <style>
     #nb-mini svg { max-width: 680px; width: 100%; height: auto; }
@@ -1971,9 +1944,8 @@ Test: =================================
     #nb-mini .prob { font: 11px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial; fill:#d62d20; font-weight:600; }
   </style>
 
+     <h4>Example</h4>
   <figure id="nb-mini" aria-label="Naive Bayes example">
-
-    <h4>Example</h4>
     <br>
     <h5>
       The classifier computes probability for each class given the features, then predicts the class with the highest probability.
@@ -2020,6 +1992,33 @@ Test: =================================
 
     </svg>
   </figure>
+  <br>
+
+    
+  <h4>Types of Naive Bayes:</h4>
+  <p>Different variants handle different types of features:</p>
+  <ul>
+    <li><b>Gaussian Naive Bayes:</b> For continuous features, assumes features follow a <b>normal (Gaussian) distribution</b> within each class.</li>
+    <ul>
+      <li>\( \displaystyle P(x_i \mid C_k) = \frac{1}{\sqrt{2\pi\sigma_{k,i}^2}} \exp\left(-\frac{(x_i - \mu_{k,i})^2}{2\sigma_{k,i}^2}\right) \)</li>
+      <li>where μ and σ are the mean and standard deviation of feature i in class k</li>
+    </ul>
+    <br>
+
+    <li><b>Multinomial Naive Bayes:</b> For discrete count data (e.g., word counts in text).</li>
+    <ul>
+      <li>Commonly used in <b>text classification</b> and spam filtering</li>
+      <li>\( \displaystyle P(x_i \mid C_k) = \frac{N_{k,i} + \alpha}{N_k + \alpha n} \)</li>
+      <li>where N<sub>k,i</sub> is count of feature i in class k, α is smoothing parameter</li>
+    </ul>
+    <br>
+
+    <li><b>Bernoulli Naive Bayes:</b> For binary features (presence/absence).</li>
+    <ul>
+      <li>Each feature is either 0 (absent) or 1 (present)</li>
+      <li>Useful when you only care whether a word appears, not how many times</li>
+    </ul>
+  </ul>
   <br>
     
   <!-- Include MathJax once globally on your page if not already included -->
