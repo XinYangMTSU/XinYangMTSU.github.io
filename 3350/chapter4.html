@@ -1881,15 +1881,15 @@ Test: =================================
   <section id="nb">
 
   <h4>2.5 Naive Bayes</h4>
-  <br>
+  Naive Bayes is a probabilistic classifier that applies <b>Bayes' Theorem</b> with a strong (naive) assumption:
+    <em>features are conditionally independent given the class</em>.
 
   <b>Idea:</b>
   <p>
-    Naive Bayes is a fast, probabilistic classifier that applies <b>Bayes’ rule</b> with a strong (naive) assumption:
-    <em>features are conditionally independent given the class</em>. It predicts the class with the highest posterior
-    probability. The goal is to <b><font color="red">estimate class posteriors from simple per-feature models</font></b>.
+    Naive Bayes predicts a class by calculating the <b>probability</b> that a data point belongs to each class, 
+    then choosing the class with the <b><font color="red">highest probability</font></b>.
   </p>
-
+  <br>
   <b>Equation (Posterior via Bayes’ Rule):</b>
   <p style="text-align:center;">
     $$ P(y=c \mid \mathbf{x}) \;\propto\; P(y=c)\,\prod_{j=1}^{n} P(x_j \mid y=c). $$
