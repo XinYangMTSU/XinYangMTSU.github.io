@@ -2032,18 +2032,6 @@ Test: =================================
 
   <br>
 
-  <h4>Model &amp; Notation</h4>
-  <p>
-    <b>Gaussian NB likelihood:</b>
-    \( \displaystyle P(x_j \mid y=c) = \mathcal{N}(x_j;\,\mu_{jc},\sigma^2_{jc})
-      = \frac{1}{\sqrt{2\pi\sigma^2_{jc}}}\exp\!\left(-\frac{(x_j-\mu_{jc})^2}{2\sigma^2_{jc}}\right) \).
-  </p>
-  <p>
-    <b>Multinomial NB (counts):</b>
-    \( \displaystyle P(\mathbf{x}\mid y=c)=\frac{(\sum_w x_w)!}{\prod_w x_w!}\prod_w \theta_{wc}^{\,x_w} \),
-    with \( \hat\theta_{wc}=\frac{N_{wc}+\alpha}{N_c+\alpha V} \).
-  </p>
-
   <h4>Objective (MAP Rule)</h4>
   <p>
     Predict the class maximizing the posterior:
