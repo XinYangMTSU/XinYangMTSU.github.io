@@ -2013,7 +2013,9 @@ Test: =================================
     <ul>
       <li>Commonly used in <b>text classification</b> and spam filtering</li>
       <li>\( \displaystyle P(x_i \mid C_k) = \frac{N_{k,i} + \alpha}{N_k + \alpha n} \)</li>
-      <li>where N<sub>k,i</sub> is count of feature i in class k, α is smoothing parameter</li>
+      <li>where N<sub>k,i</sub> is count of feature i in class k, α is smoothing parameter  (adds a small count to avoid zero probabilities) <br>
+      \(n\): Total number of unique features <br> \( N_k \): Total count of ALL features in class k
+      </li>
     </ul>
     <br>
 
