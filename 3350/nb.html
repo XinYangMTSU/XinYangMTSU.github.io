@@ -244,6 +244,11 @@
 
       <p class="legend">
         <b>Note:</b> We apply <b>smoothing</b> (α = 0.001) to avoid zero probabilities for unseen feature values.
+
+        In Naive Bayes, each feature likelihood \( P(x_i |C_k ) \)  multiplies together across features.
+        If any one of them is 0, the entire product becomes 0, wiping out that class’s 
+        probability completely — even if all other features strongly support it.
+        
       </p>
 
       <h3 style="margin-top:25px;">B. Continuous Features (Length, Exclamation count)</h3>
