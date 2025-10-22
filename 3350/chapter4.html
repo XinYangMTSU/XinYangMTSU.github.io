@@ -1916,7 +1916,10 @@ Test: =================================
     <li><b>P(C<sub>k</sub> | x):</b> Posterior probability — probability of class C<sub>k</sub> given features <b>x</b>.</li>
     <li><b>P(x | C<sub>k</sub>):</b> Likelihood — probability of observing features <b>x</b> given class C<sub>k</sub>.</li>
     <li><b>P(C<sub>k</sub>):</b> Prior probability — overall probability of class C<sub>k</sub> in training data.</li>
-    <li><b>P(x):</b> Evidence — probability of observing features <b>x</b> (constant across classes, so often ignored).</li>
+    <li><b>P(x):</b> Evidence — probability of observing features <b>x</b> (constant across classes, so often ignored).
+    P(x) is the same for all classes, so it doesn't affect which class has the maximum probability.
+    That's why we can safely ignore it for classification decisions.
+    </li>
   </ul>
 
   <p>
