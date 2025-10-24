@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OLA4 – Extended Classification with Feature Importance Analysis</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 950px; margin: 0 auto; padding: 20px; background-color: #17191a; color: #ff79c6; }
+    .container { background-color: #222025; padding: 30px; border-radius: 8px; box-shadow: 0 2px 12px rgba(255,121,198,0.15); }
+    h1 { text-align: center; font-size: 26px; color: #ff79c6; margin-bottom: 6px; }
+    h2.course-title { text-align: center; font-size: 28px; color: #ffb3de; margin-bottom: 18px; }
+    h3.deadline { text-align: center; font-size: 15px; color: #ffb3de; margin-top: 0; margin-bottom: 20px; }
+    h3 { color: #ff79c6; font-size: 22px; margin-bottom: 12px; border-bottom: 3px solid #ff79c6; padding-bottom: 6px; }
+    h4 { color: #ffb3de; font-size: 18px; margin-top: 20px; margin-bottom: 8px; border-bottom: 1px solid #ffb3de; padding-bottom: 3px; }
+    pre { background: #19121a; color: #ffb3de; padding: 15px; border-radius: 6px; font-size: 0.95em; overflow-x: auto; }
+    code { font-family: Consolas, monospace; }
+    ul { color: #ffb3de; }
+    ol { color: #ffb3de; }
+    p { color: #ffb3de; }
+    li { margin-bottom: 8px; }
+    table { width: 70%; margin: 15px auto; border-collapse: collapse; font-size: 0.9em; color: #ffb3de; }
+    th, td { border: 1px solid #ff79c6; padding: 6px 10px; text-align: left; }
+    th { background: #19121a; color: #ff79c6; }
+    tr:nth-child(even) { background: #2b2b2b; }
+    .highlight { background-color: #3d2940; padding: 2px 6px; border-radius: 3px; color: #ff79c6; }
+    .new-feature { background-color: #2d3d40; padding: 10px; border-left: 4px solid #79c6ff; border-radius: 3px; margin: 10px 0; }
+    #backToTop { position: fixed; bottom: 24px; right: 24px; background-color: #ff79c6; color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 1.3em; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25); transition: background 0.2s; }
+    #backToTop:hover { background-color: #ffb3de; color: #17191a; }
+    footer { text-align: center; margin-top: 30px; font-size: 0.9em; color: #ffb3de; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="course-title">CSCI 3350 -- Machine Learning</h2>
+  <h1>OLA4 – Extended Classification with Feature Importance & Model Comparison</h1>
+  <h3 class="deadline"><font color="red">Deadline:</font> November 2nd, 2025 (Sunday)</h3>
+
+  <h3>Objective</h3>
+  <p>
+    Build upon <b>OLA3</b> by adding three new classification models and performing <b>feature importance analysis</b>.
+    This assignment focuses on understanding which features drive predictions and how different models interpret feature significance.
+    Students will use the <b>diabetes</b> dataset (binary classification) with <b>nested cross-validation</b> and compare
+    <b>five classification models total</b>.
+  </p>
+
+  <h4>Key Concepts</h4>
+  <ul>
+    <li><b>Pipeline Construction</b> → Combining preprocessing and models (continued from OLA3)</li>
+    <li><b>Grid Search with Cross-Validation</b> → <code>GridSearchCV</code> (continued from OLA3)</li>
+    <li><b>Stratified K-Fold Cross-Validation</b> → <code>StratifiedKFold</code> (continued from OLA3)</li>
+    <li><b>Classification Metrics</b> → Accuracy, Precision, Recall, F1-Score, AUC-ROC (continued from OLA3)</li>
+    <li><b>Feature Importance Analysis</b> → Extract and visualize feature coefficients/importance from models</li>
+    <li><b>Model Interpretation</b> → Understanding which features matter most for each algorithm</li>
+    <li><b>Algorithm Comparison</b> → Compare linear vs. tree-based vs. probabilistic models</li>
+  </ul>
+
+  <h4>New Libraries & Modules</h4>
+  <ul>
+    <li><b>SVM</b> → <code>sklearn.svm</code></li>
+    <li><b>Naive Bayes</b> → <code>sklearn.naive_bayes.GaussianNB</code></li>
+    <li><b>Random Forest</b> → <code>sklearn.ensemble.RandomForestClassifier</code></li>
+  </ul>
+
+  <h3>Background: Feature Importance Methods</h3>
+  <div>
+
+    <p>
+        Different models interpret feature importance differently. Only some models provide interpretable feature importance:
+    </p>
+
+    <ul>
+      <li><font color="red"><b>Logistic Regression (LR):</b> Uses <b>coefficients</b></font> → Shows linear impact on log-odds. Larger absolute values = stronger impact.</li>
+      <li><font color="red"><b>Linear SVM:</b> Uses <b>coefficients</b></font> → Similar to LR, shows which features push the decision boundary.</li>
+      <li><b>RBF SVM:</b> Uses <b>coefficients</b> (from the dual formulation) → Similar to Linear SVM, but in transformed feature space.
+      For this assignment, we'll skip feature analysis for RBF SVM.</li>
+      <li><b>Decision Tree (DT):</b> Uses <b>feature_importances_</b> → Based on how much each feature reduces impurity (Gini/entropy) at each node.
+      For this assignment, we'll skip feature analysis for DT.</li>
+      <li><font color="red"><b>Random Forest:</b> Uses <b>feature_importances_</b></font> → Based on how much each feature reduces impurity (Gini/entropy) across all trees.</li>
+    </ul>
+
+    <p>
+      <b>Models WITHOUT feature importance:</b>
+    </p>
+
+    <ul>
+      <li><b>K-Nearest Neighbors (KNN):</b> No explicit feature importance. All features are used equally in distance calculations. Feature importance cannot be extracted.
+      For this assignment, we'll skip feature analysis for KNN.</li>
+      <li><b>Naive Bayes (NB):</b> Does NOT have built-in feature importance (probabilistic classifier). For this assignment, we'll skip feature analysis for NB.</li>
+    </ul>
+
+    <p>
+      <b>Note:</b> Models must be fitted on the TRAINING data first before extracting importance scores. We extract importance
+      from the best estimator of each fold's best model.
+    </p>
+  </div>
+
+  <h3>Requirements</h3>
+  <ol>
+    <li><b>Step 1-3: Reuse from OLA3</b><br/>
+        Load dataset, preprocess, and perform EDA exactly as in OLA3.
+        You can work directly from your OLA3 code.
+    </li>
+
+    <li><b>Step 4: Extend Pipelines with New Models</b><br/>
+        <span class="highlight">Keep KNN and Logistic Regression from OLA3, and add three new pipelines:</span>
+        <ul>
+          <li><b>Linear SVM (SVM)</b>
+            <ul>
+              <li>Pipeline: StandardScaler → SVC</li>
+              <li>Grid parameters:
+
+                <ul>
+                  <li><code>C</code> = np.logspace(-2,2,50)</li>
+                  <li><code>kernel</code> = ["linear"]</li>
+                </ul>
+              </li>
+
+              <li>Set <code>max_iter=5000</code> for convergence</li>
+            </ul>
+          </li>
+          <li><b>Naive Bayes (NB)</b>
+            <ul>
+              <li>Pipeline: StandardScaler → GaussianNB</li>
+              <li>Grid parameters:
+
+                <ul>
+                  <li><code>var_smoothing</code> = np.logspace(-10, -8, 20)</li>
+                </ul>
+
+              </li>
+
+              <li><b>Note:</b> GaussianNB has no feature importance, so skip importance analysis for this model</li>
+            </ul>
+          </li>
+          <li><b>Random Forest (RF)</b>
+            <ul>
+              <li>Pipeline: StandardScaler → RandomForestClassifier</li>
+              <li>Grid parameters:
+                <ul>
+                  <li><code>n_estimators</code> = [50, 100, 200]</li>
+                  <li><code>max_depth</code> = [10, 15, 20]</li>
+                  <li><code>min_samples_split</code> = [2, 5]</li>
+                </ul>
+              </li>
+              <li>Set <code>random_state=42</code></li>
+            </ul>
+          </li>
+        </ul>
+        All GridSearchCV should use:
+        <ul>
+          <li><code>cv=5</code> (5-fold cross-validation)</li>
+          <li><code>n_jobs=-1</code> (use all CPU cores)</li>
+          <li><code>scoring='accuracy'</code></li>
+        </ul>
+    </li>
+
+    <li><b>Step 5: Evaluate and Compare All Models</b><br/>
+        <ul>
+          <li>Run <code>cv_report()</code> for all <b>five models</b> (KNN, LR, SVM, NB, RF)</li>
+          <li>Concatenate all results into a single DataFrame</li>
+          <li>Display the complete results table showing performance comparison</li>
+          <li>Print the best performing model based on mean AUC</li>
+        </ul>
+    </li>
+
+    <li><b>Step 6: Feature Importance Visualization & Analysis</b><br/>
+        <span class="highlight">NEW:</span> Create a comprehensive feature analysis:
+        <ul>
+          <li>For each model with feature importance (LR, linear SVM, RF):
+            <ul>
+              <li>Create a <b>horizontal bar plot</b> showing top 10 features and their importance scores</li>
+              <li>Use different colors for each model (e.g., LR=blue, SVM=green, RF=orange)</li>
+            </ul>
+          </li>
+          <li>Optionally, create a <b>combined comparison plot</b> showing how the top features differ across models</li>
+        </ul>
+    </li>
+
+    <li><b>Step 7: Analysis and Interpretation</b><br/>
+        Write a detailed analysis (4-6 sentences) covering:
+        <ul>
+          <!--
+          <li>How does Naive Bayes perform? Does its independence assumption hurt or help? (Compare to other models)</li>
+        -->
+          <li><b>Feature Consensus:</b> Are the top features similar across LR, SVM, and RF? Why or why not?</li>
+          <li><b>Model Differences:</b> How do linear models (LR, SVM) differ from tree-based (RF) in their feature rankings?</li>
+          <li><b>Interesting Findings:</b> Any surprising features or patterns in the data?
+          Which features consistently rank high across models? These are likely the strongest diabetes predictors.
+        </li>
+        </ul>
+    </li>
+  </ol>
+
+  <h3>Expected Output</h3>
+  <p>Your notebook should produce:</p>
+  <ul>
+    <li><b>5 ROC curve plots</b> (one for each model: KNN, LR, SVM, NB, RF showing 5 folds each)</li>
+    <li><b>EDA visualizations</b> (2 scatter plots, 1 histogram from OLA3)</li>
+    <li><b>Results DataFrame</b> with all 5 models and their fold-wise + mean performance</li>
+    <li><b>3 feature importance bar plots</b> (top 10 features for LR, SVM, RF)</li>
+    <li><b>Optional:</b> 1 combined feature comparison plot</li>
+    <li><b>Best hyperparameters</b> for each model</li>
+    <li><b>Detailed written analysis</b> (~200-300 words) discussing findings</li>
+  </ul>
+
+  <h3>Starter Code Skeleton</h3>
+  <pre><code># --- OLA4: Extended Classification with Feature Importance ---
+
+# Import all necessary libraries (from OLA3 + new ones)
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import fetch_openml
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import GridSearchCV, StratifiedKFold
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import (accuracy_score, precision_score, recall_score,
+                             f1_score, roc_curve, auc, roc_auc_score)
+
+SEED = 42
+
+# --- Steps 1-3: Load, Preprocess, EDA (Copy from OLA3) ---
+# TODO: Load diabetes dataset, create binary target
+# TODO: Handle missing values and duplicates
+# TODO: Create EDA visualizations
+
+# --- Step 4: Build Pipelines with GridSearchCV ---
+# TODO: KNN Pipeline (from OLA3)
+# TODO: Logistic Regression Pipeline (from OLA3)
+# TODO: Linear SVM Pipeline
+# TODO: Naive Bayes Pipeline
+# TODO: Random Forest Pipeline
+
+# --- Step 5: Evaluate and Compare All 5 Models ---
+# TODO: Run cv_report for all models
+# TODO: Concatenate results into single DataFrame
+# TODO: Print comparison table
+
+# --- Step 6: Feature Importance Visualization & Analysis---
+# TODO: Create 3 bar plots (LR, SVM, RF)
+# TODO: Show top 10 features for each
+# TODO: Use different colors
+
+# --- Step 7: Analysis and Interpretation ---
+# TODO: Write detailed analysis (4-6 sentences) covering:
+#   - Feature consensus/differences across models
+#   - How linear vs. tree-based models differ
+#   - Interesting findings
+
+  </code></pre>
+
+  <h3>Grading Distribution (Total: 100 points)</h3>
+  <table>
+    <tr><th>Task</th><th>Points</th></tr>
+    <tr><td>Reuse OLA3 components (Steps 1-3)</td><td>5</td></tr>
+    <tr><td>New pipeline construction (SVM, NB, RF) with GridSearchCV</td><td>10</td></tr>
+    <tr><td>Feature importance extraction for LR, linear SVM, RF</td><td>20</td></tr>
+    <tr><td>Model evaluation and comparison (5 models total)</td><td>10</td></tr>
+    <tr><td>ROC curve visualization (5 plots, 5 folds each)</td><td>10</td></tr>
+    <tr><td>Feature importance visualization (3 bar plots)</td><td>15</td></tr>
+    <tr><td>Hyperparameter analysis and feature insights</td><td>10</td></tr>
+    <tr><td>Written analysis and interpretation</td><td>15</td></tr>
+    <tr><td>Code organization, comments, and clarity</td><td>5</td></tr>
+    <tr><th>Total</th><th>100</th></tr>
+  </table>
+
+  <h3>Hints & Tips</h3>
+  <ul>
+    <li><b>Feature Importance Extraction:</b> Always extract from <code>model.best_estimator_.named_steps['classifier']</code> to get the final trained model.</li>
+    <li><b>Visualization:</b> Use <code>plt.barh()</code> for horizontal bar plots; order features by importance for clarity.</li>
+    <li><b>Interpretation:</b> Remember that feature importance ≠ feature causality; correlation ≠ causation!</li>
+    <ul>
+      <li>Example:</li>
+
+In the diabetes dataset, if "glucose" has high feature importance, it means glucose levels are strongly associated with diabetes.
+BUT this doesn't prove that high glucose causes diabetes
+(In reality, high glucose is a symptom of diabetes, not the cause)
+    </ul>
+  </ul>
+
+  <footer>
+    Copyright @ Dr. Xin Yang <br>
+    Department of Computer Science <br>
+    Middle Tennessee State University
+  </footer>
+</div>
+
+<button id="backToTop" title="Go to top">↑</button>
+<script>
+  document.getElementById("backToTop").addEventListener("click", function() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+</body>
+</html>
