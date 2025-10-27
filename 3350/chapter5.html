@@ -315,7 +315,8 @@
     <h4>How K-Means Works</h4>
     <ol>
       <li><strong>Choose \(k\)</strong> (number of clusters) — use domain knowledge or diagnostics (Elbow, Silhouette).</li>
-      <li><strong>Initialize centroids</strong> (random or <b>k-means++</b> for smarter seeding).</li>
+      <li><strong>Initialize centroids</strong> (Randomly picks \(k\) data points as initial centroids.
+       (<b>k-means++</b> for smarter seeding)).</li>
       <li><strong>Assignment step</strong> — assign each point to the nearest centroid.</li>
       <li><strong>Update step</strong> — recompute each centroid as the mean of its assigned points.</li>
       <li><strong>Repeat</strong> steps 3–4 until convergence (assignments stabilize or objective change is tiny).</li>
