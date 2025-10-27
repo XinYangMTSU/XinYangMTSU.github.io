@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Chapter 6: Unsupervised Learning - Clustering</title>
+  <title>Chapter 5: Unsupervised Learning - Clustering</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
@@ -204,13 +204,13 @@
 <nav id="sidebar">
   <h2><i class="fas fa-book"></i> Contents</h2>
   <ul>
-    <li><a href="#what-is-unsupervised"><i class="fas fa-robot"></i>1. What is Unsupervised Learning?</a></li>
+    <li><a href="#what-is-unsupervised"><i class="fas fa-robot"></i>5.1 What is Unsupervised Learning?</a></li>
     
     <li>
       <a href="#clustering"><i class="fas fa-layer-group"></i>2. Clustering</a>
       <div class="subsections">
-        <a href="#kmeans">2.1 K-Means Clustering</a>
-        <a href="#hierarchical">2.2 Hierarchical Clustering</a>
+        <a href="#kmeans">5.1 K-Means Clustering</a>
+        <a href="#hierarchical">5.2 Hierarchical Clustering</a>
       </div>
     </li>
     
@@ -219,7 +219,7 @@
 </nav>
 
 <main id="content">
-  <h1>Chapter 6: Unsupervised Learning — Clustering</h1>
+  <h1>Chapter 5: Unsupervised Learning — Clustering</h1>
 
   <section id="what-is-unsupervised">
     <h2>1. What is Unsupervised Learning?</h2>
@@ -242,9 +242,8 @@
 
     <h4>Main families:</h4>
     <ul>
-       <li><b>Clustering</b> (K-Means, Hierarchical, DBSCAN, …)</li>
-       <li>Dimensionality Reduction (PCA, t-SNE, UMAP)</li>
-       <li>Density Estimation (GMMs, KDE)</li>
+       <li><b>Clustering</b> (K-Means, Hierarchical)</li>
+       <li>Dimensionality Reduction (PCA, ICA)</li>
     </ul>
   </section>
 
@@ -254,6 +253,32 @@
       Clustering methods partition data into groups (clusters) so that <b><font color="red">items in the same cluster are more similar</font></b>
       to each other than to items in other clusters. Similarity is defined via a distance or a density notion.
     </p>
+      <p>
+      <b>Clustering</b> is a fundamental unsupervised learning task where the goal is to group similar data points together without having labeled training data. Unlike supervised learning, where we predict a target variable, clustering discovers inherent patterns and structures in data.
+    </p>
+
+    <p>
+      Clustering is the task of partitioning a dataset into groups (called <b>clusters</b>) such that:
+    </p>
+    <ul>
+      <li><b>Within-cluster similarity:</b> Points in the same cluster are similar to each other</li>
+      <li><b>Between-cluster dissimilarity:</b> Points in different clusters are dissimilar</li>
+    </ul>
+
+    <h4>Key Differences from Classification</h4>
+    <ul>
+      <li><b>No Labels:</b> Clustering doesn't use labeled training data; classification does</li>
+      <li><b>Discovery:</b> Clustering discovers unknown patterns; classification uses known categories</li>
+      <li><b>Evaluation:</b> Clustering is harder to evaluate objectively; classification uses accuracy on labeled test data</li>
+    </ul>
+
+    <h4>Two common methods:</h4>
+
+    <ul>
+          <li>K-Means Clustering</li>
+          <li>Hierarchical Clustering</li>
+      </ul>
+    
     <ul>
       <li><strong>Prototype-based:</strong> K-Means minimizes within-cluster variance around centroids.</li>
       <li><strong>Hierarchy-based:</strong> Hierarchical clustering builds a tree (dendrogram) of merges/splits.</li>
