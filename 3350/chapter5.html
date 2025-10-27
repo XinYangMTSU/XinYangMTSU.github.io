@@ -322,14 +322,6 @@
       <li><strong>Repeat</strong> steps 3–4 until convergence (assignments stabilize or objective change is tiny).</li>
     </ol>
 
-    <h4>Interpretation &amp; Tips</h4>
-    <ul>
-      <li><b>Scale features:</b> otherwise the largest-scale feature dominates the distance.</li>
-      <li><b>Initialization matters:</b> run multiple restarts; prefer k-means++.</li>
-      <li><b>Shape assumption:</b> best for roughly spherical, equal-variance clusters.</li>
-      <li><b>Complexity:</b> \(O(m k t d)\) for \(m\) points, \(k\) clusters, \(t\) iterations, \(d\) dimensions.</li>
-    </ul>
-
     <h4>Worked Example (2D)</h4>
     <p>
       Points: \((1,1), (1.5,2), (3,4), (5,7), (3.5,5), (4.5,5), (3.5,4.5)\). Let \(k=2\). Initialize centroids at \((1,1)\) and \((5,7)\).
@@ -346,6 +338,14 @@
       <li><b>Elbow:</b> plot within-cluster SSE vs \(k\); look for the “elbow”.</li>
       <li><b>Silhouette:</b> \( s(i)=\dfrac{b(i)-a(i)}{\max\{a(i),b(i)\}} \), where \(a(i)\) is mean intra-cluster distance and \(b(i)\) is the best alternative cluster distance.</li>
     </ul>
+
+    <h4>Interpretation &amp; Tips</h4>
+    <ul>
+      <li><b>Scale features:</b> otherwise the largest-scale feature dominates the distance.</li>
+      <li><b>Initialization matters:</b> run multiple restarts; prefer k-means++.</li>
+      <li><b>Shape assumption:</b> best for roughly spherical, equal-variance clusters.</li>
+    </ul>
+    
   </section>
 
   <section id="hierarchical">
