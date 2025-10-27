@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>K-Means Complete Solution - All Steps</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$', '$']],
+        processEscapes: true
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Roboto',Arial,sans-serif;background:#17191a;min-height:100vh;color:#ff79c6;padding:20px}
+    section{margin:0 auto 40px auto;background:#222025;border-radius:18px;box-shadow:0 4px 30px rgba(255,121,198,.09);padding:30px;border-left:7px solid #ff79c6;position:relative;max-width:1200px}
+    h1{color:#ffb3de;margin:0 0 8px 0;text-align:center;font-size:2.5em}
+    h2{margin:0 0 15px 0;color:#ffb3de;font-weight:700;font-size:1.6em;border-bottom:2px solid #ff79c6;padding-bottom:10px}
+    h3{font-size:1.15em;color:#ffb3de;margin:25px 0 12px 0;font-weight:600;background:#1e1a20;padding:10px;border-left:4px solid #10b981;border-radius:4px}
+    h4{font-size:1.05em;color:#ffd7f0;margin:15px 0 8px 0;font-weight:600}
+    p{color:#ffd7f0;line-height:1.8;margin-bottom:12px}
+    .subtitle{text-align:center;color:#ffd7f0;opacity:.9;font-size:1.1em;margin-bottom:20px}
+    .pill{display:inline-block;background:#19121a;border:1px solid #ff79c6;border-radius:999px;padding:6px 12px;margin:2px 8px 2px 0;font-size:.9em}
+
+    .iteration-box{background:#1e1a20;border:2px solid #10b981;border-radius:12px;padding:20px;margin:25px 0;position:relative}
+    .iteration-header{font-size:1.3em;font-weight:700;color:#10b981;margin-bottom:15px;display:flex;align-items:center;gap:10px}
+
+    .step-card{background:#2a252b;border-left:4px solid;border-radius:8px;padding:15px;margin:15px 0;font-size:0.95em}
+    .step-card.assignment{border-left-color:#FF6B6B}
+    .step-card.update{border-left-color:#4ECDC4}
+    .step-card.convergence{border-left-color:#f59e0b}
+
+    .calculation-box{background:#19121a;border:1px solid #ff79c6;border-radius:8px;padding:15px;margin:12px 0;font-family:'Courier New',monospace;font-size:0.9em;line-height:1.6;color:#ffd7f0;overflow-x:auto}
+
+    table{width:100%;border-collapse:collapse;margin:15px 0;font-size:0.95em}
+    th{background:#1e1a20;color:#ffb3de;padding:12px;border:1px solid #ff79c6;font-weight:600;text-align:left}
+    td{padding:10px;border:1px solid rgba(255,121,198,0.2);background:#2a252b;color:#ffd7f0}
+    tr:hover td{background:#1e1a20}
+
+    .data-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+    .data-item{background:#2a252b;padding:10px;border-radius:6px;border-left:3px solid;font-size:0.9em}
+    .data-item.A{border-left-color:#FF6B6B}
+    .data-item.B{border-left-color:#4ECDC4}
+
+    .comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px 0}
+    .comparison-item{background:#2a252b;padding:15px;border-radius:8px;border:1px solid rgba(255,121,198,0.2)}
+
+    .result-box{background:#10b981;border-radius:8px;padding:20px;margin:20px 0;color:#fff;border:2px solid #059669}
+    .result-box h4{color:#fff;margin-top:0}
+
+    .warning-box{background:#f59e0b;border-radius:8px;padding:15px;margin:15px 0;color:#fff;border:2px solid #d97706}
+
+    .centroid-display{background:#1e1a20;border:2px solid #ff79c6;border-radius:8px;padding:15px;margin:12px 0;text-align:center;font-size:1.1em;font-family:monospace;color:#ffd7f0}
+
+    .formula-highlight{background:#ff79c6;color:#1a1d1f;padding:3px 8px;border-radius:4px;font-weight:600}
+
+    ul{margin:10px 0 10px 30px;color:#ffd7f0;line-height:1.8}
+    li{margin:6px 0}
+    ol{margin:10px 0 10px 30px;color:#ffd7f0;line-height:1.8}
+    ol li{margin:6px 0}
+
+    .toc{background:#2a252b;border-left:4px solid #8be9fd;border-radius:8px;padding:20px;margin:20px 0}
+    .toc h3{margin-top:0;background:none;padding:0;border:none}
+    .toc ul{margin:10px 0 0 30px}
+    .toc li{margin:5px 0}
+    .toc a{color:#8be9fd;text-decoration:none}
+    .toc a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+
+<section>
+  <center><h1><span class="pill"><i class="fas fa-tasks"></i> K-Means Complete Solution</span></h1></center>
+  <p class="subtitle">All steps showing detailed calculations for clustering 7 points into 2 clusters</p>
+</section>
+
+<section>
+  <h2><i class="fas fa-info-circle"></i> Problem Statement</h2>
+  <p><b>Given:</b></p>
+  <ul>
+    <li><b>Dataset:</b> 7 data points: P1(1,1), P2(1.5,2), P3(3,4), P4(5,7), P5(3.5,5), P6(4.5,5), P7(3.5,4.5)</li>
+    <li><b>Number of clusters:</b> k = 2</li>
+    <li><b>Initial centroids:</b> μ<sub>A</sub> = (1,1), μ<sub>B</sub> = (5,7)</li>
+  </ul>
+
+  <div class="toc">
+    <h3><i class="fas fa-bookmark"></i> Solution Overview</h3>
+    <ul>
+      <li><a href="#init">Initialization</a></li>
+      <li><a href="#iter1">Iteration 1: Assignment & Update</a></li>
+      <li><a href="#iter2">Iteration 2: Reassignment & Convergence Check</a></li>
+      <li><a href="#final">Final Result</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- INITIALIZATION -->
+<section id="init">
+  <h2><i class="fas fa-play"></i> Step 0: Initialization</h2>
+
+  <p><b>Initial centroids are given:</b></p>
+  <div class="centroid-display">
+    μ<sub>A</sub> = (1, 1)<br>
+    μ<sub>B</sub> = (5, 7)
+  </div>
+
+  <p><b>All 7 data points:</b></p>
+  <div class="data-list">
+    <div class="data-item">P1: (1, 1)</div>
+    <div class="data-item">P2: (1.5, 2)</div>
+    <div class="data-item">P3: (3, 4)</div>
+    <div class="data-item">P4: (5, 7)</div>
+    <div class="data-item">P5: (3.5, 5)</div>
+    <div class="data-item">P6: (4.5, 5)</div>
+    <div class="data-item">P7: (3.5, 4.5)</div>
+  </div>
+
+  <p style="font-size:0.95em;color:#ffd7f0;background:#2a252b;padding:12px;border-radius:6px;border-left:4px solid #8be9fd">
+    <b>Status:</b> Ready to start clustering. No points assigned yet. Will proceed to Iteration 1.
+  </p>
+</section>
+
+<!-- ITERATION 1 -->
+<section id="iter1">
+  <h2><i class="fas fa-sync"></i> Iteration 1: Assignment & Update</h2>
+
+  <div class="iteration-box">
+    <div class="iteration-header">
+      <i class="fas fa-1"></i> Step 1.1: Assignment Phase
+    </div>
+
+    <p>For each point, calculate the distance to both centroids and assign to the nearest one.</p>
+    <p><b>Distance formula:</b> \(d = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}\)</p>
+
+    <h3>Distance Calculations to Cluster A μ<sub>A</sub> = (1, 1)</h3>
+
+    <div class="calculation-box">
+P1(1, 1) to μA(1, 1):
+$d = \sqrt{(1-1)^2 + (1-1)^2} = \sqrt{0 + 0} = \mathbf{0.000}$
+    </div>
+
+    <div class="calculation-box">
+P2(1.5, 2) to μA(1, 1):
+$d = \sqrt{(1.5-1)^2 + (2-1)^2} = \sqrt{0.25 + 1} = \sqrt{1.25} = \mathbf{1.118}$
+    </div>
+
+    <div class="calculation-box">
+P3(3, 4) to μA(1, 1):
+$d = \sqrt{(3-1)^2 + (4-1)^2} = \sqrt{4 + 9} = \sqrt{13} = \mathbf{3.606}$
+    </div>
+
+    <div class="calculation-box">
+P4(5, 7) to μA(1, 1):
+$d = \sqrt{(5-1)^2 + (7-1)^2} = \sqrt{16 + 36} = \sqrt{52} = \mathbf{7.211}$
+    </div>
+
+    <div class="calculation-box">
+P5(3.5, 5) to μA(1, 1):
+$d = \sqrt{(3.5-1)^2 + (5-1)^2} = \sqrt{6.25 + 16} = \sqrt{22.25} = \mathbf{4.717}$
+    </div>
+
+    <div class="calculation-box">
+P6(4.5, 5) to μA(1, 1):
+$d = \sqrt{(4.5-1)^2 + (5-1)^2} = \sqrt{12.25 + 16} = \sqrt{28.25} = \mathbf{5.315}$
+    </div>
+
+    <div class="calculation-box">
+P7(3.5, 4.5) to μA(1, 1):
+$d = \sqrt{(3.5-1)^2 + (4.5-1)^2} = \sqrt{6.25 + 12.25} = \sqrt{18.5} = \mathbf{4.301}$
+    </div>
+
+    <h3>Distance Calculations to Cluster B μ<sub>B</sub> = (5, 7)</h3>
+
+    <div class="calculation-box">
+P1(1, 1) to μB(5, 7):
+$d = \sqrt{(1-5)^2 + (1-7)^2} = \sqrt{16 + 36} = \sqrt{52} = \mathbf{7.211}$
+    </div>
+
+    <div class="calculation-box">
+P2(1.5, 2) to μB(5, 7):
+$d = \sqrt{(1.5-5)^2 + (2-7)^2} = \sqrt{12.25 + 25} = \sqrt{37.25} = \mathbf{6.103}$
+    </div>
+
+    <div class="calculation-box">
+P3(3, 4) to μB(5, 7):
+$d = \sqrt{(3-5)^2 + (4-7)^2} = \sqrt{4 + 9} = \sqrt{13} = \mathbf{3.606}$
+    </div>
+
+    <div class="calculation-box">
+P4(5, 7) to μB(5, 7):
+$d = \sqrt{(5-5)^2 + (7-7)^2} = \sqrt{0 + 0} = \mathbf{0.000}$
+    </div>
+
+    <div class="calculation-box">
+P5(3.5, 5) to μB(5, 7):
+$d = \sqrt{(3.5-5)^2 + (5-7)^2} = \sqrt{2.25 + 4} = \sqrt{6.25} = \mathbf{2.500}$
+    </div>
+
+    <div class="calculation-box">
+P6(4.5, 5) to μB(5, 7):
+$d = \sqrt{(4.5-5)^2 + (5-7)^2} = \sqrt{0.25 + 4} = \sqrt{4.25} = \mathbf{2.062}$
+    </div>
+
+    <div class="calculation-box">
+P7(3.5, 4.5) to μB(5, 7):
+$d = \sqrt{(3.5-5)^2 + (4.5-7)^2} = \sqrt{2.25 + 6.25} = \sqrt{8.5} = \mathbf{2.915}$
+    </div>
+
+    <h3>Assignment Decision (Choose Minimum Distance)</h3>
+
+    <table>
+      <tr>
+        <th>Point</th>
+        <th>Distance to μ<sub>A</sub>(1,1)</th>
+        <th>Distance to μ<sub>B</sub>(5,7)</th>
+        <th>Min Distance</th>
+        <th>Assigned to</th>
+      </tr>
+      <tr>
+        <td><b>P1(1,1)</b></td>
+        <td>0.000 ✓</td>
+        <td>7.211</td>
+        <td>0.000</td>
+        <td><b style="color:#FF6B6B">Cluster A</b></td>
+      </tr>
+      <tr>
+        <td><b>P2(1.5,2)</b></td>
+        <td>1.118 ✓</td>
+        <td>6.103</td>
+        <td>1.118</td>
+        <td><b style="color:#FF6B6B">Cluster A</b></td>
+      </tr>
+      <tr>
+        <td><b>P3(3,4)</b></td>
+        <td>3.606</td>
+        <td>3.606 ✓</td>
+        <td>3.606</td>
+        <td><b style="color:#4ECDC4">Cluster B</b></td>
+      </tr>
+      <tr>
+        <td><b>P4(5,7)</b></td>
+        <td>7.211</td>
+        <td>0.000 ✓</td>
+        <td>0.000</td>
+        <td><b style="color:#4ECDC4">Cluster B</b></td>
+      </tr>
+      <tr>
+        <td><b>P5(3.5,5)</b></td>
+        <td>4.717</td>
+        <td>2.500 ✓</td>
+        <td>2.500</td>
+        <td><b style="color:#4ECDC4">Cluster B</b></td>
+      </tr>
+      <tr>
+        <td><b>P6(4.5,5)</b></td>
+        <td>5.315</td>
+        <td>2.062 ✓</td>
+        <td>2.062</td>
+        <td><b style="color:#4ECDC4">Cluster B</b></td>
+      </tr>
+      <tr>
+        <td><b>P7(3.5,4.5)</b></td>
+        <td>4.301</td>
+        <td>2.915 ✓</td>
+        <td>2.915</td>
+        <td><b style="color:#4ECDC4">Cluster B</b></td>
+      </tr>
+    </table>
+
+    <h3>Cluster Assignments after Iteration 1 Assignment Phase</h3>
+    <div class="comparison-grid">
+      <div class="comparison-item">
+        <h4><b style="color:#FF6B6B">Cluster A</b></h4>
+        <p><b>Points:</b> P1, P2</p>
+        <p>P1(1, 1)</p>
+        <p>P2(1.5, 2)</p>
+        <p><b>Count:</b> 2 points</p>
+      </div>
+      <div class="comparison-item">
+        <h4><b style="color:#4ECDC4">Cluster B</b></h4>
+        <p><b>Points:</b> P3, P4, P5, P6, P7</p>
+        <p>P3(3, 4)</p>
+        <p>P4(5, 7)</p>
+        <p>P5(3.5, 5)</p>
+        <p>P6(4.5, 5)</p>
+        <p>P7(3.5, 4.5)</p>
+        <p><b>Count:</b> 5 points</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="iteration-box">
+    <div class="iteration-header">
+      <i class="fas fa-calculator"></i> Step 1.2: Update Phase (Calculate New Centroids)
+    </div>
+
+    <p>Calculate the mean of each cluster to get the new centroids.</p>
+    <p><b>Formula:</b> \(\mu_i = \frac{1}{|C_i|} \sum_{x \in C_i} x\)</p>
+
+    <h3>New Centroid for Cluster A</h3>
+    <p><b>Points in cluster:</b> P1(1, 1), P2(1.5, 2)</p>
+
+    <div class="calculation-box">
+μA_x = (1 + 1.5) / 2 = 2.5 / 2 = <b style="color:#10b981">1.25</b>
+μA_y = (1 + 2) / 2 = 3 / 2 = <b style="color:#10b981">1.50</b>
+
+<b style="color:#FF6B6B">New μA = (1.25, 1.50)</b>
+    </div>
+
+    <h3>New Centroid for Cluster B</h3>
+    <p><b>Points in cluster:</b> P3(3, 4), P4(5, 7), P5(3.5, 5), P6(4.5, 5), P7(3.5, 4.5)</p>
+
+    <div class="calculation-box">
+μB_x = (3 + 5 + 3.5 + 4.5 + 3.5) / 5 = 19.5 / 5 = <b style="color:#10b981">3.90</b>
+μB_y = (4 + 7 + 5 + 5 + 4.5) / 5 = 25.5 / 5 = <b style="color:#10b981">5.10</b>
+
+<b style="color:#4ECDC4">New μB = (3.90, 5.10)</b>
+    </div>
+
+    <p style="font-size:0.95em;color:#ffd7f0;background:#2a252b;padding:12px;border-radius:6px;border-left:4px solid #10b981">
+      <b>Status after Iteration 1:</b> Centroids have moved significantly. Need to check convergence by reassigning points with new centroids.
+    </p>
+  </div>
+</section>
+
+<!-- ITERATION 2 -->
+<section id="iter2">
+  <h2><i class="fas fa-sync"></i> Iteration 2: Reassignment & Convergence Check</h2>
+
+  <div class="iteration-box">
+    <div class="iteration-header">
+      <i class="fas fa-2"></i> Step 2.1: Reassign Points with New Centroids
+    </div>
+
+    <p>Using new centroids μ<sub>A</sub> = (1.25, 1.50) and μ<sub>B</sub> = (3.90, 5.10), recalculate distances and reassign.</p>
+
+    <h3>Distance Calculations to NEW Cluster A μ<sub>A</sub> = (1.25, 1.50)</h3>
+
+    <div class="calculation-box">
+P1(1, 1) to μA(1.25, 1.50):
+$d = \sqrt{(1-1.25)^2 + (1-1.50)^2} = \sqrt{0.0625 + 0.25} = \sqrt{0.3125} = \mathbf{0.559}$
+    </div>
+
+    <div class="calculation-box">
+P2(1.5, 2) to μA(1.25, 1.50):
+$d = \sqrt{(1.5-1.25)^2 + (2-1.50)^2} = \sqrt{0.0625 + 0.25} = \sqrt{0.3125} = \mathbf{0.559}$
+    </div>
+
+    <div class="calculation-box">
+P3(3, 4) to μA(1.25, 1.50):
+$d = \sqrt{(3-1.25)^2 + (4-1.50)^2} = \sqrt{3.0625 + 6.25} = \sqrt{9.3125} = \mathbf{3.052}$
+    </div>
+
+    <div class="calculation-box">
+P4(5, 7) to μA(1.25, 1.50):
+$d = \sqrt{(5-1.25)^2 + (7-1.50)^2} = \sqrt{14.0625 + 30.25} = \sqrt{44.3125} = \mathbf{6.656}$
+    </div>
+
+    <div class="calculation-box">
+P5(3.5, 5) to μA(1.25, 1.50):
+$d = \sqrt{(3.5-1.25)^2 + (5-1.50)^2} = \sqrt{5.0625 + 12.25} = \sqrt{17.3125} = \mathbf{4.160}$
+    </div>
+
+    <div class="calculation-box">
+P6(4.5, 5) to μA(1.25, 1.50):
+$d = \sqrt{(4.5-1.25)^2 + (5-1.50)^2} = \sqrt{10.5625 + 12.25} = \sqrt{22.8125} = \mathbf{4.777}$
+    </div>
+
+    <div class="calculation-box">
+P7(3.5, 4.5) to μA(1.25, 1.50):
+$d = \sqrt{(3.5-1.25)^2 + (4.5-1.50)^2} = \sqrt{5.0625 + 9} = \sqrt{14.0625} = \mathbf{3.750}$
+    </div>
+
+    <h3>Distance Calculations to NEW Cluster B μ<sub>B</sub> = (3.90, 5.10)</h3>
+
+    <div class="calculation-box">
+P1(1, 1) to μB(3.90, 5.10):
+$d = \sqrt{(1-3.90)^2 + (1-5.10)^2} = \sqrt{8.41 + 16.81} = \sqrt{25.22} = \mathbf{5.022}$
+    </div>
+
+    <div class="calculation-box">
+P2(1.5, 2) to μB(3.90, 5.10):
+$d = \sqrt{(1.5-3.90)^2 + (2-5.10)^2} = \sqrt{5.76 + 9.61} = \sqrt{15.37} = \mathbf{3.920}$
+    </div>
+
+    <div class="calculation-box">
+P3(3, 4) to μB(3.90, 5.10):
+$d = \sqrt{(3-3.90)^2 + (4-5.10)^2} = \sqrt{0.81 + 1.21} = \sqrt{2.02} = \mathbf{1.421}$
+    </div>
+
+    <div class="calculation-box">
+P4(5, 7) to μB(3.90, 5.10):
+$d = \sqrt{(5-3.90)^2 + (7-5.10)^2} = \sqrt{1.21 + 3.61} = \sqrt{4.82} = \mathbf{2.195}$
+    </div>
+
+    <div class="calculation-box">
+P5(3.5, 5) to μB(3.90, 5.10):
+$d = \sqrt{(3.5-3.90)^2 + (5-5.10)^2} = \sqrt{0.16 + 0.01} = \sqrt{0.17} = \mathbf{0.412}$
+    </div>
+
+    <div class="calculation-box">
+P6(4.5, 5) to μB(3.90, 5.10):
+$d = \sqrt{(4.5-3.90)^2 + (5-5.10)^2} = \sqrt{0.36 + 0.01} = \sqrt{0.37} = \mathbf{0.608}$
+    </div>
+
+    <div class="calculation-box">
+P7(3.5, 4.5) to μB(3.90, 5.10):
+$d = \sqrt{(3.5-3.90)^2 + (4.5-5.10)^2} = \sqrt{0.16 + 0.36} = \sqrt{0.52} = \mathbf{0.721}$
+    </div>
+
+    <h3>Reassignment Decision (Choose Minimum Distance)</h3>
+
+    <table>
+      <tr>
+        <th>Point</th>
+        <th>Distance to NEW μ<sub>A</sub>(1.25,1.50)</th>
+        <th>Distance to NEW μ<sub>B</sub>(3.90,5.10)</th>
+        <th>Min Distance</th>
+        <th>Assigned to</th>
+        <th>Previous Cluster</th>
+        <th>Changed?</th>
+      </tr>
+      <tr>
+        <td><b>P1(1,1)</b></td>
+        <td>0.559 ✓</td>
+        <td>5.022</td>
+        <td>0.559</td>
+        <td><b style="color:#FF6B6B">Cluster A</b></td>
+        <td>Cluster A</td>
+        <td><b style="color:#10b981">NO</b></td>
+      </tr>
+      <tr>
+        <td><b>P2(1.5,2)</b></td>
+        <td>0.559 ✓</td>
+        <td>3.920</td>
+        <td>0.559</td>
+        <td><b style="color:#FF6B6B">Cluster A</b></td>
+        <td>Cluster A</td>
+        <td><b style="color:#10b981">NO</b></td>
+      </tr>
+      <tr>
+        <td><b>P3(3,4)</b></td>
+        <td>3.052</td>
+        <td>1.421 ✓</td>
+        <td>1.421</td>
+        <td><b style="color:#4ECDC4">Cluster B</b></td>
+        <td>Cluster B</td>
+        <td><b style="color:#10b981">NO</b></td>
+      </tr>
+      <tr>
+        <td><b>P4(5,7)</b></td>
+        <td>6.656</td>
+        <td>2.195 ✓</td>
+        <td>2.195</td>
+        <td><b style="color:#4ECDC4">Cluster B</b></td>
+        <td>Cluster B</td>
+        <td><b style="color:#10b981">NO</b></td>
+      </tr>
+      <tr>
+        <td><b>P5(3.5,5)</b></td>
+        <td>4.160</td>
+        <td>0.412 ✓</td>
+        <td>0.412</td>
+        <td><b style="color:#4ECDC4">Cluster B</b></td>
+        <td>Cluster B</td>
+        <td><b style="color:#10b981">NO</b></td>
+      </tr>
+      <tr>
+        <td><b>P6(4.5,5)</b></td>
+        <td>4.777</td>
+        <td>0.608 ✓</td>
+        <td>0.608</td>
+        <td><b style="color:#4ECDC4">Cluster B</b></td>
+        <td>Cluster B</td>
+        <td><b style="color:#10b981">NO</b></td>
+      </tr>
+      <tr>
+        <td><b>P7(3.5,4.5)</b></td>
+        <td>3.750</td>
+        <td>0.721 ✓</td>
+        <td>0.721</td>
+        <td><b style="color:#4ECDC4">Cluster B</b></td>
+        <td>Cluster B</td>
+        <td><b style="color:#10b981">NO</b></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="iteration-box">
+    <div class="iteration-header">
+      <i class="fas fa-check-circle"></i> Step 2.2: Convergence Check
+    </div>
+
+    <p><b>Convergence Criterion:</b> Check if cluster assignments changed from Iteration 1 to Iteration 2.</p>
+
+    <div class="result-box">
+      <h4><i class="fas fa-check"></i> ✓ CONVERGENCE ACHIEVED!</h4>
+      <p style="margin:0">All 7 points remain in the same clusters:</p>
+      <ul style="margin:10px 0 0 30px;color:#fff">
+        <li>P1 stayed in Cluster A ✓</li>
+        <li>P2 stayed in Cluster A ✓</li>
+        <li>P3 stayed in Cluster B ✓</li>
+        <li>P4 stayed in Cluster B ✓</li>
+        <li>P5 stayed in Cluster B ✓</li>
+        <li>P6 stayed in Cluster B ✓</li>
+        <li>P7 stayed in Cluster B ✓</li>
+      </ul>
+      <p style="margin:10px 0 0 0"><b>Since no points changed clusters, the algorithm has CONVERGED.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL RESULT -->
+<section id="final">
+  <h2><i class="fas fa-flag-checkered"></i> Final Result: Clustering Complete</h2>
+
+  <div class="result-box">
+    <h4><i class="fas fa-check-circle"></i> Algorithm Terminated After 2 Iterations</h4>
+    <p style="margin:0">The K-Means algorithm converged successfully in 2 iterations.</p>
+  </div>
+
+  <h3>Final Cluster Assignments</h3>
+
+  <div class="comparison-grid">
+    <div class="comparison-item">
+      <h4 style="color:#FF6B6B;margin-top:0"><i class="fas fa-circle"></i> Cluster A</h4>
+      <p><b>Centroid:</b> (1.25, 1.50)</p>
+      <p><b>Points:</b></p>
+      <ul style="margin:10px 0 0 30px;color:#ffd7f0">
+        <li>P1(1, 1)</li>
+        <li>P2(1.5, 2)</li>
+      </ul>
+      <p><b>Count:</b> 2 points</p>
+    </div>
+    <div class="comparison-item">
+      <h4 style="color:#4ECDC4;margin-top:0"><i class="fas fa-circle"></i> Cluster B</h4>
+      <p><b>Centroid:</b> (3.90, 5.10)</p>
+      <p><b>Points:</b></p>
+      <ul style="margin:10px 0 0 30px;color:#ffd7f0">
+        <li>P3(3, 4)</li>
+        <li>P4(5, 7)</li>
+        <li>P5(3.5, 5)</li>
+        <li>P6(4.5, 5)</li>
+        <li>P7(3.5, 4.5)</li>
+      </ul>
+      <p><b>Count:</b> 5 points</p>
+    </div>
+  </div>
+
+  <h3>Centroid Movement Summary</h3>
+
+  <table>
+    <tr>
+      <th>Cluster</th>
+      <th>Initial Centroid</th>
+      <th>Final Centroid</th>
+      <th>Distance Moved</th>
+    </tr>
+    <tr>
+      <td><b>Cluster A</b></td>
+      <td>(1.00, 1.00)</td>
+      <td>(1.25, 1.50)</td>
+      <td>$\sqrt{(1.25-1)^2 + (1.50-1)^2} = \sqrt{0.3125} = 0.559$</td>
+    </tr>
+    <tr>
+      <td><b>Cluster B</b></td>
+      <td>(5.00, 7.00)</td>
+      <td>(3.90, 5.10)</td>
+      <td>$\sqrt{(3.90-5)^2 + (5.10-7)^2} = \sqrt{4.82} = 2.195$</td>
+    </tr>
+  </table>
+
+  <h3>Within-Cluster Sum of Squares (WCSS)</h3>
+
+  <div class="calculation-box">
+Cluster A (μ = 1.25, 1.50):
+Point P1(1, 1): $||P_1 - \mu_A||^2 = (1-1.25)^2 + (1-1.50)^2 = 0.0625 + 0.25 = 0.3125$
+Point P2(1.5, 2): $||P_2 - \mu_A||^2 = (1.5-1.25)^2 + (2-1.50)^2 = 0.0625 + 0.25 = 0.3125$
+Cluster A WCSS = 0.3125 + 0.3125 = <b style="color:#10b981">0.625</b>
+
+Cluster B (μ = 3.90, 5.10):
+Point P3(3, 4): $||P_3 - \mu_B||^2 = (3-3.90)^2 + (4-5.10)^2 = 0.81 + 1.21 = 2.02$
+Point P4(5, 7): $||P_4 - \mu_B||^2 = (5-3.90)^2 + (7-5.10)^2 = 1.21 + 3.61 = 4.82$
+Point P5(3.5, 5): $||P_5 - \mu_B||^2 = (3.5-3.90)^2 + (5-5.10)^2 = 0.16 + 0.01 = 0.17$
+Point P6(4.5, 5): $||P_6 - \mu_B||^2 = (4.5-3.90)^2 + (5-5.10)^2 = 0.36 + 0.01 = 0.37$
+Point P7(3.5, 4.5): $||P_7 - \mu_B||^2 = (3.5-3.90)^2 + (4.5-5.10)^2 = 0.16 + 0.36 = 0.52$
+Cluster B WCSS = 2.02 + 4.82 + 0.17 + 0.37 + 0.52 = <b style="color:#10b981">7.90</b>
+
+<b style="color:#FF6B6B">Total WCSS (J) = 0.625 + 7.90 = 8.525</b>
+  </div>
+
+  <h3>Key Statistics</h3>
+  <ul>
+    <li><b>Iterations to convergence:</b> 2</li>
+    <li><b>Final WCSS:</b> 8.525</li>
+    <li><b>Total points:</b> 7</li>
+    <li><b>Cluster A size:</b> 2 points (28.6%)</li>
+    <li><b>Cluster B size:</b> 5 points (71.4%)</li>
+  </ul>
+
+</section>
+
+</body>
+</html>
