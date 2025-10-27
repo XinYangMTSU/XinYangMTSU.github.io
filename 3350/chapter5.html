@@ -343,8 +343,8 @@
 
     <h4>Interpretation &amp; Tips</h4>
     <ul>
-      <li><b>Scale features:</b> otherwise the largest-scale feature dominates the distance.</li>
-      <li><b>Initialization matters:</b> run multiple restarts; prefer k-means++.</li>
+      <li><b>Needs Feature Scaling:</b> K-Means uses Euclidean distance, which is sensitive to feature scale. Without scaling, features with larger ranges dominate the distance calculation.
+      </li>
       <li><b>Shape assumption:</b> best for roughly spherical, equal-variance clusters.</li>
     </ul>
     
