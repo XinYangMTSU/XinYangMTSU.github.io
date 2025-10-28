@@ -353,12 +353,19 @@
 
   <section id="hierarchical">
     <h4>2.2 Hierarchical Clustering</h4>
-    <br>
+
     <b>Idea:</b>
     <p>
-      Build a tree of clusters (dendrogram) by recursively merging or splitting groups.
-      Start with each point as its own cluster, then iteratively merge the closest pairs until all points are in one cluster.
-      Cut the tree at desired height to get clusters. Goal: <b><font color="red">reveal data's hierarchical structure</font></b>.
+
+      <b>Hierarchical Clustering</b> is an <b>unsupervised</b> machine learning algorithm that 
+    groups data points into a hierarchy of clusters — from individual points up to one large cluster, or vice versa.
+    <br>
+
+      It doesn’t require you to specify the number of clusters in advance (unlike K-Means) and produces a tree-like 
+      structure called a <b>dendrogram</b>.
+      <br>
+      
+      Goal: <b><font color="red">reveal data's hierarchical structure</font></b>.
     </p>
     <b>Objective: Minimize Linkage Distance</b>
     <p style="text-align:center;">
