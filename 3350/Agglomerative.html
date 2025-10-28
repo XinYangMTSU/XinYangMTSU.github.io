@@ -527,13 +527,22 @@ Cluster B WCSS = 1.25 + 1.25 = <b style="color:#10b981">2.50</b>
 
 <section>
 
-  <h2>Key Insights from Hierarchical Clustering</h2>
+  <h2>Key Insights from Agglomerative Clustering</h2>
   <ul>
+    <li><b>Bottom-Up Process:</b> Starts with individual points as separate clusters and iteratively merges the most similar pairs until a single cluster remains.</li>
+    <li><b>Dendrogram Representation:</b> A tree-like diagram (dendrogram) visually shows the merging sequence and the distance at which clusters combine.</li>
+    <li><b>Flexibility in Cluster Count:</b> You can choose the desired number of clusters by “cutting” the dendrogram at a chosen height.</li>
+    <li><b>Choice of Linkage Matters:</b> Different linkage criteria—such as <b>single</b>, <b>complete</b>, <b>average</b>, or <b>Ward’s method</b>—affect the shape and compactness of clusters.</li>
+
+    
     <li><b>No need to specify k upfront:</b> The dendrogram shows clustering structure at all levels</li>
     <li><b>Clear hierarchical relationships:</b> P1 and P2 are most similar (merge at 2.00), followed by P4 and P5 (merge at 2.24)</li>
     <li><b>Natural clustering:</b> Large gap between heights 3.61 and 6.71 suggests 2 clusters is optimal</li>
+    
+    <!--
     <li><b>Complete linkage effect:</b> Creates compact, well-separated clusters</li>
     <li><b>Flexibility:</b> Can obtain any number of clusters by cutting at different heights</li>
+    -->
   </ul>
 
 </section>
