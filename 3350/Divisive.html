@@ -1,1 +1,409 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Divisive (Top-Down) Clustering — Complete Solution</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$', '$']],
+        processEscapes: true
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Roboto',Arial,sans-serif;background:#17191a;min-height:100vh;color:#ff79c6;padding:20px}
+    section{margin:0 auto 40px auto;background:#222025;border-radius:18px;box-shadow:0 4px 30px rgba(255,121,198,.09);padding:30px;border-left:7px solid #ff79c6;position:relative;max-width:1200px}
+    h1{color:#ffb3de;margin:0 0 8px 0;text-align:center;font-size:2.5em}
+    h2{margin:0 0 15px 0;color:#ffb3de;font-weight:700;font-size:1.6em;border-bottom:2px solid #ff79c6;padding-bottom:10px}
+    h3{font-size:1.15em;color:#ffb3de;margin:25px 0 12px 0;font-weight:600;background:#1e1a20;padding:10px;border-left:4px solid #10b981;border-radius:4px}
+    h4{font-size:1.05em;color:#ffd7f0;margin:15px 0 8px 0;font-weight:600}
+    p{color:#ffd7f0;line-height:1.8;margin-bottom:12px}
+    .subtitle{text-align:center;color:#ffd7f0;opacity:.9;font-size:1.1em;margin-bottom:20px}
+    .pill{display:inline-block;background:#19121a;border:1px solid #ff79c6;border-radius:999px;padding:6px 12px;margin:2px 8px 2px 0;font-size:.9em}
+
+    .iteration-box{background:#1e1a20;border:2px solid #10b981;border-radius:12px;padding:20px;margin:25px 0;position:relative}
+    .iteration-header{font-size:1.3em;font-weight:700;color:#10b981;margin-bottom:15px;display:flex;align-items:center;gap:10px}
+
+    .step-card{background:#2a252b;border-left:4px solid;border-radius:8px;padding:15px;margin:15px 0;font-size:0.95em}
+    .step-card.single{border-left-color:#FF6B6B}
+    .step-card.complete{border-left-color:#4ECDC4}
+    .step-card.average{border-left-color:#f59e0b}
+    .step-card.ward{border-left-color:#a855f7}
+
+    .calculation-box{background:#19121a;border:1px solid #ff79c6;border-radius:8px;padding:15px;margin:12px 0;font-family:'Courier New',monospace;font-size:0.9em;line-height:1.6;color:#ffd7f0;overflow-x:auto}
+
+    table{width:100%;border-collapse:collapse;margin:15px 0;font-size:0.95em}
+    th{background:#1e1a20;color:#ffb3de;padding:12px;border:1px solid #ff79c6;font-weight:600;text-align:left}
+    td{padding:10px;border:1px solid rgba(255,121,198,0.2);background:#2a252b;color:#ffd7f0}
+    tr:hover td{background:#1e1a20}
+
+    .data-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+    .data-item{background:#2a252b;padding:10px;border-radius:6px;border-left:3px solid #8be9fd;font-size:0.9em}
+
+    .comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px 0}
+    .comparison-item{background:#2a252b;padding:15px;border-radius:8px;border:1px solid rgba(255,121,198,0.2)}
+
+    .result-box{background:#10b981;border-radius:8px;padding:20px;margin:20px 0;color:#fff;border:2px solid #059669}
+    .result-box h4{color:#fff;margin-top:0}
+
+    .warning-box{background:#f59e0b;border-radius:8px;padding:15px;margin:15px 0;color:#fff;border:2px solid #d97706}
+
+    .cluster-display{background:#1e1a20;border:2px solid #ff79c6;border-radius:8px;padding:15px;margin:12px 0;text-align:center;font-size:1.1em;font-family:monospace;color:#ffd7f0}
+
+    .distance-matrix{margin:15px 0}
+    .distance-matrix td.min{background:#10b981;color:#fff;font-weight:bold}
+    .distance-matrix td.diagonal{background:#444;color:#888}
+
+    ul{margin:10px 0 10px 30px;color:#ffd7f0;line-height:1.8}
+    li{margin:6px 0}
+    ol{margin:10px 0 10px 30px;color:#ffd7f0;line-height:1.8}
+    ol li{margin:6px 0}
+
+    .toc{background:#2a252b;border-left:4px solid #8be9fd;border-radius:8px;padding:20px;margin:20px 0}
+    .toc h3{margin-top:0;background:none;padding:0;border:none}
+    .toc ul{margin:10px 0 0 30px}
+    .toc li{margin:5px 0}
+    .toc a{color:#8be9fd;text-decoration:none}
+    .toc a:hover{text-decoration:underline}
+
+    .dendrogram-box{background:#1e1a20;border:2px solid #a855f7;border-radius:8px;padding:20px;margin:20px 0}
+    .dendrogram-text{font-family:monospace;white-space:pre;color:#ffd7f0;line-height:1.2}
+  </style>
+</head>
+<body>
+
+<section>
+  <center><h1><span class="pill"><i class="fas fa-sitemap"></i> Divisive Clustering (Top-Down)</span></h1></center>
+  <p class="subtitle">Start with one big cluster and recursively split — DIANA-style demonstration on 5 points</p>
+</section>
+
+<section>
+  <h2><i class="fas fa-info-circle"></i> Problem Statement</h2>
+  <p><b>Given:</b></p>
+  <ul>
+    <li><b>Dataset:</b> 5 data points: P1(2,3), P2(2,5), P3(5,3), P4(6,7), P5(8,6)</li>
+    <li><b>Distance metric:</b> Euclidean distance</li>
+    <li><b>Splitting heuristic (DIANA-style):</b> At each step, pick the cluster with the largest diameter; choose the <i>farthest pair</i> as initial seeds and assign remaining points to the nearest seed.</li>
+    <li><b>Goal:</b> Build the full top-down dendrogram and inspect cuts for 2–3 clusters</li>
+  </ul>
+</section>
+
+<!-- STEP 0 -->
+<section id="init">
+  <h2><i class="fas fa-play"></i> Step 0: Initialization</h2>
+  <p><b>Initial state:</b> All points in one cluster</p>
+  <div class="cluster-display">
+    C0 = { P1(2,3), P2(2,5), P3(5,3), P4(6,7), P5(8,6) }
+  </div>
+
+  <h3>All Pairwise Distances</h3>
+  <div class="calculation-box">
+P1–P2: 2.00 <br>
+P1–P3: 3.00 <br>
+P1–P4: 5.66 <br>
+P1–P5: 6.71  ← farthest pair
+P2–P3: 3.61 <br>
+P2–P4: 4.47 <br>
+P2–P5: 6.08 <br>
+P3–P4: 4.12 <br>
+P3–P5: 4.24 <br>
+P4–P5: 2.24 <br>
+  </div>
+  <div class="warning-box">
+    <b>Largest diameter in C0:</b> 6.71 (between P1 and P5) → we will split C0 first using P1 and P5 as seeds.
+  </div>
+</section>
+
+<!-- SPLIT 1 -->
+<section id="split1">
+  <h2><i class="fas fa-scissors"></i> Split 1: C0 ⟶ C1 | C2 (Height ≈ 6.71)</h2>
+
+  <div class="iteration-box">
+    <div class="iteration-header">
+      <i class="fas fa-1"></i> Seeds = {P1}, {P5} (farthest pair)
+    </div>
+
+    <p><b>Assign each remaining point to the nearest seed (Euclidean):</b></p>
+    <div class="calculation-box">
+For P2: d(P2,P1)=2.00 vs d(P2,P5)=6.08 ⇒ P2 → seed P1 <br>
+For P3: d(P3,P1)=3.00 vs d(P3,P5)=4.24 ⇒ P3 → seed P1 <br>
+For P4: d(P4,P1)=5.66 vs d(P4,P5)=2.24 ⇒ P4 → seed P5 <br>
+    </div>
+
+    <div class="result-box">
+      <h4><i class="fas fa-check"></i> Result of Split 1</h4>
+      <p style="margin:0">
+        C1 = {P1, P2, P3} &nbsp;&nbsp; | &nbsp;&nbsp; C2 = {P4, P5}
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT 2 -->
+<section id="split2">
+  <h2><i class="fas fa-scissors"></i> Split 2: Choose Cluster with Largest Diameter</h2>
+
+  <p><b>Diameters:</b></p>
+  <div class="calculation-box">
+diam(C1) = max{P1–P2=2.00, P1–P3=3.00, P2–P3=3.61} = 3.61 <br>
+diam(C2) = P4–P5 = 2.24 <br>
+→ Split C1 next (it has the larger diameter).
+  </div>
+
+  <div class="iteration-box">
+    <div class="iteration-header">
+      <i class="fas fa-2"></i> Split C1 at Height ≈ 3.61
+    </div>
+    <p><b>Seeds (farthest pair in C1):</b> P2 and P3 (distance 3.61)</p>
+    <div class="calculation-box">
+Assign P1: d(P1,P2)=2.00 vs d(P1,P3)=3.00 ⇒ P1 → seed P2
+    </div>
+    <div class="result-box">
+      <h4><i class="fas fa-check"></i> Result of Split 2</h4>
+      <p style="margin:0">
+        C1a = {P1, P2} &nbsp;&nbsp; | &nbsp;&nbsp; C1b = {P3}
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT 3 -->
+<section id="split3">
+  <h2><i class="fas fa-scissors"></i> Split 3: Next Largest Diameter</h2>
+
+  <p><b>Diameters now:</b></p>
+  <div class="calculation-box">
+diam(C2) = 2.24  (P4–P5) <br>
+diam(C1a) = 2.00 (P1–P2) <br>
+diam(C1b) = 0    (singleton) <br>
+→ Split C2 next (2.24).
+  </div>
+
+  <div class="iteration-box">
+    <div class="iteration-header">
+      <i class="fas fa-3"></i> Split C2 at Height ≈ 2.24
+    </div>
+    <p><b>Seeds:</b> P4 and P5 (only pair)</p>
+    <div class="result-box">
+      <h4><i class="fas fa-check"></i> Result of Split 3</h4>
+      <p style="margin:0">
+        C2a = {P4} &nbsp;&nbsp; | &nbsp;&nbsp; C2b = {P5}
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT 4 -->
+<section id="split4">
+  <h2><i class="fas fa-scissors"></i> Split 4: Final Non-singleton Cluster</h2>
+
+  <p>Remaining non-singleton: <b>C1a = {P1, P2}</b> with diameter 2.00.</p>
+  <div class="iteration-box">
+    <div class="iteration-header">
+      <i class="fas fa-4"></i> Split C1a at Height ≈ 2.00
+    </div>
+    <p><b>Seeds:</b> P1 and P2</p>
+    <div class="result-box">
+      <h4><i class="fas fa-check"></i> Result of Split 4</h4>
+      <p style="margin:0">
+        C1a1 = {P1} &nbsp;&nbsp; | &nbsp;&nbsp; C1a2 = {P2}
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- DENDROGRAM (TOP-DOWN) -->
+<section id="dendrogram">
+  <h2><i class="fas fa-tree"></i> Dendrogram Visualization (Top-Down)</h2>
+
+  <svg viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;background:#1e1a20">
+    <!-- ===== Axis / scale (left) ===== -->
+    <!-- y positions: 60=6.71, 130=3.61, 200=2.24, 270=2.00, 330=leaf line -->
+    <line x1="60" y1="40" x2="60" y2="340" stroke="#666" stroke-width="1"/>
+    <!-- Tick + label helper -->
+    <g font-size="12" fill="#ffd7f0">
+      <line x1="55" y1="60" x2="65" y2="60" stroke="#666"/>
+      <text x="20" y="64">6.71</text>
+
+      <line x1="55" y1="130" x2="65" y2="130" stroke="#666"/>
+      <text x="20" y="134">3.61</text>
+
+      <line x1="55" y1="200" x2="65" y2="200" stroke="#666"/>
+      <text x="20" y="204">2.24</text>
+
+      <line x1="55" y1="270" x2="65" y2="270" stroke="#666"/>
+      <text x="20" y="274">2.00</text>
+    </g>
+
+    <!-- Baseline for leaves -->
+    <line x1="80" y1="330" x2="640" y2="330" stroke="#444" stroke-dasharray="4 4"/>
+
+    <!-- ===== Leaf positions (fixed along x) ===== -->
+    <!-- P1=120, P2=220, P3=320, P4=480, P5=580 -->
+    <!-- Vertical stalks down to leaves will attach here -->
+
+    <!-- ===== Splits (top-down) ===== -->
+    <!-- Colors: main branches #ff79c6; left-sub #f59e0b; right-sub #4ECDC4; final small split #a855f7 -->
+
+    <!-- Split #1 at 6.71: All -> {P1,P2,P3} | {P4,P5} -->
+    <!-- Root vertical from a little above first split for clarity -->
+    <line x1="350" y1="40" x2="350" y2="60" stroke="#ff79c6" stroke-width="3"/>
+    <!-- Horizontal split line -->
+    <line x1="180" y1="60" x2="520" y2="60" stroke="#ff79c6" stroke-width="3"/>
+    <!-- Down to each side's trunk -->
+    <line x1="230" y1="60" x2="230" y2="130" stroke="#ff79c6" stroke-width="3"/> <!-- left trunk -->
+    <line x1="470" y1="60" x2="470" y2="200" stroke="#ff79c6" stroke-width="3"/> <!-- right trunk -->
+
+    <!-- Split #2 at 3.61 on left trunk: {P1,P2,P3} -> {P1,P2} | {P3} -->
+    <line x1="160" y1="130" x2="300" y2="130" stroke="#f59e0b" stroke-width="3"/>
+    <!-- Down to {P1,P2} trunk and to P3 leaf stalk -->
+    <line x1="210" y1="130" x2="210" y2="270" stroke="#f59e0b" stroke-width="3"/> <!-- left-sub trunk for {P1,P2} -->
+    <line x1="300" y1="130" x2="300" y2="330" stroke="#f59e0b" stroke-width="3"/> <!-- directly to P3 leaf line -->
+
+    <!-- Split #3 at 2.24 on right trunk: {P4,P5} -> {P4} | {P5} -->
+    <line x1="420" y1="200" x2="520" y2="200" stroke="#4ECDC4" stroke-width="3"/>
+    <line x1="420" y1="200" x2="420" y2="330" stroke="#4ECDC4" stroke-width="3"/> <!-- to P4 leaf -->
+    <line x1="520" y1="200" x2="520" y2="330" stroke="#4ECDC4" stroke-width="3"/> <!-- to P5 leaf -->
+
+    <!-- Split #4 at 2.00 on {P1,P2} trunk: {P1,P2} -> {P1} | {P2} -->
+    <line x1="170" y1="270" x2="250" y2="270" stroke="#a855f7" stroke-width="3"/>
+    <line x1="170" y1="270" x2="170" y2="330" stroke="#a855f7" stroke-width="3"/> <!-- P1 -->
+    <line x1="250" y1="270" x2="250" y2="330" stroke="#a855f7" stroke-width="3"/> <!-- P2 -->
+
+    <!-- ===== Vertical stalks from split lines to the actual leaf x positions ===== -->
+    <!-- Left side: connect P1,P2,P3 to their exact x leaf positions -->
+    <!-- {P1,P2} trunk is at x=210; at y=270 it split to 170 and 250 already -->
+    <!-- P3 had a direct vertical at x=300; ensure a small horizontal at bottom to the exact leaf x if desired -->
+    <!-- (Here leaf x matches stalk x, so no extra short horizontals are needed.) -->
+
+    <!-- Right side leaves already aligned at x=420 (P4) and x=520 (P5) -->
+
+    <!-- ===== Leaves (dots + labels on baseline) ===== -->
+    <g fill="#ffb3de">
+      <circle cx="120" cy="330" r="5"/><!-- P1 marker (we'll route line to it) -->
+      <circle cx="220" cy="330" r="5"/><!-- P2 -->
+      <circle cx="320" cy="330" r="5"/><!-- P3 -->
+      <circle cx="480" cy="330" r="5"/><!-- P4 -->
+      <circle cx="580" cy="330" r="5"/><!-- P5 -->
+    </g>
+
+    <!-- Short bottom connectors from last verticals to actual leaf positions -->
+    <!-- P1: from x=170 to x=120 at y=330 -->
+    <line x1="170" y1="330" x2="120" y2="330" stroke="#a855f7" stroke-width="3"/>
+    <!-- P2: from x=250 to x=220 at y=330 -->
+    <line x1="250" y1="330" x2="220" y2="330" stroke="#a855f7" stroke-width="3"/>
+    <!-- P3: from x=300 to x=320 at y=330 -->
+    <line x1="300" y1="330" x2="320" y2="330" stroke="#f59e0b" stroke-width="3"/>
+    <!-- P4: from x=420 to x=480 at y=330 -->
+    <line x1="420" y1="330" x2="480" y2="330" stroke="#4ECDC4" stroke-width="3"/>
+    <!-- P5: from x=520 to x=580 at y=330 -->
+    <line x1="520" y1="330" x2="580" y2="330" stroke="#4ECDC4" stroke-width="3"/>
+
+    <!-- Leaf text labels -->
+    <g font-size="12" fill="#ffd7f0">
+      <text x="110" y="352">P1</text>
+      <text x="210" y="352">P2</text>
+      <text x="310" y="352">P3</text>
+      <text x="470" y="352">P4</text>
+      <text x="570" y="352">P5</text>
+    </g>
+
+    <!-- Merge markers (small squares) at each split for clarity -->
+    <g fill="#ffd7f0">
+      <rect x="347" y="57" width="6" height="6"/>
+      <rect x="257" y="127" width="6" height="6"/>
+      <rect x="467" y="197" width="6" height="6"/>
+      <rect x="227" y="267" width="6" height="6"/>
+    </g>
+
+    <!-- Titles/annotations -->
+    <g font-size="12" fill="#ffd7f0">
+      <text x="360" y="56">Split @ 6.71</text>
+      <text x="310" y="126">Split @ 3.61</text>
+      <text x="525" y="198">Split @ 2.24</text>
+      <text x="255" y="266">Split @ 2.00</text>
+    </g>
+
+    <!-- Legend -->
+    <g font-size="12">
+      <rect x="80" y="12" width="10" height="10" fill="#ff79c6"/><text x="95" y="21" fill="#ffd7f0">Main branch</text>
+      <rect x="200" y="12" width="10" height="10" fill="#f59e0b"/><text x="215" y="21" fill="#ffd7f0">Left sub-branch</text>
+      <rect x="340" y="12" width="10" height="10" fill="#4ECDC4"/><text x="355" y="21" fill="#ffd7f0">Right sub-branch</text>
+      <rect x="500" y="12" width="10" height="10" fill="#a855f7"/><text x="515" y="21" fill="#ffd7f0">Final small split</text>
+    </g>
+  </svg>
+
+
+  <h3>Cutting the Dendrogram to Form Clusters</h3>
+  <div class="comparison-grid">
+    <div class="comparison-item">
+      <h4 style="color:#FF6B6B;margin-top:0"><i class="fas fa-cut"></i> Cut at Height = 4.0</h4>
+      <p><b>Number of clusters:</b> 2</p>
+      <ul style="margin:10px 0 0 20px">
+        <li>Cluster 1: {P1, P2, P3}</li>
+        <li>Cluster 2: {P4, P5}</li>
+      </ul>
+      <p style="margin-top:10px"><b>Interpretation:</b> Same 2-cluster structure as agglomerative, but discovered top-down.</p>
+    </div>
+    <div class="comparison-item">
+      <h4 style="color:#4ECDC4;margin-top:0"><i class="fas fa-cut"></i> Cut at Height = 2.5</h4>
+      <p><b>Number of clusters:</b> 3</p>
+      <ul style="margin:10px 0 0 20px">
+        <li>Cluster 1: {P1, P2}</li>
+        <li>Cluster 2: {P3}</li>
+        <li>Cluster 3: {P4, P5}</li>
+      </ul>
+      <p style="margin-top:10px"><b>Interpretation:</b> P3 becomes its own group at this cut.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL RESULT -->
+<section id="final">
+  <h2><i class="fas fa-flag-checkered"></i> Suggested 2-Cluster Solution</h2>
+
+  <div class="result-box">
+    <h4><i class="fas fa-check-circle"></i> Cut at Height ≈ 4.0 → Two Clusters</h4>
+    <p style="margin:0">Top-down split reveals the same natural partition {P1,P2,P3} vs {P4,P5}.</p>
+  </div>
+
+  <h3>Cluster Snapshots</h3>
+  <div class="comparison-grid">
+    <div class="comparison-item">
+      <h4 style="color:#FF6B6B;margin-top:0"><i class="fas fa-circle"></i> Cluster A</h4>
+      <p><b>Points:</b> P1(2,3), P2(2,5), P3(5,3)</p>
+      <p><b>Centroid:</b> (3.00, 3.67)</p>
+      <p><b>Notes:</b> Lower-left region; tight after P1–P2–P3 split.</p>
+    </div>
+    <div class="comparison-item">
+      <h4 style="color:#4ECDC4;margin-top:0"><i class="fas fa-circle"></i> Cluster B</h4>
+      <p><b>Points:</b> P4(6,7), P5(8,6)</p>
+      <p><b>Centroid:</b> (7.00, 6.50)</p>
+      <p><b>Notes:</b> Upper-right region; compact pair.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Key Insights from Divisive Clustering</h2>
+  <ul>
+    <li><b>Top-down control:</b> You can enforce early high-level splits that reflect domain structure.</li>
+    <li><b>Deterministic with a fixed heuristic:</b> Using farthest-pair seeds mirrors DIANA behavior.</li>
+    <li><b>Interpretability:</b> Tree shows <i>where</i> and <i>why</i> clusters split.</li>
+    <li><b>Cost:</b> Often more expensive than agglomerative; heuristics (like farthest-pair) help.</li>
+    <li><b>Consistency check:</b> For this dataset, a 2-cluster cut matches the agglomerative result.</li>
+  </ul>
+</section>
+
+</body>
+</html>
