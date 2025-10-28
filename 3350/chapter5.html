@@ -367,13 +367,24 @@
       <br>
       Goal: <b><font color="red">reveal data's hierarchical structure</font></b>.
     </p>
+    <br>
+    
+    <h4>The Dendrogram</h4>
+    A dendrogram is a tree diagram that records the sequence of merges or splits.
+    <ul>
+      <li>The height of each horizontal line represents the 
+        distance or dissimilarity at which clusters merge.</li>
+      <li>Cutting the dendrogram at different heights reveals different numbers of clusters.</li>
+    </ul>
+    <br>
+    
     <b>Objective: Minimize Linkage Distance</b>
     <p style="text-align:center;">
       $$
       d(\mathcal{C}_i, \mathcal{C}_j) = \begin{cases}
-        \min_{\mathbf{x} \in \mathcal{C}_i, \mathbf{y} \in \mathcal{C}_j} \|\mathbf{x} - \mathbf{y}\|_2 & \text{(Single)} \\
-        \max_{\mathbf{x} \in \mathcal{C}_i, \mathbf{y} \in \mathcal{C}_j} \|\mathbf{x} - \mathbf{y}\|_2 & \text{(Complete)} \\
-        \frac{1}{|\mathcal{C}_i||\mathcal{C}_j|} \sum_{\mathbf{x} \in \mathcal{C}_i} \sum_{\mathbf{y} \in \mathcal{C}_j} \|\mathbf{x} - \mathbf{y}\|_2 & \text{(Average)}
+        \min_{\mathbf{x} \in \mathcal{C}_i, \mathbf{y} \in \mathcal{C}_j} \|\mathbf{x} - \mathbf{y}\|_2 & \text{(Single Linkage)} \\
+        \max_{\mathbf{x} \in \mathcal{C}_i, \mathbf{y} \in \mathcal{C}_j} \|\mathbf{x} - \mathbf{y}\|_2 & \text{(Complete Linkage)} \\
+        \frac{1}{|\mathcal{C}_i||\mathcal{C}_j|} \sum_{\mathbf{x} \in \mathcal{C}_i} \sum_{\mathbf{y} \in \mathcal{C}_j} \|\mathbf{x} - \mathbf{y}\|_2 & \text{(Average Linkage)}
       \end{cases}
       $$
     </p>
@@ -383,6 +394,15 @@
       <li>Ward linkage minimizes within-cluster variance increase when merging.</li>
     </ul>
     <br>
+
+    <h4>Linkage in Hierarchical Clustering</h4>
+        In hierarchical clustering, linkage determines how the distance between two clusters is calculated from the distances 
+        between the points inside them. Different linkage criteria influence the shape, size, and separation of the resulting clusters.
+    <ul> 
+        <li><b>Single Linkage</b>: Distance between the closest pair of points in two clusters.</li>
+        <li><b>Complete Linkage</b>: Distance between the farthest pair of points in two clusters.</li>
+        <li><b>Average Linkage</b>: Average of all pairwise distances between points across the two clusters.</li>
+    </ul>
 
     <h4>Types of Hierarchical Clustering</h4>
     <p>
