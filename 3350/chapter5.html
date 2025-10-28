@@ -350,69 +350,63 @@
     
   </section>
 
+
   <section id="hierarchical">
     <h4>2.2 Hierarchical Clustering</h4>
     <br>
-
     <b>Idea:</b>
     <p>
-      Build a <b>hierarchy of clusters</b> instead of committing to a single \(k\).
-      <em>Agglomerative</em> starts with each point as its own cluster and repeatedly merges the closest pair.
-      The result is a <b>dendrogram</b>; cut it at a chosen height to get clusters.
+      Build a tree of clusters (dendrogram) by recursively merging or splitting groups.
+      Start with each point as its own cluster, then iteratively merge the closest pairs until all points are in one cluster.
+      Cut the tree at desired height to get clusters. Goal: <b><font color="red">reveal data's hierarchical structure</font></b>.
     </p>
-
-    <b>Linkage (How to measure cluster–cluster distance):</b>
+    <b>Objective: Minimize Linkage Distance</b>
     <p style="text-align:center;">
-      <b>Single:</b> \( \min_{x \in A,\, y \in B} \|x-y\| \) &nbsp; | &nbsp;
-      <b>Complete:</b> \( \max_{x \in A,\, y \in B} \|x-y\| \) &nbsp; | &nbsp;
-      <b>Average:</b> \( \frac{1}{|A||B|}\sum_{x \in A}\sum_{y \in B}\|x-y\| \) &nbsp; | &nbsp;
-      <b>Ward:</b> increase in within-cluster SSE when merging.
+      $$
+      d(\mathcal{C}_i, \mathcal{C}_j) = \begin{cases}
+        \min_{\mathbf{x} \in \mathcal{C}_i, \mathbf{y} \in \mathcal{C}_j} \|\mathbf{x} - \mathbf{y}\|_2 & \text{(Single)} \\
+        \max_{\mathbf{x} \in \mathcal{C}_i, \mathbf{y} \in \mathcal{C}_j} \|\mathbf{x} - \mathbf{y}\|_2 & \text{(Complete)} \\
+        \frac{1}{|\mathcal{C}_i||\mathcal{C}_j|} \sum_{\mathbf{x} \in \mathcal{C}_i} \sum_{\mathbf{y} \in \mathcal{C}_j} \|\mathbf{x} - \mathbf{y}\|_2 & \text{(Average)}
+      \end{cases}
+      $$
     </p>
-
     <p><strong>Where:</strong></p>
     <ul>
-      <li>\(A,B\) are clusters; \(\|\cdot\|\) is usually Euclidean distance.</li>
-      <li>Ward’s method is variance-minimizing and often yields compact, spherical clusters.</li>
+      <li>\(\mathcal{C}_i, \mathcal{C}_j\) = two clusters being compared; \(d(\cdot,\cdot)\) = distance between clusters.</li>
+      <li>Ward linkage minimizes within-cluster variance increase when merging.</li>
     </ul>
-
     <br>
-
-    <center>
-      <img src="images/hier1.png" width="800px" height="300px" alt="Hierarchical clustering dendrogram and cut height">
-    </center>
-
-    <br>
-
-    <h4>How Agglomerative Clustering Works</h4>
+    <h4>How Hierarchical Clustering Works</h4>
     <ol>
-      <li><strong>Distance matrix:</strong> compute pairwise distances between all points.</li>
-      <li><strong>Initialize:</strong> each point is its own cluster.</li>
-      <li><strong>Repeat:</strong> find two closest clusters under the chosen linkage; merge them; update distances.</li>
-      <li><strong>Stop:</strong> when a single cluster remains (full tree built).</li>
-      <li><strong>Choose clusters:</strong> cut dendrogram at a height; the horizontal cut yields your grouping.</li>
+      <li><strong>Initialize</strong> — each point starts as its own cluster.</li>
+      <li><strong>Compute pairwise distances</strong> — calculate distances between all cluster pairs using chosen linkage.</li>
+      <li><strong>Merge closest pair</strong> — combine the two clusters with minimum distance.</li>
+      <li><strong>Update distance matrix</strong> — recalculate distances to the new merged cluster.</li>
+      <li><strong>Repeat</strong> steps 2–4 until only one cluster remains, building the dendrogram.</li>
     </ol>
-
-    <h4>Worked Example (Sketch)</h4>
+    <h4>Worked Example (2D)</h4>
     <p>
-      Using the same 2D points, <em>single-link</em> first merges near neighbors (e.g., \((3,4)\) with \((3.5,4.5)\)),
-      then gradually merges small groups into larger ones. With <em>complete-link</em>, merges are more conservative, producing tighter, rounder clusters. <em>Ward</em> tends to mimic K-Means behavior.
+      Points: \((1,1), (2,1), (4,3), (5,4)\). Using single linkage.
     </p>
-
+    <ol>
+      <li><b>Initial:</b> 4 clusters: \(\{(1,1)\}, \{(2,1)\}, \{(4,3)\}, \{(5,4)\}\).</li>
+      <li><b>Merge 1:</b> \(d((1,1),(2,1))=1\) is minimum → \(\{(1,1),(2,1)\}, \{(4,3)\}, \{(5,4)\}\).</li>
+      <li><b>Merge 2:</b> \(d((4,3),(5,4))=\sqrt{2}\) is minimum → \(\{(1,1),(2,1)\}, \{(4,3),(5,4)\}\).</li>
+      <li><b>Merge 3:</b> combine remaining two clusters → <b>complete dendrogram</b>.</li>
+    </ol>
+    <h4>Choosing Number of Clusters</h4>
+    <ul>
+      <li><b>Dendrogram cut:</b> visualize the tree and cut at height with longest vertical lines.</li>
+      <li><b>Inconsistency:</b> look for large jumps in merge distances.</li>
+    </ul>
     <h4>Interpretation &amp; Tips</h4>
     <ul>
-      <li><b>No need to fix \(k\) in advance:</b> examine dendrogram and choose a cut.</li>
-      <li><b>Linkage choice matters:</b> single-link can “chain”; complete-link prefers compact clusters; Ward ≈ variance-minimizing.</li>
-      <li><b>Complexity:</b> typical implementations are \(O(m^2 \log m)\) time and \(O(m^2)\) memory for \(m\) points (due to distance matrix).</li>
-      <li><b>Scaling:</b> standardize features; distance is sensitive to scale.</li>
+      <li><b>No need to specify \(k\):</b> Unlike K-Means, hierarchical clustering reveals structure at all scales through the dendrogram.</li>
+      <li><b>Linkage choice matters:</b> Single linkage can create elongated clusters; complete linkage prefers compact clusters; Ward minimizes within-cluster variance.</li>
     </ul>
+</section>
 
-    <h4>Comparing K-Means vs Hierarchical</h4>
-    <ul>
-      <li><b>K-Means:</b> fast on large datasets, needs \(k\), prefers spherical clusters.</li>
-      <li><b>Hierarchical:</b> flexible, visual (dendrogram), heavier on memory/time, no fixed \(k\) required.</li>
-    </ul>
-  </section>
-
+  
   <section id="references">
     <h3>References</h3>
     <ul>
