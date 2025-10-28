@@ -376,6 +376,36 @@
       <li>Ward linkage minimizes within-cluster variance increase when merging.</li>
     </ul>
     <br>
+
+    <h4>Types of Hierarchical Clustering</h4>
+    <p>
+      Hierarchical clustering comes in <b>two main types</b> — distinguished by the
+      <b>direction</b> of building the cluster hierarchy:
+    </p>
+
+  <ul>
+      <li>
+        <b>1. Agglomerative (Bottom-Up):</b>
+        <ul>
+          <li>Starts with each data point as its own cluster.</li>
+          <li>At each step, <b>merges the two closest clusters</b> based on a chosen linkage method (single, complete, average, or Ward’s).</li>
+          <li>Continues until all data points form one big cluster.</li>
+          <li>Produces a <b>dendrogram</b> that shows the hierarchy of merges.</li>
+        </ul>
+      </li>
+
+      <li>
+        <b>2. Divisive (Top-Down):</b>
+        <ul>
+          <li>Starts with all data points in a single cluster.</li>
+          <li>At each step, <b>splits the cluster</b> with the largest internal dissimilarity into smaller sub-clusters.</li>
+          <li>Continues until each data point becomes its own cluster or a stopping condition is met.</li>
+          <li>More computationally expensive; used less often than agglomerative.</li>
+        </ul>
+      </li>
+  </ul>
+
+    
     <h4>How Hierarchical Clustering Works</h4>
     <ol>
       <li><strong>Initialize</strong> — each point starts as its own cluster.</li>
