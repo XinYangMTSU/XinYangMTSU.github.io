@@ -414,16 +414,8 @@
       <li><strong>Update distance matrix</strong> — recalculate distances to the new merged cluster.</li>
       <li><strong>Repeat</strong> steps 2–4 until only one cluster remains, building the dendrogram.</li>
     </ol>
-    <h4>Worked Example (2D)</h4>
-    <p>
-      Points: \((1,1), (2,1), (4,3), (5,4)\). Using single linkage.
-    </p>
-    <ol>
-      <li><b>Initial:</b> 4 clusters: \(\{(1,1)\}, \{(2,1)\}, \{(4,3)\}, \{(5,4)\}\).</li>
-      <li><b>Merge 1:</b> \(d((1,1),(2,1))=1\) is minimum → \(\{(1,1),(2,1)\}, \{(4,3)\}, \{(5,4)\}\).</li>
-      <li><b>Merge 2:</b> \(d((4,3),(5,4))=\sqrt{2}\) is minimum → \(\{(1,1),(2,1)\}, \{(4,3),(5,4)\}\).</li>
-      <li><b>Merge 3:</b> combine remaining two clusters → <b>complete dendrogram</b>.</li>
-    </ol>
+
+    
     <h4>Choosing Number of Clusters</h4>
     <ul>
       <li><b>Dendrogram cut:</b> visualize the tree and cut at height with longest vertical lines.</li>
