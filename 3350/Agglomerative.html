@@ -509,11 +509,8 @@ Cluster A has smaller x and y values (left/bottom region), while Cluster B has l
   </g>
 </svg>
 
-  
 </section>
 
-
-  
 
 <!-- FINAL RESULT -->
 <section id="final">
@@ -573,6 +570,38 @@ Cluster B WCSS = 1.25 + 1.25 = <b style="color:#10b981">2.50</b>
 
 </section>
 
+
+  <!-- NEW DATA PREDICTION -->
+<section id="prediction">
+  <h2><i class="fas fa-crystal-ball"></i> New Data Prediction</h2>
+
+  <p>Once the hierarchical clustering model is trained, you can assign new data points to the existing clusters using the learned cluster structure.</p>
+
+  <h3>Prediction Steps</h3>
+  <ol>
+    <li><b>Calculate distances</b> from the new point to all cluster centroids using the same distance metric (Euclidean)</li>
+    <li><b>Assign to the nearest cluster</b> (minimum distance)</li>
+  </ol>
+
+  <h3>Example: Predicting Cluster for New Point P_new(3, 4)</h3>
+
+  <div class="calculation-box">
+<b>Step 1: Calculate distances to cluster centroids</b>
+<br><br>
+Cluster A centroid: (3.00, 3.67)
+Cluster B centroid: (7.00, 6.50)
+<br><br>
+Distance to Cluster A: $d = \sqrt{(3-3)^2 + (4-3.67)^2} = \sqrt{0 + 0.11} = \mathbf{0.33}$
+<br>
+Distance to Cluster B: $d = \sqrt{(3-7)^2 + (4-6.5)^2} = \sqrt{16 + 6.25} = \mathbf{4.72}$
+  </div>
+
+  <div class="result-box">
+    <h4><i class="fas fa-arrow-right"></i> Prediction Result</h4>
+    <p style="margin:0"><b>New point P_new(3, 4)</b> is assigned to <b style="color:#fff">Cluster A</b> (distance: 0.33 is closer than 4.72)</p>
+  </div>
+</section>
+  
 
 <section>
 
