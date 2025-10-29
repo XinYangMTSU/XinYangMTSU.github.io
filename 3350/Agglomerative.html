@@ -451,7 +451,9 @@ C8 to C7: $d = \max\{d(P1,P4), d(P1,P5), d(P2,P4), d(P2,P5), d(P3,P4), d(P3,P5)\
         <li>Cluster 1: {P1, P2, P3}</li>
         <li>Cluster 2: {P4, P5}</li>
       </ul>
-      <p style="margin-top:10px"><b>Interpretation:</b> Natural division into lower-left and upper-right regions of the data space.</p>
+      <p style="margin-top:10px"><b>Interpretation:</b> 
+      <p><b>Interpretation:</b> The two clusters split by position in the (x, y) plane:
+Cluster A has smaller x and y values (left/bottom region), while Cluster B has larger x and y values (right/top region).</p>
     </div>
     <div class="comparison-item">
       <h4 style="color:#4ECDC4;margin-top:0"><i class="fas fa-cut"></i> Cut at Height = 2.5</h4>
@@ -464,7 +466,54 @@ C8 to C7: $d = \max\{d(P1,P4), d(P1,P5), d(P2,P4), d(P2,P5), d(P3,P4), d(P3,P5)\
       <p style="margin-top:10px"><b>Interpretation:</b> P3 is isolated as its own cluster (middle point).</p>
     </div>
   </div>
+
+  <svg viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px;background:#1e1a20;border:1px solid #ff79c6;border-radius:8px;margin-top:8px">
+  <!-- Axes -->
+  <line x1="40" y1="140" x2="280" y2="140" stroke="#888" />
+  <line x1="40" y1="140" x2="40" y2="20"  stroke="#888" />
+  <text x="282" y="145" fill="#ffd7f0" font-size="10">x</text>
+  <text x="32" y="20"  fill="#ffd7f0" font-size="10">y</text>
+
+  <!-- Cluster A points (left/bottom region) -->
+  <g fill="#ffb3de" stroke="#ff79c6">
+    <!-- scale: x-> 30*x+ (some offset), y-> invert: 160-15*y -->
+    <!-- P1(2,3) -->
+    <circle cx="100" cy="95" r="4"/>
+    <text x="93" y="108" fill="#ffd7f0" font-size="10">P1</text>
+    <!-- P2(2,5) -->
+    <circle cx="100" cy="65" r="4"/>
+    <text x="93" y="78"  fill="#ffd7f0" font-size="10">P2</text>
+    <!-- P3(5,3) -->
+    <circle cx="190" cy="95" r="4"/>
+    <text x="183" y="108" fill="#ffd7f0" font-size="10">P3</text>
+  </g>
+
+  <!-- Cluster B points (right/top region) -->
+  <g fill="#b8fff3" stroke="#4ECDC4">
+    <!-- P4(6,7) -->
+    <circle cx="220" cy="35" r="4"/>
+    <text x="213" y="48" fill="#ffd7f0" font-size="10">P4</text>
+    <!-- P5(8,6) -->
+    <circle cx="280" cy="50" r="4"/>
+    <text x="273" y="63" fill="#ffd7f0" font-size="10">P5</text>
+  </g>
+
+  <!-- Soft regions -->
+  <rect x="70" y="60" width="140" height="60" fill="none" stroke="#ff79c6" stroke-dasharray="4 3" opacity="0.7"/>
+  <rect x="205" y="25" width="85" height="40" fill="none" stroke="#4ECDC4" stroke-dasharray="4 3" opacity="0.7"/>
+
+  <!-- Legend -->
+  <g font-size="10">
+    <rect x="50" y="15" width="8" height="8" fill="#ff79c6"/><text x="63" y="22" fill="#ffd7f0">Cluster A (lower x,y)</text>
+    <rect x="170" y="15" width="8" height="8" fill="#4ECDC4"/><text x="183" y="22" fill="#ffd7f0">Cluster B (higher x,y)</text>
+  </g>
+</svg>
+
+  
 </section>
+
+
+  
 
 <!-- FINAL RESULT -->
 <section id="final">
