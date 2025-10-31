@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chapter 6: Unsupervised Learning - Dimensionality Reduction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6; /* MAIN PINK FONT COLOR */
+    }
+    /* Sidebar */
+    #sidebar {
+      position: fixed;
+      width: 250px;
+      height: 100vh;
+      overflow-y: auto;
+      background: linear-gradient(135deg, #2a1e28 80%, #47223c 100%);
+      color: #ffb3de;
+      padding: 38px 24px 24px 28px;
+      box-shadow: 2px 0 24px rgba(255,121,198,.12);
+      z-index: 10;
+    }
+    #sidebar h2 {
+      margin-top: 0;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #ffb3de;
+      margin-bottom: 1.7em;
+      text-align: left;
+    }
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #sidebar .subsections {
+      margin-left: 1.5em;
+      font-size: 0.94em;
+    }
+    #sidebar .subsections a {
+      font-size: 0.94em;
+      margin: 8px 0 8px 12px;
+      padding-left: 16px;
+      color: #ffb3de;
+      border-left: 2px solid transparent;
+      font-weight: 400;
+      box-shadow: none;
+      background: none;
+      gap: 0.6em;
+    }
+    #sidebar .subsections a:hover, #sidebar .subsections a.active {
+      color: #ff79c6;
+      background: #21111b;
+      border-left: 2px solid #ff79c6;
+      font-weight: 500;
+    }
+    #sidebar a {
+      display: flex;
+      align-items: center;
+      color: #ffb3de;
+      text-decoration: none;
+      margin: 16px 0 16px 10px;
+      font-weight: 500;
+      font-size: 1.08em;
+      border-left: 3px solid transparent;
+      padding-left: 14px;
+      transition: background .19s, color .19s, border .19s;
+      border-radius: 8px 0 0 8px;
+      gap: 0.7em;
+    }
+    #sidebar a:hover, #sidebar a.active {
+      color: #ff79c6;
+      background: #21111b;
+      border-left: 3px solid #ff79c6;
+      font-weight: 700;
+      box-shadow: 1px 2px 8px 1px #2d3436;
+    }
+    /* Main content */
+    #content {
+      margin-left: 270px;
+      padding: 56px 6vw 56px 6vw;
+      max-width: 900px;
+      width: 100vw;
+      background: #1a1d1f;
+    }
+    h1 {
+      color: #ff79c6;
+      font-size: 2.5em;
+      font-weight: 800;
+      margin-bottom: 0.4em;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 16px rgba(255,121,198,.18);
+    }
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+    }
+    section:hover {
+      box-shadow: 0 10px 34px 3px rgba(255,121,198,0.13);
+      border-left: 7px solid #ffb3de;
+    }
+    section h3 {
+      border-bottom: 2px solid #ff79c6;
+      padding-bottom: 8px;
+      margin-top: 0;
+      color: #ff79c6;
+      font-size: 1.5em;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+    }
+    ul {
+      margin-left: 2.1em;
+      margin-bottom: 0;
+    }
+    footer {
+      margin-top: 46px;
+      text-align: center;
+      color: #ffb3de;
+      font-size: 1.09em;
+      letter-spacing: 1px;
+      padding: 22px 0 14px 0;
+      border-top: 1px solid #402138;
+      background: none;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-weight: 500;
+    }
+    #sidebar::-webkit-scrollbar {
+      width: 7px;
+      background: #47223c;
+    }
+    #sidebar::-webkit-scrollbar-thumb {
+      background: #ff79c6;
+      border-radius: 6px;
+    }
+    @media (max-width: 950px) {
+      #sidebar {
+        display: none;
+      }
+      #content {
+        margin-left: 0;
+        padding: 18px 4vw 30px 4vw;
+      }
+    }
+
+    /* Links */
+    a, a:visited {
+      color: #ff79c6;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    a:hover, a:focus {
+      color: #fff52e;
+      background: #19121a;
+      text-decoration: underline;
+    }
+    section#references a, section#references a:visited {
+      color: #ff79c6;
+      font-weight: 600;
+    }
+    section#references a:hover, section#references a:focus {
+      color: #fff52e;
+      background: #19121a;
+    }
+  </style>
+
+  <!-- MathJax (once per page) -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+</head>
+<body>
+<nav id="sidebar">
+  <h2><i class="fas fa-book"></i> Contents</h2>
+  <ul>
+    <li><a href="#what-is-dimensionality"><i class="fas fa-robot"></i>1. What is Dimensionality Reduction?</a></li>
+
+    <li>
+      <a href="#dimension-reduction"><i class="fas fa-compress"></i>2. Dimensionality Reduction Methods</a>
+      <div class="subsections">
+        <a href="#pca">2.1 Principal Component Analysis (PCA)</a>
+        <a href="#ica">2.2 Independent Component Analysis (ICA)</a>
+      </div>
+    </li>
+
+    <li><a href="#references"><i class="fas fa-link"></i>References</a></li>
+  </ul>
+</nav>
+
+<main id="content">
+  <h1>Chapter 6: Unsupervised Learning — Dimensionality Reduction</h1>
+
+  <section id="what-is-dimensionality">
+    <h3>1. What is Dimensionality Reduction?</h3>
+    <p>
+      Dimensionality reduction is an unsupervised learning technique that transforms high-dimensional data into a
+      lower-dimensional representation while preserving as much relevant information as possible. The goal is to reduce
+      <b><font color="red">the number of features (dimensions)</font></b> while maintaining the structure and patterns in the data.
+    </p>
+
+    <h4>Why Reduce Dimensions?</h4>
+    <ul>
+      <li><b>Curse of Dimensionality:</b> High-dimensional spaces suffer from sparsity and computational inefficiency.</li>
+      <li><b>Visualization:</b> Reduce to 2D or 3D for visual exploration of high-dimensional data.</li>
+      <li><b>Noise Reduction:</b> Eliminate redundant or noisy features.</li>
+      <li><b>Faster Training:</b> Fewer features mean faster model training and reduced storage.</li>
+      <li><b>Interpretability:</b> Fewer, meaningful features can reveal underlying structure.</li>
+    </ul>
+
+    <h4>Analogy:</h4>
+    <p>
+      Imagine a photograph of a scene. You can compress it into a smaller file by removing redundant pixels while keeping
+      the essential visual information. Dimensionality reduction does the same for data — keeping the "essential patterns"
+      while discarding noise and redundancy.
+    </p>
+
+    <h4>Main Families:</h4>
+    <ul>
+      <li><b>Principal Component Analysis (PCA)</b> — finds orthogonal directions of maximum variance.</li>
+      <li><b>Independent Component Analysis (ICA)</b> — finds statistically independent components.</li>
+    </ul>
+  </section>
+
+  <section id="dimension-reduction">
+    <h3>2. Dimensionality Reduction Methods</h3>
+    <p>
+      There are many approaches to dimensionality reduction. Two of the most important are PCA and ICA,
+      which take fundamentally different approaches to finding low-dimensional representations:
+    </p>
+    <ul>
+      <li><b>PCA</b> seeks directions that capture <b><font color="red">maximum variance</font></b> in the data.</li>
+      <li><b>ICA</b> seeks <b><font color="red">statistically independent components</font></b> underlying the observations.</li>
+    </ul>
+  </section>
+
+  <section id="pca">
+    <h4>2.1 Principal Component Analysis (PCA)</h4>
+    <br>
+
+    <b>Idea:</b>
+    <p>
+      <b>Principal Component Analysis (PCA)</b> is a linear dimensionality reduction technique that finds a new set of
+      orthogonal (uncorrelated) axes called <b>principal components</b>. These axes are aligned with the directions of
+      <b><font color="red">maximum variance</font></b> in the data. The first principal component captures the most variance,
+      the second captures the second most, and so on.
+    </p>
+
+    <p>
+      In essence, PCA seeks to orthogonal directions (principal components) along which the data vary the most,
+      then project onto the top \(k\) components.
+    </p>
+
+        <h4>Key Intuition: Variance is Information</h4>
+
+        <div class="section">
+            <p>PCA is based on a simple idea: directions with high variance contain important information, directions with low variance contain noise.</p>
+        </div>
+
+            <p>Imagine you measured:</p>
+            <ul>
+                <li>Height of people</li>
+                <li>Amount of air they breathe per minute</li>
+            </ul>
+            <p>If everyone in your dataset is roughly the same height (low variance), then height isn't telling you much. But if people have very different breath rates (high variance), that's more informative.</p>
+
+            <p>PCA finds the directions (new axes) where the data spreads out the most (maximum variance).
+            Each principal component is a linear combination of ALL original features, but they're weighted by importance. PCA figures out the optimal weights to capture the most variance.
+          </p>
+
+    <h4>Objective: Maximize Variance</h4>
+
+    <p style="text-align:center;">
+      $$
+      \max_{\mathbf{w}} \; \text{Var}(\mathbf{X} \mathbf{w})
+      \quad \text{subject to} \quad \|\mathbf{w}\|_2 = 1
+      $$
+    </p>
+
+    <p>
+      The first principal component \(\mathbf{w}_1\) is the direction that maximizes the variance of the projected data.
+      Subsequent components are found by the same process, orthogonal to all previous components.
+    </p>
+
+    <p><strong>Equivalently:</strong></p>
+
+    <p style="text-align:center;">
+      $$
+      \mathbf{w}_i = \arg\max_{\mathbf{w}} \frac{\mathbf{w}^T \mathbf{\Sigma} \mathbf{w}}{\mathbf{w}^T \mathbf{w}}
+      $$
+    </p>
+
+    <p>
+      where \(\mathbf{\Sigma}\) is the covariance matrix of the data. The solutions are the eigenvectors
+      \(\mathbf{v}_1, \mathbf{v}_2, \ldots\) of \(\mathbf{\Sigma}\), ordered by their eigenvalues \(\lambda_1 \geq \lambda_2 \geq \cdots\).
+    </p>
+
+    <h4>How PCA Works</h4>
+    <ol>
+      <li><strong>Center the data:</strong> Subtract the mean from each feature so the data is zero-centered.</li>
+      <li><strong>Compute covariance matrix:</strong> \(\mathbf{\Sigma} = \frac{1}{m} \mathbf{X}^T \mathbf{X}\), where \(m\) is the number of samples.</li>
+      <li><strong>Compute eigendecomposition:</strong> Find eigenvalues \(\lambda_i\) and eigenvectors \(\mathbf{v}_i\) of \(\mathbf{\Sigma}\).</li>
+      <li><strong>Order eigenvectors by eigenvalues:</strong> Sort in descending order \(\lambda_1 \geq \lambda_2 \geq \cdots\).</li>
+      <li><strong>Select top \(k\) components:</strong> Choose the first \(k\) eigenvectors as the new basis.</li>
+      <li><strong>Project data:</strong> Transform the data: \(\mathbf{Z} = \mathbf{X} \mathbf{V}_k\), where \(\mathbf{V}_k\) contains the top \(k\) eigenvectors.</li>
+    </ol>
+
+    <h4>Choosing Number of Components</h4>
+    <ul>
+      <li><b>Explained Variance Ratio:</b> Select \(k\) so that cumulative variance explained is ≥ 95% (or your threshold).
+        \[ \text{Explained Ratio} = \frac{\sum_{i=1}^{k} \lambda_i}{\sum_{i=1}^{d} \lambda_i} \]
+      </li>
+      <li><b>Scree Plot:</b> Plot eigenvalues in descending order and look for an "elbow."</li>
+      <li><b>Domain Knowledge:</b> Sometimes \(k\) is dictated by visualization needs (2D or 3D) or application requirements.</li>
+    </ul>
+
+    <h4>Interpretation &amp; Tips</h4>
+    <ul>
+      <li><b>Linear Only:</b> PCA finds linear combinations; nonlinear structures may require other methods (e.g., t-SNE, UMAP).</li>
+      <li><b>Feature Scaling:</b> Standardize features to zero mean and unit variance before PCA, otherwise features with larger ranges dominate.</li>
+      <li><b>Interpretability:</b> Principal components are linear combinations of original features, which can be hard to interpret.</li>
+      <li><b>Orthogonality:</b> Components are uncorrelated by construction, which aids analysis.</li>
+    </ul>
+
+  </section>
+
+  <section id="ica">
+    <h4>2.2 Independent Component Analysis (ICA)</h4>
+    <br>
+
+    <b>Idea:</b>
+    <p>
+      <b>Independent Component Analysis (ICA)</b> is a dimensionality reduction technique that seeks to decompose
+      observed data into a set of <b><font color="red">statistically independent components</font></b>.
+      Unlike PCA which looks for <b>uncorrelated</b> (orthogonal) directions, ICA looks for <b>independent</b> directions,
+      which is a stronger condition.
+    </p>
+
+    <p>
+      ICA assumes that the observed data \(\mathbf{X}\) is a linear mixture of independent sources \(\mathbf{S}\):
+    </p>
+
+    <p style="text-align:center;">
+      $$
+      \mathbf{X} = \mathbf{A} \mathbf{S}
+      $$
+    </p>
+
+    <p>
+      where \(\mathbf{A}\) is an unknown mixing matrix. ICA aims to recover the independent sources \(\mathbf{S}\)
+      and the mixing matrix \(\mathbf{A}\) (or equivalently, the demixing matrix \(\mathbf{W} = \mathbf{A}^{-1}\))
+      such that \(\mathbf{S} = \mathbf{W} \mathbf{X}\).
+    </p>
+
+    <h4>Key Difference: Independence vs. Uncorrelatedness</h4>
+    <ul>
+      <li><b>Uncorrelated:</b> Two variables have zero covariance (correlation). This is what PCA achieves.</li>
+      <li><b>Independent:</b> Knowing one variable tells you nothing about another (zero all higher-order moments). This is stronger than uncorrelated.</li>
+      <li><b>ICA requires:</b> (1) At most one component has Gaussian distribution, and (2) the components are independent.</li>
+    </ul>
+
+    <h4>Objective: Maximize Non-Gaussianity</h4>
+
+    <p>
+      ICA relies on the <b>Independence Assumption</b> and uses measures of non-Gaussianity to find independent components.
+      Common objective functions include:
+    </p>
+
+    <p style="text-align:center;">
+      $$
+      \max_{\mathbf{W}} \; \text{NonGaussianity}(\mathbf{W} \mathbf{X})
+      $$
+    </p>
+
+    <p>
+      One common measure is <b>negentropy</b>, which measures departure from a Gaussian distribution:
+    </p>
+
+    <p style="text-align:center;">
+      $$
+      J(\mathbf{y}) = [E\{G(\mathbf{y})\} - E\{G(\mathbf{z})\}]^2
+      $$
+    </p>
+
+    <p>
+      where \(\mathbf{z}\) is a Gaussian variable with the same variance as \(\mathbf{y}\), and \(G\) is a nonlinear function.
+    </p>
+
+    <h4>Typical ICA Algorithm (FastICA)</h4>
+    <ol>
+      <li><strong>Whiten the data:</strong> Preprocess with PCA to remove correlations and scale to unit variance.</li>
+      <li><strong>Initialize:</strong> Random weight vectors (or smart initialization).</li>
+      <li><strong>For each component \(i\):</strong>
+        <ul>
+          <li>Update \(\mathbf{w}_i\) to maximize non-Gaussianity using gradient ascent or fixed-point iteration.</li>
+          <li>Orthogonalize \(\mathbf{w}_i\) with respect to previous components (Gram-Schmidt).</li>
+        </ul>
+      </li>
+      <li><strong>Repeat:</strong> Until convergence (typically fast).</li>
+      <li><strong>Extract sources:</strong> \(\mathbf{S} = \mathbf{W} \mathbf{X}\).</li>
+    </ol>
+
+    <h4>Worked Example: Cocktail Party Problem</h4>
+    <p>
+      Imagine two people speaking simultaneously (two independent sources). A microphone records a mixture of both voices.
+      ICA can separate the two speakers' voices from the single mixed recording (or multiple mixtures).
+    </p>
+    <ul>
+      <li><b>Observed:</b> \(\mathbf{x}_1(t) = 0.7 s_1(t) + 0.3 s_2(t)\), \(\mathbf{x}_2(t) = 0.4 s_1(t) + 0.6 s_2(t)\) (mixtures).</li>
+      <li><b>ICA recovers:</b> \(\mathbf{s}_1(t)\) and \(\mathbf{s}_2(t)\) (original speeches).</li>
+      <li><b>Result:</b> Two independent, interpretable speech signals.</li>
+    </ul>
+
+    <h4>Assumptions of ICA</h4>
+    <ul>
+      <li><b>Linearity:</b> Assumes linear mixing (nonlinear ICA is much harder).</li>
+      <li><b>Independence:</b> The source signals must be statistically independent.</li>
+      <li><b>Non-Gaussianity:</b> At most one component can be Gaussian (otherwise ICA cannot separate them).</li>
+      <li><b>Number of sources:</b> Must know or estimate the number of independent components.</li>
+    </ul>
+
+    <h4>PCA vs. ICA: When to Use Each</h4>
+    <ul>
+      <li><b>Use PCA when:</b> You want to reduce dimensionality, reduce noise, or visualize high-dimensional data while preserving variance structure.</li>
+      <li><b>Use ICA when:</b> You have reason to believe data contains independent underlying sources (e.g., blind source separation, feature extraction for independent factors).</li>
+    </ul>
+
+    <h4>Interpretation &amp; Tips</h4>
+    <ul>
+      <li><b>Non-uniqueness:</b> ICA components are unique only up to permutation and scaling (sign and magnitude can be flipped).</li>
+      <li><b>Feature Scaling:</b> Whiten data first (PCA) before ICA to improve stability and performance.</li>
+      <li><b>Interpretability:</b> ICA components can be more interpretable than PCA if they correspond to true underlying sources (e.g., independent causes).</li>
+      <li><b>Computational Cost:</b> ICA iterative algorithms (FastICA) are efficient but require more tuning than PCA.</li>
+      <li><b>Validation:</b> Hard to validate ICA results objectively; rely on domain knowledge or downstream task performance.</li>
+    </ul>
+
+  </section>
+
+  <section id="references">
+    <h3>References</h3>
+    <ul>
+      <li>
+        <a href="https://scikit-learn.org/stable/modules/decomposition.html" target="_blank">
+          scikit-learn: Decomposition
+        </a>
+      </li>
+      <li>
+        <a href="https://web.stanford.edu/~hastie/ElemStatLearn/" target="_blank">
+          The Elements of Statistical Learning (Hastie, Tibshirani, Friedman)
+        </a>
+      </li>
+      <li>
+        <a href="https://research.ics.aalto.fi/ica/book/" target="_blank">
+          Independent Component Analysis (ICA) Book - Hyvarinen, Karhunen, Oja
+        </a>
+      </li>
+      <li>
+        <a href="https://developers.google.com/machine-learning/crash-course" target="_blank">
+          Google Machine Learning Crash Course
+        </a>
+      </li>
+      <li>
+        <a href="https://jmlr.org/" target="_blank">
+          Journal of Machine Learning Research (JMLR)
+        </a>
+      </li>
+      <li>Scholar GPT</li>
+    </ul>
+  </section>
+
+  <footer>
+    &copy; 2025 Xin Yang <br>
+    Department of Computer Science <br>
+    Middle Tennessee State University <br>
+  </footer>
+</main>
+
+<script>
+  // Smooth scrolling & highlight active link
+  const sidebarLinks = document.querySelectorAll('#sidebar a');
+  sidebarLinks.forEach(anchor => {
+    anchor.onclick = function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href'))
+        .scrollIntoView({ behavior: 'smooth' });
+    };
+  });
+
+  // Active link highlight on scroll
+  const sectionIds = Array.from(sidebarLinks).map(l => l.getAttribute('href'));
+  window.addEventListener('scroll', () => {
+    let current = sectionIds[0];
+    for (const id of sectionIds) {
+      const section = document.querySelector(id);
+      if (section && section.getBoundingClientRect().top - 80 < 0) {
+        current = id;
+      }
+    }
+    sidebarLinks.forEach(link => link.classList.remove('active'));
+    const activeLink = document.querySelector(`#sidebar a[href="${current}"]`);
+    if (activeLink) activeLink.classList.add('active');
+  });
+</script>
+
+</body>
+</html>
