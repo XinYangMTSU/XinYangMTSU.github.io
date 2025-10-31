@@ -291,11 +291,13 @@
 
     <h4>Why Orthogonal Matters?</h4>
     <p>
-        When PC1 and PC2 are perpendicular to each other, each captures completely different information—for example, 
-        PC1 might represent "Overall Employee Performance" while PC2 represents "Skill Specialization," 
-        with no overlap between them. This is fundamentally different from your original five correlated 
-        features (Productivity, Accuracy, Teamwork, Leadership, Innovation), which all overlap and contain redundant 
-        information about similar concepts. By transforming your data into orthogonal components, PCA guarantees 
+        When PC1 and PC2 are perpendicular to each other, each one represents a completely different direction of variation 
+        in your data—PC1 captures the primary pattern (the direction where data varies the most), while PC2 captures a secondary 
+        pattern perpendicular to it (where data varies the second-most), with no overlap between these two directions.
+    </p>
+    
+    <p>
+        By transforming your data into orthogonal components, PCA guarantees 
         that each new dimension adds fresh, non-redundant insights, making your data both easier to visualize and more efficient to analyze.       
     </p>
     
