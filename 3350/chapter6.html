@@ -280,6 +280,20 @@
     </p>
 
     <p>
+      In PCA, orthogonal directions means the principal components are perpendicular (90° angles) to each other.
+    </p>
+
+    <b>Why Orthogonal Matters?</b>
+    <p>
+        When PC1 and PC2 are perpendicular to each other, each captures completely different information—for example, 
+        PC1 might represent "Overall Employee Performance" while PC2 represents "Skill Specialization," 
+        with no overlap between them. This is fundamentally different from your original five correlated 
+        features (Productivity, Accuracy, Teamwork, Leadership, Innovation), which all overlap and contain redundant 
+        information about similar concepts. By transforming your data into orthogonal components, PCA guarantees 
+        that each new dimension adds fresh, non-redundant insights, making your data both easier to visualize and more efficient to analyze.       
+    </p>
+    
+    <p>
       In essence, PCA seeks to find orthogonal directions (principal components) along which the data vary the most,
       then project onto the top \(k\) components.
     </p>
