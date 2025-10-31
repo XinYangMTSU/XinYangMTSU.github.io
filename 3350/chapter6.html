@@ -319,14 +319,21 @@
             Each principal component is a linear combination of ALL original features, but they're weighted by importance. PCA figures out the optimal weights to capture the most variance.
           </p>
 
-    <h4>Objective: Maximize Variance</h4>
+    <h4>The Objective Function: Maximize Variance</h4>
 
+    Find a direction (vector) \(w\) such that when we project our data onto it, the variance is maximized.
+    
     <p style="text-align:center;">
       $$
       \max_{\mathbf{w}} \; \text{Var}(\mathbf{X} \mathbf{w})
       \quad \text{subject to} \quad \|\mathbf{w}\|_2 = 1
       $$
     </p>
+
+    $$
+    \max_{\mathbf{w}} \; \text{Var}(\mathbf{X} \mathbf{w}) = \max_{\mathbf{w}} \; \mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w}
+    \quad \text{subject to} \quad \|\mathbf{w}\|_2 = 1
+    $$
 
     <p>
       The first principal component \(\mathbf{w}_1\) is the direction that maximizes the variance of the projected data.
