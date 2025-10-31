@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -516,28 +515,23 @@
     </div>
   </section>
 
-  <!-- SCREE PLOT -->
+  <!-- SCREE PLOT - COMBINED -->
   <section class="full-width">
     <h2><i class="fas fa-chart-line"></i> Scree Plot: Choose How Many PCs?</h2>
-
-      <!-- DEFINITION -->
-    <h2>What is a Scree Plot?</h2>
-
-    <div class="definition-box">
-      <h4>Definition</h4>
-      <p style="line-height: 1.8;">
-        A <span class="highlight">Scree Plot</span> is a graph showing the <span class="highlight">variance explained by each principal component</span>. The x-axis shows component number (PC1, PC2, PC3...), and the y-axis shows variance (or cumulative variance).
+    <p>Look for the "elbow" on the pink line (individual variance). The green dashed line shows cumulative variance.
       </p>
+
+    <div class="chart-container">
+      <canvas id="screePlotCombined"></canvas>
     </div>
 
-    <div class="explanation">
-      <strong>Purpose:</strong> Help you decide how many PCs to keep by visualizing where the "elbow" occurs—where adding more components gives diminishing returns.
-    </div>
-    
-    <p>Look for the "elbow" — where adding more components doesn't help much</p>
-    
-    <div class="chart-container">
-      <canvas id="screePlot"></canvas>
+    <div style="background: rgba(255,121,198,0.1); border-left: 4px solid #ff79c6; border-radius: 8px; padding: 15px; margin-top: 20px;">
+      <p style="margin-bottom: 10px;"><strong style="color: #ff79c6;">💡 How to Read This Plot:</strong></p>
+      <ul style="margin-left: 25px; color: var(--text); line-height: 1.8;">
+        <li><strong style="color: #ff79c6;">Pink line (Individual Variance):</strong> Shows how much variance each PC adds. Look for the "elbow" where it flattens. </li>
+        <li><strong style="color: #10b981;">Green dashed line (Cumulative Variance):</strong> Shows total information captured up to each PC. </li>
+
+      </ul>
     </div>
   </section>
 
@@ -591,7 +585,7 @@ function standardize(data) {
   const n = data.length;
   const mean = data.reduce((a, b) => a + b, 0) / n;
   const variance = data.reduce((sum, x) => sum + Math.pow(x - mean, 2), 0) / n;
-  const std = Math.sqrt(variance) || 1; // guard against zero std
+  const std = Math.sqrt(variance) || 1;
   return { mean, std, data: data.map(x => (x - mean) / std) };
 }
 
@@ -614,11 +608,11 @@ function getCovarianceMatrix(matrix) {
 function eigenDecomposition(matrix) {
   try {
     const result = numeric.eig(matrix);
-    const eigenvalues = Array.from(result.lambda.x);      // length d
-    const E = result.E.x;                                 // d×d, eigenvectors as COLUMNS
+    const eigenvalues = Array.from(result.lambda.x);
+    const E = result.E.x;
     const order = eigenvalues.map((v, i) => [v, i]).sort((a, b) => b[0] - a[0]).map(x => x[1]);
     const sortedEigenvalues = order.map(i => eigenvalues[i]);
-    const V = E.map(row => order.map(j => row[j]));       // d×d → rows=features, cols=PCs
+    const V = E.map(row => order.map(j => row[j]));
     return { eigenvalues: sortedEigenvalues, eigenvectors: V };
   } catch (e) {
     console.error('Eigendecomposition failed:', e);
@@ -706,17 +700,14 @@ function resetData() {
   updateAllCalculations();
 }
 
-// --------- FIXED: Step 2 Tabs (scoped, no event needed) ----------
 function showStdTab(whichId){
   const sec = document.getElementById('standardization-section');
   if(!sec) return;
 
-  // panes
   sec.querySelectorAll('.tab-content').forEach(p => p.classList.remove('active'));
   const pane = sec.querySelector(`#${whichId}`);
   if (pane) pane.classList.add('active');
 
-  // buttons
   sec.querySelectorAll('.tab-btn').forEach(b => {
     b.classList.remove('active');
     b.setAttribute('aria-selected','false');
@@ -725,7 +716,6 @@ function showStdTab(whichId){
   if (btn) { btn.classList.add('active'); btn.setAttribute('aria-selected','true'); }
 }
 
-// --------- Step 5 Tabs (uses event, separate group) ----------
 function switchTab(evt, tabId) {
   const section = evt.currentTarget.closest('section');
   section.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -733,11 +723,10 @@ function switchTab(evt, tabId) {
   section.querySelector('#' + tabId).classList.add('active');
   evt.currentTarget.classList.add('active');
 
-  // After layout updates, recompute & redraw so canvases get real width
   setTimeout(() => {
     updateAllCalculations();
     if (chartInstances.pca) chartInstances.pca.resize?.();
-    if (chartInstances.scree) chartInstances.scree.resize?.();
+    if (chartInstances.screePlotCombined) chartInstances.screePlotCombined.resize?.();
   }, 50);
 }
 
@@ -748,7 +737,6 @@ function updateAllCalculations() {
   const features = ['productivity', 'accuracy', 'teamwork', 'leadership', 'innovation'];
   const rawData = sampleData.map(s => features.map(f => s[f]));
 
-  // Step 2: Standardize
   const standardizedByFeature = features.map(f => {
     const values = sampleData.map(s => s[f]);
     return standardize(values);
@@ -758,18 +746,12 @@ function updateAllCalculations() {
     row.map((val, j) => (val - standardizedByFeature[j].mean) / (standardizedByFeature[j].std || 1))
   );
 
-  // Step 3: Covariance
   const covMatrix = getCovarianceMatrix(standardizedData);
-
-  // Step 4: Eigendecomposition
   const eig = eigenDecomposition(covMatrix);
   const eigenvalues = eig.eigenvalues;
   const eigenvectors = eig.eigenvectors;
-
-  // Step 5: Project to 2D
   const projected = projectData(standardizedData, eigenvectors, 2);
 
-  // Update all UI
   updateStats(standardizedByFeature);
   updateStandardizedMatrix(standardizedData);
   updateCovarianceMatrix(covMatrix);
@@ -781,7 +763,7 @@ function updateAllCalculations() {
   updateBiplot(projected, eigenvectors);
   updatePC1Projection(projected);
   updatePC2Projection(projected);
-  updateScreePlot(eigenvalues);
+  updateScreePlotCombined(eigenvalues);
   updateTransformedTable(projected);
   updateInterpretations(eigenvectors);
   updateComparisons(eigenvalues);
@@ -1079,55 +1061,161 @@ function updatePC2Projection(projected) {
   ctx.font = 'bold 14px Arial'; ctx.textAlign = 'right'; ctx.fillText('PC2', width - 20, 30);
 }
 
-function updateScreePlot(eigenvalues) {
-  const ctx = document.getElementById('screePlot').getContext('2d');
+
+function updateScreePlotCombined(eigenvalues) {
   const total = eigenvalues.reduce((a, b) => a + b, 0);
-  const percentages = eigenvalues.map(v => v / total * 100);
-  let cumulative = 0;
-  const cumulativePercentages = percentages.map(p => (cumulative += p, cumulative));
 
-  if (chartInstances.scree) chartInstances.scree.destroy();
+  // Individual percentages
+  const percentages = eigenvalues.map(v => (v / total) * 100);
 
-  chartInstances.scree = new Chart(ctx, {
+  // Cumulative (start at PC1 %, clamp to 100 to avoid float/rounding creep)
+  let cum = 0;
+  const cumulativePercentages = percentages.map(p => {
+    cum += p;
+    // Numerical safety: keep within [0, 100]
+    return Math.max(0, Math.min(100, cum));
+  });
+
+  const ctx = document.getElementById('screePlotCombined').getContext('2d');
+  if (chartInstances.screePlotCombined) chartInstances.screePlotCombined.destroy();
+
+  const labels = percentages.map((_, i) => `PC${i + 1}`);
+
+  chartInstances.screePlotCombined = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ['PC1', 'PC2', 'PC3', 'PC4', 'PC5'],
+      labels,
       datasets: [
         {
           label: 'Individual Variance %',
           data: percentages,
-          borderColor: '#8be9fd',
-          backgroundColor: 'rgba(139,233,253,0.1)',
+          borderColor: '#ff79c6',
+          backgroundColor: 'rgba(255,121,198,0.1)',
           borderWidth: 3,
-          pointRadius: 6,
-          pointBackgroundColor: '#8be9fd',
+          pointRadius: 8,
+          pointBackgroundColor: '#ff79c6',
           pointBorderColor: '#fff',
-          pointBorderWidth: 2,
-          tension: 0.4
+          pointBorderWidth: 2.5,
+          tension: 0.2,
+          yAxisID: 'y',
+          fill: false
         },
         {
           label: 'Cumulative Variance %',
-          data: cumulativePercentages,
+          data: cumulativePercentages,  // starts at PC1 %, ends at 100 %
           borderColor: '#10b981',
           backgroundColor: 'rgba(16,185,129,0.1)',
           borderWidth: 3,
-          pointRadius: 6,
+          pointRadius: 8,
           pointBackgroundColor: '#10b981',
           pointBorderColor: '#fff',
-          pointBorderWidth: 2,
-          tension: 0.4,
-          borderDash: [5, 5]
+          pointBorderWidth: 2.5,
+          borderDash: [],               // solid line
+          tension: 0,                   // straight segments, no overshoot
+          yAxisID: 'y1',
+          fill: false,
+          clip: false
         }
       ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { legend: { labels: { color: '#ffd7f0' } }, title: { display: true, text: 'Scree Plot: Diminishing Returns?', color: '#ffb3de', font: { size: 14 } }, tooltip: { backgroundColor: '#1a1d1f', borderColor: '#ff79c6', borderWidth: 1, titleColor: '#fff', bodyColor: '#ffd7f0' } },
-      scales: { y: { min: 0, max: 105, ticks: { color: '#ffd7f0' }, grid: { color: 'rgba(255,255,255,.1)' } }, x: { ticks: { color: '#ffd7f0' }, grid: { color: 'rgba(255,255,255,.1)' } } }
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          labels: {
+            color: '#ffd7f0',
+            font: { size: 13, weight: 'bold' },
+            padding: 15,
+            usePointStyle: true,
+            pointStyle: 'circle'
+          },
+          display: true,
+          position: 'top'
+        },
+        title: {
+          display: true,
+          text: 'Scree Plot: Individual vs Cumulative Variance Explained',
+          color: '#ffb3de',
+          font: { size: 16, weight: 'bold' },
+          padding: 20
+        },
+        tooltip: {
+          backgroundColor: '#1a1d1f',
+          borderColor: '#ff79c6',
+          borderWidth: 2,
+          titleColor: '#ffb3de',
+          bodyColor: '#ffd7f0',
+          padding: 12,
+          titleFont: { weight: 'bold', size: 13 },
+          bodyFont: { size: 12 },
+          cornerRadius: 6,
+          callbacks: {
+            label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(3)}%`
+          }
+        }
+      },
+      scales: {
+        // Left axis for individual %
+        y: {
+          type: 'linear',
+          display: true,
+          position: 'left',
+          min: 0,
+          // keep reasonable headroom but never exceed 100 by much
+          max: Math.min(100, Math.max(...percentages) * 1.15 || 100),
+          ticks: {
+            color: '#ffd7f0',
+            font: { size: 11 },
+            callback: v => `${Number(v).toFixed(0)}%`
+          },
+          grid: { color: 'rgba(255,121,198,.15)', drawTicks: true },
+          title: {
+            display: true,
+            text: 'Individual Variance Explained (%)',
+            color: '#ff79c6',
+            font: { weight: 'bold', size: 13 },
+            padding: 10
+          }
+        },
+        // Right axis for cumulative % — hard cap at 100%
+        y1: {
+          type: 'linear',
+          display: true,
+          position: 'right',
+          min: 0,
+          max: 100,  // hard cap to prevent 105%
+          ticks: {
+            color: '#ffd7f0',
+            font: { size: 11 },
+            callback: v => `${Number(v).toFixed(0)}%`
+          },
+          grid: { drawOnChartArea: false },
+          title: {
+            display: true,
+            text: 'Cumulative Variance (%)',
+            color: '#10b981',
+            font: { weight: 'bold', size: 12 }
+          }
+        },
+        x: {
+          ticks: { color: '#ffd7f0', font: { size: 12, weight: 'bold' } },
+          grid: { color: 'rgba(255,255,255,.08)' },
+          title: {
+            display: true,
+            text: 'Principal Component',
+            color: '#ffd7f0',
+            font: { weight: 'bold', size: 12 }
+          }
+        }
+      }
     }
   });
 }
+
+
+
 
 function updateTransformedTable(projected) {
   const tbody = document.getElementById('transformedTableBody');
@@ -1166,7 +1254,6 @@ function updateComparisons(eigenvalues) {
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
   initDataTable();
-  // Ensure Step 2 shows Statistics by default and is scoped
   showStdTab('stats');
   updateAllCalculations();
 });
