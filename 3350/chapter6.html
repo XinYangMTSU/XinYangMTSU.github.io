@@ -370,7 +370,7 @@
 
     <h4>How PCA Works</h4>
     <ol>
-      <li><strong>Center the data:</strong> Subtract the mean from each feature so the data is zero-centered.</li>
+      <li><strong>Standardize the data:</strong> For each feature, subtract its mean to center it at zero, then divide by its standard deviation to scale it to unit variance. </li>
       <li><strong>Compute covariance matrix:</strong> \(\mathbf{\Sigma} = \frac{1}{m} \mathbf{X}^T \mathbf{X}\), where \(m\) is the number of samples.</li>
       <li><strong>Compute eigendecomposition:</strong> Find eigenvalues \(\lambda_i\) and eigenvectors \(\mathbf{v}_i\) of \(\mathbf{\Sigma}\).</li>
       <li><strong>Order eigenvectors by eigenvalues:</strong> Sort in descending order \(\lambda_1 \geq \lambda_2 \geq \cdots\).</li>
