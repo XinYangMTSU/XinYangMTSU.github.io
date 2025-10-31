@@ -324,15 +324,10 @@
     
     <p style="text-align:center;">
       $$
-      \max_{\mathbf{w}} \; \text{Var}(\mathbf{X} \mathbf{w})
+      \max_{\mathbf{w}} \; \text{Var}(\mathbf{X} \mathbf{w}) = \max_{\mathbf{w}} \; \mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w}
       \quad \text{subject to} \quad \|\mathbf{w}\|_2 = 1
       $$
     </p>
-
-    $$
-    \max_{\mathbf{w}} \; \text{Var}(\mathbf{X} \mathbf{w}) = \max_{\mathbf{w}} \; \mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w}
-    \quad \text{subject to} \quad \|\mathbf{w}\|_2 = 1
-    $$
 
     <p>
       The first principal component \(\mathbf{w}_1\) is the direction that maximizes the variance of the projected data.
@@ -347,8 +342,19 @@
       $$
     </p>
 
-    <p>
-      where \(\mathbf{\Sigma}\) is the covariance matrix of the data. The solutions are the eigenvectors
+    <p> where: </p>
+
+    <ul>
+        <li>\( X \) = your original data</li>
+        <li>\(w\) = direction you're testing</li>
+        <li>\(Xw\) = data projected onto direction \(w\)</li>
+        <li>\(\mathbf{\Sigma}\) is the covariance matrix of the data</li>
+        <li>\( w^T \Sigma w \) variance in direction \(w\)</li>        
+    </ul>
+      
+
+    <p>  
+      The solutions are the eigenvectors
       \(\mathbf{v}_1, \mathbf{v}_2, \ldots\) of \(\mathbf{\Sigma}\), ordered by their eigenvalues \(\lambda_1 \geq \lambda_2 \geq \cdots\).
     </p>
 
