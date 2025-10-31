@@ -383,6 +383,21 @@ The top <em>k</em> PCs are the eigenvectors associated with the
       </li>
     </ul>
 
+    <h4>Number of Principal Components</h4>
+
+    If your data matrix \(X\) has:
+    <ul>
+      <li>\(n\) = number of samples (rows)</li>
+      <li>\(d\) = number of features (columns)</li>
+    </ul>
+
+    then the maximum number of principal components you can have is:
+    <ul>
+      <li>Number of PCs = \(min(n-1, d)\)</li>
+    </ul>
+    
+    
+    
     <h4>How PCA Works</h4>
     <ol>
       <li><strong>Standardize the data:</strong> For each feature, subtract its mean to center it at zero, then divide by its standard deviation to scale it to unit variance. </li>
