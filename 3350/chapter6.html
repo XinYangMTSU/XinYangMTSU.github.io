@@ -401,6 +401,11 @@ The top <em>k</em> PCs are the eigenvectors associated with the
     <ol>
       <li><strong>Standardize the data:</strong> For each feature, subtract its mean to center it at zero, then divide by its standard deviation to scale it to unit variance. </li>
       <li><strong>Compute covariance matrix:</strong> \(\mathbf{\Sigma} = \frac{1}{m} \mathbf{X}^T \mathbf{X}\), where \(m\) is the number of samples.</li>
+      <ul>
+        <li>\(X\) is \(m \times d\)</li>
+        <li>\(X^T\) is \(d \times m\)</li>
+        <li>\(\Sigma\) is \(d \times d\)</li>
+      </ul>
       <li><strong>Compute eigendecomposition:</strong> Find eigenvalues \(\lambda_i\) and eigenvectors \(\mathbf{v}_i\) of \(\mathbf{\Sigma}\).</li>
       <li><strong>Order eigenvectors by eigenvalues:</strong> Sort in descending order \(\lambda_1 \geq \lambda_2 \geq \cdots\).</li>
       <li><strong>Select top \(k\) components:</strong> Choose the first \(k\) eigenvectors as the new basis.</li>
