@@ -518,7 +518,23 @@
   <!-- SCREE PLOT -->
   <section class="full-width">
     <h2><i class="fas fa-chart-line"></i> Scree Plot: Choose How Many PCs?</h2>
+
+      <!-- DEFINITION -->
+    <h2>What is a Scree Plot?</h2>
+
+    <div class="definition-box">
+      <h4>Definition</h4>
+      <p style="line-height: 1.8;">
+        A <span class="highlight">Scree Plot</span> is a graph showing the <span class="highlight">variance explained by each principal component</span>. The x-axis shows component number (PC1, PC2, PC3...), and the y-axis shows variance (or cumulative variance).
+      </p>
+    </div>
+
+    <div class="explanation">
+      <strong>Purpose:</strong> Help you decide how many PCs to keep by visualizing where the "elbow" occurs—where adding more components gives diminishing returns.
+    </div>
+    
     <p>Look for the "elbow" — where adding more components doesn't help much</p>
+    
     <div class="chart-container">
       <canvas id="screePlot"></canvas>
     </div>
