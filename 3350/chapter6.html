@@ -344,6 +344,7 @@
       Subsequent components are found by the same process, orthogonal to all previous components.
     </p>
 
+    <!--
     <p><strong>Equivalently:</strong></p>
 
     <p style="text-align:center;">
@@ -351,7 +352,8 @@
       \mathbf{w}_i = \arg\max_{\mathbf{w}} \frac{\mathbf{w}^T \mathbf{\Sigma} \mathbf{w}}{\mathbf{w}^T \mathbf{w}}
       $$
     </p>
-
+    -->
+    
     <p> where: </p>
 
     <ul>
@@ -362,10 +364,11 @@
         <li>\( w^T \Sigma w \) variance in direction \(w\)</li>        
     </ul>
       
-
+    <h4>Solution:</h4>
     <p>  
-      The solutions are the eigenvectors
-      \(\mathbf{v}_1, \mathbf{v}_2, \ldots\) of \(\mathbf{\Sigma}\), ordered by their eigenvalues \(\lambda_1 \geq \lambda_2 \geq \cdots\).
+       The optimal \(w\) are eigenvectors
+      \(\mathbf{v}_1, \mathbf{v}_2, \ldots\) of \(\mathbf{\Sigma}\), 
+      ordered by their eigenvalues \(\lambda_1 \geq \lambda_2 \geq \cdots\).
     </p>
 
     <h4>How PCA Works</h4>
