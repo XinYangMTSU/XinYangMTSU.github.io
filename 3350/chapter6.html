@@ -402,7 +402,7 @@ The top <em>k</em> PCs are the eigenvectors associated with the
     <h4>How PCA Works</h4>
     <ol>
       <li><strong>Standardize the data:</strong> For each feature, subtract its mean to center it at zero, then divide by its standard deviation to scale it to unit variance. </li>
-      <li><strong>Compute covariance matrix:</strong> \(\mathbf{\Sigma} = \frac{1}{m} \mathbf{X}^T \mathbf{X}\), where \(m\) is the number of samples.</li>
+      <li><strong>Compute covariance matrix:</strong> \(\mathbf{\Sigma} = \frac{1}{m-1} \mathbf{X}^T \mathbf{X}\), where \(m\) is the number of samples.</li>
       <ul>
         <li>\(X\) is \(m \times d\)</li>
         <li>\(X^T\) is \(d \times m\)</li>
