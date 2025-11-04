@@ -466,7 +466,7 @@ The top <em>k</em> PCs are the eigenvectors associated with the
     
     <!-- <h4>The Probability Framework</h4> -->
     <ol>
-    <li>Compute Pairwise Similarities in High-D Space</li>
+    <li>Compute Pairwise Similarities in High-Dimensional Space</li>
     
     <p>
       For each point \(\mathbf{x}_i\), compute similarity to all other points \(\mathbf{x}_j\) using a Gaussian kernel:
@@ -493,11 +493,12 @@ The top <em>k</em> PCs are the eigenvectors associated with the
 
     <ul>
       <li>Points closer to \(x_i\) --> higher probability</li>
-      <li>Each point has its own width (), adjusted using perplexity, 
+      <li>Each point has its own width (\(\sigma_i\)), adjusted using perplexity, 
       which controls how many neighbors each point "trusts".</li>
       <li><b>Perplexity</b>: effective number of neighbors, typically between 5–50.</li>
     </ul>
-      
+
+    <li>Create Symmetric Joint Probabilities</li>
     <p>
       For symmetry, compute the joint probability in the high-dimensional space:
     </p>
@@ -513,9 +514,13 @@ The top <em>k</em> PCs are the eigenvectors associated with the
     </p>
 
     </ol>
-    
-    <h4>Low-Dimensional Representation</h4>
 
+    <li>Represent in Low-Dimensional Space (2D or 3D)</li>
+
+    <!--
+    <h4>Low-Dimensional Representation</h4>
+    -->
+    
     <p>
       In the low-dimensional space (typically 2D or 3D), use a Student-t distribution with 1 degree of freedom instead of Gaussian:
     </p>
