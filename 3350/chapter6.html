@@ -460,10 +460,20 @@ The top <em>k</em> PCs are the eigenvectors associated with the
       <li><b>Nonlinear:</b> Can capture curved manifolds and nonlinear structures that PCA would miss.</li>
     </ul>
 
-
+    
+    <h4>t-SNE Algorithm</h4>
+    <ol>
+      <li><strong>Compute pairwise distances:</strong> Calculate Euclidean distances between all pairs of high-dimensional points.</li>
+      <li><strong>Convert to probabilities:</strong> Use Gaussian kernel to convert distances to conditional probabilities \(p_{j|i}\). Adapt \(\sigma_i\) based on target perplexity.</li>
+      <li><strong>Symmetrize:</strong> Compute joint probabilities \(p_{ij}\).</li>
+      <li><strong>Initialize low-dimensional embedding:</strong> Random initialization (or PCA) of \(\mathbf{Y}\) (typically 2D or 3D).</li>
+      <li><strong>Gradient descent:</strong> Iteratively update \(\mathbf{Y}\) to minimize KL divergence. Use momentum or Adam optimization for faster convergence.</li>
+      <li><strong>Convergence:</strong> Continue until KL divergence stabilizes (typically thousands of iterations).</li>
+    </ol>
+    
   </section>
 
-  
+
 
   <section id="ica">
     <h4>2.3 Independent Component Analysis (ICA)</h4>
