@@ -484,11 +484,20 @@ The top <em>k</em> PCs are the eigenvectors associated with the
       $$
     </p>
 
+    <!--
     <p>
       This represents the probability of point \(\mathbf{x}_i\) selecting point \(\mathbf{x}_j\) as a neighbor.
       The bandwidth \(\sigma_i\) is adapted so each point has approximately the same number of effective neighbors (perplexity).
     </p>
+    -->
 
+    <ul>
+      <li>Points closer to \(x_i\) --> higher probability</li>
+      <li>Each point has its own width (), adjusted using perplexity, 
+      which controls how many neighbors each point "trusts".</li>
+      <li><b>Perplexity</b>: effective number of neighbors, typically between 5–50.</li>
+    </ul>
+      
     <p>
       For symmetry, compute the joint probability in the high-dimensional space:
     </p>
