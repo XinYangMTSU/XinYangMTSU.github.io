@@ -462,6 +462,71 @@ The top <em>k</em> PCs are the eigenvectors associated with the
       <li><b>Nonlinear:</b> Can capture curved manifolds and nonlinear structures that PCA would miss.</li>
     </ul>
 
+    <h4>The Probability Framework</h4>
+
+    <p>
+      For each point \(\mathbf{x}_i\), compute similarity to all other points \(\mathbf{x}_j\) using a Gaussian kernel:
+    </p>
+
+    <p style="text-align:center;">
+      $$
+      p_{j|i} = \frac{\exp(-\|\mathbf{x}_i - \mathbf{x}_j\|^2 / (2\sigma_i^2))}{\sum_{k \neq i} \exp(-\|\mathbf{x}_i - \mathbf{x}_k\|^2 / (2\sigma_i^2))}
+      $$
+    </p>
+
+    <p>
+      This represents the probability of point \(\mathbf{x}_i\) selecting point \(\mathbf{x}_j\) as a neighbor.
+      The bandwidth \(\sigma_i\) is adapted so each point has approximately the same number of effective neighbors (perplexity).
+    </p>
+
+    <p>
+      For symmetry, compute the joint probability in the high-dimensional space:
+    </p>
+
+    <p style="text-align:center;">
+      $
+      p_{ij} = \frac{p_{j|i} + p_{i|j}}{2m}
+      $
+    </p>
+
+    <p>
+      where \(m\) is the number of data points.
+    </p>
+
+    <h4>Low-Dimensional Representation</h4>
+
+    <p>
+      In the low-dimensional space (typically 2D or 3D), use a Student-t distribution with 1 degree of freedom instead of Gaussian:
+    </p>
+
+    <p style="text-align:center;">
+      $
+      q_{ij} = \frac{(1 + \|\mathbf{y}_i - \mathbf{y}_j\|^2)^{-1}}{\sum_{k \neq \ell} (1 + \|\mathbf{y}_k - \mathbf{y}_\ell\|^2)^{-1}}
+      $
+    </p>
+
+    <p>
+      where \(\mathbf{y}_i\) is the low-dimensional embedding of \(\mathbf{x}_i\). The Student-t distribution has heavier tails than Gaussian,
+      which helps maintain separation between dissimilar points.
+    </p>
+
+    <h4>Objective Function: Kullback-Leibler Divergence</h4>
+
+    <p>
+      Minimize the divergence between high-dimensional and low-dimensional probability distributions:
+    </p>
+
+    <p style="text-align:center;">
+      $
+      \text{KL}(P \| Q) = \sum_{i} \sum_{j} p_{ij} \log\frac{p_{ij}}{q_{ij}}
+      $
+    </p>
+
+    <p>
+      This objective penalizes placing nearby high-dimensional points far apart in the embedding (preserves local structure).
+      It is less strict about distant points, allowing flexibility in global layout.
+    </p>
+
     
     <h4>t-SNE Algorithm</h4>
     <ol>
