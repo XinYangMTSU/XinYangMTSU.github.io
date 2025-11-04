@@ -209,7 +209,8 @@
       <a href="#dimension-reduction"><i class="fas fa-compress"></i>2. Dimensionality Reduction Methods</a>
       <div class="subsections">
         <a href="#pca">2.1 Principal Component Analysis (PCA)</a>
-        <a href="#ica">2.2 Independent Component Analysis (ICA)</a>
+        <a href="#pca">2.2 t-Distributed Stochastic Neighbor Embedding (t-SNE)</a>
+        <a href="#ica">2.3 Independent Component Analysis (ICA)</a>
       </div>
     </li>
 
@@ -433,8 +434,39 @@ The top <em>k</em> PCs are the eigenvectors associated with the
 
   </section>
 
+
+  <section id="tsne">
+    <h4>2.2 t-Distributed Stochastic Neighbor Embedding (t-SNE)</h4>
+    <br>
+
+    <b>Idea:</b>
+    <p>
+      <b>t-SNE</b> is a nonlinear dimensionality reduction technique designed primarily for <b>visualization</b>.
+      Unlike PCA (linear, global) or ICA (seeks independence), t-SNE focuses on preserving <b><font color="red">local neighborhood structure</font></b> —
+      keeping nearby points in high-dimensional space close together in the low-dimensional embedding, while allowing distant points to spread out.
+    </p>
+
+    <p>
+      t-SNE works by converting high-dimensional Euclidean distances into conditional probabilities representing similarities
+      between data points. It then constructs a similar probability distribution in the low-dimensional space and minimizes
+      the divergence (Kullback-Leibler divergence) between these two distributions.
+    </p>
+
+    <h4>Key Insight: Preserve Local Neighborhood</h4>
+    <ul>
+      <li><b>Local structure:</b> t-SNE prioritizes keeping close neighbors close in the lower-dimensional representation.</li>
+      <li><b>Global structure:</b> Distant points can move farther apart; t-SNE cares less about global relationships.</li>
+      <li><b>Great for visualization:</b> Creates intuitive 2D/3D plots where clusters and local patterns emerge naturally.</li>
+      <li><b>Nonlinear:</b> Can capture curved manifolds and nonlinear structures that PCA would miss.</li>
+    </ul>
+
+
+  </section>
+
+  
+
   <section id="ica">
-    <h4>2.2 Independent Component Analysis (ICA)</h4>
+    <h4>2.3 Independent Component Analysis (ICA)</h4>
     <br>
 
     <b>Idea:</b>
