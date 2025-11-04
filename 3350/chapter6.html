@@ -539,6 +539,22 @@ The top <em>k</em> PCs are the eigenvectors associated with the
       which helps maintain separation between dissimilar points.
     </p>
 
+    <li>Optimize — Make P and Q Match</li>
+
+      t-SNE then tries to make \(q_{ij}\) (low-dimensional similarities) match \(p_{ij}\) (high-dimensional similarities).
+
+      The objective function (cost) is the <b>Kullback-Leibler (KL) divergence:</b>
+
+      $$
+        \text{KL}(P \| Q) = \sum_{i} \sum_{j} p_{ij} \log\frac{p_{ij}}{q_{ij}}
+      $$
+
+      Minimizing this ensures:
+          <ul>
+              <li>Nearby high-D points remain close in 2D (local structure preserved).</li>
+              <li>Distant points are free to separate (reduces crowding).</li>
+          </ul>
+
        </ol>
     
     <h4>Objective Function: Kullback-Leibler Divergence</h4>
@@ -548,9 +564,9 @@ The top <em>k</em> PCs are the eigenvectors associated with the
     </p>
 
     <p style="text-align:center;">
-      $
+      $$
       \text{KL}(P \| Q) = \sum_{i} \sum_{j} p_{ij} \log\frac{p_{ij}}{q_{ij}}
-      $
+      $$
     </p>
 
     <p>
