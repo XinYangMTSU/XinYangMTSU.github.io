@@ -544,9 +544,12 @@ The top <em>k</em> PCs are the eigenvectors associated with the
       <ul>
         <li>\(y_i\) is the low-dimensional representation (embedding) of \(x_i\)</li>
         <li>\(y_i = [y_{i1}, y_{i2}]\) (for 2D embedding)</li>
+        <li>The numerator \((1 + \|\mathbf{y}_i - \mathbf{y}_j\|^2)^{-1}\) measures how close this particular pair \((i,j)\) is.</li>
+        <li>The denominator \( \sum_{k \neq \ell} (1 + \|\mathbf{y}_k - \mathbf{y}_\ell\|^2)^{-1} \) sums over all pairs \((k,\ell)\) to normalize 
+          probabilities so that all \(q_{ij}\) add up to 1.</li>
       </ul>
     
-  
+    <br>
     <li><b>Optimize — Make P and Q Match</b></li>
 
       t-SNE then tries to make \(q_{ij}\) (low-dimensional similarities) match \(p_{ij}\) (high-dimensional similarities).
