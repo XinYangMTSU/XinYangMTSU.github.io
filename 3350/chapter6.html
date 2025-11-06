@@ -643,6 +643,24 @@ The top <em>k</em> PCs are the eigenvectors associated with the
       such that \(\mathbf{S} = \mathbf{W} \mathbf{X}\).
     </p>
 
+    <h4>Classic Application: Blind Source Separation</h4>
+
+    Imagine a room with 3 speakers and 3 microphones. 
+    Each microphone records a mixture of all 3 speakers:
+
+    <pre>
+      Microphone 1 = 0.7 * Speaker A + 0.2 * Speaker B + 0.1 * Speaker C
+      Microphone 2 = 0.1 * Speaker A + 0.8 * Speaker B + 0.1 * Speaker C
+      Microphone 3 = 0.2 * Speaker A + 0.1 * Speaker B + 0.7 * Speaker C
+    </pre>
+
+    <b>Goal:</b> Recover the original independent speaker signals from the 
+    mixed microphone recordings.
+    <br>
+    ICA solves this by finding independent components—the original 
+    speaker signals are assumed independent (different people talking), 
+    and ICA can separate them!
+    
     <h4>Key Difference: Independence vs. Uncorrelatedness</h4>
     <ul>
       <li><b>Uncorrelated:</b> Two variables have zero covariance (correlation). This is what PCA achieves.</li>
