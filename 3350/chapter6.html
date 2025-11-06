@@ -623,8 +623,14 @@ The top <em>k</em> PCs are the eigenvectors associated with the
     </p>
 
     <ul>
-        <li><b>Uncorrelated</b> = no linear relationship (covariance = 0)</li>
-        <li><b>Independence</b> = no relationship of any kind (linear, nonlinear, or otherwise)</li>
+        <li>
+          <b>Uncorrelated</b> = no linear relationship (covariance = 0).
+          But nonlinear relationships can still exist.
+        </li>
+        <li>
+          <b>Independence</b> = no relationship of any kind (linear, nonlinear, or otherwise).
+          If X and Y are independent, knowing X tells you nothing about Y.
+        </li>
     </ul>
 
     <p>
@@ -661,11 +667,18 @@ The top <em>k</em> PCs are the eigenvectors associated with the
     speaker signals are assumed independent (different people talking), 
     and ICA can separate them!
     
-    <h4>Key Difference: Independence vs. Uncorrelatedness</h4>
+    <h4>How ICA Works (Conceptually)</h4>
     <ul>
-      <li><b>Uncorrelated:</b> Two variables have zero covariance (correlation). This is what PCA achieves.</li>
-      <li><b>Independent:</b> Knowing one variable tells you nothing about another (zero all higher-order moments). This is stronger than uncorrelated.</li>
-      <li><b>ICA requires:</b> (1) At most one component has Gaussian distribution, and (2) the components are independent.</li>
+      <li>1. Assume: Observed data \(X = A \times S\), where:</li>
+      <ul>
+          <li>X = observed data (mixtures, e.g., microphone recordings)</li>
+          <li>A = unknown mixing matrix</li>
+          <li>S = independent source signals (what we want to find)</li>
+      </ul>
+      <li>2. Goal: Find A and S such that S components are statistically independent</li>
+      <li>3. Method: Maximize non-Gaussianity or minimize mutual information to find independence</li>
+      <li>4. Key Assumption: The source signals must be non-Gaussian (at least most of them). 
+        If sources are Gaussian, ICA cannot separate them!</li>
     </ul>
 
     <h4>Objective: Maximize Non-Gaussianity</h4>
