@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OLA5 – Unsupervised Learning: Clustering & Dimensionality Reduction (MNIST Only)</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 950px; margin: 0 auto; padding: 20px; background-color: #17191a; color: #ff79c6; }
+    .container { background-color: #222025; padding: 30px; border-radius: 8px; box-shadow: 0 2px 12px rgba(255,121,198,0.15); }
+    h1 { text-align: center; font-size: 26px; color: #ff79c6; margin-bottom: 6px; }
+    h2.course-title { text-align: center; font-size: 28px; color: #ffb3de; margin-bottom: 18px; }
+    h3.deadline { text-align: center; font-size: 15px; color: #ffb3de; margin-top: 0; margin-bottom: 20px; }
+    h3 { color: #ff79c6; font-size: 22px; margin-bottom: 12px; border-bottom: 3px solid #ff79c6; padding-bottom: 6px; }
+    h4 { color: #ffb3de; font-size: 18px; margin-top: 20px; margin-bottom: 8px; border-bottom: 1px solid #ffb3de; padding-bottom: 3px; }
+    pre { background: #19121a; color: #ffb3de; padding: 15px; border-radius: 6px; font-size: 0.95em; overflow-x: auto; }
+    code { font-family: Consolas, monospace; }
+    ul, ol, p, li { color: #ffb3de; }
+    li { margin-bottom: 8px; }
+    table { width: 70%; margin: 15px auto; border-collapse: collapse; font-size: 0.9em; color: #ffb3de; }
+    th, td { border: 1px solid #ff79c6; padding: 6px 10px; text-align: left; }
+    th { background: #19121a; color: #ff79c6; }
+    tr:nth-child(even) { background: #2b2b2b; }
+    .highlight { background-color: #3d2940; padding: 2px 6px; border-radius: 3px; color: #ff79c6; }
+    #backToTop { position: fixed; bottom: 24px; right: 24px; background-color: #ff79c6; color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 1.3em; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25); transition: background 0.2s; }
+    #backToTop:hover { background-color: #ffb3de; color: #17191a; }
+    footer { text-align: center; margin-top: 30px; font-size: 0.9em; color: #ffb3de; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="course-title">CSCI 3350 -- Machine Learning</h2>
+  <h1>OLA5 – Unsupervised Learning: Clustering & Dimensionality Reduction (MNIST)</h1>
+  <h3 class="deadline"><font color="red">Deadline:</font> November 23rd, 2025 (Sunday)</h3>
+
+  <h3>Objective</h3>
+  <p>
+    Explore <b>unsupervised learning</b> on a single dataset, <b>MNIST</b>, using both <b>clustering</b> and <b>dimensionality reduction</b>.
+    You will (1) find natural groupings with <b>K-Means</b> and <b>Hierarchical Clustering</b> (evaluated by the <b>Elbow Method</b>),
+    and (2) reduce feature complexity with <b>PCA</b> and <b>t-SNE</b> to visualize structure. Labels are used only for coloring plots.
+  </p>
+
+  <h4>Key Concepts</h4>
+  <ul>
+    <li><b>K-Means</b>: centroid-based clustering; choose k via <span class="highlight">Elbow Method (inertia)</span></li>
+    <li><b>Hierarchical (Agglomerative)</b>: linkages (<code>single</code>, <code>complete</code>, <code>average</code>); dendrograms on a subsample</li>
+    <li><b>PCA</b>: linear dimensionality reduction; explained variance; 2D projections</li>
+    <li><b>t-SNE</b>: nonlinear visualization emphasizing local neighborhoods; perplexity exploration</li>
+    <li><b>Standardization</b> before clustering/dendrogram is essential</li>
+  </ul>
+
+  <h3>Requirements (MNIST Dataset)</h3>
+  <ol>
+    <li><b>Step 1: Load & Preprocess MNIST</b>
+      <ul>
+        <li>Load MNIST (e.g., first <b>5000</b> samples) via <code>keras.datasets.mnist</code> or <code>fetch_openml('mnist_784')</code></li>
+        <li>Create a DataFrame (features) and store labels separately (do <b>not</b> use for clustering)</li>
+        <li><b>EDA</b>:
+          <ul>
+            <li>Dataset shape; basic stats (mean, std, min, max)</li>
+            <li>Histogram of digit counts (0–9)</li>
+            <li>Grid of <b>10</b> sample 28×28 digit images</li>
+          </ul>
+        </li>
+        <li>Standardize features with <code>StandardScaler</code></li>
+      </ul>
+    </li>
+
+    <li><b>Step 2: K-Means (Elbow Method)</b>
+      <ul>
+        <li>For k = 2…10, fit <code>KMeans(random_state=42, n_init=10)</code>, record <b>inertia</b></li>
+        <li>Plot <b>Elbow Curve</b> (k vs inertia) and pick the elbow k</li>
+      </ul>
+    </li>
+
+    <li><b>Step 3: K-Means (Optimal k) & Hierarchical Clustering</b>
+      <ul>
+        <li><b>K-Means:</b>
+          <ul>
+            <li>Fit with the elbow-chosen k; obtain labels & centroids</li>
+          </ul>
+        </li>
+        <li><b>Hierarchical (Agglomerative):</b>
+          <ul>
+            <li>Try linkages: <code>'single'</code>, <code>'complete'</code>, <code>'average'</code></li>
+            <li>For the elbow k, fit AgglomerativeClustering for each linkage</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li><b>Step 4: Dendrograms (Subsample) & Comparison</b>
+      <ul>
+        <li>Randomly sample ~<b>300–500</b> points (full dendrogram on 5000 is impractical)</li>
+        <li>For the two best-looking linkages from Step 3:
+          <ul>
+            <li>Compute <code>scipy.cluster.hierarchy.linkage()</code> on the subsample</li>
+            <li>Plot dendrograms with a horizontal cut line indicating k</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li><b>Step 5: PCA on MNIST</b>
+      <ul>
+        <li>Fit <code>PCA(n_components=None)</code> on standardized data to analyze full variance</li>
+        <li>Plots:
+          <ul>
+            <li><b>Scree</b>: component index vs explained variance ratio</li>
+            <li><b>Cumulative</b>: component index vs cumulative variance (mark 95% & 99%)</li>
+          </ul>
+        </li>
+        <li>Find the number of components for ~<b>95%</b> variance</li>
+        <li>Create a 2D scatter (PC1 vs PC2) colored by <b>true digit</b> (for visualization only)</li>
+      </ul>
+    </li>
+
+    <li><b>Step 6: t-SNE on MNIST</b>
+      <ul>
+        <li>First reduce to ~<b>50 PCs</b> (e.g., <code>PCA(n_components=50)</code>) to speed/stabilize t-SNE</li>
+        <li>Run t-SNE with perplexities <b>[5, 30, 50]</b>; use <code>TSNE(n_components=2, learning_rate="auto", random_state=42, n_iter=1000)</code></li>
+        <li>Make a 1×3 subplot of the three perplexities, colored by <b>true digit</b></li>
+        <li>Select the best perplexity and show a final high-quality 2D plot (optional 3D t-SNE)</li>
+      </ul>
+    </li>
+
+    <li><b>Step 7: PCA vs. t-SNE</b>
+      <ul>
+        <li>Show PCA-2D vs t-SNE-2D side-by-side (colored by true digit)</li>
+      </ul>
+    </li>
+
+    <li><b>Step 8: Write-Up (8–10 sentences)</b>
+      <ul>
+        <li>Elbow-based k and what it suggests about digit structure</li>
+        <li>Visual differences between K-Means and Hierarchical results</li>
+        <li>How many PCs for ~95% variance; trade-offs of dimensionality</li>
+        <li>What t-SNE reveals vs PCA; effect of perplexity</li>
+        <li>When to use clustering vs dimensionality reduction in practice</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>Expected Output</h3>
+  <ul>
+    <li>10 sample digit images and digit count histogram</li>
+    <li>Elbow plot (k vs inertia) + chosen k</li>
+    <li>K-Means PCA-2D scatter with centroids; optional centroid images</li>
+    <li>PCA-2D cluster plots for Hierarchical linkages (at least the best few)</li>
+    <li>Two dendrograms (best linkages) on subsample with cut line</li>
+    <li>PCA scree + cumulative variance plots; PCA-2D colored by digit</li>
+    <li>t-SNE perplexity exploration (1×3) + final best t-SNE</li>
+    <li>PCA vs t-SNE side-by-side + comparison table</li>
+    <li>8–10 sentence analysis</li>
+  </ul>
+
+  <h3>Grading Distribution (Total: 100 points)</h3>
+  <table>
+    <tr><th>Task</th><th>Points</th></tr>
+    <tr><td>MNIST preprocessing & EDA (Step 1)</td><td>12</td></tr>
+    <tr><td>Elbow method (plot & choice) (Step 2)</td><td>12</td></tr>
+    <tr><td>K-Means viz & Hierarchical linkages (Step 3)</td><td>16</td></tr>
+    <tr><td>Dendrograms (subsample) & comparison (Step 4)</td><td>12</td></tr>
+    <tr><td>PCA variance analysis & PCA-2D (Step 5)</td><td>16</td></tr>
+    <tr><td>t-SNE exploration & final plot (Step 6)</td><td>16</td></tr>
+    <tr><td>PCA vs t-SNE comparison (Step 7)</td><td>8</td></tr>
+    <tr><td>Write-up (Step 8)</td><td>8</td></tr>
+    <tr><th>Total</th><th>100</th></tr>
+  </table>
+
+  <h3>Starter Code Skeleton (MNIST Only)</h3>
+  <pre><code># --- OLA5: Unsupervised Learning on MNIST (Clustering + DR) ---
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans, AgglomerativeClustering
+from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
+
+from scipy.cluster.hierarchy import linkage, dendrogram
+from sklearn.utils import shuffle
+
+# Option A: Keras MNIST (reliable)
+from keras.datasets import mnist
+# Option B (alternative): from sklearn.datasets import fetch_openml
+
+SEED = 42
+np.random.seed(SEED)
+
+# ===== Step 1: Load & Preprocess MNIST =====
+# Option A: Keras
+(X_train, y_train), _ = mnist.load_data()
+X = X_train.reshape(len(X_train), -1).astype("float32")  # (N, 784)
+y = y_train
+
+# Use a subset (e.g., first 5000 after shuffling)
+X, y = shuffle(X, y, random_state=SEED)
+X = X[:5000]
+y = y[:5000]
+
+# EDA: shape & stats
+print("Shape:", X.shape)
+print("Pixel stats: mean=%.3f std=%.3f min=%.1f max=%.1f" % (X.mean(), X.std(), X.min(), X.max()))
+
+# Plot: class histogram
+plt.figure()
+plt.hist(y, bins=np.arange(11)-0.5)
+plt.xlabel("Digit")
+plt.ylabel("Count")
+plt.title("MNIST Class Distribution")
+plt.show()
+
+# Plot: 10 sample digits
+plt.figure(figsize=(6,6))
+for i in range(20):
+    ax = plt.subplot(4,5,i+1)
+    ax.imshow(X[i].reshape(28,28), cmap="gray")
+    ax.axis("off")
+plt.suptitle("Sample MNIST Digits")
+plt.show()
+
+# Standardize features
+scaler = StandardScaler()
+X_std = scaler.fit_transform(X)
+
+# ===== Step 2: K-Means Elbow =====
+inertias = []
+ks = range(2, 11)
+for k in ks:
+    km = KMeans(n_clusters=k, random_state=SEED, n_init=10)
+    km.fit(X_std)
+    inertias.append(km.inertia_)
+
+plt.figure()
+plt.plot(list(ks), inertias, marker="o")
+plt.xlabel("k")
+plt.ylabel("Inertia (WCSS)")
+plt.title("Elbow Method (MNIST)")
+plt.xticks(list(ks))
+plt.show()
+
+k_opt = 10  # <-- choose from the elbow visually (often around 10 for digits)
+print("Chosen k (from elbow):", k_opt)
+
+# ===== Step 3: K-Means @ k_opt & Hierarchical =====
+# PCA projection for 2D plotting
+pca2 = PCA(n_components=2, random_state=SEED)
+X_pca2 = pca2.fit_transform(X_std)
+
+# K-Means fit + plot
+km_opt = KMeans(n_clusters=k_opt, random_state=SEED, n_init=10)
+labels_km = km_opt.fit_predict(X_std)
+
+plt.figure()
+plt.scatter(X_pca2[:,0], X_pca2[:,1], s=8, c=labels_km)
+plt.title(f"K-Means (k={k_opt}) on PCA-2D")
+plt.xlabel("PC1"); plt.ylabel("PC2")
+plt.show()
+
+# Optional: centroid images
+centroids_img = scaler.inverse_transform(km_opt.cluster_centers_).reshape(-1, 28, 28)
+plt.figure(figsize=(8,4))
+for i in range(min(k_opt, 10)):
+    ax = plt.subplot(2,5,i+1)
+    ax.imshow(centroids_img[i], cmap="gray")
+    ax.set_title(f"C{i}")
+    ax.axis("off")
+plt.suptitle("K-Means Centroid Prototypes")
+plt.show()
+
+# Hierarchical linkages
+linkages = ["single", "complete", "average", "ward"]
+hier_labels = {}
+for link in linkages:
+    ac = AgglomerativeClustering(n_clusters=k_opt, linkage=link)
+    labels_h = ac.fit_predict(X_std)
+    hier_labels[link] = labels_h
+
+    plt.figure()
+    plt.scatter(X_pca2[:,0], X_pca2[:,1], s=8, c=labels_h)
+    plt.title(f"Agglomerative ({link}), k={k_opt} on PCA-2D")
+    plt.xlabel("PC1"); plt.ylabel("PC2")
+    plt.show()
+
+# ===== Step 4: Dendrograms on Subsample =====
+# Subsample 400 points
+sub_n = 400
+X_sub, y_sub = X_std[:sub_n], y[:sub_n]
+Z_ward = linkage(X_sub, method="ward")
+Z_complete = linkage(X_sub, method="complete")
+
+plt.figure(figsize=(8,4))
+dendrogram(Z_ward, no_labels=True, color_threshold=None)
+plt.title("Dendrogram (Ward) on Subsample")
+plt.axhline(y=Z_ward[-k_opt,2], color="r", linestyle="--")  # optional cut reference
+plt.show()
+
+plt.figure(figsize=(8,4))
+dendrogram(Z_complete, no_labels=True, color_threshold=None)
+plt.title("Dendrogram (Complete) on Subsample")
+plt.axhline(y=Z_complete[-k_opt,2], color="r", linestyle="--")
+plt.show()
+
+# ===== Step 5: PCA Variance & PCA-2D by True Digit =====
+pca_full = PCA(n_components=None, random_state=SEED)
+pca_full.fit(X_std)
+var = pca_full.explained_variance_ratio_
+cum = np.cumsum(var)
+
+plt.figure()
+plt.plot(np.arange(1, len(var)+1), var)
+plt.xlabel("Component")
+plt.ylabel("Explained Variance Ratio")
+plt.title("PCA Scree Plot")
+plt.show()
+
+plt.figure()
+plt.plot(np.arange(1, len(cum)+1), cum)
+plt.axhline(0.95, linestyle="--")
+plt.axhline(0.99, linestyle="--")
+plt.xlabel("Component")
+plt.ylabel("Cumulative Explained Variance")
+plt.title("PCA Cumulative Variance")
+plt.show()
+
+# Identify components for ~95% variance
+n95 = int(np.searchsorted(cum, 0.95) + 1)
+print("Components for ~95% variance:", n95)
+
+plt.figure()
+plt.scatter(X_pca2[:,0], X_pca2[:,1], s=8, c=y, cmap="tab10")
+plt.title("PCA-2D Colored by True Digit")
+plt.xlabel("PC1"); plt.ylabel("PC2")
+plt.show()
+
+# ===== Step 6: t-SNE (after PCA->50) =====
+pca50 = PCA(n_components=50, random_state=SEED)
+X_50 = pca50.fit_transform(X_std)
+
+perps = [5, 30, 50]
+fig = plt.figure(figsize=(12,4))
+for i, p in enumerate(perps, 1):
+    tsne = TSNE(n_components=2, learning_rate="auto", random_state=SEED, n_iter=1000, perplexity=p)
+    X_tsne = tsne.fit_transform(X_50)
+    ax = fig.add_subplot(1,3,i)
+    sc = ax.scatter(X_tsne[:,0], X_tsne[:,1], s=6, c=y, cmap="tab10")
+    ax.set_title(f"t-SNE (perplexity={p})")
+plt.suptitle("t-SNE Perplexity Exploration (Colored by Digit)")
+plt.show()
+
+# Choose best perplexity and make final plot as needed
+
+# ===== Step 7: PCA vs t-SNE Side-by-Side =====
+# (Create final best t-SNE then show PCA-2D vs t-SNE-2D next to each other)
+  </code></pre>
+
+  <h3>Hints</h3>
+  <ul>
+    <li>Use labels only for coloring plots and qualitative comparison—not for clustering.</li>
+    <li>Elbow selection is a judgment call: look for where inertia reduction noticeably tapers.</li>
+    <li>Dendrograms: always subsample for readability and performance.</li>
+  </ul>
+
+  <footer>
+    © Dr. Xin Yang <br>
+    Department of Computer & Information Sciences <br>
+    Fisk University
+  </footer>
+</div>
+
+<button id="backToTop" title="Go to top">↑</button>
+<script>
+  document.getElementById("backToTop").addEventListener("click", function() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+</body>
+</html>
