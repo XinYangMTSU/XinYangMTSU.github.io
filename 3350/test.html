@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Test 2</title>
+	<link href="../CSS/4410.css" rel="stylesheet">
+</head>
+
+<body>
+
+	 <script>
+    // Load MathJax
+    (function () {
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      document.head.appendChild(script);
+    })();
+  </script>
+
+	  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	
+	<div id="main">
+
+		<h1>Test 2</h1>
+		<h2>Chapters Covered</h2>
+		<ul>
+			<li>&#9733; Chapter 4: Supervised Learning: Classification</li>
+			<ol>
+				<li>* Logistic Regression</li>
+				<ul>
+					<li>Binary Classification</li>
+					<li>Sigmoid Function: \( \sigma(z) = \frac{1}{1 + e^{-z}} \)</li>
+					<li>Objective Function (Log Loss)</li>
+					<p>
+						\( \min_{\boldsymbol{\beta}} -\frac{1}{n} \sum_{i=1}^{n} [y_i \log(\hat{y}_i) + (1-y_i) \log(1-\hat{y}_i)] \)
+					</p>
+				</ul>
+				<li>* K-Nearest Neighbors (KNN)</li>
+				<ul>
+					<li>Distance Metrics (Euclidean, Manhattan)</li>
+					<li>Hyperparameter k</li>
+					<li>Non-parametric Algorithm</li>
+					<li>Lazy Learning</li>
+				</ul>
+				<li>* Support Vector Machine (SVM)</li>
+				<ul>
+					<li>Linear and Nonlinear Classification</li>
+					<li>Kernel Tricks (Linear, RBF, Polynomial)</li>
+					<li>Margin Maximization</li>
+					<li>Support Vectors</li>
+				</ul>
+				<li>* Decision Tree</li>
+				<ul>
+					<li>Splitting Criteria (Gini Index, Entropy/Information Gain)</li>
+					<li>Recursive Splitting</li>
+					<li>Leaf Nodes and Predictions</li>
+					<li>Overfitting Issues</li>
+				</ul>
+				<li>* Naive Bayes</li>
+				<ul>
+					<li>Bayes' Theorem: \( P(y|X) = \frac{P(X|y) \cdot P(y)}{P(X)} \)</li>
+					<li>Conditional Independence Assumption</li>
+					<li>Probabilistic Classifier</li>
+					<li>GaussianNB, MultinomialNB</li>
+				</ul>
+				<li>* Random Forest</li>
+				<ul>
+					<li>Ensemble Method</li>
+					<li>Bootstrap Aggregating (Bagging)</li>
+					<li>Multiple Decision Trees</li>
+					<li>Feature Importance</li>
+					<li>Majority Voting for Classification</li>
+				</ul>
+				<li>* Classification Metrics</li>
+				<ul>
+					<li>Accuracy</li>
+					<li>Precision</li>
+					<li>Recall (Sensitivity)</li>
+					<li>F1-Score</li>
+					<li>Confusion Matrix</li>
+					<li>ROC Curve and AUC-ROC</li>
+				</ul>
+				<li>* Cross-Validation</li>
+				<ul>
+					<li>K-Fold Cross-Validation</li>
+					<li>Stratified K-Fold</li>
+					<li>GridSearchCV for Hyperparameter Tuning</li>
+				</ul>
+			</ol>
+
+			<li>&#9733; Chapter 5: Unsupervised Learning: Clustering</li>
+			<ol>
+				<li>* K-Means Clustering</li>
+				<ul>
+					<li>Centroid-Based Partitioning</li>
+					<li>Elbow Method for Optimal k</li>
+					<li>Inertia (Within-Cluster Sum of Squares)</li>
+					<li>Convergence Criteria</li>
+					<li>Random Initialization</li>
+				</ul>
+				<li>* Hierarchical Clustering</li>
+				<ul>
+					<li>Agglomerative (Bottom-Up) Approach</li>
+					<li>Linkage Methods: Single, Complete, Average, Ward</li>
+					<li>Dendrogram Visualization</li>
+					<li>Distance Matrix</li>
+					<li>Cluster Cutting Threshold</li>
+				</ul>
+				<li>* Clustering Evaluation</li>
+				<ul>
+					<li>Inertia</li>
+					<li>Cluster Quality Assessment</li>
+				</ul>
+			</ol>
+
+			<li>&#9733; Chapter 6: Unsupervised Learning: Dimensionality Reduction</li>
+			<ol>
+				<li>* Principal Component Analysis (PCA)</li>
+				<ul>
+					<li>Linear Dimensionality Reduction</li>
+					<li>Variance Maximization</li>
+					<li>Principal Components (Eigenvectors)</li>
+					<li>Explained Variance Ratio</li>
+					<li>Scree Plot</li>
+					<li>Reconstruction Error</li>
+				</ul>
+				<li>* t-SNE (t-Distributed Stochastic Neighbor Embedding)</li>
+				<ul>
+					<li>Nonlinear Dimensionality Reduction</li>
+					<li>Local Structure Preservation</li>
+					<li>Perplexity Parameter</li>
+					<li>Kullback-Leibler Divergence</li>
+					<li>Visualization in 2D/3D Space</li>
+					<li>Non-Deterministic Algorithm</li>
+				</ul>
+				<li>* Dimensionality Reduction Comparison</li>
+				<ul>
+					<li>PCA: Linear, Fast, Interpretable</li>
+					<li>t-SNE: Nonlinear, Slow, Excellent for Visualization</li>
+					<li>Independence vs. Uncorrelatedness</li>
+				</ul>
+			</ol>
+
+			<li>Common Libraries/Modules in Machine Learning</li>
+			
+			<ul>
+				<li>Library:</li>
+				<ul>
+				<li>Machine Learning Library → sklearn</li>
+				<li>DataFrame → pandas</li>
+				<li>NumPy → numpy</li>
+				<li>Visualization → matplotlib</li>
+				<li>Hierarchical Clustering → scipy</li>
+				</ul>
+				<li>Module:</li>
+				<ul>
+				<li>Classification Models → sklearn.linear_model, sklearn.neighbors, sklearn.svm, sklearn.tree, sklearn.naive_bayes, sklearn.ensemble</li>
+				<li>Clustering → sklearn.cluster</li>
+				<li>Dimensionality Reduction → sklearn.decomposition, sklearn.manifold</li>
+				<li>Model Selection → sklearn.model_selection</li>
+				<li>Metrics → sklearn.metrics</li>
+				<li>Preprocessing → sklearn.preprocessing</li>
+				<li>Pipeline → sklearn.pipeline</li>
+				<li>Hierarchical Clustering → scipy.cluster.hierarchy</li>
+				</ul>
+			</ul>
+			
+		</ul>
+
+		<h2>Test Format and Guidelines</h2>
+		<ul>
+			<li>&#9733; Format: In-person, paper-and-pen exam</li>
+			<li>&#9733; Closed Book: No textbooks, notes, or cheat sheets allowed</li>
+			<li>&#9733; Test Duration: 60 minutes</li>
+			<li>&#9733; Content Coverage: Ch4, Ch5, Ch6</li>
+			<li>&#9733; Total points: <b><font color="red">100</font></b>.</li>
+			<ul>
+				<li>Single-Answer Multiple Choice: 40 points</li>
+				<li>Fill in the Blanks: 40 points</li>
+				<li>Programming Questions: 20 points</li>
+			</ul>
+			<li>&#9733; Academic Integrity: No external aids or communication during the exam</li>
+		</ul>
+
+		<h2>Key Concepts to Review</h2>
+		<ul>
+			<li>&#9733; <b>Classification Algorithms:</b> Understand how each classifier works (Logistic Regression, KNN, SVM, Decision Tree, Naive Bayes, Random Forest)</li>
+			<li>&#9733; <b>Classification Metrics:</b> Know how to interpret accuracy, precision, recall, F1-score, and AUC-ROC</li>
+			<li>&#9733; <b>Hyperparameter Tuning:</b> GridSearchCV for finding optimal parameters</li>
+			<li>&#9733; <b>Clustering:</b> Understand K-Means (Elbow Method) and Hierarchical Clustering (Dendrograms, Linkage Methods)</li>
+			<li>&#9733; <b>Dimensionality Reduction:</b> PCA for variance maximization, t-SNE for visualization and local structure preservation</li>
+			<li>&#9733; <b>Independence vs. Uncorrelatedness:</b> Key difference between true independence and linear uncorrelation</li>
+			<li>&#9733; <b>Cross-Validation:</b> K-Fold and Stratified K-Fold for robust model evaluation</li>
+		</ul>
+
+		<h2>Sample Questions</h2>
+		<ul>
+			<li>&#9733; <a href="https://xinyangmtsu.github.io/3350/quiz1.html" target="_blank">Quiz 1: Ch1 & Ch2</a></li>
+			<li>&#9733; <a href="https://xinyangmtsu.github.io/3350/quiz2.html" target="_blank">Quiz 2: Ch3</a></li>
+		</ul>
+
+		<h2>Study Materials</h2>
+		<ul>
+			<li>&#9733; <a href="https://xinyangmtsu.github.io/3350/chapter4.html" target="_blank">Chapter 4 Lecture: Supervised Learning: Classification</a></li>
+			<li>&#9733; <a href="https://xinyangmtsu.github.io/3350/chapter5.html" target="_blank">Chapter 5 Lecture: Unsupervised Learning: Clustering</a></li>
+			<li>&#9733; <a href="https://xinyangmtsu.github.io/3350/chapter6.html" target="_blank">Chapter 6 Lecture: Unsupervised Learning: Dimensionality Reduction</a></li>
+			<li>&#9733; <a href="https://xinyangmtsu.github.io/3350/classificationMetrics.html" target="_blank">Classification Metrics Explained</a></li>
+			<li>&#9733; <a href="https://xinyangmtsu.github.io/3350/clusteringAnalysis.html" target="_blank">Clustering Analysis and Evaluation</a></li>
+			<li>&#9733; <a href="https://xinyangmtsu.github.io/3350/dimensionalityReduction.html" target="_blank">Dimensionality Reduction: PCA vs t-SNE</a></li>
+			<li>&#9733; <a href="https://xinyangmtsu.github.io/3350/hyperparameterTuning.html" target="_blank">Hyperparameter Tuning with GridSearchCV</a></li>
+			<li>&#9733; <a href="https://xinyangmtsu.github.io/3350/crossValidation.html" target="_blank">Cross-Validation Techniques</a></li>
+				
+			<li>&#9733; <a href="https://xinyangmtsu.github.io/3350/OLA/ola3.html" target="_blank">OLA 3</a></li>
+			<li>&#9733; <a href="https://xinyangmtsu.github.io/3350/OLA/ola4.html" target="_blank">OLA 4</a></li>
+			<li>&#9733; <a href="https://xinyangmtsu.github.io/3350/OLA/ola5.html" target="_blank">OLA 5</a></li>
+			
+		</ul>
+		
+
+		<footer align="center" id="foot01"></footer>
+	</div>
+	<br>
+	<br>
+	<script src="../CCS/Script.js"></script>
+
+</body>
+
+</html>
