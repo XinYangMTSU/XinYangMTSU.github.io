@@ -111,7 +111,9 @@
 
     <li><b>Step 6: t-SNE on MNIST</b>
       <ul>
+        <!--
         <li>First reduce to ~<b>50 PCs</b> (e.g., <code>PCA(n_components=50)</code>) to speed/stabilize t-SNE</li>
+        -->
         <li>Run t-SNE with perplexities <b>[5, 30, 50]</b>; use <code>TSNE(n_components=2, learning_rate="auto", random_state=42, n_iter=1000)</code></li>
         <li>Make a 1×3 subplot of the three perplexities, colored by <b>true digit</b></li>
         <li>Select the best perplexity and show a final high-quality 2D plot (optional 3D t-SNE)</li>
