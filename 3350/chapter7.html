@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chapter 7: Neural Networks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+   body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      background: #17191a;
+      min-height: 100vh;
+      color: #ff79c6; /* MAIN PINK FONT COLOR */
+    }
+    /* Sidebar */
+    #sidebar {
+      position: fixed;
+      width: 250px;
+      height: 100vh;
+      overflow-y: auto;
+      background: linear-gradient(135deg, #2a1e28 80%, #47223c 100%);
+      color: #ffb3de;
+      padding: 38px 24px 24px 28px;
+      box-shadow: 2px 0 24px rgba(255,121,198,.12);
+      z-index: 10;
+    }
+    #sidebar h2 {
+      margin-top: 0;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #ffb3de;
+      margin-bottom: 1.7em;
+      text-align: left;
+    }
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #sidebar .subsections {
+      margin-left: 1.5em;
+      font-size: 0.94em;
+    }
+    #sidebar .subsections a {
+      font-size: 0.94em;
+      margin: 8px 0 8px 12px;
+      padding-left: 16px;
+      color: #ffb3de;
+      border-left: 2px solid transparent;
+      font-weight: 400;
+      box-shadow: none;
+      background: none;
+      gap: 0.6em;
+    }
+    #sidebar .subsections a:hover, #sidebar .subsections a.active {
+      color: #ff79c6;
+      background: #21111b;
+      border-left: 2px solid #ff79c6;
+      font-weight: 500;
+    }
+    #sidebar a {
+      display: flex;
+      align-items: center;
+      color: #ffb3de;
+      text-decoration: none;
+      margin: 16px 0 16px 10px;
+      font-weight: 500;
+      font-size: 1.08em;
+      border-left: 3px solid transparent;
+      padding-left: 14px;
+      transition: background .19s, color .19s, border .19s;
+      border-radius: 8px 0 0 8px;
+      gap: 0.7em;
+    }
+    #sidebar a:hover, #sidebar a.active {
+      color: #ff79c6;
+      background: #21111b;
+      border-left: 3px solid #ff79c6;
+      font-weight: 700;
+      box-shadow: 1px 2px 8px 1px #2d3436;
+    }
+    /* Main content */
+    #content {
+      margin-left: 270px;
+      padding: 56px 6vw 56px 6vw;
+      max-width: 900px;
+      width: 100vw;
+      background: #1a1d1f;
+    }
+    h1 {
+      color: #ff79c6;
+      font-size: 2.5em;
+      font-weight: 800;
+      margin-bottom: 0.4em;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 16px rgba(255,121,198,.18);
+    }
+    section {
+      margin-bottom: 55px;
+      background: #222025;
+      border-radius: 18px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      padding: 36px 32px 22px 32px;
+      transition: box-shadow .24s;
+      border-left: 7px solid #ff79c6;
+      position: relative;
+    }
+    section:hover {
+      box-shadow: 0 10px 34px 3px rgba(255,121,198,0.13);
+      border-left: 7px solid #ffb3de;
+    }
+    section h3 {
+      border-bottom: 2px solid #ff79c6;
+      padding-bottom: 8px;
+      margin-top: 0;
+      color: #ff79c6;
+      font-size: 1.5em;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+    section h4 {
+      font-size: 1.18em;
+      color: #ffb3de;
+      margin-bottom: 5px;
+      margin-top: 30px;
+      font-weight: 600;
+      border-bottom: 1px solid #ffb3de;
+      padding-bottom: 2px;
+    }
+    pre {
+      background: #19121a;
+      color: #ffb3de;
+      padding: 15px 18px;
+      border-radius: 8px;
+      font-size: 1.04em;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+    }
+    ul {
+      margin-left: 2.1em;
+      margin-bottom: 0;
+    }
+    footer {
+      margin-top: 46px;
+      text-align: center;
+      color: #ffb3de;
+      font-size: 1.09em;
+      letter-spacing: 1px;
+      padding: 22px 0 14px 0;
+      border-top: 1px solid #402138;
+      background: none;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-weight: 500;
+    }
+    #sidebar::-webkit-scrollbar {
+      width: 7px;
+      background: #47223c;
+    }
+    #sidebar::-webkit-scrollbar-thumb {
+      background: #ff79c6;
+      border-radius: 6px;
+    }
+    @media (max-width: 950px) {
+      #sidebar {
+        display: none;
+      }
+      #content {
+        margin-left: 0;
+        padding: 18px 4vw 30px 4vw;
+      }
+    }
+
+    /* Links */
+    a, a:visited {
+      color: #ff79c6;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    a:hover, a:focus {
+      color: #fff52e;
+      background: #19121a;
+      text-decoration: underline;
+    }
+    section#references a, section#references a:visited {
+      color: #ff79c6;
+      font-weight: 600;
+    }
+    section#references a:hover, section#references a:focus {
+      color: #fff52e;
+      background: #19121a;
+    }
+  </style>
+
+  <!-- MathJax (once per page) -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+</head>
+<body>
+<nav id="sidebar">
+  <h2><i class="fas fa-book"></i> Contents</h2>
+  <ul>
+    <li><a href="#what-are-nn"><i class="fas fa-brain"></i>1. What are Neural Networks?</a></li>
+    
+    <li>
+      <a href="#perceptron"><i class="fas fa-node"></i>2. The Perceptron</a>
+      <div class="subsections">
+        <a href="#perceptron-model">2.1 Perceptron Model</a>
+        <a href="#perceptron-learning">2.2 Perceptron Learning Rule</a>
+      </div>
+    </li>
+
+    <li>
+      <a href="#mlp"><i class="fas fa-layer-group"></i>3. Multi-Layer Perceptron (MLP)</a>
+      <div class="subsections">
+        <a href="#mlp-structure">3.1 Network Structure</a>
+        <a href="#forward-pass">3.2 Forward Propagation</a>
+        <a href="#backprop">3.3 Backpropagation</a>
+      </div>
+    </li>
+
+    <li>
+      <a href="#activation"><i class="fas fa-zap"></i>4. Activation Functions</a>
+      <div class="subsections">
+        <a href="#common-activations">4.1 Common Functions</a>
+      </div>
+    </li>
+    
+    <li><a href="#references"><i class="fas fa-link"></i>References</a></li>
+  </ul>
+</nav>
+
+<main id="content">
+  <h1>Chapter 7: Neural Networks</h1>
+
+  <section id="what-are-nn">
+    <h3>1. What are Neural Networks?</h3>
+    <p>
+      Neural networks are <b><font color="red">computational models inspired by biological neurons</font></b> that learn complex 
+      patterns in data through hierarchical representations. They form the foundation of modern deep learning.
+    </p>
+
+    <h4>Key Concepts:</h4>
+    <ul>
+      <li>Composed of interconnected <b>neurons</b> organized in <b>layers</b>.</li>
+      <li>Each neuron computes a <b>weighted sum</b> of inputs and applies a <b>nonlinear activation function</b>.</li>
+      <li>Learning occurs by adjusting <b>weights</b> and <b>biases</b> to minimize prediction error.</li>
+      <li>Capable of learning <b><font color="red">non-linear relationships</font></b> in data.</li>
+    </ul>
+
+    <h4>Biological Inspiration:</h4>
+    <p>
+      A biological neuron receives signals from other neurons through synapses, sums them, and fires 
+      if the total exceeds a threshold. Artificial neurons mimic this process: receiving inputs, weighting them, 
+      summing, and applying an activation function.
+    </p>
+
+    <h4>Why Neural Networks?</h4>
+    <ul>
+      <li><b>Universal approximators:</b> Can approximate any continuous function given sufficient hidden neurons.</li>
+      <li><b>Feature learning:</b> Hidden layers automatically learn useful representations of data.</li>
+      <li><b>Scalability:</b> Efficiently process large, high-dimensional datasets.</li>
+      <li><b>Versatility:</b> Used for classification, regression, image recognition, NLP, and more.</li>
+    </ul>
+  </section>
+
+  <section id="perceptron">
+    <h3>2. The Perceptron</h3>
+    <p>
+      The <b>perceptron</b> is the simplest neural network model — a single neuron that performs 
+      <b><font color="red">binary classification</font></b>. It forms the building block of more complex networks.
+    </p>
+
+    <h4 id="perceptron-model">2.1 Perceptron Model</h4>
+    <p>
+      A perceptron takes \(d\) inputs \(\mathbf{x} = (x_1, x_2, \ldots, x_d)\) and computes:
+    </p>
+    <p style="text-align:center;">
+      $$
+      z = \mathbf{w}^T \mathbf{x} + b = \sum_{i=1}^{d} w_i x_i + b
+      $$
+    </p>
+    <p>
+      Then applies a <b>threshold activation function</b>:
+    </p>
+    <p style="text-align:center;">
+      $$
+      \hat{y} = \begin{cases} 1 & \text{if } z \geq 0 \\ 0 & \text{if } z < 0 \end{cases}
+      $$
+    </p>
+
+    <p><strong>Where:</strong></p>
+    <ul>
+      <li>\(\mathbf{w}\) = weight vector; \(b\) = bias term.</li>
+      <li>\(\mathbf{w}^T \mathbf{x}\) = dot product (weighted sum).</li>
+      <li>Output is binary: 0 or 1 (or ±1 depending on formulation).</li>
+    </ul>
+
+    <h4 id="perceptron-learning">2.2 Perceptron Learning Rule</h4>
+    <p>
+      The perceptron learns by adjusting weights to minimize classification errors. The learning rule is:
+    </p>
+    <p style="text-align:center;">
+      $$
+      \mathbf{w} \leftarrow \mathbf{w} + \eta (y - \hat{y}) \mathbf{x}, \quad b \leftarrow b + \eta (y - \hat{y})
+      $$
+    </p>
+
+    <p><strong>Where:</strong></p>
+    <ul>
+      <li>\(\eta\) = learning rate (typically small, e.g., 0.01).</li>
+      <li>\(y\) = true label; \(\hat{y}\) = predicted label.</li>
+      <li>Update occurs only when \(y \neq \hat{y}\) (error).</li>
+    </ul>
+
+    <h4>Algorithm: Perceptron Training</h4>
+    <ol>
+      <li>Initialize \(\mathbf{w}\) and \(b\) to small random values (or zero).</li>
+      <li>For each training example \((\mathbf{x}, y)\):</li>
+      <ul>
+        <li>Compute prediction: \(\hat{y} = \text{sign}(\mathbf{w}^T \mathbf{x} + b)\)</li>
+        <li>If \(y \neq \hat{y}\), update: \(\mathbf{w} \leftarrow \mathbf{w} + \eta (y - \hat{y}) \mathbf{x}\) and \(b \leftarrow b + \eta (y - \hat{y})\)</li>
+      </ul>
+      <li>Repeat for multiple epochs until convergence.</li>
+    </ol>
+
+    <h4>Limitations:</h4>
+    <ul>
+      <li>Can only solve <b>linearly separable</b> problems.</li>
+      <li>Cannot learn XOR (exclusive OR) function.</li>
+      <li>Single layer prevents learning complex patterns.</li>
+    </ul>
+  </section>
+
+  <section id="mlp">
+    <h3>3. Multi-Layer Perceptron (MLP)</h3>
+    <p>
+      A <b>Multi-Layer Perceptron (MLP)</b> stacks multiple perceptrons in layers to overcome 
+      the limitations of single-layer networks. It can learn <b><font color="red">non-linear decision boundaries</font></b> 
+      and solve complex problems like XOR.
+    </p>
+
+    <h4 id="mlp-structure">3.1 Network Structure</h4>
+    <p>
+      An MLP consists of three types of layers:
+    </p>
+    <ul>
+      <li><b>Input Layer:</b> Receives feature vectors \(\mathbf{x}\); no computation.</li>
+      <li><b>Hidden Layers:</b> Perform non-linear transformations; learn abstract representations.</li>
+      <li><b>Output Layer:</b> Produces final predictions; often uses softmax (multi-class) or sigmoid (binary).</li>
+    </ul>
+
+    <p>
+      Example: A 3-layer MLP with input dimension 10, hidden layer with 50 neurons, and output dimension 3:
+    </p>
+    <pre>Input (10) → Hidden (50) → Output (3)</pre>
+
+    <h4 id="forward-pass">3.2 Forward Propagation</h4>
+    <p>
+      Forward propagation computes the network output by passing input through each layer sequentially.
+    </p>
+    <p style="text-align:center;">
+      $$
+      \mathbf{z}^{(l)} = \mathbf{W}^{(l)} \mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}, \quad \mathbf{a}^{(l)} = \sigma(\mathbf{z}^{(l)})
+      $$
+    </p>
+
+    <p><strong>Where:</strong></p>
+    <ul>
+      <li>\(\mathbf{z}^{(l)}\) = pre-activation (weighted sum) at layer \(l\).</li>
+      <li>\(\mathbf{a}^{(l)}\) = post-activation output at layer \(l\).</li>
+      <li>\(\sigma(\cdot)\) = activation function (ReLU, sigmoid, tanh, etc.).</li>
+      <li>\(\mathbf{W}^{(l)}, \mathbf{b}^{(l)}\) = weights and biases of layer \(l\).</li>
+    </ul>
+
+    <h4 id="backprop">3.3 Backpropagation</h4>
+    <p>
+      <b>Backpropagation</b> is the algorithm for training MLPs. It computes gradients of the loss 
+      with respect to all weights and biases, then updates them to minimize error.
+    </p>
+
+    <h4>Key Idea:</h4>
+    <ul>
+      <li>Compute loss at output: \(L = \text{CrossEntropy}(\hat{y}, y)\) or MSE.</li>
+      <li>Propagate error <b>backward</b> through layers using the chain rule.</li>
+      <li>Compute gradient for each weight: \(\frac{\partial L}{\partial \mathbf{W}^{(l)}}\)</li>
+      <li>Update weights: \(\mathbf{W}^{(l)} \leftarrow \mathbf{W}^{(l)} - \eta \frac{\partial L}{\partial \mathbf{W}^{(l)}}\)</li>
+    </ul>
+
+    <h4>Backpropagation Algorithm (Simplified):</h4>
+    <ol>
+      <li><b>Forward pass:</b> Compute all activations \(\mathbf{a}^{(1)}, \ldots, \mathbf{a}^{(L)}\).</li>
+      <li><b>Compute output loss:</b> \(L = \text{Loss}(\mathbf{a}^{(L)}, y)\)</li>
+      <li><b>Backward pass:</b> For layer \(l\) from \(L\) to 1:
+        <ul style="margin-left: 1.5em;">
+          <li>Compute \(\frac{\partial L}{\partial \mathbf{z}^{(l)}} = \frac{\partial L}{\partial \mathbf{a}^{(l)}} \odot \sigma'(\mathbf{z}^{(l)})\)</li>
+          <li>Compute \(\frac{\partial L}{\partial \mathbf{W}^{(l)}} = \frac{\partial L}{\partial \mathbf{z}^{(l)}} (\mathbf{a}^{(l-1)})^T\)</li>
+          <li>Propagate: \(\frac{\partial L}{\partial \mathbf{a}^{(l-1)}} = (\mathbf{W}^{(l)})^T \frac{\partial L}{\partial \mathbf{z}^{(l)}}\)</li>
+        </ul>
+      </li>
+      <li><b>Update weights:</b> \(\mathbf{W}^{(l)} \leftarrow \mathbf{W}^{(l)} - \eta \frac{\partial L}{\partial \mathbf{W}^{(l)}}\)</li>
+    </ol>
+
+    <h4>Why Backpropagation Works:</h4>
+    <ul>
+      <li>Efficiently computes all gradients via the chain rule in one backward pass.</li>
+      <li>Reuses intermediate computations to avoid redundant calculations.</li>
+      <li>Time complexity: roughly equal to forward pass, making training feasible.</li>
+    </ul>
+
+    <h4>Hyperparameters:</h4>
+    <ul>
+      <li><b>Learning rate \(\eta\):</b> Controls step size; too large diverges, too small converges slowly.</li>
+      <li><b>Number of hidden layers:</b> More layers learn deeper abstractions but risk overfitting.</li>
+      <li><b>Hidden layer size:</b> More neurons increase capacity but computational cost.</li>
+      <li><b>Epochs:</b> Number of full passes through training data.</li>
+      <li><b>Batch size:</b> Number of samples per gradient update (for mini-batch SGD).</li>
+    </ul>
+  </section>
+
+  <section id="activation">
+    <h3>4. Activation Functions</h3>
+    <p>
+      Activation functions introduce <b><font color="red">non-linearity</font></b> into networks. 
+      Without them, stacking layers would be equivalent to a single linear transformation.
+    </p>
+
+    <h4 id="common-activations">4.1 Common Activation Functions</h4>
+
+    <h4>Sigmoid</h4>
+    <p style="text-align:center;">
+      $$\sigma(z) = \frac{1}{1 + e^{-z}}$$
+    </p>
+    <ul>
+      <li>Output range: (0, 1); often used in output layers for binary classification.</li>
+      <li>Con: Vanishing gradient problem for very positive/negative inputs.</li>
+    </ul>
+
+    <h4>Tanh (Hyperbolic Tangent)</h4>
+    <p style="text-align:center;">
+      $$\tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$$
+    </p>
+    <ul>
+      <li>Output range: (-1, 1); zero-centered, often better than sigmoid.</li>
+      <li>Con: Still suffers from vanishing gradients.</li>
+    </ul>
+
+    <h4>ReLU (Rectified Linear Unit)</h4>
+    <p style="text-align:center;">
+      $$\text{ReLU}(z) = \max(0, z)$$
+    </p>
+    <ul>
+      <li>Simple, computationally efficient; widely used in hidden layers.</li>
+      <li>Pro: Avoids vanishing gradient; promotes sparsity.</li>
+      <li>Con: Dying ReLU (neurons stuck at 0) for very negative inputs.</li>
+    </ul>
+
+    <h4>Leaky ReLU</h4>
+    <p style="text-align:center;">
+      $$\text{LeakyReLU}(z) = \begin{cases} z & \text{if } z > 0 \\ \alpha z & \text{if } z \leq 0 \end{cases}, \quad \alpha \approx 0.01$$
+    </p>
+    <ul>
+      <li>Variant of ReLU; allows small negative values to mitigate dying ReLU.</li>
+    </ul>
+
+    <h4>Softmax (Output Layer)</h4>
+    <p style="text-align:center;">
+      $$\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_{j} e^{z_j}}$$
+    </p>
+    <ul>
+      <li>Maps output to probability distribution over classes; used in multi-class classification.</li>
+      <li>Ensures outputs sum to 1.</li>
+    </ul>
+
+    <h4>Choosing Activation Functions:</h4>
+    <ul>
+      <li><b>Hidden layers:</b> ReLU or variants are default choices in modern networks.</li>
+      <li><b>Binary classification output:</b> Sigmoid.</li>
+      <li><b>Multi-class output:</b> Softmax.</li>
+      <li><b>Regression output:</b> Linear (identity) activation or none.</li>
+    </ul>
+  </section>
+
+  <section id="references">
+    <h3>References</h3>
+    <ul>
+      <li>
+        <a href="https://www.deeplearningbook.org/" target="_blank">
+          Deep Learning (Goodfellow, Bengio, Courville)
+        </a>
+      </li>
+      <li>
+        <a href="https://cs231n.github.io/" target="_blank">
+          CS231N: Convolutional Neural Networks for Visual Recognition (Stanford)
+        </a>
+      </li>
+      <li>
+        <a href="https://scikit-learn.org/stable/modules/neural_networks_supervised.html" target="_blank">
+          scikit-learn: Neural Networks
+        </a>
+      </li>
+      <li>
+        <a href="https://www.tensorflow.org/guide/keras" target="_blank">
+          TensorFlow/Keras Documentation
+        </a>
+      </li>
+      <li>
+        <a href="https://developers.google.com/machine-learning/crash-course" target="_blank">
+          Google Machine Learning Crash Course
+        </a>
+      </li>
+      <li>Scholar GPT</li>
+    </ul>
+  </section>
+
+  <footer>
+    &copy; 2025 Xin Yang <br>
+    Department of Computer Science <br>
+    Middle Tennessee State University <br>
+  </footer>
+</main>
+
+<script>
+  // Smooth scrolling & highlight active link
+  const sidebarLinks = document.querySelectorAll('#sidebar a');
+  sidebarLinks.forEach(anchor => {
+    anchor.onclick = function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href'))
+        .scrollIntoView({ behavior: 'smooth' });
+    };
+  });
+
+  // Active link highlight on scroll
+  const sectionIds = Array.from(sidebarLinks).map(l => l.getAttribute('href'));
+  window.addEventListener('scroll', () => {
+    let current = sectionIds[0];
+    for (const id of sectionIds) {
+      const section = document.querySelector(id);
+      if (section && section.getBoundingClientRect().top - 80 < 0) {
+        current = id;
+      }
+    }
+    sidebarLinks.forEach(link => link.classList.remove('active'));
+    const activeLink = document.querySelector(`#sidebar a[href="${current}"]`);
+    if (activeLink) activeLink.classList.add('active');
+  });
+</script>
+
+</body>
+</html>
