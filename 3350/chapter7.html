@@ -214,18 +214,26 @@
     </li>
 
     <li>
-      <a href="#mlp"><i class="fas fa-layer-group"></i>3. Multi-Layer Perceptron (MLP)</a>
+      <a href="#gd"><i class="fas fa-arrow-down"></i>3. Gradient Descent</a>
       <div class="subsections">
-        <a href="#mlp-structure">3.1 Network Structure</a>
-        <a href="#forward-pass">3.2 Forward Propagation</a>
-        <a href="#backprop">3.3 Backpropagation</a>
+        <a href="#gd-concept">3.1 The Concept</a>
+        <a href="#gd-variants">3.2 Variants</a>
       </div>
     </li>
 
     <li>
-      <a href="#activation"><i class="fas fa-zap"></i>4. Activation Functions</a>
+      <a href="#mlp"><i class="fas fa-layer-group"></i>4. Multi-Layer Perceptron (MLP)</a>
       <div class="subsections">
-        <a href="#common-activations">4.1 Common Functions</a>
+        <a href="#mlp-structure">4.1 Network Structure</a>
+        <a href="#forward-pass">4.2 Forward Propagation</a>
+        <a href="#backprop">4.3 Backpropagation</a>
+      </div>
+    </li>
+
+    <li>
+      <a href="#activation"><i class="fas fa-zap"></i>5. Activation Functions</a>
+      <div class="subsections">
+        <a href="#common-activations">5.1 Common Functions</a>
       </div>
     </li>
     
@@ -335,8 +343,140 @@
     </ul>
   </section>
 
+  <section id="gd">
+    <h3>3. Gradient Descent</h3>
+    <p>
+      <b>Gradient Descent</b> is the <b><font color="red">optimization algorithm</font></b> used to train neural networks. 
+      It iteratively updates weights and biases by moving in the direction of the negative gradient of the loss function, 
+      aiming to reach a minimum.
+    </p>
+
+    <h4 id="gd-concept">3.1 The Concept</h4>
+    <p>
+      Imagine you're on a hill in fog and want to reach the lowest point. You can't see far ahead, 
+      but you can feel the slope under your feet. You take a step downhill, feel the new slope, and repeat. 
+      Gradient descent works the same way: it follows the direction of steepest descent.
+    </p>
+
+    <p>
+      The gradient \(\nabla L\) tells us how much the loss changes with respect to each parameter:
+    </p>
+    <p style="text-align:center;">
+      $
+      \nabla L = \left( \frac{\partial L}{\partial w_1}, \frac{\partial L}{\partial w_2}, \ldots, \frac{\partial L}{\partial w_d} \right)
+      $
+    </p>
+
+    <p>
+      The update rule moves weights in the opposite direction (negative gradient):
+    </p>
+    <p style="text-align:center;">
+      $
+      \mathbf{w} \leftarrow \mathbf{w} - \eta \nabla L(\mathbf{w})
+      $
+    </p>
+
+    <p><strong>Where:</strong></p>
+    <ul>
+      <li>\(\eta\) = learning rate; controls step size (typically 0.001 to 0.1).</li>
+      <li>\(\nabla L\) = gradient of loss with respect to weights.</li>
+      <li>Negative sign ensures we move toward lower loss.</li>
+    </ul>
+
+    <h4>Gradient Descent Algorithm:</h4>
+    <ol>
+      <li>Initialize weights \(\mathbf{w}\) randomly (small values).</li>
+      <li>For each iteration (epoch):
+        <ul style="margin-left: 1.5em;">
+          <li>Compute loss: \(L = \frac{1}{m} \sum_{i=1}^{m} \text{Loss}(f(\mathbf{x}_i; \mathbf{w}), y_i)\)</li>
+          <li>Compute gradient: \(\nabla L = \frac{1}{m} \sum_{i=1}^{m} \nabla \text{Loss}(\mathbf{x}_i, y_i)\)</li>
+          <li>Update weights: \(\mathbf{w} \leftarrow \mathbf{w} - \eta \nabla L\)</li>
+        </ul>
+      </li>
+      <li>Repeat until convergence (loss stops decreasing or max epochs reached).</li>
+    </ol>
+
+    <h4 id="gd-variants">3.2 Variants of Gradient Descent</h4>
+
+    <h4>Batch Gradient Descent (BGD)</h4>
+    <ul>
+      <li>Uses the <b>entire dataset</b> to compute gradient in each iteration.</li>
+      <li>Pro: Smooth convergence, stable updates.</li>
+      <li>Con: Slow for large datasets; requires keeping entire dataset in memory.</li>
+    </ul>
+
+    <h4>Stochastic Gradient Descent (SGD)</h4>
+    <ul>
+      <li>Updates weights using <b>one sample</b> at a time.</li>
+      <li>Pro: Fast updates; can escape local minima due to noise.</li>
+      <li>Con: Noisy gradient leads to oscillations; harder to converge smoothly.</li>
+    </ul>
+
+    <h4>Mini-Batch Gradient Descent</h4>
+    <ul>
+      <li>Uses a <b>small batch</b> of samples (e.g., 32, 64, 128) per update.</li>
+      <li>Pro: Balance between stability (batch) and speed (stochastic); practical sweet spot.</li>
+      <li>Con: Requires tuning batch size.</li>
+    </ul>
+
+    <p style="text-align:center;">
+      $
+      \mathbf{w} \leftarrow \mathbf{w} - \eta \frac{1}{B} \sum_{i \in \text{batch}} \nabla L(\mathbf{x}_i, y_i)
+      $
+    </p>
+
+    <h4>Momentum</h4>
+    <p>
+      Accumulates gradient history to accelerate convergence and reduce oscillations:
+    </p>
+    <p style="text-align:center;">
+      $
+      \mathbf{v} \leftarrow \beta \mathbf{v} + (1 - \beta) \nabla L, \quad \mathbf{w} \leftarrow \mathbf{w} - \eta \mathbf{v}
+      $
+    </p>
+    <ul>
+      <li>\(\beta\) ≈ 0.9 (momentum coefficient); \(\mathbf{v}\) accumulates past gradients.</li>
+      <li>Acts like a "rolling ball" with inertia; helps escape shallow local minima.</li>
+    </ul>
+
+    <h4>Adam (Adaptive Moment Estimation)</h4>
+    <p>
+      Modern optimizer that adapts learning rate per parameter:
+    </p>
+    <p style="text-align:center;">
+      $
+      m \leftarrow \beta_1 m + (1-\beta_1) \nabla L, \quad v \leftarrow \beta_2 v + (1-\beta_2) (\nabla L)^2
+      $
+      $
+      \mathbf{w} \leftarrow \mathbf{w} - \eta \frac{m}{\sqrt{v} + \epsilon}
+      $
+    </p>
+    <ul>
+      <li>\(m\) = exponential moving average of gradients (momentum).</li>
+      <li>\(v\) = exponential moving average of squared gradients (adaptive learning rate).</li>
+      <li>\(\epsilon\) = small constant to avoid division by zero.</li>
+      <li>Default: \(\beta_1 = 0.9, \beta_2 = 0.999\); widely used in practice.</li>
+    </ul>
+
+    <h4>Learning Rate Scheduling</h4>
+    <ul>
+      <li><b>Fixed:</b> constant learning rate throughout training.</li>
+      <li><b>Step decay:</b> reduce learning rate every N epochs (e.g., \(\eta := 0.1 \cdot \eta\)).</li>
+      <li><b>Exponential decay:</b> \(\eta_t = \eta_0 e^{-kt}\) where \(t\) is epoch number.</li>
+      <li><b>Warm-up:</b> start with small \(\eta\), gradually increase, then decay.</li>
+    </ul>
+
+    <h4>Convergence Tips:</h4>
+    <ul>
+      <li><b>Learning rate too high:</b> Loss oscillates or diverges.</li>
+      <li><b>Learning rate too low:</b> Convergence is very slow.</li>
+      <li><b>Feature scaling:</b> Normalize inputs to similar ranges for faster convergence.</li>
+      <li><b>Batch size:</b> Larger batches are more stable but slower per update.</li>
+    </ul>
+  </section>
+
   <section id="mlp">
-    <h3>3. Multi-Layer Perceptron (MLP)</h3>
+    <h3>4. Multi-Layer Perceptron (MLP)</h3>
     <p>
       A <b>Multi-Layer Perceptron (MLP)</b> stacks multiple perceptrons in layers to overcome 
       the limitations of single-layer networks. It can learn <b><font color="red">non-linear decision boundaries</font></b> 
