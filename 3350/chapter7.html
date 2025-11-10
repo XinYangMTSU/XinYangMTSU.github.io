@@ -256,7 +256,7 @@
 <nav id="sidebar">
   <h2><i class="fas fa-book"></i> Contents</h2>
   <ul>
-    <li><a href="#what-are-nn"><i class="fas fa-brain"></i>1. What are Neural Networks?</a></li>
+    <li><a href="#what-are-nn"><i class="fas fa-brain"></i>1. What are Artificial Neural Networks?</a></li>
 
     <li><a href="#neuron"><i class="fas fa-circle"></i>2. Understanding Neurons</a></li>
 
@@ -299,12 +299,12 @@
 </nav>
 
 <main id="content">
-  <h1>Chapter 7: Neural Networks</h1>
+  <h1>Chapter 7: Artificial Neural Networks</h1>
 
   <section id="what-are-nn">
-    <h3>1. What Is a Neural Network?</h3>
+    <h3>1. What Is Artificial Neural Network?</h3>
     <p>
-       A neural network is a computational model inspired by how the human brain works — a system made up of
+       Artificial neural network is a computational model inspired by how the human brain works — a system made up of
     simple processing units called <b>neurons</b> that work together to recognize patterns, make predictions,
     and learn from data. They form the foundation of modern deep learning.
     </p>
@@ -330,7 +330,7 @@
       <li>These outputs then feed into the next layer of neurons.</li>
     </ul>
 
-    <h4>Neural Network Architecture</h4>
+    <h4>Artificial Neural Network Architecture</h4>
 
     <ul>
         <li><b>Input Layer:</b> Takes feature values (e.g., pixels, data attributes) </li>
@@ -478,9 +478,9 @@
 
   <section id="neuron">
 
-    <h3>2. Understanding Neurons in Neural Networks</h3>
+    <h3>2. Understanding Neurons in Artificial Neural Networks</h3>
     <p>
-      A neuron in a neural network is a <b>computational unit</b> that mimics the behavior of biological neurons.
+      A neuron in artificial neural network is a <b>computational unit</b> that mimics the behavior of biological neurons.
       A neuron takes multiple inputs, processes them, and produces a single output.
     </p>
 
@@ -944,13 +944,6 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
 
   <!-- -->
 
-  <h4>Why Backpropagation Works:</h4>
-  <ul>
-    <li>Efficiently computes all gradients via the chain rule in one backward pass.</li>
-    <li>Reuses intermediate computations to avoid redundant calculations.</li>
-    <li>Time complexity: roughly equal to forward pass, making training feasible.</li>
-  </ul>
-
   <h4>Hyperparameters:</h4>
   <ul>
     <li><b>Learning rate \(\eta\):</b> Controls step size; too large diverges, too small converges slowly.</li>
@@ -959,6 +952,26 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
     <li><b>Epochs:</b> Number of full passes through training data.</li>
     <li><b>Batch size:</b> Number of samples per gradient update (for mini-batch SGD).</li>
   </ul>
+
+
+  <h4>Who Proposed Backpropagation?</h4>
+
+  <p>
+    The history of the <b>Backpropagation</b> algorithm has two key stages:
+  </p>
+
+  <ul>
+      <li><b> Early Mathematical Idea (1960s):</b><br>
+      The idea of computing gradients in multi-layer networks dates back to <b>Paul Werbos (1974)</b> in his Ph.D. dissertation
+      <i>"Beyond Regression: New Tools for Prediction and Analysis in the Behavioral Sciences."</i></li>
+      <br>
+      <li><b> Popularization in Neural Networks (1986):</b><br>
+      <b>David E. Rumelhart</b>, <b>Geoffrey E. Hinton</b>, and <b>Ronald J. Williams</b> published the landmark paper:<br>
+      <i>“Learning Representations by Back-Propagating Errors”</i> (<b>Nature</b>, 1986).<br>
+      This paper demonstrated that backpropagation could effectively train multi-layer perceptrons —
+      sparking the <b>neural network revolution</b> in AI.</li>
+  </ul>
+
 </section>
 
 
@@ -1119,6 +1132,11 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
     <li><b>Regression output:</b> Linear (identity) activation or none.</li>
   </ul>
 </section>
+
+<seciton>
+
+</section>
+
 
 </body>
 </html>
