@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz 3 - Chapter 4</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body { font-family: 'Roboto', Arial, sans-serif; margin: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; color: #fff; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+    .container { max-width: 900px; width: 100%; }
+    h1 { text-align: center; font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    .subtitle { text-align: center; font-size: 1.2em; margin-bottom: 30px; opacity: 0.9; }
+    .start-btn { background: rgba(255,255,255,0.95); color: #667eea; border: none; border-radius: 15px; padding: 30px 40px; font-size: 1.3em; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: block; margin: 0 auto; }
+    .start-btn:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+    .quiz-card { background: rgba(255,255,255,0.95); color: #333; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-bottom: 20px; }
+    .question-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid #667eea; }
+    .question-number { font-size: 1.1em; color: #f5576c; font-weight: bold; }
+    .score { font-size: 1.1em; color: #764ba2; font-weight: bold; }
+    .question-text { font-size: 1.2em; margin-bottom: 25px; line-height: 1.6; font-weight: 500; }
+    .options { display: flex; flex-direction: column; gap: 12px; }
+    .option { background: #f8f9fa; border: 2px solid #e0e0e0; border-radius: 12px; padding: 18px 20px; cursor: pointer; transition: all 0.3s; font-size: 1.05em; }
+    .option:hover { background: #e8eaf6; border-color: #667eea; transform: translateX(5px); }
+    .option.correct { background: #4caf50; color: white; border-color: #4caf50; }
+    .option.incorrect { background: #f44336; color: white; border-color: #f44336; }
+    .option.disabled { cursor: not-allowed; opacity: 0.7; }
+    .text-input { width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1.05em; font-family: 'Roboto', Arial, sans-serif; margin: 10px 0; box-sizing: border-box; }
+    .text-input:focus { outline: none; border-color: #667eea; }
+    .submit-btn { background: #667eea; color: white; padding: 12px 30px; border: none; border-radius: 10px; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 3px 10px rgba(0,0,0,0.2); margin-top: 10px; }
+    .submit-btn:hover { background: #5568d3; transform: translateY(-2px); }
+    .feedback { margin-top: 20px; padding: 15px; border-radius: 10px; font-size: 1.05em; line-height: 1.6; }
+    .feedback.correct { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #4caf50; }
+    .feedback.incorrect { background: #ffebee; color: #c62828; border-left: 4px solid #f44336; }
+    .btn-container { display: flex; gap: 15px; margin-top: 25px; justify-content: center; }
+    .btn { padding: 12px 30px; border: none; border-radius: 10px; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 3px 10px rgba(0,0,0,0.2); }
+    .btn-primary { background: #667eea; color: white; }
+    .btn-primary:hover { background: #5568d3; transform: translateY(-2px); }
+    .results { text-align: center; padding: 30px; }
+    .results h2 { font-size: 2.2em; margin-bottom: 20px; }
+    .results-stats { font-size: 1.4em; margin: 20px 0; }
+    .progress-bar { width: 100%; height: 8px; background: rgba(255,255,255,0.3); border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #4caf50, #8bc34a); transition: width 0.3s; border-radius: 10px; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1><i class="fas fa-check-circle"></i> Quiz 3</h1>
+    <p class="subtitle">Chapter 4: Supervised Learning – Classification</p>
+
+    <div id="startScreen">
+      <button class="start-btn" onclick="startQuiz()"><i class="fas fa-play-circle"></i> Start Quiz</button>
+    </div>
+
+    <div id="progressContainer" class="hidden">
+      <div class="progress-bar"><div id="progressFill" class="progress-fill" style="width:0%"></div></div>
+    </div>
+
+    <div id="quizCard" class="quiz-card hidden">
+      <div class="question-header">
+        <span class="question-number" id="questionNumber"></span>
+        <span class="score" id="score"></span>
+      </div>
+      <div class="question-text" id="questionText"></div>
+      <div class="options" id="options"></div>
+      <div id="feedback" class="feedback hidden"></div>
+      <div class="btn-container"><button id="nextBtn" class="btn btn-primary hidden" onclick="nextQuestion()">Next Question <i class="fas fa-arrow-right"></i></button></div>
+    </div>
+
+    <div id="results" class="quiz-card hidden">
+      <div class="results">
+        <h2><i class="fas fa-trophy"></i> Quiz Complete!</h2>
+        <div class="results-stats"><div id="finalScore"></div><div id="percentage"></div></div>
+        <div class="btn-container"><button class="btn btn-primary" onclick="location.reload()"><i class="fas fa-redo"></i> Try Again</button></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+const questions = [
+  // LOGISTIC REGRESSION
+  { type: "fill-blank", question: "Logistic Regression uses the __________ function to map scores to probabilities in (0,1).", answer: "sigmoid", acceptableAnswers: ["sigmoid","logistic"], explanation: "The sigmoid (logistic) function maps real numbers to (0,1)." },
+  { type: "multiple-choice", question: "Which loss does binary Logistic Regression minimize?", options: ["Mean Squared Error","Hinge Loss","Log Loss (Cross-Entropy)","Triplet Loss"], correct: 2, explanation: "Binary logistic regression minimizes the negative log-likelihood, i.e., log loss (cross-entropy)." },
+
+  // KNN
+  { type: "multiple-choice", question: "KNN is best described as a(n) ______ algorithm.", options: ["parametric","non-parametric","generative","linear"], correct: 1, explanation: "KNN makes no parametric assumptions; it is non-parametric and instance-based." },
+  { type: "multiple-choice", question: "Common distance metrics for KNN include:", options: ["Cosine only","Euclidean and Manhattan","Jaccard only","KL divergence"], correct: 1, explanation: "Euclidean (L2) and Manhattan (L1) are standard for KNN." },
+
+  // SVM
+  { type: "multiple-choice", question: "In a hard-margin linear SVM, the goal is to:", options: ["Minimize training error only","Maximize margin between classes","Minimize variance","Maximize number of support vectors"], correct: 1, explanation: "SVM seeks the hyperplane with the largest margin while classifying training data correctly." },
+  { type: "multiple-choice", question: "Which kernel enables nonlinear SVM classification by mapping into an infinite-dimensional space?", options: ["Linear","Polynomial","RBF (Gaussian)","Sigmoid"], correct: 2, explanation: "The RBF kernel induces a feature space of infinite dimensions, enabling flexible nonlinear decision boundaries." },
+
+  // DECISION TREE
+  { type: "fill-blank", question: "Decision Trees commonly split using Entropy/Information Gain or the __________ index.", answer: "gini", acceptableAnswers: ["gini","gini index"], explanation: "Gini index is a common impurity measure used in CART." },
+  { type: "multiple-choice", question: "A typical cause of overfitting in Decision Trees is:", options: ["Too small max depth","Too few leaves","No pruning and deep recursive splits","Using cross-validation"], correct: 2, explanation: "Deep, unpruned trees memorize training data and overfit." },
+
+  // NAIVE BAYES
+  { type: "multiple-choice", question: "Naive Bayes assumes:", options: ["Features are independent given the class","Classes are independent given the features","Equal class priors","Gaussian noise is absent"], correct: 0, explanation: "The conditional independence assumption simplifies likelihood computation." },
+  { type: "multiple-choice", question: "GaussianNB models feature likelihoods using:", options: ["Bernoulli distributions","Poisson distributions","Normal distributions","Uniform distributions"], correct: 2, explanation: "GaussianNB assumes features within each class follow a normal distribution." },
+
+  // RANDOM FOREST
+  { type: "multiple-choice", question: "Random Forest primarily reduces which problem compared to a single tree?", options: ["Bias","Variance","Irreducible error","Class imbalance"], correct: 1, explanation: "Bagging many trees reduces variance and improves generalization." },
+  { type: "fill-blank", question: "Random Forest trains on bootstrap samples of data; this procedure is known as __________.", answer: "bagging", acceptableAnswers: ["bagging","bootstrap aggregating","bootstrap"], explanation: "Bagging = Bootstrap AGGregatING." },
+
+  // METRICS
+  { type: "multiple-choice", question: "Which metric is most appropriate when classes are highly imbalanced?", options: ["Accuracy","Precision/Recall or F1-Score","Training loss","R-squared"], correct: 1, explanation: "Accuracy can be misleading on imbalanced data; use Precision/Recall or F1." },
+  { type: "multiple-choice", question: "AUC-ROC summarizes:", options: ["Precision vs. Recall","TPR vs. FPR across thresholds","Loss vs. Epoch","Bias vs. Variance"], correct: 1, explanation: "ROC plots TPR against FPR; AUC is threshold-agnostic separability." },
+
+  // CROSS-VALIDATION
+  { type: "multiple-choice", question: "Stratified K-Fold is preferred because it:", options: ["Uses larger folds","Ensures class proportions are preserved in each fold","Shuffles features","Always increases accuracy"], correct: 1, explanation: "Stratification maintains label distribution across folds." },
+  { type: "fill-blank", question: "Exhaustively searching hyperparameters over a grid of values is called __________.", answer: "grid search", acceptableAnswers: ["grid search","gridsearch","gridsearchcv","grid search cv"], explanation: "GridSearchCV performs exhaustive search over parameter grids with CV." }
+];
+
+let currentQuestion = 0, score = 0, answered = false;
+
+function startQuiz() {
+  document.getElementById('startScreen').classList.add('hidden');
+  document.getElementById('progressContainer').classList.remove('hidden');
+  document.getElementById('quizCard').classList.remove('hidden');
+  questions.sort(() => Math.random() - 0.5);
+  currentQuestion = 0; score = 0; displayQuestion();
+}
+
+function displayQuestion() {
+  const q = questions[currentQuestion];
+  document.getElementById('questionNumber').textContent = 'Question ' + (currentQuestion + 1) + '/' + questions.length;
+  document.getElementById('score').textContent = 'Score: ' + score + '/' + currentQuestion;
+  document.getElementById('questionText').textContent = q.question;
+  document.getElementById('feedback').classList.add('hidden');
+  document.getElementById('nextBtn').classList.add('hidden');
+  document.getElementById('options').innerHTML = '';
+  document.getElementById('progressFill').style.width = (currentQuestion / questions.length) * 100 + '%';
+
+  if (q.type === 'fill-blank') {
+    const input = document.createElement('input');
+    input.type = 'text'; input.className = 'text-input'; input.id = 'fillBlankInput'; input.placeholder = 'Type your answer here...';
+    input.addEventListener('keypress', e => { if (e.key === 'Enter') checkFillBlank(); });
+    const btn = document.createElement('button'); btn.className = 'submit-btn'; btn.textContent = 'Submit Answer'; btn.onclick = checkFillBlank;
+    options.appendChild(input); options.appendChild(btn); setTimeout(()=>input.focus(),100);
+  } else { // multiple-choice
+    for (let i=0; i<q.options.length; i++) {
+      const d = document.createElement('div'); d.className = 'option'; d.textContent = q.options[i]; d.onclick = () => selectOption(i);
+      options.appendChild(d);
+    }
+  }
+  answered = false;
+}
+
+function checkFillBlank() {
+  if (answered) return; const input = document.getElementById('fillBlankInput');
+  const user = (input.value||'').trim().toLowerCase(); const q = questions[currentQuestion]; if (!user) { alert('Please enter an answer!'); return; }
+  answered = true; input.disabled = true;
+  let ok = false; for (const a of q.acceptableAnswers) { const cand = a.toLowerCase(); if (user === cand || user.includes(cand)) { ok = true; break; } }
+  const fb = document.getElementById('feedback');
+  if (ok) { score++; fb.className = 'feedback correct'; fb.innerHTML = '<i class="fas fa-check-circle"></i> <strong>Correct!</strong><br>' + q.explanation; }
+  else { fb.className = 'feedback incorrect'; fb.innerHTML = '<i class="fas fa-times-circle"></i> <strong>Incorrect.</strong><br>Correct answer: <strong>'+q.answer+'</strong><br>'+q.explanation; }
+  fb.classList.remove('hidden'); document.getElementById('nextBtn').classList.remove('hidden');
+  document.getElementById('score').textContent = 'Score: ' + score + '/' + (currentQuestion + 1);
+}
+
+function selectOption(i) {
+  if (answered) return; answered = true; const q = questions[currentQuestion]; const opts = document.querySelectorAll('.option');
+  opts.forEach(o=>o.classList.add('disabled')); opts[q.correct].classList.add('correct');
+  const fb = document.getElementById('feedback');
+  if (i === q.correct) { score++; fb.className = 'feedback correct'; fb.innerHTML = '<i class="fas fa-check-circle"></i> <strong>Correct!</strong><br>'+q.explanation; }
+  else { opts[i].classList.add('incorrect'); fb.className = 'feedback incorrect'; fb.innerHTML = '<i class="fas fa-times-circle"></i> <strong>Incorrect.</strong><br>'+q.explanation; }
+  fb.classList.remove('hidden'); document.getElementById('nextBtn').classList.remove('hidden');
+  document.getElementById('score').textContent = 'Score: ' + score + '/' + (currentQuestion + 1);
+}
+
+function nextQuestion() { currentQuestion++; if (currentQuestion < questions.length) displayQuestion(); else showResults(); }
+
+function showResults() {
+  document.getElementById('quizCard').classList.add('hidden');
+  document.getElementById('progressContainer').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  const pct = Math.round((score / questions.length) * 100);
+  document.getElementById('finalScore').innerHTML = 'You scored <strong>'+score+'</strong> out of <strong>'+questions.length+'</strong>';
+  const msg = pct>=90? 'Outstanding!' : pct>=80? 'Great job!' : pct>=70? 'Good work!' : pct>=60? 'Keep practicing!' : 'Review the material and try again!';
+  document.getElementById('percentage').innerHTML = '<strong>'+pct+'%</strong><br>'+msg;
+  document.getElementById('progressFill').style.width = '100%';
+}
+</script>
+</body>
+</html>
