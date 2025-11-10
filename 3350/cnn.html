@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Convolutional Neural Network Architecture</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #1a1d1f;
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #ffb3de;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #222025;
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      border-left: 7px solid #ff79c6;
+    }
+
+    h2 {
+      color: #ff79c6;
+      text-align: center;
+      margin-top: 0;
+      font-size: 2em;
+    }
+
+    .subtitle {
+      color: #ffb3de;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+
+    svg {
+      display: block;
+      margin: 40px auto;
+      background: #19121a;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+      padding: 20px;
+      overflow-x: auto;
+    }
+
+    .label {
+      color: #ffb3de;
+      font-size: 0.95em;
+      font-weight: 500;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .legend {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 40px;
+    }
+
+    .legend h3 {
+      color: #ff79c6;
+      margin-top: 0;
+      border-bottom: 2px solid #ff79c6;
+      padding-bottom: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 12px 0;
+      color: #ffb3de;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .color-input { background: #ff79c6; }
+    .color-conv { background: #8be9fd; }
+    .color-pool { background: #50fa7b; }
+    .color-flatten { background: #ffb3de; }
+    .color-dense { background: #fff52e; }
+
+    h4 {
+      color: #ff79c6;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .code-block {
+      background: #19121a;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 10px 0;
+      color: #fff52e;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Convolutional Neural Network (CNN)</h2>
+  <p class="subtitle">Architecture: 32×32 RGB Input → Conv → Pool → Conv → Pool → Flatten → Dense → Output</p>
+
+  <svg width="1400" height="500" viewBox="0 0 1400 500">
+    <!-- Layer labels -->
+    <text x="80" y="25" font-size="14" font-weight="bold" fill="#ff79c6" text-anchor="middle">Input</text>
+    <text x="200" y="25" font-size="14" font-weight="bold" fill="#ff79c6" text-anchor="middle">Conv2D</text>
+    <text x="320" y="25" font-size="14" font-weight="bold" fill="#ff79c6" text-anchor="middle">MaxPool</text>
+    <text x="440" y="25" font-size="14" font-weight="bold" fill="#ff79c6" text-anchor="middle">Conv2D</text>
+    <text x="560" y="25" font-size="14" font-weight="bold" fill="#ff79c6" text-anchor="middle">MaxPool</text>
+    <text x="680" y="25" font-size="14" font-weight="bold" fill="#ff79c6" text-anchor="middle">Flatten</text>
+    <text x="800" y="25" font-size="14" font-weight="bold" fill="#ff79c6" text-anchor="middle">Dense</text>
+    <text x="920" y="25" font-size="14" font-weight="bold" fill="#ff79c6" text-anchor="middle">Dense</text>
+
+    <!-- Input Layer -->
+    <g>
+      <rect x="30" y="60" width="100" height="100" fill="#ff79c6" opacity="0.8" stroke="#ffb3de" stroke-width="2"/>
+      <text x="80" y="90" font-size="11" fill="white" text-anchor="middle" font-weight="bold">32×32×3</text>
+      <text x="80" y="110" font-size="10" fill="white" text-anchor="middle">Input</text>
+      <text x="80" y="125" font-size="9" fill="white" text-anchor="middle">Image</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M 130 110 L 150 110" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+    <!-- Conv Layer 1 -->
+    <g>
+      <rect x="150" y="60" width="100" height="100" fill="#8be9fd" opacity="0.8" stroke="#50fa7b" stroke-width="2"/>
+      <text x="200" y="90" font-size="11" fill="black" text-anchor="middle" font-weight="bold">30×30×32</text>
+      <text x="200" y="110" font-size="10" fill="black" text-anchor="middle">Conv 3×3</text>
+      <text x="200" y="125" font-size="9" fill="black" text-anchor="middle">ReLU</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M 250 110 L 270 110" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+    <!-- MaxPool Layer 1 -->
+    <g>
+      <rect x="270" y="60" width="100" height="100" fill="#50fa7b" opacity="0.8" stroke="#ffb3de" stroke-width="2"/>
+      <text x="320" y="90" font-size="11" fill="black" text-anchor="middle" font-weight="bold">15×15×32</text>
+      <text x="320" y="110" font-size="10" fill="black" text-anchor="middle">MaxPool</text>
+      <text x="320" y="125" font-size="9" fill="black" text-anchor="middle">2×2</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M 370 110 L 390 110" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+    <!-- Conv Layer 2 -->
+    <g>
+      <rect x="390" y="60" width="100" height="100" fill="#8be9fd" opacity="0.8" stroke="#50fa7b" stroke-width="2"/>
+      <text x="440" y="90" font-size="11" fill="black" text-anchor="middle" font-weight="bold">13×13×64</text>
+      <text x="440" y="110" font-size="10" fill="black" text-anchor="middle">Conv 3×3</text>
+      <text x="440" y="125" font-size="9" fill="black" text-anchor="middle">ReLU</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M 490 110 L 510 110" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+    <!-- MaxPool Layer 2 -->
+    <g>
+      <rect x="510" y="60" width="100" height="100" fill="#50fa7b" opacity="0.8" stroke="#ffb3de" stroke-width="2"/>
+      <text x="560" y="90" font-size="11" fill="black" text-anchor="middle" font-weight="bold">6×6×64</text>
+      <text x="560" y="110" font-size="10" fill="black" text-anchor="middle">MaxPool</text>
+      <text x="560" y="125" font-size="9" fill="black" text-anchor="middle">2×2</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M 610 110 L 630 110" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+    <!-- Flatten Layer -->
+    <g>
+      <rect x="630" y="60" width="100" height="100" fill="#ffb3de" opacity="0.8" stroke="#ff79c6" stroke-width="2"/>
+      <text x="680" y="90" font-size="11" fill="white" text-anchor="middle" font-weight="bold">2304</text>
+      <text x="680" y="110" font-size="10" fill="white" text-anchor="middle">Flatten</text>
+      <text x="680" y="125" font-size="9" fill="white" text-anchor="middle">(6×6×64)</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M 730 110 L 750 110" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+    <!-- Dense Layer 1 -->
+    <g>
+      <rect x="750" y="60" width="100" height="100" fill="#fff52e" opacity="0.8" stroke="#ffb3de" stroke-width="2"/>
+      <text x="800" y="90" font-size="11" fill="black" text-anchor="middle" font-weight="bold">128</text>
+      <text x="800" y="110" font-size="10" fill="black" text-anchor="middle">Dense</text>
+      <text x="800" y="125" font-size="9" fill="black" text-anchor="middle">ReLU</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M 850 110 L 870 110" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+    <!-- Dense Layer 2 (Output) -->
+    <g>
+      <rect x="870" y="60" width="100" height="100" fill="#fff52e" opacity="0.8" stroke="#ffb3de" stroke-width="2"/>
+      <text x="920" y="90" font-size="11" fill="black" text-anchor="middle" font-weight="bold">10</text>
+      <text x="920" y="110" font-size="10" fill="black" text-anchor="middle">Dense</text>
+      <text x="920" y="125" font-size="9" fill="black" text-anchor="middle">Softmax</text>
+    </g>
+
+    <!-- Arrow marker definition -->
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <polygon points="0 0, 10 3, 0 6" fill="#888"/>
+      </marker>
+    </defs>
+
+    <!-- Description boxes below -->
+    <g>
+      <rect x="30" y="220" width="100" height="60" fill="#19121a" stroke="#888" stroke-width="1" rx="4"/>
+      <text x="80" y="240" font-size="9" fill="#ffb3de" text-anchor="middle" font-weight="bold">32×32×3</text>
+      <text x="80" y="252" font-size="8" fill="#aaa" text-anchor="middle">RGB Image</text>
+      <text x="80" y="263" font-size="8" fill="#aaa" text-anchor="middle">Input</text>
+    </g>
+
+    <g>
+      <rect x="150" y="220" width="100" height="60" fill="#19121a" stroke="#888" stroke-width="1" rx="4"/>
+      <text x="200" y="238" font-size="8" fill="#ffb3de" text-anchor="middle">32 filters</text>
+      <text x="200" y="249" font-size="8" fill="#ffb3de" text-anchor="middle">3×3 kernel</text>
+      <text x="200" y="263" font-size="8" fill="#aaa" text-anchor="middle">896 params</text>
+    </g>
+
+    <g>
+      <rect x="390" y="220" width="100" height="60" fill="#19121a" stroke="#888" stroke-width="1" rx="4"/>
+      <text x="440" y="238" font-size="8" fill="#ffb3de" text-anchor="middle">64 filters</text>
+      <text x="440" y="249" font-size="8" fill="#ffb3de" text-anchor="middle">3×3 kernel</text>
+      <text x="440" y="263" font-size="8" fill="#aaa" text-anchor="middle">18,496 params</text>
+    </g>
+
+    <g>
+      <rect x="750" y="220" width="100" height="60" fill="#19121a" stroke="#888" stroke-width="1" rx="4"/>
+      <text x="800" y="238" font-size="8" fill="#ffb3de" text-anchor="middle">128 units</text>
+      <text x="800" y="249" font-size="8" fill="#ffb3de" text-anchor="middle">+ Dropout</text>
+      <text x="800" y="263" font-size="8" fill="#aaa" text-anchor="middle">294,912 params</text>
+    </g>
+
+    <g>
+      <rect x="870" y="220" width="100" height="60" fill="#19121a" stroke="#888" stroke-width="1" rx="4"/>
+      <text x="920" y="238" font-size="8" fill="#ffb3de" text-anchor="middle">10 classes</text>
+      <text x="920" y="249" font-size="8" fill="#ffb3de" text-anchor="middle">Softmax</text>
+      <text x="920" y="263" font-size="8" fill="#aaa" text-anchor="middle">1,290 params</text>
+    </g>
+  </svg>
+
+  <div class="label"><strong>Architecture:</strong> Input (32×32×3) → Conv2D(32) → MaxPool → Conv2D(64) → MaxPool → Flatten → Dense(128) → Output(10)</div>
+
+  <div class="legend">
+    <h3>📊 Network Components & Formulas</h3>
+
+    <h4>Convolutional Layer 1</h4>
+    <div class="code-block">
+      Conv2D(32 filters, 3×3 kernel)<br>
+      Output shape: 30×30×32<br>
+      Parameters: 32 × (3×3×3 + 1) = 896
+    </div>
+    <div class="legend-item">
+      <span><strong>Filters:</strong> 32 learnable 3×3 convolutional kernels that extract local features</span>
+    </div>
+    <div class="legend-item">
+      <span><strong>Activation:</strong> ReLU introduces non-linearity</span>
+    </div>
+
+    <h4>Max Pooling Layer 1</h4>
+    <div class="code-block">
+      MaxPooling2D(pool_size=2×2)<br>
+      Output shape: 15×15×32<br>
+      Downsampling by 2x, no trainable parameters
+    </div>
+    <div class="legend-item">
+      <span><strong>Purpose:</strong> Reduces spatial dimensions, retains important features, adds translation invariance</span>
+    </div>
+
+    <h4>Convolutional Layer 2</h4>
+    <div class="code-block">
+      Conv2D(64 filters, 3×3 kernel)<br>
+      Output shape: 13×13×64<br>
+      Parameters: 64 × (3×3×32 + 1) = 18,496
+    </div>
+    <div class="legend-item">
+      <span><strong>Deeper convolutions:</strong> Learn more complex, higher-level features from the first layer's outputs</span>
+    </div>
+
+    <h4>Max Pooling Layer 2</h4>
+    <div class="code-block">
+      MaxPooling2D(pool_size=2×2)<br>
+      Output shape: 6×6×64<br>
+      Further downsampling and feature compression
+    </div>
+
+    <h4>Flatten Layer</h4>
+    <div class="code-block">
+      Reshape to 1D vector: 6×6×64 = 2,304<br>
+      No learnable parameters
+    </div>
+    <div class="legend-item">
+      <span><strong>Purpose:</strong> Converts 3D feature maps into a 1D vector for fully-connected layers</span>
+    </div>
+
+    <h4>Fully Connected Layers</h4>
+    <div class="code-block">
+      Dense(128, activation='relu')<br>
+      Parameters: 2,304 × 128 + 128 = 294,912<br>
+      <br>
+      Dense(10, activation='softmax')<br>
+      Parameters: 128 × 10 + 10 = 1,290
+    </div>
+    <div class="legend-item">
+      <span><strong>Dense Layer 1:</strong> Learns complex non-linear decision boundaries from extracted features</span>
+    </div>
+    <div class="legend-item">
+      <span><strong>Output Layer:</strong> 10 classes (e.g., CIFAR-10 or MNIST), Softmax produces probability distribution</span>
+    </div>
+
+    <h4 style="color: #ff79c6; margin-top: 20px;">Total Parameters</h4>
+    <div style="background: #19121a; padding: 15px; border-radius: 8px; margin: 10px 0; color: #50fa7b;">
+      • Conv Layer 1: 896 parameters<br>
+      • Conv Layer 2: 18,496 parameters<br>
+      • Dense Layer 1: 294,912 parameters<br>
+      • Dense Layer 2: 1,290 parameters<br>
+      • <strong>Total: 315,594 trainable parameters</strong>
+    </div>
+  </div>
+
+  <div class="legend" style="margin-top: 25px;">
+    <h3>🎨 Legend</h3>
+    <div class="legend-item">
+      <div class="legend-color color-input"></div>
+      <span><strong>Pink:</strong> Input layer (raw image)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-conv"></div>
+      <span><strong>Cyan:</strong> Convolutional layers (feature extraction)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-pool"></div>
+      <span><strong>Green:</strong> Pooling layers (downsampling)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-flatten"></div>
+      <span><strong>Light pink:</strong> Flatten layer (reshape to 1D)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-dense"></div>
+      <span><strong>Yellow:</strong> Fully-connected dense layers</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
