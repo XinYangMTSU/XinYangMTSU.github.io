@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -697,20 +696,156 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
 
 <section id="mlp">
   <h3>3. Multi-Layer Perceptron (MLP)</h3>
-  <p>A <b>Multi-Layer Perceptron (MLP)</b> stacks multiple perceptrons in layers to overcome the limitations of single-layer networks.
-    It can learn <b><font color="red">non-linear decision boundaries</font></b>.</p>
+  <p>
+    A Multi-Layer Perceptron (MLP) is a type of feedforward neural network that has one or more hidden layers between
+    the input and output layers.
+    Each neuron in one layer connects to every neuron in the next layer — that’s why it’s called a fully connected network.
+    It can learn <b><font color="red">non-linear decision boundaries</font></b>.
+  </p>
 
   <h4 id="mlp-structure">3.1 Network Structure</h4>
   <p>An MLP consists of three types of layers:</p>
   <ul>
-    <li><b>Input Layer:</b> Receives feature vectors \(\mathbf{x}\); no computation.</li>
-    <li><b>Hidden Layers:</b> Perform non-linear transformations; learn abstract representations.</li>
-    <li><b>Output Layer:</b> Produces final predictions; often uses softmax (multi-class) or sigmoid (binary).</li>
+    <li><b><font color="red">Input Layer:</font></b> Receives feature vectors \(\mathbf{x}\); no activation.</li>
+    <br>
+    <li><b><font color="red">Hidden Layers:</font></b> Perform non-linear transformations; learn abstract representations. Apply nonlinear activations (e.g., ReLU, sigmoid, tanh).</li>
+    $$ h_j = \sigma(w_{1j}x_1 + w_{2j}x_2 + w_{3j}x_3 + b) $$
+    $$ \text{where:} \quad \sigma : \text{hidden activation (e.g., ReLU, sigmoid, tanh)} $$
+    <br>
+
+    <li><b><font color="red">Output Layer:</font></b> Produces final predictions; often uses softmax (multi-class) or sigmoid (binary).</li>
+    $$ y_1 = \phi(w_1h_1 + w_3h_2 + w_5h_3 + c_1) $$
+    $$ y_2 = \phi(w_2h_1 + w_4h_2 + w_6h_3 + c_2) $$
+    $$ \phi : \text{output activation (e.g., Sigmoid or Softmax)} $$
   </ul>
+
+
+  <svg width="750" height="520" viewBox="0 0 750 520">
+     <!-- Title for each layer -->
+     <text x="100" y="25" font-size="14" font-weight="bold" fill="#ff79c6" text-anchor="middle">Input Layer</text>
+     <text x="400" y="25" font-size="14" font-weight="bold" fill="#ff79c6" text-anchor="middle">Hidden Layer</text>
+     <text x="680" y="25" font-size="14" font-weight="bold" fill="#ff79c6" text-anchor="middle">Output Layer</text>
+
+     <!-- Input Layer Neurons -->
+     <circle cx="100" cy="80" r="15" fill="#ff79c6" stroke="#ffb3de" stroke-width="2"/>
+     <text x="100" y="85" font-size="11" fill="white" text-anchor="middle" font-weight="bold">x₁</text>
+
+     <circle cx="100" cy="170" r="15" fill="#ff79c6" stroke="#ffb3de" stroke-width="2"/>
+     <text x="100" y="175" font-size="11" fill="white" text-anchor="middle" font-weight="bold">x₂</text>
+
+     <circle cx="100" cy="260" r="15" fill="#ff79c6" stroke="#ffb3de" stroke-width="2"/>
+     <text x="100" y="265" font-size="11" fill="white" text-anchor="middle" font-weight="bold">x₃</text>
+
+     <circle cx="100" cy="350" r="15" fill="#ff79c6" stroke="#ffb3de" stroke-width="2"/>
+     <text x="100" y="355" font-size="11" fill="white" text-anchor="middle" font-weight="bold">x₄</text>
+
+     <!-- Hidden Layer Neurons -->
+     <circle cx="400" cy="110" r="15" fill="#ffb3de" stroke="#ff79c6" stroke-width="2"/>
+     <text x="400" y="115" font-size="11" fill="white" text-anchor="middle" font-weight="bold">h₁</text>
+
+     <circle cx="400" cy="220" r="15" fill="#ffb3de" stroke="#ff79c6" stroke-width="2"/>
+     <text x="400" y="225" font-size="11" fill="white" text-anchor="middle" font-weight="bold">h₂</text>
+
+     <circle cx="400" cy="330" r="15" fill="#ffb3de" stroke="#ff79c6" stroke-width="2"/>
+     <text x="400" y="335" font-size="11" fill="white" text-anchor="middle" font-weight="bold">h₃</text>
+
+     <!-- Output Layer Neurons -->
+     <circle cx="680" cy="150" r="15" fill="#fff52e" stroke="#ffb3de" stroke-width="2"/>
+     <text x="680" y="155" font-size="11" fill="black" text-anchor="middle" font-weight="bold">y₁</text>
+
+     <circle cx="680" cy="290" r="15" fill="#fff52e" stroke="#ffb3de" stroke-width="2"/>
+     <text x="680" y="295" font-size="11" fill="black" text-anchor="middle" font-weight="bold">y₂</text>
+
+     <!-- Connections from Input to Hidden Layer (with weight labels) -->
+     <line x1="115" y1="80" x2="385" y2="110" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="240" y="90" font-size="9" fill="#50fa7b" font-weight="bold">w₁₁</text>
+
+     <line x1="115" y1="80" x2="385" y2="220" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="240" y="140" font-size="9" fill="#50fa7b" font-weight="bold">w₁₂</text>
+
+     <line x1="115" y1="80" x2="385" y2="330" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="240" y="190" font-size="9" fill="#50fa7b" font-weight="bold">w₁₃</text>
+
+     <line x1="115" y1="170" x2="385" y2="110" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="240" y="135" font-size="9" fill="#50fa7b" font-weight="bold">w₂₁</text>
+
+     <line x1="115" y1="170" x2="385" y2="220" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="240" y="190" font-size="9" fill="#50fa7b" font-weight="bold">w₂₂</text>
+
+     <line x1="115" y1="170" x2="385" y2="330" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="240" y="245" font-size="9" fill="#50fa7b" font-weight="bold">w₂₃</text>
+
+     <line x1="115" y1="260" x2="385" y2="110" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="240" y="180" font-size="9" fill="#50fa7b" font-weight="bold">w₃₁</text>
+
+     <line x1="115" y1="260" x2="385" y2="220" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="240" y="235" font-size="9" fill="#50fa7b" font-weight="bold">w₃₂</text>
+
+     <line x1="115" y1="260" x2="385" y2="330" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="240" y="290" font-size="9" fill="#50fa7b" font-weight="bold">w₃₃</text>
+
+     <line x1="115" y1="350" x2="385" y2="110" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="240" y="225" font-size="9" fill="#50fa7b" font-weight="bold">w₄₁</text>
+
+     <line x1="115" y1="350" x2="385" y2="220" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="240" y="280" font-size="9" fill="#50fa7b" font-weight="bold">w₄₂</text>
+
+     <line x1="115" y1="350" x2="385" y2="330" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="240" y="335" font-size="9" fill="#50fa7b" font-weight="bold">w₄₃</text>
+
+     <!-- Connections from Hidden Layer to Output Layer -->
+     <line x1="415" y1="110" x2="665" y2="150" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="535" y="125" font-size="9" fill="#50fa7b" font-weight="bold">w₁</text>
+
+     <line x1="415" y1="110" x2="665" y2="290" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="535" y="195" font-size="9" fill="#50fa7b" font-weight="bold">w₂</text>
+
+     <line x1="415" y1="220" x2="665" y2="150" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="535" y="180" font-size="9" fill="#50fa7b" font-weight="bold">w₃</text>
+
+     <line x1="415" y1="220" x2="665" y2="290" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="535" y="250" font-size="9" fill="#50fa7b" font-weight="bold">w₄</text>
+
+     <line x1="415" y1="330" x2="665" y2="150" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="535" y="235" font-size="9" fill="#50fa7b" font-weight="bold">w₅</text>
+
+     <line x1="415" y1="330" x2="665" y2="290" stroke="#50fa7b" stroke-width="2" opacity="0.7"/>
+     <text x="535" y="305" font-size="9" fill="#50fa7b" font-weight="bold">w₆</text>
+
+     <!-- Bias nodes -->
+     <circle cx="100" cy="430" r="10" fill="#888888" stroke="#666666" stroke-width="2"/>
+     <text x="100" y="434" font-size="9" fill="white" text-anchor="middle" font-weight="bold">b⁰</text>
+
+     <circle cx="400" cy="430" r="10" fill="#888888" stroke="#666666" stroke-width="2"/>
+     <text x="400" y="434" font-size="9" fill="white" text-anchor="middle" font-weight="bold">b¹</text>
+
+     <circle cx="680" cy="430" r="10" fill="#888888" stroke="#666666" stroke-width="2"/>
+     <text x="680" y="434" font-size="9" fill="white" text-anchor="middle" font-weight="bold">b²</text>
+
+     <!-- Lines from bias to layers -->
+     <line x1="100" y1="420" x2="100" y2="360" stroke="#888888" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+     <line x1="400" y1="420" x2="400" y2="345" stroke="#888888" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+     <line x1="680" y1="420" x2="680" y2="305" stroke="#888888" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+   </svg>
+
+   <div class="label"><strong>Architecture:</strong> 4 inputs → 3 hidden neurons (with ReLU) → 2 outputs</div>
+
+   <h4>How It Works</h4>
+
+   <ul>
+        <li>Forward propagation: Data flows from inputs → hidden → output layers.</li>
+        <li>Activation functions introduce nonlinearity, allowing the model to learn complex patterns.</li>
+        <li>Backpropagation: The model adjusts weights and biases based on errors (using gradient descent).</li>
+   </ul>
 
   <h4 id="forward-pass">3.2 Forward Propagation</h4>
   <p>Forward propagation computes the network output by passing input through each layer sequentially.</p>
-  <p style="text-align:center;">$\mathbf{z}^{(l)} = \mathbf{W}^{(l)} \mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}, \quad \mathbf{a}^{(l)} = \sigma(\mathbf{z}^{(l)})$</p>
+  <p style="text-align:center;">
+    $$
+    \mathbf{z}^{(l)} = \mathbf{W}^{(l)} \mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}, \quad \mathbf{a}^{(l)} = \sigma(\mathbf{z}^{(l)})
+    $$
+
+  </p>
 
   <p><strong>Where:</strong></p>
   <ul>
