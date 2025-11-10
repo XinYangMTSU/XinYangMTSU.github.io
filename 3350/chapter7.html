@@ -838,42 +838,74 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
         <li>Backpropagation: The model adjusts weights and biases based on errors (using gradient descent).</li>
    </ul>
 
-  <h4 id="forward-pass">3.2 Forward Propagation</h4>
-  <!--  -->
+   <h4 id="forward-pass">3.2 Forward Propagation</h4>
+   <!-- -->
+   <p>During <b>forward propagation</b>, data moves through the network layer by layer — from the <b>input</b> to the <b>output</b>. Each neuron computes a weighted sum of its inputs, adds a bias, and applies an activation function.</p>
+   <ol>
+     <li><b><font color="red">Step 1 – Input to Hidden Layer:</font></b><br>
+       The input layer passes feature values directly to the hidden layer (no computation or activation).<br><br>
+       Each hidden neuron \(h_j\) computes:
+       $$ h_j = \sigma(w_{1j}x_1 + w_{2j}x_2 + w_{3j}x_3 + w_{4j}x_4 + b_j^{(1)}) $$
+       $$ \sigma : \text{hidden activation (e.g., ReLU, sigmoid, tanh)} $$
+     </li> <br>
 
-  <p>During <b>forward propagation</b>, data moves through the network layer by layer — from the <b>input</b> to the <b>output</b>. Each neuron computes a weighted sum of its inputs, adds a bias, and applies an activation function.</p>
+     <li><b><font color="red">Step 2 – Hidden to Output Layer:</font></b><br>
+       The outputs from hidden neurons are then combined and passed to the output layer:
+       $$ y_k = \phi(w_{1k}^{(2)}h_1 + w_{2k}^{(2)}h_2 + w_{3k}^{(2)}h_3 + b_k^{(2)}) $$
+       where \( k = 1, 2, ... , m \) (number of output neurons).<br><br>
+       $$ \phi : \text{output activation (e.g., Sigmoid for binary, Softmax for multi-class)} $$
+     </li> <br>
 
-  <ol>
-    <li><b><font color="red">Step 1 – Input to Hidden Layer:</font></b><br>
-        The input layer passes feature values directly to the hidden layer (no computation or activation).<br><br>
-        Each hidden neuron \(h_j\) computes:
-        $$ h_j = \sigma(w_{1j}x_1 + w_{2j}x_2 + w_{3j}x_3 + w_{4j}x_4 + b_j) $$
-        $$ \sigma : \text{hidden activation (e.g., ReLU, sigmoid, tanh)} $$
-    </li>
+     <li><b><font color="red">Step 3 – Output Generation:</font></b><br>
+       The output layer produces final predictions — probabilities for classification or numeric values for regression.
+     </li>
+     <br>
+
+<li><b><font color="red">Step 4 – Thresholding & Label Assignment:</font></b><br>
+    For classification tasks, we apply a decision threshold to convert probabilities into class labels.<br><br>
+
+    <b>For Binary Classification:</b><br>
+    $$ \text{Predicted Label} = \begin{cases} 1 & \text{if } y_1 \geq 0.5 \\ 0 & \text{if } y_1 < 0.5 \end{cases} $$
     <br>
 
-    <li><b><font color="red">Step 2 – Hidden to Output Layer:</font></b><br>
-        The outputs from hidden neurons are then combined and passed to the output layer:
-        $$ y_k = \phi(v_{1k}h_1 + v_{2k}h_2 + v_{3k}h_3 + c_k) $$
-        where \( k = 1, 2, ... , m \) (number of output neurons).<br><br>
-        $$ \phi : \text{output activation (e.g., Sigmoid for binary, Softmax for multi-class)} $$
-    </li>
+    <b>For Multi-class Classification:</b><br>
+    $$ \text{Predicted Label} = \arg\max_k(y_k) $$
+    where we select the class with the highest probability.<br><br>
+
+    Example: If \(\mathbf{y} = [0.1, 0.7, 0.2]\) for 3 classes, the predicted label is class 2 (index with max probability).
+</li>
+
+   </ol>
+
+   <div class="computation-box" style="background:#1e1e2f; color:#fff; padding:15px; border-radius:8px; margin-top:15px;">
+     <p><b>Summary of Forward Propagation:</b></p>
+     <p style="margin-left:20px;">
+       Input Features → Weighted Sum → Activation → Output Prediction
+     </p>
+     <p style="text-align:center;">
+       $$ \mathbf{x} \xrightarrow[]{W^{(1)}, b^{(1)}} \mathbf{h} = \sigma(W^{(1)}\mathbf{x} + b^{(1)}) \xrightarrow[]{W^{(2)}, b^{(2)}} \mathbf{y} = \phi(W^{(2)}\mathbf{h} + b^{(2)}) $$
+     </p>
+   </div>
     <br>
 
     <li><b><font color="red">Step 3 – Output Generation:</font></b><br>
-        The output layer produces final predictions — probabilities for classification or numeric values for regression.
-    </li>
-  </ol>
+    The output layer produces final predictions — probabilities for classification or numeric values for regression.
+</li> <br>
 
-  <div class="computation-box" style="background:#1e1e2f; color:#fff; padding:15px; border-radius:8px; margin-top:15px;">
-    <p><b>Summary of Forward Propagation:</b></p>
-    <p style="margin-left:20px;">
-      Input Features → Weighted Sum → Activation → Output Prediction
-    </p>
-    <p style="text-align:center;">
-      $$ \mathbf{x} \xrightarrow[]{W^{(1)}, b^{(1)}} \mathbf{h} = \sigma(W^{(1)}\mathbf{x} + b^{(1)})
-         \xrightarrow[]{W^{(2)}, b^{(2)}} \mathbf{y} = \phi(W^{(2)}\mathbf{h} + b^{(2)}) $$
-    </p>
+<li><b><font color="red">Step 4 – Thresholding & Label Assignment:</font></b><br>
+    For classification tasks, we apply a decision threshold to convert probabilities into class labels.<br><br>
+
+    <b>For Binary Classification:</b><br>
+    $$ \text{Predicted Label} = \begin{cases} 1 & \text{if } y_1 \geq 0.5 \\ 0 & \text{if } y_1 < 0.5 \end{cases} $$
+    <br>
+
+    <b>For Multi-class Classification:</b><br>
+    $$ \text{Predicted Label} = \arg\max_k(y_k) $$
+    where we select the class with the highest probability.<br><br>
+
+    Example: If \(\mathbf{y} = [0.1, 0.7, 0.2]\) for 3 classes, the predicted label is class 2 (index with max probability).
+</li>
+
   </div>
   <!-- -->
 
