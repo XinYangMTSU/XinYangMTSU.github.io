@@ -271,19 +271,19 @@
   -->
 
     <li>
-      <a href="#gd"><i class="fas fa-arrow-down"></i>3. Gradient Descent</a>
+      <a href="#mlp"><i class="fas fa-layer-group"></i>3. Multi-Layer Perceptron (MLP)</a>
       <div class="subsections">
-        <a href="#gd-concept">3.1 The Concept</a>
-        <a href="#gd-variants">3.2 Variants</a>
+        <a href="#mlp-structure">3.1 Network Structure</a>
+        <a href="#forward-pass">3.2 Forward Propagation</a>
+        <a href="#backprop">3.3 Backpropagation</a>
       </div>
     </li>
 
     <li>
-      <a href="#mlp"><i class="fas fa-layer-group"></i>4. Multi-Layer Perceptron (MLP)</a>
+      <a href="#gd"><i class="fas fa-arrow-down"></i>4. Gradient Descent</a>
       <div class="subsections">
-        <a href="#mlp-structure">4.1 Network Structure</a>
-        <a href="#forward-pass">4.2 Forward Propagation</a>
-        <a href="#backprop">4.3 Backpropagation</a>
+        <a href="#gd-concept">4.1 The Concept</a>
+        <a href="#gd-variants">4.2 Variants</a>
       </div>
     </li>
 
@@ -476,10 +476,7 @@
 
 
 
-
-
   <section id="neuron">
-
 
     <h3>2. Understanding Neurons in Neural Networks</h3>
     <p>
@@ -625,6 +622,8 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
 
   </section>
 
+
+
 <!--
   <section id="perceptron">
     <h3>2. The Perceptron</h3>
@@ -695,15 +694,83 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
   </section>
 -->
 
+<section id="mlp">
+  <h3>3. Multi-Layer Perceptron (MLP)</h3>
+  <p>A <b>Multi-Layer Perceptron (MLP)</b> stacks multiple perceptrons in layers to overcome the limitations of single-layer networks.
+    It can learn <b><font color="red">non-linear decision boundaries</font></b>.</p>
+
+  <h4 id="mlp-structure">3.1 Network Structure</h4>
+  <p>An MLP consists of three types of layers:</p>
+  <ul>
+    <li><b>Input Layer:</b> Receives feature vectors \(\mathbf{x}\); no computation.</li>
+    <li><b>Hidden Layers:</b> Perform non-linear transformations; learn abstract representations.</li>
+    <li><b>Output Layer:</b> Produces final predictions; often uses softmax (multi-class) or sigmoid (binary).</li>
+  </ul>
+
+  <h4 id="forward-pass">3.2 Forward Propagation</h4>
+  <p>Forward propagation computes the network output by passing input through each layer sequentially.</p>
+  <p style="text-align:center;">$\mathbf{z}^{(l)} = \mathbf{W}^{(l)} \mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}, \quad \mathbf{a}^{(l)} = \sigma(\mathbf{z}^{(l)})$</p>
+
+  <p><strong>Where:</strong></p>
+  <ul>
+    <li>\(\mathbf{z}^{(l)}\) = pre-activation (weighted sum) at layer \(l\).</li>
+    <li>\(\mathbf{a}^{(l)}\) = post-activation output at layer \(l\).</li>
+    <li>\(\sigma(\cdot)\) = activation function (ReLU, sigmoid, tanh, etc.).</li>
+    <li>\(\mathbf{W}^{(l)}, \mathbf{b}^{(l)}\) = weights and biases of layer \(l\).</li>
+  </ul>
+
+  <h4 id="backprop">3.3 Backpropagation</h4>
+  <p><b>Backpropagation</b> is the algorithm for training MLPs. It computes gradients of the loss with respect to all weights and biases, then updates them to minimize error.</p>
+
+  <h4>Key Idea:</h4>
+  <ul>
+    <li>Compute loss at output: \(L = \text{CrossEntropy}(\hat{y}, y)\) or MSE.</li>
+    <li>Propagate error <b>backward</b> through layers using the chain rule.</li>
+    <li>Compute gradient for each weight: \(\frac{\partial L}{\partial \mathbf{W}^{(l)}}\)</li>
+    <li>Update weights: \(\mathbf{W}^{(l)} \leftarrow \mathbf{W}^{(l)} - \eta \frac{\partial L}{\partial \mathbf{W}^{(l)}}\)</li>
+  </ul>
+
+  <h4>Backpropagation Algorithm (Simplified):</h4>
+  <ol>
+    <li><b>Forward pass:</b> Compute all activations \(\mathbf{a}^{(1)}, \ldots, \mathbf{a}^{(L)}\).</li>
+    <li><b>Compute output loss:</b> \(L = \text{Loss}(\mathbf{a}^{(L)}, y)\)</li>
+    <li><b>Backward pass:</b> For layer \(l\) from \(L\) to 1:
+      <ul style="margin-left: 1.5em;">
+        <li>Compute \(\frac{\partial L}{\partial \mathbf{z}^{(l)}} = \frac{\partial L}{\partial \mathbf{a}^{(l)}} \odot \sigma'(\mathbf{z}^{(l)})\)</li>
+        <li>Compute \(\frac{\partial L}{\partial \mathbf{W}^{(l)}} = \frac{\partial L}{\partial \mathbf{z}^{(l)}} (\mathbf{a}^{(l-1)})^T\)</li>
+        <li>Propagate: \(\frac{\partial L}{\partial \mathbf{a}^{(l-1)}} = (\mathbf{W}^{(l)})^T \frac{\partial L}{\partial \mathbf{z}^{(l)}}\)</li>
+      </ul>
+    </li>
+    <li><b>Update weights:</b> \(\mathbf{W}^{(l)} \leftarrow \mathbf{W}^{(l)} - \eta \frac{\partial L}{\partial \mathbf{W}^{(l)}}\)</li>
+  </ol>
+
+  <h4>Why Backpropagation Works:</h4>
+  <ul>
+    <li>Efficiently computes all gradients via the chain rule in one backward pass.</li>
+    <li>Reuses intermediate computations to avoid redundant calculations.</li>
+    <li>Time complexity: roughly equal to forward pass, making training feasible.</li>
+  </ul>
+
+  <h4>Hyperparameters:</h4>
+  <ul>
+    <li><b>Learning rate \(\eta\):</b> Controls step size; too large diverges, too small converges slowly.</li>
+    <li><b>Number of hidden layers:</b> More layers learn deeper abstractions but risk overfitting.</li>
+    <li><b>Hidden layer size:</b> More neurons increase capacity but computational cost.</li>
+    <li><b>Epochs:</b> Number of full passes through training data.</li>
+    <li><b>Batch size:</b> Number of samples per gradient update (for mini-batch SGD).</li>
+  </ul>
+</section>
+
+
   <section id="gd">
-    <h3>3. Gradient Descent</h3>
+    <h3>4. Gradient Descent</h3>
     <p>
       <b>Gradient Descent</b> is the <b><font color="red">optimization algorithm</font></b> used to train neural networks.
       It iteratively updates weights and biases by moving in the direction of the negative gradient of the loss function,
       aiming to reach a minimum.
     </p>
 
-    <h4 id="gd-concept">3.1 The Concept</h4>
+    <h4 id="gd-concept">4.1 The Concept</h4>
     <p>
       Imagine you're on a hill in fog and want to reach the lowest point. You can't see far ahead,
       but you can feel the slope under your feet. You take a step downhill, feel the new slope, and repeat.
@@ -729,4 +796,129 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
     </p>
 
     <p><strong>Where:</strong></p>
-    <ul>
+  <ul>
+    <li>\(\eta\) = learning rate; controls step size (typically 0.001 to 0.1).</li>
+    <li>\(\nabla L\) = gradient of loss with respect to weights.</li>
+    <li>Negative sign ensures we move toward lower loss.</li>
+  </ul>
+
+  <h4>Gradient Descent Algorithm:</h4>
+  <ol>
+    <li>Initialize weights \(\mathbf{w}\) randomly (small values).</li>
+    <li>For each iteration (epoch):
+      <ul style="margin-left: 1.5em;">
+        <li>Compute loss: \(L = \frac{1}{m} \sum_{i=1}^{m} \text{Loss}(f(\mathbf{x}_i; \mathbf{w}), y_i)\)</li>
+        <li>Compute gradient: \(\nabla L = \frac{1}{m} \sum_{i=1}^{m} \nabla \text{Loss}(\mathbf{x}_i, y_i)\)</li>
+        <li>Update weights: \(\mathbf{w} \leftarrow \mathbf{w} - \eta \nabla L\)</li>
+      </ul>
+    </li>
+    <li>Repeat until convergence (loss stops decreasing or max epochs reached).</li>
+  </ol>
+
+  <h4 id="gd-variants">4.2 Variants of Gradient Descent</h4>
+
+  <h4>Batch Gradient Descent (BGD)</h4>
+  <ul>
+    <li>Uses the <b>entire dataset</b> to compute gradient in each iteration.</li>
+    <li>Pro: Smooth convergence, stable updates.</li>
+    <li>Con: Slow for large datasets; requires keeping entire dataset in memory.</li>
+  </ul>
+
+  <h4>Stochastic Gradient Descent (SGD)</h4>
+  <ul>
+    <li>Updates weights using <b>one sample</b> at a time.</li>
+    <li>Pro: Fast updates; can escape local minima due to noise.</li>
+    <li>Con: Noisy gradient leads to oscillations; harder to converge smoothly.</li>
+  </ul>
+
+  <h4>Mini-Batch Gradient Descent</h4>
+  <ul>
+    <li>Uses a <b>small batch</b> of samples (e.g., 32, 64, 128) per update.</li>
+    <li>Pro: Balance between stability (batch) and speed (stochastic); practical sweet spot.</li>
+    <li>Con: Requires tuning batch size.</li>
+  </ul>
+
+  <h4>Momentum</h4>
+  <p>Accumulates gradient history to accelerate convergence and reduce oscillations:</p>
+  <p style="text-align:center;">$\mathbf{v} \leftarrow \beta \mathbf{v} + (1 - \beta) \nabla L, \quad \mathbf{w} \leftarrow \mathbf{w} - \eta \mathbf{v}$</p>
+  <ul>
+    <li>\(\beta\) ≈ 0.9 (momentum coefficient); \(\mathbf{v}\) accumulates past gradients.</li>
+    <li>Acts like a "rolling ball" with inertia; helps escape shallow local minima.</li>
+  </ul>
+
+  <h4>Adam (Adaptive Moment Estimation)</h4>
+  <p>Modern optimizer that adapts learning rate per parameter:</p>
+  <p style="text-align:center;">$m \leftarrow \beta_1 m + (1-\beta_1) \nabla L, \quad v \leftarrow \beta_2 v + (1-\beta_2) (\nabla L)^2$</p>
+  <p style="text-align:center;">$\mathbf{w} \leftarrow \mathbf{w} - \eta \frac{m}{\sqrt{v} + \epsilon}$</p>
+  <ul>
+    <li>\(m\) = exponential moving average of gradients (momentum).</li>
+    <li>\(v\) = exponential moving average of squared gradients (adaptive learning rate).</li>
+    <li>\(\epsilon\) = small constant to avoid division by zero.</li>
+    <li>Default: \(\beta_1 = 0.9, \beta_2 = 0.999\); widely used in practice.</li>
+  </ul>
+
+  <h4>Convergence Tips:</h4>
+  <ul>
+    <li><b>Learning rate too high:</b> Loss oscillates or diverges.</li>
+    <li><b>Learning rate too low:</b> Convergence is very slow.</li>
+    <li><b>Feature scaling:</b> Normalize inputs to similar ranges for faster convergence.</li>
+    <li><b>Batch size:</b> Larger batches are more stable but slower per update.</li>
+  </ul>
+</section>
+
+  </section>
+
+
+
+  <section id="activation">
+  <h3>5. Activation Functions</h3>
+  <p>Activation functions introduce <b><font color="red">non-linearity</font></b> into networks. Without them, stacking layers would be equivalent to a single linear transformation.</p>
+
+  <h4 id="common-activations">5.1 Common Activation Functions</h4>
+
+  <h4>Sigmoid</h4>
+  <p style="text-align:center;">$\sigma(z) = \frac{1}{1 + e^{-z}}$</p>
+  <ul>
+    <li>Output range: (0, 1); often used in output layers for binary classification.</li>
+    <li>Con: Vanishing gradient problem for very positive/negative inputs.</li>
+  </ul>
+
+  <h4>Tanh (Hyperbolic Tangent)</h4>
+  <p style="text-align:center;">$\tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$</p>
+  <ul>
+    <li>Output range: (-1, 1); zero-centered, often better than sigmoid.</li>
+    <li>Con: Still suffers from vanishing gradients.</li>
+  </ul>
+
+  <h4>ReLU (Rectified Linear Unit)</h4>
+  <p style="text-align:center;">$\text{ReLU}(z) = \max(0, z)$</p>
+  <ul>
+    <li>Simple, computationally efficient; widely used in hidden layers.</li>
+    <li>Pro: Avoids vanishing gradient; promotes sparsity.</li>
+    <li>Con: Dying ReLU (neurons stuck at 0) for very negative inputs.</li>
+  </ul>
+
+  <h4>Leaky ReLU</h4>
+  <p style="text-align:center;">$\text{LeakyReLU}(z) = \begin{cases} z & \text{if } z > 0 \\ \alpha z & \text{if } z \leq 0 \end{cases}, \quad \alpha \approx 0.01$</p>
+  <ul>
+    <li>Variant of ReLU; allows small negative values to mitigate dying ReLU.</li>
+  </ul>
+
+  <h4>Softmax (Output Layer)</h4>
+  <p style="text-align:center;">$\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_{j} e^{z_j}}$</p>
+  <ul>
+    <li>Maps output to probability distribution over classes; used in multi-class classification.</li>
+    <li>Ensures outputs sum to 1.</li>
+  </ul>
+
+  <h4>Choosing Activation Functions:</h4>
+  <ul>
+    <li><b>Hidden layers:</b> ReLU or variants are default choices in modern networks.</li>
+    <li><b>Binary classification output:</b> Sigmoid.</li>
+    <li><b>Multi-class output:</b> Softmax.</li>
+    <li><b>Regression output:</b> Linear (identity) activation or none.</li>
+  </ul>
+</section>
+
+</body>
+</html>
