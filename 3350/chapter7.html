@@ -839,46 +839,110 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
    </ul>
 
   <h4 id="forward-pass">3.2 Forward Propagation</h4>
-  <p>Forward propagation computes the network output by passing input through each layer sequentially.</p>
-  <p style="text-align:center;">
-    $$
-    \mathbf{z}^{(l)} = \mathbf{W}^{(l)} \mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}, \quad \mathbf{a}^{(l)} = \sigma(\mathbf{z}^{(l)})
-    $$
+  <!--  -->
 
-  </p>
+  <p>During <b>forward propagation</b>, data moves through the network layer by layer — from the <b>input</b> to the <b>output</b>. Each neuron computes a weighted sum of its inputs, adds a bias, and applies an activation function.</p>
 
-  <p><strong>Where:</strong></p>
-  <ul>
-    <li>\(\mathbf{z}^{(l)}\) = pre-activation (weighted sum) at layer \(l\).</li>
-    <li>\(\mathbf{a}^{(l)}\) = post-activation output at layer \(l\).</li>
-    <li>\(\sigma(\cdot)\) = activation function (ReLU, sigmoid, tanh, etc.).</li>
-    <li>\(\mathbf{W}^{(l)}, \mathbf{b}^{(l)}\) = weights and biases of layer \(l\).</li>
-  </ul>
+  <ol>
+    <li><b><font color="red">Step 1 – Input to Hidden Layer:</font></b><br>
+        The input layer passes feature values directly to the hidden layer (no computation or activation).<br><br>
+        Each hidden neuron \(h_j\) computes:
+        $$ h_j = \sigma(w_{1j}x_1 + w_{2j}x_2 + w_{3j}x_3 + w_{4j}x_4 + b_j) $$
+        $$ \sigma : \text{hidden activation (e.g., ReLU, sigmoid, tanh)} $$
+    </li>
+    <br>
+
+    <li><b><font color="red">Step 2 – Hidden to Output Layer:</font></b><br>
+        The outputs from hidden neurons are then combined and passed to the output layer:
+        $$ y_k = \phi(v_{1k}h_1 + v_{2k}h_2 + v_{3k}h_3 + c_k) $$
+        where \( k = 1, 2, ... , m \) (number of output neurons).<br><br>
+        $$ \phi : \text{output activation (e.g., Sigmoid for binary, Softmax for multi-class)} $$
+    </li>
+    <br>
+
+    <li><b><font color="red">Step 3 – Output Generation:</font></b><br>
+        The output layer produces final predictions — probabilities for classification or numeric values for regression.
+    </li>
+  </ol>
+
+  <div class="computation-box" style="background:#1e1e2f; color:#fff; padding:15px; border-radius:8px; margin-top:15px;">
+    <p><b>Summary of Forward Propagation:</b></p>
+    <p style="margin-left:20px;">
+      Input Features → Weighted Sum → Activation → Output Prediction
+    </p>
+    <p style="text-align:center;">
+      $$ \mathbf{x} \xrightarrow[]{W^{(1)}, b^{(1)}} \mathbf{h} = \sigma(W^{(1)}\mathbf{x} + b^{(1)})
+         \xrightarrow[]{W^{(2)}, b^{(2)}} \mathbf{y} = \phi(W^{(2)}\mathbf{h} + b^{(2)}) $$
+    </p>
+  </div>
+  <!-- -->
+
 
   <h4 id="backprop">3.3 Backpropagation</h4>
+
   <p><b>Backpropagation</b> is the algorithm for training MLPs. It computes gradients of the loss with respect to all weights and biases, then updates them to minimize error.</p>
 
-  <h4>Key Idea:</h4>
-  <ul>
-    <li>Compute loss at output: \(L = \text{CrossEntropy}(\hat{y}, y)\) or MSE.</li>
-    <li>Propagate error <b>backward</b> through layers using the chain rule.</li>
-    <li>Compute gradient for each weight: \(\frac{\partial L}{\partial \mathbf{W}^{(l)}}\)</li>
-    <li>Update weights: \(\mathbf{W}^{(l)} \leftarrow \mathbf{W}^{(l)} - \eta \frac{\partial L}{\partial \mathbf{W}^{(l)}}\)</li>
-  </ul>
+  <p>
+    After forward propagation produces an output, the network compares it to the true target and calculates an error.
+    <b>Backpropagation</b> is the process of sending that error backward through the network to adjust the weights and biases
+    — so the model learns to make better predictions next time.
+  </p>
 
-  <h4>Backpropagation Algorithm (Simplified):</h4>
   <ol>
-    <li><b>Forward pass:</b> Compute all activations \(\mathbf{a}^{(1)}, \ldots, \mathbf{a}^{(L)}\).</li>
-    <li><b>Compute output loss:</b> \(L = \text{Loss}(\mathbf{a}^{(L)}, y)\)</li>
-    <li><b>Backward pass:</b> For layer \(l\) from \(L\) to 1:
-      <ul style="margin-left: 1.5em;">
-        <li>Compute \(\frac{\partial L}{\partial \mathbf{z}^{(l)}} = \frac{\partial L}{\partial \mathbf{a}^{(l)}} \odot \sigma'(\mathbf{z}^{(l)})\)</li>
-        <li>Compute \(\frac{\partial L}{\partial \mathbf{W}^{(l)}} = \frac{\partial L}{\partial \mathbf{z}^{(l)}} (\mathbf{a}^{(l-1)})^T\)</li>
-        <li>Propagate: \(\frac{\partial L}{\partial \mathbf{a}^{(l-1)}} = (\mathbf{W}^{(l)})^T \frac{\partial L}{\partial \mathbf{z}^{(l)}}\)</li>
-      </ul>
+    <li><b><font color="red">Step 1 – Compute the Loss:</font></b><br>
+        The loss function measures how far the prediction \( \hat{y} \) is from the true label \( y \).<br>
+        Common loss functions:
+        <ul>
+          <li>Mean Squared Error (Regression):  \( L = \frac{1}{2}(y - \hat{y})^2 \)</li>
+          <li>Cross-Entropy (Classification): \( L = -\sum y_i \log(\hat{y}_i) \)</li>
+        </ul>
     </li>
-    <li><b>Update weights:</b> \(\mathbf{W}^{(l)} \leftarrow \mathbf{W}^{(l)} - \eta \frac{\partial L}{\partial \mathbf{W}^{(l)}}\)</li>
+    <br>
+
+    <li><b><font color="red">Step 2 – Compute the Output Layer Gradient:</font></b><br>
+        We find how much each output neuron contributed to the total error by computing partial derivatives:
+        $$ \frac{\partial L}{\partial w_{jk}^{(2)}} = \delta_k^{(2)} \, h_j $$
+        $$ \text{where: } \delta_k^{(2)} = ( \hat{y}_k - y_k ) \, \phi'(z_k^{(2)}) $$
+        Here \( \phi'(z_k^{(2)}) \) is the derivative of the output activation function.
+    </li>
+    <br>
+
+    <li><b><font color="red">Step 3 – Propagate Error to Hidden Layer:</font></b><br>
+        The hidden layer errors are found by propagating output errors backward:
+        $$ \delta_j^{(1)} = \sigma'(z_j^{(1)}) \sum_k \delta_k^{(2)} w_{jk}^{(2)} $$
+        $$ \text{where: } \sigma'(z_j^{(1)}) \text{ is the derivative of the hidden activation function.} $$
+    </li>
+    <br>
+
+    <li><b><font color="red">Step 4 – Update Weights and Biases:</font></b><br>
+        Each weight and bias is adjusted using the learning rate \( \eta \):
+        $$ w_{ij}^{(l)} \leftarrow w_{ij}^{(l)} - \eta \frac{\partial L}{\partial w_{ij}^{(l)}} $$
+        $$ b_j^{(l)} \leftarrow b_j^{(l)} - \eta \frac{\partial L}{\partial b_j^{(l)}} $$
+        The goal is to reduce the overall loss by making small corrections that move the network in the right direction.
+    </li>
   </ol>
+
+  <div class="computation-box" style="background:#1e1e2f; color:#fff; padding:15px; border-radius:8px; margin-top:15px;">
+    <p><b>Summary of Backpropagation:</b></p>
+    <p style="margin-left:20px;">
+      1️⃣ Compute loss →
+      2️⃣ Find output error →
+      3️⃣ Propagate error backward →
+      4️⃣ Update weights/biases
+    </p>
+    <p style="text-align:center;">
+      $$ \Delta w_{ij}^{(l)} = -\eta \frac{\partial L}{\partial w_{ij}^{(l)}} $$
+      $$ \Delta b_j^{(l)} = -\eta \frac{\partial L}{\partial b_j^{(l)}} $$
+    </p>
+  </div>
+
+  <div style="margin-top:10px; font-size:13px; color:#ccc;">
+    <b>Intuition:</b> Backpropagation is like “blaming” each connection for its share of the error —
+    then tuning those connections to make the network’s next guess a little more accurate.
+  </div>
+
+
+  <!-- -->
 
   <h4>Why Backpropagation Works:</h4>
   <ul>
@@ -976,7 +1040,7 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
 
   <h4>Momentum</h4>
   <p>Accumulates gradient history to accelerate convergence and reduce oscillations:</p>
-  <p style="text-align:center;">$\mathbf{v} \leftarrow \beta \mathbf{v} + (1 - \beta) \nabla L, \quad \mathbf{w} \leftarrow \mathbf{w} - \eta \mathbf{v}$</p>
+  <p style="text-align:center;">$$\mathbf{v} \leftarrow \beta \mathbf{v} + (1 - \beta) \nabla L, \quad \mathbf{w} \leftarrow \mathbf{w} - \eta \mathbf{v}$$</p>
   <ul>
     <li>\(\beta\) ≈ 0.9 (momentum coefficient); \(\mathbf{v}\) accumulates past gradients.</li>
     <li>Acts like a "rolling ball" with inertia; helps escape shallow local minima.</li>
@@ -984,8 +1048,8 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
 
   <h4>Adam (Adaptive Moment Estimation)</h4>
   <p>Modern optimizer that adapts learning rate per parameter:</p>
-  <p style="text-align:center;">$m \leftarrow \beta_1 m + (1-\beta_1) \nabla L, \quad v \leftarrow \beta_2 v + (1-\beta_2) (\nabla L)^2$</p>
-  <p style="text-align:center;">$\mathbf{w} \leftarrow \mathbf{w} - \eta \frac{m}{\sqrt{v} + \epsilon}$</p>
+  <p style="text-align:center;">$$m \leftarrow \beta_1 m + (1-\beta_1) \nabla L, \quad v \leftarrow \beta_2 v + (1-\beta_2) (\nabla L)^2$$</p>
+  <p style="text-align:center;">$$\mathbf{w} \leftarrow \mathbf{w} - \eta \frac{m}{\sqrt{v} + \epsilon}$$</p>
   <ul>
     <li>\(m\) = exponential moving average of gradients (momentum).</li>
     <li>\(v\) = exponential moving average of squared gradients (adaptive learning rate).</li>
@@ -1013,21 +1077,21 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
   <h4 id="common-activations">5.1 Common Activation Functions</h4>
 
   <h4>Sigmoid</h4>
-  <p style="text-align:center;">$\sigma(z) = \frac{1}{1 + e^{-z}}$</p>
+  <p style="text-align:center;">$$\sigma(z) = \frac{1}{1 + e^{-z}}$$</p>
   <ul>
     <li>Output range: (0, 1); often used in output layers for binary classification.</li>
     <li>Con: Vanishing gradient problem for very positive/negative inputs.</li>
   </ul>
 
   <h4>Tanh (Hyperbolic Tangent)</h4>
-  <p style="text-align:center;">$\tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$</p>
+  <p style="text-align:center;">$$\tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$$</p>
   <ul>
     <li>Output range: (-1, 1); zero-centered, often better than sigmoid.</li>
     <li>Con: Still suffers from vanishing gradients.</li>
   </ul>
 
   <h4>ReLU (Rectified Linear Unit)</h4>
-  <p style="text-align:center;">$\text{ReLU}(z) = \max(0, z)$</p>
+  <p style="text-align:center;">$$\text{ReLU}(z) = \max(0, z)$$</p>
   <ul>
     <li>Simple, computationally efficient; widely used in hidden layers.</li>
     <li>Pro: Avoids vanishing gradient; promotes sparsity.</li>
@@ -1035,13 +1099,13 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
   </ul>
 
   <h4>Leaky ReLU</h4>
-  <p style="text-align:center;">$\text{LeakyReLU}(z) = \begin{cases} z & \text{if } z > 0 \\ \alpha z & \text{if } z \leq 0 \end{cases}, \quad \alpha \approx 0.01$</p>
+  <p style="text-align:center;">$$\text{LeakyReLU}(z) = \begin{cases} z & \text{if } z > 0 \\ \alpha z & \text{if } z \leq 0 \end{cases}, \quad \alpha \approx 0.01$$</p>
   <ul>
     <li>Variant of ReLU; allows small negative values to mitigate dying ReLU.</li>
   </ul>
 
   <h4>Softmax (Output Layer)</h4>
-  <p style="text-align:center;">$\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_{j} e^{z_j}}$</p>
+  <p style="text-align:center;">$$\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_{j} e^{z_j}}$$</p>
   <ul>
     <li>Maps output to probability distribution over classes; used in multi-class classification.</li>
     <li>Ensures outputs sum to 1.</li>
