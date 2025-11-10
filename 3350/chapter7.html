@@ -913,6 +913,12 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
 
   <h4 id="backprop">3.3 Backpropagation</h4>
 
+  <p>
+    After forward propagation produces an output, the network compares it to the true target and calculates an error.
+    <b>Backpropagation</b> is the process of sending that error backward through the network to adjust the weights and biases
+    — so the model learns to make better predictions next time.
+  </p>
+  <br><br>
   <p><b>Backpropagation</b> is the algorithm for training MLPs. 
     It computes gradients of the loss with respect to all weights and biases, then updates them to minimize error.
     <br><br>
@@ -922,12 +928,6 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
   <br><br>
     Backpropagation calculates these gradients for every parameter using the <b>chain rule of calculus</b>.
     Gradients tell the network how to adjust its weights to get better predictions.
-  </p>
-
-  <p>
-    After forward propagation produces an output, the network compares it to the true target and calculates an error.
-    <b>Backpropagation</b> is the process of sending that error backward through the network to adjust the weights and biases
-    — so the model learns to make better predictions next time.
   </p>
 
   <ol>
