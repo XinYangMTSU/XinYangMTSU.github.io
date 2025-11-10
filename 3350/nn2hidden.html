@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Neural Network - Two Hidden Layers</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #1a1d1f;
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #ffb3de;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #222025;
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      border-left: 7px solid #ff79c6;
+    }
+
+    h2 {
+      color: #ff79c6;
+      text-align: center;
+      margin-top: 0;
+      font-size: 2em;
+    }
+
+    .subtitle {
+      color: #ffb3de;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+
+    svg {
+      display: block;
+      margin: 40px auto;
+      background: #19121a;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+      padding: 20px;
+    }
+
+    .label {
+      color: #ffb3de;
+      font-size: 0.95em;
+      font-weight: 500;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .legend {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 40px;
+    }
+
+    .legend h3 {
+      color: #ff79c6;
+      margin-top: 0;
+      border-bottom: 2px solid #ff79c6;
+      padding-bottom: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 12px 0;
+      color: #ffb3de;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .color-input { background: #ff79c6; }
+    .color-hidden { background: #ffb3de; }
+    .color-output { background: #fff52e; }
+    .color-weight { background: #50fa7b; }
+    .color-bias { background: #888888; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Neural Network with Two Hidden Layers</h2>
+  <p class="subtitle">Architecture: 4 inputs → 3 hidden (layer 1) → 3 hidden (layer 2) → 2 outputs</p>
+
+  <svg width="1200" height="650" viewBox="0 0 1200 650">
+    <!-- Title for each layer -->
+    <text x="100" y="25" font-size="16" font-weight="bold" fill="#ff79c6" text-anchor="middle">Input Layer</text>
+    <text x="350" y="25" font-size="16" font-weight="bold" fill="#ff79c6" text-anchor="middle">Hidden Layer 1</text>
+    <text x="650" y="25" font-size="16" font-weight="bold" fill="#ff79c6" text-anchor="middle">Hidden Layer 2</text>
+    <text x="1050" y="25" font-size="16" font-weight="bold" fill="#ff79c6" text-anchor="middle">Output Layer</text>
+
+    <!-- Input Layer Neurons -->
+    <circle cx="100" cy="80" r="15" fill="#ff79c6" stroke="#ffb3de" stroke-width="2"/>
+    <text x="100" y="87" font-size="12" fill="white" text-anchor="middle" font-weight="bold">x₁</text>
+
+    <circle cx="100" cy="180" r="15" fill="#ff79c6" stroke="#ffb3de" stroke-width="2"/>
+    <text x="100" y="187" font-size="12" fill="white" text-anchor="middle" font-weight="bold">x₂</text>
+
+    <circle cx="100" cy="280" r="15" fill="#ff79c6" stroke="#ffb3de" stroke-width="2"/>
+    <text x="100" y="287" font-size="12" fill="white" text-anchor="middle" font-weight="bold">x₃</text>
+
+    <circle cx="100" cy="380" r="15" fill="#ff79c6" stroke="#ffb3de" stroke-width="2"/>
+    <text x="100" y="387" font-size="12" fill="white" text-anchor="middle" font-weight="bold">x₄</text>
+
+    <!-- Hidden Layer 1 Neurons -->
+    <circle cx="350" cy="100" r="15" fill="#ffb3de" stroke="#ff79c6" stroke-width="2"/>
+    <text x="350" y="107" font-size="12" fill="white" text-anchor="middle" font-weight="bold">h₁⁽¹⁾</text>
+
+    <circle cx="350" cy="230" r="15" fill="#ffb3de" stroke="#ff79c6" stroke-width="2"/>
+    <text x="350" y="237" font-size="12" fill="white" text-anchor="middle" font-weight="bold">h₂⁽¹⁾</text>
+
+    <circle cx="350" cy="360" r="15" fill="#ffb3de" stroke="#ff79c6" stroke-width="2"/>
+    <text x="350" y="367" font-size="12" fill="white" text-anchor="middle" font-weight="bold">h₃⁽¹⁾</text>
+
+    <!-- Hidden Layer 2 Neurons -->
+    <circle cx="650" cy="100" r="15" fill="#ffb3de" stroke="#ff79c6" stroke-width="2"/>
+    <text x="650" y="107" font-size="12" fill="white" text-anchor="middle" font-weight="bold">h₁⁽²⁾</text>
+
+    <circle cx="650" cy="230" r="15" fill="#ffb3de" stroke="#ff79c6" stroke-width="2"/>
+    <text x="650" y="237" font-size="12" fill="white" text-anchor="middle" font-weight="bold">h₂⁽²⁾</text>
+
+    <circle cx="650" cy="360" r="15" fill="#ffb3de" stroke="#ff79c6" stroke-width="2"/>
+    <text x="650" y="367" font-size="12" fill="white" text-anchor="middle" font-weight="bold">h₃⁽²⁾</text>
+
+    <!-- Output Layer Neurons -->
+    <circle cx="1050" cy="150" r="15" fill="#fff52e" stroke="#ffb3de" stroke-width="2"/>
+    <text x="1050" y="157" font-size="12" fill="black" text-anchor="middle" font-weight="bold">y₁</text>
+
+    <circle cx="1050" cy="310" r="15" fill="#fff52e" stroke="#ffb3de" stroke-width="2"/>
+    <text x="1050" y="317" font-size="12" fill="black" text-anchor="middle" font-weight="bold">y₂</text>
+
+    <!-- Connections from Input to Hidden Layer 1 -->
+    <line x1="115" y1="80" x2="335" y2="100" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="115" y1="80" x2="335" y2="230" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="115" y1="80" x2="335" y2="360" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+
+    <line x1="115" y1="180" x2="335" y2="100" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="115" y1="180" x2="335" y2="230" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="115" y1="180" x2="335" y2="360" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+
+    <line x1="115" y1="280" x2="335" y2="100" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="115" y1="280" x2="335" y2="230" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="115" y1="280" x2="335" y2="360" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+
+    <line x1="115" y1="380" x2="335" y2="100" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="115" y1="380" x2="335" y2="230" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="115" y1="380" x2="335" y2="360" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+
+    <!-- Connections from Hidden Layer 1 to Hidden Layer 2 -->
+    <line x1="365" y1="100" x2="635" y2="100" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="365" y1="100" x2="635" y2="230" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="365" y1="100" x2="635" y2="360" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+
+    <line x1="365" y1="230" x2="635" y2="100" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="365" y1="230" x2="635" y2="230" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="365" y1="230" x2="635" y2="360" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+
+    <line x1="365" y1="360" x2="635" y2="100" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="365" y1="360" x2="635" y2="230" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="365" y1="360" x2="635" y2="360" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+
+    <!-- Connections from Hidden Layer 2 to Output Layer -->
+    <line x1="665" y1="100" x2="1035" y2="150" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="665" y1="100" x2="1035" y2="310" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+
+    <line x1="665" y1="230" x2="1035" y2="150" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="665" y1="230" x2="1035" y2="310" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+
+    <line x1="665" y1="360" x2="1035" y2="150" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+    <line x1="665" y1="360" x2="1035" y2="310" stroke="#50fa7b" stroke-width="2" opacity="0.6"/>
+
+    <!-- Bias nodes -->
+    <circle cx="100" cy="500" r="12" fill="#888888" stroke="#666666" stroke-width="2"/>
+    <text x="100" y="506" font-size="10" fill="white" text-anchor="middle" font-weight="bold">b⁽⁰⁾</text>
+
+    <circle cx="350" cy="500" r="12" fill="#888888" stroke="#666666" stroke-width="2"/>
+    <text x="350" y="506" font-size="10" fill="white" text-anchor="middle" font-weight="bold">b⁽¹⁾</text>
+
+    <circle cx="650" cy="500" r="12" fill="#888888" stroke="#666666" stroke-width="2"/>
+    <text x="650" y="506" font-size="10" fill="white" text-anchor="middle" font-weight="bold">b⁽²⁾</text>
+
+    <circle cx="1050" cy="500" r="12" fill="#888888" stroke="#666666" stroke-width="2"/>
+    <text x="1050" y="506" font-size="10" fill="white" text-anchor="middle" font-weight="bold">b⁽³⁾</text>
+
+    <!-- Lines from bias to layers (dashed) -->
+    <line x1="100" y1="488" x2="100" y2="395" stroke="#888888" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+    <line x1="350" y1="488" x2="350" y2="375" stroke="#888888" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+    <line x1="650" y1="488" x2="650" y2="375" stroke="#888888" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+    <line x1="1050" y1="488" x2="1050" y2="325" stroke="#888888" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+
+    <!-- Layer computation labels -->
+    <text x="350" y="60" font-size="11" fill="#ffb3de" text-anchor="middle" font-style="italic">z⁽¹⁾ = W⁽¹⁾x + b⁽¹⁾</text>
+    <text x="350" y="75" font-size="11" fill="#ffb3de" text-anchor="middle" font-style="italic">a⁽¹⁾ = ReLU(z⁽¹⁾)</text>
+
+    <text x="650" y="60" font-size="11" fill="#ffb3de" text-anchor="middle" font-style="italic">z⁽²⁾ = W⁽²⁾a⁽¹⁾ + b⁽²⁾</text>
+    <text x="650" y="75" font-size="11" fill="#ffb3de" text-anchor="middle" font-style="italic">a⁽²⁾ = ReLU(z⁽²⁾)</text>
+
+    <text x="1050" y="60" font-size="11" fill="#ffb3de" text-anchor="middle" font-style="italic">z⁽³⁾ = W⁽³⁾a⁽²⁾ + b⁽³⁾</text>
+    <text x="1050" y="75" font-size="11" fill="#ffb3de" text-anchor="middle" font-style="italic">a⁽³⁾ = σ(z⁽³⁾)</text>
+  </svg>
+
+  <div class="label"><strong>Architecture:</strong> 4 inputs → 3 hidden neurons (layer 1) → 3 hidden neurons (layer 2) → 2 outputs</div>
+
+  <div class="legend">
+    <h3>📊 Network Components & Formulas</h3>
+
+    <h4 style="color: #ff79c6; margin-top: 15px;">Layer 1: Input to Hidden Layer 1</h4>
+    <div style="background: #19121a; padding: 15px; border-radius: 8px; margin: 10px 0; color: #fff52e; font-family: 'Courier New', monospace;">
+      z⁽¹⁾ = W⁽¹⁾a⁽⁰⁾ + b⁽¹⁾<br>
+      a⁽¹⁾ = ReLU(z⁽¹⁾)
+    </div>
+    <div class="legend-item">
+      <span><strong>W⁽¹⁾:</strong> Weight matrix (4×3) connecting input to hidden layer 1</span>
+    </div>
+    <div class="legend-item">
+      <span><strong>b⁽¹⁾:</strong> Bias vector (3,) for hidden layer 1 neurons</span>
+    </div>
+    <div class="legend-item">
+      <span><strong>a⁽⁰⁾:</strong> Input layer (raw features)</span>
+    </div>
+
+    <h4 style="color: #ff79c6; margin-top: 15px;">Layer 2: Hidden Layer 1 to Hidden Layer 2</h4>
+    <div style="background: #19121a; padding: 15px; border-radius: 8px; margin: 10px 0; color: #fff52e; font-family: 'Courier New', monospace;">
+      z⁽²⁾ = W⁽²⁾a⁽¹⁾ + b⁽²⁾<br>
+      a⁽²⁾ = ReLU(z⁽²⁾)
+    </div>
+    <div class="legend-item">
+      <span><strong>W⁽²⁾:</strong> Weight matrix (3×3) connecting hidden layer 1 to hidden layer 2</span>
+    </div>
+    <div class="legend-item">
+      <span><strong>b⁽²⁾:</strong> Bias vector (3,) for hidden layer 2 neurons</span>
+    </div>
+    <div class="legend-item">
+      <span><strong>a⁽¹⁾:</strong> Output from hidden layer 1</span>
+    </div>
+
+    <h4 style="color: #ff79c6; margin-top: 15px;">Layer 3: Hidden Layer 2 to Output</h4>
+    <div style="background: #19121a; padding: 15px; border-radius: 8px; margin: 10px 0; color: #fff52e; font-family: 'Courier New', monospace;">
+      z⁽³⁾ = W⁽³⁾a⁽²⁾ + b⁽³⁾<br>
+      a⁽³⁾ = σ(z⁽³⁾)
+    </div>
+    <div class="legend-item">
+      <span><strong>W⁽³⁾:</strong> Weight matrix (3×2) connecting hidden layer 2 to output</span>
+    </div>
+    <div class="legend-item">
+      <span><strong>b⁽³⁾:</strong> Bias vector (2,) for output layer neurons - <strong style="color: #fff52e;">b₄, b₅</strong></span>
+    </div>
+    <div class="legend-item">
+      <span><strong>σ:</strong> Output activation (Sigmoid for classification, Linear for regression)</span>
+    </div>
+
+    <h4 style="color: #ff79c6; margin-top: 15px;">Total Parameters</h4>
+    <div style="background: #19121a; padding: 15px; border-radius: 8px; margin: 10px 0; color: #50fa7b;">
+      • Layer 1: 4×3 + 3 = 15 parameters<br>
+      • Layer 2: 3×3 + 3 = 12 parameters<br>
+      • Layer 3: 3×2 + 2 = 8 parameters<br>
+      • <strong>Total: 35 trainable parameters</strong>
+    </div>
+  </div>
+
+  <div class="legend" style="margin-top: 25px;">
+    <h3>🎨 Legend</h3>
+    <div class="legend-item">
+      <div class="legend-color color-input"></div>
+      <span><strong>Pink circles:</strong> Input layer (raw features)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-hidden"></div>
+      <span><strong>Light pink circles:</strong> Hidden layers (learn features)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-output"></div>
+      <span><strong>Yellow circles:</strong> Output layer (predictions)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-weight"></div>
+      <span><strong>Green lines:</strong> Weights (W⁽¹⁾, W⁽²⁾, W⁽³⁾)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-bias"></div>
+      <span><strong>Gray circles:</strong> Bias nodes (b⁽¹⁾, b⁽²⁾, b⁽³⁾)</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
