@@ -298,6 +298,66 @@
     </ul>
   </section>
 
+
+  <section id="neuron">
+  <h3>Understanding Neurons in Neural Networks</h3>
+  A neuron in a neural network is a <b>computational unit</b> that mimics the behavior of biological neurons.
+  A neuron takes multiple inputs, processes them, and produces a single output.
+
+  <ul>
+      <li>Receives inputs</li>
+      <li>Weights each input</li>
+      <li>Adds bias</li>
+      <li>Applies activation function</li>
+      <li>Outputs result</li>
+  </ul>
+
+  Each neuron computes this function: 
+
+  $$
+  y = \sigma(w_1 x_1 + w_2 x_2 + \cdots + w_n x_n + b)
+  $$
+
+  <table style="width: 100%;">
+  <thead>
+    <tr style="background: #2a1e28; color: #ff79c6;">
+      <th style="border: 1px solid #ff79c6; padding: 12px; text-align: left; font-weight: 700;">Symbol</th>
+      <th style="border: 1px solid #ff79c6; padding: 12px; text-align: left; font-weight: 700;">Meaning</th>
+      <th style="border: 1px solid #ff79c6; padding: 12px; text-align: left; font-weight: 700;">Analogy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background: #222025;">
+      <td style="border: 1px solid #ffb3de; padding: 12px;">\((x_1, x_2, \dots, x_n)\)</td>
+      <td style="border: 1px solid #ffb3de; padding: 12px;">Inputs (features)</td>
+      <td style="border: 1px solid #ffb3de; padding: 12px;">Signals received by the neuron</td>
+    </tr>
+    <tr style="background: #1f1a24;">
+      <td style="border: 1px solid #ffb3de; padding: 12px;">\((w_1, w_2, \dots, w_n)\)</td>
+      <td style="border: 1px solid #ffb3de; padding: 12px;">Weights</td>
+      <td style="border: 1px solid #ffb3de; padding: 12px;">Strength of each connection</td>
+    </tr>
+    <tr style="background: #222025;">
+      <td style="border: 1px solid #ffb3de; padding: 12px;">\((b)\)</td>
+      <td style="border: 1px solid #ffb3de; padding: 12px;">Bias</td>
+      <td style="border: 1px solid #ffb3de; padding: 12px;">A "threshold" — helps the neuron decide when to fire</td>
+    </tr>
+    <tr style="background: #1f1a24;">
+      <td style="border: 1px solid #ffb3de; padding: 12px;">\((\sigma(\cdot))\)</td>
+      <td style="border: 1px solid #ffb3de; padding: 12px;">Activation function</td>
+      <td style="border: 1px solid #ffb3de; padding: 12px;">Converts raw input into output (e.g., sigmoid, ReLU)</td>
+    </tr>
+    <tr style="background: #222025;">
+      <td style="border: 1px solid #ffb3de; padding: 12px;">\((y)\)</td>
+      <td style="border: 1px solid #ffb3de; padding: 12px;">Output</td>
+      <td style="border: 1px solid #ffb3de; padding: 12px;">The neuron's response — sent to the next layer</td>
+    </tr>
+  </tbody>
+</table>
+    
+    
+  </section>
+      
   <section id="perceptron">
     <h3>2. The Perceptron</h3>
     <p>
