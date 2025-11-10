@@ -170,6 +170,7 @@
     .color-generative { background: #fff52e; }
     .color-graph { background: #8be9fd; }
     .color-attention { background: #ff85b3; }
+    .color-hybrid { background: #ffb86c; }
   </style>
 </head>
 <body>
@@ -181,30 +182,36 @@
   <div class="taxonomy">
     <pre class="tree-line">Artificial Neural Networks (ANN)
 │
-├── Feedforward Networks
+├── Feedforward Networks (No cycles/memory)
 │   ├── Perceptron
 │   ├── MLP (Multi-Layer Perceptron)
-│   ├── DNN (Deep Neural Network)
 │   └── CNN (Convolutional Neural Network)
 │
-├── Recurrent Networks
+├── Recurrent Networks (With memory/cycles)
 │   ├── RNN (Recurrent Neural Network)
+│   ├── Bidirectional RNN
 │   ├── LSTM (Long Short-Term Memory)
-│   ├── GRU (Gated Recurrent Unit)
+│   └── GRU (Gated Recurrent Unit)
+│
+├── Attention & Transformer-Based
+│   ├── Transformer
+│   ├── BERT / GPT
+│   └── Vision Transformer (ViT)
 │
 ├── Generative Networks
-│   ├── Autoencoder
+│   ├── Autoencoder (Unsupervised compression)
 │   ├── VAE (Variational Autoencoder)
 │   ├── GAN (Generative Adversarial Network)
+│   └── Diffusion Models
 │
 ├── Graph-Based Networks
 │   ├── GNN (Graph Neural Network)
-│   ├── GCN (Graph Convolutional Network)
+│   └── GCN (Graph Convolutional Network)
 │
-└── Attention-Based Networks
-    ├── Transformer
-    ├── BERT / GPT
-    └── Vision Transformer (ViT)</pre>
+└── Hybrid Architectures
+    ├── CNN-LSTM
+    ├── RNN + Attention
+    └── Other combinations</pre>
   </div>
 
   <div class="categories">
@@ -213,12 +220,12 @@
       <div class="category-title">
         <span class="icon">➡️</span> Feedforward Networks
       </div>
-      <p class="description">Data flows in one direction: input → hidden layers → output. No cycles or loops.</p>
+      <p class="description">Data flows in one direction: input → hidden layers → output. No cycles or memory. Best for supervised learning.</p>
 
       <div class="subcategory">
         <div class="subcategory-title">🔹 Perceptron</div>
         <div class="subcategory-desc">
-          • Simplest neural network (single neuron)<br>
+          • Single neuron (simplest model)<br>
           • Binary classification only<br>
           • Linear decision boundaries
         </div>
@@ -229,16 +236,7 @@
         <div class="subcategory-desc">
           • Multiple hidden layers<br>
           • Non-linear decision boundaries<br>
-          • Universal approximator
-        </div>
-      </div>
-
-      <div class="subcategory">
-        <div class="subcategory-title">🔹 DNN (Deep Neural Network)</div>
-        <div class="subcategory-desc">
-          • Many hidden layers (depth ≥ 3)<br>
-          • Feature hierarchy learning<br>
-          • Requires careful training
+          • Universal approximator theorem
         </div>
       </div>
 
@@ -246,8 +244,8 @@
         <div class="subcategory-title">🔹 CNN (Convolutional Neural Network)</div>
         <div class="subcategory-desc">
           • Specialized for image/spatial data<br>
-          • Convolutional layers extract features<br>
-          • State-of-the-art vision tasks
+          • Convolutional & pooling layers<br>
+          • State-of-the-art for computer vision
         </div>
       </div>
     </div>
@@ -257,7 +255,7 @@
       <div class="category-title">
         <span class="icon">🔄</span> Recurrent Networks
       </div>
-      <p class="description">Data flows in cycles; maintains hidden state. Ideal for sequences and time-series.</p>
+      <p class="description">Data flows in cycles with hidden state. Maintains memory over sequences. Ideal for time-series and sequential data.</p>
 
       <div class="subcategory">
         <div class="subcategory-title">🔹 RNN (Recurrent Neural Network)</div>
@@ -265,6 +263,15 @@
           • Basic recurrent architecture<br>
           • Processes sequences step-by-step<br>
           • Suffers from vanishing gradients
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 Bidirectional RNN</div>
+        <div class="subcategory-desc">
+          • Processes sequences forward & backward<br>
+          • Access to future context<br>
+          • Better for understanding full sequences
         </div>
       </div>
 
@@ -287,12 +294,47 @@
       </div>
     </div>
 
+    <!-- Attention-Based Networks -->
+    <div class="category-box">
+      <div class="category-title">
+        <span class="icon">👁️</span> Attention-Based Networks
+      </div>
+      <p class="description">Focus mechanism to weight important parts of input. Parallel processing without recurrence. Foundation for modern AI.</p>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 Transformer</div>
+        <div class="subcategory-desc">
+          • Self-attention mechanism<br>
+          • Parallel processing of sequences<br>
+          • No recurrence needed
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 BERT / GPT</div>
+        <div class="subcategory-desc">
+          • Pre-trained transformer models<br>
+          • BERT: bidirectional encoding<br>
+          • GPT: autoregressive language model
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 Vision Transformer (ViT)</div>
+        <div class="subcategory-desc">
+          • Transformer for image classification<br>
+          • Treats image as sequence of patches<br>
+          • Competitive with CNNs
+        </div>
+      </div>
+    </div>
+
     <!-- Generative Networks -->
     <div class="category-box">
       <div class="category-title">
         <span class="icon">✨</span> Generative Networks
       </div>
-      <p class="description">Learn data distribution to generate new samples. Unsupervised learning.</p>
+      <p class="description">Learn data distribution to generate new samples. Primarily unsupervised learning. Create synthetic data.</p>
 
       <div class="subcategory">
         <div class="subcategory-title">🔹 Autoencoder</div>
@@ -320,6 +362,15 @@
           • Style transfer, super-resolution
         </div>
       </div>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 Diffusion Models</div>
+        <div class="subcategory-desc">
+          • Iterative denoising process<br>
+          • State-of-the-art image generation<br>
+          • DALL-E, Stable Diffusion
+        </div>
+      </div>
     </div>
 
     <!-- Graph-Based Networks -->
@@ -327,7 +378,7 @@
       <div class="category-title">
         <span class="icon">🔗</span> Graph-Based Networks
       </div>
-      <p class="description">Process graph-structured data. Nodes connected by edges with relationships.</p>
+      <p class="description">Process graph-structured data. Nodes connected by edges with relationships. Learn from topology and features.</p>
 
       <div class="subcategory">
         <div class="subcategory-title">🔹 GNN (Graph Neural Network)</div>
@@ -348,37 +399,37 @@
       </div>
     </div>
 
-    <!-- Attention-Based Networks -->
+    <!-- Hybrid Architectures -->
     <div class="category-box">
       <div class="category-title">
-        <span class="icon">👁️</span> Attention-Based Networks
+        <span class="icon">🔀</span> Hybrid Architectures
       </div>
-      <p class="description">Focus on important parts of input. Parallel processing without recurrence.</p>
+      <p class="description">Combine multiple architectures to leverage strengths of different approaches. Task-specific designs.</p>
 
       <div class="subcategory">
-        <div class="subcategory-title">🔹 Transformer</div>
+        <div class="subcategory-title">🔹 CNN-LSTM</div>
         <div class="subcategory-desc">
-          • Self-attention mechanism<br>
-          • Parallel processing of sequences<br>
-          • Foundation for modern NLP/vision
+          • CNN extracts spatial features<br>
+          • LSTM processes temporal sequences<br>
+          • Video analysis, action recognition
         </div>
       </div>
 
       <div class="subcategory">
-        <div class="subcategory-title">🔹 BERT / GPT</div>
+        <div class="subcategory-title">🔹 RNN + Attention</div>
         <div class="subcategory-desc">
-          • Pre-trained transformer models<br>
-          • BERT: bidirectional encoding<br>
-          • GPT: autoregressive language model
+          • Attention mechanism over RNN outputs<br>
+          • Focus on relevant time steps<br>
+          • Machine translation, question answering
         </div>
       </div>
 
       <div class="subcategory">
-        <div class="subcategory-title">🔹 Vision Transformer (ViT)</div>
+        <div class="subcategory-title">🔹 Other Combinations</div>
         <div class="subcategory-desc">
-          • Transformer for image classification<br>
-          • Treats image as sequence of patches<br>
-          • Competitive with CNNs
+          • CNN + Transformer (Vision tasks)<br>
+          • GNN + Attention (Molecular modeling)<br>
+          • Custom architectures for specific tasks
         </div>
       </div>
     </div>
@@ -395,16 +446,20 @@
       <span><strong>Recurrent Networks:</strong> Cyclic structure with memory. Best for sequences (text, time-series, speech).</span>
     </div>
     <div class="legend-item">
+      <div class="legend-color color-attention"></div>
+      <span><strong>Attention-Based Networks:</strong> Focus mechanism with parallelization. Best for NLP, vision, multimodal tasks.</span>
+    </div>
+    <div class="legend-item">
       <div class="legend-color color-generative"></div>
-      <span><strong>Generative Networks:</strong> Learn data distribution. Best for unsupervised learning, generation, sampling.</span>
+      <span><strong>Generative Networks:</strong> Learn data distribution. Best for unsupervised learning, generation, synthesis.</span>
     </div>
     <div class="legend-item">
       <div class="legend-color color-graph"></div>
       <span><strong>Graph-Based Networks:</strong> Process structured relationships. Best for social networks, molecules, recommendations.</span>
     </div>
     <div class="legend-item">
-      <div class="legend-color color-attention"></div>
-      <span><strong>Attention-Based Networks:</strong> Focus mechanism with parallelization. Best for NLP, vision, multimodal tasks.</span>
+      <div class="legend-color color-hybrid"></div>
+      <span><strong>Hybrid Architectures:</strong> Combine multiple approaches. Best for complex, multi-faceted tasks.</span>
     </div>
   </div>
 
