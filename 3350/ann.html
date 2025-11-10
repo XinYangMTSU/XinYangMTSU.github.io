@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Artificial Neural Networks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #17191a;
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #ff79c6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #222025;
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      border-left: 7px solid #ff79c6;
+    }
+
+    h1 {
+      color: #ff79c6;
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 16px rgba(255,121,198,.18);
+    }
+
+    .subtitle {
+      color: #ffb3de;
+      text-align: center;
+      font-size: 1.1em;
+      margin-bottom: 40px;
+    }
+
+    .taxonomy {
+      background: #19121a;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 40px;
+      border: 2px solid #ff79c6;
+      overflow-x: auto;
+    }
+
+    .tree-line {
+      color: #50fa7b;
+      font-family: 'Courier New', monospace;
+      font-size: 1em;
+      line-height: 1.8;
+      white-space: pre;
+      margin: 0;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .category-box {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 25px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .category-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(255,121,198,0.2);
+    }
+
+    .category-title {
+      color: #ff79c6;
+      font-size: 1.4em;
+      font-weight: 700;
+      margin: 0 0 15px 0;
+      border-bottom: 2px solid #ffb3de;
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon {
+      font-size: 1.5em;
+    }
+
+    .subcategory {
+      background: #19121a;
+      padding: 12px;
+      margin: 10px 0;
+      border-left: 4px solid #50fa7b;
+      border-radius: 6px;
+      color: #ffb3de;
+    }
+
+    .subcategory-title {
+      color: #fff52e;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .subcategory-desc {
+      color: #ffb3de;
+      font-size: 0.9em;
+      margin-top: 6px;
+      margin-left: 20px;
+    }
+
+    .description {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #ffb3de;
+      color: #ffb3de;
+      font-size: 0.95em;
+      line-height: 1.5;
+    }
+
+    .features {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .features li {
+      color: #ffb3de;
+      margin: 5px 0;
+      font-size: 0.9em;
+    }
+
+    .legend {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    .legend h3 {
+      color: #ff79c6;
+      margin-top: 0;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 12px 0;
+      color: #ffb3de;
+    }
+
+    .legend-color {
+      width: 25px;
+      height: 25px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .color-feedforward { background: #ff79c6; }
+    .color-recurrent { background: #50fa7b; }
+    .color-generative { background: #fff52e; }
+    .color-graph { background: #8be9fd; }
+    .color-attention { background: #ff85b3; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🧠 Artificial Neural Networks</h1>
+  <p class="subtitle">Complete classification of ANN architectures and their applications</p>
+
+  <div class="taxonomy">
+    <pre class="tree-line">Artificial Neural Networks (ANN)
+│
+├── Feedforward Networks
+│   ├── Perceptron
+│   ├── MLP (Multi-Layer Perceptron)
+│   ├── DNN (Deep Neural Network)
+│   └── CNN (Convolutional Neural Network)
+│
+├── Recurrent Networks
+│   ├── RNN (Recurrent Neural Network)
+│   ├── LSTM (Long Short-Term Memory)
+│   ├── GRU (Gated Recurrent Unit)
+│
+├── Generative Networks
+│   ├── Autoencoder
+│   ├── VAE (Variational Autoencoder)
+│   ├── GAN (Generative Adversarial Network)
+│
+├── Graph-Based Networks
+│   ├── GNN (Graph Neural Network)
+│   ├── GCN (Graph Convolutional Network)
+│
+└── Attention-Based Networks
+    ├── Transformer
+    ├── BERT / GPT
+    └── Vision Transformer (ViT)</pre>
+  </div>
+
+  <div class="categories">
+    <!-- Feedforward Networks -->
+    <div class="category-box">
+      <div class="category-title">
+        <span class="icon">➡️</span> Feedforward Networks
+      </div>
+      <p class="description">Data flows in one direction: input → hidden layers → output. No cycles or loops.</p>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 Perceptron</div>
+        <div class="subcategory-desc">
+          • Simplest neural network (single neuron)<br>
+          • Binary classification only<br>
+          • Linear decision boundaries
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 MLP (Multi-Layer Perceptron)</div>
+        <div class="subcategory-desc">
+          • Multiple hidden layers<br>
+          • Non-linear decision boundaries<br>
+          • Universal approximator
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 DNN (Deep Neural Network)</div>
+        <div class="subcategory-desc">
+          • Many hidden layers (depth ≥ 3)<br>
+          • Feature hierarchy learning<br>
+          • Requires careful training
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 CNN (Convolutional Neural Network)</div>
+        <div class="subcategory-desc">
+          • Specialized for image/spatial data<br>
+          • Convolutional layers extract features<br>
+          • State-of-the-art vision tasks
+        </div>
+      </div>
+    </div>
+
+    <!-- Recurrent Networks -->
+    <div class="category-box">
+      <div class="category-title">
+        <span class="icon">🔄</span> Recurrent Networks
+      </div>
+      <p class="description">Data flows in cycles; maintains hidden state. Ideal for sequences and time-series.</p>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 RNN (Recurrent Neural Network)</div>
+        <div class="subcategory-desc">
+          • Basic recurrent architecture<br>
+          • Processes sequences step-by-step<br>
+          • Suffers from vanishing gradients
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 LSTM (Long Short-Term Memory)</div>
+        <div class="subcategory-desc">
+          • Memory cells (forget, input, output gates)<br>
+          • Learns long-term dependencies<br>
+          • NLP, speech recognition, time-series
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 GRU (Gated Recurrent Unit)</div>
+        <div class="subcategory-desc">
+          • Simplified LSTM variant<br>
+          • Fewer parameters, faster training<br>
+          • Similar performance to LSTM
+        </div>
+      </div>
+    </div>
+
+    <!-- Generative Networks -->
+    <div class="category-box">
+      <div class="category-title">
+        <span class="icon">✨</span> Generative Networks
+      </div>
+      <p class="description">Learn data distribution to generate new samples. Unsupervised learning.</p>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 Autoencoder</div>
+        <div class="subcategory-desc">
+          • Encoder-decoder architecture<br>
+          • Dimensionality reduction<br>
+          • Anomaly detection, feature learning
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 VAE (Variational Autoencoder)</div>
+        <div class="subcategory-desc">
+          • Probabilistic generative model<br>
+          • Learns latent space distribution<br>
+          • Generate new samples from latent codes
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 GAN (Generative Adversarial Network)</div>
+        <div class="subcategory-desc">
+          • Generator vs. Discriminator competition<br>
+          • High-quality image generation<br>
+          • Style transfer, super-resolution
+        </div>
+      </div>
+    </div>
+
+    <!-- Graph-Based Networks -->
+    <div class="category-box">
+      <div class="category-title">
+        <span class="icon">🔗</span> Graph-Based Networks
+      </div>
+      <p class="description">Process graph-structured data. Nodes connected by edges with relationships.</p>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 GNN (Graph Neural Network)</div>
+        <div class="subcategory-desc">
+          • General framework for graphs<br>
+          • Message passing between nodes<br>
+          • Social networks, molecules, knowledge graphs
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 GCN (Graph Convolutional Network)</div>
+        <div class="subcategory-desc">
+          • Convolutional operations on graphs<br>
+          • Spectral or spatial approach<br>
+          • Node classification, link prediction
+        </div>
+      </div>
+    </div>
+
+    <!-- Attention-Based Networks -->
+    <div class="category-box">
+      <div class="category-title">
+        <span class="icon">👁️</span> Attention-Based Networks
+      </div>
+      <p class="description">Focus on important parts of input. Parallel processing without recurrence.</p>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 Transformer</div>
+        <div class="subcategory-desc">
+          • Self-attention mechanism<br>
+          • Parallel processing of sequences<br>
+          • Foundation for modern NLP/vision
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 BERT / GPT</div>
+        <div class="subcategory-desc">
+          • Pre-trained transformer models<br>
+          • BERT: bidirectional encoding<br>
+          • GPT: autoregressive language model
+        </div>
+      </div>
+
+      <div class="subcategory">
+        <div class="subcategory-title">🔹 Vision Transformer (ViT)</div>
+        <div class="subcategory-desc">
+          • Transformer for image classification<br>
+          • Treats image as sequence of patches<br>
+          • Competitive with CNNs
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <h3>📊 Classification Summary</h3>
+    <div class="legend-item">
+      <div class="legend-color color-feedforward"></div>
+      <span><strong>Feedforward Networks:</strong> Unidirectional data flow. Best for supervised learning (images, classification).</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-recurrent"></div>
+      <span><strong>Recurrent Networks:</strong> Cyclic structure with memory. Best for sequences (text, time-series, speech).</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-generative"></div>
+      <span><strong>Generative Networks:</strong> Learn data distribution. Best for unsupervised learning, generation, sampling.</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-graph"></div>
+      <span><strong>Graph-Based Networks:</strong> Process structured relationships. Best for social networks, molecules, recommendations.</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-attention"></div>
+      <span><strong>Attention-Based Networks:</strong> Focus mechanism with parallelization. Best for NLP, vision, multimodal tasks.</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
