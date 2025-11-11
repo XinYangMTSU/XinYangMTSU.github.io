@@ -914,13 +914,22 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
   <!-- -->
 <h4 id="backprop">3.3 Backpropagation (Detailed Derivation)</h4>
 
-<p>
-  <b>Backpropagation</b> is the core algorithm that allows neural networks to learn.
-  After a forward pass produces an output, the network compares it to the target
-  and computes the <b>loss</b> \( L \). Then, backpropagation flows this error backward
-  to compute how much each weight and bias contributed to the total error —
-  and how they should be adjusted to make the prediction better next time.
-</p>
+ <p>
+    After forward propagation produces an output, the network compares it to the true target and calculates an error.
+    <b>Backpropagation</b> is the process of sending that error backward through the network to adjust the weights and biases
+    — so the model learns to make better predictions next time.
+  </p>
+
+  <p><b>Backpropagation</b> is the algorithm for training MLPs. 
+    It computes gradients of the loss with respect to all weights and biases, then updates them to minimize error.
+    <br><br>
+
+  <b>Gradients</b> are partial derivatives of the <b>loss function (L)</b> with respect to each <b>weight (w)</b> and <b>bias (b)</b> in the network.
+  <b>Gradients</b> measure how much a change in each weight or bias affects the output error (loss) of a neural network.
+  <br><br>
+    Backpropagation calculates these gradients for every parameter using the <b>chain rule of calculus</b>.
+    Gradients tell the network how to adjust its weights to get better predictions.
+  </p>
 
 <p>
   Mathematically, backpropagation computes the <b>gradient of the loss</b>
@@ -1023,85 +1032,6 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
   </ul>
   This process repeats over many examples, gradually minimizing the total loss.
 </div>
-
-
-
-
-
-  <!-- -->
-  
-  <h4 id="backprop">3.3 Backpropagation</h4>
-
-  <p>
-    After forward propagation produces an output, the network compares it to the true target and calculates an error.
-    <b>Backpropagation</b> is the process of sending that error backward through the network to adjust the weights and biases
-    — so the model learns to make better predictions next time.
-  </p>
-
-  <p><b>Backpropagation</b> is the algorithm for training MLPs. 
-    It computes gradients of the loss with respect to all weights and biases, then updates them to minimize error.
-    <br><br>
-
-  <b>Gradients</b> are partial derivatives of the <b>loss function (L)</b> with respect to each <b>weight (w)</b> and <b>bias (b)</b> in the network.
-  <b>Gradients</b> measure how much a change in each weight or bias affects the output error (loss) of a neural network.
-  <br><br>
-    Backpropagation calculates these gradients for every parameter using the <b>chain rule of calculus</b>.
-    Gradients tell the network how to adjust its weights to get better predictions.
-  </p>
-
-  <ol>
-    <li><b><font color="red">Step 1 – Compute the Loss:</font></b><br>
-        The loss function measures how far the prediction \( \hat{y} \) is from the true label \( y \).<br>
-        Common loss functions:
-        <ul>
-          <li>Mean Squared Error (Regression):  \( L = \frac{1}{2}(y - \hat{y})^2 \)</li>
-          <li>Cross-Entropy (Classification): \( L = -\sum y_i \log(\hat{y}_i) \)</li>
-        </ul>
-    </li>
-    <br>
-
-    <li><b><font color="red">Step 2 – Compute the Output Layer Gradient:</font></b><br>
-        We find how much each output neuron contributed to the total error by computing partial derivatives:
-        $$ \frac{\partial L}{\partial w_{jk}^{(2)}} = \delta_k^{(2)} \, h_j $$
-        $$ \text{where: } \delta_k^{(2)} = ( \hat{y}_k - y_k ) \, \phi'(z_k^{(2)}) $$
-        Here \( \phi'(z_k^{(2)}) \) is the derivative of the output activation function.
-    </li>
-    <br>
-
-    <li><b><font color="red">Step 3 – Propagate Error to Hidden Layer:</font></b><br>
-        The hidden layer errors are found by propagating output errors backward:
-        $$ \delta_j^{(1)} = \sigma'(z_j^{(1)}) \sum_k \delta_k^{(2)} w_{jk}^{(2)} $$
-        $$ \text{where: } \sigma'(z_j^{(1)}) \text{ is the derivative of the hidden activation function.} $$
-    </li>
-    <br>
-
-    <li><b><font color="red">Step 4 – Update Weights and Biases:</font></b><br>
-        Each weight and bias is adjusted using the learning rate \( \eta \):
-        $$ w_{ij}^{(l)} \leftarrow w_{ij}^{(l)} - \eta \frac{\partial L}{\partial w_{ij}^{(l)}} $$
-        $$ b_j^{(l)} \leftarrow b_j^{(l)} - \eta \frac{\partial L}{\partial b_j^{(l)}} $$
-        The goal is to reduce the overall loss by making small corrections that move the network in the right direction.
-    </li>
-  </ol>
-
-  <div class="computation-box" style="background:#1e1e2f; color:#fff; padding:15px; border-radius:8px; margin-top:15px;">
-    <p><b>Summary of Backpropagation:</b></p>
-    <p style="margin-left:20px;">
-      1️⃣ Compute loss →
-      2️⃣ Find output error →
-      3️⃣ Propagate error backward →
-      4️⃣ Update weights/biases
-    </p>
-    <p style="text-align:center;">
-      $$ \Delta w_{ij}^{(l)} = -\eta \frac{\partial L}{\partial w_{ij}^{(l)}} $$
-      $$ \Delta b_j^{(l)} = -\eta \frac{\partial L}{\partial b_j^{(l)}} $$
-    </p>
-  </div>
-
-  <div style="margin-top:10px; font-size:13px; color:#ccc;">
-    <b>Intuition:</b> Backpropagation is like “blaming” each connection for its share of the error —
-    then tuning those connections to make the network’s next guess a little more accurate.
-  </div>
-
 
   <!-- -->
 
