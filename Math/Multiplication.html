@@ -1,342 +1,354 @@
-import { useState } from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fancy Multiplication Visualizations — Improved</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --indigo-700:#4338ca; --indigo-600:#4f46e5; --slate-700:#334155; --slate-600:#475569; --slate-500:#64748b; --violet-500:#8b5cf6; --violet-600:#7c3aed; --blue-700:#1d4ed8; --emerald-600:#059669; --rose-500:#f43f5e;
+    }
+    body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif; background: linear-gradient(to bottom, #eef2ff, #f3e8ff); min-height: 100vh; padding: 2rem; color: #111827; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    h1 { font-size: 2.25rem; font-weight: 800; text-align: center; color: #312e81; margin-bottom: .5rem; letter-spacing: .2px; }
+    .subtitle { text-align: center; color: #4b5563; margin-bottom: 1.25rem; }
 
-export default function FancyMultiplicationViz() {
-  const [num1, setNum1] = useState(3);
-  const [num2, setNum2] = useState(4);
-  const [vizType, setVizType] = useState('grid');
+    .panel { background: #fff; border-radius: 12px; box-shadow: 0 12px 24px rgba(0,0,0,.08); border: 1px solid #e5e7eb; }
 
-  const product = num1 * num2;
+    /* viz tabs */
+    .viz-buttons { display: grid; grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); gap: .5rem; margin-bottom: 1rem; }
+    .viz-btn { background: #fff; color: #374151; border: 2px solid #e5e7eb; padding: .75rem 1rem; border-radius: 10px; font-weight: 700; cursor: pointer; transition: .2s ease; }
+    .viz-btn:hover { border-color: var(--indigo-600); transform: translateY(-1px); }
+    .viz-btn.active { background: var(--indigo-600); color: #fff; box-shadow: 0 10px 18px rgba(79,70,229,.28); transform: translateY(-1px) scale(1.02); }
 
-  // Grid visualization - classic array
-  const renderGrid = () => (
-    <div className="space-y-4">
-      <p className="text-center text-gray-700 mb-4">
-        {num1} rows × {num2} columns = <span className="font-bold text-3xl text-green-600">{product}</span>
-      </p>
-      <div className="flex justify-center">
-        <div className="space-y-2">
-          {Array.from({ length: num1 }).map((_, row) => (
-            <div key={row} className="flex gap-2">
-              {Array.from({ length: num2 }).map((_, col) => (
-                <div
-                  key={col}
-                  className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg shadow-md hover:scale-110 transition-transform flex items-center justify-center text-white font-bold text-sm"
-                >
-                  {row * num2 + col + 1}
-                </div>
-              ))}
-            </div>
-          ))}
+    /* controls */
+    .controls { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1rem; padding: 1rem; }
+    .control-group { padding: 1rem; border: 1px dashed #e5e7eb; border-radius: 10px; }
+    .control-group label { display:block; font-size:.9rem; font-weight:700; color:#374151; margin-bottom:.5rem; }
+    .number-display { font-size: 1.875rem; color: var(--indigo-600); font-weight: 800; }
+    .number-buttons { display:flex; gap:.4rem; flex-wrap:wrap; margin-top:.6rem; }
+    .number-btn { padding:.45rem .7rem; background:#f3f4f6; color:#374151; border:2px solid transparent; border-radius: 9px; cursor:pointer; font-weight:700; transition:.15s ease; min-width: 2.2rem; text-align:center; }
+    .number-btn:hover { background:#e5e7eb; }
+    .number-btn.active { background: var(--indigo-600); color:#fff; }
+    .extras { display:flex; gap:.5rem; margin-top:.6rem; flex-wrap:wrap; }
+    .chip { padding:.45rem .7rem; border-radius: 9999px; border:1px solid #e5e7eb; background:#fff; cursor:pointer; font-weight:700; }
+
+    /* viz area */
+    .visualization { padding: 1.2rem; }
+    .visualization-content { padding: 1.2rem; }
+    .hidden { display:none; }
+
+    .center-text { text-align:center; color:#4b5563; margin-bottom: .8rem; }
+
+    /* grid */
+    .grid-display { display:flex; flex-direction:column; gap:.4rem; align-items:center; }
+    .grid-row { display:flex; gap:.4rem; }
+    .grid-item { width:40px; height:40px; background: linear-gradient(135deg, #60a5fa, #1e40af); border-radius: .6rem; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:.875rem; box-shadow: 0 2px 4px rgba(0,0,0,.08); }
+
+    /* circles */
+    .circles-display { display:flex; flex-wrap:wrap; gap:1.2rem; justify-content:center; }
+    .group { text-align:center; }
+    .group-label { font-size:.85rem; font-weight:700; color:#6b7280; margin-bottom:.35rem; }
+    .circles { display:flex; flex-wrap:wrap; gap:.45rem; justify-content:center; width: 172px; }
+    .circle { width:30px; height:30px; background: linear-gradient(135deg, #c084fc, #7c3aed); border-radius:50%; box-shadow: 0 2px 4px rgba(0,0,0,.08); }
+
+    /* result cards */
+    .result-box { text-align:center; margin-top: 1rem; padding: .9rem; border-radius: .8rem; }
+    .result-green { background:#dcfce7; } .result-green p { color:#166534; }
+    .result-blue { background:#dbeafe; } .result-blue p { color:#1e40af; }
+    .result-purple { background:#f3e8ff; } .result-purple p { color:#6b21a8; }
+    .result-orange { background:#fed7aa; } .result-orange p { color:#7c2d12; }
+    .result-pink { background:#fbcfe8; } .result-pink p { color:#831843; }
+    .result-box p { font-size: 1.6rem; font-weight: 900; letter-spacing: .3px; }
+    .small-text { font-size: .85rem; margin-top:.3rem; color:#475569; }
+
+    /* helper row */
+    .helper { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding: .8rem 1rem; border-top:1px solid #eef2ff; color:#475569; font-size:.93rem; }
+    .helper span strong { color: var(--indigo-700); }
+    .helper .right { display:flex; gap:.5rem; align-items:center; }
+    .pill { padding:.25rem .6rem; background:#eef2ff; border-radius: 9999px; font-weight:700; color:#3730a3; border:1px solid #e0e7ff; }
+    .linkish { border:none; background:none; color: var(--blue-700); font-weight:700; cursor:pointer; text-decoration: underline; }
+
+    /* svg */
+    svg { max-width: 100%; height: auto; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Fancy Multiplication Visualizations</h1>
+    <p class="subtitle">Multiple ways to <em>see</em> multiplication! (Commutative: <strong>a × b = b × a</strong>)</p>
+
+    <!-- Tabs -->
+    <div class="viz-buttons">
+      <button class="viz-btn" data-viz="grid">Grid</button>
+      <button class="viz-btn" data-viz="area">Area</button>
+      <button class="viz-btn" data-viz="circles">Groups</button>
+      <button class="viz-btn" data-viz="numberline">Number Line</button>
+      <button class="viz-btn" data-viz="tree">Tree</button>
+    </div>
+
+    <!-- Controls -->
+    <div class="panel controls">
+      <div class="control-group">
+        <label>First Number: <span class="number-display" id="num1Display">—</span></label>
+        <div id="num1Btns" class="number-buttons"></div>
+        <div class="extras">
+          <button id="swapBtn" class="chip" title="Swap factors">Swap a↔b</button>
+          <button id="randomBtn" class="chip" title="Random small practice pair">Random</button>
         </div>
       </div>
-    </div>
-  );
-
-  // Area model - shows multiplication as finding area
-  const renderArea = () => (
-    <div className="space-y-4">
-      <p className="text-center text-gray-700 mb-4">
-        Area Model: Width × Height = Area
-      </p>
-      <div className="flex justify-center items-center">
-        <div className="relative">
-          {/* Main rectangle */}
-          <svg width={num2 * 40 + 80} height={num1 * 40 + 80} className="drop-shadow-lg">
-            {/* Rectangle */}
-            <rect
-              x="40"
-              y="40"
-              width={num2 * 40}
-              height={num1 * 40}
-              fill="#dbeafe"
-              stroke="#0284c7"
-              strokeWidth="3"
-            />
-            
-            {/* Grid lines */}
-            {Array.from({ length: num1 - 1 }).map((_, i) => (
-              <line
-                key={`h${i}`}
-                x1="40"
-                y1={40 + (i + 1) * 40}
-                x2={40 + num2 * 40}
-                y2={40 + (i + 1) * 40}
-                stroke="#cbd5e1"
-                strokeWidth="1"
-                strokeDasharray="4"
-              />
-            ))}
-            {Array.from({ length: num2 - 1 }).map((_, i) => (
-              <line
-                key={`v${i}`}
-                x1={40 + (i + 1) * 40}
-                y1="40"
-                x2={40 + (i + 1) * 40}
-                y2={40 + num1 * 40}
-                stroke="#cbd5e1"
-                strokeWidth="1"
-                strokeDasharray="4"
-              />
-            ))}
-
-            {/* Labels */}
-            <text
-              x={40 + num2 * 20}
-              y={30}
-              textAnchor="middle"
-              className="text-lg font-bold fill-blue-700"
-              fontSize="16"
-            >
-              {num2}
-            </text>
-            <text
-              x={20}
-              y={40 + num1 * 20}
-              textAnchor="middle"
-              dominantBaseline="middle"
-              className="text-lg font-bold fill-blue-700"
-              fontSize="16"
-            >
-              {num1}
-            </text>
-
-            {/* Area label */}
-            <text
-              x={40 + num2 * 20}
-              y={40 + num1 * 20}
-              textAnchor="middle"
-              dominantBaseline="middle"
-              className="text-2xl font-bold fill-blue-900"
-              fontSize="18"
-            >
-              {product}
-            </text>
-          </svg>
-        </div>
-      </div>
-      <div className="text-center p-4 bg-blue-100 rounded-lg mt-6">
-        <p className="font-bold text-2xl text-blue-900">{num1} × {num2} = {product}</p>
-        <p className="text-sm text-blue-700 mt-2">The blue rectangle has an area of {product} square units</p>
+      <div class="control-group">
+        <label>Second Number: <span class="number-display" id="num2Display">—</span></label>
+        <div id="num2Btns" class="number-buttons"></div>
+        <div class="small-text">Choose 1–12 (like a times table!)</div>
       </div>
     </div>
-  );
 
-  // Circular groups
-  const renderCircles = () => (
-    <div className="space-y-4">
-      <p className="text-center text-gray-700 mb-4">
-        {num1} groups of {num2} = <span className="font-bold text-3xl text-purple-600">{product}</span>
-      </p>
-      <div className="flex flex-wrap gap-8 justify-center">
-        {Array.from({ length: num1 }).map((_, groupIdx) => (
-          <div key={groupIdx} className="text-center">
-            <p className="text-sm font-semibold text-gray-600 mb-2">Group {groupIdx + 1}</p>
-            <div className="flex flex-wrap gap-2 justify-center w-40">
-              {Array.from({ length: num2 }).map((_, itemIdx) => (
-                <div
-                  key={itemIdx}
-                  className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 shadow-md hover:scale-125 transition-transform flex items-center justify-center text-white text-xs font-bold"
-                >
-                  ●
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="text-center p-4 bg-purple-100 rounded-lg mt-6">
-        <p className="font-bold text-2xl text-purple-900">{num1} × {num2} = {product}</p>
-      </div>
-    </div>
-  );
-
-  // Number line jumps
-  const renderNumberLine = () => (
-    <div className="space-y-6">
-      <p className="text-center text-gray-700">
-        Skip counting: Jump {num2} a total of {num1} times
-      </p>
-      <svg width="100%" height="150" className="drop-shadow-lg">
-        {/* Number line */}
-        <line x1="20" y1="80" x2={Math.min(980, 20 + product * 30)} y2="80" stroke="#334155" strokeWidth="2" />
-        
-        {/* Tick marks and numbers */}
-        {Array.from({ length: Math.min(product + 1, 33) }).map((_, i) => (
-          <g key={i}>
-            <line x1={20 + i * 30} y1="75" x2={20 + i * 30} y2="85" stroke="#334155" strokeWidth="2" />
-            <text x={20 + i * 30} y="100" textAnchor="middle" fontSize="12" fill="#334155">
-              {i * (product / Math.min(product, 32))}
-            </text>
-          </g>
-        ))}
-
-        {/* Jumps */}
-        {Array.from({ length: num1 }).map((_, jumpIdx) => {
-          const startPos = 20 + jumpIdx * num2 * 30;
-          const endPos = 20 + (jumpIdx + 1) * num2 * 30;
-          const jumpY = 50 - jumpIdx * 15;
-          const colors = ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'];
-          const color = colors[jumpIdx % colors.length];
-
-          return (
-            <g key={jumpIdx}>
-              {/* Arc */}
-              <path
-                d={`M ${startPos} 80 Q ${(startPos + endPos) / 2} ${jumpY} ${endPos} 80`}
-                fill="none"
-                stroke={color}
-                strokeWidth="2"
-              />
-              {/* Label */}
-              <text
-                x={(startPos + endPos) / 2}
-                y={jumpY - 10}
-                textAnchor="middle"
-                fontSize="14"
-                fontWeight="bold"
-                fill={color}
-              >
-                +{num2}
-              </text>
-            </g>
-          );
-        })}
-      </svg>
-      <div className="text-center p-4 bg-orange-100 rounded-lg">
-        <p className="font-bold text-2xl text-orange-900">{num1} × {num2} = {product}</p>
-        <p className="text-sm text-orange-700 mt-2">0 + {num2} + {num2} + {num2} ... ({num1} times) = {product}</p>
-      </div>
-    </div>
-  );
-
-  // Tree visualization - repeated addition
-  const renderTree = () => (
-    <div className="space-y-4">
-      <p className="text-center text-gray-700 mb-4">
-        Repeated Addition: {num2} + {num2} + {num2} ... ({num1} times)
-      </p>
-      <div className="flex justify-center">
-        <svg width="400" height="300" className="drop-shadow-lg">
-          {/* Root */}
-          <circle cx="200" cy="250" r="25" fill="#ec4899" />
-          <text x="200" y="255" textAnchor="middle" dominantBaseline="middle" fontSize="16" fontWeight="bold" fill="white">
-            {product}
-          </text>
-
-          {/* Branches */}
-          {Array.from({ length: num1 }).map((_, i) => {
-            const angle = (Math.PI / (num1 + 1)) * (i + 1);
-            const x = 200 + Math.cos(angle - Math.PI / 2) * 150;
-            const y = 250 - Math.sin(angle - Math.PI / 2) * 150;
-
-            return (
-              <g key={i}>
-                <line x1="200" y1="250" x2={x} y2={y} stroke="#e879f9" strokeWidth="2" />
-                <circle cx={x} cy={y} r="20" fill="#a855f7" />
-                <text x={x} y={y} textAnchor="middle" dominantBaseline="middle" fontSize="14" fontWeight="bold" fill="white">
-                  {num2}
-                </text>
-              </g>
-            );
-          })}
-        </svg>
-      </div>
-      <div className="text-center p-4 bg-pink-100 rounded-lg">
-        <p className="font-bold text-2xl text-pink-900">{num1} × {num2} = {product}</p>
-        <p className="text-sm text-pink-700 mt-2">{num1} groups of {num2} each</p>
-      </div>
-    </div>
-  );
-
-  const visualizations = {
-    grid: renderGrid,
-    area: renderArea,
-    circles: renderCircles,
-    numberline: renderNumberLine,
-    tree: renderTree,
-  };
-
-  return (
-    <div className="w-full max-w-4xl mx-auto p-8 bg-gradient-to-b from-indigo-50 to-purple-50 min-h-screen">
-      <h1 className="text-4xl font-bold text-center mb-2 text-indigo-900">
-        Fancy Multiplication Visualizations
-      </h1>
-      <p className="text-center text-gray-700 mb-8">
-        Multiple ways to see multiplication!
-      </p>
-
-      {/* Visualization type selector */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-2 mb-8">
-        {[
-          { id: 'grid', label: 'Grid' },
-          { id: 'area', label: 'Area' },
-          { id: 'circles', label: 'Groups' },
-          { id: 'numberline', label: 'Number Line' },
-          { id: 'tree', label: 'Tree' },
-        ].map((v) => (
-          <button
-            key={v.id}
-            onClick={() => setVizType(v.id)}
-            className={`px-3 py-2 font-semibold rounded-lg transition-all ${
-              vizType === v.id
-                ? 'bg-indigo-600 text-white shadow-lg scale-105'
-                : 'bg-white text-gray-700 border-2 border-gray-300 hover:border-indigo-400'
-            }`}
-          >
-            {v.label}
-          </button>
-        ))}
+    <!-- Visualization Display -->
+    <div class="panel visualization" aria-live="polite">
+      <div id="grid" class="visualization-content hidden">
+        <p class="center-text" id="gridText"></p>
+        <div class="grid-display" id="gridContent"></div>
+        <div class="result-box result-green"><p id="gridResult"></p></div>
       </div>
 
-      {/* Number controls */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 bg-white p-6 rounded-lg">
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-3">
-            First Number: <span className="text-2xl text-indigo-600">{num1}</span>
-          </label>
-          <div className="flex gap-2 flex-wrap">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
-              <button
-                key={n}
-                onClick={() => setNum1(n)}
-                className={`px-4 py-2 rounded font-semibold transition-all ${
-                  num1 === n
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
-              >
-                {n}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-3">
-            Second Number: <span className="text-2xl text-indigo-600">{num2}</span>
-          </label>
-          <div className="flex gap-2 flex-wrap">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
-              <button
-                key={n}
-                onClick={() => setNum2(n)}
-                className={`px-4 py-2 rounded font-semibold transition-all ${
-                  num2 === n
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
-              >
-                {n}
-              </button>
-            ))}
-          </div>
+      <div id="area" class="visualization-content hidden">
+        <p class="center-text">Area Model: width × height = area</p>
+        <svg id="areaSvg"></svg>
+        <div class="result-box result-blue">
+          <p id="areaResult"></p>
+          <div class="small-text" id="areaNote"></div>
         </div>
       </div>
 
-      {/* Visualization display */}
-      <div className="bg-white p-8 rounded-lg shadow-lg min-h-96">
-        {visualizations[vizType]()}
+      <div id="circles" class="visualization-content hidden">
+        <p class="center-text" id="circlesText"></p>
+        <div class="circles-display" id="circlesContent"></div>
+        <div class="result-box result-purple"><p id="circlesResult"></p></div>
+      </div>
+
+      <div id="numberline" class="visualization-content hidden">
+        <p class="center-text" id="nlText"></p>
+        <svg id="numberlineSvg" viewBox="0 0 800 180"></svg>
+        <div class="result-box result-orange">
+          <p id="numberlineResult"></p>
+          <div class="small-text" id="numberlineNote"></div>
+        </div>
+      </div>
+
+      <div id="tree" class="visualization-content hidden">
+        <p class="center-text" id="treeText"></p>
+        <svg id="treeSvg" viewBox="0 0 420 320"></svg>
+        <div class="result-box result-pink"><p id="treeResult"></p><div class="small-text">Repeated addition view</div></div>
+      </div>
+
+      <div class="helper">
+        <span>Result: <strong id="resultBig">—</strong></span>
+        <div class="right"><span class="pill" id="identityHint">Identity: 1 × n = n</span><button class="linkish" id="commHint">Why a×b = b×a?</button></div>
       </div>
     </div>
-  );
-}
+  </div>
+
+  <script>
+    // --- State ---
+    let num1 = 3, num2 = 4, currentViz = 'grid';
+
+    // --- Build number buttons (1..12) ---
+    function buildButtons(containerId, clickFn, activeVal) {
+      const c = document.getElementById(containerId); c.innerHTML = '';
+      for (let n = 1; n <= 12; n++) {
+        const b = document.createElement('button');
+        b.className = 'number-btn' + (n === activeVal ? ' active' : '');
+        b.textContent = n; b.setAttribute('data-n', n);
+        b.addEventListener('click', () => clickFn(n));
+        c.appendChild(b);
+      }
+    }
+
+    // --- Tabs ---
+    function setActiveTab(target) {
+      document.querySelectorAll('.viz-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.viz === target);
+      });
+      document.querySelectorAll('.visualization-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById(target).classList.remove('hidden');
+      currentViz = target; updateVisualization();
+    }
+
+    document.querySelectorAll('.viz-btn').forEach(btn => {
+      btn.addEventListener('click', () => setActiveTab(btn.dataset.viz));
+    });
+
+    // --- Factor setters ---
+    function setNum1(n) { num1 = n; syncButtons('num1Btns', n); updateVisualization(); }
+    function setNum2(n) { num2 = n; syncButtons('num2Btns', n); updateVisualization(); }
+
+    function syncButtons(containerId, activeVal) {
+      document.querySelectorAll(`#${containerId} .number-btn`).forEach(b => {
+        b.classList.toggle('active', Number(b.dataset.n) === activeVal);
+      });
+      document.getElementById('num1Display').textContent = num1;
+      document.getElementById('num2Display').textContent = num2;
+    }
+
+    // --- Helpers ---
+    const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
+
+    // --- Renderers ---
+    function updateVisualization() {
+      const product = num1 * num2;
+      document.getElementById('resultBig').textContent = `${num1} × ${num2} = ${product}`;
+      document.getElementById('identityHint').style.display = (num1===1||num2===1)?'inline-block':'none';
+
+      if (currentViz === 'grid') renderGrid(product);
+      else if (currentViz === 'area') renderArea(product);
+      else if (currentViz === 'circles') renderCircles(product);
+      else if (currentViz === 'numberline') renderNumberLine(product);
+      else if (currentViz === 'tree') renderTree(product);
+    }
+
+    function renderGrid(product) {
+      const gridText = document.getElementById('gridText');
+      gridText.innerHTML = `${num1} rows × ${num2} columns = <strong style="font-size:1.5rem;color:#16a34a;">${product}</strong>`;
+
+      const grid = document.getElementById('gridContent'); grid.innerHTML='';
+      const maxCells = 144; // cap for performance/visibility
+      const rows = clamp(num1,1,12), cols = clamp(num2,1,12);
+      let counter = 1;
+      for (let r=0;r<rows;r++){
+        const row = document.createElement('div'); row.className='grid-row';
+        for (let c=0;c<cols;c++){
+          if (counter>maxCells) break;
+          const cell = document.createElement('div'); cell.className='grid-item';
+          cell.textContent = counter++; row.appendChild(cell);
+        }
+        grid.appendChild(row);
+      }
+      document.getElementById('gridResult').textContent = `${num1} × ${num2} = ${product}`;
+    }
+
+    function renderArea(product) {
+      const svg = document.getElementById('areaSvg'); svg.innerHTML='';
+      const unit = 32; const width = clamp(num2,1,20)*unit, height = clamp(num1,1,20)*unit;
+      const pad = 40; svg.setAttribute('viewBox',`0 0 ${width+pad*2} ${height+pad*2}`);
+
+      const rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
+      rect.setAttribute('x', pad); rect.setAttribute('y', pad);
+      rect.setAttribute('width', width); rect.setAttribute('height', height);
+      rect.setAttribute('fill', '#dbeafe'); rect.setAttribute('stroke', '#0284c7'); rect.setAttribute('stroke-width','3');
+      svg.appendChild(rect);
+
+      // grid lines
+      for (let i=1;i<num1;i++) addLine(pad, pad+i*unit, pad+width, pad+i*unit);
+      for (let j=1;j<num2;j++) addLine(pad+j*unit, pad, pad+j*unit, pad+height);
+      function addLine(x1,y1,x2,y2){ const l=document.createElementNS('http://www.w3.org/2000/svg','line'); l.setAttribute('x1',x1); l.setAttribute('y1',y1); l.setAttribute('x2',x2); l.setAttribute('y2',y2); l.setAttribute('stroke','#cbd5e1'); l.setAttribute('stroke-width','1'); l.setAttribute('stroke-dasharray','4'); svg.appendChild(l);}    
+
+      // labels
+      const lblTop = textAt(pad+width/2, pad-12, num2, 16, '#1e40af');
+      const lblLeft = textAt(pad-12, pad+height/2, num1, 16, '#1e40af'); lblLeft.setAttribute('text-anchor','end'); lblLeft.setAttribute('dominant-baseline','middle');
+      const lblCenter = textAt(pad+width/2, pad+height/2, product, 18, '#1e3a8a'); lblCenter.setAttribute('dominant-baseline','middle');
+      function textAt(x,y,txt,size,fill){ const t=document.createElementNS('http://www.w3.org/2000/svg','text'); t.setAttribute('x',x); t.setAttribute('y',y); t.setAttribute('text-anchor','middle'); t.setAttribute('font-size',size); t.setAttribute('font-weight','800'); t.setAttribute('fill',fill); t.textContent=txt; svg.appendChild(t); return t; }
+
+      document.getElementById('areaResult').textContent = `${num1} × ${num2} = ${product}`;
+      document.getElementById('areaNote').textContent = `The blue rectangle covers ${product} square units.`;
+    }
+
+    function renderCircles(product) {
+      const txt = document.getElementById('circlesText');
+      txt.innerHTML = `${num1} groups of ${num2} = <strong style="font-size:1.4rem;color:#7c3aed;">${product}</strong>`;
+      const wrap = document.getElementById('circlesContent'); wrap.innerHTML='';
+      const groups = clamp(num1,1,12), per = clamp(num2,1,24);
+      for (let g=0; g<groups; g++){
+        const group = document.createElement('div'); group.className='group';
+        const label = document.createElement('p'); label.className='group-label'; label.textContent = `Group ${g+1}`; group.appendChild(label);
+        const row = document.createElement('div'); row.className='circles';
+        for (let i=0;i<per;i++){ const dot=document.createElement('div'); dot.className='circle'; row.appendChild(dot);} 
+        group.appendChild(row); wrap.appendChild(group);
+      }
+      document.getElementById('circlesResult').textContent = `${num1} × ${num2} = ${product}`;
+    }
+
+    function renderNumberLine(product) {
+      const svg = document.getElementById('numberlineSvg'); svg.innerHTML='';
+      const maxP = Math.min(product, 120);
+      const padL = 30, padR = 30, baseY = 100, unit = 6; // scale
+      const width = padL + maxP*unit + padR; svg.setAttribute('viewBox',`0 0 ${Math.max(width, 260)} 180`);
+
+      // axis
+      addLine(padL, baseY, padL + maxP*unit, baseY, '#334155', 2);
+      // minor ticks each 1; label every num2
+      for (let i=0;i<=maxP;i++){
+        const x = padL + i*unit; const h = (i%num2===0)?10:6; addLine(x, baseY-h/2, x, baseY+h/2, '#334155', (i%num2===0)?2:1);
+        if (i%num2===0){ addText(x, baseY+20, i.toString(), 11, '#334155'); }
+      }
+      // arcs for each jump of +num2 (num1 jumps)
+      for (let j=0;j<num1;j++){
+        const start = padL + j*num2*unit; const end = padL + (j+1)*num2*unit; const ctrlY = baseY - 30 - j*10;
+        const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+        path.setAttribute('d', `M ${start} ${baseY} Q ${(start+end)/2} ${ctrlY} ${end} ${baseY}`);
+        path.setAttribute('fill','none'); path.setAttribute('stroke', ['#ef4444','#3b82f6','#10b981','#f59e0b','#8b5cf6'][j%5]); path.setAttribute('stroke-width','2');
+        svg.appendChild(path);
+        addText((start+end)/2, ctrlY-8, `+${num2}`, 12, '#0f172a');
+      }
+
+      document.getElementById('nlText').textContent = `Skip counting by ${num2}, ${num1} times`;
+      document.getElementById('numberlineResult').textContent = `${num1} × ${num2} = ${product}`;
+      document.getElementById('numberlineNote').textContent = `0 ${Array(num1).fill(`+ ${num2}`).join(' ')} = ${product}`;
+
+      function addLine(x1,y1,x2,y2,stroke,w){ const l=document.createElementNS('http://www.w3.org/2000/svg','line'); l.setAttribute('x1',x1); l.setAttribute('y1',y1); l.setAttribute('x2',x2); l.setAttribute('y2',y2); l.setAttribute('stroke',stroke); l.setAttribute('stroke-width',w); svg.appendChild(l); }
+      function addText(x,y,txt,size,fill){ const t=document.createElementNS('http://www.w3.org/2000/svg','text'); t.setAttribute('x',x); t.setAttribute('y',y); t.setAttribute('text-anchor','middle'); t.setAttribute('font-size',size); t.setAttribute('font-weight','800'); t.setAttribute('fill',fill); svg.appendChild(t); t.textContent = txt; }
+    }
+
+    function renderTree(product) {
+      const svg = document.getElementById('treeSvg'); svg.innerHTML='';
+      const cx=210, cy=260, r=26;
+      // root circle with product
+      circle(cx,cy,r,'#ec4899'); text(cx, cy+1, product, 16, '#fff');
+      // branches: num1 leaves each labeled num2
+      for (let i=0;i<num1;i++){
+        const angle = (Math.PI/(num1+1))*(i+1);
+        const x = cx + Math.cos(angle - Math.PI/2) * 130;
+        const y = cy - Math.sin(angle - Math.PI/2) * 130;
+        line(cx,cy,x,y,'#e879f9',2); circle(x,y,20,'#a855f7'); text(x,y+1,num2,14,'#fff');
+      }
+      document.getElementById('treeText').textContent = `Repeated addition: ${Array(num1).fill(num2).join(' + ')}`;
+      document.getElementById('treeResult').textContent = `${num1} × ${num2} = ${product}`;
+
+      function circle(x,y,r,fill){ const c=document.createElementNS('http://www.w3.org/2000/svg','circle'); c.setAttribute('cx',x); c.setAttribute('cy',y); c.setAttribute('r',r); c.setAttribute('fill',fill); svg.appendChild(c); }
+      function line(x1,y1,x2,y2,stroke,w){ const l=document.createElementNS('http://www.w3.org/2000/svg','line'); l.setAttribute('x1',x1); l.setAttribute('y1',y1); l.setAttribute('x2',x2); l.setAttribute('y2',y2); l.setAttribute('stroke',stroke); l.setAttribute('stroke-width',w); svg.appendChild(l); }
+      function text(x,y,txt,size,fill){ const t=document.createElementNS('http://www.w3.org/2000/svg','text'); t.setAttribute('x',x); t.setAttribute('y',y); t.setAttribute('text-anchor','middle'); t.setAttribute('dominant-baseline','middle'); t.setAttribute('font-size',size); t.setAttribute('font-weight','800'); t.setAttribute('fill',fill); t.textContent=txt; svg.appendChild(t); }
+    }
+
+    // --- Interactions ---
+    document.getElementById('swapBtn').addEventListener('click', () => { const tmp=num1; num1=num2; num2=tmp; syncButtons('num1Btns', num1); syncButtons('num2Btns', num2); updateVisualization(); });
+    document.getElementById('randomBtn').addEventListener('click', () => { setNum1(1+Math.floor(Math.random()*10)); setNum2(1+Math.floor(Math.random()*10)); });
+
+    document.getElementById('commHint').addEventListener('click', () => {
+      alert('Commutative Property: a × b = b × a.\n\nYou can see it by rotating the grid — 3 rows × 4 columns has the same number of squares as 4 rows × 3 columns.');
+    });
+
+    // Keyboard support: arrows move active factor, numbers 1-9 pick quickly
+    window.addEventListener('keydown', (e) => {
+      if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+      if (e.key === 'ArrowUp') setNum1(clamp(num1+1,1,12));
+      else if (e.key === 'ArrowDown') setNum1(clamp(num1-1,1,12));
+      else if (e.key === 'ArrowRight') setNum2(clamp(num2+1,1,12));
+      else if (e.key === 'ArrowLeft') setNum2(clamp(num2-1,1,12));
+      else if (/^[1-9]$/.test(e.key)) { const n = Number(e.key); setNum2(n); }
+    });
+
+    // --- Init ---
+    function init(){
+      buildButtons('num1Btns', setNum1, num1);
+      buildButtons('num2Btns', setNum2, num2);
+      // default active tab
+      setActiveTab('grid');
+      // sync displays
+      syncButtons('num1Btns', num1); syncButtons('num2Btns', num2);
+      updateVisualization();
+    }
+    init();
+  </script>
+</body>
+</html>
