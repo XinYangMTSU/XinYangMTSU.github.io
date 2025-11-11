@@ -139,7 +139,7 @@
 
       <div id="tree" class="visualization-content hidden">
         <p class="center-text" id="treeText"></p>
-        <svg id="treeSvg" viewBox="0 0 420 320"></svg>
+        <svg id="treeSvg" viewBox="0 0 460 380" preserveAspectRatio="xMidYMid meet" style="overflow:visible;"></svg>
         <div class="result-box result-pink"><p id="treeResult"></p><div class="small-text">Repeated addition view</div></div>
       </div>
 
@@ -302,14 +302,14 @@
 
     function renderTree(product) {
       const svg = document.getElementById('treeSvg'); svg.innerHTML='';
-      const cx=210, cy=260, r=26;
+      const cx=230, cy=220, r=26;
       // root circle with product
       circle(cx,cy,r,'#ec4899'); text(cx, cy+1, product, 16, '#fff');
       // branches: num1 leaves each labeled num2
       for (let i=0;i<num1;i++){
         const angle = (Math.PI/(num1+1))*(i+1);
-        const x = cx + Math.cos(angle - Math.PI/2) * 130;
-        const y = cy - Math.sin(angle - Math.PI/2) * 130;
+        const x = cx + Math.cos(angle - Math.PI/2) * 120;
+        const y = cy - Math.sin(angle - Math.PI/2) * 120;
         line(cx,cy,x,y,'#e879f9',2); circle(x,y,20,'#a855f7'); text(x,y+1,num2,14,'#fff');
       }
       document.getElementById('treeText').textContent = `Repeated addition: ${Array(num1).fill(num2).join(' + ')}`;
