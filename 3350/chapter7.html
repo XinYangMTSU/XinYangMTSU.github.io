@@ -975,33 +975,8 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
     \frac{\partial L}{\partial b^{(l)}} = \delta^{(l)}
     \]
     In words: **each weight’s gradient = error × input**, and **each bias’s gradient = error**.
-  </li>
 
   <br>
-
-  <li>
-    <b><font color="red">Step 4 – Update Weights and Biases:</font></b><br>
-    Finally, weights and biases are updated using the learning rate \( \eta \):
-    \[
-    W^{(l)} \leftarrow W^{(l)} - \eta \frac{\partial L}{\partial W^{(l)}}, \quad
-    b^{(l)} \leftarrow b^{(l)} - \eta \frac{\partial L}{\partial b^{(l)}}
-    \]
-    These updates move the parameters in the direction that reduces loss.
-  </li>
-
-
-  <!--   -->
-
-  <li>
-  <b><font color="red">Step 3 – Propagate Error to Hidden Layer (and Derive Gradients):</font></b><br>
-  Each hidden layer receives part of the error from the layer after it:
-  \[
-  \boxed{\delta^{(l)} = (W^{(l+1)})^T \delta^{(l+1)} \odot \sigma'(z^{(l)})}
-  \]
-  Here \( (W^{(l+1)})^T \delta^{(l+1)} \) carries the error backward,
-  and \( \sigma'(z^{(l)}) \) tells how sensitive this layer’s activations were.
-  <br><br>
-
   <h5 style="color:#ff79c6;">Step 3a – How a Single Weight Affects the Loss</h5>
   Pick one connection \( w_{ij}^{(l)} \) — it connects neuron \( j \) from the previous layer
   to neuron \( i \) in this layer.  
@@ -1058,6 +1033,7 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
   In words:
   - **Each weight’s gradient = error × input**  
   - **Each bias’s gradient = error × 1**
+    
 </li>
 
 <br>
