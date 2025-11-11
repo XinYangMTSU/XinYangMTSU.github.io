@@ -911,6 +911,125 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
   <!-- -->
 
 
+  <!-- -->
+<h4 id="backprop">3.3 Backpropagation (Detailed Derivation)</h4>
+
+<p>
+  <b>Backpropagation</b> is the core algorithm that allows neural networks to learn.
+  After a forward pass produces an output, the network compares it to the target
+  and computes the <b>loss</b> \( L \). Then, backpropagation flows this error backward
+  to compute how much each weight and bias contributed to the total error —
+  and how they should be adjusted to make the prediction better next time.
+</p>
+
+<p>
+  Mathematically, backpropagation computes the <b>gradient of the loss</b>
+  with respect to every weight \( w \) and bias \( b \) in the network:
+  \[
+  \text{Gradient: } 
+  \frac{\partial L}{\partial w^{(l)}_{ij}}, \quad
+  \frac{\partial L}{\partial b^{(l)}_j}
+  \]
+  These gradients tell us how changing each parameter would change the total loss.
+</p>
+
+<hr style="border:1px solid #ff79c6; opacity:0.5;">
+
+<ol>
+  <li>
+    <b><font color="red">Step 1 – Compute the Loss:</font></b><br>
+    Measure how far the prediction \( \hat{y} \) is from the true label \( y \).
+    <ul>
+      <li>Mean Squared Error (Regression): \( L = \frac{1}{2}(y - \hat{y})^2 \)</li>
+      <li>Cross-Entropy (Classification): \( L = -\sum y_i \log(\hat{y}_i) \)</li>
+    </ul>
+  </li>
+
+  <br>
+
+  <li>
+    <b><font color="red">Step 2 – Compute the Output Layer Delta:</font></b><br>
+    The <b>delta</b> is the error signal at each layer — the gradient of the loss with
+    respect to the pre-activation \( z \):
+    \[
+    \delta^{(l)} = \frac{\partial L}{\partial z^{(l)}}
+    \]
+    For the final (output) layer:
+    \[
+    \boxed{\delta^{(L)} = (\hat{y} - y) \odot \sigma'(z^{(L)})}
+    \]
+    (If using Softmax + Cross-Entropy, this simplifies to \( \delta^{(L)} = \hat{y} - y \)).
+    <br>
+    Then the gradient for each output weight and bias is:
+    \[
+    \frac{\partial L}{\partial W^{(L)}} = \delta^{(L)} (a^{(L-1)})^T, \quad
+    \frac{\partial L}{\partial b^{(L)}} = \delta^{(L)}
+    \]
+  </li>
+
+  <br>
+
+  <li>
+    <b><font color="red">Step 3 – Propagate Error to Hidden Layers:</font></b><br>
+    Each hidden layer receives part of the error from the layer after it:
+    \[
+    \boxed{\delta^{(l)} = (W^{(l+1)})^T \delta^{(l+1)} \odot \sigma'(z^{(l)})}
+    \]
+    Here \( (W^{(l+1)})^T \delta^{(l+1)} \) carries the error backward,
+    and \( \sigma'(z^{(l)}) \) tells how sensitive this layer’s activations were.
+    <br><br>
+    Once we know \( \delta^{(l)} \), we can compute:
+    \[
+    \frac{\partial L}{\partial W^{(l)}} = \delta^{(l)} (a^{(l-1)})^T, \quad
+    \frac{\partial L}{\partial b^{(l)}} = \delta^{(l)}
+    \]
+    In words: **each weight’s gradient = error × input**, and **each bias’s gradient = error**.
+  </li>
+
+  <br>
+
+  <li>
+    <b><font color="red">Step 4 – Update Weights and Biases:</font></b><br>
+    Finally, weights and biases are updated using the learning rate \( \eta \):
+    \[
+    W^{(l)} \leftarrow W^{(l)} - \eta \frac{\partial L}{\partial W^{(l)}}, \quad
+    b^{(l)} \leftarrow b^{(l)} - \eta \frac{\partial L}{\partial b^{(l)}}
+    \]
+    These updates move the parameters in the direction that reduces loss.
+  </li>
+</ol>
+
+<div class="computation-box" style="background:#1e1e2f; color:#fff; padding:15px; border-radius:8px; margin-top:15px;">
+  <p><b>Summary of Backpropagation Flow:</b></p>
+  <p style="margin-left:20px;">
+    1️⃣ Compute loss → 
+    2️⃣ Compute output delta → 
+    3️⃣ Backpropagate deltas → 
+    4️⃣ Compute gradients → 
+    5️⃣ Update weights and biases
+  </p>
+  <p style="text-align:center;">
+    \( \Delta W^{(l)} = -\eta \frac{\partial L}{\partial W^{(l)}} \), &nbsp;
+    \( \Delta b^{(l)} = -\eta \frac{\partial L}{\partial b^{(l)}} \)
+  </p>
+</div>
+
+<div style="margin-top:10px; font-size:13px; color:#ccc;">
+  <b>Intuition:</b> Each neuron’s <b>δ</b> tells “how much I caused the error.”
+  The network then adjusts:
+  <ul>
+    <li>Weights — by error × input strength.</li>
+    <li>Biases — directly by the error signal.</li>
+  </ul>
+  This process repeats over many examples, gradually minimizing the total loss.
+</div>
+
+
+
+
+
+  <!-- -->
+  
   <h4 id="backprop">3.3 Backpropagation</h4>
 
   <p>
