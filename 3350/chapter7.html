@@ -889,24 +889,6 @@ $$ h_1 = \text{ReLU}(z_1) = max(0, z_1) $$
    </div>
     <br>
 
-    <li><b><font color="red">Step 3 – Output Generation:</font></b><br>
-    The output layer produces final predictions — probabilities for classification or numeric values for regression.
-</li> <br>
-
-<li><b><font color="red">Step 4 – Thresholding & Label Assignment:</font></b><br>
-    For classification tasks, we apply a decision threshold to convert probabilities into class labels.<br><br>
-
-    <b>For Binary Classification:</b><br>
-    $$ \text{Predicted Label} = \begin{cases} 1 & \text{if } y_1 \geq 0.5 \\ 0 & \text{if } y_1 < 0.5 \end{cases} $$
-    <br>
-
-    <b>For Multi-class Classification:</b><br>
-    $$ \text{Predicted Label} = \arg\max_k(y_k) $$
-    where we select the class with the highest probability.<br><br>
-
-    Example: If \(\mathbf{y} = [0.1, 0.7, 0.2]\) for 3 classes, the predicted label is class 2 (index with max probability).
-</li>
-
   </div>
   <!-- -->
 
