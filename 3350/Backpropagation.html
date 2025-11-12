@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backpropagation and Gradient Descent for Binary Classification</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1a1d1f;
+            font-family: 'Roboto', Arial, sans-serif;
+            color: #ffb3de;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #222025;
+            border-radius: 18px;
+            padding: 40px;
+            box-shadow: 0 4px 30px rgba(255,121,198,.09);
+            border-left: 7px solid #ff79c6;
+        }
+
+        h1 {
+            color: #ff79c6;
+            text-align: center;
+            margin-top: 0;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #ff79c6;
+            font-size: 1.8em;
+            border-bottom: 2px solid #ff79c6;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #ffb3de;
+            font-size: 1.2em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: red;
+        }
+
+        .subtitle {
+            color: #ffb3de;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .code-block {
+            background: #19121a;
+            border: 2px solid #ff79c6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            color: #ffb3de;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.6;
+        }
+
+        .code-block.math {
+            border-left: 4px solid #ff79c6;
+        }
+
+        .code-block.result {
+            border-left: 4px solid #ff79c6;
+            color: #ffb3de;
+        }
+
+        .legend {
+            background: #2a1e28;
+            border: 2px solid #ff79c6;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .legend h3 {
+            color: #ff79c6;
+            margin-top: 0;
+            border-bottom: 2px solid #ff79c6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin: 12px 0;
+            color: #ffb3de;
+            font-size: 0.95em;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .color-input { background: #ff79c6; }
+        .color-hidden { background: #ffb3de; }
+        .color-output { background: #ffb3de; }
+        .color-weight { background: #50fa7b; }
+
+        .key-formula {
+            background: #2a1e28;
+            border: 2px solid #ffb3de;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #ffb3de;
+            font-family: 'Courier New', monospace;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #19121a;
+            border: 2px solid #ff79c6;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #404040;
+            padding: 12px;
+            text-align: left;
+            color: #ffb3de;
+            font-size: 0.9em;
+        }
+
+        th {
+            background: #2d1a2f;
+            color: #ffb3de;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background: #2d2d30;
+        }
+
+        ul {
+            margin-left: 20px;
+            color: #ffb3de;
+        }
+
+        ul li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .highlight-blue {
+            color: #569cd6;
+        }
+
+        .highlight-green {
+            color: #50fa7b;
+        }
+
+        .highlight-yellow {
+            color: #ffb3de;
+        }
+
+        .comparison-box {
+            background: #19121a;
+            border: 2px solid #ff79c6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #ffb3de;
+        }
+
+        .comparison-box h4 {
+            color: #ffb3de;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: #ffb3de;
+        }
+
+        .label {
+            color: #ffb3de;
+            font-size: 0.95em;
+            font-weight: 500;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        svg {
+            display: block;
+            margin: 30px auto;
+            background: #19121a;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.6em;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            .code-block {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+    <div class="container">
+        <h1>Backpropagation and Gradient Descent for Binary Classification</h1>
+        <p class="subtitle">Step-by-step explanation with all mathematical details</p>
+
+        <div class="legend">
+            <h3>Network Architecture</h3>
+            <ul>
+                <li><strong>Input Layer:</strong> 4 neurons (x₁, x₂, x₃, x₄)</li>
+                <li><strong>Hidden Layer:</strong> 3 neurons (h₁, h₂, h₃) with ReLU activation</li>
+                <li><strong>Output Layer:</strong> 1 neuron (y) with Sigmoid activation ← <span class="highlight-yellow">KEY DIFFERENCE</span></li>
+                <li><strong>Bias:</strong> b⁰ (input), b¹ (hidden), b² (output)</li>
+            </ul>
+        </div>
+
+        <h2>Network Visualization with Weights</h2>
+
+
+        <svg width="1000" height="550" viewBox="0 0 1000 550">
+          <!-- Optional: keep subtle halo for readability; remove the <style> if you want it 100% like the original -->
+          <style>
+            .wlabel { font-size:12px; fill:#ffb3de; paint-order:stroke; stroke:#19121a; stroke-width:3px; }
+          </style>
+
+          <!-- Title for each layer -->
+          <text x="100" y="25" font-size="18" font-weight="bold" fill="#ff79c6" text-anchor="middle">Input Layer</text>
+          <text x="400" y="25" font-size="18" font-weight="bold" fill="#ff79c6" text-anchor="middle">Hidden Layer</text>
+          <text x="750" y="25" font-size="18" font-weight="bold" fill="#ff79c6" text-anchor="middle">Output Layer</text>
+
+          <!-- Input Layer Neurons -->
+          <circle cx="100" cy="80" r="18" fill="#ff79c6" stroke="#ffb3de" stroke-width="2.5"/>
+          <text x="100" y="86" font-size="14" fill="black" text-anchor="middle" font-weight="bold">x₁</text>
+
+          <circle cx="100" cy="170" r="18" fill="#ff79c6" stroke="#ffb3de" stroke-width="2.5"/>
+          <text x="100" y="176" font-size="14" fill="black" text-anchor="middle" font-weight="bold">x₂</text>
+
+          <circle cx="100" cy="260" r="18" fill="#ff79c6" stroke="#ffb3de" stroke-width="2.5"/>
+          <text x="100" y="266" font-size="14" fill="black" text-anchor="middle" font-weight="bold">x₃</text>
+
+          <circle cx="100" cy="350" r="18" fill="#ff79c6" stroke="#ffb3de" stroke-width="2.5"/>
+          <text x="100" y="356" font-size="14" fill="black" text-anchor="middle" font-weight="bold">x₄</text>
+
+          <!-- Hidden Layer Neurons -->
+          <circle cx="400" cy="110" r="18" fill="#ffb3de" stroke="#ff79c6" stroke-width="2.5"/>
+          <text x="400" y="116" font-size="14" fill="black" text-anchor="middle" font-weight="bold">h₁</text>
+
+          <circle cx="400" cy="220" r="18" fill="#ffb3de" stroke="#ff79c6" stroke-width="2.5"/>
+          <text x="400" y="226" font-size="14" fill="black" text-anchor="middle" font-weight="bold">h₂</text>
+
+          <circle cx="400" cy="330" r="18" fill="#ffb3de" stroke="#ff79c6" stroke-width="2.5"/>
+          <text x="400" y="336" font-size="14" fill="black" text-anchor="middle" font-weight="bold">h₃</text>
+
+          <!-- Output Layer Neuron -->
+          <circle cx="750" cy="170" r="18" fill="#ffb3de" stroke="#ff79c6" stroke-width="2.5"/>
+          <text x="750" y="176" font-size="14" fill="black" text-anchor="middle" font-weight="bold">y</text>
+
+          <!-- Connections Input → Hidden -->
+          <line x1="118" y1="80"  x2="382" y2="110" stroke="#ff79c6" stroke-width="2" opacity="0.6"/>
+          <line x1="118" y1="80"  x2="382" y2="220" stroke="#ff79c6" stroke-width="2" opacity="0.6"/>
+          <line x1="118" y1="80"  x2="382" y2="330" stroke="#ff79c6" stroke-width="2" opacity="0.6"/>
+
+          <line x1="118" y1="170" x2="382" y2="110" stroke="#ff79c6" stroke-width="2" opacity="0.6"/>
+          <line x1="118" y1="170" x2="382" y2="220" stroke="#ff79c6" stroke-width="2" opacity="0.6"/>
+          <line x1="118" y1="170" x2="382" y2="330" stroke="#ff79c6" stroke-width="2" opacity="0.6"/>
+
+          <line x1="118" y1="260" x2="382" y2="110" stroke="#ff79c6" stroke-width="2" opacity="0.6"/>
+          <line x1="118" y1="260" x2="382" y2="220" stroke="#ff79c6" stroke-width="2" opacity="0.6"/>
+          <line x1="118" y1="260" x2="382" y2="330" stroke="#ff79c6" stroke-width="2" opacity="0.6"/>
+
+          <line x1="118" y1="350" x2="382" y2="110" stroke="#ff79c6" stroke-width="2" opacity="0.6"/>
+          <line x1="118" y1="350" x2="382" y2="220" stroke="#ff79c6" stroke-width="2" opacity="0.6"/>
+          <line x1="118" y1="350" x2="382" y2="330" stroke="#ff79c6" stroke-width="2" opacity="0.6"/>
+
+          <!-- Weight labels at the original positions (no rotation) -->
+          <text class="wlabel" x="250" y="90">w₁₁=0.5</text>
+          <text class="wlabel" x="240" y="155">w₁₂=0.2</text>
+          <text class="wlabel" x="240" y="210">w₁₃=-0.1</text>
+
+          <text class="wlabel" x="250" y="135">w₂₁=0.3</text>
+          <text class="wlabel" x="250" y="200">w₂₂=0.4</text>
+          <text class="wlabel" x="245" y="255">w₂₃=0.2</text>
+
+          <text class="wlabel" x="250" y="175">w₃₁=-0.2</text>
+          <text class="wlabel" x="250" y="245">w₃₂=0.1</text>
+          <text class="wlabel" x="245" y="300">w₃₃=0.5</text>
+
+          <text class="wlabel" x="250" y="220">w₄₁=0.1</text>
+          <text class="wlabel" x="250" y="290">w₄₂=0.3</text>
+          <text class="wlabel" x="245" y="345">w₄₃=-0.2</text>
+
+          <!-- Hidden → Output (unchanged) -->
+          <line x1="418" y1="110" x2="732" y2="170" stroke="#ff79c6" stroke-width="2" opacity="0.6"/>
+          <text x="565" y="125" font-size="12" fill="#ffb3de">w₁=0.6</text>
+
+          <line x1="418" y1="220" x2="732" y2="170" stroke="#ff79c6" stroke-width="2" opacity="0.6"/>
+          <text x="565" y="190" font-size="12" fill="#ffb3de">w₂=0.2</text>
+
+          <line x1="418" y1="330" x2="732" y2="170" stroke="#ff79c6" stroke-width="2" opacity="0.6"/>
+          <text x="565" y="265" font-size="12" fill="#ffb3de">w₃=0.5</text>
+
+          <!-- Bias nodes -->
+          <circle cx="100" cy="450" r="14" fill="#888888" stroke="#666666" stroke-width="2.5"/>
+          <text x="100" y="455" font-size="16" fill="white" text-anchor="middle" font-weight="bold">b⁰</text>
+
+          <circle cx="400" cy="450" r="14" fill="#888888" stroke="#666666" stroke-width="2.5"/>
+          <text x="400" y="455" font-size="16" fill="white" text-anchor="middle" font-weight="bold">b¹</text>
+
+          <circle cx="750" cy="450" r="14" fill="#888888" stroke="#666666" stroke-width="2.5"/>
+          <text x="750" y="455" font-size="16" fill="white" text-anchor="middle" font-weight="bold">b²</text>
+
+          <!-- Bias lines -->
+          <line x1="100" y1="440" x2="100" y2="368" stroke="#888888" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.6"/>
+          <line x1="400" y1="440" x2="400" y2="348" stroke="#888888" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.6"/>
+          <line x1="750" y1="440" x2="750" y2="188" stroke="#888888" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.6"/>
+
+          <!-- Layer formulas (16px) -->
+          <text x="400" y="520" font-size="16" fill="#ffb3de" text-anchor="middle" font-style="italic">
+            z⁽¹⁾ = W⁽¹⁾x + b⁽¹⁾  →  a⁽¹⁾ = ReLU(z⁽¹⁾)
+          </text>
+          <text x="750" y="520" font-size="16" fill="#ffb3de" text-anchor="middle" font-style="italic">
+            z⁽²⁾ = W⁽²⁾a⁽¹⁾ + b⁽²⁾  →  ŷ = σ(z⁽²⁾)
+          </text>
+        </svg>
+        <div class="label"><strong>Architecture:</strong> 4 inputs → 3 hidden neurons (with ReLU) → 1 output (with Sigmoid)</div>
+      </div>
+
+      <br><br>
+
+      <div class="container">
+        <h2>Part 1: FORWARD PROPAGATION</h2>
+
+        <h3>Step 1: Initialize Parameters</h3>
+
+        <p><strong>Weights from Input → Hidden Layer (4×3 matrix):</strong></p>
+        <div class="code-block math">W⁽¹⁾ =
+     [w₁₁  w₁₂  w₁₃]     [0.5   0.2   -0.1]
+     [w₂₁  w₂₂  w₂₃]  =  [0.3   0.4    0.2]
+     [w₃₁  w₃₂  w₃₃]     [-0.2  0.1    0.5]
+     [w₄₁  w₄₂  w₄₃]     [0.1   0.3   -0.2]</div>
+
+        <p><strong>Weights from Hidden → Output Layer (3×1 matrix):</strong></p>
+        <div class="code-block math">W⁽²⁾ =
+     [w₁]     [0.6]
+     [w₂]  =  [0.2]
+     [w₃]     [0.5]
+
+(Only 3 weights now, since only 1 output neuron!)</div>
+
+        <p><strong>Biases:</strong></p>
+        <div class="code-block math">b⁽¹⁾ = [0.1, 0.2, 0.15]  (3 hidden neurons)
+b⁽²⁾ = [0.05]             (1 output neuron)</div>
+
+        <p><strong>Input Sample:</strong></p>
+        <div class="code-block math">x = [1, 2, 0.5, -0.5]ᵀ
+Target Output (Binary Label):
+y_true = 1  (positive class, could also be 0 for negative class)</div>
+
+        <h3>Step 2: Hidden Layer Computation</h3>
+
+        <p><strong>Linear Transformation:</strong></p>
+        <div class="code-block math">z⁽¹⁾ = W⁽¹⁾ · x + b⁽¹⁾</div>
+
+        <p><strong>For each hidden neuron:</strong></p>
+        <div class="code-block math">z₁⁽¹⁾ = (0.5×1) + (0.3×2) + (-0.2×0.5) + (0.1×-0.5) + 0.1
+    = 0.5 + 0.6 - 0.1 - 0.05 + 0.1 = 1.05
+
+z₂⁽¹⁾ = (0.2×1) + (0.4×2) + (0.1×0.5) + (0.3×-0.5) + 0.2
+    = 0.2 + 0.8 + 0.05 - 0.15 + 0.2 = 1.1
+
+z₃⁽¹⁾ = (-0.1×1) + (0.2×2) + (0.5×0.5) + (-0.2×-0.5) + 0.15
+    = -0.1 + 0.4 + 0.25 + 0.1 + 0.15 = 0.8</div>
+
+        <p><strong>So:</strong> <span class="highlight-yellow">z⁽¹⁾ = [1.05, 1.1, 0.8]ᵀ</span></p>
+
+        <h3>Step 3: Apply ReLU Activation</h3>
+
+        <div class="code-block math">h₁ = ReLU(z₁⁽¹⁾) = max(0, 1.05) = 1.05
+h₂ = ReLU(z₂⁽¹⁾) = max(0, 1.1) = 1.1
+h₃ = ReLU(z₃⁽¹⁾) = max(0, 0.8) = 0.8</div>
+
+        <p><strong>Activation Vector:</strong> <span class="highlight-yellow">a⁽¹⁾ = [1.05, 1.1, 0.8]ᵀ</span></p>
+
+        <h3>Step 4: Output Layer Computation</h3>
+
+        <p><strong>Linear Transformation:</strong></p>
+        <div class="code-block math">z⁽²⁾ = W⁽²⁾ · a⁽¹⁾ + b⁽²⁾</div>
+
+        <p><strong>Calculate logit (pre-activation output):</strong></p>
+        <div class="code-block math">z⁽²⁾ = (w₁ × h₁) + (w₂ × h₂) + (w₃ × h₃) + b⁽²⁾
+z⁽²⁾ = (0.6 × 1.05) + (0.2 × 1.1) + (0.5 × 0.8) + 0.05
+z⁽²⁾ = 0.63 + 0.22 + 0.4 + 0.05 = 1.3
+
+So: z⁽²⁾ = 1.3 (single scalar value)</div>
+
+        <h3>Step 5: Apply Sigmoid Activation ⭐ (BINARY CLASSIFICATION KEY)</h3>
+
+        <p><strong>Sigmoid Function:</strong></p>
+        <div class="key-formula">σ(z) = 1 / (1 + e^(-z))
+
+This converts any value to a probability between 0 and 1</div>
+
+        <p><strong>Calculate probability:</strong></p>
+        <div class="code-block math">ŷ = σ(z⁽²⁾) = 1 / (1 + e^(-1.3))
+   = 1 / (1 + e^(-1.3))
+   = 1 / (1 + 0.2725)
+   = 1 / 1.2725
+   = 0.786</div>
+
+        <p><strong>Prediction:</strong></p>
+        <div class="code-block result">ŷ = 0.786  (78.6% probability of being class 1)
+
+Since y_true = 1, this is a good prediction!</div>
+
+</div>
+<br><br>
+
+    <div class="container">
+        <h2>Part 2: LOSS CALCULATION FOR BINARY CLASSIFICATION</h2>
+
+        <h3>Binary Cross-Entropy (BCE) Loss</h3>
+
+        <p><strong>Formula:</strong></p>
+        <div class="key-formula">L = -[y × log(ŷ) + (1-y) × log(1-ŷ)]
+
+Where:
+• y = true label (0 or 1)
+• ŷ = predicted probability</div>
+
+        <p><strong>For our sample (y = 1):</strong></p>
+        <div class="code-block math">L = -[1 × log(0.786) + (1-1) × log(1-0.786)]
+  = -[1 × log(0.786) + 0 × log(0.214)]
+  = -[log(0.786) + 0]
+  = -[-0.241]
+  = 0.241</div>
+
+        <p><strong>Interpretation:</strong></p>
+        <div class="code-block">• If ŷ = 0.786 and y = 1: Loss = 0.241 (relatively low, good)
+• If ŷ = 0.1 and y = 1: Loss = -log(0.1) = 2.303 (high penalty!)
+• If ŷ = 0.9 and y = 1: Loss = -log(0.9) = 0.105 (low, better)</div>
+
+  </div>
+  <br><br>
+
+  <div class="container">
+
+        <h2>Part 3: BACKPROPAGATION FOR BINARY CLASSIFICATION</h2>
+
+        <h3>Step 1: Output Layer Delta \(\delta^{(2)}\)</h3>
+
+        <ul>
+            <li>\(\delta^{(2)}\) = The error signal at the output layer</li>
+            <li>It's a number that tells you: "How much is the output wrong, and in which direction should we fix it?"</li>
+
+
+        <pre>
+        Step 1: Compute what we changed
+        z⁽²⁾ = W⁽²⁾a⁽¹⁾ + b⁽²⁾
+
+        Step 2: See the impact on prediction
+                ŷ = σ(z⁽²⁾) = 1/(1 + e^(-z⁽²⁾))
+
+        Step 3: Calculate the loss
+                L = -[y·log(ŷ) + (1-y)·log(1-ŷ)]
+
+        Step 4: Work backwards to find who's responsible
+                δ⁽²⁾ = ∂L/∂z⁽²⁾ = "How much does z⁽²⁾ contribute to L?"
+
+        This is the OUTPUT LAYER DELTA!
+        </pre>
+
+        <li>The Chain:</li>
+
+        <pre>
+        Loss depends on ŷ: L = -[y·log(ŷ) + (1-y)·log(1-ŷ)]
+        ŷ depends on z⁽²⁾: ŷ = σ(z⁽²⁾) = 1/(1 + e^(-z⁽²⁾))
+        z⁽²⁾ depends on w: z⁽²⁾ = W⁽²⁾a⁽¹⁾ + b⁽²⁾
+
+        So to change Loss via w, we must:
+        1. See how Loss reacts to ŷ (∂L/∂ŷ)
+        2. See how ŷ reacts to z⁽²⁾ (∂ŷ/∂z⁽²⁾)
+        3. See how z⁽²⁾ reacts to w (∂z⁽²⁾/∂w)
+        4. Multiply all three! (Chain rule)
+
+        ∂L/∂w = ∂L/∂ŷ × ∂ŷ/∂z⁽²⁾ × ∂z⁽²⁾/∂w
+
+        δ⁽²⁾ is the FIRST part of this chain!
+        </pre>
+
+        </ul>
+
+        <p><strong>For Sigmoid + BCE, the derivative simplifies beautifully:</strong></p>
+        <div class="key-formula">
+
+        $$  \delta^{(2)} = \frac{\partial L}{\partial z^{(2)}}
+                       = \frac{\partial L}{\partial \hat{y}}
+                         \times
+                         \frac{\partial \hat{y}}{\partial z^{(2)}}
+        $$
+
+        $$
+        \frac{\partial L}{\partial \hat{y}}
+        = -\left[\frac{y}{\hat{y}} - \frac{(1-y)}{(1-\hat{y})}\right]
+        = -\frac{y}{\hat{y}} + \frac{(1-y)}{(1-\hat{y})}
+        = \frac{\hat{y} - y}{\hat{y}(1 - \hat{y})}
+        \quad \text{(BCE loss derivative)} \quad ( \frac{d}{d\hat{y}}[\ln(\hat{y})] = \frac{1}{\hat{y}} )
+        $$
+
+        $$
+        \frac{\partial \hat{y}}{\partial z^{(2)}} = \frac{d}{dz^{(2)}} \left[\frac{1}{1 + e^{-z^{(2)}}}\right]
+        = -\frac{1}{(1 + e^{-z^{(2)}})^2} \cdot (-e^{-z^{(2)}}) = \frac{e^{-z^{(2)}}}{(1 + e^{-z^{(2)}})^2}
+        = \sigma(z^{(2)}) \cdot (1 - \sigma(z^{(2)}))
+        = \hat{y}(1 - \hat{y})
+        \quad \text{(Sigmoid derivative)}
+        $$
+
+        $$
+        \Rightarrow \delta^{(2)}
+        = \frac{(\hat{y} - y)}{\hat{y}(1 - \hat{y})}
+           \times \hat{y}(1 - \hat{y})
+        = (\hat{y} - y)
+        $$
+
+        $$
+        \Rightarrow  \delta^{(2)} = \frac{\partial L}{\partial z^{(2)}} = \hat{y} - y = 0.786 - 1 = -0.214
+        $$
+      </div>
+
+        <p>The sigmoid and BCE loss derivatives cancel nicely.</p>
+
+
+        <h3>Step 2: Gradients for \(W^{(2)}\) (Hidden → Output)</h3>
+
+<div class="key-formula">
+$$ \frac{\partial L}{\partial W^{(2)}} = \left(\frac{\partial L}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial z^{(2)}}\right) \times \frac{\partial z^{(2)}}{\partial W^{(2)}} $$
+Step 2: Define error term
+$$ \delta^{(2)} = \frac{\partial L}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial z^{(2)}} = -0.214 $$
+
+Step 3: Compute derivative of forward pass
+$$ z^{(2)} = W^{(2)} \cdot a^{(1)} + b^{(2)} $$
+$$ \frac{\partial z^{(2)}}{\partial W^{(2)}} = (a^{(1)})^T $$
+
+Step 4: Substitute back
+$$ \frac{\partial L}{\partial W^{(2)}} = \delta^{(2)} \times (a^{(1)})^T $$
+
+$$ \frac{\partial L}{\partial w_1} = \delta^{(2)} \times h_1 = -0.214 \times 1.05 = -0.2247 $$
+$$ \frac{\partial L}{\partial w_2} = \delta^{(2)} \times h_2 = -0.214 \times 1.1 = -0.2354 $$
+$$ \frac{\partial L}{\partial w_3} = \delta^{(2)} \times h_3 = -0.214 \times 0.8 = -0.1712 $$
+</div>
+
+
+
+        <h3>Step 3: Gradient for \(b^{(2)}\) (Output Bias)</h3>
+
+        <div class="code-block math">∂L/∂b⁽²⁾ = δ⁽²⁾ = -0.214</div>
+
+<div class="key-formula">
+        Step 1: Apply chain rule
+$$ \frac{\partial L}{\partial b^{(2)}} = \frac{\partial L}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial z^{(2)}} \times \frac{\partial z^{(2)}}{\partial b^{(2)}} $$
+
+Step 2: Define error term
+$$ \delta^{(2)} = \frac{\partial L}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial z^{(2)}} $$
+
+Step 3: Compute derivative of forward pass
+$$ z^{(2)} = W^{(2)} \cdot a^{(1)} + b^{(2)} $$
+
+Taking the derivative with respect to \( b^{(2)} \):
+$$ \frac{\partial z^{(2)}}{\partial b^{(2)}} = 1 $$
+
+Step 4: Substitute back
+$$ \frac{\partial L}{\partial b^{(2)}} = \delta^{(2)} \times 1 = \delta^{(2)} $$
+</div>
+
+        <h3>Step 4: Backpropagate to Hidden Layer</h3>
+
+        <div class="code-block math">δ⁽¹⁾ = (W⁽²⁾ᵀ × δ⁽²⁾) ⊙ ReLU'(z⁽¹⁾)</div>
+
+          <pre>
+  Loss depends on ŷ:
+        L = -[y·log(ŷ) + (1-y)·log(1-ŷ)]
+
+  ŷ depends on z⁽²⁾:
+        ŷ = σ(z⁽²⁾)
+
+  z⁽²⁾ depends on a⁽¹⁾ and w:
+        z⁽²⁾ = W⁽²⁾a⁽¹⁾ + b⁽²⁾
+
+  a⁽¹⁾ depends on z⁽¹⁾:
+        a⁽¹⁾ = ReLU(z⁽¹⁾) = max(0, z⁽¹⁾)
+
+  z⁽¹⁾ depends on w⁽¹⁾:
+        z⁽¹⁾ = W⁽¹⁾x + b⁽¹⁾
+
+  To find how Loss reacts to z⁽¹⁾, we must follow the chain:
+
+      δ⁽¹⁾ =  ∂L/∂z⁽¹⁾ = ∂L/∂ŷ × ∂ŷ/∂z⁽²⁾ × ∂z⁽²⁾/∂a⁽¹⁾ × ∂a⁽¹⁾/∂z⁽¹⁾
+                = (∂L/∂ŷ × ∂ŷ/∂z⁽²⁾) × ∂z⁽²⁾/∂a⁽¹⁾ × ∂a⁽¹⁾/∂z⁽¹⁾
+                = δ⁽²⁾ × W⁽²⁾ᵀ × ReLU'(z⁽¹⁾)
+                = (W⁽²⁾ᵀ × δ⁽²⁾) ⊙ ReLU'(z⁽¹⁾)
+
+  Each δ represents the contribution to loss at that layer!
+          </pre>
+
+
+
+          <div class="key-formula">
+
+           \begin{align*}
+\delta^{(1)} &= \frac{\partial L}{\partial z^{(1)}} \\
+&= \frac{\partial L}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial z^{(2)}} \times \frac{\partial z^{(2)}}{\partial a^{(1)}} \times \frac{\partial a^{(1)}}{\partial z^{(1)}} \\
+&= \left(\frac{\partial L}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial z^{(2)}}\right) \times \frac{\partial z^{(2)}}{\partial a^{(1)}} \times \frac{\partial a^{(1)}}{\partial z^{(1)}} \\
+&= \delta^{(2)} \times W^{(2)T} \times \text{ReLU}'(z^{(1)}) \\
+&= (W^{(2)T} \times \delta^{(2)}) \odot \text{ReLU}'(z^{(1)})
+\end{align*}
+
+           Where \( \delta^{(2)} = \hat{y} - y \) is the error from the output layer (already computed)
+
+           $$
+           \frac{\partial a^{(1)}}{\partial z^{(1)}} = \frac{d}{dz^{(1)}} [\text{ReLU}(z^{(1)})]
+           = \begin{cases} 1 & \text{if } z^{(1)} > 0 \\ 0 & \text{if } z^{(1)} \leq 0 \end{cases}
+           = \text{ReLU}'(z^{(1)})
+           \quad \text{(ReLU derivative)}
+           $$
+
+           $$
+           \Rightarrow \delta^{(1)} = (W^{(2)T} \times \delta^{(2)}) \odot \text{ReLU}'(z^{(1)})  \quad \quad ( \odot \quad \text{means element-wise product})
+           $$
+
+         </div>
+
+        <p><strong>Compute W⁽²⁾ᵀ × δ⁽²⁾:</strong></p>
+        <div class="code-block math">W⁽²⁾ᵀ × δ⁽²⁾ = [0.6, 0.2, 0.5] × (-0.214)
+
+For h₁: 0.6 × (-0.214) = -0.1284
+For h₂: 0.2 × (-0.214) = -0.0428
+For h₃: 0.5 × (-0.214) = -0.107</div>
+
+        <p><strong>Apply ReLU derivative (all z¹ > 0, so multiply by 1):</strong></p>
+        <div class="code-block math">δ₁⁽¹⁾ = -0.1284 × 1 = -0.1284
+δ₂⁽¹⁾ = -0.0428 × 1 = -0.0428
+δ₃⁽¹⁾ = -0.107 × 1 = -0.107
+
+So: δ⁽¹⁾ = [-0.1284, -0.0428, -0.107]ᵀ</div>
+
+        <h3>Step 5: Gradients for W⁽¹⁾ (Input → Hidden)</h3>
+
+        <div class="key-formula">
+        $$ \frac{\partial L}{\partial W^{(1)}} = \left(\frac{\partial L}{\partial z^{(1)}}\right) \times \frac{\partial z^{(1)}}{\partial W^{(1)}} $$
+
+        Step 2: Define error term
+        $$ \delta^{(1)} = \frac{\partial L}{\partial z^{(1)}} = [-0.1284, -0.0428, -0.107]^T $$
+
+        $$ \delta_1^{(1)} = -0.1284 \times 1 = -0.1284 $$
+        $$ \delta_2^{(1)} = -0.0428 \times 1 = -0.0428 $$
+        $$ \delta_3^{(1)} = -0.107 \times 1 = -0.107 $$
+
+        Step 3: Compute derivative of forward pass
+        $$ z^{(1)} = W^{(1)} \cdot x + b^{(1)} $$
+        $$ \frac{\partial z^{(1)}}{\partial W^{(1)}} = (x)^T $$
+
+        Step 4: Substitute back
+        $$ \frac{\partial L}{\partial W^{(1)}} = \delta^{(1)} \times (x)^T $$
+        </div>
+
+        <div class="code-block math">∇W⁽¹⁾ = δ⁽¹⁾ ⊗ xᵀ
+
+∂L/∂w₁₁ = δ₁⁽¹⁾ × x₁ = -0.1284 × 1 = -0.1284
+∂L/∂w₁₂ = δ₂⁽¹⁾ × x₁ = -0.0428 × 1 = -0.0428
+∂L/∂w₁₃ = δ₃⁽¹⁾ × x₁ = -0.107 × 1 = -0.107
+
+∂L/∂w₂₁ = δ₁⁽¹⁾ × x₂ = -0.1284 × 2 = -0.2568
+∂L/∂w₂₂ = δ₂⁽¹⁾ × x₂ = -0.0428 × 2 = -0.0856
+∂L/∂w₂₃ = δ₃⁽¹⁾ × x₂ = -0.107 × 2 = -0.214
+
+∂L/∂w₃₁ = δ₁⁽¹⁾ × x₃ = -0.1284 × 0.5 = -0.0642
+∂L/∂w₃₂ = δ₂⁽¹⁾ × x₃ = -0.0428 × 0.5 = -0.0214
+∂L/∂w₃₃ = δ₃⁽¹⁾ × x₃ = -0.107 × 0.5 = -0.0535
+
+∂L/∂w₄₁ = δ₁⁽¹⁾ × x₄ = -0.1284 × (-0.5) = 0.0642
+∂L/∂w₄₂ = δ₂⁽¹⁾ × x₄ = -0.0428 × (-0.5) = 0.0214
+∂L/∂w₄₃ = δ₃⁽¹⁾ × x₄ = -0.107 × (-0.5) = 0.0535</div>
+
+
+<h3>Step 6: Gradients for b⁽¹⁾ (Input → Hidden Bias)</h3>
+<div class="key-formula">
+$$ \frac{\partial L}{\partial b^{(1)}} = \frac{\partial L}{\partial z^{(1)}} \times \frac{\partial z^{(1)}}{\partial b^{(1)}} $$
+
+Step 2: Define error term
+$$ \delta^{(1)} = \frac{\partial L}{\partial z^{(1)}} = [-0.1284, -0.0428, -0.107]^T $$
+
+Step 3: Compute derivative of forward pass
+$$ z^{(1)} = W^{(1)} \cdot x + b^{(1)} $$
+$$ \frac{\partial z^{(1)}}{\partial b^{(1)}} = 1 $$
+
+Step 4: Substitute back
+$$ \frac{\partial L}{\partial b^{(1)}} = \delta^{(1)} \times 1 = \delta^{(1)} $$
+</div>
+<div class="code-block math">∇b⁽¹⁾ = δ⁽¹⁾
+∂L/∂b₁⁽¹⁾ = δ₁⁽¹⁾ = -0.1284
+∂L/∂b₂⁽¹⁾ = δ₂⁽¹⁾ = -0.0428
+∂L/∂b₃⁽¹⁾ = δ₃⁽¹⁾ = -0.107
+
+Result: ∂L/∂b⁽¹⁾ = [-0.1284, -0.0428, -0.107]ᵀ
+</div>
+
+</div>
+
+
+<br><br>
+
+  <div class="container">
+        <h2>Part 4: GRADIENT DESCENT - WEIGHT UPDATES</h2>
+
+        <p><strong>Update Rule (Learning Rate α = 0.1):</strong></p>
+        <div class="key-formula">
+W_new = W_old - α × ∇W  <br>
+b_new = b_old - α × ∇b</div>
+
+        <h3>Update W⁽²⁾ (Hidden → Output Weights)</h3>
+
+        <p><strong>Before:</strong></p>
+        <div class="code-block math">w₁ = 0.6,  w₂ = 0.2,  w₃ = 0.5</div>
+
+        <p><strong>After:</strong></p>
+        <div class="code-block math">w₁_new = 0.6 - 0.1 × (-0.2247) = 0.6 + 0.02247 = 0.62247
+w₂_new = 0.2 - 0.1 × (-0.2354) = 0.2 + 0.02354 = 0.22354
+w₃_new = 0.5 - 0.1 × (-0.1712) = 0.5 + 0.01712 = 0.51712
+
+Note: All weights INCREASED (because gradients were negative)
+This pushes the output probability higher toward 1 ✓</div>
+
+        <h3>Update b⁽²⁾</h3>
+
+        <div class="code-block math">b⁽²⁾_new = 0.05 - 0.1 × (-0.214) = 0.05 + 0.0214 = 0.0714</div>
+</div>
+
+<br><br>
+
+<div class="container">
+
+        <h2>Part 5: FORWARD PASS WITH UPDATED WEIGHTS</h2>
+
+        <p><strong>After one gradient descent step, let's see the improvement:</strong></p>
+        <div class="code-block math">z⁽¹⁾_new ≈ [1.08, 1.13, 0.82]
+a⁽¹⁾_new ≈ [1.08, 1.13, 0.82]
+
+z⁽²⁾_new = (0.62247 × 1.08) + (0.22354 × 1.13) + (0.51712 × 0.82) + 0.0714
+       ≈ 0.672 + 0.253 + 0.424 + 0.071
+       ≈ 1.42
+
+ŷ_new = σ(1.42) = 1 / (1 + e^(-1.42))
+      ≈ 1 / (1 + 0.242)
+      ≈ 0.805</div>
+
+        <p><strong>Improvement:</strong></p>
+        <div class="code-block result">Old prediction: ŷ = 0.786 → Loss = 0.241
+New prediction: ŷ = 0.805 → Loss ≈ 0.217
+
+Loss decreased! ✓ (closer to true label 1)</div>
+
+</div>
+
+<br><br>
+
+<div class="container">
+
+
+        <div class="legend">
+            <h3>✨ Summary: Binary Classification Pipeline</h3>
+
+
+            <h4>Single Sample Processing:</h4>
+            <pre>
+              1 input sample: x = [1, 2, 0.5, -0.5]
+              1 true label: y = 1
+
+              Forward pass → compute z⁽¹⁾, a⁽¹⁾, z⁽²⁾, ŷ
+              Loss calculation → L = 0.241
+              Backpropagation → compute all gradients
+              Gradient Descent Update Weights → W_new, b_new
+            </pre>
+
+
+              <h4>MINI-BATCH TRAINING METHOD: (Batch Size = 32)</h4>
+            <pre>
+              Dataset: 1000 samples total
+              Epochs: 100
+
+              EPOCH 1:
+
+              Shuffle dataset: [Sample 342, Sample 18, Sample 891, ...]
+
+              BATCH 1 (Samples 1-32):
+                ∇W_accumulated = 0
+                ∇b_accumulated = 0
+
+                For i = 1 to 32:
+                  Forward pass: xᵢ → z⁽¹⁾ → a⁽¹⁾ → z⁽²⁾ → ŷᵢ
+                  Loss: Lᵢ
+                  Backward pass: compute ∇Wᵢ, ∇bᵢ
+                  ∇W_accumulated += ∇Wᵢ
+                  ∇b_accumulated += ∇bᵢ
+
+                Average gradients:
+                  ∇W_avg = ∇W_accumulated / 32
+                  ∇b_avg = ∇b_accumulated / 32
+
+                Weight update:
+                  W_new = W_old - α × ∇W_avg
+                  b_new = b_old - α × ∇b_avg
+
+                Batch loss: (L₁ + L₂ + ... + L₃₂) / 32 = 0.312
+
+              BATCH 2 (Samples 33-64):
+                [Same process as Batch 1]
+                Batch loss: 0.298
+
+              BATCH 3 to BATCH 31:
+                [Continue processing remaining batches]
+
+              BATCH 32 (Samples 993-1000, 8 samples):
+                ∇W_avg = ∇W_accumulated / 8
+                ∇b_avg = ∇b_accumulated / 8
+                Weight update with 8 samples
+
+              EPOCH 1 SUMMARY:
+                Total samples: 1000
+                Total batches: 32
+                Weight updates: 32
+                Average epoch loss: 0.287
+
+              EPOCH 2:
+
+              Shuffle dataset (NEW order): [Sample 723, Sample 45, ...]
+
+              BATCH 1 (Samples 1-32, new shuffle):
+                [Same process, weights improved from Epoch 1]
+                Batch loss: 0.304
+
+              BATCH 2 to BATCH 32:
+                [Continue with improved weights]
+
+              EPOCH 2 SUMMARY:
+                Average epoch loss: 0.264 (↓ improved from 0.287)
+
+
+              EPOCH 3 to EPOCH 100:
+
+              For each epoch:
+                1. Shuffle training data (different random order)
+                2. Process all 32 batches
+                3. Update weights after each batch
+                4. Loss gradually decreases
+                5. Training converges
+
+              FINAL RESULT (After Epoch 100):
+                Average loss: 0.095
+                Model converged ✓
+</pre>
+
+      <h4>What "Converged" Means:</h4>
+      <ul>
+          <li>Loss stops improving - Further training doesn't reduce loss</li>
+          <li>Gradients become very small</li>
+          <li>Weights stabilize </li>
+      </ul>
+
+      <h4>Signs of Convergence:</h4>
+      <pre>
+        The loss stops decreasing significantly:
+
+        Epoch 90:  Loss = 0.098
+        Epoch 91:  Loss = 0.097
+        Epoch 92:  Loss = 0.096
+        Epoch 93:  Loss = 0.095
+        Epoch 94:  Loss = 0.095  ← Same as Epoch 93
+        Epoch 95:  Loss = 0.095  ← Still the same
+        Epoch 96:  Loss = 0.095  ← Plateaus
+        Epoch 97:  Loss = 0.095
+        Epoch 98:  Loss = 0.095
+        Epoch 99:  Loss = 0.095
+        Epoch 100: Loss = 0.095  ← Model has converged
+      </pre>
+
+    </div>
+
+
+
+</div>
+
+</body>
+</html>
