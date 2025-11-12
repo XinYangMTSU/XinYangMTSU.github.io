@@ -775,9 +775,73 @@ w₃_new = 0.5 - 0.1 × (-0.1712) = 0.5 + 0.01712 = 0.51712
 Note: All weights INCREASED (because gradients were negative)
 This pushes the output probability higher toward 1 ✓</div>
 
-        <h3>Update b⁽²⁾</h3>
+                <h3>Update b⁽²⁾ (Output Bias)</h3>
 
+        <p><strong>Before:</strong></p>
+        <div class="code-block math">b⁽²⁾ = 0.05</div>
+
+        <p><strong>After:</strong></p>
         <div class="code-block math">b⁽²⁾_new = 0.05 - 0.1 × (-0.214) = 0.05 + 0.0214 = 0.0714</div>
+
+        <h3>Update W⁽¹⁾ (Input → Hidden Weights) </h3>
+
+        <p><strong>Before:</strong></p>
+        <div class="code-block math">W⁽¹⁾ =
+     [0.5   0.2   -0.1]
+     [0.3   0.4    0.2]
+     [-0.2  0.1    0.5]
+     [0.1   0.3   -0.2]</div>
+
+        <p><strong>Gradients (from backpropagation):</strong></p>
+        <div class="code-block math">∇W⁽¹⁾ =
+     [-0.1284  -0.0428  -0.107 ]
+     [-0.2568  -0.0856  -0.214 ]
+     [-0.0642  -0.0214  -0.0535]
+     [0.0642   0.0214   0.0535 ]</div>
+
+        <p><strong>After (using α = 0.1):</strong></p>
+        <div class="code-block math">Row 1 (w₁₁, w₁₂, w₁₃):
+w₁₁_new = 0.5 - 0.1 × (-0.1284) = 0.5 + 0.01284 = 0.51284
+w₁₂_new = 0.2 - 0.1 × (-0.0428) = 0.2 + 0.00428 = 0.20428
+w₁₃_new = -0.1 - 0.1 × (-0.107) = -0.1 + 0.0107 = -0.0893
+
+Row 2 (w₂₁, w₂₂, w₂₃):
+w₂₁_new = 0.3 - 0.1 × (-0.2568) = 0.3 + 0.02568 = 0.32568
+w₂₂_new = 0.4 - 0.1 × (-0.0856) = 0.4 + 0.00856 = 0.40856
+w₂₃_new = 0.2 - 0.1 × (-0.214) = 0.2 + 0.0214 = 0.2214
+
+Row 3 (w₃₁, w₃₂, w₃₃):
+w₃₁_new = -0.2 - 0.1 × (-0.0642) = -0.2 + 0.00642 = -0.19358
+w₃₂_new = 0.1 - 0.1 × (-0.0214) = 0.1 + 0.00214 = 0.10214
+w₃₃_new = 0.5 - 0.1 × (-0.0535) = 0.5 + 0.00535 = 0.50535
+
+Row 4 (w₄₁, w₄₂, w₄₃):
+w₄₁_new = 0.1 - 0.1 × (0.0642) = 0.1 - 0.00642 = 0.09358
+w₄₂_new = 0.3 - 0.1 × (0.0214) = 0.3 - 0.00214 = 0.29786
+w₄₃_new = -0.2 - 0.1 × (0.0535) = -0.2 - 0.00535 = -0.20535
+
+Updated W⁽¹⁾:
+W⁽¹⁾_new =
+     [0.51284   0.20428  -0.0893 ]
+     [0.32568   0.40856   0.2214 ]
+     [-0.19358  0.10214   0.50535]
+     [0.09358   0.29786  -0.20535]</div>
+
+        <h3>Update b⁽¹⁾ (Hidden Layer Bias) </h3>
+
+        <p><strong>Before:</strong></p>
+        <div class="code-block math">b⁽¹⁾ = [0.1, 0.2, 0.15]ᵀ</div>
+
+        <p><strong>Gradients (from backpropagation):</strong></p>
+        <div class="code-block math">∇b⁽¹⁾ = [-0.1284, -0.0428, -0.107]ᵀ</div>
+
+        <p><strong>After (using α = 0.1):</strong></p>
+        <div class="code-block math">b₁⁽¹⁾_new = 0.1 - 0.1 × (-0.1284) = 0.1 + 0.01284 = 0.11284
+b₂⁽¹⁾_new = 0.2 - 0.1 × (-0.0428) = 0.2 + 0.00428 = 0.20428
+b₃⁽¹⁾_new = 0.15 - 0.1 × (-0.107) = 0.15 + 0.0107 = 0.1607
+
+Updated b⁽¹⁾ = [0.11284, 0.20428, 0.1607]ᵀ</div>
+      
 </div>
 
 <br><br>
