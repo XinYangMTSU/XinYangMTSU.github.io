@@ -4,6 +4,7 @@
 <head>
     <title>CSCI 3350 – Final Project Requirements</title>
     <link href="../CSS/Site.css" type="text/css" rel="stylesheet">
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,15 +12,21 @@
             margin: 0;
             padding: 20px;
             background-color: #f4f4f4;
+
+            /* Center vertically + horizontally visually */
+            display: flex;
+            justify-content: center;
         }
 
         #main {
             max-width: 1000px;
-            margin: 0 auto;
             background-color: white;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+            /* This ensures the card stays centered */
+            margin: 0 auto;
         }
 
         h1 {
@@ -67,14 +74,17 @@
 
 <div id="main">
 
+<center>
     <h1>CSCI 3350: Machine Learning Final Project</h1>
+		Instructor: Xin Yang
     <h2>Guidelines & Requirements</h2>
+</center>
 
     <h2>Project Requirements</h2>
     Your final project must include all the following:
 
     <ul>
-        <li>&#9733; <b><font color="blue">Dataset Selection:</font></b> Any dataset (Kaggle, UCI, Google Dataset Search, etc.)</li>
+        <li>&#9733; <b><font color="blue">Dataset Selection:</font></b> Any dataset not used in class (Kaggle, UCI, Google Dataset Search, etc.)</li>
 
         <li>&#9733; <b><font color="blue">Data Preprocessing & EDA:</font></b> Cleaning, handling missing data, visualization (matplotlib)</li>
 
@@ -85,66 +95,102 @@
         <li>&#9733; <b><font color="blue">Evaluation Metrics:</font></b>
             <ul>
                 <li>&star; <b>Classification:</b> Accuracy, Precision, Recall, F1, Confusion Matrix, ROC/AUC</li>
-                <li>&star; <b>Regression:</b> MSE, RMSE, MAE, R²</li>
+                <li>&star; <b>Regression:</b> MSE, RMSE, R^2</li>
                 <li>&star; Comparison table for all models</li>
             </ul>
         </li>
 
-        <li>&#9733; <b><font color="blue">Code:</font></b> Python with scikit-learn, pandas, numpy, matplotlib</li>
+        <li>&#9733; <b><font color="blue">Code:</font></b> Python with scikit-learn, pandas, numpy, matplotlib, etc.</li>
 
-        <li>&#9733; <b><font color="blue">Visualizations:</font></b> Include <b>5–7 charts</b> (plots, heatmap, ROC, etc.)</li>
+        <li>&#9733; <b><font color="blue">Visualizations:</font></b> Include  <b>plots</b> (plots, histogram, ROC, etc.)</li>
 
-        <li>&#9733; <b><font color="blue">Final Report (PDF):</font></b> 8–12 pages</li>
+        <li>&#9733; <b><font color="blue">Final Report (PDF):</font></b> 5-10 pages</li>
         <ul>
             <li>&star; Introduction</li>
             <li>&star; Methodology</li>
             <li>&star; Experiments & Results</li>
-            <li>&star; Discussion</li>
-            <li>&star; Conclusion</li>
+            <li>&star; Discussion & Conclusion</li>
         </ul>
 
-        <li>&#9733; <b><font color="blue">Presentation:</font></b> 10 minutes per student</li>
+        <li>&#9733; <b><font color="blue">Presentation:</font></b> 15 minutes per group</li>
     </ul>
 
-    <h2>Approved Algorithms</h2>
-    <p><b>Classification:</b> Logistic Regression, Decision Trees, Random Forest, SVM, KNN, Naive Bayes, Gradient Boosting</p>
-    <p><b>Regression:</b> Linear Regression, Ridge/Lasso, SVR, Random Forest Regressor, Gradient Boosting</p>
+    <h2>Algorithms</h2>
+    <p><b>Classification:</b> Logistic Regression, Decision Trees, Random Forest, SVM, KNN, Naive Bayes, Random Forest, Neural Network (MLPClassifier)</p>
+    <p><b>Regression:</b> Linear Regression, Polynomial Regression, Ridge, Lasso, Elastic Net, SVR, Random Forest Regressor, Neural Network Regressor (MLPRegressor)</p>
 
     <h2>Submission Checklist</h2>
     <ul>
-        <li>&#9733; Jupyter Notebook (.ipynb) or Python script (.py)</li>
+        <li>&#9733; Jupyter Notebook (.ipynb)</li>
         <li>&#9733; Dataset (or link to download)</li>
-        <li>&#9733; README instructions</li>
         <li>&#9733; Final Report (PDF)</li>
     </ul>
 
     <h2>Grading Criteria (100 Points)</h2>
-    <table style="width:80%">
-        <tr><th>Component</th><th>Points</th></tr>
-        <tr><td>Dataset & EDA</td><td>10</td></tr>
-        <tr><td>Preprocessing & Visuals</td><td>15</td></tr>
-        <tr><td>Algorithm Implementation</td><td>20</td></tr>
-        <tr><td>Cross-Validation & Metrics</td><td>15</td></tr>
-        <tr><td>Results & Comparison</td><td>15</td></tr>
-        <tr><td>Report Quality</td><td>15</td></tr>
-        <tr><td>Discussion & Insights</td><td>10</td></tr>
-        <tr><td><b>Total</b></td><td><b>100</b></td></tr>
-    </table>
+		<table style="width:80%">
+	    <tr>
+	        <th>Category</th>
+	        <th>Component</th>
+	        <th>Points</th>
+	    </tr>
+
+	    <!-- Code Category -->
+	    <tr style="background-color:#e6f2ff;">
+	        <td rowspan="5"><b>Code</b></td>
+	        <td>Dataset & EDA</td>
+	        <td>10</td>
+	    </tr>
+	    <tr>
+	        <td>Preprocessing & Visuals</td>
+	        <td>10</td>
+	    </tr>
+	    <tr>
+	        <td>Algorithm Implementation</td>
+	        <td>20</td>
+	    </tr>
+	    <tr>
+	        <td>Cross-Validation & Metrics</td>
+	        <td>15</td>
+	    </tr>
+	    <tr>
+	        <td>Results & Comparison</td>
+	        <td>15</td>
+	    </tr>
+
+	    <!-- PDF Category -->
+	    <tr style="background-color:#e6f2ff;">
+	        <td rowspan="2"><b>PDF</b></td>
+	        <td>Report Quality</td>
+	        <td>10</td>
+	    </tr>
+	    <tr>
+	        <td>Discussion & Insights</td>
+	        <td>5</td>
+	    </tr>
+
+	    <!-- Presentation Category -->
+	    <tr style="background-color:#e6f2ff;">
+	        <td><b>Presentation</b></td>
+	        <td>Presentation</td>
+	        <td>15</td>
+	    </tr>
+
+	    <!-- Total -->
+	    <tr style="background-color:#d9ead3;">
+	        <td><b>Total</b></td>
+	        <td></td>
+	        <td><b>100</b></td>
+	    </tr>
+
+	</table>
+
 
     <h2>Important Dates</h2>
     <ul>
-        <li>&#9733; Proposal Due: [DATE]</li>
-        <li>&#9733; Final Submission: [DATE]</li>
-        <li>&#9733; Presentations: [DATE]</li>
+        <li>&#9733; Final Submission: <b><font color="red">December 10, 2026</font> Midnight </b></li>
+        <li>&#9733; Presentations: <b><font color="red">December 10, 2026</font> (10:00 AM to 12:00 AM) </b></li>
     </ul>
 
-    <h2>Resources</h2>
-    <ul>
-        <li>&#9733; Kaggle – https://kaggle.com</li>
-        <li>&#9733; UCI ML Repository – https://archive.ics.uci.edu</li>
-        <li>&#9733; Google Dataset Search – datasetsearch.research.google.com</li>
-        <li>&#9733; Python Libraries: scikit-learn, pandas, numpy, matplotlib</li>
-    </ul>
 
 </div>
 
