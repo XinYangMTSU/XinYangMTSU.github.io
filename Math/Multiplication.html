@@ -13,16 +13,11 @@
     .container { max-width: 1100px; margin: 0 auto; }
     h1 { font-size: 2.25rem; font-weight: 800; text-align: center; color: #312e81; margin-bottom: .5rem; letter-spacing: .2px; }
     .subtitle { text-align: center; color: #4b5563; margin-bottom: 1.25rem; }
-
     .panel { background: #fff; border-radius: 12px; box-shadow: 0 12px 24px rgba(0,0,0,.08); border: 1px solid #e5e7eb; }
-
-    /* viz tabs */
     .viz-buttons { display: grid; grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); gap: .5rem; margin-bottom: 1rem; }
     .viz-btn { background: #fff; color: #374151; border: 2px solid #e5e7eb; padding: .75rem 1rem; border-radius: 10px; font-weight: 700; cursor: pointer; transition: .2s ease; }
     .viz-btn:hover { border-color: var(--indigo-600); transform: translateY(-1px); }
     .viz-btn.active { background: var(--indigo-600); color: #fff; box-shadow: 0 10px 18px rgba(79,70,229,.28); transform: translateY(-1px) scale(1.02); }
-
-    /* controls */
     .controls { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1rem; padding: 1rem; }
     .control-group { padding: 1rem; border: 1px dashed #e5e7eb; border-radius: 10px; }
     .control-group label { display:block; font-size:.9rem; font-weight:700; color:#374151; margin-bottom:.5rem; }
@@ -33,27 +28,18 @@
     .number-btn.active { background: var(--indigo-600); color:#fff; }
     .extras { display:flex; gap:.5rem; margin-top:.6rem; flex-wrap:wrap; }
     .chip { padding:.45rem .7rem; border-radius: 9999px; border:1px solid #e5e7eb; background:#fff; cursor:pointer; font-weight:700; }
-
-    /* viz area */
     .visualization { padding: 1.2rem; }
     .visualization-content { padding: 1.2rem; }
     .hidden { display:none; }
-
     .center-text { text-align:center; color:#4b5563; margin-bottom: .8rem; }
-
-    /* grid */
     .grid-display { display:flex; flex-direction:column; gap:.4rem; align-items:center; }
     .grid-row { display:flex; gap:.4rem; }
     .grid-item { width:40px; height:40px; background: linear-gradient(135deg, #60a5fa, #1e40af); border-radius: .6rem; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:.875rem; box-shadow: 0 2px 4px rgba(0,0,0,.08); }
-
-    /* circles */
     .circles-display { display:flex; flex-wrap:wrap; gap:1.2rem; justify-content:center; }
     .group { text-align:center; }
     .group-label { font-size:.85rem; font-weight:700; color:#6b7280; margin-bottom:.35rem; }
     .circles { display:flex; flex-wrap:wrap; gap:.45rem; justify-content:center; width: 172px; }
     .circle { width:30px; height:30px; background: linear-gradient(135deg, #c084fc, #7c3aed); border-radius:50%; box-shadow: 0 2px 4px rgba(0,0,0,.08); }
-
-    /* result cards */
     .result-box { text-align:center; margin-top: 1rem; padding: .9rem; border-radius: .8rem; }
     .result-green { background:#dcfce7; } .result-green p { color:#166534; }
     .result-blue { background:#dbeafe; } .result-blue p { color:#1e40af; }
@@ -62,16 +48,45 @@
     .result-pink { background:#fbcfe8; } .result-pink p { color:#831843; }
     .result-box p { font-size: 1.6rem; font-weight: 900; letter-spacing: .3px; }
     .small-text { font-size: .85rem; margin-top:.3rem; color:#475569; }
-
-    /* helper row */
     .helper { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding: .8rem 1rem; border-top:1px solid #eef2ff; color:#475569; font-size:.93rem; }
     .helper span strong { color: var(--indigo-700); }
     .helper .right { display:flex; gap:.5rem; align-items:center; }
     .pill { padding:.25rem .6rem; background:#eef2ff; border-radius: 9999px; font-weight:700; color:#3730a3; border:1px solid #e0e7ff; }
     .linkish { border:none; background:none; color: var(--blue-700); font-weight:700; cursor:pointer; text-decoration: underline; }
-
-    /* svg */
     svg { max-width: 100%; height: auto; }
+    .practice-container { text-align: center; }
+    .practice-question { font-size: 2rem; font-weight: 900; color: #312e81; margin: 1rem 0; }
+    .practice-question span { font-size: 2.5rem; color: var(--indigo-600); }
+    .practice-input-group { display: flex; gap: .8rem; justify-content: center; align-items: center; margin: 1.5rem 0; flex-wrap: wrap; }
+    .practice-input { padding: .75rem 1rem; font-size: 1.5rem; border: 2px solid #e5e7eb; border-radius: 8px; width: 120px; text-align: center; font-weight: 700; }
+    .practice-input:focus { outline: none; border-color: var(--indigo-600); box-shadow: 0 0 0 3px rgba(79,70,229,.1); }
+    .practice-btn { padding: .75rem 1.5rem; background: var(--indigo-600); color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; transition: .2s ease; }
+    .practice-btn:hover { background: var(--indigo-700); transform: translateY(-1px); }
+    .practice-btn:active { transform: translateY(0); }
+    .practice-feedback { margin: 1.5rem 0; padding: 1rem; border-radius: 8px; font-size: 1.1rem; font-weight: 700; min-height: 2rem; }
+    .feedback-correct { background: #dcfce7; color: #166534; }
+    .feedback-incorrect { background: #fee2e2; color: #991b1b; }
+    .feedback-hidden { visibility: hidden; }
+    .practice-streak { font-size: 1.3rem; color: var(--indigo-700); font-weight: 800; margin: 1rem 0; }
+    .practice-controls { display: flex; gap: .5rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
+    .difficulty-btn { padding: .5rem 1rem; background: #f3f4f6; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; font-weight: 700; transition: .2s ease; }
+    .difficulty-btn.active { background: var(--indigo-600); color: #fff; border-color: var(--indigo-600); }
+    .difficulty-btn:hover { border-color: var(--indigo-600); }
+    .factorization-container { padding: 1.5rem; }
+    .factorization-input-group { text-align: center; margin-bottom: 2rem; }
+    .factorization-input-group label { display: block; font-weight: 700; color: #374151; margin-bottom: .5rem; }
+    .factorization-input-group input { margin: 0 .5rem; }
+    .factorization-result { margin-top: 2rem; }
+    .factor-display { text-align: center; margin: 1.5rem 0; }
+    .all-factors { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin: 1rem 0; }
+    .factor-chip { background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff; padding: .6rem 1rem; border-radius: 20px; font-weight: 700; font-size: 1rem; }
+    .factor-pairs { margin: 1.5rem 0; }
+    .factor-pairs-title { font-size: 1.1rem; font-weight: 700; color: #312e81; text-align: center; margin-bottom: 1rem; }
+    .pair-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+    .pair-card { background: linear-gradient(135deg, #dbeafe, #e0e7ff); border: 2px solid #4f46e5; border-radius: 10px; padding: 1rem; text-align: center; }
+    .pair-card strong { font-size: 1.3rem; color: #4f46e5; }
+    .pair-card p { color: #475569; margin-top: .3rem; font-size: .9rem; }
+    .factor-error { text-align: center; color: #991b1b; font-weight: 700; padding: 1rem; background: #fee2e2; border-radius: 8px; }
   </style>
 </head>
 <body>
@@ -86,10 +101,12 @@
       <button class="viz-btn" data-viz="circles">Groups</button>
       <button class="viz-btn" data-viz="numberline">Number Line</button>
       <button class="viz-btn" data-viz="tree">Tree</button>
+      <button class="viz-btn" data-viz="practice">Practice</button>
+      <button class="viz-btn" data-viz="factorization">Factors</button>
     </div>
 
     <!-- Controls -->
-    <div class="panel controls">
+    <div class="panel controls" id="controlsPanel">
       <div class="control-group">
         <label>First Number: <span class="number-display" id="num1Display">—</span></label>
         <div id="num1Btns" class="number-buttons"></div>
@@ -143,7 +160,41 @@
         <div class="result-box result-pink"><p id="treeResult"></p><div class="small-text">Repeated addition view</div></div>
       </div>
 
-      <div class="helper">
+      <div id="practice" class="visualization-content hidden">
+        <div class="practice-container">
+          <div class="practice-controls">
+            <span style="color: #475569; font-weight: 700;">Difficulty:</span>
+            <button class="difficulty-btn active" data-difficulty="easy">Easy (1-6)</button>
+            <button class="difficulty-btn" data-difficulty="medium">Medium (1-9)</button>
+            <button class="difficulty-btn" data-difficulty="hard">Hard (1-12)</button>
+          </div>
+          <div class="practice-streak" id="practiceStreak">Streak: 0</div>
+          <div class="practice-question">
+            <span id="factor1">?</span> × <span id="factor2">?</span> = ?
+          </div>
+          <div class="practice-input-group">
+            <input type="number" class="practice-input" id="practiceAnswer" placeholder="Your answer" min="1" />
+            <button class="practice-btn" id="checkBtn">Check</button>
+          </div>
+          <div class="practice-feedback feedback-hidden" id="practiceFeedback"></div>
+          <button class="chip" id="skipBtn" title="Skip this problem">Skip</button>
+          <button class="chip" id="showBtn" title="Reveal answer">Show Answer</button>
+        </div>
+      </div>
+
+      <div id="factorization" class="visualization-content hidden">
+        <p class="center-text"><strong>Find all the factors and factor pairs!</strong></p>
+        <div class="factorization-container">
+          <div class="factorization-input-group">
+            <label>Enter a number (1–144):</label>
+            <input type="number" id="factorInput" class="practice-input" min="1" max="144" placeholder="e.g., 12" />
+            <button class="practice-btn" id="factorBtn">Find Factors</button>
+          </div>
+          <div class="factorization-result" id="factorResult"></div>
+        </div>
+      </div>
+
+      <div class="helper" id="helperRow">
         <span>Result: <strong id="resultBig">—</strong></span>
         <div class="right"><span class="pill" id="identityHint">Identity: 1 × n = n</span><button class="linkish" id="commHint">Why a×b = b×a?</button></div>
       </div>
@@ -151,10 +202,9 @@
   </div>
 
   <script>
-    // --- State ---
     let num1 = 3, num2 = 4, currentViz = 'grid';
+    let practiceStreak = 0, practiceDifficulty = 'easy';
 
-    // --- Build number buttons (1..12) ---
     function buildButtons(containerId, clickFn, activeVal) {
       const c = document.getElementById(containerId); c.innerHTML = '';
       for (let n = 1; n <= 12; n++) {
@@ -166,21 +216,23 @@
       }
     }
 
-    // --- Tabs ---
     function setActiveTab(target) {
       document.querySelectorAll('.viz-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.viz === target);
       });
       document.querySelectorAll('.visualization-content').forEach(el => el.classList.add('hidden'));
       document.getElementById(target).classList.remove('hidden');
-      currentViz = target; updateVisualization();
+      document.getElementById('controlsPanel').style.display = target === 'practice' || target === 'factorization' ? 'none' : 'grid';
+      document.getElementById('helperRow').style.display = target === 'practice' || target === 'factorization' ? 'none' : 'flex';
+      currentViz = target;
+      if (target === 'practice') generatePracticeQuestion();
+      else if (target !== 'factorization') updateVisualization();
     }
 
     document.querySelectorAll('.viz-btn').forEach(btn => {
       btn.addEventListener('click', () => setActiveTab(btn.dataset.viz));
     });
 
-    // --- Factor setters ---
     function setNum1(n) { num1 = n; syncButtons('num1Btns', n); updateVisualization(); }
     function setNum2(n) { num2 = n; syncButtons('num2Btns', n); updateVisualization(); }
 
@@ -192,10 +244,142 @@
       document.getElementById('num2Display').textContent = num2;
     }
 
-    // --- Helpers ---
     const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
 
-    // --- Renderers ---
+    function playSuccessSound() {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const notes = [523.25, 659.25, 783.99];
+      const startTime = audioContext.currentTime;
+      notes.forEach((freq, idx) => {
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        osc.frequency.value = freq;
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0.3, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.5);
+        osc.start(startTime);
+        osc.stop(startTime + 0.5);
+      });
+    }
+
+    function generatePracticeQuestion() {
+      const max = practiceDifficulty === 'easy' ? 6 : practiceDifficulty === 'medium' ? 9 : 12;
+      num1 = 1 + Math.floor(Math.random() * max);
+      num2 = 1 + Math.floor(Math.random() * max);
+      document.getElementById('factor1').textContent = num1;
+      document.getElementById('factor2').textContent = num2;
+      document.getElementById('practiceAnswer').value = '';
+      document.getElementById('practiceAnswer').focus();
+      document.getElementById('practiceFeedback').classList.add('feedback-hidden');
+      document.getElementById('practiceFeedback').textContent = '';
+    }
+
+    function checkPracticeAnswer() {
+      const answer = parseInt(document.getElementById('practiceAnswer').value, 10);
+      const correct = num1 * num2;
+      const fb = document.getElementById('practiceFeedback');
+      fb.classList.remove('feedback-hidden');
+      if (answer === correct) {
+        playSuccessSound();
+        practiceStreak++;
+        fb.className = 'practice-feedback feedback-correct';
+        fb.textContent = '🎉 Correct! Great job!';
+        document.getElementById('practiceStreak').textContent = `Streak: ${practiceStreak}`;
+        setTimeout(() => generatePracticeQuestion(), 1500);
+      } else {
+        practiceStreak = 0;
+        fb.className = 'practice-feedback feedback-incorrect';
+        fb.textContent = `Not quite. ${num1} × ${num2} = ${correct}. Try again!`;
+        document.getElementById('practiceStreak').textContent = `Streak: ${practiceStreak}`;
+      }
+    }
+
+    document.getElementById('checkBtn').addEventListener('click', checkPracticeAnswer);
+    document.getElementById('practiceAnswer').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') checkPracticeAnswer();
+    });
+
+    document.getElementById('skipBtn').addEventListener('click', generatePracticeQuestion);
+    document.getElementById('showBtn').addEventListener('click', () => {
+      const correct = num1 * num2;
+      const fb = document.getElementById('practiceFeedback');
+      fb.classList.remove('feedback-hidden');
+      fb.className = 'practice-feedback feedback-correct';
+      fb.textContent = `Answer: ${num1} × ${num2} = ${correct}`;
+    });
+
+    document.querySelectorAll('.difficulty-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.difficulty-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        practiceDifficulty = btn.dataset.difficulty;
+        practiceStreak = 0;
+        document.getElementById('practiceStreak').textContent = 'Streak: 0';
+        generatePracticeQuestion();
+      });
+    });
+
+    function getFactors(n) {
+      const factors = [];
+      for (let i = 1; i <= n; i++) {
+        if (n % i === 0) factors.push(i);
+      }
+      return factors;
+    }
+
+    function getFactorPairs(n) {
+      const pairs = [];
+      for (let i = 1; i <= Math.sqrt(n); i++) {
+        if (n % i === 0) {
+          pairs.push({ a: i, b: n / i });
+        }
+      }
+      return pairs;
+    }
+
+    function displayFactorization() {
+      const input = parseInt(document.getElementById('factorInput').value, 10);
+      const resultDiv = document.getElementById('factorResult');
+      
+      if (isNaN(input) || input < 1 || input > 144) {
+        resultDiv.innerHTML = '<div class="factor-error">Please enter a number between 1 and 144.</div>';
+        return;
+      }
+
+      const factors = getFactors(input);
+      const pairs = getFactorPairs(input);
+
+      let html = `<div class="factor-display">
+        <p style="font-size: 1.2rem; color: #475569; margin-bottom: 1rem;"><strong style="font-size: 1.5rem; color: #4f46e5;">${input}</strong> has the following factors:</p>
+        <div class="all-factors">`;
+      
+      factors.forEach(f => {
+        html += `<span class="factor-chip">${f}</span>`;
+      });
+
+      html += `</div></div>
+        <div class="factor-pairs">
+          <div class="factor-pairs-title">Factor Pairs (ways to multiply to get ${input}):</div>
+          <div class="pair-grid">`;
+
+      pairs.forEach(pair => {
+        html += `<div class="pair-card">
+          <strong>${pair.a} × ${pair.b}</strong>
+          <p>= ${input}</p>
+        </div>`;
+      });
+
+      html += `</div></div>`;
+      resultDiv.innerHTML = html;
+    }
+
+    document.getElementById('factorBtn').addEventListener('click', displayFactorization);
+    document.getElementById('factorInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') displayFactorization();
+    });
+
     function updateVisualization() {
       const product = num1 * num2;
       document.getElementById('resultBig').textContent = `${num1} × ${num2} = ${product}`;
@@ -213,7 +397,7 @@
       gridText.innerHTML = `${num1} rows × ${num2} columns = <strong style="font-size:1.5rem;color:#16a34a;">${product}</strong>`;
 
       const grid = document.getElementById('gridContent'); grid.innerHTML='';
-      const maxCells = 144; // cap for performance/visibility
+      const maxCells = 144;
       const rows = clamp(num1,1,12), cols = clamp(num2,1,12);
       let counter = 1;
       for (let r=0;r<rows;r++){
@@ -239,12 +423,10 @@
       rect.setAttribute('fill', '#dbeafe'); rect.setAttribute('stroke', '#0284c7'); rect.setAttribute('stroke-width','3');
       svg.appendChild(rect);
 
-      // grid lines
       for (let i=1;i<num1;i++) addLine(pad, pad+i*unit, pad+width, pad+i*unit);
       for (let j=1;j<num2;j++) addLine(pad+j*unit, pad, pad+j*unit, pad+height);
       function addLine(x1,y1,x2,y2){ const l=document.createElementNS('http://www.w3.org/2000/svg','line'); l.setAttribute('x1',x1); l.setAttribute('y1',y1); l.setAttribute('x2',x2); l.setAttribute('y2',y2); l.setAttribute('stroke','#cbd5e1'); l.setAttribute('stroke-width','1'); l.setAttribute('stroke-dasharray','4'); svg.appendChild(l);}    
 
-      // labels
       const lblTop = textAt(pad+width/2, pad-12, num2, 16, '#1e40af');
       const lblLeft = textAt(pad-12, pad+height/2, num1, 16, '#1e40af'); lblLeft.setAttribute('text-anchor','end'); lblLeft.setAttribute('dominant-baseline','middle');
       const lblCenter = textAt(pad+width/2, pad+height/2, product, 18, '#1e3a8a'); lblCenter.setAttribute('dominant-baseline','middle');
@@ -272,17 +454,14 @@
     function renderNumberLine(product) {
       const svg = document.getElementById('numberlineSvg'); svg.innerHTML='';
       const maxP = Math.min(product, 120);
-      const padL = 30, padR = 30, baseY = 100, unit = 6; // scale
+      const padL = 30, padR = 30, baseY = 100, unit = 6;
       const width = padL + maxP*unit + padR; svg.setAttribute('viewBox',`0 0 ${Math.max(width, 260)} 180`);
 
-      // axis
       addLine(padL, baseY, padL + maxP*unit, baseY, '#334155', 2);
-      // minor ticks each 1; label every num2
       for (let i=0;i<=maxP;i++){
         const x = padL + i*unit; const h = (i%num2===0)?10:6; addLine(x, baseY-h/2, x, baseY+h/2, '#334155', (i%num2===0)?2:1);
         if (i%num2===0){ addText(x, baseY+20, i.toString(), 11, '#334155'); }
       }
-      // arcs for each jump of +num2 (num1 jumps)
       for (let j=0;j<num1;j++){
         const start = padL + j*num2*unit; const end = padL + (j+1)*num2*unit; const ctrlY = baseY - 30 - j*10;
         const path = document.createElementNS('http://www.w3.org/2000/svg','path');
@@ -303,9 +482,7 @@
     function renderTree(product) {
       const svg = document.getElementById('treeSvg'); svg.innerHTML='';
       const cx=230, cy=220, r=26;
-      // root circle with product
       circle(cx,cy,r,'#ec4899'); text(cx, cy+1, product, 16, '#fff');
-      // branches: num1 leaves each labeled num2
       for (let i=0;i<num1;i++){
         const angle = (Math.PI/(num1+1))*(i+1);
         const x = cx + Math.cos(angle - Math.PI/2) * 120;
@@ -320,7 +497,6 @@
       function text(x,y,txt,size,fill){ const t=document.createElementNS('http://www.w3.org/2000/svg','text'); t.setAttribute('x',x); t.setAttribute('y',y); t.setAttribute('text-anchor','middle'); t.setAttribute('dominant-baseline','middle'); t.setAttribute('font-size',size); t.setAttribute('font-weight','800'); t.setAttribute('fill',fill); t.textContent=txt; svg.appendChild(t); }
     }
 
-    // --- Interactions ---
     document.getElementById('swapBtn').addEventListener('click', () => { const tmp=num1; num1=num2; num2=tmp; syncButtons('num1Btns', num1); syncButtons('num2Btns', num2); updateVisualization(); });
     document.getElementById('randomBtn').addEventListener('click', () => { setNum1(1+Math.floor(Math.random()*10)); setNum2(1+Math.floor(Math.random()*10)); });
 
@@ -328,24 +504,23 @@
       alert('Commutative Property: a × b = b × a.\n\nYou can see it by rotating the grid — 3 rows × 4 columns has the same number of squares as 4 rows × 3 columns.');
     });
 
-    // Keyboard support: arrows move active factor, numbers 1-9 pick quickly
     window.addEventListener('keydown', (e) => {
       if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
-      if (e.key === 'ArrowUp') setNum1(clamp(num1+1,1,12));
-      else if (e.key === 'ArrowDown') setNum1(clamp(num1-1,1,12));
-      else if (e.key === 'ArrowRight') setNum2(clamp(num2+1,1,12));
-      else if (e.key === 'ArrowLeft') setNum2(clamp(num2-1,1,12));
-      else if (/^[1-9]$/.test(e.key)) { const n = Number(e.key); setNum2(n); }
+      if (currentViz !== 'practice' && currentViz !== 'factorization') {
+        if (e.key === 'ArrowUp') setNum1(clamp(num1+1,1,12));
+        else if (e.key === 'ArrowDown') setNum1(clamp(num1-1,1,12));
+        else if (e.key === 'ArrowRight') setNum2(clamp(num2+1,1,12));
+        else if (e.key === 'ArrowLeft') setNum2(clamp(num2-1,1,12));
+        else if (/^[1-9]$/.test(e.key)) { const n = Number(e.key); setNum2(n); }
+      }
     });
 
-    // --- Init ---
     function init(){
       buildButtons('num1Btns', setNum1, num1);
       buildButtons('num2Btns', setNum2, num2);
-      // default active tab
       setActiveTab('grid');
-      // sync displays
-      syncButtons('num1Btns', num1); syncButtons('num2Btns', num2);
+      syncButtons('num1Btns', num1); 
+      syncButtons('num2Btns', num2);
       updateVisualization();
     }
     init();
