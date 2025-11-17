@@ -494,86 +494,93 @@
 
     <!-- CNN Pipeline with Enhanced Styling (Conv + Pool separated) -->
 
-    <div class="architecture-svg">
-      <svg viewBox="0 0 1300 260" style="width:100%; max-width:1300px;" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L9,3 z" fill="#50fa7b" />
-          </marker>
-        </defs>
+    
+<div class="architecture-svg">
+  <svg viewBox="0 0 1300 260" style="width:100%; max-width:1300px;" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L9,3 z" fill="#50fa7b" />
+      </marker>
+    </defs>
 
-        <!-- Input Layer -->
-        <rect x="20" y="70" width="110" height="90" rx="8" fill="#ff79c6" stroke="#ffb3de" stroke-width="2"/>
-        <text x="75" y="100" text-anchor="middle" font-size="15" font-weight="bold">Input</text>
-        <text x="75" y="123" text-anchor="middle" font-size="12">32×32×3</text>
-        <text x="75" y="142" text-anchor="middle" font-size="11" fill="#f8f8f2">RGB image</text>
+    <!-- Input Layer -->
+    <rect x="20" y="70" width="110" height="90" rx="8" fill="#ff79c6" stroke="#ffb3de" stroke-width="2"/>
+    <text x="75" y="100" text-anchor="middle" font-size="15" font-weight="bold">Input</text>
+    <text x="75" y="123" text-anchor="middle" font-size="12">32×32×3</text>
+    <text x="75" y="142" text-anchor="middle" font-size="11" fill="#f8f8f2">RGB image</text>
 
-        <!-- Arrow 1 -->
-        <line x1="130" y1="115" x2="180" y2="115" stroke="#50fa7b" stroke-width="3" marker-end="url(#arrow)"/>
+    <!-- Arrow 1 -->
+    <line x1="130" y1="115" x2="180" y2="115" stroke="#50fa7b" stroke-width="3" marker-end="url(#arrow)"/>
 
-        <!-- Conv 1 -->
-        <rect x="180" y="40" width="140" height="70" rx="8" fill="#8be9fd" stroke="#50fa7b" stroke-width="2"/>
-        <text x="250" y="65" text-anchor="middle" font-size="13" font-weight="bold">Conv 1 + ReLU</text>
-        <text x="250" y="83" text-anchor="middle" font-size="11">32 filters, 3×3</text>
-        <text x="250" y="100" text-anchor="middle" font-size="11">→ 32×32×32</text>
+    <!-- Conv 1 -->
+    <rect x="180" y="40" width="140" height="70" rx="8" fill="#8be9fd" stroke="#50fa7b" stroke-width="2"/>
+    <text x="250" y="63" text-anchor="middle" font-size="13" font-weight="bold">Conv 1 + ReLU</text>
+    <text x="250" y="80" text-anchor="middle" font-size="11">32 filters, 3×3×3</text>
+    <text x="250" y="97" text-anchor="middle" font-size="11">padding = 1 → 32×32×32</text>
 
-        <!-- Pool 1 -->
-        <rect x="180" y="130" width="140" height="70" rx="8" fill="#b2f7ff" stroke="#50fa7b" stroke-width="2"/>
-        <text x="250" y="155" text-anchor="middle" font-size="13" font-weight="bold">MaxPool 1</text>
-        <text x="250" y="173" text-anchor="middle" font-size="11">2×2, stride 2</text>
-        <text x="250" y="190" text-anchor="middle" font-size="11">→ 16×16×32</text>
+    <!-- Pool 1 -->
+    <rect x="180" y="130" width="140" height="70" rx="8" fill="#b2f7ff" stroke="#50fa7b" stroke-width="2"/>
+    <text x="250" y="155" text-anchor="middle" font-size="13" font-weight="bold">MaxPool 1</text>
+    <text x="250" y="173" text-anchor="middle" font-size="11">2×2, stride 2</text>
+    <text x="250" y="190" text-anchor="middle" font-size="11">→ 16×16×32</text>
 
-        <!-- Arrow 2 -->
-        <line x1="320" y1="115" x2="370" y2="115" stroke="#50fa7b" stroke-width="3" marker-end="url(#arrow)"/>
+    <!-- Arrow 2 -->
+    <line x1="320" y1="115" x2="370" y2="115" stroke="#50fa7b" stroke-width="3" marker-end="url(#arrow)"/>
 
-        <!-- Conv 2 -->
-        <rect x="370" y="40" width="150" height="70" rx="8" fill="#8be9fd" stroke="#50fa7b" stroke-width="2"/>
-        <text x="445" y="65" text-anchor="middle" font-size="13" font-weight="bold">Conv 2 + ReLU</text>
-        <text x="445" y="83" text-anchor="middle" font-size="11">64 filters, 3×3</text>
-        <text x="445" y="100" text-anchor="middle" font-size="11">→ 16×16×64</text>
+    <!-- Conv 2 -->
+    <rect x="370" y="40" width="150" height="70" rx="8" fill="#8be9fd" stroke="#50fa7b" stroke-width="2"/>
+    <text x="445" y="63" text-anchor="middle" font-size="13" font-weight="bold">Conv 2 + ReLU</text>
+    <text x="445" y="80" text-anchor="middle" font-size="11">64 filters, 3×3×32</text>
+    <text x="445" y="97" text-anchor="middle" font-size="11">padding = 1 → 16×16×64</text>
 
-        <!-- Pool 2 -->
-        <rect x="370" y="130" width="150" height="70" rx="8" fill="#b2f7ff" stroke="#50fa7b" stroke-width="2"/>
-        <text x="445" y="155" text-anchor="middle" font-size="13" font-weight="bold">MaxPool 2</text>
-        <text x="445" y="173" text-anchor="middle" font-size="11">2×2, stride 2</text>
-        <text x="445" y="190" text-anchor="middle" font-size="11">→ 8×8×64</text>
+    <!-- Pool 2 -->
+    <rect x="370" y="130" width="150" height="70" rx="8" fill="#b2f7ff" stroke="#50fa7b" stroke-width="2"/>
+    <text x="445" y="155" text-anchor="middle" font-size="13" font-weight="bold">MaxPool 2</text>
+    <text x="445" y="173" text-anchor="middle" font-size="11">2×2, stride 2</text>
+    <text x="445" y="190" text-anchor="middle" font-size="11">→ 8×8×64</text>
 
-        <!-- Arrow 3 -->
-        <line x1="520" y1="115" x2="570" y2="115" stroke="#50fa7b" stroke-width="3" marker-end="url(#arrow)"/>
+    <!-- Arrow 3 -->
+    <line x1="520" y1="115" x2="570" y2="115" stroke="#50fa7b" stroke-width="3" marker-end="url(#arrow)"/>
 
-        <!-- Flatten -->
-        <rect x="570" y="70" width="140" height="90" rx="8" fill="#ffb3de" stroke="#ff79c6" stroke-width="2"/>
-        <text x="640" y="98" text-anchor="middle" font-size="14" font-weight="bold">Flatten</text>
-        <text x="640" y="120" text-anchor="middle" font-size="12">8×8×64 = 4096</text>
-        <text x="640" y="138" text-anchor="middle" font-size="11">feature vector</text>
+    <!-- Flatten -->
+    <rect x="570" y="70" width="140" height="90" rx="8" fill="#ffb3de" stroke="#ff79c6" stroke-width="2"/>
+    <text x="640" y="98" text-anchor="middle" font-size="14" font-weight="bold">Flatten</text>
+    <text x="640" y="120" text-anchor="middle" font-size="12">8×8×64 = 4096</text>
+    <text x="640" y="138" text-anchor="middle" font-size="11">feature vector</text>
 
-        <!-- Arrow 4 -->
-        <line x1="710" y1="115" x2="760" y2="115" stroke="#50fa7b" stroke-width="3" marker-end="url(#arrow)"/>
+    <!-- Arrow 4 -->
+    <line x1="710" y1="115" x2="760" y2="115" stroke="#50fa7b" stroke-width="3" marker-end="url(#arrow)"/>
 
-        <!-- Dense -->
-        <rect x="760" y="70" width="130" height="90" rx="8" fill="#fff52e" stroke="#ffb3de" stroke-width="2"/>
-        <text x="825" y="98" text-anchor="middle" font-size="14" font-weight="bold">Dense</text>
-        <text x="825" y="120" text-anchor="middle" font-size="12">128 units</text>
-        <text x="825" y="138" text-anchor="middle" font-size="11">+ ReLU</text>
+    <!-- Dense -->
+    <rect x="760" y="70" width="130" height="90" rx="8" fill="#fff52e" stroke="#ffb3de" stroke-width="2"/>
+    <text x="825" y="98" text-anchor="middle" font-size="14" font-weight="bold">Dense</text>
+    <text x="825" y="120" text-anchor="middle" font-size="12">128 units</text>
+    <text x="825" y="138" text-anchor="middle" font-size="11">+ ReLU</text>
 
-        <!-- Arrow 5 -->
-        <line x1="890" y1="115" x2="940" y2="115" stroke="#50fa7b" stroke-width="3" marker-end="url(#arrow)"/>
+    <!-- Arrow 5 -->
+    <line x1="890" y1="115" x2="940" y2="115" stroke="#50fa7b" stroke-width="3" marker-end="url(#arrow)"/>
 
-        <!-- Output -->
-        <rect x="940" y="70" width="140" height="90" rx="8" fill="#ff5555" stroke="#ff79c6" stroke-width="2"/>
-        <text x="1010" y="98" text-anchor="middle" font-size="14" fill="#fff" font-weight="bold">Output</text>
-        <text x="1010" y="120" text-anchor="middle" font-size="12" fill="#fff">10 classes</text>
-        <text x="1010" y="138" text-anchor="middle" font-size="11" fill="#fff">softmax</text>
+    <!-- Output -->
+    <rect x="940" y="70" width="140" height="90" rx="8" fill="#ff5555" stroke="#ff79c6" stroke-width="2"/>
+    <text x="1010" y="98" text-anchor="middle" font-size="14" fill="#fff" font-weight="bold">Output</text>
+    <text x="1010" y="120" text-anchor="middle" font-size="12" fill="#fff">10 classes</text>
+    <text x="1010" y="138" text-anchor="middle" font-size="11" fill="#fff">softmax</text>
 
-        <!-- Feature Extraction Label -->
-        <line x1="180" y1="230" x2="520" y2="230" stroke="#50fa7b" stroke-width="2" stroke-dasharray="5,5"/>
-        <text x="350" y="250" text-anchor="middle" font-size="13" fill="#50fa7b" font-weight="bold">Feature Extraction (Conv + Pool)</text>
+    <!-- Feature Extraction Label -->
+    <line x1="180" y1="230" x2="520" y2="230" stroke="#50fa7b" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="350" y="250" text-anchor="middle" font-size="13" fill="#50fa7b" font-weight="bold">
+      Feature Extraction (Conv + Pool)
+    </text>
 
-        <!-- Classification Label -->
-        <line x1="570" y1="230" x2="1080" y2="230" stroke="#fff52e" stroke-width="2" stroke-dasharray="5,5"/>
-        <text x="825" y="250" text-anchor="middle" font-size="13" fill="#fff52e" font-weight="bold">Classification (Flatten + Dense)</text>
-      </svg>
-    </div>
+    <!-- Classification Label -->
+    <line x1="570" y1="230" x2="1080" y2="230" stroke="#fff52e" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="825" y="250" text-anchor="middle" font-size="13" fill="#fff52e" font-weight="bold">
+      Classification (Flatten + Dense)
+    </text>
+  </svg>
+</div>
+
+   
 
     <p>
       From left to right, the image is gradually transformed:
