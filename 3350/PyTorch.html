@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PyTorch Basics – Tensors & Autograd</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box
+    }
+
+    body {
+        font-family: 'Roboto', Arial, sans-serif;
+        background: #17191a;
+        min-height: 100vh;
+        color: #ff79c6;
+        padding: 20px
+    }
+
+    section {
+        margin: 0 auto 55px auto;
+        background: #222025;
+        border-radius: 18px;
+        box-shadow: 0 4px 30px rgba(255, 121, 198, .09);
+        padding: 36px 32px 22px 32px;
+        border-left: 7px solid #ff79c6;
+        max-width: 1400px
+    }
+
+    h1 {
+        color: #ffb3de;
+        text-align: center;
+        font-size: 2.5em;
+        margin-bottom: 15px
+    }
+
+    h2 {
+        color: #ffb3de;
+        font-size: 1.8em;
+        margin: 30px 0 20px 0
+    }
+
+    p {
+        color: #ffd7f0;
+        line-height: 1.8;
+        margin-bottom: 15px
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #ffd7f0;
+        font-size: 1.1em;
+        margin-bottom: 20px
+    }
+
+    .pill {
+        display: inline-block;
+        background: #19121a;
+        border: 1px solid #ff79c6;
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: .9em
+    }
+
+    button {
+        background: #ff79c6;
+        color: #fff;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 8px;
+        font-size: 1.1em;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(255, 121, 198, 0.3);
+        margin: 20px 0
+    }
+
+    button:hover {
+        background: #ffb3de;
+        transform: translateY(-2px)
+    }
+
+    .data-box {
+        background: #19121a;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 20px 0;
+        border: 2px solid rgba(255, 121, 198, 0.3);
+        text-align: center
+    }
+
+    .data-title {
+        color: #ffb3de;
+        font-weight: 700;
+        font-size: 1.1em;
+        margin-bottom: 15px
+    }
+
+    .balls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center
+    }
+
+    .ball {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.2em;
+        border: 3px solid #ff79c6;
+        background: #2a252b;
+        color: #ffb3de
+    }
+
+    .ball.highlighted {
+        background: #ff79c6;
+        color: #222025;
+        font-size: 1.3em
+    }
+
+    .tree-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+        margin: 30px 0
+    }
+
+    .tree-box {
+        background: #2a252b;
+        border-radius: 12px;
+        padding: 20px;
+        border: 2px solid rgba(255, 121, 198, 0.2);
+        text-align: center
+    }
+
+    .tree-name {
+        color: #ffb3de;
+        font-weight: 700;
+        font-size: 1.2em;
+        margin-bottom: 15px
+    }
+
+    .tree-samples {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        margin: 15px 0
+    }
+
+    .sample-item {
+        background: #19121a;
+        border: 2px solid rgba(255, 121, 198, 0.4);
+        border-radius: 6px;
+        padding: 8px 12px;
+        color: #ffd7f0;
+        font-weight: 600;
+        font-size: 0.95em;
+        min-width: 38px;
+        text-align: center;
+    }
+
+    .sample-item.highlight-op {
+        background: rgba(80, 250, 123, 0.2);
+        border-color: #50fa7b;
+    }
+
+    .sample-item.highlight-grad {
+        background: rgba(189, 147, 249, 0.2);
+        border-color: #bd93f9;
+    }
+
+    .box {
+        background: #2a252b;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 15px 0;
+        border: 1px solid rgba(255, 121, 198, 0.2)
+    }
+
+    .highlight {
+        background: rgba(255, 121, 198, 0.15);
+        border-left: 4px solid #ff79c6;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 6px
+    }
+
+    code {
+        font-family: "JetBrains Mono", monospace;
+        background: #19121a;
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #8be9fd;
+        font-size: 0.95em;
+    }
+
+    pre.code-block {
+        background: #19121a;
+        border-radius: 10px;
+        padding: 12px 14px;
+        overflow-x: auto;
+        border: 1px solid rgba(255, 121, 198, 0.25);
+        color: #f8f8f2;
+        font-size: 0.9em;
+        line-height: 1.5;
+        font-family: "JetBrains Mono", monospace;
+        margin: 10px 0 0 0;
+    }
+
+    ul {
+        color: #ffd7f0;
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Title -->
+    <section>
+        <h1>
+            <span class="pill">PyTorch</span>
+        </h1>
+        <p class="subtitle">
+            Tensors, operations, and autograd &mdash; visual intuition (no Python required!)
+        </p>
+    </section>
+
+    <!-- Section 1: Tensors -->
+    <section>
+        <h2>1. Tensors: PyTorch's Building Blocks</h2>
+        <p>
+            In PyTorch, a <b>tensor</b> is just a fancy word for a multi-dimensional array.
+            You can think of a 1D tensor like a list, a 2D tensor like a matrix, and so on.
+        </p>
+        <p>
+            Below we show a simple <code>1D tensor</code> with 6 elements. Click the button to create
+            a new random tensor (simulating <code>torch.randint</code>).
+        </p>
+
+        <div class="data-box">
+            <div class="data-title">1D Tensor (shape: [6])</div>
+            <div class="balls" id="originalBalls"></div>
+        </div>
+
+        <button style="width:100%" onclick="createOriginalTensor()">
+            🔁 New Random Tensor (like <code>torch.randint</code>)
+        </button>
+
+        <div class="box">
+<pre class="code-block">
+import torch
+
+# 1D tensor of length 6 with random integers in [0, 9]
+x = torch.randint(low=0, high=10, size=(6,))
+print(x)        # e.g., tensor([3, 0, 7, 1, 5, 2])
+print(x.shape)  # torch.Size([6])
+</pre>
+        </div>
+    </section>
+
+    <!-- Section 2: Operations -->
+    <section>
+        <h2>2. Tensor Operations: y = 2x + 1</h2>
+        <p>
+            PyTorch lets you apply operations to tensors just like NumPy:
+            addition, multiplication, matrix multiplication, etc. Here we will apply a simple
+            operation:
+        </p>
+        <p style="text-align:center; font-size:1.1em; margin-bottom:10px">
+            <code>y = 2x + 1</code>
+        </p>
+        <p>
+            Click the button to apply this operation to the current tensor. We'll then
+            show the <b>input</b>, the <b>output</b>, and the <b>gradient</b> if we treat this as a
+            differentiable function.
+        </p>
+
+        <button style="width:100%" onclick="runOperationDemo()">
+            ▶ Run Operation &amp; Autograd Demo
+        </button>
+
+        <div class="tree-section">
+            <div class="tree-box">
+                <div class="tree-name">① Input Tensor <code>x</code></div>
+                <div class="tree-samples" id="tensorX"></div>
+            </div>
+            <div class="tree-box">
+                <div class="tree-name">② Output Tensor <code>y = 2x + 1</code></div>
+                <div class="tree-samples" id="tensorY"></div>
+            </div>
+            <div class="tree-box">
+                <div class="tree-name">③ Gradient <code>dy/dx</code></div>
+                <div class="tree-samples" id="tensorGrad"></div>
+            </div>
+        </div>
+
+        <div class="box">
+            <p><b>How PyTorch would do this:</b></p>
+<pre class="code-block">
+import torch
+
+x = torch.randint(0, 10, (6,), dtype=torch.float32)
+x.requires_grad_(True)          # Tell PyTorch to track gradients for x
+
+y = 2 * x + 1                   # Tensor operation
+z = y.mean()                    # Scalar (average of y)
+
+z.backward()                    # Compute dz/dx
+
+print("x:", x)
+print("y:", y)
+print("z:", z)
+print("dz/dx:", x.grad)         # Should be all 2's
+</pre>
+        </div>
+    </section>
+
+    <!-- Section 3: What is Autograd Doing? -->
+    <section>
+        <h2>3. What Is Autograd Doing Behind the Scenes?</h2>
+
+        <div class="box">
+            <p><b>Step-by-step math for our example:</b></p>
+            <ul style="margin-left:20px;margin-top:10px">
+                <li>We define <code>y = 2x + 1</code> (elementwise).</li>
+                <li>Then we define <code>z = mean(y)</code>, a single scalar.</li>
+                <li>PyTorch builds a <b>computation graph</b> connecting <code>x → y → z</code>.</li>
+                <li>When we call <code>z.backward()</code>, PyTorch uses calculus to compute <code>dz/dx</code>.</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <p><b>Derivative intuition:</b></p>
+            <ul style="margin-left:20px;margin-top:10px">
+                <li>For <code>y = 2x + 1</code>, the derivative is <code>dy/dx = 2</code>.</li>
+                <li>For <code>z = mean(y)</code>, each element contributes equally.</li>
+                <li>In this simple example, the gradient with respect to each <code>x[i]</code> is still a constant (2), which is what we show in the third box.</li>
+            </ul>
+        </div>
+
+        <div class="highlight">
+            <b>Key idea:</b><br>
+            PyTorch automatically tracks operations on tensors and uses the chain rule to compute
+            gradients for you. You just write the math (<code>y = 2x + 1</code>, <code>z = y.mean()</code>),
+            and <code>autograd</code> handles the derivatives.
+        </div>
+    </section>
+
+    <!-- Section 4: CPU vs GPU (Conceptual) -->
+    <section>
+        <h2>4. Moving Tensors to GPU</h2>
+        <p>
+            One big advantage of PyTorch is that tensors can live on a <b>CPU</b> or a <b>GPU</b>.
+            You can move a tensor to GPU (if available) with <code>.to("cuda")</code> or <code>.cuda()</code>.
+        </p>
+
+        <div class="box">
+<pre class="code-block">
+import torch
+
+x = torch.randn(3, 3)            # on CPU by default
+print(x.device)                  # e.g., cpu
+
+if torch.cuda.is_available():
+    x_gpu = x.to("cuda")         # move to GPU
+    print(x_gpu.device)          # e.g., cuda:0
+</pre>
+        </div>
+
+        <div class="highlight">
+            You can think of this as:
+            <br><br>
+            <b>Same tensor API</b> + <b>faster hardware</b> = <b>deep learning at scale</b>.
+            <br>
+            The code stays almost identical; only the device changes.
+        </div>
+    </section>
+
+    <script>
+    // Global tensor storage
+    let currentTensor = [];
+
+    function createOriginalTensor() {
+        const container = document.getElementById('originalBalls');
+        container.innerHTML = '';
+        currentTensor = [];
+        // create length-6 tensor with random ints [0, 9]
+        for (let i = 0; i < 6; i++) {
+            const value = Math.floor(Math.random() * 10);
+            currentTensor.push(value);
+            const ball = document.createElement('div');
+            ball.className = 'ball';
+            ball.textContent = value;
+            container.appendChild(ball);
+        }
+        // Clear downstream displays since tensor changed
+        clearOperationDisplays();
+    }
+
+    function clearOperationDisplays() {
+        ['tensorX', 'tensorY', 'tensorGrad'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = '';
+        });
+    }
+
+    function runOperationDemo() {
+        if (currentTensor.length === 0) {
+            createOriginalTensor();
+        }
+
+        const xContainer = document.getElementById('tensorX');
+        const yContainer = document.getElementById('tensorY');
+        const gContainer = document.getElementById('tensorGrad');
+
+        xContainer.innerHTML = '';
+        yContainer.innerHTML = '';
+        gContainer.innerHTML = '';
+
+        // y = 2x + 1, gradient dy/dx = 2 (constant for our simple function)
+        currentTensor.forEach(v => {
+            const y = 2 * v + 1;
+            const grad = 2;
+
+            // Input x
+            const xItem = document.createElement('div');
+            xItem.className = 'sample-item';
+            xItem.textContent = v;
+            xContainer.appendChild(xItem);
+
+            // Output y
+            const yItem = document.createElement('div');
+            yItem.className = 'sample-item highlight-op';
+            yItem.textContent = y;
+            yContainer.appendChild(yItem);
+
+            // Gradient
+            const gItem = document.createElement('div');
+            gItem.className = 'sample-item highlight-grad';
+            gItem.textContent = grad;
+            gContainer.appendChild(gItem);
+        });
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+        createOriginalTensor();
+    });
+    </script>
+
+</body>
+</html>
