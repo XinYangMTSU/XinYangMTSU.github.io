@@ -161,14 +161,18 @@ y = y.astype(int)
 # You can take a subset (for faster demo)
 X, y = X[:5000], y[:5000]
 
-  
+# If you need DataFrame to these: Dataset shape; basic stats (mean, std, min, max)
+# You can Create DataFrame for features
+df_X = pd.DataFrame(X)
+    
+    
 # Grid of 10 sample 28×28 digit images
 # Check Demo from https://xinyangmtsu.github.io/3350/Nov-5.pdf
 
 
     
 # Standardize features
-# Please use StandardScaler() to scale your features
+# Please use StandardScaler() to scale your features X
     
     
 # ===== Step 2: K-Means Elbow =====
