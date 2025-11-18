@@ -182,9 +182,10 @@ X, y = X[:5000], y[:5000]
 # ===== Step 3: K-Means @ k_opt & Hierarchical =====
 
 # --- K-Means with chosen k = 10 ---
+#Hint here: Use k = 10 when creating kmeans_opt here.
 
-
-#Hint here:
+    
+#Get Lables and Centroids
 kmeans_labels = kmeans_opt.fit_predict(X_scaled) #Labels
 centroids = kmeans_opt.cluster_centers_ #Centroids
 
@@ -199,8 +200,8 @@ linkages_list = ["single", "complete", "average"]
 #check demo from here: https://xinyangmtsu.github.io/3350/oct-31.pdf
 dendrogram(Z, truncate_mode='lastp', p = 100, leaf_rotation = 90, leaf_font_size = 12)
 
-    
 
+    
 # ===== Step 5: PCA Variance & PCA-2D by True Digit =====
 
 pca_full = PCA(n_components=None)   # keep all components
@@ -221,7 +222,6 @@ plt.ylabel("PC2")
 plt.title("PCA 2D Projection Colored by True Digit")
 plt.tight_layout()
 plt.show()
-    
     
 # ===== Step 6: t-SNE  =====
 
