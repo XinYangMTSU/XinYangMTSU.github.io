@@ -89,15 +89,9 @@
       </ul>
     </li>
 
-    <li><b>Step 4: Dendrograms (Subsample) & Comparison</b>
+    <li><b>Step 4: Dendrograms (Subsample)</b>
       <ul>
-        <li>Randomly sample ~<b>300–500</b> points (full dendrogram on 5000 is impractical)</li>
-        <li>For the two best-looking linkages from Step 3:
-          <ul>
-            <li>Compute <code>scipy.cluster.hierarchy.linkage()</code> on the subsample</li>
-            <li>Plot dendrograms with a horizontal cut line indicating k</li>
-          </ul>
-        </li>
+        <li>Display dendrograms with ~<b>30–100</b> points (full dendrogram on 5000 is impractical)</li>
       </ul>
     </li>
 
@@ -161,16 +155,51 @@ np.random.seed(SEED)
 
 # ===== Step 1: Load & Preprocess MNIST =====
 
+# 1. Load MNIST (70,000 samples, 784 features)
+X, y = fetch_openml('mnist_784', return_X_y=True, as_frame=False)
+y = y.astype(int)
+# You can take a subset (for faster demo)
+X, y = X[:5000], y[:5000]
+
+  
+# Grid of 10 sample 28×28 digit images
+# Check Demo from https://xinyangmtsu.github.io/3350/Nov-5.pdf
+
+
+    
+# Standardize features
+# Please use StandardScaler() to scale your features
+    
     
 # ===== Step 2: K-Means Elbow =====
 
+# Check Demo from https://xinyangmtsu.github.io/3350/oct-27.pdf
+    
+# ---- Choose k based on the elbow plot ----
+# For MNIST, a natural choice is often k = 10
 
+    
 # ===== Step 3: K-Means @ k_opt & Hierarchical =====
 
+# --- K-Means with chosen k ---
 
-# ===== Step 4: Dendrograms on Subsample =====
-# Subsample 400 points
 
+#Hint here:
+kmeans_labels = kmeans_opt.fit_predict(X_scaled) #Labels
+centroids = kmeans_opt.cluster_centers_ #Centroids
+
+print("K-Means done. Centroids shape:", centroids.shape)
+
+# --- Hierarchical (Agglomerative) clustering for different linkages ---
+linkages_list = ["single", "complete", "average"]
+#check demo from here: https://xinyangmtsu.github.io/3350/oct-31.pdf
+    
+# ===== Step 4: Dendrograms on Subsample (p=100) =====
+
+#check demo from here: https://xinyangmtsu.github.io/3350/oct-31.pdf
+dendrogram(Z, truncate_mode='lastp', p = 100, leaf_rotation = 90, leaf_font_size = 12)
+
+    
 
 # ===== Step 5: PCA Variance & PCA-2D by True Digit =====
 
