@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CNN Architecture Visualizer</title>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1d1f 0%, #2a1e28 100%);
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #ffb3de;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      background: #222025;
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 4px 30px rgba(255, 121, 198, 0.15);
+      border-left: 7px solid #ff79c6;
+    }
+
+    h1 {
+      color: #ff79c6;
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 2.2em;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #ffb3de;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+
+    .controls {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .control-group label {
+      color: #ff79c6;
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+
+    .control-group span {
+      font-size: 0.9em;
+      color: #ffb3de;
+    }
+
+    button {
+      background: linear-gradient(135deg, #ff79c6, #ffb3de);
+      color: #1a1d1f;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 121, 198, 0.4);
+    }
+
+    .pipeline-container {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .pipeline {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      align-items: stretch;
+      justify-content: space-between;
+    }
+
+    .stage {
+      background: #19121a;
+      border: 2px solid #50fa7b;
+      border-radius: 12px;
+      padding: 20px;
+      flex: 1;
+      min-width: 280px;
+      text-align: center;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .stage h3 {
+      color: #ff79c6;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+
+    .stage-op {
+      font-size: 0.85em;
+      color: #fff52e;
+      margin-bottom: 8px;
+      font-family: "Courier New", monospace;
+    }
+
+    .stage-info {
+      color: #ffb3de;
+      font-size: 0.9em;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .visualization {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px 0;
+      min-height: 200px;
+      background: #2a1e28;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    canvas {
+      border: 2px solid #ff79c6;
+      border-radius: 8px;
+    }
+
+    .arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      color: #50fa7b;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .legend {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 25px;
+    }
+
+    .legend h3 {
+      color: #ff79c6;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ff79c6;
+      padding-bottom: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 12px 0;
+      color: #ffb3de;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .color-rgb { background: linear-gradient(135deg, #ff0000, #00ff00, #0000ff); }
+    .color-conv { background: #50fa7b; }
+    .color-pool { background: #ffb3de; }
+    .color-output { background: #fff52e; }
+
+    @media (max-width: 1200px) {
+      .pipeline {
+        flex-direction: column;
+      }
+
+      .arrow {
+        transform: rotate(90deg);
+      }
+    }
+
+    .param-info {
+      background: #19121a;
+      border-left: 4px solid #fff52e;
+      padding: 15px;
+      border-radius: 8px;
+      color: #fff52e;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85em;
+      margin-top: 10px;
+    }
+
+    .credit {
+      margin-top: 10px;
+      font-size: 0.75em;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🧠 CNN Architecture Step-by-Step</h1>
+  <p class="subtitle">Dog vs. Cat – From Real Dog Photo → Conv+ReLU → Pool+ReLU → Softmax Output</p>
+
+  <div class="controls">
+    <div class="control-group">
+      <label>Fixed Input Image</label>
+      <span>We use a real photo of a Labrador Retriever from the internet.</span>
+      <span>For teaching purposes, we resize the real dog photo to a small 32×32 RGB image so the CNN layer sizes remain easy to visualize.</span>
+      <span>The first stage shows the RGB image and its three separate channels (R, G, B).</span>
+    </div>
+    <!--
+    <button onclick="toggleAnimation()">▶️ <span id="animButton">Play Step-by-Step</span></button>
+    -->
+  </div>
+
+  <div class="pipeline-container">
+    <div class="pipeline" id="pipeline"></div>
+  </div>
+
+  <div class="legend">
+    <h3>📊 CNN Components & Process</h3>
+    <div class="legend-item">
+      <div class="legend-color color-rgb"></div>
+      <span><strong>Input Image:</strong> Real 32×32 RGB dog photo (3 color channels)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-conv"></div>
+      <span><strong>Convolution + ReLU:</strong> Filters slide over the image to detect patterns; ReLU keeps only positive activations.</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-pool"></div>
+      <span><strong>Pooling + ReLU:</strong> Max pooling shrinks the feature maps while keeping the strongest activations.</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-output"></div>
+      <span><strong>Output + Softmax:</strong> Fully connected layer + softmax turns features into class probabilities (dog vs. cat vs. other).</span>
+    </div>
+
+    <h4 style="color: #ff79c6; margin-top: 25px; margin-bottom: 15px;">Conceptual Flow</h4>
+    <div style="background: #19121a; padding: 15px; border-radius: 8px; color: #ffb3de; line-height: 1.8;">
+      <strong style="color: #50fa7b;">1. Input Layer:</strong> 32×32×3 RGB image of a dog (downsampled from a real photo).<br>
+      <strong style="color: #50fa7b;">2. Conv Layer 1 + ReLU:</strong> 16 filters (5×5) extract low-level edges and textures, then ReLU keeps positive responses.<br>
+      <strong style="color: #50fa7b;">3. Pool Layer 1 + ReLU:</strong> 2×2 max pooling downsamples to 14×14 while keeping the strongest activations.<br>
+      <strong style="color: #50fa7b;">4. Conv Layer 2 + ReLU:</strong> 32 filters (5×5) build more complex shapes (ears, eyes, snout).<br>
+      <strong style="color: #50fa7b;">5. Pool Layer 2 + ReLU:</strong> Another 2×2 max pooling → compact 5×5 feature maps.<br>
+      <strong style="color: #50fa7b;">6. Output Layer + Softmax:</strong> Flattened features → fully connected layer → softmax probabilities for Dog / Cat / Other.
+    </div>
+
+    <div class="credit">
+      Dog photo: “Labrador Retriever portrait” by Herwig Kavallar, via Wikimedia Commons (public domain).
+    </div>
+  </div>
+</div>
+
+
+
+<div id="conv-demo" style="
+  background:#19121a;
+  border:2px solid #ff79c6;
+  padding:20px;
+  border-radius:12px;
+  color:#ffb3de;
+  font-family:'Courier New', monospace;
+  margin-top:20px; line-height:1.6;">
+
+  <h3 style="color:#ff79c6; margin-bottom:10px;">
+    📌 Interactive: How 32×32×3 Becomes 28×28×1 for ONE Filter
+  </h3>
+
+  <p style="font-family: 'Roboto', Arial, sans-serif; font-size: 0.9em; color:#ffb3de; margin-bottom:10px;">
+    Move the sliders to choose an output position <code>(y, x)</code>. On the left, we show the 32×32 RGB input
+    (upscaled) with the corresponding 5×5×3 patch highlighted. On the right, we show the 28×28 response map of
+    <strong>one</strong> 5×5×3 filter, with the selected output pixel highlighted.
+    Below, you can see the 5×5 patch from each channel (R, G, B) and the corresponding 5×5 filter weights,
+    and how they combine into a single scalar via multiply-and-sum.
+  </p>
+
+  <!-- Big canvases: input & output -->
+  <div style="display:flex; flex-wrap:wrap; gap:40px; align-items:flex-start; justify-content:center; margin-top:15px;">
+    <!-- Left: Bigger Input Image -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+      <canvas id="conv-demo-input-canvas" width="300" height="300"
+              style="border:2px solid #ff79c6; border-radius:8px; background:#000;"></canvas>
+      <span style="font-size:0.85em;">32×32 RGB input (scaled up) with 5×5 patch highlighted</span>
+    </div>
+
+    <!-- Right: Bigger Feature Map -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+      <canvas id="conv-demo-output-canvas" width="280" height="280"
+              style="border:2px solid #ff79c6; border-radius:8px; background:#000;"></canvas>
+      <span style="font-size:0.85em;">28×28 conv response map of ONE 5×5×3 filter</span>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div style="margin-top:15px; display:flex; flex-wrap:wrap; gap:20px; align-items:center;">
+    <div>
+      <label for="conv-demo-y" style="color:#ff79c6;">Output row y (0–27): </label>
+      <input id="conv-demo-y" type="range" min="0" max="27" value="0" />
+      <span id="conv-demo-y-value">0</span>
+    </div>
+    <div>
+      <label for="conv-demo-x" style="color:#ff79c6;">Output col x (0–27): </label>
+      <input id="conv-demo-x" type="range" min="0" max="27" value="0" />
+      <span id="conv-demo-x-value">0</span>
+    </div>
+  </div>
+
+  <!-- Channel patches + filter patches -->
+  <div id="conv-demo-channels" style="margin-top:18px; font-size:0.8em;">
+    <div style="margin-bottom:6px; color:#ffb3de;">
+      For the selected output position, we use a <strong>5×5×3</strong> patch:
+      one <strong>5×5</strong> patch from each channel (R, G, B), and one <strong>5×5</strong> filter for each channel.
+    </div>
+
+    <!-- 5×5 patches from R, G, B channels -->
+    <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-bottom:10px;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <canvas id="conv-demo-patch-R" width="120" height="120"
+                style="border:1px solid #ff5555; border-radius:6px; background:#000;"></canvas>
+        <span>5×5 patch (R channel)</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <canvas id="conv-demo-patch-G" width="120" height="120"
+                style="border:1px solid #55ff55; border-radius:6px; background:#000;"></canvas>
+        <span>5×5 patch (G channel)</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <canvas id="conv-demo-patch-B" width="120" height="120"
+                style="border:1px solid #5555ff; border-radius:6px; background:#000;"></canvas>
+        <span>5×5 patch (B channel)</span>
+      </div>
+    </div>
+
+    <!-- 5×5 filter weights for R, G, B channels -->
+    <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <canvas id="conv-demo-filter-R" width="120" height="120"
+                style="border:1px solid #ff5555; border-radius:6px; background:#000;"></canvas>
+        <span>5×5 filter weights (R)</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <canvas id="conv-demo-filter-G" width="120" height="120"
+                style="border:1px solid #55ff55; border-radius:6px; background:#000;"></canvas>
+        <span>5×5 filter weights (G)</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <canvas id="conv-demo-filter-B" width="120" height="120"
+                style="border:1px solid #5555ff; border-radius:6px; background:#000;"></canvas>
+        <span>5×5 filter weights (B)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Numeric explanation of multiply + add -->
+  <div id="conv-demo-text" style="
+      margin-top:15px;
+      background:#141018;
+      border-radius:8px;
+      padding:10px;
+      font-size:0.8em;
+      line-height:1.5;
+      color:#ffb3de;">
+    Loading dog image and computing convolution…
+  </div>
+
+  To draw a pixel on screen, we must convert the actual CNN activation value (like 84.24) to a grayscale brightness between: 0 → black
+  and 255 → white. <br>
+
+  This requires min–max normalization:
+  $$
+      \text{brightness} = \frac{value - min}{max - min} \times 255
+  $$
+
+  <div style="margin-top:10px; font-size:0.75em; color:#aaa;">
+    This demo uses one fixed random 5×5×3 filter (weights are not from a trained network).
+  </div>
+</div>
+
+
+
+<script>
+// ====== Conv Demo: 32×32×3 + 5×5×3 → 28×28×1 (with channels) ======
+
+const CONV_DEMO_DOG_URL =
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Labrador_Retriever_portrait.jpg/330px-Labrador_Retriever_portrait.jpg";
+
+let convDemoImageData = null;   // 32×32×4 RGBA from downsampled dog
+let convDemoOriginalImage = null;
+let convDemoOutputRaw = null;   // 28×28 raw conv (ReLU)
+let convDemoOutputNorm = null;  // 28×28 normalized to [0,255] for drawing
+let convDemoWeights = null;     // 5×5×3 filter weights
+let convDemoReady = false;
+
+const CONV_DEMO_INPUT_SIZE = 32;
+const CONV_DEMO_KERNEL = 5;
+const CONV_DEMO_OUTPUT_SIZE = 28;
+
+// Add a load handler (coexists with your other window.onloads)
+window.addEventListener('load', () => {
+  convDemoInit();
+});
+
+function convDemoInit() {
+  const img = new Image();
+  img.crossOrigin = "Anonymous";
+  img.src = CONV_DEMO_DOG_URL;
+
+  img.onload = () => {
+    convDemoOriginalImage = img;
+
+    // Downsample to 32×32
+    const canvas32 = document.createElement('canvas');
+    canvas32.width = CONV_DEMO_INPUT_SIZE;
+    canvas32.height = CONV_DEMO_INPUT_SIZE;
+    const ctx32 = canvas32.getContext('2d');
+    ctx32.drawImage(img, 0, 0, CONV_DEMO_INPUT_SIZE, CONV_DEMO_INPUT_SIZE);
+
+    try {
+      convDemoImageData = ctx32.getImageData(0, 0, CONV_DEMO_INPUT_SIZE, CONV_DEMO_INPUT_SIZE);
+    } catch (e) {
+      console.error("Conv-demo getImageData failed:", e);
+      const textDiv = document.getElementById('conv-demo-text');
+      if (textDiv) {
+        textDiv.textContent = "Failed to read pixel data from the dog image (browser security / CORS issue).";
+      }
+      return;
+    }
+
+    convDemoInitWeights();
+    convDemoComputeConv();
+    convDemoSetupControls();
+    convDemoReady = true;
+    convDemoRedraw();
+  };
+
+  img.onerror = () => {
+    console.error("Conv demo: failed to load dog image");
+    const textDiv = document.getElementById('conv-demo-text');
+    if (textDiv) {
+      textDiv.textContent = "Failed to load dog image from the internet.";
+    }
+  };
+}
+
+// Initialize one random 5×5×3 filter with small weights
+function convDemoInitWeights() {
+  const k = CONV_DEMO_KERNEL;
+  convDemoWeights = new Float32Array(k * k * 3);
+  for (let i = 0; i < convDemoWeights.length; i++) {
+    convDemoWeights[i] = (Math.random() - 0.5) * 0.1; // ~[-0.05, 0.05]
+  }
+}
+
+// Compute conv + ReLU for ONE filter over 32×32×3 → 28×28×1
+function convDemoComputeConv() {
+  const outSize = CONV_DEMO_OUTPUT_SIZE;
+  const inSize = CONV_DEMO_INPUT_SIZE;
+  const k = CONV_DEMO_KERNEL;
+  const data = convDemoImageData.data;
+
+  convDemoOutputRaw = new Float32Array(outSize * outSize);
+
+  let maxVal = 0;
+
+  for (let oy = 0; oy < outSize; oy++) {
+    for (let ox = 0; ox < outSize; ox++) {
+      let sum = 0;
+      for (let ky = 0; ky < k; ky++) {
+        for (let kx = 0; kx < k; kx++) {
+          const iy = oy + ky;
+          const ix = ox + kx;
+          const baseIndex = (iy * inSize + ix) * 4;  // RGBA
+          const r = data[baseIndex];
+          const g = data[baseIndex + 1];
+          const b = data[baseIndex + 2];
+
+          const wIndexBase = (ky * k + kx) * 3;
+          const wr = convDemoWeights[wIndexBase];
+          const wg = convDemoWeights[wIndexBase + 1];
+          const wb = convDemoWeights[wIndexBase + 2];
+
+          sum += r * wr + g * wg + b * wb;
+        }
+      }
+      // bias = 0; ReLU
+      sum = Math.max(0, sum);
+      const idx = oy * outSize + ox;
+      convDemoOutputRaw[idx] = sum;
+      if (sum > maxVal) maxVal = sum;
+    }
+  }
+
+  // Normalize to [0,255] for drawing
+  if (maxVal <= 0) maxVal = 1;
+  convDemoOutputNorm = new Uint8ClampedArray(outSize * outSize);
+  for (let i = 0; i < convDemoOutputRaw.length; i++) {
+    convDemoOutputNorm[i] = Math.min(255, Math.round(convDemoOutputRaw[i] / maxVal * 255));
+  }
+}
+
+function convDemoSetupControls() {
+  const ySlider = document.getElementById('conv-demo-y');
+  const xSlider = document.getElementById('conv-demo-x');
+  const yVal = document.getElementById('conv-demo-y-value');
+  const xVal = document.getElementById('conv-demo-x-value');
+
+  if (!ySlider || !xSlider || !yVal || !xVal) return;
+
+  const handler = () => {
+    yVal.textContent = ySlider.value;
+    xVal.textContent = xSlider.value;
+    convDemoRedraw();
+  };
+
+  ySlider.addEventListener('input', handler);
+  xSlider.addEventListener('input', handler);
+
+  yVal.textContent = ySlider.value;
+  xVal.textContent = xSlider.value;
+}
+
+function convDemoRedraw() {
+  if (!convDemoReady || !convDemoImageData) return;
+
+  const ySlider = document.getElementById('conv-demo-y');
+  const xSlider = document.getElementById('conv-demo-x');
+  const oy = ySlider ? parseInt(ySlider.value, 10) : 0;
+  const ox = xSlider ? parseInt(xSlider.value, 10) : 0;
+
+  convDemoDrawInputCanvas(oy, ox);
+  convDemoDrawOutputCanvas(oy, ox);
+  convDemoDrawChannelPatchesAndFilters(oy, ox);
+  convDemoUpdateText(oy, ox);
+}
+
+// ---- 1) Big input canvas: highlight 5×5 patch ----
+function convDemoDrawInputCanvas(oy, ox) {
+  const canvas = document.getElementById('conv-demo-input-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const size = CONV_DEMO_INPUT_SIZE; // 32
+  const scale = canvas.width / size; // ~9.3 px per pixel
+
+  // Draw the 32×32 input, upscaled
+  const imgCanvas = document.createElement('canvas');
+  imgCanvas.width = size;
+  imgCanvas.height = size;
+  const imgCtx = imgCanvas.getContext('2d');
+  imgCtx.putImageData(convDemoImageData, 0, 0);
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(imgCanvas, 0, 0, canvas.width, canvas.height);
+
+  // Highlight 5×5 patch starting at (ox, oy)
+  const k = CONV_DEMO_KERNEL; // 5
+  ctx.strokeStyle = '#fff52e';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(ox * scale, oy * scale, k * scale, k * scale);
+}
+
+// ---- 2) Big output canvas: 28×28 feature map ----
+function convDemoDrawOutputCanvas(oy, ox) {
+  const canvas = document.getElementById('conv-demo-output-canvas');
+  if (!canvas || !convDemoOutputNorm) return;
+  const ctx = canvas.getContext('2d');
+
+  const outSize = CONV_DEMO_OUTPUT_SIZE; // 28
+  const scale = canvas.width / outSize;  // 10 px per pixel
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let y = 0; y < outSize; y++) {
+    for (let x = 0; x < outSize; x++) {
+      const v = convDemoOutputNorm[y * outSize + x];
+      ctx.fillStyle = `rgb(${v},${v},${v})`;
+      ctx.fillRect(x * scale, y * scale, scale, scale);
+    }
+  }
+
+  // Highlight selected output pixel
+  ctx.strokeStyle = '#50fa7b';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(ox * scale, oy * scale, scale, scale);
+}
+
+// ---- 3) Channel patches & filter weights (5×5 each) ----
+function convDemoDrawChannelPatchesAndFilters(oy, ox) {
+  const patchCanvases = [
+    document.getElementById('conv-demo-patch-R'),
+    document.getElementById('conv-demo-patch-G'),
+    document.getElementById('conv-demo-patch-B')
+  ];
+  const filterCanvases = [
+    document.getElementById('conv-demo-filter-R'),
+    document.getElementById('conv-demo-filter-G'),
+    document.getElementById('conv-demo-filter-B')
+  ];
+  if (!patchCanvases[0] || !filterCanvases[0] || !convDemoImageData || !convDemoWeights) return;
+
+  const inSize = CONV_DEMO_INPUT_SIZE;
+  const k = CONV_DEMO_KERNEL;
+  const data = convDemoImageData.data;
+
+  // Draw 5×5 patches from each channel
+  for (let c = 0; c < 3; c++) {
+    const pCanvas = patchCanvases[c];
+    const pCtx = pCanvas.getContext('2d');
+    const cellSize = pCanvas.width / k;
+
+    pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+
+    for (let py = 0; py < k; py++) {
+      for (let px = 0; px < k; px++) {
+        const iy = oy + py;
+        const ix = ox + px;
+        const baseIndex = (iy * inSize + ix) * 4;
+        const v = data[baseIndex + c];  // channel value (0–255)
+
+        let r = 0, g = 0, b = 0;
+        if (c === 0) r = v;
+        if (c === 1) g = v;
+        if (c === 2) b = v;
+
+        pCtx.fillStyle = `rgb(${r},${g},${b})`;
+        pCtx.fillRect(px * cellSize, py * cellSize, cellSize, cellSize);
+      }
+    }
+  }
+
+  // Draw 5×5 filter weights for each channel (simple grayscale heatmap)
+  for (let c = 0; c < 3; c++) {
+    const fCanvas = filterCanvases[c];
+    const fCtx = fCanvas.getContext('2d');
+    const cellSize = fCanvas.width / k;
+
+    // Find min and max for this channel to normalize
+    let minW = Infinity;
+    let maxW = -Infinity;
+    for (let ky = 0; ky < k; ky++) {
+      for (let kx = 0; kx < k; kx++) {
+        const wIndexBase = (ky * k + kx) * 3 + c;
+        const w = convDemoWeights[wIndexBase];
+        if (w < minW) minW = w;
+        if (w > maxW) maxW = w;
+      }
+    }
+    if (minW === maxW) {
+      minW -= 0.001;
+      maxW += 0.001;
+    }
+
+    fCtx.clearRect(0, 0, fCanvas.width, fCanvas.height);
+    for (let ky = 0; ky < k; ky++) {
+      for (let kx = 0; kx < k; kx++) {
+        const wIndexBase = (ky * k + kx) * 3 + c;
+        const w = convDemoWeights[wIndexBase];
+        const t = (w - minW) / (maxW - minW); // 0..1
+        const v = Math.round(t * 255);
+        fCtx.fillStyle = `rgb(${v},${v},${v})`;
+        fCtx.fillRect(kx * cellSize, ky * cellSize, cellSize, cellSize);
+      }
+    }
+  }
+}
+
+// ---- 4) Numeric explanation: sum_R, sum_G, sum_B, ReLU ----
+function convDemoUpdateText(oy, ox) {
+  const textDiv = document.getElementById('conv-demo-text');
+  if (!textDiv || !convDemoOutputRaw || !convDemoImageData || !convDemoWeights) return;
+
+  const outSize = CONV_DEMO_OUTPUT_SIZE;
+  const inSize = CONV_DEMO_INPUT_SIZE;
+  const k = CONV_DEMO_KERNEL;
+  const data = convDemoImageData.data;
+
+  // Index into output map
+  const outIdx = oy * outSize + ox;
+  const rawVal = convDemoOutputRaw[outIdx];
+  const normVal = convDemoOutputNorm[outIdx];
+
+  // Recompute separate sums for R, G, B for this patch
+  let sumR = 0, sumG = 0, sumB = 0;
+
+  for (let ky = 0; ky < k; ky++) {
+    for (let kx = 0; kx < k; kx++) {
+      const iy = oy + ky;
+      const ix = ox + kx;
+      const baseIndex = (iy * inSize + ix) * 4;
+
+      const r = data[baseIndex];
+      const g = data[baseIndex + 1];
+      const b = data[baseIndex + 2];
+
+      const wIndex = (ky * k + kx) * 3;
+      const wr = convDemoWeights[wIndex];
+      const wg = convDemoWeights[wIndex + 1];
+      const wb = convDemoWeights[wIndex + 2];
+
+      sumR += r * wr;
+      sumG += g * wg;
+      sumB += b * wb;
+    }
+  }
+
+  const total = sumR + sumG + sumB;
+  const relu = Math.max(0, total);
+
+  textDiv.innerHTML =
+    `At output position (y, x) = (<span style="color:#fff52e;">${oy}</span>, ` +
+    `<span style="color:#fff52e;">${ox}</span>):<br>` +
+    `&nbsp;&nbsp;• We take a <span style="color:#50fa7b;">5×5×3</span> patch starting at (y, x) = (${oy}, ${ox}).<br>` +
+    `&nbsp;&nbsp;• For each channel, we multiply the 5×5 patch by the 5×5 filter weights and sum them:<br>` +
+    `&nbsp;&nbsp;&nbsp;&nbsp;R channel sum = <span style="color:#ff79c6;">${sumR.toFixed(2)}</span><br>` +
+    `&nbsp;&nbsp;&nbsp;&nbsp;G channel sum = <span style="color:#ff79c6;">${sumG.toFixed(2)}</span><br>` +
+    `&nbsp;&nbsp;&nbsp;&nbsp;B channel sum = <span style="color:#ff79c6;">${sumB.toFixed(2)}</span><br>` +
+    `&nbsp;&nbsp;• Add them together (bias = 0 here):<br>` +
+    `&nbsp;&nbsp;&nbsp;&nbsp;total = R + G + B = <span style="color:#50fa7b;">${total.toFixed(2)}</span><br>` +
+    `&nbsp;&nbsp;• Apply ReLU: max(0, total) = <span style="color:#50fa7b;">${relu.toFixed(2)}</span><br>` +
+    `&nbsp;&nbsp;→ This value becomes the single pixel in the <span style="color:#fff52e;">28×28</span> feature map ` +
+    `at (y, x) = (${oy}, ${ox}).<br>` +
+    `&nbsp;&nbsp;→ In the feature map canvas, this is drawn with grayscale intensity ` +
+    `<span style="color:#ff79c6;">${normVal}</span> (0–255).`;
+}
+</script>
+
+
+
+<script>
+const stages = [
+  {
+    name: 'Input Image',
+    op: 'RGB + Channels',
+    size: '32×32×3',
+    info: 'Real 32×32 color image of a Labrador Retriever (3 channels: R, G, B). Below we show the full RGB and each channel separately.',
+    process: 'drawInputImage'
+  },
+  {
+    name: 'Conv Layer 1',
+    op: 'Conv (5×5) + ReLU',
+    size: '28×28×16',
+    info: '16 different 5×5 filters slide over the image to detect simple edges and textures. ReLU sets negative responses to 0.',
+    process: 'drawConv1'
+  },
+  {
+    name: 'Pool Layer 1',
+    op: 'Max Pool (2×2) + ReLU',
+    size: '14×14×16',
+    info: '2×2 max pooling shrinks each feature map by taking the strongest activation in each small region.',
+    process: 'drawPool1'
+  },
+  {
+    name: 'Conv Layer 2',
+    op: 'Conv (5×5) + ReLU',
+    size: '10×10×32',
+    info: '32 filters now look at the pooled maps to detect more complex patterns (ears, eyes, snout).',
+    process: 'drawConv2'
+  },
+  {
+    name: 'Pool Layer 2',
+    op: 'Max Pool (2×2) + ReLU',
+    size: '5×5×32',
+    info: 'Another max pooling step compresses the information into a small but rich set of feature maps.',
+    process: 'drawPool2'
+  },
+  {
+    name: 'Output Layer',
+    op: 'Fully Connected + Softmax',
+    size: '3 classes: [Dog, Cat, Other]',
+    info: 'Flattened features go into a fully connected layer. Softmax converts scores into probabilities that sum to 1.',
+    process: 'drawSoftmax'
+  }
+];
+
+let imageData = null;
+let originalDogImage = null;
+let animationRunning = false;
+let highlightInterval = null;
+
+// URL of a public-domain dog image from Wikimedia Commons
+const DOG_IMAGE_URL =
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Labrador_Retriever_portrait.jpg/330px-Labrador_Retriever_portrait.jpg";
+
+function loadDogImage(callback) {
+  const img = new Image();
+  img.crossOrigin = "Anonymous";
+  img.src = DOG_IMAGE_URL;
+
+  img.onload = () => {
+    originalDogImage = img;
+
+    // Downsample to 32×32 for the CNN "input"
+    const canvas32 = document.createElement('canvas');
+    canvas32.width = 32;
+    canvas32.height = 32;
+    const ctx32 = canvas32.getContext('2d');
+    ctx32.drawImage(img, 0, 0, 32, 32);
+    try {
+      imageData = ctx32.getImageData(0, 0, 32, 32);
+    } catch (e) {
+      console.error("getImageData failed, falling back to null imageData:", e);
+      imageData = null;
+    }
+
+    callback();
+  };
+
+  img.onerror = () => {
+    console.error("Failed to load dog image from internet.");
+    imageData = null;
+    callback();
+  };
+}
+
+function renderPipeline() {
+  const pipeline = document.getElementById('pipeline');
+  pipeline.innerHTML = '';
+
+  stages.forEach((stage, index) => {
+    const stageDiv = document.createElement('div');
+    stageDiv.className = 'stage';
+    stageDiv.innerHTML = `
+      <h3>${stage.name}</h3>
+      <div class="stage-op">${stage.op}</div>
+      <div class="stage-info">${stage.info}</div>
+      <div class="visualization" id="vis-${index}"></div>
+      <div class="param-info">${stage.size}</div>
+    `;
+    pipeline.appendChild(stageDiv);
+
+    if (index < stages.length - 1) {
+      const arrow = document.createElement('div');
+      arrow.className = 'arrow';
+      arrow.textContent = '→';
+      pipeline.appendChild(arrow);
+    }
+  });
+
+  renderVisualizations();
+}
+
+function renderVisualizations() {
+  stages.forEach((stage, index) => {
+    const container = document.getElementById(`vis-${index}`);
+    if (typeof window[stage.process] === 'function') {
+      window[stage.process](container);
+    }
+  });
+}
+
+// ---- NEW: draw RGB + three channels ----
+function drawInputImage(container) {
+  container.innerHTML = '';
+
+  const wrapper = document.createElement('div');
+  wrapper.style.display = 'flex';
+  wrapper.style.flexDirection = 'column';
+  wrapper.style.alignItems = 'center';
+  wrapper.style.gap = '10px';
+
+  // 1) Top: original dog photo
+  const colorCanvas = document.createElement('canvas');
+  colorCanvas.width = 160;
+  colorCanvas.height = 120;
+  const colorCtx = colorCanvas.getContext('2d');
+
+  if (originalDogImage) {
+    const aspect = originalDogImage.width / originalDogImage.height;
+    let drawW = 160;
+    let drawH = drawW / aspect;
+    if (drawH > 120) {
+      drawH = 120;
+      drawW = drawH * aspect;
+    }
+    const offsetX = (160 - drawW) / 2;
+    const offsetY = (120 - drawH) / 2;
+    colorCtx.drawImage(originalDogImage, offsetX, offsetY, drawW, drawH);
+  } else if (imageData) {
+    const imgCanvas = document.createElement('canvas');
+    imgCanvas.width = 32;
+    imgCanvas.height = 32;
+    const imgCtx = imgCanvas.getContext('2d');
+    imgCtx.putImageData(imageData, 0, 0);
+    colorCtx.imageSmoothingEnabled = false;
+    colorCtx.drawImage(imgCanvas, 0, 0, 160, 120);
+  } else {
+    colorCtx.fillStyle = '#50fa7b';
+    colorCtx.fillRect(0, 0, 160, 120);
+  }
+
+  const colorLabel = document.createElement('div');
+  colorLabel.textContent = 'RGB image (downsampled input)';
+  colorLabel.style.fontSize = '0.8em';
+  colorLabel.style.marginTop = '4px';
+
+  const colorBlock = document.createElement('div');
+  colorBlock.style.display = 'flex';
+  colorBlock.style.flexDirection = 'column';
+  colorBlock.style.alignItems = 'center';
+  colorBlock.appendChild(colorCanvas);
+  colorBlock.appendChild(colorLabel);
+
+  wrapper.appendChild(colorBlock);
+
+  // 2) Bottom row: R, G, B channels (from 32×32×3)
+  if (imageData) {
+    const channelsRow = document.createElement('div');
+    channelsRow.style.display = 'flex';
+    channelsRow.style.gap = '10px';
+    channelsRow.style.marginTop = '6px';
+    channelsRow.style.flexWrap = 'wrap';
+    channelsRow.style.justifyContent = 'center';
+
+    const channelNames = ['R', 'G', 'B'];
+    const channelColorFns = [
+      v => `rgb(${v},0,0)`,   // Red
+      v => `rgb(0,${v},0)`,   // Green
+      v => `rgb(0,0,${v})`    // Blue
+    ];
+
+    for (let c = 0; c < 3; c++) {
+      const chCanvas = document.createElement('canvas');
+      chCanvas.width = 96;  // 32 * 3
+      chCanvas.height = 96;
+      const chCtx = chCanvas.getContext('2d');
+
+      const scale = 3;
+      const w = 32;
+      const h = 32;
+
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          const idx = (y * w + x) * 4;
+          const v = imageData.data[idx + c]; // channel value
+          chCtx.fillStyle = channelColorFns[c](v);
+          chCtx.fillRect(x * scale, y * scale, scale, scale);
+        }
+      }
+
+      const chLabel = document.createElement('div');
+      chLabel.textContent = `${channelNames[c]} channel`;
+      chLabel.style.fontSize = '0.8em';
+      chLabel.style.marginTop = '4px';
+
+      const chBlock = document.createElement('div');
+      chBlock.style.display = 'flex';
+      chBlock.style.flexDirection = 'column';
+      chBlock.style.alignItems = 'center';
+
+      chBlock.appendChild(chCanvas);
+      chBlock.appendChild(chLabel);
+      channelsRow.appendChild(chBlock);
+    }
+
+    wrapper.appendChild(channelsRow);
+  }
+
+  container.appendChild(wrapper);
+}
+
+// ---- rest of the pipeline (unchanged) ----
+
+// A simple "conv + ReLU" style effect: local average intensity with threshold
+function applySimpleEdgeDetection(imgData, w, h, outSize) {
+  const edges = new Array(outSize * outSize).fill(0);
+
+  for (let y = 0; y < outSize; y++) {
+    for (let x = 0; x < outSize; x++) {
+      let sum = 0;
+      let count = 0;
+      for (let dy = 0; dy < 5; dy++) {
+        for (let dx = 0; dx < 5; dx++) {
+          const iy = y + dy;
+          const ix = x + dx;
+          if (iy < h && ix < w) {
+            const idx = (iy * w + ix) * 4;
+            const r = imgData.data[idx];
+            const g = imgData.data[idx + 1];
+            const b = imgData.data[idx + 2];
+            sum += (r + g + b) / 3;
+            count++;
+          }
+        }
+      }
+      const avg = sum / Math.max(count, 1);
+      let activation = avg - 100;
+      activation = Math.max(0, activation); // ReLU
+      edges[y * outSize + x] = Math.min(activation * 2, 255);
+    }
+  }
+
+  return edges;
+}
+
+function applyMaxPooling(data, w, h, poolSize) {
+  const outW = Math.floor(w / poolSize);
+  const outH = Math.floor(h / poolSize);
+  const pooled = new Array(outW * outH).fill(0);
+
+  for (let y = 0; y < outH; y++) {
+    for (let x = 0; x < outW; x++) {
+      let max = 0;
+      for (let py = 0; py < poolSize; py++) {
+        for (let px = 0; px < poolSize; px++) {
+          const iy = y * poolSize + py;
+          const ix = x * poolSize + px;
+          if (iy < h && ix < w) {
+            const idx = iy * w + ix;
+            max = Math.max(max, data[idx]);
+          }
+        }
+      }
+      pooled[y * outW + x] = Math.max(0, max);
+    }
+  }
+
+  return pooled;
+}
+
+function drawConv1(container) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 120;
+  canvas.height = 120;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#2a1e28';
+  ctx.fillRect(0, 0, 120, 120);
+
+  if (imageData) {
+    const edges = applySimpleEdgeDetection(imageData, 32, 32, 28);
+    const scaleFactor = 120 / 28;
+
+    edges.forEach((pixel, idx) => {
+      const x = Math.floor((idx % 28) * scaleFactor);
+      const y = Math.floor(Math.floor(idx / 28) * scaleFactor);
+      ctx.fillStyle = `rgb(${pixel},${pixel},${pixel})`;
+      ctx.fillRect(x, y, scaleFactor, scaleFactor);
+    });
+  }
+
+  container.appendChild(canvas);
+}
+
+function drawPool1(container) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 120;
+  canvas.height = 120;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#2a1e28';
+  ctx.fillRect(0, 0, 120, 120);
+
+  if (imageData) {
+    const edges = applySimpleEdgeDetection(imageData, 32, 32, 28);
+    const pooled = applyMaxPooling(edges, 28, 28, 2);
+    const scaleFactor = 120 / 14;
+
+    pooled.forEach((pixel, idx) => {
+      const x = Math.floor((idx % 14) * scaleFactor);
+      const y = Math.floor(Math.floor(idx / 14) * scaleFactor);
+      ctx.fillStyle = `rgb(${pixel},${pixel},${pixel})`;
+      ctx.fillRect(x, y, scaleFactor, scaleFactor);
+    });
+  }
+
+  container.appendChild(canvas);
+}
+
+function drawConv2(container) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 120;
+  canvas.height = 120;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#2a1e28';
+  ctx.fillRect(0, 0, 120, 120);
+
+  if (imageData) {
+    const edges = applySimpleEdgeDetection(imageData, 32, 32, 28);
+    const pooled = applyMaxPooling(edges, 28, 28, 2); // 14×14
+
+    const expanded = Array.from({ length: pooled.length * 4 }, (_, i) => pooled[Math.floor(i / 4)]);
+    const fakeImgData = {
+      data: expanded.flatMap(v => [v, v, v, 255])
+    };
+    const conv2 = applySimpleEdgeDetection(fakeImgData, 14, 14, 10);
+    const scaleFactor = 120 / 10;
+
+    conv2.slice(0, 100).forEach((pixel, idx) => {
+      const x = Math.floor((idx % 10) * scaleFactor);
+      const y = Math.floor(Math.floor(idx / 10) * scaleFactor);
+      ctx.fillStyle = `rgb(${Math.min(pixel + 40, 255)},${Math.min(pixel + 10, 255)},${pixel})`;
+      ctx.fillRect(x, y, scaleFactor, scaleFactor);
+    });
+  }
+
+  container.appendChild(canvas);
+}
+
+function drawPool2(container) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 120;
+  canvas.height = 120;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#2a1e28';
+  ctx.fillRect(0, 0, 120, 120);
+
+  const scaleFactor = 120 / 5;
+  for (let i = 0; i < 5; i++) {
+    for (let j = 0; j < 5; j++) {
+      const brightness = Math.floor(Math.random() * 100) + 100;
+      ctx.fillStyle = `rgb(${brightness},${brightness + 50},${brightness})`;
+      ctx.fillRect(i * scaleFactor, j * scaleFactor, scaleFactor, scaleFactor);
+    }
+  }
+
+  container.appendChild(canvas);
+}
+
+function drawSoftmax(container) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 220;
+  canvas.height = 140;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#19121a';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const labels = ['Dog', 'Cat', 'Other'];
+  const probs = [0.78, 0.18, 0.04];
+  const barWidth = 40;
+  const baseX = 30;
+  const baseY = 110;
+  const maxBarHeight = 80;
+
+  ctx.font = '12px Roboto, Arial';
+  ctx.textAlign = 'center';
+
+  for (let i = 0; i < labels.length; i++) {
+    const barHeight = probs[i] * maxBarHeight;
+    const x = baseX + i * 60;
+    const y = baseY - barHeight;
+
+    ctx.fillStyle = i === 0 ? '#50fa7b' : (i === 1 ? '#ff79c6' : '#fff52e');
+    ctx.fillRect(x, y, barWidth, barHeight);
+
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText((probs[i] * 100).toFixed(0) + '%', x + barWidth / 2, y - 5);
+    ctx.fillText(labels[i], x + barWidth / 2, baseY + 15);
+  }
+
+  ctx.strokeStyle = '#ffffff';
+  ctx.beginPath();
+  ctx.moveTo(20, baseY);
+  ctx.lineTo(canvas.width - 10, baseY);
+  ctx.stroke();
+
+  container.appendChild(canvas);
+}
+
+function toggleAnimation() {
+  animationRunning = !animationRunning;
+  const button = document.getElementById('animButton');
+  button.textContent = animationRunning ? 'Pause' : 'Play Step-by-Step';
+
+  if (!animationRunning && highlightInterval !== null) {
+    clearInterval(highlightInterval);
+    highlightInterval = null;
+    document.querySelectorAll('.stage').forEach((stage) => {
+      stage.style.borderColor = '#50fa7b';
+      stage.style.boxShadow = 'none';
+    });
+    return;
+  }
+
+  if (animationRunning) {
+    let index = 0;
+    highlightInterval = setInterval(() => {
+      const stagesEls = document.querySelectorAll('.stage');
+      stagesEls.forEach((stage, i) => {
+        stage.style.borderColor = i === index ? '#fff52e' : '#50fa7b';
+        stage.style.boxShadow = i === index ? '0 0 20px rgba(255, 245, 46, 0.5)' : 'none';
+      });
+      index = (index + 1) % stagesEls.length;
+    }, 900);
+  }
+}
+
+window.addEventListener('load', () => {
+  loadDogImage(() => {
+    renderPipeline();
+  });
+});
+</script>
+
+
+
+
+</body>
+</html>
