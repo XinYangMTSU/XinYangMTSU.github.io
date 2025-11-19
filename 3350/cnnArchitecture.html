@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CNN 32×32×3 Visualizer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1d1f 0%, #2a1e28 100%);
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #ffb3de;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      background: #222025;
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 4px 30px rgba(255, 121, 198, 0.15);
+      border-left: 7px solid #ff79c6;
+    }
+
+    h1 {
+      color: #ff79c6;
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 2.2em;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #ffb3de;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+
+    .controls {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .control-group label {
+      color: #ff79c6;
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+
+    .control-group select {
+      padding: 10px 12px;
+      background: #19121a;
+      border: 2px solid #ff79c6;
+      color: #ffb3de;
+      border-radius: 8px;
+      font-size: 0.95em;
+      min-width: 220px;
+    }
+
+    .control-group select:focus {
+      outline: none;
+      border-color: #50fa7b;
+      box-shadow: 0 0 10px rgba(80, 250, 123, 0.3);
+    }
+
+    .step-text {
+      font-size: 0.95em;
+      color: #ffb3de;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    button {
+      background: linear-gradient(135deg, #ff79c6, #ffb3de);
+      color: #1a1d1f;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 121, 198, 0.4);
+    }
+
+    .network-container {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      overflow-x: auto;
+    }
+
+    svg {
+      display: block;
+      margin: 0 auto;
+      background: #19121a;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(255, 121, 198, 0.11);
+      min-width: 100%;
+    }
+
+    .legend {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 10px;
+    }
+
+    .legend h3 {
+      color: #ff79c6;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ff79c6;
+      padding-bottom: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 10px 0;
+      color: #ffb3de;
+      font-size: 0.95em;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .color-input { background: #ff79c6; }
+    .color-conv { background: #8be9fd; }
+    .color-pool { background: #50fa7b; }
+    .color-dense { background: #fff52e; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .stat-card {
+      background: #19121a;
+      border-left: 4px solid #50fa7b;
+      padding: 18px;
+      border-radius: 8px;
+    }
+
+    .stat-label {
+      color: #ffb3de;
+      font-size: 0.9em;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      color: #fff52e;
+      font-size: 1.4em;
+      font-weight: bold;
+      font-family: 'Courier New', monospace;
+      margin-bottom: 4px;
+    }
+
+    .stat-note {
+      color: #ffb3de;
+      font-size: 0.85em;
+      line-height: 1.6;
+    }
+
+    /* Patch demo (3×3×3 -> 1 output) */
+    .patch-demo {
+      margin-top: 30px;
+      background: #19121a;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px dashed #ff79c6;
+    }
+
+    .patch-demo-title {
+      color: #ff79c6;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .patch-grids {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .patch-block {
+      min-width: 180px;
+    }
+
+    .patch-label {
+      font-size: 0.9em;
+      margin-bottom: 5px;
+      color: #ffb3de;
+    }
+
+    table.patch-grid {
+      border-collapse: collapse;
+    }
+
+    .patch-grid td {
+      width: 32px;
+      height: 32px;
+      text-align: center;
+      border: 1px solid #444;
+      font-size: 0.85em;
+      font-family: "JetBrains Mono", monospace;
+      background: #2a1e28;
+      color: #f8f8f2;
+    }
+
+    .patch-grid td.channel-R { background: rgba(255, 85, 85, 0.4); }
+    .patch-grid td.channel-G { background: rgba(80, 250, 123, 0.35); }
+    .patch-grid td.channel-B { background: rgba(139, 233, 253, 0.4); }
+
+    .patch-grid td.kernel {
+      background: rgba(255, 184, 108, 0.4);
+    }
+
+    .patch-output-box {
+      margin-top: 10px;
+      font-family: "Courier New", monospace;
+      font-size: 0.9em;
+      color: #fff52e;
+      white-space: pre-line;
+    }
+
+    .patch-demo button {
+      margin-top: 12px;
+      padding: 8px 18px;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 768px) {
+      .controls {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🧠 CNN 32×32×3 Architecture Visualizer</h1>
+  <p class="subtitle">See how a 32×32 RGB image flows through Conv → Pool → Flatten → Dense → Output</p>
+
+  <!-- STEP CONTROLS -->
+  <div class="controls">
+    <div class="control-group">
+
+      <label for="stepSelect">Current Step</label>
+
+      <!--
+      <select id="stepSelect" onchange="onStepChange()">
+        <option value="0">0️⃣ Input: 32×32×3 (RGB Image)</option>
+        <option value="1">1️⃣ Conv1 + ReLU → 32×32×32</option>
+        <option value="2">2️⃣ MaxPool1 (2×2, stride 2) → 16×16×32</option>
+        <option value="3">3️⃣ Conv2 + ReLU → 16×16×64</option>
+        <option value="4">4️⃣ MaxPool2 (2×2, stride 2) → 8×8×64</option>
+        <option value="5">5️⃣ Flatten → 4096 features</option>
+        <option value="6">6️⃣ Dense(128) → Dense(10)</option>
+      </select>
+    -->
+
+      <select id="stepSelect" onchange="onStepChange()">
+        <option value="0">0️⃣ Input: 32×32×3 (RGB Image)</option>
+        <option value="1">1️⃣ Conv1 + ReLU → 32×32×32</option>
+        <option value="2">2️⃣ MaxPool1 (2×2, stride 2) → 16×16×32</option>
+        <option value="3">3️⃣ Conv2 + ReLU → 16×16×64</option>
+        <option value="4">4️⃣ MaxPool2 (2×2, stride 2) → 8×8×64</option>
+        <option value="5">5️⃣ Flatten → 4096 features</option>
+        <option value="6">6️⃣ Dense(128)</option>
+        <option value="7">7️⃣ Dense(10) Output</option>
+      </select>
+
+    </div>
+
+
+
+
+    <button onclick="prevStep()">← Previous</button>
+    <button onclick="nextStep()">Next →</button>
+
+    <div class="step-text" id="stepText">
+      This is the raw 32×32×3 RGB image. Each spatial location has 3 values: (R, G, B).
+    </div>
+  </div>
+
+  <!-- ARCHITECTURE SVG -->
+  <div class="network-container">
+    <svg id="networkSVG" width="1200" height="420" viewBox="0 0 1200 420"></svg>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats" id="stats"></div>
+
+  <!-- LEGEND + PATCH DEMO -->
+  <div class="legend">
+    <h3>📊 Components & Legend</h3>
+    <div class="legend-item">
+      <div class="legend-color color-input"></div>
+      <span><strong>Pink block:</strong> Input image (32×32×3: height, width, RGB channels)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-conv"></div>
+      <span><strong>Teal blocks:</strong> Convolution layers (32×32×32, 16×16×64) – learn filters/kernels</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-pool"></div>
+      <span><strong>Green blocks:</strong> Max Pooling layers (no parameters, just downsampling)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-dense"></div>
+      <span><strong>Yellow block:</strong> Flatten + Dense layers → final class probabilities</span>
+    </div>
+
+    <h4 style="color: #ff79c6; margin-top: 20px; margin-bottom: 8px;">Shape Flow (Fixed CNN)</h4>
+    <div style="background:#19121a; padding:12px 14px; border-radius:8px; font-family:'Courier New',monospace; font-size:0.9em; line-height:1.7; color:#fff52e;">
+      1. Input:        32×32×3<br>
+      2. Conv1+ReLU:   32×32×32   (32 filters, 3×3×3, padding="same")<br>
+      3. MaxPool1:     16×16×32   (2×2, stride 2)<br>
+      4. Conv2+ReLU:   16×16×64   (64 filters, 3×3×32, padding="same")<br>
+      5. MaxPool2:     8×8×64     (2×2, stride 2)<br>
+      6. Flatten:      4096       (8×8×64)<br>
+      7. Dense:        128 → 10   (ReLU + Softmax)
+    </div>
+
+    <!-- PATCH DEMO -->
+    <div class="patch-demo">
+      <div class="patch-demo-title">🎨 3×3×3 Patch → 1 Conv Output (One Filter at One Location)</div>
+      <p style="font-size:0.9em; line-height:1.6; color:#ffb3de;">
+        A single Conv1 filter has shape <strong>3×3×3</strong> (3×3 spatial, depth 3 for RGB).
+        At one spatial location, the filter looks at a <strong>3×3 patch in each channel</strong>,
+        multiplies element-wise with 3×3 weights, sums everything, and adds a bias → <strong>1 number</strong>
+        in the output feature map.
+      </p>
+
+      <div class="patch-grids">
+        <!-- Input patches -->
+        <div class="patch-block">
+          <div class="patch-label">Input Patch – Red Channel (3×3)</div>
+          <table class="patch-grid" id="patchInputR"></table>
+        </div>
+        <div class="patch-block">
+          <div class="patch-label">Input Patch – Green Channel (3×3)</div>
+          <table class="patch-grid" id="patchInputG"></table>
+        </div>
+        <div class="patch-block">
+          <div class="patch-label">Input Patch – Blue Channel (3×3)</div>
+          <table class="patch-grid" id="patchInputB"></table>
+        </div>
+
+        <!-- Kernels -->
+        <div class="patch-block">
+          <div class="patch-label">Filter Weights – Red (3×3)</div>
+          <table class="patch-grid" id="patchKernelR"></table>
+        </div>
+        <div class="patch-block">
+          <div class="patch-label">Filter Weights – Green (3×3)</div>
+          <table class="patch-grid" id="patchKernelG"></table>
+        </div>
+        <div class="patch-block">
+          <div class="patch-label">Filter Weights – Blue (3×3)</div>
+          <table class="patch-grid" id="patchKernelB"></table>
+        </div>
+      </div>
+
+      <button onclick="randomizePatch()">Randomize Values</button>
+
+      <div class="patch-output-box" id="patchOutputBox">
+        Output = Σ (R_patch * R_kernel) + Σ (G_patch * G_kernel) + Σ (B_patch * B_kernel) + bias
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ========================
+   CNN Architecture Data
+   ======================== */
+/*
+const cnnLayers = [
+  {
+    name: "Input Image",
+    type: "input",
+    shape: "32 × 32 × 3",
+    H: 32, W: 32, C: 3,
+    desc: "Raw RGB pixels. Each spatial location has 3 values (R, G, B).",
+    params: 0,
+    extra: "No trainable parameters – this is just the data."
+  },
+  {
+    name: "Conv1 + ReLU",
+    type: "conv",
+    shape: "32 × 32 × 32",
+    H: 32, W: 32, C: 32,
+    desc: "32 filters, each 3×3×3. Padding='same' keeps spatial size 32×32.",
+    // Params: (3×3×3 weights) × 32 filters + 32 biases
+    weights: 3 * 3 * 3 * 32,
+    biases: 32
+  },
+  {
+    name: "MaxPool1",
+    type: "pool",
+    shape: "16 × 16 × 32",
+    H: 16, W: 16, C: 32,
+    desc: "2×2 max pooling with stride 2. Height and width are halved.",
+    params: 0,
+    extra: "No weights; just takes max in each 2×2 window."
+  },
+  {
+    name: "Conv2 + ReLU",
+    type: "conv",
+    shape: "16 × 16 × 64",
+    H: 16, W: 16, C: 64,
+    desc: "64 filters, each 3×3×32. Padding='same' keeps 16×16 spatial size.",
+    // Params: (3×3×32 weights) × 64 filters + 64 biases
+    weights: 3 * 3 * 32 * 64,
+    biases: 64
+  },
+  {
+    name: "MaxPool2",
+    type: "pool",
+    shape: "8 × 8 × 64",
+    H: 8, W: 8, C: 64,
+    desc: "Another 2×2 max pooling. We keep the 64 channels, but 8×8 spatially.",
+    params: 0,
+    extra: "Still no trainable parameters – downsampling only."
+  },
+  {
+    name: "Flatten",
+    type: "flatten",
+    shape: "4096",
+    H: 1, W: 1, C: 4096,
+    desc: "We reshape 8×8×64 into a 1D vector: 8×8×64 = 4096 features.",
+    params: 0,
+    extra: "Just a reshaping operation, no weights."
+  },
+  {
+    name: "Dense(128) → Dense(10)",
+    type: "dense",
+    shape: "128 → 10",
+    H: 1, W: 1, C: 10,
+    desc: "Fully connected layers: 4096→128 with ReLU, then 128→10 with softmax.",
+    // Dense1: 4096->128; Dense2: 128->10
+    dense1Weights: 4096 * 128,
+    dense1Biases: 128,
+    dense2Weights: 128 * 10,
+    dense2Biases: 10
+  }
+];
+*/
+
+const cnnLayers = [
+  {
+    name: "Input Image",
+    type: "input",
+    shape: "32 × 32 × 3",
+    H: 32, W: 32, C: 3,
+    desc: "Raw RGB pixels. Each spatial location has 3 values (R, G, B).",
+    params: 0,
+    extra: "No trainable parameters – this is just the data."
+  },
+  {
+    name: "Conv1 + ReLU",
+    type: "conv",
+    shape: "32 × 32 × 32",
+    H: 32, W: 32, C: 32,
+    desc: "32 filters, each 3×3×3. Padding='same' keeps spatial size 32×32.",
+    weights: 3 * 3 * 3 * 32,
+    biases: 32
+  },
+  {
+    name: "MaxPool1",
+    type: "pool",
+    shape: "16 × 16 × 32",
+    H: 16, W: 16, C: 32,
+    desc: "2×2 max pooling with stride 2. Height and width are halved.",
+    params: 0,
+    extra: "No weights; just takes max in each 2×2 window."
+  },
+  {
+    name: "Conv2 + ReLU",
+    type: "conv",
+    shape: "16 × 16 × 64",
+    H: 16, W: 16, C: 64,
+    desc: "64 filters, each 3×3×32. Padding='same' keeps 16×16 spatial size.",
+    weights: 3 * 3 * 32 * 64,
+    biases: 64
+  },
+  {
+    name: "MaxPool2",
+    type: "pool",
+    shape: "8 × 8 × 64",
+    H: 8, W: 8, C: 64,
+    desc: "Another 2×2 max pooling. We keep the 64 channels, but 8×8 spatially.",
+    params: 0,
+    extra: "Still no trainable parameters – downsampling only."
+  },
+  {
+    name: "Flatten",
+    type: "flatten",
+    shape: "4096",
+    H: 1, W: 1, C: 4096,
+    desc: "We reshape 8×8×64 into a 1D vector: 8×8×64 = 4096 features.",
+    params: 0,
+    extra: "Just a reshaping operation, no weights."
+  },
+  {
+    name: "Dense(128)",
+    type: "dense128",
+    shape: "128",
+    H: 1, W: 1, C: 128,
+    desc: "Fully connected layer: 4096 → 128 with ReLU.",
+    neurons: 128
+  },
+  {
+    name: "Dense(10)",
+    type: "output",
+    shape: "10",
+    H: 1, W: 1, C: 10,
+    desc: "Output layer: 128 → 10 with softmax (class probabilities).",
+    neurons: 10
+  }
+];
+
+let currentStep = 0;
+
+/* ========================
+   Step / UI Helpers
+   ======================== */
+
+function onStepChange() {
+  const select = document.getElementById('stepSelect');
+  currentStep = parseInt(select.value, 10) || 0;
+  updateUI();
+}
+
+function prevStep() {
+  currentStep = Math.max(0, currentStep - 1);
+  document.getElementById('stepSelect').value = currentStep;
+  updateUI();
+}
+
+function nextStep() {
+  currentStep = Math.min(cnnLayers.length - 1, currentStep + 1);
+  document.getElementById('stepSelect').value = currentStep;
+  updateUI();
+}
+
+/* ========================
+   Draw CNN Architecture
+   ======================== */
+
+function drawArchitecture(stepIndex) {
+  const svg = document.getElementById('networkSVG');
+  svg.innerHTML = '';
+
+  const w = 1200;
+  const h = 420;
+  const paddingX = 80;
+  const layerCount = cnnLayers.length;
+  const gapX = (w - 2 * paddingX) / (layerCount - 1);
+
+  // Precompute max spatial size for scaling
+  const maxHW = Math.max(...cnnLayers.map(l => l.H * l.W));
+  const maxBlockHeight = 180;
+
+  // Draw arrows + blocks
+  for (let i = 0; i < layerCount; i++) {
+    const layer = cnnLayers[i];
+    const xCenter = paddingX + i * gapX;
+    const yCenter = h / 2 + 10;
+
+    // Draw arrow from previous block
+    if (i > 0) {
+      const prevX = paddingX + (i - 1) * gapX;
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', prevX + 40);
+      line.setAttribute('y1', yCenter);
+      line.setAttribute('x2', xCenter - 40);
+      line.setAttribute('y2', yCenter);
+      line.setAttribute('stroke', '#50fa7b');
+      line.setAttribute('stroke-width', '2');
+      line.setAttribute('marker-end', 'url(#cnn-arrow)');
+      svg.appendChild(line);
+    }
+
+    // Draw the 3D-ish block
+    const isHighlight = (i === stepIndex);
+    drawBlock(svg, layer, xCenter, yCenter, maxHW, maxBlockHeight, isHighlight);
+  }
+
+  // Define arrow marker once
+  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+  defs.innerHTML = `
+    <marker id="cnn-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#50fa7b" />
+    </marker>
+  `;
+  svg.appendChild(defs);
+}
+
+
+function drawBlock(svg, layer, xCenter, yCenter, maxHW, maxBlockHeight, highlight) {
+  let fillColor = '#ff79c6';
+  if (layer.type === 'conv') fillColor = '#8be9fd';
+  if (layer.type === 'pool') fillColor = '#50fa7b';
+  if (layer.type === 'flatten' || layer.type === 'dense128' || layer.type === 'output')
+    fillColor = '#fff52e';
+
+  const strokeColor = highlight ? '#fff52e' : '#ff79c6';
+  const strokeWidth = highlight ? 3 : 1.5;
+  const opacity = highlight ? 1.0 : 0.65;
+
+  /* ==============================
+     1D LAYERS: Flatten, Dense(128)
+     ============================== */
+  if (layer.type === 'flatten' || layer.type === 'dense128') {
+    const maxVector = 4096;   // biggest vector
+    const minH = 60;
+    const maxH = 260;
+
+    const size = layer.type === 'flatten' ? 4096 : 128;
+    const scale = Math.sqrt(size / maxVector);
+    const blockHeight = Math.max(minH, maxH * scale);
+    const blockWidth  = 30;   // thin vertical bar
+
+    const xLeft = xCenter - blockWidth / 2;
+    const yTop  = yCenter - blockHeight / 2;
+
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('x', xLeft);
+    rect.setAttribute('y', yTop);
+    rect.setAttribute('width', blockWidth);
+    rect.setAttribute('height', blockHeight);
+    rect.setAttribute('fill', fillColor);
+    rect.setAttribute('fill-opacity', opacity);
+    rect.setAttribute('stroke', strokeColor);
+    rect.setAttribute('stroke-width', strokeWidth);
+    svg.appendChild(rect);
+
+    // Layer name
+    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    label.setAttribute('x', xCenter);
+    label.setAttribute('y', yTop - 20);
+    label.setAttribute('text-anchor', 'middle');
+    label.setAttribute('font-size', '14');
+    label.setAttribute('fill', '#ffb3de');
+    label.setAttribute('font-weight', 'bold');
+    label.textContent = layer.name;
+    svg.appendChild(label);
+
+    // Shape text
+    const shapeText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    shapeText.setAttribute('x', xCenter);
+    shapeText.setAttribute('y', yTop + blockHeight + 18);
+    shapeText.setAttribute('text-anchor', 'middle');
+    shapeText.setAttribute('font-size', '12');
+    shapeText.setAttribute('fill', '#fff52e');
+    shapeText.textContent = layer.shape;
+    svg.appendChild(shapeText);
+
+    // Extra explanation
+    const explain = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    explain.setAttribute('x', xCenter);
+    explain.setAttribute('y', yTop + blockHeight + 36);
+    explain.setAttribute('text-anchor', 'middle');
+    explain.setAttribute('font-size', '11');
+    explain.setAttribute('fill', '#ffb3de');
+    if (layer.type === 'flatten') {
+      explain.textContent = '4096-neuron vector';
+    } else {
+      explain.textContent = '128-neuron dense vector';
+    }
+    svg.appendChild(explain);
+
+    return; // done for these layer types
+  }
+
+  /* ==============================
+     OUTPUT LAYER: Dense(10)
+     10 tiny vertical boxes
+     ============================== */
+  if (layer.type === 'output') {
+    const boxSize = 14;
+    const gap     = 4;
+    const totalH  = layer.neurons * boxSize + (layer.neurons - 1) * gap;
+    const xLeft   = xCenter - boxSize / 2;
+    const yTop    = yCenter - totalH / 2;
+
+    // 10 little squares
+    for (let i = 0; i < layer.neurons; i++) {
+      const y = yTop + i * (boxSize + gap);
+      const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      rect.setAttribute('x', xLeft);
+      rect.setAttribute('y', y);
+      rect.setAttribute('width', boxSize);
+      rect.setAttribute('height', boxSize);
+      rect.setAttribute('fill', fillColor);
+      rect.setAttribute('fill-opacity', opacity);
+      rect.setAttribute('stroke', strokeColor);
+      rect.setAttribute('stroke-width', strokeWidth);
+      svg.appendChild(rect);
+    }
+
+    // Layer name
+    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    label.setAttribute('x', xCenter);
+    label.setAttribute('y', yTop - 20);
+    label.setAttribute('text-anchor', 'middle');
+    label.setAttribute('font-size', '14');
+    label.setAttribute('fill', '#ffb3de');
+    label.setAttribute('font-weight', 'bold');
+    label.textContent = layer.name;
+    svg.appendChild(label);
+
+    // Shape text
+    const shapeText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    shapeText.setAttribute('x', xCenter);
+    shapeText.setAttribute('y', yTop + totalH + 18);
+    shapeText.setAttribute('text-anchor', 'middle');
+    shapeText.setAttribute('font-size', '12');
+    shapeText.setAttribute('fill', '#fff52e');
+    shapeText.textContent = '10 classes';
+    svg.appendChild(shapeText);
+
+    const explain = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    explain.setAttribute('x', xCenter);
+    explain.setAttribute('y', yTop + totalH + 36);
+    explain.setAttribute('text-anchor', 'middle');
+    explain.setAttribute('font-size', '11');
+    explain.setAttribute('fill', '#ffb3de');
+    explain.textContent = 'each box = 1 class score';
+    svg.appendChild(explain);
+
+    return;
+  }
+
+  /* =========================================
+     DEFAULT 3D BLOCK: Input / Conv / Pool
+     ========================================= */
+  const spatialArea = Math.max(1, layer.H * layer.W);
+  const scale = Math.sqrt(spatialArea / maxHW);
+  const blockHeight = Math.max(40, maxBlockHeight * scale);
+  const blockWidth  = 80;
+
+  let depthSlices;
+  if (layer.C <= 3) depthSlices = layer.C;
+  else if (layer.C <= 16) depthSlices = 4;
+  else if (layer.C <= 32) depthSlices = 6;
+  else if (layer.C <= 64) depthSlices = 8;
+  else depthSlices = 10;
+
+  const baseX = xCenter - blockWidth / 2;
+  const baseY = yCenter - blockHeight / 2;
+  const offset = 6;
+
+  for (let d = depthSlices - 1; d >= 0; d--) {
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('x', baseX - d * offset);
+    rect.setAttribute('y', baseY - d * offset);
+    rect.setAttribute('width', blockWidth);
+    rect.setAttribute('height', blockHeight);
+    rect.setAttribute('fill', fillColor);
+    rect.setAttribute('fill-opacity', opacity);
+    rect.setAttribute('stroke', strokeColor);
+    rect.setAttribute('stroke-width', strokeWidth);
+    svg.appendChild(rect);
+  }
+
+  // name
+  const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  label.setAttribute('x', xCenter);
+  label.setAttribute('y', baseY - 24);
+  label.setAttribute('text-anchor', 'middle');
+  label.setAttribute('font-size', '14');
+  label.setAttribute('fill', '#ffb3de');
+  label.setAttribute('font-weight', 'bold');
+  label.textContent = layer.name;
+  svg.appendChild(label);
+
+  // shape
+  const shapeText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  shapeText.setAttribute('x', xCenter);
+  shapeText.setAttribute('y', baseY + blockHeight + 18);
+  shapeText.setAttribute('text-anchor', 'middle');
+  shapeText.setAttribute('font-size', '12');
+  shapeText.setAttribute('fill', '#fff52e');
+  shapeText.textContent = layer.shape;
+  svg.appendChild(shapeText);
+
+  // channels
+  const channelText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  channelText.setAttribute('x', xCenter);
+  channelText.setAttribute('y', baseY + blockHeight + 34);
+  channelText.setAttribute('text-anchor', 'middle');
+  channelText.setAttribute('font-size', '11');
+  channelText.setAttribute('fill', '#ffb3de');
+  channelText.textContent = `channels: ${layer.C}`;
+  svg.appendChild(channelText);
+}
+
+
+/* ========================
+   Stats Panel  (updated)
+   ======================== */
+
+function updateStats(stepIndex) {
+  const layer = cnnLayers[stepIndex];
+  const statsDiv = document.getElementById('stats');
+  statsDiv.innerHTML = '';
+
+  // ---------- Card 1: Shape ----------
+  const shapeCard = document.createElement('div');
+  shapeCard.className = 'stat-card';
+  const label1 = document.createElement('div');
+  label1.className = 'stat-label';
+  label1.textContent = 'Tensor Shape at This Step';
+  const val1 = document.createElement('div');
+  val1.className = 'stat-value';
+  val1.textContent = layer.shape;
+  const note1 = document.createElement('div');
+  note1.className = 'stat-note';
+  note1.textContent = layer.desc;
+  shapeCard.appendChild(label1);
+  shapeCard.appendChild(val1);
+  shapeCard.appendChild(note1);
+  statsDiv.appendChild(shapeCard);
+
+  // ---------- Card 2: Parameters for THIS layer ----------
+  let paramTotal = 0;
+  let paramNote = '';
+
+  if (layer.type === 'conv') {
+    const w = layer.weights;
+    const b = layer.biases;
+    paramTotal = w + b;
+    paramNote = `Weights: ${w.toLocaleString()} | Biases: ${b.toLocaleString()}`;
+  } else if (layer.type === 'dense') {
+    const w1 = layer.dense1Weights;
+    const b1 = layer.dense1Biases;
+    const w2 = layer.dense2Weights;
+    const b2 = layer.dense2Biases;
+    paramTotal = w1 + b1 + w2 + b2;
+    paramNote =
+      `Dense1 (4096→128) – Weights: ${w1.toLocaleString()}, Biases: ${b1}\n` +
+      `Dense2 (128→10) – Weights: ${w2.toLocaleString()}, Biases: ${b2}`;
+  } else {
+    paramTotal = 0;
+    paramNote = layer.extra || 'No trainable parameters at this step.';
+  }
+
+  const paramCard = document.createElement('div');
+  paramCard.className = 'stat-card';
+  const label2 = document.createElement('div');
+  label2.className = 'stat-label';
+  label2.textContent = 'Trainable Parameters at This Step';
+  const val2 = document.createElement('div');
+  val2.className = 'stat-value';
+  val2.textContent = paramTotal.toLocaleString();
+  const note2 = document.createElement('div');
+  note2.className = 'stat-note';
+  note2.textContent = paramNote;
+  paramCard.appendChild(label2);
+  paramCard.appendChild(val2);
+  paramCard.appendChild(note2);
+  statsDiv.appendChild(paramCard);
+
+  // ---------- Shared constants for whole-network counts ----------
+  const conv1W = 3 * 3 * 3 * 32;
+  const conv1B = 32;
+  const conv2W = 3 * 3 * 32 * 64;
+  const conv2B = 64;
+  const d1W = 4096 * 128;
+  const d1B = 128;
+  const d2W = 128 * 10;
+  const d2B = 10;
+
+  const conv1Total = conv1W + conv1B;   // 896
+  const conv2Total = conv2W + conv2B;   // 18,496
+  const d1Total   = d1W + d1B;          // 524,416
+  const d2Total   = d2W + d2B;          // 1,290
+
+  const totalParams =
+    conv1Total + conv2Total + d1Total + d2Total; // 545,098
+
+  // ---------- Card 3: Total params ----------
+  const totalCard = document.createElement('div');
+  totalCard.className = 'stat-card';
+  totalCard.style.borderLeftColor = '#fff52e';
+  const label3 = document.createElement('div');
+  label3.className = 'stat-label';
+  label3.textContent = 'Total Parameters (Whole CNN)';
+  const val3 = document.createElement('div');
+  val3.className = 'stat-value';
+  val3.style.color = '#fff52e';
+  val3.textContent = totalParams.toLocaleString();
+  const note3 = document.createElement('div');
+  note3.className = 'stat-note';
+  note3.textContent = 'Conv1 + Conv2 + Dense(4096→128) + Dense(128→10).';
+  totalCard.appendChild(label3);
+  totalCard.appendChild(val3);
+  totalCard.appendChild(note3);
+  statsDiv.appendChild(totalCard);
+
+  // ---------- Card 4: Detailed breakdown with formulas ----------
+  const breakdownCard = document.createElement('div');
+  breakdownCard.className = 'stat-card';
+  breakdownCard.style.borderLeftColor = '#ff79c6';
+
+  const label4 = document.createElement('div');
+  label4.className = 'stat-label';
+  label4.textContent = 'Layer-wise Parameter Breakdown';
+
+  const val4 = document.createElement('div');
+  val4.className = 'stat-value';
+  val4.style.fontSize = '1.1em';
+  val4.style.marginBottom = '6px';
+  val4.textContent = '545,098 = 896 + 18,496 + 524,416 + 1,290';
+
+  const note4 = document.createElement('div');
+  note4.className = 'stat-note';
+  note4.style.fontFamily = '"Courier New", monospace';
+  note4.style.whiteSpace = 'pre-line';
+  note4.innerHTML =
+    `Conv1:  (3×3×3)×32  + 32   = ${conv1Total.toLocaleString()}\n` +
+    `Conv2:  (3×3×32)×64 + 64   = ${conv2Total.toLocaleString()}\n` +
+    `Dense1: (4096×128)  + 128  = ${d1Total.toLocaleString()}\n` +
+    `Dense2: (128×10)    + 10   = ${d2Total.toLocaleString()}`;
+
+  breakdownCard.appendChild(label4);
+  breakdownCard.appendChild(val4);
+  breakdownCard.appendChild(note4);
+  statsDiv.appendChild(breakdownCard);
+}
+
+
+/* ========================
+   Step Text
+   ======================== */
+
+function updateStepText(stepIndex) {
+  const stepText = document.getElementById('stepText');
+  const layer = cnnLayers[stepIndex];
+  stepText.textContent = layer.desc;
+}
+
+/* ========================
+   Patch Demo (3×3×3)
+   ======================== */
+
+function createPatchGrid(id, channelClass) {
+  const table = document.getElementById(id);
+  table.innerHTML = '';
+  for (let r = 0; r < 3; r++) {
+    const tr = document.createElement('tr');
+    for (let c = 0; c < 3; c++) {
+      const td = document.createElement('td');
+      if (channelClass) {
+        td.classList.add(channelClass);
+      } else {
+        td.classList.add('kernel');
+      }
+      td.textContent = '0';
+      tr.appendChild(td);
+    }
+    table.appendChild(tr);
+  }
+}
+
+function randomizePatch() {
+  const inputR = document.getElementById('patchInputR');
+  const inputG = document.getElementById('patchInputG');
+  const inputB = document.getElementById('patchInputB');
+  const kernelR = document.getElementById('patchKernelR');
+  const kernelG = document.getElementById('patchKernelG');
+  const kernelB = document.getElementById('patchKernelB');
+  const outBox = document.getElementById('patchOutputBox');
+
+  let sumR = 0, sumG = 0, sumB = 0;
+  const bias = Math.floor(Math.random() * 5) - 2; // bias in [-2,2]
+
+  for (let r = 0; r < 3; r++) {
+    for (let c = 0; c < 3; c++) {
+      // Random inputs 0-9
+      const vR = Math.floor(Math.random() * 10);
+      const vG = Math.floor(Math.random() * 10);
+      const vB = Math.floor(Math.random() * 10);
+      inputR.rows[r].cells[c].textContent = vR;
+      inputG.rows[r].cells[c].textContent = vG;
+      inputB.rows[r].cells[c].textContent = vB;
+
+      // Random kernel weights -1, 0, 1
+      const wR = Math.floor(Math.random() * 3) - 1;
+      const wG = Math.floor(Math.random() * 3) - 1;
+      const wB = Math.floor(Math.random() * 3) - 1;
+      kernelR.rows[r].cells[c].textContent = wR;
+      kernelG.rows[r].cells[c].textContent = wG;
+      kernelB.rows[r].cells[c].textContent = wB;
+
+      sumR += vR * wR;
+      sumG += vG * wG;
+      sumB += vB * wB;
+    }
+  }
+
+  const total = sumR + sumG + sumB + bias;
+
+  outBox.textContent =
+    `R: Σ (patch * kernel) = ${sumR}\n` +
+    `G: Σ (patch * kernel) = ${sumG}\n` +
+    `B: Σ (patch * kernel) = ${sumB}\n` +
+    `Bias: ${bias}\n\n` +
+    `Output = ${sumR} + ${sumG} + ${sumB} + ${bias} = ${total}`;
+}
+
+/* ========================
+   Main UI Update
+   ======================== */
+
+function updateUI() {
+  drawArchitecture(currentStep);
+  updateStats(currentStep);
+  updateStepText(currentStep);
+}
+
+/* ========================
+   Initialization
+   ======================== */
+
+window.addEventListener('load', () => {
+  // Set up patch grids (input + kernel) with channel colors
+  createPatchGrid('patchInputR', 'channel-R');
+  createPatchGrid('patchInputG', 'channel-G');
+  createPatchGrid('patchInputB', 'channel-B');
+  createPatchGrid('patchKernelR', null);
+  createPatchGrid('patchKernelG', null);
+  createPatchGrid('patchKernelB', null);
+  randomizePatch();
+
+  // Initialize CNN view
+  updateUI();
+});
+</script>
+
+</body>
+</html>
