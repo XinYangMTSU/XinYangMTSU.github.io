@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Classical CNN Architectures</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #1a1d1f;
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #ffb3de;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #222025;
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 4px 30px rgba(255,121,198,.09);
+      border-left: 7px solid #ff79c6;
+    }
+
+    h2 {
+      color: #ff79c6;
+      text-align: center;
+      margin-top: 0;
+      font-size: 2em;
+    }
+
+    .subtitle {
+      color: #ffb3de;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+
+    svg {
+      display: block;
+      margin: 40px auto;
+      background: #19121a;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(255,121,198,0.11);
+      padding: 20px;
+    }
+
+    .label {
+      color: #ffb3de;
+      font-size: 0.95em;
+      font-weight: 500;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .legend {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 40px;
+    }
+
+    .legend h3 {
+      color: #ff79c6;
+      margin-top: 0;
+      border-bottom: 2px solid #ff79c6;
+      padding-bottom: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 12px 0;
+      color: #ffb3de;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .color-input { background: #ff79c6; }
+    .color-hidden { background: #ffb3de; }
+    .color-output { background: #fff52e; }
+    .color-weight { background: #50fa7b; }
+    .color-bias { background: #888888; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Classical Convolutional Neural Networks</h2>
+  <p class="subtitle">A visual timeline: LeNet-5 → AlexNet → VGG → GoogLeNet (Inception) → ResNet → MobileNet</p>
+
+  <svg width="1200" height="420" viewBox="0 0 1200 420">
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <polygon points="0 0, 10 3, 0 6" fill="#50fa7b" />
+      </marker>
+    </defs>
+
+    <!-- Title inside SVG -->
+    <text x="600" y="40" font-size="20" font-weight="bold" fill="#ff79c6" text-anchor="middle">
+      Timeline of Classical CNN Architectures
+    </text>
+
+    <!-- Horizontal axis -->
+    <line x1="80" y1="90" x2="1120" y2="90" stroke="#50fa7b" stroke-width="2" opacity="0.6" marker-end="url(#arrowhead)"/>
+    <text x="80" y="80" font-size="12" fill="#ffb3de">1990s</text>
+    <text x="1120" y="80" font-size="12" fill="#ffb3de" text-anchor="end">2010s+</text>
+
+    <!-- LeNet-5 -->
+    <rect x="80" y="130" rx="12" ry="12" width="150" height="120" fill="#2a1e28" stroke="#ff79c6" stroke-width="2"/>
+    <text x="155" y="155" font-size="15" fill="#ff79c6" text-anchor="middle" font-weight="bold">LeNet-5</text>
+    <text x="155" y="175" font-size="12" fill="#ffb3de" text-anchor="middle">(1998)</text>
+    <text x="155" y="195" font-size="11" fill="#ffb3de" text-anchor="middle">Digit recognition</text>
+    <text x="155" y="212" font-size="11" fill="#ffb3de" text-anchor="middle">Few conv layers</text>
+    <text x="155" y="229" font-size="11" fill="#ffb3de" text-anchor="middle">+ pooling, FC</text>
+
+    <!-- AlexNet -->
+    <rect x="270" y="130" rx="12" ry="12" width="150" height="120" fill="#2a1e28" stroke="#ff79c6" stroke-width="2"/>
+    <text x="345" y="155" font-size="15" fill="#ff79c6" text-anchor="middle" font-weight="bold">AlexNet</text>
+    <text x="345" y="175" font-size="12" fill="#ffb3de" text-anchor="middle">(2012)</text>
+    <text x="345" y="195" font-size="11" fill="#ffb3de" text-anchor="middle">ImageNet winner</text>
+    <text x="345" y="212" font-size="11" fill="#ffb3de" text-anchor="middle">ReLU, dropout,</text>
+    <text x="345" y="229" font-size="11" fill="#ffb3de" text-anchor="middle">GPU training</text>
+
+    <!-- VGG -->
+    <rect x="460" y="130" rx="12" ry="12" width="150" height="120" fill="#2a1e28" stroke="#ff79c6" stroke-width="2"/>
+    <text x="535" y="155" font-size="15" fill="#ff79c6" text-anchor="middle" font-weight="bold">VGG16 / VGG19</text>
+    <text x="535" y="175" font-size="12" fill="#ffb3de" text-anchor="middle">(2014)</text>
+    <text x="535" y="195" font-size="11" fill="#ffb3de" text-anchor="middle">Deep 3×3 conv</text>
+    <text x="535" y="212" font-size="11" fill="#ffb3de" text-anchor="middle">stacks, simple &</text>
+    <text x="535" y="229" font-size="11" fill="#ffb3de" text-anchor="middle">uniform design</text>
+
+    <!-- GoogLeNet / Inception -->
+    <rect x="650" y="130" rx="12" ry="12" width="150" height="120" fill="#2a1e28" stroke="#ff79c6" stroke-width="2"/>
+    <text x="725" y="155" font-size="15" fill="#ff79c6" text-anchor="middle" font-weight="bold">GoogLeNet</text>
+    <text x="725" y="175" font-size="12" fill="#ffb3de" text-anchor="middle">(Inception v1, 2014)</text>
+    <text x="725" y="195" font-size="11" fill="#ffb3de" text-anchor="middle">Inception modules</text>
+    <text x="725" y="212" font-size="11" fill="#ffb3de" text-anchor="middle">parallel filters,</text>
+    <text x="725" y="229" font-size="11" fill="#ffb3de" text-anchor="middle">computationally efficient</text>
+
+    <!-- ResNet -->
+    <rect x="840" y="130" rx="12" ry="12" width="150" height="120" fill="#2a1e28" stroke="#ff79c6" stroke-width="2"/>
+    <text x="915" y="155" font-size="15" fill="#ff79c6" text-anchor="middle" font-weight="bold">ResNet</text>
+    <text x="915" y="175" font-size="12" fill="#ffb3de" text-anchor="middle">(2015)</text>
+    <text x="915" y="195" font-size="11" fill="#ffb3de" text-anchor="middle">Residual blocks</text>
+    <text x="915" y="212" font-size="11" fill="#ffb3de" text-anchor="middle">skip connections</text>
+    <text x="915" y="229" font-size="11" fill="#ffb3de" text-anchor="middle">very deep nets</text>
+
+    <!-- MobileNet -->
+    <rect x="1030" y="130" rx="12" ry="12" width="150" height="120" fill="#2a1e28" stroke="#ff79c6" stroke-width="2"/>
+    <text x="1105" y="155" font-size="15" fill="#ff79c6" text-anchor="middle" font-weight="bold">MobileNet</text>
+    <text x="1105" y="175" font-size="12" fill="#ffb3de" text-anchor="middle">(2017+)</text>
+    <text x="1105" y="195" font-size="11" fill="#ffb3de" text-anchor="middle">Depthwise separable</text>
+    <text x="1105" y="212" font-size="11" fill="#ffb3de" text-anchor="middle">convolutions for</text>
+    <text x="1105" y="229" font-size="11" fill="#ffb3de" text-anchor="middle">mobile devices</text>
+
+    <!-- Arrows between boxes -->
+    <line x1="230" y1="190" x2="270" y2="190" stroke="#50fa7b" stroke-width="2" marker-end="url(#arrowhead)" opacity="0.8"/>
+    <line x1="420" y1="190" x2="460" y2="190" stroke="#50fa7b" stroke-width="2" marker-end="url(#arrowhead)" opacity="0.8"/>
+    <line x1="610" y1="190" x2="650" y2="190" stroke="#50fa7b" stroke-width="2" marker-end="url(#arrowhead)" opacity="0.8"/>
+    <line x1="800" y1="190" x2="840" y2="190" stroke="#50fa7b" stroke-width="2" marker-end="url(#arrowhead)" opacity="0.8"/>
+    <line x1="990" y1="190" x2="1030" y2="190" stroke="#50fa7b" stroke-width="2" marker-end="url(#arrowhead)" opacity="0.8"/>
+
+    <!-- Bottom caption inside SVG -->
+    <text x="600" y="320" font-size="12" fill="#ffb3de" text-anchor="middle">
+      Each box represents a widely used CNN backbone in computer vision, building on ideas from the previous models.
+    </text>
+  </svg>
+
+  <div class="label">
+    <strong>Key idea:</strong> CNN architectures evolved from shallow digit recognizers (LeNet-5)
+    to very deep residual and efficient models (ResNet, MobileNet) for large-scale vision tasks.
+  </div>
+
+  <div class="legend">
+    <h3>📊 Classical CNN Architectures Summary</h3>
+
+    <h4 style="color: #ff79c6; margin-top: 15px;">LeNet-5 (1998)</h4>
+    <div style="background: #19121a; padding: 15px; border-radius: 8px; margin: 10px 0; color: #fff52e; font-family: 'Courier New', monospace;">
+      • Task: Handwritten digit recognition (MNIST)<br>
+      • Structure: Conv → Pool → Conv → Pool → Fully Connected<br>
+      • Importance: One of the first successful CNNs for practical vision tasks.
+    </div>
+
+    <h4 style="color: #ff79c6; margin-top: 15px;">AlexNet (2012)</h4>
+    <div style="background: #19121a; padding: 15px; border-radius: 8px; margin: 10px 0; color: #fff52e; font-family: 'Courier New', monospace;">
+      • ImageNet winner, dramatically reduced classification error.<br>
+      • Used ReLU activations, dropout, and GPU acceleration.<br>
+      • Triggered the deep learning boom for computer vision.
+    </div>
+
+    <h4 style="color: #ff79c6; margin-top: 15px;">VGG16 / VGG19 (2014)</h4>
+    <div style="background: #19121a; padding: 15px; border-radius: 8px; margin: 10px 0; color: #fff52e; font-family: 'Courier New', monospace;">
+      • Very deep networks with many 3×3 conv layers.<br>
+      • Simple, uniform architecture: stacks of conv + pool layers.<br>
+      • Often used as a “textbook” example of deep CNN design.
+    </div>
+
+    <h4 style="color: #ff79c6; margin-top: 15px;">GoogLeNet / Inception (2014)</h4>
+    <div style="background: #19121a; padding: 15px; border-radius: 8px; margin: 10px 0; color: #fff52e; font-family: 'Courier New', monospace;">
+      • Introduced Inception modules (1×1, 3×3, 5×5 filters in parallel).<br>
+      • Designed to be both deep and computationally efficient.<br>
+      • Inspired many later “multi-branch” CNN architectures.
+    </div>
+
+    <h4 style="color: #ff79c6; margin-top: 15px;">ResNet (2015)</h4>
+    <div style="background: #19121a; padding: 15px; border-radius: 8px; margin: 10px 0; color: #fff52e; font-family: 'Courier New', monospace;">
+      • Introduced residual (skip) connections: y = F(x) + x.<br>
+      • Enabled training of very deep networks (50, 101, 152+ layers).<br>
+      • Became a standard backbone for many computer vision tasks.
+    </div>
+
+    <h4 style="color: #ff79c6; margin-top: 15px;">MobileNet (2017+)</h4>
+    <div style="background: #19121a; padding: 15px; border-radius: 8px; margin: 10px 0; color: #fff52e; font-family: 'Courier New', monospace;">
+      • Uses depthwise separable convolutions to reduce computation.<br>
+      • Designed for mobile/embedded devices with limited resources.<br>
+      • Shows how accuracy and efficiency must be balanced in practice.
+    </div>
+  </div>
+
+  <div class="legend" style="margin-top: 25px;">
+    <h3>🎨 Legend</h3>
+    <div class="legend-item">
+      <div class="legend-color color-input"></div>
+      <span><strong>Pink boxes:</strong> Earlier CNN models (e.g., LeNet-5, AlexNet) – foundational ideas.</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-hidden"></div>
+      <span><strong>Light pink concept:</strong> Deeper architectures (VGG, GoogLeNet, ResNet) – improved accuracy.</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-output"></div>
+      <span><strong>Yellow concept:</strong> Efficient architectures (MobileNet) – optimized for deployment.</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-weight"></div>
+      <span><strong>Green arrows:</strong> Timeline flow – how later models build on earlier ideas.</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-bias"></div>
+      <span><strong>Gray theme:</strong> Design trade-offs: depth, width, efficiency, and accuracy.</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
