@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Haxby fMRI – Complete GLM & Decoding Analysis Pipeline</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+    <style>
+        body {
+            background: #1e1a20;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            color: #ffd7f0;
+        }
+        .container {
+            background: #1e1a20;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #ffd7f0;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #8be9fd;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .section {
+            background: #2a2630;
+            border: 1.5px solid #ff79c6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            color: #ffd7f0;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ff79c6;
+            padding-bottom: 10px;
+        }
+        .subsection-title {
+            color: #4ECDC4;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+        svg {
+            width: 100%;
+            background: #1e1a20;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .chart-container {
+            position: relative;
+            height: 350px;
+            margin-bottom: 20px;
+            background: #1e1a20;
+            border: 1px solid #4ECDC4;
+            border-radius: 6px;
+            padding: 15px;
+        }
+        .formula-box {
+            background: #1e1a20;
+            border: 1.5px solid #4ECDC4;
+            border-radius: 8px;
+            color: #ffd7f0;
+            text-align: center;
+            font-size: 14px;
+            padding: 15px;
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+        .text-box {
+            background: #1e1a20;
+            border: 1.5px solid #8be9fd;
+            border-radius: 8px;
+            color: #ffd7f0;
+            font-size: 14px;
+            padding: 15px;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+        .text-box ul {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+        .text-box li {
+            margin-bottom: 8px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .info-box {
+            background: #1e1a20;
+            border: 1px solid #4ECDC4;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .info-box strong {
+            color: #4ECDC4;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        button {
+            background: #ff79c6;
+            color: #1e1a20;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #ffd7f0;
+        }
+        .stimulus-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stimulus-item {
+            background: #1e1a20;
+            border: 2px solid #8be9fd;
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .stimulus-item:hover {
+            border-color: #ff79c6;
+            box-shadow: 0 0 10px #ff79c6;
+        }
+        .stimulus-item.selected {
+            background: #ff79c6;
+            color: #1e1a20;
+            border-color: #ffd7f0;
+        }
+        .stimulus-icon {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+        .stimulus-label {
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .matrix-display {
+            background: #1e1a20;
+            border: 1px solid #4ECDC4;
+            border-radius: 6px;
+            padding: 15px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        th, td {
+            border: 1px solid #4ECDC4;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background: #ff79c6;
+            color: #1e1a20;
+        }
+        td {
+            color: #8be9fd;
+        }
+        .equation {
+            background: #1e1a20;
+            border: 1.5px solid #4ECDC4;
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+            font-family: monospace;
+            font-size: 14px;
+            margin: 15px 0;
+            color: #ffd7f0;
+        }
+        .step-indicator {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .step {
+            background: #2a2630;
+            border: 2px solid #8be9fd;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #ffd7f0;
+            font-size: 12px;
+            text-align: center;
+        }
+        .step.active {
+            border-color: #ff79c6;
+            background: #ff79c6;
+            color: #1e1a20;
+            box-shadow: 0 0 10px #ff79c6;
+        }
+        .arrow {
+            color: #4ECDC4;
+            font-size: 24px;
+        }
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .step-box {
+            background: #1e1a20;
+            border: 2px solid #ff79c6;
+            border-radius: 6px;
+            padding: 15px;
+        }
+        .step-number {
+            background: #ff79c6;
+            color: #1e1a20;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .step-title {
+            color: #ffd7f0;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .step-desc {
+            color: #8be9fd;
+            font-size: 12px;
+        }
+        code {
+            background: #1e1a20;
+            color: #50FA7B;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        .contrast-info {
+            background: #1e1a20;
+            border: 1px solid #4ECDC4;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🧠 Haxby fMRI – Complete GLM & Decoding Analysis Pipeline</h1>
+    <div class="subtitle">From fMRI Data to Brain Pattern Decoding</div>
+
+    <!-- ===== SECTION 1: PIPELINE OVERVIEW ===== -->
+    <div class="section">
+        <div class="section-title">📊 Pipeline Overview</div>
+        <div class="text-box">
+            This complete analysis pipeline shows how to go from raw fMRI data to decoding object categories from ventral temporal cortex activity patterns.
+            It combines GLM analysis (signal extraction) with machine learning classification (decoding).
+        </div>
+
+        <svg viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+            <!-- Background halos -->
+            <rect x="20" y="40" width="260" height="270" fill="none" stroke="#ff79c6" stroke-width="2" opacity="0.4" rx="12"/>
+            <rect x="320" y="40" width="260" height="270" fill="none" stroke="#8be9fd" stroke-width="2" opacity="0.4" rx="12"/>
+            <rect x="620" y="40" width="260" height="270" fill="none" stroke="#50fa7b" stroke-width="2" opacity="0.4" rx="12"/>
+
+            <!-- Group titles -->
+            <text x="40"  y="60" fill="#ffd7f0" font-size="14">Data & Labels</text>
+            <text x="340" y="60" fill="#ffd7f0" font-size="14">GLM (Signal Extraction)</text>
+            <text x="640" y="60" fill="#ffd7f0" font-size="14">Decoding (Classification)</text>
+
+            <!-- Step 1: Fetch dataset -->
+            <g>
+                <rect x="40" y="90" width="220" height="80" rx="10" fill="#2b222f" stroke="#ff79c6" stroke-width="2"/>
+                <text x="55" y="110" fill="#ffd7f0" font-size="14" font-weight="600">1. Fetch Haxby dataset</text>
+                <text x="55" y="130" fill="#ffd7f0" font-size="12">• 1 subject (from 6)</text>
+                <text x="55" y="145" fill="#ffd7f0" font-size="12">• func: (40, 64, 64, 1452)</text>
+                <text x="55" y="160" fill="#ffd7f0" font-size="12">• anat: (40, 64, 64), VT mask</text>
+            </g>
+
+            <!-- Step 2: Load behavioral labels -->
+            <g>
+                <rect x="40" y="190" width="220" height="90" rx="10" fill="#2b222f" stroke="#ffb86c" stroke-width="2"/>
+                <text x="55" y="210" fill="#ffd7f0" font-size="14" font-weight="600">2. Load behavioral labels</text>
+                <text x="55" y="228" fill="#ffd7f0" font-size="12">• session_target: ~1452 rows</text>
+                <text x="55" y="244" fill="#ffd7f0" font-size="12">• labels: face, cat, house, …</text>
+                <text x="55" y="260" fill="#ffd7f0" font-size="12">• chunks: run indices (1–12)</text>
+            </g>
+
+            <!-- Arrow -->
+            <line x1="270" y1="170" x2="320" y2="170" stroke="#8be9fd" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+            <!-- Step 3: Build events -->
+            <g>
+                <rect x="340" y="90" width="220" height="90" rx="10" fill="#232634" stroke="#8be9fd" stroke-width="2"/>
+                <text x="355" y="110" fill="#ffd7f0" font-size="14" font-weight="600">3. Build events & frame_times</text>
+                <text x="355" y="128" fill="#ffd7f0" font-size="12">• TR ≈ 2.5s → frame_times</text>
+                <text x="355" y="144" fill="#ffd7f0" font-size="12">• group same-label scans</text>
+                <text x="355" y="160" fill="#ffd7f0" font-size="12">• events: onset, duration, type</text>
+            </g>
+
+            <!-- Step 4: Fit GLM -->
+            <g>
+                <rect x="340" y="200" width="220" height="90" rx="10" fill="#232634" stroke="#bd93f9" stroke-width="2"/>
+                <text x="355" y="220" fill="#ffd7f0" font-size="14" font-weight="600">4. Fit FirstLevelModel (GLM)</text>
+                <text x="355" y="238" fill="#ffd7f0" font-size="12">• Input: func + events</text>
+                <text x="355" y="254" fill="#ffd7f0" font-size="12">• Mask: ventral temporal</text>
+                <text x="355" y="270" fill="#ffd7f0" font-size="12">• Output: β per condition</text>
+            </g>
+
+            <!-- Arrow -->
+            <line x1="560" y1="170" x2="620" y2="170" stroke="#50fa7b" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+            <!-- Step 5: Beta maps -->
+            <g>
+                <rect x="640" y="90" width="220" height="90" rx="10" fill="#1f2b26" stroke="#50fa7b" stroke-width="2"/>
+                <text x="655" y="110" fill="#ffd7f0" font-size="14" font-weight="600">5. Extract β maps per trial</text>
+                <text x="655" y="128" fill="#ffd7f0" font-size="12">• 3D β map (40×64×64)</text>
+                <text x="655" y="144" fill="#ffd7f0" font-size="12">  per event per run</text>
+                <text x="655" y="160" fill="#ffd7f0" font-size="12">• Mask → 1D VT pattern</text>
+            </g>
+
+            <!-- Step 6: Decode -->
+            <g>
+                <rect x="640" y="200" width="220" height="90" rx="10" fill="#1f2b26" stroke="#00c2b2" stroke-width="2"/>
+                <text x="655" y="220" fill="#ffd7f0" font-size="14" font-weight="600">6. Decode categories</text>
+                <text x="655" y="238" fill="#ffd7f0" font-size="12">• X: (n_trials, n_voxels)</text>
+                <text x="655" y="254" fill="#ffd7f0" font-size="12">• y: trial labels</text>
+                <text x="655" y="270" fill="#ffd7f0" font-size="12">• Decoder (SVC) + CV</text>
+            </g>
+
+            <!-- Legend -->
+            <g font-size="12">
+                <rect x="40" y="25" width="10" height="10" fill="#ff79c6"/><text x="56" y="33" fill="#ffd7f0">Dataset (NIfTI + masks)</text>
+                <rect x="310" y="25" width="10" height="10" fill="#8be9fd"/><text x="326" y="33" fill="#ffd7f0">GLM design & fit</text>
+                <rect x="600" y="25" width="10" height="10" fill="#50fa7b"/><text x="616" y="33" fill="#ffd7f0">Decoding from VT</text>
+            </g>
+
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="#8be9fd" />
+                </marker>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- ===== SECTION 2: HAXBY DATASET OVERVIEW ===== -->
+    <div class="section">
+        <div class="section-title">📊 Haxby Dataset Overview</div>
+        <div class="info-grid">
+            <div class="info-box">
+                <strong>Study Focus:</strong><br>
+                Object recognition in ventral temporal cortex (face vs. object processing)
+            </div>
+            <div class="info-box">
+                <strong>Subjects & Runs:</strong><br>
+                6 subjects × 12 runs per subject = 72 total runs
+            </div>
+            <div class="info-box">
+                <strong>TR (Repetition Time):</strong><br>
+                2.5 seconds
+            </div>
+            <div class="info-box">
+                <strong>Stimulus Categories:</strong><br>
+                8 object types shown in 24-second blocks
+            </div>
+            <div class="info-box">
+                <strong>Total Voxels per Volume:</strong><br>
+                40 × 64 × 64 = 163,840 voxels
+            </div>
+            <div class="info-box">
+                <strong>fMRI Dimensions:</strong><br>
+                <code>(40, 64, 64, 1452)</code> = height × width × depth × timepoints
+            </div>
+        </div>
+
+        <div class="section-title" style="margin-top: 20px;">🎯 Stimulus Categories in Haxby</div>
+        <div class="stimulus-grid">
+            <div class="stimulus-item" onclick="selectStimulus(0)">
+                <div class="stimulus-icon">😊</div>
+                <div class="stimulus-label">Faces</div>
+            </div>
+            <div class="stimulus-item" onclick="selectStimulus(1)">
+                <div class="stimulus-icon">🏠</div>
+                <div class="stimulus-label">Houses</div>
+            </div>
+            <div class="stimulus-item" onclick="selectStimulus(2)">
+                <div class="stimulus-icon">🐱</div>
+                <div class="stimulus-label">Cats</div>
+            </div>
+            <div class="stimulus-item" onclick="selectStimulus(3)">
+                <div class="stimulus-icon">🍷</div>
+                <div class="stimulus-label">Bottles</div>
+            </div>
+            <div class="stimulus-item" onclick="selectStimulus(4)">
+                <div class="stimulus-icon">✂️</div>
+                <div class="stimulus-label">Scissors</div>
+            </div>
+            <div class="stimulus-item" onclick="selectStimulus(5)">
+                <div class="stimulus-icon">👞</div>
+                <div class="stimulus-label">Shoes</div>
+            </div>
+            <div class="stimulus-item" onclick="selectStimulus(6)">
+                <div class="stimulus-icon">🪑</div>
+                <div class="stimulus-label">Chairs</div>
+            </div>
+            <div class="stimulus-item" onclick="selectStimulus(7)">
+                <div class="stimulus-icon">🔲</div>
+                <div class="stimulus-label">Scrambled</div>
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <strong>Data Summary</strong><br>
+            • Example: 1 subject from Nilearn<br>
+            • fMRI bold image: <code>(40, 64, 64, 1452)</code> voxels × time points<br>
+            • TR = 2.5 seconds between volumes<br>
+            • 8 stimulus categories shown in 24-second blocks<br>
+            • ~15 trials per category (8 × 15 = ~120 task volumes)
+        </div>
+    </div>
+
+    <!-- ===== SECTION 3: GLM PIPELINE STEPS ===== -->
+    <div class="section">
+        <div class="section-title">🔄 GLM Analysis Pipeline Steps</div>
+        <div class="step-indicator">
+            <div class="step active">1<br>Design<br>Matrix</div>
+            <div class="arrow">→</div>
+            <div class="step">2<br>Voxel<br>Time Series</div>
+            <div class="arrow">→</div>
+            <div class="step">3<br>Beta<br>Weights</div>
+            <div class="arrow">→</div>
+            <div class="step">4<br>Statistical<br>Maps</div>
+        </div>
+    </div>
+
+    <!-- ===== SECTION 4: DESIGN MATRIX ===== -->
+    <div class="section">
+        <div class="section-title">📋 Step 1: Design Matrix (Regressors)</div>
+        <div class="info-box" style="margin-bottom: 15px;">
+            <strong>What is it?</strong> A design matrix contains predictors (regressors) representing when each stimulus was presented.
+            Each column represents one stimulus type or condition, convolved with the hemodynamic response function (HRF).
+        </div>
+
+        <div class="controls">
+            <button onclick="generateDesignMatrix()">Generate Design Matrix</button>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="designChart"></canvas>
+        </div>
+
+        <div class="equation">
+            y = β₀ + β₁×Faces + β₂×Houses + β₃×Cats + ... + ε<br>
+            <span style="font-size: 12px; color: #8be9fd;">where y = observed BOLD signal, β = beta weights, ε = error/noise</span>
+        </div>
+
+        <div class="info-box" style="font-size: 12px;">
+            <strong>Key Point:</strong> Each regressor is convolved with the hemodynamic response function (HRF) to account for the
+            delayed vascular response in the brain. The HRF has a rise time of ~4-6 seconds.
+        </div>
+    </div>
+
+    <!-- ===== SECTION 5: VOXEL TIME SERIES ===== -->
+    <div class="section">
+        <div class="section-title">📈 Step 2: Voxel Time Series & Fitting</div>
+        <div class="info-box" style="margin-bottom: 15px;">
+            <strong>What is it?</strong> For each voxel in the brain, we have a time series of BOLD signal intensities over the entire experiment.
+            The GLM finds the best-fitting combination of regressors to explain this time series.
+        </div>
+
+        <div class="chart-container">
+            <canvas id="voxelChart"></canvas>
+        </div>
+
+        <div class="info-grid" style="margin-top: 20px;">
+            <div class="info-box">
+                <strong>BOLD Signal:</strong><br>
+                Measured brain activation over time (blue line)
+            </div>
+            <div class="info-box">
+                <strong>Model Fit:</strong><br>
+                Predicted signal combining all regressors (red line)
+            </div>
+            <div class="info-box">
+                <strong>Residuals:</strong><br>
+                Unexplained variance (difference between actual and predicted)
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SECTION 6: BETA WEIGHTS ===== -->
+    <div class="section">
+        <div class="section-title">⚖️ Step 3: Beta Weights (Effect Sizes)</div>
+        <div class="info-box" style="margin-bottom: 15px;">
+            <strong>What are Beta Weights?</strong> They represent how much each stimulus category contributes to explaining the BOLD signal.
+            Larger beta = stronger response to that stimulus type.
+        </div>
+
+        <div class="chart-container">
+            <canvas id="betaChart"></canvas>
+        </div>
+
+        <div class="matrix-display">
+            <table>
+                <tr>
+                    <th>Condition</th>
+                    <th>Beta Weight</th>
+                    <th>t-value</th>
+                    <th>p-value</th>
+                    <th>Significant?</th>
+                </tr>
+                <tr>
+                    <td>Faces</td>
+                    <td id="beta0">0.85</td>
+                    <td>4.23</td>
+                    <td>0.0001</td>
+                    <td style="color: #50FA7B;">✓</td>
+                </tr>
+                <tr>
+                    <td>Houses</td>
+                    <td id="beta1">0.62</td>
+                    <td>3.11</td>
+                    <td>0.0015</td>
+                    <td style="color: #50FA7B;">✓</td>
+                </tr>
+                <tr>
+                    <td>Cats</td>
+                    <td id="beta2">0.45</td>
+                    <td>2.18</td>
+                    <td>0.0238</td>
+                    <td style="color: #50FA7B;">✓</td>
+                </tr>
+                <tr>
+                    <td>Bottles</td>
+                    <td id="beta3">0.28</td>
+                    <td>1.32</td>
+                    <td>0.1562</td>
+                    <td style="color: #FF6B6B;">✗</td>
+                </tr>
+                <tr>
+                    <td>Scissors</td>
+                    <td id="beta4">0.19</td>
+                    <td>0.87</td>
+                    <td>0.3821</td>
+                    <td style="color: #FF6B6B;">✗</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="info-box" style="font-size: 12px; margin-top: 15px;">
+            <strong>Interpretation:</strong> This voxel in ventral temporal cortex shows strong responses to Faces and Houses,
+            consistent with its role in object recognition. Non-significant beta weights indicate weak or no response to those stimuli.
+        </div>
+    </div>
+
+    <!-- ===== SECTION 7: STATISTICAL MAPS ===== -->
+    <div class="section">
+        <div class="section-title">🗺️ Step 4: Whole-Brain Statistical Maps</div>
+        <div class="info-box" style="margin-bottom: 15px;">
+            <strong>What is it?</strong> The GLM is repeated for every voxel in the brain (~100,000 voxels). Beta weights and statistics
+            are combined to create activation maps showing which brain regions respond to each stimulus.
+        </div>
+
+        <div class="controls">
+            <button onclick="showContrast('FacesVsHouses')">Faces > Houses</button>
+            <button onclick="showContrast('FacesVsObjects')">Faces > All Objects</button>
+            <button onclick="showContrast('AllVsRest')">All Stimuli > Rest</button>
+        </div>
+
+        <div id="contrastInfo" class="contrast-info">
+            <strong style="color: #4ECDC4;">Select a contrast to see results</strong>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-box">
+                <strong>Thresholding:</strong><br>
+                p < 0.001 uncorrected (for visualization)
+            </div>
+            <div class="info-box">
+                <strong>Correction:</strong><br>
+                Multiple comparisons (Bonferroni/FDR)
+            </div>
+            <div class="info-box">
+                <strong>Cluster Size:</strong><br>
+                k > 10 voxels minimum
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SECTION 8: STEP-BY-STEP DETAILED EXPLANATION ===== -->
+    <div class="section">
+        <div class="section-title">🔍 Step-by-Step Detailed Explanation</div>
+
+        <div class="step-grid">
+            <div class="step-box">
+                <div class="step-number">1</div>
+                <div class="step-title">Fetch Dataset</div>
+                <div class="step-desc">
+                    Download 4D fMRI images (brain movie over time), anatomical scan, and ventral temporal (VT) mask from Nilearn or OpenNeuro
+                </div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-number">2</div>
+                <div class="step-title">Load Labels</div>
+                <div class="step-desc">
+                    For each time point (volume), we know what stimulus was shown and which run it belongs to
+                </div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-number">3</div>
+                <div class="step-title">Build Events</div>
+                <div class="step-desc">
+                    Group consecutive volumes with same label into blocks with onset time, duration, and condition name for GLM input
+                </div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-number">4</div>
+                <div class="step-title">Fit GLM</div>
+                <div class="step-desc">
+                    In VT cortex, fit GLM at each voxel to estimate β weight for each stimulus condition. This extracts clean activation patterns.
+                </div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-number">5</div>
+                <div class="step-title">Extract β Maps</div>
+                <div class="step-desc">
+                    For each trial/event, get a whole-brain β map (3D). Inside VT mask, this becomes a vector of voxel values per trial.
+                </div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-number">6</div>
+                <div class="step-title">Decode</div>
+                <div class="step-desc">
+                    Feed all VT patterns into a classifier (SVM) to predict stimulus category. Good performance = category info in VT patterns.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SECTION 9: MATHEMATICAL FOUNDATIONS ===== -->
+    <div class="section">
+        <div class="section-title">📐 Mathematical Foundations</div>
+
+        <div class="subsection-title">Voxel-wise GLM (Signal Extraction)</div>
+        <div class="formula-box">
+            We model the BOLD time series at each voxel as:<br><br>
+            $Y(t) = X(t, :) \, \boldsymbol{\beta} + \varepsilon(t)$<br><br>
+            where:<br>
+            • <code>Y(t)</code> = voxel intensity at time t<br>
+            • <code>X</code> = design matrix built from stimulus events (faces, houses, etc.)<br>
+            • <code>β</code> = weight for each condition (what we solve for)<br>
+            • <code>ε(t)</code> = noise/error term
+        </div>
+
+        <div class="subsection-title">Decoding from VT Patterns (Classification)</div>
+        <div class="formula-box">
+            After GLM, each trial has a β map → voxel pattern <code>x_i ∈ ℝ^V</code> within VT mask. Stack into:<br><br>
+            $X \in \mathbb{R}^{N \times V}, \quad y \in \{\text{face},\text{house},\dots\}^{N}$<br><br>
+            where:<br>
+            • <code>N</code> = number of trials<br>
+            • <code>V</code> = number of VT voxels (~500-1000)<br>
+            • <code>y</code> = stimulus category labels<br><br>
+            A classifier (e.g., Support Vector Machine) predicts <code>y</code> from <code>X</code> using cross-validation by run.
+            Accuracy > chance indicates category information is decodable from VT activity patterns.
+        </div>
+
+        <div class="subsection-title">Why This Works</div>
+        <div class="text-box">
+            <strong>The Logic:</strong><br>
+            <ul>
+                <li><strong>GLM extracts signal:</strong> By fitting each voxel's time series, we identify which brain regions respond to each stimulus category</li>
+                <li><strong>β maps capture patterns:</strong> Each trial's β map shows the distributed response pattern across VT voxels</li>
+                <li><strong>Decoding tests information:</strong> If a classifier can predict stimulus category from VT patterns better than chance, it proves the brain encodes category information there</li>
+                <li><strong>Cross-validation prevents overfitting:</strong> Training on some runs and testing on held-out runs ensures results generalize</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ===== SECTION 10: KEY GLM CONCEPTS ===== -->
+    <div class="section">
+        <div class="section-title">🔑 Key GLM Concepts</div>
+        <div class="info-grid">
+            <div class="info-box">
+                <strong>Hemodynamic Response (HRF):</strong><br>
+                Delay between neural activity and measurable blood oxygenation change (~4-6 seconds). Regressors are convolved with HRF.
+            </div>
+            <div class="info-box">
+                <strong>Contrasts:</strong><br>
+                Comparisons between conditions (e.g., Faces > Houses). Tests whether activation differences are statistically significant.
+            </div>
+            <div class="info-box">
+                <strong>Residuals:</strong><br>
+                Unexplained variance after fitting the model. Smaller residuals = better model fit.
+            </div>
+            <div class="info-box">
+                <strong>Multiple Comparisons:</strong><br>
+                With 100,000 voxels tested, need correction for false positives (FDR or Bonferroni).
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SECTION 11: KEY INSIGHTS ===== -->
+    <div class="section">
+        <div class="section-title">💡 Key Insights from Haxby Analysis</div>
+
+        <div class="text-box">
+            <strong>What Haxby Originally Found:</strong><br>
+            <ul>
+                <li><strong>Distributed Representations:</strong> Object categories are encoded by distributed patterns across VT cortex, not in segregated regions</li>
+                <li><strong>High Decoding Accuracy:</strong> SVM classifiers achieve 60-90% accuracy (chance = 12.5% for 8 categories), showing strong categorical structure</li>
+                <li><strong>Generalization Across Subjects:</strong> Patterns trained on one subject can partially predict another subject's brain activity—suggesting universal coding</li>
+                <li><strong>Semantic Organization:</strong> Similarity between category patterns reflects semantic relationships (living things cluster together, tools cluster together)</li>
+                <li><strong>Ventral Temporal Selectivity:</strong> VT cortex shows the strongest categorical decoding compared to other brain regions</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ===== SECTION 12: IMPORTANT NOTES ===== -->
+    <div class="section">
+        <div class="section-title">⚠️ Important Notes on This Analysis</div>
+
+        <div class="text-box">
+            <strong>Sample Size & Generalization:</strong><br>
+            <ul>
+                <li>Haxby has only 6 subjects, so group-level inferences are limited. This is best viewed as a demonstration of concepts, not definitive neuroscience.</li>
+                <li>Modern studies use 50+ subjects for statistical power. However, Haxby is excellent for learning analysis pipelines.</li>
+            </ul>
+        </div>
+
+        <div class="text-box">
+            <strong>Deep Learning vs. Simple Classifiers:</strong><br>
+            <ul>
+                <li>For Haxby (6 subjects, 163K voxels): Simple classifiers (SVM) work better than deep learning due to small sample size vs. high dimensionality</li>
+                <li>Deep learning needs hundreds of subjects. GLM + SVM is the gold standard for small fMRI datasets.</li>
+            </ul>
+        </div>
+
+        <div class="text-box">
+            <strong>Preprocessing Matters:</strong><br>
+            <ul>
+                <li>Motion correction, normalization to template space, and smoothing are critical preprocessing steps before GLM</li>
+                <li>VT mask registration affects which voxels are included in analysis</li>
+                <li>Different preprocessing choices can substantially affect results</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ===== SECTION 13: VT MASK DEFINITION ===== -->
+    <div class="section">
+        <div class="section-title">🎯 What is VT Mask (Ventral Temporal Mask)?</div>
+
+        <div class="text-box">
+            <strong>VT = Ventral Temporal</strong><br><br>
+            <ul>
+                <li><strong>Ventral:</strong> Lower/bottom part of the brain</li>
+                <li><strong>Temporal:</strong> Side region (near the temples)</li>
+                <li><strong>VT Cortex:</strong> Brain region specialized in object and face recognition</li>
+            </ul>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-box">
+                <strong>What is a Mask?</strong><br>
+                A mask is a <strong>binary image (0s and 1s)</strong> that tells the analysis:<br><br>
+                • <strong style="color: #50FA7B;">1</strong> = include this voxel (inside VT region)<br>
+                • <strong style="color: #FF6B6B;">0</strong> = ignore this voxel (outside VT region)
+            </div>
+            <div class="info-box">
+                <strong>Data Reduction</strong><br>
+                Full brain: <strong>163,840 voxels</strong><br>
+                ↓ Apply VT mask ↓<br>
+                VT region: <strong>500-1,000 voxels</strong><br><br>
+                <strong>Benefits:</strong> Faster analysis + focused on relevant region
+            </div>
+            <div class="info-box">
+                <strong>Shape & Dimensions</strong><br>
+                • Full brain: (40, 64, 64) voxels<br>
+                • VT mask: Same shape (40, 64, 64)<br>
+                • But only 500-1,000 voxels are labeled as 1<br>
+                • Rest are 0 (outside region)
+            </div>
+        </div>
+
+        <div class="text-box">
+            <strong>Why Use VT Mask for Haxby?</strong><br>
+            <ul>
+                <li><strong>Object Recognition:</strong> Haxby studied how the brain recognizes faces, houses, cats, and other objects</li>
+                <li><strong>Specialized Region:</strong> VT cortex is THE brain region that processes object categories</li>
+                <li><strong>Statistical Power:</strong> Focusing on the relevant region improves signal-to-noise ratio</li>
+                <li><strong>Computational Efficiency:</strong> Reduces voxels from 163K → ~1K (163× faster!)</li>
+                <li><strong>Interpretability:</strong> Results are more interpretable when focused on function-specific regions</li>
+            </ul>
+        </div>
+
+        <div class="formula-box">
+            <strong>Python Example: Applying VT Mask</strong><br><br>
+            <code style="color: #50FA7B; display: block; text-align: left; font-size: 12px; line-height: 1.6;">
+# Load full brain fMRI data<br>
+bold = nib.load('haxby.nii.gz').get_fdata()<br>
+# Shape: (40, 64, 64, 1452)<br><br>
+
+# Load VT mask<br>
+vt_mask = nib.load('vt_mask.nii.gz').get_fdata()<br>
+# Shape: (40, 64, 64) with 1s in VT, 0s elsewhere<br><br>
+
+# Apply mask to extract only VT voxels<br>
+vt_voxels = bold[vt_mask == 1]<br>
+# Shape: (1452, ~800) = timepoints × VT voxels<br><br>
+
+# Result: Only ~800 VT voxels instead of 163,840!<br>
+# Analysis is now focused & efficient
+            </code>
+        </div>
+
+        <div class="info-box">
+            <strong>Key Functions of VT Cortex:</strong><br>
+            <ul>
+                <li>👤 <strong>Face Recognition:</strong> Identifies and distinguishes faces</li>
+                <li>🏠 <strong>Place Recognition:</strong> Processes buildings, scenes, houses</li>
+                <li>🐾 <strong>Object Recognition:</strong> Categorizes animals, tools, everyday objects</li>
+                <li>📊 <strong>Semantic Processing:</strong> Understands meaning and category relationships</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<script>
+let designChart = null;
+let voxelChart = null;
+let betaChart = null;
+
+function selectStimulus(idx) {
+    document.querySelectorAll('.stimulus-item').forEach((el, i) => {
+        el.classList.toggle('selected', i === idx);
+    });
+}
+
+function generateDesignMatrix() {
+    const timepoints = 288; // 12 runs × 24 volumes per run
+    const categories = ['Faces', 'Houses', 'Cats', 'Bottles', 'Scissors', 'Shoes', 'Chairs', 'Scrambled'];
+
+    // Create design matrix (8 regressors)
+    const design = [];
+    for (let cat = 0; cat < 8; cat++) {
+        design[cat] = [];
+        for (let t = 0; t < timepoints; t++) {
+            let value = 0;
+            // Each stimulus appears in blocks of ~9 volumes (24s / 2.5s)
+            const block = Math.floor(t / 9);
+            const stimInBlock = block % 8;
+            if (stimInBlock === cat) {
+                // Simple HRF approximation
+                const timeInBlock = t % 9;
+                value = Math.sin(timeInBlock / 4) * Math.exp(-timeInBlock / 8);
+            }
+            design[cat].push(value);
+        }
+    }
+
+    const timeLabels = Array.from({length: timepoints}, (_, i) => (i * 2.5).toFixed(0));
+
+    if (designChart) designChart.destroy();
+
+    const ctx = document.getElementById('designChart').getContext('2d');
+    const colors = ['#ff79c6', '#4ECDC4', '#8be9fd', '#FFB347', '#FF6B6B', '#50FA7B', '#BD93F9', '#F8F8F2'];
+
+    designChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: timeLabels,
+            datasets: categories.map((cat, i) => ({
+                label: cat,
+                data: design[i],
+                borderColor: colors[i],
+                fill: false,
+                tension: 0.2,
+                pointRadius: 0,
+                borderWidth: 2
+            }))
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: '#ffd7f0', font: { size: 11 } } }
+            },
+            scales: {
+                x: { title: { display: true, text: 'Time (seconds)', color: '#8be9fd' }, ticks: { color: '#8be9fd' }, grid: { color: '#3a3640' } },
+                y: { title: { display: true, text: 'HRF-Convolved Signal', color: '#8be9fd' }, ticks: { color: '#8be9fd' }, grid: { color: '#3a3640' } }
+            }
+        }
+    });
+}
+
+function generateVoxelChart() {
+    const timepoints = 100;
+    const time = Array.from({length: timepoints}, (_, i) => i * 2.5);
+
+    // Simulate BOLD signal
+    const signal = [];
+    const predicted = [];
+
+    for (let t = 0; t < timepoints; t++) {
+        // Real signal (with noise and HRF response)
+        let real = 100;
+        const taskBlock = Math.floor(t / 10);
+        if (taskBlock % 2 === 0) {
+            real += 8 * Math.sin((t % 10) / 5) * Math.exp(-(t % 10) / 10);
+        }
+        real += (Math.random() - 0.5) * 3;
+        signal.push(real);
+
+        // Predicted from model
+        let pred = 100;
+        if (taskBlock % 2 === 0) {
+            pred += 6 * Math.sin((t % 10) / 5) * Math.exp(-(t % 10) / 10);
+        }
+        predicted.push(pred);
+    }
+
+    if (voxelChart) voxelChart.destroy();
+
+    const ctx = document.getElementById('voxelChart').getContext('2d');
+    voxelChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: time,
+            datasets: [
+                {
+                    label: 'Observed BOLD Signal',
+                    data: signal,
+                    borderColor: '#8be9fd',
+                    backgroundColor: '#8be9fd20',
+                    tension: 0.2,
+                    fill: true,
+                    borderWidth: 2,
+                    pointRadius: 0
+                },
+                {
+                    label: 'GLM Model Fit',
+                    data: predicted,
+                    borderColor: '#ff79c6',
+                    tension: 0.2,
+                    fill: false,
+                    borderWidth: 2.5,
+                    pointRadius: 0,
+                    borderDash: [5, 5]
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: '#ffd7f0' } }
+            },
+            scales: {
+                x: { title: { display: true, text: 'Time (seconds)', color: '#8be9fd' }, ticks: { color: '#8be9fd' }, grid: { color: '#3a3640' } },
+                y: { title: { display: true, text: 'BOLD Intensity', color: '#8be9fd' }, ticks: { color: '#8be9fd' }, grid: { color: '#3a3640' } }
+            }
+        }
+    });
+}
+
+function generateBetaChart() {
+    const categories = ['Faces', 'Houses', 'Cats', 'Bottles', 'Scissors', 'Shoes', 'Chairs', 'Scrambled'];
+    const betas = [0.85, 0.62, 0.45, 0.28, 0.19, 0.32, 0.24, 0.05];
+    const pvalues = [0.0001, 0.0015, 0.0238, 0.1562, 0.3821, 0.0456, 0.1234, 0.7234];
+
+    const colors = betas.map((b, i) => pvalues[i] < 0.05 ? '#50FA7B' : '#FF6B6B');
+
+    if (betaChart) betaChart.destroy();
+
+    const ctx = document.getElementById('betaChart').getContext('2d');
+    betaChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: categories,
+            datasets: [{
+                label: 'Beta Weight (Effect Size)',
+                data: betas,
+                backgroundColor: colors,
+                borderColor: colors,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: 'x',
+            plugins: {
+                legend: { labels: { color: '#ffd7f0' } }
+            },
+            scales: {
+                x: { ticks: { color: '#8be9fd' }, grid: { color: '#3a3640' } },
+                y: { title: { display: true, text: 'Beta Weight (Effect Size)', color: '#8be9fd' }, ticks: { color: '#8be9fd' }, grid: { color: '#3a3640' } }
+            }
+        }
+    });
+}
+
+function showContrast(contrast) {
+    const info = document.getElementById('contrastInfo');
+    const contrasts = {
+        'FacesVsHouses': {
+            name: 'Faces > Houses',
+            desc: 'Shows voxels with stronger response to face stimuli compared to house stimuli. Typically found in the fusiform face area (FFA).'
+        },
+        'FacesVsObjects': {
+            name: 'Faces > All Other Objects',
+            desc: 'Highlights face-selective regions. The ventral temporal cortex shows distributed but overlapping representations of different object categories.'
+        },
+        'AllVsRest': {
+            name: 'All Stimuli > Rest/Baseline',
+            desc: 'Shows all voxels that respond to visual stimulation. Generally includes visual cortex, ventral temporal regions, and other visual processing areas.'
+        }
+    };
+
+    const c = contrasts[contrast];
+    info.innerHTML = `<strong style="color: #4ECDC4;">${c.name}</strong><br><br>${c.desc}<br><br>
+        <strong>Result:</strong> Significant voxels shown in hot color (red/yellow); non-significant voxels not displayed.`;
+}
+
+window.onload = () => {
+    generateDesignMatrix();
+    generateVoxelChart();
+    generateBetaChart();
+};
+</script>
+
+</body>
+</html>
