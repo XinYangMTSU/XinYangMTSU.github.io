@@ -1,0 +1,476 @@
+import React, { useState } from 'react';
+import { Brain, Upload, Play, Download, BarChart3, Zap } from 'lucide-react';
+import * as tf from 'tensorflow';
+
+export default function fMRIPipeline() {
+  const [step, setStep] = useState(0);
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const [results, setResults] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [viewAngle, setViewAngle] = useState('axial');
+  const [sliceIndex, setSliceIndex] = useState(50);
+  const [plotData, setPlotData] = useState(null);
+  const [connMatrix, setConnMatrix] = useState(null);
+  const [svmResults, setSvmResults] = useState(null);
+
+  // Simulated dataset loader
+  const loadDataset = async () => {
+    setLoading(true);
+    // Simulate downloading quality-controlled fMRI data
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setDataLoaded(true);
+    setResults({ 
+      subjects: 100, 
+      autism: 52, 
+      control: 48,
+      message: "Quality-controlled ABIDE dataset loaded successfully!"
+    });
+    setLoading(false);
+  };
+
+  // Generate 3D brain visualization
+  const generateBrainSlice = () => {
+    // Simulate fMRI data (128x128x64 volume)
+    const canvas = document.getElementById('brainCanvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = 300;
+    canvas.height = 300;
+    
+    // Simulate brain slices with different angles
+    const gradient = ctx.createLinearGradient(0, 0, 300, 300);
+    gradient.addColorStop(0, '#1a1a2e');
+    gradient.addColorStop(0.5, '#16213e');
+    gradient.addColorStop(1, '#0f3460');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 300, 300);
+
+    // Draw brain outline based on angle
+    ctx.strokeStyle = '#00d4ff';
+    ctx.lineWidth = 2;
+    ctx.fillStyle = 'rgba(0, 212, 255, 0.1)';
+
+    if (viewAngle === 'axial') {
+      ctx.beginPath();
+      ctx.ellipse(150, 150, 100 + sliceIndex/2, 90 + sliceIndex/2, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.fill();
+    } else if (viewAngle === 'sagittal') {
+      ctx.beginPath();
+      ctx.ellipse(150, 150, 80, 110 + sliceIndex/2, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.fill();
+    } else {
+      ctx.beginPath();
+      ctx.ellipse(150, 150, 85 + sliceIndex/3, 110, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.fill();
+    }
+
+    // Add slice number
+    ctx.fillStyle = '#00d4ff';
+    ctx.font = '14px Arial';
+    ctx.fillText(`${viewAngle.toUpperCase()} - Slice ${sliceIndex}`, 10, 280);
+  };
+
+  // Generate time series plot
+  const generateTimeSeries = () => {
+    const canvas = document.getElementById('timeSeriesCanvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    canvas.width = 400;
+    canvas.height = 250;
+
+    ctx.fillStyle = '#1a1a2e';
+    ctx.fillRect(0, 0, 400, 250);
+
+    // Generate random but smooth time series
+    const points = [];
+    let value = 50;
+    for (let i = 0; i < 200; i++) {
+      value += (Math.random() - 0.5) * 10;
+      value = Math.max(20, Math.min(80, value));
+      points.push(value);
+    }
+
+    // Draw axes
+    ctx.strokeStyle = '#444';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(40, 20);
+    ctx.lineTo(40, 230);
+    ctx.lineTo(390, 230);
+    ctx.stroke();
+
+    // Draw time series
+    ctx.strokeStyle = '#00ff88';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    points.forEach((p, i) => {
+      const x = 40 + (i / points.length) * 350;
+      const y = 230 - (p / 100) * 200;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+
+    // Labels
+    ctx.fillStyle = '#888';
+    ctx.font = '12px Arial';
+    ctx.fillText('Time (seconds)', 180, 245);
+    ctx.fillText('BOLD Signal', 15, 120);
+
+    setPlotData({ points, timestamp: new Date().toLocaleTimeString() });
+  };
+
+  // Visualize CC400 ROIs on brain
+  const visualizeROIs = () => {
+    const canvas = document.getElementById('roiCanvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    canvas.width = 300;
+    canvas.height = 300;
+
+    // Background
+    const gradient = ctx.createRadialGradient(150, 150, 50, 150, 150, 150);
+    gradient.addColorStop(0, '#2a2a3e');
+    gradient.addColorStop(1, '#1a1a2e');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 300, 300);
+
+    // Draw brain outline
+    ctx.strokeStyle = '#666';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(150, 150, 90, 100, 0, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Draw CC400 ROIs as colored dots
+    const numRois = 400;
+    ctx.fillStyle = '#00ff88';
+    for (let i = 0; i < 30; i++) { // Sample visualization
+      const angle = (i / 30) * Math.PI * 2;
+      const radius = 50 + (i % 3) * 20;
+      const x = 150 + Math.cos(angle) * radius;
+      const y = 150 + Math.sin(angle) * radius;
+      ctx.beginPath();
+      ctx.arc(x, y, 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.fillStyle = '#00d4ff';
+    ctx.font = '12px Arial';
+    ctx.fillText('CC400 ROIs (sampled)', 80, 280);
+  };
+
+  // Calculate connectivity matrix
+  const calculateConnectivity = () => {
+    setLoading(true);
+    setTimeout(() => {
+      const canvas = document.getElementById('connCanvas');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      canvas.width = 300;
+      canvas.height = 300;
+
+      // Generate correlation matrix
+      const size = 40; // Visualize 40x40 subset
+      const cellSize = 7;
+
+      for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+          // Upper triangle only
+          if (j >= i) {
+            const correlation = Math.random() * 0.6 + 0.2;
+            const hue = correlation > 0.5 ? 0 : 240;
+            const saturation = Math.abs(correlation - 0.5) * 200;
+            ctx.fillStyle = `hsl(${hue}, 100%, ${50 - correlation * 30}%)`;
+            ctx.fillRect(i * cellSize, j * cellSize, cellSize, cellSize);
+          }
+        }
+      }
+
+      // Add labels
+      ctx.fillStyle = '#00d4ff';
+      ctx.font = '10px Arial';
+      ctx.fillText('Functional Connectivity', 50, 295);
+
+      setConnMatrix({ 
+        size: 400, 
+        upperTriangleElements: (400 * 399) / 2,
+        previewSize: size
+      });
+      setLoading(false);
+    }, 1000);
+  };
+
+  // Train SVM classifier
+  const trainSVM = async () => {
+    setLoading(true);
+    // Simulate training
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    // Simulated results
+    const results = {
+      accuracy: 0.782,
+      sensitivity: 0.756,
+      specificity: 0.805,
+      f1Score: 0.768,
+      cvScores: [0.75, 0.78, 0.80, 0.76, 0.81],
+      confusionMatrix: [[40, 8], [13, 39]]
+    };
+
+    setSvmResults(results);
+    setLoading(false);
+  };
+
+  const steps = [
+    { id: 0, title: 'Load Dataset', icon: Upload },
+    { id: 1, title: 'View Brain Slices', icon: Brain },
+    { id: 2, title: 'Time Series', icon: Zap },
+    { id: 3, title: 'CC400 ROIs', icon: Brain },
+    { id: 4, title: 'Connectivity', icon: BarChart3 },
+    { id: 5, title: 'Train SVM', icon: Play }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-cyan-400 mb-2">fMRI Autism Analysis Pipeline</h1>
+          <p className="text-slate-400">Interactive walkthrough from data loading to ML classification</p>
+        </div>
+
+        {/* Step Progress */}
+        <div className="mb-12 bg-slate-800 rounded-lg p-6">
+          <div className="flex justify-between items-center">
+            {steps.map((s, idx) => (
+              <div key={s.id} className="flex flex-col items-center">
+                <button
+                  onClick={() => setStep(s.id)}
+                  className={`w-12 h-12 rounded-full flex items-center justify-center mb-2 transition-all ${
+                    step === s.id ? 'bg-cyan-500 scale-110' : step > s.id ? 'bg-green-500' : 'bg-slate-700'
+                  }`}
+                >
+                  <s.icon size={20} className="text-white" />
+                </button>
+                <span className="text-xs text-slate-400 text-center">{s.title}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Visualization Panel */}
+          <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
+            <h2 className="text-lg font-semibold text-cyan-400 mb-4">Visualization</h2>
+
+            {step === 0 && (
+              <div className="text-center space-y-4">
+                <p className="text-slate-400">Load quality-controlled fMRI dataset</p>
+                <button
+                  onClick={loadDataset}
+                  disabled={loading}
+                  className="bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-600 text-white px-6 py-3 rounded-lg transition"
+                >
+                  {loading ? 'Loading...' : 'Load ABIDE Dataset'}
+                </button>
+                {dataLoaded && (
+                  <div className="bg-slate-700 p-4 rounded text-left text-sm text-slate-200">
+                    <p>✓ {results.message}</p>
+                    <p>Subjects: {results.subjects} (Autism: {results.autism}, Control: {results.control})</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {step === 1 && (
+              <div className="space-y-4">
+                <div className="flex gap-2">
+                  {['axial', 'sagittal', 'coronal'].map(angle => (
+                    <button
+                      key={angle}
+                      onClick={() => setViewAngle(angle)}
+                      className={`px-3 py-2 rounded text-sm ${
+                        viewAngle === angle ? 'bg-cyan-500 text-white' : 'bg-slate-700 text-slate-300'
+                      }`}
+                    >
+                      {angle}
+                    </button>
+                  ))}
+                </div>
+                <div>
+                  <label className="text-slate-400 text-sm">Slice: {sliceIndex}</label>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={sliceIndex}
+                    onChange={e => setSliceIndex(Number(e.target.value))}
+                    className="w-full"
+                  />
+                </div>
+                <canvas id="brainCanvas" className="w-full border border-slate-600 rounded" />
+                <button
+                  onClick={generateBrainSlice}
+                  className="w-full bg-cyan-500 hover:bg-cyan-600 text-white py-2 rounded transition"
+                >
+                  Render Slice
+                </button>
+              </div>
+            )}
+
+            {step === 2 && (
+              <div className="space-y-4">
+                <canvas id="timeSeriesCanvas" className="w-full border border-slate-600 rounded bg-slate-900" />
+                <button
+                  onClick={generateTimeSeries}
+                  className="w-full bg-cyan-500 hover:bg-cyan-600 text-white py-2 rounded transition"
+                >
+                  Extract Time Series
+                </button>
+                {plotData && <p className="text-xs text-slate-400">Generated at: {plotData.timestamp}</p>}
+              </div>
+            )}
+
+            {step === 3 && (
+              <div className="space-y-4">
+                <p className="text-slate-400 text-sm">Visualizing CC400 ROI parcellation on standard brain atlas</p>
+                <canvas id="roiCanvas" className="w-full border border-slate-600 rounded bg-slate-900" />
+                <button
+                  onClick={visualizeROIs}
+                  className="w-full bg-cyan-500 hover:bg-cyan-600 text-white py-2 rounded transition"
+                >
+                  Visualize CC400 ROIs
+                </button>
+              </div>
+            )}
+
+            {step === 4 && (
+              <div className="space-y-4">
+                <p className="text-slate-400 text-sm">Upper triangle of connectivity matrix (ROI × ROI correlations)</p>
+                <canvas id="connCanvas" className="w-full border border-slate-600 rounded bg-slate-900" />
+                <button
+                  onClick={calculateConnectivity}
+                  disabled={loading}
+                  className="w-full bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-600 text-white py-2 rounded transition"
+                >
+                  {loading ? 'Computing...' : 'Calculate Connectivity'}
+                </button>
+                {connMatrix && (
+                  <div className="bg-slate-700 p-3 rounded text-xs text-slate-300">
+                    <p>Matrix size: {connMatrix.size}×{connMatrix.size}</p>
+                    <p>Upper triangle elements: {connMatrix.upperTriangleElements}</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {step === 5 && (
+              <div className="space-y-4">
+                <p className="text-slate-400 text-sm">Train SVM classifier on connectivity features</p>
+                <button
+                  onClick={trainSVM}
+                  disabled={loading}
+                  className="w-full bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-600 text-white py-2 rounded transition"
+                >
+                  {loading ? 'Training SVM...' : 'Train SVM Classifier'}
+                </button>
+                {svmResults && (
+                  <div className="bg-slate-700 p-4 rounded text-sm space-y-2 text-slate-200">
+                    <p className="text-cyan-400 font-semibold">Results:</p>
+                    <p>Accuracy: {(svmResults.accuracy * 100).toFixed(2)}%</p>
+                    <p>Sensitivity: {(svmResults.sensitivity * 100).toFixed(2)}%</p>
+                    <p>Specificity: {(svmResults.specificity * 100).toFixed(2)}%</p>
+                    <p>F1 Score: {(svmResults.f1Score * 100).toFixed(2)}%</p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Info Panel */}
+          <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
+            <h2 className="text-lg font-semibold text-cyan-400 mb-4">Pipeline Information</h2>
+            <div className="space-y-4 text-sm text-slate-300">
+              {step === 0 && (
+                <>
+                  <h3 className="text-cyan-300 font-semibold">Step 1: Load Dataset</h3>
+                  <p>Load quality-controlled fMRI data from ABIDE (Autism Brain Imaging Data Exchange)</p>
+                  <p className="text-slate-400">• 539+ autism spectrum subjects</p>
+                  <p className="text-slate-400">• 573+ typically developing controls</p>
+                  <p className="text-slate-400">• Resting-state fMRI with CC400 ROI parcellation</p>
+                </>
+              )}
+              {step === 1 && (
+                <>
+                  <h3 className="text-cyan-300 font-semibold">Step 2: View Brain Slices</h3>
+                  <p>Visualize 3D fMRI volume from multiple angles:</p>
+                  <p className="text-slate-400">• Axial: horizontal slices</p>
+                  <p className="text-slate-400">• Sagittal: left-right slices</p>
+                  <p className="text-slate-400">• Coronal: front-back slices</p>
+                </>
+              )}
+              {step === 2 && (
+                <>
+                  <h3 className="text-cyan-300 font-semibold">Step 3: Time Series</h3>
+                  <p>Extract and visualize BOLD signal time series from individual voxels</p>
+                  <p className="text-slate-400">• Shows brain activity over time</p>
+                  <p className="text-slate-400">• Fluctuations reveal functional connectivity</p>
+                </>
+              )}
+              {step === 3 && (
+                <>
+                  <h3 className="text-cyan-300 font-semibold">Step 4: CC400 ROIs</h3>
+                  <p>Automated anatomical parcellation into 400 regions of interest</p>
+                  <p className="text-slate-400">• Standard brain atlas normalization</p>
+                  <p className="text-slate-400">• Reduces dimensionality for analysis</p>
+                </>
+              )}
+              {step === 4 && (
+                <>
+                  <h3 className="text-cyan-300 font-semibold">Step 5: Functional Connectivity</h3>
+                  <p>Compute correlation matrix between all ROI pairs</p>
+                  <p className="text-slate-400">• Extract upper triangle (79,800 features)</p>
+                  <p className="text-slate-400">• Represents brain network organization</p>
+                </>
+              )}
+              {step === 5 && (
+                <>
+                  <h3 className="text-cyan-300 font-semibold">Step 6: SVM Classification</h3>
+                  <p>Train support vector machine on connectivity features</p>
+                  <p className="text-slate-400">• 5-fold cross-validation</p>
+                  <p className="text-slate-400">• Performance metrics: Accuracy, Sensitivity, Specificity, F1</p>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <div className="flex justify-between mt-8">
+          <button
+            onClick={() => setStep(Math.max(0, step - 1))}
+            disabled={step === 0}
+            className="bg-slate-700 hover:bg-slate-600 disabled:bg-slate-800 disabled:text-slate-600 text-white px-4 py-2 rounded transition"
+          >
+            Previous
+          </button>
+          <button
+            onClick={() => setStep(Math.min(5, step + 1))}
+            disabled={step === 5}
+            className="bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-800 disabled:text-slate-600 text-white px-4 py-2 rounded transition"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
