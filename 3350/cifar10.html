@@ -38,8 +38,22 @@
     .subtitle {
       text-align: center;
       color: #ffb3de;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       font-size: 1.1em;
+    }
+
+    .cifar-intro {
+      background: #19121a;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 25px;
+      line-height: 1.7;
+      font-size: 0.9em;
+      border-left: 4px solid #50fa7b;
+    }
+
+    .cifar-intro strong {
+      color: #fff52e;
     }
 
     .controls {
@@ -222,6 +236,18 @@
     32×32 color images (3 channels) &mdash; 10 object classes (airplane, car, bird, cat, deer, dog, frog, horse, ship, truck)
   </p>
 
+  <!-- NEW: short introduction block -->
+  <div class="cifar-intro">
+    <strong>What is CIFAR-10?</strong><br>
+    CIFAR-10 is a classic benchmark dataset in computer vision. It contains
+    <strong>60,000 small color images</strong> (32×32 pixels with 3 RGB channels)
+    divided into <strong>10 everyday object categories</strong> such as airplanes,
+    cars, cats, and dogs. The goal is to train a model that takes one image and
+    predicts which of the 10 classes it belongs to. In this page, we flatten each
+    image into a 3,072-dimensional input vector and feed it into a fully connected
+    (MLP) network as a simple baseline before using CNNs.
+  </div>
+
   <div class="controls">
     <div class="control-group">
       <label>Input Features</label>
@@ -284,11 +310,12 @@
     </div>
 
     <div class="dataset-info">
-      <strong>CIFAR-10 Dataset:</strong><br>
+      <strong>CIFAR-10 Dataset Summary:</strong><br>
       • 60,000 color images at 32×32 resolution (50,000 train / 10,000 test).<br>
       • 3 channels per pixel (R, G, B) ⇒ 32 × 32 × 3 = 3,072 numbers per image.<br>
       • 10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.<br>
-      • This page visualizes a simple <strong>MLP baseline</strong> (flatten + fully connected layers). In practice, <strong>CNNs</strong> (like the one in your PyTorch demo) work much better on CIFAR-10.
+      • This page visualizes a simple <strong>MLP baseline</strong> (flatten + fully connected layers). In practice,
+        <strong>CNNs</strong> (like the one in your PyTorch demo) usually achieve much higher accuracy on CIFAR-10.
     </div>
   </div>
 </div>
@@ -314,7 +341,7 @@ function drawNetwork(inputSize, hidden1, hidden2, outputSize) {
 
   const layers = [inputSize, hidden1, hidden2, outputSize];
 
-  // We cap the number of visible neurons for drawing so CIFAR-10 (3072 inputs) is not insane to render
+  // Cap visible neurons so we don't render thousands
   const maxVisibleNeurons = 20;
   const visibleCounts = layers.map(count => Math.min(count, maxVisibleNeurons));
   const maxVisible = Math.max(...visibleCounts);
@@ -348,7 +375,7 @@ function drawNetwork(inputSize, hidden1, hidden2, outputSize) {
     }
   }
 
-  // Draw layer labels
+  // Layer labels + neuron counts
   const layerLabels = [
     `Input (flattened image)`,
     'Hidden Layer 1',
@@ -366,7 +393,6 @@ function drawNetwork(inputSize, hidden1, hidden2, outputSize) {
     text.textContent = label;
     svg.appendChild(text);
 
-    // Also show actual neuron count below
     const countText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
     countText.setAttribute('x', layerX[i]);
     countText.setAttribute('y', 45);
@@ -377,7 +403,7 @@ function drawNetwork(inputSize, hidden1, hidden2, outputSize) {
     svg.appendChild(countText);
   });
 
-  // Draw neurons (only visible subset)
+  // Draw neurons (visible subset)
   const colors = ['#ff79c6', '#ffb3de', '#ffb3de', '#fff52e'];
   layers.forEach((count, l) => {
     const visible = visibleCounts[l];
@@ -400,7 +426,7 @@ function drawNetwork(inputSize, hidden1, hidden2, outputSize) {
       svg.appendChild(circle);
     }
 
-    // If we are not drawing all neurons, add "..." indicator
+    // "..." indicator if not all neurons are drawn
     if (count > visible) {
       const dotsText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       dotsText.setAttribute('x', layerX[l]);
@@ -413,7 +439,7 @@ function drawNetwork(inputSize, hidden1, hidden2, outputSize) {
     }
   });
 
-  // Draw bias nodes (one per layer)
+  // Bias nodes
   const biasY = h - 40;
   layerX.forEach((x, i) => {
     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -435,7 +461,6 @@ function drawNetwork(inputSize, hidden1, hidden2, outputSize) {
     label.textContent = 'b';
     svg.appendChild(label);
 
-    // Dashed line from bias to layer
     const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     line.setAttribute('x1', x);
     line.setAttribute('y1', biasY - 8);
