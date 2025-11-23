@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CIFAR-10 CNN Architecture Visualizer – Case 1: ImageFolder</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1d1f 0%, #2a1e28 100%);
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #ffb3de;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      background: #222025;
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 4px 30px rgba(255, 121, 198, 0.15);
+      border-left: 7px solid #ff79c6;
+    }
+
+    h1 {
+      color: #ff79c6;
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 2.2em;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #ffb3de;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+
+    .cifar-intro {
+      background: #19121a;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 25px;
+      line-height: 1.7;
+      font-size: 0.95em;
+      border-left: 4px solid #50fa7b;
+    }
+
+    .cifar-intro strong {
+      color: #fff52e;
+    }
+
+    .controls {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 220px;
+    }
+
+    .control-group label {
+      color: #ff79c6;
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+
+    .control-group span {
+      font-size: 0.9em;
+      color: #ffb3de;
+      line-height: 1.5;
+    }
+
+    .network-container {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      overflow-x: auto;
+    }
+
+    .legend {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 10px;
+    }
+
+    .legend h3 {
+      color: #ff79c6;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ff79c6;
+      padding-bottom: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin: 10px 0;
+      color: #ffb3de;
+      font-size: 0.95em;
+    }
+
+    .legend-number {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid #ff79c6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #fff52e;
+      flex-shrink: 0;
+    }
+
+    .dataset-info {
+      margin-top: 20px;
+      background: #19121a;
+      border-radius: 8px;
+      padding: 15px;
+      line-height: 1.6;
+      font-size: 0.9em;
+      border-left: 4px solid #ff79c6;
+    }
+
+    .dataset-info strong {
+      color: #fff52e;
+    }
+
+    pre {
+      background: #19121a;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 0.85em;
+      overflow-x: auto;
+      margin-top: 8px;
+      border-left: 3px solid #50fa7b;
+      line-height: 1.5;
+      color: #f8f8f2;
+    }
+
+    code {
+      font-family: "Fira Code", "Courier New", monospace;
+    }
+
+    @media (max-width: 768px) {
+      .controls {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🧠 Case 1: Using Image Folders with a CNN (PyTorch)</h1>
+  <p class="subtitle">
+    Organize your own images into class folders → load with <code>ImageFolder</code> → send batches into a CNN model.
+  </p>
+
+  <!-- Intro: What Case 1 is -->
+  <div class="cifar-intro">
+    <strong>Case 1: Class Folders → ImageFolder</strong><br>
+    In this case, each class has its own folder, for example:
+    <br><br>
+    <code>
+      my_data/ <br>
+      &nbsp;&nbsp;cats/ &nbsp;&nbsp;&nbsp;img001.jpg, img002.jpg, ...<br>
+      &nbsp;&nbsp;dogs/ &nbsp;&nbsp;&nbsp;dog1.png, dog2.png, ...<br>
+      &nbsp;&nbsp;horses/ &nbsp; horse1.jpg, ...
+    </code>
+    <br><br>
+    PyTorch’s <strong><code>ImageFolder</code></strong> can automatically assign labels based on the folder names and create a dataset that you can send into a CNN model (like your CIFAR-10 CNN, AlexNet, VGG, or ResNet).
+  </div>
+
+  <!-- High-level steps summary -->
+  <div class="controls">
+    <div class="control-group">
+      <label>Step 1 – Prepare Folder Structure</label>
+      <span>
+        Put your images into a main folder (e.g., <code>my_data/</code>), with one subfolder per class:
+        <br><code>my_data/cat</code>, <code>my_data/dog</code>, <code>my_data/bird</code>, etc.
+      </span>
+    </div>
+    <div class="control-group">
+      <label>Step 2 – Define Transforms</label>
+      <span>
+        Resize images to match your CNN input size (e.g., 32×32 for SimpleCNN or 224×224 for AlexNet/VGG/ResNet), then convert to tensor and normalize.
+      </span>
+    </div>
+    <div class="control-group">
+      <label>Step 3 – Use <code>datasets.ImageFolder</code></label>
+      <span>
+        Create a dataset from your folder and wrap it in a <code>DataLoader</code> so you get mini-batches during training.
+      </span>
+    </div>
+    <div class="control-group">
+      <label>Step 4 – Send Batches into the CNN</label>
+      <span>
+        In your training loop, the <code>DataLoader</code> yields <code>(images, labels)</code>. Move them to <code>device</code> and feed them into your model.
+      </span>
+    </div>
+  </div>
+
+  <!-- Detailed steps with code -->
+  <div class="network-container">
+    <h2 style="color:#ff79c6; margin-bottom:15px; font-size:1.4em;">Detailed PyTorch Steps</h2>
+
+    <div class="legend">
+      <h3>Step-by-Step Guide (Case 1: Class Folders)</h3>
+
+      <!-- Step 1 -->
+      <div class="legend-item">
+        <div class="legend-number">1</div>
+        <div>
+          <strong>Organize your image folders</strong><br>
+          Put images in a folder structure like this:
+          <pre><code>my_data/
+  cat/
+    img001.jpg
+    img002.jpg
+  dog/
+    dog001.png
+    dog002.png
+  horse/
+    horse1.jpeg
+    horse2.jpeg</code></pre>
+          Each subfolder name (e.g., <code>cat</code>, <code>dog</code>, <code>horse</code>) will be treated as a class label.
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="legend-item">
+        <div class="legend-number">2</div>
+        <div>
+          <strong>Define image transforms</strong><br>
+          Choose the input size that matches your model:
+          <ul style="margin-left:18px; margin-top:4px; font-size:0.9em;">
+            <li>SimpleCNN / CIFAR-style CNN: <code>32×32</code></li>
+            <li>AlexNet / VGG / ResNet: <code>224×224</code></li>
+          </ul>
+          Example (for a 224×224 ResNet-style model):
+          <pre><code>from torchvision import transforms
+
+transform = transforms.Compose([
+    transforms.Resize((224, 224)),    # or (32, 32) for CIFAR-style
+    transforms.ToTensor(),
+    transforms.Normalize(
+        (0.4914, 0.4822, 0.4465),     # mean (example: CIFAR-10)
+        (0.2470, 0.2435, 0.2616)      # std
+    )
+])</code></pre>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="legend-item">
+        <div class="legend-number">3</div>
+        <div>
+          <strong>Create dataset & DataLoader with <code>ImageFolder</code></strong><br>
+          <pre><code>from torchvision import datasets
+from torch.utils.data import DataLoader
+
+data_dir = "my_data"  # path to your main folder
+
+dataset = datasets.ImageFolder(
+    root=data_dir,
+    transform=transform
+)
+
+train_loader = DataLoader(
+    dataset,
+    batch_size=32,
+    shuffle=True,
+    num_workers=2
+)
+
+print("Classes:", dataset.classes)
+# e.g. ['cat', 'dog', 'horse']</code></pre>
+          PyTorch automatically:
+          <ul style="margin-left:18px; margin-top:4px; font-size:0.9em;">
+            <li>Reads all images in subfolders</li>
+            <li>Assigns label 0, 1, 2, … in alphabetical order of folder names</li>
+            <li>Applies the transform to each image</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="legend-item">
+        <div class="legend-number">4</div>
+        <div>
+          <strong>Send batches into your CNN training loop</strong><br>
+          Here is a minimal training loop using any CNN model (e.g., your <code>SimpleCNN</code>, ResNet18, etc.):
+          <pre><code>import torch
+import torch.nn as nn
+import torch.optim as optim
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = MyCNNModel(num_classes=len(dataset.classes)).to(device)
+
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.Adam(model.parameters(), lr=1e-3)
+
+for epoch in range(5):
+    model.train()
+    running_loss = 0.0
+    correct = 0
+    total = 0
+
+    for images, labels in train_loader:
+        images = images.to(device)
+        labels = labels.to(device)
+
+        optimizer.zero_grad()
+        outputs = model(images)        # forward pass
+        loss = criterion(outputs, labels)
+        loss.backward()               # backprop
+        optimizer.step()
+
+        running_loss += loss.item() * images.size(0)
+        _, preds = outputs.max(1)
+        correct += preds.eq(labels).sum().item()
+        total += labels.size(0)
+
+    epoch_loss = running_loss / total
+    epoch_acc = correct / total
+    print(f"Epoch {epoch+1}: loss={epoch_loss:.4f}, acc={epoch_acc*100:.2f}%")</code></pre>
+          The key idea: <code>ImageFolder</code> gives you <code>(images, labels)</code> just like CIFAR-10 does, so you can reuse exactly the same CNN training code.
+        </div>
+      </div>
+    </div>
+
+    <div class="dataset-info">
+      <strong>Summary for Students:</strong><br>
+      • Put images into class folders under a main directory.<br>
+      • Use <code>transforms</code> to resize, tensor-ize, and normalize images.<br>
+      • Use <code>datasets.ImageFolder</code> to build a labeled dataset from folders.<br>
+      • Wrap it in a <code>DataLoader</code> to get mini-batches.<br>
+      • Feed each <code>(images, labels)</code> batch into your CNN training loop (just like CIFAR-10).
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
