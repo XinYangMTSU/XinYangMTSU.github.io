@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CIFAR-10 Dataset & MLP Architecture Visualizer</title>
+  <title>CIFAR-10 Dataset & CNN Architecture Visualizer</title>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
     * {
       margin: 0;
@@ -56,6 +57,7 @@
       color: #fff52e;
     }
 
+    /* CNN controls (simple info bar) */
     .controls {
       background: #2a1e28;
       border: 2px solid #ff79c6;
@@ -63,15 +65,16 @@
       padding: 25px;
       margin-bottom: 30px;
       display: flex;
-      gap: 15px;
+      gap: 25px;
       flex-wrap: wrap;
-      align-items: flex-end;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .control-group {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
 
     .control-group label {
@@ -80,25 +83,9 @@
       font-size: 0.95em;
     }
 
-    .control-group input {
-      padding: 10px 12px;
-      background: #19121a;
-      border: 2px solid #ff79c6;
+    .control-group span {
+      font-size: 0.9em;
       color: #ffb3de;
-      border-radius: 8px;
-      font-size: 0.95em;
-      width: 140px;
-    }
-
-    .control-group input:focus {
-      outline: none;
-      border-color: #50fa7b;
-      box-shadow: 0 0 10px rgba(80, 250, 123, 0.3);
-    }
-
-    .control-group small {
-      font-size: 0.75em;
-      color: #aaa;
     }
 
     button {
@@ -118,22 +105,78 @@
       box-shadow: 0 6px 20px rgba(255, 121, 198, 0.4);
     }
 
-    .network-container {
+    /* CNN pipeline styles */
+    .pipeline-container {
       background: #2a1e28;
       border: 2px solid #ff79c6;
       border-radius: 12px;
       padding: 30px;
       margin-bottom: 30px;
-      overflow-x: auto;
     }
 
-    svg {
-      display: block;
-      margin: 0 auto;
+    .pipeline {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      align-items: stretch;
+      justify-content: space-between;
+    }
+
+    .stage {
       background: #19121a;
+      border: 2px solid #50fa7b;
       border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(255, 121, 198, 0.11);
-      min-width: 100%;
+      padding: 20px;
+      flex: 1;
+      min-width: 280px;
+      text-align: center;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .stage h3 {
+      color: #ff79c6;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+
+    .stage-op {
+      font-size: 0.85em;
+      color: #fff52e;
+      margin-bottom: 8px;
+      font-family: "Courier New", monospace;
+    }
+
+    .stage-info {
+      color: #ffb3de;
+      font-size: 0.9em;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .visualization {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px 0;
+      min-height: 200px;
+      background: #2a1e28;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    canvas {
+      border: 2px solid #ff79c6;
+      border-radius: 8px;
+    }
+
+    .arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      color: #50fa7b;
+      font-size: 1.5em;
+      font-weight: bold;
     }
 
     .legend {
@@ -166,51 +209,36 @@
       flex-shrink: 0;
     }
 
-    .color-input { background: #ff79c6; }
-    .color-hidden { background: #ffb3de; }
+    .color-rgb { background: linear-gradient(135deg, #ff0000, #00ff00, #0000ff); }
+    .color-conv { background: #50fa7b; }
+    .color-pool { background: #ffb3de; }
     .color-output { background: #fff52e; }
-    .color-weight { background: #50fa7b; }
-    .color-bias { background: #888888; }
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-
-    .stat-card {
-      background: #19121a;
-      border-left: 4px solid #50fa7b;
-      padding: 20px;
-      border-radius: 8px;
-    }
-
-    .stat-label {
-      color: #ffb3de;
-      font-size: 0.9em;
-      margin-bottom: 10px;
-    }
-
-    .stat-value {
-      color: #fff52e;
-      font-size: 1.8em;
-      font-weight: bold;
-      font-family: 'Courier New', monospace;
-    }
-
-    @media (max-width: 768px) {
-      .controls {
+    @media (max-width: 1200px) {
+      .pipeline {
         flex-direction: column;
       }
 
-      .control-group input {
-        width: 100%;
+      .arrow {
+        transform: rotate(90deg);
       }
+    }
 
-      button {
-        width: 100%;
-      }
+    .param-info {
+      background: #19121a;
+      border-left: 4px solid #fff52e;
+      padding: 15px;
+      border-radius: 8px;
+      color: #fff52e;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85em;
+      margin-top: 10px;
+    }
+
+    .credit {
+      margin-top: 10px;
+      font-size: 0.75em;
+      color: #aaa;
     }
 
     .dataset-info {
@@ -226,87 +254,100 @@
     .dataset-info strong {
       color: #fff52e;
     }
+
+    /* Conv demo panel */
+    #conv-demo {
+      background:#19121a;
+      border:2px solid #ff79c6;
+      padding:20px;
+      border-radius:12px;
+      color:#ffb3de;
+      font-family:'Courier New', monospace;
+      margin-top:20px;
+      line-height:1.6;
+    }
+
+    @media (max-width: 768px) {
+      .controls {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>🧠 CIFAR-10 Dataset & MLP Architecture</h1>
+  <h1>🧠 CIFAR-10 Dataset & CNN Architecture</h1>
   <p class="subtitle">
-    32×32 color images (3 channels) &mdash; 10 object classes (airplane, car, bird, cat, deer, dog, frog, horse, ship, truck)
+    32×32 RGB images (3 channels) → Convolution + Pooling → Fully Connected → 10 CIFAR-10 Classes
   </p>
 
-  <!-- NEW: short introduction block -->
+  <!-- CIFAR-10 introduction -->
   <div class="cifar-intro">
     <strong>What is CIFAR-10?</strong><br>
     CIFAR-10 is a classic benchmark dataset in computer vision. It contains
     <strong>60,000 small color images</strong> (32×32 pixels with 3 RGB channels)
-    divided into <strong>10 everyday object categories</strong> such as airplanes,
-    cars, cats, and dogs. The goal is to train a model that takes one image and
-    predicts which of the 10 classes it belongs to. In this page, we flatten each
-    image into a 3,072-dimensional input vector and feed it into a fully connected
-    (MLP) network as a simple baseline before using CNNs.
+    divided into <strong>10 everyday object categories</strong> such as airplane,
+    automobile, bird, cat, deer, dog, frog, horse, ship, and truck.
+    In your PyTorch demo, you train a <strong>CNN model</strong> that takes a 32×32×3 image
+    and predicts which of these 10 classes it belongs to.
   </div>
 
   <div class="controls">
     <div class="control-group">
-      <label>Input Features</label>
-      <input type="number" id="inputSize" value="3072" disabled>
-      <small>32 × 32 × 3 = 3,072 pixels</small>
+      <label>CNN Input (for CIFAR-10)</label>
+      <span>32 × 32 × 3 RGB image from CIFAR-10.</span>
+      <span>Same shape as the dog image used below for visualization.</span>
     </div>
     <div class="control-group">
-      <label>Hidden Layer 1 (FC)</label>
-      <input type="number" id="hidden1" value="512" min="32" max="2048" step="32">
-      <small>e.g., 512 neurons</small>
+      <label>CNN Architecture (PyTorch Demo)</label>
+      <span>Conv1 (5×5, 16 filters) → ReLU → MaxPool (2×2)</span>
+      <span>Conv2 (5×5, 32 filters) → ReLU → MaxPool (2×2)</span>
+      <span>Flatten → Fully Connected → Softmax (10 classes)</span>
     </div>
     <div class="control-group">
-      <label>Hidden Layer 2 (FC)</label>
-      <input type="number" id="hidden2" value="256" min="32" max="2048" step="32">
-      <small>Optional deeper layer</small>
+      <label>Big Picture</label>
+      <span>This page explains <strong>how your PyTorch CNN processes CIFAR-10 images</strong>,</span>
+      <span>and shows the same filter/patch idea using a real 32×32 RGB dog photo.</span>
     </div>
-    <div class="control-group">
-      <label>Output Classes</label>
-      <input type="number" id="outputSize" value="10" disabled>
-      <small>10 CIFAR-10 classes</small>
-    </div>
-    <button onclick="updateNetwork()">Update Network</button>
   </div>
 
-  <div class="network-container">
-    <svg id="networkSVG" width="1200" height="500" viewBox="0 0 1200 500"></svg>
+  <!-- CNN pipeline (adapted for CIFAR-10) -->
+  <div class="pipeline-container">
+    <div class="pipeline" id="pipeline"></div>
   </div>
-
-  <div class="stats" id="stats"></div>
 
   <div class="legend">
-    <h3>📊 Network Components & Legend (CIFAR-10 MLP Baseline)</h3>
+    <h3>📊 CNN Components & Process (CIFAR-10-style CNN)</h3>
     <div class="legend-item">
-      <div class="legend-color color-input"></div>
-      <span><strong>Pink circles:</strong> Input layer (flattened 32×32×3 = 3,072 features)</span>
+      <div class="legend-color color-rgb"></div>
+      <span><strong>Input Image:</strong> 32×32 RGB (3 channels), here visualized with a real dog photo (same size as CIFAR-10 images).</span>
     </div>
     <div class="legend-item">
-      <div class="legend-color color-hidden"></div>
-      <span><strong>Light pink circles:</strong> Hidden fully-connected layers (learn intermediate features)</span>
+      <div class="legend-color color-conv"></div>
+      <span><strong>Convolution + ReLU:</strong> Filters slide over the image to detect patterns (edges, textures, shapes); ReLU keeps only positive activations.</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-pool"></div>
+      <span><strong>Pooling + ReLU:</strong> Max pooling shrinks the feature maps while keeping the strongest activations and making the model more robust.</span>
     </div>
     <div class="legend-item">
       <div class="legend-color color-output"></div>
-      <span><strong>Yellow circles:</strong> Output layer (10 logits → probabilities for CIFAR-10 classes)</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-color color-weight"></div>
-      <span><strong>Green lines:</strong> Weights (W) – connections between neurons</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-color color-bias"></div>
-      <span><strong>Gray circles:</strong> Bias nodes (b) – learned offsets for each layer</span>
+      <span><strong>Output + Softmax:</strong> Flattened features go into fully connected layers; softmax turns scores into probabilities over the 10 CIFAR-10 classes.</span>
     </div>
 
-    <h4 style="color: #ff79c6; margin-top: 25px; margin-bottom: 15px;">Layer Formulas (Flatten + MLP for CIFAR-10)</h4>
-    <div style="background: #19121a; padding: 15px; border-radius: 8px; color: #fff52e; font-family: 'Courier New', monospace; line-height: 1.8;">
-      <strong>Input Flatten:</strong> x ∈ ℝ<sup>3072</sup> &nbsp; (32×32×3 pixels → 1D vector)<br>
-      <strong>Hidden Layer 1:</strong> a⁽¹⁾ = ReLU(W⁽¹⁾x + b⁽¹⁾)<br>
-      <strong>Hidden Layer 2:</strong> a⁽²⁾ = ReLU(W⁽²⁾a⁽¹⁾ + b⁽²⁾)<br>
-      <strong>Output Layer:</strong> ŷ = softmax(W⁽³⁾a⁽²⁾ + b⁽³⁾) ∈ ℝ<sup>10</sup>
+    <h4 style="color: #ff79c6; margin-top: 25px; margin-bottom: 15px;">Conceptual Flow (Matches Your PyTorch CNN)</h4>
+    <div style="background: #19121a; padding: 15px; border-radius: 8px; color: #ffb3de; line-height: 1.8;">
+      <strong style="color: #50fa7b;">1. Input Layer:</strong> 32×32×3 RGB CIFAR-10 image.<br>
+      <strong style="color: #50fa7b;">2. Conv Layer 1 + ReLU:</strong> 16 filters (5×5) extract low-level edges and textures, then ReLU keeps positive responses.<br>
+      <strong style="color: #50fa7b;">3. Pool Layer 1 + ReLU:</strong> 2×2 max pooling downsamples to 14×14 while keeping the strongest activations.<br>
+      <strong style="color: #50fa7b;">4. Conv Layer 2 + ReLU:</strong> 32 filters (5×5) build more complex shapes (eyes, noses, wheels, etc.).<br>
+      <strong style="color: #50fa7b;">5. Pool Layer 2 + ReLU:</strong> Another 2×2 max pooling → compact 5×5 feature maps (5×5×32 = 800 features).<br>
+      <strong style="color: #50fa7b;">6. Output Layer + Softmax:</strong> Flattened features → fully connected layer(s) → softmax probabilities for 10 CIFAR-10 classes.
     </div>
 
     <div class="dataset-info">
@@ -314,217 +355,923 @@
       • 60,000 color images at 32×32 resolution (50,000 train / 10,000 test).<br>
       • 3 channels per pixel (R, G, B) ⇒ 32 × 32 × 3 = 3,072 numbers per image.<br>
       • 10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.<br>
-      • This page visualizes a simple <strong>MLP baseline</strong> (flatten + fully connected layers). In practice,
-        <strong>CNNs</strong> (like the one in your PyTorch demo) usually achieve much higher accuracy on CIFAR-10.
+      • This page visualizes the <strong>CNN model</strong> that you implement in PyTorch:
+        convolution + pooling layers, then fully connected layers for 10-way classification.
     </div>
   </div>
 </div>
 
-<script>
-function updateNetwork() {
-  const inputSize = 3072; // 32 * 32 * 3
-  const hidden1 = parseInt(document.getElementById('hidden1').value);
-  const hidden2 = parseInt(document.getElementById('hidden2').value);
-  const outputSize = 10;  // CIFAR-10
+<!-- Keep the interactive conv demo: 32×32×3 + 5×5×3 → 28×28×1 -->
+<div id="conv-demo">
+  <h3 style="color:#ff79c6; margin-bottom:10px;">
+    📌 Interactive: How 32×32×3 Becomes 28×28×1 for ONE Filter (CIFAR-10-style Input)
+  </h3>
 
-  drawNetwork(inputSize, hidden1, hidden2, outputSize);
-  updateStats(inputSize, hidden1, hidden2, outputSize);
+  <p style="font-family: 'Roboto', Arial, sans-serif; font-size: 0.9em; color:#ffb3de; margin-bottom:10px;">
+    Move the sliders to choose an output position <code>(y, x)</code>. On the left, we show a 32×32 RGB input
+    (scaled up) with the corresponding 5×5×3 patch highlighted. On the right, we show the 28×28 response map of
+    <strong>one</strong> 5×5×3 filter, with the selected output pixel highlighted.
+    Below, you can see the 5×5 patch from each channel (R, G, B) and the corresponding 5×5 filter weights,
+    and how they combine into a single scalar via multiply-and-sum (like one channel in your first CNN layer).
+  </p>
+
+  <!-- Big canvases: input & output -->
+  <div style="display:flex; flex-wrap:wrap; gap:40px; align-items:flex-start; justify-content:center; margin-top:15px;">
+    <!-- Left: Bigger Input Image -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+      <canvas id="conv-demo-input-canvas" width="300" height="300"
+              style="border:2px solid #ff79c6; border-radius:8px; background:#000;"></canvas>
+      <span style="font-size:0.85em;">32×32 RGB input (scaled up) with 5×5 patch highlighted</span>
+    </div>
+
+    <!-- Right: Bigger Feature Map -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+      <canvas id="conv-demo-output-canvas" width="280" height="280"
+              style="border:2px solid #ff79c6; border-radius:8px; background:#000;"></canvas>
+      <span style="font-size:0.85em;">28×28 conv response map of ONE 5×5×3 filter</span>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div style="margin-top:15px; display:flex; flex-wrap:wrap; gap:20px; align-items:center;">
+    <div>
+      <label for="conv-demo-y" style="color:#ff79c6;">Output row y (0–27): </label>
+      <input id="conv-demo-y" type="range" min="0" max="27" value="0" />
+      <span id="conv-demo-y-value">0</span>
+    </div>
+    <div>
+      <label for="conv-demo-x" style="color:#ff79c6;">Output col x (0–27): </label>
+      <input id="conv-demo-x" type="range" min="0" max="27" value="0" />
+      <span id="conv-demo-x-value">0</span>
+    </div>
+  </div>
+
+  <!-- Channel patches + filter patches -->
+  <div id="conv-demo-channels" style="margin-top:18px; font-size:0.8em;">
+    <div style="margin-bottom:6px; color:#ffb3de;">
+      For the selected output position, we use a <strong>5×5×3</strong> patch:
+      one <strong>5×5</strong> patch from each channel (R, G, B), and one <strong>5×5</strong> filter for each channel.
+    </div>
+
+    <!-- 5×5 patches from R, G, B channels -->
+    <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-bottom:10px;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <canvas id="conv-demo-patch-R" width="120" height="120"
+                style="border:1px solid #ff5555; border-radius:6px; background:#000;"></canvas>
+        <span>5×5 patch (R channel)</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <canvas id="conv-demo-patch-G" width="120" height="120"
+                style="border:1px solid #55ff55; border-radius:6px; background:#000;"></canvas>
+        <span>5×5 patch (G channel)</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <canvas id="conv-demo-patch-B" width="120" height="120"
+                style="border:1px solid #5555ff; border-radius:6px; background:#000;"></canvas>
+        <span>5×5 patch (B channel)</span>
+      </div>
+    </div>
+
+    <!-- 5×5 filter weights for R, G, B channels -->
+    <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <canvas id="conv-demo-filter-R" width="120" height="120"
+                style="border:1px solid #ff5555; border-radius:6px; background:#000;"></canvas>
+        <span>5×5 filter weights (R)</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <canvas id="conv-demo-filter-G" width="120" height="120"
+                style="border:1px solid #55ff55; border-radius:6px; background:#000;"></canvas>
+        <span>5×5 filter weights (G)</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <canvas id="conv-demo-filter-B" width="120" height="120"
+                style="border:1px solid #5555ff; border-radius:6px; background:#000;"></canvas>
+        <span>5×5 filter weights (B)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Numeric explanation of multiply + add -->
+  <div id="conv-demo-text" style="
+      margin-top:15px;
+      background:#141018;
+      border-radius:8px;
+      padding:10px;
+      font-size:0.8em;
+      line-height:1.5;
+      color:#ffb3de;">
+    Loading dog image and computing convolution…
+  </div>
+
+  To draw a pixel on screen, we must convert the actual CNN activation value (like 84.24) to a grayscale brightness between 0 → black
+  and 255 → white. <br>
+  This requires min–max normalization:
+  $$
+      \text{brightness} = \frac{value - min}{max - min} \times 255
+  $$
+
+  <div style="margin-top:10px; font-size:0.75em; color:#aaa;">
+    This demo uses one fixed random 5×5×3 filter (weights are not from a trained network), but the <strong>shape</strong>
+    of the computation is exactly the same as one filter in your first CNN layer for CIFAR-10.
+  </div>
+</div>
+
+<script>
+// ====== Conv Demo: 32×32×3 + 5×5×3 → 28×28×1 (with channels) ======
+const CONV_DEMO_DOG_URL =
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Labrador_Retriever_portrait.jpg/330px-Labrador_Retriever_portrait.jpg";
+
+let convDemoImageData = null;   // 32×32×4 RGBA from downsampled dog
+let convDemoOriginalImage = null;
+let convDemoOutputRaw = null;   // 28×28 raw conv (ReLU)
+let convDemoOutputNorm = null;  // 28×28 normalized to [0,255] for drawing
+let convDemoWeights = null;     // 5×5×3 filter weights
+let convDemoReady = false;
+
+const CONV_DEMO_INPUT_SIZE = 32;
+const CONV_DEMO_KERNEL = 5;
+const CONV_DEMO_OUTPUT_SIZE = 28;
+
+// Add a load handler (coexists with other onloads)
+window.addEventListener('load', () => {
+  convDemoInit();
+});
+
+function convDemoInit() {
+  const img = new Image();
+  img.crossOrigin = "Anonymous";
+  img.src = CONV_DEMO_DOG_URL;
+
+  img.onload = () => {
+    convDemoOriginalImage = img;
+
+    // Downsample to 32×32
+    const canvas32 = document.createElement('canvas');
+    canvas32.width = CONV_DEMO_INPUT_SIZE;
+    canvas32.height = CONV_DEMO_INPUT_SIZE;
+    const ctx32 = canvas32.getContext('2d');
+    ctx32.drawImage(img, 0, 0, CONV_DEMO_INPUT_SIZE, CONV_DEMO_INPUT_SIZE);
+
+    try {
+      convDemoImageData = ctx32.getImageData(0, 0, CONV_DEMO_INPUT_SIZE, CONV_DEMO_INPUT_SIZE);
+    } catch (e) {
+      console.error("Conv-demo getImageData failed:", e);
+      const textDiv = document.getElementById('conv-demo-text');
+      if (textDiv) {
+        textDiv.textContent = "Failed to read pixel data from the dog image (browser security / CORS issue).";
+      }
+      return;
+    }
+
+    convDemoInitWeights();
+    convDemoComputeConv();
+    convDemoSetupControls();
+    convDemoReady = true;
+    convDemoRedraw();
+  };
+
+  img.onerror = () => {
+    console.error("Conv demo: failed to load dog image");
+    const textDiv = document.getElementById('conv-demo-text');
+    if (textDiv) {
+      textDiv.textContent = "Failed to load dog image from the internet.";
+    }
+  };
 }
 
-function drawNetwork(inputSize, hidden1, hidden2, outputSize) {
-  const svg = document.getElementById('networkSVG');
-  svg.innerHTML = '';
+// Initialize one random 5×5×3 filter with small weights
+function convDemoInitWeights() {
+  const k = CONV_DEMO_KERNEL;
+  convDemoWeights = new Float32Array(k * k * 3);
+  for (let i = 0; i < convDemoWeights.length; i++) {
+    convDemoWeights[i] = (Math.random() - 0.5) * 0.1; // ~[-0.05, 0.05]
+  }
+}
 
-  const w = 1200;
-  const h = 500;
-  const layerX = [150, 400, 650, 950];
+// Compute conv + ReLU for ONE filter over 32×32×3 → 28×28×1
+function convDemoComputeConv() {
+  const outSize = CONV_DEMO_OUTPUT_SIZE;
+  const inSize = CONV_DEMO_INPUT_SIZE;
+  const k = CONV_DEMO_KERNEL;
+  const data = convDemoImageData.data;
 
-  const layers = [inputSize, hidden1, hidden2, outputSize];
+  convDemoOutputRaw = new Float32Array(outSize * outSize);
 
-  // Cap visible neurons so we don't render thousands
-  const maxVisibleNeurons = 20;
-  const visibleCounts = layers.map(count => Math.min(count, maxVisibleNeurons));
-  const maxVisible = Math.max(...visibleCounts);
+  let maxVal = 0;
 
-  const neuronRadius = Math.max(4, Math.min(12, 200 / maxVisible));
+  for (let oy = 0; oy < outSize; oy++) {
+    for (let ox = 0; ox < outSize; ox++) {
+      let sum = 0;
+      for (let ky = 0; ky < k; ky++) {
+        for (let kx = 0; kx < k; kx++) {
+          const iy = oy + ky;
+          const ix = ox + kx;
+          const baseIndex = (iy * inSize + ix) * 4;  // RGBA
+          const r = data[baseIndex];
+          const g = data[baseIndex + 1];
+          const b = data[baseIndex + 2];
 
-  // Draw connections between visible neurons
-  for (let l = 0; l < layers.length - 1; l++) {
-    const fromVisible = visibleCounts[l];
-    const toVisible = visibleCounts[l + 1];
+          const wIndexBase = (ky * k + kx) * 3;
+          const wr = convDemoWeights[wIndexBase];
+          const wg = convDemoWeights[wIndexBase + 1];
+          const wb = convDemoWeights[wIndexBase + 2];
 
-    const spacing = h / (maxVisible + 1);
-    const fromStartY = (h - (fromVisible - 1) * spacing) / 2;
-    const toStartY = (h - (toVisible - 1) * spacing) / 2;
+          sum += r * wr + g * wg + b * wb;
+        }
+      }
+      // bias = 0; ReLU
+      sum = Math.max(0, sum);
+      const idx = oy * outSize + ox;
+      convDemoOutputRaw[idx] = sum;
+      if (sum > maxVal) maxVal = sum;
+    }
+  }
 
-    for (let i = 0; i < fromVisible; i++) {
-      for (let j = 0; j < toVisible; j++) {
-        const y1 = fromStartY + i * spacing;
-        const y2 = toStartY + j * spacing;
+  // Normalize to [0,255] for drawing
+  if (maxVal <= 0) maxVal = 1;
+  convDemoOutputNorm = new Uint8ClampedArray(outSize * outSize);
+  for (let i = 0; i < convDemoOutputRaw.length; i++) {
+    convDemoOutputNorm[i] = Math.min(255, Math.round(convDemoOutputRaw[i] / maxVal * 255));
+  }
+}
 
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', layerX[l]);
-        line.setAttribute('y1', y1);
-        line.setAttribute('x2', layerX[l + 1]);
-        line.setAttribute('y2', y2);
-        line.setAttribute('stroke', '#50fa7b');
-        line.setAttribute('stroke-width', '1');
-        line.setAttribute('opacity', '0.5');
-        svg.appendChild(line);
+function convDemoSetupControls() {
+  const ySlider = document.getElementById('conv-demo-y');
+  const xSlider = document.getElementById('conv-demo-x');
+  const yVal = document.getElementById('conv-demo-y-value');
+  const xVal = document.getElementById('conv-demo-x-value');
+
+  if (!ySlider || !xSlider || !yVal || !xVal) return;
+
+  const handler = () => {
+    yVal.textContent = ySlider.value;
+    xVal.textContent = xSlider.value;
+    convDemoRedraw();
+  };
+
+  ySlider.addEventListener('input', handler);
+  xSlider.addEventListener('input', handler);
+
+  yVal.textContent = ySlider.value;
+  xVal.textContent = xSlider.value;
+}
+
+function convDemoRedraw() {
+  if (!convDemoReady || !convDemoImageData) return;
+
+  const ySlider = document.getElementById('conv-demo-y');
+  const xSlider = document.getElementById('conv-demo-x');
+  const oy = ySlider ? parseInt(ySlider.value, 10) : 0;
+  const ox = xSlider ? parseInt(xSlider.value, 10) : 0;
+
+  convDemoDrawInputCanvas(oy, ox);
+  convDemoDrawOutputCanvas(oy, ox);
+  convDemoDrawChannelPatchesAndFilters(oy, ox);
+  convDemoUpdateText(oy, ox);
+}
+
+// ---- 1) Big input canvas: highlight 5×5 patch ----
+function convDemoDrawInputCanvas(oy, ox) {
+  const canvas = document.getElementById('conv-demo-input-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const size = CONV_DEMO_INPUT_SIZE; // 32
+  const scale = canvas.width / size; // ~9.3 px per pixel
+
+  // Draw the 32×32 input, upscaled
+  const imgCanvas = document.createElement('canvas');
+  imgCanvas.width = size;
+  imgCanvas.height = size;
+  const imgCtx = imgCanvas.getContext('2d');
+  imgCtx.putImageData(convDemoImageData, 0, 0);
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(imgCanvas, 0, 0, canvas.width, canvas.height);
+
+  // Highlight 5×5 patch starting at (ox, oy)
+  const k = CONV_DEMO_KERNEL; // 5
+  ctx.strokeStyle = '#fff52e';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(ox * scale, oy * scale, k * scale, k * scale);
+}
+
+// ---- 2) Big output canvas: 28×28 feature map ----
+function convDemoDrawOutputCanvas(oy, ox) {
+  const canvas = document.getElementById('conv-demo-output-canvas');
+  if (!canvas || !convDemoOutputNorm) return;
+  const ctx = canvas.getContext('2d');
+
+  const outSize = CONV_DEMO_OUTPUT_SIZE; // 28
+  const scale = canvas.width / outSize;  // 10 px per pixel
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let y = 0; y < outSize; y++) {
+    for (let x = 0; x < outSize; x++) {
+      const v = convDemoOutputNorm[y * outSize + x];
+      ctx.fillStyle = `rgb(${v},${v},${v})`;
+      ctx.fillRect(x * scale, y * scale, scale, scale);
+    }
+  }
+
+  // Highlight selected output pixel
+  ctx.strokeStyle = '#50fa7b';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(ox * scale, oy * scale, scale, scale);
+}
+
+// ---- 3) Channel patches & filter weights (5×5 each) ----
+function convDemoDrawChannelPatchesAndFilters(oy, ox) {
+  const patchCanvases = [
+    document.getElementById('conv-demo-patch-R'),
+    document.getElementById('conv-demo-patch-G'),
+    document.getElementById('conv-demo-patch-B')
+  ];
+  const filterCanvases = [
+    document.getElementById('conv-demo-filter-R'),
+    document.getElementById('conv-demo-filter-G'),
+    document.getElementById('conv-demo-filter-B')
+  ];
+  if (!patchCanvases[0] || !filterCanvases[0] || !convDemoImageData || !convDemoWeights) return;
+
+  const inSize = CONV_DEMO_INPUT_SIZE;
+  const k = CONV_DEMO_KERNEL;
+  const data = convDemoImageData.data;
+
+  // Draw 5×5 patches from each channel
+  for (let c = 0; c < 3; c++) {
+    const pCanvas = patchCanvases[c];
+    const pCtx = pCanvas.getContext('2d');
+    const cellSize = pCanvas.width / k;
+
+    pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+
+    for (let py = 0; py < k; py++) {
+      for (let px = 0; px < k; px++) {
+        const iy = oy + py;
+        const ix = ox + px;
+        const baseIndex = (iy * inSize + ix) * 4;
+        const v = data[baseIndex + c];  // channel value (0–255)
+
+        let r = 0, g = 0, b = 0;
+        if (c === 0) r = v;
+        if (c === 1) g = v;
+        if (c === 2) b = v;
+
+        pCtx.fillStyle = `rgb(${r},${g},${b})`;
+        pCtx.fillRect(px * cellSize, py * cellSize, cellSize, cellSize);
       }
     }
   }
 
-  // Layer labels + neuron counts
-  const layerLabels = [
-    `Input (flattened image)`,
-    'Hidden Layer 1',
-    'Hidden Layer 2',
-    'Output (10 classes)'
-  ];
-  layerLabels.forEach((label, i) => {
-    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    text.setAttribute('x', layerX[i]);
-    text.setAttribute('y', 25);
-    text.setAttribute('text-anchor', 'middle');
-    text.setAttribute('font-size', '16');
-    text.setAttribute('font-weight', 'bold');
-    text.setAttribute('fill', '#ff79c6');
-    text.textContent = label;
-    svg.appendChild(text);
+  // Draw 5×5 filter weights for each channel (simple grayscale heatmap)
+  for (let c = 0; c < 3; c++) {
+    const fCanvas = filterCanvases[c];
+    const fCtx = fCanvas.getContext('2d');
+    const cellSize = fCanvas.width / k;
 
-    const countText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    countText.setAttribute('x', layerX[i]);
-    countText.setAttribute('y', 45);
-    countText.setAttribute('text-anchor', 'middle');
-    countText.setAttribute('font-size', '12');
-    countText.setAttribute('fill', '#ffb3de');
-    countText.textContent = `${layers[i].toLocaleString()} neurons`;
-    svg.appendChild(countText);
-  });
-
-  // Draw neurons (visible subset)
-  const colors = ['#ff79c6', '#ffb3de', '#ffb3de', '#fff52e'];
-  layers.forEach((count, l) => {
-    const visible = visibleCounts[l];
-    const spacing = h / (maxVisible + 1);
-    const startY = (h - (visible - 1) * spacing) / 2;
-
-    for (let i = 0; i < visible; i++) {
-      const y = startY + i * spacing;
-
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('cx', layerX[l]);
-      circle.setAttribute('cy', y);
-      circle.setAttribute('r', neuronRadius);
-      circle.setAttribute('fill', colors[l]);
-      circle.setAttribute(
-        'stroke',
-        colors[l] === '#fff52e' ? '#ffb3de' : '#ff79c6'
-      );
-      circle.setAttribute('stroke-width', '2');
-      svg.appendChild(circle);
+    // Find min and max for this channel to normalize
+    let minW = Infinity;
+    let maxW = -Infinity;
+    for (let ky = 0; ky < k; ky++) {
+      for (let kx = 0; kx < k; kx++) {
+        const wIndexBase = (ky * k + kx) * 3 + c;
+        const w = convDemoWeights[wIndexBase];
+        if (w < minW) minW = w;
+        if (w > maxW) maxW = w;
+      }
+    }
+    if (minW === maxW) {
+      minW -= 0.001;
+      maxW += 0.001;
     }
 
-    // "..." indicator if not all neurons are drawn
-    if (count > visible) {
-      const dotsText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      dotsText.setAttribute('x', layerX[l]);
-      dotsText.setAttribute('y', startY + visible * spacing);
-      dotsText.setAttribute('text-anchor', 'middle');
-      dotsText.setAttribute('font-size', '14');
-      dotsText.setAttribute('fill', '#ffb3de');
-      dotsText.textContent = '...';
-      svg.appendChild(dotsText);
+    fCtx.clearRect(0, 0, fCanvas.width, fCanvas.height);
+    for (let ky = 0; ky < k; ky++) {
+      for (let kx = 0; kx < k; kx++) {
+        const wIndexBase = (ky * k + kx) * 3 + c;
+        const w = convDemoWeights[wIndexBase];
+        const t = (w - minW) / (maxW - minW); // 0..1
+        const v = Math.round(t * 255);
+        fCtx.fillStyle = `rgb(${v},${v},${v})`;
+        fCtx.fillRect(kx * cellSize, ky * cellSize, cellSize, cellSize);
+      }
+    }
+  }
+}
+
+// ---- 4) Numeric explanation: sum_R, sum_G, sum_B, ReLU ----
+function convDemoUpdateText(oy, ox) {
+  const textDiv = document.getElementById('conv-demo-text');
+  if (!textDiv || !convDemoOutputRaw || !convDemoImageData || !convDemoWeights) return;
+
+  const outSize = CONV_DEMO_OUTPUT_SIZE;
+  const inSize = CONV_DEMO_INPUT_SIZE;
+  const k = CONV_DEMO_KERNEL;
+  const data = convDemoImageData.data;
+
+  // Index into output map
+  const outIdx = oy * outSize + ox;
+  const rawVal = convDemoOutputRaw[outIdx];
+  const normVal = convDemoOutputNorm[outIdx];
+
+  // Recompute separate sums for R, G, B for this patch
+  let sumR = 0, sumG = 0, sumB = 0;
+
+  for (let ky = 0; ky < k; ky++) {
+    for (let kx = 0; kx < k; kx++) {
+      const iy = oy + ky;
+      const ix = ox + kx;
+      const baseIndex = (iy * inSize + ix) * 4;
+
+      const r = data[baseIndex];
+      const g = data[baseIndex + 1];
+      const b = data[baseIndex + 2];
+
+      const wIndex = (ky * k + kx) * 3;
+      const wr = convDemoWeights[wIndex];
+      const wg = convDemoWeights[wIndex + 1];
+      const wb = convDemoWeights[wIndex + 2];
+
+      sumR += r * wr;
+      sumG += g * wg;
+      sumB += b * wb;
+    }
+  }
+
+  const total = sumR + sumG + sumB;
+  const relu = Math.max(0, total);
+
+  textDiv.innerHTML =
+    `At output position (y, x) = (<span style="color:#fff52e;">${oy}</span>, ` +
+    `<span style="color:#fff52e;">${ox}</span>):<br>` +
+    `&nbsp;&nbsp;• We take a <span style="color:#50fa7b;">5×5×3</span> patch starting at (y, x) = (${oy}, ${ox}).<br>` +
+    `&nbsp;&nbsp;• For each channel, we multiply the 5×5 patch by the 5×5 filter weights and sum them:<br>` +
+    `&nbsp;&nbsp;&nbsp;&nbsp;R channel sum = <span style="color:#ff79c6;">${sumR.toFixed(2)}</span><br>` +
+    `&nbsp;&nbsp;&nbsp;&nbsp;G channel sum = <span style="color:#ff79c6;">${sumG.toFixed(2)}</span><br>` +
+    `&nbsp;&nbsp;&nbsp;&nbsp;B channel sum = <span style="color:#ff79c6;">${sumB.toFixed(2)}</span><br>` +
+    `&nbsp;&nbsp;• Add them together (bias = 0 here):<br>` +
+    `&nbsp;&nbsp;&nbsp;&nbsp;total = R + G + B = <span style="color:#50fa7b;">${total.toFixed(2)}</span><br>` +
+    `&nbsp;&nbsp;• Apply ReLU: max(0, total) = <span style="color:#50fa7b;">${relu.toFixed(2)}</span><br>` +
+    `&nbsp;&nbsp;→ This value becomes the single pixel in the <span style="color:#fff52e;">28×28</span> feature map ` +
+    `at (y, x) = (${oy}, ${ox}).<br>` +
+    `&nbsp;&nbsp;→ In the feature map canvas, this is drawn with grayscale intensity ` +
+    `<span style="color:#ff79c6;">${normVal}</span> (0–255).`;
+}
+</script>
+
+<script>
+// ====== CNN Pipeline (adapted from your CNN visualizer, but described for CIFAR-10) ======
+const stages = [
+  {
+    name: 'Input Image',
+    op: 'RGB + Channels',
+    size: '32×32×3',
+    info: 'A 32×32 color image (same size as a CIFAR-10 image). Below we show the full RGB and each channel separately.',
+    process: 'drawInputImage'
+  },
+  {
+    name: 'Conv Layer 1',
+    op: 'Conv (5×5, 16 filters) + ReLU',
+    size: '28×28×16',
+    info: '16 different 5×5 filters slide over the image to detect simple edges and textures. ReLU sets negative responses to 0.',
+    process: 'drawConv1'
+  },
+  {
+    name: 'Pool Layer 1',
+    op: 'Max Pool (2×2) + ReLU',
+    size: '14×14×16',
+    info: '2×2 max pooling shrinks each feature map by taking the strongest activation in each 2×2 region.',
+    process: 'drawPool1'
+  },
+  {
+    name: 'Conv Layer 2',
+    op: 'Conv (5×5, 32 filters) + ReLU',
+    size: '10×10×32',
+    info: '32 filters now look at the pooled maps to detect more complex patterns (object parts: heads, legs, wheels, etc.).',
+    process: 'drawConv2'
+  },
+  {
+    name: 'Pool Layer 2',
+    op: 'Max Pool (2×2) + ReLU',
+    size: '5×5×32',
+    info: 'Another max pooling step compresses the information into a compact but rich set of feature maps.',
+    process: 'drawPool2'
+  },
+  {
+    name: 'Output Layer',
+    op: 'Fully Connected + Softmax',
+    size: '10 classes (CIFAR-10)',
+    info: 'Flattened features go into a fully connected layer. Softmax converts scores into probabilities for the 10 CIFAR-10 classes.',
+    process: 'drawSoftmax'
+  }
+];
+
+let imageData = null;
+let originalDogImage = null;
+
+// URL of a public-domain dog image from Wikimedia Commons
+const DOG_IMAGE_URL =
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Labrador_Retriever_portrait.jpg/330px-Labrador_Retriever_portrait.jpg";
+
+function loadDogImage(callback) {
+  const img = new Image();
+  img.crossOrigin = "Anonymous";
+  img.src = DOG_IMAGE_URL;
+
+  img.onload = () => {
+    originalDogImage = img;
+
+    // Downsample to 32×32 for the CNN "input"
+    const canvas32 = document.createElement('canvas');
+    canvas32.width = 32;
+    canvas32.height = 32;
+    const ctx32 = canvas32.getContext('2d');
+    ctx32.drawImage(img, 0, 0, 32, 32);
+    try {
+      imageData = ctx32.getImageData(0, 0, 32, 32);
+    } catch (e) {
+      console.error("getImageData failed, falling back to null imageData:", e);
+      imageData = null;
+    }
+
+    callback();
+  };
+
+  img.onerror = () => {
+    console.error("Failed to load dog image from internet.");
+    imageData = null;
+    callback();
+  };
+}
+
+function renderPipeline() {
+  const pipeline = document.getElementById('pipeline');
+  pipeline.innerHTML = '';
+
+  stages.forEach((stage, index) => {
+    const stageDiv = document.createElement('div');
+    stageDiv.className = 'stage';
+    stageDiv.innerHTML = `
+      <h3>${stage.name}</h3>
+      <div class="stage-op">${stage.op}</div>
+      <div class="stage-info">${stage.info}</div>
+      <div class="visualization" id="vis-${index}"></div>
+      <div class="param-info">${stage.size}</div>
+    `;
+    pipeline.appendChild(stageDiv);
+
+    if (index < stages.length - 1) {
+      const arrow = document.createElement('div');
+      arrow.className = 'arrow';
+      arrow.textContent = '→';
+      pipeline.appendChild(arrow);
     }
   });
 
-  // Bias nodes
-  const biasY = h - 40;
-  layerX.forEach((x, i) => {
-    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    circle.setAttribute('cx', x);
-    circle.setAttribute('cy', biasY);
-    circle.setAttribute('r', 8);
-    circle.setAttribute('fill', '#888888');
-    circle.setAttribute('stroke', '#666666');
-    circle.setAttribute('stroke-width', '2');
-    svg.appendChild(circle);
+  renderVisualizations();
+}
 
-    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    label.setAttribute('x', x);
-    label.setAttribute('y', biasY + 4);
-    label.setAttribute('text-anchor', 'middle');
-    label.setAttribute('font-size', '10');
-    label.setAttribute('fill', 'white');
-    label.setAttribute('font-weight', 'bold');
-    label.textContent = 'b';
-    svg.appendChild(label);
-
-    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    line.setAttribute('x1', x);
-    line.setAttribute('y1', biasY - 8);
-    line.setAttribute('x2', x);
-    line.setAttribute('y2', h / 2 + 30);
-    line.setAttribute('stroke', '#888888');
-    line.setAttribute('stroke-width', '1');
-    line.setAttribute('stroke-dasharray', '3,3');
-    line.setAttribute('opacity', '0.5');
-    svg.appendChild(line);
+function renderVisualizations() {
+  stages.forEach((stage, index) => {
+    const container = document.getElementById(`vis-${index}`);
+    if (typeof window[stage.process] === 'function') {
+      window[stage.process](container);
+    }
   });
 }
 
-function updateStats(inputSize, hidden1, hidden2, outputSize) {
-  const w1 = inputSize * hidden1;
-  const b1 = hidden1;
-  const layer1Total = w1 + b1;
+// ---- draw RGB + three channels ----
+function drawInputImage(container) {
+  container.innerHTML = '';
 
-  const w2 = hidden1 * hidden2;
-  const b2 = hidden2;
-  const layer2Total = w2 + b2;
+  const wrapper = document.createElement('div');
+  wrapper.style.display = 'flex';
+  wrapper.style.flexDirection = 'column';
+  wrapper.style.alignItems = 'center';
+  wrapper.style.gap = '10px';
 
-  const w3 = hidden2 * outputSize;
-  const b3 = outputSize;
-  const layer3Total = w3 + b3;
+  // 1) Top: original dog photo
+  const colorCanvas = document.createElement('canvas');
+  colorCanvas.width = 160;
+  colorCanvas.height = 120;
+  const colorCtx = colorCanvas.getContext('2d');
 
-  const totalParams = layer1Total + layer2Total + layer3Total;
+  if (originalDogImage) {
+    const aspect = originalDogImage.width / originalDogImage.height;
+    let drawW = 160;
+    let drawH = drawW / aspect;
+    if (drawH > 120) {
+      drawH = 120;
+      drawW = drawH * aspect;
+    }
+    const offsetX = (160 - drawW) / 2;
+    const offsetY = (120 - drawH) / 2;
+    colorCtx.drawImage(originalDogImage, offsetX, offsetY, drawW, drawH);
+  } else if (imageData) {
+    const imgCanvas = document.createElement('canvas');
+    imgCanvas.width = 32;
+    imgCanvas.height = 32;
+    const imgCtx = imgCanvas.getContext('2d');
+    imgCtx.putImageData(imageData, 0, 0);
+    colorCtx.imageSmoothingEnabled = false;
+    colorCtx.drawImage(imgCanvas, 0, 0, 160, 120);
+  } else {
+    colorCtx.fillStyle = '#50fa7b';
+    colorCtx.fillRect(0, 0, 160, 120);
+  }
 
-  const statsDiv = document.getElementById('stats');
-  statsDiv.innerHTML = `
-    <div class="stat-card">
-      <div class="stat-label">Layer 1 Parameters (Input 3072 → Hidden 1)</div>
-      <div class="stat-value">${layer1Total.toLocaleString()}</div>
-      <div style="color: #ffb3de; font-size: 0.85em; margin-top: 8px;">
-        Weights: ${w1.toLocaleString()} | Biases: ${b1}
-      </div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Layer 2 Parameters (Hidden 1 → Hidden 2)</div>
-      <div class="stat-value">${layer2Total.toLocaleString()}</div>
-      <div style="color: #ffb3de; font-size: 0.85em; margin-top: 8px;">
-        Weights: ${w2.toLocaleString()} | Biases: ${b2}
-      </div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Layer 3 Parameters (Hidden 2 → Output 10)</div>
-      <div class="stat-value">${layer3Total.toLocaleString()}</div>
-      <div style="color: #ffb3de; font-size: 0.85em; margin-top: 8px;">
-        Weights: ${w3.toLocaleString()} | Biases: ${b3}
-      </div>
-    </div>
-    <div class="stat-card" style="border-left-color: #fff52e;">
-      <div class="stat-label">Total Trainable Parameters in This MLP</div>
-      <div class="stat-value" style="color: #fff52e;">${totalParams.toLocaleString()}</div>
-      <div style="color: #ffb3de; font-size: 0.85em; margin-top: 8px;">
-        All weights and biases across all fully-connected layers
-      </div>
-    </div>
-  `;
+  const colorLabel = document.createElement('div');
+  colorLabel.textContent = 'RGB image (downsampled input, same size as CIFAR-10)';
+  colorLabel.style.fontSize = '0.8em';
+  colorLabel.style.marginTop = '4px';
+
+  const colorBlock = document.createElement('div');
+  colorBlock.style.display = 'flex';
+  colorBlock.style.flexDirection = 'column';
+  colorBlock.style.alignItems = 'center';
+  colorBlock.appendChild(colorCanvas);
+  colorBlock.appendChild(colorLabel);
+
+  wrapper.appendChild(colorBlock);
+
+  // 2) Bottom row: R, G, B channels (from 32×32×3)
+  if (imageData) {
+    const channelsRow = document.createElement('div');
+    channelsRow.style.display = 'flex';
+    channelsRow.style.gap = '10px';
+    channelsRow.style.marginTop = '6px';
+    channelsRow.style.flexWrap = 'wrap';
+    channelsRow.style.justifyContent = 'center';
+
+    const channelNames = ['R', 'G', 'B'];
+    const channelColorFns = [
+      v => `rgb(${v},0,0)`,   // Red
+      v => `rgb(0,${v},0)`,   // Green
+      v => `rgb(0,0,${v})`    // Blue
+    ];
+
+    for (let c = 0; c < 3; c++) {
+      const chCanvas = document.createElement('canvas');
+      chCanvas.width = 96;  // 32 * 3
+      chCanvas.height = 96;
+      const chCtx = chCanvas.getContext('2d');
+
+      const scale = 3;
+      const w = 32;
+      const h = 32;
+
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          const idx = (y * w + x) * 4;
+          const v = imageData.data[idx + c]; // channel value
+          chCtx.fillStyle = channelColorFns[c](v);
+          chCtx.fillRect(x * scale, y * scale, scale, scale);
+        }
+      }
+
+      const chLabel = document.createElement('div');
+      chLabel.textContent = `${channelNames[c]} channel`;
+      chLabel.style.fontSize = '0.8em';
+      chLabel.style.marginTop = '4px';
+
+      const chBlock = document.createElement('div');
+      chBlock.style.display = 'flex';
+      chBlock.style.flexDirection = 'column';
+      chBlock.style.alignItems = 'center';
+
+      chBlock.appendChild(chCanvas);
+      chBlock.appendChild(chLabel);
+      channelsRow.appendChild(chBlock);
+    }
+
+    wrapper.appendChild(channelsRow);
+  }
+
+  container.appendChild(wrapper);
 }
 
-// Initialize on page load
+// Lightweight helpers reused from your CNN visualizer
+function applySimpleEdgeDetection(imgData, w, h, outSize) {
+  const edges = new Array(outSize * outSize).fill(0);
+
+  for (let y = 0; y < outSize; y++) {
+    for (let x = 0; x < outSize; x++) {
+      let sum = 0;
+      let count = 0;
+      for (let dy = 0; dy < 5; dy++) {
+        for (let dx = 0; dx < 5; dx++) {
+          const iy = y + dy;
+          const ix = x + dx;
+          if (iy < h && ix < w) {
+            const idx = (iy * w + ix) * 4;
+            const r = imgData.data[idx];
+            const g = imgData.data[idx + 1];
+            const b = imgData.data[idx + 2];
+            sum += (r + g + b) / 3;
+            count++;
+          }
+        }
+      }
+      const avg = sum / Math.max(count, 1);
+      let activation = avg - 100;
+      activation = Math.max(0, activation); // ReLU
+      edges[y * outSize + x] = Math.min(activation * 2, 255);
+    }
+  }
+
+  return edges;
+}
+
+function applyMaxPooling(data, w, h, poolSize) {
+  const outW = Math.floor(w / poolSize);
+  const outH = Math.floor(h / poolSize);
+  const pooled = new Array(outW * outH).fill(0);
+
+  for (let y = 0; y < outH; y++) {
+    for (let x = 0; x < outW; x++) {
+      let max = 0;
+      for (let py = 0; py < poolSize; py++) {
+        for (let px = 0; px < poolSize; px++) {
+          const iy = y * poolSize + py;
+          const ix = x * poolSize + px;
+          if (iy < h && ix < w) {
+            const idx = iy * w + ix;
+            max = Math.max(max, data[idx]);
+          }
+        }
+      }
+      pooled[y * outW + x] = Math.max(0, max);
+    }
+  }
+
+  return pooled;
+}
+
+function drawConv1(container) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 120;
+  canvas.height = 120;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#2a1e28';
+  ctx.fillRect(0, 0, 120, 120);
+
+  if (imageData) {
+    const edges = applySimpleEdgeDetection(imageData, 32, 32, 28);
+    const scaleFactor = 120 / 28;
+
+    edges.forEach((pixel, idx) => {
+      const x = Math.floor((idx % 28) * scaleFactor);
+      const y = Math.floor(Math.floor(idx / 28) * scaleFactor);
+      ctx.fillStyle = `rgb(${pixel},${pixel},${pixel})`;
+      ctx.fillRect(x, y, scaleFactor, scaleFactor);
+    });
+  }
+
+  container.appendChild(canvas);
+}
+
+function drawPool1(container) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 120;
+  canvas.height = 120;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#2a1e28';
+  ctx.fillRect(0, 0, 120, 120);
+
+  if (imageData) {
+    const edges = applySimpleEdgeDetection(imageData, 32, 32, 28);
+    const pooled = applyMaxPooling(edges, 28, 28, 2);
+    const scaleFactor = 120 / 14;
+
+    pooled.forEach((pixel, idx) => {
+      const x = Math.floor((idx % 14) * scaleFactor);
+      const y = Math.floor(Math.floor(idx / 14) * scaleFactor);
+      ctx.fillStyle = `rgb(${pixel},${pixel},${pixel})`;
+      ctx.fillRect(x, y, scaleFactor, scaleFactor);
+    });
+  }
+
+  container.appendChild(canvas);
+}
+
+function drawConv2(container) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 120;
+  canvas.height = 120;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#2a1e28';
+  ctx.fillRect(0, 0, 120, 120);
+
+  if (imageData) {
+    const edges = applySimpleEdgeDetection(imageData, 32, 32, 28);
+    const pooled = applyMaxPooling(edges, 28, 28, 2); // 14×14
+
+    const expanded = Array.from({ length: pooled.length * 4 }, (_, i) => pooled[Math.floor(i / 4)]);
+    const fakeImgData = {
+      data: expanded.flatMap(v => [v, v, v, 255])
+    };
+    const conv2 = applySimpleEdgeDetection(fakeImgData, 14, 14, 10);
+    const scaleFactor = 120 / 10;
+
+    conv2.slice(0, 100).forEach((pixel, idx) => {
+      const x = Math.floor((idx % 10) * scaleFactor);
+      const y = Math.floor(Math.floor(idx / 10) * scaleFactor);
+      ctx.fillStyle = `rgb(${Math.min(pixel + 40, 255)},${Math.min(pixel + 10, 255)},${pixel})`;
+      ctx.fillRect(x, y, scaleFactor, scaleFactor);
+    });
+  }
+
+  container.appendChild(canvas);
+}
+
+function drawPool2(container) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 120;
+  canvas.height = 120;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#2a1e28';
+  ctx.fillRect(0, 0, 120, 120);
+
+  const scaleFactor = 120 / 5;
+  for (let i = 0; i < 5; i++) {
+    for (let j = 0; j < 5; j++) {
+      const brightness = Math.floor(Math.random() * 100) + 100;
+      ctx.fillStyle = `rgb(${brightness},${brightness + 50},${brightness})`;
+      ctx.fillRect(i * scaleFactor, j * scaleFactor, scaleFactor, scaleFactor);
+    }
+  }
+
+  container.appendChild(canvas);
+}
+
+function drawSoftmax(container) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 260;
+  canvas.height = 160;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#19121a';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Show 4 sample CIFAR-10 classes + "others"
+  const labels = ['Cat', 'Dog', 'Airplane', 'Truck', 'Others'];
+  const probs = [0.35, 0.25, 0.10, 0.05, 0.25];
+  const barWidth = 30;
+  const baseX = 30;
+  const baseY = 120;
+  const maxBarHeight = 80;
+
+  ctx.font = '11px Roboto, Arial';
+  ctx.textAlign = 'center';
+
+  for (let i = 0; i < labels.length; i++) {
+    const barHeight = probs[i] * maxBarHeight;
+    const x = baseX + i * 45;
+    const y = baseY - barHeight;
+
+    ctx.fillStyle =
+      i === 0 ? '#ff79c6' :
+      i === 1 ? '#50fa7b' :
+      i === 2 ? '#fff52e' :
+      i === 3 ? '#8be9fd' :
+      '#bd93f9';
+
+    ctx.fillRect(x, y, barWidth, barHeight);
+
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText((probs[i] * 100).toFixed(0) + '%', x + barWidth / 2, y - 4);
+    ctx.fillText(labels[i], x + barWidth / 2, baseY + 15);
+  }
+
+  ctx.strokeStyle = '#ffffff';
+  ctx.beginPath();
+  ctx.moveTo(20, baseY);
+  ctx.lineTo(canvas.width - 10, baseY);
+  ctx.stroke();
+
+  const caption = document.createElement('div');
+  caption.style.fontSize = '0.8em';
+  caption.style.marginTop = '6px';
+  caption.style.color = '#ffb3de';
+  caption.textContent = 'Softmax outputs probabilities over the 10 CIFAR-10 classes (only a few are shown here).';
+
+  container.appendChild(canvas);
+  container.appendChild(caption);
+}
+
+// Initialize CNN pipeline after image loads
 window.addEventListener('load', () => {
-  updateNetwork();
+  loadDogImage(() => {
+    renderPipeline();
+  });
 });
 </script>
 
