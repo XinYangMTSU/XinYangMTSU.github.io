@@ -262,11 +262,13 @@
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
         <div class="header">
             <h1>🎮 8 Times Tables - Fun Activities!</h1>
             <p>Learn tricks and play games to master the 8s! 🚀</p>
         </div>
 
+        <!-- Tricks Card -->
         <div class="tips-card">
             <div class="tips-title">⭐ 8 Times Table Tricks</div>
 
@@ -306,6 +308,36 @@
             </div>
         </div>
 
+        <!-- NEW: 8 Times Table List -->
+        <div class="tips-card">
+            <div class="tips-title">📋 8 Times Table (1 to 10)</div>
+            <div class="tips-text">
+                Here is the full 8 times table for quick review. You can read it together like a chant:
+                <br><em>"8, 16, 24, 32, 40, 48, 56, 64, 72, 80"</em> 🎵
+            </div>
+            <table class="double-table">
+                <thead>
+                    <tr>
+                        <th>Problem</th>
+                        <th>Answer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>8 × 1</td><td>8</td></tr>
+                    <tr><td>8 × 2</td><td>16</td></tr>
+                    <tr><td>8 × 3</td><td>24</td></tr>
+                    <tr><td>8 × 4</td><td>32</td></tr>
+                    <tr><td>8 × 5</td><td>40</td></tr>
+                    <tr><td>8 × 6</td><td>48</td></tr>
+                    <tr><td>8 × 7</td><td>56</td></tr>
+                    <tr><td>8 × 8</td><td>64</td></tr>
+                    <tr><td>8 × 9</td><td>72</td></tr>
+                    <tr><td>8 × 10</td><td>80</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Activities Grid -->
         <div class="activities-grid">
             <div class="activity-card" onclick="openActivity('multipleChoice')">
                 <div class="activity-icon">🎯</div>
@@ -344,6 +376,7 @@
             </div>
         </div>
 
+        <!-- Activity 1: Multiple Choice -->
         <div class="activity-content" id="multipleChoice">
             <button class="back-button" onclick="closeActivity()">← Back to Activities</button>
             <h2>🎯 Multiple Choice Quiz</h2>
@@ -353,6 +386,7 @@
             <button onclick="nextMC()">Next Question →</button>
         </div>
 
+        <!-- Activity 2: Fill in Blanks -->
         <div class="activity-content" id="fillBlanks">
             <button class="back-button" onclick="closeActivity()">← Back to Activities</button>
             <h2>📝 Fill in the Blanks</h2>
@@ -362,6 +396,7 @@
             <div class="feedback" id="blankFeedback"></div>
         </div>
 
+        <!-- Activity 3: Word Problems -->
         <div class="activity-content" id="wordProblems">
             <button class="back-button" onclick="closeActivity()">← Back to Activities</button>
             <h2>📖 Word Problems</h2>
@@ -369,6 +404,7 @@
             <button onclick="nextStory()">Next Story →</button>
         </div>
 
+        <!-- Activity 4: Matching -->
         <div class="activity-content" id="matching">
             <button class="back-button" onclick="closeActivity()">← Back to Activities</button>
             <h2>🔗 Match Problems & Answers</h2>
@@ -386,6 +422,7 @@
             <div class="feedback" id="matchingFeedback"></div>
         </div>
 
+        <!-- Activity 5: Patterns -->
         <div class="activity-content" id="patterns">
             <button class="back-button" onclick="closeActivity()">← Back to Activities</button>
             <h2>🔍 Find the Pattern</h2>
@@ -394,6 +431,7 @@
             <button onclick="revealAll()">Show All</button>
         </div>
 
+        <!-- Activity 6: Speed Challenge -->
         <div class="activity-content" id="speedChallenge">
             <button class="back-button" onclick="closeActivity()">← Back to Activities</button>
             <h2>⚡ Speed Challenge</h2>
@@ -660,7 +698,9 @@
                 feedback.innerHTML = `<span class="correct">✨ Match!</span>`;
                 selectedProblem = null;
                 selectedAnswer = null;
-                if (matchedCount === problems.length) feedback.innerHTML = `<span class="correct">🏆 All Matched!</span>`;
+                if (matchedCount === problems.length) {
+                    feedback.innerHTML = `<span class="correct">🏆 All Matched!</span>`;
+                }
             } else {
                 feedback.innerHTML = `<span class="incorrect">Try again!</span>`;
                 setTimeout(() => {
@@ -685,9 +725,9 @@
                     this.classList.add('revealed');
                     const str = this.dataset.val.toString();
                     if (str.length === 1) {
-                         this.innerHTML = `<span class="ones">${str}</span>`;
+                        this.innerHTML = `<span class="ones">${str}</span>`;
                     } else {
-                         this.innerHTML = `<span class="tens">${str[0]}</span><span class="ones">${str[1]}</span>`;
+                        this.innerHTML = `<span class="tens">${str[0]}</span><span class="ones">${str[1]}</span>`;
                     }
                 };
                 grid.appendChild(box);
