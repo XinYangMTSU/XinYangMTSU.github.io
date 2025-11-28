@@ -39,7 +39,7 @@
             font-size: 1.1em;
         }
 
-        /* Tips card for Double-Double-Double & Pattern */
+        /* Tips card for Strategies */
         .tips-card {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
@@ -58,7 +58,7 @@
         .tips-section-title {
             font-size: 1.2em;
             color: #764ba2;
-            margin-top: 10px;
+            margin-top: 15px;
             margin-bottom: 5px;
             font-weight: bold;
         }
@@ -105,6 +105,19 @@
             font-weight: bold;
         }
 
+        .highlight-box {
+            background-color: #e0f7fa;
+            border: 2px solid #4dd0e1;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+            text-align: center;
+            font-size: 1.1em;
+            color: #006064;
+            font-weight: bold;
+        }
+
+        /* Activity Grid Styles */
         .activities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -186,373 +199,123 @@
             background: #764ba2;
         }
 
-        /* Activity 1: Multiple Choice */
-        .quiz-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .quiz-option {
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.1em;
-            font-weight: bold;
-        }
-
-        .quiz-option:hover {
-            border-color: #667eea;
-            background: #f5f5f5;
-        }
-
-        .quiz-option.correct {
-            background: #c8e6c9;
-            border-color: #4caf50;
-            color: #2e7d32;
-        }
-
-        .quiz-option.incorrect {
-            background: #ffcdd2;
-            border-color: #f44336;
-            color: #c62828;
-        }
-
-        .question-text {
-            font-size: 1.4em;
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        /* Activity 2: Fill in blanks */
-        .blank-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .blank-item {
-            background: #f5f5f5;
-            padding: 15px;
-            border-radius: 10px;
-            border: 2px solid transparent;
-        }
-
-        .blank-problem {
-            font-size: 1.2em;
-            color: #333;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        .blank-input {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            font-size: 1em;
-            text-align: center;
-        }
-
-        /* Activity 3: Word Problems */
-        .story-problem {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border-left: 5px solid #667eea;
-        }
-
-        .story-text {
-            font-size: 1.1em;
-            color: #333;
-            margin-bottom: 15px;
-            line-height: 1.8;
-        }
-
-        .story-input {
-            padding: 10px;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            font-size: 1em;
-            width: 150px;
-            text-align: center;
-        }
-
-        /* Activity 4: Matching */
-        .matching-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .matching-column {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .matching-item {
-            background: #f5f5f5;
-            padding: 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .matching-item:hover {
-            border-color: #667eea;
-            background: #fff9e6;
-        }
-
-        .matching-item.matched {
-            background: #c8e6c9;
-            border-color: #4caf50;
-            cursor: default;
-        }
-
-        .matching-item.selected {
-            border-color: #ff9800;
-            background: #fff3cd;
-        }
-
-        /* Activity 5: Patterns */
-        .pattern-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .pattern-box {
-            aspect-ratio: 1;
-            background: #f5f5f5;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .pattern-box:hover {
-            transform: scale(1.05);
-            border-color: #667eea;
-        }
-
-        .pattern-box.revealed {
-            background: #667eea;
-            color: white;
-        }
-
-        /* Activity 6: Speed Challenge */
-        .speed-challenge {
-            text-align: center;
-        }
-
-        .speed-question {
-            font-size: 2em;
-            color: #667eea;
-            margin: 20px 0;
-            font-weight: bold;
-        }
-
-        .speed-input {
-            font-size: 1.3em;
-            padding: 12px;
-            border: 3px solid #667eea;
-            border-radius: 10px;
-            width: 150px;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .timer {
-            font-size: 1.5em;
-            color: #f44336;
-            font-weight: bold;
-            margin: 15px 0;
-        }
-
-        .score-display {
-            background: #f5f5f5;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 1.2em;
-            margin: 15px 0;
-        }
-
-        button {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Comic Sans MS', cursive;
-            font-weight: bold;
-            margin: 10px;
-        }
-
-        button:hover:not(:disabled) {
-            background: #764ba2;
-            transform: scale(1.05);
-        }
-
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        .feedback {
-            font-size: 1.2em;
-            margin: 15px 0;
-            min-height: 30px;
-            text-align: center;
-        }
-
-        .correct {
-            color: #4caf50;
-            font-weight: bold;
-        }
-
-        .incorrect {
-            color: #f44336;
-            font-weight: bold;
-        }
+        /* Activity Specific Styles from previous version... */
+        /* (Keeping these condensed for brevity as they are unchanged) */
+        .quiz-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin: 20px 0; }
+        .quiz-option { padding: 15px; border: 2px solid #ddd; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.3s ease; font-size: 1.1em; font-weight: bold; }
+        .quiz-option:hover { border-color: #667eea; background: #f5f5f5; }
+        .quiz-option.correct { background: #c8e6c9; border-color: #4caf50; color: #2e7d32; }
+        .quiz-option.incorrect { background: #ffcdd2; border-color: #f44336; color: #c62828; }
+        .question-text { font-size: 1.4em; color: #333; margin-bottom: 20px; font-weight: bold; }
+        .blank-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
+        .blank-item { background: #f5f5f5; padding: 15px; border-radius: 10px; border: 2px solid transparent; }
+        .blank-problem { font-size: 1.2em; color: #333; margin-bottom: 10px; font-weight: bold; }
+        .blank-input { width: 100%; padding: 10px; border: 2px solid #667eea; border-radius: 8px; font-size: 1em; text-align: center; }
+        .story-problem { background: #f5f5f5; padding: 20px; border-radius: 10px; margin: 15px 0; border-left: 5px solid #667eea; }
+        .story-text { font-size: 1.1em; color: #333; margin-bottom: 15px; line-height: 1.8; }
+        .story-input { padding: 10px; border: 2px solid #667eea; border-radius: 8px; font-size: 1em; width: 150px; text-align: center; }
+        .matching-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        .matching-column { display: flex; flex-direction: column; gap: 10px; }
+        .matching-item { background: #f5f5f5; padding: 15px; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; }
+        .matching-item:hover { border-color: #667eea; background: #fff9e6; }
+        .matching-item.matched { background: #c8e6c9; border-color: #4caf50; cursor: default; }
+        .matching-item.selected { border-color: #ff9800; background: #fff3cd; }
+        .pattern-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin: 20px 0; }
+        .pattern-box { aspect-ratio: 1; background: #f5f5f5; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3em; font-weight: bold; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; }
+        .pattern-box:hover { transform: scale(1.05); border-color: #667eea; }
+        .pattern-box.revealed { background: #667eea; color: white; }
+        .speed-challenge { text-align: center; }
+        .speed-question { font-size: 2em; color: #667eea; margin: 20px 0; font-weight: bold; }
+        .speed-input { font-size: 1.3em; padding: 12px; border: 3px solid #667eea; border-radius: 10px; width: 150px; text-align: center; margin: 20px 0; }
+        .timer { font-size: 1.5em; color: #f44336; font-weight: bold; margin: 15px 0; }
+        .score-display { background: #f5f5f5; padding: 15px; border-radius: 10px; font-size: 1.2em; margin: 15px 0; }
+        button { background: #667eea; color: white; border: none; padding: 12px 30px; border-radius: 25px; font-size: 1.1em; cursor: pointer; transition: all 0.3s ease; font-family: 'Comic Sans MS', cursive; font-weight: bold; margin: 10px; }
+        button:hover:not(:disabled) { background: #764ba2; transform: scale(1.05); }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        .feedback { font-size: 1.2em; margin: 15px 0; min-height: 30px; text-align: center; }
+        .correct { color: #4caf50; font-weight: bold; }
+        .incorrect { color: #f44336; font-weight: bold; }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2em;
-            }
-
-            .matching-grid {
-                grid-template-columns: 1fr;
-            }
+            .header h1 { font-size: 2em; }
+            .matching-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header">
             <h1>🎮 8 Times Tables - Fun Activities!</h1>
-            <p>Let’s learn 8 as “Double, Double, Double” and find the secret pattern! ✨</p>
+            <p>Learn tricks and play games to master the 8s! 🚀</p>
         </div>
 
-        <!-- Tips: Double Double Double & Pattern -->
         <div class="tips-card">
-            <div class="tips-title">⭐ 8 is “Double, Double, Double”</div>
+            <div class="tips-title">⭐ 8 Times Table Tricks</div>
+
+            <div class="tips-section-title">1. The "Double, Double, Double" Strategy</div>
             <div class="tips-text">
-                Tell your child: <strong>8 means doubling three times!</strong>
-                Start with any number, then:
-                <em>Double → Double → Double again</em>.
+                To multiply by 8, just <strong>double the number three times!</strong><br>
+                <em>Example: 8 × 6</em><br>
+                Double 6 is <strong>12</strong>... Double 12 is <strong>24</strong>... Double 24 is <strong>48</strong>!
             </div>
 
-            <table class="double-table">
-                <tr>
-                    <th>Number</th>
-                    <th>Double</th>
-                    <th>Double Again</th>
-                    <th>Double Again</th>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>4</td>
-                    <td>8</td>
-                    <td>16</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>6</td>
-                    <td>12</td>
-                    <td>24</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>8</td>
-                    <td>16</td>
-                    <td>32</td>
-                </tr>
-            </table>
-
+            <div class="tips-section-title">2. The "5-6-7-8" Trick 🎵</div>
             <div class="tips-text">
-                So:<br>
-                <strong>8 × 4</strong> = (4 → 8 → 16 → <strong>32</strong>)<br>
-                <strong>8 × 6</strong> = (6 → 12 → 24 → <strong>48</strong>)<br><br>
-                Make it a little chant with actions:<br>
-                “Double!” ➜ “Double!” ➜ “Double again!” 🙌
-            </div>
-
-            <div class="tips-section-title">🔍 Pattern in the 8 Times Table</div>
-            <div class="tips-text">
-                Look at the answers: <br>
-                <div class="sequence">
-                    8, 16, 24, 32, 40, 48, 56, 64, 72, 80
+                This is for the hardest one: <strong>8 × 7</strong> (or 7 × 8).<br>
+                Just count 5, 6, 7, 8 in order!<br>
+                <div class="highlight-box">
+                    5, 6, 7, 8 &nbsp; ➜ &nbsp; 56 = 7 × 8
                 </div>
-                Ask:
+                Say it out loud: <em>"Five, six, seven, eight! Fifty-six is seven times eight!"</em>
+            </div>
+
+            <div class="tips-section-title">3. The Pattern</div>
+            <div class="tips-text">
                 <ul style="margin-left:20px; margin-top:5px;">
-                    <li><strong>What happens to the ones digit?</strong> → 8 → 6 → 4 → 2 → 0 → 8 → 6 → ...</li>
-                    <li><strong>What happens to the tens digit?</strong> → goes up by 1 every two numbers</li>
+                    <li><strong>Ones digit:</strong> 8, 6, 4, 2, 0, 8, 6... (counting down by even numbers)</li>
+                    <li><strong>Tens digit:</strong> Goes up by 1 (0, 1, 2, 3, 4, 4, 5, 6, 7, 8) - <em>Watch out! The 4 repeats!</em></li>
                 </ul>
-                In the pattern game below, the <span class="tens">tens digit is blue</span> and the
-                <span class="ones">ones digit is red</span> to make the pattern pop! 🎨
             </div>
         </div>
 
-        <!-- Activity Selection -->
         <div class="activities-grid">
             <div class="activity-card" onclick="openActivity('multipleChoice')">
                 <div class="activity-icon">🎯</div>
                 <div class="activity-title">Multiple Choice</div>
-                <div class="activity-description">Pick the correct 8× answer from options!</div>
+                <div class="activity-description">Pick the correct answer from options!</div>
             </div>
 
             <div class="activity-card" onclick="openActivity('fillBlanks')">
                 <div class="activity-icon">📝</div>
                 <div class="activity-title">Fill in the Blanks</div>
-                <div class="activity-description">Complete the 8 times table problems!</div>
+                <div class="activity-description">Complete the multiplication problems!</div>
             </div>
 
             <div class="activity-card" onclick="openActivity('wordProblems')">
                 <div class="activity-icon">📖</div>
                 <div class="activity-title">Word Problems</div>
-                <div class="activity-description">Solve fun real-life problems with 8×!</div>
+                <div class="activity-description">Solve fun real-life story problems!</div>
             </div>
 
             <div class="activity-card" onclick="openActivity('matching')">
                 <div class="activity-icon">🔗</div>
                 <div class="activity-title">Match Problems & Answers</div>
-                <div class="activity-description">Connect the 8× questions to their answers!</div>
+                <div class="activity-description">Connect questions to their answers!</div>
             </div>
 
             <div class="activity-card" onclick="openActivity('patterns')">
                 <div class="activity-icon">🔍</div>
                 <div class="activity-title">Find the Pattern</div>
-                <div class="activity-description">Click to reveal the colored 8× pattern!</div>
+                <div class="activity-description">Reveal the hidden 8's pattern!</div>
             </div>
 
             <div class="activity-card" onclick="openActivity('speedChallenge')">
                 <div class="activity-icon">⚡</div>
                 <div class="activity-title">Speed Challenge</div>
-                <div class="activity-description">Beat the clock with 8× facts!</div>
+                <div class="activity-description">Beat the clock! Answer as fast as you can!</div>
             </div>
         </div>
 
-        <!-- Activity 1: Multiple Choice -->
         <div class="activity-content" id="multipleChoice">
             <button class="back-button" onclick="closeActivity()">← Back to Activities</button>
             <h2>🎯 Multiple Choice Quiz</h2>
@@ -562,17 +325,15 @@
             <button onclick="nextMC()">Next Question →</button>
         </div>
 
-        <!-- Activity 2: Fill in Blanks -->
         <div class="activity-content" id="fillBlanks">
             <button class="back-button" onclick="closeActivity()">← Back to Activities</button>
             <h2>📝 Fill in the Blanks</h2>
-            <p style="color: #666; margin-bottom: 20px;">Type the answer for each 8× problem:</p>
+            <p style="color: #666; margin-bottom: 20px;">Type the answer for each problem:</p>
             <div class="blank-grid" id="blankGrid"></div>
             <button onclick="checkBlanks()">✓ Check Answers</button>
             <div class="feedback" id="blankFeedback"></div>
         </div>
 
-        <!-- Activity 3: Word Problems -->
         <div class="activity-content" id="wordProblems">
             <button class="back-button" onclick="closeActivity()">← Back to Activities</button>
             <h2>📖 Word Problems</h2>
@@ -580,11 +341,10 @@
             <button onclick="nextStory()">Next Story →</button>
         </div>
 
-        <!-- Activity 4: Matching -->
         <div class="activity-content" id="matching">
             <button class="back-button" onclick="closeActivity()">← Back to Activities</button>
             <h2>🔗 Match Problems & Answers</h2>
-            <p style="color: #666; margin-bottom: 20px;">Click to match each 8× question with the correct answer!</p>
+            <p style="color: #666; margin-bottom: 20px;">Click to match questions with answers!</p>
             <div class="matching-grid">
                 <div>
                     <h3 style="color: #667eea; margin-bottom: 15px;">Problems</h3>
@@ -598,19 +358,14 @@
             <div class="feedback" id="matchingFeedback"></div>
         </div>
 
-        <!-- Activity 5: Patterns -->
         <div class="activity-content" id="patterns">
             <button class="back-button" onclick="closeActivity()">← Back to Activities</button>
             <h2>🔍 Find the Pattern</h2>
-            <p style="color: #666; margin-bottom: 20px;">
-                Click each box to reveal an answer from the 8 times table.
-                Watch the <span class="tens">blue tens</span> and <span class="ones">red ones</span> digits!
-            </p>
+            <p style="color: #666; margin-bottom: 20px;">Click each box to reveal the 8 times pattern! 🎁</p>
             <div class="pattern-grid" id="patternGrid"></div>
             <button onclick="revealAll()">Show All</button>
         </div>
 
-        <!-- Activity 6: Speed Challenge -->
         <div class="activity-content" id="speedChallenge">
             <button class="back-button" onclick="closeActivity()">← Back to Activities</button>
             <h2>⚡ Speed Challenge</h2>
@@ -627,7 +382,6 @@
     </div>
 
     <script>
-        // 8 times table 1–10
         const problems = [
             { num: 1, answer: 8 },
             { num: 2, answer: 16 },
@@ -641,32 +395,36 @@
             { num: 10, answer: 80 }
         ];
 
-        // Simple 8× word problems
         const stories = [
             {
-                text: "🍎 Mia has 8 baskets. Each basket has 3 apples. How many apples does she have in total?",
+                text: "🕷️ There are 8 spiders on a wall. Each spider has 8 legs. How many legs in total?",
+                problem: "8 × 8",
+                answer: 64
+            },
+            {
+                text: "🐙 An octopus has 8 arms. If there are 3 octopuses swimming together, how many arms do they have?",
                 problem: "8 × 3",
                 answer: 24
             },
             {
-                text: "🎈 There are 8 children. Each child gets 4 balloons. How many balloons in total?",
+                text: "🍕 A large pizza is cut into 8 slices. If we buy 5 pizzas for a party, how many slices do we have?",
+                problem: "8 × 5",
+                answer: 40
+            },
+            {
+                text: "📦 A box holds 8 crayons. If you have 2 boxes, how many crayons do you have?",
+                problem: "8 × 2",
+                answer: 16
+            },
+            {
+                text: "🍫 A chocolate bar has 8 squares. If I eat 4 bars (yummy!), how many squares did I eat?",
                 problem: "8 × 4",
                 answer: 32
             },
             {
-                text: "🚗 A parking lot has 5 rows. Each row has 8 cars. How many cars?",
-                problem: "5 × 8",
-                answer: 40
-            },
-            {
-                text: "🍕 A pizza shop has 8 boxes. Each box has 6 slices of pizza. How many slices?",
-                problem: "8 × 6",
-                answer: 48
-            },
-            {
-                text: "📚 A classroom has 8 shelves. Each shelf holds 9 books. How many books?",
-                problem: "8 × 9",
-                answer: 72
+                text: "🗓️ A week has 7 days. If we wait 8 weeks, how many days have passed?",
+                problem: "8 × 7",
+                answer: 56
             }
         ];
 
@@ -676,8 +434,6 @@
         let speedTime = 60;
         let speedScore = 0;
         let speedCorrect = 0;
-
-        // Matching state
         let selectedProblem = null;
         let selectedAnswer = null;
         let matchedCount = 0;
@@ -698,7 +454,7 @@
             speedActive = false;
         }
 
-        // Multiple Choice
+        // --- Multiple Choice ---
         function initMC() {
             currentMC = Math.floor(Math.random() * problems.length);
             displayMC();
@@ -710,7 +466,7 @@
 
             const options = [problem.answer];
             while (options.length < 4) {
-                const wrong = Math.floor(Math.random() * 80) + 1; // 1–80
+                const wrong = Math.floor(Math.random() * 80) + 1;
                 if (!options.includes(wrong)) options.push(wrong);
             }
             options.sort(() => Math.random() - 0.5);
@@ -721,18 +477,20 @@
                 const btn = document.createElement('button');
                 btn.className = 'quiz-option';
                 btn.textContent = option;
-                btn.onclick = () => checkMC(option, problem.answer);
+                btn.onclick = () => checkMC(btn, option, problem.answer);
                 grid.appendChild(btn);
             });
 
             document.getElementById('mcFeedback').textContent = '';
         }
 
-        function checkMC(selected, correct) {
+        function checkMC(btn, selected, correct) {
             const feedback = document.getElementById('mcFeedback');
             if (selected === correct) {
+                btn.classList.add('correct');
                 feedback.innerHTML = `<span class="correct">✓ Correct! ${correct} is right!</span>`;
             } else {
+                btn.classList.add('incorrect');
                 feedback.innerHTML = `<span class="incorrect">✗ Not quite! The answer is ${correct}</span>`;
             }
         }
@@ -741,7 +499,7 @@
             initMC();
         }
 
-        // Fill in Blanks
+        // --- Fill in Blanks ---
         function initBlanks() {
             const grid = document.getElementById('blankGrid');
             grid.innerHTML = '';
@@ -769,11 +527,10 @@
                     input.style.borderColor = '#f44336';
                 }
             });
-            document.getElementById('blankFeedback').innerHTML =
-                `<span class="correct">✓ ${correct}/${inputs.length} correct!</span>`;
+            document.getElementById('blankFeedback').innerHTML = `<span class="correct">You got ${correct}/${inputs.length} correct!</span>`;
         }
 
-        // Word Problems
+        // --- Word Problems ---
         function initStory() {
             currentStory = Math.floor(Math.random() * stories.length);
             displayStory();
@@ -809,7 +566,7 @@
             initStory();
         }
 
-        // Matching
+        // --- Matching ---
         function initMatching() {
             const problemsList = [...problems].sort(() => Math.random() - 0.5);
             const answersList = [...problems].sort(() => Math.random() - 0.5);
@@ -848,10 +605,7 @@
             if (selectedProblem) selectedProblem.classList.remove('selected');
             selectedProblem = el;
             el.classList.add('selected');
-
-            if (selectedAnswer) {
-                checkMatch();
-            }
+            if (selectedAnswer) checkMatch();
         }
 
         function selectAnswer(el) {
@@ -859,48 +613,38 @@
             if (selectedAnswer) selectedAnswer.classList.remove('selected');
             selectedAnswer = el;
             el.classList.add('selected');
-
-            if (selectedProblem) {
-                checkMatch();
-            }
+            if (selectedProblem) checkMatch();
         }
 
         function checkMatch() {
             const feedback = document.getElementById('matchingFeedback');
-            const problemAnswer = parseInt(selectedProblem.dataset.answer);
-            const answerValue = parseInt(selectedAnswer.dataset.answer);
+            const probAns = parseInt(selectedProblem.dataset.answer);
+            const ansVal = parseInt(selectedAnswer.dataset.answer);
 
-            if (problemAnswer === answerValue) {
+            if (probAns === ansVal) {
                 selectedProblem.classList.remove('selected');
                 selectedAnswer.classList.remove('selected');
-
                 selectedProblem.classList.add('matched');
                 selectedAnswer.classList.add('matched');
-
                 selectedProblem.onclick = null;
                 selectedAnswer.onclick = null;
-
                 matchedCount++;
-                feedback.innerHTML = `<span class="correct">✓ Nice match!</span>`;
-
+                feedback.innerHTML = `<span class="correct">✨ Match!</span>`;
                 selectedProblem = null;
                 selectedAnswer = null;
-
-                if (matchedCount === problems.length) {
-                    feedback.innerHTML = `<span class="correct">🏆 You matched all of them! Great job!</span>`;
-                }
+                if (matchedCount === problems.length) feedback.innerHTML = `<span class="correct">🏆 All Matched!</span>`;
             } else {
-                feedback.innerHTML = `<span class="incorrect">✗ Not a match. Try again!</span>`;
+                feedback.innerHTML = `<span class="incorrect">Try again!</span>`;
                 setTimeout(() => {
                     if (selectedProblem) selectedProblem.classList.remove('selected');
                     if (selectedAnswer) selectedAnswer.classList.remove('selected');
                     selectedProblem = null;
                     selectedAnswer = null;
-                }, 400);
+                }, 500);
             }
         }
 
-        // Patterns – color tens (blue) and ones (red)
+        // --- Patterns ---
         function initPatterns() {
             const grid = document.getElementById('patternGrid');
             grid.innerHTML = '';
@@ -908,33 +652,26 @@
                 const box = document.createElement('div');
                 box.className = 'pattern-box';
                 box.textContent = '?';
-                box.onclick = () => revealPatternBox(box, p.answer);
+                box.dataset.val = p.answer;
+                box.onclick = function() {
+                    this.classList.add('revealed');
+                    const str = this.dataset.val;
+                    if (str.length === 1) {
+                         this.innerHTML = `<span class="ones">${str}</span>`;
+                    } else {
+                         this.innerHTML = `<span class="tens">${str[0]}</span><span class="ones">${str[1]}</span>`;
+                    }
+                };
                 grid.appendChild(box);
             });
         }
 
-        function revealPatternBox(box, value) {
-            const str = value.toString();
-            let html;
-            if (str.length === 1) {
-                // Just ones digit (e.g., 8)
-                html = `<span class="ones">${str}</span>`;
-            } else {
-                html = `<span class="tens">${str[0]}</span><span class="ones">${str[1]}</span>`;
-            }
-            box.classList.add('revealed');
-            box.innerHTML = html;
-        }
-
         function revealAll() {
             const boxes = document.querySelectorAll('.pattern-box');
-            boxes.forEach((box, idx) => {
-                const value = problems[idx].answer;
-                revealPatternBox(box, value);
-            });
+            boxes.forEach(box => box.click());
         }
 
-        // Speed Challenge
+        // --- Speed Challenge ---
         function startSpeed() {
             speedActive = true;
             speedTime = 60;
@@ -945,7 +682,7 @@
             document.getElementById('speedInput').disabled = false;
             document.getElementById('speedInput').value = '';
             document.getElementById('speedInput').focus();
-
+            document.getElementById('speedScore').innerHTML = '';
             nextSpeedQuestion();
 
             const timer = setInterval(() => {
@@ -968,14 +705,10 @@
 
         function submitSpeed() {
             if (!speedActive) return;
-
-            const answer = parseInt(document.getElementById('speedInput').value);
+            const val = parseInt(document.getElementById('speedInput').value);
             const correct = parseInt(document.getElementById('speedQuestion').dataset.answer);
-
-            if (answer === correct) {
-                speedCorrect++;
-            }
             speedScore++;
+            if (val === correct) speedCorrect++;
             nextSpeedQuestion();
         }
 
@@ -984,21 +717,8 @@
             document.getElementById('submitSpeedBtn').style.display = 'none';
             document.getElementById('startSpeedBtn').style.display = 'inline-block';
             document.getElementById('speedInput').disabled = true;
-
-            if (speedScore === 0) {
-                document.getElementById('speedScore').innerHTML =
-                    `⏱️ <strong>No answers submitted this round.</strong><br>Try again!`;
-                return;
-            }
-
-            const percent = Math.round((speedCorrect / speedScore) * 100);
-            let emoji = '🎖️';
-            if (percent === 100) emoji = '🏆';
-            else if (percent >= 80) emoji = '🥇';
-            else if (percent >= 60) emoji = '🥈';
-
-            document.getElementById('speedScore').innerHTML =
-                `${emoji} <strong>Score: ${speedCorrect}/${speedScore} (${percent}%)</strong><br>Great effort! Try again!`;
+            const percent = speedScore === 0 ? 0 : Math.round((speedCorrect / speedScore) * 100);
+            document.getElementById('speedScore').innerHTML = `Score: ${speedCorrect}/${speedScore} (${percent}%)`;
         }
     </script>
 </body>
