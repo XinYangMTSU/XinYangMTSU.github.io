@@ -246,6 +246,13 @@
         .matching-item.matched {
             background: #c8e6c9;
             border-color: #4caf50;
+            cursor: default;
+        }
+
+        /* NEW: highlight selected items */
+        .matching-item.selected {
+            border-color: #ff9800;
+            background: #fff3cd;
         }
 
         /* Activity 5: Patterns */
@@ -535,10 +542,15 @@
         let speedScore = 0;
         let speedCorrect = 0;
 
+        // NEW: matching state
+        let selectedProblem = null;
+        let selectedAnswer = null;
+        let matchedCount = 0;
+
         function openActivity(activity) {
             document.querySelectorAll('.activity-content').forEach(el => el.classList.remove('active'));
             document.getElementById(activity).classList.add('active');
-            
+
             if (activity === 'multipleChoice') initMC();
             if (activity === 'fillBlanks') initBlanks();
             if (activity === 'wordProblems') initStory();
@@ -560,7 +572,7 @@
         function displayMC() {
             const problem = problems[currentMC];
             document.getElementById('mcQuestion').textContent = `9 × ${problem.num} = ?`;
-            
+
             const options = [problem.answer];
             while (options.length < 4) {
                 const wrong = Math.floor(Math.random() * 90) + 1;
@@ -622,7 +634,7 @@
                     input.style.borderColor = '#f44336';
                 }
             });
-            document.getElementById('blankFeedback').innerHTML = 
+            document.getElementById('blankFeedback').innerHTML =
                 `<span class="correct">✓ ${correct}/${inputs.length} correct!</span>`;
         }
 
@@ -662,7 +674,7 @@
             initStory();
         }
 
-        // Matching
+        // Matching (FIXED)
         function initMatching() {
             const problemsList = [...problems].sort(() => Math.random() - 0.5);
             const answersList = [...problems].sort(() => Math.random() - 0.5);
@@ -672,21 +684,89 @@
             pColumn.innerHTML = '';
             aColumn.innerHTML = '';
 
-            problemsList.forEach((p, idx) => {
+            selectedProblem = null;
+            selectedAnswer = null;
+            matchedCount = 0;
+            document.getElementById('matchingFeedback').textContent = '';
+
+            problemsList.forEach(p => {
                 const div = document.createElement('div');
                 div.className = 'matching-item';
                 div.textContent = `9 × ${p.num}`;
-                div.dataset.answer = p.answer;
+                div.dataset.answer = p.answer; // store the correct answer
+                div.onclick = () => selectProblem(div);
                 pColumn.appendChild(div);
             });
 
-            answersList.forEach((p, idx) => {
+            answersList.forEach(p => {
                 const div = document.createElement('div');
                 div.className = 'matching-item';
                 div.textContent = p.answer;
-                div.dataset.problem = `9 × ${p.num}`;
+                div.dataset.answer = p.answer; // store the answer value
+                div.onclick = () => selectAnswer(div);
                 aColumn.appendChild(div);
             });
+        }
+
+        function selectProblem(el) {
+            if (el.classList.contains('matched')) return;
+            if (selectedProblem) selectedProblem.classList.remove('selected');
+            selectedProblem = el;
+            el.classList.add('selected');
+
+            if (selectedAnswer) {
+                checkMatch();
+            }
+        }
+
+        function selectAnswer(el) {
+            if (el.classList.contains('matched')) return;
+            if (selectedAnswer) selectedAnswer.classList.remove('selected');
+            selectedAnswer = el;
+            el.classList.add('selected');
+
+            if (selectedProblem) {
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            const feedback = document.getElementById('matchingFeedback');
+            const problemAnswer = parseInt(selectedProblem.dataset.answer);
+            const answerValue = parseInt(selectedAnswer.dataset.answer);
+
+            if (problemAnswer === answerValue) {
+                // Correct match
+                selectedProblem.classList.remove('selected');
+                selectedAnswer.classList.remove('selected');
+
+                selectedProblem.classList.add('matched');
+                selectedAnswer.classList.add('matched');
+
+                // Disable further clicking
+                selectedProblem.onclick = null;
+                selectedAnswer.onclick = null;
+
+                matchedCount++;
+                feedback.innerHTML = `<span class="correct">✓ Nice match!</span>`;
+
+                selectedProblem = null;
+                selectedAnswer = null;
+
+                if (matchedCount === problems.length) {
+                    feedback.innerHTML = `<span class="correct">🏆 You matched all of them! Great job!</span>`;
+                }
+            } else {
+                // Incorrect match
+                feedback.innerHTML = `<span class="incorrect">✗ Not a match. Try again!</span>`;
+                // briefly keep highlight, then clear
+                setTimeout(() => {
+                    if (selectedProblem) selectedProblem.classList.remove('selected');
+                    if (selectedAnswer) selectedAnswer.classList.remove('selected');
+                    selectedProblem = null;
+                    selectedAnswer = null;
+                }, 400);
+            }
         }
 
         // Patterns
@@ -723,9 +803,9 @@
             document.getElementById('speedInput').disabled = false;
             document.getElementById('speedInput').value = '';
             document.getElementById('speedInput').focus();
-            
+
             nextSpeedQuestion();
-            
+
             const timer = setInterval(() => {
                 speedTime--;
                 document.getElementById('timerDisplay').textContent = `Time: ${speedTime}s`;
@@ -746,10 +826,10 @@
 
         function submitSpeed() {
             if (!speedActive) return;
-            
+
             const answer = parseInt(document.getElementById('speedInput').value);
             const correct = parseInt(document.getElementById('speedQuestion').dataset.answer);
-            
+
             if (answer === correct) {
                 speedCorrect++;
             }
@@ -762,14 +842,20 @@
             document.getElementById('submitSpeedBtn').style.display = 'none';
             document.getElementById('startSpeedBtn').style.display = 'inline-block';
             document.getElementById('speedInput').disabled = true;
-            
+
+            if (speedScore === 0) {
+                document.getElementById('speedScore').innerHTML =
+                    `⏱️ <strong>No answers submitted this round.</strong><br>Try again!`;
+                return;
+            }
+
             const percent = Math.round((speedCorrect / speedScore) * 100);
             let emoji = '🎖️';
             if (percent === 100) emoji = '🏆';
             else if (percent >= 80) emoji = '🥇';
             else if (percent >= 60) emoji = '🥈';
-            
-            document.getElementById('speedScore').innerHTML = 
+
+            document.getElementById('speedScore').innerHTML =
                 `${emoji} <strong>Score: ${speedCorrect}/${speedScore} (${percent}%)</strong><br>Great effort! Try again!`;
         }
     </script>
