@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Cube Ladder 🧊</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#121212;--card:#1e1e24;--border:#333;--text:#fff;
+ --ones:#ff595e;--tens:#ffca3a;--hund:#8ac926;
+ --thou:#1982c4;--tenk:#6a4c93;
+}
+
+body{
+ background:var(--bg);color:var(--text);
+ font-family:'Fredoka',sans-serif;
+ padding:40px;display:flex;flex-direction:column;align-items:center;
+}
+
+h1{
+ background:linear-gradient(to right,var(--ones),var(--thou));
+ -webkit-background-clip:text;
+ color:transparent;font-size:3rem;margin-bottom:8px;
+}
+
+p.subtitle{color:#aaa;margin-bottom:30px}
+
+.ladder{
+ max-width:1400px;   /* ⭐ even wider so million block has room */
+ width:100%;
+ display:flex;flex-direction:column;gap:30px;
+}
+
+.rungRow{display:flex;align-items:center;gap:14px}
+
+.cnText{
+ font-size:1.5rem;
+ font-weight:bold;
+ min-width:60px;
+ text-align:right;
+}
+
+.rung{
+ flex:1;
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:20px;
+ padding:18px;
+ display:flex;
+ gap:12px;
+ cursor:pointer;
+}
+
+/* ⭐ Make the 1,000,000 block MUCH bigger/taller */
+.million-rung{
+  padding:32px;
+  min-height:860px;
+  align-items:flex-start;  /* keep label at top */
+  display:flex;
+}
+
+.rung:hover{
+ transform:translateX(6px) scale(1.01);
+ box-shadow:0 8px 20px rgba(0,0,0,.6);
+ border-color:white;
+}
+
+.rung-label{
+ width:200px;                /* a bit wider for the text */
+ border-right:1px solid #333;
+ padding-right:16px;
+}
+
+.num-val{
+ font-family:'Roboto Mono', monospace;
+ font-size:2rem;
+ display:flex;align-items:center;gap:6px;
+}
+
+.num-name{font-size:.8rem;color:#aaa}
+
+.visual{
+ display:flex;
+ align-items:center;
+ gap:8px;
+ flex-wrap:wrap;
+}
+
+/* ⭐ Keep million row on a single line: label | big cube | formula */
+.million-visual{
+  flex-wrap:nowrap;
+  align-items:center;
+  margin-top:auto;      /* push cube downward */
+  margin-bottom:auto;   /* pull cube upward */
+}
+
+.label{
+ font-family:'Roboto Mono';
+ font-size:.85rem;
+ background:rgba(255,255,255,.06);
+ padding:4px 8px;border-radius:6px;
+ margin-left:10px;
+}
+
+/* For the 10,000 row, never wrap; let cubes stay single row */
+.tenk-visual{
+ flex-wrap:nowrap;
+}
+
+/* base pixel */
+.pixel{
+ width:4px;height:4px;background:var(--hund);
+}
+
+/* ANIMATION STATES */
+/* 10s pixels */
+.pixel-hidden{
+ opacity:0;
+ transform:scale(0.2);
+}
+.pixel-visible{
+ opacity:1;
+ transform:scale(1);
+ transition:opacity .2s,transform .2s;
+}
+
+/* 100s cells */
+.cell100{
+ background:var(--hund);
+}
+.cell-hidden{
+ opacity:0;
+}
+.cell-visible{
+ opacity:1;
+ transition:opacity .25s;
+}
+
+/* cube for 1,000 & 10,000 */
+.cubeBox{width:60px;height:60px;perspective:600px}
+
+.cube{
+ width:100%;height:100%;
+ transform-style:preserve-3d;
+}
+
+.cube-static{
+ transform:rotateX(-25deg) rotateY(35deg);
+}
+
+/* used for 10,000 animation */
+.cube-hidden{
+ opacity:0;
+ transform:scale(.5) rotateX(-25deg) rotateY(35deg);
+}
+.cube-visible{
+ opacity:1;
+ transform:scale(1) rotateX(-25deg) rotateY(35deg);
+ transition:opacity .3s,transform .3s;
+}
+
+.face{
+ position:absolute;width:60px;height:60px;
+ display:grid;grid-template-columns:repeat(10,1fr);
+ gap:1px;border:1px solid white;
+ background:rgba(138,201,38,.85);
+}
+.face div{background:rgba(0,0,0,.15)}
+.f{transform:translateZ(30px)}
+.b{transform:rotateY(180deg) translateZ(30px)}
+.r{transform:rotateY(90deg) translateZ(30px)}
+.l{transform:rotateY(-90deg) translateZ(30px)}
+.t{transform:rotateX(90deg) translateZ(30px)}
+.o{transform:rotateX(-90deg) translateZ(30px)}
+
+/* slice animation **inside** the 1,000 cube (rows) */
+.slice-hidden{
+ opacity:0;
+ transform:scale(0.7);
+}
+.slice-visible{
+ opacity:1;
+ transform:scale(1);
+ transition:opacity .25s,transform .25s;
+}
+
+/* 10,000 cubes container: single row of 10 cubes */
+.tenk-cubes{
+ display:flex;
+ flex-wrap:nowrap;
+ gap:8px;
+}
+
+/* 100s plate */
+.matrix100{
+ width:60px;height:60px;
+ display:grid;grid-template-columns:repeat(10,1fr);
+ gap:1px;padding:4px;
+ background:rgba(138,201,38,.15);
+}
+
+/* 100,000: 10 rows × 10 cubes (each cube same as 10,000 cubes) */
+.hundk-grid{
+ display:flex;
+ flex-direction:column;
+ gap:6px;
+}
+.hundk-row{
+ display:flex;
+ flex-wrap:nowrap;
+ gap:8px;
+}
+/* Animation states for 100,000 rows */
+.hundk-row-hidden{
+  opacity:0;
+  transform:scale(0.8);
+}
+
+.hundk-row-visible{
+  opacity:1;
+  transform:scale(1);
+  transition:opacity .3s, transform .3s;
+}
+
+
+.hundk-row{
+  display:flex;
+  flex-wrap:nowrap;
+  gap:8px;
+}
+
+
+
+/* 1,000,000: BIG GREEN cube, 100 × 100 pixels per face, EVEN BIGGER */
+.bigCubeWrap{
+  width:560px;
+  height:560px;
+  perspective:2600px;
+}
+.bigCube{
+  width:100%;height:100%;
+  transform-style:preserve-3d;
+  transform:rotateX(-20deg) rotateY(30deg);
+  animation:spin 10s linear infinite;
+}
+
+/* faces: 100×100 grid of green pixels with WHITE grid lines */
+/* 1,000,000 cube faces: bold white face edges, soft inner grid */
+.bigFace{
+  position:absolute;
+  width:560px;
+  height:560px;
+  display:grid;
+  grid-template-columns:repeat(100,1fr);
+  gap:0;
+
+  border:2px solid #ffffff;     /* strong edges like other cubes */
+  background:var(--hund);       /* same green as other cubes */
+}
+
+.bigFace div{
+  background:var(--hund);
+  border:0.15px solid rgba(255,255,255,0.25);  /* light inner grid */
+}
+
+
+/* Million cube row-wise reveal */
+.bigcell-hidden{
+  opacity:0;
+}
+
+.bigcell-visible{
+  opacity:1;
+  transition:opacity .25s;
+}
+
+
+
+@keyframes spin{to{transform:rotateX(-20deg) rotateY(360deg)}}
+/* translateZ is half of 560px → 280px */
+.front{transform:translateZ(280px)}
+.back{transform:rotateY(180deg) translateZ(280px)}
+.right{transform:rotateY(90deg) translateZ(280px)}
+.left{transform:rotateY(-90deg) translateZ(280px)}
+.top{transform:rotateX(90deg) translateZ(280px)}
+.bottom{transform:rotateX(-90deg) translateZ(280px)}
+
+.sound{opacity:.6}
+.sound:hover{opacity:1}
+
+/* Prevent the million formula from touching the cube */
+/* Prevent the million formula from touching the cube */
+.million-visual .label{
+  margin-left:120px;   /* push formula right */
+  white-space:nowrap; /* keep formula on one line */
+}
+
+
+</style>
+
+<!-- MathJax (once per page) -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+
+</head>
+<body>
+
+<h1>The Cube Ladder 🧊</h1>
+<p class="subtitle">Each step builds from the last.</p>
+
+<div class="ladder">
+
+  <!-- 1 -->
+  <div class="rungRow">
+    <div class="cnText">一</div>
+    <div class="rung" onclick="handleClick('one')">
+      <div class="rung-label">
+        <div class="num-val" style="color:var(--ones)">1 <span class="sound">🔊</span></div>
+        <div class="num-name">ONE</div>
+      </div>
+      <div class="visual">
+        <div class="pixel"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="rungRow">
+    <div class="cnText">一十</div>
+    <div class="rung" onclick="handleClick('ten')">
+      <div class="rung-label">
+        <div class="num-val" style="color:var(--tens)">10 <span class="sound">🔊</span></div>
+        <div class="num-name">TEN</div>
+      </div>
+      <div class="visual">
+        <div class="row10" id="tens"></div>
+        <div class="label">\( 1 \times 10 \)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 100 -->
+  <div class="rungRow">
+    <div class="cnText">一百</div>
+    <div class="rung" onclick="handleClick('hundred')">
+      <div class="rung-label">
+        <div class="num-val" style="color:var(--hund)">100 <span class="sound">🔊</span></div>
+        <div class="num-name">HUNDRED</div>
+      </div>
+      <div class="visual">
+        <div id="hundreds"></div>
+        <div class="label">\( 10 \times 10 \)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1,000 -->
+  <div class="rungRow">
+    <div class="cnText">一千</div>
+    <div class="rung" onclick="handleClick('thousand')">
+      <div class="rung-label">
+        <div class="num-val" style="color:var(--thou)">1,000 <span class="sound">🔊</span></div>
+        <div class="num-name">THOUSAND</div>
+      </div>
+      <div class="visual">
+        <div class="cubeBox">
+          <div class="cube cube-static cube-visible" id="cube-1000"></div>
+        </div>
+        <div class="label">\( 100 \times 10 = 10 \times 10 \times 10 = 10^3\)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10,000 -->
+  <div class="rungRow">
+    <div class="cnText">一万</div>
+    <div class="rung" onclick="handleClick('tenthousand')">
+      <div class="rung-label">
+        <div class="num-val" style="color:var(--tenk)">10,000 <span class="sound">🔊</span></div>
+        <div class="num-name">TEN THOUSAND</div>
+      </div>
+      <div class="visual tenk-visual">
+        <div class="tenk-cubes" id="tenk"></div>
+        <div class="label">\( 10 \times 1000 = 100 \times 100 \)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 100,000 -->
+  <div class="rungRow">
+    <div class="cnText">十万</div>
+    <div class="rung" onclick="handleClick('hundredthousand')">
+      <div class="rung-label">
+        <div class="num-val" style="color:#e63946">100,000 <span class="sound">🔊</span></div>
+        <div class="num-name">HUNDRED THOUSAND</div>
+      </div>
+      <div class="visual">
+        <!-- 10 rows × 10 cubes (each row same as 10,000) -->
+        <div class="hundk-grid" id="hundk"></div>
+        <div class="label">\( 10 \times 10,000 \)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1,000,000 -->
+  <div class="rungRow">
+    <div class="cnText">百万</div>
+    <div class="rung million-rung" onclick="handleClick('million')">
+      <div class="rung-label">
+        <div class="num-val" style="color:gold">1,000,000 <span class="sound">🔊</span></div>
+        <div class="num-name">MILLION</div>
+      </div>
+      <div class="visual million-visual">
+        <!-- BIG green cube, 100×100×100 conceptually -->
+        <div class="bigCubeWrap">
+          <div class="bigCube" id="million"></div>
+        </div>
+        <div class="label">\( 100 \times 100 \times 100 \)</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ---------- Build visuals (ALL VISIBLE INITIALLY) ----------
+
+// 10: row of 10 pixels
+const tenPixels = [];
+const tensDiv = document.getElementById("tens");
+for(let i=0;i<10;i++){
+  const d=document.createElement("div");
+  d.className="pixel pixel-visible";  // visible on load
+  tenPixels.push(d);
+  tensDiv.appendChild(d);
+}
+
+// 100: 10x10 grid
+const hundredsContainer = document.getElementById("hundreds");
+const matrix=document.createElement("div");
+matrix.className="matrix100";
+const hundredCells=[];
+for(let i=0;i<100;i++){
+  const cell=document.createElement("div");
+  cell.className="cell100 cell-visible";  // visible on load
+  cell.dataset.row = Math.floor(i/10); // 0–9
+  hundredCells.push(cell);
+  matrix.appendChild(cell);
+}
+hundredsContainer.appendChild(matrix);
+
+// 1,000: single cube; animate ALL faces slice-by-slice
+const cube1000 = document.getElementById("cube-1000");
+const sliceRows = Array.from({ length: 10 }, () => []);
+
+["f","b","r","l","t","o"].forEach(cls => {
+  const face = document.createElement("div");
+  face.className = "face " + cls;
+
+  for (let i = 0; i < 100; i++) {
+    const c = document.createElement("div");
+    const sliceIndex = Math.floor(i / 10); // 0–9
+    c.dataset.slice = sliceIndex;
+    c.classList.add("slice-visible");   // visible on load
+    sliceRows[sliceIndex].push(c);
+    face.appendChild(c);
+  }
+  cube1000.appendChild(face);
+});
+
+// 10,000: 10 cubes
+const tenkDiv=document.getElementById("tenk");
+const tenkCubes=[];
+function makeCubeBox(){
+  const box=document.createElement("div");
+  box.className="cubeBox";
+  const c=document.createElement("div");
+  c.className="cube cube-static cube-visible";  // visible on load
+  ["f","b","r","l","t","o"].forEach(cls=>{
+    const face=document.createElement("div");
+    face.className="face "+cls;
+    for(let i=0;i<100;i++){
+      const cc=document.createElement("div");
+      face.appendChild(cc);
+    }
+    c.appendChild(face);
+  });
+  box.appendChild(c);
+  return {box,cube:c};
+}
+for(let i=0;i<10;i++){
+  const {box,cube}=makeCubeBox();
+  tenkCubes.push(cube);
+  tenkDiv.appendChild(box);
+}
+
+const hundkRows = [];
+
+// 100,000: 10 rows × 10 cubes (reuse makeCubeBox so each cube is identical)
+
+// 100,000: 10 rows × 10 cubes (reuse makeCubeBox so each cube is identical)
+const hundkDiv = document.getElementById("hundk");
+for(let row=0; row<10; row++){
+  const rowDiv = document.createElement("div");
+  rowDiv.className = "hundk-row hundk-row-visible";   // visible on load
+  for(let col=0; col<10; col++){
+    const {box} = makeCubeBox();
+    rowDiv.appendChild(box);
+  }
+  hundkDiv.appendChild(rowDiv);
+  hundkRows.push(rowDiv);    // save for animation
+}
+
+
+const millionSlices = Array.from({ length: 100 }, () => []);
+
+
+// 1,000,000: big green spinning cube with 100×100 pixels per face
+// 1,000,000: big green spinning cube with 100×100 pixels per face
+const million = document.getElementById("million");
+["front","back","right","left","top","bottom"].forEach(cls => {
+  const f = document.createElement("div");
+  f.className = "bigFace " + cls;
+
+  // 100 × 100 = 10,000 little squares per face
+  for (let i = 0; i < 10000; i++) {
+    const cell = document.createElement("div");
+    const row = Math.floor(i / 100);        // 0–99: top row to bottom row
+    cell.dataset.row = row;
+    cell.classList.add("bigcell-visible");   // visible on load
+    millionSlices[row].push(cell);           // group by row across all faces
+    f.appendChild(cell);
+  }
+  million.appendChild(f);
+});
+
+
+// ---------- Animation helpers ----------
+
+function animateTen(){
+  tenPixels.forEach(p=>{
+    p.classList.remove("pixel-visible");
+    p.classList.add("pixel-hidden");
+  });
+  tenPixels.forEach((p,i)=>{
+    setTimeout(()=>{
+      p.classList.remove("pixel-hidden");
+      p.classList.add("pixel-visible");
+    }, i*150);
+  });
+}
+
+function animateHundred(){
+  hundredCells.forEach(c=>{
+    c.classList.remove("cell-visible");
+    c.classList.add("cell-hidden");
+  });
+  for(let row=0; row<10; row++){
+    setTimeout(()=>{
+      hundredCells
+        .filter(c => Number(c.dataset.row)===row)
+        .forEach(c=>{
+          c.classList.remove("cell-hidden");
+          c.classList.add("cell-visible");
+        });
+    }, row*200);
+  }
+}
+
+function animateThousand(){
+  const allCells = sliceRows.flat();
+  allCells.forEach(c=>{
+    c.classList.remove("slice-visible");
+    c.classList.add("slice-hidden");
+  });
+
+  sliceRows.forEach((rowCells, idx)=>{
+    setTimeout(()=>{
+      rowCells.forEach(c=>{
+        c.classList.remove("slice-hidden");
+        c.classList.add("slice-visible");
+      });
+    }, idx*200);
+  });
+}
+
+function animateTenThousand(){
+  tenkCubes.forEach(c=>{
+    c.classList.remove("cube-visible");
+    c.classList.add("cube-hidden");
+  });
+  tenkCubes.forEach((c,i)=>{
+    setTimeout(()=>{
+      c.classList.remove("cube-hidden");
+      c.classList.add("cube-visible");
+    }, i*200);
+  });
+}
+
+
+function animateHundredThousand(){
+  // First hide all 10 rows
+  hundkRows.forEach(row=>{
+    row.classList.remove("hundk-row-visible");
+    row.classList.add("hundk-row-hidden");
+  });
+
+  // Then reveal them one by one from top to bottom
+  hundkRows.forEach((row, idx)=>{
+    setTimeout(()=>{
+      row.classList.remove("hundk-row-hidden");
+      row.classList.add("hundk-row-visible");
+    }, idx * 250);   // 0ms, 250ms, 500ms, ... per row
+  });
+}
+
+
+function animateMillion(){
+  // Hide all cells first
+  const allCells = millionSlices.flat();
+  allCells.forEach(c => {
+    c.classList.remove("bigcell-visible");
+    c.classList.add("bigcell-hidden");
+  });
+
+  // Reveal row by row from top (row 0) to bottom (row 99)
+  millionSlices.forEach((rowCells, idx) => {
+    setTimeout(() => {
+      rowCells.forEach(c => {
+        c.classList.remove("bigcell-hidden");
+        c.classList.add("bigcell-visible");
+      });
+    }, idx * 80);   // adjust 80 for speed: smaller = faster, larger = slower
+  });
+}
+
+
+
+// ---------- sound + click handler ----------
+
+function speak(text){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.rate=.9; u.pitch=1.05;
+  speechSynthesis.speak(u);
+}
+
+function handleClick(which){
+  if(which==='one') speak('One');
+  if(which==='ten') speak('Ten');
+  if(which==='hundred') speak('One Hundred');
+  if(which==='thousand') speak('One Thousand');
+  if(which==='tenthousand') speak('Ten Thousand');
+  if(which==='hundredthousand') speak('One Hundred Thousand');
+  if(which==='million') speak('One Million');
+
+  if(which==='ten') animateTen();
+  if(which==='hundred') animateHundred();
+  if(which==='thousand') animateThousand();
+  if(which==='tenthousand') animateTenThousand();
+  if(which==='hundredthousand') animateHundredThousand();  // ⬅️ new
+
+}
+</script>
+
+</body>
+</html>
