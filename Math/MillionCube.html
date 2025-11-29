@@ -275,6 +275,15 @@ p.subtitle{color:#aaa;margin-bottom:30px}
 }
 
 
+/* ⭐ NEW: add spacing between the 10 pixels, similar to 100 grid */
+.row10{
+  display:flex;
+  gap:1px;
+  padding:2px;
+  background:rgba(138,201,38,.15); /* matches matrix100 background vibe */
+  border-radius:4px;
+}
+
 
 @keyframes spin{to{transform:rotateX(-20deg) rotateY(360deg)}}
 /* translateZ is half of 560px → 280px */
@@ -333,7 +342,7 @@ p.subtitle{color:#aaa;margin-bottom:30px}
       </div>
       <div class="visual">
         <div class="row10" id="tens"></div>
-        <div class="label">\( 1 \times 10 \)</div>
+        <div class="label">\( 10 \times 1 \)</div>
       </div>
     </div>
   </div>
@@ -365,7 +374,7 @@ p.subtitle{color:#aaa;margin-bottom:30px}
         <div class="cubeBox">
           <div class="cube cube-static cube-visible" id="cube-1000"></div>
         </div>
-        <div class="label">\( 100 \times 10 = 10 \times 10 \times 10 = 10^3\)</div>
+        <div class="label">\( 10 \times 100 = 10 \times 10 \times 10 = 10^3\)</div>
       </div>
     </div>
   </div>
@@ -414,7 +423,7 @@ p.subtitle{color:#aaa;margin-bottom:30px}
         <div class="bigCubeWrap">
           <div class="bigCube" id="million"></div>
         </div>
-        <div class="label">\( 100 \times 100 \times 100 \)</div>
+        <div class="label">\( 100 \times 100 \times 100  = 100^3\)</div>
       </div>
     </div>
   </div>
