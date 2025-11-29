@@ -430,6 +430,7 @@ p.subtitle{color:#aaa;margin-bottom:30px}
 
 </div>
 
+
 <script>
 // ---------- Build visuals (ALL VISIBLE INITIALLY) ----------
 
@@ -458,6 +459,7 @@ for(let i=0;i<100;i++){
 hundredsContainer.appendChild(matrix);
 
 // 1,000: single cube; animate ALL faces slice-by-slice
+// ⭐ but keep the TOP face solid (no animation)
 const cube1000 = document.getElementById("cube-1000");
 const sliceRows = Array.from({ length: 10 }, () => []);
 
@@ -467,10 +469,18 @@ const sliceRows = Array.from({ length: 10 }, () => []);
 
   for (let i = 0; i < 100; i++) {
     const c = document.createElement("div");
-    const sliceIndex = Math.floor(i / 10); // 0–9
-    c.dataset.slice = sliceIndex;
-    c.classList.add("slice-visible");   // visible on load
-    sliceRows[sliceIndex].push(c);
+
+    if (cls === "t") {
+      // ⭐ Top face: no slice-based animation, just a solid plate
+      // (no dataset.slice, no slice-visible class, no push into sliceRows)
+    } else {
+      // Other 5 faces: participate in the slice animation
+      const sliceIndex = Math.floor(i / 10); // 0–9
+      c.dataset.slice = sliceIndex;
+      c.classList.add("slice-visible");   // visible on load
+      sliceRows[sliceIndex].push(c);
+    }
+
     face.appendChild(c);
   }
   cube1000.appendChild(face);
@@ -505,8 +515,6 @@ for(let i=0;i<10;i++){
 const hundkRows = [];
 
 // 100,000: 10 rows × 10 cubes (reuse makeCubeBox so each cube is identical)
-
-// 100,000: 10 rows × 10 cubes (reuse makeCubeBox so each cube is identical)
 const hundkDiv = document.getElementById("hundk");
 for(let row=0; row<10; row++){
   const rowDiv = document.createElement("div");
@@ -519,11 +527,8 @@ for(let row=0; row<10; row++){
   hundkRows.push(rowDiv);    // save for animation
 }
 
-
 const millionSlices = Array.from({ length: 100 }, () => []);
 
-
-// 1,000,000: big green spinning cube with 100×100 pixels per face
 // 1,000,000: big green spinning cube with 100×100 pixels per face
 const million = document.getElementById("million");
 ["front","back","right","left","top","bottom"].forEach(cls => {
@@ -541,7 +546,6 @@ const million = document.getElementById("million");
   }
   million.appendChild(f);
 });
-
 
 // ---------- Animation helpers ----------
 
@@ -576,7 +580,7 @@ function animateHundred(){
 }
 
 function animateThousand(){
-  const allCells = sliceRows.flat();
+  const allCells = sliceRows.flat();  // ⭐ only the 5 animated faces
   allCells.forEach(c=>{
     c.classList.remove("slice-visible");
     c.classList.add("slice-hidden");
@@ -605,44 +609,34 @@ function animateTenThousand(){
   });
 }
 
-
 function animateHundredThousand(){
-  // First hide all 10 rows
   hundkRows.forEach(row=>{
     row.classList.remove("hundk-row-visible");
     row.classList.add("hundk-row-hidden");
   });
-
-  // Then reveal them one by one from top to bottom
   hundkRows.forEach((row, idx)=>{
     setTimeout(()=>{
       row.classList.remove("hundk-row-hidden");
       row.classList.add("hundk-row-visible");
-    }, idx * 250);   // 0ms, 250ms, 500ms, ... per row
+    }, idx * 250);
   });
 }
 
-
 function animateMillion(){
-  // Hide all cells first
   const allCells = millionSlices.flat();
   allCells.forEach(c => {
     c.classList.remove("bigcell-visible");
     c.classList.add("bigcell-hidden");
   });
-
-  // Reveal row by row from top (row 0) to bottom (row 99)
   millionSlices.forEach((rowCells, idx) => {
     setTimeout(() => {
       rowCells.forEach(c => {
         c.classList.remove("bigcell-hidden");
         c.classList.add("bigcell-visible");
       });
-    }, idx * 80);   // adjust 80 for speed: smaller = faster, larger = slower
+    }, idx * 80);
   });
 }
-
-
 
 // ---------- sound + click handler ----------
 
@@ -667,10 +661,11 @@ function handleClick(which){
   if(which==='hundred') animateHundred();
   if(which==='thousand') animateThousand();
   if(which==='tenthousand') animateTenThousand();
-  if(which==='hundredthousand') animateHundredThousand();  // ⬅️ new
-
+  if(which==='hundredthousand') animateHundredThousand();
+  if(which==='million') animateMillion();
 }
 </script>
+
 
 </body>
 </html>
