@@ -309,14 +309,39 @@ p.subtitle{color:#aaa;margin-bottom:30px}
 .bigCube.animating{
   animation:none;
 }
+
+.title{
+  font-size:3.2rem;
+  font-weight:600;
+  background:linear-gradient(135deg, #8ecae6, #ffffff, #219ebc);
+  -webkit-background-clip:text;
+  color:transparent;
+  text-shadow: 0 2px 8px rgba(173,216,230,0.4);
+}
+
+.subtitle::before{
+  content:"⛸️ ";
+}
+.subtitle::after{
+  content:" ⛸️";
+}
+
+
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
 </head>
 <body>
 
-<h1>The Cube Ladder 🧊</h1>
+  <h1 class="title">
+    ⛸️ Ada’s Cube Ladder 🧊
+  </h1>
+
+
 <p class="subtitle">Each step builds from the last.</p>
+
+<h2>Ada is climbing the cube ladder, skating her way into math magic! ✨⛸️</h2>
+
 
 <div class="ladder">
 
@@ -689,6 +714,10 @@ function handleClick(which){
   if(which==='million') animateMillion();
 }
 </script>
+
+<center>
+  <h1>❤️ This website was created with love for my wonderful 7-year-old daughter Ada ❤️</h1>
+</center>
 
 </body>
 </html>
