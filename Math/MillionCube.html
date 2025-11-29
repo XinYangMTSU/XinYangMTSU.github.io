@@ -26,7 +26,7 @@ h1{
 p.subtitle{color:#aaa;margin-bottom:30px}
 
 .ladder{
- max-width:1400px;   /* ⭐ even wider so million block has room */
+ max-width:1400px;
  width:100%;
  display:flex;flex-direction:column;gap:30px;
 }
@@ -51,11 +51,11 @@ p.subtitle{color:#aaa;margin-bottom:30px}
  cursor:pointer;
 }
 
-/* ⭐ Make the 1,000,000 block MUCH bigger/taller */
+/* 1,000,000 block bigger */
 .million-rung{
   padding:32px;
   min-height:860px;
-  align-items:flex-start;  /* keep label at top */
+  align-items:flex-start;
   display:flex;
 }
 
@@ -66,7 +66,7 @@ p.subtitle{color:#aaa;margin-bottom:30px}
 }
 
 .rung-label{
- width:200px;                /* a bit wider for the text */
+ width:200px;
  border-right:1px solid #333;
  padding-right:16px;
 }
@@ -86,12 +86,12 @@ p.subtitle{color:#aaa;margin-bottom:30px}
  flex-wrap:wrap;
 }
 
-/* ⭐ Keep million row on a single line: label | big cube | formula */
+/* million row layout */
 .million-visual{
   flex-wrap:nowrap;
   align-items:center;
-  margin-top:auto;      /* push cube downward */
-  margin-bottom:auto;   /* pull cube upward */
+  margin-top:auto;
+  margin-bottom:auto;
 }
 
 .label{
@@ -102,7 +102,6 @@ p.subtitle{color:#aaa;margin-bottom:30px}
  margin-left:10px;
 }
 
-/* For the 10,000 row, never wrap; let cubes stay single row */
 .tenk-visual{
  flex-wrap:nowrap;
 }
@@ -148,19 +147,16 @@ p.subtitle{color:#aaa;margin-bottom:30px}
  transform:rotateX(-25deg) rotateY(35deg);
 }
 
-/* used for 10,000 animation */
-/* used for 10,000 animation */
 .cube-hidden{
   opacity:0;
-  transform:rotateX(-25deg) rotateY(35deg);  /* same size, just invisible */
+  transform:rotateX(-25deg) rotateY(35deg);
 }
 
 .cube-visible{
   opacity:1;
   transform:rotateX(-25deg) rotateY(35deg);
-  transition:opacity .35s;   /* smooth fade-in */
+  transition:opacity .35s;
 }
-
 
 .face{
  position:absolute;width:60px;height:60px;
@@ -176,7 +172,7 @@ p.subtitle{color:#aaa;margin-bottom:30px}
 .t{transform:rotateX(90deg) translateZ(30px)}
 .o{transform:rotateX(-90deg) translateZ(30px)}
 
-/* slice animation **inside** the 1,000 cube (rows) */
+/* slice animation inside the 1,000 cube (rows) */
 .slice-hidden{
  opacity:0;
  transform:scale(0.7);
@@ -187,26 +183,22 @@ p.subtitle{color:#aaa;margin-bottom:30px}
  transition:opacity .25s,transform .25s;
 }
 
-/* 10,000 cubes container: single row of 10 cubes */
+/* 10,000 cubes: row of 10 cubes */
 .tenk-cubes{
  display:flex;
  flex-wrap:nowrap;
  gap:8px;
 }
 
-/* 10,000: animation on the whole cube box (not slices) */
 .tenk-box-hidden{
   opacity:0;
   transform:scale(0.9);
 }
-
 .tenk-box-visible{
   opacity:1;
   transform:scale(1);
   transition:opacity .35s, transform .35s;
 }
-
-
 
 /* 100s plate */
 .matrix100{
@@ -216,7 +208,7 @@ p.subtitle{color:#aaa;margin-bottom:30px}
  background:rgba(138,201,38,.15);
 }
 
-/* 100,000: 10 rows × 10 cubes (each cube same as 10,000 cubes) */
+/* 100,000: 10×10 cubes */
 .hundk-grid{
  display:flex;
  flex-direction:column;
@@ -227,28 +219,17 @@ p.subtitle{color:#aaa;margin-bottom:30px}
  flex-wrap:nowrap;
  gap:8px;
 }
-/* Animation states for 100,000 rows */
 .hundk-row-hidden{
   opacity:0;
   transform:scale(0.8);
 }
-
 .hundk-row-visible{
   opacity:1;
   transform:scale(1);
   transition:opacity .3s, transform .3s;
 }
 
-
-.hundk-row{
-  display:flex;
-  flex-wrap:nowrap;
-  gap:8px;
-}
-
-
-
-/* 1,000,000: BIG GREEN cube, 100 × 100 pixels per face, EVEN BIGGER */
+/* 1,000,000: BIG cube */
 .bigCubeWrap{
   width:560px;
   height:560px;
@@ -261,8 +242,7 @@ p.subtitle{color:#aaa;margin-bottom:30px}
   animation:spin 10s linear infinite;
 }
 
-/* faces: 100×100 grid of green pixels with WHITE grid lines */
-/* 1,000,000 cube faces: bold white face edges, soft inner grid */
+/* 1,000,000 cube faces */
 .bigFace{
   position:absolute;
   width:560px;
@@ -270,54 +250,47 @@ p.subtitle{color:#aaa;margin-bottom:30px}
   display:grid;
   grid-template-columns:repeat(100,1fr);
   gap:0;
-
-  border:2px solid #ffffff;     /* strong edges like other cubes */
-  background:var(--hund);       /* same green as other cubes */
+  border:2px solid #ffffff;
+  background:var(--hund);
 }
 
 .bigFace div{
   background:var(--hund);
-  border:0.15px solid rgba(255,255,255,0.25);  /* light inner grid */
+  border:0.15px solid rgba(255,255,255,0.25);
 }
 
-
-/* Fake 100×100 grid on non-front faces using background gradients */
+/* Fake 100×100 grid on non-front, non-left faces */
 .bigFace.top,
 .bigFace.right,
-.bigFace.left,
 .bigFace.back,
 .bigFace.bottom {
   background-image:
     linear-gradient(to right, rgba(255,255,255,0.25) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255,255,255,0.25) 1px, transparent 1px);
-  /* 560px / 100 = 5.6px → visually matches 100×100 squares */
-  background-size: 5.6px 5.6px;
+  background-size: 5.6px 5.6px; /* 560 / 100 */
 }
 
-
-/* Million cube row-wise reveal */
+/* Million cube cell states */
 .bigcell-hidden{
   opacity:0;
+  transform:scale(0.7);
 }
-
 .bigcell-visible{
   opacity:1;
-  transition:opacity .25s;
+  transform:scale(1);
+  transition:opacity .25s, transform .25s;
 }
 
-
-/* ⭐ NEW: add spacing between the 10 pixels, similar to 100 grid */
+/* row of 10 pixels for "10" */
 .row10{
   display:flex;
   gap:1px;
   padding:2px;
-  background:rgba(138,201,38,.15); /* matches matrix100 background vibe */
+  background:rgba(138,201,38,.15);
   border-radius:4px;
 }
 
-
 @keyframes spin{to{transform:rotateX(-20deg) rotateY(360deg)}}
-/* translateZ is half of 560px → 280px */
 .front{transform:translateZ(280px)}
 .back{transform:rotateY(180deg) translateZ(280px)}
 .right{transform:rotateY(90deg) translateZ(280px)}
@@ -328,22 +301,17 @@ p.subtitle{color:#aaa;margin-bottom:30px}
 .sound{opacity:.6}
 .sound:hover{opacity:1}
 
-/* Prevent the million formula from touching the cube */
-/* Prevent the million formula from touching the cube */
 .million-visual .label{
-  margin-left:120px;   /* push formula right */
-  white-space:nowrap; /* keep formula on one line */
+  margin-left:120px;
+  white-space:nowrap;
 }
 
 .bigCube.animating{
-  animation:none;   /* stop spinning while we show slices */
+  animation:none;
 }
-
 </style>
 
-<!-- MathJax (once per page) -->
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
-
 </head>
 <body>
 
@@ -437,7 +405,6 @@ p.subtitle{color:#aaa;margin-bottom:30px}
         <div class="num-name">HUNDRED THOUSAND</div>
       </div>
       <div class="visual">
-        <!-- 10 rows × 10 cubes (each row same as 10,000) -->
         <div class="hundk-grid" id="hundk"></div>
         <div class="label">\( 10 \times 10,000 \)</div>
       </div>
@@ -453,7 +420,6 @@ p.subtitle{color:#aaa;margin-bottom:30px}
         <div class="num-name">MILLION</div>
       </div>
       <div class="visual million-visual">
-        <!-- BIG green cube, 100×100×100 conceptually -->
         <div class="bigCubeWrap">
           <div class="bigCube" id="million"></div>
         </div>
@@ -464,7 +430,6 @@ p.subtitle{color:#aaa;margin-bottom:30px}
 
 </div>
 
-
 <script>
 // ---------- Build visuals (ALL VISIBLE INITIALLY) ----------
 
@@ -473,7 +438,7 @@ const tenPixels = [];
 const tensDiv = document.getElementById("tens");
 for(let i=0;i<10;i++){
   const d=document.createElement("div");
-  d.className="pixel pixel-visible";  // visible on load
+  d.className="pixel pixel-visible";
   tenPixels.push(d);
   tensDiv.appendChild(d);
 }
@@ -485,15 +450,14 @@ matrix.className="matrix100";
 const hundredCells=[];
 for(let i=0;i<100;i++){
   const cell=document.createElement("div");
-  cell.className="cell100 cell-visible";  // visible on load
+  cell.className="cell100 cell-visible";
   cell.dataset.row = Math.floor(i/10); // 0–9
   hundredCells.push(cell);
   matrix.appendChild(cell);
 }
 hundredsContainer.appendChild(matrix);
 
-// 1,000: single cube; animate ALL faces slice-by-slice
-// ⭐ but keep the TOP face solid (no animation)
+// 1,000: cube with slice animation
 const cube1000 = document.getElementById("cube-1000");
 const sliceRows = Array.from({ length: 10 }, () => []);
 
@@ -505,32 +469,28 @@ const sliceRows = Array.from({ length: 10 }, () => []);
     const c = document.createElement("div");
 
     if (cls === "t") {
-      // ⭐ Top face: no slice-based animation, just a solid plate
-      // (no dataset.slice, no slice-visible class, no push into sliceRows)
+      // top face: solid, no slice animation
     } else {
-      // Other 5 faces: participate in the slice animation
       const sliceIndex = Math.floor(i / 10); // 0–9
       c.dataset.slice = sliceIndex;
-      c.classList.add("slice-visible");   // visible on load
+      c.classList.add("slice-visible");
       sliceRows[sliceIndex].push(c);
     }
-
     face.appendChild(c);
   }
   cube1000.appendChild(face);
 });
 
-// 10,000: 10 cubes
-// 10,000: 10 cubes (each is one 1,000-cube)
+// 10,000: 10 cubes (each 1,000)
 const tenkDiv = document.getElementById("tenk");
-const tenkBoxes = [];   // ⬅️ track outer boxes for animation
+const tenkBoxes = [];
 
 function makeCubeBox(){
   const box = document.createElement("div");
-  box.className = "cubeBox tenk-box-visible";  // visible on load
+  box.className = "cubeBox tenk-box-visible";
 
   const c = document.createElement("div");
-  c.className = "cube cube-static";           // just static 3D cube
+  c.className = "cube cube-static";
 
   ["f","b","r","l","t","o"].forEach(cls=>{
     const face = document.createElement("div");
@@ -548,55 +508,42 @@ function makeCubeBox(){
 
 for(let i=0;i<10;i++){
   const {box} = makeCubeBox();
-  tenkBoxes.push(box);        // ⬅️ store the box, not the inner cube
+  tenkBoxes.push(box);
   tenkDiv.appendChild(box);
 }
 
-
+// 100,000: 10×10 cubes
 const hundkRows = [];
-
-// 100,000: 10 rows × 10 cubes (reuse makeCubeBox so each cube is identical)
 const hundkDiv = document.getElementById("hundk");
 for(let row=0; row<10; row++){
   const rowDiv = document.createElement("div");
-  rowDiv.className = "hundk-row hundk-row-visible";   // visible on load
+  rowDiv.className = "hundk-row hundk-row-visible";
   for(let col=0; col<10; col++){
     const {box} = makeCubeBox();
     rowDiv.appendChild(box);
   }
   hundkDiv.appendChild(rowDiv);
-  hundkRows.push(rowDiv);    // save for animation
+  hundkRows.push(rowDiv);
 }
 
-
-
-// 1,000,000: big cube — animate ONLY the front 100×100 face (10,000 cells)
-// other faces stay solid (no tiny cells) for performance
-const millionSlices = Array.from({ length: 100 }, () => []);
-
-const million = document.getElementById("million");
+// 1,000,000: big cube
+const millionCube = document.getElementById("million");
 ["front","back","right","left","top","bottom"].forEach(cls => {
   const f = document.createElement("div");
   f.className = "bigFace " + cls;
 
-  if (cls === "front") {
-    // 100 × 100 = 10,000 little squares on the FRONT face only
+  if (cls === "front" || cls === "left") {
+    // real 100×100 cells on FRONT and LEFT faces
     for (let i = 0; i < 10000; i++) {
       const cell = document.createElement("div");
-      const row = Math.floor(i / 100);        // 0–99: top row to bottom row
+      const row = Math.floor(i / 100); // 0–99
       cell.dataset.row = row;
-      cell.classList.add("bigcell-visible");   // visible on load
-      millionSlices[row].push(cell);           // group by row
+      cell.classList.add("bigcell-visible");
       f.appendChild(cell);
     }
   }
-
-  // other faces: just a solid green face (no inner cells) — much cheaper
-  million.appendChild(f);
+  millionCube.appendChild(f);
 });
-
-
-
 
 // ---------- Animation helpers ----------
 
@@ -631,7 +578,7 @@ function animateHundred(){
 }
 
 function animateThousand(){
-  const allCells = sliceRows.flat();  // ⭐ only the 5 animated faces
+  const allCells = sliceRows.flat();
   allCells.forEach(c=>{
     c.classList.remove("slice-visible");
     c.classList.add("slice-hidden");
@@ -648,22 +595,18 @@ function animateThousand(){
 }
 
 function animateTenThousand(){
-  // Hide all 10 boxes instantly
   tenkBoxes.forEach(box=>{
     box.classList.remove("tenk-box-visible");
     box.classList.add("tenk-box-hidden");
   });
 
-  // Reveal them one by one from LEFT to RIGHT
   tenkBoxes.forEach((box, i)=>{
     setTimeout(()=>{
       box.classList.remove("tenk-box-hidden");
       box.classList.add("tenk-box-visible");
-    }, i * 300);   // 0ms, 300ms, 600ms, ... left → right
+    }, i * 300);
   });
 }
-
-
 
 function animateHundredThousand(){
   hundkRows.forEach(row=>{
@@ -678,35 +621,46 @@ function animateHundredThousand(){
   });
 }
 
-
 function animateMillion(){
   const cube = document.getElementById("million");
-  cube.classList.add("animating");  // stop spinning during animation (optional)
+  cube.classList.add("animating");  // stop spinning during animation
+
+  // Grab all real cells on front + left faces
+  const frontCells = Array.from(document.querySelectorAll('.bigFace.front div'));
+  const leftCells  = Array.from(document.querySelectorAll('.bigFace.left div'));
+  const allCells   = frontCells.concat(leftCells);
+
+  // Group by row index 0–99
+  const slices = Array.from({length:100}, () => []);
+  allCells.forEach(cell => {
+    const row = Number(cell.dataset.row) || 0;
+    if (row >= 0 && row < 100) {
+      slices[row].push(cell);
+    }
+  });
 
   // Hide all cells first
-  const allCells = millionSlices.flat();
   allCells.forEach(c => {
     c.classList.remove("bigcell-visible");
     c.classList.add("bigcell-hidden");
   });
 
-  // Reveal row by row from top (row 0) to bottom (row 99)
-  millionSlices.forEach((rowCells, idx) => {
+  // Reveal row by row from top to bottom
+  slices.forEach((rowCells, idx) => {
     setTimeout(() => {
       rowCells.forEach(c => {
         c.classList.remove("bigcell-hidden");
         c.classList.add("bigcell-visible");
       });
-    }, idx * 80);   // adjust 80 for speed: smaller = faster
+    }, idx * 80);
   });
 
   // after the last row finishes, let the cube spin again
-  const totalDuration = 100 * 80 + 400;  // rows * delay + small buffer
+  const totalDuration = 100 * 80 + 400;
   setTimeout(() => {
     cube.classList.remove("animating");
   }, totalDuration);
 }
-
 
 // ---------- sound + click handler ----------
 
@@ -735,7 +689,6 @@ function handleClick(which){
   if(which==='million') animateMillion();
 }
 </script>
-
 
 </body>
 </html>
