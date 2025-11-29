@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7 Times Tables - Fun Activities</title>
+
+<style>
+/* Same styles as your 8-page, reused for consistency */
+* {margin:0; padding:0; box-sizing:border-box;}
+body {background:linear-gradient(135deg,#43cea2,#185a9d); min-height:100vh; padding:20px;
+font-family:'Comic Sans MS','Arial Rounded MT Bold',cursive;}
+.container {max-width:1100px; margin:auto;}
+
+.header {text-align:center; color:white; margin-bottom:20px;}
+.header h1 {font-size:2.8em; margin-bottom:10px; text-shadow:2px 2px 4px rgba(0,0,0,.3);}
+.header p {font-size:1.1em;}
+
+.tips-card {background:rgba(255,255,255,.95); border-radius:20px; padding:20px; margin-bottom:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);}
+.tips-title {font-size:1.6em; color:#185a9d; font-weight:bold;}
+.tips-section-title {font-size:1.2em; color:#43cea2; margin-top:15px; font-weight:bold;}
+.tips-text {color:#444; font-size:.95em; line-height:1.6;}
+
+.highlight-box {background:#e1f5fe; border:2px solid #29b6f6; border-radius:10px; padding:10px;
+margin-top:10px; text-align:center; font-weight:bold;}
+.rhyme-box {background:#fff3e0; border:2px dashed orange; border-radius:10px; padding:12px;
+text-align:center; font-weight:bold; margin-top:10px;}
+
+.double-table {width:100%; border-collapse:collapse; margin-top:10px;}
+.double-table th,.double-table td {border:1px solid #ccc; padding:8px; text-align:center;}
+.double-table th {background:#e3f2fd}
+
+.activities-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;}
+.activity-card {background:white; border-radius:20px; padding:20px; box-shadow:0 8px 20px rgba(0,0,0,.2); cursor:pointer;}
+.activity-card:hover {transform:scale(1.05);}
+
+.activity-title {font-size:1.3em; color:#185a9d; font-weight:bold;}
+.activity-icon {font-size:3em;}
+
+.activity-content {display:none; background:white; border-radius:20px; padding:25px; margin-top:20px;}
+.activity-content.active {display:block;}
+
+.pattern-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(90px,1fr)); gap:10px;}
+.pattern-box {background:#f5f5f5; font-weight:bold; padding:15px; text-align:center; border-radius:10px; cursor:pointer;}
+.pattern-box.revealed {background:#43cea2; color:white;}
+
+button {background:#185a9d; color:white; border:none; padding:12px 25px; border-radius:20px; cursor:pointer;}
+button:hover {background:#43cea2;}
+
+@media(max-width:700px){.header h1{font-size:2em;}}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="header">
+<h1>🎉 7 Times Table Adventure</h1>
+<p>Learn the magic of multiplying by 7 — with tricks & games! ✨</p>
+</div>
+
+<!-- TRICKS -->
+<div class="tips-card">
+<div class="tips-title">⭐ 7 Times Table Tricks</div>
+
+<div class="tips-section-title">1. Add 7 Each Time</div>
+<div class="tips-text">
+Start from 7 and just keep adding 7!<br>
+<div class="highlight-box">7, 14, 21, 28, 35, 42, 49, 56, 63, 70</div>
+</div>
+
+<div class="tips-section-title">2. The "5-6-7-8" Memory Chant 🎵</div>
+<div class="tips-text">
+Hard one? <strong>7 × 8</strong> is easy with a rhyme:
+<div class="rhyme-box">🎵 "Five, six, seven, eight — fifty-six is seven times eight!"</div>
+</div>
+
+<div class="tips-section-title">3. Double Then Add One More Group</div>
+<div class="tips-text">
+7 is like <strong>double 3 and add one more</strong><br>
+Example: 7 × 4 → (3×4=12) + 4 = <b>28</b>
+</div>
+
+<div class="tips-section-title">4. Lucky 7 Pattern ✨</div>
+<div class="tips-text">
+Multiples of 7 have patterns in digits and often repeat:
+21 ➜ 28 ➜ 35 ➜ 42 ➜ 49 ➜ 56
+</div>
+</div>
+
+<!-- TABLE -->
+<div class="tips-card">
+<div class="tips-title">📋 7 Times Table</div>
+
+<table class="double-table">
+<tr><th>Problem</th><th>Answer</th></tr>
+<tr><td>7 × 1</td><td>7</td></tr>
+<tr><td>7 × 2</td><td>14</td></tr>
+<tr><td>7 × 3</td><td>21</td></tr>
+<tr><td>7 × 4</td><td>28</td></tr>
+<tr><td>7 × 5</td><td>35</td></tr>
+<tr><td>7 × 6</td><td>42</td></tr>
+<tr><td>7 × 7</td><td>49</td></tr>
+<tr><td>7 × 8</td><td>56</td></tr>
+<tr><td>7 × 9</td><td>63</td></tr>
+<tr><td>7 × 10</td><td>70</td></tr>
+</table>
+</div>
+
+<!-- ACTIVITIES -->
+<div class="activities-grid">
+
+<div class="activity-card" onclick="show('pattern')">
+<div class="activity-icon">🧩</div>
+<div class="activity-title">Pattern Reveal</div>
+<p>Click to reveal the magic of 7!</p>
+</div>
+
+<div class="activity-card" onclick="show('quiz')">
+<div class="activity-icon">🎯</div>
+<div class="activity-title">Quick Quiz</div>
+<p>Test your memory!</p>
+</div>
+
+</div>
+
+<!-- PATTERN -->
+<div class="activity-content" id="pattern">
+<h2>🔍 Pattern Game</h2>
+<div class="pattern-grid" id="patternGrid"></div>
+<button onclick="revealAll()">Show All</button>
+</div>
+
+<!-- QUIZ -->
+<div class="activity-content" id="quiz">
+<h2>🎯 Quiz</h2>
+<p id="qText"></p>
+<div id="answers"></div>
+<p id="feedback"></p>
+<button onclick="nextQ()">Next</button>
+</div>
+
+</div>
+
+<script>
+const table = [7,14,21,28,35,42,49,56,63,70];
+const patternGrid = document.getElementById("patternGrid");
+const qText = document.getElementById("qText");
+const answersDiv = document.getElementById("answers");
+const feedback = document.getElementById("feedback");
+
+table.forEach(v=>{
+let b=document.createElement("div");
+b.className="pattern-box";
+b.textContent="?";
+b.onclick=()=>{b.textContent=v; b.classList.add("revealed");};
+patternGrid.appendChild(b);
+});
+
+function revealAll(){document.querySelectorAll('.pattern-box').forEach(b=>b.click());}
+
+let q=0;
+function nextQ(){
+let n=Math.floor(Math.random()*10)+1;
+let ans=7*n;
+qText.textContent=`7 × ${n} = ?`;
+answersDiv.innerHTML="";
+feedback.textContent="";
+let opts=[ans,ans+7,ans-7,ans+14].sort(()=>Math.random()-0.5);
+opts.forEach(v=>{
+let btn=document.createElement("button");
+btn.textContent=v;
+btn.onclick=()=>check(v,ans);
+answersDiv.appendChild(btn);
+});
+}
+
+function check(val,ans){
+feedback.textContent = val==ans?"✅ Correct!":"❌ Try again!";
+}
+
+function show(id){
+document.querySelectorAll('.activity-content').forEach(d=>d.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+if(id==="quiz") nextQ();
+}
+</script>
+
+</body>
+</html>
