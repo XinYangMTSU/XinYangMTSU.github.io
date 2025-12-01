@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CIFAR-10 Deep Learning: ResNet18_Scratch_32 & ResNet18_Pretrained_224</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1d1f 0%, #2a1e28 100%);
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #ffb3de;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      background: #222025;
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 4px 30px rgba(255, 121, 198, 0.15);
+      border-left: 7px solid #ff79c6;
+    }
+
+    h1 {
+      color: #ff79c6;
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 2.2em;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #ffb3de;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+
+    h2 {
+      color: #ff79c6;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      font-size: 1.6em;
+      border-bottom: 2px solid #ff79c6;
+      padding-bottom: 6px;
+    }
+
+    .section-label {
+      font-size: 0.9em;
+      color: #fff52e;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .cifar-intro {
+      background: #19121a;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 25px;
+      line-height: 1.7;
+      font-size: 0.95em;
+      border-left: 4px solid #50fa7b;
+    }
+
+    .cifar-intro strong {
+      color: #fff52e;
+    }
+
+    .model-summary {
+      background: #2a1e28;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 25px;
+      border-left: 4px solid #ff79c6;
+      font-size: 0.9em;
+      line-height: 1.7;
+    }
+
+    .model-summary ul {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+
+    .model-summary li {
+      margin-bottom: 4px;
+    }
+
+    .network-container {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 30px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      overflow-x: auto;
+    }
+
+    .diagram-caption {
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: #ffb3de;
+      text-align: center;
+    }
+
+    svg {
+      display: block;
+      margin: 0 auto;
+      background: #19121a;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(255, 121, 198, 0.11);
+      min-width: 100%;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .stat-card {
+      background: #19121a;
+      border-left: 4px solid #50fa7b;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .stat-card.highlight {
+      border-left-color: #fff52e;
+    }
+
+    .stat-label {
+      color: #ffb3de;
+      font-size: 0.9em;
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      color: #fff52e;
+      font-size: 1.6em;
+      font-weight: bold;
+      font-family: 'Courier New', monospace;
+    }
+
+    .stat-extra {
+      color: #ffb3de;
+      font-size: 0.85em;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    .code-box {
+      background: #19121a;
+      border-radius: 8px;
+      border: 1px solid #444;
+      padding: 12px 14px;
+      margin-top: 10px;
+      font-family: "Courier New", monospace;
+      font-size: 0.85em;
+      color: #f8f8f2;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+
+    .dataset-info {
+      margin-top: 20px;
+      background: #19121a;
+      border-radius: 8px;
+      padding: 15px;
+      line-height: 1.6;
+      font-size: 0.9em;
+      border-left: 4px solid #ff79c6;
+    }
+
+    .dataset-info strong {
+      color: #fff52e;
+    }
+
+    .legend-color {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .color-input  { background: #ff79c6; }
+    .color-conv   { background: #50fa7b; }
+    .color-block  { background: #8be9fd; }
+    .color-flatten{ background: #bd93f9; }
+    .color-output { background: #fff52e; }
+
+    @media (max-width: 768px) {
+      .network-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🧠 CIFAR-10 Deep Learning: Two ResNet18 Models</h1>
+  <p class="subtitle">
+    Comparing <strong>ResNet18_Scratch_32</strong> (32×32 inputs, trained from scratch)
+    and <strong>ResNet18_Pretrained_224</strong> (224×224 inputs, ImageNet-pretrained backbone).
+  </p>
+
+  <!-- ====================== Section 1: Overview & CIFAR-10 ====================== -->
+  <div class="section-label">Section 1</div>
+  <h2>Overview & CIFAR-10 Dataset</h2>
+
+  <div class="cifar-intro">
+    <strong>What is CIFAR-10?</strong><br>
+    CIFAR-10 is a classic benchmark dataset in computer vision. It contains
+    <strong>60,000 color images (32×32 pixels, 3 RGB channels)</strong> divided into
+    <strong>10 everyday object categories</strong>: airplane, automobile, bird, cat, deer,
+    dog, frog, horse, ship, and truck.<br><br>
+    In the PyTorch notebook, we use CIFAR-10 to study <strong>two ResNet18-based models</strong>:
+    one trained entirely from scratch on 32×32 images, and one starting from
+    <strong>ImageNet-pretrained weights</strong> on 224×224 images (transfer learning).
+  </div>
+
+  <div class="model-summary">
+    <strong>High-level comparison:</strong>
+    <ul>
+      <li><strong>ResNet18_Scratch_32</strong>:
+        32×32 inputs, modified stem (3×3 conv, no maxpool), all weights randomly
+        initialized, ~<strong>11.17M</strong> trainable parameters.</li>
+      <li><strong>ResNet18_Pretrained_224</strong>:
+        224×224 inputs, standard ResNet18 architecture, loaded with ImageNet
+        pretrained weights, FC layer changed to 10 classes, ~<strong>11.18M</strong>
+        trainable parameters if fine-tuning the whole network.</li>
+    </ul>
+  </div>
+
+  <!-- ====================== Section 2: ResNet18_Scratch_32 ====================== -->
+  <div class="section-label">Section 2</div>
+  <h2>ResNet18_Scratch_32 (32×32 CIFAR-10, trained from scratch)</h2>
+
+  <div class="model-summary">
+    <strong>Architecture & Training:</strong>
+    <ul>
+      <li><strong>Input:</strong> 32×32×3 CIFAR-10 RGB image.</li>
+      <li><strong>Stem (modified):</strong> 3×3 conv, stride 1, padding 1 → BN → ReLU
+          (no initial 7×7 conv, no maxpool).</li>
+      <li><strong>Four stages of residual blocks</strong>:
+        Layer1 (64), Layer2 (128), Layer3 (256), Layer4 (512), each with 2
+        BasicBlocks and skip connections.</li>
+      <li><strong>Global Average Pooling:</strong> compresses 4×4×512 into 1×1×512.</li>
+      <li><strong>FC layer:</strong> Linear(512 → 10) for CIFAR-10 logits.</li>
+      <li><strong>Initialization:</strong> <code>weights = None</code>, so the network
+          learns all features directly from CIFAR-10.</li>
+    </ul>
+
+    <strong>Data pipeline (32×32 transforms):</strong>
+    <div class="code-box">
+<code>transform_32 = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize(
+        mean=(0.4914, 0.4822, 0.4465),  # CIFAR-10 mean (approx)
+        std=(0.2470, 0.2435, 0.2616)    # CIFAR-10 std  (approx)
+    )
+])
+
+trainset_32    = CIFAR10(root="./data", train=True,
+                         download=True, transform=transform_32)
+trainloader_32 = DataLoader(trainset_32, batch_size=128, shuffle=True)</code>
+    </div>
+    Each batch <code>images</code> has shape <code>[B, 3, 32, 32]</code> and is sent directly to
+    <code>ResNet18_Scratch_32(images)</code>.
+  </div>
+
+  <!-- Diagram: ResNet18_Scratch_32 -->
+  <div class="network-container">
+    <svg id="resnet32SVG" width="1200" height="380" viewBox="0 0 1200 380"></svg>
+    <p class="diagram-caption">
+      <span class="legend-color color-input"></span>Input (32×32×3) →
+      <span class="legend-color color-conv"></span>Stem Conv + BN + ReLU →
+      <span class="legend-color color-block"></span>4 Residual Stages →
+      <span class="legend-color color-flatten"></span>Global Avg Pool →
+      <span class="legend-color color-output"></span>FC 512→10.
+    </p>
+  </div>
+
+  <!-- Parameter breakdown: ResNet18_Scratch_32 -->
+  <div class="stats" id="stats-resnet32"></div>
+
+  <!-- ====================== Section 3: ResNet18_Pretrained_224 ====================== -->
+  <div class="section-label">Section 3</div>
+  <h2>ResNet18_Pretrained_224 (ImageNet → CIFAR-10 transfer learning)</h2>
+
+  <div class="model-summary">
+    <strong>Architecture & Pretraining:</strong>
+    <ul>
+      <li><strong>Input:</strong> CIFAR-10 image resized to 224×224×3.</li>
+      <li><strong>Standard ResNet18 stem:</strong>
+        7×7 conv (stride 2, padding 3) → BN → ReLU → 3×3 maxpool (stride 2).</li>
+      <li><strong>Four residual stages</strong>:
+        Layer1 (64), Layer2 (128), Layer3 (256), Layer4 (512), each with 2
+        BasicBlocks and skip connections (same as the scratch model’s blocks).</li>
+      <li><strong>Global Average Pooling</strong> → 1×1×512 features.</li>
+      <li><strong>FC layer replaced:</strong> original FC (512 → 1000) is replaced by
+        <strong>Linear(512 → 10)</strong> for CIFAR-10 classes.</li>
+      <li><strong>Pretrained backbone:</strong> weights loaded from ImageNet
+        (e.g., <code>ResNet18_Weights.DEFAULT</code>).</li>
+      <li><strong>freeze_backbone option:</strong>
+        you can choose to:
+        <ul>
+          <li><strong>Fine-tune all layers</strong> (more parameters updated, more flexible).</li>
+          <li><strong>Freeze the backbone</strong> and train only the last FC layer
+              (faster and less prone to overfitting on small datasets).</li>
+        </ul>
+      </li>
+    </ul>
+
+    <strong>Data pipeline (ImageNet-style transforms):</strong>
+    <div class="code-box">
+<code>weights = ResNet18_Weights.DEFAULT
+transform_224 = weights.transforms()   # resize/crop to 224×224, ToTensor, normalize
+
+trainset_224    = CIFAR10(root="./data", train=True,
+                          download=True, transform=transform_224)
+trainloader_224 = DataLoader(trainset_224, batch_size=128, shuffle=True)</code>
+    </div>
+    Now each batch <code>images</code> has shape <code>[B, 3, 224, 224]</code> and is fed to
+    <code>ResNet18_Pretrained_224(images)</code>. We are effectively “zooming” each CIFAR-10
+    image to 224×224 so that the pretrained filters behave as they did on ImageNet.
+  </div>
+
+  <!-- Diagram: ResNet18_Pretrained_224 -->
+  <div class="network-container">
+    <svg id="resnet224SVG" width="1200" height="380" viewBox="0 0 1200 380"></svg>
+    <p class="diagram-caption">
+      <span class="legend-color color-input"></span>Input (224×224×3) →
+      <span class="legend-color color-conv"></span>7×7 Conv + BN + ReLU →
+      <span class="legend-color color-block"></span>MaxPool + 4 Residual Stages →
+      <span class="legend-color color-flatten"></span>Global Avg Pool →
+      <span class="legend-color color-output"></span>FC 512→10.
+    </p>
+  </div>
+
+  <!-- Parameter breakdown: ResNet18_Pretrained_224 -->
+  <div class="stats" id="stats-resnet224"></div>
+
+  <!-- Shared summary -->
+  <div class="dataset-info">
+    <strong>Big picture:</strong><br>
+    • Both models share the same <strong>residual backbone structure</strong> (Layer1–Layer4),
+      but differ in the stem and input size.<br>
+    • <strong>ResNet18_Scratch_32</strong> has a slightly smaller stem (3×3 conv, no maxpool),
+      so its total parameters (~11.17M) are a bit lower than the pretrained version (~11.18M).<br>
+    • <strong>ResNet18_Pretrained_224</strong> shows how to do
+      <strong>transfer learning</strong>: reuse ImageNet features and only adapt the final
+      classifier (or fine-tune the whole network) for CIFAR-10.
+  </div>
+</div>
+
+<script>
+function drawDiagram(svgId, layers, titleText) {
+  const svg = document.getElementById(svgId);
+  if (!svg) return;
+
+  svg.innerHTML = '';
+
+  const w = 1200;
+  const h = 380;
+  const centerY = h / 2;
+
+  const paddingX = 90;
+  const availableW = w - 2 * paddingX;
+  const stepX = availableW / (layers.length - 1);
+  const rectW = 170;
+  const rectH = 80;
+
+  function getFillColor(type) {
+    if (type === 'input')   return '#ff79c6';
+    if (type === 'conv')    return '#50fa7b';
+    if (type === 'block')   return '#8be9fd';
+    if (type === 'flatten') return '#bd93f9';
+    if (type === 'output')  return '#fff52e';
+    return '#ffb3de';
+  }
+
+  function getStrokeColor(type) {
+    if (type === 'output') return '#ff79c6';
+    return '#222025';
+  }
+
+  // Arrowhead definition
+  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+  const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+  marker.setAttribute('id', 'arrowhead-' + svgId);
+  marker.setAttribute('markerWidth', '10');
+  marker.setAttribute('markerHeight', '7');
+  marker.setAttribute('refX', '0');
+  marker.setAttribute('refY', '3.5');
+  marker.setAttribute('orient', 'auto');
+  const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+  polygon.setAttribute('points', '0 0, 10 3.5, 0 7');
+  polygon.setAttribute('fill', '#ffb3de');
+  marker.appendChild(polygon);
+  defs.appendChild(marker);
+  svg.appendChild(defs);
+
+  // Arrows
+  for (let i = 0; i < layers.length - 1; i++) {
+    const x1 = paddingX + i * stepX + rectW / 2;
+    const x2 = paddingX + (i + 1) * stepX - rectW / 2;
+    const y  = centerY;
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', x1 + rectW / 2);
+    line.setAttribute('y1', y);
+    line.setAttribute('x2', x2 - rectW / 2 + 10);
+    line.setAttribute('y2', y);
+    line.setAttribute('stroke', '#ffb3de');
+    line.setAttribute('stroke-width', '2');
+    line.setAttribute('marker-end', 'url(#arrowhead-' + svgId + ')');
+    svg.appendChild(line);
+  }
+
+  // Rectangles + text
+  layers.forEach((layer, i) => {
+    const centerX = paddingX + i * stepX;
+    const x = centerX - rectW / 2;
+    const y = centerY - rectH / 2;
+
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('x', x);
+    rect.setAttribute('y', y);
+    rect.setAttribute('rx', 16);
+    rect.setAttribute('ry', 16);
+    rect.setAttribute('width', rectW);
+    rect.setAttribute('height', rectH);
+    rect.setAttribute('fill', getFillColor(layer.type));
+    rect.setAttribute('stroke', getStrokeColor(layer.type));
+    rect.setAttribute('stroke-width', '3');
+    svg.appendChild(rect);
+
+    const nameText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    nameText.setAttribute('x', centerX);
+    nameText.setAttribute('y', y + 26);
+    nameText.setAttribute('text-anchor', 'middle');
+    nameText.setAttribute('font-size', '14');
+    nameText.setAttribute('font-weight', 'bold');
+    nameText.setAttribute('fill', '#1a1d1f');
+    nameText.textContent = layer.name;
+    svg.appendChild(nameText);
+
+    const shapeText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    shapeText.setAttribute('x', centerX);
+    shapeText.setAttribute('y', y + 48);
+    shapeText.setAttribute('text-anchor', 'middle');
+    shapeText.setAttribute('font-size', '13');
+    shapeText.setAttribute('fill', '#1a1d1f');
+    shapeText.textContent = layer.shape;
+    svg.appendChild(shapeText);
+
+    const descText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    descText.setAttribute('x', centerX);
+    descText.setAttribute('y', y + 66);
+    descText.setAttribute('text-anchor', 'middle');
+    descText.setAttribute('font-size', '11');
+    descText.setAttribute('fill', '#1a1d1f');
+    descText.textContent = layer.desc;
+    svg.appendChild(descText);
+  });
+
+  const title = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  title.setAttribute('x', w / 2);
+  title.setAttribute('y', 30);
+  title.setAttribute('text-anchor', 'middle');
+  title.setAttribute('font-size', '18');
+  title.setAttribute('font-weight', 'bold');
+  title.setAttribute('fill', '#ff79c6');
+  title.textContent = titleText;
+  svg.appendChild(title);
+}
+
+function updateStats() {
+  // Shared block parameter counts (same in both models)
+  const layer1 = 147968;   // 2 BasicBlocks @ 64
+  const layer2 = 525568;   // 2 BasicBlocks @ 128
+  const layer3 = 2099712;  // 2 BasicBlocks @ 256
+  const layer4 = 8393728;  // 2 BasicBlocks @ 512
+  const fc10   = 512 * 10 + 10; // 5,130
+
+  // Stem params
+  const stem_scratch = 1856; // 3×3 conv (3→64, no bias) + BN(64): 1,728 + 128
+  const stem_pre     = 9536; // 7×7 conv (3→64, no bias) + BN(64): 9,408 + 128
+
+  // Totals
+  const features_scratch = stem_scratch + layer1 + layer2 + layer3 + layer4; // features only
+  const total_scratch    = features_scratch + fc10;                           // 11,173,962
+
+  const features_pre  = stem_pre + layer1 + layer2 + layer3 + layer4;
+  const total_pre_all = features_pre + fc10;                                  // 11,181,642
+  const total_pre_fc  = fc10;                                                 // 5,130 (if backbone frozen)
+
+  // ----- Fill ResNet18_Scratch_32 stats -----
+  const stats32 = document.getElementById('stats-resnet32');
+  stats32.innerHTML = `
+    <div class="stat-card">
+      <div class="stat-label">Stem (3×3 conv + BN, no maxpool)</div>
+      <div class="stat-value">${stem_scratch.toLocaleString()}</div>
+      <div class="stat-extra">
+        3×3 conv (3 → 64, no bias): 1,728<br>
+        BN(64): 128<br>
+        <strong>Total:</strong> 1,728 + 128 = 1,856
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Layer1 Parameters (2 BasicBlocks @ 64 channels)</div>
+      <div class="stat-value">${layer1.toLocaleString()}</div>
+      <div class="stat-extra">
+        Residual blocks with 3×3 convs and BN, no downsample in this stage.
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Layer2 Parameters (2 BasicBlocks @ 128 channels)</div>
+      <div class="stat-value">${layer2.toLocaleString()}</div>
+      <div class="stat-extra">
+        First block includes a stride-2 conv and a 1×1 downsample conv for the skip connection.
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Layer3 Parameters (2 BasicBlocks @ 256 channels)</div>
+      <div class="stat-value">${layer3.toLocaleString()}</div>
+      <div class="stat-extra">
+        Similar pattern: first block downsamples, second block keeps the same spatial size.
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Layer4 Parameters (2 BasicBlocks @ 512 channels)</div>
+      <div class="stat-value">${layer4.toLocaleString()}</div>
+      <div class="stat-extra">
+        Deepest stage with the most channels; dominates the total parameter count.
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Fully Connected Layer (512 → 10)</div>
+      <div class="stat-value">${fc10.toLocaleString()}</div>
+      <div class="stat-extra">
+        Weights: 512 × 10 = 5,120<br>
+        Biases: 10<br>
+        <strong>Total:</strong> 5,120 + 10 = 5,130
+      </div>
+    </div>
+
+    <div class="stat-card highlight">
+      <div class="stat-label">Total Trainable Parameters – ResNet18_Scratch_32</div>
+      <div class="stat-value">${total_scratch.toLocaleString()}</div>
+      <div class="stat-extra">
+        Stem + Layer1–Layer4 + FC<br>
+        = ${stem_scratch.toLocaleString()} + ${layer1.toLocaleString()} + ${layer2.toLocaleString()} +
+          ${layer3.toLocaleString()} + ${layer4.toLocaleString()} + ${fc10.toLocaleString()}<br>
+        = <strong>${total_scratch.toLocaleString()}</strong>
+      </div>
+    </div>
+  `;
+
+  // ----- Fill ResNet18_Pretrained_224 stats -----
+  const stats224 = document.getElementById('stats-resnet224');
+  stats224.innerHTML = `
+    <div class="stat-card">
+      <div class="stat-label">Stem (7×7 conv + BN + MaxPool)</div>
+      <div class="stat-value">${stem_pre.toLocaleString()}</div>
+      <div class="stat-extra">
+        7×7 conv (3 → 64, no bias): 9,408<br>
+        BN(64): 128<br>
+        <strong>Total:</strong> 9,408 + 128 = 9,536
+        <br>(MaxPool has no trainable parameters.)
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Layer1 Parameters (2 BasicBlocks @ 64 channels)</div>
+      <div class="stat-value">${layer1.toLocaleString()}</div>
+      <div class="stat-extra">
+        Same residual stage as in the scratch model; weights are initialized from ImageNet.
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Layer2 Parameters (2 BasicBlocks @ 128 channels)</div>
+      <div class="stat-value">${layer2.toLocaleString()}</div>
+      <div class="stat-extra">
+        Includes downsample in the first block for the skip connection (stride-2).
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Layer3 Parameters (2 BasicBlocks @ 256 channels)</div>
+      <div class="stat-value">${layer3.toLocaleString()}</div>
+      <div class="stat-extra">
+        Deeper residual stage with more channels, same structure as standard ResNet18.
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Layer4 Parameters (2 BasicBlocks @ 512 channels)</div>
+      <div class="stat-value">${layer4.toLocaleString()}</div>
+      <div class="stat-extra">
+        Final and largest stage; again identical to standard ResNet18.
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Fully Connected Layer (512 → 10)</div>
+      <div class="stat-value">${fc10.toLocaleString()}</div>
+      <div class="stat-extra">
+        Same as scratch model: 5,120 weights + 10 biases = 5,130 parameters.
+      </div>
+    </div>
+
+    <div class="stat-card highlight">
+      <div class="stat-label">Total Trainable Parameters – ResNet18_Pretrained_224</div>
+      <div class="stat-value">${total_pre_all.toLocaleString()}</div>
+      <div class="stat-extra">
+        <strong>If fine-tuning all layers:</strong><br>
+        Stem + Layer1–Layer4 + FC = <strong>${total_pre_all.toLocaleString()}</strong> trainable params.<br><br>
+        <strong>If freeze_backbone = True:</strong><br>
+        Only the last FC layer is trainable → <strong>${total_pre_fc.toLocaleString()}</strong> parameters.
+      </div>
+    </div>
+  `;
+}
+
+// Initialize on page load
+window.addEventListener('load', () => {
+  // ResNet18_Scratch_32 layers (32×32 input)
+  const resnet32Layers = [
+    { name: 'Input',         shape: '32×32×3',   desc: 'CIFAR-10 RGB',           type: 'input'   },
+    { name: 'Stem',          shape: '32×32×64',  desc: '3×3 conv + BN + ReLU',   type: 'conv'    },
+    { name: 'Layer1',        shape: '32×32×64',  desc: '2× BasicBlock (64)',     type: 'block'   },
+    { name: 'Layer2',        shape: '16×16×128', desc: '2× BasicBlock (128)',    type: 'block'   },
+    { name: 'Layer3',        shape: '8×8×256',   desc: '2× BasicBlock (256)',    type: 'block'   },
+    { name: 'Layer4',        shape: '4×4×512',   desc: '2× BasicBlock (512)',    type: 'block'   },
+    { name: 'Global AvgPool',shape: '1×1×512',   desc: 'Average over H, W',      type: 'flatten' },
+    { name: 'FC 512→10',     shape: '10 logits', desc: 'CIFAR-10 classes',       type: 'output'  },
+  ];
+
+  // ResNet18_Pretrained_224 layers (224×224 input)
+  const resnet224Layers = [
+    { name: 'Input',         shape: '224×224×3', desc: 'Resized CIFAR-10',       type: 'input'   },
+    { name: 'Conv7×7',       shape: '112×112×64',desc: '7×7 conv, stride 2',     type: 'conv'    },
+    { name: 'MaxPool',       shape: '56×56×64',  desc: '3×3, stride 2',          type: 'block'   },
+    { name: 'Layer1',        shape: '56×56×64',  desc: '2× BasicBlock (64)',     type: 'block'   },
+    { name: 'Layer2',        shape: '28×28×128', desc: '2× BasicBlock (128)',    type: 'block'   },
+    { name: 'Layer3',        shape: '14×14×256', desc: '2× BasicBlock (256)',    type: 'block'   },
+    { name: 'Layer4',        shape: '7×7×512',   desc: '2× BasicBlock (512)',    type: 'block'   },
+    { name: 'Global AvgPool',shape: '1×1×512',   desc: 'Average over H, W',      type: 'flatten' },
+    { name: 'FC 512→10',     shape: '10 logits', desc: 'CIFAR-10 classes',       type: 'output'  },
+  ];
+
+  drawDiagram('resnet32SVG',  resnet32Layers,  'ResNet18_Scratch_32 (32×32 input)');
+  drawDiagram('resnet224SVG', resnet224Layers, 'ResNet18_Pretrained_224 (224×224 input)');
+  updateStats();
+});
+</script>
+
+</body>
+</html>
