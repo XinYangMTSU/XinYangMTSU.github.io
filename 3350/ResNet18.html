@@ -262,6 +262,7 @@
 
     <strong>Data pipeline (32×32 transforms):</strong>
     <div class="code-box">
+      <pre>
 <code>transform_32 = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize(
@@ -276,6 +277,7 @@ trainloader_32 = DataLoader(trainset_32, batch_size=128, shuffle=True)</code>
     </div>
     Each batch <code>images</code> has shape <code>[B, 3, 32, 32]</code> and is sent directly to
     <code>ResNet18_Scratch_32(images)</code>.
+    </pre>
   </div>
 
   <!-- Diagram: ResNet18_Scratch_32 -->
@@ -294,6 +296,7 @@ trainloader_32 = DataLoader(trainset_32, batch_size=128, shuffle=True)</code>
   <div class="stats" id="stats-resnet32"></div>
 
   <!-- ====================== Section 3: ResNet18_Pretrained_224 ====================== -->
+  <br><br>
   <div class="section-label">Section 3</div>
   <h2>ResNet18_Pretrained_224 (ImageNet → CIFAR-10 transfer learning)</h2>
 
@@ -323,6 +326,7 @@ trainloader_32 = DataLoader(trainset_32, batch_size=128, shuffle=True)</code>
 
     <strong>Data pipeline (ImageNet-style transforms):</strong>
     <div class="code-box">
+      <pre>
 <code>weights = ResNet18_Weights.DEFAULT
 transform_224 = weights.transforms()   # resize/crop to 224×224, ToTensor, normalize
 
@@ -331,7 +335,8 @@ trainset_224    = CIFAR10(root="./data", train=True,
 trainloader_224 = DataLoader(trainset_224, batch_size=128, shuffle=True)</code>
     </div>
     Now each batch <code>images</code> has shape <code>[B, 3, 224, 224]</code> and is fed to
-    <code>ResNet18_Pretrained_224(images)</code>. We are effectively “zooming” each CIFAR-10
+    <code>ResNet18_Pretrained_224(images)</code>.
+  </pre>We are effectively “zooming” each CIFAR-10
     image to 224×224 so that the pretrained filters behave as they did on ImageNet.
   </div>
 
