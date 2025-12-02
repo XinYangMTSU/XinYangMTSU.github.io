@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CIFAR-10 Training vs Test Accuracy</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1d1f 0%, #2a1e28 100%);
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #ffb3de;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      background: #222025;
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 4px 30px rgba(255, 121, 198, 0.15);
+      border-left: 7px solid #ff79c6;
+    }
+
+    h1 {
+      color: #ff79c6;
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 2.2em;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #ffb3de;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+
+    .cifar-intro {
+      background: #19121a;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 25px;
+      line-height: 1.7;
+      font-size: 0.95em;
+      border-left: 4px solid #50fa7b;
+    }
+
+    .cifar-intro strong {
+      color: #fff52e;
+    }
+
+    .controls {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 220px;
+    }
+
+    .control-group label {
+      color: #ff79c6;
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+
+    .control-group span {
+      font-size: 0.9em;
+      color: #ffb3de;
+      line-height: 1.5;
+    }
+
+    .plots-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    @media (min-width: 1100px) {
+      .plots-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .network-container {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 20px 20px 30px 20px;
+      overflow-x: auto;
+    }
+
+    .plot-title {
+      color: #ffb3de;
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+
+    svg {
+      display: block;
+      margin: 0 auto;
+      background: #19121a;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(255, 121, 198, 0.11);
+      min-width: 100%;
+    }
+
+    .legend {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 10px;
+    }
+
+    .legend h3 {
+      color: #ff79c6;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ff79c6;
+      padding-bottom: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 10px 0;
+      color: #ffb3de;
+      font-size: 0.95em;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .color-train { background: #50fa7b; }
+    .color-test  { background: #ff79c6; }
+
+    .dataset-info {
+      margin-top: 20px;
+      background: #19121a;
+      border-radius: 8px;
+      padding: 15px;
+      line-height: 1.6;
+      font-size: 0.9em;
+      border-left: 4px solid #ff79c6;
+    }
+
+    .dataset-info strong {
+      color: #fff52e;
+    }
+
+    @media (max-width: 768px) {
+      .controls {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>📈 Training vs Test Accuracy</h1>
+  <p class="subtitle">
+    Visualizing how <strong>training accuracy</strong> and <strong>test accuracy</strong> evolve across epochs,
+    and how this relates to <strong>bias</strong> and <strong>variance</strong>.
+  </p>
+
+  <!-- Concept introduction -->
+  <div class="cifar-intro">
+    <strong>Bias, Variance, and Generalization:</strong><br>
+    During training, we typically see <strong>training accuracy</strong> increase steadily as the model fits the training data.
+    The behavior of <strong>test accuracy</strong> tells us how well the model generalizes:
+    <ul style="margin-left: 20px; margin-top: 8px;">
+      <li>Both train &amp; test accuracy low ⇒ <strong>underfitting</strong> (model too simple, high bias).</li>
+      <li>Train accuracy high, test accuracy also high ⇒ <strong>good fit</strong> (good bias–variance tradeoff).</li>
+      <li>Train accuracy continues to increase while test accuracy drops ⇒ <strong>overfitting</strong> (high variance).</li>
+    </ul>
+  </div>
+
+  <!-- Three scenarios: underfitting, good fit, overfitting -->
+  <div class="plots-wrapper">
+    <div class="network-container">
+      <div class="plot-title">Underfitting (High Bias)</div>
+      <svg id="underSVG" width="500" height="320" viewBox="0 0 500 320"></svg>
+    </div>
+
+    <div class="network-container">
+      <div class="plot-title">Good Fit (Best Tradeoff)</div>
+      <svg id="goodSVG" width="500" height="320" viewBox="0 0 500 320"></svg>
+    </div>
+
+    <div class="network-container">
+      <div class="plot-title">Overfitting (High Variance)</div>
+      <svg id="overSVG" width="500" height="320" viewBox="0 0 500 320"></svg>
+    </div>
+  </div>
+
+  <!-- Legend + explanation -->
+  <div class="legend">
+    <h3>Legend & Interpretation</h3>
+
+    <div class="legend-item">
+      <div class="legend-color color-train"></div>
+      <div>
+        <strong>Training Accuracy:</strong> Measured on the training set after each epoch.
+        It usually increases as the model learns and can approach 100% if the model is very flexible.
+      </div>
+    </div>
+
+    <div class="legend-item">
+      <div class="legend-color color-test"></div>
+      <div>
+        <strong>Test Accuracy:</strong> Measured on unseen data. This curve shows how well the model
+        <strong>generalizes</strong>. Watch how it behaves relative to the training curve.
+      </div>
+    </div>
+
+    <div class="dataset-info">
+      <strong>Tip:</strong><br>
+      • Use the underfitting plot to illustrate high bias (both curves low).<br>
+      • Use the overfitting plot to illustrate high variance (big gap between curves).<br>
+      • Emphasize that the good-fit plot represents the ideal region of the <em>bias–variance tradeoff</em>.
+    </div>
+  </div>
+</div>
+
+<script>
+// Common x-axis (epochs)
+const epochs = [1,2,3,4,5,6,7,8,9,10];
+
+// --- Scenario 1: Underfitting (both accuracies low, gap small) ---
+const trainUnder = [0.30, 0.35, 0.38, 0.40, 0.42, 0.43, 0.45, 0.46, 0.47, 0.48];
+const testUnder  = [0.28, 0.32, 0.35, 0.36, 0.37, 0.37, 0.38, 0.38, 0.38, 0.38];
+
+// --- Scenario 2: Good fit (both high and close) ---
+const trainGood = [0.45, 0.55, 0.65, 0.72, 0.78, 0.82, 0.85, 0.87, 0.88, 0.89];
+const testGood  = [0.44, 0.53, 0.63, 0.70, 0.76, 0.80, 0.83, 0.84, 0.84, 0.84];
+
+// --- Scenario 3: Overfitting (train keeps rising, test peaks then drops) ---
+const trainOver = [0.45, 0.55, 0.65, 0.75, 0.83, 0.90, 0.94, 0.96, 0.98, 0.99];
+const testOver  = [0.44, 0.54, 0.62, 0.68, 0.72, 0.74, 0.73, 0.70, 0.67, 0.64];
+
+// Generic function to draw one accuracy plot
+function drawAccuracyPlot(svgId, trainAcc, testAcc) {
+  const svg = document.getElementById(svgId);
+  svg.innerHTML = ''; // clear
+
+  const width = 500;
+  const height = 320;
+  const margin = { top: 40, right: 40, bottom: 50, left: 60 };
+  const plotWidth = width - margin.left - margin.right;
+  const plotHeight = height - margin.top - margin.bottom;
+
+  const minEpoch = Math.min(...epochs);
+  const maxEpoch = Math.max(...epochs);
+  const minAcc = 0.0;
+  const maxAcc = 1.0;
+
+  function xScale(epoch) {
+    if (maxEpoch === minEpoch) return margin.left + plotWidth / 2;
+    return margin.left + ((epoch - minEpoch) / (maxEpoch - minEpoch)) * plotWidth;
+  }
+
+  function yScale(acc) {
+    return margin.top + (1 - (acc - minAcc) / (maxAcc - minAcc)) * plotHeight;
+  }
+
+  // Background
+  const bgRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  bgRect.setAttribute('x', margin.left);
+  bgRect.setAttribute('y', margin.top);
+  bgRect.setAttribute('width', plotWidth);
+  bgRect.setAttribute('height', plotHeight);
+  bgRect.setAttribute('fill', '#19121a');
+  bgRect.setAttribute('rx', 10);
+  bgRect.setAttribute('ry', 10);
+  svg.appendChild(bgRect);
+
+  // Axes
+  const xAxis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  xAxis.setAttribute('x1', margin.left);
+  xAxis.setAttribute('y1', margin.top + plotHeight);
+  xAxis.setAttribute('x2', margin.left + plotWidth);
+  xAxis.setAttribute('y2', margin.top + plotHeight);
+  xAxis.setAttribute('stroke', '#ffb3de');
+  xAxis.setAttribute('stroke-width', '1.8');
+  svg.appendChild(xAxis);
+
+  const yAxis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  yAxis.setAttribute('x1', margin.left);
+  yAxis.setAttribute('y1', margin.top);
+  yAxis.setAttribute('x2', margin.left);
+  yAxis.setAttribute('y2', margin.top + plotHeight);
+  yAxis.setAttribute('stroke', '#ffb3de');
+  yAxis.setAttribute('stroke-width', '1.8');
+  svg.appendChild(yAxis);
+
+  // Axis labels
+  const xLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  xLabel.setAttribute('x', margin.left + plotWidth / 2);
+  xLabel.setAttribute('y', height - 15);
+  xLabel.setAttribute('text-anchor', 'middle');
+  xLabel.setAttribute('font-size', '12');
+  xLabel.setAttribute('fill', '#ffb3de');
+  xLabel.textContent = 'Epoch';
+  svg.appendChild(xLabel);
+
+  const yLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  yLabel.setAttribute('x', 20);
+  yLabel.setAttribute('y', margin.top + plotHeight / 2);
+  yLabel.setAttribute('text-anchor', 'middle');
+  yLabel.setAttribute('font-size', '12');
+  yLabel.setAttribute('fill', '#ffb3de');
+  yLabel.setAttribute('transform', `rotate(-90 20 ${margin.top + plotHeight / 2})`);
+  yLabel.textContent = 'Accuracy';
+  svg.appendChild(yLabel);
+
+  // Y grid and ticks
+  for (let a = 0.0; a <= 1.0; a += 0.2) {
+    const y = yScale(a);
+    const grid = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    grid.setAttribute('x1', margin.left);
+    grid.setAttribute('y1', y);
+    grid.setAttribute('x2', margin.left + plotWidth);
+    grid.setAttribute('y2', y);
+    grid.setAttribute('stroke', '#3b3240');
+    grid.setAttribute('stroke-width', '1');
+    grid.setAttribute('stroke-dasharray', '2,3');
+    svg.appendChild(grid);
+
+    const tickLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    tickLabel.setAttribute('x', margin.left - 10);
+    tickLabel.setAttribute('y', y + 4);
+    tickLabel.setAttribute('text-anchor', 'end');
+    tickLabel.setAttribute('font-size', '10');
+    tickLabel.setAttribute('fill', '#ffb3de');
+    tickLabel.textContent = a.toFixed(1);
+    svg.appendChild(tickLabel);
+  }
+
+  // X ticks (epochs)
+  epochs.forEach(epoch => {
+    const x = xScale(epoch);
+
+    const tick = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    tick.setAttribute('x1', x);
+    tick.setAttribute('y1', margin.top + plotHeight);
+    tick.setAttribute('x2', x);
+    tick.setAttribute('y2', margin.top + plotHeight + 5);
+    tick.setAttribute('stroke', '#ffb3de');
+    tick.setAttribute('stroke-width', '1.5');
+    svg.appendChild(tick);
+
+    const tickLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    tickLabel.setAttribute('x', x);
+    tickLabel.setAttribute('y', margin.top + plotHeight + 18);
+    tickLabel.setAttribute('text-anchor', 'middle');
+    tickLabel.setAttribute('font-size', '10');
+    tickLabel.setAttribute('fill', '#ffb3de');
+    tickLabel.textContent = epoch.toString();
+    svg.appendChild(tickLabel);
+  });
+
+  // Helper to draw line + points
+  function drawCurve(accArray, color) {
+    let pathData = '';
+    accArray.forEach((acc, i) => {
+      const x = xScale(epochs[i]);
+      const y = yScale(acc);
+      if (i === 0) {
+        pathData += `M ${x} ${y}`;
+      } else {
+        pathData += ` L ${x} ${y}`;
+      }
+    });
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', pathData);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', color);
+    path.setAttribute('stroke-width', '3');
+    svg.appendChild(path);
+
+    accArray.forEach((acc, i) => {
+      const x = xScale(epochs[i]);
+      const y = yScale(acc);
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', x);
+      circle.setAttribute('cy', y);
+      circle.setAttribute('r', 4);
+      circle.setAttribute('fill', color);
+      circle.setAttribute('stroke', '#222025');
+      circle.setAttribute('stroke-width', '1.2');
+      svg.appendChild(circle);
+    });
+  }
+
+  // Draw training (green) and test (pink)
+  drawCurve(trainAcc, '#50fa7b');
+  drawCurve(testAcc,  '#ff79c6');
+}
+
+// Initialize plots on page load
+window.addEventListener('load', () => {
+  drawAccuracyPlot('underSVG', trainUnder, testUnder);
+  drawAccuracyPlot('goodSVG',  trainGood,  testGood);
+  drawAccuracyPlot('overSVG',  trainOver,  testOver);
+});
+</script>
+
+</body>
+</html>
