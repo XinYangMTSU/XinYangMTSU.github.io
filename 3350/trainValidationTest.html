@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Deep Learning: Train / Validation / Test</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1d1f 0%, #2a1e28 100%);
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #ffb3de;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      background: #222025;
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 4px 30px rgba(255, 121, 198, 0.15);
+      border-left: 7px solid #ff79c6;
+    }
+
+    h1 {
+      color: #ff79c6;
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 2.2em;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #ffb3de;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+
+    .cifar-intro {
+      background: #19121a;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 25px;
+      line-height: 1.7;
+      font-size: 0.95em;
+      border-left: 4px solid #50fa7b;
+    }
+
+    .cifar-intro strong {
+      color: #fff52e;
+    }
+
+    .controls {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 260px;
+      flex: 1;
+    }
+
+    .control-group label {
+      color: #ff79c6;
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+
+    .control-group span {
+      font-size: 0.9em;
+      color: #ffb3de;
+      line-height: 1.6;
+    }
+
+    .legend {
+      background: #2a1e28;
+      border: 2px solid #ff79c6;
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 10px;
+    }
+
+    .legend h3 {
+      color: #ff79c6;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ff79c6;
+      padding-bottom: 10px;
+    }
+
+    .legend-item {
+      margin: 10px 0;
+      color: #ffb3de;
+      font-size: 0.95em;
+      line-height: 1.6;
+    }
+
+    .dataset-info {
+      margin-top: 20px;
+      background: #19121a;
+      border-radius: 8px;
+      padding: 15px;
+      line-height: 1.6;
+      font-size: 0.9em;
+      border-left: 4px solid #ff79c6;
+    }
+
+    .dataset-info strong {
+      color: #fff52e;
+    }
+
+    @media (max-width: 768px) {
+      .controls {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1> Deep Learning Evaluation</h1>
+  <p class="subtitle">
+    Most deep learning workflows use <strong>train / validation / test</strong> splits
+    instead of <strong>5-fold or 10-fold cross-validation</strong>.
+  </p>
+
+  <!-- Concept introduction -->
+  <div class="cifar-intro">
+    <strong>Classical ML vs Deep Learning:</strong><br>
+    In traditional machine learning, it is very common to use
+    <strong>5-fold or 10-fold cross-validation</strong> to estimate performance,
+    especially on small datasets. For most deep learning work, however,
+    training is much more expensive and datasets are often larger. So instead of
+    full k-fold cross-validation, practitioners typically:
+    <ul style="margin-left: 20px; margin-top: 8px;">
+      <li>Use a single <strong>train / validation / test</strong> split (for example, 80% / 10% / 10%).</li>
+      <li><strong>Tune hyperparameters</strong> and make modeling decisions using the validation set.</li>
+      <li><strong>Report the final performance</strong> on the held-out test set once, at the end.</li>
+    </ul>
+  </div>
+
+  <!-- Three key ideas -->
+  <div class="controls">
+    <div class="control-group">
+      <label>1. Train / Validation / Test Split</label>
+      <span>
+        A typical deep learning pipeline uses:
+        <ul style="margin-left: 18px; margin-top: 6px;">
+          <li><strong>Train set (≈ 80%)</strong> – used to update weights via backpropagation.</li>
+          <li><strong>Validation set (≈ 10%)</strong> – used to choose hyperparameters, architectures, and early stopping.</li>
+          <li><strong>Test set (≈ 10%)</strong> – used only once at the end to report performance.</li>
+        </ul>
+      </span>
+    </div>
+
+    <div class="control-group">
+      <label>2. Why Not 5-Fold / 10-Fold for Deep Learning?</label>
+      <span>
+        Training a deep model (e.g., a CNN or transformer) can take hours or days.
+        Running <strong>5 or 10 full trainings</strong> for cross-validation is often too expensive.
+        Also, with large datasets, a single well-chosen split already gives a stable estimate of performance.
+      </span>
+    </div>
+
+    <div class="control-group">
+      <label>3. When Would We Still Use k-Fold?</label>
+      <span>
+        k-fold cross-validation can still be useful in deep learning when:
+        <ul style="margin-left: 18px; margin-top: 6px;">
+          <li>The dataset is <strong>very small</strong> (e.g., medical images, clinical data).</li>
+          <li>We need <strong>very robust evaluation</strong> for a paper or high-stakes application.</li>
+          <li>We can afford fewer folds (e.g., 3-fold) or reduced training epochs per fold.</li>
+        </ul>
+      </span>
+    </div>
+  </div>
+
+  <!-- Summary box -->
+  <div class="legend">
+    <h3>Deep Learning Evaluation Summary</h3>
+
+    <div class="legend-item">
+      <strong>Most common practice:</strong><br>
+      Split data into <strong>train / validation / test</strong>, tune on validation,
+      and report results on the test set.
+    </div>
+
+    <div class="legend-item">
+      <strong>Cross-validation is optional, not mandatory:</strong><br>
+      Full 5-fold or 10-fold cross-validation is usually skipped in deep learning
+      due to the <strong>high computational cost</strong>, unless the dataset is small
+      or very careful evaluation is required.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
