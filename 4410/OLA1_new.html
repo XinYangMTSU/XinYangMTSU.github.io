@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OLA 1</title>
+	<link href="../CSS/Site.css" rel="stylesheet">
+	<link href="OLA.css" rel="stylesheet">
+</head>
+
+<body>
+	<ul>
+		<li><a href="https://xinyangmtsu.github.io/4410.html" target="_blank"><b>CSCI 4410</b></a></li>
+		<li><a href="https://xinyangmtsu.github.io/4410/OLA1.html"><b>OLA1</b></a></li>
+	</ul>
+
+	<div id="main" style="margin-top: 38px;">
+
+		<h1>OLA 1: HTML (Industry Workflow)</h1>
+
+		<center>
+			<b>
+				<h3>Course: CSCI 4410/5410 Web Technologies</h3>
+				<p>Instructor: Dr. Xin Yang</p>
+				<font color="red">
+					Due date: 11:59 pm Feb TBD, 2026 ()
+				</font>
+			</b>
+		</center>
+		<br>
+
+		<h2>Objective:</h2>
+		In this assignment, you will create a <b>personal webpage</b> using an industry-inspired workflow:
+		<b>(1) plan</b> your structure, <b>(2) build</b> your HTML, and <b>(3) reflect</b> on what changed and why.
+		The goal is to showcase your understanding of basic HTML components, including
+		<b>&lt;!DOCTYPE&gt;, &lt;html&gt;, &lt;head&gt;, &lt;body&gt;, &lt;meta&gt;, &lt;title&gt;, &lt;p&gt;, &lt;img&gt;, &lt;a&gt;,
+			&lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;, &lt;table&gt;, &lt;tr&gt;, &lt;th&gt;, &lt;td&gt;, &lt;thead&gt;, &lt;tbody&gt;,
+			&lt;b&gt; or &lt;strong&gt;, &lt;i&gt; or &lt;em&gt;, &lt;mark&gt;, and HTML comments &lt;!-- --&gt;.</b>
+		<br><br>
+
+		<h2>Rules:</h2>
+		<ul>
+			<li>&#x2022; <b>HTML only</b> (we have not taught CSS or JavaScript yet).</li>
+			<li>&#x2022; Do NOT use CSS: no <b>&lt;style&gt;</b>, no <b>style=""</b>, no external CSS files.</li>
+			<li>&#x2022; Do NOT use JavaScript: no <b>&lt;script&gt;</b>.</li>
+			<li>&#x2022; Avoid deprecated tags such as <b>&lt;font&gt;</b> and <b>&lt;center&gt;</b> in your student submission.</li>
+			<li>&#x2022; Your HTML file must be named <b>ola1.html</b>.</li>
+		</ul>
+
+		<h2>Industry Workflow Steps (3 Stages)</h2>
+		You must submit <b>all three stages</b>:
+		<ol>
+			<li><b>Stage 1:</b> Hand-drawn or text outline of HTML structure</li>
+			<li><b>Stage 2:</b> HTML implementation (personal webpage)</li>
+			<li><b>Stage 3:</b> Reflection: what changed and why</li>
+		</ol>
+
+		<h2>Stage 1: Plan (Outline of Structure) (30 points)</h2>
+		Before writing code, plan the structure of your personal webpage (this is how web developers work in industry).
+
+		<h3>What to submit</h3>
+		<ul>
+			<li>&#x2022; <b>Option A:</b> A clear photo of a hand-drawn outline, OR</li>
+			<li>&#x2022; <b>Option B:</b> A text file named <b>outline.txt</b></li>
+		</ul>
+
+		<h3>Outline requirements</h3>
+		Your outline must show the order of your webpage and include:
+		<ul>
+			<li>&#x2022; A top title area (H1)</li>
+			<li>&#x2022; At least <b>4 content sections</b> (each will later have a heading)</li>
+			<li>&#x2022; One section that contains a <b>table</b></li>
+			<li>&#x2022; A bottom area (closing content + reflection section)</li>
+		</ul>
+
+		<h3>Example outline (text)</h3>
+		<pre>
+Top
+- H1: My Personal Homepage
+
+Section 1: About Me
+- 1 paragraph with formatting
+
+Section 2: Image
+- Image + alt + source/credit (if needed) + short explanation
+
+Section 3: Lists
+- UL + OL + nested list
+
+Section 4: Favorites Table
+- thead + tbody + 3x3 data + rowspan/colspan
+
+Section 5: External Link
+- link to a meaningful website
+
+Section 6: Reflection
+- what changed and why
+		</pre>
+
+		<b>Important:</b> Your Stage 2 HTML should closely follow your Stage 1 outline. If you change the structure, explain it in Stage 3.
+
+		<h2>Stage 2: Build (HTML Implementation) (50 points)</h2>
+		Create your personal webpage in a file named <b>ola1.html</b>.
+
+		<h3>Basic HTML structure</h3>
+		<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+		</pre>
+
+		<h3>Stage 2 requirements (personal webpage)</h3>
+
+		<h3>1. Title</h3>
+		Add a title in the head section using <b>&lt;title&gt;</b>. The title should match your page’s main heading.
+
+		<h3>2. About Me (Introduction Paragraph)</h3>
+		Write one paragraph to introduce yourself (name, where you're from, academic interests, hobbies/goals).
+		This paragraph must include:
+		<ul>
+			<li>&#x2022; one <b>&lt;strong&gt;</b> or <b>&lt;b&gt;</b></li>
+			<li>&#x2022; one <b>&lt;em&gt;</b> or <b>&lt;i&gt;</b></li>
+			<li>&#x2022; one <b>&lt;mark&gt;</b></li>
+			<li>&#x2022; exactly one <b>&lt;br&gt;</b></li>
+		</ul>
+
+		<h3>3. Image (with alt + credit)</h3>
+		Include one image using <b>&lt;img&gt;</b>.
+		<ul>
+			<li>&#x2022; You must include an <b>alt</b> attribute.</li>
+			<li>&#x2022; If the image is from the internet, include a visible credit link to the source using <b>&lt;a&gt;</b>.</li>
+			<li>&#x2022; Under the image, write 1–2 sentences explaining why you chose it.</li>
+		</ul>
+
+		<h3>4. Lists (unordered, ordered, nested)</h3>
+		Create:
+		<ul>
+			<li>&#x2022; One <b>&lt;ul&gt;</b> with at least 4 items</li>
+			<li>&#x2022; One <b>&lt;ol&gt;</b> with at least 3 items</li>
+			<li>&#x2022; At least one <b>nested list</b> (a list inside an &lt;li&gt;)</li>
+		</ul>
+
+		<h3>5. Table (use thead + tbody)</h3>
+		Create a table listing your favorites (movies/books/songs/games/etc.).
+		Requirements:
+		<ul>
+			<li>&#x2022; Use <b>&lt;thead&gt;</b> and <b>&lt;tbody&gt;</b>.</li>
+			<li>&#x2022; Include at least 3 rows of data in <b>&lt;tbody&gt;</b>.</li>
+			<li>&#x2022; Include at least 3 columns.</li>
+			<li>&#x2022; Use <b>rowspan</b> or <b>colspan</b> at least once.</li>
+		</ul>
+
+		<h3>6. External Hyperlink</h3>
+		Add one external hyperlink to a meaningful website (favorite website, club, hobby, portfolio inspiration, etc.).
+		The link must open in a new tab using <b>target="_blank"</b>.
+
+		<h3>7. Headings</h3>
+		Use headings (e.g., <b>&lt;h1&gt;</b>, <b>&lt;h2&gt;</b>, <b>&lt;h3&gt;</b>) to separate each section of your webpage.
+
+		<h3>8. Comments (exactly 6)</h3>
+		Add <b>exactly 6</b> HTML comments that explain key parts of your page structure.
+		Example:
+		<pre>
+&lt;!-- This section introduces who I am --&gt;
+		</pre>
+
+		<h2>Stage 3: Review (Reflection) (20 points)</h2>
+		At the bottom of your webpage, add a section titled <b>Reflection</b>.
+		Answer each question in 2–3 sentences:
+
+		<ol>
+			<li><b>What changed</b> between your Stage 1 outline and your final HTML? Why did you change it?</li>
+			<li>What was the hardest part to implement correctly, and why?</li>
+			<li>Describe one mistake you made and how you fixed it.</li>
+			<li>If you had more time (still HTML-only), what would you improve next?</li>
+		</ol>
+
+		<b>Anti-copy-paste note:</b> Your reflection must match your actual HTML file. Reflections that do not match the code will lose points.
+
+		<h2>Submit</h2>
+		Submit the following to D2L:
+		<ul>
+			<li>&#x2022; <b>Stage 1:</b> Photo of your outline OR outline.txt</li>
+			<li>&#x2022; <b>Stage 2 + Stage 3:</b> ola1.html (includes the Reflection section)</li>
+			<li>&#x2022; If you used a local image, submit the image file too.</li>
+		</ul>
+
+		<h2>Grading</h2>
+		<ul>
+			<li>&#x2022; Stage 1 (Outline): <b>30 points</b></li>
+			<li>&#x2022; Stage 2 (HTML Implementation): <b>50 points</b></li>
+			<li>&#x2022; Stage 3 (Reflection): <b>20 points</b></li>
+			<li>&#x2022; <b>Total: 100 points</b></li>
+		</ul>
+
+		If you have any questions, please feel free to reach out to me at <b><font color="blue">Xin.Yang@mtsu.edu</font></b>
+		or stop by my office in ROTC annex 113E.
+		<br><br>
+
+		<!-- Copyright Section -->
+		<footer align="center" id="foot01">
+			<p>&copy; 2026 Dr. Xin Yang. All rights reserved.</p>
+			<p><b>Department of Computer Science <br>
+					College of Basic and Applied Sciences<br>
+					Middle Tennessee State University</b></p>
+		</footer>
+
+	</div>
+
+</body>
+
+</html>
