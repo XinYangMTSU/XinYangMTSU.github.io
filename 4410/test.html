@@ -1,65 +1,73 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'>
-</script>
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+	<title>My first Webpage</title>
 </head>
+
 <body>
 
-<br>
 
-This is my math formula: \( \frac{-b &plusmn; \sqrt{b^2 - 4bc} }{2a} \)
-<br>
-<br>
-This is my math formula: $$ \frac{-b &plusmn; \sqrt{b^2 - 4bc} }{2a} $$
+<!-- This part is just introdue HTML 
+made by Xin Yang 1/11/2026 -->
+<h1 id="top">Introduction to HTML</h1>
 
-<br>
-
-<video width="320" height="240" controls>
-<source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
-Your browser does not support the video tag.	
-</video>
-<br>
-<br>
-
-<audio width="320" height="400" controls>
-<source src="https://www.w3schools.com/html/horse.ogg" type="audio/mp3">
-</audio>
-<br>
-
-<iframe width="420" height="300" src="https://www.youtube.com/embed/ekr2nIex040">
-</iframe>
-
-<br>
-
-<a href="https://www.youtube.com/watch?v=ekr2nIex040">
-https://www.youtube.com/watch?v=ekr2nIex040</a>
-
-<br>
-
-This is my formula: 
-$$ \sum_{i=0}^na^i = \frac{a^{n+1}-1}{a-1} (a \ne 1) $$
-
-
-<p style="color:red;">
-This is my paragraph.
+<p title="Introduction to HTML">
+	HTML is the standard markup language 
+	for creating Web pages. 
+	HTML stands for HyperText Markup 
+	Language. "Markup language" means that, 
+	rather than using a programming 
+	language to perform functions, 
+	HTML uses tags to identify different types 
+	of content and the purposes they each serve 
+	to the webpage.
 </p>
 
-<br>
+
+<p title="Introduction to HTML">
+	HTML is the standard markup language 
+	for creating Web pages. 
+	HTML stands for HyperText Markup 
+	Language. "Markup language" means that, 
+	rather than using a programming 
+	language to perform functions, 
+	HTML uses tags to identify different types 
+	of content and the purposes they each serve 
+	to the webpage.
+</p>
+
+
+<img src=".\cat.jpg" width="100px" height="100px">
+
+<h1>Nested List</h1>
+
+<ol>
+	<li>Coffee</li>
+		<ul>
+			<li>Espresso</li>
+			<li>Cappuccino</li>
+		</ul>
+	<li>Tea</li>
+	<li>Milk</li>
+</ol>
+
+<br><br>
 
 <table border="1px">
 	<thead>
 		<tr>
-			<th colspan="3">Computer Science Courses</th>
+			<th>Course Title</th>
+			<th>Course Name</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td>CSCI 2170</td>
-			<td>Computer Science II</td>
-			<td rowspan="2">4 credit hours</td>
+			<td>CSCI 3080</td>
+			<td>Discrete Structure</td>
 		</tr>
 		<tr>
 			<td>CSCI 4410</td>
@@ -70,24 +78,101 @@ This is my paragraph.
 
 <br>
 
+
 <table border="1px">
-		
+	<thead>
 		<tr>
-			<td rowspan="2">Computer Science Courses</td>
-			<td>CSCI 2170</td>
-			<td><i>Computer Science II</i></td>
-			<td><mark>4 credit hours</mark></td>
+			<th colspan="2">Course Title and Name</th>
 		</tr>
-			<tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>CSCI 3080</td>
+			<td>Discrete Structure</td>
+		</tr>
+		<tr>
 			<td>CSCI 4410</td>
 			<td>Web Technologies</td>
-			<td><b>3 credit hours</b></td>
 		</tr>
-
+	</tbody>
 </table>
 
-<p> I will display &dollar; </p>
-<p> I will display &#128516; </p>
+
+<br>
+
+<table border="1px">
+	<tr>
+		<th>Course Title</th>
+		<th>Course Name</th>
+	</tr>
+	<tr>
+		<td rowspan="2">CSCI 3080</td>
+		<td>Discrete Structure</td>
+	</tr>
+	<tr>
+		<td>Web Technologies</td>
+	</tr>
+</table>
+
+<br>
+
+<p>This text is normal.</p>
+
+<p><b>This text is bold (style only).</b> </p>
+<p><strong>This text is strong (important).</strong> </p>
+<p><i>This text is italic (style only).</i></p>
+<p><em>This text is emphasized (important).</em></p>
+<p><mark>This text is marked.</mark></p>
+
+<h1>Symbols</h1>
+
+
+<p>I will display &euro; </p>
+<p>I will display &dollar; </p>
+<p>I will display &yen; </p>
+
+<p>I will display &#934; </li>
+<p>I will display &#127874;</p>
+
+
+<h1>Math Formula</h1>
+
+<h3>In-line Math formula:</h3>
+
+\( \frac{-b &plusmn; \sqrt{b^2-4bc} }{2a} \) this is just someting to test.
+
+ 
+$$ \frac{-b &plusmn; \sqrt{b^2-4bc} }{2a} $$ this is just someting to test.
+
+<br>
+
+$$ \sum_{i=0}^n a^i = \frac{a^{n+1}-1}{a-1} (a \neq 1) $$
+
+<br>
+
+<h1>Multimedia</h1>
+
+
+<video width = "250" height="250" controls>
+	<source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+	Your browser does not support the video tag.
+</video>
+<br>
+<br>
+
+<audio controls>
+	<source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg">
+</audio>
+
+
+<br>
+
+
+<iframe src="https://www.youtube.com/embed/ekr2nIex040">
+</iframe>
+
+
+<br>
 
 </body>
 </html>
