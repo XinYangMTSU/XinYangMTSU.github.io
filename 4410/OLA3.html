@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLA 3</title>
+    <link href="../CSS/Site.css" rel="stylesheet">
+    <link href="OLA.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <ul>
+        <li><a href="https://xinyangmtsu.github.io/4410.html" target="_blank"><b>CSCI 4410</b></a></li>
+        <li><a href="https://xinyangmtsu.github.io/4410/OLA3.html"><b>OLA3</b></a></li>
+    </ul>
+
+    <div id="main" style="margin-top: 38px;">
+        <h1>OLA 3: HTML &amp; CSS &amp; JavaScript</h1>
+
+        <center>
+            <b>
+                <h3>Course: CSCI 4410/5410 Web Technologies</h3>
+                <p>Instructor: Dr. Xin Yang</p>
+                <font color="red">
+                    Due date: 11:59 pm Feb TBD, 2026 (Thursday)
+                </font>
+            </b>
+        </center>
+        <br>
+
+        <h2>Objective:</h2>
+        In this assignment, you will enhance your web development skills by creating a dynamic web-based cash register
+        system similar to real-world checkout applications. This project will deepen your understanding of JavaScript
+        object manipulation, event handling, user input processing, and CSS styling. You will design an interactive
+        interface that allows users to input item costs, calculate totals, display results in a structured manner, and
+        reset transactions.
+        <br><br>
+
+        <h2>Workflow Steps (3 Stages)</h2>
+        You must submit <b>all three stages</b>:
+        <ol>
+            <li><b>Stage 1:</b> Plan the Outline of Structure</li>
+            <li><b>Stage 2:</b> HTML &amp; CSS &amp; JavaScript implementation (cash.html + cash.css + cash.js)</li>
+            <li><b>Stage 3:</b> Reflection: what changed and why</li>
+        </ol>
+
+        <!-- ===================== Stage 1 ===================== -->
+        <h2>Stage 1: Plan the Outline of Structure (15 points)</h2>
+        Before writing code, plan the structure of your cash register webpage (this is how web developers work in
+        industry).
+
+        <h3>What to submit</h3>
+        <ol>
+            <li>&#x2022; <b>Option A:</b> A clear photo of a hand-drawn outline, OR</li>
+            <li>&#x2022; <b>Option B:</b> A text file named <b>outline3.txt</b></li>
+        </ol>
+
+        <h3>Outline requirements</h3>
+        Your outline must show the order/structure of your webpage and include:
+        <ol>
+            <li>&#x2022; A page title area (H1)</li>
+            <li>&#x2022; A brief description/instructions area</li>
+            <li>&#x2022; Input area for item count</li>
+            <li>&#x2022; Buttons area (Scan Items, Show Total, Reset)</li>
+            <li>&#x2022; Display area for scanned items (unordered list)</li>
+            <li>&#x2022; Display area for total cost</li>
+            <li>&#x2022; Bookmark/Go-to-top element (if used)</li>
+        </ol>
+
+        <h3>Example outline (text)</h3>
+        <pre>
+Top
+- H1: Cash Register System
+
+Section 1: Instructions
+- short paragraph explaining what the user should do
+
+Section 2: User Input
+- label + input (itemCount)
+
+Section 3: Buttons
+- Scan Items button
+- Show Total button
+- Reset button
+
+Section 4: Scanned Items Display
+- H2 heading
+- UL list where JS will add LI items
+
+Section 5: Total Display
+- H2 heading
+- total output area (e.g., a div or p)
+
+Bottom
+- Bookmark / Go-to-top link
+- Footer
+Reflection (Stage 3) in outline3.txt
+        </pre>
+
+        <!-- ===================== Stage 2 ===================== -->
+        <h2>Stage 2: Implementation (85 points)</h2>
+
+        <h2>Step 1: JavaScript File (cash.js) (70 points)</h2>
+        Create a JavaScript file and name it <b>cash.js</b>. Implement the following functionalities:
+
+        <h3>1. Create a cashRegister Object</h3>
+        Create an object named <b><font color="blue">cashRegister</font></b> with:
+        <br>
+        (1) A property <b><font color="blue">total</font></b>, initialized to <b><font color="blue">0</font></b>. <br>
+        (2) A property <b><font color="blue">itemCount</font></b>, initialized to <b><font color="blue">0</font></b>. <br>
+        (3) A method <b><font color="blue">add(itemCost)</font></b>, which adds
+        <b><font color="blue">itemCost</font></b> to <b><font color="blue">this.total</font></b>. <br>
+        (4) A method <b><font color="blue">reset()</font></b>, which resets
+        <b><font color="blue">total</font></b> and <b><font color="blue">itemCount</font></b> to
+        <b><font color="blue">0</font></b>.
+        <br><br>
+
+        <h3>2. Create a scan Function</h3>
+        Define a function <b><font color="blue">scan()</font></b> with no parameters.
+        <br>
+        (1) Retrieve the item count from the input field with the ID <b>"itemCount"</b> using
+        <b><font color="blue">document.getElementById</font></b>:
+        <pre>
+let itemCountInput = document.getElementById("itemCount").value;
+cashRegister.itemCount = parseInt(itemCountInput);
+        </pre>
+        (2) Use a <b><font color="blue">for</font></b> loop to prompt the user to enter the cost of each item. <br>
+        (3) Convert the input to a float using <b><font color="blue">parseFloat()</font></b> and call
+        <b><font color="blue">cashRegister.add()</font></b> to add it to the total. <br>
+        (4) Display the scanned item prices dynamically in an unordered list. <br>
+        <br>
+
+        <h3>3. Create a printTotal Function</h3>
+        (1) Define a function <b><font color="blue">printTotal()</font></b> with no parameters. <br>
+        (2) Display the total amount price in HTML using
+        <b><font color="blue">document.getElementById</font></b>. <br>
+
+        <h3>4. Create a resetAll Function</h3>
+        Define a function <b><font color="blue">resetAll()</font></b> that:
+        <br>
+        (1) Clears the input field. <br>
+        (2) Removes all scanned items from the list. <br>
+        (3) Clears the total display. <br>
+        (4) Resets the cashRegister object. <br>
+
+        <h3>5. Invoke Functions using addEventListener</h3>
+        (1) Use <b><font color="blue">addEventListener</font></b> to call the
+        <b><font color="blue">scan</font></b> function when the <b><font color="blue">Scan Items</font></b> button is clicked. <br>
+        (2) Use <b><font color="blue">addEventListener</font></b> to call the
+        <b><font color="blue">printTotal</font></b> function when the <b><font color="blue">Show Total</font></b> button is clicked. <br>
+        (3) Use <b><font color="blue">addEventListener</font></b> to call the
+        <b><font color="blue">resetAll</font></b> function when the <b><font color="blue">Reset</font></b> button is clicked. <br>
+
+        <h2>Step 2: HTML File (cash.html) (15 points)</h2>
+
+        <h3>1. Create an HTML File (cash.html)</h3>
+        (1) Name your HTML file <b>cash.html</b>. <br>
+        (2) Use standard HTML structure:
+        <pre>
+&lt;!DOCTYPE HTML&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+        (3) Link <b>cash.js</b> at the <b><font color="blue">bottom of the body</font></b> using
+        <b>&lt;script&gt;&lt;/script&gt;</b>. <br>
+
+        <h3>2. Add User Interface Elements</h3>
+        (1) Provide an appropriate welcome title for your cash register system. <br>
+        (2) <b><font color="blue">User Input</font></b>: Add an <b><font color="blue">input field</font></b> for entering the number of items. <br>
+        <pre>
+&lt;label for="itemCount"&gt;Enter number of items:&lt;/label&gt;
+&lt;input type="number" id="itemCount" min="1"&gt;
+        </pre>
+        (3) Buttons: <br>
+        a. "<b><font color="blue">Scan Items</font></b>" button that triggers scan(). <br>
+        b. "<b><font color="blue">Show Total</font></b>" button that triggers printTotal(). <br>
+        c. "<b><font color="blue">Reset</font></b>" button that triggers resetAll(). <br><br>
+        (4) Scanned Items Display: Create a dynamic list to show scanned items. <br>
+        (5) Total Cost Display: Show the total amount dynamically. <br>
+
+        <h2>Step 3: CSS File (cash.css) (15 points)</h2>
+        <h3>1. Create a CSS File (cash.css)</h3>
+        (1) Name your CSS file <b>cash.css</b>. <br>
+        (2) Apply styling for:
+        <pre>
+Input fields
+Buttons
+Proper button alignment
+Hover effects for buttons
+        </pre>
+        (3) Link <b>cash.css</b> in the head section of <b>cash.html</b> using <b>&lt;link&gt;</b>. <br><br>
+
+        <!-- ===================== Stage 3 ===================== -->
+        <h2>Stage 3: Reflection (10 points)</h2>
+        At the bottom of your Stage 1 outline, include a section titled <b>Reflection</b>.
+        Answer each question in <b>2–3 sentences</b>:
+
+        <ol>
+            <li><b>What changed</b> between your Stage 1 outline and your final implementation? Why did you change it?</li>
+            <li><b>What was the hardest part</b> to implement correctly, and why?</li>
+            <li><b>Describe one mistake</b> you made and how you fixed it.</li>
+        </ol>
+
+        <h2>Step 4: Submission Instructions</h2>
+        Please compress all your assignment files (<b>cash.html</b>, <b>cash.js</b>, <b>cash.css</b>, and other necessary files)
+        into a single ZIP archive and submit it through D2L.
+
+        <h2>Grading</h2>
+        The assignment is worth a total of <b>100</b> points, distributed as follows:
+        <br><br>
+
+        <table border="1" width="60%">
+            <thead>
+                <tr>
+                    <th>Part</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Stage 1 (Outline)</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>HTML</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>External CSS File</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>JavaScript</td>
+                    <td>70</td>
+                </tr>
+                <tr>
+                    <td>Stage 3 (Reflection)</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td><b>Total</b></td>
+                    <td><b>100</b></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br><br>
+        If you have any questions, please feel free to reach out to me at
+        <b><font color="blue">Xin.Yang@mtsu.edu</font></b> or stop by my office in ROTC annex 113E.
+        <br><br>
+
+        <!-- Copyright Section -->
+        <footer align="center" id="foot01">
+            <p>&copy; 2026 Dr. Xin Yang. All rights reserved.</p>
+            <p><b>Department of Computer Science <br>
+                    College of Basic and Applied Sciences<br>
+                    Middle Tennessee State University</b></p>
+        </footer>
+    </div>
+
+    <br>
+    <!-- Go to Top Button -->
+    <a href="#" id="goTopBtn">&#8679;</a>
+
+    <!-- Script to scroll to top -->
+    <script src="OLA.js"></script>
+
+</body>
+
+</html>
