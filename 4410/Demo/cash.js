@@ -216,58 +216,80 @@ function renderCart() {
 }
 
 /** ---------- Scanner Logic (ZXing) ---------- */
+
 async function startCameraScan() {
   if (!window.ZXing) {
     alert("ZXing library not loaded. Check your internet connection.");
     return;
   }
-
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    alert("Camera API not supported in this browser. Try Chrome/Safari on mobile.");
+    return;
+  }
   if (scanning) return;
-  scanning = true;
 
+  scanning = true;
   el.startScan.disabled = true;
   el.stopScan.disabled = false;
 
-  // Create reader that supports multiple formats (QR + UPC/EAN etc.)
+  // 1) Request permission FIRST (critical for some browsers)
+  let tempStream = null;
+  try {
+    tempStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" },
+      audio: false
+    });
+  } catch (err) {
+    console.error(err);
+    alert("Camera permission denied or unavailable. Please allow camera access and try again.");
+    stopCameraScan();
+    return;
+  } finally {
+    // stop the temp stream immediately (we only needed permission)
+    if (tempStream) tempStream.getTracks().forEach(t => t.stop());
+  }
+
+  // 2) Now list devices and start ZXing
   codeReader = new ZXing.BrowserMultiFormatReader();
 
-  // List cameras
   let devices = [];
   try {
     devices = await ZXing.BrowserCodeReader.listVideoInputDevices();
   } catch (err) {
     console.error(err);
-    alert("Could not access cameras. Make sure you're on HTTPS or localhost and allow permissions.");
+    alert("Could not access cameras. Try Safari/Chrome (not an in-app browser) and refresh.");
     stopCameraScan();
     return;
   }
 
   if (!devices.length) {
-    alert("No camera found.");
+    alert("No camera found. Try a phone (rear camera works best).");
     stopCameraScan();
     return;
   }
 
-  // Prefer back camera on phones if label helps
   const preferredDeviceId =
     devices.find(d => /back|rear|environment/i.test(d.label))?.deviceId || devices[0].deviceId;
 
-  // Start decoding from camera stream
   try {
     await codeReader.decodeFromVideoDevice(
       preferredDeviceId,
       el.previewVideo,
       (result, err) => {
         if (result) handleScanResult(result);
-        // ignore decode errors (no barcode in frame)
       }
     );
   } catch (err) {
     console.error(err);
-    alert("Failed to start camera scanning. Try a different browser or device.");
+    alert("Failed to start camera scanning. Try another browser or device.");
     stopCameraScan();
   }
 }
+
+
+
+////
+
 
 function stopCameraScan() {
   scanning = false;
