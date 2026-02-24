@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grocery Scan Register</title>
+  <link rel="stylesheet" href="cash.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>Grocery Scan Register</h1>
+    <p class="subtitle">Scan UPC/EAN barcodes or QR codes → lookup price → cart total</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Scanner</h2>
+
+      <div class="button-row">
+        <button id="startScan" class="btn primary">Start Scan</button>
+        <button id="stopScan" class="btn" disabled>Stop Camera</button>
+        <button id="resetAll" class="btn danger">Reset</button>
+      </div>
+
+      <div class="scanner-grid">
+        <div class="video-wrap">
+          <video id="preview" playsinline></video>
+          <div class="hint">Tip: On phones, allow camera permissions. Scan a barcode close to the camera.</div>
+        </div>
+
+        <div class="scan-info">
+          <div class="info-row">
+            <span class="label">Inventory loaded:</span>
+            <span id="invStatus" class="value">No</span>
+          </div>
+
+          <div class="info-row">
+            <span class="label">Last scanned code:</span>
+            <span id="lastCode" class="value mono">None</span>
+          </div>
+
+          <div class="info-row">
+            <span class="label">Detected format:</span>
+            <span id="lastFormat" class="value mono">—</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <h3>Item Preview</h3>
+          <div id="itemPreview" class="preview muted">
+            Scan an item to preview details here.
+          </div>
+
+          <div class="button-row">
+            <button id="addToCart" class="btn primary" disabled>Add to Cart</button>
+          </div>
+
+          <div id="unknownBox" class="unknown hidden">
+            <h4>Unknown Item</h4>
+            <p class="muted small">This code is not in <code>inventory.json</code>. Enter a name and price to add it.</p>
+            <label>
+              Item name
+              <input id="unknownName" type="text" placeholder="e.g., Custom Snack" />
+            </label>
+            <label>
+              Price ($)
+              <input id="unknownPrice" type="number" step="0.01" min="0" placeholder="e.g., 2.49" />
+            </label>
+            <div class="button-row">
+              <button id="saveUnknown" class="btn primary">Save & Add</button>
+              <button id="cancelUnknown" class="btn">Cancel</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Cart</h2>
+      <ul id="cartList" class="cart-list"></ul>
+
+      <div class="totals">
+        <div class="total-line">
+          <span class="label">Items:</span>
+          <span id="itemCount" class="value">0</span>
+        </div>
+        <div class="total-line big">
+          <span class="label">Total:</span>
+          <span id="totalDisplay" class="value">$0.00</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ZXing library for QR + UPC/EAN scanning -->
+  <script src="https://unpkg.com/@zxing/library@latest"></script>
+  <script src="cash.js"></script>
+</body>
+</html>
