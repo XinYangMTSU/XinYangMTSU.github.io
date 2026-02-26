@@ -193,6 +193,7 @@ npm run dev
     <img src="vite-react.png" width="600px" height="400px"/>
 </ul>
 
+	<!--
 		<h2>React Project Structure</h2>
 		
 		<h3>✅ <span class="folder">src/</span> → This is the Core Folder for Your React Code:</h3>
@@ -209,7 +210,52 @@ npm run dev
 			<li>Import and use other components.</li>
 			<li>Add styles and logic.</li>
 		</u>
+	-->
 
+<h2>React Project Structure (Vite + React)</h2>
+
+<h3>✅ <span class="folder">src/</span> → This is the Core Folder for Your React Code:</h3>
+<ul>
+    <li><b>main.jsx</b> → Entry point of the React application. Connects React to the HTML DOM.</li>
+    <li><b>App.jsx</b> → Main component of your React application.</li>
+    <li>Components (.jsx files) → Reusable UI building blocks.</li>
+    <li>Styles (.css files) → CSS files for styling your components.</li>
+    <li>Logic (.js or .ts files) → JavaScript or TypeScript files for handling data and functionality.</li>
+    <li>Assets (images, icons, etc.) → Static resources like images and icons used in the app.</li>
+</ul>
+
+<h3>✅ <span class="folder">main.jsx</span> → Application Entry Point</h3>
+This file renders your React app into the browser DOM. It connects the <b>App</b> component to the HTML file (index.html).
+
+Example:
+<pre>
+ReactDOM.createRoot(document.getElementById('root')).render(
+  &lt;App /&gt;
+)
+</pre>
+
+<h3>✅ <span class="folder">App.jsx</span> → Main Component of Your React App</h3>
+This is the primary file where you write your React code. It serves as the root component of your application, and you can:
+
+<ul>
+    <li>Create and modify the UI.</li>
+    <li>Import and use other components.</li>
+    <li>Add styles and logic.</li>
+    <li>Manage state and user interactions.</li>
+</ul>
+
+<h3>✅ <span class="folder">public/</span> → Static Files Folder</h3>
+<ul>
+    <li>Contains the <b>index.html</b> file.</li>
+    <li>Stores public assets that do not go through React bundling.</li>
+</ul>
+
+<h3>✅ <span class="folder">package.json</span> → Project Configuration</h3>
+<ul>
+    <li>Lists project dependencies.</li>
+    <li>Contains scripts like <code>npm run dev</code> and <code>npm run build</code>.</li>
+</ul>
+		
 <h2>React Image Import Methods</h2>
 		
     <table style="width:80%">
