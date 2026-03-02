@@ -104,6 +104,7 @@
     <p>React renders components inside <code>main.jsx</code> using <code>ReactDOM.createRoot()</code>.</p>
 
     <h3>Example (<code>main.jsx</code>)</h3>
+        <!--
     <pre><code>import React from "react";
 import ReactDOM from "react-dom/client"; // Loads ReactDOM, which handles rendering.
 import App from "./App";
@@ -111,11 +112,11 @@ import App from "./App";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(&lt;App /&gt;); // React renders App.jsx inside index.html
 </code></pre>
-
+-->
         
     <pre><code>
-    import { StrictMode } from 'react'; // StrictMode is a tool for highlighting potential problems in an application    
-    import { createRoot } from 'react-dom/client'; // createRoot is used to create a root to render your React app (React 18+)
+    import { StrictMode } from 'react'; // StrictMode is to highlight potential problems in an application    
+    import { createRoot } from 'react-dom/client'; // createRoot is to render your React app (React 18+)
     import './index.css'; // Import global CSS styles
     import App from './App.jsx'; // Import the main App component
     
