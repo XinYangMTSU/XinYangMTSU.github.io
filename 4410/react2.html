@@ -31,7 +31,7 @@
     </ul>
     
     <h3>Basic Functional Component</h3>
-    <b>Header.js</b> (Encapsulation: Displays the Website Title)
+    <b>Header.jsx</b> (Encapsulation: Displays the Website Title)
     <pre> <code class="language-jsx">
        function Header() {
           return (
@@ -44,7 +44,7 @@
         export default Header;
     </code></pre>
 
-    <b>MainContent.js</b> (Encapsulation: Handles Main Content)
+    <b>MainContent.jsx</b> (Encapsulation: Handles Main Content)
     <pre>
          <code class="language-jsx">
         function MainContent() {
@@ -60,7 +60,7 @@
         </code>
     </pre>
 
-    <b>Footer.js</b> (Encapsulation: Displays the Footer)
+    <b>Footer.jsx</b> (Encapsulation: Displays the Footer)
     <pre>
          <code class="language-jsx">
         function Footer() {
@@ -77,9 +77,9 @@
     </pre>
         
     <h3>Using the Component</h3>
-    <b>App.js</b> (Composition: Combines Header, MainContent, and Footer)
+    <b>App.jsx</b> (Composition: Combines Header, MainContent, and Footer)
         
-    <p>In <code>App.js</code>:</p>
+    <p>In <code>App.jsx</code>:</p>
     <pre> <code class="language-jsx">
         import Header from "./Header";
         import MainContent from "./MainContent";
@@ -100,16 +100,16 @@
 
     <h2>Rendering a Component</h2>
     Rendering a component means <b><font color="blue">displaying a React component inside the browser</font></b>.
-    React does this by inserting the <b><font color="blue">main component (App.js)</font></b> into index.html via index.js.
-    <p>React renders components inside <code>index.js</code> using <code>ReactDOM.createRoot()</code>.</p>
+    React does this by inserting the <b><font color="blue">main component (App.jsx)</font></b> into index.html via index.js.
+    <p>React renders components inside <code>main.jsx</code> using <code>ReactDOM.createRoot()</code>.</p>
 
-    <h3>Example (<code>index.js</code>)</h3>
+    <h3>Example (<code>main.jsx</code>)</h3>
     <pre><code>import React from "react";
 import ReactDOM from "react-dom/client"; // Loads ReactDOM, which handles rendering.
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(&lt;App /&gt;); // React renders App.js inside index.html
+root.render(&lt;App /&gt;); // React renders App.jsx inside index.html
 </code></pre>
         
     <h2>Understanding Props (Passing Data to Components) in React</h2>
@@ -117,7 +117,7 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
     They allow components to be dynamic and reusable by providing different values when needed.</p>
 
     <h3>Example:</h3>
-    <b>Welcome.js</b>: A component receives props as a function parameter.
+    <b>Welcome.jsx</b>: A component receives props as a function parameter.
     <pre><code class="language-jsx">
     function Welcome(props) {
           return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;
@@ -167,7 +167,7 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
     <h3>Passing Multiple Props</h3>
     Props aren’t limited to just one value—you can pass multiple properties.
     <br>
-    <b>UserCard.js:</b>
+    <b>UserCard.jsx:</b>
     <pre>
         <code class="language-jsx">
             function UserCard(props) {
@@ -183,7 +183,7 @@ root.render(&lt;App /&gt;); // React renders App.js inside index.html
             export default UserCard;
         </code>
     </pre>
-    Using UserCard in <b>App.js</b>:
+    Using UserCard in <b>App.jsx</b>:
     <pre>
         <code class="language-jsx">
         import UserCard from "./UserCard";
