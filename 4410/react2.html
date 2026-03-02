@@ -114,22 +114,20 @@ root.render(&lt;App /&gt;); // React renders App.jsx inside index.html
 </code></pre>
 
         
-        <pre><code>
-            import { StrictMode } from 'react'; // StrictMode is a tool for highlighting potential problems in an application    
-            import { createRoot } from 'react-dom/client'; // createRoot is used to create a root to render your React app (React 18+)
-            import './index.css'; // Import global CSS styles
-            import App from './App.jsx'; // Import the main App component
-            
-            // Find the HTML element with id="root" in index.html
-            // Then create a React root and render the application inside it
-            createRoot(document.getElementById('root')).render(
-              // StrictMode helps identify unsafe lifecycle methods, legacy API usage, and other potential issues during development
-              &lt;StrictMode&gt;
-                {/* App is the main component of your application */}
-                &lt;App /&gt;
-              &lt;/StrictMode&gt;,
-            )
-        </code></pre>
+    <pre><code>
+    import { StrictMode } from 'react'; // StrictMode is a tool for highlighting potential problems in an application    
+    import { createRoot } from 'react-dom/client'; // createRoot is used to create a root to render your React app (React 18+)
+    import './index.css'; // Import global CSS styles
+    import App from './App.jsx'; // Import the main App component
+    
+    // Find the HTML element with id="root" in index.html
+    // Then create a React root and render the application inside it
+    createRoot(document.getElementById('root')).render(
+      &lt;StrictMode&gt;
+        &lt;App /&gt; 
+      &lt;/StrictMode&gt;
+    )
+    </code></pre>
         
     <h2>Understanding Props (Passing Data to Components) in React</h2>
     <p>Props (short for "properties") are a way to pass data from a parent component to a child component in React. 
