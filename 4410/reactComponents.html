@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Prism.js CSS for styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <link href="../CSS/Site.css" type="text/css" rel="stylesheet">
+    <title>React Syntax Guide</title>
+</head>
+<body>
+
+    <div id="main">
+
+    <h1>React Basics: Components, State, Events, and Forms</h1>
+    React simplifies UI development by using components, which are reusable functions that return JSX to structure applications efficiently. 
+    Events enable user interactions, while forms handle user input dynamically, ensuring a responsive interface. 
+    State manages component data, allowing updates and reactivity without reloading the page. 
+      
+    <h2>1. Components</h2>
+    <p>React applications are built using components, which are the fundamental building blocks of any React UI. 
+    A component is essentially a reusable piece of code (function) that returns JSX (HTML-like syntax). 
+    Components help in structuring and organizing a React application efficiently. </p>
+
+    Key Features of React Components:
+    <ul>
+        <li>&diams; <b><font color="blue">Reusability:</font></b> Components can be used multiple times across the application.</li>
+        <li>&diams; <b><font color="blue">Separation of Concerns:</font></b> Helps organize code by breaking UI into small, manageable parts.</li>
+        <li>&diams;  <b><font color="blue">Encapsulation:</font></b> Each component manages its own structure, logic, and styling.</li>
+        <li>&diams; <b><font color="blue">Composition:</font></b> Components can be combined to form larger UI structures. </li>
+    </ul>
+    
+    <h3>Basic Functional Component</h3>
+    <b>Header.jsx</b> (Encapsulation: Displays the Website Title)
+    <pre> <code class="language-jsx">
+       function Header() {
+          return (
+            &lt;header style={{ backgroundColor: "#007bff", color: "white", padding: "15px", textAlign: "center" }}&gt;
+              &lt;h1&gt;My React Website&lt;/h1&gt;
+            &lt;/header&gt;
+          );
+        }
+        
+        export default Header;
+    </code></pre>
+
+    <b>MainContent.jsx</b> (Encapsulation: Handles Main Content)
+    <pre>
+         <code class="language-jsx">
+        function MainContent() {
+          return (
+            &lt;main style={{padding: "20px", textAlign: "center", minHeight: "400px"}}&gt;
+              &lt;h2>Welcome to My Website&lt;/h2&gt;
+              &lt;p>This is a simple React app demonstrating component structure.&lt;/p&gt;
+            &lt;/main&gt;
+          );
+        }
+        
+        export default MainContent;
+        </code>
+    </pre>
+
+    <b>Footer.jsx</b> (Encapsulation: Displays the Footer)
+    <pre>
+         <code class="language-jsx">
+        function Footer() {
+          return (
+            &lt;footer style={{ backgroundColor: "#333", color: "white", padding: "10px", textAlign: "center", 
+            marginTop: "20px" }}&gt;
+              &lt;p&gt;© 2026 My React Website. All rights reserved.&lt;/p&gt;
+            &lt;/footer&gt;
+          );
+        }
+        
+        export default Footer;
+        </code>
+    </pre>
+        
+    <h3>Using the Component</h3>
+    <b>App.jsx</b> (Composition: Combines Header, MainContent, and Footer)
+        
+    <p>In <code>App.jsx</code>:</p>
+    <pre> <code class="language-jsx">
+        import Header from "./Header";
+        import MainContent from "./MainContent";
+        import Footer from "./Footer";
+        
+        function App() {
+          return (
+            &lt;div&gt;
+              &lt;Header /&gt;
+              &lt;MainContent /&gt;
+              &lt;Footer /&gt;
+            &lt;/div&gt;
+          );
+        }
+        
+        export default App;
+    </code></pre>
+
+    <h2>Rendering a Component</h2>
+    Rendering a component means <b><font color="blue">displaying a React component inside the browser</font></b>.
+    React does this by inserting the <b><font color="blue">main component (App.jsx)</font></b> into index.html via main.jsx.
+    <p>React renders components inside <code>main.jsx</code> using <code>ReactDOM.createRoot()</code>.</p>
+
+    <h3>Example (<code>main.jsx</code>)</h3>
+        <!--
+    <pre><code>import React from "react";
+import ReactDOM from "react-dom/client"; // Loads ReactDOM, which handles rendering.
+import App from "./App";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(&lt;App /&gt;); // React renders App.jsx inside index.html
+</code></pre>
+-->
+        
+    <pre><code>
+    import { StrictMode } from 'react'; // StrictMode is to highlight potential problems in an application    
+    import { createRoot } from 'react-dom/client'; // createRoot is to render your React app (React 18+)
+    import './index.css'; // Import global CSS styles
+    import App from './App.jsx'; // Import the main App component
+    
+    // Find the HTML element with id="root" in index.html
+    // Then create a React root and render the application inside it
+    createRoot(document.getElementById('root')).render(
+      &lt;StrictMode&gt;
+        &lt;App /&gt; 
+      &lt;/StrictMode&gt;
+    )
+    </code></pre>
+        
+    <h2>Understanding Props (Passing Data to Components) in React</h2>
+    <p>Props (short for "properties") are a way to pass data from a parent component to a child component in React. 
+    They allow components to be dynamic and reusable by providing different values when needed.</p>
+
+    <h3>Example:</h3>
+    <b>Welcome.jsx</b>: A component receives props as a function parameter.
+    <pre><code class="language-jsx">
+    function Welcome(props) {
+          return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;
+    }
+    // Default value for name if no prop is passed
+    Welcome.defaultProps = {
+      name: "Guest"
+    };
+        
+    export default Welcome;
+    </code></pre>
+
+    <h3>Passing Props to a Component:</h3>
+    <b>App.js</b>: let’s use &lt;Welcome /&gt; inside App.js and pass data.
+    <pre><code class="language-jsx">
+        import Welcome from "./Welcome"; // Import the Welcome component
+
+        function App() {
+          return (
+            &lt;div&gt;
+              &lt;Welcome name="Alice" /&gt;  {/* Passing "Alice" as a prop */}
+              &lt;Welcome name="Bob" /&gt;    {/* Passing "Bob" as a prop */}
+              &lt;Welcome name="Charlie" /&gt; {/* Passing "Charlie" as a prop */}
+              &lt;Welcome /&gt;  {/* No name provided */}
+            &lt;/div&gt;
+          );
+        }
+        
+        export default App;
+    </code></pre>
+
+    <h3>Props Are Read-Only</h3>
+    <ul>
+        <li>&diams;  Props are immutable—they cannot be changed inside the component.</li>
+        <li>&diams; If you try to modify them, React will throw an error.</li>
+    </ul>
+    ❌ Incorrect (Trying to Modify Props)
+    <pre>
+        <code class="language-jsx">
+            function Welcome(props) {
+              props.name = "John"; // ❌ This will cause an error
+              return <h1>Hello, {props.name}!</h1>;
+            }
+        </code>
+    </pre>
+
+    <h3>Passing Multiple Props</h3>
+    Props aren’t limited to just one value—you can pass multiple properties.
+    <br>
+    <b>UserCard.jsx:</b>
+    <pre>
+        <code class="language-jsx">
+            function UserCard(props) {
+              return (
+                &lt;div&gt;
+                  &lt;h2&gt;Name: {props.name}&lt;/h2&gt;
+                  &lt;p&gt;Age: {props.age}&lt;/p&gt;
+                  &lt;p&gt;Profession: {props.profession}&lt;/p&gt;
+                &lt;/div&gt;
+              );
+            }
+            
+            export default UserCard;
+        </code>
+    </pre>
+    Using UserCard in <b>App.jsx</b>:
+    <pre>
+        <code class="language-jsx">
+        import UserCard from "./UserCard";
+        
+        function App() {
+          return (
+            &lt;div&gt;
+              &lt;UserCard name="Alice" age={25} profession="Developer" /&gt;
+              &lt;UserCard name="Bob" age={30} profession="Designer" /&gt;
+              &lt;UserCard name="Charlie" age={35} profession="Manager" /&gt;
+            &lt;/div&gt;
+          );
+        }
+        
+        export default App;  
+        </code>
+    </pre>
+
+    <h2>2. State (Managing Component Data)</h2>
+    In React, <b><font color="blue">state</font></b> is used to manage <b><font color="blue">dynamic data</font></b> inside components.
+    State allows a component to remember values between renders and update the UI when the state changes.
+
+    <h3>What is useState?</h3>
+    <b><font color="blue">useState</font></b> is a React Hook that <b><font color="blue">allows functional components to manage state</font></b>.
+    It returns two values:
+    <ul>
+        <li>1. <b><font color="blue">Current state value</font></b> (count)</li>
+        <li>2. <b><font color="blue">Function to update the state</font></b> (setCount)</li>
+    </ul>
+        
+    <h3>Example using <code>useState</code>:</h3>
+    <pre><code class="language-jsx">
+        import { useState } from "react"; //useState is imported from React because it's a built-in Hook.
+
+        function Counter() {
+          const [count, setCount] = useState(0); //useState(0) initializes count with 0.
+        
+          return (
+            &lt;div style={{ textAlign: "center", marginTop: "20px" }}&gt;
+              &lt;h2&gt;React Counter&lt;/h2&gt;
+              &lt;p&gt;Count: {count}&lt;/p&gt; {/*{count} dynamically displays the current state in the UI.*/}
+              &lt;button onClick={() => setCount(count + 1)}&gt;Increase&lt;/button&gt; 
+              {/*setCount(newValue) updates count and re-renders the component.*/}
+              {/*When the button is clicked, setCount(count + 1) increments the count by 1.*/}
+              &lt;button onClick={() => setCount(count - 1)}&gt;Decrease&lt;/button&gt;
+              &lt;button onClick={() => setCount(0)}&gt;Reset&lt;/button&gt;
+            &lt;/div&gt;
+          );
+        }
+        
+        export default Counter;
+    </code></pre>
+    
+    <h2>3. Handling Events in React </h2>
+    In React, event handling works similarly to JavaScript but with some key differences:
+    <ul>
+        <li>&diams; Event names use <b><font color="blue">camelCase</font></b> (<b><font color="blue">onClick</font></b> instead of onclick).</li>
+        <li>&diams; Pass function <b><font color="blue">references inside {}</font></b> (not function calls).</li>
+        <li>&diams; Prevent default behavior using <b><font color="blue">event.preventDefault()</font></b> (like preventing form submission).
+</li>
+    </ul>
+    
+    <h3>Example 1: Handling Button Clicks</h3>
+    <pre>
+        <code class="language-jsx">    
+        function App() {
+            
+          function handleClick() {
+            alert("You clicked the button!");
+          }
+        
+          return (
+            &lt;div&gt;
+              &lt;h2&gt;Click Event Example&lt;/h2&gt;
+              &lt;button onClick={handleClick}&gt;Click Me&lt;/button&gt;
+            &lt;/div&gt;
+          );
+        }
+        
+        export default App;
+        </code>
+    </pre>
+
+    ✅: <b><font color="blue">onClick={handleClick}</font></b> passes the function reference, 
+        meaning React <b><font color="blue">calls</font></b> handleClick <b><font color="blue">only when the button is clicked</font></b>.
+    <br>
+        
+    <h3>Example 2: Passing Parameters to Event Handlers</h3>
+    If you need to pass arguments inside an event handler, use an <b><font color="blue">arrow function</font></b>.
+    <pre>
+       <code class="language-jsx">  
+            function App() {
+    
+                   function handleClick(name) {
+                        alert(`Hello, ${name}!`);
+                   }
+                
+                  return (
+                    &lt;button onClick={() => handleClick("Alice")}&gt;
+                      Click Me
+                    &lt;/button&gt;
+                  );
+            }
+                
+            export default App;
+        </code>
+    </pre>
+    <ul>
+        <li>&diams; <b><font color="blue">() => handleClick("Alice")</font></b> creates a new function that gets executed only when the button is clicked.</li>
+        <li>&diams; This prevents handleClick("Alice") from running immediately.</li>
+    </ul>
+
+    <h3>Example 3: Handling Input Changes (onChange)</h3>
+    <pre>
+        <code class="language-jsx">  
+            import { useState } from "react";
+
+            function App() {
+            
+              const [text, setText] = useState("");
+            
+              function handleChange(event) {
+                setText(event.target.value);
+              }
+            
+              return (
+                &lt;div&gt;
+                  &lt;h2&gt;Type something:&lt;/h2&gt;
+                  &lt;input type="text" value={text} onChange={handleChange} /&gt;
+                  &lt;p&gt;You typed: {text}&lt;/p&gt;
+                &lt;/div&gt;
+              );
+            }
+            
+            export default App;
+        </code>
+    </pre>
+        <ul>
+            <li>&diams; <b><font color="blue">onChange={handleChange}</font></b> updates state when text is typed.</li>
+            <li>&diams; <b><font color="blue">event.target</font></b> – Refers to the HTML element that triggered the event (e.g., an &lt;input&gt; field).</li>
+           <li>&diams; <b><font color="blue">event.target.value</font></b> – Captures the current value of the input field</li>
+            <li>&diams; <b><font color="blue">setText(event.target.value);</font></b> – Updates the state (text) with the new input value.</li>
+        </ul>
+        
+        
+
+    <h3>Example 4: Preventing Default Behavior (Form Submission)</h3>
+        
+    Forms automatically reload the page when submitted. 
+    Prevent this using <b><font color="blue">event.preventDefault()</font></b>.
+    <pre>
+        <code class="language-jsx"> 
+            import { useState } from "react";
+
+            function App() {
+            
+              const [name, setName] = useState(""); // Stores name input
+              const [email, setEmail] = useState(""); // Stores email input
+            
+              function handleSubmit(event) {
+                event.preventDefault(); // Prevents page reload
+                alert(`Name: ${name}\nEmail: ${email}`);
+              }
+            
+              return (
+                &lt;div style={{ textAlign: "center", marginTop: "20px" }}&gt;
+                  &lt;h2&gt;Simple Form&lt;/h2&gt;
+                  &lt;form onSubmit={handleSubmit}&gt;
+                    &lt;input 
+                      type="text" 
+                      value={name} 
+                      onChange={(event) => setName(event.target.value)} 
+                      placeholder="Enter your name"
+                      style={{ display: "block", margin: "10px auto", padding: "8px" }}
+                    /&gt;
+                    &lt;input 
+                      type="email" 
+                      value={email} 
+                      onChange={(event) => setEmail(event.target.value)} 
+                      placeholder="Enter your email"
+                      style={{ display: "block", margin: "10px auto", padding: "8px" }}
+                    /&gt;
+                    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+                  &lt;/form&gt;
+                &lt;/div&gt;
+              );
+            }
+            
+            export default App;
+        </code>
+    </pre>
+        
+    <h3>Common Event Types in React</h3>
+
+    <table style="width:80%">
+        <thead>
+        <tr>
+          <th>Event Type</th>
+          <th>Example Event Handler</th>
+        </tr>
+       </thead>
+      <tbody>
+        <tr>
+          <td>Click</td>
+          <td><code>onClick={handleClick}</code></td>
+        </tr>
+        <tr>
+          <td>Mouse Over</td>
+          <td><code>onMouseOver={handleMouseOver}</code></td>
+        </tr>
+        <tr>
+          <td>Key Press</td>
+          <td><code>onKeyPress={handleKeyPress}</code></td>
+        </tr>
+        <tr>
+          <td>Input Change</td>
+          <td><code>onChange={handleChange}</code></td>
+        </tr>
+        <tr>
+          <td>Form Submit</td>
+          <td><code>onSubmit={handleSubmit}</code></td>
+        </tr>
+      </tbody>
+    </table>
+        
+
+
+    <h2>4. Conditional Rendering</h2>
+
+    <b><font color="blue">Conditional rendering</font></b> in React allows a component to display different content based on a condition 
+    (e.g., user login status, form completion, etc.).    
+    
+    <h3>Example: Log In & Log Out Form with Username Validation</h3>
+    <pre><code class="language-jsx"> 
+    import { useState } from "react";
+
+    function LoginForm() {
+      const [isLoggedIn, setIsLoggedIn] = useState(false); // Controls login state
+      const [username, setUsername] = useState(""); // Stores username input
+      const [email, setEmail] = useState(""); // Stores email input
+      const [error, setError] = useState(""); // Stores validation error message
+    
+      function isValidUsername(username) {
+        return /^[a-zA-Z0-9_]+$/.test(username); // Allows letters, numbers, and underscores only
+      }
+    
+      function handleLogin(event) {
+        event.preventDefault(); // Prevent page reload
+        if (!username || !email) {
+          setError("Both fields are required.");
+          return;
+        }
+    
+        if (!isValidUsername(username)) {
+          setError("Username can only contain letters, numbers, and underscores.");
+          return;
+        }
+    
+        setError(""); // Clear errors if valid
+        setIsLoggedIn(true);
+      }
+    
+      function handleLogout() {
+        setIsLoggedIn(false);
+        setUsername(""); // Clear input fields
+        setEmail("");
+        setError("");
+      }
+    
+      return (
+        &lt;div style={{ textAlign: "center", marginTop: "20px" }}&gt;
+          &lt;h2&gt;{isLoggedIn ? `Welcome, ${username}!` : "Please Log In"}&lt;/h2&gt;
+    
+          {!isLoggedIn ? (
+            &lt;form onSubmit={handleLogin}&gt;
+              &lt;input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter your username"
+                style={{ display: "block", margin: "10px auto", padding: "8px" }}
+              /&gt;
+              &lt;input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                style={{ display: "block", margin: "10px auto", padding: "8px" }}
+              /&gt;
+              &lt;button type="submit"&gt;Log In&lt;/button&gt;
+              {/*Short-Circuit Evaluation*/}
+              {error && &lt;p style={{ color: "red" }}&gt;{error}&lt;/p&gt;}
+            &lt;/form&gt;
+          ) : (
+            &lt;button onClick={handleLogout}&gt;Log Out&lt;/button&gt;
+          )}
+        &lt;/div&gt;
+      );
+    }
+    
+    export default LoginForm;  
+    </code></pre>
+
+    This Login Form includes:
+        <ul>
+            <li>✅ Conditional rendering (isLoggedIn) controls which UI appears.</li>
+            <li>✅ Username field validation (no spaces or special characters).</li>
+            <li>✅ Two buttons: "Log In" (with validation) & "Log Out".</li>
+            <li>✅ State management: isLoggedIn controls which UI is displayed.</li>
+            <li>✅ Error messages if validation fails.</li>
+        </ul>
+
+
+    <h2>5. useEffect (Handling Side Effects)</h2>
+    <h3>What is useEffect?</h3>
+    <b><font color="blue">useEffect</font></b> is a React Hook that runs <b><font color="blue">side effects</font></b> in a component. 
+    A side effect is any operation that affects something outside the component, such as: 
+        <ul>
+            <li>✅ Fetching data from an API</li>
+            <li>✅ Updating the browser title</li>
+            <li>✅ Setting up event listeners</li>
+            <li>✅ Interacting with local storage</li>
+        </ul>
+    <h3>Example: Fetching Movies from an API</h3>
+    This example fetches a list of popular movies from the TMDB (The Movie Database) API.
+    <pre><code class="language-jsx"> 
+        import { useState, useEffect } from "react";
+
+        function MovieList() {
+          const [movies, setMovies] = useState([]); // State to store movie data
+          const [loading, setLoading] = useState(true); // State to track loading status
+        
+          useEffect(() => {
+            fetch("https://api.tvmaze.com/shows") // Fetches a list of TV shows
+              .then((response) => response.json()) // Convert response to JSON
+              .then((data) => {
+                setMovies(data.slice(0, 10)); // Store only the first 10 movies
+                setLoading(false); // Stop loading
+              })
+              .catch((error) => console.error("Error fetching movie data:", error));
+          }, []); // Empty dependency array → Runs only once when the component mounts
+        
+          return (
+            &lt;div style={{ textAlign: "center", marginTop: "20px" }}&gt;
+              &lt;h2&gt;Top 10 Movies&lt;/h2&gt;
+              {loading ? (
+                &lt;p&gt;Loading...&lt;/p&gt;
+              ) : (
+                &lt;ul style={{ listStyle: "none", padding: 0 }}&gt;
+                  {movies.map((movie) => (
+                    &lt;li key={movie.id} style={{ marginBottom: "15px", padding: "10px", 
+                        border: "1px solid #ddd" }}&gt;
+                      &lt;strong&gt;{movie.name}&lt;/strong&gt; &lt;br /&gt;
+                      &lt;img src={movie.image?.medium} alt={movie.name} style={{ borderRadius: "10px", 
+                        marginTop: "5px" }} /&gt;
+                      &lt;p&gt;&lt;strong&gt;Genre:&lt;/strong&gt; {movie.genres.join(", ")}&lt;/p&gt;
+                      &lt;p&gt;&lt;strong&gt;Premiered:&lt;/strong&gt; {movie.premiered}&lt;/p&gt;
+                    &lt;/li&gt;
+                  ))}
+                &lt;/ul&gt;
+              )}
+            &lt;/div&gt;
+          );
+        }
+        
+        export default MovieList;
+    </code></pre>
+
+    <h3>Structure of useEffect</h3>
+    <pre>
+        <code>
+        useEffect(() => {
+          // Effect logic (e.g., fetching data)
+        }, [dependencies]);
+        </code>
+    </pre>
+
+    <ul>
+        <li>&clubs; The first argument <b><font color="blue">() => {}</font></b> is the effect function.</li>
+        <li>&clubs; The second argument <b><font color="blue">[dependencies]</font></b> determines when the effect runs.</li>
+        <li>&clubs; Empty dependency array <b><font color="blue">[]</font></b>: The effect runs only once, when the component mounts (i.e., on the first render).</li>
+    </ul>
+
+    <h3>movies.map((movie) => ())</h3>
+        Loops through movies and returns JSX for each movie.
+    <h3>key={movie.id}</h3>
+        Ensures React efficiently updates the list.
+    <h3>movie.image?.medium</h3>
+        <ul>
+            <li>&clubs; movie.image --> The image property inside the movie object.</li>
+            <li>&clubs; movie.image?.medium --> Accesses movie.image.medium, but only if movie.image exists.</li>
+            <li>&clubs; ?. (Optional Chaining) --> Prevents errors if image is null or undefined.</li>
+        </ul>
+
+</div>
+
+    <!-- Prism.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+
+    
+</body>
+</html>
