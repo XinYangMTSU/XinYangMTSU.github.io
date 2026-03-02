@@ -115,29 +115,19 @@ root.render(&lt;App /&gt;); // React renders App.jsx inside index.html
 
         
         <pre><code>
-            // Import StrictMode from React
-            // StrictMode is a tool for highlighting potential problems in an application
-            import { StrictMode } from 'react'
-            
-            // Import createRoot from React DOM (client version)
-            // createRoot is used to create a root to render your React app (React 18+)
-            import { createRoot } from 'react-dom/client'
-            
-            // Import global CSS styles
-            import './index.css'
-            
-            // Import the main App component
-            import App from './App.jsx'
+            import { StrictMode } from 'react'; // StrictMode is a tool for highlighting potential problems in an application    
+            import { createRoot } from 'react-dom/client'; // createRoot is used to create a root to render your React app (React 18+)
+            import './index.css'; // Import global CSS styles
+            import App from './App.jsx'; // Import the main App component
             
             // Find the HTML element with id="root" in index.html
             // Then create a React root and render the application inside it
             createRoot(document.getElementById('root')).render(
-              // StrictMode helps identify unsafe lifecycle methods,
-              // legacy API usage, and other potential issues during development
-              <StrictMode>
+              // StrictMode helps identify unsafe lifecycle methods, legacy API usage, and other potential issues during development
+              &lt;StrictMode&gt;
                 {/* App is the main component of your application */}
-                <App />
-              </StrictMode>,
+                &lt;App /&gt;
+              &lt;/StrictMode&gt;,
             )
         </code></pre>
         
