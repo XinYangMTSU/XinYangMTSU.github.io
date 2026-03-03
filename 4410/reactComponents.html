@@ -163,6 +163,7 @@ root.render(&lt;App /&gt;); // React renders App.jsx inside index.html
         export default App;
     </code></pre>
 
+    <!--
     <h3>Props Are Read-Only</h3>
     <ul>
         <li>&diams;  Props are immutable—they cannot be changed inside the component.</li>
@@ -177,19 +178,21 @@ root.render(&lt;App /&gt;); // React renders App.jsx inside index.html
             }
         </code>
     </pre>
+    -->
 
+        
     <h3>Passing Multiple Props</h3>
     Props aren’t limited to just one value—you can pass multiple properties.
     <br>
     <b>UserCard.jsx:</b>
     <pre>
         <code class="language-jsx">
-            function UserCard(props) {
+            function UserCard({ name, age, profession }) {
               return (
                 &lt;div&gt;
-                  &lt;h2&gt;Name: {props.name}&lt;/h2&gt;
-                  &lt;p&gt;Age: {props.age}&lt;/p&gt;
-                  &lt;p&gt;Profession: {props.profession}&lt;/p&gt;
+                  &lt;h2&gt;Name: {name}&lt;/h2&gt;
+                  &lt;p&gt;Age: {age}&lt;/p&gt;
+                  &lt;p&gt;Profession: {profession}&lt;/p&gt;
                 &lt;/div&gt;
               );
             }
