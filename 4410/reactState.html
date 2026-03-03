@@ -164,6 +164,9 @@
               function handleSubmit(event) {
                 event.preventDefault(); // Prevents page reload
                 alert(`Name: ${name}\nEmail: ${email}`);
+                // Clear the inputs after submitting
+                setName("");
+                setEmail("");
               }
             
               return (
