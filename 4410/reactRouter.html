@@ -76,7 +76,7 @@
                 &lt;/BrowserRouter&gt;
               );
             }
-            // Export the App component so it can be used in index.js
+            // Export the App component so it can be used in index.jsx
             export default App;
         </code>
     </pre>
@@ -132,7 +132,7 @@
     
 In the above example, users must type URLs manually. Let's add <b><font color="blue">clickable navigation</font></b>.
 
-<h3>Step 1: Create a Header.js Component</h3>
+<h3>Step 1: Create a Header.jsx Component</h3>
 <pre>
     <code class="language-jsx">
         import { Link } from "react-router-dom";
@@ -195,7 +195,7 @@ In the above example, users must type URLs manually. Let's add <b><font color="b
 <h2>Handling 404 Pages (Not Found)</h2>
 If a user enters an unknown URL, display a 404 error page.
 <ul>
-    <li>&clubs; <b>Add This Route</b> in App.js</li>
+    <li>&clubs; <b>Add This Route</b> in App.jsx</li>
     <pre>
         <code>
             &lt;Route path="*" element={&lt;h1&gt;404 - Page Not Found&lt;/h1&gt;} /&gt;
@@ -207,8 +207,8 @@ If a user enters an unknown URL, display a 404 error page.
 
 <h2>Building a Stylish Navigation Bar with React Router</h2>
 
-<h3>Step 1: Create Navbar.js</h3>
-Inside your src folder, create a new file called Navbar.js:
+<h3>Step 1: Create Navbar.jsx</h3>
+Inside your src folder, create a new file called Navbar.jsx:
 <pre>
     <code class="language-jsx">
         import { Link } from "react-router-dom";
@@ -284,8 +284,8 @@ Inside src, create a new file called Navbar.css:
     </code>
 </pre>
 
-<h3>Use Navbar in App.js</h3>
-Now, modify your App.js file to include the Navbar component:
+<h3>Use Navbar in App.jsx</h3>
+Now, modify your App.jsx file to include the Navbar component:
 <pre>
     <code class="language-jsx">
         import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -328,7 +328,7 @@ and maintainable. Here's how you can do it:
 <h3>Step 1: Create Separate Component Files</h3>
 
 <ul>
-    <li>(1) Create Home.js</li>
+    <li>(1) Create Home.jsx</li>
     <pre>
     <code class="language-jsx">
         function Home() {
@@ -338,7 +338,7 @@ and maintainable. Here's how you can do it:
         export default Home;
     </code>
     </pre>
-    <li>(2) Create About.js</li>
+    <li>(2) Create About.jsx</li>
     <pre>
         <code class="language-jsx">
         function About() {
@@ -348,7 +348,7 @@ and maintainable. Here's how you can do it:
         export default About;
         </code>
     </pre>
-    <li>(3) Create Contact.js</li>
+    <li>(3) Create Contact.jsx</li>
     <pre>
         <code class="language-jsx">
             function Contact() {
@@ -360,8 +360,8 @@ and maintainable. Here's how you can do it:
     </pre>
 </ul>
 
-<h3>Step 2: Update App.js</h3>
-Now, modify your App.js file to import and use these separate components:
+<h3>Step 2: Update App.jsx</h3>
+Now, modify your App.jsx file to import and use these separate components:
 <pre>
     <code class="language-jsx">
         import { BrowserRouter, Routes, Route } from "react-router-dom";
