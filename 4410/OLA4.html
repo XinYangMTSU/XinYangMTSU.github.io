@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLA 4</title>
+    <link href="../CSS/Site.css" rel="stylesheet">
+    <link href="OLA.css" rel="stylesheet">
+</head>
+
+<body>
+
+<ul>
+  <li><a href="https://xinyangmtsu.github.io/4410.html" target="_blank"><b>CSCI 4410</b></a></li>
+  <li><a href="https://xinyangmtsu.github.io/4410/OLA4.html"><b>OLA4</b></a></li>
+</ul>
+	
+    <div id="main" style="margin-top: 38px;"> 
+        <h1>OLA 4: React Blog Website</h1>
+
+        <center>
+            <b>
+                <h3>Course: CSCI 4410/5410 Web Technologies</h3>
+                <p>Instructor: Dr. Xin Yang</p>
+                <font color="red">
+                    Due date: 11:59 pm Mar 29th, 2026 (Sunday)
+                </font>
+            </b>
+        </center>
+        <br>
+
+        <h2>Objective:</h2>
+	    
+	In this assignment, you will <b><font color="blue">develop a dynamic personal blog application using React</font></b>. 
+	Your task is to create an interactive interface where users can <b><font color="blue">add, view, and delete 
+	blog posts</font></b> while navigating between different pages using <b><font color="blue">React Router</font></b>. You will implement 
+	<b><font color="blue">state management</font></b> to handle blog data, use <b><font color="blue">event handling</font></b> for form submissions, and 
+	structure your application using <b><font color="blue">reusable components</font></b>. By completing this project, 
+	you will enhance your ability to build and manage a <b><font color="blue">multi-page React application</font></b> 
+	while applying best practices in component organization, routing, and user input handling.
+        <br><br>
+
+        <h2>Workflow Steps (3 Stages)</h2>
+        You must submit <b>all three stages</b>:
+        <ol>
+            <li><b>Stage 1:</b> Plan the Outline of Structure</li>
+            <li><b>Stage 2:</b> React Blog Website Implementation</li>
+            <li><b>Stage 3:</b> Reflection: what changed and why</li>
+        </ol>
+
+        <!-- ===================== Stage 1 ===================== -->
+        <h2>Stage 1: Plan the Outline of Structure (10 Points)</h2>
+        Before writing code, plan the structure of your React blog website.
+
+        <h3>What to submit</h3>
+        <ol>
+            <li>&#x2022; <b>Option A:</b> A clear photo of a hand-drawn outline, OR</li>
+            <li>&#x2022; <b>Option B:</b> A text file named <b>outline4.txt</b></li>
+        </ol>
+
+        <h3>Outline requirements</h3>
+        Your outline must show the order/structure of your React application and include:
+        <ol>
+            <li>&#x2022; A page title area (H1)</li>
+            <li>&#x2022; A navigation bar with links</li>
+            <li>&#x2022; A Home page layout</li>
+            <li>&#x2022; A Blog page layout for displaying posts</li>
+            <li>&#x2022; A New Post page layout with form fields</li>
+            <li>&#x2022; Buttons/actions area (such as Submit and Delete)</li>
+            <li>&#x2022; A display area for blog post details</li>
+            <li>&#x2022; A footer or bottom section</li>
+        </ol>
+
+        <h3>Example outline (text)</h3>
+        <pre>
+Top
+- H1: React Blog Website
+
+Section 1: Navigation
+- Home link
+- Blog link
+- New Post link
+
+Page 1: Home
+- Welcome message
+- Short description
+
+Page 2: Blog
+- Heading
+- List of blog posts
+- Each post shows title, author, content, timestamp
+- Delete button for each post
+
+Page 3: New Post
+- Form with title input
+- Form with author input
+- Form with content textarea
+- Submit button
+- Validation/error message area
+
+Bottom
+- Footer
+- Reflection (Stage 3) in outline4.txt
+        </pre>
+
+        <!-- ===================== Stage 2 ===================== -->
+        <h2>Stage 2: Implementation (81 Points)</h2>
+	
+	<h2>Step 1: Install Dependencies</h2>
+	    First, initialize a <b><font color="blue">React app</font></b> and install <b><font color="blue">react-router-dom</font></b>:
+	<pre>
+npx create-react-app my-react-blog
+cd my-react-blog
+npm install react-router-dom
+	</pre>
+	    
+	<h2>Project Structure</h2>
+	    
+	<pre>
+/my-react-blog
+│── /src
+│   │── /pages
+│   │   ├── Home.js
+│   │   ├── Blog.js
+│   │   ├── NewPost.js
+│   │── App.js
+│   │── Navbar.js
+│   │── Navbar.css
+	</pre>
+
+	<h2>Step 2: React Component Development (30 Points)</h2>
+	In this step, you will build and structure key React components that form the foundation of your blog application.
+	<br><br>
+	(1) &clubs; Create React components for different pages (Home.js, Blog.js, NewPost.js). (15 points)<br>
+	Implement four main page components:
+	<pre>
+a. Home.js --> Displays a welcome message.
+b. Blog.js --> Shows a list of blog posts.
+c. NewPost.js --> Contains a form for creating new posts.
+	</pre>
+	(2) &clubs; Implement state management (useState) for handling blog posts dynamically. (10 points)<br>
+	<pre>
+a. Use useState to store and manage blog posts.
+b. Ensure state updates when new posts are added or deleted.
+	</pre>
+	(3) &clubs; Ensure each component is well-structured and functional. (5 points)<br>
+	<pre>
+a. Components should be modular and reusable where applicable.
+b. Follow React best practices (clean syntax, meaningful function/component names).
+c. Ensure smooth communication between components through props.
+	</pre>
+
+	<br>
+	    
+    	<h2>Step 3: Implementing React Router (18 Points)</h2>
+	This step involves setting up React Router to enable navigation between different pages without reloading the application.
+	<br><br>
+	(1) &clubs; Set up routes in App.js for different pages (4 points)
+	<pre>
+/ --> Home
+/blog --> Blog page
+/new-post --> New post form
+	</pre>
+
+	(2) &clubs; Use the &lt;Link&gt; component for navigation in Navbar.js. (12 points)<br>
+	<pre>
+a. Use &lt;Link to="/"&gt; instead of &lt;a href="/"&gt; for navigation.
+b. Ensure the Navbar.js contains links to all pages.
+	</pre>
+	    
+	(3) &clubs; Handle 404 (Not Found) pages correctly. (2 points) <br>
+	    Implement a wildcard route (*) in App.js that displays a "404 - Page Not Found" message for unknown URLs.
+	
+
+	<h2>Step 4: Form Handling & Event Management (20 Points)</h2>
+	This step focuses on implementing the New Post form, handling user input, and updating the blog dynamically.
+	<br><br>
+	(1) Implement a form in NewPost.js to allow users to add blog posts. (5 Points)<br>
+	<pre>
+a. Title (text input)
+b. Author (text input)
+c. Content (textarea)
+	</pre>
+	(2) Use controlled components (useState) for form input management. (5 Points) <br>
+	<pre>
+a. Manage form input values using useState.
+b. Update state when the user types in the form fields.
+	</pre>
+	(3) Ensure form validation (e.g., title, author, and content fields cannot be empty). (5 Points) <br>
+	<pre>
+a. Prevent submission if title, author, or content fields are empty.
+b. Display an error message if validation fails.
+	</pre>
+	(4) After submission, update the blog post list dynamically. (5 Points)<br>
+	<pre>
+a. When a post is added, it should appear in Blog page.
+b. Use state (manage blog posts in App.js and pass as props).
+	</pre>
+
+	<h2>Step 5: Post Viewing & Deletion (18 Points)</h2>
+	This step involves displaying full post details and allowing users to delete posts.
+	    <br><br>
+	    
+	(1) Create Blog.js to display full blog post details. (4 Points) <br>
+	<pre>
+a. When clicking Blog, users should be navigated to the Blog page.
+b. The blog page will display all post details: Title, Author, Content, and timestamp.
+	</pre>
+	    
+	(2) Implement Delete functionality to remove posts from the list. (10 Points)<br>
+	<pre>
+a. Add a "Delete" button for each post in Blog.js.
+b. Clicking it should remove the post from the blog list.
+c. Use state updates (setPosts()) to ensure the post is deleted.
+	</pre>
+	    
+	(3) Use React state updates to dynamically reflect deletions. (4 Points) <br>
+    <pre>
+a. Ensure the UI updates immediately after a post is deleted.
+	</pre>
+
+	<h2>Step 6: Styling & UI Enhancement (10 Points)</h2>
+
+	<b><font color="red">Please create your own unique layout and styling instead of replicating the example we covered in class.</font></b>
+	<br><br>
+	(1) Apply CSS to enhance the appearance of the blog. (4 Points) <br>
+	<pre>
+a. Create a consistent layout for all pages.
+b. Use CSS classes for styling form elements, buttons, and text.
+	</pre>
+	(2) Style navigation links, form inputs, buttons, and blog post lists. (3 Points) <br>
+	<pre>
+a. Ensure the Navbar is visually distinct.
+b. Buttons should have hover effects and smooth styling.
+c. Blog posts should be clearly structured and readable.
+	</pre>
+	(3) Ensure a responsive layout for better user experience. (3 Points) <br>
+	<pre>
+a. The app should work well on both desktop and mobile.
+	</pre>
+
+        <!-- ===================== Stage 3 ===================== -->
+        <h2>Stage 3: Reflection (5 Points)</h2>
+        At the bottom of your Stage 1 outline, include a section titled <b>Reflection</b>.
+        Answer each question in <b>2–3 sentences</b>:
+
+        <ol>
+            <li><b>What changed</b> between your Stage 1 outline and your final implementation? Why did you change it?</li>
+            <li><b>What was the hardest part</b> to implement correctly, and why?</li>
+            <li><b>Describe one mistake</b> you made and how you fixed it.</li>
+        </ol>
+
+        <h2>Step 7: Submission Instructions</h2>
+        
+        Please compress your <b><font color="blue">my-react-blog</font></b> folder into a single ZIP archive and submit it through D2L.
+	Since the entire folder is quite large, you may delete the <b><font color="blue">node_modules</font></b> folder before creating the ZIP archive.
+        <br><br>
+        Please include:
+        <br>
+        <b>Stage 1:</b> outline4.txt or a clear photo of your hand-drawn outline<br>
+        <b>Stage 2:</b> your React blog project files<br>
+        <b>Stage 3:</b> reflection written at the bottom of outline4.txt
+
+        <h2>Grading:</h2>
+        The assignment is worth a total of 100 points, distributed as follows:
+        <br><br>
+
+      <table style="width:60%" border="1">
+    <tr>
+        <th>Part</th>
+        <th>Points</th>
+    </tr>
+    <tr>
+        <td>Stage 1: Outline of Structure</td>
+        <td>10 Points</td>
+    </tr>
+    <tr>
+        <td>React Component Development</td>
+        <td>26 Points</td>
+    </tr>
+    <tr>
+        <td>Implementing React Router</td>
+        <td>16 Points</td>
+    </tr>
+    <tr>
+        <td>Form Handling &amp; Event Management</td>
+        <td>18 Points</td>
+    </tr>
+    <tr>
+        <td>Post Viewing &amp; Deletion</td>
+        <td>15 Points</td>
+    </tr>
+    <tr>
+        <td>Styling &amp; UI Enhancement</td>
+        <td>10 Points</td>
+    </tr>
+    <tr>
+        <td>Stage 3: Reflection</td>
+        <td>5 Points</td>
+    </tr>
+    <tr>
+        <td><b>Total</b></td>
+        <td><b>100 Points</b></td>
+    </tr>
+</table>
+      
+        <br>
+        If you have any questions, please feel free to reach out to me at <b><font color="blue">Xin.Yang@mtsu.edu</font></b>
+        or stop by my office in ROTC annex 113E.
+        <br>
+        <br>
+	    <!-- Copyright Section -->
+   <footer style="text-align: center;">
+        
+         &copy;2026 Dr. Xin Yang. All rights reserved.<br>
+        <br><b>Department of Computer Science</b>
+        <br><b>College of Basic and Applied Sciences</b>
+        <br><B>Middle Tennessee State University</B>
+        
+    </footer>
+
+	    <br>
+	      <!-- Go to Top Button -->
+    <a href="#" id="goTopBtn">&#8679;</a>
+    </div>
+
+    <!-- Script to scroll to top -->
+    <script src="OLA.js"></script>
+	
+</body>
+
+</html>
