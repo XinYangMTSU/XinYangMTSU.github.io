@@ -153,7 +153,7 @@ c. Ensure smooth communication between components through props.
 
 	<br>
 	    
-    	<h2>Step 3: Implementing React Router (18 Points)</h2>
+    	<h2>Step 3: Implementing React Router (16 Points)</h2>
 	This step involves setting up React Router to enable navigation between different pages without reloading the application.
 	<br><br>
 	(1) &clubs; Set up routes in App.js for different pages (4 points)
@@ -163,7 +163,7 @@ c. Ensure smooth communication between components through props.
 /new-post --> New post form
 	</pre>
 
-	(2) &clubs; Use the &lt;Link&gt; component for navigation in Navbar.js. (12 points)<br>
+	(2) &clubs; Use the &lt;Link&gt; component for navigation in Navbar.js. (10 points)<br>
 	<pre>
 a. Use &lt;Link to="/"&gt; instead of &lt;a href="/"&gt; for navigation.
 b. Ensure the Navbar.js contains links to all pages.
@@ -173,7 +173,7 @@ b. Ensure the Navbar.js contains links to all pages.
 	    Implement a wildcard route (*) in App.js that displays a "404 - Page Not Found" message for unknown URLs.
 	
 
-	<h2>Step 4: Form Handling & Event Management (20 Points)</h2>
+	<h2>Step 4: Form Handling & Event Management (18 Points)</h2>
 	This step focuses on implementing the New Post form, handling user input, and updating the blog dynamically.
 	<br><br>
 	(1) Implement a form in NewPost.js to allow users to add blog posts. (5 Points)<br>
@@ -182,7 +182,7 @@ a. Title (text input)
 b. Author (text input)
 c. Content (textarea)
 	</pre>
-	(2) Use controlled components (useState) for form input management. (5 Points) <br>
+	(2) Use controlled components (useState) for form input management. (4 Points) <br>
 	<pre>
 a. Manage form input values using useState.
 b. Update state when the user types in the form fields.
@@ -192,17 +192,17 @@ b. Update state when the user types in the form fields.
 a. Prevent submission if title, author, or content fields are empty.
 b. Display an error message if validation fails.
 	</pre>
-	(4) After submission, update the blog post list dynamically. (5 Points)<br>
+	(4) After submission, update the blog post list dynamically. (4 Points)<br>
 	<pre>
 a. When a post is added, it should appear in Blog page.
 b. Use state (manage blog posts in App.js and pass as props).
 	</pre>
 
-	<h2>Step 5: Post Viewing & Deletion (18 Points)</h2>
+	<h2>Step 5: Post Viewing & Deletion (15 Points)</h2>
 	This step involves displaying full post details and allowing users to delete posts.
 	    <br><br>
 	    
-	(1) Create Blog.js to display full blog post details. (4 Points) <br>
+	(1) Create Blog.js to display full blog post details. (3 Points) <br>
 	<pre>
 a. When clicking Blog, users should be navigated to the Blog page.
 b. The blog page will display all post details: Title, Author, Content, and timestamp.
@@ -215,7 +215,7 @@ b. Clicking it should remove the post from the blog list.
 c. Use state updates (setPosts()) to ensure the post is deleted.
 	</pre>
 	    
-	(3) Use React state updates to dynamically reflect deletions. (4 Points) <br>
+	(3) Use React state updates to dynamically reflect deletions. (2 Points) <br>
     <pre>
 a. Ensure the UI updates immediately after a post is deleted.
 	</pre>
