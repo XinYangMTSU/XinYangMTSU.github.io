@@ -121,23 +121,23 @@ npm install react-router-dom
 /my-react-blog
 │── /src
 │   │── /pages
-│   │   ├── Home.js
-│   │   ├── Blog.js
-│   │   ├── NewPost.js
-│   │── App.js
-│   │── Navbar.js
+│   │   ├── Home.jsx
+│   │   ├── Blog.jsx
+│   │   ├── NewPost.jsx
+│   │── App.jsx
+│   │── Navbar.jsx
 │   │── Navbar.css
 	</pre>
 
 	<h2>Step 2: React Component Development (30 Points)</h2>
 	In this step, you will build and structure key React components that form the foundation of your blog application.
 	<br><br>
-	(1) &clubs; Create React components for different pages (Home.js, Blog.js, NewPost.js). (15 points)<br>
+	(1) &clubs; Create React components for different pages (Home.jsx, Blog.jsx, NewPost.jsx). (15 points)<br>
 	Implement four main page components:
 	<pre>
-a. Home.js --> Displays a welcome message.
-b. Blog.js --> Shows a list of blog posts.
-c. NewPost.js --> Contains a form for creating new posts.
+a. Home.jsx --> Displays a welcome message.
+b. Blog.jsx --> Shows a list of blog posts.
+c. NewPost.jsx --> Contains a form for creating new posts.
 	</pre>
 	(2) &clubs; Implement state management (useState) for handling blog posts dynamically. (10 points)<br>
 	<pre>
@@ -156,27 +156,27 @@ c. Ensure smooth communication between components through props.
     	<h2>Step 3: Implementing React Router (16 Points)</h2>
 	This step involves setting up React Router to enable navigation between different pages without reloading the application.
 	<br><br>
-	(1) &clubs; Set up routes in App.js for different pages (4 points)
+	(1) &clubs; Set up routes in App.jsx for different pages (4 points)
 	<pre>
 / --> Home
 /blog --> Blog page
 /new-post --> New post form
 	</pre>
 
-	(2) &clubs; Use the &lt;Link&gt; component for navigation in Navbar.js. (10 points)<br>
+	(2) &clubs; Use the &lt;Link&gt; component for navigation in Navbar.jsx. (10 points)<br>
 	<pre>
 a. Use &lt;Link to="/"&gt; instead of &lt;a href="/"&gt; for navigation.
-b. Ensure the Navbar.js contains links to all pages.
+b. Ensure the Navbar.jsx contains links to all pages.
 	</pre>
 	    
 	(3) &clubs; Handle 404 (Not Found) pages correctly. (2 points) <br>
-	    Implement a wildcard route (*) in App.js that displays a "404 - Page Not Found" message for unknown URLs.
+	    Implement a wildcard route (*) in App.jsx that displays a "404 - Page Not Found" message for unknown URLs.
 	
 
 	<h2>Step 4: Form Handling & Event Management (18 Points)</h2>
 	This step focuses on implementing the New Post form, handling user input, and updating the blog dynamically.
 	<br><br>
-	(1) Implement a form in NewPost.js to allow users to add blog posts. (5 Points)<br>
+	(1) Implement a form in NewPost.jsx to allow users to add blog posts. (5 Points)<br>
 	<pre>
 a. Title (text input)
 b. Author (text input)
@@ -195,14 +195,14 @@ b. Display an error message if validation fails.
 	(4) After submission, update the blog post list dynamically. (4 Points)<br>
 	<pre>
 a. When a post is added, it should appear in Blog page.
-b. Use state (manage blog posts in App.js and pass as props).
+b. Use state (manage blog posts in App.jsx and pass as props).
 	</pre>
 
 	<h2>Step 5: Post Viewing & Deletion (16 Points)</h2>
 	This step involves displaying full post details and allowing users to delete posts.
 	    <br><br>
 	    
-	(1) Create Blog.js to display full blog post details. (3 Points) <br>
+	(1) Create Blog.jsx to display full blog post details. (3 Points) <br>
 	<pre>
 a. When clicking Blog, users should be navigated to the Blog page.
 b. The blog page will display all post details: Title, Author, Content, and timestamp.
@@ -210,7 +210,7 @@ b. The blog page will display all post details: Title, Author, Content, and time
 	    
 	(2) Implement Delete functionality to remove posts from the list. (10 Points)<br>
 	<pre>
-a. Add a "Delete" button for each post in Blog.js.
+a. Add a "Delete" button for each post in Blog.jsx.
 b. Clicking it should remove the post from the blog list.
 c. Use state updates (setPosts()) to ensure the post is deleted.
 	</pre>
