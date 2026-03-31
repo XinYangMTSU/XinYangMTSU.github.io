@@ -80,82 +80,134 @@ Stage 3: Reflection: what changed and why
 
     <h3>Step 1: Project Setup</h3>
     <p>
-        Create your project folder structure and organize your files properly.
+        Start by creating a new folder for your PHP quiz project and adding the necessary files.
     </p>
 
-    <pre>
-/your-project
-│── index.html
-│── /css
-│   ├── style.css
-│── /js
-│   ├── script.js
-│── /images
-    </pre>
+	<pre> 
+	/php-word-bank-quiz 
+	│── index.php 
+	│── php_quiz.json 
+	│── style.css 
+	</pre>
 
-    <h3>Step 2: Page Structure and Content (30 Points)</h3>
+	In this project, you'll use <b><font color="blue">PHP</font></b> to build a dynamic quiz, 
+	and <b><font color="blue">JSON</font></b> to store quiz data. <br><br>
+
+	<div>
+	&star; <b><font color="blue">index.php</font></b> contains your PHP logic and HTML form. <br>
+	&star; <b><font color="blue">php_quiz.json</font></b> stores the quiz questions and answers.<br><br>
+	</div>
+	
+
+    <h3>Step 2: Create the JSON File (6 Points)</h3>
     <p>
-        In this step, you will build the main structure and content of your website.
+        Create a file named <b><font color="blue">php_quiz.json </font></b> and 
+	add PHP-related fill-in-the-blank questions with correct answers.
     </p>
     <pre>
-(1) Create the required pages or sections. (15 points)
-    a. Include headings and organized content.
-    b. Ensure each page/section serves a clear purpose.
-
-(2) Use semantic HTML elements properly. (10 points)
-    a. Use header, nav, main, section, footer where appropriate.
-    b. Keep the code clean and readable.
-
-(3) Ensure the layout is well-structured and functional. (5 points)
-    a. Organize content clearly.
-    b. Use meaningful names for classes/IDs.
+	[
+		  {
+		    "question": "PHP code is executed on the __________.",
+		    "answer": "server"
+		  },
+		  {
+		    "question": "To display text in PHP, we use the __________ statement.",
+		    "answer": "echo"
+		  },
+		  {
+		    "question": "To collect form data sent via POST, we use __________.",
+		    "answer": "$_POST"
+		  },
+		  {
+		    "question": "To check if a variable is set in PHP, we use the __________ function.",
+		    "answer": "isset"
+		  },
+		  {
+		    "question": "In PHP, variables start with the __________ symbol.",
+		    "answer": "$"
+		  }
+		]
     </pre>
 
-    <h3>Step 3: Navigation and User Experience (16 Points)</h3>
-    <p>
-        This step focuses on making your website easy to navigate and pleasant to use.
-    </p>
-    <pre>
-(1) Add a navigation menu with working links. (6 points)
-    a. Users should be able to move between sections/pages easily.
+    	<h2>Step 3: Build the Quiz Form (35 Points)</h2>
+      
+	In this step, you'll dynamically generate quiz questions based on data from a JSON file and allow users to fill in the blanks.
+	
+	<br><br>
+	
+	(1) &clubs; Load the quiz data from <b><font color="blue">php_quiz.json</font></b>. (5 points)
+	<div>
+		a. Use <b><font color="blue">json_decode(file_get_contents(...),true)</font></b> to read the questions.  <br>
+		b. Store them in a PHP associate array.  <br>
+	</div>
+	<br><br> 
+	(2) &clubs; Create a form using <b><font color="blue">PHP</font></b> that loops through the questions 
+	    and displays each one with a text input field for the user’s answer. (20 points)
+	<div> 
+		a. Create a  <b><font color="blue">&lt;form&gt;&lt;/form&gt;</font></b> using <b><font color="blue">post method</font></b>. <br>
+		b. Use <b><font color="blue">foreach</font></b> loop through the questions to dynamically display each one with a blank input. <br>
+		c. Please use <b><font color="blue">text type</font></b> for the blank input field. <br>
+		d. Use <b><font color="blue">Submit</font></b> to submit the form. <br>
 
-(2) Ensure a logical flow of information. (5 points)
-    a. Arrange content in a user-friendly order.
+	</div>
+	<br><br> 
+	(3) &clubs; Style the form for clarity and readability. (5 points)
+	<div> 
+		a. Use CSS styles.  <br>
+		b. Highlight the Word Bank at the top.  <br>
+	</div>
+	<br><br> 
+	    
+	(4) &clubs; Include a visible <b><font color="blue">Word Bank</font></b> section that lists all possible answers to help users. (5 points)
+		
+	<br>
+	<br>
+ 
 
-(3) Handle missing or invalid pages/links if needed. (5 points)
-    a. Include a fallback or clear error message if applicable.
-    </pre>
+   	<h2>Step 4: Process and Grade the Quiz (45 Points)</h2>
+	This step focuses on processing the user's answers and giving instant feedback.
+	
+	<br><br>
+	(1) &clubs; Use <b><font color="blue">$_SERVER["REQUEST_METHOD"]</font></b> to detect form submission. (5 points)
+	<br><br>
+	    
+	(2) &clubs; Use <b><font color="blue">$_POST</font></b> to collect submitted answers. (5 points)
+	<div> 
+		a. Use <b><font color="blue">isset()</font></b> and loop through each submitted answer. 
+	</div>
+	<br><br>
+	(3) &clubs; Use <b><font color="blue">string comparison</font></b> to check if the user's answer 
+	    matches the correct answer from the JSON file. (10 points)
+	<div>
+		a. You can use <b><font color="blue">strtolower()</font></b> to convert both the correct answer and the submitted answer to lowercase before checking it. <br>
+		b. Track the total number of correct answers
+	</div>
+	<br><br>    
+	
+	(4) &clubs; Display the correct answer and the user's answer with color-coded feedback. (20 points)
+	<div> 
+		a. Display each question along with the user’s answer <br>
+		b. Show "Correct" or "Incorrect" next to each answer <br>
+		c. Use green/red or styled spans to show feedback <br>
+		d. Show the final score  <br>
+	</div>
+	<br><br>  
+	(5) &clubs; Create a link to retry the quiz. (5 points)
+	<div> 
+		a. Add a <b><font color="blue">"Restart Quiz"</font></b> button that clears the form
+	</div>
+	    
+	<br><br>
+	
 
-    <h3>Step 4: Interactivity / Functionality (18 Points)</h3>
-    <p>
-        Add interactive or dynamic features required for your website.
-    </p>
-    <pre>
-(1) Implement required user interactions. (6 points)
-    a. Buttons, forms, menus, or other features as needed.
+ 	<h2>Step 5: Input Validation & Security (10 Points)</h2>
+	Sanitize and secure user input using PHP best practices.
+	
+	<br><br>
+	(1) &clubs; Use <b><font color="blue">htmlspecialchars()</font></b> to prevent code injection. (5 points)
+	<br><br>
+	(2) &clubs; Ensure <b><font color="blue">input fields</font></b> are required in the form and display a message if left blank. (5 points)
 
-(2) Use JavaScript appropriately for dynamic behavior. (6 points)
-    a. Update content or handle events correctly.
-
-(3) Validate user input if forms are included. (6 points)
-    a. Prevent empty or invalid submissions.
-    b. Show helpful error messages where needed.
-    </pre>
-
-    <h3>Step 5: Content Display / Actions (16 Points)</h3>
-    <p>
-        This step focuses on how content is shown and how user actions affect the page.
-    </p>
-    <pre>
-(1) Display information clearly and effectively. (6 points)
-    a. Organize text, images, or data in a readable way.
-
-(2) Implement any required action buttons or controls. (6 points)
-    a. Buttons should work correctly and update the interface as needed.
-
-(3) Ensure updates appear immediately in the UI. (4 points)
-    a. Changes should be reflected clearly for the user.
-    </pre>
 
     <h3>Step 6: Styling & UI Enhancement (10 Points)</h3>
     <p>
