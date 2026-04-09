@@ -136,7 +136,7 @@ node index.js (restart server)
         <h2>What is a Route?</h2>
         <ul>
             <li>&#9733; A <b><font color="blue">route</font></b> is a URL path handled by the server.</li>
-            <li>&#9733; For example, <b><font color="blue">/</font></b>, <b><font color="blue">/students</font></b>, and <b><font color="blue">/courses</font></b> are routes.</li>
+            <li>&#9733; For example, <b><font color="blue">/</font></b>, <b><font color="blue">/students</font></b>, and <b><font color="blue">/course</font></b> are routes.</li>
             <li>&#9733; Express uses methods like <b><font color="red">app.get()</font></b> to define routes.</li>
         </ul>
 
@@ -148,7 +148,18 @@ app.get('/students', (req, res) =&gt; {
     { id: 2, name: 'Bob' }
   ]);
 });
+
+app.get('/course', (req, res) => {
+  res.send('<h1>Course Page</h1>');
+});
         </pre>
+
+      <b><font color="blue">Then visit:</font></b>
+
+        <ul>
+           <li>/students -> JSON</li> 
+           <li>/course -> HTML page</li> 
+        </ul>
 
         <h2>What is JSON?</h2>
         <ul>
