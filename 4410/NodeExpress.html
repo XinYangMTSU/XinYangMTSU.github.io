@@ -230,19 +230,80 @@ app.listen(3000, () =&gt; {
             </table>
         </center>
 
-        <h2>React Calling Express</h2>
+        <!--  -->
+
+                <h2>Frontend Calling Express (Using HTML)</h2>
         <ul>
-            <li>&#9733; React can use <b><font color="red">fetch()</font></b> to request data from Express.</li>
-            <li>&#9733; Example:</li>
+            <li>&#9733; Instead of React for now, we can use a simple <b><font color="blue">HTML file</font></b> to request data from Express.</li>
+            <li>&#9733; We will use <b><font color="red">fetch()</font></b> in a browser to call our backend.</li>
+        </ul>
+
+        <h3>Step 1: Create a public Folder</h3>
+        <ul>
+            <li>&#9733; Inside your Node project, create a folder named <b><font color="blue">public</font></b>.</li>
+            <li>&#9733; This folder will store frontend files like HTML.</li>
+        </ul>
+
+        <h3>Step 2: Create test.html</h3>
+        <ul>
+            <li>&#9733; Inside the <b><font color="blue">public</font></b> folder, create a file named <b><font color="blue">test.html</font></b>.</li>
         </ul>
 
         <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Students&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;Students&lt;/h1&gt;
+&lt;ul id="studentsList"&gt;&lt;/ul&gt;
+
+&lt;script&gt;
 fetch('http://localhost:3000/students')
   .then(response =&gt; response.json())
   .then(data =&gt; {
-    console.log(data);
-  });
+    const list = document.getElementById('studentsList');
+
+    data.forEach(student =&gt; {
+        const li = document.createElement('li');
+        li.textContent = student.name;
+        list.appendChild(li);
+    });
+  })
+  .catch(error =&gt; console.error(error));
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
         </pre>
+
+        <h3>Step 3: Update index.js</h3>
+        <ul>
+            <li>&#9733; Tell Express to serve files from the <b><font color="blue">public</font></b> folder.</li>
+        </ul>
+
+        <pre>
+app.use(express.static('public'));
+        </pre>
+
+        <h3>Step 4: Run and Test</h3>
+        <ul>
+            <li>&#9733; Start your server:</li>
+        </ul>
+
+        <pre>
+node index.js
+        </pre>
+
+        <ul>
+            <li>&#9733; Open your browser and go to:</li>
+            <li>&#9733; <b><font color="blue">http://localhost:3000/test.html</font></b></li>
+            <li>&#9733; You should see student names displayed on the page.</li>
+        </ul>
+        
+        <!--  -->
 
         <h2>Important Idea: API-Based Development</h2>
         <ul>
