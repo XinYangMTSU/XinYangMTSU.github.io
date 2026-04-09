@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Node.js and Express</title>
+    <link href="../CSS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="main">
+        <h1>Introduction to Node.js and Express</h1>
+
+        <h2>Why Learn Node.js and Express?</h2>
+        <ul>
+            <li>&#9733; So far, we have used <b><font color="blue">HTML/CSS/JavaScript</font></b> for the front end, <b><font color="blue">PHP</font></b> for the back end, and <b><font color="blue">MySQL</font></b> for the database.</li>
+            <li>&#9733; <b><font color="blue">Node.js + Express</font></b> is a modern way to build the server side of web applications.</li>
+            <li>&#9733; It allows developers to use <b><font color="blue">JavaScript on both the front end and the back end</font></b>.</li>
+            <li>&#9733; This makes it easier to build applications where <b><font color="blue">React talks to an API</font></b> and the API talks to <b><font color="blue">MySQL</font></b>.</li>
+        </ul>
+
+        <h2>What is Node.js?</h2>
+        <ul>
+            <li>&#9733; <b><font color="blue">Node.js</font></b> is a JavaScript runtime environment.</li>
+            <li>&#9733; It lets us run JavaScript <b>outside the browser</b>.</li>
+            <li>&#9733; With Node.js, JavaScript can be used to create a web server, read files, connect to databases, and build APIs.</li>
+            <li>&#9733; It is commonly used for <b><font color="blue">modern full-stack development</font></b>.</li>
+        </ul>
+
+        <h2>What is Express?</h2>
+        <ul>
+            <li>&#9733; <b><font color="blue">Express</font></b> is a lightweight framework built on top of Node.js.</li>
+            <li>&#9733; It makes it easier to create routes, handle requests, and send responses.</li>
+            <li>&#9733; Express helps us build a <b><font color="blue">backend API</font></b> quickly.</li>
+        </ul>
+
+        <h2>PHP vs Node.js/Express</h2>
+        <center>
+            <table style="width:85%">
+                <thead>
+                    <tr>
+                        <th>PHP Approach</th>
+                        <th>Node.js / Express Approach</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Runs with Apache/XAMPP</td>
+                        <td>Runs with Node.js</td>
+                    </tr>
+                    <tr>
+                        <td>Backend language is PHP</td>
+                        <td>Backend language is JavaScript</td>
+                    </tr>
+                    <tr>
+                        <td>Often mixes PHP with HTML</td>
+                        <td>Often sends JSON data to the frontend</td>
+                    </tr>
+                    <tr>
+                        <td>Frontend can submit forms directly to PHP pages</td>
+                        <td>Frontend can call API routes such as /students</td>
+                    </tr>
+                    <tr>
+                        <td>HTML &rarr; PHP &rarr; MySQL</td>
+                        <td>React &rarr; Express &rarr; MySQL</td>
+                    </tr>
+                </tbody>
+            </table>
+        </center>
+
+        <h2>Step 1: Create a Node Project</h2>
+        <ul>
+            <li>&#9733; First, create a new folder for your project.</li>
+            <li>&#9733; Then initialize the project using <b><font color="red">npm init -y</font></b>.</li>
+            <li>&#9733; Install Express with <b><font color="red">npm install express</font></b>.</li>
+        </ul>
+
+        <b><font color="blue">Commands:</font></b>
+        <pre>
+mkdir nodeapp
+cd nodeapp
+npm init -y
+npm install express
+        </pre>
+
+        <h2>Step 2: Create Your First Express Server</h2>
+        <ul>
+            <li>&#9733; Create a file named <b><font color="blue">index.js</font></b>.</li>
+            <li>&#9733; Add the following code:</li>
+        </ul>
+
+        <b><font color="blue">index.js:</font></b>
+        <pre>
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) =&gt; {
+  res.send('Hello from Express!');
+});
+
+app.listen(3000, () =&gt; {
+  console.log('Server running at http://localhost:3000');
+});
+        </pre>
+
+        <h2>How to Run the Server</h2>
+        <ul>
+            <li>&#9733; In the terminal, type:</li>
+        </ul>
+
+        <pre>
+node index.js
+        </pre>
+
+        <ul>
+            <li>&#9733; Open your browser and go to <b><font color="blue">http://localhost:3000</font></b>.</li>
+            <li>&#9733; You should see: <b>Hello from Express!</b></li>
+        </ul>
+
+        <h2>What is a Route?</h2>
+        <ul>
+            <li>&#9733; A <b><font color="blue">route</font></b> is a URL path handled by the server.</li>
+            <li>&#9733; For example, <b><font color="blue">/</font></b>, <b><font color="blue">/students</font></b>, and <b><font color="blue">/courses</font></b> are routes.</li>
+            <li>&#9733; Express uses methods like <b><font color="red">app.get()</font></b> to define routes.</li>
+        </ul>
+
+        <b><font color="blue">Example:</font></b>
+        <pre>
+app.get('/students', (req, res) =&gt; {
+  res.json([
+    { id: 1, name: 'Alice' },
+    { id: 2, name: 'Bob' }
+  ]);
+});
+        </pre>
+
+        <h2>What is JSON?</h2>
+        <ul>
+            <li>&#9733; <b><font color="blue">JSON</font></b> stands for JavaScript Object Notation.</li>
+            <li>&#9733; It is a common data format used for communication between frontend and backend.</li>
+            <li>&#9733; React often receives data from the server in JSON format.</li>
+        </ul>
+
+        <h2>Connecting Express to MySQL</h2>
+        <ul>
+            <li>&#9733; We can connect Express to the same <b><font color="blue">MySQL</font></b> database you already used with PHP.</li>
+            <li>&#9733; Install the MySQL package for Node.js:</li>
+        </ul>
+
+        <pre>
+npm install mysql2
+        </pre>
+
+        <b><font color="blue">Example:</font></b>
+        <pre>
+const express = require('express');
+const mysql = require('mysql2');
+const app = express();
+
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'school'
+});
+
+app.get('/students', (req, res) =&gt; {
+  db.query('SELECT * FROM students', (err, results) =&gt; {
+    if (err) {
+      res.status(500).send(err.message);
+      return;
+    }
+    res.json(results);
+  });
+});
+
+app.listen(3000, () =&gt; {
+  console.log('Server running at http://localhost:3000');
+});
+        </pre>
+
+        <h2>How the Modern Stack Works</h2>
+        <ul>
+            <li>&#9733; <b><font color="blue">React</font></b> is the frontend.</li>
+            <li>&#9733; <b><font color="blue">Express</font></b> is the backend server.</li>
+            <li>&#9733; <b><font color="blue">MySQL</font></b> stores the data.</li>
+        </ul>
+
+        <center>
+            <table style="width:75%">
+                <thead>
+                    <tr>
+                        <th>Layer</th>
+                        <th>Technology</th>
+                        <th>Job</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Frontend</td>
+                        <td>React</td>
+                        <td>Displays pages and user interface</td>
+                    </tr>
+                    <tr>
+                        <td>Backend</td>
+                        <td>Node.js + Express</td>
+                        <td>Handles requests and sends data</td>
+                    </tr>
+                    <tr>
+                        <td>Database</td>
+                        <td>MySQL</td>
+                        <td>Stores application data</td>
+                    </tr>
+                </tbody>
+            </table>
+        </center>
+
+        <h2>React Calling Express</h2>
+        <ul>
+            <li>&#9733; React can use <b><font color="red">fetch()</font></b> to request data from Express.</li>
+            <li>&#9733; Example:</li>
+        </ul>
+
+        <pre>
+fetch('http://localhost:3000/students')
+  .then(response =&gt; response.json())
+  .then(data =&gt; {
+    console.log(data);
+  });
+        </pre>
+
+        <h2>Important Idea: API-Based Development</h2>
+        <ul>
+            <li>&#9733; In older projects, the server often returned full HTML pages.</li>
+            <li>&#9733; In modern applications, the backend often returns <b><font color="blue">JSON data</font></b> instead.</li>
+            <li>&#9733; The frontend uses that data to build the page dynamically.</li>
+        </ul>
+
+        <h2>Full Flow Example</h2>
+        <ul>
+            <li>&#9733; User opens React app.</li>
+            <li>&#9733; React sends a request to <b><font color="blue">/students</font></b>.</li>
+            <li>&#9733; Express receives the request.</li>
+            <li>&#9733; Express queries MySQL.</li>
+            <li>&#9733; MySQL returns the student records.</li>
+            <li>&#9733; Express sends JSON back to React.</li>
+            <li>&#9733; React displays the data on the page.</li>
+        </ul>
+
+        <h2>Summary</h2>
+        <ul>
+            <li>&#9733; <b><font color="blue">Node.js</font></b> lets us run JavaScript on the server.</li>
+            <li>&#9733; <b><font color="blue">Express</font></b> helps us build a web server and API easily.</li>
+            <li>&#9733; We can connect Express to <b><font color="blue">MySQL</font></b>.</li>
+            <li>&#9733; React can request data from Express using <b><font color="blue">fetch()</font></b>.</li>
+            <li>&#9733; Modern web apps often follow this structure: <b><font color="blue">React &rarr; Express &rarr; MySQL</font></b>.</li>
+        </ul>
+
+        <h2>Practice Exercise</h2>
+        <ul>
+            <li>&#9733; Create an Express server.</li>
+            <li>&#9733; Add a route named <b><font color="blue">/courses</font></b>.</li>
+            <li>&#9733; Return JSON with at least 3 course objects.</li>
+            <li>&#9733; Try to connect to your MySQL database and display student data.</li>
+        </ul>
+
+        <br>
+        <br>
+        <footer align="center" id="foot01"></footer>
+    </div>
+    <br>
+    <br>
+    <script src="../CCS/Script.js"></script>
+
+</body>
+
+</html>
