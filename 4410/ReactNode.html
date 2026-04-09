@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>React + Node.js + Express Login System</title>
+    <link href="../CSS/Site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="main">
+        <h1>React + Node.js + Express User Registration, Login, and Dashboard</h1>
+
+        <h2>Goal of This Project</h2>
+        <ul>
+            <li>&#9733; In this project, we will build a <b><font color="blue">modern full-stack login system</font></b>.</li>
+            <li>&#9733; The <b><font color="blue">React frontend</font></b> will display pages such as Register, Login, and Dashboard.</li>
+            <li>&#9733; The <b><font color="blue">Node.js + Express backend</font></b> will handle requests from React.</li>
+            <li>&#9733; The <b><font color="blue">MySQL database</font></b> will store user accounts.</li>
+        </ul>
+
+        <h2>What Students Will Build</h2>
+        <ul>
+            <li>&#9733; A <b><font color="blue">Register page</font></b> to create a new account.</li>
+            <li>&#9733; A <b><font color="blue">Login page</font></b> to sign in.</li>
+            <li>&#9733; A <b><font color="blue">Dashboard page</font></b> to welcome the logged-in user.</li>
+            <li>&#9733; React routes so each page appears separately.</li>
+        </ul>
+
+        <h2>Project Structure</h2>
+        <ul>
+            <li>&#9733; We will use two folders: one for the frontend and one for the backend.</li>
+        </ul>
+
+        <pre>
+login-demo/
+    client/
+        src/
+            App.jsx
+            Register.jsx
+            Login.jsx
+            Dashboard.jsx
+            main.jsx
+    server/
+        index.js
+        package.json
+        </pre>
+
+        <h2>How the Modern Stack Works</h2>
+        <center>
+            <table style="width:80%">
+                <thead>
+                    <tr>
+                        <th>Layer</th>
+                        <th>Technology</th>
+                        <th>Job</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Frontend</td>
+                        <td>React</td>
+                        <td>Displays Register, Login, and Dashboard pages</td>
+                    </tr>
+                    <tr>
+                        <td>Backend</td>
+                        <td>Node.js + Express</td>
+                        <td>Handles registration and login requests</td>
+                    </tr>
+                    <tr>
+                        <td>Database</td>
+                        <td>MySQL</td>
+                        <td>Stores usernames and hashed passwords</td>
+                    </tr>
+                </tbody>
+            </table>
+        </center>
+
+        <h2>Step 1: Create the React Frontend</h2>
+        <ul>
+            <li>&#9733; Open a terminal and create a React project using Vite.</li>
+        </ul>
+
+        <pre>
+npm create vite@latest client -- --template react
+cd client
+npm install
+npm install react-router-dom
+        </pre>
+
+        <ul>
+            <li>&#9733; <b><font color="blue">react-router-dom</font></b> allows us to create separate pages like Register, Login, and Dashboard.</li>
+        </ul>
+
+        <h2>Step 2: Create the Node.js + Express Backend</h2>
+        <ul>
+            <li>&#9733; In a separate terminal, create the server folder and install the required packages.</li>
+        </ul>
+
+        <pre>
+mkdir server
+cd server
+npm init -y
+npm install express mysql2 bcrypt cors
+        </pre>
+
+        <ul>
+            <li>&#9733; <b><font color="blue">express</font></b> builds the backend server.</li>
+            <li>&#9733; <b><font color="blue">mysql2</font></b> connects Node.js to MySQL.</li>
+            <li>&#9733; <b><font color="blue">bcrypt</font></b> hashes passwords securely.</li>
+            <li>&#9733; <b><font color="blue">cors</font></b> lets the React app call the Express server during development.</li>
+        </ul>
+
+        <h2>Step 3: Create the Database</h2>
+        <ul>
+            <li>&#9733; In phpMyAdmin or MySQL Workbench, create a database and a table for users.</li>
+        </ul>
+
+        <b><font color="blue">SQL:</font></b>
+        <pre>
+CREATE DATABASE login_demo;
+
+USE login_demo;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL
+);
+        </pre>
+
+        <ul>
+            <li>&#9733; The <b><font color="blue">username</font></b> must be unique.</li>
+            <li>&#9733; The <b><font color="blue">password</font></b> column stores a hashed password, not plain text.</li>
+        </ul>
+
+        <h2>Step 4: Create server/index.js</h2>
+        <ul>
+            <li>&#9733; This file creates the Express server, connects to MySQL, and defines the registration and login routes.</li>
+        </ul>
+
+        <b><font color="blue">server/index.js:</font></b>
+        <pre>
+const express = require('express');
+const mysql = require('mysql2');
+const bcrypt = require('bcrypt');
+const cors = require('cors');
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'login_demo'
+});
+
+db.connect((err) => {
+  if (err) {
+    console.error('Database connection failed:', err.message);
+    return;
+  }
+  console.log('Connected to MySQL');
+});
+
+app.post('/api/register', async (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).json({ message: 'Username and password are required.' });
+  }
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    db.query(
+      'INSERT INTO users (username, password) VALUES (?, ?)',
+      [username, hashedPassword],
+      (err, result) => {
+        if (err) {
+          if (err.code === 'ER_DUP_ENTRY') {
+            return res.status(400).json({ message: 'Username already taken.' });
+          }
+          return res.status(500).json({ message: err.message });
+        }
+
+        res.json({ message: 'Registered successfully!' });
+      }
+    );
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.post('/api/login', (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).json({ message: 'Username and password are required.' });
+  }
+
+  db.query(
+    'SELECT id, username, password FROM users WHERE username = ?',
+    [username],
+    async (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+
+      if (results.length === 0) {
+        return res.status(400).json({ message: 'Invalid username or password.' });
+      }
+
+      const user = results[0];
+
+      try {
+        const match = await bcrypt.compare(password, user.password);
+
+        if (!match) {
+          return res.status(400).json({ message: 'Invalid username or password.' });
+        }
+
+        res.json({
+          message: 'Login successful!',
+          user: {
+            id: user.id,
+            username: user.username
+          }
+        });
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+    }
+  );
+});
+
+app.listen(3000, () => {
+  console.log('Server running at http://localhost:3000');
+});
+        </pre>
+
+        <h2>Important: Restart the Server</h2>
+        <ul>
+            <li>&#9733; When you change <b><font color="blue">server/index.js</font></b>, Node.js does <b><font color="red">NOT automatically reload</font></b>.</li>
+            <li>&#9733; You must stop and restart the server.</li>
+        </ul>
+
+        <pre>
+Ctrl + C
+node index.js
+        </pre>
+
+        <h2>Step 5: Create App.jsx</h2>
+        <ul>
+            <li>&#9733; <b><font color="blue">App.jsx</font></b> defines the React routes.</li>
+            <li>&#9733; This is why Register, Login, and Dashboard appear on different pages.</li>
+        </ul>
+
+        <b><font color="blue">client/src/App.jsx:</font></b>
+        <pre>
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Register from './Register';
+import Login from './Login';
+import Dashboard from './Dashboard';
+
+function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;Routes&gt;
+        &lt;Route path="/" element={&lt;Login /&gt;} /&gt;
+        &lt;Route path="/register" element={&lt;Register /&gt;} /&gt;
+        &lt;Route path="/dashboard" element={&lt;Dashboard /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}
+
+export default App;
+        </pre>
+
+        <h2>Step 6: Create Register.jsx</h2>
+        <ul>
+            <li>&#9733; This page collects a username and password and sends them to the backend.</li>
+        </ul>
+
+        <b><font color="blue">client/src/Register.jsx:</font></b>
+        <pre>
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+function Register() {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  });
+
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+
+  const handleChange = (e) =&gt; {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) =&gt; {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('http://localhost:3000/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+      setMessage(data.message);
+
+      if (response.ok) {
+        setTimeout(() =&gt; {
+          navigate('/');
+        }, 1000);
+      }
+    } catch (error) {
+      setMessage('Error connecting to server.');
+    }
+  };
+
+  return (
+    &lt;div style={{ padding: '30px', fontFamily: 'Arial' }}&gt;
+      &lt;h1&gt;Register&lt;/h1&gt;
+
+      &lt;form onSubmit={handleSubmit}&gt;
+        &lt;div&gt;
+          &lt;label&gt;Username: &lt;/label&gt;
+          &lt;input
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;br /&gt;
+
+        &lt;div&gt;
+          &lt;label&gt;Password: &lt;/label&gt;
+          &lt;input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;br /&gt;
+
+        &lt;button type="submit"&gt;Register&lt;/button&gt;
+      &lt;/form&gt;
+
+      &lt;p&gt;{message}&lt;/p&gt;
+
+      &lt;p&gt;
+        Already have an account? &lt;Link to="/"&gt;Login here&lt;/Link&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Register;
+        </pre>
+
+        <h2>Step 7: Create Login.jsx</h2>
+        <ul>
+            <li>&#9733; This page sends the username and password to the login route.</li>
+            <li>&#9733; If login is successful, the user is saved in <b><font color="blue">localStorage</font></b> and redirected to the Dashboard page.</li>
+        </ul>
+
+        <b><font color="blue">client/src/Login.jsx:</font></b>
+        <pre>
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+function Login() {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  });
+
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+
+  const handleChange = (e) =&gt; {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) =&gt; {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('http://localhost:3000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+      setMessage(data.message);
+
+      if (response.ok && data.user) {
+        localStorage.setItem('user', JSON.stringify(data.user));
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      setMessage('Error connecting to server.');
+    }
+  };
+
+  return (
+    &lt;div style={{ padding: '30px', fontFamily: 'Arial' }}&gt;
+      &lt;h1&gt;Login&lt;/h1&gt;
+
+      &lt;form onSubmit={handleSubmit}&gt;
+        &lt;div&gt;
+          &lt;label&gt;Username: &lt;/label&gt;
+          &lt;input
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;br /&gt;
+
+        &lt;div&gt;
+          &lt;label&gt;Password: &lt;/label&gt;
+          &lt;input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;br /&gt;
+
+        &lt;button type="submit"&gt;Login&lt;/button&gt;
+      &lt;/form&gt;
+
+      &lt;p&gt;{message}&lt;/p&gt;
+
+      &lt;p&gt;
+        Don't have an account? &lt;Link to="/register"&gt;Register here&lt;/Link&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Login;
+        </pre>
+
+        <h2>Step 8: Create Dashboard.jsx</h2>
+        <ul>
+            <li>&#9733; This page checks whether a user is stored in <b><font color="blue">localStorage</font></b>.</li>
+            <li>&#9733; If no user exists, React sends the visitor back to the Login page.</li>
+        </ul>
+
+        <b><font color="blue">client/src/Dashboard.jsx:</font></b>
+        <pre>
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+function Dashboard() {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() =&gt; {
+    const storedUser = localStorage.getItem('user');
+
+    if (!storedUser) {
+      navigate('/');
+      return;
+    }
+
+    setUser(JSON.parse(storedUser));
+  }, [navigate]);
+
+  const handleLogout = () =&gt; {
+    localStorage.removeItem('user');
+    navigate('/');
+  };
+
+  return (
+    &lt;div style={{ padding: '30px', fontFamily: 'Arial' }}&gt;
+      &lt;h1&gt;Dashboard&lt;/h1&gt;
+
+      {user ? (
+        &lt;&gt;
+          &lt;p&gt;Welcome, {user.username}! You are logged in.&lt;/p&gt;
+          &lt;button onClick={handleLogout}&gt;Logout&lt;/button&gt;
+        &lt;/&gt;
+      ) : (
+        &lt;p&gt;Loading...&lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+export default Dashboard;
+        </pre>
+
+        <h2>Step 9: Check main.jsx</h2>
+        <ul>
+            <li>&#9733; Vite usually creates this file automatically.</li>
+            <li>&#9733; Make sure it loads <b><font color="blue">App.jsx</font></b>.</li>
+        </ul>
+
+        <b><font color="blue">client/src/main.jsx:</font></b>
+        <pre>
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './index.css';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  &lt;React.StrictMode&gt;
+    &lt;App /&gt;
+  &lt;/React.StrictMode&gt;
+);
+        </pre>
+
+        <h2>Step 10: Run the Backend</h2>
+        <ul>
+            <li>&#9733; Open the <b><font color="blue">server</font></b> terminal and run:</li>
+        </ul>
+
+        <pre>
+node index.js
+        </pre>
+
+        <ul>
+            <li>&#9733; You should see:</li>
+        </ul>
+
+        <pre>
+Connected to MySQL
+Server running at http://localhost:3000
+        </pre>
+
+        <h2>Step 11: Run the React Frontend</h2>
+        <ul>
+            <li>&#9733; Open the <b><font color="blue">client</font></b> terminal and run:</li>
+        </ul>
+
+        <pre>
+npm run dev
+        </pre>
+
+        <ul>
+            <li>&#9733; Vite usually gives a URL such as <b><font color="blue">http://localhost:5173</font></b>.</li>
+            <li>&#9733; Open that URL in your browser.</li>
+        </ul>
+
+        <h2>How the Full Login Flow Works</h2>
+        <ul>
+            <li>&#9733; User opens the React app.</li>
+            <li>&#9733; User clicks Register and creates a new account.</li>
+            <li>&#9733; React sends the form data to <b><font color="blue">/api/register</font></b>.</li>
+            <li>&#9733; Express hashes the password and stores the user in MySQL.</li>
+            <li>&#9733; User goes to the Login page and signs in.</li>
+            <li>&#9733; React sends the login data to <b><font color="blue">/api/login</font></b>.</li>
+            <li>&#9733; Express checks the username and compares the hashed password.</li>
+            <li>&#9733; If correct, Express returns success JSON.</li>
+            <li>&#9733; React stores the user in <b><font color="blue">localStorage</font></b> and sends the user to the Dashboard page.</li>
+        </ul>
+
+        <h2>Diagram: React ↔ Express ↔ MySQL</h2>
+        <center>
+            <table style="width:85%">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>What Happens</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><b><font color="blue">Register.jsx</font></b> or <b><font color="blue">Login.jsx</font></b> sends a request using <b><font color="red">fetch()</font></b></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><b><font color="blue">Express</font></b> receives the request at <b><font color="blue">/api/register</font></b> or <b><font color="blue">/api/login</font></b></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><b><font color="blue">Express</font></b> runs SQL queries on <b><font color="blue">MySQL</font></b></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><b><font color="blue">MySQL</font></b> returns the results</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><b><font color="blue">Express</font></b> sends JSON back to React</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><b><font color="blue">React</font></b> updates the page or redirects the user</td>
+                    </tr>
+                </tbody>
+            </table>
+        </center>
+
+        <br>
+        <center>
+            <h3>
+                <font color="blue">React Page</font>
+                &nbsp;&rarr;&nbsp;
+                <font color="blue">Express API</font>
+                &nbsp;&rarr;&nbsp;
+                <font color="blue">MySQL Database</font>
+            </h3>
+            <h3>
+                <font color="blue">Dashboard or Message</font>
+                &larr;&nbsp;
+                <font color="blue">JSON Response</font>
+                &larr;&nbsp;
+                <font color="blue">Query Result</font>
+            </h3>
+        </center>
+
+        <h2>Why CORS is Needed Here</h2>
+        <ul>
+            <li>&#9733; During development, React and Express often run on different ports.</li>
+            <li>&#9733; Example: React at <b><font color="blue">http://localhost:5173</font></b> and Express at <b><font color="blue">http://localhost:3000</font></b>.</li>
+            <li>&#9733; Since they are different origins, the browser requires <b><font color="blue">CORS</font></b>.</li>
+            <li>&#9733; That is why we use <b><font color="red">app.use(cors())</font></b> in <b><font color="blue">server/index.js</font></b>.</li>
+        </ul>
+
+        <h2>Important Note About Security</h2>
+        <ul>
+            <li>&#9733; This project is a good classroom demo for learning how React, Express, and MySQL work together.</li>
+            <li>&#9733; In a real production system, we would also teach sessions or JWT, protected backend routes, and stronger validation.</li>
+            <li>&#9733; For now, this project focuses on the basic full-stack flow.</li>
+        </ul>
+
+        <h2>Summary</h2>
+        <ul>
+            <li>&#9733; React creates separate pages using <b><font color="blue">React Router</font></b>.</li>
+            <li>&#9733; Express handles registration and login API routes.</li>
+            <li>&#9733; MySQL stores usernames and hashed passwords.</li>
+            <li>&#9733; React uses <b><font color="blue">fetch()</font></b> to communicate with Express.</li>
+            <li>&#9733; Together, they form a modern full-stack web application.</li>
+        </ul>
+
+        <h2>Practice Exercise</h2>
+        <ul>
+            <li>&#9733; Add an email field to the registration form.</li>
+            <li>&#9733; Update the MySQL table to store the email.</li>
+            <li>&#9733; Display the username on the Dashboard page.</li>
+            <li>&#9733; Add a link to move from the Dashboard back to the Login page after logout.</li>
+        </ul>
+
+        <br>
+        <br>
+        <footer align="center" id="foot01"></footer>
+    </div>
+    <br>
+    <br>
+    <script src="../CCS/Script.js"></script>
+
+</body>
+
+</html>
