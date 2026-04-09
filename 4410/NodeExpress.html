@@ -92,16 +92,27 @@ npm install express
 
         <b><font color="blue">index.js:</font></b>
         <pre>
-const express = require('express');
-const app = express();
-
-app.get('/', (req, res) =&gt; {
-  res.send('Hello from Express!');
-});
-
-app.listen(3000, () =&gt; {
-  console.log('Server running at http://localhost:3000');
-});
+        const express = require('express'); 
+        // Import the Express library
+        
+        const app = express(); 
+        // Create an Express application (this is our server)
+        
+        app.get('/', (req, res) => { 
+          // Define a route for the homepage "/"
+          // req = request from the browser
+          // res = response sent back to the browser
+        
+          res.send('Hello from Express!'); 
+          // Send a response (text or HTML) to the browser
+        });
+        
+        app.listen(3000, () => { 
+          // Start the server on port 3000
+        
+          console.log('Server running at http://localhost:3000'); 
+          // Print a message in the terminal
+        });
         </pre>
 
         
