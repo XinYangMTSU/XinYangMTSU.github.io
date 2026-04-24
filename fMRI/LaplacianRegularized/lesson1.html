@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 1 — Standard First-Level GLM</title>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(','\\)'], ['$', '$']], displayMath: [['\\[','\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    :root{
+      --bg:#f3f2f6; --panel:#ffffff; --ink:#252238; --muted:#655f7a;
+      --accent:#8b7ac8; --accent2:#d9d2f1; --accent3:#f0ecff;
+      --code:#28243a; --ok:#2f7d68; --warn:#9a6a1d;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+      color:var(--ink); background:linear-gradient(135deg,#f6f4fa,#eceaf4);
+      line-height:1.55;
+    }
+    header{
+      background:linear-gradient(90deg,#7664b6,#a799da);
+      color:white; padding:38px 7vw 32px; border-bottom:5px solid #d8d1ef;
+    }
+    header h1{margin:0;font-size:clamp(2rem,4vw,3.4rem);letter-spacing:-.04em}
+    header p{margin:.6rem 0 0;font-size:1.15rem;opacity:.95}
+    .wrap{max-width:1120px;margin:0 auto;padding:30px 22px 70px}
+    .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}
+    @media (max-width:850px){.grid{grid-template-columns:1fr}}
+    .card{
+      background:var(--panel); border:1px solid #ddd8ed; border-radius:22px; padding:24px;
+      box-shadow:0 12px 32px rgba(71,55,120,.10); margin:20px 0;
+    }
+    .card h2{margin:0 0 12px;color:#4e4381;font-size:1.55rem}
+    .card h3{margin:22px 0 8px;color:#5a4a99}
+    .pill{display:inline-block;background:var(--accent3);color:#4d4081;border:1px solid var(--accent2);
+      border-radius:999px;padding:7px 12px;font-weight:700;font-size:.9rem;margin-bottom:12px}
+    .mathbox{
+      background:#fbfaff;border:1px solid #ddd5f1;border-left:7px solid var(--accent);
+      border-radius:16px;padding:18px;margin:14px 0;font-size:1.1rem;overflow-x:auto;
+    }
+    .note{
+      background:#f8f7fb;border-left:6px solid var(--ok);padding:14px 16px;border-radius:14px;margin:14px 0;
+    }
+    .warn{
+      background:#fff8ec;border-left:6px solid var(--warn);padding:14px 16px;border-radius:14px;margin:14px 0;
+    }
+    table{width:100%;border-collapse:collapse;margin:14px 0;background:white;border-radius:14px;overflow:hidden}
+    th{background:#e8e2fa;color:#3d336a;text-align:left}
+    th,td{padding:12px 14px;border-bottom:1px solid #eeeaf8}
+    tr:last-child td{border-bottom:none}
+    code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    pre{
+      background:var(--code);color:#fff;border-radius:16px;padding:18px;overflow-x:auto;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)
+    }
+    .svgbox{background:#fbfaff;border-radius:18px;border:1px solid #e1dbf2;padding:14px}
+    .caption{font-size:.92rem;color:var(--muted);text-align:center;margin-top:8px}
+    .step{
+      display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start;margin:18px 0;
+    }
+    .num{
+      width:42px;height:42px;border-radius:50%;background:#7d6ac0;color:white;font-weight:800;
+      display:flex;align-items:center;justify-content:center;box-shadow:0 7px 18px rgba(105,84,174,.25)
+    }
+    .footer{color:#6e6883;text-align:center;margin-top:36px;font-size:.95rem}
+    .check{font-weight:800;color:#2f7d68}
+  </style>
+</head>
+<body>
+<header>
+  <h1>Lesson 1 — Standard First-Level GLM</h1>
+  <p>Understanding the single-vertex model before adding surface Laplacian regularization</p>
+</header>
+
+<main class="wrap">
+
+  <section class="card">
+    <span class="pill">Goal of this lesson</span>
+    <h2>What are we learning?</h2>
+    <p>
+      Before we can understand the new <strong>Surface Laplacian Regularized GLM</strong>, we need to understand the ordinary
+      first-level GLM used in the current surface-based fMRI pipeline.
+    </p>
+    <div class="note">
+      In the attached project, the surface pipeline fits a first-level GLM after projecting the 4D volume onto the cortical
+      surface. The slides describe this as solving \(y = X\beta + \varepsilon\) independently at every surface vertex.
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <h2>1. The data at one surface vertex</h2>
+      <p>
+        After projecting the fMRI volume to the cortical surface, each vertex has a BOLD time series.
+        For this localizer dataset, there are:
+      </p>
+      <div class="mathbox">
+        \[
+        T = 128 \quad \text{time points}
+        \]
+      </div>
+      <p>So at one vertex, the measured signal is a column vector:</p>
+      <div class="mathbox">
+        \[
+        y =
+        \begin{bmatrix}
+        y_1 \\ y_2 \\ y_3 \\ \vdots \\ y_{128}
+        \end{bmatrix}
+        \in \mathbb{R}^{128 \times 1}
+        \]
+      </div>
+      <p>Each entry \(y_t\) is the measured BOLD intensity at time point \(t\).</p>
+    </div>
+
+    <div class="card">
+      <h2>Visual intuition</h2>
+      <div class="svgbox">
+        <svg viewBox="0 0 520 360" width="100%" height="auto" role="img" aria-label="BOLD time series at one cortical vertex">
+          <defs>
+            <linearGradient id="brain" x1="0" x2="1">
+              <stop offset="0" stop-color="#cfc7ed"/>
+              <stop offset="1" stop-color="#f0ecff"/>
+            </linearGradient>
+          </defs>
+          <path d="M97,195 C61,155 76,88 138,72 C160,34 229,31 258,74 C296,43 366,60 376,112 C434,125 460,184 431,229 C454,284 389,325 337,300 C306,342 238,339 212,294 C165,324 96,288 108,232 C84,224 75,209 97,195 Z" fill="url(#brain)" stroke="#7766b5" stroke-width="4"/>
+          <circle cx="264" cy="178" r="13" fill="#7d6ac0"/>
+          <text x="286" y="183" font-size="20" fill="#44396f" font-weight="700">one vertex</text>
+          <polyline points="76,315 118,291 160,300 202,263 244,271 286,218 328,244 370,194 412,226 454,177" fill="none" stroke="#7d6ac0" stroke-width="5" stroke-linecap="round"/>
+          <line x1="76" y1="325" x2="460" y2="325" stroke="#9b93b9" stroke-width="2"/>
+          <line x1="76" y1="165" x2="76" y2="325" stroke="#9b93b9" stroke-width="2"/>
+          <text x="231" y="352" font-size="18" fill="#655f7a">time: 1 ... 128</text>
+          <text x="19" y="243" font-size="18" fill="#655f7a" transform="rotate(-90 19 243)">BOLD</text>
+        </svg>
+        <div class="caption">At each surface vertex, we observe a 128-point BOLD signal.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>2. The design matrix \(X\)</h2>
+    <p>
+      The design matrix tells the model what task-related signal should look like over time.
+      It is built from events, the HRF model, derivative terms, and drift regressors.
+    </p>
+    <div class="mathbox">
+      \[
+      X \in \mathbb{R}^{128 \times 18}
+      \]
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Meaning</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>128 rows</td><td>one row per fMRI volume / time point</td></tr>
+        <tr><td>18 columns</td><td>task regressors + HRF derivatives + drift regressors</td></tr>
+      </tbody>
+    </table>
+
+    <div class="svgbox">
+      <svg viewBox="0 0 880 330" width="100%" height="auto">
+        <rect x="50" y="35" width="470" height="250" rx="12" fill="#f8f6ff" stroke="#7d6ac0" stroke-width="3"/>
+        <g>
+          <rect x="75" y="62" width="38" height="196" fill="#d6ceed"/>
+          <rect x="120" y="62" width="38" height="196" fill="#efeafd"/>
+          <rect x="165" y="62" width="38" height="196" fill="#bcb0e2"/>
+          <rect x="210" y="62" width="38" height="196" fill="#e7e1f8"/>
+          <rect x="255" y="62" width="38" height="196" fill="#9d8ed2"/>
+          <rect x="300" y="62" width="38" height="196" fill="#dcd6f1"/>
+          <rect x="345" y="62" width="38" height="196" fill="#c8bee9"/>
+          <rect x="390" y="62" width="38" height="196" fill="#f0ecff"/>
+          <rect x="435" y="62" width="38" height="196" fill="#aba0da"/>
+        </g>
+        <text x="219" y="315" font-size="22" fill="#44396f" font-weight="700">Design matrix X</text>
+        <text x="36" y="170" font-size="18" fill="#655f7a" transform="rotate(-90 36 170)">128 time points</text>
+        <text x="190" y="25" font-size="18" fill="#655f7a">18 regressors</text>
+        <path d="M555 155 L650 155" stroke="#7d6ac0" stroke-width="5" marker-end="url(#arrow)"/>
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L9,3 z" fill="#7d6ac0"/>
+          </marker>
+        </defs>
+        <rect x="675" y="76" width="150" height="160" rx="12" fill="#fff" stroke="#7d6ac0" stroke-width="3"/>
+        <text x="710" y="115" font-size="22" fill="#44396f" font-weight="700">predict</text>
+        <text x="708" y="150" font-size="20" fill="#655f7a">BOLD</text>
+        <text x="708" y="185" font-size="20" fill="#655f7a">response</text>
+      </svg>
+      <div class="caption">Each column of \(X\) is a predicted time course for one regressor.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>3. The unknown coefficients \(\beta\)</h2>
+    <p>
+      At one vertex, the GLM estimates one coefficient for each column of the design matrix.
+      Since \(X\) has 18 columns, \(\beta\) has 18 entries.
+    </p>
+    <div class="mathbox">
+      \[
+      \beta =
+      \begin{bmatrix}
+      \beta_1 \\ \beta_2 \\ \vdots \\ \beta_{18}
+      \end{bmatrix}
+      \in \mathbb{R}^{18 \times 1}
+      \]
+    </div>
+    <p>
+      A large positive coefficient means that the corresponding regressor explains the measured BOLD signal well at this vertex.
+      A value near zero means that regressor does not explain much signal at this vertex.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>4. The first-level GLM equation</h2>
+    <div class="mathbox">
+      \[
+      \underbrace{y}_{128 \times 1}
+      =
+      \underbrace{X}_{128 \times 18}
+      \underbrace{\beta}_{18 \times 1}
+      +
+      \underbrace{\varepsilon}_{128 \times 1}
+      \]
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Symbol</th><th>Meaning</th><th>Shape</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>\(y\)</td><td>measured BOLD time series at one vertex</td><td>\(128 \times 1\)</td></tr>
+        <tr><td>\(X\)</td><td>design matrix</td><td>\(128 \times 18\)</td></tr>
+        <tr><td>\(\beta\)</td><td>unknown effect sizes</td><td>\(18 \times 1\)</td></tr>
+        <tr><td>\(\varepsilon\)</td><td>unexplained noise</td><td>\(128 \times 1\)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <span class="check">Dimension check:</span>
+      \(X\beta\) has shape \((128 \times 18)(18 \times 1)=128 \times 1\), so it can be compared directly with \(y\).
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>5. What does GLM fitting do?</h2>
+    <p>
+      The model chooses \(\beta\) so that the predicted signal \(X\beta\) is close to the observed signal \(y\).
+    </p>
+
+    <div class="mathbox">
+      \[
+      \hat{\beta}
+      =
+      \arg\min_{\beta}
+      \frac{1}{2}
+      \|y-X\beta\|_2^2
+      \]
+    </div>
+
+    <div class="step">
+      <div class="num">1</div>
+      <div>
+        Compute the predicted BOLD time series:
+        \[
+        \hat y = X\beta
+        \]
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">2</div>
+      <div>
+        Compute the residual:
+        \[
+        r = y-\hat y = y-X\beta
+        \]
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">3</div>
+      <div>
+        Choose \(\beta\) that makes the squared residual as small as possible:
+        \[
+        \|r\|_2^2 = r^\top r
+        \]
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>6. Deriving the ordinary least-squares solution</h2>
+    <p>Start with the objective:</p>
+    <div class="mathbox">
+      \[
+      J(\beta)
+      =
+      \frac{1}{2}
+      \|y-X\beta\|_2^2
+      \]
+    </div>
+
+    <p>Rewrite the norm:</p>
+    <div class="mathbox">
+      \[
+      J(\beta)
+      =
+      \frac{1}{2}
+      (y-X\beta)^\top(y-X\beta)
+      \]
+    </div>
+
+    <p>Take derivative with respect to \(\beta\):</p>
+    <div class="mathbox">
+      \[
+      \nabla_\beta J
+      =
+      X^\top(X\beta-y)
+      \]
+    </div>
+
+    <p>Set derivative equal to zero:</p>
+    <div class="mathbox">
+      \[
+      X^\top(X\hat\beta-y)=0
+      \]
+    </div>
+
+    <p>Expand:</p>
+    <div class="mathbox">
+      \[
+      X^\top X\hat\beta - X^\top y=0
+      \]
+    </div>
+
+    <p>Solve for \(\hat\beta\):</p>
+    <div class="mathbox">
+      \[
+      \boxed{
+      \hat\beta = (X^\top X)^{-1}X^\top y
+      }
+      \]
+    </div>
+
+    <div class="warn">
+      This formula is the mathematical baseline. In real fMRI software, additional details such as temporal autocorrelation,
+      drift modeling, and masking are handled carefully, but this is the core idea.
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>7. What happens across the whole surface?</h2>
+    <p>
+      The same GLM is repeated at every vertex. The design matrix \(X\) stays the same. Only the measured BOLD signal \(y\) changes.
+    </p>
+
+    <div class="svgbox">
+      <svg viewBox="0 0 900 330" width="100%" height="auto">
+        <rect x="50" y="40" width="170" height="230" rx="14" fill="#f8f6ff" stroke="#7d6ac0" stroke-width="3"/>
+        <text x="103" y="75" font-size="25" font-weight="700" fill="#44396f">X</text>
+        <text x="74" y="305" font-size="18" fill="#655f7a">same design matrix</text>
+        <circle cx="330" cy="86" r="28" fill="#d8d1ef" stroke="#7d6ac0" stroke-width="3"/>
+        <circle cx="330" cy="162" r="28" fill="#d8d1ef" stroke="#7d6ac0" stroke-width="3"/>
+        <circle cx="330" cy="238" r="28" fill="#d8d1ef" stroke="#7d6ac0" stroke-width="3"/>
+        <text x="378" y="93" font-size="20" fill="#44396f">vertex 1: \(y_1\)</text>
+        <text x="378" y="169" font-size="20" fill="#44396f">vertex 2: \(y_2\)</text>
+        <text x="378" y="245" font-size="20" fill="#44396f">vertex 3: \(y_3\)</text>
+        <line x1="220" y1="155" x2="292" y2="86" stroke="#7d6ac0" stroke-width="4"/>
+        <line x1="220" y1="155" x2="292" y2="162" stroke="#7d6ac0" stroke-width="4"/>
+        <line x1="220" y1="155" x2="292" y2="238" stroke="#7d6ac0" stroke-width="4"/>
+        <rect x="640" y="60" width="190" height="190" rx="15" fill="#fff" stroke="#7d6ac0" stroke-width="3"/>
+        <text x="682" y="105" font-size="22" font-weight="700" fill="#44396f">separate</text>
+        <text x="685" y="140" font-size="22" font-weight="700" fill="#44396f">GLM fit</text>
+        <text x="683" y="185" font-size="18" fill="#655f7a">one \(\hat\beta\)</text>
+        <text x="683" y="215" font-size="18" fill="#655f7a">per vertex</text>
+      </svg>
+      <div class="caption">Current approach: fit one independent GLM at each surface vertex.</div>
+    </div>
+
+    <div class="mathbox">
+      \[
+      \hat\beta_n = (X^\top X)^{-1}X^\top y_n,
+      \qquad n=1,\ldots,N
+      \]
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>8. Why Lesson 1 matters for the new project</h2>
+    <p>
+      The proposed project does <strong>not</strong> change the events, HRF, design matrix, or contrasts.
+      It changes how the coefficient maps are estimated across space.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Part</th><th>Standard GLM</th><th>Future Laplacian GLM</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Temporal model</td><td>Uses \(X\)</td><td>Uses same \(X\)</td></tr>
+        <tr><td>Single-vertex fit</td><td>\(y=X\beta+\varepsilon\)</td><td>same starting point</td></tr>
+        <tr><td>Spatial relation</td><td>ignored</td><td>modeled with surface Laplacian</td></tr>
+        <tr><td>Innovation</td><td>none</td><td>geometry-aware estimation</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      Once Lesson 1 is clear, Lesson 2 will simply stack all vertex-wise GLMs into one matrix equation:
+      \[
+      Y = XB + E
+      \]
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Mini-quiz</h2>
+    <ol>
+      <li>Why does \(y\) have 128 entries?</li>
+      <li>Why does \(\beta\) have 18 entries?</li>
+      <li>What does \(X\beta\) represent?</li>
+      <li>What is the residual \(r\)?</li>
+      <li>Why is the standard GLM considered “independent at each vertex”?</li>
+    </ol>
+  </section>
+
+  <div class="footer">
+    Lesson 1 of the Surface Laplacian Regularized First-Level GLM mini-course.
+  </div>
+
+</main>
+</body>
+</html>
