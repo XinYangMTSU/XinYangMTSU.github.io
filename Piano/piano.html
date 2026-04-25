@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Is a Piano? 88 Keys Explained</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fef3c7, #dbeafe, #fce7f3, #dcfce7);
+      color: #0f172a;
+      padding: 24px;
+    }
+    .container { max-width: 1250px; margin: auto; }
+    .hero, .card {
+      background: rgba(255,255,255,0.94);
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 0 22px 50px rgba(15, 23, 42, 0.18);
+      margin-bottom: 24px;
+    }
+    .badge {
+      display: inline-block;
+      background: #ede9fe;
+      color: #6d28d9;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: bold;
+    }
+    h1 { font-size: 46px; margin: 12px 0; }
+    h2 { font-size: 30px; margin-top: 0; }
+    h3 { font-size: 23px; margin-bottom: 8px; }
+    p, li { font-size: 18px; line-height: 1.65; color: #475569; }
+    strong { color: #0f172a; }
+    .pill-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .pill { padding: 9px 14px; border-radius: 999px; background: #eef2ff; color: #3730a3; font-weight: bold; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+    .fact-card {
+      background: white;
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 10px 24px rgba(15,23,42,.12);
+      border-top: 10px solid #8b5cf6;
+    }
+    .fact-card.yellow { border-top-color: #f59e0b; }
+    .fact-card.blue { border-top-color: #3b82f6; }
+    .fact-card.green { border-top-color: #10b981; }
+    .big-number { font-size: 48px; font-weight: 900; color: #0f172a; margin: 0; }
+    .definition {
+      background: #f8fafc;
+      border-left: 8px solid #8b5cf6;
+      border-radius: 18px;
+      padding: 18px 22px;
+      margin: 18px 0;
+    }
+    .keyboard-wrap { overflow-x: auto; padding-bottom: 12px; }
+    .keyboard {
+      position: relative;
+      width: 1560px;
+      height: 250px;
+      background: #0f172a;
+      border-radius: 24px;
+      padding: 12px;
+      box-shadow: inset 0 0 0 4px rgba(255,255,255,.08);
+    }
+    .white-key {
+      position: absolute;
+      top: 12px;
+      width: 30px;
+      height: 205px;
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 0 0 6px 6px;
+      cursor: pointer;
+    }
+    .white-key:hover { background: #f1f5f9; }
+    .white-key.selected { outline: 5px solid #22c55e; z-index: 30; }
+    .black-key {
+      position: absolute;
+      top: 12px;
+      width: 19px;
+      height: 125px;
+      background: #020617;
+      border-radius: 0 0 8px 8px;
+      z-index: 20;
+      cursor: pointer;
+      box-shadow: 0 5px 12px rgba(0,0,0,.45);
+    }
+    .black-key:hover { background: #1e293b; }
+    .black-key.selected { outline: 4px solid #22c55e; z-index: 40; }
+    .key-label {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      font-weight: bold;
+      color: #334155;
+      white-space: nowrap;
+    }
+    .black-key .key-label {
+      bottom: 10px;
+      color: white;
+      writing-mode: vertical-rl;
+      transform: translateX(-50%) rotate(180deg);
+      font-size: 9px;
+    }
+    .c-label {
+      background: #10b981;
+      color: white;
+      border-radius: 999px;
+      padding: 4px 6px;
+    }
+    .selected-info {
+      margin-top: 16px;
+      background: #ecfdf5;
+      border-left: 8px solid #10b981;
+      border-radius: 18px;
+      padding: 18px 22px;
+    }
+    .pattern-row { display: flex; gap: 8px; align-items: end; flex-wrap: wrap; margin: 18px 0; }
+    .mini-white { width: 44px; height: 90px; background: white; border: 2px solid #cbd5e1; border-radius: 0 0 8px 8px; display:flex; align-items:end; justify-content:center; padding-bottom:8px; font-weight:bold; }
+    .mini-black { width: 30px; height: 60px; background: #020617; border-radius: 0 0 8px 8px; color:white; display:flex; align-items:end; justify-content:center; padding-bottom:5px; font-size: 12px; margin-left:-20px; margin-right:-20px; z-index:2; position:relative; }
+    table { width: 100%; border-collapse: collapse; border-radius: 18px; overflow: hidden; background: white; box-shadow: 0 10px 24px rgba(15,23,42,.10); }
+    th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 16px; }
+    th { background: #0f172a; color: white; }
+    .quiz { background: linear-gradient(135deg, #0f172a, #581c87); color: white; }
+    .quiz p { color: #e2e8f0; }
+    .challenge { background: white; color: #0f172a; border-radius: 22px; padding: 18px; margin: 16px 0; font-size: 24px; font-weight: bold; }
+    .quiz-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+    .quiz-options button { border: none; border-radius: 18px; padding: 16px; font-size: 17px; font-weight: bold; cursor: pointer; background: white; color: #0f172a; }
+    .score { display: inline-block; background: rgba(255,255,255,.15); padding: 12px 16px; border-radius: 16px; font-weight: bold; }
+    .reset { margin-left: 8px; border: none; padding: 12px 16px; border-radius: 14px; cursor: pointer; font-weight: bold; }
+    .feedback { margin-top: 16px; border-radius: 18px; padding: 16px; font-size: 20px; font-weight: bold; }
+    .correct { background: #34d399; color: #064e3b; }
+    .wrong { background: #fb7185; color: #4c0519; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <span class="badge">🎹 Piano Basics</span>
+      <h1>What Is a Piano?</h1>
+      <p>A piano is a keyboard instrument. When you press a key, the piano makes a musical sound. On an acoustic piano, pressing a key causes a small hammer to strike a string. On a digital piano, pressing a key triggers an electronic sound.</p>
+      <div class="pill-row">
+        <span class="pill">88 keys total</span>
+        <span class="pill">52 white keys</span>
+        <span class="pill">36 black keys</span>
+        <span class="pill">Lowest note: A0</span>
+        <span class="pill">Highest note: C8</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>1. Piano Key Facts</h2>
+      <div class="grid">
+        <div class="fact-card">
+          <h3>Total Keys</h3>
+          <p class="big-number">88</p>
+          <p>A standard modern piano has 88 keys.</p>
+        </div>
+        <div class="fact-card yellow">
+          <h3>White Keys</h3>
+          <p class="big-number">52</p>
+          <p>White keys use the natural note names: A, B, C, D, E, F, G.</p>
+        </div>
+        <div class="fact-card blue">
+          <h3>Black Keys</h3>
+          <p class="big-number">36</p>
+          <p>Black keys are sharps or flats, like C♯/D♭.</p>
+        </div>
+        <div class="fact-card green">
+          <h3>Range</h3>
+          <p class="big-number">A0–C8</p>
+          <p>The piano starts at A0 and ends at C8.</p>
+        </div>
+      </div>
+      <div class="definition">
+        <p><strong>Simple explanation:</strong> The piano repeats the same seven letter names: A, B, C, D, E, F, G. After G, the pattern starts again at A.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. White Key Pattern</h2>
+      <p>The white keys repeat this pattern over and over:</p>
+      <div class="pattern-row">
+        <div class="mini-white">A</div>
+        <div class="mini-white">B</div>
+        <div class="mini-white">C</div>
+        <div class="mini-white">D</div>
+        <div class="mini-white">E</div>
+        <div class="mini-white">F</div>
+        <div class="mini-white">G</div>
+      </div>
+      <p><strong>Important:</strong> Every C is the white key immediately to the left of a group of two black keys.</p>
+    </section>
+
+    <section class="card">
+      <h2>3. Black Key Pattern</h2>
+      <p>The black keys appear in groups of <strong>two</strong> and <strong>three</strong>. This pattern helps you find notes quickly.</p>
+      <div class="pattern-row">
+        <div class="mini-white">C</div><div class="mini-black">C♯</div><div class="mini-white">D</div><div class="mini-black">D♯</div><div class="mini-white">E</div>
+        <div class="mini-white">F</div><div class="mini-black">F♯</div><div class="mini-white">G</div><div class="mini-black">G♯</div><div class="mini-white">A</div><div class="mini-black">A♯</div><div class="mini-white">B</div>
+      </div>
+      <div class="definition">
+        <p><strong>Sharp and flat:</strong> A black key can have two names. For example, the black key between C and D can be called <strong>C♯</strong> or <strong>D♭</strong>.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>4. Interactive 88-Key Piano</h2>
+      <p>Click any key to see its note name. Green labels show all the C notes.</p>
+      <div class="keyboard-wrap">
+        <div class="keyboard" id="keyboard"></div>
+      </div>
+      <div class="selected-info" id="selectedInfo">
+        Click a piano key to learn its note name.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>5. What Are the Notes of All 88 Keys?</h2>
+      <p>The full piano starts at <strong>A0</strong>, then goes to <strong>A♯0/B♭0</strong>, <strong>B0</strong>, then <strong>C1</strong>. After that, the pattern repeats until the highest key, <strong>C8</strong>.</p>
+      <div id="keyTable"></div>
+    </section>
+
+    <section class="card quiz">
+      <h2>6. Quick Quiz</h2>
+      <p>Check your piano keyboard knowledge.</p>
+      <div>
+        <span class="score" id="score">Score: 0/0</span>
+        <button class="reset" onclick="resetQuiz()">Reset</button>
+      </div>
+      <div class="challenge" id="questionText"></div>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div id="feedback"></div>
+    </section>
+  </div>
+
+  <script>
+    const WHITE_WIDTH = 30;
+    const START_X = 12;
+    const noteNames = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
+    const flatNames = { "A#": "B♭", "C#": "D♭", "D#": "E♭", "F#": "G♭", "G#": "A♭" };
+    const keys = build88KeyPiano();
+    let selectedMidi = null;
+
+    function build88KeyPiano() {
+      const result = [];
+      let octave = 0;
+      let whiteIndex = 0;
+      for (let midi = 21; midi <= 108; midi++) {
+        const raw = noteNames[(midi - 21) % 12];
+        if (raw === "C") octave++;
+        const isBlack = raw.includes("#");
+        const display = isBlack ? `${raw.replace("#", "♯")}${octave}/${flatNames[raw]}${octave}` : `${raw}${octave}`;
+        const key = {
+          midi,
+          raw,
+          octave,
+          display,
+          isBlack,
+          whiteIndex: isBlack ? whiteIndex - 1 : whiteIndex
+        };
+        result.push(key);
+        if (!isBlack) whiteIndex++;
+      }
+      return result;
+    }
+
+    function renderKeyboard() {
+      const keyboard = document.getElementById("keyboard");
+      keyboard.innerHTML = "";
+
+      keys.filter(k => !k.isBlack).forEach(keyData => {
+        const key = document.createElement("button");
+        key.className = "white-key" + (selectedMidi === keyData.midi ? " selected" : "");
+        key.style.left = `${START_X + keyData.whiteIndex * WHITE_WIDTH}px`;
+        key.onclick = () => selectKey(keyData);
+        if (keyData.raw === "C") {
+          key.innerHTML = `<span class="key-label c-label">C${keyData.octave}</span>`;
+        } else if (["A", "B"].includes(keyData.raw) && keyData.octave === 0) {
+          key.innerHTML = `<span class="key-label">${keyData.raw}${keyData.octave}</span>`;
+        }
+        keyboard.appendChild(key);
+      });
+
+      keys.filter(k => k.isBlack).forEach(keyData => {
+        const key = document.createElement("button");
+        key.className = "black-key" + (selectedMidi === keyData.midi ? " selected" : "");
+        key.style.left = `${START_X + (keyData.whiteIndex + 1) * WHITE_WIDTH - 9}px`;
+        key.onclick = () => selectKey(keyData);
+        keyboard.appendChild(key);
+      });
+    }
+
+    function selectKey(keyData) {
+      selectedMidi = keyData.midi;
+      renderKeyboard();
+      const color = keyData.isBlack ? "black key" : "white key";
+      const extra = keyData.raw === "C" ? " This is one of the 8 C notes on the piano." : "";
+      document.getElementById("selectedInfo").innerHTML = `<strong>${keyData.display}</strong> is a <strong>${color}</strong>.${extra}`;
+    }
+
+    function renderKeyTable() {
+      const container = document.getElementById("keyTable");
+      let html = `<table><tr><th>#</th><th>Note</th><th>Key Color</th></tr>`;
+      keys.forEach((k, index) => {
+        html += `<tr><td>${index + 1}</td><td>${k.display}</td><td>${k.isBlack ? "Black" : "White"}</td></tr>`;
+      });
+      html += `</table>`;
+      container.innerHTML = html;
+    }
+
+    const questions = [
+      { q: "How many keys are on a standard piano?", answer: "88", options: ["61", "76", "88"] },
+      { q: "How many white keys are on a standard piano?", answer: "52", options: ["36", "52", "88"] },
+      { q: "How many black keys are on a standard piano?", answer: "36", options: ["36", "52", "12"] },
+      { q: "What is the lowest note on a standard piano?", answer: "A0", options: ["C1", "A0", "C0"] },
+      { q: "What is the highest note on a standard piano?", answer: "C8", options: ["C8", "A8", "G8"] },
+      { q: "A C key is usually found where?", answer: "Left of two black keys", options: ["Right of three black keys", "Left of two black keys", "Between two black keys"] }
+    ];
+
+    let quizIndex = 0;
+    let score = { correct: 0, total: 0 };
+
+    function renderQuiz() {
+      const current = questions[quizIndex % questions.length];
+      document.getElementById("questionText").textContent = current.q;
+      document.getElementById("score").textContent = `Score: ${score.correct}/${score.total}`;
+      const box = document.getElementById("quizOptions");
+      box.innerHTML = "";
+      current.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => answerQuiz(option);
+        box.appendChild(btn);
+      });
+    }
+
+    function answerQuiz(option) {
+      const current = questions[quizIndex % questions.length];
+      const correct = option === current.answer;
+      score.total++;
+      if (correct) score.correct++;
+      const feedback = document.getElementById("feedback");
+      feedback.className = "feedback " + (correct ? "correct" : "wrong");
+      feedback.textContent = correct ? "Correct! Great job." : `Almost! The answer is: ${current.answer}`;
+      quizIndex++;
+      renderQuiz();
+    }
+
+    function resetQuiz() {
+      quizIndex = 0;
+      score = { correct: 0, total: 0 };
+      document.getElementById("feedback").className = "";
+      document.getElementById("feedback").textContent = "";
+      renderQuiz();
+    }
+
+    renderKeyboard();
+    renderKeyTable();
+    renderQuiz();
+  </script>
+</body>
+</html>
