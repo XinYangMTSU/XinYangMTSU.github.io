@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Middle C, Treble G, and Bass F Trainer</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fef3c7, #dbeafe, #fce7f3);
+      color: #0f172a;
+      padding: 24px;
+    }
+    .container { max-width: 1250px; margin: auto; }
+    .hero, .card {
+      background: rgba(255,255,255,0.92);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.18);
+      margin-bottom: 24px;
+    }
+    .hero h1 { font-size: 44px; margin: 8px 0; }
+    .hero p { font-size: 18px; color: #475569; }
+    .badge {
+      display: inline-block;
+      background: #ede9fe;
+      color: #6d28d9;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: bold;
+    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+    button.note-btn {
+      border: none;
+      background: white;
+      border-radius: 18px;
+      padding: 18px;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(15,23,42,.12);
+      transition: .2s;
+    }
+    button.note-btn:hover { transform: translateY(-3px); }
+    button.note-btn.active { background: #0f172a; color: white; }
+    .color-dot { width: 54px; height: 10px; border-radius: 999px; margin-bottom: 10px; }
+    .middle-c { background: #10b981; }
+    .treble-g { background: #f59e0b; }
+    .bass-f { background: #3b82f6; }
+    .info-box { background: #f8fafc; border-radius: 20px; padding: 20px; margin-top: 18px; }
+    .staff-wrap { background: linear-gradient(135deg, #f5f3ff, #e0f2fe); border-radius: 20px; padding: 16px; overflow-x: auto; }
+    svg { width: 100%; min-width: 700px; height: 430px; }
+    .keyboard-wrap { overflow-x: auto; padding-bottom: 10px; }
+    .keyboard {
+      position: relative;
+      width: 1560px;
+      height: 230px;
+      background: #0f172a;
+      border-radius: 20px;
+      padding: 12px;
+    }
+    .white-key {
+      position: absolute;
+      top: 12px;
+      width: 30px;
+      height: 196px;
+      background: white;
+      border: 1px solid #cbd5e1;
+      cursor: pointer;
+      border-radius: 0 0 5px 5px;
+    }
+    .white-key:hover { background: #f1f5f9; }
+    .white-key.selected { outline: 5px solid #22c55e; z-index: 30; }
+    .black-key {
+      position: absolute;
+      top: 12px;
+      width: 19px;
+      height: 120px;
+      background: #020617;
+      border-radius: 0 0 8px 8px;
+      z-index: 20;
+      pointer-events: none;
+      box-shadow: 0 5px 12px rgba(0,0,0,.45);
+    }
+    .key-label {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 5px 7px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .quiz {
+      background: linear-gradient(135deg, #0f172a, #581c87);
+      color: white;
+    }
+    .challenge {
+      background: white;
+      color: #0f172a;
+      border-radius: 22px;
+      padding: 18px;
+      margin: 16px 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .score { display: inline-block; background: rgba(255,255,255,.15); padding: 12px 16px; border-radius: 16px; font-weight: bold; }
+    .reset {
+      margin-left: 8px;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .feedback {
+      margin-top: 16px;
+      border-radius: 18px;
+      padding: 16px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .correct { background: #34d399; color: #064e3b; }
+    .wrong { background: #fb7185; color: #4c0519; }
+    .tips { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    .tip { background: rgba(255,255,255,.9); border-radius: 22px; padding: 20px; box-shadow: 0 8px 20px rgba(15,23,42,.12); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <span class="badge">🎵 Piano Landmark Notes Trainer</span>
+      <h1>Middle C, Treble G, and Bass F</h1>
+      <p>Learn three important sight-reading landmarks: <strong>Middle C</strong>, <strong>Treble G</strong>, and <strong>Bass F</strong>.</p>
+    </section>
+
+    <section class="card">
+      <h2>1. Choose a landmark note</h2>
+      <div class="grid" id="noteButtons"></div>
+      <div class="info-box">
+        <h2 id="selectedName">Middle C = C4</h2>
+        <p id="selectedDescription"></p>
+        <p><strong>Memory hint:</strong> <span id="selectedHint"></span></p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. Find it on the grand staff</h2>
+      <p>The red line highlights the important landmark line: Treble G line or Bass F line.</p>
+      <div class="staff-wrap">
+        <svg viewBox="0 0 700 430">
+          <g id="staffLines"></g>
+          <g id="highlightLine"></g>
+          <g id="ledgerLines"></g>
+
+          <line x1="68" y1="60" x2="68" y2="310" stroke="#334155" stroke-width="3" />
+          <path d="M68 60 C35 120,35 250,68 310" fill="none" stroke="#334155" stroke-width="4" />
+
+          <text x="88" y="142" font-size="96" fill="#7c3aed" font-family="serif">𝄞</text>
+          <text x="88" y="325" font-size="96" fill="#7c3aed" font-family="serif">𝄢</text>
+          <text x="190" y="38" font-size="18" fill="#475569" font-weight="700">Treble Clef</text>
+          <text x="190" y="240" font-size="18" fill="#475569" font-weight="700">Bass Clef</text>
+
+          <ellipse id="noteHead" cx="380" cy="160" rx="14" ry="9" fill="#111827" transform="rotate(-20 380 160)" />
+          <text id="staffOctave" x="435" y="166" font-size="24" fill="#0f172a" font-weight="800">C4</text>
+          <text id="staffExplanation" x="120" y="390" font-size="17" fill="#334155" font-weight="700">Middle C / C4: one ledger line between the staves.</text>
+        </svg>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3. Find it on the piano keyboard</h2>
+      <p>The highlighted keys are <strong>F3</strong>, <strong>C4</strong>, and <strong>G4</strong>.</p>
+      <div class="keyboard-wrap"><div class="keyboard" id="keyboard"></div></div>
+    </section>
+
+    <section class="card quiz">
+      <h2>4. Quick Practice Game</h2>
+      <p>Click the correct piano key.</p>
+      <div>
+        <span class="score" id="score">Score: 0/0</span>
+        <button class="reset" onclick="resetQuiz()">Reset</button>
+      </div>
+      <div class="challenge" id="challenge"></div>
+      <div class="keyboard-wrap"><div class="keyboard" id="quizKeyboard"></div></div>
+      <div id="feedback"></div>
+    </section>
+
+    <section class="tips">
+      <div class="tip"><h3>Middle C</h3><p>C4 is the bridge between treble and bass clef. It uses one ledger line between the staves.</p></div>
+      <div class="tip"><h3>Treble G</h3><p>G4 sits on the second line of the treble staff. The treble clef curls around this G line.</p></div>
+      <div class="tip"><h3>Bass F</h3><p>F3 sits on the fourth line of the bass staff. The bass clef dots surround this F line.</p></div>
+    </section>
+  </div>
+
+  <script>
+    const notes = [
+      {
+        id: "middle-c",
+        name: "Middle C",
+        octave: "C4",
+        keyName: "C",
+        clef: "Bridge Note",
+        className: "middle-c",
+        description: "Middle C is C4. It sits between the treble and bass staves.",
+        hint: "Middle C is the bridge note between left hand and right hand.",
+        y: 180,
+        ledger: [180],
+        highlight: null,
+        explanation: "Middle C / C4: one ledger line between the treble and bass staves."
+      },
+      {
+        id: "treble-g",
+        name: "Treble G",
+        octave: "G4",
+        keyName: "G",
+        clef: "Treble Clef",
+        className: "treble-g",
+        description: "Treble G is G4. It sits on the second line of the treble clef staff.",
+        hint: "The treble clef is also called the G clef because it circles the G line.",
+        y: 120,
+        ledger: [],
+        highlight: 120,
+        explanation: "Treble G / G4: second line from the bottom of the treble staff."
+      },
+      {
+        id: "bass-f",
+        name: "Bass F",
+        octave: "F3",
+        keyName: "F",
+        clef: "Bass Clef",
+        className: "bass-f",
+        description: "Bass F is F3. It sits on the fourth line of the bass clef staff.",
+        hint: "The two bass clef dots surround the F line.",
+        y: 280,
+        ledger: [],
+        highlight: 280,
+        explanation: "Bass F / F3: fourth line from the bottom of the bass staff."
+      }
+    ];
+
+    const WHITE_WIDTH = 30;
+    const START_X = 12;
+    const allKeys = build88KeyPiano();
+    let selected = notes[0];
+    let quizIndex = 0;
+    let score = { correct: 0, total: 0 };
+
+    function build88KeyPiano() {
+      const sequence = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
+      const keys = [];
+      let octave = 0;
+      let whiteIndex = 0;
+
+      for (let midi = 21; midi <= 108; midi++) {
+        const name = sequence[(midi - 21) % 12];
+        if (name === "C") octave++;
+        const isBlack = name.includes("#");
+        const key = {
+          midi,
+          name,
+          octave,
+          label: name.replace("#", "♯") + octave,
+          isBlack,
+          whiteIndex: isBlack ? whiteIndex - 1 : whiteIndex
+        };
+        keys.push(key);
+        if (!isBlack) whiteIndex++;
+      }
+      return keys;
+    }
+
+    function noteForKey(key) {
+      return notes.find(n => n.octave === `${key.name}${key.octave}`);
+    }
+
+    function buildStaffLines() {
+      const group = document.getElementById("staffLines");
+      group.innerHTML = "";
+
+      const starts = [60, 260];
+
+      starts.forEach(startY => {
+        for (let i = 0; i < 5; i++) {
+          const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          line.setAttribute("x1", "80");
+          line.setAttribute("x2", "640");
+          line.setAttribute("y1", startY + i * 20);
+          line.setAttribute("y2", startY + i * 20);
+          line.setAttribute("stroke", "#334155");
+          line.setAttribute("stroke-width", "2");
+          group.appendChild(line);
+        }
+      });
+    }
+
+    function renderHighlightLine(y) {
+      const group = document.getElementById("highlightLine");
+      group.innerHTML = "";
+
+      if (y === null || y === undefined) return;
+
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", "80");
+      line.setAttribute("x2", "640");
+      line.setAttribute("y1", y);
+      line.setAttribute("y2", y);
+      line.setAttribute("stroke", "#ef4444");
+      line.setAttribute("stroke-width", "5");
+      line.setAttribute("stroke-linecap", "round");
+      line.setAttribute("opacity", "0.75");
+      group.appendChild(line);
+    }
+
+    function renderLedgerLines(lines) {
+      const group = document.getElementById("ledgerLines");
+      group.innerHTML = "";
+
+      lines.forEach(y => {
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", "340");
+        line.setAttribute("x2", "420");
+        line.setAttribute("y1", y);
+        line.setAttribute("y2", y);
+        line.setAttribute("stroke", "#64748b");
+        line.setAttribute("stroke-width", "3");
+        group.appendChild(line);
+      });
+    }
+
+    function renderNoteButtons() {
+      const box = document.getElementById("noteButtons");
+      box.innerHTML = "";
+
+      notes.forEach(note => {
+        const btn = document.createElement("button");
+        btn.className = "note-btn" + (note.id === selected.id ? " active" : "");
+        btn.innerHTML = `
+          <div class="color-dot ${note.className}"></div>
+          <h3>${note.name}</h3>
+          <p>${note.octave} · ${note.clef}</p>
+        `;
+        btn.onclick = () => selectNote(note);
+        box.appendChild(btn);
+      });
+    }
+
+    function renderKeyboard(targetId, quizMode = false) {
+      const keyboard = document.getElementById(targetId);
+      keyboard.innerHTML = "";
+
+      allKeys.filter(k => !k.isBlack).forEach(keyData => {
+        const note = noteForKey(keyData);
+        const key = document.createElement("button");
+
+        key.className = "white-key" + (note && note.id === selected.id ? " selected" : "");
+        key.style.left = `${START_X + keyData.whiteIndex * WHITE_WIDTH}px`;
+
+        key.onclick = () => quizMode ? handleQuizPick(note) : (note && selectNote(note));
+        if (quizMode && !note) key.disabled = true;
+
+        if (note) {
+          key.innerHTML = `<span class="key-label ${note.className}">${note.octave}</span>`;
+        }
+
+        keyboard.appendChild(key);
+      });
+
+      allKeys.filter(k => k.isBlack).forEach(keyData => {
+        const black = document.createElement("div");
+        black.className = "black-key";
+        black.style.left = `${START_X + (keyData.whiteIndex + 1) * WHITE_WIDTH - 9}px`;
+        keyboard.appendChild(black);
+      });
+    }
+
+    function updateStaff() {
+      buildStaffLines();
+      renderHighlightLine(selected.highlight);
+      renderLedgerLines(selected.ledger);
+
+      const noteHead = document.getElementById("noteHead");
+      noteHead.setAttribute("cy", selected.y);
+      noteHead.setAttribute("transform", `rotate(-20 380 ${selected.y})`);
+
+      document.getElementById("staffOctave").textContent = selected.octave;
+      document.getElementById("staffOctave").setAttribute("y", selected.y + 7);
+      document.getElementById("staffExplanation").textContent = selected.explanation;
+    }
+
+    function selectNote(note) {
+      selected = note;
+
+      document.getElementById("selectedName").textContent = `${note.name} = ${note.octave}`;
+      document.getElementById("selectedDescription").textContent = note.description;
+      document.getElementById("selectedHint").textContent = note.hint;
+
+      renderNoteButtons();
+      renderKeyboard("keyboard", false);
+      renderKeyboard("quizKeyboard", true);
+      updateStaff();
+    }
+
+    function updateQuiz() {
+      const target = notes[quizIndex % notes.length];
+      document.getElementById("challenge").textContent = `Can you find ${target.name} (${target.octave}) on the keyboard?`;
+      document.getElementById("score").textContent = `Score: ${score.correct}/${score.total}`;
+    }
+
+    function handleQuizPick(note) {
+      if (!note) return;
+
+      const target = notes[quizIndex % notes.length];
+      const correct = note.id === target.id;
+
+      selectNote(note);
+
+      score.total++;
+      if (correct) score.correct++;
+
+      const feedback = document.getElementById("feedback");
+      feedback.className = "feedback " + (correct ? "correct" : "wrong");
+      feedback.textContent = correct
+        ? "Correct! Great sight-reading."
+        : `Almost! That was ${note.octave}. Try the next one.`;
+
+      quizIndex++;
+      updateQuiz();
+    }
+
+    function resetQuiz() {
+      quizIndex = 0;
+      score = { correct: 0, total: 0 };
+
+      document.getElementById("feedback").className = "";
+      document.getElementById("feedback").textContent = "";
+
+      selectNote(notes[0]);
+      updateQuiz();
+    }
+
+    selectNote(selected);
+    updateQuiz();
+  </script>
+</body>
+</html>
