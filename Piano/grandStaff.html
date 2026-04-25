@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grand Staff, Treble Staff, and Bass Staff</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fef3c7, #dbeafe, #fce7f3, #dcfce7);
+      color: #0f172a;
+      padding: 24px;
+    }
+    .container { max-width: 1200px; margin: auto; }
+    .hero, .card {
+      background: rgba(255,255,255,0.94);
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 0 22px 50px rgba(15, 23, 42, 0.18);
+      margin-bottom: 24px;
+    }
+    .badge {
+      display: inline-block;
+      background: #ede9fe;
+      color: #6d28d9;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: bold;
+    }
+    h1 { font-size: 46px; margin: 12px 0; }
+    h2 { font-size: 30px; margin-top: 0; }
+    h3 { font-size: 23px; margin-bottom: 8px; }
+    p, li { font-size: 18px; line-height: 1.65; color: #475569; }
+    strong { color: #0f172a; }
+    .pill-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .pill { padding: 9px 14px; border-radius: 999px; background: #eef2ff; color: #3730a3; font-weight: bold; }
+    .definition {
+      background: #f8fafc;
+      border-left: 8px solid #8b5cf6;
+      border-radius: 18px;
+      padding: 18px 22px;
+      margin: 18px 0;
+    }
+    .definition.big {
+      border-left-color: #10b981;
+      background: #ecfdf5;
+    }
+    .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+    .mini-card {
+      background: white;
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 10px 24px rgba(15,23,42,.12);
+    }
+    .mini-card.treble { border-top: 10px solid #f59e0b; }
+    .mini-card.bass { border-top: 10px solid #3b82f6; }
+    .mini-card.grand { border-top: 10px solid #8b5cf6; }
+    .mini-card.middle { border-top: 10px solid #10b981; }
+    .staff-wrap {
+      background: linear-gradient(135deg, #f5f3ff, #e0f2fe);
+      border-radius: 24px;
+      padding: 20px;
+      overflow-x: auto;
+      margin-top: 18px;
+    }
+    svg { width: 100%; min-width: 760px; height: 430px; }
+    .label-box {
+      fill: white;
+      stroke: #cbd5e1;
+      stroke-width: 2;
+      filter: drop-shadow(0 5px 8px rgba(15,23,42,.12));
+    }
+    .memory-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      background: white;
+      box-shadow: 0 10px 24px rgba(15,23,42,.10);
+    }
+    .memory-table th, .memory-table td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 17px;
+    }
+    .memory-table th { background: #0f172a; color: white; }
+    .quiz { background: linear-gradient(135deg, #0f172a, #581c87); color: white; }
+    .quiz p { color: #e2e8f0; }
+    .challenge {
+      background: white;
+      color: #0f172a;
+      border-radius: 22px;
+      padding: 18px;
+      margin: 16px 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .quiz-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+    .quiz-options button {
+      border: none;
+      border-radius: 18px;
+      padding: 16px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      background: white;
+      color: #0f172a;
+    }
+    .score { display: inline-block; background: rgba(255,255,255,.15); padding: 12px 16px; border-radius: 16px; font-weight: bold; }
+    .reset { margin-left: 8px; border: none; padding: 12px 16px; border-radius: 14px; cursor: pointer; font-weight: bold; }
+    .feedback { margin-top: 16px; border-radius: 18px; padding: 16px; font-size: 20px; font-weight: bold; }
+    .correct { background: #34d399; color: #064e3b; }
+    .wrong { background: #fb7185; color: #4c0519; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <span class="badge">🎼 Piano Reading Basics</span>
+      <h1>Grand Staff, Treble Staff, and Bass Staff</h1>
+      <p>This lesson explains how piano sheet music is organized. It focuses on three ideas: the <strong>grand staff</strong>, the <strong>treble staff</strong>, and the <strong>bass staff</strong>.</p>
+      <div class="pill-row">
+        <span class="pill">Grand Staff = Treble Staff + Bass Staff</span>
+        <span class="pill">Treble Staff = Top Staff</span>
+        <span class="pill">Bass Staff = Bottom Staff</span>
+        <span class="pill">Piano uses both hands</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>1. What is a Grand Staff?</h2>
+      <div class="definition big">
+        <p><strong>Grand staff</strong> means the <strong>treble staff and bass staff together</strong>. It is the big music map pianists use to read both hands at the same time.</p>
+      </div>
+      <p>On piano music, you usually see two groups of five lines. The top group is the treble staff, and the bottom group is the bass staff. Together, they are called the <strong>grand staff</strong>.</p>
+      <p>The two staffs are connected by a <strong>brace</strong> or a vertical line on the left. This shows that the notes belong together and are played as one piece of music.</p>
+      <div class="definition">
+        <p><strong>Simple way to remember:</strong> Grand staff = the whole piano music map.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. What is a Treble Staff?</h2>
+      <div class="two-col">
+        <div class="mini-card treble">
+          <h3>🎵 Treble Staff</h3>
+          <p>The <strong>treble staff</strong> is the <strong>top set of five lines</strong> in piano music.</p>
+          <p>It uses the <strong>treble clef</strong>, which looks like this: <strong>𝄞</strong></p>
+        </div>
+        <div class="mini-card treble">
+          <h3>What is it used for?</h3>
+          <p>The treble staff usually shows <strong>higher notes</strong>. On piano, students often play treble staff notes with the <strong>right hand</strong>.</p>
+          <p><strong>Memory hint:</strong> Treble = top = higher sounds.</p>
+        </div>
+      </div>
+      <div class="definition">
+        <p>The treble clef is also called the <strong>G clef</strong> because the clef curls around the G line. That is why treble G is such an important landmark later.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3. What is a Bass Staff?</h2>
+      <div class="two-col">
+        <div class="mini-card bass">
+          <h3>🎶 Bass Staff</h3>
+          <p>The <strong>bass staff</strong> is the <strong>bottom set of five lines</strong> in piano music.</p>
+          <p>It uses the <strong>bass clef</strong>, which looks like this: <strong>𝄢</strong></p>
+        </div>
+        <div class="mini-card bass">
+          <h3>What is it used for?</h3>
+          <p>The bass staff usually shows <strong>lower notes</strong>. On piano, students often play bass staff notes with the <strong>left hand</strong>.</p>
+          <p><strong>Memory hint:</strong> Bass = bottom = lower sounds.</p>
+        </div>
+      </div>
+      <div class="definition">
+        <p>The bass clef is also called the <strong>F clef</strong> because the two dots point to the F line. That is why bass F is an important landmark later.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>4. Visual Map</h2>
+      <p>This picture shows how the grand staff is built. The <strong>treble staff</strong> is on top, the <strong>bass staff</strong> is on the bottom, and the left side connects them into one grand staff.</p>
+      <div class="staff-wrap">
+        <svg viewBox="0 0 760 430">
+          <rect x="85" y="50" width="625" height="130" rx="22" fill="#fef3c7" opacity="0.7" />
+          <rect x="85" y="240" width="625" height="130" rx="22" fill="#dbeafe" opacity="0.7" />
+          <rect x="78" y="42" width="640" height="338" rx="28" fill="none" stroke="#8b5cf6" stroke-width="5" stroke-dasharray="10 8" />
+
+          <g id="staffLines"></g>
+
+          <line x1="75" y1="70" x2="75" y2="350" stroke="#334155" stroke-width="3" />
+          <path d="M75 70 C35 130,35 290,75 350" fill="none" stroke="#334155" stroke-width="4" />
+
+          <text x="105" y="152" font-size="96" fill="#7c3aed" font-family="serif">𝄞</text>
+          <text x="105" y="323" font-size="96" fill="#7c3aed" font-family="serif">𝄢</text>
+
+          <rect class="label-box" x="500" y="78" width="180" height="46" rx="16" />
+          <text x="520" y="108" font-size="19" fill="#92400e" font-weight="900">Treble Staff</text>
+
+          <rect class="label-box" x="500" y="282" width="180" height="46" rx="16" />
+          <text x="525" y="312" font-size="19" fill="#1d4ed8" font-weight="900">Bass Staff</text>
+
+          <rect class="label-box" x="155" y="188" width="240" height="46" rx="16" />
+          <text x="175" y="218" font-size="19" fill="#6d28d9" font-weight="900">Together = Grand Staff</text>
+        </svg>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>5. Quick Summary</h2>
+      <table class="memory-table">
+        <tr>
+          <th>Concept</th>
+          <th>Meaning</th>
+          <th>Easy Memory</th>
+        </tr>
+        <tr>
+          <td><strong>Grand Staff</strong></td>
+          <td>Treble staff and bass staff together</td>
+          <td>The whole piano music map</td>
+        </tr>
+        <tr>
+          <td><strong>Treble Staff</strong></td>
+          <td>Top staff, often higher notes and right hand</td>
+          <td>Treble = top</td>
+        </tr>
+        <tr>
+          <td><strong>Bass Staff</strong></td>
+          <td>Bottom staff, often lower notes and left hand</td>
+          <td>Bass = bottom</td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="card quiz">
+      <h2>6. Quick Quiz</h2>
+      <p>Practice the concepts with a few simple questions.</p>
+      <div>
+        <span class="score" id="score">Score: 0/0</span>
+        <button class="reset" onclick="resetQuiz()">Reset</button>
+      </div>
+      <div class="challenge" id="questionText"></div>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div id="feedback"></div>
+    </section>
+  </div>
+
+  <script>
+    const questions = [
+      { q: "What is the grand staff?", answer: "Treble staff + bass staff", options: ["Only the top staff", "Only the bottom staff", "Treble staff + bass staff"] },
+      { q: "Which staff is on top?", answer: "Treble staff", options: ["Treble staff", "Bass staff", "Grand staff"] },
+      { q: "Which staff is on the bottom?", answer: "Bass staff", options: ["Treble staff", "Bass staff", "Treble clef"] },
+      { q: "Which staff usually has higher notes?", answer: "Treble staff", options: ["Bass staff", "Treble staff", "Both are always low"] },
+      { q: "Which staff usually has lower notes?", answer: "Bass staff", options: ["Bass staff", "Treble staff", "Both are always high"] },
+      { q: "Why does piano music use the grand staff?", answer: "Because piano uses two hands", options: ["Because piano uses two hands", "Because it has no rhythm", "Because every song is short"] }
+    ];
+
+    let quizIndex = 0;
+    let score = { correct: 0, total: 0 };
+
+    function buildStaffLines() {
+      const group = document.getElementById("staffLines");
+      group.innerHTML = "";
+      const starts = [70, 260];
+      starts.forEach(startY => {
+        for (let i = 0; i < 5; i++) {
+          const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          line.setAttribute("x1", "90");
+          line.setAttribute("x2", "700");
+          line.setAttribute("y1", startY + i * 20);
+          line.setAttribute("y2", startY + i * 20);
+          line.setAttribute("stroke", "#334155");
+          line.setAttribute("stroke-width", "2");
+          group.appendChild(line);
+        }
+      });
+    }
+
+    function renderQuiz() {
+      const current = questions[quizIndex % questions.length];
+      document.getElementById("questionText").textContent = current.q;
+      document.getElementById("score").textContent = `Score: ${score.correct}/${score.total}`;
+      const box = document.getElementById("quizOptions");
+      box.innerHTML = "";
+      current.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => answerQuiz(option);
+        box.appendChild(btn);
+      });
+    }
+
+    function answerQuiz(option) {
+      const current = questions[quizIndex % questions.length];
+      const correct = option === current.answer;
+      score.total++;
+      if (correct) score.correct++;
+      const feedback = document.getElementById("feedback");
+      feedback.className = "feedback " + (correct ? "correct" : "wrong");
+      feedback.textContent = correct ? "Correct! Great job." : `Almost! The answer is: ${current.answer}`;
+      quizIndex++;
+      renderQuiz();
+    }
+
+    function resetQuiz() {
+      quizIndex = 0;
+      score = { correct: 0, total: 0 };
+      document.getElementById("feedback").className = "";
+      document.getElementById("feedback").textContent = "";
+      renderQuiz();
+    }
+
+    buildStaffLines();
+    renderQuiz();
+  </script>
+</body>
+</html>
