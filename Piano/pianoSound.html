@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How a Piano Makes Sound</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fef3c7, #dbeafe, #fce7f3, #dcfce7);
+      color: #0f172a;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .hero, .card {
+      background: rgba(255,255,255,0.94);
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 0 22px 50px rgba(15, 23, 42, 0.18);
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #ede9fe;
+      color: #6d28d9;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: 46px;
+      margin: 12px 0;
+    }
+
+    h2 {
+      font-size: 30px;
+      margin-top: 0;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.65;
+      color: #475569;
+    }
+
+    strong { color: #0f172a; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .step-card {
+      background: white;
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 10px 24px rgba(15,23,42,.12);
+      border-top: 8px solid #8b5cf6;
+    }
+
+    .step-card:nth-child(2) { border-top-color: #f59e0b; }
+    .step-card:nth-child(3) { border-top-color: #3b82f6; }
+    .step-card:nth-child(4) { border-top-color: #10b981; }
+
+    .animation-card {
+      background: rgba(255,255,255,0.94);
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 0 22px 50px rgba(15, 23, 42, 0.18);
+      margin-bottom: 24px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 18px 0;
+    }
+
+    button {
+      border: none;
+      border-radius: 18px;
+      padding: 14px 20px;
+      font-size: 18px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(15,23,42,.16);
+    }
+
+    #playBtn {
+      background: #10b981;
+      color: white;
+    }
+
+    #resetBtn {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .stage {
+      position: relative;
+      height: 430px;
+      background: linear-gradient(180deg, #f8fafc, #e0f2fe);
+      border-radius: 28px;
+      border: 4px solid #cbd5e1;
+      overflow: hidden;
+    }
+
+    .caption {
+      position: absolute;
+      left: 28px;
+      top: 24px;
+      background: white;
+      border-radius: 18px;
+      padding: 12px 16px;
+      box-shadow: 0 8px 20px rgba(15,23,42,.15);
+      font-size: 18px;
+      font-weight: 900;
+      color: #0f172a;
+      z-index: 5;
+    }
+
+    .finger {
+      position: absolute;
+      left: 155px;
+      top: 115px;
+      width: 58px;
+      height: 105px;
+      background: #fbbf24;
+      border: 4px solid #92400e;
+      border-radius: 32px 32px 18px 18px;
+      transition: transform 300ms ease;
+      z-index: 4;
+    }
+
+    .fingernail {
+      position: absolute;
+      left: 13px;
+      top: 12px;
+      width: 26px;
+      height: 18px;
+      background: #fde68a;
+      border-radius: 50%;
+    }
+
+    .key {
+      position: absolute;
+      left: 70px;
+      bottom: 70px;
+      width: 230px;
+      height: 65px;
+      background: white;
+      border: 5px solid #334155;
+      border-radius: 14px;
+      box-shadow: 0 14px 0 #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 900;
+      transition: transform 300ms ease, box-shadow 300ms ease;
+      z-index: 3;
+    }
+
+    .mechanism {
+      position: absolute;
+      left: 310px;
+      bottom: 112px;
+      width: 135px;
+      height: 14px;
+      background: #64748b;
+      border-radius: 999px;
+      transform-origin: left center;
+      transform: rotate(-8deg);
+      transition: transform 300ms ease;
+      z-index: 2;
+    }
+
+    .hammer {
+      position: absolute;
+      left: 420px;
+      bottom: 135px;
+      width: 170px;
+      height: 14px;
+      background: #92400e;
+      border-radius: 999px;
+      transform-origin: left center;
+      transform: rotate(22deg);
+      transition: transform 400ms ease;
+      z-index: 3;
+    }
+
+    .hammer-head {
+      position: absolute;
+      right: -20px;
+      top: -19px;
+      width: 45px;
+      height: 52px;
+      background: #f5f5f4;
+      border: 4px solid #57534e;
+      border-radius: 16px;
+    }
+
+    .strings {
+      position: absolute;
+      left: 610px;
+      top: 110px;
+      width: 390px;
+      height: 120px;
+      z-index: 1;
+    }
+
+    .string {
+      position: absolute;
+      left: 0;
+      width: 360px;
+      height: 6px;
+      background: #64748b;
+      border-radius: 999px;
+    }
+
+    .string.s1 { top: 20px; }
+    .string.s2 { top: 55px; }
+    .string.s3 { top: 90px; }
+
+    .sound-wave {
+      position: absolute;
+      left: 855px;
+      top: 103px;
+      width: 40px;
+      height: 100px;
+      border: 6px solid #8b5cf6;
+      border-left: none;
+      border-radius: 0 90px 90px 0;
+      opacity: 0;
+      transform: scale(0.5);
+      z-index: 5;
+    }
+
+    .sound-wave.two {
+      left: 900px;
+      top: 83px;
+      height: 140px;
+    }
+
+    .sound-wave.three {
+      left: 950px;
+      top: 63px;
+      height: 180px;
+    }
+
+    .status-box {
+      margin-top: 18px;
+      background: #ecfdf5;
+      border-left: 8px solid #10b981;
+      border-radius: 18px;
+      padding: 18px 22px;
+      font-size: 20px;
+      font-weight: 900;
+      color: #065f46;
+    }
+
+    .pressed .finger {
+      transform: translateY(78px);
+    }
+
+    .pressed .key {
+      transform: translateY(20px) rotate(-1deg);
+      box-shadow: 0 4px 0 #cbd5e1;
+    }
+
+    .mechanism-up .mechanism {
+      transform: rotate(-22deg);
+    }
+
+    .hammer-hit .hammer {
+      transform: rotate(-42deg);
+    }
+
+    .vibrate .string {
+      animation: stringVibrate 0.12s linear infinite;
+    }
+
+    .waves .sound-wave {
+      animation: soundWave 1s ease-out forwards;
+    }
+
+    .waves .sound-wave.two { animation-delay: 0.12s; }
+    .waves .sound-wave.three { animation-delay: 0.24s; }
+
+    @keyframes stringVibrate {
+      0% { transform: translateY(0); }
+      25% { transform: translateY(-4px); }
+      50% { transform: translateY(4px); }
+      75% { transform: translateY(-2px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes soundWave {
+      0% { opacity: 0; transform: scale(0.4); }
+      25% { opacity: 1; }
+      100% { opacity: 0; transform: scale(1.25); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <span class="badge">🎹 Piano Sound Animation</span>
+      <h1>How Does a Piano Make Sound?</h1>
+      <p>When you press a piano key, the piano makes a musical sound. On an acoustic piano, pressing a key causes a small hammer to strike a string. The string vibrates, and the vibration creates sound.</p>
+    </section>
+
+    <section class="card">
+      <h2>Labeled Figure: How the Piano Makes Sound</h2>
+      <p>This figure shows the main parts inside an acoustic piano. The key moves a lever, the lever moves the hammer, the hammer strikes the string, and the vibrating string creates sound.</p>
+
+      <div style="background:linear-gradient(135deg,#f8fafc,#e0f2fe); border:4px solid #cbd5e1; border-radius:28px; padding:20px; overflow-x:auto;">
+        <svg viewBox="0 0 980 470" style="width:100%; min-width:760px; height:470px;">
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#ef4444" />
+            </marker>
+          </defs>
+
+          <rect x="40" y="40" width="900" height="380" rx="26" fill="white" opacity="0.9" />
+
+          <!-- Finger -->
+          <rect x="95" y="75" width="58" height="115" rx="28" fill="#fbbf24" stroke="#92400e" stroke-width="4" />
+          <ellipse cx="124" cy="100" rx="17" ry="11" fill="#fde68a" />
+          <text x="70" y="55" font-size="20" font-weight="900" fill="#92400e">Finger presses down</text>
+
+          <!-- Key -->
+          <rect x="50" y="260" width="235" height="70" rx="14" fill="#ffffff" stroke="#334155" stroke-width="5" />
+          <rect x="50" y="330" width="235" height="22" rx="8" fill="#cbd5e1" />
+          <text x="122" y="305" font-size="23" font-weight="900" fill="#0f172a">Piano Key</text>
+
+          <!-- Lever / action -->
+          <line x1="290" y1="282" x2="455" y2="222" stroke="#64748b" stroke-width="14" stroke-linecap="round" />
+          <circle cx="290" cy="282" r="12" fill="#64748b" />
+          <text x="315" y="330" font-size="20" font-weight="900" fill="#334155">Lever / action</text>
+
+          <!-- Hammer -->
+          <line x1="455" y1="222" x2="610" y2="155" stroke="#92400e" stroke-width="14" stroke-linecap="round" />
+          <rect x="595" y="120" width="55" height="60" rx="18" fill="#f5f5f4" stroke="#57534e" stroke-width="5" />
+          <text x="505" y="110" font-size="20" font-weight="900" fill="#92400e">Hammer</text>
+
+          <!-- Strings -->
+          <line x1="690" y1="125" x2="910" y2="125" stroke="#64748b" stroke-width="6" stroke-linecap="round" />
+          <line x1="690" y1="155" x2="910" y2="155" stroke="#64748b" stroke-width="6" stroke-linecap="round" />
+          <line x1="690" y1="185" x2="910" y2="185" stroke="#64748b" stroke-width="6" stroke-linecap="round" />
+          <text x="735" y="105" font-size="20" font-weight="900" fill="#334155">Strings vibrate</text>
+
+          <!-- Soundboard -->
+          <rect x="700" y="235" width="205" height="85" rx="18" fill="#fcd34d" stroke="#92400e" stroke-width="4" />
+          <text x="742" y="285" font-size="21" font-weight="900" fill="#78350f">Soundboard</text>
+          <text x="707" y="345" font-size="17" fill="#78350f" font-weight="700">Makes the sound louder</text>
+
+          <!-- Sound waves -->
+          <path d="M905 128 C950 150,950 185,905 207" fill="none" stroke="#8b5cf6" stroke-width="6" stroke-linecap="round" />
+          <path d="M925 105 C990 145,990 210,925 250" fill="none" stroke="#8b5cf6" stroke-width="6" stroke-linecap="round" opacity="0.65" />
+          <text x="820" y="400" font-size="22" font-weight="900" fill="#6d28d9">Sound waves</text>
+
+          <!-- Arrows -->
+          <line x1="125" y1="195" x2="125" y2="250" stroke="#ef4444" stroke-width="5" marker-end="url(#arrow)" />
+          <line x1="250" y1="260" x2="360" y2="230" stroke="#ef4444" stroke-width="5" marker-end="url(#arrow)" />
+          <line x1="535" y1="185" x2="675" y2="150" stroke="#ef4444" stroke-width="5" marker-end="url(#arrow)" />
+          <line x1="780" y1="195" x2="780" y2="230" stroke="#ef4444" stroke-width="5" marker-end="url(#arrow)" />
+        </svg>
+      </div>
+
+      <div class="definition">
+        <p><strong>Figure summary:</strong> Your finger pushes the key. The key moves a lever. The lever moves the hammer. The hammer hits the string. The string vibrates, and the soundboard makes the sound louder.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Simple Explanation</h2>
+      <p><strong>Press key → hammer moves → hammer hits string → string vibrates → sound comes out.</strong></p>
+      <div class="steps">
+        <div class="step-card"><h3>1. Press the key</h3><p>Your finger pushes the piano key down.</p></div>
+        <div class="step-card"><h3>2. Mechanism moves</h3><p>The key moves a small lever inside the piano.</p></div>
+        <div class="step-card"><h3>3. Hammer hits string</h3><p>A small hammer swings up and strikes the string.</p></div>
+        <div class="step-card"><h3>4. String vibrates</h3><p>The vibrating string makes the musical sound.</p></div>
+      </div>
+    </section>
+
+    <section class="animation-card">
+      <h2>Interactive Animation</h2>
+      <p>Click the button. Watch the key press down, the hammer move, the string vibrate, and the sound waves appear.</p>
+
+      <div class="controls">
+        <button id="playBtn" type="button">▶ Press the Piano Key</button>
+        <button id="resetBtn" type="button">Reset</button>
+      </div>
+
+      <div class="stage" id="stage">
+        <div class="caption" id="caption">Ready: click the green button.</div>
+
+        <div class="finger" id="finger"><div class="fingernail"></div></div>
+        <div class="key" id="key">Piano Key</div>
+        <div class="mechanism" id="mechanism"></div>
+        <div class="hammer" id="hammer"><div class="hammer-head"></div></div>
+
+        <div class="strings" id="strings">
+          <div class="string s1"></div>
+          <div class="string s2"></div>
+          <div class="string s3"></div>
+        </div>
+
+        <div class="sound-wave"></div>
+        <div class="sound-wave two"></div>
+        <div class="sound-wave three"></div>
+      </div>
+
+      <div class="status-box" id="statusBox">Step: waiting to press the key.</div>
+    </section>
+  </div>
+
+  <script>
+    const stage = document.getElementById("stage");
+    const playBtn = document.getElementById("playBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const caption = document.getElementById("caption");
+    const statusBox = document.getElementById("statusBox");
+
+    let timers = [];
+
+    function clearTimers() {
+      timers.forEach(timer => clearTimeout(timer));
+      timers = [];
+    }
+
+    function resetAnimation() {
+      clearTimers();
+      stage.classList.remove("pressed", "mechanism-up", "hammer-hit", "vibrate", "waves");
+      caption.textContent = "Ready: click the green button.";
+      statusBox.textContent = "Step: waiting to press the key.";
+    }
+
+    function addStep(delay, action) {
+      timers.push(setTimeout(action, delay));
+    }
+
+    function playAnimation() {
+      resetAnimation();
+
+      addStep(100, () => {
+        stage.classList.add("pressed");
+        caption.textContent = "1. The finger presses the key down.";
+        statusBox.textContent = "Step 1: Pressing the key.";
+      });
+
+      addStep(700, () => {
+        stage.classList.add("mechanism-up");
+        caption.textContent = "2. The key moves the mechanism inside.";
+        statusBox.textContent = "Step 2: The inside lever moves.";
+      });
+
+      addStep(1200, () => {
+        stage.classList.add("hammer-hit");
+        caption.textContent = "3. The hammer swings up and strikes the string.";
+        statusBox.textContent = "Step 3: Hammer strikes the string.";
+      });
+
+      addStep(1700, () => {
+        stage.classList.add("vibrate", "waves");
+        caption.textContent = "4. The string vibrates and creates sound.";
+        statusBox.textContent = "Step 4: String vibration makes sound.";
+      });
+
+      addStep(3300, () => {
+        stage.classList.remove("vibrate", "waves");
+        caption.textContent = "Sound fades away.";
+        statusBox.textContent = "Done: the sound was made by a vibrating string.";
+      });
+
+      addStep(4300, () => {
+        stage.classList.remove("pressed", "mechanism-up", "hammer-hit");
+        caption.textContent = "Ready: click again to replay.";
+        statusBox.textContent = "Step: ready to replay.";
+      });
+    }
+
+    playBtn.addEventListener("click", playAnimation);
+    resetBtn.addEventListener("click", resetAnimation);
+  </script>
+</body>
+</html>
