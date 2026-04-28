@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>15-Step Study Guide: Surface Laplacian Regularized GLM</title>
+<script>window.STUDY_DATA = {"T": 128, "audio": [6.976957719599785e-05, 0.00011961288358102643, 0.00020188496560092134, 0.0003354626279025267, 0.0005487802334320879, 0.0008838263069351519, 0.0014013594188856543, 0.0021874911181835512, 0.003361686487933927, 0.00508606923101684, 0.007575677444270067, 0.011108996538266799, 0.01603770927540903, 0.022794180883750275, 0.03189479336247841, 0.04393693362414676, 0.059587318763666415, 0.07955950872199978, 0.10457900129736537, 0.13533528325493058, 0.1724216239333787, 0.21626516691455563, 0.26705183540503385, 0.3246524677308446, 0.38855812827933245, 0.4578333633314285, 0.5310959941686791, 0.6065306659296043, 0.681940763374332, 0.7548396255741299, 0.8225776074933439, 0.8824969877475668, 0.9321026512195608, 0.9692335271723744, 0.9922184709291612, 1.0000009574943465, 0.9922196382778565, 0.9692362157988818, 0.9321076565570529, 0.8825057381646673, 0.8225924939739555, 0.7548645258046226, 0.6819818436152999, 0.6065975783904172, 0.5312036304362094, 0.45800437650666875, 0.38882649761468613, 0.3250684479529544, 0.2676887045795399, 0.21722825482574987, 0.1738601572232309, 0.13745760988432865, 0.1076717374005797, 0.08401106474046278, 0.06591608654913028, 0.05282413085400127, 0.04422154981910813, 0.03968190604654919, 0.038890109902990855, 0.04165334357867094, 0.04790010413446284, 0.05766889212423706, 0.0710880773859562, 0.08834840727020858, 0.10966958600817556, 0.13526241571296194, 0.16528817738079105, 0.19981722964973947, 0.23878916191073818, 0.2819771768799786, 0.328959601982946, 0.3791014464136842, 0.4315486566554845, 0.4852371348752838, 0.5389176723994197, 0.5911967636774191, 0.6405919015440061, 0.6855985480024342, 0.7247646855849033, 0.7567678450832627, 0.7804889187388457, 0.7950770048171694, 0.8000000319909593, 0.7950769538911328, 0.7804887911900247, 0.7567675784191265, 0.7247641543838448, 0.6855975138173818, 0.640589922628073, 0.5911930371519583, 0.5389107643302818, 0.4852245277930041, 0.431526005799572, 0.37906138112014776, 0.328889832407296, 0.28185756399700773, 0.23858727694537435, 0.19948176702192766, 0.16473939714739316, 0.13437858940603956, 0.10826822658929479, 0.08616091615202737, 0.06772639089802453, 0.05258282289322456, 0.040324426690202975, 0.030544347040428656, 0.02285240062764031, 0.01688772516293685, 0.012326756456951029, 0.008887197230593846, 0.006328767787144198, 0.004451556022235096, 0.0030927361115782436, 0.002122326647715942, 0.0014385333294780667, 0.0009630879958625633, 0.0006368693531965844, 0.000415980594604684, 0.0002683701023220095, 0.00017101473505447365, 0.00010763940086427151, 6.691867778378214e-05, 4.10924249518075e-05, 2.4923815615211727e-05, 1.493157529081643e-05, 8.835580071821034e-06, 5.164197525306135e-06, 2.9813225376629368e-06], "visual": [2.4296206530267126e-07, 4.19014414420477e-07, 7.154454253814226e-07, 1.2094310498683673e-06, 2.024150370329112e-06, 3.353987854870804e-06, 5.502211169734252e-06, 8.936553875265973e-06, 1.4370105508024245e-05, 2.2877411864579362e-05, 3.605876765365596e-05, 5.626935339733814e-05, 8.693407234996561e-05, 0.00013297352420883028, 0.0002013712143485585, 0.0003019163651122607, 0.00044815987935294653, 0.0006586221769924255, 0.0009582896130011277, 0.0013804296113920167, 0.0019687420063645967, 0.0027798438674130946, 0.0038860560068697736, 0.005378420605505344, 0.007369830912936667, 0.009998096884418075, 0.013428707462161057, 0.01785698526993327, 0.0235092688685264, 0.0306427092611394, 0.03954324026106668, 0.05052128655072036, 0.06390481836567331, 0.08002945571344768, 0.09922547277403669, 0.12180175491295145, 0.14802701091943946, 0.17810882917525334, 0.21217146890027763, 0.25023357040787586, 0.292187220622518, 0.3377799889662685, 0.3866016223896891, 0.438077030364038, 0.49146698397590444, 0.5458775937417972, 0.6002791297737092, 0.6535341333690213, 0.7044340844243108, 0.751743190286173, 0.7942472123642862, 0.83080471183737, 0.8603977338560286, 0.8821788064444908, 0.8955112323207801, 0.9000000023055998, 0.8955112362701176, 0.8821788166370657, 0.8603977560434615, 0.8308047580571837, 0.7942473066070141, 0.75174337924064, 0.7044344573057881, 0.6535348577642695, 0.6002805152200188, 0.5458802023985906, 0.49147181966228526, 0.4380858553375984, 0.38661747799543345, 0.33780803467443465, 0.292236059326552, 0.2503172994263814, 0.21231278837619785, 0.17834365301478494, 0.14841115708284183, 0.12242043332780597, 0.10020642436725646, 0.0815606994961757, 0.06625799890722589, 0.054081535012429245, 0.04484621447204864, 0.03841900683790901, 0.03473566536127178, 0.03381291188846191, 0.03575506281567103, 0.040753950420803264, 0.049080954046326924, 0.06107007670826472, 0.07709135690917078, 0.09751454213304198, 0.12266387873199157, 0.15276604639231312, 0.18789457427144146, 0.22791534932783722, 0.2724388491380078, 0.32078526960524223, 0.3719685649390902, 0.4247044353230522, 0.4774454599055936, 0.5284439907457024, 0.5758403524467188, 0.6177707092210813, 0.6524861147571772, 0.6784722006873161, 0.6945580589933401, 0.7000033539878548, 0.6945545809325407, 0.6784644735644907, 0.6524724600970946, 0.6177482508236312, 0.5758045366411305, 0.5283878608700873, 0.47735860510685646, 0.4245715064064912, 0.37176721857592376, 0.3204833669471117, 0.2719906967436871, 0.22725673119755932, 0.18693628682449054, 0.15138561792878796, 0.12069513732786971, 0.0947346985784591, 0.07320530106318131, 0.05569165618467262, 0.041711123174681924, 0.030755853556992806, 0.02232635536369237, 0.015955926623509788], "drift": [0.9999247018391445, 0.9993223845883495, 0.9981181129001492, 0.996312612182778, 0.9939069700023561, 0.99090263542778, 0.9873014181578584, 0.9831054874312163, 0.9783173707196277, 0.9729399522055602, 0.9669764710448521, 0.9604305194155658, 0.9533060403541939, 0.9456073253805213, 0.937339011912575, 0.9285060804732156, 0.9191138516900578, 0.9091679830905224, 0.8986744656939538, 0.8876396204028539, 0.8760700941954066, 0.8639728561215868, 0.8513551931052652, 0.8382247055548381, 0.8245893027850253, 0.8104571982525948, 0.7958369046088836, 0.7807372285720945, 0.765167265622459, 0.7491363945234594, 0.7326542716724128, 0.7157308252838186, 0.6983762494089729, 0.6806009977954531, 0.6624157775901718, 0.6438315428897915, 0.6248594881423865, 0.6055110414043255, 0.5857978574564389, 0.5657318107836132, 0.5453249884220465, 0.5245896826784688, 0.5035383837257176, 0.48218377207912283, 0.46053871095824, 0.4386162385385277, 0.4164295600976373, 0.3939920400610481, 0.3713171939518376, 0.3484186802494345, 0.325310292162263, 0.3020059493192282, 0.27851968938505306, 0.2548656596045146, 0.23105810828067128, 0.20711137619221856, 0.18303988795514106, 0.1588581433338614, 0.13458070850712622, 0.11022220729388318, 0.08579731234443988, 0.06132073630220865, 0.03680722294135899, 0.012271538285719944, -0.012271538285719823, -0.036807222941358866, -0.06132073630220853, -0.08579731234443976, -0.11022220729388306, -0.1345807085071261, -0.15885814333386128, -0.18303988795514092, -0.20711137619221845, -0.23105810828067114, -0.2548656596045145, -0.27851968938505295, -0.3020059493192281, -0.32531029216226287, -0.3484186802494344, -0.3713171939518375, -0.393992040061048, -0.416429560097637, -0.4386162385385274, -0.46053871095824006, -0.4821837720791227, -0.5035383837257175, -0.5245896826784687, -0.5453249884220462, -0.5657318107836132, -0.5857978574564389, -0.6055110414043254, -0.6248594881423862, -0.6438315428897913, -0.6624157775901719, -0.680600997795453, -0.6983762494089728, -0.7157308252838186, -0.7326542716724127, -0.7491363945234591, -0.765167265622459, -0.7807372285720945, -0.7958369046088835, -0.8104571982525947, -0.8245893027850251, -0.8382247055548381, -0.8513551931052652, -0.8639728561215867, -0.8760700941954065, -0.8876396204028538, -0.8986744656939539, -0.9091679830905224, -0.9191138516900578, -0.9285060804732155, -0.9373390119125748, -0.9456073253805212, -0.9533060403541939, -0.9604305194155658, -0.9669764710448521, -0.9729399522055601, -0.9783173707196275, -0.9831054874312163, -0.9873014181578584, -0.99090263542778, -0.9939069700023561, -0.996312612182778, -0.9981181129001492, -0.9993223845883495, -0.9999247018391445], "bold": [-0.33573882602143496, -0.291017265632702, -0.30323951376671004, -0.27752129506300743, -0.18291732329420443, -0.4013054478250643, -0.2755976778238148, -0.28706695053772274, -0.32041016261276406, -0.24801556481048748, -0.23338639591800997, -0.0054376787829900075, -0.19347027286596966, -0.21184289257948183, -0.12104479537435012, -0.2778361526835811, -0.21807574938288535, -0.08963807618355363, -0.1542670166473434, -0.16086960464806077, -0.08024687910107303, -0.09848827806725165, 0.18622860869831312, 0.2645919678260591, 0.46152403585723756, 0.2802938621184444, 0.3721313338866377, 0.4641263957750858, 0.6200294541652472, 0.6611227795610797, 0.8146770145173989, 0.7919060638061345, 0.7576040819989948, 1.0834139929298099, 0.9357214259028834, 1.1104473585821861, 0.9862758742099261, 1.025649465085312, 0.8459664376834353, 0.8790552378525798, 0.9648040070818171, 0.9383551332081431, 0.8158462389458586, 0.8005043012070561, 0.573403910385844, 0.6979285185979046, 0.5929657538899136, 0.5254806107740662, 0.6205122976390828, 0.5248322274112979, 0.46727903447149455, 0.49691879866777633, 0.4865984474311646, 0.48770684472196585, 0.5137498148502337, 0.4612796241683295, 0.5773661213821903, 0.6304557027873616, 0.5731280744540833, 0.4442499093088462, 0.4101322958056903, 0.49628598691345605, 0.437151217972454, 0.576792391886195, 0.47358659932573766, 0.49911696088071994, 0.4154958997459128, 0.4970316835803602, 0.40364865084255414, 0.39533310831796764, 0.5800065058049992, 0.4990348252970487, 0.587943582974175, 0.7682374450768665, 0.8802011162593785, 0.7917493351832665, 0.7965105604743095, 0.9491339287686793, 1.0067943710870813, 1.0022485844085227, 0.9039934169672873, 0.9552726892384279, 1.100640077548333, 0.9099111265690607, 1.0046773418117851, 1.09045623798407, 1.0476600917304324, 0.8659491600233732, 0.8625180196586245, 0.831001021851144, 0.711739832006138, 0.7806556305050136, 0.662537362412965, 0.7626377569047913, 0.5853867728657374, 0.6041212220333729, 0.5918792605860643, 0.639619075941069, 0.41012560306509216, 0.7150835801239298, 0.6102041722268268, 0.6457731440220996, 0.7474045992368741, 0.6391299235680039, 0.6736403544331364, 0.6438458196123407, 0.6999251833915724, 0.6732709529244209, 0.6979110180755711, 0.5694439394371645, 0.45778556800240955, 0.5500583242512184, 0.4001016347973198, 0.4694989802466369, 0.4138278029094916, 0.2255144171838962, 0.3600230261962037, 0.2777816761902615, 0.22990495129241253, 0.16875646189806248, 0.3499874553554203, 0.3534755858385313, 0.18751194318578582, 0.1857882397194004, 0.19710239892791187, 0.17280212402920664, 0.31129664690921066, 0.16852744506921774], "fit": [-0.2499042952957346, -0.24969879151722033, -0.24930706126789232, -0.2487084789679243, -0.24787197096111005, -0.24675160522599615, -0.24528083296254705, -0.24336521652317078, -0.24087358398515019, -0.237627729320746, -0.23339104025030644, -0.22785678551742944, -0.22063721614580606, -0.21125509693469016, -0.19913972611152578, -0.18362983913093073, -0.16398592434883724, -0.139414293981085, -0.10910465570923591, -0.07228185723402422, -0.02827092911863452, 0.023427383702691706, 0.08305555147299931, 0.1505196694482475, 0.22532002241312454, 0.30650135338785256, 0.3926321565375149, 0.4818207672780044, 0.5717731211838399, 0.6598929795943048, 0.7434205824681618, 0.819600687804265, 0.8858665040903939, 0.940022831083145, 0.9804103836502545, 1.0060341327234565, 1.0166415860757374, 1.0127419330740781, 0.9955632657438014, 0.9669518230095626, 0.9292234676082245, 0.8849825516469154, 0.8369263243597296, 0.7876537599098992, 0.7394961569270179, 0.6943834310806923, 0.6537552787272856, 0.6185210560859496, 0.5890670229829055, 0.5653051649033614, 0.5467545667053457, 0.532644475053508, 0.5220277424151901, 0.5138940998578503, 0.5072743459103047, 0.5013287011594267, 0.49541491276079846, 0.48913390996812495, 0.48235270959041215, 0.47520574304451824, 0.46807680509565697, 0.4615644558434607, 0.4564340309073956, 0.45355953519614767, 0.45385871255143345, 0.45822457433882274, 0.46745668000867924, 0.4821955011365025, 0.5028632428227713, 0.5296144907656971, 0.5622999306443095, 0.6004460777283477, 0.6432533999759964, 0.6896143845911117, 0.7381519909360534, 0.7872776007217176, 0.8352661124302049, 0.8803443605661401, 0.9207877236047265, 0.9550187723363845, 0.9817012385876192, 0.9998225490841456, 1.0087587107733866, 1.0083164285584603, 0.9987488978774269, 0.9807436049239104, 0.9553825152173263, 0.9240770544941772, 0.8884821138868275, 0.8503948034044371, 0.8116447344169868, 0.7739831781236735, 0.7389785079512698, 0.7079249057600161, 0.6817704321227932, 0.6610692810318349, 0.6459614216773661, 0.6361809510699024, 0.6310924384410739, 0.6297524596623946, 0.6309915502369433, 0.6335101239910457, 0.6359806926674232, 0.6371481412568272, 0.6359199781942699, 0.631439424714108, 0.6231358742336985, 0.6107494816885521, 0.5943291902567617, 0.5742060713301389, 0.550946135491111, 0.525288498025521, 0.498075762649811, 0.47018364081420144, 0.44245618822431426, 0.4156517587049087, 0.3904030693514356, 0.3671928985739358, 0.346345152917414, 0.3280295487493002, 0.3122771007290831, 0.2990030493031793, 0.2880337761091417, 0.2791345695993357, 0.27203569552458945, 0.26645496681946235, 0.262115772214396, 0.2587602145575079], "resid": [-0.08583453072570035, -0.0413184741154817, -0.05393245249881773, -0.028812816095083127, 0.06495464766690562, -0.15455384259906813, -0.030316844861267733, -0.04370173401455196, -0.07953657862761387, -0.010387835489741482, 4.644332296466214e-06, 0.22241910673443943, 0.027166943279836403, -0.0005877956447916666, 0.07809493073717566, -0.09420631355265036, -0.054089825034048106, 0.049776217797531386, -0.04516236093810749, -0.08858774741403655, -0.05197594998243851, -0.12191566176994335, 0.10317305722531381, 0.1140722983778116, 0.23620401344411301, -0.026207491269408134, -0.02050082265087716, -0.017694371502918582, 0.0482563329814073, 0.0012297999667748583, 0.07125643204923715, -0.027694623998130496, -0.12826242209139915, 0.1433911618466649, -0.04468895774737103, 0.10441322585872959, -0.030365711865811273, 0.012907532011233958, -0.14959682806036612, -0.08789658515698284, 0.03558053947359263, 0.053372581561227705, -0.021080085413870964, 0.012850541297156903, -0.16609224654117383, 0.0035450875172122753, -0.06078952483737199, -0.09304044531188349, 0.0314452746561773, -0.04047293749206349, -0.07947553223385118, -0.03572567638573165, -0.03542929498402553, -0.026187255135884435, 0.006475468939929008, -0.04004907699109722, 0.08195120862139188, 0.14132179281923668, 0.09077536486367116, -0.03095583373567201, -0.057944509289966695, 0.03472153106999537, -0.019282812934941607, 0.12323285669004735, 0.019727886774304204, 0.0408923865418972, -0.05196078026276646, 0.014836182443857704, -0.09921459198021715, -0.13428138244772947, 0.01770657516068974, -0.101411252431299, -0.05530981700182136, 0.07862306048575485, 0.14204912532332503, 0.004471734461548915, -0.03875555195589542, 0.06878956820253923, 0.08600664748235476, 0.047229812072138166, -0.07770782162033185, -0.04454985984571769, 0.0918813667749463, -0.09840530198939956, 0.005928443934358207, 0.10971263306015966, 0.09227757651310609, -0.05812789447080402, -0.025964094228203005, -0.019393781553293077, -0.09990490241084882, 0.006672452381340177, -0.07644114553830483, 0.0547128511447752, -0.09638365925705583, -0.056948058998462, -0.05408216109130182, 0.003438124871166681, -0.22096683537598172, 0.08533112046153524, -0.020787378010116542, 0.01226302003105395, 0.11142390656945089, 0.0019817823111767385, 0.03772037623886648, 0.012406394898232698, 0.07678930915787385, 0.06252147123586871, 0.10358182781880942, -0.004762131892974364, -0.0931605674887015, 0.024769826225697344, -0.09797412785249121, -0.0006846605675645545, -0.028628385314822646, -0.19013734152101253, -0.030380043155231906, -0.08941122238367427, -0.11644020162500149, -0.1592730868512377, 0.037710354626337206, 0.054472536535352, -0.1005218329233559, -0.0933463298799353, -0.07493329659667758, -0.09365284279025571, 0.049180874694814636, -0.09023276948829018], "spike": [[0, 0, 0, 0, 0, 0], [0, 0, 0, 9, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]], "smooth": [[0, 0, 1, 1, 0, 0], [0, 1, 3, 4, 2, 0], [0, 1, 4, 5, 2, 0], [0, 0, 1, 2, 1, 0]], "lams": [0, 0.01, 0.05, 0.1, 0.2, 0.5, 1, 2, 5], "mse": [0.42, 0.31, 0.22, 0.17, 0.15, 0.18, 0.24, 0.34, 0.55], "repro": [0.45, 0.57, 0.69, 0.78, 0.82, 0.8, 0.73, 0.62, 0.48], "rough": [1.0, 0.82, 0.62, 0.47, 0.32, 0.2, 0.13, 0.08, 0.04]};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{
+ --ink:#202436; --muted:#667085; --brand:#6b5bd6; --brand2:#9d8cff; --line:#dedaf5;
+ --soft:#f4f2ff; --green:#0f766e; --orange:#b45309; --red:#b42318; --bg:#fbfbff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#f0edff,#fbfbff 430px);color:var(--ink)}
+header{max-width:1220px;margin:auto;padding:44px 28px 22px}
+main{max-width:1220px;margin:auto;padding:0 28px 70px}
+.eyebrow{color:var(--brand);font-weight:850;letter-spacing:.08em;text-transform:uppercase;font-size:13px}
+h1{font-size:44px;line-height:1.05;margin:10px 0 12px}
+.subtitle{font-size:19px;line-height:1.55;color:#424761;max-width:980px}
+.layout{display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:start}
+@media(max-width:980px){.layout{grid-template-columns:1fr}.toc{position:relative!important;top:0!important}h1{font-size:34px}}
+.toc{position:sticky;top:16px;background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:0 12px 34px rgba(78,65,160,.10)}
+.toc h3{margin:0 0 10px;font-size:16px}
+.toc a{display:block;text-decoration:none;color:#30296f;padding:7px 9px;border-radius:10px;font-size:13px;line-height:1.25}
+.toc a:hover{background:#f4f2ff}
+.card{background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:24px;padding:24px;margin:0 0 22px;box-shadow:0 16px 45px rgba(78,65,160,.12)}
+.stephead{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+.num{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:white;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:20px;flex:0 0 auto}
+h2{font-size:28px;margin:0}
+h3{font-size:20px;margin:18px 0 8px}
+p{line-height:1.65}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:850px){.grid,.grid3{grid-template-columns:1fr}}
+.note{border-left:6px solid var(--brand);background:#f8f6ff;border-radius:14px;padding:14px 16px;margin:14px 0}
+.good{border-left-color:var(--green);background:#ecfdf5}
+.warn{border-left-color:var(--orange);background:#fff7ed}
+.bad{border-left-color:var(--red);background:#fff1f2}
+.eq{background:#f9fafb;border:1px solid #e5e7eb;border-radius:14px;padding:12px 16px;overflow:auto;margin:12px 0}
+.metric{background:linear-gradient(135deg,#fff,#f7f5ff);border:1px solid var(--line);border-radius:18px;padding:18px}
+.big{font-size:42px;font-weight:900;color:var(--brand);line-height:1}
+.chart{background:#fff;border:1px solid #e6e2fb;border-radius:18px;padding:14px;margin:14px 0}
+.chart-title{font-weight:850;margin-bottom:8px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 12px;color:#475467;font-size:14px}
+.sw{display:inline-block;width:13px;height:13px;border-radius:3px;margin-right:5px;vertical-align:-2px}
+.flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0}
+.box{background:#fff;border:1px solid var(--line);box-shadow:0 5px 16px rgba(60,50,130,.08);border-radius:16px;padding:14px 16px;min-width:142px;text-align:center}
+.arrow{font-size:25px;color:var(--brand);font-weight:900}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:14px}
+td,th{padding:9px 10px;border-bottom:1px solid #eee;text-align:left}
+th{background:#ece9ff;color:#30296f}
+.mini{font-size:13px;color:var(--muted)}
+.code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#111827;color:#f8fafc;border-radius:14px;padding:14px;overflow:auto;font-size:13px;line-height:1.5}
+svg{max-width:100%}
+.footer{text-align:center;color:#667085;font-size:13px;margin-top:32px}
+</style>
+</head>x
+<body>
+<header>
+ <div class="eyebrow">PhD preliminary project study guide</div>
+ <h1>Surface Laplacian Regularized GLM</h1>
+ <div class="subtitle">A student-friendly, step-by-step explanation of the full project: from standard first-level GLM to surface graph Laplacian regularization, contrasts, evaluation, and defense narrative.</div>
+</header>
+
+<main class="layout">
+<nav class="toc">
+ <h3>Study steps</h3>
+ <a href="#s1">1. One vertex</a>
+ <a href="#s2">2. Design matrix</a>
+ <a href="#s3">3. All vertices</a>
+ <a href="#s4">4. Ordinary GLM</a>
+ <a href="#s5">5. Why weak?</a>
+ <a href="#s6">6. Surface graph</a>
+ <a href="#s7">7. Laplacian penalty</a>
+ <a href="#s8">8. Regularized GLM</a>
+ <a href="#s9">9. Derivation</a>
+ <a href="#s10">10. Contrasts</a>
+ <a href="#s11">11. Python pipeline</a>
+ <a href="#s12">12. Innovation</a>
+ <a href="#s13">13. Evaluation</a>
+ <a href="#s14">14. Defense script</a>
+ <a href="#s15">15. Study checklist</a>
+</nav>
+
+<div>
+
+<section class="card" id="s1">
+ <div class="stephead"><div class="num">1</div><h2>Start from one vertex</h2></div>
+ <p>Pick one surface vertex. At this vertex, the scanner measured a BOLD value at each of 128 time points.</p>
+ <div class="eq">\[
+ y =
+ \begin{bmatrix}
+ y_1 \\ y_2 \\ \vdots \\ y_{128}
+ \end{bmatrix},
+ \qquad
+ y = X\beta+\varepsilon
+ \]</div>
+ <div class="grid3">
+  <div class="metric"><div class="big">\(y\)</div><b>measured BOLD</b><br><span class="mini">128 × 1</span></div>
+  <div class="metric"><div class="big">\(X\)</div><b>design matrix</b><br><span class="mini">128 × 18</span></div>
+  <div class="metric"><div class="big">\(\beta\)</div><b>activation weights</b><br><span class="mini">18 × 1</span></div>
+ </div>
+ <div class="chart"><div class="chart-title">Example measured BOLD at one vertex</div><div id="boldChart"></div></div>
+ <div class="note"><b>Memory hook:</b> one vertex gives one 128-number signal. The GLM tries to explain that signal.</div>
+</section>
+
+<section class="card" id="s2">
+ <div class="stephead"><div class="num">2</div><h2>Understand the design matrix</h2></div>
+ <p>The design matrix is not brain data. It is a table of predicted signals created from events, HRF, derivatives, and drift regressors.</p>
+ <div class="eq">\[
+ X \in \mathbb{R}^{128\times 18}
+ \]</div>
+ <div class="chart"><div class="chart-title">Example design columns</div><div id="designChart"></div></div>
+ <table>
+  <thead><tr><th>Part</th><th>Meaning</th></tr></thead>
+  <tbody>
+   <tr><td>Rows</td><td>128 time points</td></tr>
+   <tr><td>Task columns</td><td>Predicted BOLD responses for experimental conditions</td></tr>
+   <tr><td>Derivative columns</td><td>Small timing-shift corrections</td></tr>
+   <tr><td>Drift columns</td><td>Slow scanner/background trends</td></tr>
+  </tbody>
+ </table>
+ <div class="note"><b>Plain English:</b> each column says, “If this condition explains activity, the BOLD signal should look like this over time.”</div>
+</section>
+
+<section class="card" id="s3">
+ <div class="stephead"><div class="num">3</div><h2>Move from one vertex to all vertices</h2></div>
+ <p>Surface fMRI has many vertices. We stack all vertex time series side by side.</p>
+ <div class="eq">\[
+ Y =
+ \begin{bmatrix}
+ | & | & | & & | \\
+ y_1 & y_2 & y_3 & \cdots & y_N \\
+ | & | & | & & |
+ \end{bmatrix},
+ \qquad
+ Y=XB+E
+ \]</div>
+ <div class="grid3">
+  <div class="metric"><div class="big">\(Y\)</div><b>all BOLD data</b><br><span class="mini">128 × N</span></div>
+  <div class="metric"><div class="big">\(B\)</div><b>all beta maps</b><br><span class="mini">18 × N</span></div>
+  <div class="metric"><div class="big">\(E\)</div><b>all residuals</b><br><span class="mini">128 × N</span></div>
+ </div>
+ <div class="note">Each column of \(B\) is one vertex’s beta vector. Each row of \(B\) is one spatial beta map across the surface.</div>
+</section>
+
+<section class="card" id="s4">
+ <div class="stephead"><div class="num">4</div><h2>Ordinary GLM solution</h2></div>
+ <p>The standard GLM chooses \(B\) so that \(XB\) is close to \(Y\).</p>
+ <div class="eq">\[
+ \hat B =
+ \arg\min_B \frac12\|Y-XB\|_F^2
+ \]</div>
+ <div class="eq">\[
+ \hat B_{\text{OLS}}=(X^\top X)^{-1}X^\top Y
+ \]</div>
+ <div class="chart"><div class="chart-title">Measured signal, fitted signal, and residuals</div><div id="fitChart"></div></div>
+ <div class="note"><b>Key limitation:</b> this estimates each vertex independently. Neighboring vertices do not communicate.</div>
+</section>
+
+<section class="card" id="s5">
+ <div class="stephead"><div class="num">5</div><h2>Why ordinary GLM is weak</h2></div>
+ <p>The cortex is not a bag of unrelated points. It is a connected surface. Neighboring vertices are usually related.</p>
+ <div class="grid">
+  <div class="chart"><div class="chart-title">Suspicious isolated spike</div><div id="spikeMap"></div></div>
+  <div class="chart"><div class="chart-title">More plausible smooth region</div><div id="smoothMap"></div></div>
+ </div>
+ <div class="note warn">Ordinary GLM can produce high-variance, fragmented maps because it does not use surface geometry.</div>
+</section>
+
+<section class="card" id="s6">
+ <div class="stephead"><div class="num">6</div><h2>Build the surface graph</h2></div>
+ <p>The surface mesh becomes a graph: vertices are nodes, and mesh edges are graph connections.</p>
+ <div class="flow">
+  <div class="box">surface mesh</div><div class="arrow">→</div>
+  <div class="box">adjacency \(W\)</div><div class="arrow">→</div>
+  <div class="box">degree \(D\)</div><div class="arrow">→</div>
+  <div class="box">Laplacian \(L\)</div>
+ </div>
+ <div class="eq">\[
+ W_{ij}=
+ \begin{cases}
+ 1,&\text{if vertices }i,j\text{ are neighbors}\\
+ 0,&\text{otherwise}
+ \end{cases},
+ \qquad
+ D_{ii}=\sum_j W_{ij},
+ \qquad
+ L=D-W
+ \]</div>
+ <div class="chart"><div class="chart-title">Toy surface graph</div><div id="graphDemo"></div></div>
+</section>
+
+<section class="card" id="s7">
+ <div class="stephead"><div class="num">7</div><h2>Understand the Laplacian penalty</h2></div>
+ <p>For one beta map \(b\), the Laplacian penalty is:</p>
+ <div class="eq">\[
+ b^\top Lb=\frac12\sum_{i,j}W_{ij}(b_i-b_j)^2
+ \]</div>
+ <div class="grid">
+  <div class="note bad"><b>Large penalty:</b> neighboring vertices have very different beta values.</div>
+  <div class="note good"><b>Small penalty:</b> neighboring vertices have similar beta values.</div>
+ </div>
+ <div class="note"><b>Plain English:</b> the method pays a cost when activation jumps sharply between neighboring vertices.</div>
+
+ <div class="note good">
+ <b>Why is it called “Laplacian”?</b><br><br>
+ The Laplacian is a mathematical operator that measures how different a value is from its neighbors.<br>
+ In continuous space, it uses derivatives.<br>
+ On a surface mesh, it becomes the matrix \(L = D - W\).<br>
+ That’s why it’s called the “Laplacian” — it’s the discrete version of the same concept.
+ </div>
+
+</section>
+
+<section class="card" id="s8">
+ <div class="stephead"><div class="num">8</div><h2>New regularized GLM</h2></div>
+ <p>We add the Laplacian penalty to the ordinary GLM objective.</p>
+ <div class="eq">\[
+ \hat B =
+ \arg\min_B
+ \frac12\|Y-XB\|_F^2
+ +
+ \frac{\lambda}{2}\operatorname{tr}(BLB^\top)
+ \]</div>
+ <table>
+  <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+  <tbody>
+   <tr><td>\(\frac12\|Y-XB\|_F^2\)</td><td>fit the measured BOLD data</td></tr>
+   <tr><td>\(\frac{\lambda}{2}\operatorname{tr}(BLB^\top)\)</td><td>make beta maps smooth along cortex</td></tr>
+   <tr><td>\(\lambda\)</td><td>controls smoothness strength</td></tr>
+  </tbody>
+ </table>
+ <div class="note">When \(\lambda=0\), this becomes ordinary GLM. Larger \(\lambda\) means stronger smoothness.</div>
+</section>
+
+<section class="card" id="s9">
+ <div class="stephead"><div class="num">9</div><h2>Derive the final equation</h2></div>
+ <p>Start with the objective:</p>
+ <div class="eq">\[
+ J(B)=
+ \frac12\|Y-XB\|_F^2+
+ \frac{\lambda}{2}\operatorname{tr}(BLB^\top)
+ \]</div>
+ <p>Take derivatives:</p>
+ <div class="eq">\[
+ \nabla_B\frac12\|Y-XB\|_F^2=X^\top(XB-Y)
+ \]</div>
+ <div class="eq">\[
+ \nabla_B\frac{\lambda}{2}\operatorname{tr}(BLB^\top)=\lambda BL
+ \]</div>
+ <p>Set gradient to zero and rearrange:</p>
+ <div class="eq">\[
+ X^\top(XB-Y)+\lambda BL=0
+ \]</div>
+ <div class="eq">\[
+ X^\top XB+\lambda BL=X^\top Y
+ \]</div>
+ <div class="note good">This equation combines the temporal GLM model and the spatial surface geometry.</div>
+</section>
+
+<section class="card" id="s10">
+ <div class="stephead"><div class="num">10</div><h2>Compute contrasts</h2></div>
+ <p>After estimating \(B\), we compute contrast maps.</p>
+ <div class="eq">\[
+ c:18\times 1,
+ \qquad
+ m=c^\top B
+ \]</div>
+ <p>The result \(m\) gives one contrast value at every vertex.</p>
+ <div class="grid3">
+  <div class="metric"><b>audio − visual</b><br><span class="mini">auditory vs visual processing</span></div>
+  <div class="metric"><b>computation − sentences</b><br><span class="mini">arithmetic vs language</span></div>
+  <div class="metric"><b>left − right button</b><br><span class="mini">motor lateralization</span></div>
+ </div>
+</section>
+
+<section class="card" id="s11">
+ <div class="stephead"><div class="num">11</div><h2>What the Python pipeline does</h2></div>
+ <p>The code implements the mathematical pipeline step by step.</p>
+ <div class="code">1. Load or simulate fMRI-shaped data Y
+2. Build design matrix X
+3. Build surface graph Laplacian L
+4. Fit ordinary GLM
+5. Fit Laplacian regularized GLM
+6. Compute contrast maps
+7. Evaluate and compare methods
+8. Save figures
+9. Create report
+10. Create defense slides</div>
+ <div class="note">The only conceptual change from standard GLM is adding \(L\), the surface geometry matrix.</div>
+</section>
+
+<section class="card" id="s12">
+ <div class="stephead"><div class="num">12</div><h2>Explain the innovation</h2></div>
+ <div class="grid">
+  <div class="note warn"><b>Standard GLM asks:</b><br>At each vertex, what task regressors explain the BOLD signal?</div>
+  <div class="note good"><b>Proposed method asks:</b><br>What activation maps explain BOLD while being smooth along cortex?</div>
+ </div>
+ <p>The innovation is not a new design matrix. The innovation is a new estimator for the beta maps.</p>
+ <div class="eq">\[
+ \text{standard GLM}+\text{surface geometry}=\text{regularized GLM}
+ \]</div>
+</section>
+
+<section class="card" id="s13">
+ <div class="stephead"><div class="num">13</div><h2>Defend that the method is better</h2></div>
+ <p>Real fMRI has no perfect ground-truth activation map, so we evaluate from multiple perspectives.</p>
+ <table>
+  <thead><tr><th>Perspective</th><th>Metric</th><th>Why it matters</th></tr></thead>
+  <tbody>
+   <tr><td>Semi-synthetic truth</td><td>\(\|\hat B-B^\star\|^2\)</td><td>direct recovery accuracy</td></tr>
+   <tr><td>Prediction</td><td>held-out MSE</td><td>tests overfitting/generalization</td></tr>
+   <tr><td>Reproducibility</td><td>map correlation / Dice</td><td>tests stability</td></tr>
+   <tr><td>Smoothness</td><td>\(m^\top Lm\)</td><td>tests spatial roughness</td></tr>
+   <tr><td>\(\lambda\) sensitivity</td><td>curves across \(\lambda\)</td><td>shows tradeoff</td></tr>
+  </tbody>
+ </table>
+ <div class="chart"><div class="chart-title">Example evaluation curves across \(\lambda\)</div><div id="lambdaChart"></div></div>
+ <div class="note">A convincing defense uses several metrics, not only prettier pictures.</div>
+</section>
+
+<section class="card" id="s14">
+ <div class="stephead"><div class="num">14</div><h2>Defense explanation script</h2></div>
+ <div class="note good">
+ Standard first-level GLM estimates each cortical vertex independently. However, cortical fMRI signals are spatially structured on a connected surface. We introduce a Laplacian regularized GLM that keeps the same design matrix and contrasts but adds a surface-geometry penalty. This encourages neighboring vertices to have similar beta values, reducing variance and improving stability. We evaluate the method through semi-synthetic recovery, held-out prediction, reproducibility, and smoothness analysis.
+ </div>
+</section>
+
+<section class="card" id="s15">
+ <div class="stephead"><div class="num">15</div><h2>Study checklist</h2></div>
+ <p>Your student understands the project when they can explain these 10 questions without notes:</p>
+ <ol>
+  <li>What is \(y=X\beta+\varepsilon\)?</li>
+  <li>What is the design matrix \(X\)?</li>
+  <li>What is \(Y=XB+E\)?</li>
+  <li>What does ordinary GLM minimize?</li>
+  <li>What is a surface graph?</li>
+  <li>What is \(L=D-W\)?</li>
+  <li>Why does \(b^\top Lb\) measure roughness?</li>
+  <li>Why does \(\lambda\) matter?</li>
+  <li>How are contrasts computed?</li>
+  <li>How do we evaluate without ground truth?</li>
+ </ol>
+ <div class="note good"><b>Final target:</b> explain the entire project in one sentence: “We improve first-level surface GLM by adding a Laplacian penalty that uses cortical mesh geometry to stabilize beta-map estimation.”</div>
+</section>
+
+<div class="footer">Study guide for the PhD preliminary project.</div>
+</div>
+</main>
+
+<script>
+const D = window.STUDY_DATA;
+function lineChart(id, series, opts={}){
+ const T=opts.T || D.T, width=1040, height=opts.height || 280;
+ const m={top:18,right:20,bottom:34,left:48}, w=width-m.left-m.right, h=height-m.top-m.bottom;
+ let vals=[]; series.forEach(s=>vals=vals.concat(s.values));
+ let ymin=Math.min(...vals), ymax=Math.max(...vals); if(ymin===ymax){ymin-=1;ymax+=1}
+ const pad=(ymax-ymin)*0.12; ymin-=pad; ymax+=pad;
+ const x=i=>m.left+(i/(T-1))*w; const y=v=>m.top+(ymax-v)/(ymax-ymin)*h;
+ const colors=opts.colors || ['#6b5bd6','#0f766e','#b45309','#b42318','#2563eb'];
+ const paths=series.map((s,si)=>{
+   let d=s.values.map((v,i)=>(i===0?'M':'L')+x(i).toFixed(1)+' '+y(v).toFixed(1)).join(' ');
+   return `<path d="${d}" fill="none" stroke="${colors[si%colors.length]}" stroke-width="2.4"/>`;
+ }).join('');
+ const legend=series.map((s,si)=>`<span><span class="sw" style="background:${colors[si%colors.length]}"></span>${s.name}</span>`).join('');
+ const ticks=[1,16,32,48,64,80,96,112,128].map(t=>`<text x="${x(t-1)}" y="${height-10}" text-anchor="middle" font-size="11" fill="#667085">${t}</text>`).join('');
+ document.getElementById(id).innerHTML=`<div class="legend">${legend}</div><svg viewBox="0 0 ${width} ${height}"><rect width="${width}" height="${height}" fill="#fff"/><line x1="${m.left}" x2="${m.left+w}" y1="${m.top+h}" y2="${m.top+h}" stroke="#98a2b3"/><line x1="${m.left}" x2="${m.left}" y1="${m.top}" y2="${m.top+h}" stroke="#98a2b3"/>${paths}${ticks}<text x="${m.left+w/2}" y="${height-1}" text-anchor="middle" font-size="12" fill="#667085">time row, 1–128</text></svg>`;
+}
+function heatMap(id, matrix, opts={}){
+ const rows=matrix.length, cols=matrix[0].length, cell=opts.cell||58, width=cols*cell+70, height=rows*cell+65;
+ let flat=matrix.flat(); let mn=Math.min(...flat), mx=Math.max(...flat); if(mx===mn){mx=mn+1}
+ const color=v=>{let r=(v-mn)/(mx-mn); return `rgb(${Math.round(245-120*r)},${Math.round(242-180*r)},${Math.round(255-45*r)})`;};
+ let cells='';
+ for(let i=0;i<rows;i++){for(let j=0;j<cols;j++){
+  cells+=`<rect x="${45+j*cell}" y="${20+i*cell}" width="${cell-2}" height="${cell-2}" rx="8" fill="${color(matrix[i][j])}" stroke="#fff"/><text x="${45+j*cell+cell/2}" y="${20+i*cell+cell/2+4}" text-anchor="middle" font-size="12" fill="#1f2437">${matrix[i][j]}</text>`;
+ }}
+ document.getElementById(id).innerHTML=`<svg viewBox="0 0 ${width} ${height}"><rect width="${width}" height="${height}" fill="#fff"/>${cells}<text x="${width/2}" y="${height-12}" text-anchor="middle" font-size="12" fill="#667085">${opts.label||''}</text></svg>`;
+}
+function graphDemo(id){
+ const pts=[[120,70],[220,50],[320,80],[160,170],[270,170],[380,160],[470,95]];
+ const edges=[[0,1],[1,2],[0,3],[1,3],[1,4],[2,4],[2,5],[4,5],[5,6],[2,6]];
+ let lines=edges.map(e=>`<line x1="${pts[e[0]][0]}" y1="${pts[e[0]][1]}" x2="${pts[e[1]][0]}" y2="${pts[e[1]][1]}" stroke="#d8d3f6" stroke-width="3"/>`).join('');
+ let dots=pts.map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="17" fill="#f4f2ff" stroke="#6b5bd6" stroke-width="2"/><text x="${p[0]}" y="${p[1]+5}" text-anchor="middle" font-size="13" fill="#30296f">${i+1}</text>`).join('');
+ document.getElementById(id).innerHTML=`<svg viewBox="0 0 600 240"><rect width="600" height="240" fill="#fff"/>${lines}${dots}</svg>`;
+}
+function lambdaChart(){
+ const width=1040,height=300,m={top:18,right:20,bottom:40,left:48},w=width-m.left-m.right,h=height-m.top-m.bottom;
+ const xs=D.lams.map((_,i)=>i);
+ let vals=[...D.mse,...D.repro,...D.rough]; let ymin=0, ymax=Math.max(...vals)*1.15;
+ const x=i=>m.left+(i/(D.lams.length-1))*w; const y=v=>m.top+(ymax-v)/(ymax-ymin)*h;
+ const make=(arr,col)=>arr.map((v,i)=>(i===0?'M':'L')+x(i).toFixed(1)+' '+y(v).toFixed(1)).join(' ');
+ const ticks=D.lams.map((lam,i)=>`<text x="${x(i)}" y="${height-12}" text-anchor="middle" font-size="11" fill="#667085">${lam}</text>`).join('');
+ document.getElementById('lambdaChart').innerHTML=`<div class="legend"><span><span class="sw" style="background:#6b5bd6"></span>MSE</span><span><span class="sw" style="background:#0f766e"></span>Reproducibility</span><span><span class="sw" style="background:#b45309"></span>Roughness</span></div><svg viewBox="0 0 ${width} ${height}"><rect width="${width}" height="${height}" fill="#fff"/><line x1="${m.left}" x2="${m.left+w}" y1="${m.top+h}" y2="${m.top+h}" stroke="#98a2b3"/><line x1="${m.left}" x2="${m.left}" y1="${m.top}" y2="${m.top+h}" stroke="#98a2b3"/><path d="${make(D.mse)}" fill="none" stroke="#6b5bd6" stroke-width="2.6"/><path d="${make(D.repro)}" fill="none" stroke="#0f766e" stroke-width="2.6"/><path d="${make(D.rough)}" fill="none" stroke="#b45309" stroke-width="2.6"/>${ticks}<text x="${m.left+w/2}" y="${height-1}" text-anchor="middle" font-size="12" fill="#667085">lambda values</text></svg>`;
+}
+lineChart('boldChart',[{name:'measured BOLD y',values:D.bold}],{colors:['#6b5bd6']});
+lineChart('designChart',[{name:'audio column',values:D.audio},{name:'visual column',values:D.visual},{name:'drift column',values:D.drift}],{colors:['#6b5bd6','#0f766e','#b45309']});
+lineChart('fitChart',[{name:'measured y',values:D.bold},{name:'fitted Xβ',values:D.fit},{name:'residual ε',values:D.resid}],{colors:['#6b5bd6','#0f766e','#b42318']});
+heatMap('spikeMap',D.spike,{label:'one isolated high value'});
+heatMap('smoothMap',D.smooth,{label:'contiguous smooth activation'});
+graphDemo('graphDemo');
+lambdaChart();
+</script>
+</body>
+</html>
