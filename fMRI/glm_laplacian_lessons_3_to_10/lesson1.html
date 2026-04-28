@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lesson 1 — Standard First-Level GLM</title>
+<script>window.LESSON1 = {"T": 128, "P": 18, "TR": 2.4, "audio": [0.0, 0.0, 0.0, 0.0, 0.0, 0.3445, 1.0, 0.685, 0.2366, 0.0039, -0.0801, -0.0852, -0.0589, -0.0315, -0.0139, -0.0053, -0.0018, -0.0005, -0.0001, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, 0.3445, 1.0, 0.685, 0.2366, 0.0039, -0.0801, -0.0852, -0.0589, -0.0315, -0.0139, -0.0053, -0.0018, -0.0005, -0.0001, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3445, 1.0, 0.685, 0.2366, 0.0039, -0.0801, -0.0852, -0.0589, -0.0315, -0.0139, -0.0053, -0.0018, -0.0005, -0.0001, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3445, 1.0, 0.685, 0.2366, 0.0039, -0.0801, -0.0852, -0.0589, -0.0315, -0.0139, -0.0053, -0.0018, -0.0005, -0.0001, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, 0.0, 0.0], "visual": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3445, 1.0, 0.685, 0.2366, 0.0039, -0.0801, -0.0852, -0.0589, -0.0315, -0.0139, -0.0053, -0.0018, -0.0005, -0.0001, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3445, 1.0, 0.685, 0.2366, 0.0039, -0.0801, -0.0852, -0.0589, -0.0315, -0.0139, -0.0053, -0.0018, -0.0005, -0.0001, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3445, 1.0, 0.685, 0.2366, 0.0039, -0.0801, -0.0852, -0.0589, -0.0315, -0.0139, -0.0053, -0.0018, -0.0005, -0.0001, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3445, 1.0, 0.685, 0.2366, 0.0039, -0.0801, -0.0852, -0.0589, -0.0315], "drift": [0.9999, 0.9993, 0.9981, 0.9963, 0.9939, 0.9909, 0.9873, 0.9831, 0.9783, 0.9729, 0.967, 0.9604, 0.9533, 0.9456, 0.9373, 0.9285, 0.9191, 0.9092, 0.8987, 0.8876, 0.8761, 0.864, 0.8514, 0.8382, 0.8246, 0.8105, 0.7958, 0.7807, 0.7652, 0.7491, 0.7327, 0.7157, 0.6984, 0.6806, 0.6624, 0.6438, 0.6249, 0.6055, 0.5858, 0.5657, 0.5453, 0.5246, 0.5035, 0.4822, 0.4605, 0.4386, 0.4164, 0.394, 0.3713, 0.3484, 0.3253, 0.302, 0.2785, 0.2549, 0.2311, 0.2071, 0.183, 0.1589, 0.1346, 0.1102, 0.0858, 0.0613, 0.0368, 0.0123, -0.0123, -0.0368, -0.0613, -0.0858, -0.1102, -0.1346, -0.1589, -0.183, -0.2071, -0.2311, -0.2549, -0.2785, -0.302, -0.3253, -0.3484, -0.3713, -0.394, -0.4164, -0.4386, -0.4605, -0.4822, -0.5035, -0.5246, -0.5453, -0.5657, -0.5858, -0.6055, -0.6249, -0.6438, -0.6624, -0.6806, -0.6984, -0.7157, -0.7327, -0.7491, -0.7652, -0.7807, -0.7958, -0.8105, -0.8246, -0.8382, -0.8514, -0.864, -0.8761, -0.8876, -0.8987, -0.9092, -0.9191, -0.9285, -0.9373, -0.9456, -0.9533, -0.9604, -0.967, -0.9729, -0.9783, -0.9831, -0.9873, -0.9909, -0.9939, -0.9963, -0.9981, -0.9993, -0.9999], "pred": [-0.25, -0.2498, -0.2495, -0.2491, -0.2485, 0.1657, 0.9532, 0.5762, 0.0393, -0.2386, -0.3378, -0.3423, -0.309, -0.2742, -0.251, -0.2384, -0.2319, -0.0384, 0.3252, 0.1548, -0.0889, -0.2139, -0.2569, -0.2564, -0.2385, -0.2199, -0.2066, -0.1981, -0.1923, 0.2258, 1.0168, 0.6431, 0.1093, -0.1655, -0.2617, -0.2632, -0.2269, -0.1891, -0.1631, -0.1478, -0.1384, -0.1318, -0.1261, -0.1206, -0.1151, -0.1097, -0.1041, -0.0985, -0.0928, -0.0871, -0.0813, 0.114, 0.4804, 0.313, 0.0724, -0.0497, -0.0898, -0.0866, -0.066, -0.0449, -0.0291, -0.0182, -0.0102, 0.4101, 1.203, 0.8312, 0.2992, 0.0261, -0.0685, -0.0686, -0.0309, 0.008, 0.0351, 0.0514, 0.0616, 0.069, 0.0753, 0.0813, 0.0871, 0.0928, 0.0985, 0.1041, 0.1097, 0.1151, 0.1205, 0.3154, 0.6811, 0.5131, 0.2716, 0.1486, 0.1073, 0.1094, 0.1286, 0.1483, 0.1625, 0.1717, 0.178, 0.5963, 1.3872, 1.0133, 0.4791, 0.2036, 0.1066, 0.1039, 0.1389, 0.1751, 0.1993, 0.2127, 0.2198, 0.224, 0.2271, 0.2297, 0.2321, 0.2343, 0.2364, 0.2383, 0.2401, 0.2417, 0.2432, 0.4341, 0.7958, 0.6236, 0.3779, 0.2506, 0.205, 0.2027, 0.2175, 0.2327], "bold": [-0.3656, -0.2312, -0.2718, -0.2875, -0.1711, 0.171, 0.9312, 0.7205, -0.0002, -0.3396, -0.4477, -0.3844, -0.2563, -0.206, -0.1599, -0.0903, -0.094, 0.015, 0.4339, 0.2099, -0.1312, -0.1443, -0.2484, -0.2694, -0.0737, -0.1537, -0.2415, -0.2, 0.0008, 0.2102, 1.0806, 0.6976, 0.1551, -0.1135, -0.2962, -0.2962, -0.2354, -0.2137, -0.0932, -0.0183, -0.206, -0.083, -0.2011, -0.1722, -0.13, -0.0965, -0.1351, -0.3056, 0.024, -0.1046, -0.1284, 0.1736, 0.4364, 0.2017, 0.1166, -0.0113, -0.1523, -0.0141, -0.0313, -0.1324, 0.1174, 0.0079, -0.0978, 0.4512, 1.2177, 0.9144, 0.1942, 0.1149, 0.0123, -0.0078, 0.023, 0.119, 0.0978, 0.0662, -0.0019, 0.1635, 0.1593, 0.1098, 0.1038, 0.1558, -0.1013, 0.1341, -0.0888, 0.1389, 0.2105, 0.4733, 0.6471, 0.5521, 0.2699, -0.0278, 0.1705, 0.112, 0.1381, 0.0758, 0.1631, 0.1822, 0.2856, 0.6239, 1.6741, 0.984, 0.4615, 0.2032, 0.0447, 0.2304, 0.1952, 0.0756, 0.2119, 0.3098, 0.1086, 0.2399, 0.2117, 0.4228, 0.2696, 0.205, 0.1947, 0.3955, 0.2061, 0.4307, 0.1203, 0.4223, 0.7802, 0.5703, 0.3645, 0.3105, 0.1549, 0.0902, 0.3304, 0.3556], "resid": [-0.1156, 0.0186, -0.0223, -0.0384, 0.0774, 0.0053, -0.022, 0.1442, -0.0396, -0.101, -0.1099, -0.0421, 0.0527, 0.0682, 0.0911, 0.1482, 0.1379, 0.0534, 0.1088, 0.0551, -0.0423, 0.0696, 0.0085, -0.013, 0.1648, 0.0662, -0.0349, -0.002, 0.1931, -0.0156, 0.0638, 0.0545, 0.0458, 0.052, -0.0346, -0.033, -0.0085, -0.0245, 0.0699, 0.1295, -0.0676, 0.0488, -0.075, -0.0516, -0.0149, 0.0132, -0.031, -0.2071, 0.1168, -0.0175, -0.0471, 0.0597, -0.044, -0.1114, 0.0442, 0.0384, -0.0626, 0.0725, 0.0347, -0.0876, 0.1465, 0.0262, -0.0876, 0.0411, 0.0147, 0.0832, -0.105, 0.0888, 0.0808, 0.0608, 0.0539, 0.111, 0.0627, 0.0148, -0.0635, 0.0945, 0.084, 0.0285, 0.0167, 0.0629, -0.1998, 0.03, -0.1985, 0.0238, 0.09, 0.1579, -0.0341, 0.039, -0.0016, -0.1764, 0.0632, 0.0027, 0.0095, -0.0726, 0.0006, 0.0105, 0.1077, 0.0277, 0.2869, -0.0293, -0.0176, -0.0004, -0.0619, 0.1264, 0.0563, -0.0994, 0.0126, 0.0971, -0.1112, 0.0159, -0.0154, 0.1931, 0.0375, -0.0293, -0.0417, 0.1571, -0.034, 0.189, -0.1229, -0.0118, -0.0156, -0.0533, -0.0134, 0.0599, -0.0501, -0.1125, 0.1129, 0.1229], "betas": [1.2, 0.55, -0.25], "times": [0.0, 2.4, 4.8, 7.2, 9.6, 12.0, 14.4, 16.8, 19.2, 21.6, 24.0, 26.4, 28.8, 31.2, 33.6, 36.0, 38.4, 40.8, 43.2, 45.6, 48.0, 50.4, 52.8, 55.2, 57.6, 60.0, 62.4, 64.8, 67.2, 69.6, 72.0, 74.4, 76.8, 79.2, 81.6, 84.0, 86.4, 88.8, 91.2, 93.6, 96.0, 98.4, 100.8, 103.2, 105.6, 108.0, 110.4, 112.8, 115.2, 117.6, 120.0, 122.4, 124.8, 127.2, 129.6, 132.0, 134.4, 136.8, 139.2, 141.6, 144.0, 146.4, 148.8, 151.2, 153.6, 156.0, 158.4, 160.8, 163.2, 165.6, 168.0, 170.4, 172.8, 175.2, 177.6, 180.0, 182.4, 184.8, 187.2, 189.6, 192.0, 194.4, 196.8, 199.2, 201.6, 204.0, 206.4, 208.8, 211.2, 213.6, 216.0, 218.4, 220.8, 223.2, 225.6, 228.0, 230.4, 232.8, 235.2, 237.6, 240.0, 242.4, 244.8, 247.2, 249.6, 252.0, 254.4, 256.8, 259.2, 261.6, 264.0, 266.4, 268.8, 271.2, 273.6, 276.0, 278.4, 280.8, 283.2, 285.6, 288.0, 290.4, 292.8, 295.2, 297.6, 300.0, 302.4, 304.8]};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--ink:#202436;--muted:#667085;--brand:#6b5bd6;--line:#dedaf5;--soft:#f4f2ff;--orange:#b45309;--green:#0f766e;--red:#b42318}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#f1eeff,#fbfbff 360px);color:var(--ink)}
+header,main{max-width:1180px;margin:auto;padding-left:28px;padding-right:28px}header{padding-top:42px;padding-bottom:24px}main{padding-bottom:70px}
+.eyebrow{color:var(--brand);font-weight:850;letter-spacing:.08em;text-transform:uppercase;font-size:13px}
+h1{font-size:42px;line-height:1.06;margin:10px 0 12px}.subtitle{font-size:19px;line-height:1.55;color:#424761;max-width:930px}
+.card{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:24px;padding:24px;margin:22px 0;box-shadow:0 16px 45px rgba(78,65,160,.12)}
+h2{font-size:29px;margin:0 0 12px}h3{font-size:20px;margin:18px 0 8px}p{line-height:1.65}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.grid,.grid3{grid-template-columns:1fr}h1{font-size:34px}}
+.metric{background:linear-gradient(135deg,#fff,#f7f5ff);border:1px solid var(--line);border-radius:20px;padding:20px}.big{font-size:48px;font-weight:900;color:var(--brand);line-height:1}
+.note{border-left:6px solid var(--brand);background:#f8f6ff;border-radius:14px;padding:14px 16px;margin:14px 0}.warn{border-left-color:var(--orange);background:#fff7ed}.good{border-left-color:var(--green);background:#ecfdf5}
+.eq{background:#f9fafb;border:1px solid #e5e7eb;border-radius:14px;padding:12px 16px;overflow:auto}
+.flow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0}.step{background:#fff;border:1px solid var(--line);box-shadow:0 5px 16px rgba(60,50,130,.08);border-radius:16px;padding:14px 16px;min-width:150px}.arrow{font-size:28px;color:var(--brand);font-weight:900}
+.chart{background:#fff;border:1px solid #e6e2fb;border-radius:18px;padding:14px;margin:14px 0}.chart-title{font-weight:850;margin-bottom:8px}svg{max-width:100%}.legend{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 12px;color:#475467;font-size:14px}.sw{display:inline-block;width:13px;height:13px;border-radius:3px;margin-right:5px;vertical-align:-2px}.mini{font-size:13px;color:var(--muted)}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px}td,th{padding:7px 9px;border-bottom:1px solid #eee;text-align:right;white-space:nowrap}th{background:#ece9ff;color:#30296f;position:sticky;top:0;z-index:2}td:first-child,th:first-child{text-align:center;font-weight:850;position:sticky;left:0;background:#fff;z-index:1}th:first-child{background:#ece9ff;z-index:3}.tablebox{overflow:auto;border:1px solid var(--line);border-radius:16px;max-height:420px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.nav a{padding:9px 12px;border:1px solid var(--line);border-radius:999px;text-decoration:none;color:#30296f;background:#fff;font-weight:700}.footer{text-align:center;color:#667085;font-size:13px;margin-top:32px}
+</style>
+</head>
+<body>
+<header>
+<div class="eyebrow">Lesson 1 • Standard first-level GLM</div>
+<h1>Standard First-Level GLM: \(y=X\beta+\varepsilon\)</h1>
+<div class="subtitle">This page explains the most important equation in the project using one surface vertex: measured BOLD signal = predicted task signals × beta weights + leftover noise.</div>
+<div class="nav">
+<a href="index.html">Index</a>
+<a href="lesson1_standard_first_level_glm.html">Lesson 1</a>
+<a href="lesson2_all_vertices_glm.html">Lesson 2</a>
+<a href="lesson3_ordinary_glm_objective.html">Lesson 3</a>
+<a href="lesson4_why_standard_glm_is_weak.html">Lesson 4</a>
+<a href="lesson5_build_surface_graph.html">Lesson 5</a>
+<a href="lesson6_laplacian_penalty.html">Lesson 6</a>
+<a href="lesson7_regularized_glm.html">Lesson 7</a>
+<a href="lesson8_derivation.html">Lesson 8</a>
+<a href="lesson9_plain_english_method.html">Lesson 9</a>
+<a href="lesson10_defense_evaluation.html">Lesson 10</a>
+</div>
+</header>
+<main>
+
+<section class="card">
+<h2>0. What data do we have at one vertex?</h2>
+<p>Pick one surface vertex. At that vertex, the scanner recorded one BOLD value at each of 128 scan times.</p>
+<div class="eq">\[
+\underbrace{y}_{128\times 1}
+=
+\begin{bmatrix}
+y_1\\y_2\\\vdots\\y_{128}
+\end{bmatrix}
+\]</div>
+<div class="grid3">
+<div class="metric"><div class="big">128</div><b>time rows</b><br><span class="mini">one row per scan</span></div>
+<div class="metric"><div class="big">2.4s</div><b>TR</b><br><span class="mini">time between scans</span></div>
+<div class="metric"><div class="big">5.12</div><b>minutes</b><br><span class="mini">128 × 2.4 ÷ 60</span></div>
+</div>
+<div class="chart"><div class="chart-title">All 128 time rows</div><div id="sampleGrid"></div></div>
+</section>
+
+<section class="card">
+<h2>1. The measured BOLD signal \(y\)</h2>
+<p>This is the thing we want to explain. It goes up and down over time.</p>
+<div class="chart"><div class="chart-title">Measured BOLD signal at one vertex</div><div id="boldChart"></div></div>
+<div class="note">Zero-abstraction meaning: \(y\) is just a list of 128 measured numbers from one vertex.</div>
+</section>
+
+<section class="card">
+<h2>2. The design matrix \(X\)</h2>
+<p>The design matrix is a spreadsheet of predicted signals. In the real project it has 128 rows and 18 columns.</p>
+<div class="eq">\[
+\underbrace{X}_{128\times 18}
+=
+\begin{bmatrix}
+\text{row 1 predictions}\\
+\text{row 2 predictions}\\
+\vdots\\
+\text{row 128 predictions}
+\end{bmatrix}
+\]</div>
+<div class="chart"><div class="chart-title">Three example columns from \(X\)</div><div id="designCols"></div></div>
+<div class="note">Each column says: “If this condition explains the brain signal, the timecourse should look like this.”</div>
+</section>
+
+<section class="card">
+<h2>3. The beta vector \(eta\)</h2>
+<p>The GLM chooses one weight for each design-matrix column.</p>
+<div class="eq">\[
+\underbrace{\beta}_{18\times 1}
+=
+\begin{bmatrix}
+\beta_1\\\beta_2\\\vdots\\\beta_{18}
+\end{bmatrix}
+\]</div>
+<div class="grid3">
+<div class="metric"><div class="big">large</div><b>beta</b><br><span class="mini">that predicted signal is important</span></div>
+<div class="metric"><div class="big">0</div><b>beta</b><br><span class="mini">that column does not help</span></div>
+<div class="metric"><div class="big">negative</div><b>beta</b><br><span class="mini">opposite relationship</span></div>
+</div>
+</section>
+
+<section class="card">
+<h2>4. The full equation</h2>
+<div class="eq">\[
+\underbrace{y}_{128\times 1}
+=
+\underbrace{X}_{128\times 18}
+\underbrace{\beta}_{18\times 1}
++
+\underbrace{\varepsilon}_{128\times 1}
+\]</div>
+<div class="flow">
+<div class="step"><b>\(X\)</b><br><span class="mini">18 candidate explanations</span></div>
+<div class="arrow">×</div>
+<div class="step"><b>\(eta\)</b><br><span class="mini">18 weights</span></div>
+<div class="arrow">=</div>
+<div class="step"><b>\(Xeta\)</b><br><span class="mini">predicted BOLD</span></div>
+</div>
+<div class="chart"><div class="chart-title">Measured signal vs model prediction</div><div id="fitChart"></div></div>
+</section>
+
+<section class="card">
+<h2>5. The leftover noise \(arepsilon\)</h2>
+<p>The model is never perfect. The difference between measured and predicted is the residual/noise.</p>
+<div class="eq">\[
+\varepsilon = y-X\beta
+\]</div>
+<div class="chart"><div class="chart-title">Residuals over all 128 time points</div><div id="residChart"></div></div>
+</section>
+
+<section class="card">
+<h2>6. The same information as a table</h2>
+<p>This table shows all 128 rows for a simplified version: a few design columns, measured \(y\), prediction \(X\beta\), and residual \(arepsilon\).</p>
+<div class="tablebox"><table id="glmTable"></table></div>
+</section>
+
+<section class="card">
+<h2>7. Final memory hook</h2>
+<div class="grid">
+<div class="note"><b>Design matrix \(X\)</b><br>A table of predicted signals.</div>
+<div class="note"><b>Beta \(eta\)</b><br>How much each predicted signal contributes to the measured BOLD.</div>
+</div>
+<div class="note good"><b>Plain English:</b> The GLM asks, “Which weighted mixture of the design-matrix columns best explains this vertex’s measured BOLD signal?”</div>
+</section>
+
+<div class="footer">Lesson 1 teaching webpage. Numerical values are illustrative but shaped to match the 128 × 18 first-level GLM setting.</div>
+</main>
+<script>
+const D = window.LESSON1;
+function lineChart(id, series, opts={}){
+ const T=D.T, width=1040, height=opts.height||280;
+ const m={top:18,right:20,bottom:34,left:48}, w=width-m.left-m.right, h=height-m.top-m.bottom;
+ let vals=[];series.forEach(s=>vals=vals.concat(s.values));
+ let ymin=Math.min(...vals),ymax=Math.max(...vals); if(ymin===ymax){ymin-=1;ymax+=1}
+ const pad=(ymax-ymin)*0.12;ymin-=pad;ymax+=pad;
+ const x=i=>m.left+(i/(T-1))*w; const y=v=>m.top+(ymax-v)/(ymax-ymin)*h;
+ const colors=opts.colors||['#6b5bd6','#0f766e','#b45309','#b42318','#2563eb'];
+ const paths=series.map((s,si)=>{let d=s.values.map((v,i)=>(i===0?'M':'L')+x(i).toFixed(1)+' '+y(v).toFixed(1)).join(' ');return `<path d="${d}" fill="none" stroke="${colors[si%colors.length]}" stroke-width="2.4"/>`;}).join('');
+ const legend=series.map((s,si)=>`<span><span class="sw" style="background:${colors[si%colors.length]}"></span>${s.name}</span>`).join('');
+ const ticks=[1,16,32,48,64,80,96,112,128].map(t=>`<text x="${x(t-1)}" y="${height-10}" text-anchor="middle" font-size="11" fill="#667085">${t}</text>`).join('');
+ document.getElementById(id).innerHTML=`<div class="legend">${legend}</div><svg viewBox="0 0 ${width} ${height}"><rect width="${width}" height="${height}" fill="#fff"/><line x1="${m.left}" x2="${m.left+w}" y1="${m.top+h}" y2="${m.top+h}" stroke="#98a2b3"/><line x1="${m.left}" x2="${m.left}" y1="${m.top}" y2="${m.top+h}" stroke="#98a2b3"/>${paths}${ticks}<text x="${m.left+w/2}" y="${height-1}" text-anchor="middle" font-size="12" fill="#667085">time row, 1–128</text></svg>`;
+}
+function sampleGrid(){
+ let html='<div style="display:grid;grid-template-columns:repeat(16,1fr);gap:5px">';
+ for(let i=0;i<D.T;i++){
+  html+=`<div title="row ${i+1}, time ${D.times[i]} s" style="height:28px;border-radius:6px;background:${(i+1)%16===0?'#6b5bd6':'#d9d6fb'};display:flex;align-items:center;justify-content:center;font-size:10px;color:${(i+1)%16===0?'white':'#30296f'}">${i+1}</div>`;
+ }
+ html+='</div><p class="mini">Each square is one row/time point. Hover to see seconds.</p>';
+ document.getElementById('sampleGrid').innerHTML=html;
+}
+function buildTable(){
+ let cols=[['audio column',D.audio],['visual column',D.visual],['drift column',D.drift],['measured y',D.bold],['fitted Xβ',D.pred],['residual ε',D.resid]];
+ let html='<thead><tr><th>row</th><th>time(s)</th>'; cols.forEach(c=>html+=`<th>${c[0]}</th>`); html+='</tr></thead><tbody>';
+ for(let i=0;i<D.T;i++){
+  html+=`<tr><td>${i+1}</td><td>${D.times[i].toFixed(1)}</td>`;
+  cols.forEach(c=>html+=`<td>${Number(c[1][i]).toFixed(3)}</td>`);
+  html+='</tr>';
+ }
+ html+='</tbody>'; document.getElementById('glmTable').innerHTML=html;
+}
+sampleGrid();
+lineChart('designCols',[{name:'audio predicted column',values:D.audio},{name:'visual predicted column',values:D.visual},{name:'drift column',values:D.drift}],{colors:['#6b5bd6','#0f766e','#b45309']});
+lineChart('boldChart',[{name:'measured BOLD y',values:D.bold}],{colors:['#6b5bd6']});
+lineChart('fitChart',[{name:'measured y',values:D.bold},{name:'model prediction Xβ',values:D.pred}],{colors:['#6b5bd6','#0f766e']});
+lineChart('residChart',[{name:'leftover noise ε = y − Xβ',values:D.resid}],{colors:['#b42318']});
+buildTable();
+</script>
+</body>
+</html>
