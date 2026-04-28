@@ -53,6 +53,7 @@ td,th{padding:9px 10px;border-bottom:1px solid #eee;text-align:left}
 th{background:#ece9ff;color:#30296f}
 .mini{font-size:13px;color:var(--muted)}
 .code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#111827;color:#f8fafc;border-radius:14px;padding:14px;overflow:auto;font-size:13px;line-height:1.5}
+
 svg{max-width:100%}
 .footer{text-align:center;color:#667085;font-size:13px;margin-top:32px}
 </style>
@@ -168,6 +169,12 @@ svg{max-width:100%}
   <div class="chart"><div class="chart-title">More plausible smooth region</div><div id="smoothMap"></div></div>
  </div>
  <div class="note warn">Ordinary GLM can produce high-variance, fragmented maps because it does not use surface geometry.</div>
+
+ <div class="note good">
+ <b>Key definition:</b><br>
+ Surface geometry = the connectivity structure of the cortical mesh that tells us which vertices are neighbors on the brain surface.
+ </div>
+
 </section>
 
 <section class="card" id="s6">
@@ -280,16 +287,16 @@ svg{max-width:100%}
 <section class="card" id="s11">
  <div class="stephead"><div class="num">11</div><h2>What the Python pipeline does</h2></div>
  <p>The code implements the mathematical pipeline step by step.</p>
- <div class="code">1. Load or simulate fMRI-shaped data Y
-2. Build design matrix X
-3. Build surface graph Laplacian L
-4. Fit ordinary GLM
-5. Fit Laplacian regularized GLM
-6. Compute contrast maps
-7. Evaluate and compare methods
-8. Save figures
-9. Create report
-10. Create defense slides</div>
+ <div class="code">
+1. Load fMRI data Y <br>
+2. Build design matrix X <br>
+3. Build surface graph Laplacian L <br>
+4. Fit ordinary GLM <br>
+5. Fit Laplacian regularized GLM <br>
+6. Compute contrast maps <br>
+7. Evaluate and compare methods <br>
+8. Save figures <br>
+</div>
  <div class="note">The only conceptual change from standard GLM is adding \(L\), the surface geometry matrix.</div>
 </section>
 
@@ -331,7 +338,7 @@ svg{max-width:100%}
 
 <section class="card" id="s15">
  <div class="stephead"><div class="num">15</div><h2>Study checklist</h2></div>
- <p>Your student understands the project when they can explain these 10 questions without notes:</p>
+ <p>The student understands the project when they can explain these 10 questions without notes:</p>
  <ol>
   <li>What is \(y=X\beta+\varepsilon\)?</li>
   <li>What is the design matrix \(X\)?</li>
@@ -344,7 +351,7 @@ svg{max-width:100%}
   <li>How are contrasts computed?</li>
   <li>How do we evaluate without ground truth?</li>
  </ol>
- <div class="note good"><b>Final target:</b> explain the entire project in one sentence: “We improve first-level surface GLM by adding a Laplacian penalty that uses cortical mesh geometry to stabilize beta-map estimation.”</div>
+ <div class="note good"><b>Final target:</b> explain the entire project in one sentence: "We improve first-level surface GLM by adding a Laplacian penalty that uses cortical mesh geometry to stabilize beta-map estimation."</div>
 </section>
 
 <div class="footer">Study guide for the PhD preliminary project.</div>
