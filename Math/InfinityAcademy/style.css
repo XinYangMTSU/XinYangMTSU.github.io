@@ -1,4 +1,79 @@
 /* ======================================
+   Book Chapter Table of Contents
+   ====================================== */
+
+.chapter-list {
+    width: 82%;
+    margin: 0 auto 70px;
+}
+
+.chapter-item {
+    display: flex;
+    align-items: center;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid rgba(139, 107, 45, .15);
+
+    transition: .25s;
+}
+
+.chapter-item:hover {
+    transform: translateX(6px);
+}
+
+.chapter-number {
+    width: 70px;
+    flex-shrink: 0;
+
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: bold;
+
+    color: #4b3a22;
+}
+
+.chapter-link {
+    flex: 1;
+}
+
+.chapter-link a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 27px;
+
+    color: #8b6b2d;
+    text-decoration: none;
+
+    transition: .25s;
+}
+
+.chapter-link a:visited {
+    color: #8b6b2d;
+}
+
+.chapter-link a:hover {
+    color: #c79a33;
+    letter-spacing: .5px;
+}
+
+@media(max-width:700px) {
+
+    .chapter-list {
+        width: 95%;
+    }
+
+    .chapter-number {
+        width: 48px;
+        font-size: 18px;
+    }
+
+    .chapter-link a {
+        font-size: 22px;
+    }
+
+}
+
+/* ======================================
    Infinity Academy Library
    ====================================== */
 
