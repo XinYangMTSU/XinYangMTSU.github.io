@@ -1,3 +1,4 @@
+
 document.getElementById("foot01").innerHTML =
 	"<p>&copy;  " + new Date().getFullYear() + " Xin Yang. All rights reserved.</p>";
 document.getElementById("nav01").innerHTML =
