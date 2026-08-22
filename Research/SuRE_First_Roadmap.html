@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SuRE-First Project Roadmap — Arcuate Fasciculus & Language Heterogeneity</title>
+<style>
+:root{
+  --bg:#f4f7fb;
+  --ink:#172033;
+  --muted:#607086;
+  --card:#ffffff;
+  --navy:#193b5a;
+  --blue:#2f6fb0;
+  --teal:#2f8f8b;
+  --gold:#d2a84a;
+  --line:#d9e2ec;
+  --soft:#eef4fa;
+  --shadow:0 18px 50px rgba(34,55,80,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 15% 0%, rgba(47,111,176,.10), transparent 30%),
+    radial-gradient(circle at 85% 5%, rgba(47,143,139,.10), transparent 28%),
+    var(--bg);
+  line-height:1.6;
+}
+a{text-decoration:none;color:inherit}
+.shell{max-width:1180px;margin:auto;padding:0 22px}
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(244,247,251,.88);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(217,226,236,.9);
+}
+.topbar .shell{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:12px;padding-bottom:12px}
+.brand{font-weight:800;letter-spacing:.01em;color:var(--navy)}
+.nav{display:flex;gap:16px;flex-wrap:wrap;font-size:.93rem;color:var(--muted)}
+.nav a:hover{color:var(--blue)}
+.hero{padding:72px 0 42px}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:center}
+.kicker{font-size:.8rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+h1{font-size:clamp(2.4rem,5vw,4.6rem);line-height:1.05;margin:.1em 0 .25em;color:var(--navy);letter-spacing:-.035em}
+.hero p{font-size:1.12rem;color:var(--muted);max-width:760px}
+.question{
+  margin-top:24px;padding:18px 20px;border-left:5px solid var(--gold);
+  background:rgba(255,255,255,.78);border-radius:14px;box-shadow:var(--shadow);
+  font-weight:700
+}
+.hero-card{
+  background:linear-gradient(145deg,#173954,#255d84);
+  color:white;border-radius:28px;padding:28px;box-shadow:var(--shadow);position:relative;overflow:hidden
+}
+.hero-card:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.08);right:-50px;top:-45px}
+.hero-card h3{font-size:1.15rem;margin-top:0}
+.chain{display:grid;gap:10px;margin-top:18px}
+.chain div{background:rgba(255,255,255,.10);padding:10px 12px;border-radius:12px}
+.chain span{color:#d8f0ef;font-weight:700}
+section{padding:38px 0}
+.section-title{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:18px}
+.section-title h2{font-size:2rem;line-height:1.15;margin:0;color:var(--navy)}
+.section-title p{max-width:680px;margin:0;color:var(--muted)}
+.grid{display:grid;gap:18px}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 10px 28px rgba(34,55,80,.06)
+}
+.card h3{margin:.1em 0 .35em;color:var(--navy)}
+.card p{color:var(--muted)}
+.tag{display:inline-block;background:var(--soft);color:var(--blue);font-size:.78rem;font-weight:800;padding:6px 9px;border-radius:999px;margin-bottom:8px}
+.aim{border-top:5px solid var(--blue)}
+.aim:nth-child(2){border-top-color:var(--teal)}
+.aim:nth-child(3){border-top-color:var(--gold)}
+.pipeline{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-items:stretch
+}
+.pipe{
+  background:white;border:1px solid var(--line);border-radius:16px;padding:18px 14px;text-align:center;position:relative
+}
+.pipe:not(:last-child):after{
+  content:"→";position:absolute;right:-13px;top:50%;transform:translateY(-50%);font-weight:900;color:var(--blue);font-size:1.2rem;z-index:2
+}
+.pipe .num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:white;margin:0 auto 8px;font-weight:800;font-size:.84rem}
+.pipe strong{display:block;color:var(--navy);font-size:.93rem}
+.pipe small{display:block;color:var(--muted);margin-top:5px}
+.timeline{position:relative;margin-left:8px}
+.timeline:before{content:"";position:absolute;left:18px;top:4px;bottom:4px;width:2px;background:linear-gradient(var(--blue),var(--teal),var(--gold))}
+.step{position:relative;padding-left:58px;margin:0 0 22px}
+.step:before{
+  content:attr(data-step);position:absolute;left:0;top:0;width:38px;height:38px;border-radius:50%;
+  background:white;border:3px solid var(--blue);display:grid;place-items:center;font-weight:900;color:var(--blue)
+}
+.step:nth-child(n+5):before{border-color:var(--teal);color:var(--teal)}
+.step:nth-child(n+9):before{border-color:var(--gold);color:#9b791f}
+.step h3{margin:0;color:var(--navy)}
+.step p{margin:.35em 0;color:var(--muted)}
+.step details{background:white;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:8px}
+.step summary{cursor:pointer;font-weight:700;color:var(--blue)}
+.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.check{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 15px}
+.check b{color:var(--navy)}
+.codebox{
+  background:#101827;color:#dce8f5;border-radius:16px;padding:18px;overflow:auto;font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;font-size:.86rem
+}
+.table-wrap{overflow:auto;border-radius:16px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;background:white}
+th,td{padding:13px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#eef4fa;color:var(--navy);font-size:.88rem}
+.note{
+  background:linear-gradient(135deg,rgba(47,111,176,.08),rgba(47,143,139,.08));
+  border:1px solid #cfe0ed;border-radius:18px;padding:20px
+}
+.warning{
+  background:#fff8e9;border:1px solid #efdba6;border-radius:16px;padding:18px
+}
+footer{padding:42px 0 56px;color:var(--muted);font-size:.9rem}
+button.top{
+  position:fixed;right:22px;bottom:22px;border:0;background:var(--navy);color:white;width:46px;height:46px;border-radius:50%;box-shadow:var(--shadow);cursor:pointer;font-size:1.1rem
+}
+@media (max-width:960px){
+  .hero-grid,.grid-3,.grid-2,.checklist{grid-template-columns:1fr}
+  .pipeline{grid-template-columns:1fr 1fr}
+  .pipe:not(:last-child):after{display:none}
+}
+@media (max-width:620px){
+  .nav{display:none}
+  .pipeline{grid-template-columns:1fr}
+  .hero{padding-top:46px}
+  h1{font-size:2.45rem}
+}
+</style>
+</head>
+<body id="top">
+
+<div class="topbar">
+  <div class="shell">
+    <div class="brand">SuRE-First • Candidate A</div>
+    <nav class="nav">
+      <a href="#concept">Concept</a>
+      <a href="#aims">Aims</a>
+      <a href="#data">Data</a>
+      <a href="#implementation">Implementation</a>
+      <a href="#analysis">Analysis</a>
+      <a href="#deliverables">Deliverables</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="shell hero-grid">
+    <div>
+      <div class="kicker">Autism • Diffusion MRI • Language Neurodevelopment</div>
+      <h1>Localized Developmental Alterations of the Arcuate Fasciculus</h1>
+      <p><strong>Goal:</strong> understand whether different portions of a major language white-matter pathway develop atypically in autistic children, and whether those localized changes are associated with expressive and receptive language differences.</p>
+      <div class="question">
+        Research Question — Do different regions along the arcuate fasciculus develop atypically in autistic children, and are these developmental differences associated with expressive and receptive language abilities?
+      </div>
+    </div>
+    <aside class="hero-card">
+      <h3>The biomedical story</h3>
+      <div class="chain">
+        <div><span>1.</span> Autism is neurodevelopmental</div>
+        <div><span>2.</span> Language outcomes vary greatly</div>
+        <div><span>3.</span> The arcuate fasciculus supports language circuitry</div>
+        <div><span>4.</span> Whole-tract averages may hide local abnormalities</div>
+        <div><span>5.</span> Local developmental patterns may explain language heterogeneity</div>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<main>
+<section id="concept">
+  <div class="shell">
+    <div class="section-title">
+      <h2>1. What this project is really asking</h2>
+      <p>The project moves beyond “is the arcuate fasciculus abnormal in autism?” and asks <strong>where</strong>, <strong>when</strong>, and <strong>how those changes matter for language</strong>.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="tag">WHERE?</div>
+        <h3>Localized tract differences</h3>
+        <p>Instead of averaging the entire arcuate fasciculus, profile microstructure at many points along the tract to locate spatially specific abnormalities.</p>
+      </div>
+      <div class="card">
+        <div class="tag">WHEN?</div>
+        <h3>Developmental change</h3>
+        <p>Use repeated imaging or age-related modeling to determine how localized tract properties change during childhood.</p>
+      </div>
+      <div class="card">
+        <div class="tag">SO WHAT?</div>
+        <h3>Language relevance</h3>
+        <p>Test whether localized microstructural trajectories are associated differently with expressive versus receptive language.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="aims">
+  <div class="shell">
+    <div class="section-title">
+      <h2>2. Specific aims</h2>
+      <p>Each aim answers a different level of the biomedical question while keeping the project focused enough for SuRE-First.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card aim">
+        <div class="tag">Aim 1</div>
+        <h3>Map localized AF development</h3>
+        <p>Reconstruct left and right arcuate fasciculi and generate along-tract FA, MD, RD, and AD profiles. Identify tract locations showing atypical developmental patterns.</p>
+      </div>
+      <div class="card aim">
+        <div class="tag">Aim 2</div>
+        <h3>Link AF development to language</h3>
+        <p>Within autistic children, test whether localized AF trajectories are associated with expressive and receptive language trajectories.</p>
+      </div>
+      <div class="card aim">
+        <div class="tag">Aim 3</div>
+        <h3>Test reproducibility and heterogeneity</h3>
+        <p>Determine whether AF–language relationships replicate across participants, developmental periods, sites, or an independent dataset.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="data">
+  <div class="shell">
+    <div class="section-title">
+      <h2>3. Data you need</h2>
+      <p>The central project does <strong>not require fMRI</strong>. The critical ingredients are diffusion MRI, structural MRI, repeated language measures, and clinical/demographic covariates.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Data type</th><th>Why needed</th><th>Priority</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Diffusion MRI / DWI</strong></td><td>Measure arcuate fasciculus microstructure and reconstruct the tract.</td><td>Essential</td><td>FA, MD, RD, AD; tractography</td></tr>
+          <tr><td><strong>T1 structural MRI</strong></td><td>Anatomical reference, registration, tissue segmentation, tract localization.</td><td>Highly desirable</td><td>T1w, cortical/subcortical anatomy</td></tr>
+          <tr><td><strong>Language assessments</strong></td><td>Primary behavioral outcomes.</td><td>Essential</td><td>Expressive language, receptive language, vocabulary</td></tr>
+          <tr><td><strong>Repeated visits</strong></td><td>Needed for true developmental trajectories.</td><td>Strongly preferred</td><td>2–3+ visits per child</td></tr>
+          <tr><td><strong>Clinical/demographic data</strong></td><td>Covariates and phenotype characterization.</td><td>Essential</td><td>Age, sex, IQ, ADOS/SRS, handedness</td></tr>
+          <tr><td><strong>Site/scanner + motion QC</strong></td><td>Control technical variability and bias.</td><td>Essential for multisite</td><td>Scanner ID, protocol, motion metrics</td></tr>
+          <tr><td>rs-fMRI</td><td>Could support a later structure–function extension.</td><td>Optional</td><td>Language-network functional connectivity</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
+    <div class="section-title">
+      <h2>4. End-to-end research pipeline</h2>
+      <p>This is the project in one glance.</p>
+    </div>
+    <div class="pipeline">
+      <div class="pipe"><div class="num">1</div><strong>Dataset</strong><small>Longitudinal autism cohort</small></div>
+      <div class="pipe"><div class="num">2</div><strong>dMRI QC</strong><small>Motion, distortion, completeness</small></div>
+      <div class="pipe"><div class="num">3</div><strong>AF reconstruction</strong><small>Left + right tractography</small></div>
+      <div class="pipe"><div class="num">4</div><strong>Along-tract profiles</strong><small>FA / MD / RD / AD</small></div>
+      <div class="pipe"><div class="num">5</div><strong>Trajectory models</strong><small>Localized developmental change</small></div>
+      <div class="pipe"><div class="num">6</div><strong>Language link</strong><small>Expressive + receptive outcomes</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="implementation">
+  <div class="shell">
+    <div class="section-title">
+      <h2>5. Step-by-step implementation</h2>
+      <p>Use this as the operational checklist for actually executing the project.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="step" data-step="1">
+        <h3>Freeze the exact scientific question</h3>
+        <p>Write one primary question and one primary hypothesis. Avoid letting software or dataset convenience redefine the science.</p>
+        <details><summary>Recommended output</summary><p>One paragraph containing the problem, knowledge gap, central hypothesis, population, primary tract, and primary language outcomes.</p></details>
+      </div>
+
+      <div class="step" data-step="2">
+        <h3>Complete a targeted literature-gap matrix</h3>
+        <p>Search arcuate fasciculus + autism + diffusion MRI + longitudinal + expressive/receptive language + along-tract analysis.</p>
+        <details><summary>Build a spreadsheet with these columns</summary><p>Study, year, N, age range, longitudinal?, ASD/TD, left/right AF, whole-tract vs along-tract, FA/MD/RD/AD, language instrument, main finding, limitation, gap relevant to your proposal.</p></details>
+      </div>
+
+      <div class="step" data-step="3">
+        <h3>Select the dataset before finalizing aims</h3>
+        <p>Prioritize cohorts with repeated dMRI and repeated standardized language scores from the same children.</p>
+        <details><summary>Feasibility gate</summary><p>Do not proceed until you know how many autistic children have usable imaging + language data at each visit, and how many have ≥2 longitudinal visits.</p></details>
+      </div>
+
+      <div class="step" data-step="4">
+        <h3>Create the analysis-ready subject table</h3>
+        <p>One row per subject per visit. This table becomes the spine of the entire project.</p>
+        <div class="codebox">subject_id | visit | age | sex | diagnosis | site | scanner | dwi_available
+expressive_score | receptive_score | IQ | ADOS | SRS | handedness | motion_QC | notes</div>
+      </div>
+
+      <div class="step" data-step="5">
+        <h3>Preprocess diffusion MRI</h3>
+        <p>Apply denoising, motion/eddy correction, susceptibility correction when available, brain masking, tensor fitting, and registration.</p>
+        <details><summary>Suggested tools</summary><p>MRtrix3, FSL, ANTs, DIPY, or a reproducible containerized pipeline. Record software versions and all QC exclusions.</p></details>
+      </div>
+
+      <div class="step" data-step="6">
+        <h3>Reconstruct left and right arcuate fasciculi</h3>
+        <p>Use tractography or an automated tract quantification framework. Keep the method fixed across all participants and visits.</p>
+        <details><summary>Important decision</summary><p>Choose whether the grant uses classical tensor tractography, probabilistic tractography, or a tract-profiling framework such as AFQ-style analysis. The choice should follow data quality and novelty, not convenience.</p></details>
+      </div>
+
+      <div class="step" data-step="7">
+        <h3>Generate along-tract profiles</h3>
+        <p>Resample each AF to a common number of nodes, then extract FA, MD, RD, and AD at each node.</p>
+        <div class="codebox">Example conceptual output:
+subject_id | visit | hemisphere | node | FA | MD | RD | AD
+S001       | V1    | L          | 1    | ...| ...| ...| ...
+S001       | V1    | L          | 2    | ...| ...| ...| ...
+...
+S001       | V1    | R          | 100  | ...| ...| ...| ...</div>
+      </div>
+
+      <div class="step" data-step="8">
+        <h3>Run imaging quality control</h3>
+        <p>Inspect tract reconstruction, missing segments, implausible streamlines, motion, and node-wise outliers. Predefine exclusion rules.</p>
+        <details><summary>Do not skip</summary><p>Pediatric diffusion MRI is especially vulnerable to motion. QC must be documented and ideally blinded to language outcomes.</p></details>
+      </div>
+
+      <div class="step" data-step="9">
+        <h3>Model developmental trajectories</h3>
+        <p>Use longitudinal mixed-effects or growth-curve models. Avoid arbitrary age bins unless biologically justified.</p>
+        <div class="codebox">Conceptual model:
+AF_metric ~ age + age² + diagnosis + age×diagnosis
+          + sex + motion + site + (1 + age | subject)</div>
+      </div>
+
+      <div class="step" data-step="10">
+        <h3>Identify localized developmental differences</h3>
+        <p>Test which tract nodes show divergent developmental patterns. Correct for multiple comparisons or use functional/cluster-based approaches.</p>
+      </div>
+
+      <div class="step" data-step="11">
+        <h3>Link tract development to language</h3>
+        <p>Within autistic children, test whether node-wise AF development is associated with expressive and receptive language trajectories.</p>
+        <div class="codebox">Conceptual model:
+Language_score ~ AF_metric + age + AF_metric×age
+               + sex + motion + site + relevant cognitive covariates
+               + (1 + age | subject)</div>
+      </div>
+
+      <div class="step" data-step="12">
+        <h3>Separate expressive and receptive language</h3>
+        <p>Do not collapse them automatically. Test whether different AF locations or developmental patterns relate to each outcome differently.</p>
+      </div>
+
+      <div class="step" data-step="13">
+        <h3>Analyze individual heterogeneity</h3>
+        <p>Go beyond group averages. Examine whether children show distinct AF developmental profiles and whether those profiles correspond to different language outcomes.</p>
+      </div>
+
+      <div class="step" data-step="14">
+        <h3>Replicate</h3>
+        <p>Use an independent cohort, independent site, or prespecified holdout where feasible. Replication should test the biological relationship, not only predictive accuracy.</p>
+      </div>
+
+      <div class="step" data-step="15">
+        <h3>Interpret biologically, not only statistically</h3>
+        <p>Explain what localized AF findings imply for language-network development. Avoid treating FA as a direct measure of “white-matter integrity” without qualification.</p>
+      </div>
+
+      <div class="step" data-step="16">
+        <h3>Package results for SuRE-First</h3>
+        <p>Translate analyses into a biomedical narrative: established finding → unresolved developmental mechanism → tract-local discovery → language relevance → future multimodal research program.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="analysis">
+  <div class="shell">
+    <div class="section-title">
+      <h2>6. Analysis design at a glance</h2>
+      <p>Keep the primary analysis interpretable. Machine learning can be secondary, not the biomedical centerpiece.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Primary inferential analyses</h3>
+        <div class="checklist">
+          <div class="check"><b>Group development:</b><br>ASD vs TD trajectory differences</div>
+          <div class="check"><b>Node localization:</b><br>Where along AF differences occur</div>
+          <div class="check"><b>Language association:</b><br>Expressive and receptive separately</div>
+          <div class="check"><b>Within-subject change:</b><br>AF change vs language change</div>
+          <div class="check"><b>Hemisphere:</b><br>Left/right effects as secondary analysis</div>
+          <div class="check"><b>Reproducibility:</b><br>Independent cohort/site if available</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Key covariates / sources of bias</h3>
+        <div class="checklist">
+          <div class="check"><b>Age</b><br>core developmental variable</div>
+          <div class="check"><b>Sex</b><br>biological variable</div>
+          <div class="check"><b>Motion</b><br>major pediatric dMRI confound</div>
+          <div class="check"><b>Site/scanner</b><br>multisite heterogeneity</div>
+          <div class="check"><b>Cognitive ability</b><br>careful interpretation with language</div>
+          <div class="check"><b>Missingness</b><br>longitudinal attrition and incomplete phenotypes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
+    <div class="section-title">
+      <h2>7. Minimum viable project vs stronger grant version</h2>
+      <p>This helps you control scope.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="tag">Minimum viable</div>
+        <h3>Focused and feasible</h3>
+        <p><strong>Population:</strong> autistic + TD children</p>
+        <p><strong>Data:</strong> T1 + longitudinal dMRI + language</p>
+        <p><strong>Imaging:</strong> left/right AF, along-tract FA/MD/RD/AD</p>
+        <p><strong>Statistics:</strong> mixed-effects trajectory models</p>
+        <p><strong>Outcome:</strong> expressive + receptive language</p>
+      </div>
+      <div class="card">
+        <div class="tag">Stronger if feasible</div>
+        <h3>Grant-enhanced version</h3>
+        <p><strong>Add:</strong> independent replication cohort</p>
+        <p><strong>Add:</strong> advanced diffusion measures if multi-shell data permit</p>
+        <p><strong>Add:</strong> sensitivity analysis across tractography methods</p>
+        <p><strong>Add:</strong> prespecified developmental windows</p>
+        <p><strong>Future, not required:</strong> rs-fMRI language-network structure–function coupling</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="deliverables">
+  <div class="shell">
+    <div class="section-title">
+      <h2>8. Concrete deliverables</h2>
+      <p>Each phase should produce something useful even before the full grant is complete.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3>Pre-grant</h3><p>Literature gap matrix, dataset feasibility table, pilot AF reconstruction, initial QC protocol, preliminary figures.</p></div>
+      <div class="card"><h3>During project</h3><p>Reproducible dMRI pipeline, along-tract profiles, longitudinal statistical models, student research modules, conference abstracts.</p></div>
+      <div class="card"><h3>Final outputs</h3><p>Journal papers, validated AF–language developmental findings, reusable analysis code, and preliminary data for a future multimodal NIH application.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
+    <div class="note">
+      <h3 style="margin-top:0;color:var(--navy)">Critical next decision</h3>
+      <p style="margin-bottom:0">Before you write the final Specific Aims page, verify that an accessible dataset contains enough autistic children with <strong>longitudinal diffusion MRI + repeated expressive/receptive language assessments</strong>. If that combination is not available at adequate sample size, refine the question before investing in the full pipeline.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
+    <div class="warning">
+      <strong>Novelty checkpoint:</strong> This webpage treats the project as a strong working concept. Before grant submission, compare it directly with recent 2024–2026 longitudinal and along-tract autism studies so that the proposal can state precisely what prior work established and what your study uniquely adds.
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="shell">
+    SuRE-First Candidate A • Project planning webpage • Designed as a practical implementation roadmap
+  </div>
+</footer>
+
+<button class="top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+</body>
+</html>
