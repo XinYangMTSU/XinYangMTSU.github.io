@@ -120,6 +120,10 @@ df_no_outliers = df[(df['Score'] >= lower_bound) & (df['Score'] <= upper_bound)]
 
 # Step 5: Option 2 - Cap outliers to boundary values
 df_capped = df.copy()
+
+# Convert Score to float so decimal boundary values can be stored
+df_capped['Score'] = df_capped['Score'].astype(float)
+
 df_capped.loc[df_capped['Score'] > upper_bound, 'Score'] = upper_bound
 df_capped.loc[df_capped['Score'] < lower_bound, 'Score'] = lower_bound
 
