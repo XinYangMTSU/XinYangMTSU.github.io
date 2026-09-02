@@ -61,6 +61,7 @@
       margin: 20px auto;
       border: 1px solid #ccc;
       background: white;
+      max-width: 100%;
     }
 
     .result {
@@ -78,6 +79,7 @@
 </head>
 
 <body>
+
 <div class="card">
 
   <h1>Interactive Standardization Demo</h1>
@@ -87,15 +89,25 @@
   </div>
 
   <p style="text-align:center;">
-    Move the sliders to see how x, μ, and σ affect the bell curve and z-score.
+    Move the sliders to see how x, μ, and σ affect the bell curve
+    and the corresponding z-score.
   </p>
 
-  <canvas id="graph" width="820" height="380"></canvas>
+  <canvas
+    id="graph"
+    width="820"
+    height="500">
+  </canvas>
+
 
   <div class="controls">
 
     <div class="control">
-      <label for="xSlider">Observation (x):</label>
+
+      <label for="xSlider">
+        Observation (x):
+      </label>
+
       <input
         type="range"
         id="xSlider"
@@ -104,11 +116,22 @@
         step="0.1"
         value="3"
       />
-      <span class="value" id="xValue">3.0</span>
+
+      <span
+        class="value"
+        id="xValue">
+        3.0
+      </span>
+
     </div>
 
+
     <div class="control">
-      <label for="meanSlider">Mean (μ):</label>
+
+      <label for="meanSlider">
+        Mean (μ):
+      </label>
+
       <input
         type="range"
         id="meanSlider"
@@ -117,11 +140,22 @@
         step="0.1"
         value="0"
       />
-      <span class="value" id="meanValue">0.0</span>
+
+      <span
+        class="value"
+        id="meanValue">
+        0.0
+      </span>
+
     </div>
 
+
     <div class="control">
-      <label for="sigmaSlider">Std. Dev. (σ):</label>
+
+      <label for="sigmaSlider">
+        Std. Dev. (σ):
+      </label>
+
       <input
         type="range"
         id="sigmaSlider"
@@ -130,232 +164,960 @@
         step="0.1"
         value="2"
       />
-      <span class="value" id="sigmaValue">2.0</span>
+
+      <span
+        class="value"
+        id="sigmaValue">
+        2.0
+      </span>
+
     </div>
 
   </div>
 
+
   <div class="result">
+
     z =
-    (<span id="displayX">3.0</span> -
-    <span id="displayMean">0.0</span>) /
+
+    (
+    <span id="displayX">3.0</span>
+    -
+    <span id="displayMean">0.0</span>
+    )
+
+    /
+
     <span id="displaySigma">2.0</span>
+
     =
-    <strong id="zValue">1.50</strong>
+
+    <strong id="zValue">
+      1.50
+    </strong>
+
   </div>
 
-  <div class="interpretation" id="interpretation">
+
+  <div
+    class="interpretation"
+    id="interpretation">
+
     The observation is 1.50 standard deviations above the mean.
+
   </div>
 
 </div>
 
+
 <script>
-  const canvas = document.getElementById("graph");
-  const ctx = canvas.getContext("2d");
 
-  const xSlider = document.getElementById("xSlider");
-  const meanSlider = document.getElementById("meanSlider");
-  const sigmaSlider = document.getElementById("sigmaSlider");
+  const canvas =
+    document.getElementById("graph");
 
-  function normalPDF(x, mean, sigma) {
+  const ctx =
+    canvas.getContext("2d");
+
+
+  const xSlider =
+    document.getElementById("xSlider");
+
+  const meanSlider =
+    document.getElementById("meanSlider");
+
+  const sigmaSlider =
+    document.getElementById("sigmaSlider");
+
+
+  function normalPDF(
+    x,
+    mean,
+    sigma
+  ) {
+
     return (
-      1 / (sigma * Math.sqrt(2 * Math.PI))
-    ) * Math.exp(
-      -0.5 * Math.pow((x - mean) / sigma, 2)
+
+      1 /
+      (
+        sigma *
+        Math.sqrt(
+          2 * Math.PI
+        )
+      )
+
+    ) *
+
+    Math.exp(
+
+      -0.5 *
+
+      Math.pow(
+
+        (x - mean) /
+        sigma,
+
+        2
+      )
+
     );
   }
 
+
   function updateDemo() {
-    const x = parseFloat(xSlider.value);
-    const mean = parseFloat(meanSlider.value);
-    const sigma = parseFloat(sigmaSlider.value);
 
-    const z = (x - mean) / sigma;
+    const x =
+      parseFloat(
+        xSlider.value
+      );
 
-    document.getElementById("xValue").textContent = x.toFixed(1);
-    document.getElementById("meanValue").textContent = mean.toFixed(1);
-    document.getElementById("sigmaValue").textContent = sigma.toFixed(1);
+    const mean =
+      parseFloat(
+        meanSlider.value
+      );
 
-    document.getElementById("displayX").textContent = x.toFixed(1);
-    document.getElementById("displayMean").textContent = mean.toFixed(1);
-    document.getElementById("displaySigma").textContent = sigma.toFixed(1);
-    document.getElementById("zValue").textContent = z.toFixed(2);
+    const sigma =
+      parseFloat(
+        sigmaSlider.value
+      );
+
+
+    const z =
+      (x - mean) /
+      sigma;
+
+
+    document
+      .getElementById("xValue")
+      .textContent =
+      x.toFixed(1);
+
+
+    document
+      .getElementById("meanValue")
+      .textContent =
+      mean.toFixed(1);
+
+
+    document
+      .getElementById("sigmaValue")
+      .textContent =
+      sigma.toFixed(1);
+
+
+    document
+      .getElementById("displayX")
+      .textContent =
+      x.toFixed(1);
+
+
+    document
+      .getElementById("displayMean")
+      .textContent =
+      mean.toFixed(1);
+
+
+    document
+      .getElementById("displaySigma")
+      .textContent =
+      sigma.toFixed(1);
+
+
+    document
+      .getElementById("zValue")
+      .textContent =
+      z.toFixed(2);
+
 
     let message;
 
-    if (Math.abs(z) < 0.01) {
-      message = "The observation is at the mean.";
-    } else if (z > 0) {
+
+    if (
+      Math.abs(z) <
+      0.01
+    ) {
+
       message =
-        `The observation is ${Math.abs(z).toFixed(2)} standard deviations above the mean.`;
-    } else {
-      message =
-        `The observation is ${Math.abs(z).toFixed(2)} standard deviations below the mean.`;
+        "The observation is at the mean.";
+
     }
 
-    document.getElementById("interpretation").textContent = message;
+    else if (
+      z > 0
+    ) {
 
-    drawGraph(x, mean, sigma);
+      message =
+
+        `The observation is ${Math.abs(z).toFixed(2)}
+        standard deviations above the mean.`;
+
+    }
+
+    else {
+
+      message =
+
+        `The observation is ${Math.abs(z).toFixed(2)}
+        standard deviations below the mean.`;
+
+    }
+
+
+    document
+      .getElementById("interpretation")
+      .textContent =
+      message;
+
+
+    drawGraph(
+      x,
+      mean,
+      sigma
+    );
   }
 
-  function drawGraph(observation, mean, sigma) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const width = canvas.width;
-    const height = canvas.height;
+  function drawGraph(
+    observation,
+    mean,
+    sigma
+  ) {
 
-    const left = 60;
-    const right = 30;
-    const top = 30;
-    const bottom = 55;
+    ctx.clearRect(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
 
-    const graphWidth = width - left - right;
-    const graphHeight = height - top - bottom;
 
-    const minX = -12;
-    const maxX = 12;
+    const width =
+      canvas.width;
+
+    const height =
+      canvas.height;
+
+
+    const left =
+      60;
+
+    const right =
+      30;
+
+    const top =
+      35;
+
+
+    /*
+      We reserve more space at the bottom
+      because we now have TWO horizontal axes.
+    */
+
+    const originalAxisY =
+      315;
+
+    const zAxisY =
+      405;
+
+
+    const graphWidth =
+      width -
+      left -
+      right;
+
+
+    /*
+      Fixed original x scale.
+    */
+
+    const minX =
+      -12;
+
+    const maxX =
+      12;
+
 
     function xToPixel(x) {
-      return left +
-        ((x - minX) / (maxX - minX)) * graphWidth;
-    }
 
-    const maxDensity =
-      1 / (0.5 * Math.sqrt(2 * Math.PI));
+      return (
 
-    function yToPixel(y) {
-      return height - bottom -
-        (y / maxDensity) * graphHeight;
-    }
+        left +
 
-    // X-axis
-    ctx.beginPath();
-    ctx.moveTo(left, height - bottom);
-    ctx.lineTo(width - right, height - bottom);
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 1;
-    ctx.stroke();
+        (
+          (x - minX) /
+          (maxX - minX)
+        )
 
-    // Tick marks
-    ctx.font = "12px Arial";
-    ctx.textAlign = "center";
-    ctx.fillStyle = "black";
+        *
 
-    for (let value = -10; value <= 10; value += 2) {
-      const px = xToPixel(value);
+        graphWidth
 
-      ctx.beginPath();
-      ctx.moveTo(px, height - bottom);
-      ctx.lineTo(px, height - bottom + 6);
-      ctx.stroke();
-
-      ctx.fillText(
-        value,
-        px,
-        height - bottom + 20
       );
     }
 
-    // Bell curve
+
+    /*
+      The z-score corresponding to any
+      original x-axis value.
+    */
+
+    function xToZ(x) {
+
+      return (
+
+        (x - mean) /
+        sigma
+
+      );
+    }
+
+
+    /*
+      Maximum density uses the smallest
+      possible sigma = 0.5.
+    */
+
+    const maxDensity =
+
+      1 /
+
+      (
+        0.5 *
+        Math.sqrt(
+          2 * Math.PI
+        )
+      );
+
+
+    const graphHeight =
+      originalAxisY -
+      top;
+
+
+    function yToPixel(y) {
+
+      return (
+
+        originalAxisY -
+
+        (
+          y /
+          maxDensity
+        )
+
+        *
+
+        graphHeight
+
+      );
+    }
+
+
+    /* =====================================================
+       BELL CURVE
+    ====================================================== */
+
     ctx.beginPath();
 
-    for (let i = 0; i <= graphWidth; i++) {
+
+    for (
+      let i = 0;
+      i <= graphWidth;
+      i++
+    ) {
+
       const dataX =
-        minX + (i / graphWidth) * (maxX - minX);
+
+        minX +
+
+        (
+          i /
+          graphWidth
+        )
+
+        *
+
+        (
+          maxX -
+          minX
+        );
+
 
       const density =
-        normalPDF(dataX, mean, sigma);
 
-      const px = xToPixel(dataX);
-      const py = yToPixel(density);
+        normalPDF(
+          dataX,
+          mean,
+          sigma
+        );
 
-      if (i === 0) {
-        ctx.moveTo(px, py);
-      } else {
-        ctx.lineTo(px, py);
+
+      const px =
+        xToPixel(
+          dataX
+        );
+
+
+      const py =
+        yToPixel(
+          density
+        );
+
+
+      if (
+        i === 0
+      ) {
+
+        ctx.moveTo(
+          px,
+          py
+        );
+
+      }
+
+      else {
+
+        ctx.lineTo(
+          px,
+          py
+        );
+
       }
     }
 
-    ctx.strokeStyle = "blue";
-    ctx.lineWidth = 3;
+
+    ctx.strokeStyle =
+      "blue";
+
+    ctx.lineWidth =
+      3;
+
     ctx.stroke();
 
-    // Mean line
-    const meanPixel = xToPixel(mean);
+
+    /* =====================================================
+       ORIGINAL X-AXIS
+    ====================================================== */
 
     ctx.beginPath();
-    ctx.moveTo(meanPixel, height - bottom);
-    ctx.lineTo(
-      meanPixel,
-      yToPixel(normalPDF(mean, mean, sigma))
+
+    ctx.moveTo(
+      left,
+      originalAxisY
     );
 
-    ctx.strokeStyle = "green";
-    ctx.lineWidth = 2;
-    ctx.setLineDash([6, 5]);
+    ctx.lineTo(
+      width - right,
+      originalAxisY
+    );
+
+    ctx.strokeStyle =
+      "black";
+
+    ctx.lineWidth =
+      1.5;
+
     ctx.stroke();
+
+
+    /*
+      Original x-axis ticks.
+    */
+
+    ctx.font =
+      "12px Arial";
+
+    ctx.textAlign =
+      "center";
+
+    ctx.fillStyle =
+      "black";
+
+
+    for (
+      let value = -10;
+      value <= 10;
+      value += 2
+    ) {
+
+      const px =
+        xToPixel(
+          value
+        );
+
+
+      ctx.beginPath();
+
+      ctx.moveTo(
+        px,
+        originalAxisY
+      );
+
+      ctx.lineTo(
+        px,
+        originalAxisY + 6
+      );
+
+      ctx.stroke();
+
+
+      ctx.fillText(
+        value.toFixed(0),
+        px,
+        originalAxisY + 21
+      );
+    }
+
+
+    /*
+      Label original scale.
+    */
+
+    ctx.font =
+      "bold 14px Arial";
+
+    ctx.fillStyle =
+      "black";
+
+    ctx.fillText(
+      "Original x-axis (feature values)",
+      width / 2,
+      originalAxisY + 48
+    );
+
+
+    /* =====================================================
+       Z-SCORE AXIS
+    ====================================================== */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      left,
+      zAxisY
+    );
+
+    ctx.lineTo(
+      width - right,
+      zAxisY
+    );
+
+    ctx.strokeStyle =
+      "blue";
+
+    ctx.lineWidth =
+      2;
+
+    ctx.stroke();
+
+
+    /*
+      Use the SAME horizontal positions
+      as the original x-axis ticks.
+
+      But underneath them display their
+      corresponding z-scores.
+    */
+
+    for (
+      let value = -10;
+      value <= 10;
+      value += 2
+    ) {
+
+      const px =
+        xToPixel(
+          value
+        );
+
+
+      const correspondingZ =
+        xToZ(
+          value
+        );
+
+
+      ctx.beginPath();
+
+      ctx.moveTo(
+        px,
+        zAxisY
+      );
+
+      ctx.lineTo(
+        px,
+        zAxisY + 6
+      );
+
+      ctx.strokeStyle =
+        "blue";
+
+      ctx.lineWidth =
+        1.5;
+
+      ctx.stroke();
+
+
+      ctx.fillStyle =
+        "blue";
+
+      ctx.font =
+        "12px Arial";
+
+
+      ctx.fillText(
+        correspondingZ.toFixed(1),
+        px,
+        zAxisY + 22
+      );
+    }
+
+
+    /*
+      Z-axis title.
+    */
+
+    ctx.fillStyle =
+      "blue";
+
+    ctx.font =
+      "bold 14px Arial";
+
+
+    ctx.fillText(
+      "Z-score axis (standard deviations from the mean)",
+      width / 2,
+      zAxisY + 50
+    );
+
+
+    /* =====================================================
+       MEAN
+    ====================================================== */
+
+    const meanPixel =
+      xToPixel(
+        mean
+      );
+
+
+    const meanDensity =
+
+      normalPDF(
+        mean,
+        mean,
+        sigma
+      );
+
+
+    ctx.beginPath();
+
+
+    ctx.moveTo(
+      meanPixel,
+      originalAxisY
+    );
+
+
+    ctx.lineTo(
+      meanPixel,
+      yToPixel(
+        meanDensity
+      )
+    );
+
+
+    ctx.strokeStyle =
+      "green";
+
+    ctx.lineWidth =
+      2;
+
+    ctx.setLineDash(
+      [6, 5]
+    );
+
+    ctx.stroke();
+
     ctx.setLineDash([]);
 
-    ctx.fillStyle = "green";
-    ctx.font = "bold 14px Arial";
+
+    /*
+      Extend the mean line to the
+      z-score axis.
+    */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      meanPixel,
+      originalAxisY
+    );
+
+    ctx.lineTo(
+      meanPixel,
+      zAxisY
+    );
+
+    ctx.strokeStyle =
+      "green";
+
+    ctx.lineWidth =
+      1.5;
+
+    ctx.setLineDash(
+      [5, 5]
+    );
+
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+
+
+    /*
+      Mean label on original axis.
+    */
+
+    ctx.fillStyle =
+      "green";
+
+    ctx.font =
+      "bold 14px Arial";
+
+
     ctx.fillText(
       "μ",
       meanPixel,
-      height - bottom + 40
+      originalAxisY - 10
     );
 
-    // Observation line and point
-    const obsPixel = xToPixel(observation);
+
+    /*
+      Mean always corresponds to z = 0.
+    */
+
+    ctx.fillText(
+      "z = 0",
+      meanPixel,
+      zAxisY - 10
+    );
+
+
+    /* =====================================================
+       OBSERVATION x
+    ====================================================== */
+
+    const obsPixel =
+      xToPixel(
+        observation
+      );
+
+
     const obsDensity =
-      normalPDF(observation, mean, sigma);
+
+      normalPDF(
+        observation,
+        mean,
+        sigma
+      );
+
+
+    const obsY =
+      yToPixel(
+        obsDensity
+      );
+
+
+    /*
+      Red line from x-axis
+      to bell curve.
+    */
 
     ctx.beginPath();
-    ctx.moveTo(obsPixel, height - bottom);
-    ctx.lineTo(obsPixel, yToPixel(obsDensity));
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 3;
+
+    ctx.moveTo(
+      obsPixel,
+      originalAxisY
+    );
+
+    ctx.lineTo(
+      obsPixel,
+      obsY
+    );
+
+
+    ctx.strokeStyle =
+      "red";
+
+    ctx.lineWidth =
+      3;
+
     ctx.stroke();
 
+
+    /*
+      Red observation point.
+    */
+
     ctx.beginPath();
+
     ctx.arc(
       obsPixel,
-      yToPixel(obsDensity),
+      obsY,
       6,
       0,
       2 * Math.PI
     );
-    ctx.fillStyle = "red";
+
+    ctx.fillStyle =
+      "red";
+
     ctx.fill();
 
-    ctx.fillStyle = "red";
-    ctx.font = "bold 14px Arial";
+
+    /*
+      x label.
+    */
+
+    ctx.fillStyle =
+      "red";
+
+    ctx.font =
+      "bold 14px Arial";
+
+
     ctx.fillText(
       "x",
       obsPixel,
-      yToPixel(obsDensity) - 12
+      obsY - 12
     );
 
-    // Information
-    ctx.textAlign = "left";
-    ctx.fillStyle = "black";
-    ctx.font = "14px Arial";
 
-    ctx.fillText(`x = ${observation.toFixed(1)}`, 70, 30);
-    ctx.fillText(`μ = ${mean.toFixed(1)}`, 70, 50);
-    ctx.fillText(`σ = ${sigma.toFixed(1)}`, 70, 70);
+    /*
+      Extend the observation line
+      from original x-axis to z-axis.
+    */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      obsPixel,
+      originalAxisY
+    );
+
+    ctx.lineTo(
+      obsPixel,
+      zAxisY
+    );
+
+    ctx.strokeStyle =
+      "red";
+
+    ctx.lineWidth =
+      1.5;
+
+    ctx.setLineDash(
+      [5, 5]
+    );
+
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+
+
+    /*
+      Display the current z-score
+      directly on the z-axis.
+    */
+
+    const currentZ =
+
+      (
+        observation -
+        mean
+      )
+
+      /
+
+      sigma;
+
+
+    ctx.fillStyle =
+      "red";
+
+    ctx.font =
+      "bold 14px Arial";
+
+
     ctx.fillText(
-      `z = ${((observation - mean) / sigma).toFixed(2)}`,
+      `z = ${currentZ.toFixed(2)}`,
+      obsPixel,
+      zAxisY - 10
+    );
+
+
+    /* =====================================================
+       INFORMATION BOX
+    ====================================================== */
+
+    ctx.textAlign =
+      "left";
+
+    ctx.fillStyle =
+      "black";
+
+    ctx.font =
+      "14px Arial";
+
+
+    ctx.fillText(
+      `x = ${observation.toFixed(1)}`,
+      70,
+      30
+    );
+
+
+    ctx.fillText(
+      `μ = ${mean.toFixed(1)}`,
+      70,
+      50
+    );
+
+
+    ctx.fillText(
+      `σ = ${sigma.toFixed(1)}`,
+      70,
+      70
+    );
+
+
+    ctx.fillText(
+      `z = ${currentZ.toFixed(2)}`,
       70,
       90
     );
   }
 
-  xSlider.addEventListener("input", updateDemo);
-  meanSlider.addEventListener("input", updateDemo);
-  sigmaSlider.addEventListener("input", updateDemo);
+
+  xSlider.addEventListener(
+    "input",
+    updateDemo
+  );
+
+
+  meanSlider.addEventListener(
+    "input",
+    updateDemo
+  );
+
+
+  sigmaSlider.addEventListener(
+    "input",
+    updateDemo
+  );
+
 
   updateDemo();
+
 </script>
 
 </body>
