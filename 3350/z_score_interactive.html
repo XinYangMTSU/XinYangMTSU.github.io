@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Z-Score Demo</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: #000;
+        font-family: Arial, Helvetica, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #f3f3f3;
+    }
+
+    .demo {
+        width: min(1400px, 96vw);
+        height: 670px;
+
+        background: #262626;
+        border: 2px solid #555;
+        border-radius: 46px;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* -----------------------------
+       LEFT SIDE
+    ----------------------------- */
+
+    .left-panel {
+        position: relative;
+        padding: 75px 55px 30px 55px;
+        border-right: 2px solid #555;
+        background: #333;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 28px;
+        left: 28px;
+
+        font-size: 38px;
+        font-weight: 300;
+        cursor: pointer;
+
+        line-height: 1;
+    }
+
+    .copy-button {
+        position: absolute;
+        top: 32px;
+        right: 34px;
+
+        width: 32px;
+        height: 32px;
+
+        cursor: pointer;
+    }
+
+    .copy-button::before,
+    .copy-button::after {
+        content: "";
+        position: absolute;
+        width: 21px;
+        height: 24px;
+        border: 3px solid white;
+        border-radius: 6px;
+    }
+
+    .copy-button::before {
+        left: 8px;
+        top: 0;
+    }
+
+    .copy-button::after {
+        left: 0;
+        top: 8px;
+        background: #333;
+    }
+
+    .main-formula {
+        text-align: center;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 53px;
+        font-style: italic;
+        margin-top: 25px;
+        margin-bottom: 75px;
+    }
+
+    .fraction {
+        display: inline-flex;
+        flex-direction: column;
+        vertical-align: middle;
+        text-align: center;
+        line-height: 1.05;
+    }
+
+    .fraction-top {
+        border-bottom: 2px solid currentColor;
+        padding: 0 7px 3px 7px;
+    }
+
+    .fraction-bottom {
+        padding-top: 3px;
+    }
+
+    .calculation {
+        text-align: center;
+        color: #d4d4d4;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 38px;
+        margin-bottom: 25px;
+    }
+
+    .cdf-display {
+        text-align: center;
+        font-family: Georgia, "Times New Roman", serif;
+        color: #d0d0d0;
+        font-size: 38px;
+        margin-bottom: 43px;
+    }
+
+    /* -----------------------------
+       SLIDERS
+    ----------------------------- */
+
+    .slider-row {
+        display: grid;
+        grid-template-columns: 65px 75px 1fr;
+        align-items: center;
+        gap: 14px;
+
+        margin: 24px 0;
+    }
+
+    .slider-symbol {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 30px;
+        font-style: italic;
+    }
+
+    .slider-value {
+        font-size: 23px;
+        font-weight: 500;
+    }
+
+    input[type="range"] {
+        width: 100%;
+        height: 55px;
+
+        appearance: none;
+        -webkit-appearance: none;
+
+        background: transparent;
+        cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-runnable-track {
+        height: 54px;
+        background: #454545;
+        border-radius: 28px;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        appearance: none;
+        -webkit-appearance: none;
+
+        width: 46px;
+        height: 46px;
+
+        margin-top: 4px;
+
+        border-radius: 50%;
+        background: #fff;
+        border: none;
+        box-shadow: 0 1px 2px rgba(0,0,0,.4);
+    }
+
+    input[type="range"]::-moz-range-track {
+        height: 54px;
+        background: #454545;
+        border-radius: 28px;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: #fff;
+        border: none;
+    }
+
+    /* -----------------------------
+       RIGHT SIDE
+    ----------------------------- */
+
+    .right-panel {
+        position: relative;
+        background: #222;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    /* -----------------------------
+       RESPONSIVE
+    ----------------------------- */
+
+    @media (max-width: 900px) {
+        body {
+            align-items: flex-start;
+            padding: 15px;
+        }
+
+        .demo {
+            height: auto;
+            grid-template-columns: 1fr;
+        }
+
+        .left-panel {
+            border-right: none;
+            border-bottom: 2px solid #555;
+        }
+
+        .right-panel {
+            height: 500px;
+        }
+    }
+</style>
+</head>
+
+
+<body>
+
+<div class="demo">
+
+    <!-- =====================================================
+         LEFT PANEL
+    ====================================================== -->
+    <div class="left-panel">
+
+        <div class="close-button">×</div>
+
+        <div
+            class="copy-button"
+            title="Copy values"
+            onclick="copyValues()">
+        </div>
+
+
+        <!-- Main z-score formula -->
+        <div class="main-formula">
+
+            z =
+
+            <span class="fraction">
+                <span class="fraction-top">
+                    x − μ
+                </span>
+
+                <span class="fraction-bottom">
+                    σ
+                </span>
+            </span>
+
+        </div>
+
+
+        <!-- Numerical substitution -->
+        <div class="calculation">
+
+            z =
+
+            <span class="fraction">
+                <span class="fraction-top">
+                    (<span id="calcX">1.2</span>)
+                    −
+                    (<span id="calcMu">0</span>)
+                </span>
+
+                <span class="fraction-bottom">
+                    <span id="calcSigma">1</span>
+                </span>
+            </span>
+
+            =
+
+            <strong id="calcZ">1.2</strong>
+
+        </div>
+
+
+        <!-- CDF -->
+        <div class="cdf-display">
+
+            Φ(z) ≈
+            <span id="cdfValue">88.5</span>%
+
+        </div>
+
+
+        <!-- X -->
+        <div class="slider-row">
+
+            <div class="slider-symbol">
+                x
+            </div>
+
+            <div
+                class="slider-value"
+                id="xText">
+                1.2
+            </div>
+
+            <input
+                id="xSlider"
+                type="range"
+                min="-4"
+                max="4"
+                value="1.2"
+                step="0.1">
+
+        </div>
+
+
+        <!-- MU -->
+        <div class="slider-row">
+
+            <div class="slider-symbol">
+                μ
+            </div>
+
+            <div
+                class="slider-value"
+                id="muText">
+                0.0
+            </div>
+
+            <input
+                id="muSlider"
+                type="range"
+                min="-3"
+                max="3"
+                value="0"
+                step="0.1">
+
+        </div>
+
+
+        <!-- SIGMA -->
+        <div class="slider-row">
+
+            <div class="slider-symbol">
+                σ
+            </div>
+
+            <div
+                class="slider-value"
+                id="sigmaText">
+                1.0
+            </div>
+
+            <input
+                id="sigmaSlider"
+                type="range"
+                min="0.3"
+                max="3"
+                value="1"
+                step="0.1">
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         RIGHT PANEL
+    ====================================================== -->
+    <div class="right-panel">
+
+        <canvas id="bellCanvas"></canvas>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   ELEMENT REFERENCES
+========================================================= */
+
+const xSlider =
+    document.getElementById("xSlider");
+
+const muSlider =
+    document.getElementById("muSlider");
+
+const sigmaSlider =
+    document.getElementById("sigmaSlider");
+
+
+const canvas =
+    document.getElementById("bellCanvas");
+
+const ctx =
+    canvas.getContext("2d");
+
+
+/* =========================================================
+   NORMAL DISTRIBUTION
+========================================================= */
+
+function normalPDF(x, mu, sigma) {
+
+    return (
+        1 /
+        (sigma * Math.sqrt(2 * Math.PI))
+    ) *
+    Math.exp(
+        -0.5 *
+        Math.pow(
+            (x - mu) / sigma,
+            2
+        )
+    );
+}
+
+
+/* =========================================================
+   ERROR FUNCTION
+   Used to calculate normal CDF
+========================================================= */
+
+function erf(x) {
+
+    const sign =
+        x >= 0 ? 1 : -1;
+
+    x = Math.abs(x);
+
+    const a1 = 0.254829592;
+    const a2 = -0.284496736;
+    const a3 = 1.421413741;
+    const a4 = -1.453152027;
+    const a5 = 1.061405429;
+
+    const p =
+        0.3275911;
+
+    const t =
+        1 / (1 + p * x);
+
+    const y =
+        1 -
+        (
+            (
+                (
+                    (
+                        (
+                            a5 * t + a4
+                        ) * t + a3
+                    ) * t + a2
+                ) * t + a1
+            ) * t
+        ) *
+        Math.exp(-x * x);
+
+    return sign * y;
+}
+
+
+/* =========================================================
+   STANDARD NORMAL CDF
+========================================================= */
+
+function normalCDF(z) {
+
+    return (
+        0.5 *
+        (
+            1 +
+            erf(
+                z / Math.sqrt(2)
+            )
+        )
+    );
+}
+
+
+/* =========================================================
+   RESIZE CANVAS FOR HIGH DPI DISPLAYS
+========================================================= */
+
+function resizeCanvas() {
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+    const dpr =
+        window.devicePixelRatio || 1;
+
+    canvas.width =
+        rect.width * dpr;
+
+    canvas.height =
+        rect.height * dpr;
+
+    ctx.setTransform(
+        dpr,
+        0,
+        0,
+        dpr,
+        0,
+        0
+    );
+
+    draw();
+}
+
+
+/* =========================================================
+   ROUNDED LABEL
+========================================================= */
+
+function drawBubble(
+    text,
+    centerX,
+    centerY,
+    width,
+    height
+) {
+
+    const radius = height / 2;
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+        centerX - width / 2,
+        centerY - height / 2,
+        width,
+        height,
+        radius
+    );
+
+    ctx.fillStyle =
+        "#3479ec";
+
+    ctx.fill();
+
+
+    ctx.fillStyle =
+        "#ffffff";
+
+    ctx.font =
+        "bold 25px Arial";
+
+    ctx.textAlign =
+        "center";
+
+    ctx.textBaseline =
+        "middle";
+
+    ctx.fillText(
+        text,
+        centerX,
+        centerY + 1
+    );
+}
+
+
+/* =========================================================
+   DRAW GRAPH
+========================================================= */
+
+function draw() {
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+    const width =
+        rect.width;
+
+    const height =
+        rect.height;
+
+
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    const xValue =
+        parseFloat(
+            xSlider.value
+        );
+
+    const mu =
+        parseFloat(
+            muSlider.value
+        );
+
+    const sigma =
+        parseFloat(
+            sigmaSlider.value
+        );
+
+
+    /* -----------------------------------------
+       z-score
+    ----------------------------------------- */
+
+    const z =
+        (xValue - mu) /
+        sigma;
+
+
+    const cdf =
+        normalCDF(z);
+
+
+    /* -----------------------------------------
+       Graph dimensions
+    ----------------------------------------- */
+
+    const left =
+        width * 0.15;
+
+    const right =
+        width * 0.86;
+
+    const top =
+        height * 0.20;
+
+    const baseline =
+        height * 0.46;
+
+
+    const graphWidth =
+        right - left;
+
+
+    /*
+       Keep visible region around μ.
+       This lets μ move while preserving scale.
+    */
+
+    const minimumX =
+        mu - 4 * sigma;
+
+    const maximumX =
+        mu + 4 * sigma;
+
+
+    function xToPixel(value) {
+
+        return (
+            left +
+            (
+                (value - minimumX) /
+                (maximumX - minimumX)
+            ) *
+            graphWidth
+        );
+    }
+
+
+    const peak =
+        normalPDF(
+            mu,
+            mu,
+            sigma
+        );
+
+
+    function yToPixel(density) {
+
+        const maxCurveHeight =
+            baseline - top;
+
+        return (
+            baseline -
+            (
+                density /
+                peak
+            ) *
+            maxCurveHeight
+        );
+    }
+
+
+    /* =====================================================
+       GRID
+    ====================================================== */
+
+    ctx.strokeStyle =
+        "#3d3d3d";
+
+    ctx.lineWidth = 2;
+
+
+    /*
+       horizontal lines
+    */
+
+    const horizontal1 =
+        baseline -
+        (baseline - top) * 0.45;
+
+    const horizontal2 =
+        top + 10;
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        left,
+        horizontal1
+    );
+
+    ctx.lineTo(
+        right,
+        horizontal1
+    );
+
+    ctx.stroke();
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        left,
+        horizontal2
+    );
+
+    ctx.lineTo(
+        right,
+        horizontal2
+    );
+
+    ctx.stroke();
+
+
+    /*
+       vertical grid
+    */
+
+    const gridXs = [
+        mu - 2.5 * sigma,
+        mu,
+        mu + 2.5 * sigma
+    ];
+
+
+    gridXs.forEach(value => {
+
+        const px =
+            xToPixel(value);
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            px,
+            top - 20
+        );
+
+        ctx.lineTo(
+            px,
+            baseline
+        );
+
+        ctx.stroke();
+    });
+
+
+    /* =====================================================
+       SHADED CDF AREA
+    ====================================================== */
+
+    const shadedEnd =
+        Math.min(
+            xValue,
+            maximumX
+        );
+
+
+    if (
+        shadedEnd >
+        minimumX
+    ) {
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            xToPixel(minimumX),
+            baseline
+        );
+
+
+        const steps = 350;
+
+
+        for (
+            let i = 0;
+            i <= steps;
+            i++
+        ) {
+
+            const dataX =
+                minimumX +
+                (
+                    i / steps
+                ) *
+                (
+                    shadedEnd -
+                    minimumX
+                );
+
+
+            const density =
+                normalPDF(
+                    dataX,
+                    mu,
+                    sigma
+                );
+
+
+            ctx.lineTo(
+                xToPixel(dataX),
+                yToPixel(density)
+            );
+        }
+
+
+        ctx.lineTo(
+            xToPixel(shadedEnd),
+            baseline
+        );
+
+        ctx.closePath();
+
+
+        ctx.fillStyle =
+            "rgba(65, 123, 230, 0.20)";
+
+        ctx.fill();
+    }
+
+
+    /* =====================================================
+       BASELINE
+    ====================================================== */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        left,
+        baseline
+    );
+
+    ctx.lineTo(
+        right,
+        baseline
+    );
+
+    ctx.strokeStyle =
+        "#4386f4";
+
+    ctx.lineWidth =
+        5;
+
+    ctx.lineCap =
+        "round";
+
+    ctx.stroke();
+
+
+    /* =====================================================
+       NORMAL CURVE
+    ====================================================== */
+
+    ctx.beginPath();
+
+
+    const curveSteps =
+        500;
+
+
+    for (
+        let i = 0;
+        i <= curveSteps;
+        i++
+    ) {
+
+        const dataX =
+            minimumX +
+            (
+                i /
+                curveSteps
+            ) *
+            (
+                maximumX -
+                minimumX
+            );
+
+
+        const density =
+            normalPDF(
+                dataX,
+                mu,
+                sigma
+            );
+
+
+        const px =
+            xToPixel(dataX);
+
+        const py =
+            yToPixel(density);
+
+
+        if (i === 0) {
+
+            ctx.moveTo(
+                px,
+                py
+            );
+
+        } else {
+
+            ctx.lineTo(
+                px,
+                py
+            );
+        }
+    }
+
+
+    ctx.strokeStyle =
+        "#3f86f7";
+
+    ctx.lineWidth =
+        6;
+
+    ctx.lineJoin =
+        "round";
+
+    ctx.lineCap =
+        "round";
+
+    ctx.stroke();
+
+
+    /* =====================================================
+       MEAN LINE
+    ====================================================== */
+
+    const muX =
+        xToPixel(mu);
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        muX,
+        baseline
+    );
+
+    ctx.lineTo(
+        muX,
+        yToPixel(peak)
+    );
+
+    ctx.strokeStyle =
+        "#eeeeee";
+
+    ctx.lineWidth =
+        4;
+
+    ctx.stroke();
+
+
+    /* =====================================================
+       OBSERVATION LINE
+    ====================================================== */
+
+    let obsX =
+        xToPixel(
+            xValue
+        );
+
+
+    /*
+       Keep x label on visible graph
+    */
+
+    obsX =
+        Math.max(
+            left,
+            Math.min(
+                right,
+                obsX
+            )
+        );
+
+
+    const observationDensity =
+        normalPDF(
+            xValue,
+            mu,
+            sigma
+        );
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        obsX,
+        baseline
+    );
+
+    ctx.lineTo(
+        obsX,
+        Math.min(
+            baseline,
+            yToPixel(
+                observationDensity
+            )
+        )
+    );
+
+    ctx.strokeStyle =
+        "#4386f4";
+
+    ctx.lineWidth =
+        4;
+
+    ctx.stroke();
+
+
+    /* =====================================================
+       LABEL μ
+    ====================================================== */
+
+    drawBubble(
+        "μ",
+        muX,
+        yToPixel(peak) - 45,
+        70,
+        50
+    );
+
+
+    /* =====================================================
+       LABEL x
+    ====================================================== */
+
+    drawBubble(
+        "x",
+        obsX,
+        baseline - 72,
+        70,
+        52
+    );
+
+
+    /* =====================================================
+       LABEL Phi(z)
+    ====================================================== */
+
+    const phiX =
+        Math.max(
+            left + 90,
+            Math.min(
+                muX - 105,
+                right - 100
+            )
+        );
+
+
+    const phiY =
+        baseline -
+        (
+            baseline - top
+        ) * 0.48;
+
+
+    drawBubble(
+        "Φ(z)",
+        phiX,
+        phiY,
+        116,
+        52
+    );
+
+
+    /* =====================================================
+       UPDATE TEXT
+    ====================================================== */
+
+    document.getElementById(
+        "xText"
+    ).textContent =
+        xValue.toFixed(1);
+
+
+    document.getElementById(
+        "muText"
+    ).textContent =
+        mu.toFixed(1);
+
+
+    document.getElementById(
+        "sigmaText"
+    ).textContent =
+        sigma.toFixed(1);
+
+
+    document.getElementById(
+        "calcX"
+    ).textContent =
+        xValue.toFixed(1);
+
+
+    document.getElementById(
+        "calcMu"
+    ).textContent =
+        formatNumber(mu);
+
+
+    document.getElementById(
+        "calcSigma"
+    ).textContent =
+        formatNumber(sigma);
+
+
+    document.getElementById(
+        "calcZ"
+    ).textContent =
+        formatZ(z);
+
+
+    document.getElementById(
+        "cdfValue"
+    ).textContent =
+        (
+            cdf * 100
+        ).toFixed(1);
+}
+
+
+/* =========================================================
+   FORMATTING
+========================================================= */
+
+function formatNumber(value) {
+
+    if (
+        Math.abs(
+            value -
+            Math.round(value)
+        ) < 0.0001
+    ) {
+
+        return String(
+            Math.round(value)
+        );
+    }
+
+    return value.toFixed(1);
+}
+
+
+function formatZ(value) {
+
+    if (
+        Math.abs(
+            value -
+            Math.round(value)
+        ) < 0.0001
+    ) {
+
+        return value.toFixed(1);
+    }
+
+    return value.toFixed(2)
+        .replace(
+            /0$/,
+            ""
+        );
+}
+
+
+/* =========================================================
+   COPY BUTTON
+========================================================= */
+
+function copyValues() {
+
+    const x =
+        parseFloat(
+            xSlider.value
+        );
+
+    const mu =
+        parseFloat(
+            muSlider.value
+        );
+
+    const sigma =
+        parseFloat(
+            sigmaSlider.value
+        );
+
+    const z =
+        (x - mu) /
+        sigma;
+
+    const cdf =
+        normalCDF(z);
+
+
+    const text =
+`z = (x - μ) / σ
+
+x = ${x}
+μ = ${mu}
+σ = ${sigma}
+
+z = ${z.toFixed(3)}
+Φ(z) = ${(cdf * 100).toFixed(1)}%`;
+
+
+    navigator.clipboard
+        .writeText(text);
+}
+
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+xSlider.addEventListener(
+    "input",
+    draw
+);
+
+muSlider.addEventListener(
+    "input",
+    draw
+);
+
+sigmaSlider.addEventListener(
+    "input",
+    draw
+);
+
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+resizeCanvas();
+
+</script>
+
+</body>
+</html>
