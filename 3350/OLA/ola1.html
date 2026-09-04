@@ -228,7 +228,6 @@ data = wine.frame.copy()  # Includes features and target
 # 1. Print the shape of data.
 # 2. Display the first five rows.
 # 3. Display the column names and data types.
-# 4. Display the number of samples in each target class.
 
 # Markdown explanation:
 # What does one row represent?
@@ -241,14 +240,10 @@ data = wine.frame.copy()  # Includes features and target
 # TODO:
 # 1. Count missing values in each column.
 # 2. Count duplicate rows.
-# 3. Create a DataFrame named data_clean.
+# 3. If missing values exist, handle them.
+# 4. If duplicate rows exist, handle them.
+# 5. Create a DataFrame named data_clean.
 #    If no cleaning is needed, use data.copy().
-# 4. If duplicates exist, inspect them and explain whether
-#    removing them is appropriate.
-#
-# Do not change valid data simply to demonstrate cleaning.
-# If missing values require imputation, fit the imputer only
-# on the training data after splitting.
 
 # Markdown explanation:
 # What issues did you find? What did you change, and why?
@@ -259,8 +254,9 @@ data = wine.frame.copy()  # Includes features and target
 # ------------------------------------------------------------
 
 # TODO:
-# Create X_original containing all original feature columns.
-# Create y containing the target column.
+# Using data_clean from the previous step:
+# 1. Create X_clean containing all feature columns except target.
+# 2. Create y containing the target column.
 #
 # The target must NOT be included as an input feature.
 
@@ -269,19 +265,29 @@ data = wine.frame.copy()  # Includes features and target
 # ------------------------------------------------------------
 
 # TODO:
-# Split X_original and y into:
-# X_train_original, X_test_original, y_train, y_test
+# Split X_clean and y into:
+# X_train_clean, X_test_clean, y_train, y_test
 #
 # Use:
 # test_size=0.20
 # random_state=42
 # stratify=y
 #
-# Use these SAME training and test observations for all models.
-# Do not perform a new split for each model.
 
 # ------------------------------------------------------------
-# 5. Feature engineering
+# 5. Model A — Original clean features, without standardization
+# ------------------------------------------------------------
+model_a = LogisticRegression(max_iter=5000, solver="lbfgs")
+
+# TODO:
+# 1. Fit model_a using X_train_clean and y_train.
+# 2. Predict labels for X_test_clean.
+# 3. Calculate test accuracy and store it as accuracy_a.
+# 4. Print the result with a descriptive label.
+
+    
+# ------------------------------------------------------------
+# 6. Feature engineering
 # ------------------------------------------------------------
 
 # TODO:
@@ -307,17 +313,6 @@ data = wine.frame.copy()  # Includes features and target
 # Why might it help distinguish wine classes?
 # Present your explanation as a hypothesis, not a guaranteed benefit.
 
-    
-# ------------------------------------------------------------
-# 6. Model A — Original features, without standardization
-# ------------------------------------------------------------
-model_a = LogisticRegression(max_iter=5000, solver="lbfgs")
-
-# TODO:
-# 1. Fit model_a using X_train_original and y_train.
-# 2. Predict labels for X_test_original.
-# 3. Calculate test accuracy and store it as accuracy_a.
-# 4. Print the result with a descriptive label.
 
 # ------------------------------------------------------------
 # 7. Model B — Engineered features, without standardization
@@ -333,7 +328,7 @@ model_b = LogisticRegression(max_iter=5000, solver="lbfgs")
 # Keep the model settings identical to Model A.
 # The only difference should be the additional feature.
 
-
+    
 # ------------------------------------------------------------
 # 8. Standardize the engineered features
 # ------------------------------------------------------------
@@ -397,19 +392,14 @@ model_c = LogisticRegression(max_iter=5000, solver="lbfgs")
 # ------------------------------------------------------------
 
 # 1. Did adding phenols_ratio improve, reduce, or leave
-#    accuracy unchanged? Support your answer using A and B.
+#    accuracy unchanged? 
 #
 # 2. Did standardization improve, reduce, or leave accuracy
-#    unchanged? Support your answer using B and C.
+#    unchanged? 
 #
-# 3. Why does comparing A directly with C not isolate the
-#    effect of feature engineering?
+# 3. Why can scaling affect logistic regression?
 #
-# 4. Could the new ratio contain information that overlaps
-#    with the original features? Explain.
-#
-# 5. Why is one train/test split insufficient to conclude
-#    that a preprocessing step always improves performance?
+# 4. Why is one train/test split insufficient to conclude that a preprocessing step always improves performance?
 #
 # Your grade depends on correct implementation and reasoning,
 # not on whether either change increases accuracy.
