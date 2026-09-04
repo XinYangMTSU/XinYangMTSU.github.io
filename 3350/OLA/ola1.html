@@ -178,7 +178,7 @@ y = data_clean["target"]
     
 # --- 6. Baseline Logistic Regression  --- 
 # --- Baseline Logistic Regression ---
-baseline = LogisticRegression(max_iter=5000, solver="liblinear")
+baseline = LogisticRegression(max_iter=5000, solver="lbfgs")
 # please bulid the baseline model using training data
 # make prediction with above model 
 # please print the accuracy score for the prediction
