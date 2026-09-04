@@ -126,6 +126,9 @@
     The purpose of this assignment is to practice <b>data preprocessing</b> using a real dataset. 
     Data preprocessing includes <b>data cleaning, data transformation, and feature engineering</b>.  
     You will apply these techniques on the built-in <b>Wine Dataset</b> from scikit-learn. 
+    <br><br>
+    <b>Goal</b>: <br>
+    # Investigate how feature engineering and standardization affect logistic regression classification on the Wine dataset.
   </p>
 
   <h3>Steps to Complete</h3>
@@ -151,58 +154,225 @@
 
   <h3>Starter Code</h3>
   <pre><code>
-# --- Please import necessary libraries here ---
+# ------------------------------------------------------------
+# 0. Import necessary libraries
+# ------------------------------------------------------------
 from sklearn.datasets import load_wine
 
-# --- 1. Load dataset ---
+# TODO: Import train_test_split, LogisticRegression,
+# StandardScaler, and accuracy_score.
+
+
+# ------------------------------------------------------------
+# 1. Load and inspect the dataset
+# ------------------------------------------------------------
 wine = load_wine(as_frame=True)
-data = wine.frame   # full DataFrame (features + target)
-# print shape
-# show the first 5 rows.
+data = wine.frame.copy()  # Includes features and target
 
-    
-# --- 2. Data Cleaning ---
-#  (check missing values and duplicates)
+# TODO:
+# 1. Print the shape of data.
+# 2. Display the first five rows.
+# 3. Display the column names and data types.
+# 4. Display the number of samples in each target class.
+
+# Markdown explanation:
+# What does one row represent?
+# How many original features and target classes are there?
+
+# ------------------------------------------------------------
+# 2. Check data quality
+# ------------------------------------------------------------
+
+# TODO:
+# 1. Count missing values in each column.
+# 2. Count duplicate rows.
+# 3. Create a DataFrame named data_clean.
+#    If no cleaning is needed, use data.copy().
+# 4. If duplicates exist, inspect them and explain whether
+#    removing them is appropriate.
 #
+# Do not change valid data simply to demonstrate cleaning.
+# If missing values require imputation, fit the imputer only
+# on the training data after splitting.
 
-# --- 3. Split the cleaned data into X and y ---  
-X = data_clean.drop(columns=["target"])
-y = data_clean["target"]
+# Markdown explanation:
+# What issues did you find? What did you change, and why?
+
+
+# ------------------------------------------------------------
+# 3. Separate features and target
+# ------------------------------------------------------------
+
+# TODO:
+# Create X_original containing all original feature columns.
+# Create y containing the target column.
+#
+# The target must NOT be included as an input feature.
+
+# ------------------------------------------------------------
+# 4. Create ONE train/test split
+# ------------------------------------------------------------
+
+# TODO:
+# Split X_original and y into:
+# X_train_original, X_test_original, y_train, y_test
+#
+# Use:
+# test_size=0.20
+# random_state=42
+# stratify=y
+#
+# Use these SAME training and test observations for all models.
+# Do not perform a new split for each model.
+
+# ------------------------------------------------------------
+# 5. Feature engineering
+# ------------------------------------------------------------
+
+# TODO:
+# 1. Create copies of the original training and test features:
+#    X_train_engineered
+#    X_test_engineered
+#
+# 2. Check that total_phenols contains no zero values before
+#    calculating the ratio.
+#
+# 3. Add this feature to BOTH copies:
+#
+#    phenols_ratio = flavanoids / total_phenols
+#
+# 4. Confirm that the original feature DataFrames are unchanged
+#    and the engineered DataFrames contain one additional column.
+#
+# Calculate this ratio BEFORE standardization.
+# It is a row-by-row calculation and does not require fitting.
+
+# Markdown explanation:
+# What relationship does this ratio describe?
+# Why might it help distinguish wine classes?
+# Present your explanation as a hypothesis, not a guaranteed benefit.
+
     
-# --- 4. Feature Engineering ---
-# Create new feature: phenols_ratio
+# ------------------------------------------------------------
+# 6. Model A — Original features, without standardization
+# ------------------------------------------------------------
+model_a = LogisticRegression(max_iter=5000, solver="lbfgs")
 
-# --- 5. Train/test split --- 
-# use train_test_split to split the data into training data and test data
-# 80% trianing data, 20% test data
-    
-# --- 6. Baseline Logistic Regression  --- 
-# --- Baseline Logistic Regression ---
-baseline = LogisticRegression(max_iter=5000, solver="lbfgs")
-# please bulid the baseline model using training data
-# make prediction with above model 
-# please print the accuracy score for the prediction
+# TODO:
+# 1. Fit model_a using X_train_original and y_train.
+# 2. Predict labels for X_test_original.
+# 3. Calculate test accuracy and store it as accuracy_a.
+# 4. Print the result with a descriptive label.
 
-# --- 7. Logistic Regression with Standardization ---
-# Make sure standardization only fits to training data
+# ------------------------------------------------------------
+# 7. Model B — Engineered features, without standardization
+# ------------------------------------------------------------
+model_b = LogisticRegression(max_iter=5000, solver="lbfgs")
+
+# TODO:
+# 1. Fit model_b using X_train_engineered and y_train.
+# 2. Predict labels for X_test_engineered.
+# 3. Calculate test accuracy and store it as accuracy_b.
+# 4. Print the result with a descriptive label.
+#
+# Keep the model settings identical to Model A.
+# The only difference should be the additional feature.
+
+
+# ------------------------------------------------------------
+# 8. Standardize the engineered features
+# ------------------------------------------------------------
 scaler = StandardScaler()
-# please fit and transform traing data, please fit on train data only
-# please transform test data using the training parameters
-# 
-# finish your code here
-#    
-print("Scaled Accuracy (all features):", accuracy_score(y_test, y_pred_scaled))
-    
-# --- 8. Discussion ---
+
+# TODO:
+# 1. Use fit_transform() on X_train_engineered.
+#    Store the result as X_train_scaled.
+#
+# 2. Use transform() on X_test_engineered.
+#    Store the result as X_test_scaled.
+#
+# IMPORTANT:
+# Fit the scaler ONLY on the training data.
+# Do not fit a separate scaler on the test data.
+# Scale all input features, including phenols_ratio.
+# Do NOT scale y_train or y_test.
+
+# Markdown explanation:
+# Why can standardization affect logistic regression?
+# Why would fitting the scaler on test data cause data leakage?
+
+
+# ------------------------------------------------------------
+# 9. Model C — Engineered features, with standardization
+# ------------------------------------------------------------
+model_c = LogisticRegression(max_iter=5000, solver="lbfgs")
+
+# TODO:
+# 1. Fit model_c using X_train_scaled and y_train.
+# 2. Predict labels for X_test_scaled.
+# 3. Calculate test accuracy and store it as accuracy_c.
+# 4. Print the result with a descriptive label.
+#
+# Keep the model settings identical to Models A and B.
+
+
+# ------------------------------------------------------------
+# 10. Compare results
+# ------------------------------------------------------------
+
+# TODO:
+# 1. Display a table containing the three model names,
+#    feature sets, scaling status, and test accuracies.
+#
+# 2. Calculate the accuracy change from A to B:
+#    Feature-engineering change = accuracy_b - accuracy_a
+#
+# 3. Calculate the accuracy change from B to C:
+#    Standardization change = accuracy_c - accuracy_b
+#
+# Multiply each difference by 100 to express the change
+# in percentage points.
+#
+# Do not repeatedly change the split or model settings
+# to obtain a higher test accuracy.
+
+
+# ------------------------------------------------------------
+# 11. Discussion — Answer in Markdown cells
+# ------------------------------------------------------------
+
+# 1. Did adding phenols_ratio improve, reduce, or leave
+#    accuracy unchanged? Support your answer using A and B.
+#
+# 2. Did standardization improve, reduce, or leave accuracy
+#    unchanged? Support your answer using B and C.
+#
+# 3. Why does comparing A directly with C not isolate the
+#    effect of feature engineering?
+#
+# 4. Could the new ratio contain information that overlaps
+#    with the original features? Explain.
+#
+# 5. Why is one train/test split insufficient to conclude
+#    that a preprocessing step always improves performance?
+#
+# Your grade depends on correct implementation and reasoning,
+# not on whether either change increases accuracy.
 # 
   </code></pre>
 
-  <h3>Submission</h3>
-  <p>
-    Submit your Jupyter Notebook file <code>ola1.ipynb</code> 
-    with all outputs in D2L. 
-    Include short explanations for each step. 
-  </p>
+# ------------------------------------------------------------
+# 12. Submission checklist
+# ------------------------------------------------------------
+
+# - Restart the kernel and run all cells in order.
+# - Resolve errors and investigate any convergence warnings.
+# - Keep all outputs visible.
+# - Include short explanations in Markdown cells.
+# - Include your AI-use disclaimer, as required by the course.
+# - Save the notebook as ola1.ipynb.
+# - Submit it to Canvas by September 13, 2026.
+
 
   <h3>Grading Distribution (Total: 100 points)</h3>
   <table>
