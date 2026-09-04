@@ -153,7 +153,10 @@ from sklearn.datasets import load_wine
 # --- 1. Load dataset ---
 wine = load_wine(as_frame=True)
 data = wine.frame   # full DataFrame (features + target)
+# print shape
+# show the first 5 rows.
 
+    
 # --- 2. Data Cleaning ---
 #  (check missing values and duplicates)
 #
@@ -166,22 +169,21 @@ y = data_clean["target"]
 # Create new feature: phenols_ratio
 
 # --- 5. Train/test split --- 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
-)
+# use train_test_split to split the data into training data and test data
+# 80% trianing data, 20% test data
     
 # --- 6. Baseline Logistic Regression  --- 
 # --- Baseline Logistic Regression ---
 baseline = LogisticRegression(max_iter=5000, solver="liblinear")
-baseline.fit(X_train, y_train)
-y_pred = baseline.predict(X_test)
-print("Baseline Accuracy (all features):", accuracy_score(y_test, y_pred))
+# please bulid the baseline model using training data
+# make prediction with above model 
+# please print the accuracy score for the prediction
 
 # --- 7. Logistic Regression with Standardization ---
 # Make sure standardization only fits to training data
 scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)  # fit on train only
-X_test_scaled  = scaler.transform(X_test)
+# please fit and transform traing data, please fit on train data only
+# please transform test data using the training parameters
 # 
 # finish your code here
 #    
