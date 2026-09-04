@@ -131,78 +131,36 @@
   <h3>Steps to Complete</h3>
 <ol>
   <li><b>Load and Inspect the Dataset</b>
-    – Load using <code>load_wine(as_frame=True)</code>. Print the shape,
-    display the first five rows, inspect column names and data types,
-    and report the number of samples in each target class.
   </li>
 
   <li><b>Check Data Quality and Clean the Dataset</b>
-    – Check for missing values and duplicate rows. Create
-    <code>data_clean</code> and explain any changes. If no cleaning is
-    needed, use <code>data.copy()</code>. If imputation is necessary,
-    fit the imputer only on training data after splitting.
   </li>
 
   <li><b>Separate Features and Target</b>
-    – Create <code>X_original</code> containing the original features
-    and <code>y</code> containing the target. Do not include the target
-    as an input feature.
   </li>
 
   <li><b>Create One Train/Test Split</b>
-    – Use <code>train_test_split</code> with
-    <code>test_size=0.20</code>, <code>random_state=42</code>,
-    and <code>stratify=y</code>. Use the same training and test
-    observations for all three models.
   </li>
 
   <li><b>Feature Engineering</b>
-    – Copy the training and test feature sets. Check that
-    <code>total_phenols</code> contains no zero values, then create
-    <code>phenols_ratio = flavanoids / total_phenols</code> in both copies.
-    Keep the original feature sets unchanged. Explain what the ratio
-    represents and why it might help classification.
   </li>
 
   <li><b>Train Model A: Original Features Without Standardization</b>
-    – Train logistic regression using the original training features.
-    Predict the test labels and report test accuracy.
   </li>
 
   <li><b>Train Model B: Engineered Features Without Standardization</b>
-    – Train logistic regression using the original features plus
-    <code>phenols_ratio</code>. Predict the test labels and report
-    test accuracy.
   </li>
 
   <li><b>Standardize the Engineered Features</b>
-    – Use <code>StandardScaler</code>. Apply <code>fit_transform()</code>
-    to the engineered training features and <code>transform()</code>
-    to the engineered test features. Scale all input features, including
-    the ratio, but do not scale the target. Explain why the scaler must
-    be fitted only on training data.
   </li>
 
   <li><b>Train Model C: Engineered Features With Standardization</b>
-    – Train logistic regression using the standardized training features.
-    Predict the test labels and report test accuracy. For all three models,
-    use <code>LogisticRegression(max_iter=5000, solver="lbfgs")</code>.
   </li>
 
   <li><b>Compare Results</b>
-    – Present the three models and their test accuracies in a table.
-    Compare Model A with Model B to examine feature engineering.
-    Compare Model B with Model C to examine standardization.
-    Report accuracy differences in percentage points.
   </li>
 
   <li><b>Discussion</b>
-    <ul>
-      <li>Did adding the ratio improve, reduce, or leave accuracy unchanged?</li>
-      <li>Did standardization improve, reduce, or leave accuracy unchanged?</li>
-      <li>Why can scaling affect logistic regression?</li>
-      <li>Why would fitting the scaler on test data cause data leakage?</li>
-    </ul>
   </li>
   
   </ol>
