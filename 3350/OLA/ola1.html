@@ -249,7 +249,7 @@ model_a = LogisticRegression(max_iter=5000, solver="lbfgs")
 # ------------------------------------------------------------
 
 # TODO:
-# 1. Create copies of the original training and test features:
+# 1. Create copies of the original clean training and test features:
 #    X_train_engineered
 #    X_test_engineered
 #
@@ -260,11 +260,9 @@ model_a = LogisticRegression(max_iter=5000, solver="lbfgs")
 #
 #    phenols_ratio = flavanoids / total_phenols
 #
-# 4. Confirm that the original feature DataFrames are unchanged
+# 4. Confirm that the original clean feature DataFrames are unchanged
 #    and the engineered DataFrames contain one additional column.
 #
-# Calculate this ratio BEFORE standardization.
-# It is a row-by-row calculation and does not require fitting.
 
 # Markdown explanation:
 # What relationship does this ratio describe?
