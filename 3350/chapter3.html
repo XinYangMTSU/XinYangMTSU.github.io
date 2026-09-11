@@ -892,15 +892,16 @@ solution can handle features of different magnitudes.
     
   <h4>How Polynomial Regression Works</h4>
   <ol>
-    <li><strong>Collect Data</strong> – Pairs of inputs (\(x\)) and outputs (\(y\)).</li>
+    <li><strong>Collect Data</strong> – Obtain input features \(X\) and corresponding target values \(y\).</li>
     <li><strong>Feature Expansion</strong> – Transform the input feature into higher-order terms:
+      For one feature: 
       \[
       x \;\;\longrightarrow\;\; [\,x,\,x^2,\,x^3,\,\ldots,\,x^d\,]
       \]
-      or, for multiple features, include all monomials up to degree \(d\).
+      or, for multiple features, include polynomial and interaction terms up to degree \(d\).
     </li>
     <li><strong>Fit a Linear Model</strong> – Apply OLS on the expanded features to estimate coefficients \(\beta\).</li>
-    <li><strong>Prediction</strong> – Use the polynomial equation to generate predictions \(\hat{y}\).</li>
+    <li><strong>Prediction</strong> – Apply the same polynomial transformation to new input data and use the fitted model to generate predictions \(\hat{y}\).</li>
   </ol>
 
   <br>
