@@ -300,7 +300,7 @@
 
     <p><strong>Where:</strong></p>
     <ul>
-      <li><em>y</em> = predicted output</li>
+      <li><em>y</em> = actual/observed output</li>
       <li>β<sub>0</sub> = intercept (value of <em>y</em> when all <em>x</em> are zero). Baseline prediction when all features are zero (unpenalized)</li>
       <li>β<sub>1</sub>, β<sub>2</sub>, …, β<sub>p</sub> = coefficients (weights for each feature). Effect of feature \(x_j\) on \(y\) when others are held fixed.</li>
       <li><em>x</em><sub>1</sub>, <em>x</em><sub>2</sub>, …, <em>x</em><sub>p</sub> = input features</li>
@@ -881,11 +881,11 @@ solution can handle features of different magnitudes.
     <li><em>y</em> = predicted output.</li>
     <li>β<sub>0</sub> = intercept (baseline prediction when all features are zero).</li>
     <li>β’s = coefficients learned from data (one for each polynomial/interaction term).</li>
-    <li><em>x</em><sub>j</sub> = original input features; we also include powers like x<sub>j</sub><sup>2</sup>, x<sub>j</sub><sup>3</sup>, … and interactions x<sub>j</sub>x<sub>k</sub>.</li>
+    <li><em>x</em><sub>j</sub> = original input features; polynomial features can include x<sub>j</sub><sup>2</sup>, x<sub>j</sub><sup>3</sup>, … and interactions x<sub>j</sub>x<sub>k</sub>.</li>
     <li><i>d</i> = polynomial degree (hyperparameter controlling model flexibility).</li>
-    <li><em>ε</em> = error term (difference between predicted and actual values).</li>
-    <li>Higher-degree terms allow the model to capture curves and feature interactions</li>
-    <li>Still solved by Ordinary Least Squares (OLS) after expanding the feature set</li>
+    <li><em>ε</em> = error term (representing variation not explained by the model).</li>
+    <li>Higher-degree terms allow the model to capture curved relationships and feature interactions</li>
+    <li>After polynomial feature expansion, the coefficients can still be estimated using <b>Ordinary Least Squares (OLS)</b></li>
   </ul>
       
   <br>
