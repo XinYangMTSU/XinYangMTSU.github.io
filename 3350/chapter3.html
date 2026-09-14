@@ -986,6 +986,62 @@ solution can handle features of different magnitudes.
     It’s also called <b><font color="red">regularization</font></b>. By penalizing large coefficients, L2 regularization reduces reliance on single features and improves generalization.
     <br><br>
 
+  <br><br>
+
+    Ridge Regression (L2-regularized linear regression) fits a hyperplane like OLS but adds a penalty on the size of the coefficients to reduce overfitting and handle multicollinearity.
+    The goal is to <b><font color="red">minimize the sum squared error while shrinking coefficients</font></b>.
+</p>
+
+<b>Equation:</b>
+<p style="text-align: center;">
+  \(\hat{\mathbf{y}} = \mathbf{X}\boldsymbol{\beta}\), &nbsp; and we choose \(\boldsymbol{\beta}\) to minimize
+  \[
+    \mathrm{SSE}(\boldsymbol{\beta}) + \lambda \sum_{j=1}^{p} \beta_j^2
+  \]
+ 
+</p>
+
+    <p style="text-align:center;">
+       
+    \[
+      \;\;\Longrightarrow\;\;
+      
+      \underbrace{\sum_{i=1}^{m}\bigl(y_i - \hat{y}_i\bigr)^2}_{\text{SSE}}
+      \;+\;
+      \underbrace{\lambda \sum_{j=1}^{p} \beta_j^2}_{\text{L2 penalty}}
+    \]
+       
+  </p>
+
+   <p style="text-align:center;">
+    \[
+
+    \;\;\Longrightarrow\;\;
+    
+    \underbrace{\|\mathbf{y}-\mathbf{X}\boldsymbol{\beta}\|_2^2}_{\text{sum of squared residuals}}
+      \;+\;
+      \underbrace{\lambda \|\boldsymbol{\beta}_{1:p}\|_2^2}_{\text{sum of squared coefficients}}
+     
+  \]
+
+     (note: the intercept \(\beta_0\) is typically <i>not</i> penalized).
+  </p>
+
+<p><strong>Where:</strong></p>
+<ul>
+  <li>\( \lambda \ge 0 \): &lambda; is the regularization strength parameter, 
+    it controls the amount of regularization applied</li>
+  <li>\(  \lambda = 0 &rArr; Ridge = OLS \) (no penalty) </li>
+  <li> Small &lambda; &rArr; weak shrinkage &rArr; coefficients close to OLS values </li>
+  <li> Large &lambda; &rArr; strong shrinkage &rArr; coefficients shrink toward zero, coefficients much smaller, model more regularized. </li>
+  <li>\( \beta_1, \dots, \beta_p \) = coefficients for features</li>
+  <li>\( \mathbf{X} \) = design matrix </li>
+  <li>\( \mathbf{y} \) = targets</li>
+  <li>\( p \) means the number of input feature </li>
+</ul>
+
+<br>
+    
   <h4>Why Do We Need Ridge Regression?</h4>
 
 <p>
