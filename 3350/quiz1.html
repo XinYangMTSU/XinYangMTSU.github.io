@@ -369,13 +369,22 @@ const questions = [
     correct: 1,
     explanation: "One-Hot Encoding converts categorical variables into binary (0/1) vectors, creating a separate column for each category. This allows machine learning algorithms to work with categorical data."
   },
+  /*
   {
     type: "short-answer",
     question: "Explain what Recursive Feature Elimination (RFE) does and why it is useful in machine learning.",
     sampleAnswer: "RFE is a feature selection method that recursively removes the least important features based on model coefficients/importance scores. It trains a model, ranks features by importance, removes the weakest ones, and repeats until the desired number of features remains. This helps reduce overfitting and improve model performance.",
     keyPoints: ["feature selection", "recursive", "removes", "importance", "performance"],
     explanation: "RFE iteratively builds models and eliminates the least important features, helping to identify the most relevant predictors and reduce model complexity."
-  }
+  },
+  */
+  {
+  type: "fill-blank",
+  question: "After standardization using StandardScaler, each feature has a mean of approximately ______ and a standard deviation of approximately ______. Enter your answer as: mean, standard deviation",
+  answer: "0, 1",
+  acceptableAnswers: ["0, 1", "0,1", "0 and 1", "mean 0 and standard deviation 1"],
+  explanation: "StandardScaler standardizes each feature so that it has a mean of approximately 0 and a standard deviation of approximately 1."
+}
 ];
 
 let currentQuestion = 0;
