@@ -1037,6 +1037,46 @@ solution can handle features of different magnitudes.
 </ul>
 
 <br>
+
+  <h4>What Does λ Control?</h4>
+
+<ul>
+  <li>
+    \(\lambda = 0\):
+    there is no penalty, so <b>Ridge becomes OLS</b>.
+  </li>
+
+  <li>
+    Small \(\lambda\):
+    the penalty is weak, so the coefficients remain close to
+    their OLS values.
+  </li>
+
+  <li>
+    Large \(\lambda\):
+    the penalty becomes more important, so the coefficients
+    are pushed more strongly toward zero.
+  </li>
+</ul>
+
+<p style="text-align:center;">
+\[
+\boxed{
+\lambda \uparrow
+\quad\Longrightarrow\quad
+\text{stronger penalty}
+\quad\Longrightarrow\quad
+|\beta_j| \downarrow
+}
+\]
+</p>
+
+<p>
+However, Ridge usually does <b>not</b> make coefficients exactly zero.
+It shrinks them <b>toward zero</b>.
+</p>
+
+<br>
     
   <h4>Why Do We Need Ridge Regression?</h4>
 
@@ -1239,46 +1279,6 @@ The important point is that
 <b>the larger SSE is not the goal</b>.
 It is the price Ridge is willing to pay for a model with smaller,
 more stable coefficients.
-</p>
-
-<br>
-
-<h4>What Does λ Control?</h4>
-
-<ul>
-  <li>
-    \(\lambda = 0\):
-    there is no penalty, so <b>Ridge becomes OLS</b>.
-  </li>
-
-  <li>
-    Small \(\lambda\):
-    the penalty is weak, so the coefficients remain close to
-    their OLS values.
-  </li>
-
-  <li>
-    Large \(\lambda\):
-    the penalty becomes more important, so the coefficients
-    are pushed more strongly toward zero.
-  </li>
-</ul>
-
-<p style="text-align:center;">
-\[
-\boxed{
-\lambda \uparrow
-\quad\Longrightarrow\quad
-\text{stronger penalty}
-\quad\Longrightarrow\quad
-|\beta_j| \downarrow
-}
-\]
-</p>
-
-<p>
-However, Ridge usually does <b>not</b> make coefficients exactly zero.
-It shrinks them <b>toward zero</b>.
 </p>
 
 <br>
