@@ -975,6 +975,313 @@ solution can handle features of different magnitudes.
     
       <h4>2.3 Ridge Regression</h4>
 
+
+  <h4>Why Do We Need Ridge Regression?</h4>
+
+<p>
+Ordinary Least Squares (OLS) chooses coefficients that minimize the
+<b>training Sum of Squared Errors (SSE)</b>.
+</p>
+
+<p style="text-align:center;">
+\[
+\mathrm{SSE}
+=
+\sum_{i=1}^{m}(y_i-\hat y_i)^2
+\]
+</p>
+
+<p>
+However, the model with the smallest training SSE is not always the model
+that performs best on <b>new, unseen data</b>.
+</p>
+
+<p>
+In some situations, especially when features are highly correlated,
+when there are many features, or when the training data contain noise,
+OLS may produce <b>large and unstable coefficients</b>.
+</p>
+
+<p>
+Large coefficients make the model more sensitive to small changes in
+the input data. A model may therefore fit the training data extremely
+well but perform worse on new data. This is one form of
+<b><font color="red">overfitting</font></b>.
+</p>
+
+<br>
+
+<h4>The Main Idea of Ridge Regression</h4>
+
+<p>
+Ridge Regression modifies OLS by saying:
+</p>
+
+<p style="text-align:center; font-size:1.15em;">
+<b>
+Fit the training data well, but avoid unnecessarily large coefficients.
+</b>
+</p>
+
+<p>
+Ridge therefore has <b>two competing goals</b>:
+</p>
+
+<table style="width:80%; margin:auto; border-collapse:collapse;">
+  <tr>
+    <th style="border:1px solid #ccc; padding:10px;">Goal</th>
+    <th style="border:1px solid #ccc; padding:10px;">What It Wants</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ccc; padding:10px;">SSE</td>
+    <td style="border:1px solid #ccc; padding:10px;">
+      Fit the training data as accurately as possible
+    </td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ccc; padding:10px;">L2 Penalty</td>
+    <td style="border:1px solid #ccc; padding:10px;">
+      Keep the coefficients small
+    </td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ccc; padding:10px;"><b>Ridge</b></td>
+    <td style="border:1px solid #ccc; padding:10px;">
+      Find a good balance between these two goals
+    </td>
+  </tr>
+</table>
+
+<br>
+
+<h4>Why Would Ridge Accept a Larger Training SSE?</h4>
+
+<p>
+Ridge does <b>not</b> want a larger SSE.
+Instead, it is willing to accept a
+<b><font color="red">slightly larger training SSE</font></b>
+if doing so produces much smaller and more stable coefficients.
+</p>
+
+<p>
+This tradeoff can improve performance on unseen data.
+</p>
+
+<p style="text-align:center; font-size:1.1em;">
+\[
+\boxed{
+\text{slightly worse training fit}
+\quad\Longrightarrow\quad
+\text{potentially better generalization}
+}
+\]
+</p>
+
+<p>
+This is an example of the <b>bias–variance tradeoff</b>.
+Ridge introduces some bias by shrinking the coefficients, but it can
+reduce variance and make the model more stable.
+</p>
+
+<br>
+
+<h4>A Simple Example</h4>
+
+<p>
+Suppose we have two possible regression models:
+</p>
+
+<table style="width:80%; margin:auto; border-collapse:collapse;">
+  <tr>
+    <th style="border:1px solid #ccc; padding:10px;">Model</th>
+    <th style="border:1px solid #ccc; padding:10px;">Training SSE</th>
+    <th style="border:1px solid #ccc; padding:10px;">β₁</th>
+    <th style="border:1px solid #ccc; padding:10px;">β₂</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ccc; padding:10px;">A</td>
+    <td style="border:1px solid #ccc; padding:10px;">100</td>
+    <td style="border:1px solid #ccc; padding:10px;">10</td>
+    <td style="border:1px solid #ccc; padding:10px;">10</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #ccc; padding:10px;">B</td>
+    <td style="border:1px solid #ccc; padding:10px;">120</td>
+    <td style="border:1px solid #ccc; padding:10px;">3</td>
+    <td style="border:1px solid #ccc; padding:10px;">4</td>
+  </tr>
+</table>
+
+<br>
+
+<p>
+OLS considers only the SSE, so it chooses <b>Model A</b>:
+</p>
+
+<p style="text-align:center;">
+\[
+100 < 120
+\]
+</p>
+
+<p>
+Ridge considers both the SSE and the size of the coefficients.
+Suppose \(\lambda=1\).
+</p>
+
+<p>
+For Model A:
+</p>
+
+<p style="text-align:center;">
+\[
+100 + 1(10^2+10^2)
+=
+100+200
+=
+300
+\]
+</p>
+
+<p>
+For Model B:
+</p>
+
+<p style="text-align:center;">
+\[
+120 + 1(3^2+4^2)
+=
+120+25
+=
+145
+\]
+</p>
+
+<p>
+Although Model B has a <b>larger training SSE</b>, its coefficients are
+much smaller. Therefore, its overall Ridge objective is smaller:
+</p>
+
+<p style="text-align:center;">
+\[
+\boxed{145 < 300}
+\]
+</p>
+
+<p>
+Ridge would therefore prefer Model B in this example.
+</p>
+
+<p>
+The important point is that
+<b>the larger SSE is not the goal</b>.
+It is the price Ridge is willing to pay for a model with smaller,
+more stable coefficients.
+</p>
+
+<br>
+
+<h4>Ridge Objective Function</h4>
+
+<p>
+Ridge adds an <b><font color="red">L2 penalty</font></b>
+to the ordinary least-squares objective:
+</p>
+
+<p style="text-align:center;">
+\[
+\boxed{
+\underbrace{
+\sum_{i=1}^{m}(y_i-\hat y_i)^2
+}_{\text{training error (SSE)}}
++
+\underbrace{
+\lambda\sum_{j=1}^{p}\beta_j^2
+}_{\text{L2 penalty}}
+}
+\]
+</p>
+
+<p>
+The first term asks the model to <b>fit the data well</b>.
+The second term asks the model to <b>keep its coefficients small</b>.
+Ridge finds a compromise between them.
+</p>
+
+<p>
+The intercept \(\beta_0\) is typically <b>not penalized</b>.
+</p>
+
+<br>
+
+<h4>What Does λ Control?</h4>
+
+<ul>
+  <li>
+    \(\lambda = 0\):
+    there is no penalty, so <b>Ridge becomes OLS</b>.
+  </li>
+
+  <li>
+    Small \(\lambda\):
+    the penalty is weak, so the coefficients remain close to
+    their OLS values.
+  </li>
+
+  <li>
+    Large \(\lambda\):
+    the penalty becomes more important, so the coefficients
+    are pushed more strongly toward zero.
+  </li>
+</ul>
+
+<p style="text-align:center;">
+\[
+\boxed{
+\lambda \uparrow
+\quad\Longrightarrow\quad
+\text{stronger penalty}
+\quad\Longrightarrow\quad
+|\beta_j| \downarrow
+}
+\]
+</p>
+
+<p>
+However, Ridge usually does <b>not</b> make coefficients exactly zero.
+It shrinks them <b>toward zero</b>.
+</p>
+
+<br>
+
+<h4>When Is Ridge Particularly Useful?</h4>
+
+<ul>
+  <li>
+    <b>Overfitting:</b> when OLS fits the training data too closely
+    and does not generalize well.
+  </li>
+
+  <li>
+    <b>Multicollinearity:</b> when highly correlated features cause
+    OLS coefficients to become unstable.
+  </li>
+
+  <li>
+    <b>Many features:</b> when the number of features is large
+    relative to the number of observations.
+  </li>
+
+  <li>
+    <b>Noisy data:</b> when some predictors may cause the model
+    to react too strongly to noise in the training data.
+  </li>
+</ul>
+
+<br>
+
+  
+  <!--
     <b>Idea:</b>
 <p>
    
@@ -1050,7 +1357,10 @@ solution can handle features of different magnitudes.
 </ul>
 
 <br>
+-->
 
+
+  
 
 <h4>What does <span style="white-space:nowrap;">\(\|\cdot\|_2\)</span> mean?</h4>
 
