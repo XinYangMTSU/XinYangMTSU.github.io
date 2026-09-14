@@ -973,10 +973,20 @@ solution can handle features of different magnitudes.
 
 <section id="ridge-regression">
     
-      <h4>2.3 Ridge Regression</h4>
+<h4>2.3 Ridge Regression</h4>
 
+  <b>Idea:</b>
+  <p>
+   
+    Ridge Regression extends Ordinary Least Squares (OLS) by adding an <b><font color="red">L2 penalty</font></b> on the size of the coefficients. 
+    This penalty discourages overly large weights, helping to reduce <b>overfitting</b> and improve <b>generalization</b>, 
+    especially when features are correlated or when the number of features \( p \) is close to or greater than the number of training samples \( m \).
+    <br><br>
+    In Ridge Regression, a penalty is an extra cost you add to the training objective for using large coefficient values. 
+    It’s also called <b><font color="red">regularization</font></b>. By penalizing large coefficients, L2 regularization reduces reliance on single features and improves generalization.
+    <br><br>
 
-  <h4>Why Do We Need Ridge Regression?</h4>
+  <h5>Why Do We Need Ridge Regression?</h5>
 
 <p>
 Ordinary Least Squares (OLS) chooses coefficients that minimize the
