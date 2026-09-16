@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gradient Descent — Interactive Learning Page</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{--pink:#ff79c6;--pink2:#ffb3de;--bg:#17191a;--panel:#222025;--ink:#ffd4ea;--muted:#cfaac0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:Roboto,Arial,sans-serif;margin:0;display:flex;background:var(--bg);min-height:100vh;color:var(--pink)}
+#sidebar{position:fixed;width:285px;height:100vh;overflow:auto;background:linear-gradient(135deg,#2a1e28 80%,#47223c 100%);padding:34px 20px 24px 25px;box-shadow:2px 0 24px rgba(255,121,198,.12)}
+#sidebar h2{font-size:1.08rem;color:var(--pink2);text-transform:uppercase}#sidebar a{display:flex;gap:.65em;align-items:center;color:var(--pink2);text-decoration:none;margin:9px 0;padding:9px 8px 9px 13px;border-left:3px solid transparent;border-radius:8px}
+#sidebar a:hover,#sidebar a.active{color:var(--pink);background:#21111b;border-left-color:var(--pink);font-weight:700}
+#content{margin-left:305px;padding:50px 5vw 70px;max-width:1150px;width:calc(100vw - 305px);background:#1a1d1f}
+h1{font-size:2.55rem;margin:.1em 0 .2em;text-shadow:0 2px 16px rgba(255,121,198,.18)}.subtitle{font-size:1.15rem;color:var(--pink2);margin-bottom:30px}
+section{margin:0 0 34px;background:var(--panel);border-radius:18px;box-shadow:0 4px 30px rgba(255,121,198,.09);padding:27px;border-left:7px solid var(--pink)}
+section h3{border-bottom:2px solid var(--pink);padding-bottom:9px;margin:0 0 17px;font-size:1.45rem}p,li{color:var(--ink);line-height:1.7}strong{color:var(--pink2)}
+.math{font-family:Georgia,serif;text-align:center;background:#19121a;color:#fff0f8;padding:16px;border-radius:12px;font-size:1.28rem;margin:16px 0;border:1px solid #5b304d}
+.callout{background:#2a1725;border:1px solid #7b3d67;border-radius:12px;padding:15px 18px;margin:15px 0;color:var(--ink)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:#191a1c;border:1px solid #553148;border-radius:14px;padding:17px}.card h4{color:var(--pink);margin-top:0}
+.flow{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;margin:20px}.flow span{background:#301d2a;border:1px solid #814365;padding:10px 13px;border-radius:10px;color:var(--ink);font-weight:700}
+.controls{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}.control{background:#191a1c;border-radius:12px;padding:13px;border:1px solid #4b3143}.control label{display:block;color:var(--pink2);font-weight:700;margin-bottom:8px}
+input[type=range]{width:100%;accent-color:var(--pink)}button{border:1px solid #a14d85;background:#331b2b;color:var(--pink2);padding:10px 15px;border-radius:9px;font-weight:700;cursor:pointer;margin:4px}button.primary{background:var(--pink);color:#26151f}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0}.stat{background:#18191b;border:1px solid #563448;border-radius:10px;padding:10px 14px;color:var(--ink)}.stat b{color:var(--pink)}
+.canvas-wrap{height:390px;background:#151618;border-radius:14px;padding:12px;border:1px solid #4c2c42}table{width:100%;border-collapse:collapse;margin-top:15px;color:var(--ink)}th,td{border:1px solid #563448;padding:11px;text-align:left}th{background:#301d2a;color:var(--pink2)}
+pre{position:relative;background:#19121a;color:var(--ink);padding:17px;border-radius:10px;overflow:auto;border:1px solid #4b2c42}.copy{position:absolute;top:8px;right:8px;padding:.35rem .55rem;background:#111;color:#ddd}
+.quiz label{display:block;padding:8px;color:var(--ink)}.feedback{font-weight:700;margin-top:10px}footer{text-align:center;color:var(--muted);padding:18px;border-top:1px solid #402138}
+@media(max-width:980px){#sidebar{display:none}#content{margin:0;width:100%;padding:26px 5vw}.grid,.controls{grid-template-columns:1fr}}
+</style></head><body>
+<aside id="sidebar"><h2><i class="fa-solid fa-mountain-sun"></i> Gradient Descent</h2><nav>
+<a href="#intro" class="active">1. Big Idea</a><a href="#gradient">2. What is a Gradient?</a><a href="#algorithm">3. The Algorithm</a><a href="#interactive">4. Interactive Demo</a><a href="#learning-rate">5. Learning Rate</a><a href="#regression">6. Linear Regression</a><a href="#closed-form">7. OLS vs GD</a><a href="#lasso">8. Lasso Connection</a><a href="#code">9. Python Example</a><a href="#quiz">10. Quick Check</a>
+</nav></aside>
+<main id="content"><h1>Gradient Descent</h1><p class="subtitle">An intuitive, visual introduction to one of the fundamental optimization ideas in machine learning.</p>
+<section id="intro"><h3>1) The Big Idea</h3><p><strong>Gradient descent</strong> is an iterative optimization algorithm used to find parameter values that make a loss function as small as possible.</p><div class="callout"><strong>Imagine this:</strong> You are standing on a mountain in thick fog. You cannot see the bottom. You feel the slope under your feet, take a small step downhill, check the slope again, and repeat until you reach the valley.</div><div class="flow"><span>Choose parameters</span> → <span>Calculate loss</span> → <span>Find gradient</span> → <span>Move downhill</span> ↻</div></section>
+<section id="gradient"><h3>2) What is a Gradient?</h3><p>For one variable, the derivative tells us the slope. For many parameters, the <strong>gradient</strong> collects all partial derivatives into a vector.</p><div class="math">∇L(β) = [ ∂L/∂β₁, ∂L/∂β₂, ..., ∂L/∂βₚ ]ᵀ</div><p>The gradient points toward the <strong>steepest increase</strong>. To minimize loss, we move in the opposite direction.</p><div class="grid"><div class="card"><h4>Gradient</h4><p>Points toward the steepest uphill direction.</p></div><div class="card"><h4>Negative Gradient</h4><p>Points downhill—the direction used by gradient descent.</p></div></div></section>
+<section id="algorithm"><h3>3) The Gradient Descent Update Rule</h3><div class="math">β<sub>new</sub> = β<sub>old</sub> − η ∇L(β<sub>old</sub>)</div><table><tr><th>Symbol</th><th>Meaning</th></tr><tr><td>β</td><td>Model parameter(s)</td></tr><tr><td>∇L(β)</td><td>Gradient of the loss</td></tr><tr><td>η</td><td>Learning rate / step size</td></tr></table><p>Example: let <strong>L(β)=(β−3)²</strong>, so the derivative is 2(β−3). Starting at β=0 with η=.1:</p><div class="math">βnew = 0 − 0.1 × 2(0 − 3) = 0.6</div><p>Then: 0 → 0.6 → 1.08 → 1.464 → 1.771 → ... → 3.</p></section>
+<section id="interactive"><h3>4) Interactive Gradient Descent Demo</h3><p>Experiment with <strong>L(β)=(β−3)²</strong>. Change the starting point and learning rate, then take individual steps or run automatically.</p><div class="controls"><div class="control"><label>Starting β: <span id="startVal">0</span></label><input id="start" type="range" min="-4" max="8" value="0" step=".1"></div><div class="control"><label>Learning rate η: <span id="lrVal">0.10</span></label><input id="lr" type="range" min=".01" max="1.1" value=".1" step=".01"></div><div class="control"><label>Actions</label><button class="primary" id="stepBtn">Take One Step</button><button id="runBtn">Run</button><button id="resetBtn">Reset</button></div></div><div class="stats"><div class="stat">Iteration: <b id="iter">0</b></div><div class="stat">β: <b id="beta">0</b></div><div class="stat">Gradient: <b id="grad">-6</b></div><div class="stat">Loss: <b id="loss">9</b></div></div><div class="canvas-wrap"><canvas id="lossChart"></canvas></div></section>
+<section id="learning-rate"><h3>5) Why Does the Learning Rate Matter?</h3><div class="grid"><div class="card"><h4>η too small</h4><p>Tiny steps; convergence can be very slow.</p></div><div class="card"><h4>η appropriate</h4><p>Loss decreases efficiently toward the minimum.</p></div><div class="card"><h4>η too large</h4><p>The algorithm can overshoot and oscillate.</p></div><div class="card"><h4>η much too large</h4><p>The optimization can diverge.</p></div></div></section>
+<section id="regression"><h3>6) Gradient Descent for Linear Regression</h3><div class="math">ŷ = β₀ + β₁x</div><p>Using mean squared error:</p><div class="math">MSE = (1/n) Σ(yᵢ − ŷᵢ)²</div><p>Gradient descent updates both parameters using their partial derivatives:</p><div class="math">β₀ ← β₀ − η ∂L/∂β₀ &nbsp;&nbsp; β₁ ← β₁ − η ∂L/∂β₁</div></section>
+<section id="closed-form"><h3>7) OLS vs. Gradient Descent</h3><p>OLS has a direct linear-algebra solution:</p><div class="math">β̂ = (XᵀX)⁻¹Xᵀy</div><p>Therefore, <strong>OLS does not require gradient descent</strong>. But OLS defines an optimization objective, and gradient descent is another way to minimize that objective.</p><table><tr><th>Closed-form / linear algebra</th><th>Gradient descent</th></tr><tr><td>Solves directly</td><td>Approaches the solution iteratively</td></tr><tr><td>No learning rate</td><td>Requires a step size</td></tr></table></section>
+<section id="lasso"><h3>8) Lasso and Coordinate Descent</h3><p><strong>The objective and the optimization algorithm are different concepts.</strong></p><table><tr><th>Method</th><th>Typical perspective</th></tr><tr><td>OLS</td><td>Closed-form / linear algebra solution available</td></tr><tr><td>Ridge</td><td>Closed-form / linear algebra solution available</td></tr><tr><td>Lasso</td><td>No simple closed-form solution; iterative optimization</td></tr><tr><td>Elastic Net</td><td>Typically iterative optimization</td></tr></table><p>Lasso contains the L1 penalty λΣ|βⱼ|. Because |β| is not differentiable at zero, ordinary gradient descent is not the most natural solver. <strong>Coordinate descent</strong> is commonly used.</p><div class="grid"><div class="card"><h4>Gradient Descent</h4><p>Uses gradient information to update all coefficients together.</p></div><div class="card"><h4>Coordinate Descent</h4><p>Optimizes one coefficient at a time while holding the others fixed.</p></div></div><div class="callout"><strong>Remember:</strong> Coordinate descent is not simply an advanced version of gradient descent. They are different iterative optimization strategies.</div></section>
+<section id="code"><h3>9) Python Example</h3><pre><button class="copy">Copy</button><code>def loss(beta):
+    return (beta - 3) ** 2
+
+def gradient(beta):
+    return 2 * (beta - 3)
+
+beta = 0.0
+learning_rate = 0.1
+
+for iteration in range(20):
+    beta = beta - learning_rate * gradient(beta)
+    print(iteration + 1, beta, loss(beta))</code></pre></section>
+<section id="quiz" class="quiz"><h3>10) Quick Check</h3><p><strong>1.</strong> The gradient points toward:</p><label><input type="radio" name="q1" value="a"> Steepest decrease</label><label><input type="radio" name="q1" value="b"> Steepest increase</label><p><strong>2.</strong> Why subtract the gradient?</p><label><input type="radio" name="q2" value="a"> To move downhill and minimize loss</label><label><input type="radio" name="q2" value="b"> To make coefficients positive</label><p><strong>3.</strong> Which is most accurate for Lasso?</p><label><input type="radio" name="q3" value="a"> It must use ordinary gradient descent</label><label><input type="radio" name="q3" value="c"> It needs iterative optimization; coordinate descent is commonly used</label><br><button class="primary" id="checkQuiz">Check Answers</button><div id="feedback" class="feedback"></div></section>
+<footer>&copy; 2026 Xin Yang • CSCI 3350 Machine Learning • Gradient Descent</footer></main>
+<script>
+document.querySelectorAll('.copy').forEach(b=>b.onclick=()=>navigator.clipboard.writeText(b.nextElementSibling.innerText).then(()=>{b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',1000)}));
+const start=document.getElementById('start'),lr=document.getElementById('lr');let beta=0,it=0,timer=null;
+const xs=[],ys=[];for(let x=-4;x<=8;x+=.1){xs.push(+x.toFixed(1));ys.push((x-3)**2)}
+const chart=new Chart(document.getElementById('lossChart'),{type:'line',data:{labels:xs,datasets:[{label:'Loss L(β) = (β − 3)²',data:ys,borderWidth:2,pointRadius:0},{label:'Current β',data:xs.map(()=>null),borderWidth:0,pointRadius:8}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#ffd4ea'}}},scales:{x:{title:{display:true,text:'β',color:'#ffb3de'},ticks:{color:'#cfaac0'},grid:{color:'#30252d'}},y:{title:{display:true,text:'Loss',color:'#ffb3de'},ticks:{color:'#cfaac0'},grid:{color:'#30252d'}}}}});
+const g=b=>2*(b-3),L=b=>(b-3)**2;
+function update(){iter.textContent=it;document.getElementById('beta').textContent=beta.toFixed(4);grad.textContent=g(beta).toFixed(4);document.getElementById('loss').textContent=L(beta).toFixed(4);let j=0,m=Infinity;xs.forEach((x,i)=>{let d=Math.abs(x-beta);if(d<m){m=d;j=i}});chart.data.datasets[1].data=xs.map(()=>null);if(beta>=-4&&beta<=8)chart.data.datasets[1].data[j]=L(beta);chart.update()}
+function reset(){if(timer)clearInterval(timer);timer=null;runBtn.textContent='Run';beta=+start.value;it=0;update()}
+function step(){beta-=+lr.value*g(beta);it++;update()}
+start.oninput=()=>{startVal.textContent=start.value;reset()};lr.oninput=()=>lrVal.textContent=(+lr.value).toFixed(2);stepBtn.onclick=step;resetBtn.onclick=reset;
+runBtn.onclick=()=>{if(timer){clearInterval(timer);timer=null;runBtn.textContent='Run'}else{runBtn.textContent='Pause';timer=setInterval(()=>{step();if(Math.abs(g(beta))<.0001){clearInterval(timer);timer=null;runBtn.textContent='Run'}},350)}};
+checkQuiz.onclick=()=>{let s=(document.querySelector('[name=q1]:checked')?.value==='b')+(document.querySelector('[name=q2]:checked')?.value==='a')+(document.querySelector('[name=q3]:checked')?.value==='c');feedback.textContent=s+'/3 correct. '+(s===3?'Excellent!':'Review the sections above and try again.');feedback.style.color=s===3?'#67e8b5':'#ffe08a'};
+update();
+</script></body></html>
