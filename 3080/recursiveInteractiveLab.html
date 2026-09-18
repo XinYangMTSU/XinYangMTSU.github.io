@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CSCI 3080 — Recursive Definitions Interactive Learning Lab</title>
+<style>
+:root{--bg:#151719;--panel:#222025;--panel2:#191b20;--text:#f7f2f6;--muted:#bbb4bc;--pink:#ff79c6;--pink2:#ffb3de;--blue:#86d7ff;--green:#79e2a5;--yellow:#ffd166;--red:#ff8585;--border:#443943}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif}.wrap{max-width:1080px;margin:auto;padding:28px 20px 70px}h1{color:var(--pink2);font-size:clamp(2rem,5vw,3rem);margin:.15em 0}h2{color:var(--pink2);margin-top:0}h3{color:var(--blue)}p,li{line-height:1.65}.tag{color:var(--pink);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.8rem}.sub,.tiny{color:var(--muted)}.progress{height:10px;background:#302c31;border-radius:20px;overflow:hidden;margin:24px 0}.progress div{height:100%;background:linear-gradient(90deg,var(--pink),var(--blue));transition:.25s}.stage{display:none;background:var(--panel);border:1px solid var(--border);border-left:6px solid var(--pink);border-radius:18px;padding:26px}.stage.active{display:block}.call,.math,.code{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:15px;margin:15px 0}.call{border-left:5px solid var(--pink)}.math{text-align:center;font:1.25rem Georgia,serif}.code{font:1rem ui-monospace,Consolas,monospace;white-space:pre-wrap;color:#ffd7f0;overflow:auto}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:15px}.card h3{margin-top:0}.choices button{display:block;width:100%;text-align:left;margin:9px 0}button{font:inherit;min-height:44px;padding:10px 15px;border-radius:10px;border:1px solid #665b65;background:#302b31;color:white;cursor:pointer;font-weight:700}button.primary{background:var(--pink);border-color:var(--pink);color:#25121f}button:disabled{opacity:.4}.correct{background:#173528!important;border-color:var(--green)!important}.wrong{background:#402326!important;border-color:var(--red)!important}.feedback{min-height:25px;font-weight:700}.good{color:var(--green)}.warn{color:var(--yellow)}.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}.nav button{min-width:120px}.flow{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin:18px 0}.box{padding:10px 12px;background:#111418;border:1px solid var(--border);border-radius:9px;font-weight:700}.arrow{color:var(--pink);font-size:1.3rem}.stack{display:flex;flex-direction:column-reverse;gap:5px;max-width:340px;margin:15px auto;min-height:210px;border:2px solid var(--border);border-top:0;padding:8px}.frame{padding:8px;text-align:center;background:#253346;border:1px solid var(--blue);border-radius:7px}.seq{display:flex;gap:8px;flex-wrap:wrap}.term{min-width:55px;text-align:center;padding:12px;background:#111418;border:1px solid var(--border);border-radius:8px}.activeTerm{border-color:var(--pink);background:#382337}.hidden{display:none}table{width:100%;border-collapse:collapse}th,td{padding:9px;border:1px solid var(--border);text-align:center}th{background:#302b31}input[type=range]{width:100%;accent-color:var(--pink)}.controls{background:var(--panel2);padding:15px;border-radius:12px}.memory{font-size:1.25rem;color:var(--yellow);font-weight:800}.domino{display:flex;gap:4px;align-items:end;justify-content:center;height:130px}.dom{width:38px;height:80px;background:#253346;border:2px solid var(--blue);border-radius:5px;display:flex;align-items:center;justify-content:center;transition:.3s}.dom.fall{transform:rotate(58deg);transform-origin:bottom right;background:#382337;border-color:var(--pink)}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.stage{padding:18px}.nav button{min-width:0;flex:1}}
+</style></head><body><main class="wrap">
+<div class="tag">CSCI 3080 • Chapter 3 • Section 3.1</div><h1>Recursive Definitions — Interactive Learning Lab</h1>
+<p class="sub">Learn recursion as a process: <strong>start somewhere → use earlier results → build new results → repeat.</strong></p><div class="progress"><div id="prog"></div></div>
+
+<section class="stage active"><div class="tag">Step 1 of 12</div><h2>How can something be defined using itself?</h2>
+<p>A <strong>recursive definition</strong> may look circular because the item being defined appears in its own definition. It works because recursion has a place to <strong>start</strong>.</p>
+<div class="grid"><div class="card"><h3>1. Basis / Base Case</h3>Explicitly gives one or more simple starting cases.</div><div class="card"><h3>2. Recursive Step</h3>Defines new cases using cases we already know.</div></div>
+<div class="flow"><span class="box">Known starting value</span><b class="arrow">→</b><span class="box">Rule</span><b class="arrow">→</b><span class="box">New value</span><b class="arrow">→</b><span class="box">Rule again...</span></div>
+<p>What would happen if a recursive definition had no base case?</p><div class="choices q" data-a="nostart" data-f="f1"><button data-v="fine">It would work normally.</button><button data-v="nostart">We would have no concrete place to start constructing values.</button><button data-v="zero">Every sequence would start at 0.</button></div><div id="f1" class="feedback"></div></section>
+
+<section class="stage"><div class="tag">Step 2 of 12</div><h2>Recursively Defined Sequences</h2>
+<p>A sequence is an ordered list. We can write its terms as S(1), S(2), ..., S(n), ... or S₁, S₂, ..., Sₙ, ...</p>
+<div class="call"><strong>Recurrence relation:</strong> a formula that defines a sequence term using one or more earlier terms.</div>
+<p>Example:</p><div class="math">S(1) = 2<br>S(n) = 2S(n−1), &nbsp; n ≥ 2</div>
+<p>Which line is the base case?</p><div class="choices q" data-a="base" data-f="f2"><button data-v="base">S(1) = 2</button><button data-v="rec">S(n) = 2S(n−1)</button></div><div id="f2" class="feedback"></div></section>
+
+<section class="stage"><div class="tag">Step 3 of 12</div><h2>Build the sequence yourself</h2>
+<div class="math">S(1)=2 &nbsp;&nbsp;&nbsp; S(n)=2S(n−1)</div>
+<div id="seqS" class="seq"></div><button id="nextS" class="primary">Generate Next Term</button><button id="resetS">Reset</button><div id="sExplain" class="call">We know S(1)=2 from the base case. Click to use the recurrence relation.</div>
+<div class="call">Notice the dependency: to calculate S(5), we first need S(4); to get S(4), we need S(3); and so on until we reach the known base case.</div></section>
+
+<section class="stage"><div class="tag">Step 4 of 12</div><h2>Recursive algorithm: calls itself</h2>
+<div class="code">S(n)
+    if n = 1 then
+        return 2
+    else
+        return 2 * S(n-1)
+    end if</div>
+<p>Choose n and watch the call stack grow.</p><div class="controls"><label>n = <b id="nv">5</b></label><input id="nslide" type="range" min="1" max="10" value="5"><button id="runStack" class="primary">Build Recursive Call Stack</button></div>
+<div class="grid"><div><div id="stack" class="stack"></div></div><div class="call" id="stackText">The computer must keep track of unfinished function calls until it reaches S(1).</div></div></section>
+
+<section class="stage"><div class="tag">Step 5 of 12</div><h2>Why can recursion use a lot of stack memory?</h2>
+<p>To compute S(5), calls are nested:</p><div class="math">S(5) → S(4) → S(3) → S(2) → S(1)</div>
+<p>Each unfinished call needs a <strong>stack frame</strong>. For this particular recurrence, the recursion depth grows with n.</p>
+<div class="choices q" data-a="million" data-f="f5"><button data-v="one">Only one call is ever stored.</button><button data-v="million">A very large n can require a very deep call stack and may cause stack overflow.</button><button data-v="faster">More recursion always means less memory.</button></div><div id="f5" class="feedback"></div>
+<div class="call"><strong>Important distinction:</strong> recursion is often elegant and closely matches a recursive definition, but a direct recursive implementation is not automatically the most memory-efficient implementation.</div></section>
+
+<section class="stage"><div class="tag">Step 6 of 12</div><h2>Iteration: carry the current value forward</h2>
+<div class="code">i = 2
+CurrentValue = 2
+while i &lt;= n do
+    CurrentValue = 2 * CurrentValue
+    i = i + 1
+end while</div>
+<div class="grid"><div class="card"><h3>Recursive idea</h3>Ask another function call to compute the previous term.</div><div class="card"><h3>Iterative idea</h3>Keep the current value in a variable and update it inside a loop.</div></div>
+<button id="iterBtn" class="primary">Run Iterative S(5) Step by Step</button><div id="iterOut" class="call">CurrentValue starts at 2.</div>
+<div class="call">For this sequence, iteration can compute the same result while keeping only a small amount of changing state rather than a deep chain of function calls.</div></section>
+
+<section class="stage"><div class="tag">Step 7 of 12</div><h2>Fibonacci needs TWO base cases</h2>
+<div class="math">F(0)=0<br>F(1)=1<br>F(n)=F(n−2)+F(n−1), &nbsp; n&gt;1</div>
+<p>Why are two starting values needed?</p><div class="choices q" data-a="two" data-f="f7"><button data-v="two">Because the recursive rule needs the previous two terms.</button><button data-v="always">Every recursive sequence must have exactly two base cases.</button><button data-v="speed">Two base cases always make code faster.</button></div><div id="f7" class="feedback"></div>
+<div id="fibSeq" class="seq"></div><button id="fibNext" class="primary">Generate Next Fibonacci Term</button><button id="fibReset">Reset</button><div id="fibExplain" class="call">We begin with F(0)=0 and F(1)=1.</div></section>
+
+<section class="stage"><div class="tag">Step 8 of 12</div><h2>Recursive Fibonacci creates repeated work</h2>
+<p>The simple recursive algorithm is:</p><div class="code">F(n)
+    if n &lt;= 1 then return n
+    else return F(n-2) + F(n-1)</div>
+<p>For F(5), click to reveal the branching calls.</p><button id="treeBtn" class="primary">Expand F(5)</button><div id="tree" class="code hidden">F(5)
+├─ F(3)
+│  ├─ F(1)
+│  └─ F(2)
+│     ├─ F(0)
+│     └─ F(1)
+└─ F(4)
+   ├─ F(2)   ← repeated!
+   │  ├─ F(0)
+   │  └─ F(1)
+   └─ F(3)   ← repeated!
+      ├─ F(1)
+      └─ F(2)</div>
+<div class="call"><strong>Two different issues can make naive recursion expensive:</strong> deep call stacks use memory, and branching recursions such as naive Fibonacci also recompute the same values many times.</div></section>
+
+<section class="stage"><div class="tag">Step 9 of 12</div><h2>Iterative Fibonacci remembers only what it needs next</h2>
+<div class="code">F0 = 0
+F1 = 1
+while i &lt;= n:
+    Fn = F0 + F1
+    F0 = F1
+    F1 = Fn</div>
+<button id="fibIter" class="primary">Run F(7) Iteratively</button><div id="fibIterOut" class="call">State: F0=0, F1=1</div>
+<div class="call">Because the next Fibonacci value needs only the previous two values, the loop can update those two stored values repeatedly.</div></section>
+
+<section class="stage"><div class="tag">Step 10 of 12</div><h2>Practice: read a recurrence before coding it</h2>
+<p>Consider:</p><div class="math">T(1)=1<br>T(n)=T(n−1)+3, &nbsp; n&gt;1</div>
+<p>Predict T(4).</p><div class="choices q" data-a="10" data-f="f10"><button data-v="7">7</button><button data-v="10">10</button><button data-v="12">12</button></div><div id="f10" class="feedback"></div>
+<button class="primary" id="showT">Show Construction</button><div id="tout" class="code hidden">T(1)=1
+T(2)=T(1)+3=4
+T(3)=T(2)+3=7
+T(4)=T(3)+3=10</div>
+<div class="call">Before writing C++ or pseudocode, identify: <strong>(1) base case, (2) recursive dependency, (3) what state an iterative version must carry.</strong></div></section>
+
+<section class="stage"><div class="tag">Step 11 of 12</div><h2>Practice: design recursive AND iterative logic</h2>
+<p>Sequence:</p><div class="math">A(1)=1<br>A(n)=A(n−1)+n, &nbsp; n&gt;1</div>
+<div class="grid"><div class="card"><h3>Recursive skeleton</h3><div class="code">A(n)
+ if ______
+   return ______
+ else
+   return ______</div><div class="choices q" data-a="r" data-f="f11a"><button data-v="r">if n=1 return 1; else return A(n−1)+n</button><button data-v="x">if n=1 return n; else return A(n)+1</button></div><div id="f11a" class="feedback"></div></div>
+<div class="card"><h3>Iterative idea</h3><p>Start CurrentValue=1. For i=2 through n, what update should we perform?</p><div class="choices q" data-a="add" data-f="f11b"><button data-v="double">CurrentValue = 2×CurrentValue</button><button data-v="add">CurrentValue = CurrentValue + i</button></div><div id="f11b" class="feedback"></div></div></div></section>
+
+<section class="stage"><div class="tag">Step 12 of 12</div><h2>Mastery: Recursion or Iteration?</h2>
+<table><tr><th>Recursion</th><th>Iteration</th></tr><tr><td>Often closely mirrors a recursive mathematical definition</td><td>Uses loops and explicitly updated state</td></tr><tr><td>Natural for recursively structured problems</td><td>Often avoids deep call stacks</td></tr><tr><td>Function calls may add stack/overhead</td><td>Can be preferable when stack usage/performance matters</td></tr></table>
+<p><strong>Scenario:</strong> You must compute a simple recurrence for an extremely large n, and each term only needs the immediately previous value. Stack usage is a major concern. Which implementation is the more natural choice?</p>
+<div class="choices q" data-a="iteration" data-f="f12"><button data-v="recursion">A direct recursive implementation</button><button data-v="iteration">An iterative loop carrying the current value</button></div><div id="f12" class="feedback"></div>
+<div class="call"><strong>Big picture:</strong> A recursive <em>definition</em> tells us how objects depend on earlier objects. A recursive <em>algorithm</em> implements that dependency by calling itself. An iterative <em>algorithm</em> can often compute the same recurrence using a loop.</div></section>
+
+<div class="nav"><button id="back">← Previous</button><button id="next" class="primary">Next Step →</button></div>
+</main><script>
+const stages=[...document.querySelectorAll('.stage')];let page=0;function show(){stages.forEach((s,i)=>s.classList.toggle('active',i===page));prog.style.width=((page+1)/stages.length*100)+'%';back.disabled=page===0;next.textContent=page===stages.length-1?'Start Over':'Next Step →';window.scrollTo({top:0,behavior:'smooth'})}next.onclick=()=>{page=page===stages.length-1?0:page+1;show()};back.onclick=()=>{if(page)page--;show()};
+document.querySelectorAll('.q').forEach(q=>q.querySelectorAll('button').forEach(b=>b.onclick=()=>{q.querySelectorAll('button').forEach(x=>x.classList.remove('correct','wrong'));let ok=b.dataset.v===q.dataset.a;b.classList.add(ok?'correct':'wrong');let f=document.getElementById(q.dataset.f);f.textContent=ok?'✓ Correct — explain why before continuing.':'Not quite. Trace what information the next value depends on and try again.';f.className='feedback '+(ok?'good':'warn')}));
+let sv=[2];function renderS(){seqS.innerHTML=sv.map((v,i)=>`<div class="term ${i===sv.length-1?'activeTerm':''}">S(${i+1})<br><strong>${v}</strong></div>`).join('')}nextS.onclick=()=>{if(sv.length>=7)return;let old=sv.at(-1),v=2*old;sv.push(v);renderS();sExplain.innerHTML=`S(${sv.length}) = 2 × S(${sv.length-1}) = 2 × ${old} = <strong>${v}</strong>`};resetS.onclick=()=>{sv=[2];renderS();sExplain.textContent='We know S(1)=2 from the base case. Click to use the recurrence relation.'};renderS();
+nslide.oninput=()=>nv.textContent=nslide.value;runStack.onclick=()=>{let n=+nslide.value,frames=[];for(let k=n;k>=1;k--)frames.push(`<div class="frame">S(${k})${k>1?' waits for S('+(k-1)+')':' → base case returns 2'}</div>`);stack.innerHTML=frames.join('');stackText.innerHTML=`Depth = <strong>${n}</strong> function call${n===1?'':'s'}. Once S(1) returns, the waiting calls can finish in reverse order.`};
+let it=1,cur=2;iterBtn.onclick=()=>{if(it>=5){it=1;cur=2;iterOut.innerHTML='Reset: CurrentValue=2.';return}it++;let old=cur;cur*=2;iterOut.innerHTML=`i=${it}: CurrentValue = 2 × ${old} = <strong>${cur}</strong>${it===5?'<br>S(5)=32. Click again to reset.':''}`};
+let fv=[0,1];function renderF(){fibSeq.innerHTML=fv.map((v,i)=>`<div class="term ${i===fv.length-1?'activeTerm':''}">F(${i})<br><strong>${v}</strong></div>`).join('')}fibNext.onclick=()=>{if(fv.length>=9)return;let a=fv.at(-2),b=fv.at(-1),v=a+b;fv.push(v);renderF();fibExplain.innerHTML=`F(${fv.length-1}) = F(${fv.length-3}) + F(${fv.length-2}) = ${a} + ${b} = <strong>${v}</strong>`};fibReset.onclick=()=>{fv=[0,1];renderF();fibExplain.textContent='We begin with F(0)=0 and F(1)=1.'};renderF();
+treeBtn.onclick=()=>tree.classList.toggle('hidden');let fi=1,f0=0,f1=1;fibIter.onclick=()=>{if(fi>=7){fi=1;f0=0;f1=1;fibIterOut.textContent='Reset: F0=0, F1=1';return}fi++;let fn=f0+f1,old0=f0,old1=f1;f0=f1;f1=fn;fibIterOut.innerHTML=`i=${fi}: Fn=${old0}+${old1}=<strong>${fn}</strong>; then F0←${f0}, F1←${f1}${fi===7?'<br>F(7)=13. Click again to reset.':''}`};showT.onclick=()=>tout.classList.toggle('hidden');show();
+</script></body></html>
