@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Regression Family — Interactive Learning Lab</title>
+<style>
+:root{--bg:#151719;--panel:#222025;--panel2:#191b20;--text:#f7f2f6;--muted:#bbb4bc;--pink:#ff79c6;--pink2:#ffb3de;--blue:#86d7ff;--green:#79e2a5;--yellow:#ffd166;--red:#ff8585;--border:#443943}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif}.wrap{max-width:1080px;margin:auto;padding:28px 20px 70px}h1{color:var(--pink2);font-size:clamp(2rem,5vw,3rem);margin:.15em 0}h2{color:var(--pink2);margin-top:0}h3{color:var(--blue)}p,li{line-height:1.65}.tag{color:var(--pink);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.8rem}.sub,.tiny{color:var(--muted)}
+.progress{height:10px;background:#302c31;border-radius:20px;overflow:hidden;margin:24px 0}.progress div{height:100%;background:linear-gradient(90deg,var(--pink),var(--blue));transition:.25s}.stage{display:none;background:var(--panel);border:1px solid var(--border);border-left:6px solid var(--pink);border-radius:18px;padding:26px}.stage.active{display:block}.call,.math,.code{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:15px;margin:15px 0}.call{border-left:5px solid var(--pink)}.math{text-align:center;font:1.25rem Georgia,serif}.code{font:1rem ui-monospace,Consolas,monospace;white-space:pre-wrap;color:#ffd7f0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:15px}.card h3{margin-top:0}.choices button{display:block;width:100%;text-align:left;margin:9px 0}
+button{font:inherit;min-height:44px;padding:10px 15px;border-radius:10px;border:1px solid #665b65;background:#302b31;color:white;cursor:pointer;font-weight:700}button.primary{background:var(--pink);border-color:var(--pink);color:#25121f}button:disabled{opacity:.4}.correct{background:#173528!important;border-color:var(--green)!important}.wrong{background:#402326!important;border-color:var(--red)!important}.feedback{min-height:25px;font-weight:700}.good{color:var(--green)}.warn{color:var(--yellow)}.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}.nav button{min-width:120px}
+svg{width:100%;height:auto;background:#111418;border:1px solid var(--border);border-radius:12px}.controls{background:var(--panel2);padding:15px;border-radius:12px}.controls label{display:block;margin:12px 0 5px}input[type=range]{width:100%;accent-color:var(--pink)}.coef{display:flex;gap:8px;align-items:flex-end;height:170px;border-bottom:1px solid #777;padding:10px}.bar{flex:1;min-width:25px;background:#86d7ff;border-radius:5px 5px 0 0;position:relative}.bar span{position:absolute;bottom:-28px;width:100%;text-align:center;font-size:.8rem}.bar.zero{height:2px!important;background:var(--pink)}table{width:100%;border-collapse:collapse}th,td{padding:9px;border:1px solid var(--border);text-align:left}th{background:#302b31}.flow{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap}.box{padding:10px 12px;background:#111418;border:1px solid var(--border);border-radius:9px;font-weight:700}.arrow{color:var(--pink);font-size:1.3rem}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.stage{padding:18px}.nav button{min-width:0;flex:1}}
+</style></head><body><main class="wrap">
+<div class="tag">CSCI 3350 • Interactive Learning Lab</div><h1>From Linear Regression to Elastic Net</h1>
+<p class="sub">Learn the family as one story: <strong>fit a line → add curves → control coefficients → shrink → select → combine.</strong></p><div class="progress"><div id="prog"></div></div>
+
+<section class="stage active"><div class="tag">Step 1 of 11</div><h2>Start with Linear Regression</h2>
+<p>We have data points and want a model that predicts <em>y</em> from <em>x</em>.</p><div class="math">ŷ = β₀ + β₁x</div>
+<div class="grid"><div><svg id="linPlot" viewBox="0 0 600 330"></svg></div><div class="controls"><label>Intercept β₀ = <b id="b0v">1.0</b></label><input id="b0" type="range" min="-2" max="5" step=".1" value="1"><label>Slope β₁ = <b id="b1v">0.5</b></label><input id="b1" type="range" min="-1" max="3" step=".1" value=".5"><p>Sum of squared errors (SSE): <strong id="sse"></strong></p><button id="bestLine" class="primary">Show a Better Fit</button></div></div>
+<div class="call"><strong>Goal:</strong> choose β₀ and β₁ so predictions are close to observed y values. The vertical gaps are <strong>residuals</strong>.</div></section>
+
+<section class="stage"><div class="tag">Step 2 of 11</div><h2>Why square the residuals?</h2><div class="math">SSE = Σ(yᵢ − ŷᵢ)²</div>
+<p>Residuals can be positive or negative. If we simply add them, they can cancel. Squaring makes every contribution nonnegative and penalizes large errors more strongly.</p>
+<div class="choices q" data-a="square" data-f="f2"><button data-v="cancel">To make predictions always positive</button><button data-v="square">To prevent positive/negative errors from canceling and penalize large errors</button><button data-v="features">To create more features</button></div><div id="f2" class="feedback"></div>
+<div class="call">Ordinary Least Squares (OLS) finds coefficients that minimize the sum of squared residuals.</div></section>
+
+<section class="stage"><div class="tag">Step 3 of 11</div><h2>What if a straight line is not enough?</h2><p>Some relationships are curved. Polynomial regression adds transformed versions of x as features.</p>
+<div class="math">Degree 1: ŷ = β₀ + β₁x<br><br>Degree 2: ŷ = β₀ + β₁x + β₂x²<br><br>Degree 3: ŷ = β₀ + β₁x + β₂x² + β₃x³</div>
+<div class="grid"><svg id="polyPlot" viewBox="0 0 600 330"></svg><div class="controls"><label>Polynomial degree = <b id="degv">1</b></label><input id="degree" type="range" min="1" max="8" value="1" step="1"><p id="degreeExplain"></p></div></div>
+<div class="call"><strong>Important:</strong> Polynomial regression is still linear regression with respect to the coefficients β. We changed the <em>features</em> by adding x², x³, etc.</div></section>
+
+<section class="stage"><div class="tag">Step 4 of 11</div><h2>More flexibility can become overfitting</h2><p>A high-degree polynomial can bend enough to follow noise in the training data.</p>
+<div class="grid"><div class="card"><h3>Underfitting</h3>Model is too simple to capture the important pattern.</div><div class="card"><h3>Overfitting</h3>Model follows training data too closely and may perform poorly on new data.</div></div>
+<p>Which result is the real goal?</p><div class="choices q" data-a="generalize" data-f="f4"><button data-v="train">The lowest possible training error, no matter what</button><button data-v="generalize">Good performance on unseen/test data</button></div><div id="f4" class="feedback"></div></section>
+
+<section class="stage"><div class="tag">Step 5 of 11</div><h2>Regularization: add a penalty</h2><p>Instead of minimizing prediction error alone, we can also discourage very large coefficients.</p>
+<div class="flow"><span class="box">Prediction Error</span><b class="arrow">+</b><span class="box">Coefficient Penalty</span><b class="arrow">=</b><span class="box">New Objective</span></div>
+<div class="call">The tuning parameter <strong>α (alpha)</strong> controls penalty strength. α = 0 means no regularization. Larger α means stronger pressure to shrink coefficients.</div>
+<p>Why might smaller coefficients help?</p><div class="choices q" data-a="stable" data-f="f5"><button data-v="stable">They can reduce sensitivity to noise and improve generalization</button><button data-v="zero">They always make training error zero</button></div><div id="f5" class="feedback"></div></section>
+
+<section class="stage"><div class="tag">Step 6 of 11</div><h2>Ridge Regression: shrink coefficients</h2><div class="math">Ridge objective = SSE + α Σ βⱼ²</div>
+<p>Move α and watch illustrative coefficients shrink.</p><div class="grid"><div><div id="ridgeBars" class="coef"></div></div><div class="controls"><label>α = <b id="rav">0</b></label><input id="ra" type="range" min="0" max="20" value="0" step=".5"><p id="ridgeText"></p></div></div>
+<div class="call"><strong>Ridge uses an L2 penalty.</strong> It usually shrinks coefficients toward zero but does not force them exactly to zero. It is useful when many features may contribute.</div></section>
+
+<section class="stage"><div class="tag">Step 7 of 11</div><h2>Lasso: shrink AND select</h2><div class="math">Lasso objective = SSE + α Σ |βⱼ|</div>
+<p>Move α. Notice that some illustrative coefficients become exactly zero.</p><div class="grid"><div><div id="lassoBars" class="coef"></div></div><div class="controls"><label>α = <b id="lav">0</b></label><input id="la" type="range" min="0" max="10" value="0" step=".25"><p id="lassoText"></p></div></div>
+<div class="call"><strong>Lasso uses an L1 penalty.</strong> Because coefficients can become exactly zero, Lasso can perform feature selection.</div></section>
+
+<section class="stage"><div class="tag">Step 8 of 11</div><h2>Ridge vs. Lasso</h2>
+<table><tr><th></th><th>Ridge</th><th>Lasso</th></tr><tr><td>Penalty</td><td>L2: Σβ²</td><td>L1: Σ|β|</td></tr><tr><td>Shrink coefficients?</td><td>Yes</td><td>Yes</td></tr><tr><td>Exact zeros?</td><td>Usually no</td><td>Yes, possible</td></tr><tr><td>Intuition</td><td>“How much should each feature be shrunk?”</td><td>“Which features are really needed?”</td></tr></table>
+<p>Suppose you want a sparse model where some features disappear completely. Which is more directly designed for that?</p><div class="choices q" data-a="lasso" data-f="f8"><button data-v="ridge">Ridge</button><button data-v="lasso">Lasso</button></div><div id="f8" class="feedback"></div></section>
+
+<section class="stage"><div class="tag">Step 9 of 11</div><h2>Elastic Net: combine Ridge + Lasso</h2><div class="math">Elastic Net = SSE + α[(1 − r)/2 · Σβⱼ² + r · Σ|βⱼ|]</div>
+<p><strong>r = l1_ratio</strong> controls the mixture.</p><div class="controls"><label>l1_ratio = <b id="env">0.50</b></label><input id="en" type="range" min="0" max="1" value=".5" step=".05"><div id="enText" class="call"></div></div>
+<div class="grid"><div class="card"><h3>r = 0</h3>Ridge-like: L2 side dominates.</div><div class="card"><h3>r = 1</h3>Lasso: L1 side dominates.</div></div>
+<div class="call">Elastic Net is useful when you want both coefficient shrinkage and sparsity, especially when predictors are correlated.</div></section>
+
+<section class="stage"><div class="tag">Step 10 of 11</div><h2>Connect the ideas to scikit-learn</h2>
+<div class="code">LinearRegression()
+
+PolynomialFeatures(degree=2)
+LinearRegression()
+
+Ridge(alpha=...)
+
+Lasso(alpha=...)
+
+ElasticNet(alpha=..., l1_ratio=...)</div>
+<p>Why should Ridge, Lasso, and Elastic Net commonly be used with standardized features?</p><div class="choices q" data-a="fair" data-f="f10"><button data-v="fair">Because the penalty acts on coefficient magnitudes, and feature scale affects those magnitudes</button><button data-v="required">Because Python cannot run them otherwise</button></div><div id="f10" class="feedback"></div>
+<div class="code">Pipeline([
+    ("scaler", StandardScaler()),
+    ("ridge", Ridge(alpha=1.0))
+])</div></section>
+
+<section class="stage"><div class="tag">Step 11 of 11</div><h2>Mastery Check: identify the model</h2>
+<p><strong>Scenario:</strong> You have many correlated predictors. You want shrinkage, but you also want some feature selection. Which model combines L1 and L2 penalties?</p><div class="choices q" data-a="en" data-f="f11"><button data-v="ols">Linear Regression</button><button data-v="poly">Polynomial Regression</button><button data-v="ridge">Ridge</button><button data-v="lasso">Lasso</button><button data-v="en">Elastic Net</button></div><div id="f11" class="feedback"></div>
+<div class="call"><strong>The whole story:</strong><br>Linear Regression → fit a linear relationship.<br>Polynomial Regression → give the linear model curved features.<br>Ridge → shrink coefficients with L2.<br>Lasso → shrink and possibly set coefficients to zero with L1.<br>Elastic Net → combine L1 and L2.</div></section>
+
+<div class="nav"><button id="back">← Previous</button><button id="next" class="primary">Next Step →</button></div>
+</main><script>
+const stages=[...document.querySelectorAll('.stage')];let page=0;function show(){stages.forEach((s,i)=>s.classList.toggle('active',i===page));prog.style.width=((page+1)/stages.length*100)+'%';back.disabled=page===0;next.textContent=page===stages.length-1?'Start Over':'Next Step →';window.scrollTo({top:0,behavior:'smooth'})}next.onclick=()=>{page=page===stages.length-1?0:page+1;show()};back.onclick=()=>{if(page)page--;show()};
+document.querySelectorAll('.q').forEach(q=>q.querySelectorAll('button').forEach(b=>b.onclick=()=>{q.querySelectorAll('button').forEach(x=>x.classList.remove('correct','wrong'));let ok=b.dataset.v===q.dataset.a;b.classList.add(ok?'correct':'wrong');let f=document.getElementById(q.dataset.f);f.textContent=ok?'✓ Correct — explain why before continuing.':'Not quite. Think about the purpose of the model and try again.';f.className='feedback '+(ok?'good':'warn')}));
+const pts=[[1,2],[2,3.2],[3,4.7],[4,5.1],[5,7],[6,7.8],[7,9.4],[8,10.2]], sx=x=>50+x*62, sy=y=>290-y*23;
+function drawLine(){let a=+b0.value,b=+b1.value;b0v.textContent=a.toFixed(1);b1v.textContent=b.toFixed(1);let err=0,s='<line x1="40" y1="290" x2="570" y2="290" stroke="#777"/><line x1="50" y1="25" x2="50" y2="300" stroke="#777"/>';pts.forEach(p=>{let yh=a+b*p[0];err+=(p[1]-yh)**2;s+=`<line x1="${sx(p[0])}" y1="${sy(p[1])}" x2="${sx(p[0])}" y2="${sy(yh)}" stroke="#ff79c6" stroke-width="2"/><circle cx="${sx(p[0])}" cy="${sy(p[1])}" r="6" fill="#ffd166"/>`});s+=`<line x1="${sx(0)}" y1="${sy(a)}" x2="${sx(8.4)}" y2="${sy(a+b*8.4)}" stroke="#86d7ff" stroke-width="4"/>`;linPlot.innerHTML=s;sse.textContent=err.toFixed(2)}b0.oninput=b1.oninput=drawLine;bestLine.onclick=()=>{b0.value=.7;b1.value=1.18;drawLine()};drawLine();
+const curvePts=[[.5,7],[1.5,5.3],[2.5,3.7],[3.5,3],[4.5,3.4],[5.5,4.8],[6.5,7],[7.5,10]];
+function drawPoly(){let d=+degree.value;degv.textContent=d;let s='<line x1="40" y1="290" x2="570" y2="290" stroke="#777"/><line x1="50" y1="25" x2="50" y2="300" stroke="#777"/>';curvePts.forEach(p=>s+=`<circle cx="${sx(p[0])}" cy="${sy(p[1])}" r="6" fill="#ffd166"/>`);let path='';for(let x=.3;x<8.3;x+=.08){let y;if(d===1)y=3.4+.55*x;else{let base=.38*(x-3.7)*(x-3.7)+2.8;let wig=d>4?.18*(d-4)*Math.sin(x*2.2):0;y=base+wig}path+=(path?' L ':'M ')+sx(x)+' '+sy(y)}s+=`<path d="${path}" fill="none" stroke="#86d7ff" stroke-width="4"/>`;polyPlot.innerHTML=s;degreeExplain.textContent=d===1?'Degree 1: a straight line may underfit this curved pattern.':d<=3?'More flexible: the model can represent curvature.':d<=5?'Increasing flexibility: watch for whether complexity is actually needed.':'Very flexible: high-degree models can begin following noise and overfit.'}degree.oninput=drawPoly;drawPoly();
+const base=[1.5,1.05,.75,.42,.22];function bars(el,vals){el.innerHTML=vals.map((v,i)=>`<div class="bar ${v<.025?'zero':''}" style="height:${Math.max(2,v*85)}px"><span>β${i+1}<br>${v.toFixed(2)}</span></div>`).join('')}
+function ridge(){let a=+ra.value;rav.textContent=a.toFixed(1);let vals=base.map(v=>v/(1+a*.18));bars(ridgeBars,vals);ridgeText.textContent=a===0?'No penalty: coefficients are unchanged.':'As α increases, all coefficients are pulled toward zero.'}ra.oninput=ridge;ridge();
+function lasso(){let a=+la.value;lav.textContent=a.toFixed(2);let vals=base.map(v=>Math.max(0,v-a*.13));bars(lassoBars,vals);let z=vals.filter(v=>v===0).length;lassoText.textContent=z?z+' illustrative coefficient(s) are now exactly zero → feature selection.':'Increase α to see coefficients shrink; smaller ones will reach zero first.'}la.oninput=lasso;lasso();
+function elastic(){let r=+en.value;env.textContent=r.toFixed(2);enText.innerHTML=r===0?'<strong>Pure L2 side:</strong> Ridge-like behavior.':r===1?'<strong>Pure L1 side:</strong> Lasso behavior.':`<strong>Mixture:</strong> ${(r*100).toFixed(0)}% toward the L1 side and ${((1-r)*100).toFixed(0)}% toward the L2 side.`}en.oninput=elastic;elastic();show();
+</script></body></html>
