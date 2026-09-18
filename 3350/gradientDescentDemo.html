@@ -66,7 +66,19 @@ input[type=range]{width:100%;accent-color:var(--pink)}.tiny{color:var(--muted);f
 <circle cx="250" cy="185" r="10" fill="#ff79c6"/><text x="205" y="165" fill="white" font-size="17">Start β = 2</text>
 <circle cx="320" cy="278" r="8" fill="#7fe0a8"/><text x="333" y="262" fill="white" font-size="16">best β = 3</text>
 <text x="565" y="310" fill="#aeb8c4">β</text><text x="18" y="35" fill="#aeb8c4">Loss</text></svg>
-<p>You are at β = 2. Pretend you do <strong>not</strong> know the bottom is β = 3. What information could tell you which way is downhill?</p>
+<div class="call"><strong>First, what is a slope?</strong><br>
+A slope tells us how a quantity changes when we move a little to the right. On this graph, moving right means increasing <strong>β</strong>, while moving up or down means the <strong>loss</strong> changes.<br><br>
+<strong>Positive slope:</strong> as β increases, the loss increases — the curve is going uphill.<br>
+<strong>Negative slope:</strong> as β increases, the loss decreases — the curve is going downhill.<br>
+<strong>Zero slope:</strong> the graph is flat at that point. At the bottom of this bowl, the slope is 0.<br><br>
+Importantly, the slope describes the curve <strong>where we are standing right now</strong>. We do not need to know where the minimum is yet.
+</div>
+<div class="grid">
+<div class="card"><h3>↗ Positive slope</h3><p>Move right → loss goes up.</p></div>
+<div class="card"><h3>↘ Negative slope</h3><p>Move right → loss goes down.</p></div>
+</div>
+<p>You are at β = 2. Look at the curve near that point. If you move β slightly to the right, the loss goes down. Therefore the local slope is <strong>negative</strong>.</p>
+<p>Now pretend you do <strong>not</strong> know the bottom is β = 3. What information could tell you which way is downhill?</p>
 <div class="choices q" data-answer="slope" data-feedback="fb4"><button data-v="random">Choose randomly</button><button data-v="slope">Look at the local slope</button><button data-v="largest">Always make β larger</button></div><div id="fb4" class="feedback"></div>
 </section>
 
@@ -104,7 +116,37 @@ input[type=range]{width:100%;accent-color:var(--pink)}.tiny{color:var(--muted);f
 <p>The gradient tells us <strong>which direction</strong>. The learning rate η controls <strong>how far</strong> we move.</p>
 <label>Learning rate η = <b id="lrval">0.01</b></label><input id="lr" type="range" min=".001" max=".13" value=".01" step=".001">
 <div id="lrout" class="call"></div>
-<div class="call">Too small → slow. A useful size → efficient. Too large → overshoot or diverge.</div>
+
+<div class="grid">
+<div class="card">
+<h3>What does “converge” mean?</h3>
+<p><strong>Converge</strong> means the parameter values get closer and closer to a stable best value.</p>
+<p>In our example, the best value is β = 3. A converging sequence might look like:</p>
+<div class="math">2.00 → 2.18 → 2.33 → 2.45 → 2.55 → ... → 3.00</div>
+<p>The steps become smaller, β settles near 3, and the loss approaches 0.</p>
+</div>
+
+<div class="card">
+<h3>What does “diverge” mean?</h3>
+<p><strong>Diverge</strong> means the updates do not settle near the minimum. Instead, they move farther away or become increasingly unstable.</p>
+<p>For example, with a learning rate that is too large, β might jump back and forth:</p>
+<div class="math">2.0 → 4.5 → 0.8 → 6.2 → −1.5 → ...</div>
+<p>The jumps become larger rather than smaller, so the loss may increase instead of approaching 0.</p>
+</div>
+</div>
+
+<div class="call"><strong>Think of walking down a valley:</strong><br><br>
+<strong>Convergence</strong> = your steps eventually bring you closer and closer to the bottom. ✓<br>
+<strong>Divergence</strong> = your steps are so large that you keep jumping across the valley and farther away. ✗<br><br>
+<strong>Overshooting is not automatically divergence.</strong> Gradient descent can cross the minimum several times and still converge if those jumps become smaller over time.
+</div>
+
+<div class="call"><strong>Learning-rate summary:</strong><br>
+η too small → converges, but slowly.<br>
+η appropriate → converges efficiently.<br>
+η somewhat large → may oscillate across the minimum but can still converge.<br>
+η too large → oscillations grow and the algorithm diverges.
+</div>
 </section>
 
 <section class="stage">
