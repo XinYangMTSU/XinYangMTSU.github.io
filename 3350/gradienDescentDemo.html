@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gradient Descent — Learn It Step by Step</title>
+<style>
+:root{--bg:#12161b;--panel:#1d232b;--panel2:#151a20;--text:#f4f7fa;--muted:#aeb8c4;--pink:#ff79c6;--blue:#82d4ff;--green:#7fe0a8;--yellow:#ffd166;--red:#ff8080;--border:#394451}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif}.wrap{max-width:1050px;margin:auto;padding:28px 20px 70px}
+h1{font-size:clamp(2rem,5vw,3.2rem);margin:.15em 0;color:var(--pink)}h2{margin-top:0}p{line-height:1.65}.sub{color:var(--muted);font-size:1.08rem}
+.progress{height:10px;background:#2b333d;border-radius:20px;overflow:hidden;margin:24px 0}.progress div{height:100%;background:linear-gradient(90deg,var(--pink),var(--blue));transition:.25s}
+.stage{display:none;background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:26px}.stage.active{display:block}.tag{color:var(--blue);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.8rem}
+.math{font:1.35rem Georgia,serif;text-align:center;background:#101419;border:1px solid var(--border);padding:16px;border-radius:12px;margin:16px 0}.call{background:var(--panel2);border-left:5px solid var(--pink);padding:15px 17px;border-radius:10px;margin:16px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:16px}.card h3{margin-top:0;color:var(--blue)}
+button{font:inherit;min-height:44px;padding:10px 15px;border-radius:10px;border:1px solid #647180;background:#29323c;color:white;cursor:pointer;font-weight:700}button.primary{background:var(--pink);border-color:var(--pink);color:#26141f}button:disabled{opacity:.4;cursor:not-allowed}.choices button{display:block;width:100%;text-align:left;margin:9px 0}.correct{background:#173528!important;border-color:var(--green)!important}.wrong{background:#402326!important;border-color:var(--red)!important}.feedback{font-weight:700;min-height:26px}.good{color:var(--green)}.warn{color:var(--yellow)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}.nav button{min-width:120px}
+.flow{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin:18px 0}.flow span{background:#101419;border:1px solid var(--border);padding:10px 12px;border-radius:9px}.arrow{color:var(--pink);font-size:1.3rem}
+.demo{display:grid;grid-template-columns:1fr 1fr;gap:18px}.stats{background:var(--panel2);border-radius:12px;padding:15px}.row{display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:9px}.row b{color:var(--blue)}
+svg{width:100%;height:auto;background:#101419;border-radius:12px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;margin-top:15px;font-size:.92rem}th,td{border:1px solid var(--border);padding:8px;text-align:right}th{background:#27303a}
+input[type=range]{width:100%;accent-color:var(--pink)}.tiny{color:var(--muted);font-size:.92rem}
+@media(max-width:700px){.grid,.demo{grid-template-columns:1fr}.stage{padding:19px}.nav button{min-width:0;flex:1}}
+</style></head>
+<body><main class="wrap">
+<div class="tag">CSCI 3350 • Interactive Learning Lab</div>
+<h1>Gradient Descent</h1>
+<p class="sub">Do not memorize the formula. Build the idea yourself: <strong>prediction → error → loss → slope → update → repeat.</strong></p>
+<div class="progress"><div id="prog"></div></div>
+
+<section class="stage active">
+<div class="tag">Step 1 of 9</div><h2>Start with a real prediction problem</h2>
+<p>Suppose one student studies <strong>3 hours</strong> and actually scores <strong>9 points</strong>. We use the simplest model:</p>
+<div class="math">prediction = β × x</div>
+<p>Here, x = 3 hours. β tells us how many score-points the model predicts per study hour.</p>
+<p>If β = 2, what does the model predict?</p>
+<div class="choices q" data-answer="6" data-feedback="fb1">
+<button data-v="5">5</button><button data-v="6">6</button><button data-v="9">9</button></div><div id="fb1" class="feedback"></div>
+<div class="call">This is where β comes from: it is a <strong>model parameter</strong> we want to learn from data.</div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 2 of 9</div><h2>Prediction is not enough — measure the error</h2>
+<p>With β = 2, our prediction is 6, but the real score is 9.</p>
+<div class="math">error = actual − prediction = 9 − 6 = 3</div>
+<p>What should happen if our prediction becomes exactly 9?</p>
+<div class="choices q" data-answer="0" data-feedback="fb2"><button data-v="9">Error becomes 9</button><button data-v="3">Error stays 3</button><button data-v="0">Error becomes 0</button></div><div id="fb2" class="feedback"></div>
+<div class="call">Machine learning needs a numerical way to say, “How bad is this prediction?”</div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 3 of 9</div><h2>Turn error into a loss</h2>
+<p>A common choice is to square the prediction error:</p>
+<div class="math">Loss = (actual − prediction)²</div>
+<p>Since actual = 9 and prediction = β×3:</p>
+<div class="math">L(β) = (9 − 3β)²</div>
+<p>Now try different β values:</p>
+<div class="grid"><div class="card"><h3>β = 1</h3>prediction = 3<br>loss = (9−3)² = <b>36</b></div><div class="card"><h3>β = 2</h3>prediction = 6<br>loss = (9−6)² = <b>9</b></div><div class="card"><h3>β = 3</h3>prediction = 9<br>loss = <b>0</b></div><div class="card"><h3>β = 4</h3>prediction = 12<br>loss = <b>9</b></div></div>
+<div class="call"><strong>Now we have an optimization problem:</strong> find the β that makes the loss as small as possible.</div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 4 of 9</div><h2>See the “bowl” of possible β values</h2>
+<svg viewBox="0 0 620 330" aria-label="Loss curve">
+<line x1="55" y1="280" x2="585" y2="280" stroke="#788592"/><line x1="75" y1="25" x2="75" y2="300" stroke="#788592"/>
+<path d="M105 45 Q315 500 535 45" fill="none" stroke="#82d4ff" stroke-width="5"/>
+<circle cx="250" cy="185" r="10" fill="#ff79c6"/><text x="205" y="165" fill="white" font-size="17">Start β = 2</text>
+<circle cx="320" cy="278" r="8" fill="#7fe0a8"/><text x="333" y="262" fill="white" font-size="16">best β = 3</text>
+<text x="565" y="310" fill="#aeb8c4">β</text><text x="18" y="35" fill="#aeb8c4">Loss</text></svg>
+<p>You are at β = 2. Pretend you do <strong>not</strong> know the bottom is β = 3. What information could tell you which way is downhill?</p>
+<div class="choices q" data-answer="slope" data-feedback="fb4"><button data-v="random">Choose randomly</button><button data-v="slope">Look at the local slope</button><button data-v="largest">Always make β larger</button></div><div id="fb4" class="feedback"></div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 5 of 9</div><h2>The gradient is just the local slope</h2>
+<p>For our loss:</p><div class="math">L(β) = (9 − 3β)²</div>
+<p>Its derivative is:</p><div class="math">dL/dβ = 18β − 54</div>
+<p>At β = 2:</p><div class="math">gradient = 18(2) − 54 = −18</div>
+<div class="grid"><div class="card"><h3>Gradient &lt; 0</h3>As β increases a little, loss goes <strong>down</strong>.</div><div class="card"><h3>Gradient &gt; 0</h3>As β increases a little, loss goes <strong>up</strong>.</div></div>
+<div class="call"><strong>Gradient does not mean “the answer.”</strong> It tells us the slope <em>where we are right now</em>.</div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 6 of 9</div><h2>Why subtract the gradient?</h2>
+<p>The gradient points toward increasing loss — uphill. We want downhill, so we go in the opposite direction.</p>
+<div class="math">βnew = βold − η × gradient</div>
+<p>Let β = 2 and choose a small learning rate η = 0.01:</p>
+<div class="math">βnew = 2 − 0.01(−18) = 2.18</div>
+<p>What happened?</p>
+<div class="flow"><span>β: 2</span><b class="arrow">→</b><span>gradient: −18</span><b class="arrow">→</b><span>move +0.18</span><b class="arrow">→</b><span>β: 2.18</span></div>
+<div class="call">Old loss = 9. New loss ≈ <strong>6.05</strong>. One small update made the model better.</div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 7 of 9</div><h2>Now YOU are gradient descent</h2>
+<p>Click one step repeatedly. Do not click quickly—watch the relationship among β, gradient, and loss.</p>
+<div class="demo"><svg id="plot" viewBox="0 0 620 330"></svg><div class="stats">
+<div class="row"><span>Iteration</span><b id="iter">0</b></div><div class="row"><span>β</span><b id="beta">2.0000</b></div><div class="row"><span>Prediction (3β)</span><b id="pred">6.0000</b></div><div class="row"><span>Gradient</span><b id="grad">−18.0000</b></div><div class="row"><span>Loss</span><b id="loss">9.0000</b></div>
+<p><button class="primary" id="one">Take ONE Step</button> <button id="reset">Reset</button></p><p class="tiny" id="explain"></p></div></div>
+<table><thead><tr><th>i</th><th>β old</th><th>gradient</th><th>β new</th><th>loss new</th></tr></thead><tbody id="hist"></tbody></table>
+</section>
+
+<section class="stage">
+<div class="tag">Step 8 of 9</div><h2>What does the learning rate do?</h2>
+<p>The gradient tells us <strong>which direction</strong>. The learning rate η controls <strong>how far</strong> we move.</p>
+<label>Learning rate η = <b id="lrval">0.01</b></label><input id="lr" type="range" min=".001" max=".13" value=".01" step=".001">
+<div id="lrout" class="call"></div>
+<div class="call">Too small → slow. A useful size → efficient. Too large → overshoot or diverge.</div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 9 of 9</div><h2>Can you explain gradient descent now?</h2>
+<p>Which description is best?</p>
+<div class="choices q" data-answer="best" data-feedback="fb9">
+<button data-v="magic">It directly calculates the best parameter in one formula.</button>
+<button data-v="best">It repeatedly uses the local slope to change parameters in a direction that reduces loss.</button>
+<button data-v="random">It randomly changes parameters until something works.</button></div><div id="fb9" class="feedback"></div>
+<div class="flow"><span>Make prediction</span><b class="arrow">→</b><span>Calculate loss</span><b class="arrow">→</b><span>Find gradient</span><b class="arrow">→</b><span>Update β</span><b class="arrow">→</b><span>Repeat</span></div>
+<div class="math">β ← β − η ∇L(β)</div>
+<div class="call"><strong>One-sentence understanding:</strong> Gradient descent is a repeated process for adjusting model parameters so that the model's loss becomes smaller.</div>
+</section>
+
+<div class="nav"><button id="back">← Previous</button><button class="primary" id="next">Next Step →</button></div>
+</main>
+<script>
+const stages=[...document.querySelectorAll('.stage')],prog=document.getElementById('prog');let page=0;
+function show(){stages.forEach((s,i)=>s.classList.toggle('active',i===page));prog.style.width=((page+1)/stages.length*100)+'%';back.disabled=page===0;next.textContent=page===stages.length-1?'Start Over':'Next Step →';window.scrollTo({top:0,behavior:'smooth'})}
+next.addEventListener('click',()=>{page=page===stages.length-1?0:page+1;show()});back.addEventListener('click',()=>{if(page>0)page--;show()});
+document.querySelectorAll('.q').forEach(q=>q.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{q.querySelectorAll('button').forEach(x=>x.classList.remove('correct','wrong'));let ok=b.dataset.v===q.dataset.answer;b.classList.add(ok?'correct':'wrong');let f=document.getElementById(q.dataset.feedback);f.textContent=ok?'✓ Correct — continue when you are ready.':'Not quite. Think about what each quantity means and try again.';f.className='feedback '+(ok?'good':'warn')})));
+let B=2,I=0;const eta=.01;
+function L(b){return (9-3*b)**2}function G(b){return 18*b-54}function sx(b){return 75+b*105}function sy(l){return 280-Math.min(l,40)*5.8}
+function draw(){let pts='';for(let b=.3;b<=4.7;b+=.04)pts+=sx(b)+','+sy(L(b))+' ';plot.innerHTML='<line x1="55" y1="280" x2="585" y2="280" stroke="#788592"/><line x1="75" y1="25" x2="75" y2="300" stroke="#788592"/><polyline points="'+pts+'" fill="none" stroke="#82d4ff" stroke-width="4"/><circle cx="'+sx(B)+'" cy="'+sy(L(B))+'" r="10" fill="#ff79c6"/><text x="'+(sx(B)+12)+'" y="'+(sy(L(B))-9)+'" fill="white" font-size="15">β='+B.toFixed(3)+'</text>'}
+function stats(){iter.textContent=I;beta.textContent=B.toFixed(4);pred.textContent=(3*B).toFixed(4);grad.textContent=G(B).toFixed(4);loss.textContent=L(B).toFixed(4);draw()}
+one.addEventListener('click',()=>{let old=B,g=G(B);B=old-eta*g;I++;hist.insertAdjacentHTML('afterbegin','<tr><td>'+I+'</td><td>'+old.toFixed(4)+'</td><td>'+g.toFixed(4)+'</td><td>'+B.toFixed(4)+'</td><td>'+L(B).toFixed(4)+'</td></tr>');explain.textContent='βnew = '+old.toFixed(4)+' − 0.01 × ('+g.toFixed(4)+') = '+B.toFixed(4)+'. Loss is now '+L(B).toFixed(4)+'.';stats()});
+reset.addEventListener('click',()=>{B=2;I=0;hist.innerHTML='';explain.textContent='';stats()});
+function lrDemo(){let e=+lr.value,b=2,a=[];lrval.textContent=e.toFixed(3);for(let i=0;i<5;i++){b-=e*G(b);a.push(b.toFixed(3))}let msg=e<.005?'Very small steps: it moves toward 3, but slowly.':e<.055?'Good range for this example: it approaches 3.':e<.111?'Large steps: it crosses the minimum and oscillates, though it may still converge.':'Too large for this example: the oscillations grow and the algorithm diverges.';lrout.innerHTML='<strong>'+msg+'</strong><br><span class="tiny">β values: 2.000 → '+a.join(' → ')+'</span>'}
+lr.addEventListener('input',lrDemo);lrDemo();stats();show();
+</script></body></html>
