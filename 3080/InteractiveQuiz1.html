@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CSCI 3080 Quiz — Mathematical Logic, Proofs & Induction</title>
+<style>
+:root{--bg:#151719;--panel:#222025;--panel2:#191b20;--text:#f7f2f6;--muted:#bbb4bc;--pink:#ff79c6;--pink2:#ffb3de;--blue:#86d7ff;--green:#79e2a5;--yellow:#ffd166;--red:#ff8585;--border:#443943}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif}
+.wrap{max-width:960px;margin:auto;padding:28px 20px 70px}h1{color:var(--pink2);font-size:clamp(2rem,5vw,3rem);margin:.15em 0}h2{color:var(--pink2);margin-top:0}h3{color:var(--blue)}
+p{line-height:1.6}.tag{color:var(--pink);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.8rem}.sub,.muted{color:var(--muted)}
+.top{display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap}.scorebox{background:var(--panel2);border:1px solid var(--border);padding:10px 14px;border-radius:10px;font-weight:800}
+.progress{height:10px;background:#302c31;border-radius:20px;overflow:hidden;margin:20px 0}.progress div{height:100%;background:linear-gradient(90deg,var(--pink),var(--blue));transition:.25s}
+.card{background:var(--panel);border:1px solid var(--border);border-left:6px solid var(--pink);border-radius:18px;padding:26px}.chapter{color:var(--blue);font-weight:800}.qnum{color:var(--muted);font-size:.9rem}
+.math,.call{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:15px;margin:15px 0}.math{text-align:center;font:1.25rem Georgia,serif}.call{border-left:5px solid var(--pink)}
+.options{display:grid;gap:10px;margin:18px 0}.options button{width:100%;text-align:left}.option.correct{background:#173528;border-color:var(--green)}.option.wrong{background:#402326;border-color:var(--red)}
+button{font:inherit;min-height:46px;padding:11px 15px;border-radius:10px;border:1px solid #665b65;background:#302b31;color:white;cursor:pointer;font-weight:700}button.primary{background:var(--pink);border-color:var(--pink);color:#25121f}button:disabled{opacity:.45;cursor:not-allowed}
+input[type=text]{width:100%;font:inherit;font-size:1rem;padding:13px;border-radius:10px;border:1px solid #665b65;background:#111418;color:white;margin:10px 0}input:focus,button:focus{outline:3px solid #86d7ff55;outline-offset:2px}
+.feedback{min-height:55px;padding:13px;border-radius:10px;margin-top:12px;display:none}.feedback.good{display:block;background:#173528;border:1px solid var(--green)}.feedback.bad{display:block;background:#402326;border:1px solid var(--red)}
+.actions{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:20px}.hidden{display:none!important}
+.result{background:var(--panel);border:1px solid var(--border);border-left:6px solid var(--green);border-radius:18px;padding:28px;text-align:center}.big{font-size:3rem;color:var(--pink2);font-weight:900}.breakdown{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}.mini{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:14px}.review{text-align:left;margin-top:20px}.reviewItem{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:13px;margin:9px 0}.yes{color:var(--green)}.no{color:var(--red)}
+@media(max-width:650px){.card{padding:18px}.breakdown{grid-template-columns:1fr}.actions button{flex:1}}
+</style>
+</head>
+<body><main class="wrap">
+<div id="quiz">
+<div class="top"><div><div class="tag">CSCI 3080 • Interactive Quiz</div><h1>Logic, Proofs & Induction</h1></div><div class="scorebox" id="scoreBox">Score: 0 / 0</div></div>
+<p class="sub">Chapter 1: Mathematical Logic • Chapter 2: Proof Techniques & First Principle of Induction</p>
+<div class="progress"><div id="progress"></div></div>
+<div class="card">
+<div class="qnum" id="qnum"></div><div class="chapter" id="chapter"></div><h2 id="question"></h2>
+<div id="extra"></div><div id="answerArea"></div><div id="feedback" class="feedback" aria-live="polite"></div>
+<div class="actions"><button id="prev">← Previous</button><button id="check" class="primary">Check Answer</button><button id="next" class="primary" disabled>Next →</button></div>
+</div></div>
+<div id="results" class="hidden"></div>
+</main>
+<script>
+const questions=[
+{c:"Chapter 1 • Propositions",t:"mc",q:"Which of the following is a proposition?",o:["Please close the door.","x + 2 = 5","7 is an odd number.","What time is it?"],a:2,e:"A proposition is a declarative statement that has a definite truth value. “7 is an odd number” is true, so it is a proposition."},
+{c:"Chapter 1 • Propositional Variables",t:"fill",q:"A letter such as p, q, or r that represents a proposition is called a propositional ______.",a:["variable"],e:"The missing word is variable. A propositional variable represents a proposition."},
+{c:"Chapter 1 • Logical Connectives",t:"mc",q:"Which symbol represents conjunction (“and”)?",o:["∨","∧","→","¬"],a:1,e:"The conjunction connective is ∧. Thus p ∧ q means “p and q.”"},
+{c:"Chapter 1 • Truth Tables",t:"mc",q:"If p is True and q is False, what is the truth value of p → q?",o:["True","False","Cannot be determined","Both True and False"],a:1,e:"An implication p → q is false exactly when p is true and q is false."},
+{c:"Chapter 1 • Translation",t:"mc",q:"Let p = “I study” and q = “I pass the quiz.” Which expression means “If I study, then I pass the quiz”?",o:["p ∧ q","p ∨ q","p → q","q → p"],a:2,e:"“If p, then q” translates to p → q."},
+{c:"Chapter 1 • Translation",t:"mc",q:"Let p = “It is raining” and q = “I bring an umbrella.” Which expression means “It is raining and I do not bring an umbrella”?",o:["p ∧ ¬q","¬p ∧ q","p → q","p ∨ q"],a:0,e:"“It is raining” gives p, “do not bring an umbrella” gives ¬q, and “and” gives ∧."},
+{c:"Chapter 1 • Tautology",t:"mc",q:"Which expression is a tautology?",o:["p ∧ ¬p","p ∨ ¬p","p ∧ q","¬(p ∨ ¬p)"],a:1,e:"p ∨ ¬p is true whether p is true or false, so it is a tautology."},
+{c:"Chapter 1 • Contradiction",t:"fill",q:"A proposition that is false for every possible assignment of truth values is called a ______.",a:["contradiction"],e:"The missing word is contradiction."},
+{c:"Chapter 1 • De Morgan's Laws",t:"mc",q:"Using De Morgan's law, ¬(p ∧ q) is equivalent to:",o:["¬p ∧ ¬q","¬p ∨ ¬q","p ∨ q","p → q"],a:1,e:"De Morgan's law changes AND to OR while negating both components: ¬(p ∧ q) ≡ ¬p ∨ ¬q."},
+{c:"Chapter 1 • De Morgan's Laws",t:"mc",q:"Using De Morgan's law, ¬(p ∨ q) is equivalent to:",o:["¬p ∨ ¬q","¬p ∧ ¬q","p ∧ q","¬p → q"],a:1,e:"Negating an OR gives the AND of the negations: ¬(p ∨ q) ≡ ¬p ∧ ¬q."},
+{c:"Chapter 1 • Tautological Equivalence",t:"mc",q:"Which expression is equivalent to p → q?",o:["p ∨ q","¬p ∨ q","p ∧ ¬q","¬p ∧ q"],a:1,e:"The implication equivalence is p → q ≡ ¬p ∨ q."},
+{c:"Chapter 1 • Valid Arguments",t:"mc",q:"Given p → q and p, which conclusion follows by Modus Ponens?",o:["¬q","q","¬p","q → p"],a:1,e:"Modus Ponens has the form p → q, p, therefore q."},
+{c:"Chapter 1 • Inference Rules",t:"mc",q:"Given p → q and ¬q, what can be concluded by Modus Tollens?",o:["p","q","¬p","p ∧ q"],a:2,e:"Modus Tollens has the form p → q, ¬q, therefore ¬p."},
+{c:"Chapter 1 • Inference Rules",t:"mc",q:"Given p → q and q → r, which conclusion follows by Hypothetical Syllogism?",o:["p → r","r → p","p ∧ r","q → p"],a:0,e:"Hypothetical Syllogism chains the implications: p → q and q → r imply p → r."},
+{c:"Chapter 1 • Deduction / Verbal Arguments",t:"mc",q:"If I study, then I understand the material. If I understand the material, then I pass. I study. Which conclusion is valid?",o:["I do not understand the material.","I pass.","I do not study.","No conclusion follows."],a:1,e:"The two implications can be chained, and the fact that I study then leads to the conclusion that I pass."},
+{c:"Chapter 2 • Disproof",t:"mc",q:"To disprove the statement “Every animal with wings is a bird,” what is sufficient?",o:["Show that one bird has wings.","Find one animal with wings that is not a bird.","List every type of bird.","Prove that most animals do not have wings."],a:1,e:"One counterexample is sufficient to disprove a universal statement."},
+{c:"Chapter 2 • Exhaustive Proof",t:"mc",q:"Suppose n is an integer and 0 < n < 5. Which values must be checked in an exhaustive proof?",o:["0, 1, 2, 3, 4","1, 2, 3, 4","1, 2, 3, 4, 5","All positive integers"],a:1,e:"The integers strictly between 0 and 5 are exactly 1, 2, 3, and 4."},
+{c:"Chapter 2 • Direct Proof",t:"mc",q:"To directly prove P → Q, what is the usual starting point?",o:["Assume ¬Q.","Assume Q.","Assume P.","Assume P and ¬Q."],a:2,e:"A direct proof assumes the hypothesis P and logically derives the conclusion Q."},
+{c:"Chapter 2 • Contraposition",t:"mc",q:"What is the contrapositive of P → Q?",o:["Q → P","¬P → ¬Q","¬Q → ¬P","P → ¬Q"],a:2,e:"The contrapositive of P → Q is ¬Q → ¬P, and the two statements are logically equivalent."},
+{c:"Chapter 2 • Contraposition",t:"fill",q:"If Q is x > 0, then ¬Q is x ______ 0. Enter the comparison symbol.",a:["<=","≤"],e:"The answer is ≤. The negation of x > 0 includes both negative values and equality: x ≤ 0."},
+{c:"Chapter 2 • Contradiction",t:"mc",q:"To prove P → Q by contradiction, which assumptions are used together?",o:["P and Q","¬P and Q","P and ¬Q","¬P and ¬Q"],a:2,e:"For contradiction, assume the hypothesis P and the negation of the desired conclusion ¬Q, then derive an impossibility."},
+{c:"Chapter 2 • Induction",t:"mc",q:"Which situation most naturally suggests mathematical induction?",o:["Prove one particular number is prime.","Prove a statement for all integers n ≥ 1.","Find one counterexample.","Solve one equation for x."],a:1,e:"Induction is especially appropriate for statements claimed to hold for every integer beginning at a specified starting value."},
+{c:"Chapter 2 • Induction Base Case",t:"mc",q:"If a claim is stated for every integer n ≥ 4, which base case should normally be proved first?",o:["P(0)","P(1)","P(3)","P(4)"],a:3,e:"The base case should begin at the first integer covered by the claim, which is n = 4."},
+{c:"Chapter 2 • Induction Hypothesis",t:"fill",q:"During the induction step, we assume P(k) is true and try to prove P(______ ) is true.",a:["k+1","k + 1"],e:"The missing expression is k+1. The induction step proves P(k) → P(k+1)."},
+{c:"Chapter 2 • Induction",t:"mc",q:"To prove 1 + 3 + 5 + ··· + (2n−1) = n² by induction, what new term is added when moving from P(k) to P(k+1)?",o:["2k−1","2k","2k+1","(k+1)²"],a:2,e:"The next odd term is 2(k+1)−1 = 2k+1."},
+{c:"Chapter 2 • Induction",t:"mc",q:"Why are both the base case and the induction step necessary?",o:["The base case proves every value by itself.","The induction step proves the first case.","The base case starts the chain and the induction step carries truth from one case to the next.","They are two names for the same step."],a:2,e:"The base case establishes a starting truth, while P(k) → P(k+1) propagates that truth to subsequent integers."}
+];
+
+let i=0, answered=Array(questions.length).fill(false), correct=Array(questions.length).fill(false), responses=Array(questions.length).fill(null);
+const $=id=>document.getElementById(id);
+function norm(s){return String(s).trim().toLowerCase().replace(/\s+/g,' ')}
+function render(){
+ const q=questions[i]; $("qnum").textContent=`Question ${i+1} of ${questions.length}`;$("chapter").textContent=q.c;$("question").textContent=q.q;$("extra").innerHTML="";
+ let area=$("answerArea");area.innerHTML="";
+ if(q.t==="mc"){let d=document.createElement("div");d.className="options";q.o.forEach((x,j)=>{let b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+j)+". "+x;b.dataset.j=j;b.addEventListener("click",()=>{if(answered[i])return;d.querySelectorAll("button").forEach(z=>z.classList.remove("selected"));b.classList.add("selected");responses[i]=j});d.appendChild(b)});area.appendChild(d)}
+ else{let inp=document.createElement("input");inp.type="text";inp.placeholder="Type your answer here";inp.value=responses[i]||"";inp.addEventListener("input",()=>responses[i]=inp.value);area.appendChild(inp)}
+ $("feedback").className="feedback";$("feedback").innerHTML="";$("check").disabled=answered[i];$("next").disabled=!answered[i];$("prev").disabled=i===0;
+ if(answered[i])showAnswered();
+ $("progress").style.width=((i+1)/questions.length*100)+"%";updateScore();
+}
+function showAnswered(){
+ const q=questions[i],fb=$("feedback");fb.className="feedback "+(correct[i]?"good":"bad");fb.innerHTML=(correct[i]?"✓ Correct. ":"✗ Not quite. ")+q.e;
+ if(q.t==="mc"){document.querySelectorAll(".option").forEach((b,j)=>{if(j===q.a)b.classList.add("correct");if(j===responses[i]&&j!==q.a)b.classList.add("wrong");b.disabled=true})}
+ else{$("answerArea").querySelector("input").disabled=true}
+}
+function check(){
+ const q=questions[i];if(responses[i]===null||String(responses[i]).trim()===""){let fb=$("feedback");fb.className="feedback bad";fb.textContent="Please choose or enter an answer first.";return}
+ correct[i]=q.t==="mc"?responses[i]===q.a:q.a.some(a=>norm(a)===norm(responses[i]));answered[i]=true;showAnswered();$("check").disabled=true;$("next").disabled=false;updateScore();
+}
+function updateScore(){let done=answered.filter(Boolean).length,sc=correct.filter(Boolean).length;$("scoreBox").textContent=`Score: ${sc} / ${done}`}
+$("check").addEventListener("click",check);$("prev").addEventListener("click",()=>{if(i>0){i--;render()}});
+$("next").addEventListener("click",()=>{if(i<questions.length-1){i++;render()}else finish()});
+function finish(){
+ $("quiz").classList.add("hidden");let sc=correct.filter(Boolean).length,p=Math.round(sc/questions.length*100),logic=0,logicN=0,proof=0,proofN=0;
+ questions.forEach((q,j)=>{if(q.c.startsWith("Chapter 1")){logicN++;if(correct[j])logic++}else{proofN++;if(correct[j])proof++}});
+ let msg=p>=90?"Excellent mastery.":p>=80?"Strong work. Review the few missed concepts.":p>=70?"Good foundation. Review the missed topics before the quiz.":"More review is recommended. Use the interactive learning labs, then try again.";
+ let missed=questions.map((q,j)=>!correct[j]?`<div class="reviewItem"><strong>Q${j+1}: ${q.c}</strong><br>${q.q}<br><span class="no">Review:</span> ${q.e}</div>`:"").join("");
+ $("results").innerHTML=`<div class="result"><div class="tag">Quiz Complete</div><h1>Your Result</h1><div class="big">${sc}/${questions.length}</div><h2>${p}%</h2><p>${msg}</p><div class="breakdown"><div class="mini"><strong>Chapter 1 — Logic</strong><br>${logic}/${logicN}</div><div class="mini"><strong>Chapter 2 — Proofs & Induction</strong><br>${proof}/${proofN}</div></div><button class="primary" id="restart">Try Again</button>${missed?`<div class="review"><h3>Topics to Review</h3>${missed}</div>`:'<p class="yes"><strong>You answered every question correctly.</strong></p>'}</div>`;
+ $("results").classList.remove("hidden");$("restart").addEventListener("click",()=>{i=0;answered.fill(false);correct.fill(false);responses.fill(null);$("results").classList.add("hidden");$("quiz").classList.remove("hidden");render();window.scrollTo(0,0)});window.scrollTo(0,0)
+}
+render();
+</script></body></html>
