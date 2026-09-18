@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Machine Learning Pipeline — Learn It Step by Step</title>
+<style>
+:root{--bg:#151719;--panel:#222025;--panel2:#191b20;--text:#f7f2f6;--muted:#bcb4bc;--pink:#ff79c6;--pink2:#ffb3de;--blue:#86d7ff;--green:#79e2a5;--yellow:#ffd166;--red:#ff8585;--border:#443943}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif}.wrap{max-width:1050px;margin:auto;padding:28px 20px 70px}
+h1{color:var(--pink2);font-size:clamp(2rem,5vw,3.1rem);margin:.15em 0}h2{margin-top:0;color:var(--pink2)}h3{color:var(--blue)}p,li{line-height:1.65}.sub,.tiny{color:var(--muted)}.tag{color:var(--pink);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.8rem}
+.progress{height:10px;background:#302c31;border-radius:20px;overflow:hidden;margin:24px 0}.progress div{height:100%;background:linear-gradient(90deg,var(--pink),var(--blue));transition:.25s}
+.stage{display:none;background:var(--panel);border:1px solid var(--border);border-left:6px solid var(--pink);border-radius:18px;padding:26px}.stage.active{display:block}
+.call,.code{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:16px;margin:15px 0}.call{border-left:5px solid var(--pink)}.code{font:1rem ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow:auto;color:#ffd7f0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:16px}.card h3{margin-top:0}
+.flow{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin:20px 0}.box{padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:#111418;font-weight:700}.arrow{color:var(--pink);font-size:1.4rem}
+button{font:inherit;min-height:44px;padding:10px 15px;border-radius:10px;border:1px solid #665b65;background:#302b31;color:white;cursor:pointer;font-weight:700}button.primary{background:var(--pink);border-color:var(--pink);color:#25121f}button:disabled{opacity:.4}.choices button{display:block;width:100%;text-align:left;margin:9px 0}.correct{background:#173528!important;border-color:var(--green)!important}.wrong{background:#402326!important;border-color:var(--red)!important}.feedback{min-height:26px;font-weight:700}.good{color:var(--green)}.warn{color:var(--yellow)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}.nav button{min-width:120px}
+.dataset{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:15px 0}.data{padding:10px;border-radius:8px;text-align:center;background:#111418;border:1px solid var(--border)}.train{border-color:var(--blue)}.test{border-color:var(--yellow)}
+.leak{padding:14px;border-radius:10px;background:#3a2026;border:1px solid var(--red)}.safe{padding:14px;border-radius:10px;background:#173528;border:1px solid var(--green)}
+.stepper .pipeStep{opacity:.28;transition:.25s}.stepper .pipeStep.on{opacity:1;border-color:var(--pink)}
+table{width:100%;border-collapse:collapse;margin-top:15px}th,td{padding:9px;border:1px solid var(--border);text-align:center}th{background:#302b31}
+.metric{font-size:1.5rem;color:var(--blue);font-weight:800}.hidden{display:none}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.dataset{grid-template-columns:1fr 1fr}.stage{padding:19px}.nav button{min-width:0;flex:1}}
+</style></head>
+<body><main class="wrap">
+<div class="tag">CSCI 3350 • Interactive Learning Lab</div>
+<h1>What Is a Machine Learning Pipeline?</h1>
+<p class="sub">Build the idea yourself: <strong>split data → learn preprocessing from training data → transform → train model → predict → evaluate.</strong></p>
+<div class="progress"><div id="prog"></div></div>
+
+<section class="stage active">
+<div class="tag">Step 1 of 10</div><h2>Why do we need a pipeline?</h2>
+<p>In Python, you have already written machine-learning code with several steps. Imagine predicting house prices using features such as income, house age, and population.</p>
+<div class="flow"><span class="box">Raw X</span><b class="arrow">→</b><span class="box">StandardScaler</span><b class="arrow">→</b><span class="box">Regression Model</span><b class="arrow">→</b><span class="box">Prediction</span></div>
+<p>Which two operations should always stay together?</p>
+<div class="choices q" data-answer="both" data-f="f1"><button data-v="scale">Only scaling</button><button data-v="model">Only the model</button><button data-v="both">The preprocessing steps and the model</button></div><div id="f1" class="feedback"></div>
+<div class="call"><strong>Pipeline = one object that organizes a sequence of ML operations.</strong> Instead of remembering to run each operation separately, we define the workflow once.</div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 2 of 10</div><h2>First: split BEFORE learning from the data</h2>
+<p>Suppose we have 12 observations. Click the button to create training and test sets.</p>
+<div id="data" class="dataset"></div><button class="primary" id="split">Split the Data</button>
+<div id="splitText" class="call hidden"><strong>Training set:</strong> used to learn preprocessing parameters and model parameters.<br><strong>Test set:</strong> kept separate until evaluation. It represents unseen data.</div>
+<p>Why do we keep test data separate?</p><div class="choices q" data-answer="unseen" data-f="f2"><button data-v="more">To make the training set larger</button><button data-v="unseen">To measure performance on data the model did not learn from</button><button data-v="scale">Because test data cannot be scaled</button></div><div id="f2" class="feedback"></div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 3 of 10</div><h2>What does StandardScaler actually learn?</h2>
+<p>Suppose one training feature contains:</p><div class="code">X_train = [10, 20, 30]</div>
+<p>StandardScaler first <strong>fits</strong> on these training values. It learns their mean and standard deviation.</p>
+<button class="primary" id="fitScaler">Fit StandardScaler</button>
+<div id="scaleLearn" class="call hidden">Training mean = <strong>20</strong><br>Training standard deviation ≈ <strong>8.16</strong><br><br>These are learned from <strong>X_train only</strong>.</div>
+<div class="call"><strong>Important vocabulary:</strong> <code>fit()</code> means <em>learn something from data</em>. For StandardScaler, it learns the mean and standard deviation.</div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 4 of 10</div><h2>Then transform the data</h2>
+<p>After fitting, StandardScaler uses what it learned:</p><div class="code">z = (x − training_mean) / training_standard_deviation</div>
+<p>For x = 30:</p><button id="transformBtn" class="primary">Transform 30</button><div id="transformOut" class="call hidden">(30 − 20) / 8.16 ≈ <strong>1.225</strong><br><br>The value 30 is now expressed relative to the <strong>training distribution</strong>.</div>
+<div class="call"><code>transform()</code> does <strong>not</strong> learn a new mean or standard deviation. It applies the values already learned during <code>fit()</code>.</div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 5 of 10</div><h2>The most important idea: avoid data leakage</h2>
+<p>Suppose the test set is <code>[40, 50]</code>. Which workflow is correct?</p>
+<div class="grid">
+<div class="leak"><h3>❌ Workflow A</h3>Combine train + test → fit scaler → split → train model</div>
+<div class="safe"><h3>✓ Workflow B</h3>Split → fit scaler on train only → use that scaler to transform train AND test</div>
+</div>
+<div class="choices q" data-answer="B" data-f="f5"><button data-v="A">Workflow A</button><button data-v="B">Workflow B</button></div><div id="f5" class="feedback"></div>
+<div class="call"><strong>Data leakage</strong> happens when information from data that should be unseen influences training. If the scaler learns from the test set, the test set has already influenced the workflow before evaluation.</div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 6 of 10</div><h2>Now put scaler + model into one Pipeline</h2>
+<p>This is the pattern from your Python work:</p>
+<div class="code">ols = Pipeline([
+    ("scaler", StandardScaler()),
+    ("linreg", LinearRegression())
+])</div>
+<div class="flow stepper"><span id="ps1" class="box pipeStep">1. StandardScaler</span><b class="arrow">→</b><span id="ps2" class="box pipeStep">2. LinearRegression</span></div>
+<button class="primary" id="walk">Run Next Pipeline Step</button><button id="walkReset">Reset</button><div id="walkText" class="call">Nothing has run yet.</div>
+<div class="call">The names <code>"scaler"</code> and <code>"linreg"</code> let us access individual steps later using <code>ols.named_steps[...]</code>.</div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 7 of 10</div><h2>What happens when you call pipeline.fit()?</h2>
+<div class="code">ols.fit(X_train, y_train)</div>
+<p>Predict the hidden operations before revealing them.</p>
+<div class="choices q" data-answer="seq" data-f="f7"><button data-v="model">Only LinearRegression.fit()</button><button data-v="seq">Scaler.fit → Scaler.transform → LinearRegression.fit</button><button data-v="test">Scaler.fit on the test set → LinearRegression.fit</button></div><div id="f7" class="feedback"></div>
+<button id="revealFit">Show the sequence</button>
+<div id="fitSeq" class="flow hidden"><span class="box">X_train</span><b class="arrow">→</b><span class="box">Scaler.fit()</span><b class="arrow">→</b><span class="box">Scaler.transform()</span><b class="arrow">→</b><span class="box">Model.fit()</span></div>
+<div class="call">One call to <code>pipeline.fit()</code> coordinates all of this for you.</div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 8 of 10</div><h2>What happens when you call pipeline.predict()?</h2>
+<div class="code">y_pred_test = ols.predict(X_test)</div>
+<p>Does the scaler learn a new mean from X_test?</p>
+<div class="choices q" data-answer="no" data-f="f8"><button data-v="yes">Yes — fit the scaler again on X_test</button><button data-v="no">No — transform X_test using the scaler learned from X_train</button></div><div id="f8" class="feedback"></div>
+<div class="flow"><span class="box">X_test</span><b class="arrow">→</b><span class="box">Scaler.transform()</span><b class="arrow">→</b><span class="box">Trained Model.predict()</span><b class="arrow">→</b><span class="box">ŷ_test</span></div>
+<div class="call"><strong>This is why Pipeline is so useful:</strong> the exact same preprocessing logic is automatically applied at prediction time.</div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 9 of 10</div><h2>Evaluate the complete workflow</h2>
+<p>Your evaluation helper fits the model, predicts on train/test data, and calculates SSE, MSE, RMSE, and R².</p>
+<table><tr><th>Metric</th><th>Question it answers</th></tr><tr><td>SSE</td><td>What is the total squared prediction error?</td></tr><tr><td>MSE</td><td>What is the average squared error?</td></tr><tr><td>RMSE</td><td>What is the typical error size, in the target's units?</td></tr><tr><td>R²</td><td>How much variation is explained relative to a mean-prediction baseline?</td></tr></table>
+<p>If training RMSE is very small but test RMSE is much larger, what might this suggest?</p>
+<div class="choices q" data-answer="over" data-f="f9"><button data-v="perfect">The model is definitely perfect</button><button data-v="over">The model may not generalize well / may be overfitting</button><button data-v="scale">StandardScaler is impossible to use</button></div><div id="f9" class="feedback"></div>
+</section>
+
+<section class="stage">
+<div class="tag">Step 10 of 10</div><h2>Put the whole idea together</h2>
+<div class="flow"><span class="box">Raw Data</span><b class="arrow">→</b><span class="box">Train/Test Split</span><b class="arrow">→</b><span class="box">Pipeline</span><b class="arrow">→</b><span class="box">Fit TRAIN</span><b class="arrow">→</b><span class="box">Predict TEST</span><b class="arrow">→</b><span class="box">Evaluate</span></div>
+<p>Which sentence best describes a machine-learning Pipeline?</p>
+<div class="choices q" data-answer="best" data-f="f10"><button data-v="best">It packages preprocessing and modeling steps into one consistent workflow, helping prevent leakage and ensuring the same transformations are used during training and prediction.</button><button data-v="model">It is another name for LinearRegression.</button><button data-v="metric">It is a metric for measuring prediction error.</button></div><div id="f10" class="feedback"></div>
+<div class="call"><strong>Remember:</strong> A pipeline is not a new machine-learning algorithm. It is a safe, organized way to connect the steps of your machine-learning workflow.</div>
+<div class="code">pipeline.fit(X_train, y_train)
+y_pred_train = pipeline.predict(X_train)
+y_pred_test  = pipeline.predict(X_test)</div>
+</section>
+
+<div class="nav"><button id="back">← Previous</button><button class="primary" id="next">Next Step →</button></div>
+</main>
+<script>
+const stages=[...document.querySelectorAll('.stage')],prog=document.getElementById('prog');let page=0;
+function show(){stages.forEach((s,i)=>s.classList.toggle('active',i===page));prog.style.width=((page+1)/stages.length*100)+'%';back.disabled=page===0;next.textContent=page===stages.length-1?'Start Over':'Next Step →';window.scrollTo({top:0,behavior:'smooth'})}
+next.onclick=()=>{page=page===stages.length-1?0:page+1;show()};back.onclick=()=>{if(page>0)page--;show()};
+document.querySelectorAll('.q').forEach(q=>q.querySelectorAll('button').forEach(b=>b.onclick=()=>{q.querySelectorAll('button').forEach(x=>x.classList.remove('correct','wrong'));let ok=b.dataset.v===q.dataset.answer;b.classList.add(ok?'correct':'wrong');let f=document.getElementById(q.dataset.f);f.textContent=ok?'✓ Correct — now explain to yourself WHY.':'Not quite. Think about which data are allowed to teach the workflow, then try again.';f.className='feedback '+(ok?'good':'warn')}));
+let d=document.getElementById('data');for(let i=1;i<=12;i++)d.innerHTML+='<div class="data" id="d'+i+'">Observation '+i+'</div>';
+split.onclick=()=>{for(let i=1;i<=12;i++)document.getElementById('d'+i).classList.add(i<=9?'train':'test');splitText.classList.remove('hidden');split.textContent='Blue = Train • Yellow = Test'};
+fitScaler.onclick=()=>scaleLearn.classList.remove('hidden');transformBtn.onclick=()=>transformOut.classList.remove('hidden');revealFit.onclick=()=>fitSeq.classList.remove('hidden');
+let walkN=0;walk.onclick=()=>{walkN=Math.min(2,walkN+1);if(walkN>=1)ps1.classList.add('on');if(walkN>=2)ps2.classList.add('on');walkText.innerHTML=walkN===1?'<strong>Step 1:</strong> StandardScaler learns the training mean/std and transforms X_train.':'<strong>Step 2:</strong> LinearRegression receives the scaled training features and learns its coefficients.'};
+walkReset.onclick=()=>{walkN=0;ps1.classList.remove('on');ps2.classList.remove('on');walkText.textContent='Nothing has run yet.'};show();
+</script></body></html>
