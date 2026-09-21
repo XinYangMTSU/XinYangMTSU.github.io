@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bias–Variance Challenge</title>
+<style>
+:root{
+  --bg:#17191a; --panel:#222025; --panel2:#19121a; --text:#ffd7f0;
+  --muted:#d7b9cb; --pink:#ff79c6; --pink2:#ffb3de;
+  --green:#5fbf5f; --orange:#ffb347; --blue:#9ec5ff; --red:#ff6b6b;
+  --line:#58384d;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 Arial,sans-serif;padding:18px}
+main{max-width:900px;margin:auto}
+header{text-align:center;margin:12px 0 24px}
+h1{color:var(--pink2);font-size:clamp(30px,5vw,48px);margin:0 0 8px}
+h2{color:var(--pink2);margin-top:0}
+.sub{color:var(--muted);max-width:720px;margin:auto}
+section{background:var(--panel);border-left:6px solid var(--pink);border-radius:16px;padding:24px;margin:0 0 24px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px}
+.term{font-size:22px;font-weight:800}
+.under{color:var(--green)} .over{color:var(--orange)}
+.bias{color:var(--blue)} .variance{color:var(--pink)}
+.arrow{font-size:24px;color:var(--pink2);text-align:center;padding:5px}
+.key{background:#291923;border:1px solid var(--pink);border-radius:10px;padding:13px;margin-top:14px;text-align:center;font-weight:700}
+.q{padding:18px 0;border-bottom:1px solid #4a3341}.q:last-child{border-bottom:0}
+.qnum{color:var(--pink2);font-weight:800}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+button.opt{min-height:48px;text-align:left;border:1px solid var(--line);border-radius:9px;background:var(--panel2);color:var(--text);padding:11px;cursor:pointer;font-size:15px}
+button.opt:hover{border-color:var(--pink)}
+button.opt:disabled{cursor:default}
+.feedback{margin-top:10px;padding:10px 12px;border-radius:8px;background:#171419;display:none}
+.correct{border-color:var(--green)!important;background:#17301d!important}
+.wrong{border-color:var(--red)!important;background:#351c22!important}
+#scoreBox{text-align:center;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:18px}
+.score{font-size:30px;font-weight:900;color:var(--pink2)}
+.btn{border:1px solid var(--pink);background:#291923;color:var(--pink2);padding:10px 16px;border-radius:9px;font-weight:700;cursor:pointer}
+.small{font-size:14px;color:var(--muted)}
+@media(max-width:600px){.grid,.options{grid-template-columns:1fr}section{padding:18px}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>Bias–Variance Challenge</h1>
+<p class="sub">A short but deeper quiz on <b>underfitting, overfitting, high bias, and high variance</b>. Focus on reasoning from training and test behavior—not memorizing definitions.</p>
+</header>
+
+<section>
+<h2>60-Second Mental Model</h2>
+<div class="grid">
+<div class="card"><div class="term under">Underfitting</div><p>Model is too simple to learn the important signal.</p><b>Training error: high<br>Test error: high</b></div>
+<div class="card"><div class="term over">Overfitting</div><p>Model learns training-specific details/noise that do not generalize.</p><b>Training error: low<br>Test error: much higher</b></div>
+<div class="card"><div class="term bias">High Bias</div><p>Systematic error from assumptions that are too restrictive.</p><b>Think: consistently misses the pattern.</b></div>
+<div class="card"><div class="term variance">High Variance</div><p>Model changes substantially when the training sample changes.</p><b>Think: too sensitive to the data.</b></div>
+</div>
+<div class="key">Core connection: Underfitting ↔ High Bias &nbsp;&nbsp; | &nbsp;&nbsp; Overfitting ↔ High Variance</div>
+</section>
+
+<section>
+<h2>Deep Reasoning Quiz</h2>
+<div id="quiz"></div>
+<div id="scoreBox">
+<div class="score" id="score">0 / 8</div>
+<div id="message" class="small">Answer all 8 questions.</div>
+<br><button class="btn" id="reset">Try Again</button>
+</div>
+</section>
+</main>
+
+<script>
+const questions=[
+{
+q:"A model gets 72% accuracy on the training set and 70% on the test set. Both are below the performance you need. What is the strongest diagnosis?",
+opts:["Overfitting / high variance","Underfitting / high bias","Good fit because the gap is small","Data leakage"],
+ans:1,
+why:"The small train–test gap alone does not mean the model is good. Because performance is poor even on the training set, the stronger diagnosis is underfitting/high bias."
+},
+{
+q:"A model gets 99% training accuracy and 78% test accuracy. What does the 21-point gap most strongly suggest?",
+opts:["High bias","High variance / overfitting","Underfitting","The test set is unnecessary"],
+ans:1,
+why:"The model fits training data extremely well but loses substantial performance on unseen data. That generalization gap is characteristic of overfitting/high variance."
+},
+{
+q:"You retrain the same learning algorithm on several different random training samples. The learned decision boundary changes dramatically each time. Which concept does this directly demonstrate?",
+opts:["High bias","High variance","Low variance","Underfitting only"],
+ans:1,
+why:"Variance describes sensitivity to the particular training sample. Large changes across samples are direct evidence of high variance."
+},
+{
+q:"A straight-line model is used for data with a strong curved relationship. Training error and test error are both high. What is the underlying problem?",
+opts:["The model has too much variance","The model class has too much capacity","The model has high bias","The test set is too easy"],
+ans:2,
+why:"The model's assumptions are too restrictive to represent the curved relationship. This produces systematic error: high bias and underfitting."
+},
+{
+q:"A degree-15 polynomial has almost zero training error. You reduce it to degree 4 and training error rises slightly, but test error drops substantially. What happened?",
+opts:["Generalization improved by reducing variance","Bias necessarily became zero","The degree-15 model was underfitting","The test set became part of training"],
+ans:0,
+why:"A modest loss in training fit can be worthwhile when unseen-data error falls substantially. Simplifying the model reduced excessive sensitivity and improved generalization."
+},
+{
+q:"Which statement best distinguishes bias from variance?",
+opts:["Bias is training error; variance is test error","Bias is systematic error; variance is sensitivity to the training sample","Bias means complex models; variance means simple models","Bias and variance are two names for the same error"],
+ans:1,
+why:"Bias concerns systematic error from restrictive assumptions. Variance concerns how much the learned model changes with different training samples."
+},
+{
+q:"An overfit model is given much stronger regularization. What is the important tradeoff to watch for?",
+opts:["Variance may decrease, but too much regularization can increase bias","Bias and variance must both increase","Training error must become zero","Test error must always decrease"],
+ans:0,
+why:"Regularization can control excessive model flexibility and reduce variance, but overly strong regularization can make the model too rigid and increase bias."
+},
+{
+q:"Model A: training error 18%, test error 19%. Model B: training error 2%, test error 17%. Which comparison is most defensible?",
+opts:["A shows more evidence of high bias; B shows more evidence of high variance","A is overfitting more than B","B must be the better model because its training error is lower","Both models have the same bias and variance"],
+ans:0,
+why:"A performs poorly even on training data, suggesting bias/underfitting. B fits training data extremely well but has a much larger generalization gap, suggesting variance/overfitting."
+}
+];
+
+let score=0, answered=Array(questions.length).fill(false);
+const quiz=document.getElementById("quiz");
+
+function render(){
+ quiz.innerHTML="";
+ questions.forEach((item,i)=>{
+   const wrap=document.createElement("div"); wrap.className="q";
+   const p=document.createElement("div");
+   p.innerHTML='<span class="qnum">Q'+(i+1)+'.</span> '+item.q;
+   wrap.appendChild(p);
+   const opts=document.createElement("div"); opts.className="options";
+   item.opts.forEach((label,j)=>{
+     const b=document.createElement("button"); b.className="opt"; b.textContent=label;
+     b.addEventListener("click",()=>answer(i,j,wrap));
+     opts.appendChild(b);
+   });
+   wrap.appendChild(opts);
+   const f=document.createElement("div"); f.className="feedback"; f.id="f"+i;
+   wrap.appendChild(f); quiz.appendChild(wrap);
+ });
+ updateScore();
+}
+function answer(i,j,wrap){
+ if(answered[i]) return;
+ answered[i]=true;
+ const buttons=[...wrap.querySelectorAll(".opt")];
+ buttons.forEach(b=>b.disabled=true);
+ buttons[questions[i].ans].classList.add("correct");
+ const f=wrap.querySelector(".feedback");
+ if(j===questions[i].ans){score++;f.innerHTML="<b>Correct.</b> "+questions[i].why;}
+ else{buttons[j].classList.add("wrong");f.innerHTML="<b>Not quite.</b> "+questions[i].why;}
+ f.style.display="block"; updateScore();
+}
+function updateScore(){
+ document.getElementById("score").textContent=score+" / "+questions.length;
+ const n=answered.filter(Boolean).length;
+ const m=document.getElementById("message");
+ if(n<questions.length)m.textContent=(questions.length-n)+" question"+(questions.length-n===1?"":"s")+" remaining.";
+ else if(score===8)m.textContent="Excellent: you are distinguishing fit quality from bias–variance behavior.";
+ else if(score>=6)m.textContent="Strong understanding. Review the explanations for the missed cases.";
+ else m.textContent="Review the four core ideas above, then try again and focus on training error, test error, and sensitivity to data.";
+}
+document.getElementById("reset").addEventListener("click",()=>{score=0;answered.fill(false);render();window.scrollTo({top:0,behavior:"smooth"});});
+render();
+</script>
+</body>
+</html>
