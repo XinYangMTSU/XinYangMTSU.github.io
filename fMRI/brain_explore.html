@@ -1,6 +1,234 @@
 <!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Ada MRI Explorer</title><style>
 *{box-sizing:border-box}body{margin:0;font-family:system-ui;background:#f5f2fb;color:#172033}header{text-align:center;padding:22px}h1{margin:0;color:#674bc7}.wrap{max-width:1250px;margin:auto;padding:12px}.card{background:white;border-radius:20px;padding:16px;margin:12px 0}.bar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.coord{font-family:monospace;background:#eeeaf8;padding:8px;border-radius:9px}.views{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.panel{background:#05070a;border-radius:14px;overflow:hidden}.title{color:white;padding:8px 10px;background:#151923;font-weight:800;display:flex;justify-content:space-between}.title small{font-weight:500;color:#cbd0da}.title button,.learn button{border:0;border-radius:8px;padding:5px 8px}.cw{position:relative;aspect-ratio:1/1}.cw canvas{width:100%;height:100%;display:block;cursor:crosshair}.lab span{position:absolute;color:white;font-weight:900;background:#0008;padding:1px 4px;border-radius:4px}.t{top:4px;left:50%}.b{bottom:4px;left:50%}.l{left:4px;top:50%}.r{right:4px;top:50%}.controls,.learn{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.ctl,.learn div{background:#f4f1fb;padding:12px;border-radius:13px}.ctl label{display:flex;justify-content:space-between;font-weight:800}.ctl input{width:100%}.lesson{background:#fff3c4!important}.note{font-size:.82rem;color:#667085}@media(max-width:850px){.views,.controls,.learn{grid-template-columns:1fr}}
-</style></head><body><header><div style="font-size:45px">🧠🔬</div><h1>Ada's MRI Brain Explorer</h1><p>One real 3D MNI152 MRI • three synchronized orthogonal views</p></header><main class=wrap>
+</style>
+<style id="scientificDarkTheme">
+:root{--ink:#e2e8f0!important;--muted:#94a3b8!important;--accent:#06b6d4!important}
+body{background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%)!important;color:#e2e8f0!important;padding:20px}
+header{max-width:1200px;margin:0 auto 28px;padding:18px 10px!important}
+header h1{background:none!important;color:#06b6d4!important;font-size:clamp(2rem,5vw,2.7rem)!important}
+header p{color:#94a3b8!important}
+main{max-width:1200px!important}
+.card,#adaLesson .hero{background:#1e293b!important;border:1px solid #334155!important;border-radius:10px!important;box-shadow:none!important}
+#adaLesson{color:#e2e8f0!important}
+#adaLesson .hero{padding:24px!important}
+#adaLesson h2,.card h2{color:#06b6d4!important}
+#adaLesson .progress{background:#334155!important;height:8px!important}
+#adaLesson .bar{background:#06b6d4!important}
+#adaLesson .lesson{background:#0f172a!important;border:1px solid #334155!important;border-radius:8px!important}
+#adaLesson .part,#adaLesson .plane,.control,.mini{background:#0f172a!important;border:1px solid #334155!important;color:#cbd5e1!important}
+#adaLesson .analogy,#adaLesson .check,#wordLab>div,#gameBox{background:#0f172a!important;border:1px solid #0891b2!important;color:#cbd5e1!important}
+#adaLesson .tiny,#adaLesson .visualCaption,.note{color:#94a3b8!important}
+#adaLesson .eduPic{background:#0f172a!important;border-color:#334155!important}
+#adaLesson .say,.hear,.nextL,.next,.answers button,#gameNext{background:#06b6d4!important;color:white!important;border-radius:6px!important}
+#adaLesson .prevL{background:#475569!important;color:white!important;border-radius:6px!important}
+#adaLesson .say:hover,.hear:hover,.nextL:hover,.next:hover,.answers button:hover,#gameNext:hover{background:#0891b2!important;transform:translateY(-1px)}
+.views{gap:16px!important}.panel{border:1px solid #334155!important;border-radius:10px!important;background:#0f172a!important}.ptitle{background:#1e293b!important;color:#e2e8f0!important;border-bottom:1px solid #334155!important}.pron{color:#94a3b8!important}
+.toolbar{color:#cbd5e1!important}.coord{background:#0f172a!important;border:1px solid #0891b2!important;color:#06b6d4!important}
+input[type=range]{accent-color:#06b6d4!important}
+#wordLab{background:#1e293b!important;border:1px solid #334155!important;border-radius:10px!important;padding:22px!important;margin:28px 0!important}
+#wordLab h3{color:#06b6d4!important;font-size:1.3rem!important}
+#wordLab p,#wordLab li{color:#cbd5e1!important}
+.quiz{background:#1e293b!important}
+.credit{color:#94a3b8!important}
+</style>
+
+<style id="contrastFix">
+/* Contrast fixes for legacy light cards after dark-theme conversion */
+.control,#adaLesson .part,#adaLesson .plane,.mini{
+  background:#0f172a!important;color:#e2e8f0!important;border:1px solid #334155!important;
+}
+.control label,.control span,.mini h3,.mini p,
+#adaLesson .part b,#adaLesson .part p,#adaLesson .plane b,#adaLesson .plane p{
+  color:#e2e8f0!important;
+}
+.learn{color:#e2e8f0!important}
+.learn>div:first-child,.lesson{
+  color:#e2e8f0!important;
+}
+.learn .lesson,.learn .planes .plane{
+  background:#0f172a!important;color:#e2e8f0!important;border:1px solid #334155!important;
+}
+.learn .lesson b,.learn .lesson p,.learn .plane b,.learn .plane p{
+  color:#e2e8f0!important;
+}
+.learn .lesson{background:#082f49!important;border-color:#0891b2!important}
+.learn .plane button,.plane button{
+  background:#06b6d4!important;color:#fff!important;border:0!important;
+}
+</style>
+
+<style id="contrastFixV2">
+/* Force ALL legacy pale panels in the MRI controls/learn section into the dark theme */
+.controls .control{
+ background:#0f172a!important;border:1px solid #334155!important;color:#e2e8f0!important;
+}
+.controls .control label,.controls .control label b,.controls .control span{
+ color:#e2e8f0!important;
+}
+.learn{
+ background:#1e293b!important;color:#e2e8f0!important;
+}
+.learn>div,.learn .planes,.learn .planes .plane{
+ color:#e2e8f0!important;
+}
+.learn .lesson{
+ background:#083b56!important;border:1px solid #06b6d4!important;color:#e2e8f0!important;
+}
+.learn .lesson *{color:#e2e8f0!important}
+.learn .planes .plane{
+ background:#0f172a!important;border:1px solid #334155!important;color:#e2e8f0!important;
+}
+.learn .planes .plane *:not(button){color:#e2e8f0!important}
+.learn .planes .plane button{
+ background:#06b6d4!important;color:#fff!important;border:0!important;border-radius:6px!important;
+}
+</style>
+
+<style id="planeCardsDefinitiveFix">
+/* Definitive fix: these cards are .mini elements inside .grid, not .plane */
+.grid .mini{
+  background:#0f172a !important;
+  border:1px solid #334155 !important;
+  color:#e2e8f0 !important;
+  border-radius:10px !important;
+}
+.grid .mini h3,
+.grid .mini p,
+.grid .mini b{
+  color:#e2e8f0 !important;
+}
+.grid .mini h3{
+  color:#06b6d4 !important;
+}
+.grid .mini button,
+.grid .mini .hear{
+  background:#06b6d4 !important;
+  color:#ffffff !important;
+  border:none !important;
+  border-radius:6px !important;
+}
+.grid .mini button:hover,
+.grid .mini .hear:hover{
+  background:#0891b2 !important;
+}
+/* Also catch the later Learn Mode cards regardless of their wrapper */
+.learn .mini,.learn .plane,.planes .plane{
+  background:#0f172a !important;
+  border:1px solid #334155 !important;
+  color:#e2e8f0 !important;
+}
+.learn .mini h3,.learn .mini p,.learn .mini b,
+.learn .plane h3,.learn .plane p,.learn .plane b,
+.planes .plane h3,.planes .plane p,.planes .plane b{
+  color:#e2e8f0 !important;
+}
+.learn .mini h3,.learn .plane h3,.planes .plane h3{
+  color:#06b6d4 !important;
+}
+</style>
+
+<style id="matchCrosshairCardStyle">
+/* Make Sagittal/Coronal/Axial cards match the crosshair explanation card */
+.grid .mini,
+.learn .mini,
+.learn .plane,
+.planes .plane{
+  background:#083b56 !important;
+  border:1px solid #06b6d4 !important;
+  color:#e2e8f0 !important;
+  border-radius:16px !important;
+  padding:20px !important;
+}
+.grid .mini h3,
+.learn .mini h3,
+.learn .plane h3,
+.planes .plane h3{
+  color:#e2e8f0 !important;
+  font-size:1.15rem !important;
+  font-weight:800 !important;
+  margin-top:0 !important;
+}
+.grid .mini p,.grid .mini b,
+.learn .mini p,.learn .mini b,
+.learn .plane p,.learn .plane b,
+.planes .plane p,.planes .plane b{
+  color:#e2e8f0 !important;
+}
+.grid .mini button,.grid .mini .hear,
+.learn .mini button,.learn .plane button,.planes .plane button{
+  background:#06b6d4 !important;
+  color:#fff !important;
+  border:0 !important;
+  border-radius:6px !important;
+}
+</style>
+
+<style id="exactLearnChildrenFix">
+/* Exact structure: .learn has four direct child DIVs; only first has .lesson */
+.card.learn > div{
+  background:#083b56 !important;
+  border:1px solid #06b6d4 !important;
+  color:#e2e8f0 !important;
+  border-radius:16px !important;
+  padding:20px !important;
+}
+.card.learn > div > b,
+.card.learn > div > p,
+.card.learn > div > p b{
+  color:#e2e8f0 !important;
+}
+.card.learn > div > b{
+  font-size:1.15rem !important;
+  font-weight:800 !important;
+}
+.card.learn > div > button{
+  background:#06b6d4 !important;
+  color:#ffffff !important;
+  border:none !important;
+  border-radius:6px !important;
+  padding:9px 12px !important;
+}
+.card.learn > div > button:hover{background:#0891b2 !important}
+</style>
+
+<style id="sliderCardsDarkFix">
+/* Exact MRI slider cards are .ctl inside .controls */
+.controls .ctl{
+  background:#083b56 !important;
+  border:1px solid #06b6d4 !important;
+  color:#e2e8f0 !important;
+  border-radius:16px !important;
+  padding:18px 20px !important;
+}
+.controls .ctl label,
+.controls .ctl label span{
+  color:#e2e8f0 !important;
+  font-weight:800 !important;
+}
+.controls .ctl input[type="range"]{
+  width:100% !important;
+  accent-color:#06b6d4 !important;
+  margin-top:10px !important;
+}
+/* Cross-browser range styling */
+.controls .ctl input[type="range"]::-webkit-slider-runnable-track{
+  height:7px;background:#334155;border:1px solid #64748b;border-radius:999px;
+}
+.controls .ctl input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;
+  background:#06b6d4;border:2px solid #67e8f9;margin-top:-8px;
+}
+.controls .ctl input[type="range"]::-moz-range-track{
+  height:7px;background:#334155;border:1px solid #64748b;border-radius:999px;
+}
+.controls .ctl input[type="range"]::-moz-range-progress{
+  height:7px;background:#06b6d4;border-radius:999px;
+}
+.controls .ctl input[type="range"]::-moz-range-thumb{
+  width:20px;height:20px;border-radius:50%;background:#06b6d4;border:2px solid #67e8f9;
+}
+</style>
+</head><body><header><div style="font-size:45px">🧠🔬</div><h1>Ada's MRI Brain Explorer</h1><p>One real 3D MNI152 MRI • three synchronized orthogonal views</p></header><main class=wrap>
 <section id="adaLesson" style="max-width:1250px;margin:18px auto;padding:0 14px;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#172033">
 <style>
 #adaLesson .hero{background:linear-gradient(135deg,#f5efff,#eafaff,#fff7df);border-radius:26px;padding:25px;box-shadow:0 12px 30px #4d3a7c18}
