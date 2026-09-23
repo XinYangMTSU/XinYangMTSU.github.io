@@ -1,0 +1,150 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Ridge GridSearchCV Demo</title><style>
+body{font-family:Arial;background:#151719;color:#f7f2f6;margin:0}.w{max-width:1000px;margin:auto;padding:30px}h1,h2{color:#ffb3de}.s{display:none;background:#222025;border-left:6px solid #ff79c6;padding:24px;border-radius:16px}.s.on{display:block}.bar{height:9px;background:#333;margin:20px 0;border-radius:10px}.bar div{height:100%;background:#ff79c6}.code,.call{background:#191b20;padding:15px;border-radius:10px;margin:14px 0}.code{white-space:pre-wrap;font-family:monospace;color:#ffd7f0}.call{border-left:5px solid #ff79c6}.flow{display:flex;gap:7px;flex-wrap:wrap;align-items:center;justify-content:center}.box{background:#111418;padding:10px;border:1px solid #555;border-radius:8px}.a{color:#ff79c6;font-weight:bold}.split{display:flex;height:65px;border-radius:9px;overflow:hidden}.tr{width:80%;background:#193345;display:flex;align-items:center;justify-content:center}.te{width:20%;background:#4b3714;display:flex;align-items:center;justify-content:center}.folds{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.fold{padding:20px 5px;text-align:center;border:2px solid #86d7ff;border-radius:8px}.val{background:#443716;border-color:#ffd166}.nav{display:flex;justify-content:space-between;margin-top:20px}button{padding:11px 15px;border-radius:9px;border:1px solid #666;background:#302b31;color:white;cursor:pointer}button.primary{background:#ff79c6;color:#25131f;font-weight:bold}.choice{display:block;width:100%;text-align:left;margin:8px 0}.good{background:#173528!important}.bad{background:#402326!important}table{width:100%;border-collapse:collapse}td,th{border:1px solid #555;padding:9px;text-align:center}th{background:#302b31}.winner{background:#173528}@media(max-width:650px){.folds{grid-template-columns:1fr}.s{padding:18px}}</style></head><body><main class="w">
+<h1>Ridge Regression: Pipeline + GridSearchCV</h1><p>Interactive walkthrough of the complete Python demo. <strong>Every code block is complete code for that step and can be copied into a notebook in order.</strong></p><div class="bar"><div id="prog"></div></div>
+<section class="s on"><h2>1. Import Libraries and Load the Dataset</h2>
+<p>Before using the classes and functions in this demo, import all required libraries:</p>
+<div class="code">import numpy as np
+
+from sklearn.datasets import load_diabetes
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import Ridge
+from sklearn.metrics import (
+    mean_squared_error,
+    root_mean_squared_error,
+    r2_score
+)</div>
+
+<div class="call"><strong>What are these imports for?</strong><br><br>
+<code>numpy</code> → numerical operations<br>
+<code>load_diabetes</code> → load the example dataset<br>
+<code>train_test_split</code> → create training and test sets<br>
+<code>GridSearchCV</code> → search for the best alpha using cross-validation<br>
+<code>Pipeline</code> → connect preprocessing and Ridge into one workflow<br>
+<code>StandardScaler</code> → standardize the input features<br>
+<code>Ridge</code> → Ridge regression model<br>
+<code>mean_squared_error</code>, <code>root_mean_squared_error</code>, <code>r2_score</code> → evaluate model performance
+</div>
+
+<h3>Now load the data</h3>
+<div class="code">data = load_diabetes()
+
+X = data.data
+y = data.target
+
+print("X shape:", X.shape)
+print("y shape:", y.shape)
+print("Feature names:", data.feature_names)</div><div class="call"><b>X</b> contains 442 observations and 10 input features. <b>y</b> is the quantitative diabetes disease-progression target. First identify what the model receives and what it predicts.</div></section>
+<section class="s"><h2>2. Create train/test data</h2><div class="code">X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.20,
+    random_state=42
+)
+
+print("\nTraining samples:", X_train.shape[0])
+print("Test samples:", X_test.shape[0])</div><div class="split"><div class="tr">TRAIN 80%</div><div class="te">TEST 20%</div></div><div class="call">GridSearchCV uses the <b>training data only</b>. The test set stays untouched until final evaluation.</div></section>
+<section class="s"><h2>3. Build the Pipeline</h2><div class="code">ridge_pipe = Pipeline([
+ ("scaler", StandardScaler()),
+ ("ridge", Ridge())
+])</div><div class="flow"><span class="box">CV training fold</span><span class="a">→</span><span class="box">fit scaler</span><span class="a">→</span><span class="box">transform</span><span class="a">→</span><span class="box">fit Ridge</span></div><div class="call">Putting StandardScaler inside the Pipeline makes CV refit the scaler separately using only each fold's training portion, preventing validation-fold leakage.</div></section>
+<section class="s"><h2>4. Define candidate α values</h2><div class="code">ridge_grid = {
+ "ridge__alpha": [0.01, 0.1, 1, 10, 100]
+}</div><div class="call"><b>ridge__alpha</b> means “the alpha parameter inside the Pipeline step named ridge.” Small α = weaker regularization; large α = stronger regularization.</div></section>
+<section class="s"><h2>5. Configure GridSearchCV</h2><div class="code">ridge_search = GridSearchCV(
+    estimator=ridge_pipe,
+    param_grid=ridge_grid,
+    cv=5,
+    scoring="neg_mean_squared_error",
+    n_jobs=-1,
+    return_train_score=True
+)</div><table><tr><th>Parameter</th><th>Meaning</th></tr><tr><td>estimator</td><td>Scaler → Ridge Pipeline</td></tr><tr><td>param_grid</td><td>α values to try</td></tr><tr><td>cv=5</td><td>5-fold CV</td></tr><tr><td>scoring</td><td>compare validation MSE</td></tr><tr><td>n_jobs=-1</td><td>use all available CPU cores</td></tr><tr><td>return_train_score</td><td>also store CV training scores</td></tr></table><div class="call">This configures the experiment. <b>.fit()</b> actually runs it.</div></section>
+<section class="s"><h2>6. Run .fit(): see one 5-fold CV</h2><div class="code">ridge_search.fit(X_train, y_train)</div><div id="folds" class="folds"><div class="fold">Fold 1</div><div class="fold">Fold 2</div><div class="fold">Fold 3</div><div class="fold">Fold 4</div><div class="fold">Fold 5</div></div><p><button id="foldBtn" class="primary">Run Next Fold</button> <button id="resetFold">Reset</button></p><div id="ft" class="call">For one α: train on 4 folds, validate on 1; repeat five times.</div><p>With 5 α values × 5 folds, GridSearchCV performs <b>25 CV fits</b>, followed by the default refit of the best pipeline on all training data.</p></section>
+<section class="s"><h2>7. Why negative MSE?</h2><table><tr><th>Actual MSE</th><th>scikit-learn score</th></tr><tr><td>5000</td><td>−5000</td></tr><tr class="winner"><td>3000 ← lower/better</td><td>−3000 ← higher/better</td></tr><tr><td>4000</td><td>−4000</td></tr></table><div class="call">scikit-learn scorers use “higher is better.” Negating MSE converts a minimization metric into that convention. The actual MSE itself is not negative.</div></section>
+<section class="s"><h2>8. Compare α Values</h2>
+<p>This is the complete Python code used to display the cross-validation result for every alpha:</p>
+<div class="code">print("\nCross-Validation Results")
+print("------------------------")
+
+for alpha, score in zip(
+    ridge_search.cv_results_["param_ridge__alpha"],
+    ridge_search.cv_results_["mean_test_score"],
+):
+    mse = -score
+
+    print(
+        f"alpha = {float(alpha):7.2f} "
+        f"Average CV MSE = {mse:.4f}"
+    )</div><button id="showResults" class="primary">Show Illustrative CV Results</button><table><thead><tr><th>α</th><th>Average CV MSE</th></tr></thead><tbody id="rt"><tr><td>.01</td><td>—</td></tr><tr><td>.1</td><td>—</td></tr><tr><td>1</td><td>—</td></tr><tr><td>10</td><td>—</td></tr><tr><td>100</td><td>—</td></tr></tbody></table><div class="call">These numbers are illustrative. The actual values come from <b>cv_results_["mean_test_score"]</b>. Here “test” means CV validation fold, not final X_test.</div></section>
+<section class="s"><h2>9. Select the best α</h2><div class="code">best_alpha = ridge_search.best_params_["ridge__alpha"]
+best_cv_mse = -ridge_search.best_score_
+
+print("\nBest alpha:", best_alpha)
+print(f"Best CV MSE: {best_cv_mse:.4f}")</div><button class="choice q" data-ok="0">Choose the numerically smallest α</button><button class="choice q" data-ok="1">Choose the α with the lowest average validation MSE</button><button class="choice q" data-ok="0">Choose the largest α</button><p id="qf"></p></section>
+<section class="s"><h2>10. Refit the best Pipeline</h2><div class="code">best_ridge = ridge_search.best_estimator_</div><div class="flow"><span class="box">ALL X_train</span><span class="a">→</span><span class="box">fit scaler</span><span class="a">→</span><span class="box">Ridge(best α)</span></div><div class="call">GridSearchCV uses refit=True by default. After choosing α, it refits the complete best Pipeline on all training data.</div></section>
+<section class="s"><h2>11. Predict and Evaluate</h2>
+<p>Use the refitted best pipeline to make predictions:</p>
+<div class="code">y_train_pred = best_ridge.predict(X_train)
+y_test_pred = best_ridge.predict(X_test)</div>
+
+<p>Now calculate the evaluation metrics:</p>
+<div class="code">train_mse = mean_squared_error(
+    y_train,
+    y_train_pred
+)
+
+test_mse = mean_squared_error(
+    y_test,
+    y_test_pred
+)
+
+train_rmse = root_mean_squared_error(
+    y_train,
+    y_train_pred
+)
+
+test_rmse = root_mean_squared_error(
+    y_test,
+    y_test_pred
+)
+
+train_r2 = r2_score(
+    y_train,
+    y_train_pred
+)
+
+test_r2 = r2_score(
+    y_test,
+    y_test_pred
+)
+
+print("\nRidge Regression Results")
+print("------------------------")
+
+print(f"Train MSE:  {train_mse:.4f}")
+print(f"Test MSE:   {test_mse:.4f}")
+
+print(f"Train RMSE: {train_rmse:.4f}")
+print(f"Test RMSE:  {test_rmse:.4f}")
+
+print(f"Train R²:   {train_r2:.4f}")
+print(f"Test R²:    {test_r2:.4f}")</div>
+
+<div class="call"><b>MSE/RMSE:</b> lower is better. <b>R²:</b> generally higher is better. CV selected α; the untouched test set now evaluates the selected workflow.</div></section>
+<section class="s"><h2>12. Inspect Ridge Coefficients</h2>
+<div class="code">ridge_model = best_ridge.named_steps["ridge"]
+
+print("\nRidge coefficients")
+print("------------------")
+
+for feature, coef in zip(
+    data.feature_names,
+    ridge_model.coef_
+):
+    print(f"{feature:8s}: {coef:10.4f}")</div><div class="call"><b>Complete story:</b> Load → split → Pipeline → α grid → GridSearchCV → fold-specific scaling → choose α → refit all training data → predict test → evaluate → inspect coefficients.</div></section>
+<div class="nav"><button id="back">← Previous</button><button id="next" class="primary">Next Step →</button></div></main><script>
+let n=0,S=[...document.querySelectorAll(".s")];function show(){S.forEach((x,i)=>x.classList.toggle("on",i===n));prog.style.width=100*(n+1)/S.length+"%";back.disabled=n===0;next.textContent=n===S.length-1?"Start Over":"Next Step →";scrollTo(0,0)}next.onclick=()=>{n=n===S.length-1?0:n+1;show()};back.onclick=()=>{if(n)n--;show()};
+let f=0;function reset(){f=0;[...folds.children].forEach(x=>x.classList.remove("val"));ft.textContent="For one α: train on 4 folds, validate on 1; repeat five times."}foldBtn.onclick=()=>{if(f===5){reset();return}[...folds.children].forEach(x=>x.classList.remove("val"));folds.children[f].classList.add("val");ft.innerHTML="Run "+(f+1)+": <b>Fold "+(f+1)+"</b> is validation; other four folds train the scaler and Ridge model.";f++;if(f===5)ft.innerHTML+="<br>✓ Five validation errors are now available for this α."};resetFold.onclick=reset;
+showResults.onclick=()=>{let a=[[.01,3300],[.1,3200],[1,3050],[10,3150],[100,3900]];rt.innerHTML=a.map((r,i)=>"<tr class='"+(i===2?"winner":"")+"'><td>"+r[0]+"</td><td>"+r[1]+"</td></tr>").join("")};document.querySelectorAll(".q").forEach(b=>b.onclick=()=>{document.querySelectorAll(".q").forEach(x=>x.classList.remove("good","bad"));let ok=b.dataset.ok==="1";b.classList.add(ok?"good":"bad");qf.textContent=ok?"✓ Correct!":"Not quite. CV chooses based on average validation performance."});show();
+</script></body></html>
