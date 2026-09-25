@@ -1,0 +1,67 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Sigmoid & MLE Lab</title>
+<style>body{font-family:Arial;background:#151719;color:#f7f2f6;margin:0}.w{max-width:980px;margin:auto;padding:28px 20px}h1,h2{color:#ffb3de}.s{display:none;background:#222025;border-left:6px solid #ff79c6;padding:24px;border-radius:16px}.s.on{display:block}.prog{height:9px;background:#333;margin:20px 0}.prog div{height:100%;background:#ff79c6}.call,.math{background:#191b20;padding:14px;border-radius:9px;margin:14px 0}.call{border-left:5px solid #ff79c6}.math{text-align:center;font:1.25em Georgia}.slider{width:100%;accent-color:#ff79c6}.big{font-size:1.8em;color:#79e2a5;font-weight:bold}.nav{display:flex;justify-content:space-between;margin-top:20px}button{padding:11px 14px;border-radius:9px;border:1px solid #666;background:#302b31;color:white;cursor:pointer}.primary{background:#ff79c6;color:#25131f;font-weight:bold}.svg{width:100%;background:#111418;border-radius:10px}.choice{display:block;width:100%;text-align:left;margin:8px 0}.good{background:#173528!important}.bad{background:#402326!important}table{width:100%;border-collapse:collapse}td,th{border:1px solid #555;padding:9px;text-align:center}th{background:#302b31}.flow{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;align-items:center}.box{background:#191b20;padding:10px;border:1px solid #555;border-radius:8px}.arr{color:#ff79c6;font-weight:bold}.bars{height:220px;display:flex;align-items:flex-end;gap:9px;border-bottom:2px solid #777;padding:10px}.bw{flex:1;text-align:center;font-size:.8em}.bar{background:#86d7ff;min-height:3px}.hidden{display:none}</style></head><body><main class="w">
+<h1>Sigmoid Function & Maximum Likelihood Estimation</h1><p>Deep interactive exploration for Logistic Regression.</p><div class="prog"><div id="prog"></div></div>
+<section class="s on"><h2>1. Big Picture</h2><div class="flow"><span class="box">X</span><span class="arr">→</span><span class="box">Linear score z</span><span class="arr">→</span><span class="box">Sigmoid</span><span class="arr">→</span><span class="box">Probability p</span><span class="arr">→</span><span class="box">Likelihood</span></div><div class="call"><b>Question 1:</b> How does sigmoid turn any real score into a probability?<br><br><b>Question 2:</b> How does MLE decide which coefficients are best?</div></section>
+<section class="s"><h2>2. Explore z = β₀ + β₁x</h2><label>x=<b id="xv"></b></label><input id="xs" class="slider" type="range" min="-5" max="5" step=".1" value="2"><label>β₀=<b id="b0v"></b></label><input id="b0s" class="slider" type="range" min="-5" max="5" step=".1" value="-1"><label>β₁=<b id="b1v"></b></label><input id="b1s" class="slider" type="range" min="-4" max="4" step=".1" value="1.5"><div id="zcalc" class="math"></div><div class="call">z can be any real number. It is not yet a probability.</div></section>
+<section class="s"><h2>3. Explore Sigmoid</h2><div class="math">σ(z)=1/(1+e<sup>-z</sup>)</div><svg id="svg" class="svg" viewBox="0 0 700 330"></svg><input id="zs" class="slider" type="range" min="-10" max="10" step=".1" value="0"><p>z=<b id="zv"></b> → σ(z)=<span id="pv" class="big"></span></p><div class="call">At z=0, p=0.5. Negative z moves p toward 0; positive z moves p toward 1.</div></section>
+<section class="s"><h2>4. What Does β₁ Do?</h2><p>Explore p=σ(β₁x), with β₀=0.</p><label>β₁=<b id="sv"></b></label><input id="ss" class="slider" type="range" min="-4" max="4" step=".1" value="1"><svg id="svg2" class="svg" viewBox="0 0 700 330"></svg><div id="sexp" class="call"></div></section>
+<section class="s"><h2>5. One Observation: Probability → Likelihood</h2><p>Suppose true y=1.</p><input id="op" class="slider" type="range" min=".01" max=".99" step=".01" value=".8"><p>p=<b id="opv"></b></p><div id="ol" class="math"></div><div class="call">If y=1, likelihood contribution is p. If y=0, it is 1-p.</div></section>
+<section class="s"><h2>6. Likelihood for Several Observations</h2><p>True labels: <b>1, 1, 0</b>.</p><label>p₁: <b id="p1v"></b></label><input id="p1" class="slider" type="range" min=".05" max=".95" step=".05" value=".9"><label>p₂: <b id="p2v"></b></label><input id="p2" class="slider" type="range" min=".05" max=".95" step=".05" value=".8"><label>p₃=P(y=1) when y₃=0: <b id="p3v"></b></label><input id="p3" class="slider" type="range" min=".05" max=".95" step=".05" value=".1"><div id="L" class="math"></div><div class="call">Likelihood = p₁ × p₂ × (1-p₃). MLE wants this product as large as possible.</div></section><section class="s"><h2>7. Why Log-Likelihood?</h2><div class="math">L = ∏ contributions → log L = Σ log(contributions)</div><button id="lb" class="primary">Calculate Log-Likelihood</button><div id="lo" class="call hidden"></div><div class="call">Log turns multiplication into addition and improves numerical stability. Maximizing L and log L gives the same optimum.</div></section>
+<section class="s"><h2>8. Negative Log-Likelihood = Log Loss</h2><div class="math">Loss = -[y log(p)+(1-y)log(1-p)]</div><p>Assume y=1:</p><input id="lps" class="slider" type="range" min=".01" max=".99" step=".01" value=".8"><p>p=<b id="lpp"></b> → loss=<span id="loss" class="big"></span></p><div class="call">Correct and confident → small loss. Wrong and confident → large loss.</div></section>
+<section class="s"><h2>9. MLE Chooses β: Follow Every Calculation</h2>
+<p>Now use a <b>non-perfectly-separable</b> toy dataset so that we can see a clear best finite coefficient:</p>
+<table><tr><th>x</th><th>Actual y</th></tr><tr><td>-2</td><td>0</td></tr><tr><td>-1</td><td>1</td></tr><tr><td>1</td><td>0</td></tr><tr><td>2</td><td>1</td></tr></table>
+<p>For simplicity, set β₀=0. Move β₁ and follow the complete chain:</p>
+<div class="flow"><span class="box">β₁</span><span class="arr">→</span><span class="box">z=β₁x</span><span class="arr">→</span><span class="box">p=σ(z)</span><span class="arr">→</span><span class="box">Probability of actual y</span><span class="arr">→</span><span class="box">Multiply → L</span></div>
+<input id="bs" class="slider" type="range" min="-3" max="3" step=".1" value="0"><p>β₁=<b id="bv"></b></p>
+<table><thead><tr><th>x</th><th>y</th><th>z=β₁x</th><th>p=P(y=1)</th><th>Probability assigned to actual y</th></tr></thead><tbody id="bt"></tbody></table>
+<div id="bout" class="math"></div>
+<div id="bexplain" class="call"></div></section>
+
+<section class="s"><h2>10. Search Across β₁ Values — What Does Each Bar Mean?</h2>
+<p>Each bar below represents the <b>total likelihood of the entire four-observation dataset</b> for one candidate β₁. It is <b>not</b> the probability of one observation.</p>
+<button id="search" class="primary">Evaluate Candidate β₁ Values</button>
+<div id="bars" class="bars"></div>
+<div id="barDetail" class="call">Click <b>Evaluate Candidate β₁ Values</b>. Then click any β₁ button below the chart to inspect how that likelihood was calculated.</div>
+<div id="betaButtons" class="flow"></div>
+<div class="call"><b>MLE rule:</b> compare the likelihood produced by each candidate coefficient and prefer the β₁ with the <b>largest likelihood</b>. With this non-separable dataset, the likelihood rises and then falls, so students can see a clear finite optimum.</div></section>
+<section class="s"><h2>11. Training Goal</h2><div class="flow"><span class="box">Choose β</span><span class="arr">→</span><span class="box">z</span><span class="arr">→</span><span class="box">sigmoid p</span><span class="arr">→</span><span class="box">loss</span><span class="arr">→</span><span class="box">update β</span></div><button class="choice q" data-ok="0">Training changes the true labels.</button><button class="choice q" data-ok="1">Training changes β to increase likelihood / decrease negative log-likelihood.</button><button class="choice q" data-ok="0">Training changes the sigmoid formula.</button><p id="qf"></p><div class="call"><b>MLE view:</b> maximize log-likelihood. <b>Loss view:</b> minimize negative log-likelihood. Same goal.</div></section>
+<section class="s"><h2>12. Complete Concept Map</h2><div class="flow"><span class="box">X</span><span class="arr">→</span><span class="box">β₀+βᵀX</span><span class="arr">→</span><span class="box">Sigmoid</span><span class="arr">→</span><span class="box">p</span><span class="arr">→</span><span class="box">Likelihood</span><span class="arr">→</span><span class="box">Optimize β</span></div><div class="call"><b>Sigmoid:</b> maps a real score to probability.<br><br><b>MLE:</b> finds coefficients that make observed labels most likely.<br><br><b>Equivalent loss view:</b> minimize negative log-likelihood.</div></section>
+<div class="nav"><button id="back">← Previous</button><button id="next" class="primary">Next Step →</button></div></main><script>
+let n=0,S=[...document.querySelectorAll(".s")];function show(){S.forEach((x,i)=>x.classList.toggle("on",i===n));prog.style.width=100*(n+1)/S.length+"%";back.disabled=n===0;next.textContent=n===S.length-1?"Start Over":"Next Step →";scrollTo(0,0)}next.onclick=()=>{n=n===S.length-1?0:n+1;show()};back.onclick=()=>{if(n)n--;show()};function sg(z){return 1/(1+Math.exp(-z))}
+function lin(){let x=+xs.value,a=+b0s.value,b=+b1s.value,z=a+b*x;xv.textContent=x.toFixed(1);b0v.textContent=a.toFixed(1);b1v.textContent=b.toFixed(1);zcalc.textContent="z = "+a.toFixed(1)+" + ("+b.toFixed(1)+" × "+x.toFixed(1)+") = "+z.toFixed(2)+"; sigmoid(z) = "+sg(z).toFixed(3)}[xs,b0s,b1s].forEach(e=>e.oninput=lin);lin();
+function curve(el,b,pt){let w=700,h=330,p=42,A=[];for(let x=-10;x<=10;x+=.1)A.push((p+(x+10)/20*(w-2*p))+","+(h-p-sg(b*x)*(h-2*p)));let c="";if(pt!==null){let x=p+(pt+10)/20*(w-2*p),y=h-p-sg(b*pt)*(h-2*p);c='<circle cx="'+x+'" cy="'+y+'" r="8" fill="#ff79c6" stroke="white" stroke-width="2"/>'}el.innerHTML='<line x1="'+p+'" y1="'+(h-p)+'" x2="'+(w-p)+'" y2="'+(h-p)+'" stroke="#777"/><line x1="'+w/2+'" y1="'+p+'" x2="'+w/2+'" y2="'+(h-p)+'" stroke="#555"/><polyline points="'+A.join(" ")+'" fill="none" stroke="#86d7ff" stroke-width="4"/>'+c}
+function sd(){let z=+zs.value;zv.textContent=z.toFixed(1);pv.textContent=sg(z).toFixed(3);curve(svg,1,z)}zs.oninput=sd;sd();function slope(){let b=+ss.value;sv.textContent=b.toFixed(1);curve(svg2,b,null);sexp.textContent=b>0?"Positive β₁: larger x gives larger probability; greater magnitude makes the transition steeper.":b<0?"Negative β₁ reverses the relationship: larger x gives smaller probability.":"β₁=0: x has no effect and p stays 0.5."}ss.oninput=slope;slope();
+function one(){let p=+op.value;opv.textContent=p.toFixed(2);ol.textContent="Because y=1, likelihood contribution = p = "+p.toFixed(2)}op.oninput=one;one();function multi(){let a=+p1.value,b=+p2.value,c=+p3.value,l=a*b*(1-c);p1v.textContent=a.toFixed(2);p2v.textContent=b.toFixed(2);p3v.textContent=c.toFixed(2);L.textContent="L = "+a.toFixed(2)+" × "+b.toFixed(2)+" × (1-"+c.toFixed(2)+") = "+l.toFixed(5);return l}[p1,p2,p3].forEach(e=>e.oninput=multi);multi();lb.onclick=()=>{let l=multi();lo.classList.remove("hidden");lo.textContent="log L = log("+l.toFixed(5)+") = "+Math.log(l).toFixed(4)};function lossf(){let p=+lps.value;lpp.textContent=p.toFixed(2);loss.textContent=(-Math.log(p)).toFixed(3)}lps.oninput=lossf;lossf();
+let X=[-2,-1,1,2],Y=[0,1,0,1];
+function cb(b){
+ let l=1,r="",details=[];
+ X.forEach((x,i)=>{
+   let z=b*x,p=sg(z),c=Y[i]===1?p:1-p;
+   l*=c; details.push(c);
+   r+="<tr><td>"+x+"</td><td>"+Y[i]+"</td><td>"+z.toFixed(2)+"</td><td>"+p.toFixed(3)+"</td><td>"+c.toFixed(3)+"</td></tr>";
+ });
+ return [l,r,details];
+}
+function bd(){
+ let b=+bs.value,r=cb(b);
+ bv.textContent=b.toFixed(1);bt.innerHTML=r[1];
+ bout.textContent="L = "+r[2].map(v=>v.toFixed(3)).join(" × ")+" = "+r[0].toFixed(6);
+ bexplain.innerHTML="<b>Interpretation:</b> For y=1 we use p; for y=0 we use 1−p. The four correct-outcome probabilities are multiplied to obtain one likelihood for this β₁.";
+}
+bs.oninput=bd;bd();
+function detailBeta(b){
+ let r=cb(b);
+ barDetail.innerHTML="<b>β₁ = "+b.toFixed(1)+"</b><br><br>"+
+ "Correct-outcome probabilities: "+r[2].map(v=>v.toFixed(3)).join(", ")+"<br><br>"+
+ "L = "+r[2].map(v=>v.toFixed(3)).join(" × ")+" = <b>"+r[0].toFixed(6)+"</b>";
+}
+search.onclick=()=>{
+ let V=[-3,-2,-1,0,1,2,3],A=V.map(v=>cb(v)[0]),m=Math.max(...A);
+ bars.innerHTML=V.map((v,i)=>'<div class="bw"><div class="bar" style="height:'+(8+180*A[i]/m)+'px"></div><b>β='+v+'</b><br>L='+A[i].toFixed(3)+'</div>').join("");
+ betaButtons.innerHTML=V.map(v=>'<button type="button" class="betaInspect" data-b="'+v+'">Inspect β='+v+'</button>').join("");
+ document.querySelectorAll(".betaInspect").forEach(btn=>btn.onclick=()=>detailBeta(+btn.dataset.b));
+ let best=V[A.indexOf(m)];
+ barDetail.innerHTML="<b>Look for the tallest bar.</b> In this candidate grid, β₁="+best+" gives the largest likelihood. Click a β button to see exactly how its bar was calculated.";
+};document.querySelectorAll(".q").forEach(b=>b.onclick=()=>{document.querySelectorAll(".q").forEach(x=>x.classList.remove("good","bad"));let ok=b.dataset.ok==="1";b.classList.add(ok?"good":"bad");qf.textContent=ok?"✓ Correct!":"Not quite. β is what training changes."});show();
+</script></body></html>
