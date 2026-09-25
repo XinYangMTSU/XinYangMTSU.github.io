@@ -1,0 +1,294 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Logistic Regression Python Demo</title><style>
+body{font-family:Arial;background:#151719;color:#f7f2f6;margin:0}.w{max-width:1020px;margin:auto;padding:30px 20px}h1,h2{color:#ffb3de}.s{display:none;background:#222025;border-left:6px solid #ff79c6;padding:24px;border-radius:16px}.s.on{display:block}.bar{height:9px;background:#333;margin:20px 0;border-radius:10px}.bar div{height:100%;background:#ff79c6}.code,.call{background:#191b20;padding:15px;border-radius:10px;margin:14px 0}.code{white-space:pre-wrap;font-family:monospace;color:#ffd7f0;overflow:auto}.call{border-left:5px solid #ff79c6}.flow{display:flex;gap:7px;flex-wrap:wrap;align-items:center;justify-content:center}.box{background:#111418;padding:10px;border:1px solid #555;border-radius:8px}.a{color:#ff79c6;font-weight:bold}.split{display:flex;height:65px;border-radius:9px;overflow:hidden}.tr{width:80%;background:#193345;display:flex;align-items:center;justify-content:center;font-weight:bold}.te{width:20%;background:#4b3714;display:flex;align-items:center;justify-content:center;font-weight:bold}.nav{display:flex;justify-content:space-between;margin-top:20px}button{padding:11px 15px;border-radius:9px;border:1px solid #666;background:#302b31;color:white;cursor:pointer}button.primary{background:#ff79c6;color:#25131f;font-weight:bold}.choice{display:block;width:100%;text-align:left;margin:8px 0}.good{background:#173528!important}.bad{background:#402326!important}table{width:100%;border-collapse:collapse}td,th{border:1px solid #555;padding:9px;text-align:center}th{background:#302b31}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:#191b20;padding:14px;border-radius:10px}.hidden{display:none}@media(max-width:650px){.grid{grid-template-columns:1fr}.s{padding:18px}}</style></head><body><main class="w">
+<h1>Logistic Regression in Python: Step by Step</h1><p>11-step interactive walkthrough. <strong>Every code block is complete code for that step and can be copied into a Jupyter Notebook in order.</strong></p><div class="bar"><div id="prog"></div></div>
+<section class="s on"><h2>1. Import All Required Libraries</h2><div class="code">import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
+    confusion_matrix,
+    ConfusionMatrixDisplay,
+    classification_report
+)</div><div class="call"><b>Why these imports?</b><br><br><code>load_breast_cancer</code> → classification dataset<br><code>train_test_split</code> → training/test split<br><code>Pipeline</code> → connect scaling and classifier<br><code>StandardScaler</code> → standardize features<br><code>LogisticRegression</code> → classifier<br><code>metrics</code> → evaluate predictions</div></section>
+
+<section class="s"><h2>2. Load the Breast Cancer Dataset</h2><div class="code">data = load_breast_cancer()
+
+X = data.data
+y = data.target
+
+print("X shape:", X.shape)
+print("y shape:", y.shape)
+print("Feature names:")
+print(data.feature_names)
+
+print("\nClass names:")
+print(data.target_names)
+
+print("\nFirst 10 target values:")
+print(y[:10])</div><div class="call"><b>X</b> contains the input features. <b>y</b> contains binary class labels. In this scikit-learn dataset, target 0 = malignant and target 1 = benign.</div></section>
+
+<section class="s"><h2>3. Split into Training and Test Sets</h2><div class="code">X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.20,
+    random_state=42,
+    stratify=y
+)
+
+print("Training samples:", X_train.shape[0])
+print("Test samples:", X_test.shape[0])</div><div class="split"><div class="tr">TRAIN 80%</div><div class="te">TEST 20%</div></div>
+
+<div class="call"><strong>What does <code>stratify=y</code> mean?</strong><br><br>
+For a classification problem, <code>y</code> contains the class labels. Setting <code>stratify=y</code> tells <code>train_test_split()</code> to make the training and test sets preserve approximately the same class proportions as the original dataset.<br><br>
+
+For example, suppose the full dataset contains:<br><br>
+<strong>60% Class 1</strong> and <strong>40% Class 0</strong>.<br><br>
+
+With <code>stratify=y</code>, the split will try to keep approximately:<br><br>
+Training set → 60% Class 1, 40% Class 0<br>
+Test set → 60% Class 1, 40% Class 0
+</div>
+
+<table>
+<tr><th>Dataset</th><th>Class 0</th><th>Class 1</th></tr>
+<tr><td>Original data</td><td>≈ 40%</td><td>≈ 60%</td></tr>
+<tr><td>Training data</td><td>≈ 40%</td><td>≈ 60%</td></tr>
+<tr><td>Test data</td><td>≈ 40%</td><td>≈ 60%</td></tr>
+</table>
+
+<div class="call"><strong>Why is this useful?</strong><br><br>
+Without stratification, a random split can accidentally create training and test sets with noticeably different class distributions, especially when the dataset is small or classes are imbalanced. Stratification makes the split more representative of the original class distribution.<br><br>
+<strong>Important:</strong> <code>stratify=y</code> does not balance the classes. It preserves their existing proportions.
+</div>
+
+<p>Quick check: If the original data are 80% Class 0 and 20% Class 1, what does <code>stratify=y</code> try to do?</p>
+<button class="choice q3" data-ok="0">Make both classes 50% / 50%</button>
+<button class="choice q3" data-ok="1">Keep approximately 80% / 20% in both training and test sets</button>
+<button class="choice q3" data-ok="0">Put Class 0 in training and Class 1 in testing</button>
+<p id="f3"></p>
+</section>
+
+<section class="s"><h2>4. Create the Pipeline</h2><div class="code">model = Pipeline([
+    ("scaler", StandardScaler()),
+    ("logistic", LogisticRegression(
+        max_iter=1000
+    ))
+])</div><div class="flow"><span class="box">Raw X</span><span class="a">→</span><span class="box">StandardScaler</span><span class="a">→</span><span class="box">LogisticRegression</span></div><div class="call"><b>Why scale?</b> The features have different numerical scales. Standardization generally helps numerical optimization and is especially important when regularization is used.</div></section>
+
+<section class="s"><h2>5. Train the Logistic Regression Model</h2>
+<div class="code">model.fit(X_train, y_train)
+
+logistic_model = model.named_steps["logistic"]
+
+print("Number of iterations used:")
+print(logistic_model.n_iter_)</div>
+
+<div class="flow"><span class="box">X_train, y_train</span><span class="a">→</span><span class="box">fit scaler</span><span class="a">→</span><span class="box">learn β coefficients</span><span class="a">→</span><span class="box">converge</span></div>
+
+<div class="call">During <code>fit()</code>, Logistic Regression numerically optimizes its objective. Conceptually, it learns coefficients that make the observed labels likely while accounting for the model's regularization settings.<br><br>
+
+<strong>What does <code>n_iter_</code> mean?</strong><br><br>
+Earlier we set <code>max_iter=1000</code>. This means the solver is allowed to use <strong>up to 1,000 iterations</strong>. It does not mean that it must run exactly 1,000 iterations.<br><br>
+
+After training, <code>logistic_model.n_iter_</code> tells us how many iterations the solver actually used before stopping. For example, if it reports <code>[15]</code>, the solver converged after 15 iterations even though <code>max_iter</code> was 1,000.<br><br>
+
+<strong>max_iter = maximum allowed iterations</strong><br>
+<strong>n_iter_ = iterations actually used</strong>
+</div></section>
+
+<section class="s"><h2>6. Get Probabilities with predict_proba()</h2><div class="code">y_prob = model.predict_proba(X_test)
+
+print("Probability array shape:", y_prob.shape)
+print("\nFirst 5 probability pairs:")
+print(y_prob[:5])
+
+print("\nFirst 5 probabilities for class 1:")
+print(y_prob[:5, 1])</div><div class="call">Each row has two probabilities: <b>P(class 0)</b> and <b>P(class 1)</b>. They add to 1. <code>y_prob[:, 1]</code> selects the probability of class 1.</div><button id="probBtn" class="primary">Show Example</button><table id="probTable" class="hidden"><tr><th>Sample</th><th>P(class 0)</th><th>P(class 1)</th></tr><tr><td>1</td><td>0.08</td><td>0.92</td></tr><tr><td>2</td><td>0.71</td><td>0.29</td></tr><tr><td>3</td><td>0.03</td><td>0.97</td></tr></table></section>
+
+<section class="s"><h2>7. Convert Probabilities into Class Predictions</h2><div class="code">y_pred = model.predict(X_test)
+
+print("First 10 predicted classes:")
+print(y_pred[:10])
+
+print("\nFirst 10 actual classes:")
+print(y_test[:10])</div><div class="call"><code>predict()</code> returns final class labels. For binary logistic regression, the default decision corresponds to choosing the class with the larger predicted probability (equivalent to a 0.5 threshold for class 1 in the ordinary binary case).</div><p>If P(class 1)=0.82, what class is predicted using 0.5?</p><button class="choice q7" data-ok="0">Class 0</button><button class="choice q7" data-ok="1">Class 1</button><p id="f7"></p></section>
+
+<section class="s"><h2>8. Build and Display the Confusion Matrix</h2>
+<p>First, calculate and print the raw confusion matrix:</p>
+<div class="code">cm = confusion_matrix(
+    y_test,
+    y_pred
+)
+
+print("Confusion Matrix:")
+print(cm)
+
+tn, fp, fn, tp = cm.ravel()
+
+print("\nTN:", tn)
+print("FP:", fp)
+print("FN:", fn)
+print("TP:", tp)</div>
+
+<div class="flow"><span class="box">y_test + y_pred</span><span class="a">→</span><span class="box">confusion_matrix()</span><span class="a">→</span><span class="box">cm</span></div>
+
+<h3>Display the same results as a colored matrix</h3>
+<div class="code">disp = ConfusionMatrixDisplay(
+    confusion_matrix=cm,
+    display_labels=data.target_names
+)
+
+disp.plot(
+    cmap="Blues",
+    values_format="d"
+)
+
+plt.title("Confusion Matrix")
+plt.show()</div>
+
+<div class="call"><strong>What does the colored plot show?</strong><br><br>
+Each cell contains the number of samples for one actual/predicted combination. The color intensity provides a visual representation of the count, making the confusion matrix easier to read than the raw array alone.<br><br>
+The rows represent the <strong>actual classes</strong>, and the columns represent the <strong>predicted classes</strong>.
+</div>
+
+<table>
+<tr><th></th><th>Predicted Malignant (0)</th><th>Predicted Benign (1)</th></tr>
+<tr><th>Actual Malignant (0)</th><td><strong>TN</strong></td><td><strong>FP</strong></td></tr>
+<tr><th>Actual Benign (1)</th><td><strong>FN</strong></td><td><strong>TP</strong></td></tr>
+</table>
+
+<div class="call"><b>Important:</b> In this dataset, <code>0 = malignant</code> and <code>1 = benign</code>. With scikit-learn's default binary metric convention, class <strong>1 (benign)</strong> is treated as the positive class. Therefore, the upper-left cell is TN and the lower-right cell is TP.</div>
+</section>
+
+<section class="s"><h2>9. Calculate Accuracy, Precision, Recall, F1, and Specificity</h2><div class="code">accuracy = accuracy_score(
+    y_test,
+    y_pred
+)
+
+precision = precision_score(
+    y_test,
+    y_pred
+)
+
+recall = recall_score(
+    y_test,
+    y_pred
+)
+
+f1 = f1_score(
+    y_test,
+    y_pred
+)
+
+tn, fp, fn, tp = confusion_matrix(
+    y_test,
+    y_pred
+).ravel()
+
+specificity = tn / (tn + fp)
+
+print(f"Accuracy:    {accuracy:.4f}")
+print(f"Precision:   {precision:.4f}")
+print(f"Recall:      {recall:.4f}")
+print(f"Specificity: {specificity:.4f}")
+print(f"F1 Score:    {f1:.4f}")</div><div class="grid"><div class="card"><b>Accuracy</b><p>(TP+TN)/All</p></div><div class="card"><b>Precision</b><p>TP/(TP+FP)</p></div><div class="card"><b>Recall</b><p>TP/(TP+FN)</p></div><div class="card"><b>Specificity</b><p>TN/(TN+FP)</p></div><div class="card"><b>F1</b><p>Balances precision and recall.</p></div></div></section>
+
+<section class="s"><h2>10. Print and Understand the Classification Report</h2>
+<div class="code">print(
+    classification_report(
+        y_test,
+        y_pred,
+        target_names=data.target_names
+    )
+)</div>
+
+<div class="call"><strong>What does each class row mean?</strong><br><br>
+The report calculates <strong>precision, recall, and F1-score separately for each class</strong>. For example, on the <code>malignant</code> row, malignant is treated as the class of interest; on the <code>benign</code> row, benign is treated as the class of interest.
+</div>
+
+<table>
+<tr><th>Column</th><th>Meaning</th></tr>
+<tr><td><strong>precision</strong></td><td>Of the samples predicted as this class, how many were actually this class?</td></tr>
+<tr><td><strong>recall</strong></td><td>Of all actual samples of this class, how many did the model correctly identify?</td></tr>
+<tr><td><strong>f1-score</strong></td><td>The harmonic mean of precision and recall.</td></tr>
+<tr><td><strong>support</strong></td><td>The number of actual samples belonging to this class in the test set.</td></tr>
+</table>
+
+<h3>What is support?</h3>
+<div class="call">
+Suppose the report shows:<br><br>
+Malignant support = <strong>42</strong><br>
+Benign support = <strong>72</strong><br><br>
+Then the test set contains 42 actual malignant samples and 72 actual benign samples:
+<br><br><strong>42 + 72 = 114 total test samples.</strong>
+</div>
+
+<h3>What is macro average?</h3>
+<div class="call">
+<strong>Macro average gives every class equal importance, regardless of how many samples are in each class.</strong><br><br>
+For two classes:
+<br><br>
+<code>Macro Precision = (Precision_class0 + Precision_class1) / 2</code>
+<br><br>
+So malignant and benign each contribute <strong>50%</strong> to the macro average, even if one class contains many more samples.<br><br>
+<strong>Memory aid:</strong> Macro average → every <em>class</em> gets equal weight.
+</div>
+
+<h3>What is weighted average?</h3>
+<div class="call">
+<strong>Weighted average accounts for the number of samples (support) in each class.</strong><br><br>
+If there are 42 malignant and 72 benign samples:
+<br><br>
+<code>Weighted Precision = (42 × Precision_malignant + 72 × Precision_benign) / 114</code>
+<br><br>
+The benign class contributes more because it contains more samples.<br><br>
+<strong>Memory aid:</strong> Weighted average → larger classes get more weight.
+</div>
+
+<table>
+<tr><th></th><th>Macro Average</th><th>Weighted Average</th></tr>
+<tr><td><strong>Class importance</strong></td><td>Equal</td><td>Based on support</td></tr>
+<tr><td><strong>Minority class</strong></td><td>Same importance as majority class</td><td>Contributes less</td></tr>
+<tr><td><strong>Useful for</strong></td><td>Performance across classes</td><td>Overall performance accounting for class sizes</td></tr>
+</table>
+
+<div class="call"><strong>Why compare macro and weighted averages?</strong><br><br>
+If the model performs similarly on every class, macro and weighted averages will usually be similar. If they are very different, the model may be performing much better on a larger class than on a smaller class. This is especially useful to examine when classes are imbalanced.
+</div>
+
+<p>Quick check: Suppose Class 0 has only 10 samples and Class 1 has 90 samples. Which average gives the two classes equal importance?</p>
+<button class="choice q10" data-ok="1">Macro average</button>
+<button class="choice q10" data-ok="0">Weighted average</button>
+<p id="f10"></p>
+</section>
+
+<section class="s"><h2>11. Inspect the Learned Coefficients</h2><div class="code">logistic_model = model.named_steps["logistic"]
+
+coefficients = logistic_model.coef_[0]
+intercept = logistic_model.intercept_[0]
+
+print("Intercept:")
+print(intercept)
+
+print("\nCoefficients:")
+for feature, coef in zip(
+    data.feature_names,
+    coefficients
+):
+    print(f"{feature:30s}: {coef:10.4f}")</div><div class="call">Because the inputs were standardized inside the Pipeline, these coefficients correspond to standardized feature inputs. Positive coefficients increase the log-odds of class 1; negative coefficients decrease them, holding other features fixed.</div></section>
+
+<div class="call"><b>Complete Logistic Regression Workflow:</b><br><br>
+Load Data → Train/Test Split → StandardScaler + LogisticRegression → fit() → predict_proba() → predict() → Confusion Matrix → Accuracy / Precision / Recall / Specificity / F1 → Inspect Coefficients
+</div>
+<div class="nav"><button id="back">← Previous</button><button id="next" class="primary">Next Step →</button></div></main>
+<script>
+let n=0,S=[...document.querySelectorAll(".s")];function show(){S.forEach((x,i)=>x.classList.toggle("on",i===n));prog.style.width=100*(n+1)/S.length+"%";back.disabled=n===0;next.textContent=n===S.length-1?"Start Over":"Next Step →";scrollTo(0,0)}next.onclick=()=>{n=n===S.length-1?0:n+1;show()};back.onclick=()=>{if(n)n--;show()};probBtn.onclick=()=>probTable.classList.toggle("hidden");function quiz(cls,id){document.querySelectorAll(cls).forEach(b=>b.onclick=()=>{document.querySelectorAll(cls).forEach(x=>x.classList.remove("good","bad"));let ok=b.dataset.ok==="1";b.classList.add(ok?"good":"bad");document.getElementById(id).textContent=ok?"✓ Correct!":"Not quite. Review the probability-to-class step."})}quiz(".q3","f3");quiz(".q7","f7");quiz(".q10","f10");show();
+</script></body></html>
