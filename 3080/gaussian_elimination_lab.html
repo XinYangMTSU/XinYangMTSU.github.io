@@ -1,0 +1,797 @@
+<!doctype html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CSCI 3080 — Gaussian Elimination Interactive Learning Lab</title>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <style>
+
+/* ============================================================
+   COLORS
+============================================================ */
+
+:root{
+
+    --bg:#151719;
+
+    --panel:#222025;
+
+    --panel2:#191b20;
+
+    --text:#f7f2f6;
+
+    --muted:#bbb4bc;
+
+    --pink:#ff79c6;
+
+    --pink2:#ffb3de;
+
+    --blue:#86d7ff;
+
+    --green:#79e2a5;
+
+    --yellow:#ffd166;
+
+    --red:#ff8585;
+
+    --border:#443943;
+
+}
+
+
+/* ============================================================
+   GENERAL PAGE
+============================================================ */
+
+*{
+    box-sizing:border-box;
+}
+
+
+body{
+
+    margin:0;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-family:
+        Inter,
+        system-ui,
+        Arial,
+        sans-serif;
+
+}
+
+
+.wrap{
+
+    max-width:1080px;
+
+    margin:auto;
+
+    padding:
+        28px
+        20px
+        70px;
+
+}
+
+
+h1{
+
+    color:var(--pink2);
+
+    font-size:
+        clamp(
+            2rem,
+            5vw,
+            3rem
+        );
+
+    margin:.15em 0;
+
+}
+
+
+h2{
+
+    color:var(--pink2);
+
+    margin-top:0;
+
+}
+
+
+h3{
+
+    color:var(--blue);
+
+}
+
+
+p,
+li{
+
+    line-height:1.65;
+
+}
+
+
+.tag{
+
+    color:var(--pink);
+
+    font-weight:800;
+
+    text-transform:uppercase;
+
+    letter-spacing:.08em;
+
+    font-size:.8rem;
+
+}
+
+
+.sub,
+.tiny{
+
+    color:var(--muted);
+
+}
+
+
+/* ============================================================
+   PROGRESS BAR
+============================================================ */
+
+.progress{
+
+    height:10px;
+
+    background:#302c31;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin:24px 0;
+
+}
+
+
+.progress div{
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--pink),
+            var(--blue)
+        );
+
+    transition:.25s;
+
+}
+
+
+/* ============================================================
+   STAGES
+============================================================ */
+
+.stage{
+
+    display:none;
+
+    background:var(--panel);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-left:
+        6px solid
+        var(--pink);
+
+    border-radius:18px;
+
+    padding:26px;
+
+}
+
+
+.stage.active{
+
+    display:block;
+
+}
+
+
+/* ============================================================
+   CONTENT BOXES
+============================================================ */
+
+.call,
+.math,
+.code{
+
+    background:var(--panel2);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:12px;
+
+    padding:15px;
+
+    margin:15px 0;
+
+}
+
+
+.call{
+
+    border-left:
+        5px solid
+        var(--pink);
+
+}
+
+
+.math{
+
+    text-align:center;
+
+    font:
+        1.25rem
+        Georgia,
+        serif;
+
+}
+
+
+.code{
+
+    font:
+        1rem
+        ui-monospace,
+        Consolas,
+        monospace;
+
+    white-space:pre-wrap;
+
+    color:#ffd7f0;
+
+    overflow:auto;
+
+}
+
+
+/* ============================================================
+   GRID / CARDS
+============================================================ */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:14px;
+
+}
+
+
+.card{
+
+    background:var(--panel2);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:12px;
+
+    padding:15px;
+
+}
+
+
+.card h3{
+
+    margin-top:0;
+
+}
+
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+
+.choices button{
+
+    display:block;
+
+    width:100%;
+
+    text-align:left;
+
+    margin:9px 0;
+
+}
+
+
+button{
+
+    font:inherit;
+
+    min-height:44px;
+
+    padding:
+        10px
+        15px;
+
+    border-radius:10px;
+
+    border:
+        1px solid
+        #665b65;
+
+    background:#302b31;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+}
+
+
+button.primary{
+
+    background:var(--pink);
+
+    border-color:var(--pink);
+
+    color:#25121f;
+
+}
+
+
+button:disabled{
+
+    opacity:.4;
+
+}
+
+
+/* ============================================================
+   ANSWER FEEDBACK
+============================================================ */
+
+.correct{
+
+    background:
+        #173528 !important;
+
+    border-color:
+        var(--green) !important;
+
+}
+
+
+.wrong{
+
+    background:
+        #402326 !important;
+
+    border-color:
+        var(--red) !important;
+
+}
+
+
+.feedback{
+
+    min-height:25px;
+
+    font-weight:700;
+
+}
+
+
+.good{
+
+    color:var(--green);
+
+}
+
+
+.warn{
+
+    color:var(--yellow);
+
+}
+
+
+/* ============================================================
+   NAVIGATION
+============================================================ */
+
+.nav{
+
+    display:flex;
+
+    justify-content:
+        space-between;
+
+    gap:12px;
+
+    margin-top:24px;
+
+}
+
+
+.nav button{
+
+    min-width:120px;
+
+}
+
+
+/* ============================================================
+   FLOW DIAGRAM
+============================================================ */
+
+.flow{
+
+    display:flex;
+
+    gap:8px;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    margin:18px 0;
+
+}
+
+
+.box{
+
+    padding:
+        10px
+        12px;
+
+    background:#111418;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:9px;
+
+    font-weight:700;
+
+    /*
+       IMPORTANT FIX:
+       force text to be light
+    */
+
+    color:var(--text);
+
+}
+
+
+.arrow{
+
+    color:var(--pink);
+
+    font-size:1.3rem;
+
+}
+
+
+/* ============================================================
+   TABLE
+============================================================ */
+
+table{
+
+    width:100%;
+
+    border-collapse:
+        collapse;
+
+}
+
+
+th,
+td{
+
+    padding:12px;
+
+    border:
+        1px solid
+        var(--border);
+
+    text-align:center;
+
+}
+
+
+th{
+
+    background:#302b31;
+
+    /*
+       IMPORTANT FIX:
+       readable header text
+    */
+
+    color:var(--pink2);
+
+    font-weight:800;
+
+}
+
+
+/* ============================================================
+   CONTROLS
+============================================================ */
+
+.controls{
+
+    background:var(--panel2);
+
+    padding:15px;
+
+    border-radius:12px;
+
+    margin:
+        15px
+        0;
+
+}
+
+
+select{
+
+    background:#111418;
+
+    color:var(--text);
+
+    border:
+        1px solid
+        #665b65;
+
+    border-radius:8px;
+
+    padding:9px;
+
+    font:inherit;
+
+}
+
+
+.hidden{
+
+    display:none;
+
+}
+
+
+/* ============================================================
+   SPECIAL TEXT
+============================================================ */
+
+.operation{
+
+    background:#111418;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:10px;
+
+    padding:12px;
+
+    margin:15px 0;
+
+    text-align:center;
+
+    color:var(--pink2);
+
+    font:
+        1.1rem
+        ui-monospace,
+        Consolas,
+        monospace;
+
+}
+
+
+.solution{
+
+    text-align:center;
+
+    font-size:1.4rem;
+
+    color:var(--green);
+
+    font-weight:900;
+
+    margin:20px 0;
+
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media(max-width:700px){
+
+    .grid{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .stage{
+
+        padding:18px;
+
+    }
+
+
+    .nav button{
+
+        min-width:0;
+
+        flex:1;
+
+    }
+
+}
+
+
+/* Compatibility additions for this Gaussian Elimination lab */
+.operation{
+    background:#111418;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px;
+    margin:15px 0;
+    text-align:center;
+    color:var(--pink2);
+    font:1.1rem ui-monospace,Consolas,monospace;
+}
+.solution{
+    text-align:center;
+    font-size:1.4rem;
+    color:var(--green);
+    font-weight:900;
+    margin:20px 0;
+}
+select{
+    background:#111418;
+    color:var(--text);
+    border:1px solid #665b65;
+    border-radius:8px;
+    padding:9px;
+    font:inherit;
+}
+</style></head><body><main class="wrap"><div class="tag">CSCI 3080 • Chapter 5 • Section 5.7</div><h1>Gaussian Elimination — Interactive Learning Lab</h1><p class="sub">Learn the process: <strong>represent → pivot → eliminate → back-substitute → extend to RREF.</strong></p><div class="progress"><div id="prog"></div></div>
+<section class="stage active"><div class="tag">Step 1 of 8</div><h2>Why Gaussian Elimination?</h2><div class="math">x + y = 70<br>24x + 14y = 1180</div><div class="call">Gaussian elimination transforms a system into an <strong>equivalent</strong> system that is easier to solve.</div><div class="choices q" data-a="s" data-f="f1"><button data-v="g">Guess values until they work.</button><button data-v="s">Transform the system into an equivalent, easier system.</button><button data-v="c">Change the solution.</button></div><div id="f1" class="feedback"></div></section>
+<section class="stage"><div class="tag">Step 2 of 8</div><h2>Build the augmented matrix</h2><div class="math">[ 1 &nbsp; 1 | 70 ]<br>[ 24 &nbsp; 14 | 1180 ]</div><p>The left side stores coefficients; the rightmost column stores constants.</p><div class="choices q" data-a="a" data-f="f2"><button data-v="a">[1 1 | 70] and [24 14 | 1180]</button><button data-v="b">[1 70 | 1] and [24 1180 | 14]</button></div><div id="f2" class="feedback"></div></section>
+<section class="stage"><div class="tag">Step 3 of 8</div><h2>Three elementary row operations</h2>
+
+  <div class="grid"><div class="card"><h3>Swap</h3>R₁ ↔ R₂</div><div class="card"><h3>Scale</h3>Rᵢ ← cRᵢ, c ≠ 0</div><div class="card"><h3>Replace</h3>Rᵢ ← Rᵢ + cRⱼ</div><div class="card"><h3>Key idea</h3>All preserve the solution set.</div></div>
+  <h2>
+  We can swap rows, multiply a row by a nonzero number, or add a multiple of one row to another.
+Which operation below is NOT allowed? </h2>
+  <div class="choices q" data-a="z" data-f="f3"><button data-v="a">Multiply a row by 5.</button><button data-v="z">Multiply a row by 0.</button><button data-v="b">Add −3R₁ to R₂.</button></div><div id="f3" class="feedback"></div></section>
+
+<section class="stage"><div class="tag">Step 4 of 8</div><h2>Create the first zero</h2><div class="math">[ 1 &nbsp; 1 | 70 ]<br>[ 24 &nbsp; 14 | 1180 ]</div><p>Use the first pivot to eliminate 24.</p><div class="controls"><label>Choose c for R₂ ← R₂ + cR₁: <select id="mult"><option value="">Choose…</option><option value="-24">−24</option><option value="24">24</option><option value="-14">−14</option></select></label><button id="apply" class="primary">Apply</button></div><div id="out" class="call">Target: make the first entry of row 2 equal to 0.</div></section>
+<section class="stage"><div class="tag">Step 5 of 8</div><h2>Upper triangular form</h2><div class="math">[ 1 &nbsp; 1 | 70 ]<br>[ 0 &nbsp; −10 | −500 ]</div><div class="call">Everything below the main diagonal is now zero. Standard Gaussian elimination can stop and use <strong>back-substitution</strong>.</div><div class="choices q" data-a="b" data-f="f5"><button data-v="a">Restart.</button><button data-v="b">Solve −10y = −500 first.</button><button data-v="c">Guess x.</button></div><div id="f5" class="feedback"></div></section>
+<section class="stage"><div class="tag">Step 6 of 8</div><h2>Back-substitution</h2><div class="math">−10y = −500 → y = 50<br><br>x + 50 = 70 → x = 20</div><div class="call"><strong>Solution:</strong> x = 20, y = 50</div><div class="choices q" data-a="20" data-f="f6"><button data-v="50">x = 50</button><button data-v="20">x = 20</button><button data-v="-20">x = −20</button></div><div id="f6" class="feedback"></div></section>
+<section class="stage"><div class="tag">Step 7 of 8</div><h2>Gaussian vs. Gauss–Jordan</h2>
+<p>You have already used <strong>Gaussian Elimination</strong> to reach:</p><div class="math">[ 1 &nbsp; 1 | 70 ]<br>[ 0 &nbsp; −10 | −500 ]</div>
+<div class="call"><strong>Gaussian Elimination can stop here.</strong> The matrix is in row echelon form, so we can use back-substitution. <strong>Gauss–Jordan keeps going</strong> until the coefficient part becomes the identity matrix.</div>
+<table><tr><th>Gaussian Elimination</th><th>Gauss–Jordan Elimination</th></tr><tr><td>Zeros below pivots</td><td>Zeros above and below pivots</td></tr><tr><td>Row Echelon Form (REF)</td><td>Reduced Row Echelon Form (RREF)</td></tr><tr><td>Pivots do not have to be 1</td><td>Every pivot is 1</td></tr><tr><td>Back-substitution required</td><td>Read solution directly</td></tr></table>
+<div class="flow"><span class="box">Gaussian</span><b class="arrow">→</b><span class="box">REF</span><b class="arrow">→</b><span class="box">Back-substitution</span></div>
+<div class="flow"><span class="box">Gauss–Jordan</span><b class="arrow">→</b><span class="box">REF</span><b class="arrow">→</b><span class="box">Keep going</span><b class="arrow">→</b><span class="box">RREF</span></div>
+<h3>Let's continue using Gauss–Jordan</h3><div class="call"><strong>Goal:</strong> change the coefficient part from [ 1 &nbsp; 1 ; 0 &nbsp; −10 ] into the identity matrix [ 1 &nbsp; 0 ; 0 &nbsp; 1 ].</div>
+<h3>Step A: Make the second pivot 1</h3><p>The second pivot is −10. What should we multiply Row 2 by?</p>
+<div class="choices" id="gj1"><button data-ok="0">10</button><button data-ok="1">−1/10</button><button data-ok="0">−10</button></div><div id="gjf1" class="feedback"></div>
+<div id="gjA" class="hidden"><div class="call"><strong>Correct.</strong> R₂ ← −(1/10)R₂</div><div class="math">[ 1 &nbsp; 1 | 70 ]<br>[ 0 &nbsp; 1 | 50 ]</div>
+<h3>Step B: What must happen above the second pivot?</h3><p>The second pivot is now 1. For RREF, what should happen to the 1 above it?</p>
+<div class="choices" id="gj2"><button data-ok="1">Change it to 0.</button><button data-ok="0">Change it to 2.</button><button data-ok="0">Leave it unchanged.</button></div><div id="gjf2" class="feedback"></div>
+<div id="gjB" class="hidden"><p>Which row operation will do that?</p><div class="choices" id="gj3"><button data-ok="0">R₁ ← R₁ + R₂</button><button data-ok="1">R₁ ← R₁ − R₂</button><button data-ok="0">R₂ ← R₂ − R₁</button></div><div id="gjf3" class="feedback"></div>
+<div id="gjFinal" class="hidden"><div class="call"><strong>Correct.</strong> Since 1 − 1 = 0, R₁ ← R₁ − R₂ eliminates the entry above the pivot.</div><div class="math">[ 1 &nbsp; 0 | 20 ]<br>[ 0 &nbsp; 1 | 50 ]</div><div class="call"><strong>RREF reached!</strong> The coefficient matrix is now the identity matrix.</div><div class="call"><strong>Read the solution directly:</strong> x = 20, y = 50.</div></div></div></div></section>
+<section class="stage"><div class="tag">Step 8 of 8</div><h2>Application: Matrix Inverse</h2><div class="math">[ A | I ] → [ I | A⁻¹ ]</div><p>For A = [1 2; 3 2], Gauss–Jordan can turn the left side into I.</p><button id="inv" class="primary">Show A⁻¹</button><div id="iout" class="call hidden">A⁻¹ = [ −1/2 &nbsp; 1/2 ; 3/4 &nbsp; −1/4 ]</div><div class="call"><strong>Mastery:</strong> Gaussian elimination simplifies to echelon form; Gauss–Jordan continues to RREF.</div></section>
+<div class="nav"><button id="back">← Previous</button><button id="next" class="primary">Next Step →</button></div></main><script>
+(() => {
+  const stages = [...document.querySelectorAll('.stage')];
+  let page = 0;
+  const prog = document.getElementById('prog');
+  const back = document.getElementById('back');
+  const next = document.getElementById('next');
+
+  function show(){
+    stages.forEach((stage,i)=>stage.classList.toggle('active',i===page));
+    prog.style.width=((page+1)/stages.length*100)+'%';
+    back.disabled=page===0;
+    next.textContent=page===stages.length-1?'Start Over':'Next Step →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  next.addEventListener('click',()=>{ page=page===stages.length-1?0:page+1; show(); });
+  back.addEventListener('click',()=>{ if(page>0) page--; show(); });
+
+  document.querySelectorAll('.q').forEach(q=>{
+    q.querySelectorAll('button').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        q.querySelectorAll('button').forEach(x=>x.classList.remove('correct','wrong'));
+        const ok=btn.dataset.v===q.dataset.a;
+        btn.classList.add(ok?'correct':'wrong');
+        const f=document.getElementById(q.dataset.f);
+        f.textContent=ok?'✓ Correct — read the explanation, then click Next Step.':'Not quite. Think about the goal and try again.';
+        f.className='feedback '+(ok?'good':'warn');
+        if(ok && q.dataset.f==='f3'){
+          const ex=document.getElementById('f3explain');
+          if(ex) ex.classList.remove('hidden');
+        }
+      });
+    });
+  });
+
+  const mult=document.getElementById('mult');
+  const apply=document.getElementById('apply');
+  const out=document.getElementById('out');
+  if(apply && mult && out){
+    apply.addEventListener('click',()=>{
+      if(mult.value==='-24'){
+        out.innerHTML='<strong>Correct!</strong><br>R₂ ← R₂ − 24R₁<br><br>[ 1 &nbsp; 1 | 70 ]<br>[ 0 &nbsp; −10 | −500 ]';
+        out.style.borderLeftColor='var(--green)';
+      } else if(mult.value===''){
+        out.textContent='Choose a multiplier first.';
+      } else {
+        const c=Number(mult.value);
+        out.innerHTML='The first entry becomes <strong>'+(24+c)+'</strong>, not 0. Try again.';
+      }
+    });
+  }
+
+  function wire(id,feedback,nextId,msg){
+    const area=document.getElementById(id);
+    if(!area) return;
+    area.querySelectorAll('button').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        area.querySelectorAll('button').forEach(x=>x.classList.remove('correct','wrong'));
+        const ok=btn.dataset.ok==='1';
+        btn.classList.add(ok?'correct':'wrong');
+        const f=document.getElementById(feedback);
+        f.innerHTML=ok?'✓ '+msg:'Not quite. Think about the goal of RREF and try again.';
+        f.className='feedback '+(ok?'good':'warn');
+        if(ok && nextId){ const n=document.getElementById(nextId); if(n) n.classList.remove('hidden'); }
+      });
+    });
+  }
+  wire('gj1','gjf1','gjA','Correct — (−1/10)(−10)=1.');
+  wire('gj2','gjf2','gjB','Correct — in RREF, a pivot is the only nonzero entry in its column.');
+  wire('gj3','gjf3','gjFinal','Correct — 1−1=0, so the entry above the pivot is eliminated.');
+
+  const inv=document.getElementById('inv');
+  const iout=document.getElementById('iout');
+  if(inv && iout) inv.addEventListener('click',()=>iout.classList.toggle('hidden'));
+  show();
+})();
+</script></body></html>
