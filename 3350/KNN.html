@@ -242,31 +242,53 @@ predictions = knn_clf.predict(X_test)
 print(predictions)  # ['Benign', 'Malignant', 'Benign', ...]</pre>
 
   <h3>Regression Example (House Prices)</h3>
-  <pre>from sklearn.neighbors import KNeighborsRegressor
+  <pre>from sklearn.datasets import fetch_california_housing
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.neighbors import KNeighborsRegressor
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
-from sklearn.model_selection import GridSearchCV
 import numpy as np
 
-# Create pipeline with scaling
+# Load dataset
+housing = fetch_california_housing()
+X = housing.data
+y = housing.target
+
+# Split into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2,
+    random_state=42
+)
+
+# Create pipeline
 knn_reg_pipe = Pipeline([
     ("scaler", StandardScaler()),
     ("knn", KNeighborsRegressor())
 ])
 
-# Tune hyperparameters
+# Hyperparameters to tune
 knn_reg_grid = {
     "knn__n_neighbors": np.arange(1, 31, 2),
-    "knn__weights": ["uniform", "distance"],  # Distance often better for regression
+    "knn__weights": ["uniform", "distance"],
     "knn__metric": ["euclidean", "manhattan"]
 }
 
-knn_reg = GridSearchCV(knn_reg_pipe, knn_reg_grid, cv=5, scoring="r2")
+# Grid search with 5-fold cross-validation
+knn_reg = GridSearchCV(
+    knn_reg_pipe,
+    knn_reg_grid,
+    cv=5,
+    scoring="r2"
+)
+
+# Train
 knn_reg.fit(X_train, y_train)
 
-# Predict continuous values
+# Predict
 predictions = knn_reg.predict(X_test)
-print(predictions)  # [250000, 180000, 320000, ...]</pre>
+
+print(predictions)</pre>
 </section>
 
 <section id="key-points">
