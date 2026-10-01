@@ -1,0 +1,713 @@
+
+<!doctype html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CSCI 3080 — Graphs and Their Representations Interactive Learning Lab</title>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <style>
+
+/* ============================================================
+   COLORS
+============================================================ */
+
+:root{
+
+    --bg:#151719;
+
+    --panel:#222025;
+
+    --panel2:#191b20;
+
+    --text:#f7f2f6;
+
+    --muted:#bbb4bc;
+
+    --pink:#ff79c6;
+
+    --pink2:#ffb3de;
+
+    --blue:#86d7ff;
+
+    --green:#79e2a5;
+
+    --yellow:#ffd166;
+
+    --red:#ff8585;
+
+    --border:#443943;
+
+}
+
+
+/* ============================================================
+   GENERAL PAGE
+============================================================ */
+
+*{
+    box-sizing:border-box;
+}
+
+
+body{
+
+    margin:0;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-family:
+        Inter,
+        system-ui,
+        Arial,
+        sans-serif;
+
+}
+
+
+.wrap{
+
+    max-width:1080px;
+
+    margin:auto;
+
+    padding:
+        28px
+        20px
+        70px;
+
+}
+
+
+h1{
+
+    color:var(--pink2);
+
+    font-size:
+        clamp(
+            2rem,
+            5vw,
+            3rem
+        );
+
+    margin:.15em 0;
+
+}
+
+
+h2{
+
+    color:var(--pink2);
+
+    margin-top:0;
+
+}
+
+
+h3{
+
+    color:var(--blue);
+
+}
+
+
+p,
+li{
+
+    line-height:1.65;
+
+}
+
+
+.tag{
+
+    color:var(--pink);
+
+    font-weight:800;
+
+    text-transform:uppercase;
+
+    letter-spacing:.08em;
+
+    font-size:.8rem;
+
+}
+
+
+.sub,
+.tiny{
+
+    color:var(--muted);
+
+}
+
+
+/* ============================================================
+   PROGRESS BAR
+============================================================ */
+
+.progress{
+
+    height:10px;
+
+    background:#302c31;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin:24px 0;
+
+}
+
+
+.progress div{
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--pink),
+            var(--blue)
+        );
+
+    transition:.25s;
+
+}
+
+
+/* ============================================================
+   STAGES
+============================================================ */
+
+.stage{
+
+    display:none;
+
+    background:var(--panel);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-left:
+        6px solid
+        var(--pink);
+
+    border-radius:18px;
+
+    padding:26px;
+
+}
+
+
+.stage.active{
+
+    display:block;
+
+}
+
+
+/* ============================================================
+   CONTENT BOXES
+============================================================ */
+
+.call,
+.math,
+.code{
+
+    background:var(--panel2);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:12px;
+
+    padding:15px;
+
+    margin:15px 0;
+
+}
+
+
+.call{
+
+    border-left:
+        5px solid
+        var(--pink);
+
+}
+
+
+.math{
+
+    text-align:center;
+
+    font:
+        1.25rem
+        Georgia,
+        serif;
+
+}
+
+
+.code{
+
+    font:
+        1rem
+        ui-monospace,
+        Consolas,
+        monospace;
+
+    white-space:pre-wrap;
+
+    color:#ffd7f0;
+
+    overflow:auto;
+
+}
+
+
+/* ============================================================
+   GRID / CARDS
+============================================================ */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:14px;
+
+}
+
+
+.card{
+
+    background:var(--panel2);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:12px;
+
+    padding:15px;
+
+}
+
+
+.card h3{
+
+    margin-top:0;
+
+}
+
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+
+.choices button{
+
+    display:block;
+
+    width:100%;
+
+    text-align:left;
+
+    margin:9px 0;
+
+}
+
+
+button{
+
+    font:inherit;
+
+    min-height:44px;
+
+    padding:
+        10px
+        15px;
+
+    border-radius:10px;
+
+    border:
+        1px solid
+        #665b65;
+
+    background:#302b31;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+}
+
+
+button.primary{
+
+    background:var(--pink);
+
+    border-color:var(--pink);
+
+    color:#25121f;
+
+}
+
+
+button:disabled{
+
+    opacity:.4;
+
+}
+
+
+/* ============================================================
+   ANSWER FEEDBACK
+============================================================ */
+
+.correct{
+
+    background:
+        #173528 !important;
+
+    border-color:
+        var(--green) !important;
+
+}
+
+
+.wrong{
+
+    background:
+        #402326 !important;
+
+    border-color:
+        var(--red) !important;
+
+}
+
+
+.feedback{
+
+    min-height:25px;
+
+    font-weight:700;
+
+}
+
+
+.good{
+
+    color:var(--green);
+
+}
+
+
+.warn{
+
+    color:var(--yellow);
+
+}
+
+
+/* ============================================================
+   NAVIGATION
+============================================================ */
+
+.nav{
+
+    display:flex;
+
+    justify-content:
+        space-between;
+
+    gap:12px;
+
+    margin-top:24px;
+
+}
+
+
+.nav button{
+
+    min-width:120px;
+
+}
+
+
+/* ============================================================
+   FLOW DIAGRAM
+============================================================ */
+
+.flow{
+
+    display:flex;
+
+    gap:8px;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    margin:18px 0;
+
+}
+
+
+.box{
+
+    padding:
+        10px
+        12px;
+
+    background:#111418;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:9px;
+
+    font-weight:700;
+
+    /*
+       IMPORTANT FIX:
+       force text to be light
+    */
+
+    color:var(--text);
+
+}
+
+
+.arrow{
+
+    color:var(--pink);
+
+    font-size:1.3rem;
+
+}
+
+
+/* ============================================================
+   TABLE
+============================================================ */
+
+table{
+
+    width:100%;
+
+    border-collapse:
+        collapse;
+
+}
+
+
+th,
+td{
+
+    padding:12px;
+
+    border:
+        1px solid
+        var(--border);
+
+    text-align:center;
+
+}
+
+
+th{
+
+    background:#302b31;
+
+    /*
+       IMPORTANT FIX:
+       readable header text
+    */
+
+    color:var(--pink2);
+
+    font-weight:800;
+
+}
+
+
+/* ============================================================
+   CONTROLS
+============================================================ */
+
+.controls{
+
+    background:var(--panel2);
+
+    padding:15px;
+
+    border-radius:12px;
+
+    margin:
+        15px
+        0;
+
+}
+
+
+select{
+
+    background:#111418;
+
+    color:var(--text);
+
+    border:
+        1px solid
+        #665b65;
+
+    border-radius:8px;
+
+    padding:9px;
+
+    font:inherit;
+
+}
+
+
+.hidden{
+
+    display:none;
+
+}
+
+
+/* ============================================================
+   SPECIAL TEXT
+============================================================ */
+
+.operation{
+
+    background:#111418;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:10px;
+
+    padding:12px;
+
+    margin:15px 0;
+
+    text-align:center;
+
+    color:var(--pink2);
+
+    font:
+        1.1rem
+        ui-monospace,
+        Consolas,
+        monospace;
+
+}
+
+
+.solution{
+
+    text-align:center;
+
+    font-size:1.4rem;
+
+    color:var(--green);
+
+    font-weight:900;
+
+    margin:20px 0;
+
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media(max-width:700px){
+
+    .grid{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .stage{
+
+        padding:18px;
+
+    }
+
+
+    .nav button{
+
+        min-width:0;
+
+        flex:1;
+
+    }
+
+}
+
+
+/* Compatibility additions for this Gaussian Elimination lab */
+.operation{
+    background:#111418;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px;
+    margin:15px 0;
+    text-align:center;
+    color:var(--pink2);
+    font:1.1rem ui-monospace,Consolas,monospace;
+}
+.solution{
+    text-align:center;
+    font-size:1.4rem;
+    color:var(--green);
+    font-weight:900;
+    margin:20px 0;
+}
+select{
+    background:#111418;
+    color:var(--text);
+    border:1px solid #665b65;
+    border-radius:8px;
+    padding:9px;
+    font:inherit;
+}
+</style></head><body><main class="wrap"><div class="tag">CSCI 3080 • Chapter 6 • Section 6.1</div><h1>Graphs and Their Representations — Interactive Learning Lab</h1><p class="sub">Learn the language of graphs: <strong>vertices → edges → degree → paths → cycles → special graphs → isomorphism.</strong></p><div class="progress"><div id="prog"></div></div>
+<section class="stage active"><div class="tag">Step 1 of 10</div><h2>What is a Graph?</h2><p>Graphs are formal mathematical representations of networks and relationships. Objects are <strong>vertices (nodes)</strong>; relationships are <strong>edges (arcs)</strong>.</p><div class="call">A graph lets us model social networks, roads, computer networks, airline routes, and many other systems.</div><div class="choices q" data-a="e" data-f="f1"><button data-v="v">Relationships are represented by vertices.</button><button data-v="e">Relationships are represented by edges.</button><button data-v="x">Graphs cannot model real networks.</button></div><div id="f1" class="feedback"></div></section>
+<section class="stage"><div class="tag">Step 2 of 10</div><h2>Adjacent Vertices and Adjacent Edges</h2><div class="grid"><div class="card"><h3>Adjacent Vertices</h3><p>Two vertices are adjacent if an edge connects them.</p></div><div class="card"><h3>Adjacent Edges</h3><p>Two edges are adjacent if they share a common vertex.</p></div></div><div class="call">Example: edges (A,C) and (A,D) are adjacent because they share vertex A.</div><div class="choices q" data-a="yes" data-f="f2"><button data-v="yes">(A,C) and (A,D) are adjacent edges.</button><button data-v="no">(A,C) and (B,D) must be adjacent edges.</button></div><div id="f2" class="feedback"></div></section>
+<section class="stage"><div class="tag">Step 3 of 10</div><h2>Loops and Parallel Arcs</h2><div class="grid"><div class="card"><h3>Loop</h3><p>An edge connecting a vertex to itself.</p></div><div class="card"><h3>Parallel Arcs</h3><p>Two arcs with the same endpoints.</p></div></div><div class="call"><strong>Important:</strong> a loop adds <strong>2</strong> to the degree of its vertex.</div><div class="choices q" data-a="2" data-f="f3"><button data-v="1">A loop adds 1 to degree.</button><button data-v="2">A loop adds 2 to degree.</button><button data-v="0">A loop adds 0 to degree.</button></div><div id="f3" class="feedback"></div></section>
+<section class="stage"><div class="tag">Step 4 of 10</div><h2>Simple Graphs and Isolated Nodes</h2><div class="call"><strong>Simple graph:</strong> unweighted + undirected + no loops + no parallel arcs.</div><div class="grid"><div class="card"><h3>✓ Unweighted</h3></div><div class="card"><h3>✓ Undirected</h3></div><div class="card"><h3>✓ No Loops</h3></div><div class="card"><h3>✓ No Parallel Arcs</h3></div></div><div class="call"><strong>Isolated node:</strong> a node with no incident edges; degree 0.</div><div class="choices q" data-a="all" data-f="f4"><button data-v="one">Only no loops is required.</button><button data-v="all">All four conditions are required for a simple graph.</button></div><div id="f4" class="feedback"></div></section>
+<section class="stage"><div class="tag">Step 5 of 10</div><h2>Degree of a Vertex</h2><p>The degree of a vertex is the number of edges incident with it.</p><div class="math">deg(v) = number of incident edge connections</div><div class="call">For an undirected graph, degree is normally the number of connected edges. A loop contributes two connections.</div><div class="choices q" data-a="4" data-f="f5"><button data-v="3">A vertex with two ordinary edges and one loop has degree 3.</button><button data-v="4">A vertex with two ordinary edges and one loop has degree 4.</button><button data-v="2">Its degree is 2.</button></div><div id="f5" class="feedback"></div></section>
+<section class="stage"><div class="tag">Step 6 of 10</div><h2>Complete Graphs Kₙ</h2><p>Every vertex is connected to every other vertex by exactly one edge.</p><div class="math">E(n) = n(n − 1) / 2</div><div class="controls"><label>Choose n: <select id="kn"><option>1</option><option>2</option><option>3</option><option>4</option><option selected>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></label> <button id="calcK" class="primary">Calculate</button></div><div id="kout" class="call">For K₅, E(5)=5×4/2=10 edges.</div><div class="call"><strong>Recurrence:</strong> E(1)=0; E(n)=E(n−1)+(n−1).</div></section>
+<section class="stage"><div class="tag">Step 7 of 10</div><h2>Paths, Length, Connected Graphs, and Cycles</h2><div class="grid"><div class="card"><h3>Path</h3><p>A sequence of adjacent vertices.</p></div><div class="card"><h3>Simple Path</h3><p>A path with no repeated vertices.</p></div><div class="card"><h3>Connected Graph</h3><p>A path exists between every pair of nodes.</p></div><div class="card"><h3>Cycle</h3><p>A closed path that starts and ends at the same vertex.</p></div></div><div class="math">A → B → C → D</div><div class="choices q" data-a="3" data-f="f7"><button data-v="4">Length = 4</button><button data-v="3">Length = 3</button><button data-v="2">Length = 2</button></div><div id="f7" class="feedback"></div></section>
+<section class="stage"><div class="tag">Step 8 of 10</div><h2>Complete Bipartite Graphs Kₘ,ₙ</h2><p>Vertices are divided into two disjoint nonempty sets. Every vertex in one set is connected to every vertex in the other set, but there are no edges within a set.</p><div class="math">K₂,₃ has 2 vertices in one set and 3 in the other.</div><div class="choices q" data-a="cross" data-f="f8"><button data-v="inside">Vertices within each set must connect.</button><button data-v="cross">Every cross-set pair is connected; no within-set edges exist.</button></div><div id="f8" class="feedback"></div></section>
+<section class="stage"><div class="tag">Step 9 of 10</div><h2>Graph Isomorphism</h2><p>Two graphs are isomorphic if they have the same structure under an adjacency-preserving bijection.</p><table><tr><th>Check</th><th>Use</th></tr><tr><td>Number of vertices</td><td>Must match</td></tr><tr><td>Number of edges</td><td>Must match</td></tr><tr><td>Degree sequence</td><td>Must match</td></tr><tr><td>Adjacency</td><td>Must be preserved</td></tr></table><div class="choices q" data-a="no" data-f="f9"><button data-v="yes">Same vertex and edge counts guarantee isomorphism.</button><button data-v="no">Same counts are necessary, but adjacency structure must also match.</button></div><div id="f9" class="feedback"></div></section>
+<section class="stage"><div class="tag">Step 10 of 10</div><h2>Practice: Put Everything Together</h2><div class="math">V={1,2,3,4,5}<br>E={{1,2},{1,3},{3,4},{3,4},{4,5},{5,5}}</div><div class="call">Sketch this graph, then answer: nonadjacent nodes; node adjacent to itself; loop; parallel arcs; degree of node 3; a path of length 5; a cycle; complete? connected?</div><div class="choices q" data-a="parallel" data-f="f10"><button data-v="loop">{5,5} is a pair of parallel arcs.</button><button data-v="parallel">The two copies of {3,4} are parallel arcs.</button><button data-v="simple">This is a simple graph.</button></div><div id="f10" class="feedback"></div><div class="call"><strong>Why graphs matter:</strong> social networks, GPS/navigation, Internet and network security, search ranking, airlines, and transportation systems all use graph ideas.</div></section>
+<div class="nav"><button id="back">← Previous</button><button id="next" class="primary">Next Step →</button></div></main><script>
+(() => {
+ const stages=[...document.querySelectorAll('.stage')]; let page=0;
+ const prog=document.getElementById('prog'), back=document.getElementById('back'), next=document.getElementById('next');
+ function show(){stages.forEach((x,i)=>x.classList.toggle('active',i===page));prog.style.width=((page+1)/stages.length*100)+'%';back.disabled=page===0;next.textContent=page===stages.length-1?'Start Over':'Next Step →';window.scrollTo({top:0,behavior:'smooth'});}
+ next.addEventListener('click',()=>{page=page===stages.length-1?0:page+1;show()}); back.addEventListener('click',()=>{if(page>0)page--;show()});
+ document.querySelectorAll('.q').forEach(q=>q.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{q.querySelectorAll('button').forEach(x=>x.classList.remove('correct','wrong'));const ok=btn.dataset.v===q.dataset.a;btn.classList.add(ok?'correct':'wrong');const f=document.getElementById(q.dataset.f);f.textContent=ok?'✓ Correct — read the explanation, then click Next Step.':'Not quite. Review the definition and try again.';f.className='feedback '+(ok?'good':'warn')})));
+ const calc=document.getElementById('calcK'), kn=document.getElementById('kn'), kout=document.getElementById('kout'); if(calc)calc.addEventListener('click',()=>{const n=Number(kn.value),e=n*(n-1)/2;kout.innerHTML='<strong>K'+n+'</strong> has '+e+' edges because '+n+'×'+(n-1)+'/2 = '+e+'.';kout.style.borderLeftColor='var(--green)'});
+ show();
+})();
+</script></body></html>
