@@ -35,6 +35,43 @@ ul{line-height:1.8}.note{opacity:.9}@media(max-width:800px){.grid,.inputs,.compa
 <div class="compare"><div class="metric">Manhattan (L1)<b id="m1"></b></div><div class="metric">Euclidean (L2)<b id="m2"></b></div></div>
 </div></div></section>
 
+<section>
+    <div class="info-section">
+        <h3>Real-Life Applications</h3>
+        <ul>
+            <li>
+                <strong>City navigation:</strong>
+                distance traveled along streets in a grid-like city, where movement follows horizontal and vertical directions rather than a straight line.
+            </li>
+
+            <li>
+                <strong>Grid-based robotics and path planning:</strong>
+                useful when a robot or agent can move along fixed horizontal and vertical directions rather than moving directly between two points.
+            </li>
+
+            <li>
+                <strong>Machine learning:</strong>
+                Manhattan distance is an alternative to Euclidean distance for measuring similarity between observations. It adds the absolute differences between corresponding features rather than using squared differences.
+            </li>
+
+           
+        </ul>
+
+        <p class="note">
+            <strong>Important intuition:</strong>
+            Manhattan distance adds absolute differences rather than squaring them.
+            Therefore, large individual feature differences are not emphasized as strongly as they are with Euclidean distance.
+        </p>
+
+        <p class="note">
+            <strong>Feature scaling matters:</strong>
+            if one feature has a much larger numerical scale than another,
+            it can still dominate the Manhattan distance.
+        </p>
+    </div>
+</section>
+
+ 
 <section><div class="info"><h3>How is it different from Euclidean Distance?</h3>
 <p>For A=(1,1) and B=(4,5), Manhattan distance is <strong>3 + 4 = 7</strong>, while Euclidean distance is <strong>5</strong>. Euclidean distance travels directly between the points; Manhattan distance adds movement along each coordinate direction.</p>
 <div class="compare"><div class="metric">Euclidean / L2<br><b>√Σ(Δxⱼ)²</b><span>Straight-line distance</span></div><div class="metric">Manhattan / L1<br><b>Σ|Δxⱼ|</b><span>Axis-aligned distance</span></div></div></div></section>
