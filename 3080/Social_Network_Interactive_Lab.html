@@ -1,0 +1,720 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>CSCI 3080 Social Network Interactive Lab</title><style>
+
+/* ============================================================
+   COLORS
+============================================================ */
+
+:root{
+
+    --bg:#151719;
+
+    --panel:#222025;
+
+    --panel2:#191b20;
+
+    --text:#f7f2f6;
+
+    --muted:#bbb4bc;
+
+    --pink:#ff79c6;
+
+    --pink2:#ffb3de;
+
+    --blue:#86d7ff;
+
+    --green:#79e2a5;
+
+    --yellow:#ffd166;
+
+    --red:#ff8585;
+
+    --border:#443943;
+
+}
+
+
+/* ============================================================
+   GENERAL PAGE
+============================================================ */
+
+*{
+    box-sizing:border-box;
+}
+
+
+body{
+
+    margin:0;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-family:
+        Inter,
+        system-ui,
+        Arial,
+        sans-serif;
+
+}
+
+
+.wrap{
+
+    max-width:1080px;
+
+    margin:auto;
+
+    padding:
+        28px
+        20px
+        70px;
+
+}
+
+
+h1{
+
+    color:var(--pink2);
+
+    font-size:
+        clamp(
+            2rem,
+            5vw,
+            3rem
+        );
+
+    margin:.15em 0;
+
+}
+
+
+h2{
+
+    color:var(--pink2);
+
+    margin-top:0;
+
+}
+
+
+h3{
+
+    color:var(--blue);
+
+}
+
+
+p,
+li{
+
+    line-height:1.65;
+
+}
+
+
+.tag{
+
+    color:var(--pink);
+
+    font-weight:800;
+
+    text-transform:uppercase;
+
+    letter-spacing:.08em;
+
+    font-size:.8rem;
+
+}
+
+
+.sub,
+.tiny{
+
+    color:var(--muted);
+
+}
+
+
+/* ============================================================
+   PROGRESS BAR
+============================================================ */
+
+.progress{
+
+    height:10px;
+
+    background:#302c31;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin:24px 0;
+
+}
+
+
+.progress div{
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--pink),
+            var(--blue)
+        );
+
+    transition:.25s;
+
+}
+
+
+/* ============================================================
+   STAGES
+============================================================ */
+
+.stage{
+
+    display:none;
+
+    background:var(--panel);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-left:
+        6px solid
+        var(--pink);
+
+    border-radius:18px;
+
+    padding:26px;
+
+}
+
+
+.stage.active{
+
+    display:block;
+
+}
+
+
+/* ============================================================
+   CONTENT BOXES
+============================================================ */
+
+.call,
+.math,
+.code{
+
+    background:var(--panel2);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:12px;
+
+    padding:15px;
+
+    margin:15px 0;
+
+}
+
+
+.call{
+
+    border-left:
+        5px solid
+        var(--pink);
+
+}
+
+
+.math{
+
+    text-align:center;
+
+    font:
+        1.25rem
+        Georgia,
+        serif;
+
+}
+
+
+.code{
+
+    font:
+        1rem
+        ui-monospace,
+        Consolas,
+        monospace;
+
+    white-space:pre-wrap;
+
+    color:#ffd7f0;
+
+    overflow:auto;
+
+}
+
+
+/* ============================================================
+   GRID / CARDS
+============================================================ */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:14px;
+
+}
+
+
+.card{
+
+    background:var(--panel2);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:12px;
+
+    padding:15px;
+
+}
+
+
+.card h3{
+
+    margin-top:0;
+
+}
+
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+
+.choices button{
+
+    display:block;
+
+    width:100%;
+
+    text-align:left;
+
+    margin:9px 0;
+
+}
+
+
+button{
+
+    font:inherit;
+
+    min-height:44px;
+
+    padding:
+        10px
+        15px;
+
+    border-radius:10px;
+
+    border:
+        1px solid
+        #665b65;
+
+    background:#302b31;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+}
+
+
+button.primary{
+
+    background:var(--pink);
+
+    border-color:var(--pink);
+
+    color:#25121f;
+
+}
+
+
+button:disabled{
+
+    opacity:.4;
+
+}
+
+
+/* ============================================================
+   ANSWER FEEDBACK
+============================================================ */
+
+.correct{
+
+    background:
+        #173528 !important;
+
+    border-color:
+        var(--green) !important;
+
+}
+
+
+.wrong{
+
+    background:
+        #402326 !important;
+
+    border-color:
+        var(--red) !important;
+
+}
+
+
+.feedback{
+
+    min-height:25px;
+
+    font-weight:700;
+
+}
+
+
+.good{
+
+    color:var(--green);
+
+}
+
+
+.warn{
+
+    color:var(--yellow);
+
+}
+
+
+/* ============================================================
+   NAVIGATION
+============================================================ */
+
+.nav{
+
+    display:flex;
+
+    justify-content:
+        space-between;
+
+    gap:12px;
+
+    margin-top:24px;
+
+}
+
+
+.nav button{
+
+    min-width:120px;
+
+}
+
+
+/* ============================================================
+   FLOW DIAGRAM
+============================================================ */
+
+.flow{
+
+    display:flex;
+
+    gap:8px;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    margin:18px 0;
+
+}
+
+
+.box{
+
+    padding:
+        10px
+        12px;
+
+    background:#111418;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:9px;
+
+    font-weight:700;
+
+    /*
+       IMPORTANT FIX:
+       force text to be light
+    */
+
+    color:var(--text);
+
+}
+
+
+.arrow{
+
+    color:var(--pink);
+
+    font-size:1.3rem;
+
+}
+
+
+/* ============================================================
+   TABLE
+============================================================ */
+
+table{
+
+    width:100%;
+
+    border-collapse:
+        collapse;
+
+}
+
+
+th,
+td{
+
+    padding:12px;
+
+    border:
+        1px solid
+        var(--border);
+
+    text-align:center;
+
+}
+
+
+th{
+
+    background:#302b31;
+
+    /*
+       IMPORTANT FIX:
+       readable header text
+    */
+
+    color:var(--pink2);
+
+    font-weight:800;
+
+}
+
+
+/* ============================================================
+   CONTROLS
+============================================================ */
+
+.controls{
+
+    background:var(--panel2);
+
+    padding:15px;
+
+    border-radius:12px;
+
+    margin:
+        15px
+        0;
+
+}
+
+
+select{
+
+    background:#111418;
+
+    color:var(--text);
+
+    border:
+        1px solid
+        #665b65;
+
+    border-radius:8px;
+
+    padding:9px;
+
+    font:inherit;
+
+}
+
+
+.hidden{
+
+    display:none;
+
+}
+
+
+/* ============================================================
+   SPECIAL TEXT
+============================================================ */
+
+.operation{
+
+    background:#111418;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:10px;
+
+    padding:12px;
+
+    margin:15px 0;
+
+    text-align:center;
+
+    color:var(--pink2);
+
+    font:
+        1.1rem
+        ui-monospace,
+        Consolas,
+        monospace;
+
+}
+
+
+.solution{
+
+    text-align:center;
+
+    font-size:1.4rem;
+
+    color:var(--green);
+
+    font-weight:900;
+
+    margin:20px 0;
+
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media(max-width:700px){
+
+    .grid{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .stage{
+
+        padding:18px;
+
+    }
+
+
+    .nav button{
+
+        min-width:0;
+
+        flex:1;
+
+    }
+
+}
+
+
+/* Compatibility additions for this Gaussian Elimination lab */
+.operation{
+    background:#111418;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px;
+    margin:15px 0;
+    text-align:center;
+    color:var(--pink2);
+    font:1.1rem ui-monospace,Consolas,monospace;
+}
+.solution{
+    text-align:center;
+    font-size:1.4rem;
+    color:var(--green);
+    font-weight:900;
+    margin:20px 0;
+}
+select{
+    background:#111418;
+    color:var(--text);
+    border:1px solid #665b65;
+    border-radius:8px;
+    padding:9px;
+    font:inherit;
+}
+
+.flightmap{min-height:330px;background:#111418;border:1px solid var(--border);border-radius:12px;overflow:hidden}.flightmap svg{width:100%;height:330px}
+.route{stroke:var(--pink);stroke-width:4}.city circle{fill:#302b31;stroke:var(--blue);stroke-width:3}.city text{fill:white;font-weight:900;font-size:17px;text-anchor:middle;dominant-baseline:middle}
+.yes{background:#173528;color:var(--green);font-weight:900}.no{background:#29272b;color:var(--muted)}.hot{outline:3px solid var(--yellow);outline-offset:-3px}
+.lookup{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}.lookup label{display:flex;flex-direction:column;gap:6px;color:var(--muted);font-weight:700}.result{padding:15px;margin:15px 0;background:#111418;border:1px solid var(--border);border-radius:12px;font-weight:800}.rg{color:var(--green);border-left:5px solid var(--green)}.rr{color:var(--red);border-left:5px solid var(--red)}
+@media(max-width:700px){.lookup{grid-template-columns:1fr}}
+
+.net{min-height:330px;background:#111418;border:1px solid var(--border);border-radius:12px}.net svg{width:100%;height:330px}.ne{stroke:#665b65;stroke-width:4}.ne.on{stroke:var(--pink)}.pn circle{fill:#302b31;stroke:var(--blue);stroke-width:3}.pn text{fill:white;font-weight:900;text-anchor:middle;dominant-baseline:middle}.ar{padding:8px;border-bottom:1px solid var(--border);font-family:Consolas,monospace}.ar b{color:var(--blue)}.chip{display:inline-block;padding:5px 9px;margin:3px;border:1px solid #665b65;border-radius:20px}.sg{color:var(--green);border-color:var(--green)}.sim{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+</style></head><body><main class="wrap"><div class="tag">CSCI 3080 • Graphs • Adjacency Lists • C++</div><h1>Social Network — Interactive Learning Lab</h1><p class="sub">Learn <strong>unordered_map → vector adjacency lists → friendships → traversal → friends-of-friends suggestions.</strong></p><div class="progress"><div id="prog"></div></div><section class="stage active"><div class="tag">Step 1 of 14</div><h2>Social Network = Graph</h2><div class="grid"><div class="card"><h3>Users = Vertices</h3><p>Alice, Bob, Charlie, David, and Eve are nodes.</p></div><div class="card"><h3>Friendships = Edges</h3><p>A friendship connects two users.</p></div></div><div class="math">Users + Friendships = Graph</div><div class="choices q" data-a="e" data-f="f1"><button data-v="v">A friendship is a vertex.</button><button data-v="e">A friendship is an edge.</button></div><div id="f1" class="feedback"></div></section><section class="stage"><div class="tag">Step 2 of 14</div><h2>The Adjacency List</h2><div class="code">unordered_map&lt;string, vector&lt;string&gt;&gt; friendList;</div><div class="grid"><div class="card"><h3>Key: string</h3><p>User name, e.g. <code>"Alice"</code>.</p></div><div class="card"><h3>Value: vector&lt;string&gt;</h3><p>List of adjacent users (friends).</p></div></div><div class="operation">Alice → [Bob, Charlie]</div><div class="choices q" data-a="friends" data-f="f2"><button data-v="self">The vector stores Alice's name.</button><button data-v="friends">The vector stores Alice's friends.</button></div><div id="f2" class="feedback"></div></section><section class="stage"><div class="tag">Step 3 of 14</div><h2>addUser(): Add a Vertex</h2><div class="code">if (friendList.find(user) == friendList.end()) {
+    friendList[user] = {};
+}</div><div class="flow"><div class="box">find(user)</div><div class="arrow">→</div><div class="box">Not found?</div><div class="arrow">→</div><div class="box">Create empty vector</div></div><div class="call">A new user starts with <strong>no friends</strong>. If the user already exists, nothing is changed.</div><div class="choices q" data-a="empty" data-f="f3"><button data-v="empty">A new user gets an empty friend vector.</button><button data-v="auto">A new user automatically gets a friend.</button></div><div id="f3" class="feedback"></div></section><section class="stage"><div class="tag">Step 4 of 14</div><h2>Pass-by-Constant-Reference</h2><div class="code">void addUser(const string&amp; user);
+void addFriendship(const string&amp; user1, const string&amp; user2);</div><div class="grid"><div class="card"><h3>&amp; reference</h3><p>Avoids making another copy of the string.</p></div><div class="card"><h3>const</h3><p>Prevents modification through this parameter.</p></div></div><div class="choices q" data-a="both" data-f="f4"><button data-v="copy">It forces a copy.</button><button data-v="both">It avoids a copy and protects the argument from modification.</button></div><div id="f4" class="feedback"></div></section><section class="stage"><div class="tag">Step 5 of 14</div><h2>addFriendship(): Bi-directional Edge</h2><div class="code">friendList[user1].push_back(user2);
+friendList[user2].push_back(user1);</div><div class="math">Alice ↔ Bob</div><div class="call">The friendship is stored in <strong>both adjacency lists</strong>, because the graph represents friendship as bi-directional.</div><div class="choices q" data-a="two" data-f="f5"><button data-v="one">Only one vector changes.</button><button data-v="two">Both users' vectors change.</button></div><div id="f5" class="feedback"></div></section><section class="stage"><div class="tag">Step 6 of 14</div><h2>Build the Network Interactively</h2><p>Execute the four friendship calls from <code>main()</code> one at a time.</p><div class="grid"><div class="card"><h3>Graph</h3><div id="net" class="net"></div></div><div class="card"><h3>Adjacency List</h3><div id="adj"></div></div></div><div class="controls"><button id="add" class="primary">Add Next Friendship</button><button id="rst">Reset</button></div><div id="op" class="operation">All users exist. Friend vectors are empty.</div></section><section class="stage"><div class="tag">Step 7 of 14</div><h2>displayFriends(): Traverse a Vector</h2><div class="code">for (const string&amp; friendName : friendList.at(user)) {
+    cout &lt;&lt; friendName &lt;&lt; " ";
+}</div><table><tr><th>Call</th><th>Output</th></tr><tr><td>displayFriends("Alice")</td><td>Bob Charlie</td></tr><tr><td>displayFriends("Bob")</td><td>Alice David</td></tr></table><div class="choices q" data-a="ad" data-f="f7"><button data-v="ac">Bob's friends: Alice, Charlie</button><button data-v="ad">Bob's friends: Alice, David</button></div><div id="f7" class="feedback"></div></section><section class="stage"><div class="tag">Step 8 of 14</div><h2>const at the End of the Function</h2><div class="code">void displayFriends(const string&amp; user) const;
+void suggestFriends(const string&amp; user) const;</div><div class="call">The trailing <code>const</code> promises that the member function does <strong>not modify the object's member variables</strong>.</div><div class="choices q" data-a="obj" data-f="f8"><button data-v="param">It only describes the parameter.</button><button data-v="obj">It means the member function does not modify the object's member data.</button></div><div id="f8" class="feedback"></div></section><section class="stage"><div class="tag">Step 9 of 14</div><h2>suggestFriends(): Friends of Friends</h2><div class="flow"><div class="box">User</div><div class="arrow">→</div><div class="box">Friend</div><div class="arrow">→</div><div class="box">Friend's Friend</div><div class="arrow">→</div><div class="box">Candidate</div></div><div class="code">for (const string&amp; friendName : friendList.at(user))
+    for (const string&amp; friendOfFriend : friendList.at(friendName))
+        ...</div><div class="call">The nested loops move <strong>two levels</strong> through the graph.</div><div class="choices q" data-a="two" data-f="f9"><button data-v="one">Only direct friends are examined.</button><button data-v="two">Friends and each friend's friends are examined.</button></div><div id="f9" class="feedback"></div></section><section class="stage"><div class="tag">Step 10 of 14</div><h2>Filter Invalid Suggestions</h2><div class="code">if (friendOfFriend != user &amp;&amp;
+    find(friendList.at(user).begin(),
+         friendList.at(user).end(),
+         friendOfFriend) == friendList.at(user).end())</div><div class="grid"><div class="card"><h3>Filter 1</h3><p>Do not suggest the user themself.</p></div><div class="card"><h3>Filter 2</h3><p>Do not suggest an existing direct friend.</p></div></div><div class="choices q" data-a="reject" data-f="f10"><button data-v="keep">An existing friend is a valid new suggestion.</button><button data-v="reject">An existing friend must be filtered out.</button></div><div id="f10" class="feedback"></div></section><section class="stage"><div class="tag">Step 11 of 14</div><h2>Why set<string>?</h2><div class="code">set&lt;string&gt; suggestions;
+suggestions.insert(friendOfFriend);</div><div class="call">A candidate might be discovered through multiple mutual friends. A <code>set</code> keeps each suggestion <strong>unique</strong>.</div><div class="math">same candidate found twice → stored once</div><div class="choices q" data-a="unique" data-f="f11"><button data-v="unique">A set prevents duplicate suggestions.</button><button data-v="dup">A set stores duplicate suggestions.</button></div><div id="f11" class="feedback"></div></section><section class="stage"><div class="tag">Step 12 of 14</div><h2>Interactive Suggestion Simulator</h2><p>Select a user and run the friends-of-friends algorithm.</p><div class="sim"><select id="who"><option>Alice</option><option>Bob</option><option>Charlie</option><option>David</option><option>Eve</option></select><button id="sug" class="primary">Suggest Friends</button></div><div id="res" class="call">Choose a user and click <strong>Suggest Friends</strong>.</div><div id="trace"></div></section><section class="stage"><div class="tag">Step 13 of 14</div><h2>Trace main()</h2><div class="math">Alice ↔ Bob ↔ David<br>Alice ↔ Charlie ↔ Eve</div><table><tr><th>Call</th><th>Result</th></tr><tr><td>displayFriends("Alice")</td><td>Bob Charlie</td></tr><tr><td>displayFriends("Bob")</td><td>Alice David</td></tr><tr><td>suggestFriends("Alice")</td><td>David Eve</td></tr><tr><td>suggestFriends("David")</td><td>Alice</td></tr></table><div class="choices q" data-a="de" data-f="f13"><button data-v="bc">Alice's suggestions: Bob, Charlie</button><button data-v="de">Alice's suggestions: David, Eve</button></div><div id="f13" class="feedback"></div></section><section class="stage"><div class="tag">Step 14 of 14</div><h2>Final Challenge</h2><div class="call">Suppose we execute <code>sn.addFriendship("David", "Eve");</code>.</div><p>Which adjacency-list entries change?</p><div class="choices q" data-a="both" data-f="f14"><button data-v="d">Only David gets Eve.</button><button data-v="e">Only Eve gets David.</button><button data-v="both">David gets Eve AND Eve gets David.</button></div><div id="f14" class="feedback"></div><div class="solution">User → Adjacency List → Friends → Friends-of-Friends → Suggestions</div></section><div class="nav"><button id="back">← Previous</button><button id="next" class="primary">Next Step →</button></div></main><script>
+(()=>{const N=['Alice','Bob','Charlie','David','Eve'],P=[['Alice','Bob'],['Alice','Charlie'],['Bob','David'],['Charlie','Eve']],A={Alice:['Bob','Charlie'],Bob:['Alice','David'],Charlie:['Alice','Eve'],David:['Bob'],Eve:['Charlie']};
+const S=[...document.querySelectorAll('.stage')];let p=0,pr=document.getElementById('prog'),bk=document.getElementById('back'),nx=document.getElementById('next');function show(){S.forEach((x,i)=>x.classList.toggle('active',i===p));pr.style.width=((p+1)/S.length*100)+'%';bk.disabled=p===0;nx.textContent=p===S.length-1?'Start Over':'Next Step →';scrollTo({top:0,behavior:'smooth'})}nx.onclick=()=>{p=p===S.length-1?0:p+1;show()};bk.onclick=()=>{if(p>0)p--;show()};
+document.querySelectorAll('.q').forEach(q=>q.querySelectorAll('button').forEach(b=>b.onclick=()=>{q.querySelectorAll('button').forEach(x=>x.classList.remove('correct','wrong'));let o=b.dataset.v===q.dataset.a;b.classList.add(o?'correct':'wrong');let f=document.getElementById(q.dataset.f);f.textContent=o?'✓ Correct — great work!':'Not quite. Review this step and try again.';f.className='feedback '+(o?'good':'warn')}));
+let pos={Alice:[350,55],Bob:[170,155],Charlie:[530,155],David:[100,275],Eve:[600,275]};
+document.getElementById('net').innerHTML='<svg viewBox="0 0 700 330">'+P.map((e,i)=>`<line id="e${i}" class="ne" x1="${pos[e[0]][0]}" y1="${pos[e[0]][1]}" x2="${pos[e[1]][0]}" y2="${pos[e[1]][1]}"/>`).join('')+N.map(n=>`<g class="pn"><circle cx="${pos[n][0]}" cy="${pos[n][1]}" r="36"/><text x="${pos[n][0]}" y="${pos[n][1]}">${n}</text></g>`).join('')+'</svg>';
+let cur={},k=0;N.forEach(n=>cur[n]=[]);function adj(){document.getElementById('adj').innerHTML=N.map(n=>`<div class="ar"><b>${n}</b> → [${cur[n].join(', ')}]</div>`).join('')}adj();
+document.getElementById('add').onclick=()=>{if(k>=P.length){document.getElementById('op').innerHTML='<strong>Done!</strong> All four friendships have been added.';return}let [a,b]=P[k];cur[a].push(b);cur[b].push(a);document.getElementById('e'+k).classList.add('on');document.getElementById('op').innerHTML=`addFriendship("${a}", "${b}") → add ${b} to ${a}, and ${a} to ${b}`;k++;adj()};document.getElementById('rst').onclick=()=>{k=0;N.forEach(n=>cur[n]=[]);document.querySelectorAll('.ne').forEach(x=>x.classList.remove('on'));document.getElementById('op').textContent='All users exist. Friend vectors are empty.';adj()};
+document.getElementById('sug').onclick=()=>{let u=document.getElementById('who').value,s=new Set(),lines=[];A[u].forEach(f=>{A[f].forEach(x=>{let ok=x!==u&&!A[u].includes(x);lines.push(`<div class="trace"><b>${u} → ${f} → ${x}</b> ${ok?'✓ valid candidate':'✗ reject (self or already a friend)'}</div>`);if(ok)s.add(x)})});let ar=[...s].sort();document.getElementById('res').innerHTML=`Friend suggestions for <strong>${u}</strong>: ${ar.length?ar.map(x=>`<span class="chip sg">${x}</span>`).join(' '):'None'}`;document.getElementById('trace').innerHTML=lines.join('')};show()})();
+</script></body></html>
