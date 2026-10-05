@@ -1,0 +1,292 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>5-Fold CV Interactive Explainer</title><style>body{font-family:Arial,sans-serif;background:#151719;color:#f7f2f6;margin:0}.w{max-width:1050px;margin:auto;padding:30px 20px}h1,h2{color:#ffb3de}.s{display:none;background:#222025;border-left:6px solid #ff79c6;padding:24px;border-radius:16px}.s.on{display:block}.bar{height:9px;background:#333;margin:20px 0;border-radius:10px}.bar div{height:100%;background:#ff79c6;border-radius:10px}.code,.call,.ex{background:#191b20;padding:15px;border-radius:10px;margin:14px 0;line-height:1.65}.code{white-space:pre-wrap;font-family:monospace;color:#ffd7f0;overflow:auto}.call{border-left:5px solid #ff79c6}.ex{border-left:5px solid #86d7ff}.grid,.branch{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:#191b20;padding:14px;border-radius:10px}.card b{color:#86d7ff}.flow{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin:18px 0}.box{padding:10px;background:#111418;border:1px solid #555;border-radius:9px;font-weight:bold}.arrow{color:#ff79c6}.folds{display:grid;gap:7px}.fold{display:grid;grid-template-columns:65px repeat(5,1fr);gap:5px}.fold span{padding:9px;text-align:center;border-radius:6px;font-size:12px;font-weight:bold}.train{background:#193b50}.test{background:#713452}.nav{display:flex;justify-content:space-between;margin-top:20px}button{padding:11px 15px;border-radius:9px;border:1px solid #666;background:#302b31;color:white;font-weight:bold}button.primary{background:#ff79c6;color:#25131f}code{color:#ffb3de}table{width:100%;border-collapse:collapse}td,th{border:1px solid #555;padding:9px;text-align:center}th{background:#302b31;color:#ffb3de}@media(max-width:650px){.grid,.branch{grid-template-columns:1fr}.s{padding:18px}}
+.loop-start,.loop-end,.after-loop{padding:14px 16px;border-radius:10px;margin:14px 0;font-weight:800;text-align:center;letter-spacing:.03em}
+.loop-start{background:#173528;border:2px solid #79e2a5;color:#79e2a5}
+.loop-end{background:#402326;border:2px solid #ff8585;color:#ffb0b0}
+.after-loop{background:#193345;border:2px solid #86d7ff;color:#bfeaff}
+.inside-loop{border:2px dashed #79e2a5;border-radius:12px;padding:14px;margin:14px 0;background:#14231d}
+.outside-loop{border:2px dashed #86d7ff;border-radius:12px;padding:14px;margin:14px 0;background:#14212a}
+.indent-demo{font-family:Consolas,monospace;white-space:pre-wrap;background:#101317;padding:16px;border-radius:10px;line-height:1.7}
+</style></head><body><main class="w"><h1>5-Fold Cross-Validation: Interactive Code Explainer</h1><p>Step-by-step guided walkthrough of the simplified 5-fold Stratified Cross-Validation code.</p><div class="bar"><div id="prog"></div></div><section class="s on"><h2>1. Big Picture</h2><div class="flow"><div class="box">5 stratified folds</div><div class="arrow">→</div><div class="box">Train on 4</div><div class="arrow">→</div><div class="box">Test on 1</div><div class="arrow">→</div><div class="box">Repeat ×5</div></div><div id="folds" class="folds"></div><div class="call"><b>Main idea:</b> every fold is held out once. We calculate five sets of metrics and then average them.</div><div class="call"><b>Terminology:</b> This lesson uses ordinary <strong>5-fold Stratified Cross-Validation</strong>. There is no GridSearchCV, no inner CV, and no nested CV in this example.</div></section><section class="s"><h2>2. Imports and SEED</h2><div class="code">import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import StratifiedKFold
+from sklearn.metrics import (
+    accuracy_score, precision_score, recall_score, f1_score,
+    roc_curve, auc
+)
+SEED = 42</div><div class="ex"><code>pandas</code> builds the results table; <code>matplotlib</code> plots ROC curves; <code>StratifiedKFold</code> creates folds; metric functions evaluate predictions. <code>SEED=42</code> makes shuffled splits reproducible.</div></section><section class="s"><h2>3. Function Inputs</h2><div class="code">def cv5_report(name, model, X, y, n_splits=5):</div><div class="grid"><div class="card"><b>name</b><p>Label such as "LR".</p></div><div class="card"><b>model</b><p>Classifier, Pipeline, or GridSearchCV.</p></div><div class="card"><b>X</b><p>Features.</p></div><div class="card"><b>y</b><p>Class labels.</p></div></div></section><section class="s"><h2>4. Create StratifiedKFold</h2><div class="code">skf = StratifiedKFold(
+    n_splits=n_splits,
+    shuffle=True,
+    random_state=SEED
+)</div><div class="ex"><b>StratifiedKFold</b> preserves approximately the class proportions.<br><code>n_splits</code> = number of folds.<br><code>shuffle=True</code> = shuffle before splitting.<br><code>random_state=SEED</code> = reproduce the same shuffle.</div></section><section class="s"><h2>5. Prepare Storage and Figure</h2><div class="code">folds = []
+aucs = []
+plt.figure(figsize=(6,5))</div><div class="ex"><code>folds</code> stores each fold's metrics. <code>aucs</code> stores AUC values. <code>plt.figure()</code> creates the ROC figure.</div></section><section class="s"><h2>6. Generate Fold Indices</h2><div class="loop-start">▼ FOR LOOP STARTS HERE ▼</div>
+<div class="code">for fold, (train_idx, test_idx) in enumerate(
+    skf.split(X, y), 1
+):
+    print("Running Fold:", fold)</div>
+<div class="inside-loop"><b>Everything indented under this <code>for</code> statement runs once for each fold.</b><br><br>
+Fold 1 → run the indented code<br>
+Fold 2 → run the indented code again<br>
+Fold 3 → run it again<br>
+Fold 4 → run it again<br>
+Fold 5 → run it again
+</div><div class="ex"><code>skf.split(X,y)</code> produces training and testing row indices. <code>enumerate(...,1)</code> numbers the folds 1–5.<br><br><b>Debug check:</b> <code>print("Running Fold:", fold)</code> should print Fold 1, 2, 3, 4, and 5. If you only see Fold 1, the loop is not completing all five iterations.</div></section><section class="s"><h2>7. Select Train and Test Rows</h2><div class="loop-start" style="font-size:.9rem">INSIDE THE FOR LOOP — runs once per fold</div><div class="code">X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
+y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]</div><div class="ex"><code>.iloc</code> selects rows by integer position. Four folds become training data and one fold becomes held-out test data.</div></section><section class="s"><h2>8. Train the Model</h2><div class="loop-start" style="font-size:.9rem">INSIDE THE FOR LOOP — runs once per fold</div><div class="code">model.fit(X_train, y_train)</div><div class="ex"><code>fit()</code> trains the model using the current fold's training data. When the loop moves to the next fold, <code>fit()</code> is called again using the new training data.</div><div class="flow"><div class="box">X_train + y_train</div><div class="arrow">→</div><div class="box">model.fit()</div><div class="arrow">→</div><div class="box">Trained model</div></div></section><section class="s"><h2>9. Predictions</h2><div class="loop-start" style="font-size:.9rem">INSIDE THE FOR LOOP — runs once per fold</div><div class="code">y_pred = model.predict(X_test)
+y_prob = model.predict_proba(X_test)[:, 1]</div><div class="grid"><div class="card"><b>y_pred</b><p>Class labels used for Accuracy, Precision, Recall, F1.</p></div><div class="card"><b>y_prob</b><p>Probability of class 1, used for ROC/AUC.</p></div></div><div class="ex"><code>[:,1]</code> means all test samples, second probability column (class 1).</div></section><section class="s"><h2>10. Classification Metrics</h2><div class="loop-start" style="font-size:.9rem">INSIDE THE FOR LOOP — runs once per fold</div><div class="code">acc  = accuracy_score(y_test, y_pred)
+prec = precision_score(y_test, y_pred)
+rec  = recall_score(y_test, y_pred)
+f1   = f1_score(y_test, y_pred)</div><div class="grid"><div class="card"><b>Accuracy</b><p>Overall correctness.</p></div><div class="card"><b>Precision</b><p>Correct among predicted positives.</p></div><div class="card"><b>Recall</b><p>Found among actual positives.</p></div><div class="card"><b>F1</b><p>Balance of precision and recall.</p></div></div></section><section class="s"><h2>11. ROC and AUC</h2><div class="loop-start" style="font-size:.9rem">INSIDE THE FOR LOOP — runs once per fold</div><div class="code">fpr, tpr, _ = roc_curve(y_test, y_prob)
+fold_auc = auc(fpr, tpr)
+aucs.append(fold_auc)</div><div class="ex"><code>fpr</code> = False Positive Rate; <code>tpr</code> = True Positive Rate; <code>_</code> receives unused thresholds. <code>auc()</code> measures the area under this fold's ROC curve.</div></section><section class="s"><h2>12. Plot and Save Each Fold</h2><div class="loop-start" style="font-size:.9rem">INSIDE THE FOR LOOP — runs once per fold</div><div class="code">plt.plot(fpr, tpr, alpha=0.7,
+         label=f"Fold {fold} AUC={fold_auc:.3f}")
+
+folds.append({
+    "Model": name,
+    "Fold": fold,
+    "Accuracy": acc,
+    "Precision": prec,
+    "Recall": rec,
+    "F1": f1,
+    "AUC": fold_auc
+})</div><div class="ex">Each iteration adds one ROC curve and one result dictionary. After five iterations there are five of each.</div><div class="call"><b>CRITICAL INDENTATION:</b> <code>model.fit()</code>, predictions, metrics, <code>roc_curve()</code>, <code>plt.plot(fpr,tpr,...)</code>, and <code>folds.append(...)</code> must all stay <b>inside the for loop</b>. Otherwise you may get only one ROC curve or one result row.</div></section><section class="s"><h2>13. Finish the ROC Figure</h2><div class="loop-end">▲ FOR LOOP ENDS BEFORE THIS SECTION ▲</div><div class="after-loop">AFTER THE FOR LOOP — runs only once, after all 5 folds finish</div><div class="code">plt.plot([0,1], [0,1], "k--", lw=1)
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.title(f"5-Fold ROC — {name}")
+plt.legend(loc="lower right")
+plt.grid(True, alpha=0.3)
+plt.show()</div><div class="call">The dashed diagonal is the random-classifier reference.</div><div class="ex"><b>This section is OUTSIDE the for loop.</b> The five fold curves must already have been added before <code>plt.show()</code> is called. Likewise, the DataFrame, Mean row, and <code>return results</code> belong after the loop.</div></section><section class="s"><h2>14. Mean Results</h2><div class="after-loop">AFTER THE FOR LOOP</div><div class="code">df = pd.DataFrame(folds)
+
+mean_row = {
+    "Model": name,
+    "Fold": "Mean",
+    "Accuracy": df["Accuracy"].mean(),
+    "Precision": df["Precision"].mean(),
+    "Recall": df["Recall"].mean(),
+    "F1": df["F1"].mean(),
+    "AUC": df["AUC"].mean()
+}
+
+results = pd.concat(
+    [df, pd.DataFrame([mean_row])],
+    ignore_index=True
+)
+return results</div><div class="ex">Convert the five dictionaries to a DataFrame, average each metric, append a Mean row, and return the finished table.</div></section><section class="s"><h2>15. Usage Example: Load Data</h2><div class="code">from sklearn.datasets import load_breast_cancer
+
+data = load_breast_cancer(as_frame=True)
+X = data.data
+y = data.target</div><div class="ex">This step is essential: it actually creates <code>X</code> and <code>y</code>. <code>X</code> contains the breast-cancer features; <code>y</code> contains the target labels.</div></section><section class="s"><h2>16. Usage Example: Create the Model</h2><div class="code">from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+lr = Pipeline([
+    ("scaler", StandardScaler()),
+    ("lr", LogisticRegression(max_iter=5000))
+])</div><div class="ex">The Pipeline scales the features and then fits Logistic Regression. This <code>lr</code> object is a plain Pipeline, <b>not GridSearchCV</b>.</div></section><section class="s"><h2>17. Call the Function</h2><div class="code">results = cv5_report(
+    "LR",
+    lr,
+    X,
+    y,
+    n_splits=5
+)
+
+print(results)</div><div class="flow"><div class="box">"LR"</div><div class="arrow">→ name</div><div class="box">lr</div><div class="arrow">→ model</div><div class="box">X</div><div class="arrow">→ features</div><div class="box">y</div><div class="arrow">→ labels</div></div><div class="call">Defining <code>cv5_report()</code> does not run it. This call executes the five-fold evaluation and stores the returned DataFrame in <code>results</code>.</div></section><section class="s"><h2>18. Python Indentation: Where the Loop Really Ends</h2>
+<div class="loop-start">▼ FOR LOOP STARTS HERE ▼</div>
+<div class="indent-demo">for fold, (train_idx, test_idx) in enumerate(skf.split(X, y), 1):
+
+    # INSIDE LOOP — indented
+    X_train = X.iloc[train_idx]
+    X_test = X.iloc[test_idx]
+
+    model.fit(X_train, y_train)
+
+    y_pred = model.predict(X_test)
+
+    # calculate metrics...
+    # calculate ROC...
+    # plot this fold...
+    # save this fold...</div>
+
+<div class="loop-end">▲ FOR LOOP ENDS HERE — indentation moves back to the left ▲</div>
+
+<div class="outside-loop">
+<b>These statements must NOT be indented under the loop:</b>
+<div class="code"># AFTER all 5 folds
+plt.show()
+
+df = pd.DataFrame(folds)
+
+# calculate Mean row...
+
+return results</div>
+</div>
+
+<div class="call"><b>Why your earlier code stopped after Fold 1:</b><br><br>
+<code>return results</code> was indented inside the <code>for</code> loop. Python reached it during Fold 1 and immediately left the entire function. Therefore Fold 2 never started.</div>
+
+<div class="formula">return inside loop → stop after Fold 1 ❌<br><br>return after loop → finish Fold 1–5, then return ✓</div>
+</section><section class="s"><h2>19. Complete Mental Model</h2><div class="flow"><div class="box">Load X,y</div><div class="arrow">→</div><div class="box">Create model</div><div class="arrow">→</div><div class="box">5 folds</div><div class="arrow">→</div><div class="box">fit</div><div class="arrow">→</div><div class="box">predict</div><div class="arrow">→</div><div class="box">metrics + ROC</div><div class="arrow">→</div><div class="box">mean</div></div><div class="call"><b>Complete idea:</b> Load the data → create the Logistic Regression Pipeline → create five stratified folds → train and test five times → calculate metrics and ROC curves → average the five fold results.<br><br><b>Indentation map:</b><br><code>FOR each fold:</code><br>&nbsp;&nbsp;&nbsp;&nbsp;select train/test data<br>&nbsp;&nbsp;&nbsp;&nbsp;fit model<br>&nbsp;&nbsp;&nbsp;&nbsp;predict<br>&nbsp;&nbsp;&nbsp;&nbsp;calculate metrics<br>&nbsp;&nbsp;&nbsp;&nbsp;calculate + plot ROC<br>&nbsp;&nbsp;&nbsp;&nbsp;append fold results<br><br><code>AFTER the loop:</code><br>&nbsp;&nbsp;&nbsp;&nbsp;finish/show ROC figure<br>&nbsp;&nbsp;&nbsp;&nbsp;create DataFrame<br>&nbsp;&nbsp;&nbsp;&nbsp;calculate Mean row<br>&nbsp;&nbsp;&nbsp;&nbsp;return results</div>
+<h3 style="color:#ffb3de;margin-top:28px;">Complete Executable Code</h3>
+<div class="call"><b>Run this complete version from top to bottom.</b> Notice the two boundary comments: <code>FOR LOOP STARTS HERE</code> and <code>FOR LOOP ENDS HERE</code>. The ROC finishing code, mean calculation, and <code>return results</code> are intentionally outside the loop.</div>
+<div class="code"># Minimal imports
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from sklearn.model_selection import StratifiedKFold
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
+    roc_curve,
+    auc
+)
+
+SEED = 42
+
+
+def cv5_report(name, model, X, y, n_splits=5):
+
+    # Create stratified folds
+    skf = StratifiedKFold(
+        n_splits=n_splits,
+        shuffle=True,
+        random_state=SEED
+    )
+
+    folds = []
+
+    # Create one ROC figure
+    plt.figure(figsize=(6, 5))
+
+    # ==========================================
+    # FOR LOOP STARTS HERE
+    # ==========================================
+    for fold, (train_idx, test_idx) in enumerate(
+        skf.split(X, y), 1
+    ):
+
+        print(&quot;Running Fold:&quot;, fold)
+
+        # 1. Select training and test data
+        X_train = X.iloc[train_idx]
+        X_test = X.iloc[test_idx]
+
+        y_train = y.iloc[train_idx]
+        y_test = y.iloc[test_idx]
+
+        # 2. Train the model
+        model.fit(X_train, y_train)
+
+        # 3. Make predictions
+        y_pred = model.predict(X_test)
+        y_prob = model.predict_proba(X_test)[:, 1]
+
+        # 4. Calculate classification metrics
+        acc = accuracy_score(y_test, y_pred)
+        prec = precision_score(y_test, y_pred)
+        rec = recall_score(y_test, y_pred)
+        f1 = f1_score(y_test, y_pred)
+
+        # 5. Calculate ROC and AUC
+        fpr, tpr, _ = roc_curve(y_test, y_prob)
+        fold_auc = auc(fpr, tpr)
+
+        # 6. Plot this fold&#x27;s ROC curve
+        plt.plot(
+            fpr,
+            tpr,
+            alpha=0.7,
+            label=f&quot;Fold {fold} AUC={fold_auc:.3f}&quot;
+        )
+
+        # 7. Save this fold&#x27;s results
+        folds.append({
+            &quot;Model&quot;: name,
+            &quot;Fold&quot;: fold,
+            &quot;Accuracy&quot;: acc,
+            &quot;Precision&quot;: prec,
+            &quot;Recall&quot;: rec,
+            &quot;F1&quot;: f1,
+            &quot;AUC&quot;: fold_auc
+        })
+
+    # ==========================================
+    # FOR LOOP ENDS HERE
+    # ==========================================
+
+    # Finish ROC plot AFTER all 5 folds
+    plt.plot([0, 1], [0, 1], &quot;k--&quot;, lw=1)
+    plt.xlabel(&quot;False Positive Rate&quot;)
+    plt.ylabel(&quot;True Positive Rate&quot;)
+    plt.title(f&quot;5-Fold ROC — {name}&quot;)
+    plt.legend(loc=&quot;lower right&quot;)
+    plt.grid(True, alpha=0.3)
+    plt.show()
+
+    # Convert fold results to a DataFrame
+    df = pd.DataFrame(folds)
+
+    # Calculate mean performance
+    mean_row = {
+        &quot;Model&quot;: name,
+        &quot;Fold&quot;: &quot;Mean&quot;,
+        &quot;Accuracy&quot;: df[&quot;Accuracy&quot;].mean(),
+        &quot;Precision&quot;: df[&quot;Precision&quot;].mean(),
+        &quot;Recall&quot;: df[&quot;Recall&quot;].mean(),
+        &quot;F1&quot;: df[&quot;F1&quot;].mean(),
+        &quot;AUC&quot;: df[&quot;AUC&quot;].mean()
+    }
+
+    # Add Mean row
+    results = pd.concat(
+        [df, pd.DataFrame([mean_row])],
+        ignore_index=True
+    )
+
+    # Return only AFTER all folds are finished
+    return results
+
+
+# ==============================================
+# EXAMPLE: LOAD DATA
+# ==============================================
+
+from sklearn.datasets import load_breast_cancer
+
+data = load_breast_cancer(as_frame=True)
+
+X = data.data
+y = data.target
+
+
+# ==============================================
+# CREATE LOGISTIC REGRESSION PIPELINE
+# ==============================================
+
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+lr = Pipeline([
+    (&quot;scaler&quot;, StandardScaler()),
+    (&quot;lr&quot;, LogisticRegression(max_iter=5000))
+])
+
+
+# ==============================================
+# CALL THE FUNCTION
+# ==============================================
+
+results = cv5_report(
+    &quot;LR&quot;,
+    lr,
+    X,
+    y,
+    n_splits=5
+)
+
+print(results)
+</div>
+</section><div class="nav"><button id="back">← Previous</button><button id="next" class="primary">Next Step →</button></div></main><script>let n=0,S=[...document.querySelectorAll('.s')],p=document.getElementById('prog'),b=document.getElementById('back'),x=document.getElementById('next');function show(){S.forEach((e,i)=>e.classList.toggle('on',i===n));p.style.width=100*(n+1)/S.length+'%';b.disabled=n===0;x.textContent=n===S.length-1?'Start Over':'Next Step →';scrollTo(0,0)}x.onclick=()=>{n=n===S.length-1?0:n+1;show()};b.onclick=()=>{if(n)n--;show()};let h='';for(let r=0;r<5;r++){h+='<div class="fold"><b>Fold '+(r+1)+'</b>';for(let c=0;c<5;c++)h+='<span class="'+(r===c?'test':'train')+'">'+(r===c?'TEST':'TRAIN')+'</span>';h+='</div>'}document.getElementById('folds').innerHTML=h;show();</script></body></html>
