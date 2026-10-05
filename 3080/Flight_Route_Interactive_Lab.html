@@ -1,0 +1,773 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CSCI 3080 — Flight Route Lookup Interactive Lab</title><style>
+
+/* ============================================================
+   COLORS
+============================================================ */
+
+:root{
+
+    --bg:#151719;
+
+    --panel:#222025;
+
+    --panel2:#191b20;
+
+    --text:#f7f2f6;
+
+    --muted:#bbb4bc;
+
+    --pink:#ff79c6;
+
+    --pink2:#ffb3de;
+
+    --blue:#86d7ff;
+
+    --green:#79e2a5;
+
+    --yellow:#ffd166;
+
+    --red:#ff8585;
+
+    --border:#443943;
+
+}
+
+
+/* ============================================================
+   GENERAL PAGE
+============================================================ */
+
+*{
+    box-sizing:border-box;
+}
+
+
+body{
+
+    margin:0;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-family:
+        Inter,
+        system-ui,
+        Arial,
+        sans-serif;
+
+}
+
+
+.wrap{
+
+    max-width:1080px;
+
+    margin:auto;
+
+    padding:
+        28px
+        20px
+        70px;
+
+}
+
+
+h1{
+
+    color:var(--pink2);
+
+    font-size:
+        clamp(
+            2rem,
+            5vw,
+            3rem
+        );
+
+    margin:.15em 0;
+
+}
+
+
+h2{
+
+    color:var(--pink2);
+
+    margin-top:0;
+
+}
+
+
+h3{
+
+    color:var(--blue);
+
+}
+
+
+p,
+li{
+
+    line-height:1.65;
+
+}
+
+
+.tag{
+
+    color:var(--pink);
+
+    font-weight:800;
+
+    text-transform:uppercase;
+
+    letter-spacing:.08em;
+
+    font-size:.8rem;
+
+}
+
+
+.sub,
+.tiny{
+
+    color:var(--muted);
+
+}
+
+
+/* ============================================================
+   PROGRESS BAR
+============================================================ */
+
+.progress{
+
+    height:10px;
+
+    background:#302c31;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin:24px 0;
+
+}
+
+
+.progress div{
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--pink),
+            var(--blue)
+        );
+
+    transition:.25s;
+
+}
+
+
+/* ============================================================
+   STAGES
+============================================================ */
+
+.stage{
+
+    display:none;
+
+    background:var(--panel);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-left:
+        6px solid
+        var(--pink);
+
+    border-radius:18px;
+
+    padding:26px;
+
+}
+
+
+.stage.active{
+
+    display:block;
+
+}
+
+
+/* ============================================================
+   CONTENT BOXES
+============================================================ */
+
+.call,
+.math,
+.code{
+
+    background:var(--panel2);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:12px;
+
+    padding:15px;
+
+    margin:15px 0;
+
+}
+
+
+.call{
+
+    border-left:
+        5px solid
+        var(--pink);
+
+}
+
+
+.math{
+
+    text-align:center;
+
+    font:
+        1.25rem
+        Georgia,
+        serif;
+
+}
+
+
+.code{
+
+    font:
+        1rem
+        ui-monospace,
+        Consolas,
+        monospace;
+
+    white-space:pre-wrap;
+
+    color:#ffd7f0;
+
+    overflow:auto;
+
+}
+
+
+/* ============================================================
+   GRID / CARDS
+============================================================ */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:14px;
+
+}
+
+
+.card{
+
+    background:var(--panel2);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:12px;
+
+    padding:15px;
+
+}
+
+
+.card h3{
+
+    margin-top:0;
+
+}
+
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+
+.choices button{
+
+    display:block;
+
+    width:100%;
+
+    text-align:left;
+
+    margin:9px 0;
+
+}
+
+
+button{
+
+    font:inherit;
+
+    min-height:44px;
+
+    padding:
+        10px
+        15px;
+
+    border-radius:10px;
+
+    border:
+        1px solid
+        #665b65;
+
+    background:#302b31;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+}
+
+
+button.primary{
+
+    background:var(--pink);
+
+    border-color:var(--pink);
+
+    color:#25121f;
+
+}
+
+
+button:disabled{
+
+    opacity:.4;
+
+}
+
+
+/* ============================================================
+   ANSWER FEEDBACK
+============================================================ */
+
+.correct{
+
+    background:
+        #173528 !important;
+
+    border-color:
+        var(--green) !important;
+
+}
+
+
+.wrong{
+
+    background:
+        #402326 !important;
+
+    border-color:
+        var(--red) !important;
+
+}
+
+
+.feedback{
+
+    min-height:25px;
+
+    font-weight:700;
+
+}
+
+
+.good{
+
+    color:var(--green);
+
+}
+
+
+.warn{
+
+    color:var(--yellow);
+
+}
+
+
+/* ============================================================
+   NAVIGATION
+============================================================ */
+
+.nav{
+
+    display:flex;
+
+    justify-content:
+        space-between;
+
+    gap:12px;
+
+    margin-top:24px;
+
+}
+
+
+.nav button{
+
+    min-width:120px;
+
+}
+
+
+/* ============================================================
+   FLOW DIAGRAM
+============================================================ */
+
+.flow{
+
+    display:flex;
+
+    gap:8px;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    margin:18px 0;
+
+}
+
+
+.box{
+
+    padding:
+        10px
+        12px;
+
+    background:#111418;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:9px;
+
+    font-weight:700;
+
+    /*
+       IMPORTANT FIX:
+       force text to be light
+    */
+
+    color:var(--text);
+
+}
+
+
+.arrow{
+
+    color:var(--pink);
+
+    font-size:1.3rem;
+
+}
+
+
+/* ============================================================
+   TABLE
+============================================================ */
+
+table{
+
+    width:100%;
+
+    border-collapse:
+        collapse;
+
+}
+
+
+th,
+td{
+
+    padding:12px;
+
+    border:
+        1px solid
+        var(--border);
+
+    text-align:center;
+
+}
+
+
+th{
+
+    background:#302b31;
+
+    /*
+       IMPORTANT FIX:
+       readable header text
+    */
+
+    color:var(--pink2);
+
+    font-weight:800;
+
+}
+
+
+/* ============================================================
+   CONTROLS
+============================================================ */
+
+.controls{
+
+    background:var(--panel2);
+
+    padding:15px;
+
+    border-radius:12px;
+
+    margin:
+        15px
+        0;
+
+}
+
+
+select{
+
+    background:#111418;
+
+    color:var(--text);
+
+    border:
+        1px solid
+        #665b65;
+
+    border-radius:8px;
+
+    padding:9px;
+
+    font:inherit;
+
+}
+
+
+.hidden{
+
+    display:none;
+
+}
+
+
+/* ============================================================
+   SPECIAL TEXT
+============================================================ */
+
+.operation{
+
+    background:#111418;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:10px;
+
+    padding:12px;
+
+    margin:15px 0;
+
+    text-align:center;
+
+    color:var(--pink2);
+
+    font:
+        1.1rem
+        ui-monospace,
+        Consolas,
+        monospace;
+
+}
+
+
+.solution{
+
+    text-align:center;
+
+    font-size:1.4rem;
+
+    color:var(--green);
+
+    font-weight:900;
+
+    margin:20px 0;
+
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media(max-width:700px){
+
+    .grid{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .stage{
+
+        padding:18px;
+
+    }
+
+
+    .nav button{
+
+        min-width:0;
+
+        flex:1;
+
+    }
+
+}
+
+
+/* Compatibility additions for this Gaussian Elimination lab */
+.operation{
+    background:#111418;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px;
+    margin:15px 0;
+    text-align:center;
+    color:var(--pink2);
+    font:1.1rem ui-monospace,Consolas,monospace;
+}
+.solution{
+    text-align:center;
+    font-size:1.4rem;
+    color:var(--green);
+    font-weight:900;
+    margin:20px 0;
+}
+select{
+    background:#111418;
+    color:var(--text);
+    border:1px solid #665b65;
+    border-radius:8px;
+    padding:9px;
+    font:inherit;
+}
+
+.flightmap{min-height:330px;background:#111418;border:1px solid var(--border);border-radius:12px;overflow:hidden}.flightmap svg{width:100%;height:330px}
+.route{stroke:var(--pink);stroke-width:4}.city circle{fill:#302b31;stroke:var(--blue);stroke-width:3}.city text{fill:white;font-weight:900;font-size:17px;text-anchor:middle;dominant-baseline:middle}
+.yes{background:#173528;color:var(--green);font-weight:900}.no{background:#29272b;color:var(--muted)}.hot{outline:3px solid var(--yellow);outline-offset:-3px}
+.lookup{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}.lookup label{display:flex;flex-direction:column;gap:6px;color:var(--muted);font-weight:700}.result{padding:15px;margin:15px 0;background:#111418;border:1px solid var(--border);border-radius:12px;font-weight:800}.rg{color:var(--green);border-left:5px solid var(--green)}.rr{color:var(--red);border-left:5px solid var(--red)}
+@media(max-width:700px){.lookup{grid-template-columns:1fr}}
+</style></head><body><main class="wrap"><div class="tag">CSCI 3080 • Graph Applications • C++</div><h1>Flight Route Lookup System — Interactive Learning Lab</h1><p class="sub">Explore how the program connects <strong>city names → map indices → adjacency matrix → direct-flight decisions.</strong></p><div class="progress"><div id="prog"></div></div><section class="stage active"><div class="tag">Step 1 of 9</div><h2>What Does This Program Model?</h2>
+<p>The program represents a <strong>flight network</strong> using a graph.</p><div class="grid"><div class="card"><h3>✈ Cities = Vertices</h3><p>NYC, LAX, ORD, and DFW are vertices.</p></div><div class="card"><h3>↔ Direct Flights = Edges</h3><p>A direct connection between two cities is an edge.</p></div></div>
+<div class="flow"><div class="box">Cities</div><div class="arrow">→</div><div class="box">Indices</div><div class="arrow">→</div><div class="box">Adjacency Matrix</div><div class="arrow">→</div><div class="box">Flight Lookup</div></div>
+<div class="choices q" data-a="e" data-f="f1"><button data-v="v">A direct flight is a vertex.</button><button data-v="e">A direct flight is an edge.</button></div><div id="f1" class="feedback"></div></section><section class="stage"><div class="tag">Step 2 of 9</div><h2>City Names and Array Indices</h2>
+<div class="code">string cities[CITY_COUNT] = {"NYC", "LAX", "ORD", "DFW"};</div>
+<table><tr><th>Index</th><th>City</th></tr><tr><td>0</td><td>NYC</td></tr><tr><td>1</td><td>LAX</td></tr><tr><td>2</td><td>ORD</td></tr><tr><td>3</td><td>DFW</td></tr></table>
+<div class="call"><code>flightMatrix[0][2]</code> asks whether NYC and ORD have a direct connection.</div>
+<div class="choices q" data-a="2" data-f="f2"><button data-v="1">ORD has index 1.</button><button data-v="2">ORD has index 2.</button><button data-v="3">ORD has index 3.</button></div><div id="f2" class="feedback"></div></section><section class="stage"><div class="tag">Step 3 of 9</div><h2>Why Use a C++ map?</h2>
+<div class="code">map&lt;string, int&gt; cityIndex;
+for (int i = 0; i &lt; CITY_COUNT; i++) {
+    cityIndex[cities[i]] = i;
+}</div>
+<div class="math">"NYC" → 0 &nbsp; "LAX" → 1 &nbsp; "ORD" → 2 &nbsp; "DFW" → 3</div>
+<div class="call">The <code>map</code> converts a meaningful city name into the integer index required by the matrix.</div>
+<div class="choices q" data-a="1" data-f="f3"><button data-v="0">cityIndex["LAX"] = 0</button><button data-v="1">cityIndex["LAX"] = 1</button><button data-v="2">cityIndex["LAX"] = 2</button></div><div id="f3" class="feedback"></div></section><section class="stage"><div class="tag">Step 4 of 9</div><h2>Read the Flight Adjacency Matrix</h2>
+<div class="code">int flightMatrix[CITY_COUNT][CITY_COUNT] = {
+ {0,1,1,0},
+ {1,0,1,0},
+ {1,1,0,1},
+ {0,0,1,0}
+};</div><div id="matrixMain"></div>
+<div class="call"><strong>1 = direct flight exists.</strong> &nbsp; <strong>0 = no direct flight.</strong></div>
+<div class="choices q" data-a="yes" data-f="f4"><button data-v="yes">NYC ↔ LAX is direct because [0][1] = 1.</button><button data-v="no">NYC ↔ LAX has no direct flight.</button></div><div id="f4" class="feedback"></div></section><section class="stage"><div class="tag">Step 5 of 9</div><h2>The Same Data as a Graph</h2>
+<div class="flightmap" id="flightMap"></div>
+<div class="call"><strong>ORD is the hub in this example.</strong> It has direct connections to NYC, LAX, and DFW.</div>
+<div class="choices q" data-a="ord" data-f="f5"><button data-v="nyc">NYC has the most connections.</button><button data-v="ord">ORD has the most connections.</button><button data-v="dfw">DFW has the most connections.</button></div><div id="f5" class="feedback"></div></section><section class="stage"><div class="tag">Step 6 of 9</div><h2>Interactive Direct-Flight Lookup</h2>
+<p>Run the same logical test performed by <code>checkFlight()</code>.</p>
+<div class="lookup"><label>First city<select id="from"><option>NYC</option><option>LAX</option><option>ORD</option><option>DFW</option></select></label><label>Second city<select id="to"><option>LAX</option><option>NYC</option><option>ORD</option><option>DFW</option></select></label><button id="check" class="primary">Check Flight ✈</button></div>
+<div id="result" class="result">Choose two cities and click Check Flight.</div><div id="lookupMatrix"></div><div id="lookupCode" class="operation">matrix[index1][index2]</div></section><section class="stage"><div class="tag">Step 7 of 9</div><h2>Validate City Names</h2>
+<div class="code">if (cityIndex.find(city1) == cityIndex.end() ||
+    cityIndex.find(city2) == cityIndex.end()) {
+    cout &lt;&lt; "Invalid city names.";
+    return;
+}</div>
+<div class="call"><code>find()</code> searches for a key. If the result equals <code>end()</code>, the city name was <strong>not found</strong>.</div>
+<div class="choices q" data-a="bad" data-f="f7"><button data-v="good">find(...) == end() means valid city.</button><button data-v="bad">find(...) == end() means the city was not found.</button></div><div id="f7" class="feedback"></div></section><section class="stage"><div class="tag">Step 8 of 9</div><h2>Direct Flight vs. Connecting Route</h2>
+<div class="code">int index1 = cityIndex[city1];
+int index2 = cityIndex[city2];
+
+if (matrix[index1][index2] == 1)
+    cout &lt;&lt; "Yes! Direct flight available";
+else
+    cout &lt;&lt; "No! No direct flight";</div>
+<div class="math">NYC → DFW: flightMatrix[0][3] = 0</div>
+<div class="call"><strong>No direct flight does not mean no possible route.</strong> In this graph, NYC can reach DFW through ORD: <strong>NYC → ORD → DFW</strong>.</div>
+<div class="choices q" data-a="connect" data-f="f8"><button data-v="never">NYC can never reach DFW.</button><button data-v="connect">NYC can reach DFW with a connection through ORD.</button></div><div id="f8" class="feedback"></div></section><section class="stage"><div class="tag">Step 9 of 9</div><h2>Why the do–while Loop?</h2>
+<div class="code">do {
+    checkFlight(flightMatrix, cities, cityIndex);
+    cout &lt;&lt; "Check another flight? (y/n): ";
+    cin &gt;&gt; choice;
+} while (choice == 'y' || choice == 'Y');</div>
+<div class="grid"><div class="card"><h3>y or Y</h3><p>Run another flight query.</p></div><div class="card"><h3>Anything else</h3><p>Leave the loop and end the program.</p></div></div>
+<div class="call">A <strong>do–while</strong> loop runs the body at least once before testing the condition.</div>
+<h3>Quick Check</h3>
+<div class="math">Why is a <code>do-while</code> loop appropriate for this program?</div>
+<div class="choices q" data-a="once" data-f="f9">
+<button data-v="once">Because the flight lookup should run at least once before asking whether the user wants to continue.</button>
+<button data-v="exactly">Because a <code>do-while</code> loop always runs exactly one time.</button>
+<button data-v="map">Because a <code>do-while</code> loop is required whenever a C++ <code>map</code> is used.</button>
+</div>
+<div id="f9" class="feedback"></div>
+<div class="call"><strong>Think about the order:</strong> first <code>checkFlight()</code> runs, then the program asks <code>y/n</code>, and only then is the loop condition tested.</div>
+<div class="solution">Run Once → Ask y/n → Test Condition → Repeat or Exit</div></section><div class="nav"><button id="back">← Previous</button><button id="next" class="primary">Next Step →</button></div></main>
+<script>
+(()=>{
+const C=['NYC','LAX','ORD','DFW'], M=[[0,1,1,0],[1,0,1,0],[1,1,0,1],[0,0,1,0]];
+const S=[...document.querySelectorAll('.stage')];let p=0;const prog=document.getElementById('prog'),back=document.getElementById('back'),next=document.getElementById('next');
+function show(){S.forEach((x,i)=>x.classList.toggle('active',i===p));prog.style.width=((p+1)/S.length*100)+'%';back.disabled=p===0;next.textContent=p===S.length-1?'Start Over':'Next Step →';window.scrollTo({top:0,behavior:'smooth'})}
+next.onclick=()=>{p=p===S.length-1?0:p+1;show()};back.onclick=()=>{if(p>0)p--;show()};
+document.querySelectorAll('.q').forEach(q=>q.querySelectorAll('button').forEach(b=>b.onclick=()=>{q.querySelectorAll('button').forEach(x=>x.classList.remove('correct','wrong'));let ok=b.dataset.v===q.dataset.a;b.classList.add(ok?'correct':'wrong');let f=document.getElementById(q.dataset.f);f.textContent=ok?'✓ Correct — great work!':'Not quite. Review the explanation and try again.';f.className='feedback '+(ok?'good':'warn')}));
+function tab(pre){let s='<table><tr><th></th>'+C.map(x=>'<th>'+x+'</th>').join('')+'</tr>';for(let i=0;i<4;i++){s+='<tr><th>'+C[i]+'</th>';for(let j=0;j<4;j++)s+=`<td id="${pre}${i}${j}" class="${M[i][j]?'yes':'no'}">${M[i][j]}</td>`;s+='</tr>'}return s+'</table>'}
+document.getElementById('matrixMain').innerHTML=tab('m');document.getElementById('lookupMatrix').innerHTML=tab('q');
+document.getElementById('flightMap').innerHTML=`<svg viewBox="0 0 700 330"><line class="route" x1="120" y1="80" x2="570" y2="90"/><line class="route" x1="120" y1="80" x2="350" y2="170"/><line class="route" x1="570" y1="90" x2="350" y2="170"/><line class="route" x1="350" y1="170" x2="430" y2="270"/>${[[120,80,'NYC'],[570,90,'LAX'],[350,170,'ORD'],[430,270,'DFW']].map(n=>`<g class="city"><circle cx="${n[0]}" cy="${n[1]}" r="38"/><text x="${n[0]}" y="${n[1]}">${n[2]}</text></g>`).join('')}</svg>`;
+document.getElementById('check').onclick=()=>{document.querySelectorAll('#lookupMatrix td').forEach(x=>x.classList.remove('hot'));let a=C.indexOf(document.getElementById('from').value),b=C.indexOf(document.getElementById('to').value),v=M[a][b],r=document.getElementById('result');document.getElementById('q'+a+b).classList.add('hot');document.getElementById('lookupCode').innerHTML=`cityIndex["${C[a]}"] = ${a}, cityIndex["${C[b]}"] = ${b}<br>flightMatrix[${a}][${b}] = <strong>${v}</strong>`;r.className='result '+(v?'rg':'rr');r.innerHTML=v?`✓ Yes! Direct flight available between <strong>${C[a]}</strong> and <strong>${C[b]}</strong>.`:`✗ No direct flight between <strong>${C[a]}</strong> and <strong>${C[b]}</strong>.`};
+show();
+})();
+</script>
+</body></html>
