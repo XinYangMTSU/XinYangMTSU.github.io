@@ -1,0 +1,280 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linear SVM: Effect of C</title>
+<style>
+body{margin:0;background:#151719;color:#f7f2f6;font-family:Arial,sans-serif}
+.wrap{max-width:1100px;margin:auto;padding:30px 20px}
+h1{color:#ffb3de;margin-bottom:8px}
+.sub{color:#c9c3c8;line-height:1.5}
+.note{background:#222025;border-left:6px solid #ff79c6;border-radius:14px;padding:16px 18px;margin:20px 0;line-height:1.55}
+.code-wrap{position:relative;margin-top:18px}
+.copy-btn{position:absolute;top:12px;right:12px;z-index:2;padding:8px 12px;border:1px solid #666;border-radius:8px;background:#302b31;color:white;font-weight:bold;cursor:pointer}
+.copy-btn:hover{background:#453d45}
+.copy-btn:focus{outline:2px solid #ff79c6;outline-offset:2px}
+pre{background:#191b20;color:#ffd7f0;border:1px solid #403940;border-radius:14px;padding:22px;overflow:auto;white-space:pre;line-height:1.45;font-size:14px}
+.flow{background:#222025;border-radius:14px;padding:18px;margin-top:20px;line-height:1.7}
+strong{color:#ffb3de}
+</style>
+</head>
+<body>
+<main class="wrap">
+<h1>Linear SVM: Effect of the C Parameter</h1>
+<p class="sub">Copy the complete code below into one Jupyter Notebook cell and run it. The program will generate the comparison figure automatically.</p>
+
+<div class="note">
+<strong>What you should observe:</strong>
+small <code>C</code> is more tolerant of margin violations and usually produces stronger regularization; large <code>C</code> penalizes violations more strongly. Compare the <strong>margin width</strong>, <strong>number of support vectors</strong>, and <strong>training accuracy</strong> across the three plots.
+</div>
+
+<div class="code-wrap"><button type="button" id="copyCode" class="copy-btn">Copy</button><pre id="svmCode">&quot;&quot;&quot;
+Simple Linear SVM Demo
+3 functions: make_data, plot_svm, compare_C
+&quot;&quot;&quot;
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.svm import SVC
+
+np.random.seed(42)
+
+# ============================================
+# FUNCTION 1: Create a Simple Dataset
+# ============================================
+def make_data():
+    &quot;&quot;&quot;
+    Create two overlapping classes of 2D data.
+    Each observation has two features.
+    &quot;&quot;&quot;
+    # Class 0: cluster toward the bottom-left
+    X1 = np.random.randn(50, 2) + [-1, -1]
+
+    # Class 1: cluster toward the top-right
+    X2 = np.random.randn(50, 2) + [1, 1]
+
+    # Combine the two groups
+    X = np.vstack([X1, X2])
+
+    # First 50 labels are 0; next 50 labels are 1
+    y = np.array([0] * 50 + [1] * 50)
+
+    return X, y
+
+
+# ============================================
+# FUNCTION 2: Train and Plot One SVM
+# ============================================
+def plot_svm(X, y, C, ax):
+    &quot;&quot;&quot;Train a Linear SVM and visualize the boundary, margins, and support vectors.&quot;&quot;&quot;
+
+    # Train a linear SVM
+    # C controls how strongly margin violations/errors are penalized.
+    svm = SVC(kernel=&#x27;linear&#x27;, C=C)
+    svm.fit(X, y)
+
+    # Linear SVM decision boundary:
+    # w1*x1 + w2*x2 + b = 0
+    w = svm.coef_[0]
+    b = svm.intercept_[0]
+
+    # x-values used to draw the lines
+    x_points = np.linspace(-5, 5, 100)
+
+    # Solve the SVM equations for x2 (vertical axis):
+    #
+    # Decision boundary: w·x + b = 0
+    # Upper margin:      w·x + b = +1
+    # Lower margin:      w·x + b = -1
+    y_boundary = -(w[0] * x_points + b) / w[1]
+    y_margin_up = -(w[0] * x_points + b - 1) / w[1]
+    y_margin_down = -(w[0] * x_points + b + 1) / w[1]
+
+    # Plot decision boundary and margins
+    ax.plot(x_points, y_boundary, &#x27;k-&#x27;, linewidth=3, label=&#x27;Decision Boundary&#x27;)
+    ax.plot(x_points, y_margin_up, &#x27;b--&#x27;, linewidth=2, label=&#x27;Margin&#x27;)
+    ax.plot(x_points, y_margin_down, &#x27;r--&#x27;, linewidth=2)
+
+    # Plot the two classes
+    ax.scatter(X[y == 0, 0], X[y == 0, 1],
+               c=&#x27;blue&#x27;, s=50, label=&#x27;Class 0&#x27;)
+
+    ax.scatter(X[y == 1, 0], X[y == 1, 1],
+               c=&#x27;red&#x27;, s=50, label=&#x27;Class 1&#x27;)
+
+    # Highlight support vectors with large green circles
+    ax.scatter(
+        svm.support_vectors_[:, 0],
+        svm.support_vectors_[:, 1],
+        s=200,
+        facecolors=&#x27;none&#x27;,
+        edgecolors=&#x27;green&#x27;,
+        linewidths=3,
+        label=&#x27;Support Vectors&#x27;
+    )
+
+    # Full distance between the two canonical margin lines
+    margin_width = 2 / np.linalg.norm(w)
+
+    # Number of support vectors
+    n_sv = len(svm.support_vectors_)
+
+    # Training accuracy: evaluated on the SAME data used for training
+    train_acc = svm.score(X, y)
+
+    # Display statistics in the title
+    ax.set_title(
+        f&#x27;C={C} | Margin={margin_width:.2f} | &#x27;
+        f&#x27;SVs={n_sv} | Train Acc={train_acc:.2%}&#x27;,
+        fontsize=12,
+        fontweight=&#x27;bold&#x27;
+    )
+
+    ax.legend()
+    ax.grid(True, alpha=0.3)
+    ax.set_xlim(-5, 5)
+    ax.set_ylim(-5, 5)
+
+
+# ============================================
+# FUNCTION 3: Compare Different C Values
+# ============================================
+def compare_C():
+    &quot;&quot;&quot;Compare three C values using exactly the same dataset.&quot;&quot;&quot;
+
+    # Create the data ONCE
+    X, y = make_data()
+
+    # Small, medium, and large C
+    C_values = [0.01, 1, 100]
+
+    # Create three side-by-side plots
+    fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+
+    # Train and plot one SVM for each C
+    for i, C in enumerate(C_values):
+        plot_svm(X, y, C, axes[i])
+
+    plt.suptitle(
+        &#x27;Linear SVM: Effect of C Parameter&#x27;,
+        fontsize=16,
+        fontweight=&#x27;bold&#x27;
+    )
+
+    plt.tight_layout()
+
+    # Save the comparison figure
+    plt.savefig(
+        &#x27;simple_svm_demo.png&#x27;,
+        dpi=150,
+        bbox_inches=&#x27;tight&#x27;
+    )
+
+    print(&quot;Saved: simple_svm_demo.png&quot;)
+    plt.show()
+
+
+# ============================================
+# BONUS: Display One C Value
+# ============================================
+def single_plot(C=1):
+    &quot;&quot;&quot;Train and display one SVM for a chosen C value.&quot;&quot;&quot;
+
+    X, y = make_data()
+
+    fig, ax = plt.subplots(figsize=(8, 6))
+    plot_svm(X, y, C, ax)
+
+    plt.tight_layout()
+    plt.show()
+
+
+# ============================================
+# RUN THE PROGRAM
+# ============================================
+if __name__ == &quot;__main__&quot;:
+    print(&quot;Running Simple SVM Demo...&quot;)
+
+    # Compare C = 0.01, 1, and 100
+    compare_C()
+
+    print(&quot;\nDone! Check &#x27;simple_svm_demo.png&#x27;&quot;)
+
+    # Try one additional C value
+    single_plot(C=0.1)
+
+
+# ============================================
+# MAIN IDEA OF C
+# ============================================
+
+# C = 0.01
+#   Small penalty for violations/errors
+#   Stronger regularization
+#   More tolerant of training violations
+#   Often gives a wider/softer margin
+#
+# C = 1
+#   Moderate penalty
+#   Balance between margin size and violations
+#
+# C = 100
+#   Large penalty for violations/errors
+#   Weaker regularization
+#   Tries harder to fit the training data
+#
+# Note:
+# A very large finite C is not literally the same
+# as a mathematical hard-margin SVM.
+</pre></div>
+
+<div class="flow">
+<strong>Workflow:</strong><br>
+Create overlapping data → Train Linear SVM → Calculate decision boundary and margins → Highlight support vectors → Compare C = 0.01, 1, 100 → Display and save figure
+</div>
+</main>
+
+<script>
+const copyButton = document.getElementById('copyCode');
+const codeBlock = document.getElementById('svmCode');
+
+copyButton.addEventListener('click', () => {
+  const selection = window.getSelection();
+  const range = document.createRange();
+
+  range.selectNodeContents(codeBlock);
+  selection.removeAllRanges();
+  selection.addRange(range);
+
+  let copied = false;
+
+  try {
+    copied = document.execCommand('copy');
+  } catch (err) {
+    copied = false;
+  }
+
+  selection.removeAllRanges();
+
+  if (copied) {
+    copyButton.textContent = 'Copied!';
+    setTimeout(() => {
+      copyButton.textContent = 'Copy';
+    }, 1400);
+  } else {
+    // If the browser blocks automatic copying, keep the code selected
+    // so the user can press Ctrl+C or Command+C.
+    range.selectNodeContents(codeBlock);
+    selection.addRange(range);
+    copyButton.textContent = 'Press Ctrl+C / ⌘C';
+    setTimeout(() => {
+      copyButton.textContent = 'Copy';
+      selection.removeAllRanges();
+    }, 3000);
+  }
+});
+</script>
+
+</body>
+</html>
