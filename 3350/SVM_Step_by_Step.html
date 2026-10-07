@@ -1,0 +1,254 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SVM with Grid Search</title>
+<style>
+body{font-family:Arial,sans-serif;background:#151719;color:#f7f2f6;margin:0}.w{max-width:1020px;margin:auto;padding:30px 20px}h1,h2,h3{color:#ffb3de}.s{display:none;background:#222025;border-left:6px solid #ff79c6;padding:24px;border-radius:16px}.s.on{display:block}.bar{height:9px;background:#333;margin:20px 0;border-radius:10px}.bar div{height:100%;background:#ff79c6;border-radius:10px}.code,.call{background:#191b20;padding:15px;border-radius:10px;margin:14px 0}.code{white-space:pre-wrap;font-family:monospace;color:#ffd7f0;overflow:auto}.call{border-left:5px solid #ff79c6;line-height:1.6}.split{display:flex;height:65px;border-radius:9px;overflow:hidden}.tr{width:80%;background:#193345;display:flex;align-items:center;justify-content:center;font-weight:bold}.te{width:20%;background:#4b3714;display:flex;align-items:center;justify-content:center;font-weight:bold}.nav{display:flex;justify-content:space-between;margin-top:20px}button{padding:11px 15px;border-radius:9px;border:1px solid #666;background:#302b31;color:white;cursor:pointer}button.primary{background:#ff79c6;color:#25131f;font-weight:bold}.choice{display:block;width:100%;text-align:left;margin:8px 0}.good{background:#173528!important}.bad{background:#402326!important}table{width:100%;border-collapse:collapse}td,th{border:1px solid #555;padding:9px;text-align:center}th{background:#302b31;color:#ffb3de}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:#191b20;padding:14px;border-radius:10px}.formula{text-align:center;color:#ffb3de;font:1.2em Georgia;background:#191b20;padding:12px;border-radius:10px}.diagram{background:#191b20;border-radius:12px;padding:20px;text-align:center;line-height:1.9}.margin{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:center}.plane{border-left:4px solid #ff79c6;height:100px;margin:auto}.sv{border:2px solid #ffd166;border-radius:50%;padding:7px;display:inline-block;margin:5px}@media(max-width:650px){.grid{grid-template-columns:1fr}.s{padding:18px}}
+</style></head><body><main class="w">
+<h1>Support Vector Machine (SVM) in Python: Grid Search Workflow</h1>
+<p>9-step interactive walkthrough. <strong>Learn the SVM idea first, then use GridSearchCV to select the best SVM hyperparameters using the training data.</strong></p>
+<div class="bar"><div id="prog"></div></div>
+
+<section class="s on"><h2>1. Import Required Libraries</h2>
+<div class="code">import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+
+from sklearn.metrics import (
+    accuracy_score, precision_score, recall_score,
+    f1_score, confusion_matrix, ConfusionMatrixDisplay,
+    classification_report
+)</div>
+<div class="call"><b>Goal:</b> load a classification dataset, split it, scale the features, create an SVM, use GridSearchCV to choose SVM hyperparameters, predict the test data, and evaluate the final model.</div>
+</section><br>
+
+<section class="s"><h2>2. Load the Breast Cancer Dataset</h2>
+<div class="code">data = load_breast_cancer()
+
+X = data.data
+y = data.target
+
+print("X shape:", X.shape)
+print("y shape:", y.shape)
+print(data.feature_names)
+print(data.target_names)</div>
+<div class="call"><b>X</b> contains 30 numeric features. <b>y</b> contains class labels: 0 = malignant and 1 = benign.</div>
+</section><br>
+
+<section class="s"><h2>3. Split into Training and Test Sets</h2>
+<div class="code">X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.20,
+    random_state=42,
+    stratify=y
+)
+
+print(X_train.shape, X_test.shape)</div>
+<div class="split"><div class="tr">TRAIN 80%</div><div class="te">TEST 20%</div></div>
+<div class="call"><code>stratify=y</code> preserves approximately the original class proportions in both sets. The test set stays untouched while GridSearchCV works on the training set.</div>
+<p>What does <code>stratify=y</code> do?</p>
+<button class="choice q3" data-ok="0">Makes the classes exactly 50/50</button>
+<button class="choice q3" data-ok="1">Preserves approximately the original class proportions</button><p id="f3"></p>
+</section><br>
+
+<section class="s"><h2>4. Understand the SVM Idea</h2>
+<div class="formula">SVM finds a decision boundary that separates classes while maximizing the margin.</div>
+<div class="grid">
+<div class="card"><b>Hyperplane</b><p>The decision boundary. In two dimensions, it is a line.</p></div>
+<div class="card"><b>Margin</b><p>The space between the boundary and the nearest training observations.</p></div>
+<div class="card"><b>Support Vectors</b><p>The observations closest to the boundary. They are especially important for determining it.</p></div>
+<div class="card"><b>Kernel</b><p>Allows SVM to create nonlinear boundaries when a straight boundary is not enough.</p></div>
+</div>
+<div class="diagram"><span class="sv">Class 0</span> &nbsp; ← margin → &nbsp; <b>Decision Boundary</b> &nbsp; ← margin → &nbsp; <span class="sv">Class 1</span><br><br><b>Wider margin is generally preferred.</b></div>
+<p>Which points are especially important for determining the SVM boundary?</p>
+<button class="choice qsvm" data-ok="0">Every observation contributes equally</button>
+<button class="choice qsvm" data-ok="1">Support vectors closest to the boundary</button><p id="fsvm"></p>
+</section><br>
+
+<section class="s"><h2>5. Create the SVM Pipeline</h2>
+<div class="formula">z = (x − μ) / σ</div>
+<div class="code">svm_pipe = Pipeline([
+    ("scaler", StandardScaler()),
+    ("svm", SVC(probability=True))
+])</div>
+<div class="call"><b>Why scale?</b> SVM is sensitive to feature scale. <code>StandardScaler()</code> puts features on comparable scales. Keeping the scaler inside the pipeline also prevents data leakage during cross-validation.<br><br><b>Why probability=True?</b> It allows probability estimates later if you want ROC/AUC analysis.</div>
+</section><br>
+
+<section class="s"><h2>6. Use Grid Search to Find the Best SVM Model</h2>
+<div class="call"><b>C:</b> Small C allows more training errors and encourages a wider/softer margin. Large C penalizes errors more strongly.<br><br><b>kernel:</b> <code>linear</code> uses a linear boundary; <code>rbf</code> can create nonlinear boundaries.<br><br><b>gamma:</b> for RBF, smaller gamma gives broader influence and a smoother boundary; larger gamma gives more local influence and potentially a more complex boundary.</div>
+<div class="code">param_grid = {
+    "svm__C": [0.01, 0.1, 1, 10, 100],
+    "svm__kernel": ["linear", "rbf"],
+    "svm__gamma": ["scale", "auto"]
+}
+
+grid = GridSearchCV(
+    svm_pipe,
+    param_grid,
+    cv=5,
+    scoring="accuracy",
+    n_jobs=-1
+)
+
+grid.fit(X_train, y_train)
+
+print("Best parameters:", grid.best_params_)
+print("Best CV accuracy:", grid.best_score_)
+
+best_model = grid.best_estimator_</div>
+<div class="call"><b>GridSearchCV</b> tries the SVM hyperparameter combinations using 5-fold CV on the <b>training set only</b>. The test set is not used to choose C, kernel, or gamma.</div>
+<table><tr><th>Hyperparameter</th><th>Meaning</th><th>Values</th></tr>
+<tr><td>C</td><td>Error penalty / margin trade-off</td><td>0.01, 0.1, 1, 10, 100</td></tr>
+<tr><td>kernel</td><td>Boundary type</td><td>linear, rbf</td></tr>
+<tr><td>gamma</td><td>RBF point influence</td><td>scale, auto</td></tr></table>
+</section><br>
+
+<section class="s"><h2>7. Make Predictions with the Best Model</h2>
+<div class="code">y_pred = best_model.predict(X_test)
+
+print("First 10 predictions:", y_pred[:10])
+print("First 10 actual labels:", y_test[:10])</div>
+<div class="call">After GridSearchCV selects the best SVM, we finally apply it to <code>X_test</code>. This is the first time the held-out test set is used for model evaluation.</div>
+</section><br>
+
+<section class="s"><h2>8. Evaluate the SVM</h2>
+<div class="code">accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+
+tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
+specificity = tn / (tn + fp)
+
+print(f"Accuracy:    {accuracy:.4f}")
+print(f"Precision:   {precision:.4f}")
+print(f"Recall:      {recall:.4f}")
+print(f"Specificity: {specificity:.4f}")
+print(f"F1 Score:    {f1:.4f}")
+
+print("\nClassification Report:")
+print(classification_report(
+    y_test,
+    y_pred,
+    target_names=data.target_names
+))</div>
+<div class="grid"><div class="card"><b>Accuracy</b><p>(TP + TN) / All</p></div><div class="card"><b>Precision</b><p>TP / (TP + FP)</p></div><div class="card"><b>Recall</b><p>TP / (TP + FN)</p></div><div class="card"><b>Specificity</b><p>TN / (TN + FP)</p></div><div class="card"><b>F1</b><p>Harmonic mean of precision and recall</p></div></div>
+<div class="call"><b>Important:</b> this dataset uses 1 = benign, so the default precision and recall describe the benign class. The classification report gives metrics for both classes.</div>
+</section><br>
+
+<section class="s"><h2>9. Confusion Matrix and Complete Code</h2>
+<div class="code">cm = confusion_matrix(y_test, y_pred)
+
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=cm,
+    display_labels=data.target_names
+)
+
+disp.plot(cmap="Blues", values_format="d")
+plt.title("Best SVM Model - Confusion Matrix")
+plt.show()</div>
+<table><tr><th></th><th>Predicted 0</th><th>Predicted 1</th></tr><tr><th>Actual 0</th><td>TN</td><td>FP</td></tr><tr><th>Actual 1</th><td>FN</td><td>TP</td></tr></table>
+<div class="call"><b>Complete SVM Workflow:</b><br><br>Load Data → Train/Test Split → StandardScaler + SVM Pipeline → GridSearchCV on Training Data → Best SVM → Predict Test Data → Metrics → Confusion Matrix</div>
+<h3>Complete Executable Code</h3>
+<div class="code">import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+from sklearn.metrics import (
+    accuracy_score, precision_score, recall_score,
+    f1_score, confusion_matrix, ConfusionMatrixDisplay,
+    classification_report
+)
+
+data = load_breast_cancer()
+X = data.data
+y = data.target
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.20,
+    random_state=42,
+    stratify=y
+)
+
+svm_pipe = Pipeline([
+    ("scaler", StandardScaler()),
+    ("svm", SVC(probability=True))
+])
+
+param_grid = {
+    "svm__C": [0.01, 0.1, 1, 10, 100],
+    "svm__kernel": ["linear", "rbf"],
+    "svm__gamma": ["scale", "auto"]
+}
+
+grid = GridSearchCV(
+    svm_pipe,
+    param_grid,
+    cv=5,
+    scoring="accuracy",
+    n_jobs=-1
+)
+
+grid.fit(X_train, y_train)
+
+print("Best parameters:", grid.best_params_)
+print("Best CV accuracy:", grid.best_score_)
+
+best_model = grid.best_estimator_
+y_pred = best_model.predict(X_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+
+tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
+specificity = tn / (tn + fp)
+
+print(f"Accuracy:    {accuracy:.4f}")
+print(f"Precision:   {precision:.4f}")
+print(f"Recall:      {recall:.4f}")
+print(f"Specificity: {specificity:.4f}")
+print(f"F1 Score:    {f1:.4f}")
+
+print("\nClassification Report:")
+print(classification_report(
+    y_test,
+    y_pred,
+    target_names=data.target_names
+))
+
+cm = confusion_matrix(y_test, y_pred)
+
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=cm,
+    display_labels=data.target_names
+)
+
+disp.plot(cmap="Blues", values_format="d")
+plt.title("Best SVM Model - Confusion Matrix")
+plt.show()</div>
+</section><br>
+
+<div class="nav"><button id="back">← Previous</button><button id="next" class="primary">Next Step →</button></div>
+</main>
+<script>
+let n=0,S=[...document.querySelectorAll('.s')];
+const prog=document.getElementById('prog'),back=document.getElementById('back'),next=document.getElementById('next');
+function show(){S.forEach((x,i)=>x.classList.toggle('on',i===n));prog.style.width=100*(n+1)/S.length+'%';back.disabled=n===0;next.textContent=n===S.length-1?'Start Over':'Next Step →';window.scrollTo(0,0)}
+next.addEventListener('click',()=>{n=n===S.length-1?0:n+1;show()});
+back.addEventListener('click',()=>{if(n)n--;show()});
+function quiz(cls,id,msg){document.querySelectorAll(cls).forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll(cls).forEach(x=>x.classList.remove('good','bad'));let ok=b.dataset.ok==='1';b.classList.add(ok?'good':'bad');document.getElementById(id).textContent=ok?'✓ Correct!':msg}))}
+quiz('.q3','f3','Not quite. Stratification preserves class proportions; it does not force equal class sizes.');
+quiz('.qsvm','fsvm','Not quite. Support vectors are the observations closest to the decision boundary.');
+show();
+</script></body></html>
