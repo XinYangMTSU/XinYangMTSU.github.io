@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gaussian Naive Bayes Python — Step-by-Step Lesson</title><style>*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;background:#151719;color:#f8edf5;margin:0;line-height:1.65}.wrap{max-width:1060px;margin:0 auto;padding:26px 18px 60px}h1,h2{color:#ffb3de}h1{font-size:2rem;margin-bottom:4px}.muted{color:#d9b9ce}.section{background:#242126;border-left:6px solid #ff79c6;padding:23px;border-radius:15px;display:none;margin:20px 0}.section.active{display:block}.progress{height:9px;background:#38333a;border-radius:20px;overflow:hidden;margin:20px 0}.progress>div{height:100%;background:#ff79c6;transition:width .25s}.codearea{background:#191b20;border:1px solid #564254;border-radius:10px;margin:14px 0;padding:14px}.codearea pre{white-space:pre;overflow:auto;color:#f7d5f0;font-size:14px;line-height:1.5;margin:12px 0 0}.hint{border-left:4px solid #ff79c6;background:#312932;border-radius:8px;padding:12px 14px;margin-top:12px}.buttons{display:flex;gap:10px;justify-content:space-between;margin-top:20px;flex-wrap:wrap}button{padding:10px 16px;border-radius:9px;border:1px solid #ae6a94;background:#3a2e3b;color:#fff;cursor:pointer;font-weight:600}button.primary{background:#ff79c6;color:#23151d}button:disabled{opacity:.38;cursor:not-allowed}.small{font-size:.86rem}.quiz{margin-top:20px;padding:14px;border:1px solid #6c5165;border-radius:10px}.quiz button{display:block;width:100%;text-align:left;margin:7px 0}.correct{background:#1b583e!important}.incorrect{background:#75323b!important}.schematic{display:flex;border-radius:8px;overflow:hidden;height:55px;margin-top:12px}.train{width:80%;background:#2c5f75;display:grid;place-items:center}.test{width:20%;background:#88602f;display:grid;place-items:center}.formula{background:#191b20;border:1px solid #66475b;border-radius:12px;padding:20px;text-align:center;font-family:Georgia,serif;color:#ffc4e6;font-size:1.35rem;overflow-x:auto}.formula small{display:block;font-family:Arial;font-size:.85rem;color:#e0c3d3;margin-top:8px}.note{font-size:.92rem;color:#e9c3da}@media(max-width:650px){h1{font-size:1.55rem}.section{padding:16px}.wrap{padding:15px}.formula{font-size:1rem}}</style></head><body><main class="wrap"><h1>Naive Bayes (GaussianNB) in Python</h1><p class="muted">Interactive, 9-step classroom walkthrough · Breast Cancer Wisconsin dataset · scikit-learn</p><div class="progress"><div id="fill"></div></div><p id="counter" class="muted"></p><section class="section active" data-step="1"><h2>1. Import required libraries</h2><div class="codearea"><button class="copy">Copy Python code</button><pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import (
+    accuracy_score, precision_score, recall_score, f1_score,
+    confusion_matrix, ConfusionMatrixDisplay, classification_report,
+    roc_auc_score
+)</code></pre></div><div class="hint"> We use <code>GaussianNB</code> because the dataset contains continuous numerical measurements. Unlike the decision tree, Naive Bayes models each feature’s distribution within each class.</div></section><section class="section" data-step="2"><h2>2. Load the breast cancer dataset</h2><div class="codearea"><button class="copy">Copy Python code</button><pre><code>data = load_breast_cancer()
+X = data.data
+y = data.target
+
+print(&quot;X shape:&quot;, X.shape)
+print(&quot;y shape:&quot;, y.shape)
+print(&quot;Classes:&quot;, data.target_names)
+print(&quot;Class counts [malignant, benign]:&quot;, np.bincount(y))
+print(&quot;First five features:&quot;, data.feature_names[:5])</code></pre></div><div class="hint">The dataset contains <b>569 samples</b>, <b>30 continuous features</b>, and two classes: <b>0 = malignant</b> (212), <b>1 = benign</b> (357). This is a classroom dataset—not a clinical diagnostic tool.</div></section><section class="section" data-step="3"><h2>3. Split the data: 80% training / 20% testing</h2><div class="codearea"><button class="copy">Copy Python code</button><pre><code>X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.20,
+    random_state=42,
+    stratify=y
+)
+
+print(&quot;Training:&quot;, X_train.shape)
+print(&quot;Testing:&quot;, X_test.shape)</code></pre></div><div class="hint"> <code>stratify=y</code> preserves approximately the original class percentages in both sets. Do not train or tune using the test set.</div><div class="schematic"><div class="train">Train 80%</div><div class="test">Test 20%</div></div><div class="quiz"><strong>Quick check:</strong> Why use stratify=y?<button class="answer" data-right="false">To make both classes exactly 50/50</button><button class="answer" data-right="true">To keep approximately the same class proportions</button><button class="answer" data-right="false">To remove 20% of the features</button><div class="feedback" data-explanation="It keeps approximately the same class balance after the split." aria-live="polite"></div></div></section><section class="section" data-step="4"><h2>4. Understand the Naive Bayes rule</h2><div class="codearea"><button class="copy">Copy Python code</button><pre><code># Conceptual example: score each class using
+# prior probability × feature likelihoods.
+# GaussianNB estimates likelihoods with Gaussian curves.
+
+print(&quot;Naive Bayes assumption:&quot;)
+print(&quot;Features are independent GIVEN the class.&quot;)</code></pre></div><div class="hint"> <b>Prior</b> = how common the class is. <b>Likelihood</b> = how likely the feature values are within that class. Multiply these terms to get an <i>unnormalized</i> class score. The denominator is common across classes; normalize scores to obtain posterior probabilities. For continuous features, GaussianNB uses <b>probability densities</b>, not the probabilities of exact values.</div><div class="formula">P(C<sub>k</sub> | x) ∝ P(C<sub>k</sub>) ∏<sub>i=1</sub><sup>n</sup> P(x<sub>i</sub> | C<sub>k</sub>)<small>Class score = Prior × Feature 1 likelihood × Feature 2 likelihood × …</small></div><p class="note">For Gaussian Naive Bayes, feature likelihoods come from class-specific normal probability density functions. The symbol ∝ means “proportional to.”</p><div class="quiz"><strong>Quick check:</strong> What is the ‘naive’ assumption?<button class="answer" data-right="false">The classes have equal probabilities</button><button class="answer" data-right="true">Features are conditionally independent given the class</button><button class="answer" data-right="false">Every feature is normally distributed across both classes together</button><div class="feedback" data-explanation="The independence assumption is conditional on the class." aria-live="polite"></div></div></section><section class="section" data-step="5"><h2>5. Create and train Gaussian Naive Bayes</h2><div class="codearea"><button class="copy">Copy Python code</button><pre><code>nb = GaussianNB()
+nb.fit(X_train, y_train)
+
+print(&quot;Learned class order:&quot;, nb.classes_)
+print(&quot;Learned class priors:&quot;, nb.class_prior_)
+print(&quot;Training accuracy:&quot;, nb.score(X_train, y_train))</code></pre></div><div class="hint"> <code>fit()</code> estimates a <b>mean</b> and <b>variance</b> for each feature in each class. <code>class_prior_</code> shows the class proportions from training data. A standard GaussianNB model does not require StandardScaler, though transformations can matter for some variants and numerical settings.</div><div class="quiz"><strong>Quick check:</strong> What does GaussianNB learn for each continuous feature in each class?<button class="answer" data-right="false">Only a decision-tree threshold</button><button class="answer" data-right="true">A mean and variance</button><button class="answer" data-right="false">One nearest neighbor</button><div class="feedback" data-explanation="GaussianNB estimates a Gaussian distribution using mean and variance." aria-live="polite"></div></div></section><section class="section" data-step="6"><h2>6. Predict classes and probabilities</h2><div class="codearea"><button class="copy">Copy Python code</button><pre><code>y_pred = nb.predict(X_test)
+y_proba = nb.predict_proba(X_test)
+
+print(&quot;First 5 predicted labels:&quot;, y_pred[:5])
+print(&quot;First 5 actual labels:&quot;, y_test[:5])
+print(&quot;Probability columns:&quot;, nb.classes_)
+print(&quot;First 5 posterior probabilities:\n&quot;, y_proba[:5])
+
+</code></pre></div><div class="hint"> <code>predict()</code> returns class labels; <code>predict_proba()</code> returns a probability for each class. Always inspect <code>nb.classes_</code> to identify the correct columns. In this dataset label 0 is <b>malignant</b>, not benign.</div></section><section class="section" data-step="7"><h2>7. Evaluate classification performance</h2><div class="codearea"><button class="copy">Copy Python code</button><pre><code>print(&quot;Accuracy:&quot;, accuracy_score(y_test, y_pred))
+print(&quot;Malignant precision:&quot;, precision_score(y_test, y_pred, pos_label=0))
+print(&quot;Malignant recall:&quot;, recall_score(y_test, y_pred, pos_label=0))
+print(&quot;Malignant F1:&quot;, f1_score(y_test, y_pred, pos_label=0))
+print(&quot;Malignant ROC-AUC:&quot;, roc_auc_score((y_test == 0).astype(int),
+                                          malignant_prob))
+print(&quot;\nClassification report:&quot;)
+print(classification_report(y_test, y_pred,
+                            target_names=data.target_names))</code></pre></div><div class="hint"> Since <b>0 = malignant</b>, specify <code>pos_label=0</code> for malignant precision, recall, and F1. For ROC-AUC, use an indicator where <b>malignant is 1</b> and the corresponding malignant probabilities. This avoids accidentally reporting benign-class AUC.</div><div class="quiz"><strong>Quick check:</strong> Which label is malignant in this dataset?<button class="answer" data-right="true">0</button><button class="answer" data-right="false">1</button><div class="feedback" data-explanation="The dataset uses 0 for malignant and 1 for benign." aria-live="polite"></div></div></section><section class="section" data-step="8"><h2>8. Display the confusion matrix</h2><div class="codearea"><button class="copy">Copy Python code</button><pre><code>cm = confusion_matrix(y_test, y_pred, labels=[0, 1])
+print(&quot;Confusion matrix [malignant, benign]:\n&quot;, cm)
+
+ConfusionMatrixDisplay(
+    confusion_matrix=cm,
+    display_labels=data.target_names
+).plot(cmap=&quot;Blues&quot;, values_format=&quot;d&quot;)
+plt.title(&quot;Gaussian Naive Bayes — Held-out Test Set&quot;)
+plt.tight_layout()
+plt.show()</code></pre></div><div class="hint"> Rows are <b>actual</b> classes and columns are <b>predicted</b> classes, both ordered [malignant, benign]. The upper-right cell is a malignant sample predicted as benign; discuss why this error matters.</div><div class="hint"><b>Class order:</b> Actual malignant / predicted malignant | Actual malignant / predicted benign<br>Actual benign / predicted malignant | Actual benign / predicted benign</div></section><section class="section" data-step="9"><h2>9. Optional: tune var_smoothing using cross-validation</h2><div class="codearea"><button class="copy">Copy Python code</button><pre><code>param_grid = {&quot;var_smoothing&quot;: np.logspace(-12, -6, 7)}
+search = GridSearchCV(
+    GaussianNB(),
+    param_grid=param_grid,
+    cv=5,
+    scoring=&quot;balanced_accuracy&quot;,
+    n_jobs=-1
+)
+search.fit(X_train, y_train)
+
+print(&quot;Best parameters:&quot;, search.best_params_)
+print(&quot;Best CV balanced accuracy:&quot;, search.best_score_)
+
+best_nb = search.best_estimator_
+print(&quot;Tuned test accuracy:&quot;, best_nb.score(X_test, y_test))</code></pre></div><div class="hint"> <code>var_smoothing</code> adds a small stabilization term to the estimated variances. <code>GridSearchCV</code> uses <b>training data only</b> for model selection. The held-out test set is used once at the end. There is no need to scale features for this basic lesson.</div><div class="quiz"><strong>Quick check:</strong> Which data should grid search use for model selection?<button class="answer" data-right="true">Training data</button><button class="answer" data-right="false">Test data</button><button class="answer" data-right="false">Training and test data together</button><div class="feedback" data-explanation="Hyperparameter selection should not access the held-out test set." aria-live="polite"></div></div></section><nav class="buttons"><button id="back">← Previous step</button><button class="primary" id="next">Next step →</button></nav></main><script>let pos=0;const cards=[...document.querySelectorAll('.section')];function show(){cards.forEach((s,i)=>s.classList.toggle('active',i===pos));document.getElementById('fill').style.width=((pos+1)/cards.length*100)+'%';document.getElementById('counter').textContent='Step '+(pos+1)+' of '+cards.length;document.getElementById('back').disabled=pos===0;document.getElementById('next').textContent=pos===cards.length-1?'Start over ↻':'Next step →';window.scrollTo(0,0)}document.getElementById('next').addEventListener('click',()=>{pos=(pos+1)%cards.length;show()});document.getElementById('back').addEventListener('click',()=>{if(pos>0)pos--;show()});document.querySelectorAll('.copy').forEach(button=>button.addEventListener('click',async()=>{const code=button.parentElement.querySelector('code').textContent;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(code)}else{const temp=document.createElement('textarea');temp.value=code;temp.style.position='fixed';temp.style.opacity='0';document.body.appendChild(temp);temp.select();if(!document.execCommand('copy'))throw new Error('Copy failed');temp.remove()}button.textContent='Copied!'}catch(e){button.textContent='Select code and copy (Ctrl/Cmd+C)';}setTimeout(()=>button.textContent='Copy Python code',2000)}));document.querySelectorAll('.quiz').forEach(q=>q.querySelectorAll('.answer').forEach(b=>b.addEventListener('click',()=>{q.querySelectorAll('.answer').forEach(x=>x.classList.remove('correct','incorrect'));const right=b.dataset.right==='true';b.classList.add(right?'correct':'incorrect');q.querySelector('.feedback').textContent=right?'✓ Correct!':'Not quite. '+q.querySelector('.feedback').dataset.explanation})));show();</script></body></html>
