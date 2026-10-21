@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Random Forest in Python — Step-by-Step Lesson</title><style>*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;background:#151719;color:#f8edf5;margin:0;line-height:1.65}.wrap{max-width:1060px;margin:0 auto;padding:26px 18px 65px}h1,h2{color:#ffb3de}h1{font-size:2rem;margin-bottom:4px}.muted{color:#d9b9ce}.section{background:#242126;border-left:6px solid #ff79c6;padding:23px;border-radius:15px;display:none;margin:20px 0}.section.active{display:block}.progress{height:9px;background:#38333a;border-radius:20px;overflow:hidden;margin:20px 0}.progress>div{height:100%;background:#ff79c6;transition:width .25s}.codearea{background:#191b20;border:1px solid #564254;border-radius:10px;margin:14px 0;padding:14px}.codearea pre{white-space:pre;overflow:auto;color:#f7d5f0;font-size:14px;line-height:1.5;margin:12px 0 0;tab-size:4}.hint{border-left:4px solid #ff79c6;background:#312932;border-radius:8px;padding:12px 14px;margin-top:12px}.buttons{display:flex;gap:10px;justify-content:space-between;margin-top:20px;flex-wrap:wrap}button{padding:10px 16px;border-radius:9px;border:1px solid #ae6a94;background:#3a2e3b;color:#fff;cursor:pointer;font-weight:600}button.primary{background:#ff79c6;color:#23151d}button:disabled{opacity:.38;cursor:not-allowed}.small{font-size:.86rem}.quiz,.demo{margin-top:20px;padding:14px;border:1px solid #6c5165;border-radius:10px}.quiz button{display:block;width:100%;text-align:left;margin:7px 0}.correct{background:#1b583e!important}.incorrect{background:#75323b!important}.schematic{display:flex;border-radius:8px;overflow:hidden;height:55px;margin-top:12px}.train{width:80%;background:#2c5f75;display:grid;place-items:center}.test{width:20%;background:#88602f;display:grid;place-items:center}.treevotes{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.tree{border:1px solid #ab7195;background:#302832;border-radius:9px;padding:9px;min-width:116px;flex:1;text-align:center}.tree b{display:block;color:#ffc4e6}.voteout{padding:9px 0;color:#ffc4e6;font-weight:700}.tag{font-size:.76rem;color:#f3bedb;border:1px solid #7d5870;border-radius:999px;padding:4px 10px;display:inline-block;margin-top:8px}.feedback{margin-top:10px;min-height:1em}.footer{font-size:.85rem;color:#ccaebf;margin-top:30px}@media(max-width:650px){h1{font-size:1.55rem}.section{padding:16px}.wrap{padding:15px}}</style></head><body><main class="wrap"><h1>Random Forest in Python</h1><p class="muted">Interactive, 12-step classroom walkthrough · Breast Cancer Wisconsin dataset · scikit-learn</p><div class="progress"><div id="fill"></div></div><p id="counter" class="muted"></p><section class="section active" data-step="1"><h2>1. Import required libraries</h2><p>We use scikit-learn to train and evaluate a Random Forest, with matplotlib for visualizations.</p><div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split, GridSearchCV, StratifiedKFold
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import (
+    accuracy_score, precision_score, recall_score, f1_score,
+    roc_auc_score, confusion_matrix, ConfusionMatrixDisplay,
+    RocCurveDisplay, classification_report
+)</code></pre></div></section><section class="section" data-step="2"><h2>2. Load the Breast Cancer Wisconsin dataset</h2><p>This is the same dataset used in your Naive Bayes lesson. We use its 30 numeric tumor measurements to demonstrate Random Forest classification.</p><div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code>dataset = load_breast_cancer(as_frame=True)
+X = dataset.data
+y = dataset.target
+
+print(&quot;Feature matrix:&quot;, X.shape)
+print(&quot;Target vector:&quot;, y.shape)
+print(&quot;Class labels:&quot;, list(dataset.target_names))
+print(&quot;Counts:&quot;, y.value_counts().sort_index().to_dict())
+print(X.head())</code></pre></div><div class="hint">569 samples and 30 numeric features. Labels: 0 = malignant (212 samples); 1 = benign (357 samples). This is a teaching dataset, not a clinical diagnostic tool.</div><div class="quiz"><strong>Quick check: What does X contain?</strong><button type="button" class="answer" data-right="true">The 30 numeric tumor features</button><button type="button" class="answer" data-right="false">The predicted diagnoses</button><button type="button" class="answer" data-right="false">Only the patient identifiers</button><div class="feedback" data-explanation="X is the feature matrix; y contains the two class labels." aria-live="polite"></div></div></section><section class="section" data-step="3"><h2>3. How Random Forest works</h2><p>A Random Forest is an ensemble of decision trees. Each tree is usually trained on a bootstrap sample, and each split considers a random subset of features. The combined prediction reduces the instability of a single tree.</p><div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code># Conceptual model: many decision trees vote on a class.
+# In scikit-learn, RandomForestClassifier builds the trees for us.
+rf_preview = RandomForestClassifier(
+    n_estimators=5,
+    max_features=&quot;sqrt&quot;,
+    bootstrap=True,
+    random_state=42
+)
+print(rf_preview)</code></pre></div><div class="hint">Use the interactive voting example below. Tree votes are illustrative, not predictions from the dataset.</div><div class="demo"><strong>Interactive forest vote</strong><p class="muted small">Select a different vote pattern to see how trees combine predictions.</p><div class="treevotes" id="treevotes"></div><div class="voteout" id="voteout"></div><button type="button" id="vote-again">Change tree votes ↻</button></div><div class="quiz"><strong>Quick check: Why use multiple trees instead of just one?</strong><button type="button" class="answer" data-right="true">To reduce variance and improve stability</button><button type="button" class="answer" data-right="false">To guarantee zero classification errors</button><button type="button" class="answer" data-right="false">To avoid using any training data</button><div class="feedback" data-explanation="Averaging/voting across varied trees often reduces variance." aria-live="polite"></div></div></section><section class="section" data-step="4"><h2>4. Split training and test data</h2><p>Reserve 20% of the data as a held-out test set. Stratification maintains approximately the same malignant/benign proportions in each split.</p><div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code>X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.20,
+    random_state=42,
+    stratify=y
+)
+print(&quot;Training samples:&quot;, len(X_train))
+print(&quot;Test samples:&quot;, len(X_test))</code></pre></div><div class="hint">Do not fit the model or select hyperparameters using X_test.</div><div class="schematic"><div class="train">Train 80%</div><div class="test">Test 20%</div></div><div class="quiz"><strong>Quick check: Why do we hold out a test set?</strong><button type="button" class="answer" data-right="true">To estimate performance on unseen data</button><button type="button" class="answer" data-right="false">To find the best model settings</button><button type="button" class="answer" data-right="false">To make the forest grow more trees</button><div class="feedback" data-explanation="The test set should remain untouched during training and tuning." aria-live="polite"></div></div></section><section class="section" data-step="5"><h2>5. Train a basic Random Forest</h2><p>Start with a reproducible baseline before tuning the hyperparameters.</p><div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code>rf = RandomForestClassifier(
+    n_estimators=100,
+    random_state=42,
+    n_jobs=-1
+)
+rf.fit(X_train, y_train)
+
+print(&quot;Number of fitted trees:&quot;, len(rf.estimators_))
+print(&quot;Training accuracy:&quot;, rf.score(X_train, y_train))</code></pre></div><div class="hint">For a Random Forest, StandardScaler is generally unnecessary because decision trees split on feature thresholds. Training accuracy alone does not measure generalization.</div></section><section class="section" data-step="6"><h2>6. Understand the main hyperparameters</h2><p>The most useful Random Forest settings control the number of trees and how complex individual trees can become.</p><div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code>rf = RandomForestClassifier(
+    n_estimators=200,       # Number of trees
+    max_depth=10,          # Maximum tree depth
+    min_samples_split=5,   # Minimum samples needed to split
+    max_features=&quot;sqrt&quot;,   # Features considered at a split
+    bootstrap=True,        # Resample training rows
+    random_state=42,
+    n_jobs=-1
+)
+rf.fit(X_train, y_train)</code></pre></div><div class="hint">More trees often stabilize results but increase computation. Restricting depth or increasing min_samples_split can regularize the model.</div><div class="quiz"><strong>Quick check: Which hyperparameter sets the number of trees?</strong><button type="button" class="answer" data-right="false">max_depth</button><button type="button" class="answer" data-right="true">n_estimators</button><button type="button" class="answer" data-right="false">min_samples_split</button><div class="feedback" data-explanation="n_estimators determines the number of decision trees in the forest." aria-live="polite"></div></div></section><section class="section" data-step="7"><h2>7. Predict labels and probabilities</h2><p>For each test sample, predict its class and estimate the fraction of trees supporting each class.</p><div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code>y_pred = rf.predict(X_test)
+y_prob = rf.predict_proba(X_test)
+
+print(&quot;Class order:&quot;, rf.classes_)
+print(&quot;First 5 predicted classes:&quot;, y_pred[:5])
+print(&quot;First 5 probabilities:\n&quot;, y_prob[:5])
+
+# Probability for malignant (class 0):
+malignant_index = np.where(rf.classes_ == 0)[0][0]
+malignant_prob = y_prob[:, malignant_index]</code></pre></div><div class="hint">The two probability columns follow rf.classes_. Because malignant is class 0, select its probability column explicitly.</div></section><section class="section" data-step="8"><h2>8. Evaluate model performance</h2><p>Evaluate the held-out predictions with accuracy, precision, recall, F1 and ROC-AUC. Here we explicitly report malignant-class metrics.</p><div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code>print(&quot;Accuracy:&quot;, accuracy_score(y_test, y_pred))
+print(&quot;Malignant precision:&quot;, precision_score(y_test, y_pred, pos_label=0))
+print(&quot;Malignant recall:&quot;, recall_score(y_test, y_pred, pos_label=0))
+print(&quot;Malignant F1:&quot;, f1_score(y_test, y_pred, pos_label=0))
+print(&quot;Malignant AUC:&quot;, roc_auc_score(
+    (y_test == 0).astype(int), malignant_prob
+))
+print(classification_report(
+    y_test, y_pred,
+    target_names=dataset.target_names
+))</code></pre></div><div class="hint">The scikit-learn default positive class is 1 (benign in this dataset). Using pos_label=0 makes precision, recall, and F1 refer specifically to malignant cases.</div><div class="quiz"><strong>Quick check: What does malignant recall measure?</strong><button type="button" class="answer" data-right="true">Of malignant cases, how many are correctly identified</button><button type="button" class="answer" data-right="false">Of predicted malignant cases, how many are correct</button><button type="button" class="answer" data-right="false">The fraction of all correct predictions</button><div class="feedback" data-explanation="Recall is TP / (TP + FN) for the selected positive class." aria-live="polite"></div></div></section><section class="section" data-step="9"><h2>9. Visualize the confusion matrix</h2><p>Rows correspond to actual classes; columns correspond to predicted classes. Misclassifying a malignant case as benign is an especially important error to discuss.</p><div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code>cm = confusion_matrix(y_test, y_pred, labels=[0, 1])
+print(cm)
+
+ConfusionMatrixDisplay(
+    confusion_matrix=cm,
+    display_labels=dataset.target_names
+).plot(cmap=&quot;Blues&quot;, values_format=&quot;d&quot;)
+plt.title(&quot;Random Forest — Test Set&quot;)
+plt.tight_layout()
+plt.show()</code></pre></div><div class="hint">With class order [malignant, benign], the upper-right cell counts malignant samples predicted benign.</div></section><section class="section" data-step="10"><h2>10. Plot the ROC curve</h2><p>The ROC curve shows sensitivity versus false-positive rate over multiple classification thresholds. We explicitly set malignant as the positive class.</p><div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code>RocCurveDisplay.from_predictions(
+    (y_test == 0).astype(int),
+    malignant_prob,
+    name=&quot;Random Forest (malignant)&quot;,
+)
+plt.title(&quot;Random Forest ROC Curve&quot;)
+plt.grid(alpha=0.3)
+plt.show()</code></pre></div><div class="hint">ROC-AUC summarizes discrimination across thresholds. A good AUC does not by itself establish clinical readiness.</div></section><section class="section" data-step="11"><h2>11. Tune hyperparameters with GridSearchCV</h2><p>Try combinations of tree count, depth, and splitting threshold using cross-validation on the training portion only.</p><div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code>param_grid = {
+    &quot;n_estimators&quot;: [50, 100, 200],
+    &quot;max_depth&quot;: [5, 10, 15, None],
+    &quot;min_samples_split&quot;: [2, 5, 10]
+}
+
+search = GridSearchCV(
+    RandomForestClassifier(random_state=42, n_jobs=1),
+    param_grid=param_grid,
+    scoring=&quot;balanced_accuracy&quot;,
+    cv=5,
+    n_jobs=-1
+)
+search.fit(X_train, y_train)
+
+print(&quot;Best parameters:&quot;, search.best_params_)
+print(&quot;Best CV balanced accuracy:&quot;, search.best_score_)
+
+best_rf = search.best_estimator_
+print(&quot;Held-out test accuracy:&quot;, best_rf.score(X_test, y_test))</code></pre></div><div class="hint">There are 3 × 4 × 3 = 36 parameter combinations, each evaluated using five training folds. balanced_accuracy averages recall over both classes. This step may take time.</div><div class="quiz"><strong>Quick check: Which data is used to choose the best hyperparameters?</strong><button type="button" class="answer" data-right="false">The held-out test set</button><button type="button" class="answer" data-right="true">Only the training set, through inner CV</button><button type="button" class="answer" data-right="false">The whole dataset without splitting</button><div class="feedback" data-explanation="GridSearchCV should tune on training data, not on the held-out test set." aria-live="polite"></div></div></section><section class="section" data-step="12"><h2>12. Show the top 10 feature importances</h2><p>Random Forest measures impurity-based feature importance across its fitted trees. We rank the 30 original features and draw a horizontal bar chart.</p><div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code>importance_df_rf = pd.DataFrame({
+    &quot;Feature&quot;: X.columns,
+    &quot;Importance&quot;: best_rf.feature_importances_
+}).sort_values(&quot;Importance&quot;, ascending=False)
+
+print(importance_df_rf.head(10))
+
+plt.figure(figsize=(10, 6))
+plt.barh(
+    importance_df_rf[&quot;Feature&quot;].head(10),
+    importance_df_rf[&quot;Importance&quot;].head(10)
+)
+plt.xlabel(&quot;Feature Importance&quot;)
+plt.ylabel(&quot;Feature&quot;)
+plt.title(&quot;Top 10 Most Important Features - Random Forest&quot;)
+plt.gca().invert_yaxis()
+plt.tight_layout()
+plt.show()</code></pre></div><div class="hint">Impurity importance can favor continuous/high-cardinality features and be distorted by correlated features. It does not prove clinical causation. Compare with permutation importance for a different perspective.</div></section><nav class="buttons"><button type="button" id="back">← Previous step</button><button type="button" class="primary" id="next">Next step →</button></nav><p class="footer">Educational demonstration only. These results must not be used as a medical diagnosis.</p></main><script>
+let pos=0;const cards=[...document.querySelectorAll('.section')];function show(){cards.forEach((s,i)=>s.classList.toggle('active',i===pos));document.getElementById('fill').style.width=((pos+1)/cards.length*100)+'%';document.getElementById('counter').textContent='Step '+(pos+1)+' of '+cards.length;document.getElementById('back').disabled=pos===0;document.getElementById('next').textContent=pos===cards.length-1?'Start over ↻':'Next step →';window.scrollTo(0,0)}document.getElementById('next').addEventListener('click',()=>{pos=(pos+1)%cards.length;show()});document.getElementById('back').addEventListener('click',()=>{if(pos>0)pos--;show()});document.querySelectorAll('.copy').forEach(button=>button.addEventListener('click',async()=>{const code=button.parentElement.querySelector('code').textContent;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(code)}else{const temp=document.createElement('textarea');temp.value=code;temp.style.position='fixed';temp.style.opacity='0';document.body.appendChild(temp);temp.select();if(!document.execCommand('copy'))throw new Error('Copy failed');temp.remove()}button.textContent='Copied!'}catch(e){button.textContent='Select code and copy (Ctrl/Cmd+C)'}setTimeout(()=>button.textContent='Copy Python code',1800)}));document.querySelectorAll('.quiz').forEach(q=>q.querySelectorAll('.answer').forEach(b=>b.addEventListener('click',()=>{q.querySelectorAll('.answer').forEach(x=>x.classList.remove('correct','incorrect'));const right=b.dataset.right==='true';b.classList.add(right?'correct':'incorrect');q.querySelector('.feedback').textContent=right?'✓ Correct!':'Not quite. '+q.querySelector('.feedback').dataset.explanation})));const patterns=[[0,0,1,0,1],[1,0,1,1,0],[0,0,0,1,1],[1,1,1,0,0]];let pi=0;function vote(){let arr=patterns[pi];document.getElementById('treevotes').innerHTML=arr.map((v,i)=>'<div class="tree">Tree '+(i+1)+'<b>'+ (v?'Benign':'Malignant')+'</b></div>').join('');const b=arr.filter(x=>x===1).length;document.getElementById('voteout').textContent='Majority vote: '+(b>arr.length/2?'Benign':'Malignant')+' ('+Math.max(b,arr.length-b)+' of '+arr.length+' trees)'}document.getElementById('vote-again').addEventListener('click',()=>{pi=(pi+1)%patterns.length;vote()});vote();show();
+</script></body></html>
