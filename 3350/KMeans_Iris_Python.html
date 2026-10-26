@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>K-Means on Iris — Interactive Step-by-Step Lesson</title><meta name="description" content="Interactive nine-step K-means Iris clustering lesson with Python code, elbow method, scatter plots, and comprehension quizzes."><style>
+:root{color-scheme:dark;--bg:#151719;--section:#242126;--code:#191b20;--pink:#ff79c6;--title:#ffb3de;--text:#f8edf5;--muted:#d9b9ce;--line:#60465a;--blue:#64c0ef;--orange:#ffb661;--green:#5bdb9a;}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);margin:0;line-height:1.64}
+.wrap{max-width:1060px;margin:0 auto;padding:26px 18px 70px}.brand{font-size:.8rem;text-transform:uppercase;letter-spacing:.13em;color:var(--pink);font-weight:700;margin:0 0 4px}.top{display:flex;justify-content:space-between;gap:15px;align-items:start}.top-tag{background:#2f2830;color:#f0cada;border:1px solid #67445c;font-size:.78rem;padding:6px 11px;border-radius:100px;white-space:nowrap}
+h1,h2{color:var(--title)}h1{font-size:clamp(1.65rem,3.6vw,2.3rem);margin:0 0 6px}h2{font-size:1.45rem;margin:3px 0 8px}p{margin:0 0 13px}.muted{color:var(--muted)}.small{font-size:.88rem}.section{background:var(--section);border-left:6px solid var(--pink);padding:23px;border-radius:15px;display:none;margin:17px 0;box-shadow:0 12px 40px #090a0a30}.section.active{display:block}.step-eyebrow{font-weight:800;letter-spacing:.10em;color:#ff9bcf;font-size:.7rem}.progress{height:9px;background:#38333a;border-radius:20px;overflow:hidden;margin:20px 0 6px}.progress>div{height:100%;background:var(--pink);transition:width .25s}.counter{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:6px}.jump{background:#2e272e;color:var(--text);border:1px solid #76526b;border-radius:8px;padding:6px 10px;max-width:360px}
+.codearea{background:var(--code);border:1px solid #564254;border-radius:10px;margin:14px 0;padding:14px}.codearea pre{white-space:pre;overflow:auto;color:#f7d5f0;font-size:13.5px;line-height:1.56;margin:12px 0 0;tab-size:4}.codearea code{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}code{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}.hint{border-left:4px solid var(--pink);background:#312932;border-radius:8px;padding:12px 14px;margin-top:12px}.hint-title{display:block;text-transform:uppercase;letter-spacing:.07em;color:#ffb2dc;font-weight:800;font-size:.73rem;margin-bottom:2px}
+.buttons{display:flex;gap:10px;justify-content:space-between;margin-top:20px;flex-wrap:wrap}.actionbar{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}button{padding:10px 16px;border-radius:9px;border:1px solid #ae6a94;background:#3a2e3b;color:#fff;cursor:pointer;font-weight:600;font-size:.89rem}button:hover:not(:disabled){filter:brightness(1.16)}button.primary{background:var(--pink);color:#23151d}button:disabled{opacity:.38;cursor:not-allowed}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #ffacd9;outline-offset:3px}
+.quiz{margin-top:20px;padding:14px;border:1px solid #6c5165;border-radius:10px}.quiz strong{display:block;margin-bottom:7px}.quiz button{display:block;width:100%;text-align:left;margin:7px 0}.correct{background:#1b583e!important}.incorrect{background:#75323b!important}.feedback{color:#ffe0ed;min-height:20px;font-size:.92rem}.formula{background:var(--code);border:1px solid #66475b;border-radius:12px;padding:20px;text-align:center;font-family:Georgia,serif;color:#ffc4e6;font-size:1.45rem;overflow-x:auto}.formula small{display:block;font-family:Arial;font-size:.85rem;color:#e0c3d3;margin-top:8px}.definition-row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}.definition-row span{background:#342b34;padding:8px 12px;border-radius:10px;color:#ffd8ef}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:15px 0}.stats div{background:#322b33;border:1px solid #584557;border-radius:10px;text-align:center;padding:12px 8px;min-width:0}.stats b{font-size:1.5rem;color:#ffbee2;display:block;overflow-wrap:anywhere}.stats small{display:block;color:var(--muted);font-size:.82rem}.stats.compact{grid-template-columns:repeat(2,minmax(0,1fr))}.output{margin-top:15px;border:1px solid #655169;background:#17191c;border-radius:9px;padding:12px}.output span{display:block;font-size:.72rem;color:#d7aac8;text-transform:uppercase;font-weight:700;letter-spacing:.07em}.output pre{color:#c5efd7;white-space:pre-wrap;margin:8px 0 0;font-size:13.5px}.table-wrap{overflow-x:auto;margin:13px 0}table{border-collapse:collapse;width:100%;font-size:.93rem}td,th{border-bottom:1px solid #5e4c59;padding:9px 12px;text-align:left}th{color:#ffc5e6}.mini-pair{margin:15px 0;display:flex;align-items:center;gap:12px}.mini-pair div{background:#312b35;border-radius:9px;padding:12px;flex:1;text-align:center}.mini-pair small{color:var(--muted)}.mini-pair>span{color:var(--pink);font-size:1.5rem}.chart-card{border:1px solid #5b4b5b;background:#1b1e22;border-radius:11px;margin-top:16px;padding:12px}.chart-heading{display:flex;align-items:center;justify-content:space-between;gap:9px;flex-wrap:wrap}.chart-heading>span{font-size:.77rem;color:var(--muted)}.chart-card svg{display:block;width:100%;height:auto;max-height:445px}.chart-note{font-size:.83rem;color:var(--muted);margin:0 3px 6px}.select-pair{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.select-pair label{font-size:.8rem;color:#e9cade}.select-pair select{background:#352b35;color:var(--text);border:1px solid #926583;border-radius:7px;padding:6px;font-size:.85rem}.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px}.c0{background:#55c5f5}.c1{background:#ffb360}.c2{background:#67d59e}.predict-card{background:#2a252c;border:1px solid #695364;border-radius:12px;padding:15px;margin-top:15px}.predict-card>p{font-size:.9rem;color:var(--muted);margin-top:7px}.inputs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.inputs-grid label{font-size:.8rem;color:#eac8da}.inputs-grid input{display:block;width:100%;background:#171b21;border:1px solid #78586c;border-radius:8px;color:white;padding:9px;margin-top:5px;font-size:.95rem}.prediction{background:#1b2328;border:1px solid #3c6675;padding:11px;border-radius:9px;color:#cbf3fc;font-weight:600}.footer{margin-top:25px;font-size:.82rem;color:var(--muted)}.footer a{color:#ffb8df}@media(max-width:750px){.section{padding:15px}.wrap{padding:16px 12px 40px}.top-tag{display:none}.stats{gap:5px}.stats b{font-size:1.22rem}.inputs-grid{grid-template-columns:repeat(2,1fr)}.mini-pair{flex-direction:column}.mini-pair>span{transform:rotate(90deg)}.codearea pre{font-size:12px}.chart-heading{align-items:start}.chart-heading>strong{width:100%}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.progress>div{transition:none}}
+</style></head><body><main class="wrap">
+<header><p class="brand">CSCI 3350 · Machine Learning</p><div class="top"><div><h1>K-Means Clustering in Python</h1><p class="muted">Interactive, 9-step classroom walkthrough · Iris dataset · scikit-learn</p></div><span class="top-tag">UNSUPERVISED LEARNING</span></div></header>
+<div class="progress" aria-label="Lesson progress"><div id="fill"></div></div><div class="counter"><span id="counter" class="muted" aria-live="polite">Step 1 of 9</span><label class="small muted" for="jump">Jump to step: <select id="jump" class="jump"><option value="0">1. Imports</option><option value="1">2. Load Iris</option><option value="2">3. Scaling</option><option value="3">4. Elbow method</option><option value="4">5. Fit K-means</option><option value="5">6. Scatter plot</option><option value="6">7. Predict samples</option><option value="7">8. Interpretation</option><option value="8">9. Try different k</option></select></label></div>
+<section class="section active" data-step="1" id="step-1" aria-labelledby="st-1">
+ <div class="step-eyebrow">STEP 1 / 9</div><h2 id="st-1">1. Import the required libraries</h2><p>Set up numerical operations, tables, plots, dataset loading, standardization, and K-means.</p>
+ <div class="codearea"><button type="button" class="copy" aria-label="Copy Python code for step 1">Copy Python code</button><pre><code>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans</code></pre></div>
+ <div class="hint"><span class="hint-title">Why this matters</span><code>KMeans</code> performs unsupervised learning. No species labels are supplied to the algorithm.</div>
+ <div class="definition-row"><span>NumPy → arrays</span><span>pandas → tables</span><span>Matplotlib → plots</span><span>scikit-learn → clustering</span></div>
+ </section><section class="section" data-step="2" id="step-2" aria-labelledby="st-2">
+ <div class="step-eyebrow">STEP 2 / 9</div><h2 id="st-2">2. Load the Iris dataset</h2><p>We analyze 150 flower observations with four numeric measurements (in centimeters).</p>
+ <div class="codearea"><button type="button" class="copy" aria-label="Copy Python code for step 2">Copy Python code</button><pre><code># Load the built-in Iris dataset (no download required)
+iris = load_iris()
+X = iris.data                    # shape (150, 4)
+feature_names = iris.feature_names
+
+df = pd.DataFrame(X, columns=feature_names)
+print(&quot;Samples:&quot;, X.shape[0], &quot;| Features:&quot;, X.shape[1])
+print(&quot;Feature names:&quot;, feature_names)
+print(df.head())</code></pre></div>
+ <div class="hint"><span class="hint-title">Why this matters</span>The dataset includes species names for reference, but this K-means example deliberately clusters using only <code>X = iris.data</code>.</div>
+ <div class="stats"><div><b>150</b><small>flowers</small></div><div><b>4</b><small>numeric features</small></div><div><b>0</b><small>labels used for fitting</small></div></div><div class="table-wrap"><table><thead><tr><th>Feature</th><th>Example measurement</th></tr></thead><tbody><tr><td>Sepal length</td><td>5.1 cm</td></tr><tr><td>Sepal width</td><td>3.5 cm</td></tr><tr><td>Petal length</td><td>1.4 cm</td></tr><tr><td>Petal width</td><td>0.2 cm</td></tr></tbody></table></div><div class="quiz"><strong>Quick check:</strong> What makes K-means unsupervised?<button class="answer" type="button" data-right="false">It requires the true species for every flower</button><button class="answer" type="button" data-right="true">It learns groups without using true species labels</button><button class="answer" type="button" data-right="false">It only works with two features</button><div class="feedback" data-explanation="K-means discovers structure from the feature vectors, without training targets." role="status" aria-live="polite"></div></div>
+ </section><section class="section" data-step="3" id="step-3" aria-labelledby="st-3">
+ <div class="step-eyebrow">STEP 3 / 9</div><h2 id="st-3">3. Scale the four features</h2><p>Use <code>StandardScaler</code> so variables contribute in standardized units to Euclidean distance.</p>
+ <div class="codearea"><button type="button" class="copy" aria-label="Copy Python code for step 3">Copy Python code</button><pre><code># Standardize all four features before clustering
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Check the transformed feature means and standard deviations
+print(&quot;Scaled means:&quot;, X_scaled.mean(axis=0).round(3))
+print(&quot;Scaled stds:&quot;, X_scaled.std(axis=0).round(3))</code></pre></div>
+ <div class="hint"><span class="hint-title">Why this matters</span>Scaling is important because K-means minimizes distances. All <b>four scaled features</b> will be used during clustering. The scatter plot later displays two original features only.</div>
+ <div class="formula">z = (x − μ) / σ <small>One mean and standard deviation per feature</small></div><div class="mini-pair"><div>Before scaling<br><small>Original measurements in cm</small></div><span>→</span><div>After scaling<br><small>Each feature has mean ≈ 0, standard deviation ≈ 1</small></div></div><div class="quiz"><strong>Quick check:</strong> Which features does this lesson use to fit the K-means model?<button class="answer" type="button" data-right="false">Only the two features shown in the scatter plot</button><button class="answer" type="button" data-right="true">All four standardized Iris features</button><button class="answer" type="button" data-right="false">The true Iris species labels</button><div class="feedback" data-explanation="The model is fitted on X_scaled, which contains four standardized features." role="status" aria-live="polite"></div></div>
+ </section><section class="section" data-step="4" id="step-4" aria-labelledby="st-4">
+ <div class="step-eyebrow">STEP 4 / 9</div><h2 id="st-4">4. Use the elbow method to explore k</h2><p>Fit models for k=1 through k=10. Watch how inertia (within-cluster sum of squares) decreases as k increases.</p>
+ <div class="codearea"><button type="button" class="copy" aria-label="Copy Python code for step 4">Copy Python code</button><pre><code># Test k = 1 to 10 using within-cluster sum of squares (WCSS)
+ks = range(1, 11)
+inertias = []
+for k in ks:
+    km = KMeans(n_clusters=k, init=&quot;k-means++&quot;,
+                n_init=10, random_state=42)
+    km.fit(X_scaled)
+    inertias.append(km.inertia_)
+
+plt.figure()
+plt.plot(ks, inertias, marker=&quot;o&quot;)
+plt.title(&quot;Elbow Method (Iris, scaled)&quot;)
+plt.xlabel(&quot;k&quot;)
+plt.ylabel(&quot;Inertia (WCSS)&quot;)
+plt.xticks(list(ks))
+plt.grid()
+plt.tight_layout()
+plt.show()
+
+# Choose k=3 as in the provided example
+k = 3</code></pre></div>
+ <div class="hint"><span class="hint-title">Why this matters</span><b>Inertia (WCSS)</b> adds squared distances from each flower to its assigned centroid, in standardized four-dimensional space. More clusters typically reduce inertia even when the extra clusters are not useful.</div>
+ <div class="chart-card"><div class="chart-heading"><strong>Elbow method · standardized Iris data</strong><span>Hover on any point for inertia</span></div><svg id="elbow-chart" role="img" aria-label="Elbow chart of within-cluster sum of squares versus number of clusters" viewBox="0 0 860 365"></svg><p class="chart-note">Highlighted: <b>k = 3</b>, the selection in the uploaded Python example. An elbow is a heuristic, not proof of an optimal k.</p></div><div class="quiz"><strong>Quick check:</strong> Does the smallest inertia automatically identify the best k?<button class="answer" type="button" data-right="false">Yes, always</button><button class="answer" type="button" data-right="true">No; inertia usually decreases as k increases</button><button class="answer" type="button" data-right="false">Only when the features are not scaled</button><div class="feedback" data-explanation="The elbow method looks for diminishing returns, because inertia generally decreases with larger k." role="status" aria-live="polite"></div></div>
+ </section><section class="section" data-step="5" id="step-5" aria-labelledby="st-5">
+ <div class="step-eyebrow">STEP 5 / 9</div><h2 id="st-5">5. Fit the final model with k = 3</h2><p>Run K-means++ with 10 initializations and <code>random_state=10</code>, matching the final model in your example.</p>
+ <div class="codearea"><button type="button" class="copy" aria-label="Copy Python code for step 5">Copy Python code</button><pre><code># Fit the final K-means model on ALL FOUR scaled features
+kmeans = KMeans(n_clusters=k, init=&quot;k-means++&quot;,
+                n_init=10, random_state=10)
+labels = kmeans.fit_predict(X_scaled)
+
+print(&quot;Cluster sizes:&quot;, np.bincount(labels))
+print(&quot;Final inertia (WCSS):&quot;, kmeans.inertia_)
+print(&quot;Centroids in scaled space:\n&quot;, kmeans.cluster_centers_)</code></pre></div>
+ <div class="hint"><span class="hint-title">Why this matters</span>Cluster numbers are algorithm-assigned identifiers, not the names setosa, versicolor, and virginica. Centroids from <code>cluster_centers_</code> are given in <b>scaled</b> units.</div>
+ <div class="stats"><div><b>53</b><small>cluster 0</small></div><div><b>50</b><small>cluster 1</small></div><div><b>47</b><small>cluster 2</small></div></div><div class="output"><span>Output from the example</span><pre>Cluster sizes: [53 50 47]
+Final inertia (WCSS): 139.82049635974982</pre></div><div class="quiz"><strong>Quick check:</strong> What does k=3 mean?<button class="answer" type="button" data-right="false">Three input features</button><button class="answer" type="button" data-right="true">Three learned groups (clusters)</button><button class="answer" type="button" data-right="false">Three species labels given to K-means</button><div class="feedback" data-explanation="k sets the number of clusters, not the number of features or labels." role="status" aria-live="polite"></div></div>
+ </section><section class="section" data-step="6" id="step-6" aria-labelledby="st-6">
+ <div class="step-eyebrow">STEP 6 / 9</div><h2 id="st-6">6. Visualize the clusters in two dimensions</h2><p>The scatter plot shows original flower measurements, colored by the cluster assignments learned using all four scaled features.</p>
+ <div class="codearea"><button type="button" class="copy" aria-label="Copy Python code for step 6">Copy Python code</button><pre><code># Visualize two original, unscaled features
+# (Cluster labels were learned from all four scaled features.)
+i, j = 0, 1             # Sepal length vs. sepal width
+plt.figure()
+for c in range(k):
+    mask = (labels == c)
+    plt.scatter(X[mask, i], X[mask, j],
+                label=f&quot;cluster {c}&quot;, s=40)
+plt.xlabel(feature_names[i])
+plt.ylabel(feature_names[j])
+plt.title(&quot;K-Means clusters on two original features&quot;)
+plt.grid()
+plt.legend()
+plt.tight_layout()
+plt.show()</code></pre></div>
+ <div class="hint"><span class="hint-title">Why this matters</span>The <code>mask = (labels == c)</code> expression selects rows belonging to a cluster. Two plotted axes are a <b>projection</b>; the model itself is fitted using four features.</div>
+ <div class="chart-card"><div class="chart-heading"><strong>Cluster scatter · k = 3</strong><div class="select-pair"><label for="scatter-x">X axis</label><select id="scatter-x"><option value="0">Sepal length</option><option value="1">Sepal width</option><option value="2">Petal length</option><option value="3">Petal width</option></select><label for="scatter-y">Y axis</label><select id="scatter-y"><option value="0">Sepal length</option><option value="1" selected>Sepal width</option><option value="2">Petal length</option><option value="3">Petal width</option></select></div></div><svg id="scatter-chart" role="img" aria-label="Scatter plot of Iris flowers colored by K-means cluster" viewBox="0 0 860 420"></svg><p class="chart-note">Try petal length versus petal width. Points can overlap in 2D even when their four-dimensional distances differ.</p></div><div class="quiz"><strong>Quick check:</strong> Why might differently colored clusters overlap in this 2D plot?<button class="answer" type="button" data-right="false">K-means ignored petal features</button><button class="answer" type="button" data-right="true">The model used four dimensions but the plot shows only two</button><button class="answer" type="button" data-right="false">Every point must have the same coordinates</button><div class="feedback" data-explanation="We project 4D assignments onto 2 axes; information about the other dimensions is hidden." role="status" aria-live="polite"></div></div>
+ </section><section class="section" data-step="7" id="step-7" aria-labelledby="st-7">
+ <div class="step-eyebrow">STEP 7 / 9</div><h2 id="st-7">7. Predict clusters for new flowers</h2><p>Apply the <em>already fitted scaler</em> to new samples, then use the trained K-means model to assign their nearest centroids.</p>
+ <div class="codearea"><button type="button" class="copy" aria-label="Copy Python code for step 7">Copy Python code</button><pre><code># New rows follow this order:
+# sepal length, sepal width, petal length, petal width
+new_samples = np.array([
+    [5.0, 3.5, 1.3, 0.3],  # Setosa-like
+    [6.0, 2.7, 5.1, 1.6],  # Versicolor/Virginica-like
+])
+new_scaled = scaler.transform(new_samples)  # Do not refit!
+pred = kmeans.predict(new_scaled)
+print(&quot;Predicted clusters for new samples:&quot;, pred)</code></pre></div>
+ <div class="hint"><span class="hint-title">Why this matters</span>Use <code>scaler.transform(new_samples)</code>—not <code>fit_transform</code>—so the new flowers are standardized with the original training means and standard deviations.</div>
+ <div class="output"><span>Output from the uploaded example</span><pre>Predicted clusters for new samples: [1 0]</pre></div><div class="predict-card"><strong>Try your own Iris measurements</strong><p>Each input is in centimeters. The mini predictor uses the saved <b>k=3</b> cluster centers from this lesson.</p><div class="inputs-grid"><label>Sepal length <input id="f0" type="number" min="0" max="15" step="0.1" value="5.0" /></label><label>Sepal width <input id="f1" type="number" min="0" max="15" step="0.1" value="3.5" /></label><label>Petal length <input id="f2" type="number" min="0" max="15" step="0.1" value="1.3" /></label><label>Petal width <input id="f3" type="number" min="0" max="15" step="0.1" value="0.3" /></label></div><div class="actionbar"><button type="button" id="predict" class="primary">Predict cluster</button><button type="button" id="use-second">Load second example</button></div><div id="prediction" class="prediction" aria-live="polite">Select Predict cluster to see the result.</div></div><div class="quiz"><strong>Quick check:</strong> Why must you call scaler.transform() rather than refit the scaler on new flowers?<button class="answer" type="button" data-right="true">To retain the training-data scale used by the centroids</button><button class="answer" type="button" data-right="false">Because new flower measurements are labels</button><button class="answer" type="button" data-right="false">To force each cluster to contain 50 flowers</button><div class="feedback" data-explanation="New points must be transformed in the same feature space used for training." role="status" aria-live="polite"></div></div>
+ </section><section class="section" data-step="8" id="step-8" aria-labelledby="st-8">
+ <div class="step-eyebrow">STEP 8 / 9</div><h2 id="st-8">8. Interpret results and limitations</h2><p>Use centroid coordinates to describe the clusters and remember what the model cannot tell you.</p>
+ <div class="codearea"><button type="button" class="copy" aria-label="Copy Python code for step 8">Copy Python code</button><pre><code># Optional: inspect centroids in the ORIGINAL units
+centers_original = scaler.inverse_transform(kmeans.cluster_centers_)
+center_df = pd.DataFrame(centers_original, columns=feature_names)
+print(center_df.round(2))
+
+# Inertia is the sum of squared distances to assigned centroids.
+# Lower inertia always follows higher k, so use the elbow as a heuristic.
+# Cluster IDs (0, 1, 2) are arbitrary; they are NOT species names.</code></pre></div>
+ <div class="hint"><span class="hint-title">Why this matters</span>An elbow near k=3 and visually separated points do not prove that the three clusters reproduce ground-truth species. Clustering is exploratory.</div>
+ <div class="table-wrap"><table><thead><tr><th>Cluster</th><th>Size</th><th>Typical pattern in original features</th></tr></thead><tbody><tr><td><span class="dot c0"></span> 0</td><td>53</td><td>Medium-to-long petals</td></tr><tr><td><span class="dot c1"></span> 1</td><td>50</td><td>Short petals and relatively wider sepals</td></tr><tr><td><span class="dot c2"></span> 2</td><td>47</td><td>Long petals and generally larger sepals</td></tr></tbody></table></div><div class="hint"><span class="hint-title">Important distinction</span>The labels 0, 1, and 2 can be reordered on a new run. Even if a cluster resembles a flower species, K-means did <b>not</b> learn species labels.</div><div class="quiz"><strong>Quick check:</strong> Is “cluster 1” guaranteed to mean Iris setosa?<button class="answer" type="button" data-right="false">Yes, all K-means runs use that naming</button><button class="answer" type="button" data-right="true">No, cluster IDs are arbitrary and not species names</button><button class="answer" type="button" data-right="false">Only if k=2</button><div class="feedback" data-explanation="The algorithm assigns arbitrary numerical cluster IDs." role="status" aria-live="polite"></div></div>
+ </section><section class="section" data-step="9" id="step-9" aria-labelledby="st-9">
+ <div class="step-eyebrow">STEP 9 / 9</div><h2 id="st-9">9. Experiment: change the number of clusters</h2><p>This interactive extension uses precomputed scikit-learn K-means outputs so students can explore k without installing Python.</p>
+ <div class="codearea"><button type="button" class="copy" aria-label="Copy Python code for step 9">Copy Python code</button><pre><code># Experiment: change k and compare the result
+for trial_k in [2, 3, 4, 5]:
+    trial = KMeans(n_clusters=trial_k, init=&quot;k-means++&quot;,
+                   n_init=10, random_state=42)
+    trial_labels = trial.fit_predict(X_scaled)
+    print(f&quot;k={trial_k}: inertia={trial.inertia_:.2f}, &quot;
+          f&quot;cluster sizes={np.bincount(trial_labels).tolist()}&quot;)
+
+# Compare cluster geometry, inertia, and sizes—but remember that
+# cluster numbers are arbitrary and 2D plots show only two features.</code></pre></div>
+ <div class="hint"><span class="hint-title">Why this matters</span>Inertia decreases with larger k because clusters can fit the data more closely. Consider interpretability and the learning objective, not only WCSS.</div>
+ <div class="chart-card"><div class="chart-heading"><strong>Explore clusters</strong><div class="select-pair"><label for="explore-k">Choose k</label><select id="explore-k"><option value="2">2 clusters</option><option value="3" selected>3 clusters</option><option value="4">4 clusters</option><option value="5">5 clusters</option><option value="6">6 clusters</option></select></div></div><div class="stats compact"><div><b id="live-inertia">139.82</b><small>inertia (WCSS)</small></div><div><b id="live-counts">53 · 50 · 47</b><small>cluster sizes</small></div></div><svg id="explore-chart" role="img" aria-label="Interactive scatter plot of K-means assignments for selected k" viewBox="0 0 860 420"></svg><p class="chart-note">The exploration uses the same standardized Iris data. For k=3, the initial labeling matches the lesson; for other k values, cluster numbers/colors may change.</p></div><div class="quiz"><strong>Quick check:</strong> If k increases from 3 to 6, what usually happens to inertia?<button class="answer" type="button" data-right="false">It usually increases</button><button class="answer" type="button" data-right="false">It cannot change</button><button class="answer" type="button" data-right="true">It usually decreases or stays the same</button><div class="feedback" data-explanation="With more centroids, the optimized within-cluster sum of squares cannot increase in the ideal solution." role="status" aria-live="polite"></div></div>
+ </section>
+<nav class="buttons" aria-label="Lesson steps"><button id="back" type="button">← Previous step</button><button id="next" type="button" class="primary">Next step →</button></nav>
+<!--
+<footer class="footer">Adapted from the supplied “K-Means on the Iris dataset” Python example. The interactive plots use precomputed scikit-learn clustering outputs and run entirely in your browser. Python is not executed by this webpage. Cluster IDs are arbitrary. <br>Prepared for instructional use in CSCI 3350 · Middle Tennessee State University.</footer>
+-->
+</main><script>
+const DATA = {"points":[[5.1,3.5,1.4,0.2],[4.9,3.0,1.4,0.2],[4.7,3.2,1.3,0.2],[4.6,3.1,1.5,0.2],[5.0,3.6,1.4,0.2],[5.4,3.9,1.7,0.4],[4.6,3.4,1.4,0.3],[5.0,3.4,1.5,0.2],[4.4,2.9,1.4,0.2],[4.9,3.1,1.5,0.1],[5.4,3.7,1.5,0.2],[4.8,3.4,1.6,0.2],[4.8,3.0,1.4,0.1],[4.3,3.0,1.1,0.1],[5.8,4.0,1.2,0.2],[5.7,4.4,1.5,0.4],[5.4,3.9,1.3,0.4],[5.1,3.5,1.4,0.3],[5.7,3.8,1.7,0.3],[5.1,3.8,1.5,0.3],[5.4,3.4,1.7,0.2],[5.1,3.7,1.5,0.4],[4.6,3.6,1.0,0.2],[5.1,3.3,1.7,0.5],[4.8,3.4,1.9,0.2],[5.0,3.0,1.6,0.2],[5.0,3.4,1.6,0.4],[5.2,3.5,1.5,0.2],[5.2,3.4,1.4,0.2],[4.7,3.2,1.6,0.2],[4.8,3.1,1.6,0.2],[5.4,3.4,1.5,0.4],[5.2,4.1,1.5,0.1],[5.5,4.2,1.4,0.2],[4.9,3.1,1.5,0.2],[5.0,3.2,1.2,0.2],[5.5,3.5,1.3,0.2],[4.9,3.6,1.4,0.1],[4.4,3.0,1.3,0.2],[5.1,3.4,1.5,0.2],[5.0,3.5,1.3,0.3],[4.5,2.3,1.3,0.3],[4.4,3.2,1.3,0.2],[5.0,3.5,1.6,0.6],[5.1,3.8,1.9,0.4],[4.8,3.0,1.4,0.3],[5.1,3.8,1.6,0.2],[4.6,3.2,1.4,0.2],[5.3,3.7,1.5,0.2],[5.0,3.3,1.4,0.2],[7.0,3.2,4.7,1.4],[6.4,3.2,4.5,1.5],[6.9,3.1,4.9,1.5],[5.5,2.3,4.0,1.3],[6.5,2.8,4.6,1.5],[5.7,2.8,4.5,1.3],[6.3,3.3,4.7,1.6],[4.9,2.4,3.3,1.0],[6.6,2.9,4.6,1.3],[5.2,2.7,3.9,1.4],[5.0,2.0,3.5,1.0],[5.9,3.0,4.2,1.5],[6.0,2.2,4.0,1.0],[6.1,2.9,4.7,1.4],[5.6,2.9,3.6,1.3],[6.7,3.1,4.4,1.4],[5.6,3.0,4.5,1.5],[5.8,2.7,4.1,1.0],[6.2,2.2,4.5,1.5],[5.6,2.5,3.9,1.1],[5.9,3.2,4.8,1.8],[6.1,2.8,4.0,1.3],[6.3,2.5,4.9,1.5],[6.1,2.8,4.7,1.2],[6.4,2.9,4.3,1.3],[6.6,3.0,4.4,1.4],[6.8,2.8,4.8,1.4],[6.7,3.0,5.0,1.7],[6.0,2.9,4.5,1.5],[5.7,2.6,3.5,1.0],[5.5,2.4,3.8,1.1],[5.5,2.4,3.7,1.0],[5.8,2.7,3.9,1.2],[6.0,2.7,5.1,1.6],[5.4,3.0,4.5,1.5],[6.0,3.4,4.5,1.6],[6.7,3.1,4.7,1.5],[6.3,2.3,4.4,1.3],[5.6,3.0,4.1,1.3],[5.5,2.5,4.0,1.3],[5.5,2.6,4.4,1.2],[6.1,3.0,4.6,1.4],[5.8,2.6,4.0,1.2],[5.0,2.3,3.3,1.0],[5.6,2.7,4.2,1.3],[5.7,3.0,4.2,1.2],[5.7,2.9,4.2,1.3],[6.2,2.9,4.3,1.3],[5.1,2.5,3.0,1.1],[5.7,2.8,4.1,1.3],[6.3,3.3,6.0,2.5],[5.8,2.7,5.1,1.9],[7.1,3.0,5.9,2.1],[6.3,2.9,5.6,1.8],[6.5,3.0,5.8,2.2],[7.6,3.0,6.6,2.1],[4.9,2.5,4.5,1.7],[7.3,2.9,6.3,1.8],[6.7,2.5,5.8,1.8],[7.2,3.6,6.1,2.5],[6.5,3.2,5.1,2.0],[6.4,2.7,5.3,1.9],[6.8,3.0,5.5,2.1],[5.7,2.5,5.0,2.0],[5.8,2.8,5.1,2.4],[6.4,3.2,5.3,2.3],[6.5,3.0,5.5,1.8],[7.7,3.8,6.7,2.2],[7.7,2.6,6.9,2.3],[6.0,2.2,5.0,1.5],[6.9,3.2,5.7,2.3],[5.6,2.8,4.9,2.0],[7.7,2.8,6.7,2.0],[6.3,2.7,4.9,1.8],[6.7,3.3,5.7,2.1],[7.2,3.2,6.0,1.8],[6.2,2.8,4.8,1.8],[6.1,3.0,4.9,1.8],[6.4,2.8,5.6,2.1],[7.2,3.0,5.8,1.6],[7.4,2.8,6.1,1.9],[7.9,3.8,6.4,2.0],[6.4,2.8,5.6,2.2],[6.3,2.8,5.1,1.5],[6.1,2.6,5.6,1.4],[7.7,3.0,6.1,2.3],[6.3,3.4,5.6,2.4],[6.4,3.1,5.5,1.8],[6.0,3.0,4.8,1.8],[6.9,3.1,5.4,2.1],[6.7,3.1,5.6,2.4],[6.9,3.1,5.1,2.3],[5.8,2.7,5.1,1.9],[6.8,3.2,5.9,2.3],[6.7,3.3,5.7,2.5],[6.7,3.0,5.2,2.3],[6.3,2.5,5.0,1.9],[6.5,3.0,5.2,2.0],[6.2,3.4,5.4,2.3],[5.9,3.0,5.1,1.8]],"features":["sepal length (cm)","sepal width (cm)","petal length (cm)","petal width (cm)"],"mean":[5.843333333,3.057333333,3.758,1.199333333],"std":[0.825301292,0.434410968,1.759404066,0.759692628],"models":{"1":{"labels":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"centers":[[-0.0,-0.0,-0.0,-0.0]],"inertia":600.0,"sizes":[150]},"2":{"labels":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"centers":[[0.507289484,-0.42663134,0.652493661,0.627446745],[-1.014578969,0.85326268,-1.304987322,-1.25489349]],"inertia":222.361705,"sizes":[100,50]},"3":{"labels":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,0,0,0,2,0,0,0,0,0,0,0,0,2,0,0,0,0,2,0,0,0,0,2,2,2,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,2,2,2,2,0,2,2,2,2,2,2,0,0,2,2,2,2,0,2,0,2,0,2,2,0,2,2,2,2,2,2,0,0,2,2,2,0,2,2,2,0,2,2,2,0,2,2,0],"centers":[[-0.050219891,-0.883376471,0.347737812,0.281527299],[-1.014578969,0.85326268,-1.304987322,-1.25489349],[1.135970269,0.08842168,0.996154512,1.01752612]],"inertia":139.820496,"sizes":[53,50,47]},"4":{"labels":[2,3,3,3,2,2,3,2,3,3,2,3,3,3,2,2,2,2,2,2,2,2,2,3,3,3,2,2,2,3,3,2,2,2,3,3,2,2,3,2,2,3,3,2,2,3,2,3,2,3,0,0,0,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,0,0,0,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,1,0,1,0,1,0,0,1,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,1],"centers":[[1.135970269,0.08842168,0.996154512,1.01752612],[-0.050219891,-0.883376471,0.347737812,0.281527299],[-0.749221332,1.430070006,-1.297598456,-1.221421306],[-1.352306869,0.119144266,-1.314391333,-1.297494452]],"inertia":114.092547,"sizes":[47,53,28,22]},"5":{"labels":[0,4,4,4,0,0,4,0,4,4,0,4,4,4,0,0,0,0,0,0,0,0,0,4,4,4,0,0,0,4,4,0,0,0,4,4,0,0,4,0,0,4,4,0,0,4,0,4,0,4,1,1,1,2,1,2,1,2,1,2,2,1,2,1,2,1,1,2,2,2,1,1,1,1,1,1,1,1,1,2,2,2,2,1,1,1,1,2,1,2,2,1,2,2,2,1,1,1,2,2,3,1,3,1,3,3,2,3,1,3,3,1,3,2,1,3,1,3,3,2,3,1,3,1,3,3,1,1,1,3,3,3,1,1,1,3,3,1,1,3,3,3,1,3,3,3,1,1,3,1],"centers":[[-0.749221332,1.430070006,-1.297598456,-1.221421306],[0.444787058,-0.342993182,0.610007684,0.554829657],[-0.338462251,-1.301379052,0.13982007,0.058795709],[1.401508368,0.234630185,1.202722055,1.283072528],[-1.352306869,0.119144266,-1.314391333,-1.297494452]],"inertia":90.927514,"sizes":[28,48,25,27,22]},"6":{"labels":[2,0,0,0,2,2,0,0,0,0,2,0,0,0,2,2,2,2,2,2,2,2,2,0,0,0,0,2,2,0,0,2,2,2,0,0,2,2,0,0,2,0,0,2,2,0,2,0,2,0,4,5,4,3,1,5,5,3,5,3,3,5,3,5,5,5,5,3,3,3,5,5,1,5,5,5,1,1,5,3,3,3,3,1,5,5,5,3,5,3,3,5,3,3,3,5,5,5,3,5,4,1,4,1,4,4,3,4,1,4,4,1,4,1,1,4,1,4,4,3,4,1,4,1,4,4,1,5,1,4,4,4,1,1,1,4,4,1,5,4,4,4,1,4,4,4,1,1,4,5],"centers":[[-1.307805215,0.199503864,-1.308397568,-1.289117858],[0.495383424,-0.682450007,0.807239734,0.807840069],[-0.721352722,1.507021496,-1.301577076,-1.220669122],[-0.364080601,-1.41450432,0.107774588,0.000877548],[1.397330166,0.233160219,1.160620258,1.217340492],[0.239194352,-0.149031092,0.398577719,0.327520376]],"inertia":81.544391,"sizes":[25,23,25,21,29,27]},"7":{"labels":[5,0,0,0,5,4,5,5,0,0,5,5,0,0,4,4,4,5,4,5,5,5,5,5,5,0,5,5,5,0,0,5,4,4,0,0,5,5,0,5,5,0,0,5,5,0,5,0,5,5,3,2,3,6,1,2,2,6,2,6,6,2,6,2,2,2,2,6,6,6,2,2,1,2,2,2,1,1,2,6,6,6,6,1,2,2,2,6,2,6,6,2,6,6,6,2,2,2,6,2,3,1,3,1,3,3,6,3,1,3,3,1,3,1,1,3,1,3,3,6,3,1,3,1,3,3,1,1,1,3,3,3,1,1,1,3,3,1,2,3,3,3,1,3,3,3,1,1,3,1],"centers":[[-1.399607696,-0.050733562,-1.340226527,-1.323187365],[0.470939123,-0.638412365,0.799134222,0.806466516],[0.243143527,-0.150395221,0.373990269,0.290468353],[1.397330166,0.233160219,1.160620258,1.217340492],[-0.381390297,2.26864394,-1.299628365,-1.202616708],[-0.933303289,1.063272961,-1.2833891,-1.224314321],[-0.364080601,-1.41450432,0.107774588,0.000877548]],"inertia":72.631144,"sizes":[17,25,25,29,7,26,21]},"8":{"labels":[1,4,4,4,1,6,1,1,4,4,6,1,4,4,6,6,6,1,6,6,1,6,1,1,1,4,1,1,1,4,4,1,6,6,4,1,1,1,4,1,1,4,4,1,6,4,6,4,6,1,2,2,2,3,0,0,2,3,0,3,3,0,3,0,0,2,0,3,3,3,2,0,0,0,0,0,0,2,0,3,3,3,3,0,0,2,2,3,0,3,3,0,3,3,3,0,0,0,3,0,2,0,5,2,2,5,3,5,5,7,2,0,2,0,0,2,2,7,5,3,2,0,5,0,2,5,0,0,2,5,5,7,2,0,0,5,2,2,0,2,2,2,0,2,2,2,0,2,2,0],"centers":[[0.223487405,-0.522035111,0.51804157,0.476215991],[-0.975689852,0.876501592,-1.305041453,-1.233957705],[0.852214022,0.174949542,0.861276476,1.045159543],[-0.364080601,-1.41450432,0.107774588,0.000877548],[-1.423217612,-0.074430288,-1.333121848,-1.323671307],[1.837712702,-0.408215599,1.399337451,1.014445367],[-0.574459981,1.957498861,-1.27027277,-1.204063216],[2.128515591,1.55613014,1.501644819,1.361076786]],"inertia":62.540606,"sizes":[36,21,30,21,16,10,13,3]},"9":{"labels":[0,3,3,3,0,5,0,0,3,3,0,0,3,3,5,5,5,0,5,0,0,0,0,0,0,3,0,0,0,3,3,0,5,5,3,3,0,0,3,0,0,3,3,0,0,3,0,3,0,0,1,1,1,2,4,8,1,2,8,2,2,8,2,8,8,1,8,8,2,2,8,8,4,8,8,8,4,1,8,2,2,2,8,4,8,1,1,2,8,2,2,8,2,2,8,8,8,8,2,8,1,4,7,4,1,7,2,7,4,6,1,4,1,4,4,1,1,6,7,2,1,4,7,4,1,7,4,8,4,7,7,6,4,4,4,7,1,1,8,1,1,1,4,1,1,1,4,1,1,8],"centers":[[-0.933303289,1.063272961,-1.2833891,-1.224314321],[0.907516281,0.248730557,0.850200464,1.048872246],[-0.402546592,-1.513160077,0.09649732,0.008190447],[-1.399607696,-0.050733562,-1.340226527,-1.323187365],[0.425788148,-0.810454159,0.792672704,0.804526673],[-0.381390297,2.26864394,-1.299628365,-1.202616708],[2.128515591,1.55613014,1.501644819,1.361076786],[1.92656914,-0.311021409,1.425861583,1.039309224],[0.102588797,-0.334552634,0.360349287,0.264141916]],"inertia":55.119493,"sizes":[26,26,18,17,19,7,3,9,25]},"10":{"labels":[6,2,2,2,6,0,6,6,2,2,0,6,2,2,0,0,0,6,0,0,6,0,6,6,6,2,6,6,6,2,2,6,0,0,2,6,6,6,2,6,6,2,2,6,0,2,0,2,0,6,1,1,1,4,1,9,1,4,1,9,4,9,4,9,9,1,9,9,4,4,1,9,8,9,1,1,1,1,9,4,4,4,9,8,9,1,1,4,9,4,4,1,4,4,9,9,9,9,4,9,3,8,5,8,3,5,4,5,8,7,3,8,3,8,8,3,3,7,5,4,3,8,5,8,3,5,8,8,8,5,5,7,8,8,8,5,3,3,8,3,3,3,8,3,3,3,8,3,3,8],"centers":[[-0.574459981,1.957498861,-1.27027277,-1.204063216],[0.803746874,0.021485032,0.497516944,0.378223143],[-1.423217612,-0.074430288,-1.333121848,-1.323671307],[0.910105338,0.238893089,0.996423246,1.32451229],[-0.38037208,-1.553783036,0.097426036,-0.006865522],[1.92656914,-0.311021409,1.425861583,1.039309224],[-0.975689852,0.876501592,-1.305041453,-1.233957705],[2.128515591,1.55613014,1.501644819,1.361076786],[0.335231108,-0.730491072,0.799702597,0.849905137],[-0.092895367,-0.45169721,0.270167236,0.161761329]],"inertia":47.391035,"sizes":[13,15,16,18,17,9,21,3,20,18]}}};
+let pos=0;
+const sections=[...document.querySelectorAll('.section')];
+const $=id=>document.getElementById(id);
+const COLORS=['#55c5f5','#ffb360','#67d59e','#c99bff','#ff7695','#e8d779','#45b6a8','#e5a3d9','#99a8ff','#fecc8b'];
+function showStep(){
+ sections.forEach((s,i)=>s.classList.toggle('active',i===pos));
+ $('fill').style.width=((pos+1)/sections.length*100)+'%';
+ $('counter').textContent='Step '+(pos+1)+' of '+sections.length;
+ $('back').disabled=pos===0;
+ $('next').textContent=pos===sections.length-1?'Start over ↻':'Next step →';
+ $('jump').value=String(pos);
+ if(pos===3)elbow(); if(pos===5)scatter('scatter-chart',3,Number($('scatter-x').value),Number($('scatter-y').value));
+ if(pos===8)explore();
+ window.scrollTo({top:0,behavior:'instant'});
+}
+$('back').addEventListener('click',()=>{if(pos>0){pos--;showStep();}});
+$('next').addEventListener('click',()=>{pos=(pos+1)%sections.length;showStep();});
+$('jump').addEventListener('change',e=>{pos=Number(e.target.value);showStep();});
+document.querySelectorAll('.copy').forEach(btn=>btn.addEventListener('click',async()=>{
+ const str=btn.parentElement.querySelector('code').textContent;
+ try{
+   if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(str)}
+   else{const ta=document.createElement('textarea');ta.value=str;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();if(!document.execCommand('copy'))throw new Error('copy failed');ta.remove()}
+   btn.textContent='Copied!';
+ }catch(err){btn.textContent='Select code and use Ctrl/Cmd+C'}
+ setTimeout(()=>btn.textContent='Copy Python code',2100);
+}));
+document.querySelectorAll('.quiz').forEach(q=>q.querySelectorAll('.answer').forEach(b=>b.addEventListener('click',()=>{
+ q.querySelectorAll('.answer').forEach(el=>el.classList.remove('correct','incorrect'));
+ let ok=b.dataset.right==='true';b.classList.add(ok?'correct':'incorrect');
+ q.querySelector('.feedback').textContent=ok?'✓ Correct!':'Not quite. '+q.querySelector('.feedback').dataset.explanation;
+})));
+const NS='http://www.w3.org/2000/svg';
+function S(parent,tag,attrs={},content){let n=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,String(v)));if(content!=null)n.textContent=String(content);parent.appendChild(n);return n;}
+function plotArea(svg,xmin,xmax,ymin,ymax,xname,yname){
+ svg.replaceChildren();const W=860,H=(svg.id==='elbow-chart'?365:420),L=82,R=25,T=22,B=68;
+ const px=x=>L+(x-xmin)/(xmax-xmin)*(W-L-R), py=y=>H-B-(y-ymin)/(ymax-ymin)*(H-T-B);
+ for(let u=0;u<=5;u++){
+  const y=ymin+(ymax-ymin)*u/5;S(svg,'line',{x1:L,y1:py(y),x2:W-R,y2:py(y),stroke:'#454952','stroke-width':'1'});
+  S(svg,'text',{x:L-13,y:py(y)+5,fill:'#d9c4d3','text-anchor':'end','font-size':'13'},y.toFixed(ymax-ymin<15?1:0));
+ }
+ for(let u=0;u<=(svg.id==='elbow-chart'?9:5);u++){
+  const steps=(svg.id==='elbow-chart'?9:5);const x=xmin+(xmax-xmin)*u/steps;S(svg,'line',{x1:px(x),y1:T,x2:px(x),y2:H-B,stroke:'#30343d','stroke-width':'1'});
+  S(svg,'text',{x:px(x),y:H-B+22,fill:'#d9c4d3','text-anchor':'middle','font-size':'13'},x.toFixed(svg.id==='elbow-chart'?0:(xmax-xmin<15?1:0)));
+ }
+ S(svg,'line',{x1:L,y1:H-B,x2:W-R,y2:H-B,stroke:'#b1aab6','stroke-width':'1.5'});
+ S(svg,'line',{x1:L,y1:T,x2:L,y2:H-B,stroke:'#b1aab6','stroke-width':'1.5'});
+ S(svg,'text',{x:(L+W-R)/2,y:H-12,fill:'#f5d6e9','text-anchor':'middle','font-size':'16'},xname);
+ S(svg,'text',{x:20,y:(H-B+T)/2,fill:'#f5d6e9','text-anchor':'middle','font-size':'16',transform:`rotate(-90 20 ${(H-B+T)/2})`},yname);
+ return {px,py,W,H,L,R,T,B};
+}
+function elbow(){
+ const svg=$('elbow-chart'),d=Object.entries(DATA.models).map(([k,v])=>({x:Number(k),y:v.inertia})), ymax=650;
+ const a=plotArea(svg,1,10,0,ymax,'Number of clusters (k)','Inertia (WCSS)');
+ const points=d.map(p=>`${a.px(p.x)},${a.py(p.y)}`).join(' ');
+ S(svg,'polyline',{points,fill:'none',stroke:'#64c0ef','stroke-width':3,'stroke-linejoin':'round'});
+ S(svg,'line',{x1:a.px(3),y1:a.T,x2:a.px(3),y2:a.H-a.B,stroke:'#ff79c6','stroke-dasharray':'5 7','stroke-width':2,opacity:.8});
+ for(let p of d){const n=S(svg,'circle',{cx:a.px(p.x),cy:a.py(p.y),r:p.x===3?8:6,fill:p.x===3?'#ff79c6':'#64c0ef',stroke:'#172026','stroke-width':2});S(n,'title',{},`k=${p.x} • inertia=${p.y.toFixed(2)}`);}
+ S(svg,'text',{x:a.px(3)+12,y:a.py(d[2].y)-15,fill:'#ffb6df','font-size':14,'font-weight':'bold'},'k = 3');
+}
+function scatter(id,k,xi,yi){
+ const svg=$(id),pts=DATA.points,labels=DATA.models[k].labels;
+ const xx=pts.map(p=>p[xi]),yy=pts.map(p=>p[yi]);
+ const xmin=Math.min(...xx)-.25,xmax=Math.max(...xx)+.25,ymin=Math.min(...yy)-.25,ymax=Math.max(...yy)+.25;
+ const a=plotArea(svg,xmin,xmax,ymin,ymax,DATA.features[xi],DATA.features[yi]);
+ for(let c=0;c<k;c++)for(let i=0;i<pts.length;i++)if(labels[i]===c){
+  let n=S(svg,'circle',{cx:a.px(pts[i][xi]),cy:a.py(pts[i][yi]),r:5.2,fill:COLORS[c],opacity:.87,stroke:'#172026','stroke-width':.6});S(n,'title',{},`Flower ${i+1} • cluster ${c} • ${DATA.features[xi]}: ${pts[i][xi]} • ${DATA.features[yi]}: ${pts[i][yi]}`);
+ }
+ const centers=DATA.models[k].centers;
+ centers.forEach((z,c)=>{
+  const cx=z[xi]*DATA.std[xi]+DATA.mean[xi],cy=z[yi]*DATA.std[yi]+DATA.mean[yi],x=a.px(cx),y=a.py(cy);
+  S(svg,'circle',{cx:x,cy:y,r:9,fill:'#111419',stroke:'#ffffff','stroke-width':2.2});
+  S(svg,'path',{d:`M ${x-5} ${y} L ${x+5} ${y} M ${x} ${y-5} L ${x} ${y+5}`,stroke:COLORS[c],'stroke-width':3});
+ });
+ for(let c=0;c<k;c++){
+  let x=80+(c%5)*138,y=15+Math.floor(c/5)*23;
+  S(svg,'circle',{cx:x,cy:y,r:5,fill:COLORS[c]});S(svg,'text',{x:x+10,y:y+5,fill:'#eacbdc','font-size':13},'Cluster '+c);
+ }
+}
+function explore(){let k=Number($('explore-k').value);$('live-inertia').textContent=DATA.models[k].inertia.toFixed(2);$('live-counts').textContent=DATA.models[k].sizes.join(' · ');scatter('explore-chart',k,0,1);}
+$('scatter-x').addEventListener('change',()=>scatter('scatter-chart',3,Number($('scatter-x').value),Number($('scatter-y').value)));
+$('scatter-y').addEventListener('change',()=>scatter('scatter-chart',3,Number($('scatter-x').value),Number($('scatter-y').value)));
+$('explore-k').addEventListener('change',explore);
+$('predict').addEventListener('click',()=>{
+ const raw=[0,1,2,3].map(i=>Number($('f'+i).value));
+ if(raw.some((x,i)=>!Number.isFinite(x)||!$('f'+i).value||x<=0)){ $('prediction').textContent='Please enter four positive measurements.';return;}
+ const v=raw.map((x,i)=>(x-DATA.mean[i])/DATA.std[i]);
+ const dist=DATA.models['3'].centers.map(c=>c.reduce((sum,z,i)=>sum+(z-v[i])**2,0));
+ const best=dist.indexOf(Math.min(...dist));
+ $('prediction').textContent=`Predicted cluster: ${best}  ·  Squared distances to centroids: ${dist.map(x=>x.toFixed(2)).join(' / ')}`;
+});
+$('use-second').addEventListener('click',()=>{[6.0,2.7,5.1,1.6].forEach((v,i)=>$('f'+i).value=v);$('predict').click();});
+showStep();
+</script></body></html>
