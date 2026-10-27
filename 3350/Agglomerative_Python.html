@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agglomerative Clustering — Interactive Step-by-Step Lesson</title>
+<meta name="description" content="Interactive complete-linkage agglomerative clustering walkthrough: Euclidean distances, updated matrices, merge animations, dendrogram cuts, WCSS, new point assignment and Python code." />
+<style>
+:root{color-scheme:dark;--bg:#151719;--section:#242126;--code:#191b20;--pink:#ff79c6;--title:#ffb3de;--text:#f8edf5;--muted:#d9b9ce;--line:#60465a;--blue:#64c0ef;--orange:#ffb661;--green:#5bdb9a;--lav:#c79cff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);margin:0;line-height:1.64}
+.wrap{max-width:1060px;margin:0 auto;padding:26px 18px 70px}.brand{font-size:.8rem;text-transform:uppercase;letter-spacing:.13em;color:var(--pink);font-weight:700;margin:0 0 4px}.top{display:flex;justify-content:space-between;gap:15px;align-items:start}.top-tag{background:#2f2830;color:#f0cada;border:1px solid #67445c;font-size:.78rem;padding:6px 11px;border-radius:100px;white-space:nowrap}
+h1,h2,h3{color:var(--title)}h1{font-size:clamp(1.65rem,3.6vw,2.3rem);margin:0 0 6px}h2{font-size:1.43rem;margin:3px 0 8px}h3{font-size:1.08rem;margin:17px 0 7px}p{margin:0 0 13px}.muted{color:var(--muted)}.small{font-size:.88rem}.section{background:var(--section);border-left:6px solid var(--pink);padding:23px;border-radius:15px;display:none;margin:17px 0;box-shadow:0 12px 40px #090a0a30}.section.active{display:block}.step-eyebrow{font-weight:800;letter-spacing:.10em;color:#ff9bcf;font-size:.7rem}.progress{height:9px;background:#38333a;border-radius:20px;overflow:hidden;margin:20px 0 6px}.progress>div{height:100%;background:var(--pink);transition:width .25s}.counter{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:6px}.jump{background:#2e272e;color:var(--text);border:1px solid #76526b;border-radius:8px;padding:6px 10px;max-width:360px}
+.codearea{background:var(--code);border:1px solid #564254;border-radius:10px;margin:14px 0;padding:14px}.codearea pre{white-space:pre;overflow:auto;color:#f7d5f0;font-size:13px;line-height:1.56;margin:12px 0 0;tab-size:4}.codearea code,code{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}.hint{border-left:4px solid var(--pink);background:#312932;border-radius:8px;padding:12px 14px;margin-top:12px}.hint-title{display:block;text-transform:uppercase;letter-spacing:.07em;color:#ffb2dc;font-weight:800;font-size:.73rem;margin-bottom:2px}
+.buttons{display:flex;gap:10px;justify-content:space-between;margin-top:20px;flex-wrap:wrap}.actionbar{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}button{padding:10px 16px;border-radius:9px;border:1px solid #ae6a94;background:#3a2e3b;color:#fff;cursor:pointer;font-weight:600;font-size:.89rem}button:hover:not(:disabled){filter:brightness(1.16)}button.primary{background:var(--pink);color:#23151d}button:disabled{opacity:.38;cursor:not-allowed}button:focus-visible,select:focus-visible,input:focus-visible,input[type=range]:focus-visible{outline:3px solid #ffacd9;outline-offset:3px}
+.quiz{margin-top:20px;padding:14px;border:1px solid #6c5165;border-radius:10px}.quiz strong{display:block;margin-bottom:7px}.quiz button{display:block;width:100%;text-align:left;margin:7px 0}.correct{background:#1b583e!important}.incorrect{background:#75323b!important}.feedback{color:#ffe0ed;min-height:20px;font-size:.92rem}.formula{background:var(--code);border:1px solid #66475b;border-radius:12px;padding:20px;text-align:center;font-family:Georgia,serif;color:#ffc4e6;font-size:1.4rem;overflow-x:auto}.formula small{display:block;font-family:Arial;font-size:.85rem;color:#e0c3d3;margin-top:8px}.definition-row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}.definition-row span{background:#342b34;padding:8px 12px;border-radius:10px;color:#ffd8ef}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:15px 0}.stats div{background:#322b33;border:1px solid #584557;border-radius:10px;text-align:center;padding:12px 8px;min-width:0}.stats b{font-size:1.5rem;color:#ffbee2;display:block;overflow-wrap:anywhere}.stats small{display:block;color:var(--muted);font-size:.82rem}.stats.compact{grid-template-columns:repeat(2,minmax(0,1fr))}.output{margin-top:15px;border:1px solid #655169;background:#17191c;border-radius:9px;padding:12px}.output span{display:block;font-size:.72rem;color:#d7aac8;text-transform:uppercase;font-weight:700;letter-spacing:.07em}.output pre{color:#c5efd7;white-space:pre-wrap;margin:8px 0 0;font-size:13px}.table-wrap{overflow-x:auto;margin:13px 0}table{border-collapse:collapse;width:100%;font-size:.91rem}td,th{border-bottom:1px solid #5e4c59;padding:9px 12px;text-align:left;white-space:nowrap}th{color:#ffc5e6}td.num{text-align:right;font-variant-numeric:tabular-nums}.nearest{background:#2f5550!important;color:#d1ffe8;font-weight:800}.matrix th{font-size:.85rem}.matrix td{text-align:right}.matrix th:first-child{text-align:left}.calc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.calc-item{background:#2e2a31;border:1px solid #584658;border-radius:9px;padding:10px 12px;font-size:.89rem;overflow-wrap:anywhere}.calc-item b{color:#ffc6e4}
+.chart-card{border:1px solid #5b4b5b;background:#1b1e22;border-radius:11px;margin-top:16px;padding:12px}.chart-heading{display:flex;align-items:center;justify-content:space-between;gap:9px;flex-wrap:wrap}.chart-heading>span{font-size:.77rem;color:var(--muted)}.chart-card svg{display:block;width:100%;height:auto;max-height:445px}.chart-note{font-size:.83rem;color:var(--muted);margin:0 3px 6px}.select-pair{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.select-pair label{font-size:.8rem;color:#e9cade}.select-pair select{background:#352b35;color:var(--text);border:1px solid #926583;border-radius:7px;padding:6px;font-size:.85rem}.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px}.c0{background:#55c5f5}.c1{background:#ffb360}.c2{background:#67d59e}.predict-card{background:#2a252c;border:1px solid #695364;border-radius:12px;padding:15px;margin-top:15px}.predict-card>p{font-size:.9rem;color:var(--muted);margin-top:7px}.inputs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;max-width:390px}.inputs-grid label{font-size:.8rem;color:#eac8da}.inputs-grid input{display:block;width:100%;background:#171b21;border:1px solid #78586c;border-radius:8px;color:white;padding:9px;margin-top:5px;font-size:.95rem}.prediction{background:#1b2328;border:1px solid #3c6675;padding:11px;border-radius:9px;color:#cbf3fc;font-weight:600}.footer{margin-top:25px;font-size:.82rem;color:var(--muted)}.footer a{color:#ffb8df}.cutbox{background:#302834;border:1px solid #754d70;border-radius:10px;padding:13px 15px;margin:12px 0}.cutrow{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.cutrow input[type=range]{flex:1;min-width:160px;accent-color:var(--pink)}.cutvalue{font-size:1.15rem;color:var(--title);font-weight:800;min-width:55px}.clusters{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.cluster-chip{border:1px solid #79516e;border-radius:8px;padding:7px 10px;background:#352b36;color:#f7e5ef;font-weight:600;font-size:.86rem}.two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.two-col>div{background:#302b34;border:1px solid #594459;padding:12px;border-radius:10px}.two-col h3{margin:0 0 5px}.note{font-size:.85rem;color:#d8bfd0}.mathline{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#d4f5ea;word-break:break-word;margin:6px 0}.heading-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.kbd{border:1px solid #79546c;border-bottom-width:2px;padding:1px 6px;border-radius:5px;font:12px ui-monospace;background:#332b34}
+@media(max-width:750px){.section{padding:15px}.wrap{padding:16px 12px 40px}.top-tag{display:none}.stats{gap:5px}.stats b{font-size:1.22rem}.codearea pre{font-size:12px}.calc-grid,.two-col{grid-template-columns:1fr}.chart-heading{align-items:start}.chart-heading>strong{width:100%}.inputs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cutrow{gap:8px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.progress>div{transition:none}}@media print{body{background:white;color:#111}.section{display:block!important;break-inside:avoid;border-color:#b04e8a;background:white;box-shadow:none}.buttons,.progress,.counter,.copy,.quiz button,.actionbar{display:none!important}h1,h2,h3{color:#731c55}.chart-card,.codearea,.hint{background:white;color:#111}.codearea pre{color:#333}.footer{color:#555}}
+
+.three-col,.compare-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mini-formula{font-size:1.2rem;padding:10px}.three-col h3{text-align:center}
+.compare-card{border:1px solid #674b63;border-radius:12px;padding:10px;background:#1a1c22;min-width:0}
+.compare-card h3{text-align:center;margin:2px 0;color:#ffb3de}
+.compare-card svg{display:block;width:100%;height:auto;margin:0 auto;border-bottom:1px solid #3b3540}
+.compare-card .clusters{display:block;margin:5px 0}
+.compare-card .cluster-chip{display:block;margin:5px 0;font-size:.76rem;padding:4px 6px;overflow-wrap:anywhere}
+.mini-count{text-align:center;color:#fff0f7;font-weight:700;font-size:.9rem;margin-bottom:4px}
+@media(max-width:860px){.compare-grid{grid-template-columns:1fr}.compare-card{max-width:680px;margin:auto;width:100%}.three-col{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:560px){.three-col{grid-template-columns:1fr}}
+</style></head>
+<body><main class="wrap">
+<header><p class="brand">CSCI 3350 · Machine Learning</p><div class="top"><div><h1>Agglomerative Clustering (Bottom-Up)</h1><p class="muted">Interactive, 12-step walkthrough · Five 2D points · Single, Complete & Average linkage</p></div><span class="top-tag">UNSUPERVISED LEARNING</span></div></header>
+<div class="progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="12" aria-valuenow="1" id="prog"><div id="fill"></div></div>
+<div class="counter"><span id="counter" class="muted" aria-live="polite">Step 1 of 12</span><label class="small muted" for="jump">Jump to step: <select id="jump" class="jump">
+<option value="0">1. Problem and initialization</option><option value="1">2. Euclidean distances</option><option value="2">3. Merge 1: P1 + P2</option><option value="3">4. Merge 2: P4 + P5</option><option value="4">5. Merge 3: {P1,P2} + P3</option><option value="5">6. Merge 4: final</option><option value="6">7. Interactive dendrogram</option><option value="7">8. Scatter plot and cut</option><option value="8">9. Centroids and WCSS</option><option value="9">10. Assign a new point</option><option value="10">11. All-linkages Python program</option><option value="11">12. Live linkage comparison</option></select></label></div>
+
+<section class="section active" id="step1">
+<div class="step-eyebrow">STEP 1 / 12</div><h2>1. Problem statement and initialization</h2>
+<p>We have <b>five data points</b>. Begin with each point as its own cluster. At each round, merge the two clusters with the <b>smallest complete-linkage distance</b>. We build the full dendrogram and then select a two-cluster solution.</p>
+<div class="stats"><div><b>5</b><small>points / initial clusters</small></div><div><b>4</b><small>merges to one cluster</small></div><div><b>2</b><small>desired final clusters</small></div></div>
+<div class="definition-row"><span>P1 = (2, 3)</span><span>P2 = (2, 5)</span><span>P3 = (5, 3)</span><span>P4 = (6, 7)</span><span>P5 = (8, 6)</span></div>
+<div class="chart-card"><div class="chart-heading"><strong>Five data points before clustering</strong><span>Hover over a point to inspect its coordinates</span></div><svg id="scatter-initial" viewBox="0 0 860 420" role="img" aria-label="Initial scatter plot of five points"></svg><p class="chart-note">Initially: C1={P1}, C2={P2}, C3={P3}, C4={P4}, C5={P5}.</p></div>
+<div class="formula">d(A,B) = max { d(a,b) : a ∈ A, b ∈ B } <small>Complete linkage uses the largest cross-cluster pairwise Euclidean distance.</small></div>
+<div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code>import numpy as np
+from scipy.spatial.distance import pdist, squareform
+from scipy.cluster.hierarchy import linkage, fcluster, dendrogram
+import matplotlib.pyplot as plt
+
+names = ["P1", "P2", "P3", "P4", "P5"]
+X = np.array([[2, 3], [2, 5], [5, 3], [6, 7], [8, 6]], dtype=float)
+print("Data points:", dict(zip(names, X.tolist())))</code></pre></div>
+<div class="quiz"><strong>Quick check: How many clusters exist before the first merge?</strong><button type="button" class="answer" data-right="false">Two clusters</button><button type="button" class="answer" data-right="true">Five clusters, one per point</button><button type="button" class="answer" data-right="false">Only one cluster</button><div class="feedback" data-explanation="Agglomerative clustering begins with each point isolated." aria-live="polite"></div></div>
+</section>
+
+<section class="section" id="step2">
+<div class="step-eyebrow">STEP 2 / 12</div><h2>2. Calculate Euclidean pairwise distances</h2>
+<p>Before any merges, single-point clusters are separated by Euclidean distance. Every pair is calculated below.</p>
+<div class="formula">d(Pᵢ,Pⱼ) = √[(xᵢ − xⱼ)² + (yᵢ − yⱼ)²] <small>Distance between two points in the (x, y) plane</small></div>
+<div class="calc-grid" id="pair-calcs"></div>
+<h3>Initial distance matrix</h3><div class="table-wrap" id="matrix-0"></div>
+<div class="hint"><span class="hint-title">First decision</span>Smallest nonzero distance: <b>d(P1,P2) = 2.00</b>. Therefore P1 and P2 merge first. The diagonal zeros are not candidates.</div>
+<div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code># Pairwise Euclidean distances for the five points
+D = squareform(pdist(X, metric="euclidean"))
+print(np.round(D, 2))
+
+# The closest two original points are P1 and P2
+# (d = 2.00). No standardization is used in this example.</code></pre></div>
+<div class="quiz"><strong>Quick check: Which pair merges first?</strong><button type="button" class="answer" data-right="true">P1 and P2 (distance 2.00)</button><button type="button" class="answer" data-right="false">P4 and P5 (distance 2.24)</button><button type="button" class="answer" data-right="false">P1 and P3 (distance 3.00)</button><div class="feedback" data-explanation="2.00 is the smallest off-diagonal entry." aria-live="polite"></div></div>
+</section>
+
+<section class="section" id="step3">
+<div class="step-eyebrow">STEP 3 / 12</div><h2>3. Merge 1: P1 and P2</h2>
+<p><b>C1{P1} + C2{P2} → C6{P1,P2}</b> at dendrogram height <b>2.00</b>.</p>
+<div class="hint"><span class="hint-title">Recalculate distances using complete linkage</span>
+<div class="mathline">d(C6,C3) = max[d(P1,P3),d(P2,P3)] = max(3.00,3.61) = 3.61</div>
+<div class="mathline">d(C6,C4) = max(5.66,4.47) = 5.66</div>
+<div class="mathline">d(C6,C5) = max(6.71,6.08) = 6.71</div></div>
+<h3>Updated distance matrix</h3><div class="table-wrap" id="matrix-1"></div>
+<div class="chart-card"><strong>Dendrogram constructed so far</strong><svg id="dendro-1" viewBox="0 0 860 430" role="img" aria-label="Dendrogram after first merge"></svg></div>
+<p class="muted small">Next minimum: <b>2.24</b> between P4 and P5.</p>
+<div class="quiz"><strong>Quick check: Why is d(C6,P3) equal to 3.61, not 3.00?</strong><button type="button" class="answer" data-right="false">Because complete linkage chooses the smallest distance</button><button type="button" class="answer" data-right="true">Because complete linkage uses the largest cross-cluster distance</button><button type="button" class="answer" data-right="false">Because the centroid moved</button><div class="feedback" data-explanation="Complete linkage considers the farthest members, so max(3.00, 3.61) = 3.61." aria-live="polite"></div></div>
+</section>
+
+<section class="section" id="step4">
+<div class="step-eyebrow">STEP 4 / 12</div><h2>4. Merge 2: P4 and P5</h2>
+<p><b>C4{P4} + C5{P5} → C7{P4,P5}</b> at height <b>√5 ≈ 2.24</b>.</p>
+<div class="hint"><span class="hint-title">Recalculate complete-linkage distances</span>
+<div class="mathline">d(C7,P3) = max[d(P4,P3),d(P5,P3)] = max(4.12,4.24) = 4.24</div>
+<div class="mathline">d(C7,C6) = max(5.66,6.71,4.47,6.08) = 6.71</div></div>
+<h3>Updated distance matrix</h3><div class="table-wrap" id="matrix-2"></div>
+<div class="chart-card"><strong>Dendrogram after two merges</strong><svg id="dendro-2" viewBox="0 0 860 430" role="img" aria-label="Dendrogram after second merge"></svg></div>
+<p class="muted small">Next minimum: <b>3.61</b> between C6{P1,P2} and P3.</p>
+<div class="quiz"><strong>Quick check: How many clusters remain?</strong><button type="button" class="answer" data-right="false">Four</button><button type="button" class="answer" data-right="true">Three: {P1,P2}, {P3}, and {P4,P5}</button><button type="button" class="answer" data-right="false">Two</button><div class="feedback" data-explanation="Each merge reduces the number of clusters by one: 5 → 4 → 3." aria-live="polite"></div></div>
+</section>
+
+<section class="section" id="step5">
+<div class="step-eyebrow">STEP 5 / 12</div><h2>5. Merge 3: {P1,P2} and P3</h2>
+<p><b>C6{P1,P2} + C3{P3} → C8{P1,P2,P3}</b> at height <b>√13 ≈ 3.61</b>.</p>
+<p>Why is 3.61 the merge height? Complete linkage compares both <b>P1→P3</b> (3.00) and <b>P2→P3</b> (3.61), choosing the larger value.</p>
+<div class="hint"><span class="hint-title">Only two clusters remain</span>
+<div class="mathline">d(C8,C7) = max{d(P1,P4), d(P1,P5), d(P2,P4), d(P2,P5), d(P3,P4), d(P3,P5)}</div>
+<div class="mathline">= max{5.66, 6.71, 4.47, 6.08, 4.12, 4.24} = 6.71</div></div>
+<h3>Updated distance matrix</h3><div class="table-wrap" id="matrix-3"></div>
+<div class="chart-card"><strong>Dendrogram after three merges</strong><svg id="dendro-3" viewBox="0 0 860 430" role="img" aria-label="Dendrogram after third merge"></svg></div>
+<div class="quiz"><strong>Quick check: How many clusters exist after Merge 3?</strong><button type="button" class="answer" data-right="true">Two</button><button type="button" class="answer" data-right="false">Three</button><button type="button" class="answer" data-right="false">Five</button><div class="feedback" data-explanation="The clusters are {P1,P2,P3} and {P4,P5}." aria-live="polite"></div></div>
+</section>
+
+<section class="section" id="step6">
+<div class="step-eyebrow">STEP 6 / 12</div><h2>6. Merge 4: Complete the hierarchy</h2>
+<p><b>C8{P1,P2,P3} + C7{P4,P5} → C9{P1,P2,P3,P4,P5}</b> at height <b>√45 ≈ 6.71</b>.</p>
+<div class="chart-card"><strong>The fully constructed dendrogram</strong><svg id="dendro-4" viewBox="0 0 860 430" role="img" aria-label="Full complete-linkage dendrogram"></svg></div>
+<h3>Merge sequence summary</h3><div class="table-wrap"><table><thead><tr><th>Merge</th><th>Combined clusters</th><th>Height</th><th>Clusters remaining</th></tr></thead><tbody>
+<tr><td>1</td><td>P1 + P2</td><td>2.00</td><td>4</td></tr><tr><td>2</td><td>P4 + P5</td><td>2.24</td><td>3</td></tr><tr><td>3</td><td>{P1,P2} + P3</td><td>3.61</td><td>2</td></tr><tr><td>4</td><td>{P1,P2,P3} + {P4,P5}</td><td>6.71</td><td>1</td></tr></tbody></table></div>
+<div class="hint"><span class="hint-title">Why build all four merges if we want two clusters?</span>The full dendrogram records the entire hierarchy. We can later cut it at a chosen height to return 2, 3, 4, or 5 groups without retraining.</div>
+<div class="quiz"><strong>Quick check: Which height corresponds to the final merge?</strong><button type="button" class="answer" data-right="false">2.00</button><button type="button" class="answer" data-right="false">3.61</button><button type="button" class="answer" data-right="true">6.71</button><div class="feedback" data-explanation="The complete-linkage distance across the two large clusters is √45 ≈ 6.71." aria-live="polite"></div></div>
+</section>
+
+<section class="section" id="step7">
+<div class="step-eyebrow">STEP 7 / 12</div><h2>7. Explore the dendrogram: Choose a cut height</h2>
+<p>A horizontal cut through the dendrogram determines the grouping: only merges <b>at or below</b> the cut height are included.</p>
+<div class="cutbox"><div class="cutrow"><label for="height-slider"><b>Cut height</b></label><input id="height-slider" type="range" min="0" max="7" step="0.05" value="4"/><output class="cutvalue" id="height-out" for="height-slider">4.00</output></div>
+<div class="actionbar"><button type="button" id="cut4" class="primary">Cut at 4.0 → 2 clusters</button><button type="button" id="cut25">Cut at 2.5 → 3 clusters</button><button type="button" id="cut7">Cut at 7.0 → 1 cluster</button></div>
+<div><b id="cut-count">2 clusters</b> <span class="muted small">at the selected height</span></div><div id="cut-clusters" class="clusters" aria-live="polite"></div></div>
+<div class="chart-card"><div class="chart-heading"><strong>Interactive complete-linkage dendrogram</strong><span>Pink dashed line = cut height</span></div><svg id="dendro-interactive" viewBox="0 0 860 430" role="img" aria-label="Interactive dendrogram with a cut height line"></svg><p class="chart-note">At height 4.0: {P1,P2,P3} and {P4,P5}. At height 2.5: {P1,P2}, {P3}, and {P4,P5}.</p></div>
+<div class="hint"><span class="hint-title">Choosing k</span>The large gap between merge heights <b>3.61</b> and <b>6.71</b> suggests that <b>two clusters</b> are a reasonable visual choice. This is a heuristic, not a mathematical guarantee that k=2 is optimal.</div>
+<div class="quiz"><strong>Quick check: At a cut height of 2.5, what happens to P3?</strong><button type="button" class="answer" data-right="false">It joins P4 and P5</button><button type="button" class="answer" data-right="true">It remains a singleton cluster</button><button type="button" class="answer" data-right="false">It joins P1 and P2</button><div class="feedback" data-explanation="P3 does not merge with {P1,P2} until height 3.61." aria-live="polite"></div></div>
+</section>
+
+<section class="section" id="step8">
+<div class="step-eyebrow">STEP 8 / 12</div><h2>8. See the cluster groups in the (x, y) plane</h2>
+<p>Color the original five points by the cut you chose in Step 7. Choose one of the example heights or change the cut interactively below.</p>
+<div class="actionbar"><button type="button" id="scatter4" class="primary">Show 2 clusters (height 4.0)</button><button type="button" id="scatter25">Show 3 clusters (height 2.5)</button></div>
+<div class="chart-card"><div class="chart-heading"><strong>Cluster scatter plot</strong><span id="scatter-label">Cut height = 4.00</span></div><svg id="scatter-clusters" viewBox="0 0 860 420" role="img" aria-label="Interactive scatter plot showing cluster groups"></svg><p class="chart-note" id="scatter-caption">Blue: {P1,P2,P3}. Orange: {P4,P5}.</p></div>
+<div class="hint"><span class="hint-title">How to interpret</span>The two groups occupy different regions in the plane: Cluster A is lower/left, and Cluster B is upper/right. The colors here represent the dendrogram cut, not predefined labels.</div>
+</section>
+
+<section class="section" id="step9">
+<div class="step-eyebrow">STEP 9 / 12</div><h2>9. Describe the 2-cluster solution and compute WCSS</h2>
+<p>With a cut at <b>height = 4.0</b>, the final two groups are:</p>
+<div class="two-col"><div><h3><span class="dot c0"></span> Cluster A</h3><p><b>{P1(2,3), P2(2,5), P3(5,3)}</b><br/>Count: 3<br/>Centroid: <b>(3.00, 3.67)</b></p><p class="note">Lower-left part of the plane.</p></div><div><h3><span class="dot c1"></span> Cluster B</h3><p><b>{P4(6,7), P5(8,6)}</b><br/>Count: 2<br/>Centroid: <b>(7.00, 6.50)</b></p><p class="note">Upper-right part of the plane.</p></div></div>
+<div class="formula">WCSS = Σ [ (x − μₓ)² + (y − μᵧ)² ] <small>Sum of squared distances from each point to the centroid of its assigned cluster.</small></div>
+<h3>Cluster A calculation</h3><div class="mathline">P1: (2−3)² + (3−3.6667)² = 1.4444</div><div class="mathline">P2: (2−3)² + (5−3.6667)² = 2.7778</div><div class="mathline">P3: (5−3)² + (3−3.6667)² = 4.4444</div><p><b>WCSS(A) = 8.6667 ≈ 8.67</b></p>
+<h3>Cluster B calculation</h3><div class="mathline">P4: (6−7)² + (7−6.5)² = 1.25</div><div class="mathline">P5: (8−7)² + (6−6.5)² = 1.25</div><p><b>WCSS(B) = 2.50</b></p>
+<div class="stats compact"><div><b>11.17</b><small>Total WCSS ≈ 8.67 + 2.50</small></div><div><b>4.0</b><small>Dendrogram cut height</small></div></div>
+<div class="hint"><span class="hint-title">Important distinction</span>Agglomerative complete linkage <b>does not minimize WCSS</b>. WCSS and centroids are supplementary ways to describe the chosen clusters, commonly used with K-means. They did <b>not</b> determine the merge order.</div>
+<div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code># For the two-cluster solution, compute means and WCSS afterward
+Z = linkage(X, method="complete", metric="euclidean")
+labels_2 = fcluster(Z, t=4.0, criterion="distance")
+wcss = 0.0
+for c in np.unique(labels_2):
+    group = X[labels_2 == c]
+    centroid = group.mean(axis=0)
+    wcss += ((group - centroid)**2).sum()
+    print("Cluster", c, "centroid:", np.round(centroid, 2))
+print("WCSS:", round(float(wcss), 2))  # 11.17</code></pre></div>
+<div class="quiz"><strong>Quick check: Does complete-linkage clustering use centroids or WCSS to decide which clusters merge?</strong><button type="button" class="answer" data-right="true">No; it uses the maximum cross-cluster point distance</button><button type="button" class="answer" data-right="false">Yes; it minimizes WCSS at each merge</button><button type="button" class="answer" data-right="false">Yes; it always uses the nearest centroid</button><div class="feedback" data-explanation="Centroids and WCSS are descriptive here; complete linkage uses the farthest pair between candidate clusters." aria-live="polite"></div></div>
+</section>
+
+<section class="section" id="step10">
+<div class="step-eyebrow">STEP 10 / 12</div><h2>10. Assign a new point (post-clustering heuristic)</h2>
+<p>Once the two clusters are formed, we can <b>optionally</b> assign a new point to the nearest cluster centroid. The example new point is <b>Pnew(3,4)</b>.</p>
+<div class="hint"><span class="hint-title">This is not the agglomerative algorithm's built-in prediction</span>Unlike K-means, <code>AgglomerativeClustering</code> does <b>not</b> provide a native <code>predict()</code> method. Assigning by nearest centroid is a convenient <b>additional heuristic</b>, not complete-linkage re-clustering. Adding the new point and rerunning hierarchical clustering could yield a different hierarchy.</div>
+<div class="predict-card"><strong>Try a new point</strong><p>Enter x and y. The page compares Euclidean distances to the <b>two post-hoc cluster centroids</b>: A=(3.00,3.67), B=(7.00,6.50).</p><div class="inputs-grid"><label>x coordinate<input id="newx" type="number" step="0.25" value="3" /></label><label>y coordinate<input id="newy" type="number" step="0.25" value="4" /></label></div><div class="actionbar"><button type="button" id="assign-new" class="primary">Assign by nearest centroid</button><button type="button" id="reset-new">Reset to (3,4)</button></div><div id="prediction" class="prediction" aria-live="polite">For (3,4): distance to A = 0.33; distance to B = 4.72 → assign to Cluster A.</div></div>
+<div class="chart-card"><strong>New point and the two cluster centroids</strong><svg id="scatter-new" viewBox="0 0 860 420" role="img" aria-label="Scatter plot with a new point and two centroids"></svg></div>
+<div class="codearea"><button type="button" class="copy">Copy Python code</button><pre><code># Optional post-clustering nearest-centroid assignment
+new_point = np.array([3.0, 4.0])
+clusters = [X[labels_2 == labels_2[0]], X[labels_2 == labels_2[3]]]
+centroids = np.array([group.mean(axis=0) for group in clusters])
+distances = np.linalg.norm(centroids - new_point, axis=1)
+print("Distances (A, B):", np.round(distances, 2))  # [0.33, 4.72]
+print("Nearest cluster:", ["A", "B"][np.argmin(distances)])
+# This is a separate heuristic, not AgglomerativeClustering.predict().</code></pre></div>
+<div class="quiz"><strong>Quick check: Does scikit-learn AgglomerativeClustering have a built-in predict() method for unseen samples?</strong><button type="button" class="answer" data-right="false">Yes, identical to K-means</button><button type="button" class="answer" data-right="true">No; nearest-centroid assignment here is a separate heuristic</button><button type="button" class="answer" data-right="false">Yes, but only with 5 points</button><div class="feedback" data-explanation="AgglomerativeClustering builds a hierarchy of the fitted points. New-point classification is an extra choice." aria-live="polite"></div></div>
+</section>
+
+<section class="section" id="step11">
+<div class="step-eyebrow">STEP 11 / 12</div><h2>11. Compare all three linkages using Python</h2>
+<p>This complete runnable script computes <b>single, complete, and average linkage</b> on the same five points, plots <b>all three dendrograms</b> side by side, and plots their cluster assignments below. Try cut heights <b>3.2, 3.4, and 4.0</b> to compare how linkage changes the grouping.</p>
+<div class="codearea"><button type="button" class="copy">Copy all-linkages Python program</button><pre><code>"""CSCI 3350: Compare single, complete and average agglomerative linkage.
+Save as compare_agglomerative_linkages.py and run with Python.
+Dependencies: numpy scipy matplotlib.
+This produces a six-panel figure: three dendrograms + three cluster plots.
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.spatial.distance import pdist, squareform
+from scipy.cluster.hierarchy import linkage, dendrogram, fcluster
+
+names = ["P1", "P2", "P3", "P4", "P5"]
+X = np.array([[2, 3], [2, 5], [5, 3], [6, 7], [8, 6]], dtype=float)
+methods = ["single", "complete", "average"]
+cut_height = 3.40   # Compare results; try 2.50 or 4.00
+
+print("Pairwise Euclidean distance matrix:")
+print(np.round(squareform(pdist(X, metric="euclidean")), 2))
+
+# Three dendrograms in row 1; cluster scatter plots in row 2.
+fig, axes = plt.subplots(2, 3, figsize=(16, 9))
+fig.suptitle("Agglomerative Clustering: Comparing Three Linkage Methods", fontsize=17)
+
+for col, method in enumerate(methods):
+    Z = linkage(X, method=method, metric="euclidean")
+    labels = fcluster(Z, t=cut_height, criterion="distance")
+
+    print(f"\n{method.upper()} linkage")
+    print("Merge heights:", np.round(Z[:, 2], 4))
+    for c in np.unique(labels):
+        group = [names[i] for i in np.where(labels == c)[0]]
+        print(f"  Cluster {c}: {group}")
+
+    # Top: full hierarchical dendrogram and the SAME cut height.
+    ax = axes[0, col]
+    dendrogram(Z, labels=names, ax=ax, color_threshold=cut_height,
+               above_threshold_color="gray")
+    ax.axhline(cut_height, color="magenta", linestyle="--", linewidth=1.5)
+    ax.set_title(f"{method.title()} linkage")
+    ax.set_xlabel("Data points")
+    ax.set_ylabel("Linkage distance")
+    ax.set_ylim(bottom=0, top=7.1)
+    ax.grid(axis="y", alpha=0.25)
+
+    # Bottom: points colored according to groups from this dendrogram cut.
+    ax = axes[1, col]
+    for c in np.unique(labels):
+        group = X[labels == c]
+        ax.scatter(group[:, 0], group[:, 1], s=90,
+                   label=f"Cluster {c}")
+    for i, (x, y) in enumerate(X):
+        ax.annotate(names[i], (x, y), xytext=(7, 7),
+                    textcoords="offset points")
+    ax.set_xlim(0, 10)
+    ax.set_ylim(1, 9)
+    ax.set_xlabel("x")
+    ax.set_ylabel("y")
+    ax.set_title(f"Cut = {cut_height:.2f}: {len(np.unique(labels))} clusters")
+    ax.grid(alpha=0.25)
+    ax.legend(loc="best", fontsize=9)
+
+fig.tight_layout(rect=(0, 0, 1, 0.96))
+fig.savefig("agglomerative_linkage_comparison.png", dpi=180, bbox_inches="tight")
+plt.show()
+
+# The three methods all give two groups at cut height 4.0:
+# {P1,P2,P3} and {P4,P5}. Their merge heights are different.
+</code></pre></div>
+<div class="hint"><span class="hint-title">Python environment</span>Install NumPy, SciPy, and Matplotlib with <code>pip install numpy scipy matplotlib</code>. The script also saves <code>agglomerative_linkage_comparison.png</code>. The live browser figures do not require Python.</div>
+<h3>Key insights to remember</h3>
+<div class="definition-row"><span>Bottom-up: 5 → 1 clusters</span><span>Complete linkage = maximum distance</span><span>Dendrogram heights: 2.00, 2.24, 3.61, 6.71</span><span>Cut at 4.0 → 2 clusters</span><span>WCSS = 11.17 (post-hoc)</span></div>
+<div class="quiz"><strong>Final check: Why is k=2 a reasonable choice for these data?</strong><button type="button" class="answer" data-right="false">The algorithm must always make two clusters</button><button type="button" class="answer" data-right="true">A large gap between merge heights 3.61 and 6.71 supports a two-cluster cut</button><button type="button" class="answer" data-right="false">Because the distance matrix contains exactly two zeros</button><div class="feedback" data-explanation="Cutting between 3.61 and 6.71 leaves two clusters, though optimality is not mathematically guaranteed by this gap alone." aria-live="polite"></div></div>
+</section>
+
+<section class="section" id="step12">
+<div class="step-eyebrow">STEP 12 / 12</div><h2>12. Compare Single, Complete, and Average Linkage</h2>
+<p>Each method starts with the same Euclidean distances and merges the same closest pairs first. The <b>definition of cluster-to-cluster distance</b> changes the third and fourth merge heights. See the <a href="https://xinyangmtsu.github.io/3350/Linkage.html" target="_blank" rel="noopener noreferrer" style="color:#ffb8df">Single, Complete, and Average Linkage</a> reference for the linkage concepts.</p>
+<div class="three-col">
+ <div><h3>Single linkage</h3><div class="formula mini-formula">minimum <small>Closest cross-cluster pair</small></div></div>
+ <div><h3>Complete linkage</h3><div class="formula mini-formula">maximum <small>Farthest cross-cluster pair</small></div></div>
+ <div><h3>Average linkage</h3><div class="formula mini-formula">average <small>Mean of all cross-cluster pairs</small></div></div>
+</div>
+<div class="hint"><span class="hint-title">Example: merging {P1,P2} with P3</span>
+ <div class="mathline">Single: min(3.00, 3.61) = 3.00</div>
+ <div class="mathline">Complete: max(3.00, 3.61) = 3.61</div>
+ <div class="mathline">Average: (3.00 + 3.61)/2 = 3.30</div>
+</div>
+<h3>All four merge heights</h3>
+<div class="table-wrap"><table><thead><tr><th>Merge</th><th>Single</th><th>Complete</th><th>Average</th></tr></thead><tbody>
+<tr><td>P1 + P2</td><td>2.00</td><td>2.00</td><td>2.00</td></tr>
+<tr><td>P4 + P5</td><td>2.24</td><td>2.24</td><td>2.24</td></tr>
+<tr><td>{P1,P2} + P3</td><td>3.00</td><td>3.61</td><td>3.30</td></tr>
+<tr><td>{P1,P2,P3} + {P4,P5}</td><td>4.12</td><td>6.71</td><td>5.21</td></tr>
+</tbody></table></div>
+<div class="cutbox"><div class="cutrow"><label for="compare-cut-slider"><b>Shared cut height</b></label><input type="range" min="0" max="7" step="0.05" value="3.4" id="compare-cut-slider"/><output class="cutvalue" id="compare-cut-value">3.40</output></div>
+<div class="actionbar"><button type="button" id="compare-cut-32">Try 3.20</button><button type="button" id="compare-cut-34" class="primary">Try 3.40</button><button type="button" id="compare-cut-4">Try 4.00</button></div>
+<p class="note" style="margin:0">At height 3.40, single and average linkage have two clusters, but complete linkage still has three. At height 4.00, all three methods agree on the two clusters.</p></div>
+<div class="compare-grid" id="compare-grid">
+ <article class="compare-card"><h3>Single linkage</h3><p class="mini-count" id="single-count">2 clusters</p><svg id="compare-single-dendro" viewBox="0 0 860 380" role="img" aria-label="Single linkage dendrogram"></svg><svg id="compare-single-scatter" viewBox="0 0 860 420" role="img" aria-label="Single linkage scatter plot"></svg><div class="clusters" id="single-groups"></div></article>
+ <article class="compare-card"><h3>Complete linkage</h3><p class="mini-count" id="complete-count">3 clusters</p><svg id="compare-complete-dendro" viewBox="0 0 860 380" role="img" aria-label="Complete linkage dendrogram"></svg><svg id="compare-complete-scatter" viewBox="0 0 860 420" role="img" aria-label="Complete linkage scatter plot"></svg><div class="clusters" id="complete-groups"></div></article>
+ <article class="compare-card"><h3>Average linkage</h3><p class="mini-count" id="average-count">2 clusters</p><svg id="compare-average-dendro" viewBox="0 0 860 380" role="img" aria-label="Average linkage dendrogram"></svg><svg id="compare-average-scatter" viewBox="0 0 860 420" role="img" aria-label="Average linkage scatter plot"></svg><div class="clusters" id="average-groups"></div></article>
+</div>
+<div class="hint"><span class="hint-title">What should students notice?</span>The 2-cluster groups at height 4.0 are identical for this dataset; <b>the merge heights are not</b>. At a lower cut, the three linkage methods can disagree. Cluster IDs and colors do not represent true labels or prove that one linkage is universally best.</div>
+<div class="quiz"><strong>Quick check: At a dendrogram cut height of 3.40, which method still has three clusters?</strong><button type="button" class="answer" data-right="false">Single linkage</button><button type="button" class="answer" data-right="true">Complete linkage</button><button type="button" class="answer" data-right="false">Average linkage</button><div class="feedback" data-explanation="Complete linkage joins P3 to {P1,P2} at 3.61, whereas single joins at 3.00 and average joins at about 3.30." aria-live="polite"></div></div>
+</section>
+<nav class="buttons" aria-label="Lesson steps"><button id="back" type="button">← Previous step</button><button id="next" type="button" class="primary">Next step →</button></nav>
+</main>
+<script>
+"use strict";
+const POINTS=[{id:'P1',x:2,y:3},{id:'P2',x:2,y:5},{id:'P3',x:5,y:3},{id:'P4',x:6,y:7},{id:'P5',x:8,y:6}];
+const COLORS=['#55c5f5','#ffb360','#67d59e','#c79cff','#ff7793'];
+const $=id=>document.getElementById(id);
+const fmt=x=>Number(x).toFixed(2);
+const dist=(p,q)=>Math.hypot(p.x-q.x,p.y-q.y);
+const sq=(p,q)=>(p.x-q.x)**2+(p.y-q.y)**2;
+const look=id=>POINTS.find(p=>p.id===id);
+const rootSets=[['P1'],['P2'],['P3'],['P4'],['P5']];
+const stages=[
+ {ids:['C1{P1}','C2{P2}','C3{P3}','C4{P4}','C5{P5}'],sets:[['P1'],['P2'],['P3'],['P4'],['P5']],min:[0,1]},
+ {ids:['C6{P1,P2}','C3{P3}','C4{P4}','C5{P5}'],sets:[['P1','P2'],['P3'],['P4'],['P5']],min:[2,3]},
+ {ids:['C6{P1,P2}','C3{P3}','C7{P4,P5}'],sets:[['P1','P2'],['P3'],['P4','P5']],min:[0,1]},
+ {ids:['C8{P1,P2,P3}','C7{P4,P5}'],sets:[['P1','P2','P3'],['P4','P5']],min:[0,1]}
+];
+const euclidGroups=(A,B)=>Math.max(...A.flatMap(a=>B.map(b=>dist(look(a),look(b)))));
+const NS='http://www.w3.org/2000/svg';
+function S(parent,tag,attrs={},content){const el=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,String(v));if(content!==undefined)el.textContent=String(content);parent.appendChild(el);return el;}
+function writeMatrix(idx){const stage=stages[idx],n=stage.sets.length,elem=$('matrix-'+idx);const table=document.createElement('table');table.className='matrix';const thead=document.createElement('thead'),hr=document.createElement('tr');['',...stage.ids].forEach(x=>{const th=document.createElement('th');th.textContent=x;hr.appendChild(th)});thead.appendChild(hr);table.appendChild(thead);const body=document.createElement('tbody');for(let i=0;i<n;i++){const tr=document.createElement('tr'),th=document.createElement('th');th.textContent=stage.ids[i];tr.appendChild(th);for(let j=0;j<n;j++){const td=document.createElement('td');const d=i===j?0:euclidGroups(stage.sets[i],stage.sets[j]);td.textContent=fmt(d);td.title=i===j?'Same cluster':`Complete linkage of ${stage.ids[i]} and ${stage.ids[j]} = ${d.toFixed(4)}`;if(i!==j&&stage.min&&((i===stage.min[0]&&j===stage.min[1])||(j===stage.min[0]&&i===stage.min[1])))td.className='nearest';tr.appendChild(td)}body.appendChild(tr)}table.appendChild(body);elem.appendChild(table);}
+stages.forEach((_,i)=>writeMatrix(i));
+const paircalcs=[];for(let i=0;i<5;i++)for(let j=i+1;j<5;j++){const a=POINTS[i],b=POINTS[j],dx=a.x-b.x,dy=a.y-b.y,d=dist(a,b);paircalcs.push(`<div class="calc-item"><b>${a.id}–${b.id}</b><div>√[(${a.x}−${b.x})² + (${a.y}−${b.y})²]</div><div>= √${dx*dx+dy*dy} = <b>${fmt(d)}</b></div></div>`)}$('pair-calcs').innerHTML=paircalcs.join('');
+const nodes={P1:{x:120,h:0},P2:{x:250,h:0},P3:{x:380,h:0},P4:{x:560,h:0},P5:{x:690,h:0},C6:{x:185,h:2,left:'P1',right:'P2',step:1},C7:{x:625,h:Math.sqrt(5),left:'P4',right:'P5',step:2},C8:{x:282.5,h:Math.sqrt(13),left:'C6',right:'P3',step:3},C9:{x:453.75,h:Math.sqrt(45),left:'C8',right:'C7',step:4}};
+const mergePalette=['','#64c0ef','#ffb661','#5bdb9a','#ff79c6'];
+function renderDendro(id,maxStep,cut=null){const svg=$(id);if(!svg)return;svg.replaceChildren();const bottom=360,top=33,left=67,right=800,Y=h=>bottom-(h/7)*(bottom-top);for(let u=0;u<=7;u++){const y=Y(u);S(svg,'line',{x1:left,y1:y,x2:right,y2:y,stroke:u===0?'#88828d':'#363940','stroke-width':1});S(svg,'text',{x:left-12,y:y+5,'text-anchor':'end',fill:'#d9c4d3','font-size':13},u)}S(svg,'text',{x:18,y:195,transform:'rotate(-90 18 195)',fill:'#f5d6e9','font-size':15,'text-anchor':'middle'},'Merge height (Euclidean distance)');
+ const visible=Object.entries(nodes).filter(([k,n])=>n.step&&n.step<=maxStep).sort((a,b)=>a[1].step-b[1].step);for(const [id2,n] of visible){const a=nodes[n.left],b=nodes[n.right],color=n.step===maxStep?'#ff79c6':mergePalette[n.step];const opa=n.step===maxStep?1:.85;S(svg,'path',{d:`M ${a.x} ${Y(a.h)} V ${Y(n.h)} H ${b.x} V ${Y(b.h)}`,stroke:color,'stroke-width':n.step===maxStep?4:3,fill:'none',opacity:opa,'stroke-linejoin':'round'});const tx=n.x+10,ty=Y(n.h)-11;S(svg,'text',{x:tx,y:ty,fill:color,'font-size':n.step===4?16:13,'font-weight':'bold'},fmt(n.h));}
+ POINTS.forEach(p=>{const x=nodes[p.id].x;S(svg,'circle',{cx:x,cy:Y(0),r:6,fill:'#ecd4e4'});S(svg,'text',{x,y:bottom+28,fill:'#f9dcea','text-anchor':'middle','font-size':17,'font-weight':'bold'},p.id)});
+ if(cut!==null){const y=Y(cut);S(svg,'line',{x1:left,y1:y,x2:right,y2:y,stroke:'#ff79c6','stroke-width':2.6,'stroke-dasharray':'10 6'});S(svg,'rect',{x:right-118,y:y-26,width:116,height:22,rx:5,fill:'#533049'});S(svg,'text',{x:right-62,y:y-11,fill:'#ffd3ea','font-size':13,'text-anchor':'middle'},'cut = '+fmt(cut));}
+}
+for(let i=1;i<=4;i++)renderDendro('dendro-'+i,i);
+function clustersAtHeight(h){let sets=POINTS.map(p=>[p.id]);const merges=[{height:2,left:['P1'],right:['P2']},{height:Math.sqrt(5),left:['P4'],right:['P5']},{height:Math.sqrt(13),left:['P1','P2'],right:['P3']},{height:Math.sqrt(45),left:['P1','P2','P3'],right:['P4','P5']}];for(let m of merges){if(m.height>h+1e-9)break;let left=sets.findIndex(set=>m.left.every(x=>set.includes(x))),right=sets.findIndex(set=>m.right.every(x=>set.includes(x)));if(left>=0&&right>=0&&left!==right){const united=[...sets[left],...sets[right]].sort();sets=sets.filter((_,i)=>i!==left&&i!==right);sets.push(united)}}return sets.sort((a,b)=>Number(a[0][1])-Number(b[0][1]));}
+let cutHeight=4;
+function setCut(h){cutHeight=Number(h);$('height-slider').value=cutHeight;$('height-out').textContent=fmt(cutHeight);const cls=clustersAtHeight(cutHeight);$('cut-count').textContent=`${cls.length} cluster${cls.length!==1?'s':''}`;$('cut-clusters').replaceChildren();cls.forEach((members,i)=>{const span=document.createElement('span');span.className='cluster-chip';span.style.borderColor=COLORS[i];span.innerText=`Cluster ${String.fromCharCode(65+i)}: {${members.join(', ')}}`;$('cut-clusters').appendChild(span)});renderDendro('dendro-interactive',4,cutHeight);renderScatter('scatter-clusters',cls);$('scatter-label').textContent=`Cut height = ${fmt(cutHeight)}`;$('scatter-caption').textContent=cls.map((m,i)=>`Cluster ${String.fromCharCode(65+i)}: {${m.join(', ')}}`).join('  ·  ');}
+function drawAxes(svg,xmin=0,xmax=10,ymin=1,ymax=9){svg.replaceChildren();const W=860,H=420,L=78,R=34,T=31,B=58,px=x=>L+(x-xmin)/(xmax-xmin)*(W-L-R),py=y=>H-B-(y-ymin)/(ymax-ymin)*(H-T-B);for(let v=0;v<=10;v+=2){S(svg,'line',{x1:px(v),y1:T,x2:px(v),y2:H-B,stroke:'#323640'});S(svg,'text',{x:px(v),y:H-B+22,fill:'#dcc5d5','text-anchor':'middle','font-size':13},v);}for(let v=2;v<=8;v+=2){S(svg,'line',{x1:L,y1:py(v),x2:W-R,y2:py(v),stroke:'#323640'});S(svg,'text',{x:L-12,y:py(v)+5,fill:'#dcc5d5','text-anchor':'end','font-size':13},v);}S(svg,'line',{x1:L,y1:H-B,x2:W-R,y2:H-B,stroke:'#a79aa6','stroke-width':1.4});S(svg,'line',{x1:L,y1:T,x2:L,y2:H-B,stroke:'#a79aa6','stroke-width':1.4});S(svg,'text',{x:(L+W-R)/2,y:H-8,'text-anchor':'middle',fill:'#f4cadd','font-size':16},'x');S(svg,'text',{x:20,y:(T+H-B)/2,transform:`rotate(-90 20 ${(T+H-B)/2})`,fill:'#f4cadd','font-size':16,'text-anchor':'middle'},'y');return {px,py};}
+function renderScatter(id,groups,newPoint=null,centroids=false){const svg=$(id);if(!svg)return;const {px,py}=drawAxes(svg);groups.forEach((members,i)=>{for(const name of members){const p=look(name),cx=px(p.x),cy=py(p.y),color=COLORS[i];const n=S(svg,'circle',{cx,cy,r:11,fill:color,stroke:'#121519','stroke-width':2});S(n,'title',{},`${name} (${p.x},${p.y}) • Cluster ${String.fromCharCode(65+i)}`);S(svg,'text',{x:cx+13,y:cy-12,fill:color,'font-size':16,'font-weight':'bold'},name)}if(centroids){const c={x:members.reduce((a,n)=>a+look(n).x,0)/members.length,y:members.reduce((a,n)=>a+look(n).y,0)/members.length},x=px(c.x),y=py(c.y);S(svg,'path',{d:`M ${x-10} ${y-10} L ${x+10} ${y+10} M ${x-10} ${y+10} L ${x+10} ${y-10}`,stroke:'#ffffff','stroke-width':3.3});S(svg,'text',{x:x+12,y:y+27,fill:'#fff','font-size':13},`μ${String.fromCharCode(65+i)} (${fmt(c.x)}, ${fmt(c.y)})`);}});
+ if(newPoint){const x=px(newPoint.x),y=py(newPoint.y);if(x>=0&&x<=860&&y>=0&&y<=420){S(svg,'circle',{cx:x,cy:y,r:15,fill:'none',stroke:'#ff79c6','stroke-width':2.5});const m=S(svg,'path',{d:`M ${x-8} ${y} L ${x+8} ${y} M ${x} ${y-8} L ${x} ${y+8}`,stroke:'#ff79c6','stroke-width':3});S(m,'title',{},`New point (${newPoint.x}, ${newPoint.y})`);S(svg,'text',{x:x+18,y:y-17,fill:'#ffbfe5','font-size':14,'font-weight':'bold'},`New (${fmt(newPoint.x)}, ${fmt(newPoint.y)})`)}}
+ const lblY=16;groups.forEach((m,i)=>{const x=86+i*180;S(svg,'circle',{cx:x,cy:lblY,r:6,fill:COLORS[i]});S(svg,'text',{x:x+12,y:lblY+5,fill:'#eed4e6','font-size':13},`Cluster ${String.fromCharCode(65+i)}`)});
+}
+renderScatter('scatter-initial',POINTS.map(p=>[p.id]));
+$('height-slider').addEventListener('input',e=>setCut(e.target.value));$('cut4').addEventListener('click',()=>setCut(4));$('cut25').addEventListener('click',()=>setCut(2.5));$('cut7').addEventListener('click',()=>setCut(7));$('scatter4').addEventListener('click',()=>setCut(4));$('scatter25').addEventListener('click',()=>setCut(2.5));setCut(4);
+const TWO=[['P1','P2','P3'],['P4','P5']];
+function assignPoint(){const x=Number($('newx').value),y=Number($('newy').value);if(!$('newx').value||!$('newy').value||!Number.isFinite(x)||!Number.isFinite(y)){$('prediction').textContent='Please enter valid numeric x and y values.';return;}const centroids=TWO.map(m=>({x:m.reduce((a,n)=>a+look(n).x,0)/m.length,y:m.reduce((a,n)=>a+look(n).y,0)/m.length}));const d=centroids.map(c=>Math.hypot(x-c.x,y-c.y));const chosen=d[0]<=d[1]?'A':'B';$('prediction').textContent=`Pnew(${fmt(x)}, ${fmt(y)}): distance to A = ${fmt(d[0])}; distance to B = ${fmt(d[1])} → assign to Cluster ${chosen} (nearest-centroid heuristic).`;renderScatter('scatter-new',TWO,{x,y},true);}
+$('assign-new').addEventListener('click',assignPoint);$('reset-new').addEventListener('click',()=>{$('newx').value=3;$('newy').value=4;assignPoint();});assignPoint();
+let pos=0;const sections=[...document.querySelectorAll('.section')];function showStep(){sections.forEach((s,i)=>s.classList.toggle('active',i===pos));$('fill').style.width=((pos+1)/sections.length*100)+'%';$('counter').textContent=`Step ${pos+1} of ${sections.length}`;$('prog').setAttribute('aria-valuenow',String(pos+1));$('back').disabled=pos===0;$('next').textContent=pos===sections.length-1?'Start over ↻':'Next step →';$('jump').value=pos;window.scrollTo({top:0,behavior:'instant'});} $('back').addEventListener('click',()=>{if(pos>0){pos--;showStep()}});$('next').addEventListener('click',()=>{pos=(pos+1)%sections.length;showStep()});$('jump').addEventListener('change',e=>{pos=Number(e.target.value);showStep()});document.addEventListener('keydown',e=>{if(e.target.matches('input,select,textarea,button'))return;if(e.key==='ArrowRight'&&pos<sections.length-1){pos++;showStep()}else if(e.key==='ArrowLeft'&&pos>0){pos--;showStep()}});
+document.querySelectorAll('.copy').forEach(btn=>btn.addEventListener('click',async()=>{const code=btn.parentElement.querySelector('code').textContent;try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(code);else{const area=document.createElement('textarea');area.value=code;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();if(!document.execCommand('copy'))throw Error('copy');area.remove()}btn.textContent='Copied!';}catch(e){btn.textContent='Select code and press Ctrl/Cmd+C'}setTimeout(()=>btn.textContent=btn.closest('#step11')?'Copy all-linkages Python program':'Copy Python code',2100)}));
+document.querySelectorAll('.quiz').forEach(q=>q.querySelectorAll('.answer').forEach(b=>b.addEventListener('click',()=>{q.querySelectorAll('.answer').forEach(el=>el.classList.remove('correct','incorrect'));const ok=b.dataset.right==='true';b.classList.add(ok?'correct':'incorrect');q.querySelector('.feedback').textContent=ok?'✓ Correct!':'Not quite. '+q.querySelector('.feedback').dataset.explanation;})));
+
+// All-linkages demonstration: the merge topology agrees for these five points,
+// but the heights depend on the linkage definition. All decisions use full precision.
+const COMPARISON_LINKAGES={
+  single:[2,Math.sqrt(5),3,Math.sqrt(17)],
+  complete:[2,Math.sqrt(5),Math.sqrt(13),Math.sqrt(45)],
+  average:[2,Math.sqrt(5),(3+Math.sqrt(13))/2,
+    (Math.sqrt(32)+Math.sqrt(45)+Math.sqrt(20)+Math.sqrt(37)+Math.sqrt(17)+Math.sqrt(18))/6]
+};
+const CMP_LEAVES=['P1','P2','P3','P4','P5'];
+const CMP_MERGES=[[0,1],[3,4],[2,5],[6,7]];
+let comparisonCut=3.4;
+function comparisonGroups(method,h){
+  let groups=CMP_LEAVES.map(x=>[x]);
+  const mergeSets=[ [['P1'],['P2']], [['P4'],['P5']], [['P3'],['P1','P2']], [['P4','P5'],['P1','P2','P3']] ];
+  COMPARISON_LINKAGES[method].forEach((height,k)=>{
+    if(height>h+1e-9)return;
+    const [a,b]=mergeSets[k];
+    const ai=groups.findIndex(g=>a.every(x=>g.includes(x)));
+    const bi=groups.findIndex(g=>b.every(x=>g.includes(x)));
+    if(ai<0||bi<0||ai===bi)return;
+    groups=groups.filter((g,i)=>i!==ai&&i!==bi).concat([[...groups[ai],...groups[bi]].sort()]);
+  });
+  return groups.sort((a,b)=>Number(a[0][1])-Number(b[0][1]));
+}
+function comparisonDendro(method){
+ const svg=$('compare-'+method+'-dendro');svg.replaceChildren();
+ const hvals=COMPARISON_LINKAGES[method], xs=[120,250,380,560,690], y0=304,top=24;
+ const Y=h=>y0-h/7*(y0-top);
+ for(let h=0;h<=7;h+=1){let y=Y(h);S(svg,'line',{x1:62,y1:y,x2:800,y2:y,stroke:'#343841'});S(svg,'text',{x:51,y:y+4,'text-anchor':'end',fill:'#e4cddd','font-size':18},h)}
+ S(svg,'text',{x:26,y:160,transform:'rotate(-90 26 160)','text-anchor':'middle',fill:'#ead1e1','font-size':16},'Merge height');
+ const nodes=xs.map((x)=>({x,h:0}));
+ for(let k=0;k<4;k++){
+   const [a,b]=CMP_MERGES[k],left=nodes[a],right=nodes[b],height=hvals[k],yy=Y(height);
+   S(svg,'path',{d:`M${left.x} ${Y(left.h)} V${yy} H${right.x} V${Y(right.h)}`,
+        fill:'none',stroke:['#64c0ef','#ffb661','#5bdb9a','#ff79c6'][k],
+        'stroke-width':4,'stroke-linecap':'round'});
+   nodes.push({x:(left.x+right.x)/2,h:height});
+   S(svg,'text',{x:(left.x+right.x)/2,y:yy-8,'text-anchor':'middle',fill:'#ffb3de','font-size':18,'font-weight':'bold'},height.toFixed(2));
+ }
+ CMP_LEAVES.forEach((n,i)=>S(svg,'text',{x:xs[i],y:342,'text-anchor':'middle',fill:'#f9ddea','font-weight':'bold','font-size':20},n));
+ const yc=Y(comparisonCut);
+ S(svg,'line',{x1:62,y1:yc,x2:800,y2:yc,stroke:'#ff79c6','stroke-width':2.5,'stroke-dasharray':'10 9'});
+ S(svg,'text',{x:792,y:yc-10,'text-anchor':'end','font-size':17,fill:'#ffb3de'},'cut '+comparisonCut.toFixed(2));
+}
+function updateComparison(h){
+  comparisonCut=Number(h);
+  $('compare-cut-slider').value=comparisonCut;
+  $('compare-cut-value').textContent=comparisonCut.toFixed(2);
+  ['single','complete','average'].forEach(method=>{
+    comparisonDendro(method);
+    const groups=comparisonGroups(method,comparisonCut);
+    $(''+method+'-count').textContent=groups.length+(groups.length===1?' cluster':' clusters');
+    renderScatter('compare-'+method+'-scatter',groups);
+    const wrap=$(method+'-groups');wrap.replaceChildren();
+    groups.forEach((g,i)=>{const n=document.createElement('span');n.className='cluster-chip';n.style.borderColor=COLORS[i];n.textContent=`${String.fromCharCode(65+i)}: {${g.join(', ')}}`;wrap.appendChild(n)});
+  });
+}
+$('compare-cut-slider').addEventListener('input',e=>updateComparison(e.target.value));
+$('compare-cut-32').addEventListener('click',()=>updateComparison(3.2));
+$('compare-cut-34').addEventListener('click',()=>updateComparison(3.4));
+$('compare-cut-4').addEventListener('click',()=>updateComparison(4));
+updateComparison(3.4);
+
+showStep();
+</script>
+</body></html>
