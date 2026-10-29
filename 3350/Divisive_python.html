@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Divisive Clustering</title><style>body{font:16px Arial;background:#151719;color:#f7f2f6;margin:0;line-height:1.5}.w{max-width:1000px;margin:auto;padding:30px 20px}h1,h2{color:#ffb3de}.s{display:none;background:#222025;border-left:6px solid #ff79c6;padding:24px;border-radius:16px}.on{display:block}.bar{background:#333;height:9px;border-radius:10px;margin:20px 0}.bar div{background:#ff79c6;height:100%;border-radius:10px}.code,.call,.visual{background:#191b20;padding:15px;border-radius:10px;margin:14px 0}.code{white-space:pre;overflow:auto;color:#ffd7f0;font:13px monospace}.call{border-left:5px solid #ff79c6}.nav{display:flex;justify-content:space-between;margin-top:20px}button,select{padding:11px 15px;border-radius:9px;border:1px solid #666;background:#302b31;color:white;cursor:pointer}.primary{background:#ff79c6;color:#25131f;font-weight:bold}.choice{display:block;width:100%;text-align:left;margin:8px 0}.good{background:#173528}.bad{background:#402326}table{width:100%;border-collapse:collapse}td,th{border:1px solid #555;padding:8px;text-align:center}th{color:#ffb3de}.visual svg{width:100%;max-height:330px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:650px){.grid{grid-template-columns:1fr}.s{padding:15px}}</style></head><body><main class="w"><h1>Divisive (Top-Down) Clustering in Python</h1><p>8-step interactive walkthrough • Euclidean distance • largest-diameter splitting • farthest-pair seeds</p><div class="bar"><div id="prog"></div></div><p id="count"></p>
+<section class="s on"><h2>1. Define the Data</h2><p>Start with one cluster containing all five points.</p><pre class="code">import numpy as np
+X = np.array([[2,3],[2,5],[5,3],[6,7],[8,6]])
+labels = ["P1", "P2", "P3", "P4", "P5"]</pre><div class="visual" id="p0"></div><div class="call">C0 = {P1,P2,P3,P4,P5}</div></section>
+<section class="s"><h2>2. Pairwise Euclidean Distances</h2><p>d(A,B) = √((xA−xB)² + (yA−yB)²)</p><pre class="code">from scipy.spatial.distance import pdist, squareform
+D = squareform(pdist(X, metric="euclidean"))
+print(np.round(D,2))</pre><table id="dist"><tbody></tbody></table><div class="call">Diameter of C0 = 6.71, between P1 and P5.</div><p>Which pair is farthest?</p><button class="choice q2" data-ok="0">P2 and P3</button><button class="choice q2" data-ok="1">P1 and P5</button><p id="f2"></p></section>
+<section class="s"><h2>3. Split 1: Farthest Seeds</h2><p>Seeds P1 and P5. Assign remaining points to the nearest seed.</p><table><tr><th>Point</th><th>To P1</th><th>To P5</th><th>Result</th></tr><tr><td>P2</td><td>2.00</td><td>6.08</td><td>P1</td></tr><tr><td>P3</td><td>3.00</td><td>4.24</td><td>P1</td></tr><tr><td>P4</td><td>5.66</td><td>2.24</td><td>P5</td></tr></table><p>Python: define the diameter and farthest-seed split functions, then try the first split.</p><pre class="code">def diameter(cluster):
+    if len(cluster) &lt; 2:
+        return 0.0
+    return max(D[i, j] for i in cluster for j in cluster)
+
+def split_cluster(cluster):
+    # Choose the farthest two points as seeds
+    a, b = max(
+        ((i, j) for i in cluster for j in cluster if i &lt; j),
+        key=lambda pair: D[pair[0], pair[1]]
+    )
+    left, right = [a], [b]
+    for i in cluster:
+        if i not in (a, b):
+            (left if D[i, a] &lt;= D[i, b] else right).append(i)
+    return sorted(left), sorted(right)
+
+# Demonstrate the first split
+print(split_cluster(list(range(5))))  # ([0, 1, 2], [3, 4])</pre><div class="visual" id="p1"></div><div class="call">At 6.71: {P1,P2,P3} | {P4,P5}</div></section>
+<section class="s"><h2>4. Split 2: Largest Diameter</h2><p>diam({P1,P2,P3}) = 3.61; diam({P4,P5}) = 2.24. Split the first cluster using seeds P2 and P3; P1 joins P2.</p><p>Python: run the top-down loop. The first two iterations correspond to Splits 1 and 2.</p><pre class="code"># Automatically repeat the largest-diameter split
+clusters = [list(range(len(X)))]
+history = [[c.copy() for c in clusters]]
+splits = []
+
+while any(len(c) &gt; 1 for c in clusters):
+    target = max((c for c in clusters if len(c) &gt; 1),
+                 key=diameter)
+    height = diameter(target)
+    left, right = split_cluster(target)
+    splits.append((tuple(target), tuple(left),
+                   tuple(right), height))
+    clusters.remove(target)
+    clusters.extend([left, right])
+    history.append([c.copy() for c in clusters])
+    print(f"Height {height:.2f}:",
+          [labels[i] for i in left], "|",
+          [labels[i] for i in right])</pre><div class="visual" id="p2"></div><div class="call">At 3.61: {P1,P2} | {P3} | {P4,P5}</div><p>Why split {P1,P2,P3}?</p><button class="choice q4" data-ok="1">It has the largest diameter.</button><button class="choice q4" data-ok="0">It has the largest centroid.</button><p id="f4"></p></section>
+<section class="s"><h2>5. Final Two Splits</h2><div class="grid"><div><h3>Split 3 at 2.24</h3><p>{P4,P5} → {P4} | {P5}</p><div class="visual" id="p3"></div></div><div><h3>Split 4 at 2.00</h3><p>{P1,P2} → {P1} | {P2}</p><div class="visual" id="p4"></div></div></div><div class="call">All five points are now singleton clusters.</div><p>Python: inspect the final two splits and all intermediate clusters.</p><pre class="code"># Inspect the full split history from the previous step
+for step, groups in enumerate(history):
+    print(f"After {step} split(s):",
+          [[labels[i] for i in c] for c in groups])</pre></section>
+<section class="s"><h2>6. Dendrogram</h2><div class="visual" id="tree"></div><pre class="code">import matplotlib.pyplot as plt
+from scipy.cluster.hierarchy import dendrogram
+
+# Rebuild the divisive tree in SciPy linkage format
+ids = {(i,): i for i in range(len(X))}
+Z = []
+for parent, left, right, height in reversed(splits):
+    Z.append([ids[tuple(sorted(left))],
+              ids[tuple(sorted(right))], height, len(parent)])
+    ids[tuple(sorted(parent))] = len(X) + len(Z) - 1
+
+Z = np.array(Z, dtype=float)
+plt.figure(figsize=(8, 5))
+dendrogram(Z, labels=labels)
+plt.ylabel("Cluster diameter at split")
+plt.title("Top-Down Divisive Clustering")
+plt.tight_layout()
+plt.show()</pre><div class="call">Heights represent the diameter at each divisive split, not an agglomerative linkage fit.</div></section>
+<section class="s"><h2>7. Explore Dendrogram Cuts</h2><label>Cut height: <select id="cut"><option value="4">4.0 — 2 clusters</option><option value="2.5">2.5 — 3 clusters</option><option value="2.1">2.1 — 4 clusters</option><option value="1.5">1.5 — 5 clusters</option></select></label><div class="visual" id="cutTree"></div><div class="visual" id="cutPlot"></div><div class="call" id="result"></div><p>At height 2.5, which point becomes a singleton?</p><button class="choice q7" data-ok="0">P1</button><button class="choice q7" data-ok="1">P3</button><p id="f7"></p><p>Python: inspect the two requested cuts without rerunning the clustering.</p><pre class="code"># Cut at selected heights (strictly below split heights)
+for cut in [4.0, 2.5]:
+    groups = [list(range(len(X)))]
+    for parent, left, right, height in splits:
+        if height &lt;= cut:
+            continue
+        # Only split a parent that is still present
+        if list(parent) in groups:
+            groups.remove(list(parent))
+            groups.extend([list(left), list(right)])
+    print(f"Cut {cut}:",
+          [[labels[i] for i in c] for c in groups])</pre></section>
+<section class="s"><h2>8. Review the Step-by-Step Workflow</h2><p>The Python code is now distributed across Steps 1–7. Run each code block in order in one notebook or Python session—no long code dump is needed here.</p><div class="call">Run in order: 1. Data → 2. Distances → 3. Split functions → 4. Recursive splitting → 5. Inspect history → 6. Dendrogram → 7. Cut heights.</div><div class="call"><b>Key idea:</b> Start together → choose cluster of largest diameter → farthest-pair seeds → assign to nearest seed → repeat. This is a DIANA-style heuristic, <b>not</b> the original DIANA algorithm.</div></section>
+<div class="nav"><button id="back">← Previous</button><button class="primary" id="next">Next Step →</button></div></main><script>
+const X=[[2,3],[2,5],[5,3],[6,7],[8,6]],names=['P1','P2','P3','P4','P5'],colors=['#ff79c6','#55c6e8','#f3b95c','#9dd27b','#b7a0ff'],snaps=[[[0,1,2,3,4]],[[0,1,2],[3,4]],[[0,1],[2],[3,4]],[[0,1],[2],[3],[4]],[[0],[1],[2],[3],[4]]];const d=(i,j)=>Math.hypot(X[i][0]-X[j][0],X[i][1]-X[j][1]);
+function scatter(groups){let s='<svg viewBox="0 0 560 290">',px=x=>55+(x-1)*58,py=y=>250-(y-1)*30;for(let x=1;x<=9;x++)s+=`<line x1="${px(x)}" y1="20" x2="${px(x)}" y2="250" stroke="#38353c"/><text x="${px(x)}" y="270" fill="#aaa" text-anchor="middle" font-size="12">${x}</text>`;for(let y=1;y<=8;y++)s+=`<line x1="55" y1="${py(y)}" x2="530" y2="${py(y)}" stroke="#38353c"/><text x="35" y="${py(y)+4}" fill="#aaa" font-size="12">${y}</text>`;groups.forEach((g,k)=>g.forEach(i=>s+=`<circle cx="${px(X[i][0])}" cy="${py(X[i][1])}" r="10" fill="${colors[k]}" stroke="white"/><text x="${px(X[i][0])+13}" y="${py(X[i][1])-10}" fill="white" font-size="14">${names[i]}</text>`));return s+'</svg>'}for(let i=0;i<5;i++)document.getElementById('p'+i).innerHTML=scatter(snaps[i]);let tb=document.querySelector('#dist tbody');tb.innerHTML='<tr><th></th>'+names.map(n=>'<th>'+n+'</th>').join('')+'</tr>';for(let i=0;i<5;i++)tb.innerHTML+='<tr><th>'+names[i]+'</th>'+names.map((_,j)=>'<td>'+d(i,j).toFixed(2)+'</td>').join('')+'</tr>';
+function tree(cut){let yy=h=>265-h*32,s='<svg viewBox="0 0 430 310">';for(let h of [0,2,3.61,6.71])s+=`<line x1="42" y1="${yy(h)}" x2="400" y2="${yy(h)}" stroke="#353139" stroke-dasharray="3 4"/><text x="36" y="${yy(h)+4}" text-anchor="end" fill="#bbb" font-size="11">${h.toFixed(2)}</text>`;s+=`<path d="M65 265 V${yy(2)} H125 V265 M305 265 V${yy(Math.sqrt(5))} H365 V265 M95 ${yy(2)} V${yy(Math.sqrt(13))} H185 V265 M140 ${yy(Math.sqrt(13))} V${yy(Math.sqrt(45))} H335 V${yy(Math.sqrt(5))}" fill="none" stroke="#ff79c6" stroke-width="2.5"/>`;if(cut!==undefined)s+=`<line x1="42" y1="${yy(cut)}" x2="400" y2="${yy(cut)}" stroke="#55c6e8" stroke-width="2" stroke-dasharray="7 5"/>`;[65,125,185,305,365].forEach((x,i)=>s+=`<text x="${x}" y="285" text-anchor="middle" fill="white" font-size="14">${names[i]}</text>`);return s+'</svg>'}document.getElementById('tree').innerHTML=tree();function update(){let h=+document.getElementById('cut').value,g=h>=3.61?snaps[1]:h>=Math.sqrt(5)?snaps[2]:h>=2?snaps[3]:snaps[4];document.getElementById('cutTree').innerHTML=tree(h);document.getElementById('cutPlot').innerHTML=scatter(g);document.getElementById('result').innerHTML='<b>'+g.length+' clusters:</b> '+g.map(a=>'{'+a.map(i=>names[i]).join(', ')+'}').join(' | ')}document.getElementById('cut').onchange=update;update();
+let n=0,S=[...document.querySelectorAll('.s')],prog=document.getElementById('prog'),back=document.getElementById('back'),next=document.getElementById('next');function show(){S.forEach((s,i)=>s.classList.toggle('on',i===n));prog.style.width=(100*(n+1)/S.length)+'%';document.getElementById('count').textContent='Step '+(n+1)+' of '+S.length;back.disabled=n===0;next.textContent=n===S.length-1?'Start Over':'Next Step →';window.scrollTo(0,0)}next.onclick=()=>{n=(n+1)%S.length;show()};back.onclick=()=>{if(n)n--;show()};for(let [cls,id] of [['q2','f2'],['q4','f4'],['q7','f7']])document.querySelectorAll('.'+cls).forEach(b=>b.onclick=()=>{document.querySelectorAll('.'+cls).forEach(x=>x.classList.remove('good','bad'));let ok=b.dataset.ok==='1';b.classList.add(ok?'good':'bad');document.getElementById(id).textContent=ok?'✓ Correct!':'Try again.'});show();
+</script></body></html>
