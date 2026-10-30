@@ -8,7 +8,8 @@
 <section class="card"><h2>Submit lab</h2><p>Check your answers and complete all required fields before submitting. Your quiz score is calculated automatically. Written answers are saved for your instructor to review.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button id="review">Review / calculate score</button><button id="submit" class="primary">Submit to instructor</button><button id="download">Download backup JSON</button></div><div id="result" class="status" role="status" aria-live="polite">Not yet submitted.</div><p class="small muted">This is an educational quiz, not a secure proctored examination. Do not reload while submitting. If submission fails, download your backup and contact your instructor.</p></section><footer>Clustering algorithms lab · Student-facing file · No account or browser extension required</footer>
 </main><script>
 // INSTRUCTOR CONFIGURATION: replace with your deployed Cloudflare Worker URL (no secrets here).
-const SUBMISSION_ENDPOINT = 'REPLACE_WITH_YOUR_WORKER_URL';
+//const SUBMISSION_ENDPOINT = 'REPLACE_WITH_YOUR_WORKER_URL';
+const SUBMISSION_ENDPOINT = 'https://lab-submissions.yangxinncut.workers.dev';
 const QUESTIONS=[
 {q:'Which operation follows assignment to the nearest centroid in standard K-Means?',options:['Merge the closest clusters','Update each centroid to the mean of its assigned points','Split the cluster with the most points','Choose each centroid as the farthest point'],answer:[1],why:'K-Means alternates assignment and centroid updates.'},
 {q:'Points (2,4), (4,6), and (6,2) are in the same K-Means cluster. What is its centroid?',options:['(4,4)','(4,6)','(6,4)','(3,4)'],answer:[0],why:'Average x: 12/3 = 4; average y: 12/3 = 4.'},
