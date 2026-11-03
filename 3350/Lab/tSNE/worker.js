@@ -29,21 +29,22 @@ export default {
     } catch {return reply({error:'Invalid JSON'},400)}
     const safeStr = (s,max) => typeof s==='string' && s.trim().length>0 && s.length<=max;
     const isTsne = data?.lab === 'tsne-dimensionality-reduction-v1';
+    const expectedTotal = isTsne ? 7 : 10;
     if ((!isTsne && data?.lab !== 'clustering-algorithms-v1') ||
         !safeStr(data.student_name,100) || !safeStr(data.student_identifier,120) ||
         (typeof data.section !== 'string' || data.section.length>80) ||
-        !Array.isArray(data.answers) || data.answers.length!==10 ||
-        !Number.isInteger(data.quiz_score) || data.quiz_score<0 || data.quiz_score>10 ||
-        data.quiz_total!==10 || !data.written ||
-        !(isTsne ? ['perplexity','initialization','student_t','interpretation'] : ['comparison','initialization','linkage','divisive']).every(k=>safeStr(data.written[k],8000)))
+        !Array.isArray(data.answers) || data.answers.length!==expectedTotal ||
+        !Number.isInteger(data.quiz_score) || data.quiz_score<0 || data.quiz_score>expectedTotal ||
+        data.quiz_total!==expectedTotal || !data.written ||
+        !(isTsne ? (typeof data.written === 'object' && !Array.isArray(data.written)) : ['comparison','initialization','linkage','divisive'].every(k=>safeStr(data.written[k],8000))))
        return reply({error:'Missing or invalid fields'},400);
     // Client scores can be manipulated. Recalculate from selected option indices on server.
-    const keys=isTsne ? [[1],[0],[2],[1],[3],[0],[2],[1],[0,1,3],[2]] : [[1],[0],[2],[3],[1],[1],[0,1,3],[0,1,3],[0],[1]];
+    const keys=isTsne ? [[1],[0],[2],[1],[3],[2],[1]] : [[1],[0],[2],[3],[1],[1],[0,1,3],[0,1,3],[0],[1]];
     let score=0;
-    for(let i=0;i<10;i++){
+    for(let i=0;i<keys.length;i++){
       const row=data.answers[i];
       if(row?.number!==i+1 || !Array.isArray(row.selected))return reply({error:'Invalid answers'},400);
-      const expectedLabels=(isTsne ? [["To predict class labels","To visualize local neighborhoods in low-dimensional space","To find statistically independent components","To maximize global variance with a linear projection"],["Gaussian kernel","Student-t kernel with one degree of freedom","Linear kernel","Laplacian eigenvector kernel"],["The exact number of clusters in the data","The number of gradient-descent iterations","The effective scale of a point’s neighborhood","The target number of embedding dimensions"],["To make the mapping linear","To reduce the crowding problem","To avoid computing pairwise similarities","To guarantee equal distances between clusters"],["Explained variance ratio","Reconstruction mean squared error","KL(Q ∥ P)","KL(P ∥ Q)"],["Placing a high-dimensional neighbor far apart in 2D (small q_ij)","Placing a dissimilar pair near each other (large q_ij)","Rotating the embedding by 90 degrees","Changing the absolute axis labels"],["Their axes must have the same orientation","The optimization must return identical coordinates","They may produce different layouts while preserving similar local neighborhoods","The larger-looking cluster is always more variable in the source space"],["True","False"],["Nearby embedded points may reflect nearby high-dimensional neighbors","Distances between far-apart displayed clusters can be misleading","t-SNE guarantees that visible clusters correspond to true classes","Perplexity and initialization can influence the visualization"],["p_ij = p_j|i × p_i|j","p_ij = p_j|i + p_i|j","p_ij = (p_j|i + p_i|j) / (2n)","p_ij = (p_j|i − p_i|j) / n"]] : [
+      const expectedLabels=(isTsne ? [["To predict class labels", "To visualize local neighborhoods in low-dimensional space", "To find statistically independent components", "To maximize global variance with a linear projection"], ["Gaussian kernel", "Student-t kernel with one degree of freedom", "Linear kernel", "Laplacian eigenvector kernel"], ["The exact number of clusters in the data", "The number of gradient-descent iterations", "The effective scale of a point’s neighborhood", "The target number of embedding dimensions"], ["To make the mapping linear", "To reduce the crowding problem", "To avoid computing pairwise similarities", "To guarantee equal distances between clusters"], ["Explained variance ratio", "Reconstruction mean squared error", "KL(Q ∥ P)", "KL(P ∥ Q)"], ["Their axes must have the same orientation", "The optimization must return identical coordinates", "They may produce different layouts while preserving similar local neighborhoods", "The larger-looking cluster is always more variable in the source space"], ["True", "False"]] : [
         ['Merge the closest clusters','Update each centroid to the mean of its assigned points','Split the cluster with the most points','Choose each centroid as the farthest point'],
         ['(4,4)','(4,6)','(6,4)','(3,4)'],
         ['One cluster containing all n observations','K randomly chosen centroids','One singleton cluster per observation','Two clusters of equal size'],
@@ -62,7 +63,7 @@ export default {
       if(correct)score++;
     }
     data.quiz_score=score;
-    data.quiz_total=10;
+    data.quiz_total=expectedTotal;
     data.received_at=new Date().toISOString();
     data.submitted_at=data.received_at;
     const receipt=crypto.randomUUID();
