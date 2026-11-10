@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSCI 3350 | Backpropagation Step-by-Step Quiz</title>
+<style>
+:root{--bg:#10131d;--panel:#1b2030;--panel2:#252b3f;--txt:#f1f3fc;--muted:#afb8d3;--pink:#f582c4;--mint:#6ce1b8;--yellow:#ffd17b;--line:#384058;--bad:#ff999d}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top left,#2c1a37 0,transparent 34%),var(--bg);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--txt);line-height:1.55}header,main,footer{max-width:1120px;margin:auto;padding:22px}header{padding-top:38px}h1{font-size:clamp(1.8rem,4vw,3rem);margin:0;color:var(--pink);line-height:1.15}header p{color:var(--muted);max-width:780px}h2{font-size:1.3rem;color:var(--pink)}h3{margin:0 0 10px}.tag{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--mint)}.row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(265px,1fr);gap:18px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 12px 30px #0002}.muted{color:var(--muted)}.mini{font-size:.91rem}.pill{display:inline-block;background:#3a2941;color:#ffd0eb;padding:5px 11px;border-radius:30px;font-size:.82rem}.progress{height:10px;background:#31364c;border-radius:15px;overflow:hidden}.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--mint));transition:width .2s}.meta{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:9px 0 12px}.question{font-size:1.22rem;margin:12px 0 18px;font-weight:760}.options{display:grid;gap:10px}.opt{text-align:left;width:100%;display:flex;gap:12px;align-items:start;border:1px solid #47506d;border-radius:12px;padding:12px 14px;background:#252b40;color:var(--txt);font:inherit;cursor:pointer}.opt:hover:not(:disabled){border-color:var(--pink);background:#31304c}.opt:disabled{cursor:default}.opt.correct{border-color:var(--mint);background:#173e35}.opt.wrong{border-color:var(--bad);background:#4a2835}.letter{font-weight:900;color:var(--pink);width:20px;flex:none}.feedback{padding:14px;border:1px solid var(--line);border-radius:12px;margin-top:16px;background:#161b2c;display:none}.feedback #explanation{white-space:pre-line;display:block;margin-top:8px;line-height:1.65}.feedback.good{border-color:#3b9d7e}.feedback.bad{border-color:#bd747a}.buttons{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}button.action{padding:11px 16px;border-radius:10px;border:1px solid #76516d;background:#42283d;color:#fff;font-weight:700;cursor:pointer}button.action.primary{background:var(--pink);color:#1d1322;border-color:var(--pink)}button.action:disabled{opacity:.4;cursor:not-allowed}input[type=text]{width:100%;padding:11px 12px;background:#141927;color:#fff;border:1px solid #64708a;border-radius:8px;font:inherit}.formula{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#111723;border-left:4px solid var(--mint);padding:12px;border-radius:7px;color:#dbf4e8;font-size:.9rem;margin:10px 0}.boxline{border-top:1px solid var(--line);margin-top:16px;padding-top:14px}svg{width:100%;height:auto;display:block}.svglabel{font-size:12px;fill:#f1f3fc}.node{fill:#633852;stroke:#ffaddb;stroke-width:2}.node.hidden{fill:#315c62;stroke:#8de9cd}.node.out{fill:#a66b29;stroke:#ffd17b}.edge{stroke:#657398;stroke-width:1.7;opacity:.74}.legend{font-size:.86rem;color:var(--muted)}.legend strong{color:var(--txt)}.hidden{display:none!important}.summary-score{font-size:3rem;color:var(--mint);font-weight:900}footer{color:var(--muted);font-size:.8rem;padding-bottom:45px}a{color:var(--mint)}.qnav{display:flex;flex-wrap:wrap;gap:6px}.qnav button{width:29px;height:29px;border-radius:7px;background:#252b40;color:#dbe2f9;border:1px solid #48516b;cursor:pointer}.qnav button.done{border-color:var(--mint)}.qnav button.active{background:#69405c;color:#fff}.review-row{border-top:1px solid var(--line);padding:12px 0;font-size:.9rem}.review-row em{color:var(--muted);white-space:pre-line;display:block}@media(max-width:760px){header,main,footer{padding:16px}.grid{grid-template-columns:1fr}.card{padding:16px}}
+</style>
+</head>
+<body>
+<header>
+<div class="tag">CSCI 3350 · Machine Learning · Interactive lab</div>
+<h1>Backpropagation, One Step at a Time</h1>
+<p>Answer <strong>one multiple-choice question for each calculation</strong> in the lecture's 4 → 3 → 1 binary classifier. Get immediate explanations, review the network, and check how a gradient-descent update improves the prediction.</p>
+</header>
+<main>
+<div class="grid">
+<div>
+<section class="card" id="intro">
+<h2>Student information</h2>
+<p class="muted">Enter your name before starting. Your answers are checked locally in the browser; no results are sent to the instructor automatically.</p>
+<label for="student">Student name</label><input type="text" id="student" placeholder="First and last name" autocomplete="name">
+<div class="buttons"><button class="action primary" id="start">Start the lab</button></div>
+</section>
+<section class="card hidden" id="quiz" aria-live="polite">
+<div class="tag" id="phase">Forward propagation</div>
+<div class="meta"><strong id="counter">Question 1 of 20</strong><span class="pill" id="points">0 correct</span></div>
+<div class="progress" role="progressbar" aria-label="Questions answered" aria-valuemin="0" aria-valuemax="100"><div id="progress"></div></div>
+<div class="question" id="question"></div>
+<div class="formula" id="context"></div>
+<div class="options" id="options"></div>
+<div class="feedback" id="feedback"></div>
+<div class="buttons"><button class="action" id="prev">Previous</button><button class="action primary" id="next">Next question</button><button class="action" id="finish">Finish and score</button></div>
+<div class="boxline"><p class="mini muted">Jump to a question. A green outline means you answered it.</p><div id="qnav" class="qnav"></div></div>
+</section>
+<section class="card hidden" id="summary">
+<div class="tag">Completed · Results</div><h2>Lab results</h2><div class="summary-score" id="score">0/0</div><p id="summaryText"></p>
+<div class="buttons"><button class="action primary" id="download">Download my results (.json)</button><button class="action" id="copy">Copy summary</button><button class="action" id="review">Review answers</button><button class="action" id="restart">Start over</button></div>
+<div id="reviewResults" class="hidden"></div>
+</section>
+</div>
+<aside>
+<section class="card">
+<h2>Lecture reference: the network</h2>
+<svg viewBox="0 0 410 295" role="img" aria-label="Four input neurons connect to three hidden neurons and one output neuron">
+<g id="edges"></g><g id="nodes"></g>
+<text x="42" y="15" class="svglabel">Inputs</text><text x="176" y="15" class="svglabel">ReLU</text><text x="326" y="15" class="svglabel">Sigmoid</text>
+</svg>
+<div class="legend"><strong>4 inputs → 3 hidden neurons → 1 output</strong><br>Input x = [1, 2, 0.5, −0.5], true label y = 1, learning rate α = 0.1.</div>
+<div class="formula">W¹ (rows: inputs, columns: hidden)
+[ 0.5   0.2  -0.1 ]
+[ 0.3   0.4   0.2 ]
+[-0.2   0.1   0.5 ]
+[ 0.1   0.3  -0.2 ]
+b¹ = [0.1, 0.2, 0.15]
+W² = [0.6, 0.2, 0.5]
+b² = 0.05</div>
+<div class="mini muted">Notation: x is treated as a row vector for the table shown above; hidden neuron j computes z¹ⱼ = Σᵢ xᵢW¹ᵢⱼ + b¹ⱼ. The full output is z² = Σⱼ hⱼW²ⱼ + b².</div>
+</section>
+<section class="card" style="margin-top:17px">
+<h2>Concept checkpoints</h2>
+<div class="mini">Forward pass → <strong>prediction</strong> → BCE loss → <strong>backpropagation</strong> → gradients → gradient descent → new forward pass.</div>
+<p class="mini muted">This lab uses the same numerical values as the lecture. Values in answer choices are rounded; gradient calculations use the original forward-pass values.</p>
+<p class="mini muted"><strong>Note:</strong> This exercise focuses on understanding each calculation in the lecture, from the initial forward pass through the weight updates and mini-batch learning.</p>
+</section>
+</aside>
+</div>
+</main>
+<footer>CSCI 3350 — practice quiz for learning. Designed for static hosting on GitHub Pages. No external JavaScript packages or network submission needed.</footer>
+<script>
+'use strict';
+const questions = [
+{phase:'1 · Forward propagation',q:'How many learnable weights connect the input layer to the hidden layer?',context:'4 input features × 3 hidden neurons',options:['7','12','15','3'],a:1,why:'Every input connects to each of the three hidden neurons: 4 × 3 = 12 weights. The three hidden biases are separate parameters.'},
+{phase:'1 · Forward propagation',q:'Which expression computes the pre-activation z¹₁ of the first hidden neuron?',context:'x = [1, 2, 0.5, −0.5]; weights to h₁ = [0.5, 0.3, −0.2, 0.1]; b¹₁ = 0.1',options:['0.5 + 0.3 − 0.2 + 0.1','0.5×1 + 0.3×2 − 0.2×0.5 + 0.1×(−0.5) + 0.1','(0.5+0.3−0.2+0.1)×4','0.5×1 + 0.3×2 − 0.2×0.5 + 0.1×(−0.5) − 0.1'],a:1,why:'Multiply each feature by its corresponding connection weight, sum the products, and add the bias.'},
+{phase:'1 · Forward propagation',q:'What is z¹₁ (before ReLU)?',context:'z¹₁ = 0.5×1 + 0.3×2 + (−0.2)×0.5 + 0.1×(−0.5) + 0.1',options:['1.05','1.15','0.95','0.50'],a:0,why:'0.5 + 0.6 − 0.1 − 0.05 + 0.1 = 1.05.'},
+{phase:'1 · Forward propagation',q:'What is the complete hidden-layer pre-activation vector z¹?',context:'Apply weighted sums and biases to all three hidden neurons.',options:['[1.05, 1.10, 0.80]','[1.05, 0.80, 1.10]','[0.50, 0.40, 0.50]','[1.05, 1.10, −0.80]'],a:0,why:'Calculate each hidden neuron as the weighted sum of all four inputs plus its bias:\n\nz¹₁ = (1×0.5) + (2×0.3) + (0.5×−0.2) + (−0.5×0.1) + 0.1 = 0.5 + 0.6 − 0.1 − 0.05 + 0.1 = 1.05\n\nz¹₂ = (1×0.2) + (2×0.4) + (0.5×0.1) + (−0.5×0.3) + 0.2 = 0.2 + 0.8 + 0.05 − 0.15 + 0.2 = 1.10\n\nz¹₃ = (1×−0.1) + (2×0.2) + (0.5×0.5) + (−0.5×−0.2) + 0.15 = −0.1 + 0.4 + 0.25 + 0.1 + 0.15 = 0.80\n\nTherefore, z¹ = [1.05, 1.10, 0.80]. These are pre-activation values, before ReLU.'},
+{phase:'1 · Forward propagation',q:'What does ReLU return for z¹ = [1.05, 1.10, 0.80]?',context:'ReLU(z) = max(0,z) applied to each hidden neuron.',options:['[0,0,0]','[1,1,1]','[1.05,1.10,0.80]','[0.74,0.75,0.69]'],a:2,why:'All three inputs are positive, so ReLU passes each through unchanged.'},
+{phase:'1 · Forward propagation',q:'What is the output logit z²?',context:'z² = 0.6×1.05 + 0.2×1.10 + 0.5×0.80 + 0.05',options:['0.95','1.30','1.25','0.786'],a:1,why:'0.63 + 0.22 + 0.40 + 0.05 = 1.30. This is the logit, not the probability.'},
+{phase:'1 · Forward propagation',q:'What probability does the sigmoid output for z² = 1.30?',context:'σ(z) = 1/(1+e⁻ᶻ)',options:['1.30','0.214','0.786','0.500'],a:2,why:'σ(1.30) ≈ 0.7858. The probability is between zero and one.'},
+{phase:'2 · Binary cross-entropy',q:'What does the model predict using a 0.5 classification threshold?',context:'ŷ ≈ 0.786; y_true = 1',options:['Class 0','Class 1','Cannot tell without the loss','Neither class'],a:1,why:'ŷ ≥ 0.5 predicts class 1. The prediction matches y_true = 1 for this example.'},
+{phase:'2 · Binary cross-entropy',q:'For the true label y = 1, which binary cross-entropy expression applies?',context:'BCE = −[y ln(ŷ) + (1−y) ln(1−ŷ)]',options:['−ln(ŷ)','−ln(1−ŷ)','(1−ŷ)²','ŷ−1'],a:0,why:'Setting y=1 gives BCE = −ln(ŷ); the other logarithmic term is multiplied by zero.'},
+{phase:'2 · Binary cross-entropy',q:'What is the loss when y=1 and ŷ≈0.786?',context:'L = −ln(0.786)',options:['1.30','0.786','2.303','0.241'],a:3,why:'−ln(0.786) ≈ 0.241. A probability closer to 1 would lower the loss when y=1.'},
+{phase:'3 · Backpropagation',q:'Which expression is the output error signal δ² for sigmoid + BCE?',context:'δ² = ∂L/∂z²',options:['ŷ(1−ŷ)','ŷ−y','y−ŷ','L×z²'],a:1,why:'The BCE derivative and sigmoid derivative simplify to δ² = ŷ − y.'},
+{phase:'3 · Backpropagation',q:'What is δ² approximately?',context:'ŷ ≈ 0.786; y=1',options:['+0.214','−0.214','+0.786','−0.786'],a:1,why:'δ² = 0.786 − 1 = −0.214. Its negative sign indicates that increasing the logit would reduce loss.'},
+{phase:'3 · Backpropagation',q:'What is ∂L/∂w₁ for the connection from h₁ to the output?',context:'w₁=0.6; h₁=1.05; δ²≈−0.214',options:['−0.2247','+0.2247','−0.1284','−0.2140'],a:0,why:'For a hidden-to-output weight, gradient = δ² × h₁ = −0.214 × 1.05 ≈ −0.2247.'},
+{phase:'3 · Backpropagation',q:'What is ∂L/∂b² (the output bias)?',context:'Output-layer error signal δ²≈−0.214',options:['1.05','−0.2247','−0.214','0'],a:2,why:'The output logit changes one-for-one with its bias: ∂z²/∂b² = 1, so ∂L/∂b² = δ².'},
+{phase:'3 · Backpropagation',q:'How is the error signal passed to hidden neuron h₁?',context:'w₁=0.6, δ²≈−0.214, z¹₁=1.05 > 0',options:['δ¹₁ = δ² × 0.6 × ReLU′(1.05) ≈ −0.1284','δ¹₁ = δ² + 0.6 ≈ 0.386','δ¹₁ = −0.214 / 0.6','δ¹₁ = 0 because ReLU′=0'],a:0,why:'ReLU′(1.05)=1, so δ¹₁ ≈ 0.6×(−0.214) = −0.1284.'},
+{phase:'3 · Backpropagation',q:'What is the gradient for the input-to-hidden weight w₂₁?',context:'x₂ = 2; δ¹₁≈−0.1284. Here w₂₁ connects x₂ to h₁.',options:['−0.1284','−0.2568','+0.2568','−0.0642'],a:1,why:'∂L/∂w₂₁ = x₂ × δ¹₁ = 2×(−0.1284) = −0.2568.'},
+{phase:'3 · Backpropagation',q:'What is the gradient with respect to hidden bias b¹₃?',context:'δ¹≈[−0.1284, −0.0428, −0.107]',options:['−0.107','+0.107','−0.214','−0.0535'],a:0,why:'Each hidden bias gradient equals its neuron’s error signal: ∂L/∂b¹₃ = δ¹₃ ≈ −0.107.'},
+{phase:'4 · Gradient descent',q:'What is the correct gradient-descent update rule?',context:'α is the positive learning rate.',options:['w_new = w_old + α×gradient','w_new = gradient − α×w_old','w_new = w_old − α×gradient','w_new = α/gradient'],a:2,why:'Subtracting the gradient moves parameters in the locally decreasing-loss direction for a sufficiently small learning rate.'},
+{phase:'4 · Gradient descent',q:'What is the updated output weight w₁ with α=0.1?',context:'w₁=0.6; ∂L/∂w₁≈−0.2247',options:['0.57753','0.62247','0.82470','0.60000'],a:1,why:'0.6 − 0.1×(−0.2247) = 0.62247. Negative gradient means the weight increases.'},
+{phase:'4 · Gradient descent',q:'What is the updated input-to-hidden weight w₄₁ with α=0.1?',context:'w₄₁=0.1; gradient ≈+0.0642',options:['0.10642','0.16420','0.09358','−0.00642'],a:2,why:'0.1 − 0.1×0.0642 = 0.09358. Positive gradient means the weight decreases.'},
+{phase:'5 · Verify the improvement',q:'After updating ALL weights and biases, what should we do to check learning?',context:'A single gradient step has completed.',options:['Recompute a forward pass using all updated parameters and calculate BCE again','Reuse the old forward-pass activations','Assume the loss dropped without testing','Change the true label'],a:0,why:'A fresh forward pass is necessary because both hidden and output layers changed.'},
+{phase:'6 · Mini-batch learning',q:'With 1,000 training examples and batch size 32, how many optimizer updates occur per epoch?',context:'Process each batch once, including an 8-example final batch.',options:['31','32','1000','100'],a:1,why:'31 full batches cover 992 samples and one final batch contains 8 samples: 32 updates per epoch.'},
+{phase:'6 · Mini-batch learning',q:'Why do we divide the final mini-batch’s gradient sum by 8 instead of 32?',context:'The 32nd batch has only 8 examples.',options:['Because the learning rate is 8','Because gradient averages divide by the actual batch sample count','Because there are 8 features','Because the last batch does not update weights'],a:1,why:'Mini-batch mean gradients divide by the number of examples in that batch, which is 8 for the last batch.'},
+{phase:'6 · Mini-batch learning',q:'What does an epoch mean?',context:'The lecture uses 100 epochs of mini-batch training.',options:['One gradient update','One pass through the entire training dataset','One hidden neuron activating','One correctly classified example'],a:1,why:'An epoch is one complete pass over the training data, generally containing many mini-batch updates.'},
+{phase:'6 · Mini-batch learning',q:'If training loss plateaus at about 0.095, what can we conclude?',context:'Epochs 94–100 show roughly constant reported training loss.',options:['The model must generalize perfectly to new data','The optimization appears to have plateaued on training data, but generalization must be checked separately','Training data are definitely mislabeled','Every gradient is exactly zero'],a:1,why:'A plateau suggests limited further training-loss improvement. It does not prove strong test performance or perfectly zero gradients.'}
+];
+let answers=Array(questions.length).fill(null),index=0,name='';
+const $=id=>document.getElementById(id);
+function countCorrect(){return answers.reduce((s,a,i)=>s+(a===questions[i].a?1:0),0)}
+function answered(){return answers.filter(a=>a!==null).length}
+function render(){const q=questions[index];$('phase').textContent=q.phase;$('counter').textContent=`Question ${index+1} of ${questions.length}`;$('points').textContent=`${countCorrect()} correct / ${answered()} answered`;$('progress').style.width=`${answered()/questions.length*100}%`;$('question').textContent=q.q;$('context').textContent=q.context;
+$('options').innerHTML='';q.options.forEach((opt,i)=>{const btn=document.createElement('button');btn.className='opt';btn.type='button';btn.disabled=answers[index]!==null;if(answers[index]!==null){if(i===q.a)btn.classList.add('correct');if(i===answers[index]&&i!==q.a)btn.classList.add('wrong')}const mark=document.createElement('span');mark.className='letter';mark.textContent='ABCD'[i];const label=document.createElement('span');label.textContent=opt;btn.append(mark,label);btn.addEventListener('click',()=>{answers[index]=i;render()});$('options').append(btn)});
+const fb=$('feedback');if(answers[index]!==null){let ok=answers[index]===q.a;fb.className=`feedback ${ok?'good':'bad'}`;fb.style.display='block';fb.innerHTML=`<strong>${ok?'Correct!':'Not quite.'}</strong> <span id="explanation"></span>`;$('explanation').textContent=q.why}else{fb.style.display='none';fb.textContent=''}
+$('prev').disabled=index===0;$('next').disabled=index===questions.length-1;$('finish').disabled=answered()!==questions.length;$('qnav').innerHTML='';questions.forEach((it,i)=>{const b=document.createElement('button');b.textContent=i+1;b.className=(answers[i]===null?'':'done ')+(i===index?'active':'');b.setAttribute('aria-label',`Go to question ${i+1}`);b.onclick=()=>{index=i;render()};$('qnav').append(b)})}
+$('start').onclick=()=>{name=$('student').value.trim();if(!name){$('student').focus();$('student').setCustomValidity('Please enter your name');$('student').reportValidity();return}$('student').setCustomValidity('');$('intro').classList.add('hidden');$('quiz').classList.remove('hidden');render()};$('student').addEventListener('input',()=> $('student').setCustomValidity(''));
+$('prev').onclick=()=>{if(index>0){index--;render()}};$('next').onclick=()=>{if(index<questions.length-1){index++;render()}};
+function summary(){if(answered()!==questions.length){return}const n=countCorrect();$('quiz').classList.add('hidden');$('summary').classList.remove('hidden');$('score').textContent=`${n}/${questions.length} · ${Math.round(100*n/questions.length)}%`;$('summaryText').textContent=`${name}, you answered ${n} of ${questions.length} questions correctly. Review any missed steps and revisit the matching lecture section.`;renderReview();window.scrollTo({top:0,behavior:'smooth'})}
+$('finish').onclick=summary;
+function renderReview(){$('reviewResults').innerHTML='';questions.forEach((q,i)=>{const d=document.createElement('div');d.className='review-row';const title=document.createElement('strong');title.textContent=`${i+1}. ${answers[i]===q.a?'✓':'✕'} ${q.q}`;const p=document.createElement('p');p.textContent=`Your answer: ${q.options[answers[i]]} | Correct answer: ${q.options[q.a]}`;const exp=document.createElement('em');exp.textContent=q.why;d.append(title,p,exp);$('reviewResults').append(d)})}
+$('review').onclick=()=>{$('reviewResults').classList.toggle('hidden')};$('restart').onclick=()=>{answers=Array(questions.length).fill(null);index=0;$('summary').classList.add('hidden');$('intro').classList.remove('hidden');$('reviewResults').classList.add('hidden')};
+function summaryObj(){return {lab:'CSCI 3350 Backpropagation Step-by-Step Quiz',student:name,completed_at:new Date().toISOString(),score:countCorrect(),total:questions.length,percent:Math.round(100*countCorrect()/questions.length),answers:questions.map((q,i)=>({number:i+1,phase:q.phase,question:q.q,selected:answers[i]===null?null:q.options[answers[i]],correct:q.options[q.a],is_correct:answers[i]===q.a}))}}
+$('download').onclick=()=>{const file=new Blob([JSON.stringify(summaryObj(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(file);a.download='backpropagation-quiz-'+name.replace(/[^a-z0-9_-]/gi,'_')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)};
+$('copy').onclick=async()=>{const s=`${name} — CSCI 3350 Backpropagation quiz: ${countCorrect()}/${questions.length} (${Math.round(100*countCorrect()/questions.length)}%).`;try{await navigator.clipboard.writeText(s);$('copy').textContent='Copied!';setTimeout(()=>$('copy').textContent='Copy summary',1400)}catch(e){window.prompt('Copy this summary:',s)}};
+const g=$('edges'),n=$('nodes'),ns='http://www.w3.org/2000/svg',inp=[48,108,168,228],hid=[68,139,210],out=139;
+function el(tag,attrs,parent){const e=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));parent.append(e);return e}
+for(const yi of inp)for(const yh of hid)el('line',{x1:59,y1:yi,x2:192,y2:yh,class:'edge'},g);
+for(const yh of hid)el('line',{x1:213,y1:yh,x2:342,y2:out,class:'edge'},g);
+function node(cx,cy,label,css){el('circle',{cx,cy,r:19,class:'node '+css},n);let t=el('text',{x:cx,y:cy+4,'text-anchor':'middle',class:'svglabel'},n);t.textContent=label}
+inp.forEach((y,i)=>node(39,y,'x'+(i+1),''));hid.forEach((y,i)=>node(203,y,'h'+(i+1),'hidden'));node(354,out,'ŷ','out');
+</script>
+</body>
+</html>
